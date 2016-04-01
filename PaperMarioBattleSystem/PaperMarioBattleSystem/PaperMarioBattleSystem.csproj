@@ -56,7 +56,9 @@
   <PropertyGroup>
     <StartupObject>PaperMarioBattleSystem.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
+    <Compile Include="Classes\ActionCommands\ActionCommand.cs" />
     <Compile Include="Classes\Actions\BattleAction.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\Mario\Guard.cs" />
@@ -68,11 +70,12 @@
     <Compile Include="Classes\BattleEntities\Goomba.cs" />
     <Compile Include="Classes\BattleEntities\Goombario.cs" />
     <Compile Include="Classes\Global\Debug.cs" />
-    <Compile Include="Classes\Menus\ActionMenus\ActionButton.cs" />
-    <Compile Include="Classes\Menus\ActionMenus\ActionSubMenus\ActionSubMenu.cs" />
-    <Compile Include="Classes\Menus\ActionMenus\ActionSubMenus\JumpSubMenu.cs" />
-    <Compile Include="Classes\Menus\ActionMenus\BonkButton.cs" />
-    <Compile Include="Classes\Menus\ActionMenus\JumpButton.cs" />
+    <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
+    <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\ActionSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\BonkSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\JumpSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionButtons\BonkButton.cs" />
+    <Compile Include="Classes\Menus\ActionButtons\JumpButton.cs" />
     <Compile Include="Classes\Menus\BattleMenu.cs" />
     <Compile Include="Classes\Menus\MarioBattleMenu.cs" />
     <Compile Include="Classes\Menus\PartnerBattleMenu.cs" />
@@ -121,6 +124,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\UI\Battle\JumpButton.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\UI\Box.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\UI\Cursor.png">

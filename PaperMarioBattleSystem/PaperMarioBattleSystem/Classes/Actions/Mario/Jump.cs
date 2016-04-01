@@ -16,5 +16,15 @@ namespace PaperMarioBattleSystem
         {
             Name = "Jump";
         }
+
+        public override void OnMenuSelected()
+        {
+            BattleUIManager.Instance.StartTargetSelection((target) =>
+            {
+                target.LoseHP(1);
+                BattleManager.Instance.EntityTurn.UsedTurn = true;
+                BattleManager.Instance.EntityTurn.EndTurn();
+            }, BattleManager.Instance.GetAliveEnemies());
+        }
     }
 }

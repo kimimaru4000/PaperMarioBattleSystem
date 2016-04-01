@@ -20,12 +20,7 @@ namespace PaperMarioBattleSystem
 
         public override void OnSelected()
         {
-            BattleUIManager.Instance.StartTargetSelection((target) =>
-                {
-                    target.LoseHP(1);
-                    BattleManager.Instance.EntityTurn.UsedTurn = true;
-                    BattleManager.Instance.EntityTurn.EndTurn();
-                }, BattleManager.Instance.GetAliveEnemies());
+            BattleUIManager.Instance.PushMenu(new JumpSubMenu());
         }
 
         public override void Draw()

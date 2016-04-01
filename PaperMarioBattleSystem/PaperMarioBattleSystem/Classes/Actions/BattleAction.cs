@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
@@ -16,6 +17,11 @@ namespace PaperMarioBattleSystem
         /// The name of the action
         /// </summary>
         public string Name = "Action";
+
+        /// <summary>
+        /// The icon representing the action
+        /// </summary>
+        public Texture2D Icon = null;
 
         /// <summary>
         /// How much FP it costs to use the action
@@ -32,6 +38,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public BattleEntity User { get; protected set; } = null;
 
+        /// <summary>
+        /// The ActionCommand associated with the BattleAction
+        /// </summary>
+        protected ActionCommand Command = null;
+
         protected BattleAction()
         {
             
@@ -40,6 +51,14 @@ namespace PaperMarioBattleSystem
         public void SetUser(BattleEntity user)
         {
             User = user;
+        }
+
+        /// <summary>
+        /// What happens when the BattleAction is selected on the menu
+        /// </summary>
+        public virtual void OnMenuSelected()
+        {
+            
         }
     }
 }

@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
 
         private BattleEntity[] Targets = null;
 
-        public delegate void OnSelection(BattleEntity target);
+        public delegate void OnSelection(/*params BattleEntity[] targets*/BattleEntity target);
         public event OnSelection SelectionEvent = null;
 
         protected override int LastSelection => Targets.Length - 1;

@@ -44,11 +44,9 @@ namespace PaperMarioBattleSystem
             LogsEnabled = !LogsEnabled;
         }
 
-        public static void Log(object value)
+        private static string GetStackInfo()
         {
-            if (LogsEnabled == false) return;
-
-            StackFrame trace = new StackFrame(1, true);
+            StackFrame trace = new StackFrame(2, true);
             int line = 0;
             string method = "";
 
@@ -58,41 +56,25 @@ namespace PaperMarioBattleSystem
             line = trace.GetFileLineNumber();
             method = trace.GetMethod()?.Name;
 
-            WriteLine("Information: " + fileName + " -> " + method + ": (" + line + ") - " + value);
+            return $"{fileName}->{method}({line}):";
+        }
+
+        public static void Log(object value)
+        {
+            if (LogsEnabled == false) return;
+            WriteLine($"Information: {GetStackInfo()} {value}");
         }
 
         public static void LogWarning(object value)
         {
             if (LogsEnabled == false) return;
-
-            StackFrame trace = new StackFrame(1, true);
-            int line = 0;
-            string method = "";
-
-            string[] file = trace.GetFileName().Split('\\');
-            string fileName = file?[file.Length - 1];
-
-            line = trace.GetFileLineNumber();
-            method = trace.GetMethod()?.Name;
-
-            WriteLine("Warning: " + fileName + " -> " + method + ": (" + line + ") - " + value);
+            WriteLine($"Warning: {GetStackInfo()} {value}");
         }
 
         public static void LogError(object value)
         {
             if (LogsEnabled == false) return;
-
-            StackFrame trace = new StackFrame(1, true);
-            int line = 0;
-            string method = "";
-
-            string[] file = trace.GetFileName().Split('\\');
-            string fileName = file?[file.Length - 1];
-
-            line = trace.GetFileLineNumber();
-            method = trace.GetMethod()?.Name;
-
-            WriteLine("Error: " + fileName + " -> " + method + ": (" + line + ") - " + value);
+            WriteLine($"Error: {GetStackInfo()} {value}");
         }
 
         public static void DebugUpdate()

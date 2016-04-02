@@ -36,7 +36,7 @@ namespace PaperMarioBattleSystem
 
         protected BattleEntity()
         {
-
+            
         }
 
         protected BattleEntity(Stats stats)

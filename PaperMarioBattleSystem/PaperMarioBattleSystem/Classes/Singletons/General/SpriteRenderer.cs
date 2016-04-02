@@ -34,9 +34,13 @@ namespace PaperMarioBattleSystem
         #endregion
 
         /// <summary>
-        /// The SpriteBatch used for drawing
+        /// The SpriteBatch used for drawing non-UI elements
         /// </summary>
         private SpriteBatch spriteBatch { get; set; } = null;
+
+        /// <summary>
+        /// The SpriteBatch used for drawing UI elements. UI is always drawn on top of non-UI elements
+        /// </summary>
         private SpriteBatch uiBatch { get; set; } = null;
         private GraphicsDeviceManager graphicsDeviceManager { get; set; } = null;
 
@@ -91,25 +95,28 @@ namespace PaperMarioBattleSystem
             uiBatch.End();
         }
 
-        public void Draw(Texture2D texture, Vector2 position, Color color, bool flip, float layer)
+        public void Draw(Texture2D texture, Vector2 position, Color color, bool flip, float layer, bool uibatch = false)
         {
-            Draw(texture, position, null, color, flip, layer);
+            Draw(texture, position, null, color, flip, layer, uibatch);
         }
 
-        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, bool flip, float layer)
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, bool flip, float layer, bool uibatch = false)
         {
-            Draw(texture, position, sourceRect, color, Vector2.Zero, flip, layer);
+            Draw(texture, position, sourceRect, color, Vector2.Zero, flip, layer, uibatch);
         }
 
-        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, Vector2 origin, bool flip, float layer)
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, Vector2 origin, bool flip, float layer, bool uibatch = false)
         {
-            Draw(texture, position, sourceRect, color, 0f, origin, 1f, flip, layer);
+            Draw(texture, position, sourceRect, color, 0f, origin, 1f, flip, layer, uibatch);
         }
 
-        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, float scale, bool flip, float layer)
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, float scale, bool flip, float layer, bool uibatch = false)
         {
             SpriteEffects se = flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            spriteBatch.Draw(texture, position, sourceRect, color, rotation, origin, scale, se, layer);
+            Vector2 realOrigin = sourceRect.HasValue ? sourceRect.Value.GetOrigin(origin.X, origin.Y) : origin;
+            if (uibatch == false)
+                spriteBatch.Draw(texture, position, sourceRect, color, rotation, realOrigin, scale, se, layer);
+            else uiBatch.Draw(texture, position, sourceRect, color, rotation, realOrigin, scale, se, layer);
         }
 
         public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float layer)
@@ -119,7 +126,8 @@ namespace PaperMarioBattleSystem
 
         public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)
         {
-            uiBatch.DrawString(spriteFont, text, position, color, rotation, origin, scale, SpriteEffects.None, layer);
+            Vector2 realOrigin = spriteFont.GetOrigin(text, origin.X, origin.Y);
+            uiBatch.DrawString(spriteFont, text, position, color, rotation, realOrigin, scale, SpriteEffects.None, layer);
         }
     }
 }

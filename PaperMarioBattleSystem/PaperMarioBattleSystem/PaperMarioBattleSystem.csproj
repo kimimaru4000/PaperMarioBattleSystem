@@ -70,6 +70,7 @@
     <Compile Include="Classes\BattleEntities\Goomba.cs" />
     <Compile Include="Classes\BattleEntities\Goombario.cs" />
     <Compile Include="Classes\Global\Debug.cs" />
+    <Compile Include="Classes\Global\Extensions.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\ActionSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\BonkSubMenu.cs" />

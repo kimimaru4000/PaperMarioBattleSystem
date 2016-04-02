@@ -14,13 +14,19 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class TargetSelectionMenu : BattleMenu
     {
+        public enum EntitySelectionType
+        {
+            Single, /*FirstGround, Ground, Air,*/ All
+        }
+
         private Texture2D Cursor = null;
 
         private BattleEntity[] Targets = null;
 
-        public delegate void OnSelection(/*params BattleEntity[] targets*/BattleEntity target);
-        public event OnSelection SelectionEvent = null;
+        public delegate void OnSelection(params BattleEntity[] targets);
+        public OnSelection Selection = null;
 
+        protected EntitySelectionType SelectionType = EntitySelectionType.Single;
         protected override int LastSelection => Targets.Length - 1;
 
         public TargetSelectionMenu() : base(MenuTypes.Horizontal)
@@ -28,10 +34,18 @@ namespace PaperMarioBattleSystem
             Cursor = AssetManager.Instance.LoadAsset<Texture2D>("UI/Cursor");
         }
 
-        public void StartSelection(OnSelection onSelection, params BattleEntity[] targets)
+        public void StartSelection(OnSelection onSelection, EntitySelectionType selectionType, params BattleEntity[] targets)
         {
             Targets = targets;
-            SelectionEvent += onSelection;
+            Selection = onSelection;
+            SelectionType = selectionType;
+        }
+
+        protected override void HandleCursorInput()
+        {
+            if (SelectionType == EntitySelectionType.All) return;
+
+            base.HandleCursorInput();
         }
 
         protected override void OnBackOut()
@@ -41,9 +55,15 @@ namespace PaperMarioBattleSystem
 
         protected override void OnConfirm()
         {
-            BattleEntity target = Targets[CurSelection];
+            if (SelectionType == EntitySelectionType.Single)
+            {
+                Selection?.Invoke(Targets[CurSelection]);
+            }
+            else if (SelectionType == EntitySelectionType.All)
+            {
+                Selection?.Invoke(Targets);
+            }
 
-            SelectionEvent?.Invoke(target);
             EndSelection();
         }
 
@@ -51,7 +71,8 @@ namespace PaperMarioBattleSystem
         {
             CurSelection = 0;
             Targets = null;
-            SelectionEvent = null;
+            Selection = null;
+            SelectionType = EntitySelectionType.Single;
 
             if (BattleUIManager.Instance.TopMenu != null)
             {
@@ -60,6 +81,27 @@ namespace PaperMarioBattleSystem
         }
 
         public override void Draw()
+        {
+            if (SelectionType == EntitySelectionType.Single)
+            {
+                DrawSingle();
+            }
+            else if (SelectionType == EntitySelectionType.All)
+            {
+                DrawAll();
+            }
+        }
+
+        private void DrawAll()
+        {
+            Rectangle rect = new Rectangle(4, 5, 14, 20);
+            for (int i = 0; i < Targets.Length; i++)
+            {
+                SpriteRenderer.Instance.Draw(Cursor, Targets[i].Position + new Vector2(0, -20), rect, Color.White, true, .3f);
+            }
+        }
+
+        private void DrawSingle()
         {
             Rectangle rect = new Rectangle(4, 5, 14, 20);
             SpriteRenderer.Instance.Draw(Cursor, Targets[CurSelection].Position + new Vector2(0, -20), rect, Color.White, true, .3f);

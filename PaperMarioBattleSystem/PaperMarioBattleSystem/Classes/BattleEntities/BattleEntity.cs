@@ -105,7 +105,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public virtual void OnDeath()
         {
-            Debug.Log($"{Name} has died!");
+            Debug.Log($"{Name} has been defeated!");
         }
 
         #endregion

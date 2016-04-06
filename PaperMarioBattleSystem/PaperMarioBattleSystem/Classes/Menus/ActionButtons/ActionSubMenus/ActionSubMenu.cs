@@ -32,14 +32,16 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected Vector2 Position = Vector2.Zero;
 
+        protected TextBox BoxMenu = null;
+
         protected override int LastSelection => BattleActions.Count - 1;
 
         protected ActionSubMenu() : base(MenuTypes.Vertical)
         {
-            
+            BoxMenu = new TextBox(new Vector2(SpriteRenderer.Instance.WindowCenter.X, SpriteRenderer.Instance.WindowCenter.Y + 220f), new Vector2(320f, 80f), null);
         }
 
-        protected ActionSubMenu(List<BattleAction> battleActions) : base(MenuTypes.Vertical)
+        protected ActionSubMenu(List<BattleAction> battleActions) : this()
         {
             Initialize(battleActions);
         }
@@ -47,6 +49,12 @@ namespace PaperMarioBattleSystem
         public void Initialize(List<BattleAction> battleActions)
         {
             BattleActions = battleActions;
+            BoxMenu.SetText(BattleActions[0].Description);
+        }
+
+        protected override void OnSelectionChanged(int newSelection)
+        {
+            BoxMenu.SetText(BattleActions[CurSelection].Description);
         }
 
         protected override void OnBackOut()
@@ -73,6 +81,9 @@ namespace PaperMarioBattleSystem
                 if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) color *= .7f;
                 SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, BattleActions[i].Name, pos, color, 0f, Vector2.Zero, 1f, .4f);
             }
+
+            //Show description window at the bottom
+            BoxMenu.Draw();
         }
 
         /*protected class SubMenuEntry

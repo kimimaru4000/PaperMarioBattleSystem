@@ -84,8 +84,6 @@ namespace PaperMarioBattleSystem
     {
         public const int WindowWidth = 800;
         public const int WindowHeight = 600;
-
-        public static Vector2 WindowSize => new Vector2(WindowWidth, WindowHeight);
     }
 
     /// <summary>

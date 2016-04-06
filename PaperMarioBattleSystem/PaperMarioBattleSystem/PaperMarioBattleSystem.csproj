@@ -59,6 +59,7 @@
   <PropertyGroup />
   <ItemGroup>
     <Compile Include="Classes\ActionCommands\ActionCommand.cs" />
+    <Compile Include="Classes\ActionCommands\JumpCommand.cs" />
     <Compile Include="Classes\Actions\BattleAction.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\Mario\Guard.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Classes\BattleEntities\Goombario.cs" />
     <Compile Include="Classes\Global\Debug.cs" />
     <Compile Include="Classes\Global\Extensions.cs" />
+    <Compile Include="Classes\Global\FPSCounter.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\ActionSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\BonkSubMenu.cs" />
@@ -90,6 +92,7 @@
     <Compile Include="Classes\Singletons\General\SoundManager.cs" />
     <Compile Include="Classes\Singletons\General\SpriteRenderer.cs" />
     <Compile Include="Classes\Global\Time.cs" />
+    <Compile Include="Classes\UIElements\TextBox.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -44,7 +44,8 @@ namespace PaperMarioBattleSystem
         private SpriteBatch uiBatch { get; set; } = null;
         private GraphicsDeviceManager graphicsDeviceManager { get; set; } = null;
 
-        public Vector2 GameWindowSize => new Vector2(graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
+        public Vector2 WindowSize => new Vector2(graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
+        public Vector2 WindowCenter => WindowSize.HalveInt();
 
         private SpriteRenderer()
         {
@@ -85,8 +86,8 @@ namespace PaperMarioBattleSystem
 
         public void BeginDrawing()
         {
-            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend, null, null, null, null, /*null*/Camera.Instance.CalculateTransformation());
-            uiBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
+            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, null, null, null, null, /*null*/Camera.Instance.CalculateTransformation());
+            uiBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
         }
 
         public void EndDrawing()
@@ -111,6 +112,11 @@ namespace PaperMarioBattleSystem
         }
 
         public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, float scale, bool flip, float layer, bool uibatch = false)
+        {
+            Draw(texture, position, sourceRect, color, rotation, origin, new Vector2(scale, scale), flip, layer, uibatch);
+        }
+
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flip, float layer, bool uibatch = false)
         {
             SpriteEffects se = flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             Vector2 realOrigin = sourceRect.HasValue ? sourceRect.Value.GetOrigin(origin.X, origin.Y) : origin;

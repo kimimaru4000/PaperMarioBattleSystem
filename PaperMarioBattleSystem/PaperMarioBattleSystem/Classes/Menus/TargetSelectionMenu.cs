@@ -97,14 +97,16 @@ namespace PaperMarioBattleSystem
             Rectangle rect = new Rectangle(4, 5, 14, 20);
             for (int i = 0; i < Targets.Length; i++)
             {
-                SpriteRenderer.Instance.Draw(Cursor, Targets[i].Position + new Vector2(0, -20), rect, Color.White, true, .3f);
+                Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[i].Position + new Vector2(0, -20));
+                SpriteRenderer.Instance.Draw(Cursor, pos, rect, Color.White, true, .3f, true);
             }
         }
 
         private void DrawSingle()
         {
             Rectangle rect = new Rectangle(4, 5, 14, 20);
-            SpriteRenderer.Instance.Draw(Cursor, Targets[CurSelection].Position + new Vector2(0, -20), rect, Color.White, true, .3f);
+            Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[CurSelection].Position + new Vector2(0, -20));
+            SpriteRenderer.Instance.Draw(Cursor, pos, rect, Color.White, true, .3f, true);
         }
     }
 }

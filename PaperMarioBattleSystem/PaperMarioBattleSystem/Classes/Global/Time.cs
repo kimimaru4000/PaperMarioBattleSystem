@@ -13,7 +13,13 @@ namespace PaperMarioBattleSystem
     public static class Time
     {
         private static TimeSpan TotalTime = default(TimeSpan);
+        private static TimeSpan ElapsedTime = default(TimeSpan);
         private static double ActiveElapsedTime = 0d;
+
+        /// <summary>
+        /// The frames per second the game runs at
+        /// </summary>
+        //public static float FPS = 60f;
 
         /// <summary>
         /// Whether in-game time is enabled or not. If set to false, ActiveMilliseconds won't be updated
@@ -29,6 +35,16 @@ namespace PaperMarioBattleSystem
         /// The total amount of unpaused or unfrozen time, in milliseconds, since the game booted up
         /// </summary>
         public static double ActiveMilliseconds => ActiveElapsedTime;
+
+        /// <summary>
+        /// The amount of time since the previous frame
+        /// </summary>
+        public static double ElapsedMilliseconds => ElapsedTime.TotalMilliseconds;
+
+        /// <summary>
+        /// Determines if the game is running slowly or not
+        /// </summary>
+        public static bool RunningSlowly { get; private set; } = false;
 
         /// <summary>
         /// Enables time
@@ -53,9 +69,11 @@ namespace PaperMarioBattleSystem
         public static void UpdateTime(GameTime gameTime)
         {
             TotalTime = gameTime.TotalGameTime;
+            ElapsedTime = gameTime.ElapsedGameTime;
+            RunningSlowly = gameTime.IsRunningSlowly;
 
             if (TimeEnabled == true)
-                ActiveElapsedTime += gameTime.ElapsedGameTime.TotalMilliseconds;
+                ActiveElapsedTime += ElapsedTime.TotalMilliseconds;
         }
     }
 }

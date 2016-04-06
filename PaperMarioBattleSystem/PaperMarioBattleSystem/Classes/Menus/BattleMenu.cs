@@ -56,6 +56,11 @@ namespace PaperMarioBattleSystem
         protected bool WrapCursor = false;
 
         /// <summary>
+        /// The depth of the menu; deeper menus should have increasingly more depth
+        /// </summary>
+        public float MenuDepth = .1f;
+
+        /// <summary>
         /// The last selection
         /// </summary>
         protected abstract int LastSelection { get; }
@@ -72,6 +77,13 @@ namespace PaperMarioBattleSystem
             {
                 CurSelection = HelperGlobals.Wrap(CurSelection + amount, 0, LastSelection);
             }
+
+            OnSelectionChanged(CurSelection);
+        }
+
+        protected virtual void OnSelectionChanged(int newSelection)
+        {
+            
         }
 
         /// <summary>

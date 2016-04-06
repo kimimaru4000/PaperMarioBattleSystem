@@ -15,6 +15,7 @@ namespace PaperMarioBattleSystem
         public Bonk()
         {
             Name = "Bonk";
+            Description = "Headbonk an enemy.";
         }
 
         public override void OnMenuSelected()

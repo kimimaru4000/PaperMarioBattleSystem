@@ -25,7 +25,7 @@ namespace PaperMarioBattleSystem
 
         public override void Draw()
         {
-            SpriteRenderer.Instance.Draw(ButtonImage, new Vector2(-170, 50), Color.White, false, .4f);
+            SpriteRenderer.Instance.Draw(ButtonImage, Camera.Instance.SpriteToUIPos(new Vector2(-170, 50)), Color.White, false, .4f, true);
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, Name, new Vector2(230, 320), Color.White, .45f);
         }
     }

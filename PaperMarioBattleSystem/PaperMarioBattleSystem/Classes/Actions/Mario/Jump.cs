@@ -15,6 +15,9 @@ namespace PaperMarioBattleSystem
         public Jump()
         {
             Name = "Jump";
+            Description = "Jump and stomp on an enemy.";
+
+            Command = new JumpCommand(this);
         }
 
         public override void OnMenuSelected()
@@ -25,7 +28,7 @@ namespace PaperMarioBattleSystem
                     targets[i].LoseHP(1);
                 BattleManager.Instance.EntityTurn.UsedTurn = true;
                 BattleManager.Instance.EntityTurn.EndTurn();
-            }, TargetSelectionMenu.EntitySelectionType.Single, BattleManager.Instance.GetAliveEnemies());
+            }, SelectionType, BattleManager.Instance.GetAliveEnemies());
         }
     }
 }

@@ -18,6 +18,9 @@ namespace PaperMarioBattleSystem
         public Main()
         {
             graphics = new GraphicsDeviceManager(this);
+
+            //Variable timestep
+            IsFixedTimeStep = false;
         }
 
         /// <summary>
@@ -31,7 +34,7 @@ namespace PaperMarioBattleSystem
             graphics.PreferMultiSampling = true;
             graphics.PreferredBackBufferWidth = RenderingGlobals.WindowWidth;
             graphics.PreferredBackBufferHeight = RenderingGlobals.WindowHeight;
-
+            
             AssetManager.Instance.Initialize(Content);
             SpriteRenderer.Instance.Initialize(graphics);
             BattleManager.Instance.Initialize(new BattleMario(Stats.Default), new Goombario(), new List<BattleEnemy>() { new Goomba(), new Goomba() });

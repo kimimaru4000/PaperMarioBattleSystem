@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static PaperMarioBattleSystem.TargetSelectionMenu;
 
 namespace PaperMarioBattleSystem
 {
@@ -34,9 +35,14 @@ namespace PaperMarioBattleSystem
         public int BaseDamage = 0;
 
         /// <summary>
-        /// The user of the action
+        /// The description of the action
         /// </summary>
-        public BattleEntity User { get; protected set; } = null;
+        public string Description = "Error";
+
+        /// <summary>
+        /// The amount of entities this action can select
+        /// </summary>
+        public EntitySelectionType SelectionType = EntitySelectionType.Single;
 
         /// <summary>
         /// The ActionCommand associated with the BattleAction
@@ -48,15 +54,25 @@ namespace PaperMarioBattleSystem
             
         }
 
-        public void SetUser(BattleEntity user)
+        /// <summary>
+        /// What occurs when an ActionCommand is finished.
+        /// A successRate of 0 is passed in if the ActionCommand was failed completely
+        /// </summary>
+        /// <param name="successRate">0 if the ActionCommand was completely failed, otherwise a number of varying success</param>
+        public virtual void OnActionCommandFinish(int successRate)
         {
-            User = user;
+
         }
 
         /// <summary>
         /// What happens when the BattleAction is selected on the menu
         /// </summary>
         public virtual void OnMenuSelected()
+        {
+            
+        }
+
+        public void Update()
         {
             
         }

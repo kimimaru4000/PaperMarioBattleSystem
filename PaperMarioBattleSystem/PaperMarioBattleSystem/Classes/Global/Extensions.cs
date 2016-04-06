@@ -105,5 +105,29 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        #region Vector2 Extensions
+
+        /// <summary>
+        /// Halves the Vector2
+        /// </summary>
+        /// <param name="vector2">The Vector2 to halve</param>
+        /// <returns>A Vector2 with the X and Y components halved</returns>
+        public static Vector2 Halve(this Vector2 vector2)
+        {
+            return vector2 / 2f;
+        }
+
+        /// <summary>
+        /// Halves the Vector2, truncating the X and Y components to the nearest integer
+        /// </summary>
+        /// <param name="vector2">The Vector2 to halve</param>
+        /// <returns>A Vector2 with the X and Y components halved as integer values</returns>
+        public static Vector2 HalveInt(this Vector2 vector2)
+        {
+            return new Vector2((int)(vector2.X / 2f), (int)(vector2.Y / 2f));
+        }
+
+        #endregion
     }
 }

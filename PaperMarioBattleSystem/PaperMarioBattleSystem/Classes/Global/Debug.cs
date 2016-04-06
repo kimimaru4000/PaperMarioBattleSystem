@@ -131,11 +131,16 @@ namespace PaperMarioBattleSystem
                     if (zoom != 0f) Camera.Instance.Zoom(zoom);
                 }
             }
+
+            FPSCounter.Update();
         }
 
         public static void DebugDraw()
         {
             if (DebugEnabled == false) return;
+
+            //FPS counter
+            FPSCounter.Draw();
 
             //Camera info
             Vector2 cameraBasePos = new Vector2(0, 510);

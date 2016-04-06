@@ -95,6 +95,36 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Conversions
+
+        /// <summary>
+        /// Converts a position on the Sprite layer to its respective position on the UI layer
+        /// </summary>
+        /// <param name="position">The position on the Sprite layer</param>
+        /// <returns>The position on the UI layer corresponding to the position on the Sprite layer</returns>
+        public Vector2 SpriteToUIPos(Vector2 position)
+        {
+            Vector2 convert = SpriteRenderer.Instance.WindowSize * .5f;
+            convert.X = (int)convert.X;
+            convert.Y = (int)convert.Y;
+            return position + convert;
+        }
+
+        /// <summary>
+        /// Converts a position on the UI layer to its respective position on the Sprite layer
+        /// </summary>
+        /// <param name="position">The position on the UI layer</param>
+        /// <returns>The position on the Sprite layer corresponding to the position on the UI layer</returns>
+        public Vector2 UIToSpritePos(Vector2 position)
+        {
+            Vector2 convert = -SpriteRenderer.Instance.WindowSize * .5f;
+            convert.X = (int)convert.X;
+            convert.Y = (int)convert.Y;
+            return position + convert;
+        }
+
+        #endregion
+
         /// <summary>
         /// Calculates the Camera's Transform using Matrix multiplication
         /// <para>Obtained from: http://www.david-amador.com/2009/10/xna-camera-2d-with-zoom-and-rotation/</para>
@@ -102,7 +132,7 @@ namespace PaperMarioBattleSystem
         /// <returns>The Matrix representing the Camera's Transform</returns>
         public Matrix CalculateTransformation()
         {
-            Vector2 windowSize = SpriteRenderer.Instance.GameWindowSize;
+            Vector2 windowSize = SpriteRenderer.Instance.WindowSize;
             Transform = Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0f)) *
                         Matrix.CreateRotationZ(Rotation) *
                         Matrix.CreateScale(new Vector3(Scale, Scale, 0)) *

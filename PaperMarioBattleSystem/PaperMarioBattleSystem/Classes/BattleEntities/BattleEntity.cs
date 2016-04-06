@@ -28,7 +28,12 @@ namespace PaperMarioBattleSystem
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
         public Texture2D SpriteSheet = null;
-        
+
+        /// <summary>
+        /// The previous BattleAction the entity used
+        /// </summary>
+        public BattleAction PreviousAction { get; protected set; } = null;
+
         public bool IsDead => CurHP <= 0;
 
         //TEMPORARY
@@ -63,6 +68,8 @@ namespace PaperMarioBattleSystem
             {
                 Die();
             }
+
+            Debug.Log($"{Name} took {hp} points of damage!");
         }
 
         public void LoseFP(int fp)
@@ -144,10 +151,16 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public virtual void TurnUpdate()
         {
-            
+            PreviousAction?.Update();
         }
 
         #endregion
+
+        public void StartAction(BattleAction action, params BattleEntity[] targets)
+        {
+            PreviousAction = action;
+            PreviousAction.StartSequence(targets);
+        }
 
         /// <summary>
         /// Used for update logic that applies to the entity regardless of whether it is its turn or not
@@ -159,7 +172,7 @@ namespace PaperMarioBattleSystem
 
         public virtual void Draw()
         {
-            
+            PreviousAction?.Draw();
         }
     }
 }

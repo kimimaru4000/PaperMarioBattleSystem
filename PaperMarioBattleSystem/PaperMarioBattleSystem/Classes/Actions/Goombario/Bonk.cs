@@ -18,6 +18,11 @@ namespace PaperMarioBattleSystem
             Description = "Headbonk an enemy.";
         }
 
+        protected override void OnActionCompleted(int successRate, BattleEntity[] targets)
+        {
+            
+        }
+
         public override void OnMenuSelected()
         {
             BattleUIManager.Instance.StartTargetSelection((targets) =>

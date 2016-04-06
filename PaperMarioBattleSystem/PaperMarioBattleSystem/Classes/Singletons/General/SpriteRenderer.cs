@@ -125,15 +125,17 @@ namespace PaperMarioBattleSystem
             else uiBatch.Draw(texture, position, sourceRect, color, rotation, realOrigin, scale, se, layer);
         }
 
-        public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float layer)
+        public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float layer, bool uibatch = true)
         {
-            DrawText(spriteFont, text, position, color, 0f, Vector2.Zero, 1f, layer);
+            DrawText(spriteFont, text, position, color, 0f, Vector2.Zero, 1f, layer, uibatch);
         }
 
-        public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)
+        public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer, bool uibatch = true)
         {
             Vector2 realOrigin = spriteFont.GetOrigin(text, origin.X, origin.Y);
-            uiBatch.DrawString(spriteFont, text, position, color, rotation, realOrigin, scale, SpriteEffects.None, layer);
+            if (uibatch == true)
+                uiBatch.DrawString(spriteFont, text, position, color, rotation, realOrigin, scale, SpriteEffects.None, layer);
+            else spriteBatch.DrawString(spriteFont, text, position, color, rotation, realOrigin, scale, SpriteEffects.None, layer);
         }
     }
 }

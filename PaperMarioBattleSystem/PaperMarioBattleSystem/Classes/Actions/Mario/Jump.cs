@@ -16,18 +16,25 @@ namespace PaperMarioBattleSystem
         {
             Name = "Jump";
             Description = "Jump and stomp on an enemy.";
+            BaseDamage = 1;
 
             Command = new JumpCommand(this);
+        }
+
+        protected override void OnActionCompleted(int successRate, BattleEntity[] targets)
+        {
+            for (int i = 0; i < targets.Length; i++)
+            {
+                targets[i].LoseHP(BaseDamage + successRate);
+            }
         }
 
         public override void OnMenuSelected()
         {
             BattleUIManager.Instance.StartTargetSelection((targets) =>
             {
-                for (int i = 0; i < targets.Length; i++)
-                    targets[i].LoseHP(1);
-                BattleManager.Instance.EntityTurn.UsedTurn = true;
-                BattleManager.Instance.EntityTurn.EndTurn();
+                BattleUIManager.Instance.ClearMenuStack();
+                BattleManager.Instance.EntityTurn.StartAction(this, targets);
             }, SelectionType, BattleManager.Instance.GetAliveEnemies());
         }
     }

@@ -23,6 +23,11 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Performs any initialization to start reading input for the action command
+        /// </summary>
+        public abstract void StartInput();
+
+        /// <summary>
         /// Reads input for the action command
         /// </summary>
         protected abstract void ReadInput();
@@ -30,6 +35,11 @@ namespace PaperMarioBattleSystem
         public void Update()
         {
             ReadInput();
+        }
+
+        public virtual void Draw()
+        {
+            
         }
 
         /// <summary>

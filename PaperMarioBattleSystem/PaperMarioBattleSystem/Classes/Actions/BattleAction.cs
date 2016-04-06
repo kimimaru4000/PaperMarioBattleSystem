@@ -49,9 +49,50 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected ActionCommand Command = null;
 
+        /// <summary>
+        /// Whether the action's sequence is being performed or not
+        /// </summary>
+        public bool InSequence = false;
+
+        public float Length = 1000f;
+
+        private BattleEntity[] EntitiesAffected = null;
+
         protected BattleAction()
         {
             
+        }
+
+        /// <summary>
+        /// Starts the action sequence
+        /// </summary>
+        /// <param name="targets">The targets to perform the sequence on</param>
+        public void StartSequence(params BattleEntity[] targets)
+        {
+            InSequence = true;
+
+            EntitiesAffected = targets;
+
+            if (Command == null)
+            {
+                OnActionCommandFinish(0);
+            }
+            else
+            {
+                Command.StartInput();
+            }
+        }
+        
+        /// <summary>
+        /// Ends the action sequence
+        /// </summary>
+        public void EndSequence()
+        {
+            InSequence = false;
+            EntitiesAffected = null;
+
+            BattleManager.Instance.EntityTurn.UsedTurn = true;
+            BattleManager.Instance.EntityTurn.EndTurn();
         }
 
         /// <summary>
@@ -59,10 +100,16 @@ namespace PaperMarioBattleSystem
         /// A successRate of 0 is passed in if the ActionCommand was failed completely
         /// </summary>
         /// <param name="successRate">0 if the ActionCommand was completely failed, otherwise a number of varying success</param>
-        public virtual void OnActionCommandFinish(int successRate)
+        public void OnActionCommandFinish(int successRate)
         {
-
+            OnActionCompleted(successRate, EntitiesAffected);
+            EndSequence();
         }
+
+        /// <summary>
+        /// What occurs when the action is completed
+        /// </summary>
+        protected abstract void OnActionCompleted(int successRate, BattleEntity[] targets);
 
         /// <summary>
         /// What happens when the BattleAction is selected on the menu
@@ -74,7 +121,19 @@ namespace PaperMarioBattleSystem
 
         public void Update()
         {
-            
+            //Perform sequence
+            if (InSequence == true)
+            {
+                Command.Update();
+            }
+        }
+
+        public void Draw()
+        {
+            if (InSequence == true)
+            {
+                Command.Draw();
+            }
         }
     }
 }

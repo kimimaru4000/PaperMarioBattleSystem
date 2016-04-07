@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -112,8 +113,12 @@ namespace PaperMarioBattleSystem
             Partner = partner;
 
             Mario.Position = MarioPos;
+            Mario.SetBattlePosition(MarioPos);
             if (Partner != null)
+            {
                 Partner.Position = PartnerPos;
+                Partner.SetBattlePosition(PartnerPos);
+            }
 
             //Add and initialize enemies
             AddEnemies(enemies);
@@ -325,7 +330,11 @@ namespace PaperMarioBattleSystem
 
                 //Set reference and position, then increment the number alive
                 Enemies[index] = enemy;
-                enemy.Position = EnemyStartPos + new Vector2(EnemyXDiff * index, 0);
+
+                Vector2 battlepos = EnemyStartPos + new Vector2(EnemyXDiff * index, 0);
+                enemy.Position = battlepos;
+                enemy.SetBattlePosition(battlepos);
+
                 IncrementEnemiesAlive();
             }
         }
@@ -359,10 +368,32 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Returns all entities of a specified type in an array
+        /// </summary>
+        /// <param name="entityType">The type of entities to return</param>
+        /// <returns>Mario and his Partner if entityType is Player, otherwise all alive enemies</returns>
+        public BattleEntity[] GetEntities(EntityTypes entityType)
+        {
+            List<BattleEntity> entities = new List<BattleEntity>();
+
+            if (entityType == EntityTypes.Enemy)
+            {
+                return GetAliveEnemies();
+            }
+            else if (entityType == EntityTypes.Player)
+            {
+                entities.Add(Mario);
+                entities.Add(Partner);
+            }
+
+            return entities.ToArray();
+        }
+
+        /// <summary>
         /// Returns all alive enemies in an array
         /// </summary>
         /// <returns>An array of all alive enemies. An empty array is returned if no enemies are alive</returns>
-        public BattleEnemy[] GetAliveEnemies()
+        private BattleEnemy[] GetAliveEnemies()
         {
             List<BattleEnemy> aliveEnemies = new List<BattleEnemy>();
 

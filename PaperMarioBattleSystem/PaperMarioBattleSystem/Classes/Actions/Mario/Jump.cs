@@ -23,6 +23,9 @@ namespace PaperMarioBattleSystem
 
         protected override void OnActionCompleted(int successRate, BattleEntity[] targets)
         {
+            //Cap success of normal Jump to 1 since it can only bounce once
+            successRate = HelperGlobals.Clamp(successRate, 0, 1);
+
             for (int i = 0; i < targets.Length; i++)
             {
                 targets[i].LoseHP(BaseDamage + successRate);
@@ -31,11 +34,7 @@ namespace PaperMarioBattleSystem
 
         public override void OnMenuSelected()
         {
-            BattleUIManager.Instance.StartTargetSelection((targets) =>
-            {
-                BattleUIManager.Instance.ClearMenuStack();
-                BattleManager.Instance.EntityTurn.StartAction(this, targets);
-            }, SelectionType, BattleManager.Instance.GetAliveEnemies());
+            base.OnMenuSelected();
         }
     }
 }

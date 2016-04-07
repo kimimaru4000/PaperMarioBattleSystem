@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static PaperMarioBattleSystem.TargetSelectionMenu;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -17,44 +18,54 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The name of the action
         /// </summary>
-        public string Name = "Action";
+        public string Name { get; protected set; } = "Action";
 
         /// <summary>
         /// The icon representing the action
         /// </summary>
-        public Texture2D Icon = null;
+        public Texture2D Icon { get; protected set; } = null;
 
         /// <summary>
         /// How much FP it costs to use the action
         /// </summary>
-        public int FPCost = 0;
+        public int FPCost { get; protected set; } = 0;
 
         /// <summary>
         /// The base damage of the action
         /// </summary>
-        public int BaseDamage = 0;
+        public int BaseDamage { get; protected set; } = 0;
 
         /// <summary>
         /// The description of the action
         /// </summary>
-        public string Description = "Error";
+        public string Description { get; protected set; } = "Error";
 
         /// <summary>
         /// The amount of entities this action can select
         /// </summary>
-        public EntitySelectionType SelectionType = EntitySelectionType.Single;
+        public EntitySelectionType SelectionType { get; protected set; } = EntitySelectionType.Single;
+
+        /// <summary>
+        /// The type of entities this action selects
+        /// </summary>
+        public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
         /// <summary>
         /// The ActionCommand associated with the BattleAction
         /// </summary>
-        protected ActionCommand Command = null;
+        public ActionCommand Command { get; protected set; } = null;
 
         /// <summary>
         /// Whether the action's sequence is being performed or not
         /// </summary>
-        public bool InSequence = false;
+        public bool InSequence { get; protected set; } = false;
 
-        public float Length = 1000f;
+        /// <summary>
+        /// The default time it takes for the action to perform its effects.
+        /// ActionCommands can cause the action to take longer or shorter.
+        /// This time always occurs for enemies, as they cannot perform ActionCommands
+        /// </summary>
+        public float BaseLength { get; protected set; } = 1000f;
 
         private BattleEntity[] EntitiesAffected = null;
 
@@ -112,11 +123,22 @@ namespace PaperMarioBattleSystem
         protected abstract void OnActionCompleted(int successRate, BattleEntity[] targets);
 
         /// <summary>
-        /// What happens when the BattleAction is selected on the menu
+        /// What happens when the BattleAction is selected on the menu.
+        /// The default behavior is to start target selection with the ActionStart method
         /// </summary>
         public virtual void OnMenuSelected()
         {
-            
+            BattleUIManager.Instance.StartTargetSelection(ActionStart, SelectionType, BattleManager.Instance.GetEntities(EntityType));
+        }
+
+        /// <summary>
+        /// Clears the menu stack and makes the entity whose turn it is start performing this action
+        /// </summary>
+        /// <param name="targets"></param>
+        private void ActionStart(BattleEntity[] targets)
+        {
+            BattleUIManager.Instance.ClearMenuStack();
+            BattleManager.Instance.EntityTurn.StartAction(this, targets);
         }
 
         public void Update()

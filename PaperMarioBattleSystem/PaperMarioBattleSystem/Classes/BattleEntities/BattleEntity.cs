@@ -21,7 +21,17 @@ namespace PaperMarioBattleSystem
         public int CurFP => BattleStats.FP;
 
         public string Name { get; protected set; } = "Entity";
+        
+        /// <summary>
+        /// The entity's current position
+        /// </summary>
         public Vector2 Position { get; set; } = Vector2.Zero;
+
+        /// <summary>
+        /// The entity's battle position. The entity goes back to this after each action
+        /// </summary>
+        public Vector2 BattlePosition { get; protected set; } = Vector2.Zero;
+
         public float Rotation { get; set; } = 0f;
         public float Scale { get; set; } = 1f;
 
@@ -155,6 +165,11 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        public void SetBattlePosition(Vector2 battlePos)
+        {
+            BattlePosition = battlePos;
+        }
 
         public void StartAction(BattleAction action, params BattleEntity[] targets)
         {

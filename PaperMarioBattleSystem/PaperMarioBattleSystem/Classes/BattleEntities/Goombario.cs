@@ -36,6 +36,8 @@ namespace PaperMarioBattleSystem
 
         public override void Draw()
         {
+            base.Draw();
+
             if (IsDead) return;
             Rectangle rect = new Rectangle(67, 89, 26, 30);
             SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), true, .1f);

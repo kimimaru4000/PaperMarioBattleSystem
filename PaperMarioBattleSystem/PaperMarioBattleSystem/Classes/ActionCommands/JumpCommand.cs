@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
 
         public override void StartInput()
         {
-            EndRange = (float)Time.ActiveMilliseconds + Action.Length;
+            EndRange = (float)Time.ActiveMilliseconds + Action.BaseLength;
             StartRange = EndRange - Leniency;
         }
 

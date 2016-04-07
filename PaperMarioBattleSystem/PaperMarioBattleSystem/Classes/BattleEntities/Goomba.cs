@@ -41,7 +41,6 @@ namespace PaperMarioBattleSystem
 
         public override void Draw()
         {
-            if (IsDead) return;
             Rectangle rect = new Rectangle(67, 107, 26, 28);
             SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), false, .1f);
         }

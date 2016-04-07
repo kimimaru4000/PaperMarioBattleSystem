@@ -16,22 +16,23 @@ namespace PaperMarioBattleSystem
         {
             Name = "Bonk";
             Description = "Headbonk an enemy.";
+            BaseDamage = 1;
+            BaseLength = 1000000f;
+
+            Command = new HammerCommand(this);
         }
 
         protected override void OnActionCompleted(int successRate, BattleEntity[] targets)
         {
-            
+            for (int i = 0; i < targets.Length; i++)
+            {
+                targets[i].LoseHP(BaseDamage + successRate);
+            }
         }
 
         public override void OnMenuSelected()
         {
-            BattleUIManager.Instance.StartTargetSelection((targets) =>
-            {
-                for (int i = 0; i < targets.Length; i++)
-                    targets[i].LoseHP(1);
-                BattleManager.Instance.EntityTurn.UsedTurn = true;
-                BattleManager.Instance.EntityTurn.EndTurn();
-            }, TargetSelectionMenu.EntitySelectionType.Single, BattleManager.Instance.GetAliveEnemies());
+            base.OnMenuSelected();
         }
     }
 }

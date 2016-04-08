@@ -51,6 +51,11 @@ namespace PaperMarioBattleSystem
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
         /// <summary>
+        /// The user of this action
+        /// </summary>
+        public BattleEntity User { get; protected set; } = null;
+
+        /// <summary>
         /// The ActionCommand associated with the BattleAction
         /// </summary>
         public ActionCommand Command { get; protected set; } = null;
@@ -62,16 +67,41 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// The default time it takes for the action to perform its effects.
-        /// ActionCommands can cause the action to take longer or shorter.
+        /// ActionCommands can cause the action to take longer or shorter to complete.
         /// This time always occurs for enemies, as they cannot perform ActionCommands
         /// </summary>
         public float BaseLength { get; protected set; } = 1000f;
 
+        /// <summary>
+        /// The time the action sequence should end, after it started, without action commands
+        /// </summary>
+        public float SequenceEndTime { get; protected set; } = 0f;
+
+        /// <summary>
+        /// Whether the action sequence's base time, without action commands, has ended or not
+        /// </summary>
+        public bool IsSequenceBaseEnded => (float)Time.ActiveMilliseconds >= SequenceEndTime;
+
         private BattleEntity[] EntitiesAffected = null;
+
+        /// <summary>
+        /// Tells whether the action command is enabled or not.
+        /// Action commands are always disabled for enemies
+        /// </summary>
+        protected bool CommandEnabled => (Command != null && User.EntityType != EntityTypes.Enemy);
 
         protected BattleAction()
         {
             
+        }
+
+        /// <summary>
+        /// Sets the user of this action
+        /// </summary>
+        /// <param name="user">The entity performing this action</param>
+        public void SetUser(BattleEntity user)
+        {
+            User = user;
         }
 
         /// <summary>
@@ -81,17 +111,12 @@ namespace PaperMarioBattleSystem
         public void StartSequence(params BattleEntity[] targets)
         {
             InSequence = true;
+            SequenceEndTime = (float)Time.ActiveMilliseconds + BaseLength;
 
             EntitiesAffected = targets;
 
-            if (Command == null)
-            {
-                OnActionCommandFinish(0);
-            }
-            else
-            {
+            if (CommandEnabled == true)
                 Command.StartInput();
-            }
         }
         
         /// <summary>
@@ -100,10 +125,15 @@ namespace PaperMarioBattleSystem
         public void EndSequence()
         {
             InSequence = false;
+            SequenceEndTime = 0f;
+
             EntitiesAffected = null;
 
-            BattleManager.Instance.EntityTurn.UsedTurn = true;
-            BattleManager.Instance.EntityTurn.EndTurn();
+            if (User == BattleManager.Instance.EntityTurn)
+            {
+                User.UsedTurn = true;
+                User.EndTurn();
+            }
         }
 
         /// <summary>
@@ -146,7 +176,16 @@ namespace PaperMarioBattleSystem
             //Perform sequence
             if (InSequence == true)
             {
-                Command.Update();
+                //If the action command is enabled, let it handle the sequence
+                if (CommandEnabled == true)
+                {
+                    Command.Update();
+                }
+                //Otherwise, wait for the action to finish
+                else if (IsSequenceBaseEnded == true)
+                {
+                    OnActionCommandFinish(0);
+                }
             }
         }
 
@@ -154,7 +193,14 @@ namespace PaperMarioBattleSystem
         {
             if (InSequence == true)
             {
-                Command.Draw();
+                if (CommandEnabled == true)
+                {
+                    SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font,
+                $"Command: {Name} performed by {User.Name}",
+                new Vector2(SpriteRenderer.Instance.WindowCenter.X, 50f), Color.Black, 0f, new Vector2(.5f, .5f), 1.1f, .9f, true);
+
+                    Command?.Draw();
+                }
             }
         }
     }

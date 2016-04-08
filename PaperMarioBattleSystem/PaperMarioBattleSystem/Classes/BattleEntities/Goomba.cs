@@ -13,9 +13,6 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class Goomba : BattleEnemy
     {
-        //TEMPORARY
-        private double Timer = 0d;
-
         public Goomba() : base(new Stats(1, 2, 0, 1, 0))
         {
             Name = "Goomba";
@@ -27,20 +24,18 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
-            Timer = Time.ActiveMilliseconds + 2000d;
+            StartAction(new Jump(), BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Player)[0]);
         }
 
         public override void TurnUpdate()
         {
-            if (Time.ActiveMilliseconds >= Timer)
-            {
-                //End turn
-                EndTurn();   
-            } 
+            base.TurnUpdate();
         }
 
         public override void Draw()
         {
+            base.Draw();
+
             Rectangle rect = new Rectangle(67, 107, 26, 28);
             SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), false, .1f);
         }

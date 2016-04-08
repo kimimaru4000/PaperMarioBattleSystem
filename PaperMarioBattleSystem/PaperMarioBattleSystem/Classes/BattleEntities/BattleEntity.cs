@@ -64,6 +64,8 @@ namespace PaperMarioBattleSystem
         public virtual void HealHP(int hp)
         {
             BStats.HP = HelperGlobals.Clamp(BStats.HP + hp, 0, BStats.MaxHP);
+
+            Debug.Log($"{Name} healed {hp} HP!");
         }
 
         public void HealFP(int fp)
@@ -174,6 +176,7 @@ namespace PaperMarioBattleSystem
         public void StartAction(BattleAction action, params BattleEntity[] targets)
         {
             PreviousAction = action;
+            PreviousAction.SetUser(this);
             PreviousAction.StartSequence(targets);
         }
 

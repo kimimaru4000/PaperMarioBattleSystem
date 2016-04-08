@@ -12,11 +12,18 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class BattleEnemy : BattleEntity
     {
+        public int BattleIndex { get; protected set; } = -1;
+
         protected BattleEnemy(Stats stats) : base(stats)
         {
             Name = "Partner";
 
             EntityType = Enumerations.EntityTypes.Enemy;
+        }
+
+        public void SetBattleIndex(int battleIndex)
+        {
+            BattleIndex = battleIndex;
         }
 
         public override void OnDeath()

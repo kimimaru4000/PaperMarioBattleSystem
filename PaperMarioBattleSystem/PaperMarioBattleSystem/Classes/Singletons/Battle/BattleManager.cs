@@ -334,6 +334,7 @@ namespace PaperMarioBattleSystem
                 Vector2 battlepos = EnemyStartPos + new Vector2(EnemyXDiff * index, 0);
                 enemy.Position = battlepos;
                 enemy.SetBattlePosition(battlepos);
+                enemy.SetBattleIndex(index);
 
                 IncrementEnemiesAlive();
             }
@@ -354,7 +355,7 @@ namespace PaperMarioBattleSystem
                     return;
                 }
 
-                int enemyIndex = FindIndexFromEnemy(enemies[i]);
+                int enemyIndex = enemies[i].BattleIndex;
                 if (enemyIndex < 0)
                 {
                     Debug.LogError($"Enemy {enemies[i].Name} cannot be removed from battle because it isn't in battle!");
@@ -434,23 +435,6 @@ namespace PaperMarioBattleSystem
             for (int i = start; i < MaxEnemies; i++)
             {
                 if (Enemies[i] != null)
-                    return i;
-            }
-
-            return -1;
-        }
-
-        /// <summary>
-        /// Finds the index an enemy is located at
-        /// </summary>
-        /// <param name="enemy">The enemy in question</param>
-        /// <returns>The index of the enemy if it's in battle, otherwise -1</returns>
-        private int FindIndexFromEnemy(BattleEnemy enemy)
-        {
-            for (int i = 0; i < Enemies.Length; i++)
-            {
-                BattleEnemy Enemy = Enemies[i];
-                if (Enemy != null && Enemy == enemy)
                     return i;
             }
 

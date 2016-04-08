@@ -15,14 +15,13 @@ namespace PaperMarioBattleSystem
     {
         private float Leniency = 600f;
         private float StartRange = 0f;
-        private float EndRange = 0f;
 
         private bool WithinRange
         {
             get
             {
                 float windowPressed = (float)Time.ActiveMilliseconds;
-                return (windowPressed >= StartRange && windowPressed < EndRange);
+                return (windowPressed >= StartRange && windowPressed < Action.SequenceEndTime);
             }
         }
 
@@ -33,16 +32,13 @@ namespace PaperMarioBattleSystem
 
         public override void StartInput()
         {
-            EndRange = (float)Time.ActiveMilliseconds + Action.BaseLength;
-            StartRange = EndRange - Leniency;
+            StartRange = Action.SequenceEndTime - Leniency;
         }
 
         protected override void ReadInput()
         {
-            float windowPressed = (float)Time.ActiveMilliseconds;
-
             //Failure if it wasn't pressed
-            if (windowPressed > EndRange)
+            if (Action.IsSequenceBaseEnded == true)
             {
                 Action.OnActionCommandFinish(0);
                 return;
@@ -51,7 +47,7 @@ namespace PaperMarioBattleSystem
             if (Input.GetKeyDown(Keys.Z))
             {
                 //Success if within range
-                if (windowPressed >= StartRange && windowPressed < EndRange)
+                if (WithinRange == true)
                 {
                     Action.OnActionCommandFinish(1);
                 }

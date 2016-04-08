@@ -23,7 +23,6 @@ namespace PaperMarioBattleSystem
         protected bool HeldLeft = false;
         protected int LightsLit = 0;
         protected float PrevLightTime = 0f;
-        protected float MaxTime = 0f;
 
         protected Texture2D CircleImage = null;
 
@@ -35,7 +34,6 @@ namespace PaperMarioBattleSystem
         public override void StartInput()
         {
             LightsLit = 0;
-            MaxTime = (float)Time.ActiveMilliseconds + Action.BaseLength;
             PrevLightTime = (float)Time.ActiveMilliseconds + TimeEachLight;
         }
 
@@ -44,7 +42,7 @@ namespace PaperMarioBattleSystem
             float time = (float)Time.ActiveMilliseconds;
 
             //Didn't hold Left in time
-            if (HeldLeft == false && time >= MaxTime)
+            if (HeldLeft == false && Action.IsSequenceBaseEnded == true)
             {
                 Action.OnActionCommandFinish(0);
                 return;

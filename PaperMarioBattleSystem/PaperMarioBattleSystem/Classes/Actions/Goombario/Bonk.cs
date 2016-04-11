@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Goombario's Bonk action
     /// </summary>
-    public sealed class Bonk : BattleAction
+    public sealed class Bonk : Jump
     {
         public Bonk()
         {
@@ -20,19 +20,6 @@ namespace PaperMarioBattleSystem
             BaseLength = 2000f;
 
             Command = new HammerCommand(this);
-        }
-
-        protected override void OnActionCompleted(int successRate, BattleEntity[] targets)
-        {
-            for (int i = 0; i < targets.Length; i++)
-            {
-                targets[i].LoseHP(BaseDamage + successRate);
-            }
-        }
-
-        public override void OnMenuSelected()
-        {
-            base.OnMenuSelected();
         }
     }
 }

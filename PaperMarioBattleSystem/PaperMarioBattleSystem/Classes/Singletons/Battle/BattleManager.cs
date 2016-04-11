@@ -229,6 +229,8 @@ namespace PaperMarioBattleSystem
 
             //Perform Mario or Partner-specific turn start logic
             EntityTurn.OnTurnStart();
+
+            //SoundManager.Instance.PlaySound(SoundManager.Sound.SwitchPartner);
         }
 
         public void TurnStart()

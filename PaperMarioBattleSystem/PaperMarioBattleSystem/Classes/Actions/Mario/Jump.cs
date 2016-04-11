@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Mario's Jump action
     /// </summary>
-    public sealed class Jump : BattleAction
+    public class Jump : BattleAction
     {
         public Jump()
         {
@@ -21,15 +21,16 @@ namespace PaperMarioBattleSystem
             Command = new JumpCommand(this);
         }
 
-        protected override void OnActionCompleted(int successRate, BattleEntity[] targets)
+        public override void OnCommandSuccess(int successRate)
         {
-            //Cap success of normal Jump to 1 since it can only bounce once
-            successRate = HelperGlobals.Clamp(successRate, 0, 1);
+            DealDamage(BaseDamage);
+        }
 
-            for (int i = 0; i < targets.Length; i++)
-            {
-                targets[i].LoseHP(BaseDamage + successRate);
-            }
+        public override void OnCommandFailed()
+        {
+            DealDamage(BaseDamage);
+
+            EndSequence();
         }
 
         public override void OnMenuSelected()

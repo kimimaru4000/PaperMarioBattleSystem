@@ -37,6 +37,18 @@ namespace PaperMarioBattleSystem
             PrevLightTime = (float)Time.ActiveMilliseconds + TimeEachLight;
         }
 
+        protected override void OnSuccess(int successRate)
+        {
+            Action.DealDamage(Action.BaseDamage * 2);
+            Action.EndSequence();
+        }
+
+        protected override void OnFailure()
+        {
+            Action.DealDamage(Action.BaseDamage);
+            Action.EndSequence();
+        }
+
         protected override void ReadInput()
         {
             float time = (float)Time.ActiveMilliseconds;
@@ -44,7 +56,7 @@ namespace PaperMarioBattleSystem
             //Didn't hold Left in time
             if (HeldLeft == false && Action.IsSequenceBaseEnded == true)
             {
-                Action.OnActionCommandFinish(0);
+                OnFailure();
                 return;
             }
 
@@ -60,7 +72,7 @@ namespace PaperMarioBattleSystem
                     //Held Left too long (past the last light)
                     if (LightsLit > MaxLights)
                     {
-                        Action.OnActionCommandFinish(0);
+                        OnFailure();
                     }
                 }
 
@@ -72,19 +84,19 @@ namespace PaperMarioBattleSystem
                 //Released Left at the right time
                 if (LightsLit == MaxLights)
                 {
-                    Action.OnActionCommandFinish(1);
+                    OnSuccess(1);
                 }
                 //Released Left too early
                 else
                 {
-                    Action.OnActionCommandFinish(0);
+                    OnFailure();
                 }
             }
         }
 
-        public override void Draw()
+        protected override void OnDraw()
         {
-            base.Draw();
+            base.OnDraw();
 
             string text = "NO!";
             Color color = Color.Red;

@@ -103,6 +103,7 @@ namespace PaperMarioBattleSystem
         /// <param name="gameTime">Provides a snapshot of timing values</param>
         private void PostUpdate(GameTime gameTime)
         {
+            SoundManager.Instance.Update();
             Input.UpdateInputState();
 
             base.Update(gameTime);

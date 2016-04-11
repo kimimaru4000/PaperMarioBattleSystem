@@ -18,9 +18,14 @@ namespace PaperMarioBattleSystem
             Name = "Guard";
         }
 
-        protected override void OnActionCompleted(int successRate, BattleEntity[] targets)
+        public override void OnCommandSuccess(int successRate)
         {
             
+        }
+
+        public override void OnCommandFailed()
+        {
+            EndSequence();
         }
     }
 }

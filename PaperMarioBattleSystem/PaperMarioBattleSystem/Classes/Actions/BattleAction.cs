@@ -82,7 +82,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool IsSequenceBaseEnded => (float)Time.ActiveMilliseconds >= SequenceEndTime;
 
-        private BattleEntity[] EntitiesAffected = null;
+        protected BattleEntity[] EntitiesAffected { get; private set; } = null;
 
         /// <summary>
         /// Tells whether the action command is enabled or not.
@@ -102,6 +102,14 @@ namespace PaperMarioBattleSystem
         public void SetUser(BattleEntity user)
         {
             User = user;
+        }
+
+        public void DealDamage(int damage)
+        {
+            for (int i = 0; i < EntitiesAffected.Length; i++)
+            {
+                EntitiesAffected[i].LoseHP(damage);
+            }
         }
 
         /// <summary>
@@ -137,20 +145,18 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What occurs when an ActionCommand is finished.
-        /// A successRate of 0 is passed in if the ActionCommand was failed completely
+        /// What occurs when the action command is successfully performed
         /// </summary>
-        /// <param name="successRate">0 if the ActionCommand was completely failed, otherwise a number of varying success</param>
-        public void OnActionCommandFinish(int successRate)
-        {
-            OnActionCompleted(successRate, EntitiesAffected);
-            EndSequence();
-        }
+        /// <param name="successRate">How well the action command was performed</param>
+        public abstract void OnCommandSuccess(int successRate);
 
         /// <summary>
-        /// What occurs when the action is completed
+        /// What occurs when the action command is failed
         /// </summary>
-        protected abstract void OnActionCompleted(int successRate, BattleEntity[] targets);
+        public virtual void OnCommandFailed()
+        {
+            EndSequence();
+        }
 
         /// <summary>
         /// What happens when the BattleAction is selected on the menu.
@@ -179,12 +185,13 @@ namespace PaperMarioBattleSystem
                 //If the action command is enabled, let it handle the sequence
                 if (CommandEnabled == true)
                 {
-                    Command.Update();
+                    if (Command.AcceptingInput == true)
+                        Command.Update();
                 }
                 //Otherwise, wait for the action to finish
                 else if (IsSequenceBaseEnded == true)
                 {
-                    OnActionCommandFinish(0);
+                    OnCommandFailed();
                 }
             }
         }

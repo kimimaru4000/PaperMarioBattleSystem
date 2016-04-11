@@ -16,6 +16,9 @@ namespace PaperMarioBattleSystem
         private float Leniency = 600f;
         private float StartRange = 0f;
 
+        //TEMPORARY
+        private float SuccessTimeWait = 0f;
+
         private bool WithinRange
         {
             get
@@ -35,12 +38,33 @@ namespace PaperMarioBattleSystem
             StartRange = Action.SequenceEndTime - Leniency;
         }
 
+        protected override void OnSuccess(int successRate)
+        {
+            Action.DealDamage(Action.BaseDamage);
+
+            SuccessTimeWait = (float)Time.ActiveMilliseconds + 1500f;
+        }
+
+        protected override void OnFailure()
+        {
+            Action.DealDamage(Action.BaseDamage);
+            Action.EndSequence();
+        }
+
         protected override void ReadInput()
         {
+            //TEMPORARY
+            if (SuccessTimeWait > 0f)
+            {
+                if ((float)Time.ActiveMilliseconds >= SuccessTimeWait)
+                    OnFailure();
+                return;
+            }
+
             //Failure if it wasn't pressed
             if (Action.IsSequenceBaseEnded == true)
             {
-                Action.OnActionCommandFinish(0);
+                OnFailure();
                 return;
             }
 
@@ -49,19 +73,19 @@ namespace PaperMarioBattleSystem
                 //Success if within range
                 if (WithinRange == true)
                 {
-                    Action.OnActionCommandFinish(1);
+                    OnSuccess(1);
                 }
                 //Otherwise failure
                 else
                 {
-                    Action.OnActionCommandFinish(0);
+                    OnFailure();
                 }
             }
         }
 
-        public override void Draw()
+        protected override void OnDraw()
         {
-            base.Draw();
+            base.OnDraw();
 
             string text = "NO!";
             Color color = Color.Red;

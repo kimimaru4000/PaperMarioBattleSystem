@@ -93,7 +93,10 @@ namespace PaperMarioBattleSystem
     {
         public const string ContentRoot = "Content";
         public const string AudioRoot = "Audio";
+        public const string SoundRoot = "Audio/SFX/";
+        public const string MusicRoot = "Audio/Music/";
         public const string SpriteRoot = "Sprites";
+        public const string UIRoot = "UI";
     }
 
     /// <summary>

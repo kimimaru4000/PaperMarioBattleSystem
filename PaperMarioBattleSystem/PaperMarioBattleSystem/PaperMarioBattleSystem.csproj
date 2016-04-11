@@ -84,6 +84,10 @@
     <Compile Include="Classes\Menus\MarioBattleMenu.cs" />
     <Compile Include="Classes\Menus\PartnerBattleMenu.cs" />
     <Compile Include="Classes\Menus\TargetSelectionMenu.cs" />
+    <Compile Include="Classes\Sequences\Move.cs" />
+    <Compile Include="Classes\Sequences\Sequence.cs" />
+    <Compile Include="Classes\Sequences\SequenceAction.cs" />
+    <Compile Include="Classes\Sequences\Wait.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleUIManager.cs" />
     <Compile Include="Classes\Singletons\General\AssetManager.cs" />

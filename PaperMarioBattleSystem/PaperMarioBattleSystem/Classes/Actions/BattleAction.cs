@@ -75,12 +75,17 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The time the action sequence should end, after it started, without action commands
         /// </summary>
-        public float SequenceEndTime { get; protected set; } = 0f;
+        public float SequenceEndTime { get; private set; } = 0f;
 
         /// <summary>
         /// Whether the action sequence's base time, without action commands, has ended or not
         /// </summary>
         public bool IsSequenceBaseEnded => (float)Time.ActiveMilliseconds >= SequenceEndTime;
+
+        /// <summary>
+        /// The Sequence performed
+        /// </summary>
+        public Sequence ActionSequence { get; protected set; } = null;
 
         protected BattleEntity[] EntitiesAffected { get; private set; } = null;
 
@@ -92,7 +97,10 @@ namespace PaperMarioBattleSystem
 
         protected BattleAction()
         {
-            
+            //TEMPORARY
+            User = BattleManager.Instance.EntityTurn;
+
+            ActionSequence = new Sequence();
         }
 
         /// <summary>
@@ -102,6 +110,7 @@ namespace PaperMarioBattleSystem
         public void SetUser(BattleEntity user)
         {
             User = user;
+            ActionSequence.SetEntity(User);
         }
 
         public void DealDamage(int damage)
@@ -193,6 +202,8 @@ namespace PaperMarioBattleSystem
                 {
                     OnCommandFailed();
                 }
+
+                ActionSequence.UpdateSequence();
             }
         }
 

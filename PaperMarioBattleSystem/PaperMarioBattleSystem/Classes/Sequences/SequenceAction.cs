@@ -15,7 +15,8 @@ namespace PaperMarioBattleSystem
     {
         public double Duration { get; protected set; } = 0d;
         protected double StartTime = 0d;
-        protected bool Done = false;
+        protected bool Done { get; private set; } = false;
+        public BattleEntity Entity { get; private set; } = null;
 
         public bool IsDone => Done;
 
@@ -27,6 +28,16 @@ namespace PaperMarioBattleSystem
         protected SequenceAction(double duration)
         {
             Duration = duration;
+            if (Duration < 0f)
+            {
+                Debug.LogWarning($"{nameof(Duration)} is negative - turning it positive!");
+                Duration = Math.Abs(Duration);
+            }
+        }
+
+        public void SetEntity(BattleEntity entity)
+        {
+            Entity = entity;
         }
 
         public void Start()

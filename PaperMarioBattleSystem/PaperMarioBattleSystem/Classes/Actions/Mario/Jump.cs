@@ -17,8 +17,13 @@ namespace PaperMarioBattleSystem
             Name = "Jump";
             Description = "Jump and stomp on an enemy.";
             BaseDamage = 1;
+            BaseLength = 1800f;
 
             Command = new JumpCommand(this);
+
+            ActionSequence.SetEntity(User);
+            ActionSequence.AddSequence(new MoveAmount(new Vector2(25f, 0), 500f), new Wait(500f),
+                new MoveAmount(new Vector2(0f, -50f), 400f), new MoveAmount(new Vector2(0f, 50), 400f));
         }
 
         public override void OnCommandSuccess(int successRate)

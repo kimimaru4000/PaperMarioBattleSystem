@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class JumpCommand : ActionCommand
     {
-        private float Leniency = 600f;
+        private float Leniency = 200f;
         private float StartRange = 0f;
 
         //TEMPORARY
@@ -40,15 +40,14 @@ namespace PaperMarioBattleSystem
 
         protected override void OnSuccess(int successRate)
         {
-            Action.DealDamage(Action.BaseDamage);
+            Action.OnCommandSuccess(successRate);
 
             SuccessTimeWait = (float)Time.ActiveMilliseconds + 1500f;
         }
 
         protected override void OnFailure()
         {
-            Action.DealDamage(Action.BaseDamage);
-            Action.EndSequence();
+            Action.OnCommandFailed();
         }
 
         protected override void ReadInput()

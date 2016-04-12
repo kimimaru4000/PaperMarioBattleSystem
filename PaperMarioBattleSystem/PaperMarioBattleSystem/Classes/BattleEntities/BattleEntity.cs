@@ -155,6 +155,12 @@ namespace PaperMarioBattleSystem
 
         public void EndTurn()
         {
+            if (this != BattleManager.Instance.EntityTurn)
+            {
+                Debug.LogError($"Attempting to end the turn of {Name} when it's not their turn!");
+                return;
+            }
+
             BattleManager.Instance.TurnEnd();
         }
 

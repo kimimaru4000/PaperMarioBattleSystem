@@ -51,9 +51,10 @@ namespace PaperMarioBattleSystem
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
         /// <summary>
-        /// The user of this action
+        /// The user of this action.
+        /// Aside from the Guard action, it will be the entity whose turn it currently is
         /// </summary>
-        public BattleEntity User { get; protected set; } = null;
+        public virtual BattleEntity User => BattleManager.Instance.EntityTurn;
 
         /// <summary>
         /// The ActionCommand associated with the BattleAction
@@ -97,20 +98,7 @@ namespace PaperMarioBattleSystem
 
         protected BattleAction()
         {
-            //TEMPORARY
-            User = BattleManager.Instance.EntityTurn;
-
-            ActionSequence = new Sequence();
-        }
-
-        /// <summary>
-        /// Sets the user of this action
-        /// </summary>
-        /// <param name="user">The entity performing this action</param>
-        public void SetUser(BattleEntity user)
-        {
-            User = user;
-            ActionSequence.SetEntity(User);
+            //ActionSequence = new Sequence();
         }
 
         public void DealDamage(int damage)
@@ -203,7 +191,7 @@ namespace PaperMarioBattleSystem
                     OnCommandFailed();
                 }
 
-                ActionSequence.UpdateSequence();
+                ActionSequence?.UpdateSequence();
             }
         }
 

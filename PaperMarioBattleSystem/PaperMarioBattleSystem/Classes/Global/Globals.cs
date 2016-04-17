@@ -54,6 +54,11 @@ namespace PaperMarioBattleSystem
             Player, Enemy
         }
 
+        public enum PartnerTypes
+        {
+            None, Goombario, Kooper, Bombette, Parakarry, Bow, Watt, Sushie, Lakilester, Goompa, Goombaria, Twink
+        }
+
         public enum BattleActions
         {
             Misc, Item, Jump, Hammer, Focus, Special

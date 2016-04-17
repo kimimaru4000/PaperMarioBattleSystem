@@ -11,30 +11,13 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class BattlePartner : BattleEntity
     {
+        public Enumerations.PartnerTypes PartnerType { get; protected set; } = Enumerations.PartnerTypes.None;
+
         public BattlePartner(Stats stats) : base(stats)
         {
             Name = "Partner";
 
             EntityType = Enumerations.EntityTypes.Player;
-        }
-
-        /// <summary>
-        /// Since Mario's partners do not have HP, nothing happens when a partner is somehow healed
-        /// </summary>
-        /// <param name="hp"></param>
-        public override void HealHP(int hp)
-        {
-            
-        }
-
-        /// <summary>
-        /// Mario's partners do not have HP; instead, they get afflicted with a status condition that makes them unavailable for
-        /// a number of turns based directly on the amount of damaged dealt to them
-        /// </summary>
-        /// <param name="hp">The number of turns the partner is unavailable</param>
-        public override void LoseHP(int hp)
-        {
-            //Inflict status effect
         }
     }
 }

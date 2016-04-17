@@ -13,10 +13,14 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class SequenceAction
     {
+        public delegate void Finish();
+        public Finish OnFinish { get; protected set; } = null;
+
         public double Duration { get; protected set; } = 0d;
         protected double StartTime = 0d;
         protected bool Done { get; private set; } = false;
-        public BattleEntity Entity { get; private set; } = null;
+
+        public BattleEntity Entity => BattleManager.Instance.EntityTurn;
 
         public bool IsDone => Done;
 
@@ -25,7 +29,7 @@ namespace PaperMarioBattleSystem
             
         }
 
-        protected SequenceAction(double duration)
+        protected SequenceAction(double duration, Finish onFinish = null)
         {
             Duration = duration;
             if (Duration < 0f)
@@ -33,16 +37,14 @@ namespace PaperMarioBattleSystem
                 Debug.LogWarning($"{nameof(Duration)} is negative - turning it positive!");
                 Duration = Math.Abs(Duration);
             }
-        }
 
-        public void SetEntity(BattleEntity entity)
-        {
-            Entity = entity;
+            OnFinish = onFinish;
         }
 
         public void Start()
         {
             StartTime = Time.ActiveMilliseconds;
+
             OnStart();
         }
 
@@ -54,6 +56,8 @@ namespace PaperMarioBattleSystem
         public void End()
         {
             Done = true;
+            OnFinish?.Invoke();
+
             OnEnd();
         }
 

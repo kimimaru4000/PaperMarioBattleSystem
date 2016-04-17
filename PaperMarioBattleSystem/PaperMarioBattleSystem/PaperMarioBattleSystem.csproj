@@ -65,6 +65,8 @@
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\Mario\Guard.cs" />
     <Compile Include="Classes\Actions\Mario\Jump.cs" />
+    <Compile Include="Classes\Animations\Animation.cs" />
+    <Compile Include="Classes\Animations\LoopAnimation.cs" />
     <Compile Include="Classes\BattleEntities\BattleEnemy.cs" />
     <Compile Include="Classes\BattleEntities\BattleEntity.cs" />
     <Compile Include="Classes\BattleEntities\BattleMario.cs" />

@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
         public Queue<SequenceAction> Sequences = new Queue<SequenceAction>();
         private bool StartNext = true;
 
-        public BattleEntity Entity { get; private set; } = null;
+        public BattleEntity Entity => BattleManager.Instance.EntityTurn;
 
         private SequenceAction CurSequence
         {
@@ -25,16 +25,10 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public void SetEntity(BattleEntity entity)
-        {
-            Entity = entity;
-        }
-
         public void AddSequence(params SequenceAction[] sequenceActions)
         {
             for (int i = 0; i < sequenceActions.Length; i++)
             {
-                sequenceActions[i].SetEntity(Entity);
                 Sequences.Enqueue(sequenceActions[i]);
             }
         }

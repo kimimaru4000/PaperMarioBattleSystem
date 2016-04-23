@@ -67,26 +67,14 @@ namespace PaperMarioBattleSystem
         public bool InSequence { get; protected set; } = false;
 
         /// <summary>
-        /// The default time it takes for the action to perform its effects.
-        /// ActionCommands can cause the action to take longer or shorter to complete.
-        /// This time always occurs for enemies, as they cannot perform ActionCommands
+        /// The current step of the sequence
         /// </summary>
-        public float BaseLength { get; protected set; } = 1000f;
+        public int SequenceStep { get; protected set; } = 0;
 
         /// <summary>
-        /// The time the action sequence should end, after it started, without action commands
+        /// The current SequenceAction being performed
         /// </summary>
-        public float SequenceEndTime { get; private set; } = 0f;
-
-        /// <summary>
-        /// Whether the action sequence's base time, without action commands, has ended or not
-        /// </summary>
-        public bool IsSequenceBaseEnded => (float)Time.ActiveMilliseconds >= SequenceEndTime;
-
-        /// <summary>
-        /// The Sequence performed
-        /// </summary>
-        public Sequence ActionSequence { get; protected set; } = null;
+        public SequenceAction CurSequence { get; protected set; } = null;
 
         protected BattleEntity[] EntitiesAffected { get; private set; } = null;
 
@@ -98,7 +86,7 @@ namespace PaperMarioBattleSystem
 
         protected BattleAction()
         {
-            //ActionSequence = new Sequence();
+            
         }
 
         public void DealDamage(int damage)
@@ -116,12 +104,11 @@ namespace PaperMarioBattleSystem
         public void StartSequence(params BattleEntity[] targets)
         {
             InSequence = true;
-            SequenceEndTime = (float)Time.ActiveMilliseconds + BaseLength;
 
             EntitiesAffected = targets;
 
-            if (CommandEnabled == true)
-                Command.StartInput();
+            //Start the first sequence
+            ProgressSequence(0);
         }
         
         /// <summary>
@@ -130,7 +117,8 @@ namespace PaperMarioBattleSystem
         public void EndSequence()
         {
             InSequence = false;
-            SequenceEndTime = 0f;
+            SequenceStep = 0;
+            CurSequence = null;
 
             EntitiesAffected = null;
 
@@ -144,16 +132,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// What occurs when the action command is successfully performed
         /// </summary>
-        /// <param name="successRate">How well the action command was performed</param>
-        public abstract void OnCommandSuccess(int successRate);
+        public abstract void OnCommandSuccess();
 
         /// <summary>
         /// What occurs when the action command is failed
         /// </summary>
-        public virtual void OnCommandFailed()
-        {
-            EndSequence();
-        }
+        public abstract void OnCommandFailed();
 
         /// <summary>
         /// What happens when the BattleAction is selected on the menu.
@@ -174,6 +158,35 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.EntityTurn.StartAction(this, targets);
         }
 
+        /// <summary>
+        /// Progresses the BattleAction further into its sequence
+        /// </summary>
+        /// <param name="progressAmount">The amount to progress the sequence</param>
+        public void ProgressSequence(uint progressAmount)
+        {
+            SequenceStep += (int)progressAmount;
+
+            OnProgressSequence();
+            if (InSequence == true)
+            {
+                CurSequence.Start();
+            }
+        }
+
+        /// <summary>
+        /// What occurs next in the sequence when it's progressed.
+        /// <para>Base functionality moves the entity back to its battle position</para>
+        /// </summary>
+        protected virtual void OnProgressSequence()
+        {
+            switch (SequenceStep)
+            {
+                default:
+                    CurSequence = new MoveTo(User.BattlePosition, 1000f);
+                    break;
+            }
+        }
+
         public void Update()
         {
             //Perform sequence
@@ -185,13 +198,12 @@ namespace PaperMarioBattleSystem
                     if (Command.AcceptingInput == true)
                         Command.Update();
                 }
-                //Otherwise, wait for the action to finish
-                else if (IsSequenceBaseEnded == true)
-                {
-                    OnCommandFailed();
-                }
 
-                ActionSequence?.UpdateSequence();
+                CurSequence.Update();
+                if (CurSequence.IsDone == true)
+                {
+                    ProgressSequence(1);
+                }
             }
         }
 
@@ -202,8 +214,8 @@ namespace PaperMarioBattleSystem
                 if (CommandEnabled == true)
                 {
                     SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font,
-                $"Command: {Name} performed by {User.Name}",
-                new Vector2(SpriteRenderer.Instance.WindowCenter.X, 50f), Color.Black, 0f, new Vector2(.5f, .5f), 1.1f, .9f, true);
+                    $"Command: {Name} performed by {User.Name}",
+                    new Vector2(SpriteRenderer.Instance.WindowCenter.X, 50f), Color.Black, 0f, new Vector2(.5f, .5f), 1.1f, .9f, true);
 
                     Command?.Draw();
                 }

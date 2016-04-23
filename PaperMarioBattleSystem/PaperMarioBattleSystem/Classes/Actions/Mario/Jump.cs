@@ -17,29 +17,58 @@ namespace PaperMarioBattleSystem
             Name = "Jump";
             Description = "Jump and stomp on an enemy.";
             BaseDamage = 1;
-            //BaseLength = 1800f;
 
-            Command = new JumpCommand(this);
-
-            ActionSequence?.AddSequence(new MoveAmount(new Vector2(25f, 0), 500f), new Wait(500f),
-                new MoveAmount(new Vector2(0f, -50f), 400f), new MoveAmount(new Vector2(0f, 50), 400f));
+            Command = new JumpCommand(this, 2000f);
         }
 
-        public override void OnCommandSuccess(int successRate)
+        public override void OnCommandSuccess()
         {
-            DealDamage(BaseDamage);
+            //Show "NICE" here or something
+            SequenceStep += 1;
         }
 
         public override void OnCommandFailed()
         {
-            DealDamage(BaseDamage);
 
-            EndSequence();
         }
 
         public override void OnMenuSelected()
         {
             base.OnMenuSelected();
+        }
+
+        protected override void OnProgressSequence()
+        {
+            float x = User.EntityType == Enumerations.EntityTypes.Player ? 100f : -100f;
+
+            switch(SequenceStep)
+            {
+                case 0:
+                    CurSequence = new MoveAmount(new Vector2(x, 0f), 2000f);
+                    break;
+                case 1:
+                    CurSequence = new MoveAmount(new Vector2(0f, -100f), 2000f);
+                    break;
+                case 2:
+                    if (SequenceStep == 2 && CommandEnabled == true) Command.StartInput();
+                    CurSequence = new MoveAmount(new Vector2(0f, 100f), 2000f);
+                    break;
+                case 3:
+                    DealDamage(BaseDamage);
+                    base.OnProgressSequence();
+                    if (SequenceStep == 3) SequenceStep += 500;
+                    break;
+                case 4:
+                    DealDamage(BaseDamage);
+                    goto case 1;
+                case 5:
+                    goto case 2;
+                case 6:
+                    goto case 3;
+                default:
+                    EndSequence();
+                    break;
+            }
         }
     }
 }

@@ -13,8 +13,9 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class JumpCommand : ActionCommand
     {
-        private float Leniency = 200f;
+        private float Leniency = 500f;
         private float StartRange = 0f;
+        private float EndRange = 0f;
 
         //TEMPORARY
         private float SuccessTimeWait = 0f;
@@ -24,44 +25,41 @@ namespace PaperMarioBattleSystem
             get
             {
                 float windowPressed = (float)Time.ActiveMilliseconds;
-                return (windowPressed >= StartRange && windowPressed < Action.SequenceEndTime);
+                return (windowPressed >= StartRange && windowPressed < EndRange);
             }
         }
 
-        public JumpCommand(BattleAction battleAction) : base(battleAction)
+        public JumpCommand(BattleAction battleAction, float leniency) : base(battleAction)
         {
-            
+            Leniency = leniency;
         }
 
         public override void StartInput()
         {
-            StartRange = Action.SequenceEndTime - Leniency;
+            base.StartInput();
+
+            StartRange = (float)Time.ActiveMilliseconds;
+            EndRange = StartRange + Leniency;
         }
 
-        protected override void OnSuccess(int successRate)
+        protected override void OnSuccess()
         {
-            Action.OnCommandSuccess(successRate);
+            Action.OnCommandSuccess();
 
             SuccessTimeWait = (float)Time.ActiveMilliseconds + 1500f;
+            EndInput();
         }
 
         protected override void OnFailure()
         {
             Action.OnCommandFailed();
+            EndInput();
         }
 
         protected override void ReadInput()
         {
-            //TEMPORARY
-            if (SuccessTimeWait > 0f)
-            {
-                if ((float)Time.ActiveMilliseconds >= SuccessTimeWait)
-                    OnFailure();
-                return;
-            }
-
             //Failure if it wasn't pressed
-            if (Action.IsSequenceBaseEnded == true)
+            if ((float)Time.ActiveMilliseconds >= EndRange)
             {
                 OnFailure();
                 return;
@@ -72,7 +70,7 @@ namespace PaperMarioBattleSystem
                 //Success if within range
                 if (WithinRange == true)
                 {
-                    OnSuccess(1);
+                    OnSuccess();
                 }
                 //Otherwise failure
                 else

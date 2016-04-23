@@ -80,6 +80,8 @@ namespace PaperMarioBattleSystem
     {
         public const int MinDamage = 0;
         public const int MaxDamage = 99;
+
+        public const int MaxPowerBounces = 100;
     }
 
     /// <summary>

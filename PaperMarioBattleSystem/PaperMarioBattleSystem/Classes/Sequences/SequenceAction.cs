@@ -7,15 +7,12 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     ///<summary>
-    /// An action that occurs over time in a Sequence.
+    /// An action that occurs over time during a BattleAction.
     /// This can be used to do about anything to the BattleEntity performing the action.
     /// Examples include moving, waiting, playing an animation, and more
     /// </summary>
     public abstract class SequenceAction
     {
-        public delegate void Finish();
-        public Finish OnFinish { get; protected set; } = null;
-
         public double Duration { get; protected set; } = 0d;
         protected double StartTime = 0d;
         protected bool Done { get; private set; } = false;
@@ -29,7 +26,7 @@ namespace PaperMarioBattleSystem
             
         }
 
-        protected SequenceAction(double duration, Finish onFinish = null)
+        protected SequenceAction(double duration)
         {
             Duration = duration;
             if (Duration < 0f)
@@ -37,8 +34,6 @@ namespace PaperMarioBattleSystem
                 Debug.LogWarning($"{nameof(Duration)} is negative - turning it positive!");
                 Duration = Math.Abs(Duration);
             }
-
-            OnFinish = onFinish;
         }
 
         public void Start()
@@ -56,7 +51,6 @@ namespace PaperMarioBattleSystem
         public void End()
         {
             Done = true;
-            OnFinish?.Invoke();
 
             OnEnd();
         }

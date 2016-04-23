@@ -17,9 +17,8 @@ namespace PaperMarioBattleSystem
             Name = "Bonk";
             Description = "Headbonk an enemy.";
             BaseDamage = 1;
-            BaseLength = 2000f;
 
-            Command = new HammerCommand(this);
+            Command = new JumpCommand(this, 500f);
         }
     }
 }

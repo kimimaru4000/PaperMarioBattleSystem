@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
             Name = "Guard";
         }
 
-        public override void OnCommandSuccess(int successRate)
+        public override void OnCommandSuccess()
         {
             
         }

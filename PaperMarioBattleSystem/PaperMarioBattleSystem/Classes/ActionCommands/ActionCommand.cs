@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class ActionCommand
     {
-        public bool AcceptingInput { get; protected set; } = true;
+        public bool AcceptingInput { get; protected set; } = false;
         protected BattleAction Action = null;
 
         protected ActionCommand(BattleAction battleAction)
@@ -26,9 +26,20 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Performs any initialization to start reading input for the action command
         /// </summary>
-        public abstract void StartInput();
+        public virtual void StartInput()
+        {
+            AcceptingInput = true;
+        }
 
-        protected abstract void OnSuccess(int successRate);
+        /// <summary>
+        /// Performs anything required when ending input for the action command
+        /// </summary>
+        public virtual void EndInput()
+        {
+            AcceptingInput = false;
+        }
+
+        protected abstract void OnSuccess();
 
         protected abstract void OnFailure();
 
@@ -39,7 +50,10 @@ namespace PaperMarioBattleSystem
 
         public void Update()
         {
-            ReadInput();
+            if (AcceptingInput == true)
+            {
+                ReadInput();
+            }
         }
 
         public void Draw()

@@ -20,6 +20,9 @@ namespace PaperMarioBattleSystem
         protected readonly int MaxLights = 4;
         protected readonly float TimeEachLight = 500f;
 
+        protected float EndTime = 1500f;
+        protected float PrevEndTime = 0f;
+
         protected bool HeldLeft = false;
         protected int LightsLit = 0;
         protected float PrevLightTime = 0f;
@@ -35,9 +38,10 @@ namespace PaperMarioBattleSystem
         {
             LightsLit = 0;
             PrevLightTime = (float)Time.ActiveMilliseconds + TimeEachLight;
+            PrevEndTime = (float)Time.ActiveMilliseconds + EndTime;
         }
 
-        protected override void OnSuccess(int successRate)
+        protected override void OnSuccess()
         {
             Action.DealDamage(Action.BaseDamage * 2);
             Action.EndSequence();
@@ -54,7 +58,7 @@ namespace PaperMarioBattleSystem
             float time = (float)Time.ActiveMilliseconds;
 
             //Didn't hold Left in time
-            if (HeldLeft == false && Action.IsSequenceBaseEnded == true)
+            if (HeldLeft == false && time >= PrevEndTime)
             {
                 OnFailure();
                 return;
@@ -84,7 +88,7 @@ namespace PaperMarioBattleSystem
                 //Released Left at the right time
                 if (LightsLit == MaxLights)
                 {
-                    OnSuccess(1);
+                    OnSuccess();
                 }
                 //Released Left too early
                 else

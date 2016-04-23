@@ -38,9 +38,15 @@ namespace PaperMarioBattleSystem
 
         protected override void OnStart()
         {
-            MoveDir = Entity.Position - MoveDest;
-            MoveTotal.X = Math.Abs(MoveDir.X) / (float)Duration;
-            MoveTotal.Y = Math.Abs(MoveDir.Y) / (float)Duration;
+            Vector2 entityPos = Entity.Position;
+
+            MoveDir.X = MoveDest.X < entityPos.X ? -1f : 1f;
+            MoveDir.Y = MoveDest.Y < entityPos.Y ? -1f : 1f;
+
+            Vector2 movePerFrame = entityPos - MoveDest;
+
+            MoveTotal.X = Math.Abs(movePerFrame.X) / (float)Duration;
+            MoveTotal.Y = Math.Abs(movePerFrame.Y) / (float)Duration;
         }
 
         protected override void OnEnd()

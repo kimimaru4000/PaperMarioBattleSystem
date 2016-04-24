@@ -107,10 +107,20 @@ namespace PaperMarioBattleSystem
 
             EntitiesAffected = targets;
 
+            OnStart();
+
             //Start the first sequence
             ProgressSequence(0);
         }
-        
+
+        /// <summary>
+        /// BattleAction-specific logic when the action is started
+        /// </summary>
+        protected virtual void OnStart()
+        {
+            
+        }
+
         /// <summary>
         /// Ends the action sequence
         /// </summary>
@@ -122,11 +132,21 @@ namespace PaperMarioBattleSystem
 
             EntitiesAffected = null;
 
+            OnEnd();
+
             if (User == BattleManager.Instance.EntityTurn)
             {
                 User.UsedTurn = true;
                 User.EndTurn();
             }
+        }
+
+        /// <summary>
+        /// BattleAction-specific logic when the action is complete
+        /// </summary>
+        protected virtual void OnEnd()
+        {
+
         }
 
         /// <summary>
@@ -174,10 +194,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What occurs next in the sequence when it's progressed.
-        /// <para>Base functionality moves the entity back to its battle position</para>
+        /// A separate method for the top-most base for progressing the sequence.
+        /// Move the entity back to its battle position
         /// </summary>
-        protected virtual void OnProgressSequence()
+        protected void OnProgressBase()
         {
             switch (SequenceStep)
             {
@@ -185,6 +205,15 @@ namespace PaperMarioBattleSystem
                     CurSequence = new MoveTo(User.BattlePosition, 1000f);
                     break;
             }
+        }
+
+        /// <summary>
+        /// What occurs next in the sequence when it's progressed.
+        /// <para>Base functionality moves the entity back to its battle position</para>
+        /// </summary>
+        protected virtual void OnProgressSequence()
+        {
+            OnProgressBase();
         }
 
         public void Update()

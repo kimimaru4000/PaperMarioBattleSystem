@@ -66,6 +66,7 @@
     <Compile Include="Classes\Actions\Mario\Guard.cs" />
     <Compile Include="Classes\Actions\Mario\Hammer.cs" />
     <Compile Include="Classes\Actions\Mario\Jump.cs" />
+    <Compile Include="Classes\Actions\Mario\PowerBounce.cs" />
     <Compile Include="Classes\Animations\Animation.cs" />
     <Compile Include="Classes\Animations\LoopAnimation.cs" />
     <Compile Include="Classes\BattleEntities\BattleEnemy.cs" />

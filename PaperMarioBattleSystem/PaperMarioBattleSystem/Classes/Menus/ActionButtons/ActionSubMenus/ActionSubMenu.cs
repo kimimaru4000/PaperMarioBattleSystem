@@ -67,8 +67,8 @@ namespace PaperMarioBattleSystem
         protected override void OnConfirm()
         {
             base.OnConfirm();
-            CurSelection = 0;
             BattleActions[CurSelection].OnMenuSelected();
+            CurSelection = 0;
         }
 
         public override void Draw()

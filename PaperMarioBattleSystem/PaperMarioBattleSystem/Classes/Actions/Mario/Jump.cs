@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
             Description = "Jump and stomp on an enemy.";
             BaseDamage = 1;
 
-            Command = new JumpCommand(this, 2000f, 1000f);
+            Command = new JumpCommand(this, 1000f, 500f);
         }
 
         public override void OnCommandSuccess()
@@ -46,14 +46,14 @@ namespace PaperMarioBattleSystem
             switch(SequenceStep)
             {
                 case 0:
-                    CurSequence = new MoveAmount(new Vector2(x, 0f), 2000f);
+                    CurSequence = new MoveAmount(new Vector2(x, 0f), 1000f);
                     break;
                 case 1:
-                    CurSequence = new MoveAmount(new Vector2(0f, -100f), 2000f);
+                    CurSequence = new MoveAmount(new Vector2(0f, -100f), 1000f);
                     break;
                 case 2:
                     if (SequenceStep == 2 && CommandEnabled == true) Command.StartInput();
-                    CurSequence = new MoveAmount(new Vector2(0f, 100f), 2000f);
+                    CurSequence = new MoveAmount(new Vector2(0f, 100f), 1000f);
                     break;
                 case 3:
                     DealDamage(BaseDamage);

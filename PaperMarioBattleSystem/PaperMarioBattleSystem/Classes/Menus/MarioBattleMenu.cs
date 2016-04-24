@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
 
         public MarioBattleMenu() : base(MenuTypes.Horizontal)
         {
-            ActionButtons = new List<ActionButton>() { new JumpButton() };
+            ActionButtons = new List<ActionButton>() { new JumpButton(), new HammerButton() };
         }
 
         protected override void HandleSelectionInput()
@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
         {
             for (int i = 0; i < ActionButtons.Count; i++)
             {
-                ActionButtons[i].Draw();
+                ActionButtons[i].Draw(CurSelection == i);
             }
         }
     }

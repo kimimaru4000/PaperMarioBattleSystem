@@ -36,6 +36,8 @@ namespace PaperMarioBattleSystem
 
         public override void StartInput()
         {
+            base.StartInput();
+
             LightsLit = 0;
             PrevLightTime = (float)Time.ActiveMilliseconds + TimeEachLight;
             PrevEndTime = (float)Time.ActiveMilliseconds + EndTime;
@@ -43,14 +45,14 @@ namespace PaperMarioBattleSystem
 
         protected override void OnSuccess()
         {
-            Action.DealDamage(Action.BaseDamage * 2);
-            Action.EndSequence();
+            Action.OnCommandSuccess();
+            EndInput();
         }
 
         protected override void OnFailure()
         {
-            Action.DealDamage(Action.BaseDamage);
-            Action.EndSequence();
+            Action.OnCommandFailed();
+            EndInput();
         }
 
         protected override void ReadInput()

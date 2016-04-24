@@ -24,10 +24,13 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.PushMenu(new BonkSubMenu());
         }
 
-        public override void Draw()
+        public override void Draw(bool selected)
         {
-            SpriteRenderer.Instance.Draw(ButtonImage, Camera.Instance.SpriteToUIPos(new Vector2(-190, 50)), Color.White, false, .4f, true);
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, Name, new Vector2(210, 320), Color.White, .45f);
+            Color color = Color.White * .75f;
+            if (selected == true) color = Color.White;
+
+            SpriteRenderer.Instance.Draw(ButtonImage, Camera.Instance.SpriteToUIPos(new Vector2(-190, 50)), color, false, .4f, true);
+            SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, Name, new Vector2(210, 320), color, .45f);
         }
     }
 }

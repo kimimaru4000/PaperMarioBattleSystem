@@ -44,7 +44,7 @@ namespace PaperMarioBattleSystem
             
         }
 
-        public virtual void Draw()
+        public virtual void Draw(bool selected)
         {
 
         }

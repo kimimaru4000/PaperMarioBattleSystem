@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
             Description = "Jump and stomp on an enemy.";
             BaseDamage = 1;
 
-            Command = new JumpCommand(this, 2000f);
+            Command = new JumpCommand(this, 2000f, 1000f);
         }
 
         public override void OnCommandSuccess()
@@ -39,6 +39,8 @@ namespace PaperMarioBattleSystem
 
         protected override void OnProgressSequence()
         {
+            //NOTE: Add a MoveAmountTowards class or something so you can have them move towards the center from their
+            //battle positions, eliminating the need for this check entirely
             float x = User.EntityType == Enumerations.EntityTypes.Player ? 100f : -100f;
 
             switch(SequenceStep)

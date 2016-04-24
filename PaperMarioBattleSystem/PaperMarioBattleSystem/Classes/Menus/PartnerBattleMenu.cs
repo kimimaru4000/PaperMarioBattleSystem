@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
         {
             for (int i = 0; i < ActionButtons.Count; i++)
             {
-                ActionButtons[i].Draw();
+                ActionButtons[i].Draw(CurSelection == i);
             }
         }
     }

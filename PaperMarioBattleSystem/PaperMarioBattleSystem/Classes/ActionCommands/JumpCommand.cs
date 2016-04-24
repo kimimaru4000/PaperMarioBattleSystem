@@ -16,9 +16,7 @@ namespace PaperMarioBattleSystem
         private float Leniency = 500f;
         private float StartRange = 0f;
         private float EndRange = 0f;
-
-        //TEMPORARY
-        private float SuccessTimeWait = 0f;
+        private float TotalRange = 0f;
 
         private bool WithinRange
         {
@@ -29,8 +27,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public JumpCommand(BattleAction battleAction, float leniency) : base(battleAction)
+        public JumpCommand(BattleAction battleAction, float totalRange, float leniency) : base(battleAction)
         {
+            TotalRange = totalRange;
             Leniency = leniency;
         }
 
@@ -38,15 +37,13 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput();
 
-            StartRange = (float)Time.ActiveMilliseconds;
-            EndRange = StartRange + Leniency;
+            StartRange = (float)Time.ActiveMilliseconds + Leniency;
+            EndRange = (float)Time.ActiveMilliseconds + TotalRange;
         }
 
         protected override void OnSuccess()
         {
             Action.OnCommandSuccess();
-
-            SuccessTimeWait = (float)Time.ActiveMilliseconds + 1500f;
             EndInput();
         }
 

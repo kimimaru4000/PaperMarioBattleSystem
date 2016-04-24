@@ -64,6 +64,7 @@
     <Compile Include="Classes\Actions\BattleAction.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\Mario\Guard.cs" />
+    <Compile Include="Classes\Actions\Mario\Hammer.cs" />
     <Compile Include="Classes\Actions\Mario\Jump.cs" />
     <Compile Include="Classes\Animations\Animation.cs" />
     <Compile Include="Classes\Animations\LoopAnimation.cs" />
@@ -79,8 +80,10 @@
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\ActionSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\BonkSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\HammerSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\JumpSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionButtons\BonkButton.cs" />
+    <Compile Include="Classes\Menus\ActionButtons\HammerButton.cs" />
     <Compile Include="Classes\Menus\ActionButtons\JumpButton.cs" />
     <Compile Include="Classes\Menus\BattleMenu.cs" />
     <Compile Include="Classes\Menus\MarioBattleMenu.cs" />
@@ -90,6 +93,7 @@
     <Compile Include="Classes\Sequences\MoveTo.cs" />
     <Compile Include="Classes\Sequences\SequenceAction.cs" />
     <Compile Include="Classes\Sequences\Wait.cs" />
+    <Compile Include="Classes\Sequences\WaitForCommand.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleUIManager.cs" />
     <Compile Include="Classes\Singletons\General\AssetManager.cs" />

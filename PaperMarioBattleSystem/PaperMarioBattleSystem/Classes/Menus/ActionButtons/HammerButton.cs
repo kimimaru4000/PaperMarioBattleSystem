@@ -8,19 +8,16 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
-    /// <summary>
-    /// The Jump button for Mario
-    /// </summary>
-    public sealed class JumpButton : ActionButton
+    public class HammerButton : ActionButton
     {
-        public JumpButton() : base("Jump")
+        public HammerButton() : base("Hammer")
         {
             ButtonImage = AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton");
         }
 
         public override void OnSelected()
         {
-            BattleUIManager.Instance.PushMenu(new JumpSubMenu());
+            BattleUIManager.Instance.PushMenu(new HammerSubMenu());
         }
 
         public override void Draw(bool selected)
@@ -28,8 +25,8 @@ namespace PaperMarioBattleSystem
             Color color = Color.White * .75f;
             if (selected == true) color = Color.White;
 
-            SpriteRenderer.Instance.Draw(ButtonImage, Camera.Instance.SpriteToUIPos(new Vector2(-170, 50)), color, false, .4f, true);
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, Name, new Vector2(230, 320), color, .45f);
+            SpriteRenderer.Instance.Draw(ButtonImage, Camera.Instance.SpriteToUIPos(new Vector2(-120, 50)), color, false, .4f, true);
+            SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, Name, new Vector2(280, 320), color, .45f);
         }
     }
 }

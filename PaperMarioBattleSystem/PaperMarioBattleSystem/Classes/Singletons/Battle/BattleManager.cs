@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
         private readonly Vector2 MarioPos = new Vector2(-150, 100);
         private readonly Vector2 PartnerPos = new Vector2(-190, 120);
         private readonly Vector2 EnemyStartPos = new Vector2(150, 125);
-        private readonly int EnemyXDiff = 30;
+        private readonly int PositionXDiff = 30;
 
         /// <summary>
         /// Unless scripted, the battle always starts on the player phase, with Mario always going first
@@ -294,10 +294,13 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Updates the battle state, checking if the battle should be over.
-        /// It's game over if Mario has 0 HP, otherwise it's victory
+        /// It's game over if Mario has 0 HP, otherwise it's victory if no enemies are alive
         /// </summary>
         private void UpdateBattleState()
         {
+            //Go through all entities and check which ones are dead at the end of each turn
+            //Enemies are only removed from battle at the end of a turn
+
             if (Mario.IsDead == true)
             {
                 State = BattleState.Done;
@@ -333,7 +336,7 @@ namespace PaperMarioBattleSystem
                 //Set reference and position, then increment the number alive
                 Enemies[index] = enemy;
 
-                Vector2 battlepos = EnemyStartPos + new Vector2(EnemyXDiff * index, 0);
+                Vector2 battlepos = EnemyStartPos + new Vector2(PositionXDiff * index, 0);
                 enemy.Position = battlepos;
                 enemy.SetBattlePosition(battlepos);
                 enemy.SetBattleIndex(index);
@@ -453,6 +456,19 @@ namespace PaperMarioBattleSystem
         {
             EnemiesAlive--;
             if (EnemiesAlive < 0) EnemiesAlive = 0;
+        }
+
+        /// <summary>
+        /// Gets the position in front of an entity's battle position
+        /// </summary>
+        /// <param name="entity">The entity to get the position in front of</param>
+        /// <returns>A Vector2 with the position in front of the entity</returns>
+        public Vector2 GetPositionInFront(BattleEntity entity)
+        {
+            Vector2 xdiff = new Vector2(PositionXDiff, 0f);
+            if (entity.EntityType == EntityTypes.Enemy) xdiff.X = -xdiff.X;
+
+            return (entity.BattlePosition + xdiff);
         }
 
         #endregion

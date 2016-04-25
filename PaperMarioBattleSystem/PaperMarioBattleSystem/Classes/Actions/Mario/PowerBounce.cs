@@ -56,8 +56,7 @@ namespace PaperMarioBattleSystem
 
                     if (Repeat == true && Bounces < BattleGlobals.MaxPowerBounces)
                     {
-                        SequenceStep = 1;
-                        goto case 1;
+                        SequenceStep = 0;
                     }
                     break;
                 case 4:

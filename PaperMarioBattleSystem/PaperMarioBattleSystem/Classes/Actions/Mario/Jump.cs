@@ -39,14 +39,10 @@ namespace PaperMarioBattleSystem
 
         protected override void OnProgressSequence()
         {
-            //NOTE: Add a MoveAmountTowards class or something so you can have them move towards the center from their
-            //battle positions, eliminating the need for this check entirely
-            float x = User.EntityType == Enumerations.EntityTypes.Player ? 100f : -100f;
-
             switch(SequenceStep)
             {
                 case 0:
-                    CurSequence = new MoveAmount(new Vector2(x, 0f), 1000f);
+                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), 1000f);
                     break;
                 case 1:
                     CurSequence = new MoveAmount(new Vector2(0f, -100f), 1000f);

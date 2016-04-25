@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    CurSequence = new MoveAmount(new Vector2(x, 0f), 2000f);
+                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), 1000f);
                     break;
                 case 1:
                     if (CommandEnabled == true) Command.StartInput();

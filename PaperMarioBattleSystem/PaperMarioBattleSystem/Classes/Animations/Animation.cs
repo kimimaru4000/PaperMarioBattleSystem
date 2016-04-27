@@ -37,6 +37,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool IsUIAnim = false;
 
+        /// <summary>
+        /// The speed the animation plays back at
+        /// </summary>
+        public float Speed { get; protected set; } = 1f;
+
         public bool AnimFinished => AnimDone;
         protected int MaxFrameIndex => MaxFrames - 1;
         protected Frame CurFrame => Frames[CurFrameNum];
@@ -52,6 +57,23 @@ namespace PaperMarioBattleSystem
         public Animation (Texture2D spriteSheet, bool isUIAnim, params Frame[] frames) : this(spriteSheet, frames)
         {
             IsUIAnim = isUIAnim;
+        }
+
+        public Animation(Texture2D spriteSheet, float speed, bool isUIAnim, params Frame[] frames) : this (spriteSheet, isUIAnim, frames)
+        {
+            
+        }
+
+        protected double ElapsedAnimTime => (Time.ActiveMilliseconds - PrevFrameTimer);
+        protected double TrueCurFrameDuration => (CurFrame.Duration * (Speed <= 0f ? 0f : (1f/Speed)));
+
+        /// <summary>
+        /// Tells if the current frame is complete
+        /// </summary>
+        /// <returns>true if the time passed is greater than the current frame's duration, otherwise false</returns>
+        protected bool FrameComplete()
+        {
+            return (ElapsedAnimTime >= TrueCurFrameDuration);
         }
 
         /// <summary>
@@ -81,11 +103,21 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Sets the Speed the animation plays at
+        /// </summary>
+        /// <param name="newSpeed">The new speed of the animation. This value cannot be lower than 0 as reversed playback is
+        /// not supported through the speed</param>
+        public void SetSpeed(float newSpeed)
+        {
+            Speed = HelperGlobals.Clamp(newSpeed, 0, float.MaxValue);
+        }
+
+        /// <summary>
         /// Resets the frame timer to the start of the current frame
         /// </summary>
         protected void ResetFrameDur()
         {
-            PrevFrameTimer = Time.ActiveMilliseconds + CurFrame.Duration;
+            PrevFrameTimer = Time.ActiveMilliseconds;
         }
 
         public void Update()
@@ -93,7 +125,7 @@ namespace PaperMarioBattleSystem
             if (AnimDone == false)
             {
                 //Progress if it's over 
-                if (Time.ActiveMilliseconds >= PrevFrameTimer)
+                if (FrameComplete() == true)
                 {
                     Progress();
                 }
@@ -118,7 +150,7 @@ namespace PaperMarioBattleSystem
             /// <summary>
             /// How long the frame lasts, in milliseconds
             /// </summary>
-            public double Duration = 0f;
+            public double Duration = 0d;
 
             public Frame(Rectangle drawRegion, double duration)
             {

@@ -20,6 +20,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public Dictionary<Elements, bool> Weaknesses { get; private set; } = new Dictionary<Elements, bool>();
 
+        /// <summary>
+        /// The animations, referred to by string, of the BattleEntity
+        /// </summary>
+        public Dictionary<string, Animation> Animations = new Dictionary<string, Animation>();
+
         protected Stats BStats;
 
         public Stats BattleStats { get { return BStats; } }

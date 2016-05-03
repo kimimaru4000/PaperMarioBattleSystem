@@ -20,9 +20,10 @@ namespace PaperMarioBattleSystem
         public BattleMario(Stats marioStats) : base(marioStats)
         {
             Name = "Mario";
-            SpriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Mario");
-
             EntityType = Enumerations.EntityTypes.Player;
+
+            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Mario");
+            AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(228, 918, 29, 51), 1000d)));
         }
 
         public override void OnTurnStart()
@@ -46,9 +47,9 @@ namespace PaperMarioBattleSystem
         {
             base.Draw();
 
-            if (IsDead) return;
-            Rectangle rect = new Rectangle(228, 918, 29, 51);
-            SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), true, .1f);
+            //if (IsDead) return;
+            //Rectangle rect = new Rectangle(228, 918, 29, 51);
+            //SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), true, .1f);
         }
     }
 }

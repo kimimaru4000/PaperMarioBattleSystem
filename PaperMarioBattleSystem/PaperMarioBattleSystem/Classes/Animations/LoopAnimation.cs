@@ -54,10 +54,9 @@ namespace PaperMarioBattleSystem
             ResetFrameDur();
         }
 
-        public override void Reset()
+        protected override void DerivedReset()
         {
             Loops = 0;
-            base.Reset();
         }
     }
 }

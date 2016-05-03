@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static PaperMarioBattleSystem.Enumerations;
+using static PaperMarioBattleSystem.AnimationGlobals;
 
 namespace PaperMarioBattleSystem
 {
@@ -23,7 +24,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The animations, referred to by string, of the BattleEntity
         /// </summary>
-        public Dictionary<string, Animation> Animations = new Dictionary<string, Animation>();
+        public Dictionary<string, Animation> Animations { get; private set; } = new Dictionary<string, Animation>();
+
+        /// <summary>
+        /// The current animation being played
+        /// </summary>
+        protected Animation CurrentAnim = null;
 
         protected Stats BStats;
 
@@ -48,8 +54,6 @@ namespace PaperMarioBattleSystem
 
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
-        public Texture2D SpriteSheet = null;
-
         /// <summary>
         /// The previous BattleAction the entity used
         /// </summary>
@@ -65,7 +69,7 @@ namespace PaperMarioBattleSystem
             
         }
 
-        protected BattleEntity(Stats stats)
+        protected BattleEntity(Stats stats) : this()
         {
             BStats = stats;
         }
@@ -223,16 +227,61 @@ namespace PaperMarioBattleSystem
             PreviousAction.StartSequence(targets);
         }
 
+        protected void AddAnimation(string animName, Animation anim)
+        {
+            if (Animations.ContainsKey(animName) == true)
+            {
+                Debug.LogError($"Entity {Name} already has an animation called \"{animName}\"");
+                return;
+            }
+
+            Animations.Add(animName, anim);
+
+            //Assume the first animation that gets added is the default, and play it
+            //This allows us to safely have a valid animation reference at all times, provided at least one is added
+            if (CurrentAnim == null && Animations.Count == 1)
+            {
+                PlayAnimation(animName);
+            }
+        }
+
+        public void PlayAnimation(string animName)
+        {
+            string animToPlay = animName;
+
+            //If animation cannot be found
+            if (Animations.ContainsKey(animName) == false)
+            {
+                Debug.LogError($"Cannot find animation called \"{animName}\" for entity {Name}. Reverting to \"{IdleName}\" anim");
+
+                if (Animations.ContainsKey(IdleName) == true)
+                {
+                    //Use idle animation
+                    animToPlay = IdleName;
+                }
+                else
+                {
+                    Debug.LogError($"Cannot find \"{IdleName}\" anim for entity {Name}. Each entity MUST have an \"{IdleName}\" anim!");
+                    return;
+                }
+            }
+
+            //Play animation
+            CurrentAnim = Animations[animToPlay];
+            CurrentAnim.Play();
+        }
+
         /// <summary>
         /// Used for update logic that applies to the entity regardless of whether it is its turn or not
         /// </summary>
         public void Update()
         {
-            
+            CurrentAnim?.Update();
         }
 
         public virtual void Draw()
         {
+            CurrentAnim?.Draw(Position, Color.White, EntityType != EntityTypes.Enemy, .1f);
             PreviousAction?.Draw();
         }
     }

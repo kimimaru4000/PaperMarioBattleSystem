@@ -17,7 +17,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Goomba";
 
-            SpriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Goomba");
+            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Goomba");
+            AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(67, 107, 26, 28), 1000d)));
         }
 
         public override void OnTurnStart()
@@ -36,8 +37,8 @@ namespace PaperMarioBattleSystem
         {
             base.Draw();
 
-            Rectangle rect = new Rectangle(67, 107, 26, 28);
-            SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), false, .1f);
+            //Rectangle rect = new Rectangle(67, 107, 26, 28);
+            //SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), false, .1f);
         }
     }
 }

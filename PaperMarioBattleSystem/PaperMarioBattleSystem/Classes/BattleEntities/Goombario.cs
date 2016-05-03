@@ -15,7 +15,8 @@ namespace PaperMarioBattleSystem
             Name = "Goombario";
             PartnerType = Enumerations.PartnerTypes.Goombario;
 
-            SpriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Goombario");
+            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Goombario");
+            AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(67, 89, 26, 30), 1000d)));
         }
 
         public override void OnTurnStart()
@@ -39,9 +40,9 @@ namespace PaperMarioBattleSystem
         {
             base.Draw();
 
-            if (IsDead) return;
-            Rectangle rect = new Rectangle(67, 89, 26, 30);
-            SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), true, .1f);
+            //if (IsDead) return;
+            //Rectangle rect = new Rectangle(67, 89, 26, 30);
+            //SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), true, .1f);
         }
     }
 }

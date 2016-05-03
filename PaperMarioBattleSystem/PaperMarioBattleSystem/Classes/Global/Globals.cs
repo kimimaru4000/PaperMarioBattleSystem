@@ -74,6 +74,20 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
+    /// Class for global values dealing with Animations
+    /// </summary>
+    public static class AnimationGlobals
+    {
+        public const string IdleName = "Idle";
+        public const string JumpName = "Jump";
+        public const string HammerName = "Hammer";
+        public const string RunningName = "Run";
+
+        public const string HurtName = "Hurt";
+        public const string DeathName = "Death";
+    }
+
+    /// <summary>
     /// Class for global values dealing with Battles
     /// </summary>
     public static class BattleGlobals

@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The base class for sprite animation.
-    /// It plays an animation forwards once, stopping on the last frame
+    /// It plays an animation forwards once, stopping on the last frame.
     /// </summary>
     public class Animation
     {
@@ -42,6 +42,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public float Speed { get; protected set; } = 1f;
 
+        /// <summary>
+        /// Whether the animation is paused or not
+        /// </summary>
+        public bool Paused { get; private set; } = false;
+        private double PausedTime = 0d;
+
         public bool AnimFinished => AnimDone;
         protected int MaxFrameIndex => MaxFrames - 1;
         protected Frame CurFrame => Frames[CurFrameNum];
@@ -64,7 +70,7 @@ namespace PaperMarioBattleSystem
             
         }
 
-        protected double ElapsedAnimTime => (Time.ActiveMilliseconds - PrevFrameTimer);
+        protected double ElapsedFrameTime => (Time.ActiveMilliseconds - PrevFrameTimer);
         protected double TrueCurFrameDuration => (CurFrame.Duration * (Speed <= 0f ? 0f : (1f/Speed)));
 
         /// <summary>
@@ -73,7 +79,7 @@ namespace PaperMarioBattleSystem
         /// <returns>true if the time passed is greater than the current frame's duration, otherwise false</returns>
         protected bool FrameComplete()
         {
-            return (ElapsedAnimTime >= TrueCurFrameDuration);
+            return (ElapsedFrameTime >= TrueCurFrameDuration);
         }
 
         /// <summary>
@@ -93,13 +99,53 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Plays the animation from the start
+        /// </summary>
+        public void Play()
+        {
+            Reset();
+            Resume();
+        }
+
+        /// <summary>
+        /// Pauses the animation
+        /// </summary>
+        public void Pause()
+        {
+            Paused = true;
+
+            //Store the amount of time elapsed
+            PausedTime = ElapsedFrameTime;
+        }
+
+        /// <summary>
+        /// Resumes the animation
+        /// </summary>
+        public void Resume()
+        {
+            Paused = false;
+            ResetFrameDur();
+
+            //Put back the elapsed time
+            PrevFrameTimer += PausedTime;
+        }
+
+        /// <summary>
         /// Resets the animation to the start
         /// </summary>
-        public virtual void Reset()
+        public void Reset()
         {
             AnimDone = false;
             CurFrameNum = 0;
+            PausedTime = 0d;
             ResetFrameDur();
+
+            DerivedReset();
+        }
+
+        protected virtual void DerivedReset()
+        {
+
         }
 
         /// <summary>
@@ -122,7 +168,7 @@ namespace PaperMarioBattleSystem
 
         public void Update()
         {
-            if (AnimDone == false)
+            if (Paused == false && AnimDone == false)
             {
                 //Progress if it's over 
                 if (FrameComplete() == true)
@@ -140,17 +186,17 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// An animation frame
         /// </summary>
-        public sealed class Frame
+        public struct Frame
         {
             /// <summary>
             /// A rectangle designating the region on the sprite sheet to draw
             /// </summary>
-            public Rectangle DrawRegion = Rectangle.Empty;
+            public Rectangle DrawRegion;
 
             /// <summary>
             /// How long the frame lasts, in milliseconds
             /// </summary>
-            public double Duration = 0d;
+            public double Duration;
 
             public Frame(Rectangle drawRegion, double duration)
             {

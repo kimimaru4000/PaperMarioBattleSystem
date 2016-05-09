@@ -24,6 +24,12 @@ namespace PaperMarioBattleSystem
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Mario");
             AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(228, 918, 29, 51), 1000d)));
+            AddAnimation(AnimationGlobals.HammerName, new Animation(spriteSheet, 
+                new Animation.Frame(new Rectangle(341, 9, 36, 50), 100d),
+                new Animation.Frame(new Rectangle(341, 64, 38, 50), 100d),
+                new Animation.Frame(new Rectangle(341, 118, 32, 44), 100d),
+                new Animation.Frame(new Rectangle(340, 166, 32, 44), 100d)));
+            AddAnimation(AnimationGlobals.VictoryName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(447, 281, 42, 50), 1000d)));
         }
 
         public override void OnTurnStart()

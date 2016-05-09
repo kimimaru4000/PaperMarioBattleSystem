@@ -48,7 +48,7 @@ namespace PaperMarioBattleSystem
         public bool Paused { get; private set; } = false;
         private double PausedTime = 0d;
 
-        public bool AnimFinished => AnimDone;
+        public bool Finished => AnimDone;
         protected int MaxFrameIndex => MaxFrames - 1;
         protected Frame CurFrame => Frames[CurFrameNum];
 
@@ -155,7 +155,7 @@ namespace PaperMarioBattleSystem
         /// not supported through the speed</param>
         public void SetSpeed(float newSpeed)
         {
-            Speed = HelperGlobals.Clamp(newSpeed, 0, float.MaxValue);
+            Speed = UtilityGlobals.Clamp(newSpeed, 0, float.MaxValue);
         }
 
         /// <summary>

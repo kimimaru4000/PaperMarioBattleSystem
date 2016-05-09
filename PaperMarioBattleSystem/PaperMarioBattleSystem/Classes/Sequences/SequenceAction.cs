@@ -62,7 +62,7 @@ namespace PaperMarioBattleSystem
 
         public void Update()
         {
-            if (Done == false)
+            if (IsDone == false)
                 OnUpdate();
         }
 

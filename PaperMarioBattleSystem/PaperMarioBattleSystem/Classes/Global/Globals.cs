@@ -74,6 +74,14 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
+    /// Class for general global values and references
+    /// </summary>
+    public static class GeneralGlobals
+    {
+        public static readonly Random Randomizer = new Random();
+    }
+
+    /// <summary>
     /// Class for global values dealing with Animations
     /// </summary>
     public static class AnimationGlobals
@@ -85,6 +93,7 @@ namespace PaperMarioBattleSystem
 
         public const string HurtName = "Hurt";
         public const string DeathName = "Death";
+        public const string VictoryName = "Victory";
     }
 
     /// <summary>
@@ -121,9 +130,9 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
-    /// Class for global helper functions
+    /// Class for global utility functions
     /// </summary>
-    public static class HelperGlobals
+    public static class UtilityGlobals
     {
         public static int Clamp(int value, int min, int max) => (value < min) ? min : (value > max) ? max : value;
         public static float Clamp(float value, float min, float max) => (value < min) ? min : (value > max) ? max : value;
@@ -132,5 +141,28 @@ namespace PaperMarioBattleSystem
         public static int Wrap(int value, int min, int max) => (value < min) ? max : (value > max) ? min : value;
         public static float Wrap(float value, float min, float max) => (value < min) ? max : (value > max) ? min : value;
         public static double Wrap(double value, double min, double max) => (value < min) ? max : (value > max) ? min : value;
+
+        /// <summary>
+        /// Chooses a random index in a list of percentages
+        /// </summary>
+        /// <param name="percentages">The container of percentages, each with positive values, with the sum adding up to 1</param>
+        /// <returns>The index in the container of percentages that was chosen</returns>
+        public static int ChoosePercentage(IList<double> percentages)
+        {
+            double randomVal = GeneralGlobals.Randomizer.NextDouble();
+            double value = 0d;
+
+            for (int i = 0; i < percentages.Count; i++)
+            {
+                value += percentages[i];
+                if (value > randomVal)
+                {
+                    return i;
+                }
+            }
+
+            //Return the last one if it goes through
+            return percentages.Count - 1;
+        }
     }
 }

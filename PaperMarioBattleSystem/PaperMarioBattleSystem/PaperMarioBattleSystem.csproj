@@ -94,6 +94,7 @@
     <Compile Include="Classes\Sequences\MoveTo.cs" />
     <Compile Include="Classes\Sequences\SequenceAction.cs" />
     <Compile Include="Classes\Sequences\Wait.cs" />
+    <Compile Include="Classes\Sequences\WaitForAnimation.cs" />
     <Compile Include="Classes\Sequences\WaitForCommand.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleUIManager.cs" />

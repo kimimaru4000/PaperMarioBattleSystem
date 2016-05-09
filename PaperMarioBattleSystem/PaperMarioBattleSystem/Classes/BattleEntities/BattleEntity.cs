@@ -19,12 +19,12 @@ namespace PaperMarioBattleSystem
         /// Weaknesses an entity has to particular elements.
         /// Each weakness can be handled differently by each entity
         /// </summary>
-        public Dictionary<Elements, bool> Weaknesses { get; private set; } = new Dictionary<Elements, bool>();
+        protected Dictionary<Elements, bool> Weaknesses { get; private set; } = new Dictionary<Elements, bool>();
 
         /// <summary>
         /// The animations, referred to by string, of the BattleEntity
         /// </summary>
-        public Dictionary<string, Animation> Animations { get; private set; } = new Dictionary<string, Animation>();
+        protected Dictionary<string, Animation> Animations { get; private set; } = new Dictionary<string, Animation>();
 
         /// <summary>
         /// The current animation being played
@@ -79,21 +79,21 @@ namespace PaperMarioBattleSystem
         public virtual void TakeDamage(Elements element, int damage)
         {
             int newDamage = HandleWeakness(element, damage);
-            newDamage = HelperGlobals.Clamp(newDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            newDamage = UtilityGlobals.Clamp(newDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
 
             LoseHP(newDamage);
         }
 
         public virtual void HealHP(int hp)
         {
-            BStats.HP = HelperGlobals.Clamp(BStats.HP + hp, 0, BStats.MaxHP);
+            BStats.HP = UtilityGlobals.Clamp(BStats.HP + hp, 0, BStats.MaxHP);
 
             Debug.Log($"{Name} healed {hp} HP!");
         }
 
         public void HealFP(int fp)
         {
-            BStats.FP = HelperGlobals.Clamp(BStats.FP + fp, 0, BStats.MaxFP);
+            BStats.FP = UtilityGlobals.Clamp(BStats.FP + fp, 0, BStats.MaxFP);
         }
 
         public virtual void LoseHP(int hp)
@@ -101,7 +101,7 @@ namespace PaperMarioBattleSystem
             //TEMPORARY: Fix for removing enemies multiple times during overkill
             if (BStats.HP == 0) return;
 
-            BStats.HP = HelperGlobals.Clamp(BStats.HP - hp, 0, BStats.MaxHP);
+            BStats.HP = UtilityGlobals.Clamp(BStats.HP - hp, 0, BStats.MaxHP);
             if (BStats.HP <= 0)
             {
                 Die();
@@ -112,7 +112,7 @@ namespace PaperMarioBattleSystem
 
         public void LoseFP(int fp)
         {
-            BStats.FP = HelperGlobals.Clamp(BStats.FP - fp, 0, BStats.MaxFP);
+            BStats.FP = UtilityGlobals.Clamp(BStats.FP - fp, 0, BStats.MaxFP);
         }
 
         public void RaiseAttack(int attack)
@@ -245,29 +245,30 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public void PlayAnimation(string animName)
+        public Animation GetAnimation(string animName)
         {
-            string animToPlay = animName;
-
             //If animation cannot be found
             if (Animations.ContainsKey(animName) == false)
             {
-                Debug.LogError($"Cannot find animation called \"{animName}\" for entity {Name}. Reverting to \"{IdleName}\" anim");
+                Debug.LogError($"Cannot find animation called \"{animName}\" for entity {Name}");
+                return null;
+            }
 
-                if (Animations.ContainsKey(IdleName) == true)
-                {
-                    //Use idle animation
-                    animToPlay = IdleName;
-                }
-                else
-                {
-                    Debug.LogError($"Cannot find \"{IdleName}\" anim for entity {Name}. Each entity MUST have an \"{IdleName}\" anim!");
-                    return;
-                }
+            return Animations[animName];
+        }
+
+        public void PlayAnimation(string animName)
+        {
+            Animation animToPlay = GetAnimation(animName);
+
+            //If animation cannot be found, try to play the Idle animation
+            if (animToPlay == null)
+            {
+                return;
             }
 
             //Play animation
-            CurrentAnim = Animations[animToPlay];
+            CurrentAnim = animToPlay;
             CurrentAnim.Play();
         }
 

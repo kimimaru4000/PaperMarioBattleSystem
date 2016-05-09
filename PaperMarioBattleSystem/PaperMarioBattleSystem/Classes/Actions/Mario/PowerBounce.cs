@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
                     break;
                 case 3:
                     DealDamage(DamageValue);
-                    DamageValue = HelperGlobals.Clamp(DamageValue - 1, 1, BattleGlobals.MaxDamage);
+                    DamageValue = UtilityGlobals.Clamp(DamageValue - 1, 1, BattleGlobals.MaxDamage);
 
                     Bounces++;
 

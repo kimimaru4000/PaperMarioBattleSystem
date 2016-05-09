@@ -23,7 +23,12 @@ namespace PaperMarioBattleSystem
             
         }
 
-        public LoopAnimation(Texture2D spriteSheet, int maxLoops, bool isUIAnim, params Frame[] frames) : base(spriteSheet, isUIAnim, frames)
+        public LoopAnimation(Texture2D spriteSheet, int maxLoops, bool isUIAnim, params Frame[] frames) : this(spriteSheet, maxLoops, 1f, isUIAnim, frames)
+        {
+            
+        }
+
+        public LoopAnimation(Texture2D spriteSheet, int maxLoops, float speed, bool isUIAnim, params Frame[] frames) : base(spriteSheet, speed, isUIAnim, frames)
         {
             MaxLoops = maxLoops;
         }

@@ -309,6 +309,8 @@ namespace PaperMarioBattleSystem
             else if (EnemiesAlive <= 0)
             {
                 State = BattleState.Done;
+                Mario.PlayAnimation(AnimationGlobals.VictoryName);
+                Partner.PlayAnimation(AnimationGlobals.VictoryName);
                 Debug.Log("VICTORY");
             }
         }

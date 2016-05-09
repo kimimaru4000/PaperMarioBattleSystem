@@ -48,6 +48,11 @@ namespace PaperMarioBattleSystem
                     break;
                 case 2:
                     DealDamage(BaseDamage * DamageMod);
+                    User.PlayAnimation(AnimationGlobals.HammerName);
+                    CurSequence = new WaitForAnimation(AnimationGlobals.HammerName);
+                    break;
+                case 3:
+                    User.PlayAnimation(AnimationGlobals.IdleName);
                     base.OnProgressSequence();
                     break;
                 default:

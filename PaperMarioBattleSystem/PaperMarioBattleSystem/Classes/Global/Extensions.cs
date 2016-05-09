@@ -27,8 +27,8 @@ namespace PaperMarioBattleSystem
         /// <returns>A Vector2 with the origin</returns>
         public static Vector2 GetOrigin(this Texture2D texture2D, float x, float y)
         {
-            int xVal = (int)(texture2D.Width * HelperGlobals.Clamp(x, 0f, 1f));
-            int yVal = (int)(texture2D.Height * HelperGlobals.Clamp(y, 0f, 1f));
+            int xVal = (int)(texture2D.Width * UtilityGlobals.Clamp(x, 0f, 1f));
+            int yVal = (int)(texture2D.Height * UtilityGlobals.Clamp(y, 0f, 1f));
 
             return new Vector2(xVal, yVal);
         }
@@ -58,8 +58,8 @@ namespace PaperMarioBattleSystem
         public static Vector2 GetOrigin(this SpriteFont spriteFont, string text, float x, float y)
         {
             Vector2 size = spriteFont.MeasureString(text);
-            size.X *= HelperGlobals.Clamp(x, 0f, 1f);
-            size.Y *= HelperGlobals.Clamp(y, 0f, 1f);
+            size.X *= UtilityGlobals.Clamp(x, 0f, 1f);
+            size.Y *= UtilityGlobals.Clamp(y, 0f, 1f);
 
             return size;
         }
@@ -88,8 +88,8 @@ namespace PaperMarioBattleSystem
         /// <returns>A Vector2 with the origin</returns>
         public static Vector2 GetOrigin(this Rectangle rectangle, float x, float y)
         {
-            int xVal = (int)(rectangle.Width * HelperGlobals.Clamp(x, 0f, 1f));
-            int yVal = (int)(rectangle.Height * HelperGlobals.Clamp(y, 0f, 1f));
+            int xVal = (int)(rectangle.Width * UtilityGlobals.Clamp(x, 0f, 1f));
+            int yVal = (int)(rectangle.Height * UtilityGlobals.Clamp(y, 0f, 1f));
 
             return new Vector2(xVal, yVal);
         }

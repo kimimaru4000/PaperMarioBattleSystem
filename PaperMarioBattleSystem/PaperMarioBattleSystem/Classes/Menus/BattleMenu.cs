@@ -71,11 +71,11 @@ namespace PaperMarioBattleSystem
         {
             if (WrapCursor == false)
             {
-                CurSelection = HelperGlobals.Clamp(CurSelection + amount, 0, LastSelection);
+                CurSelection = UtilityGlobals.Clamp(CurSelection + amount, 0, LastSelection);
             }
             else
             {
-                CurSelection = HelperGlobals.Wrap(CurSelection + amount, 0, LastSelection);
+                CurSelection = UtilityGlobals.Wrap(CurSelection + amount, 0, LastSelection);
             }
 
             OnSelectionChanged(CurSelection);

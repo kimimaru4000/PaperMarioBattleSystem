@@ -74,7 +74,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The current SequenceAction being performed
         /// </summary>
-        public SequenceAction CurSequence { get; protected set; } = null;
+        protected SequenceAction CurSequence { get; set; } = null;
 
         protected BattleEntity[] EntitiesAffected { get; private set; } = null;
 
@@ -158,6 +158,16 @@ namespace PaperMarioBattleSystem
         /// What occurs when the action command is failed
         /// </summary>
         public abstract void OnCommandFailed();
+
+        /// <summary>
+        /// Handles BattleAction responses sent from an ActionCommand that are not a definite Success or Failure.
+        /// Unlike a Success or Failure, the ActionCommand is not required to send this down at all
+        /// <para>For example, the Hammer command sends back the number of lights lit up, and the Hammer action responds
+        /// by speeding up Mario's hammer windup animation
+        /// </para>
+        /// </summary>
+        /// <param name="response">A number representing a response from the action command</param>
+        public abstract void OnCommandResponse(int response);
 
         /// <summary>
         /// What happens when the BattleAction is selected on the menu.

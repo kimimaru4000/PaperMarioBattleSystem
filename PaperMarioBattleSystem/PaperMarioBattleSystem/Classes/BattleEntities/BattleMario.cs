@@ -24,11 +24,22 @@ namespace PaperMarioBattleSystem
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Mario");
             AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(228, 918, 29, 51), 1000d)));
-            AddAnimation(AnimationGlobals.HammerName, new Animation(spriteSheet, 
-                new Animation.Frame(new Rectangle(341, 9, 36, 50), 100d),
-                new Animation.Frame(new Rectangle(341, 64, 38, 50), 100d),
-                new Animation.Frame(new Rectangle(341, 118, 32, 44), 100d),
-                new Animation.Frame(new Rectangle(340, 166, 32, 44), 100d)));
+            AddAnimation(AnimationGlobals.RunningName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(228, 918, 29, 51), 30d),
+                new Animation.Frame(new Rectangle(228, 861, 29, 49), 30d),
+                new Animation.Frame(new Rectangle(68, 1056, 31, 48), 30d),
+                new Animation.Frame(new Rectangle(228, 861, 29, 49), 30d))); //NOTE: Omit this last frame by creating reversable animations
+
+            AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerPickupName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(173, 664, 30, 49), 100d),
+                new Animation.Frame(new Rectangle(174, 607, 29, 50), 100d),
+                new Animation.Frame(new Rectangle(340, 421, 32, 46), 200d)));
+            AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerWindupName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(341, 9, 36, 50), 150d),
+                new Animation.Frame(new Rectangle(341, 64, 38, 50), 150d)));
+            AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerSlamName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(334, 319, 42, 50), 200d),
+                new Animation.Frame(new Rectangle(340, 166, 32, 44), 300d)));
             AddAnimation(AnimationGlobals.VictoryName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(447, 281, 42, 50), 1000d)));
         }
 

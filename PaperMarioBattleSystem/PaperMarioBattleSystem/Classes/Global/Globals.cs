@@ -86,10 +86,25 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class AnimationGlobals
     {
+        /// <summary>
+        /// A value corresponding to an animation that loops infinitely
+        /// </summary>
+        public const int InfiniteLoop = -1;
+        public const float DefaultAnimSpeed = 1f;
+
         public const string IdleName = "Idle";
         public const string JumpName = "Jump";
-        public const string HammerName = "Hammer";
         public const string RunningName = "Run";
+
+        /// <summary>
+        /// Mario-specific battle animations
+        /// </summary>
+        public static class MarioBattleAnimations
+        {
+            public const string HammerPickupName = "HammerPickup";
+            public const string HammerWindupName = "HammerWindup";
+            public const string HammerSlamName = "HammerSlam";
+        }
 
         public const string HurtName = "Hurt";
         public const string DeathName = "Death";
@@ -114,6 +129,11 @@ namespace PaperMarioBattleSystem
     {
         public const int WindowWidth = 800;
         public const int WindowHeight = 600;
+    }
+
+    public static class AudioGlobals
+    {
+        
     }
 
     /// <summary>

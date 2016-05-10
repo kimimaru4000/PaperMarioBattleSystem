@@ -14,6 +14,15 @@ namespace PaperMarioBattleSystem
     {
         protected int DamageMod = 1;
 
+        /// <summary>
+        /// The number of lights lit at which the hammer windup animation's speed increases
+        /// </summary>
+        protected int LitWindupSpeed = 3;
+
+        protected string PickupAnimName = AnimationGlobals.MarioBattleAnimations.HammerPickupName;
+        protected string WindupAnimName = AnimationGlobals.MarioBattleAnimations.HammerWindupName;
+        protected string SlamAnimName = AnimationGlobals.MarioBattleAnimations.HammerSlamName;
+
         public Hammer()
         {
             Name = "Hammer";
@@ -33,6 +42,15 @@ namespace PaperMarioBattleSystem
             
         }
 
+        public override void OnCommandResponse(int response)
+        {
+            if (response == LitWindupSpeed)
+            {
+                Animation windupAnim = User.GetAnimation(WindupAnimName);
+                windupAnim?.SetSpeed(2f);
+            }
+        }
+
         protected override void OnProgressSequence()
         {
             float x = User.EntityType == Enumerations.EntityTypes.Player ? 100f : -100f;
@@ -40,22 +58,29 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    User.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), 1000f);
                     break;
                 case 1:
+                    User.PlayAnimation(PickupAnimName, true);
+                    CurSequence = new WaitForAnimation(PickupAnimName);
+                    break;
+                case 2:
+                    User.PlayAnimation(WindupAnimName);
                     if (CommandEnabled == true) Command.StartInput();
                     CurSequence = new WaitForCommand(1500f, Command, CommandEnabled);
                     break;
-                case 2:
-                    DealDamage(BaseDamage * DamageMod);
-                    User.PlayAnimation(AnimationGlobals.HammerName);
-                    CurSequence = new WaitForAnimation(AnimationGlobals.HammerName);
-                    break;
                 case 3:
-                    User.PlayAnimation(AnimationGlobals.IdleName);
+                    User.PlayAnimation(SlamAnimName, true);
+                    DealDamage(BaseDamage * DamageMod);
+                    CurSequence = new WaitForAnimation(SlamAnimName);
+                    break;
+                case 4:
+                    User.PlayAnimation(AnimationGlobals.RunningName);
                     base.OnProgressSequence();
                     break;
                 default:
+                    User.PlayAnimation(AnimationGlobals.IdleName, true);
                     EndSequence();
                     break;
             }

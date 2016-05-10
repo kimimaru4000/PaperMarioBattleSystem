@@ -32,6 +32,11 @@ namespace PaperMarioBattleSystem
 
         }
 
+        public override void OnCommandResponse(int response)
+        {
+            
+        }
+
         public override void OnMenuSelected()
         {
             base.OnMenuSelected();

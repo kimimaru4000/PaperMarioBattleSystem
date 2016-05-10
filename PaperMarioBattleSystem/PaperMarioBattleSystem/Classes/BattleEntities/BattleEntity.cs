@@ -257,14 +257,27 @@ namespace PaperMarioBattleSystem
             return Animations[animName];
         }
 
-        public void PlayAnimation(string animName)
+        /// <summary>
+        /// Plays an animation that the entity has, specified by its name. If the animation does not have the specified animation,
+        /// nothing happens
+        /// </summary>
+        /// <param name="animName">The name of the animation to play</param>
+        /// <param name="resetPrevious">If true, resets the previous animation that was playing, if any.
+        /// This will also reset its speed</param>
+        public void PlayAnimation(string animName, bool resetPrevious = false)
         {
             Animation animToPlay = GetAnimation(animName);
 
-            //If animation cannot be found, try to play the Idle animation
+            //If animation cannot be found, return
             if (animToPlay == null)
             {
                 return;
+            }
+
+            //Reset the previous animation if specified
+            if (resetPrevious == true)
+            {
+                CurrentAnim?.Reset(true);
             }
 
             //Play animation

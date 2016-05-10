@@ -27,5 +27,10 @@ namespace PaperMarioBattleSystem
         {
             EndSequence();
         }
+
+        public override void OnCommandResponse(int response)
+        {
+
+        }
     }
 }

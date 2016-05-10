@@ -75,6 +75,9 @@ namespace PaperMarioBattleSystem
                     LightsLit++;
                     PrevLightTime = time + TimeEachLight;
 
+                    //Send the number of lights lit
+                    Action.OnCommandResponse(LightsLit);
+
                     //Held Left too long (past the last light)
                     if (LightsLit > MaxLights)
                     {

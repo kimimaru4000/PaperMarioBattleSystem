@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The speed the animation plays back at
         /// </summary>
-        public float Speed { get; protected set; } = 1f;
+        public float Speed { get; protected set; } = AnimationGlobals.DefaultAnimSpeed;
 
         /// <summary>
         /// Whether the animation is paused or not
@@ -133,12 +133,19 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Resets the animation to the start
         /// </summary>
-        public void Reset()
+        /// <param name="resetSpeed">If true, resets the Animation's speed to its default value</param>
+        public void Reset(bool resetSpeed = false)
         {
             AnimDone = false;
             CurFrameNum = 0;
             PausedTime = 0d;
             ResetFrameDur();
+
+            //Reset the animation's speed if specified
+            if (resetSpeed == true)
+            {
+                ResetSpeed();
+            }
 
             DerivedReset();
         }
@@ -156,6 +163,14 @@ namespace PaperMarioBattleSystem
         public void SetSpeed(float newSpeed)
         {
             Speed = UtilityGlobals.Clamp(newSpeed, 0, float.MaxValue);
+        }
+
+        /// <summary>
+        /// Resets the animation's Speed to the default value
+        /// </summary>
+        public void ResetSpeed()
+        {
+            SetSpeed(AnimationGlobals.DefaultAnimSpeed);
         }
 
         /// <summary>

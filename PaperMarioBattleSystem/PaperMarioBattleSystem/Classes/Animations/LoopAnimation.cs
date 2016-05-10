@@ -10,11 +10,6 @@ namespace PaperMarioBattleSystem
 {
     public class LoopAnimation : Animation
     {
-        /// <summary>
-        /// A value corresponding to an animation that loops infinitely
-        /// </summary>
-        public const int INFINITE_LOOP = -1;
-
         public int MaxLoops = 1;
         public int Loops = 0;
 
@@ -43,7 +38,7 @@ namespace PaperMarioBattleSystem
                 Loops++;
 
                 //If the animation goes on forever or we're not done, reset back to the first frame
-                if (MaxLoops <= INFINITE_LOOP || Loops < MaxLoops)
+                if (MaxLoops <= AnimationGlobals.InfiniteLoop || Loops < MaxLoops)
                 {
                     CurFrameNum = 0;
                 }

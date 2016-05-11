@@ -12,6 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class Hammer : BattleAction
     {
+        protected float WalkDuration = 1000f;
         protected int DamageMod = 1;
 
         /// <summary>
@@ -59,7 +60,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), 1000f);
+                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), WalkDuration);
                     break;
                 case 1:
                     User.PlayAnimation(PickupAnimName, true);
@@ -77,7 +78,7 @@ namespace PaperMarioBattleSystem
                     break;
                 case 4:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    base.OnProgressSequence();
+                    CurSequence = new MoveTo(User.BattlePosition, WalkDuration);
                     break;
                 default:
                     User.PlayAnimation(AnimationGlobals.IdleName, true);

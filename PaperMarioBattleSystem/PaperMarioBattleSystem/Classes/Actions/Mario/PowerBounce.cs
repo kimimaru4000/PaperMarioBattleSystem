@@ -60,7 +60,7 @@ namespace PaperMarioBattleSystem
                     }
                     break;
                 case 4:
-                    OnProgressBase();
+                    CurSequence = new MoveTo(User.BattlePosition, WalkDuration);
                     break;
                 default:
                     EndSequence();

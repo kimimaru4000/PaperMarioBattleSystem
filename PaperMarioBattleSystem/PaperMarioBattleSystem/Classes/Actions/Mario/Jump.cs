@@ -12,13 +12,16 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class Jump : BattleAction
     {
+        protected float WalkDuration = 1000f;
+        protected float JumpDuration = 1000f;
+
         public Jump()
         {
             Name = "Jump";
             Description = "Jump and stomp on an enemy.";
             BaseDamage = 1;
 
-            Command = new JumpCommand(this, 1000f, 500f);
+            Command = new JumpCommand(this, JumpDuration, (int)(JumpDuration / 2f));
         }
 
         public override void OnCommandSuccess()
@@ -47,18 +50,21 @@ namespace PaperMarioBattleSystem
             switch(SequenceStep)
             {
                 case 0:
-                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), 1000f);
+                    User.PlayAnimation(AnimationGlobals.RunningName);
+                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), WalkDuration);
                     break;
                 case 1:
-                    CurSequence = new MoveAmount(new Vector2(0f, -100f), 1000f);
+                    User.PlayAnimation(AnimationGlobals.IdleName);
+                    CurSequence = new MoveAmount(new Vector2(0f, -100f), JumpDuration);
                     break;
                 case 2:
                     if (SequenceStep == 2 && CommandEnabled == true) Command.StartInput();
-                    CurSequence = new MoveAmount(new Vector2(0f, 100f), 1000f);
+                    CurSequence = new MoveAmount(new Vector2(0f, 100f), JumpDuration);
                     break;
                 case 3:
+                    User.PlayAnimation(AnimationGlobals.RunningName);
                     DealDamage(BaseDamage);
-                    base.OnProgressSequence();
+                    CurSequence = new MoveTo(User.BattlePosition, WalkDuration);
                     if (SequenceStep == 3) SequenceStep += 500;
                     break;
                 case 4:
@@ -69,6 +75,7 @@ namespace PaperMarioBattleSystem
                 case 6:
                     goto case 3;
                 default:
+                    User.PlayAnimation(AnimationGlobals.IdleName);
                     EndSequence();
                     break;
             }

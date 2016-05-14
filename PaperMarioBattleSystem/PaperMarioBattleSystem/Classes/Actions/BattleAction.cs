@@ -88,7 +88,7 @@ namespace PaperMarioBattleSystem
         {
             
         }
-
+        
         public void DealDamage(int damage)
         {
             for (int i = 0; i < EntitiesAffected.Length; i++)
@@ -168,6 +168,15 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="response">A number representing a response from the action command</param>
         public abstract void OnCommandResponse(int response);
+
+        /// <summary>
+        /// What occurs when the command backfires.
+        /// The most notable example of this is when Mario takes damage when jumping on a spiked enemy
+        /// </summary>
+        public virtual void OnCommandBackfire()
+        {
+
+        }
 
         /// <summary>
         /// What happens when the BattleAction is selected on the menu.

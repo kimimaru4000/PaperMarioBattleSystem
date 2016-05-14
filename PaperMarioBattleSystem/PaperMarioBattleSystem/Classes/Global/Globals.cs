@@ -53,10 +53,19 @@ namespace PaperMarioBattleSystem
         {
             Player, Enemy
         }
-
+        
+        /// <summary>
+        /// The types of partners in the game
+        /// </summary>
         public enum PartnerTypes
         {
-            None, Goombario, Kooper, Bombette, Parakarry, Bow, Watt, Sushie, Lakilester, Goompa, Goombaria, Twink
+            None,
+            //PM Partners
+            Goombario, Kooper, Bombette, Parakarry, Bow, Watt, Sushie, Lakilester,
+            //TTYD Partners
+            Goombella, Koops, Flurrie, Yoshi, Vivian, Bobbery, MsMowz,
+            //Unused or temporary partners
+            Goompa, Goombaria, Twink
         }
 
         public enum BattleActions
@@ -70,6 +79,40 @@ namespace PaperMarioBattleSystem
         public enum Elements
         {
             Normal, Sharp, Fire, Electric, Ice, Poison, Explosion
+        }
+
+        /// <summary>
+        /// The main height states an entity can be in.
+        /// Some moves may or may not be able to hit entities in certain height states.
+        /// </summary>
+        public enum HeightStates
+        {
+            Grounded, Airborne, Ceiling
+        }
+
+        /// <summary>
+        /// The physical attributes assigned to entities.
+        /// These determine if an attack can target a particular entity, or whether there is an advantage
+        /// or disadvantage to using a particular attack on an entity with a particular physical attribute.
+        /// 
+        /// <para>Flying does not mean that the entity is Airborne. Flying entities, such as Ruff Puffs,
+        /// can still be damaged by ground moves if they hover at ground level.</para>
+        /// </summary>
+        public enum PhysicalAttributes
+        {
+            None, Flying, Spiked, Electrified, Burning
+        }
+
+        /// <summary>
+        /// The state of health an entity can be in.
+        /// 
+        /// <para>Danger occurs when the entity has 2-5 HP remaining.
+        /// Peril occurs when the entity has exactly 1 HP remaining.
+        /// Dead occurs when the entity has 0 HP remaining.</para>
+        /// </summary>
+        public enum HealthState
+        {
+            Normal, Danger, Peril, Dead
         }
     }
 

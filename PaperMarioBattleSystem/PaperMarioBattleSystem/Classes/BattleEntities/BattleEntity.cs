@@ -16,6 +16,11 @@ namespace PaperMarioBattleSystem
     public abstract class BattleEntity
     {
         /// <summary>
+        /// The physical attributes the entity possesses
+        /// </summary>
+        protected Dictionary<PhysicalAttributes, bool> PhysAttributes { get; private set; } = new Dictionary<PhysicalAttributes, bool>();
+
+        /// <summary>
         /// Weaknesses an entity has to particular elements.
         /// Each weakness can be handled differently by each entity
         /// </summary>
@@ -25,6 +30,11 @@ namespace PaperMarioBattleSystem
         /// The animations, referred to by string, of the BattleEntity
         /// </summary>
         protected Dictionary<string, Animation> Animations { get; private set; } = new Dictionary<string, Animation>();
+
+        /// <summary>
+        /// The HeightState of the entity
+        /// </summary>
+        public HeightStates HeightState { get; protected set; } = HeightStates.Grounded;
 
         /// <summary>
         /// The current animation being played
@@ -78,7 +88,7 @@ namespace PaperMarioBattleSystem
 
         public virtual void TakeDamage(Elements element, int damage)
         {
-            int newDamage = HandleWeakness(element, damage);
+            int newDamage = damage;
             newDamage = UtilityGlobals.Clamp(newDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
 
             LoseHP(newDamage);
@@ -162,12 +172,12 @@ namespace PaperMarioBattleSystem
         /// <param name="element">The element used to damage the entity</param>
         /// <param name="damage">The damage dealt to the entity</param>
         /// <returns>The new damage dealt if the weakness handles damage, otherwise the original damage</returns>
-        protected virtual int HandleWeakness(Elements element, int damage)
-        {
-            if (Weaknesses.ContainsKey(element) == false) return damage;
-
-            return damage * 2;
-        }
+        //protected virtual int HandleWeakness(Elements element, int damage)
+        //{
+        //    if (Weaknesses.ContainsKey(element) == false) return damage;
+        //
+        //    return damage * 2;
+        //}
 
         #endregion
 
@@ -227,19 +237,40 @@ namespace PaperMarioBattleSystem
             PreviousAction.StartSequence(targets);
         }
 
+        /// <summary>
+        /// Adds an animation for the entity.
+        /// If an animation already exists, it will be replaced.
+        /// </summary>
+        /// <param name="animName">The name of the animation</param>
+        /// <param name="anim">The animation reference</param>
         protected void AddAnimation(string animName, Animation anim)
         {
+            //Return if trying to add null animation
+            if (anim == null)
+            {
+                Debug.LogError($"Trying to add null animation called \"{animName}\" to entity {Name}, so it won't be added");
+                return;
+            }
+
             if (Animations.ContainsKey(animName) == true)
             {
-                Debug.LogError($"Entity {Name} already has an animation called \"{animName}\"");
-                return;
+                Debug.LogWarning($"Entity {Name} already has an animation called \"{animName}\" and will be replaced");
+
+                //Clear the current animation reference if it is the animation being removed
+                Animation prevAnim = Animations[animName];
+                if (CurrentAnim == prevAnim)
+                { 
+                    CurrentAnim = null;
+                }
+
+                Animations.Remove(animName);
             }
 
             Animations.Add(animName, anim);
 
-            //Assume the first animation that gets added is the default, and play it
+            //Play the most recent animation that gets added is the default, and play it
             //This allows us to safely have a valid animation reference at all times, provided at least one is added
-            if (CurrentAnim == null && Animations.Count == 1)
+            if (CurrentAnim == null)
             {
                 PlayAnimation(animName);
             }
@@ -250,7 +281,7 @@ namespace PaperMarioBattleSystem
             //If animation cannot be found
             if (Animations.ContainsKey(animName) == false)
             {
-                Debug.LogError($"Cannot find animation called \"{animName}\" for entity {Name}");
+                Debug.LogError($"Cannot find animation called \"{animName}\" for entity {Name} to play");
                 return null;
             }
 
@@ -283,6 +314,48 @@ namespace PaperMarioBattleSystem
             //Play animation
             CurrentAnim = animToPlay;
             CurrentAnim.Play();
+        }
+
+        /// <summary>
+        /// Adds a physical attribute to the entity
+        /// </summary>
+        /// <param name="physicalAttribute">The physical attribute to add</param>
+        public void AddPhysAttribute(PhysicalAttributes physicalAttribute)
+        {
+            if (PhysAttributes.ContainsKey(physicalAttribute) == true)
+            {
+                Debug.LogError($"{Name} already has the {physicalAttribute} {nameof(PhysicalAttributes)}!");
+                return;
+            }
+
+            PhysAttributes.Add(physicalAttribute, true);
+        }
+
+        /// <summary>
+        /// Removes a physical attribute from the entity
+        /// </summary>
+        /// <param name="physicalAttribute">The physical attribute to remove</param>
+        /// <returns>true if the physical attribute was successfully found and removed, false otherwise</returns>
+        public bool RemovePhysAttribute(PhysicalAttributes physicalAttribute)
+        {
+            return PhysAttributes.Remove(physicalAttribute);
+        }
+
+        /// <summary>
+        /// Tells whether the entity has a set of physical attributes or not
+        /// </summary>
+        /// <param name="attributes">The set of physical attributes to check the entity has</param>
+        /// <returns>true if the entity has all of the physical attributes in the set, otherwise false</returns>
+        public bool HasPhysAttributes(params PhysicalAttributes[] attributes)
+        {
+            if (attributes == null) return false;
+
+            for (int i = 0; i < attributes.Length; i++)
+            {
+                if (PhysAttributes.ContainsKey(attributes[i]) == false) return false;
+            }
+
+            return true;
         }
 
         /// <summary>

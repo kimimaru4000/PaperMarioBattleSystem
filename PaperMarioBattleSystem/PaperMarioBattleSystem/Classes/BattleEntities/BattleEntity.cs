@@ -37,6 +37,12 @@ namespace PaperMarioBattleSystem
         public HeightStates HeightState { get; protected set; } = HeightStates.Grounded;
 
         /// <summary>
+        /// The HealthState of the entity.
+        /// This can apply to any entity, but only Mario and his Partners utilize Danger and Peril
+        /// </summary>
+        public HealthStates HealthState { get; private set; } = HealthStates.Normal;
+
+        /// <summary>
         /// The current animation being played
         /// </summary>
         protected Animation CurrentAnim = null;
@@ -98,6 +104,7 @@ namespace PaperMarioBattleSystem
         {
             BStats.HP = UtilityGlobals.Clamp(BStats.HP + hp, 0, BStats.MaxHP);
 
+            UpdateHealthState();
             Debug.Log($"{Name} healed {hp} HP!");
         }
 
@@ -112,7 +119,8 @@ namespace PaperMarioBattleSystem
             if (BStats.HP == 0) return;
 
             BStats.HP = UtilityGlobals.Clamp(BStats.HP - hp, 0, BStats.MaxHP);
-            if (BStats.HP <= 0)
+            UpdateHealthState();
+            if (HealthState == HealthStates.Dead)
             {
                 Die();
             }
@@ -161,6 +169,29 @@ namespace PaperMarioBattleSystem
         public virtual void OnDeath()
         {
             Debug.Log($"{Name} has been defeated!");
+        }
+
+        /// <summary>
+        /// Updates the entity's health state based on its current HP
+        /// </summary>
+        protected void UpdateHealthState()
+        {
+            if (CurHP > BattleGlobals.MaxDangerHP)
+            {
+                HealthState = HealthStates.Normal;
+            }
+            else if (CurHP >= BattleGlobals.MinDangerHP)
+            {
+                HealthState = HealthStates.Danger;
+            }
+            else if (CurHP == BattleGlobals.PerilHP)
+            {
+                HealthState = HealthStates.Peril;
+            }
+            else
+            {
+                HealthState = HealthStates.Dead;
+            }
         }
 
         /// <summary>

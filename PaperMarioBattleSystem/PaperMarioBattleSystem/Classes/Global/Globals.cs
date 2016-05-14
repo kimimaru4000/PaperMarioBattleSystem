@@ -110,7 +110,7 @@ namespace PaperMarioBattleSystem
         /// Peril occurs when the entity has exactly 1 HP remaining.
         /// Dead occurs when the entity has 0 HP remaining.</para>
         /// </summary>
-        public enum HealthState
+        public enum HealthStates
         {
             Normal, Danger, Peril, Dead
         }
@@ -135,9 +135,23 @@ namespace PaperMarioBattleSystem
         public const int InfiniteLoop = -1;
         public const float DefaultAnimSpeed = 1f;
 
+        //Shared animations
         public const string IdleName = "Idle";
         public const string JumpName = "Jump";
         public const string RunningName = "Run";
+        public const string HurtName = "Hurt";
+        public const string DeathName = "Death";
+        public const string VictoryName = "Victory";
+
+        /// <summary>
+        /// Battle animations specific to playable characters
+        /// </summary>
+        public static class PlayerBattleAnimations
+        {
+            public const string ChoosingActionName = "ChoosingAction";
+            public const string GuardName = "Guard";
+            public const string DangerName = "Danger";
+        }
 
         /// <summary>
         /// Mario-specific battle animations
@@ -148,10 +162,6 @@ namespace PaperMarioBattleSystem
             public const string HammerWindupName = "HammerWindup";
             public const string HammerSlamName = "HammerSlam";
         }
-
-        public const string HurtName = "Hurt";
-        public const string DeathName = "Death";
-        public const string VictoryName = "Victory";
     }
 
     /// <summary>
@@ -163,6 +173,11 @@ namespace PaperMarioBattleSystem
         public const int MaxDamage = 99;
 
         public const int MaxPowerBounces = 100;
+
+        public const int MinDangerHP = 2;
+        public const int MaxDangerHP = 5;
+        public const int PerilHP = 1;
+        public const int DeathHP = 0;
     }
 
     /// <summary>

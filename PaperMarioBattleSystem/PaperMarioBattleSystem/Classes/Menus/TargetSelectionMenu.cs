@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -16,7 +17,7 @@ namespace PaperMarioBattleSystem
     {
         public enum EntitySelectionType
         {
-            Single, /*FirstGround, Ground, Air,*/ All
+            Single, All
         }
 
         private Texture2D Cursor = null;
@@ -39,6 +40,13 @@ namespace PaperMarioBattleSystem
             Targets = targets;
             Selection = onSelection;
             SelectionType = selectionType;
+
+            //Failsafe - end selection immediately if inputs are invalid
+            if (Targets == null || Targets.Length == 0)
+            {
+                Debug.LogError($"Null or empty target array in {nameof(TargetSelectionMenu)}.{nameof(StartSelection)}, ending selection...");
+                EndSelection();
+            }
         }
 
         protected override void HandleCursorInput()

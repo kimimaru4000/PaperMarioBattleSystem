@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -19,9 +20,11 @@ namespace PaperMarioBattleSystem
         {
             Name = "Jump";
             Description = "Jump and stomp on an enemy.";
+            ContactType = Enumerations.ContactTypes.JumpContact;
             BaseDamage = 1;
 
             Command = new JumpCommand(this, JumpDuration, (int)(JumpDuration / 2f));
+            HeightsAffected = new Enumerations.HeightStates[] { HeightStates.Grounded, HeightStates.Airborne };
         }
 
         public override void OnCommandSuccess()

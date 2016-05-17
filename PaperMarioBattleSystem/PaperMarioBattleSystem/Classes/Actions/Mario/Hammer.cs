@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -28,7 +29,9 @@ namespace PaperMarioBattleSystem
         {
             Name = "Hammer";
             Description = "Whack an enemy with your Hammer.";
+            ContactType = Enumerations.ContactTypes.HammerContact;
             BaseDamage = 1;
+            HeightsAffected = new HeightStates[] { HeightStates.Grounded };
 
             Command = new HammerCommand(this);
         }

@@ -78,7 +78,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum Elements
         {
-            Normal, Sharp, Fire, Electric, Ice, Poison, Explosion
+            Normal, Sharp, Water, Fire, Electric, Ice, Poison, Explosion
         }
 
         /// <summary>
@@ -113,6 +113,15 @@ namespace PaperMarioBattleSystem
         public enum HealthStates
         {
             Normal, Danger, Peril, Dead
+        }
+
+        /// <summary>
+        /// The type of contact actions will make on entities.
+        /// JumpContact and HammerContact means the action attacks from the top and side, respectively
+        /// </summary>
+        public enum ContactTypes
+        {
+            None, JumpContact, HammerContact
         }
     }
 

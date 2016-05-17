@@ -379,20 +379,25 @@ namespace PaperMarioBattleSystem
         /// Returns all entities of a specified type in an array
         /// </summary>
         /// <param name="entityType">The type of entities to return</param>
-        /// <returns>Mario and his Partner if entityType is Player, otherwise all alive enemies</returns>
-        public BattleEntity[] GetEntities(EntityTypes entityType)
+        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
+        /// If null, will include entities of all height states</param>
+        /// <returns>Entities matching the type and height states specified</returns>
+        public BattleEntity[] GetEntities(EntityTypes entityType, params HeightStates[] heightStates)
         {
             List<BattleEntity> entities = new List<BattleEntity>();
 
             if (entityType == EntityTypes.Enemy)
             {
-                return GetAliveEnemies();
+                entities.AddRange(GetAliveEnemies());
             }
             else if (entityType == EntityTypes.Player)
             {
                 entities.Add(Mario);
                 entities.Add(Partner);
             }
+
+            //Filter by height states
+            FilterEntitiesByHeights(entities, heightStates);
 
             return entities.ToArray();
         }
@@ -414,6 +419,40 @@ namespace PaperMarioBattleSystem
             }
 
             return aliveEnemies.ToArray();
+        }
+
+        /// <summary>
+        /// Filters a set of entities by specified height states
+        /// </summary>
+        /// <param name="entities">The list of entities to filter</param>
+        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
+        /// If null or empty, will return the entities passed in</param>
+        private void FilterEntitiesByHeights(List<BattleEntity> entities, params HeightStates[] heightStates)
+        {
+            //Return immediately if either input is null
+            if (entities == null || heightStates == null || heightStates.Length == 0) return;
+
+            for (int i = 0; i < entities.Count; i++)
+            {
+                BattleEntity entity = entities[i];
+                bool found = false;
+                for (int j = 0; j < heightStates.Length; i++)
+                {
+                    HeightStates heightstate = heightStates[j];
+                    if (entity.HeightState == heightstate)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                //Remove the entity if it wasn't in any of the height states passed in
+                if (found == false)
+                {
+                    entities.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         /// <summary>

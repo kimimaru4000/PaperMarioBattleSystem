@@ -16,6 +16,16 @@ namespace PaperMarioBattleSystem
     public abstract class BattleAction
     {
         /// <summary>
+        /// Values for each branch of a sequence.
+        /// BattleActions switch branches based on what happens
+        /// </summary>
+        //COMMENTED AS IMPLEMENTATION IS DELAYED FOR NOW
+        //public enum SequenceBranch
+        //{
+        //    Start, End, Success, Failed, Backfire
+        //}
+
+        /// <summary>
         /// The name of the action
         /// </summary>
         public string Name { get; protected set; } = "Action";
@@ -49,6 +59,16 @@ namespace PaperMarioBattleSystem
         /// The type of entities this action selects
         /// </summary>
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
+
+        /// <summary>
+        /// The type of contact this action makes
+        /// </summary>
+        public ContactTypes ContactType { get; protected set; } = ContactTypes.None;
+
+        /// <summary>
+        /// The heights of enemies this action affects
+        /// </summary>
+        public HeightStates[] HeightsAffected { get; protected set; } = null;
 
         /// <summary>
         /// The user of this action.
@@ -88,7 +108,29 @@ namespace PaperMarioBattleSystem
         {
             
         }
-        
+
+        /// <summary>
+        /// TEMPORARY NAME AND LOCATION FOR THIS
+        /// </summary>
+        /// <param name="entityToAttack"></param>
+        /// <returns>true if the interaction was successful, false otherwise</returns>
+        //protected bool HandleInteraction(BattleEntity entityToAttack)
+        //{
+        //    //Check if you successfully jump on the entity
+        //    if (ContactType == ContactTypes.JumpContact)
+        //    {
+        //        if (entityToAttack.HasPhysAttributes(true,
+        //            PhysicalAttributes.Spiked, PhysicalAttributes.Burning, PhysicalAttributes.Electrified) == true)
+        //        {
+        //            //Get hurt, not successful jump
+        //            OnCommandBackfire();
+        //            return false;
+        //        }
+        //    }
+        //
+        //    return true;
+        //}
+
         public void DealDamage(int damage)
         {
             for (int i = 0; i < EntitiesAffected.Length; i++)
@@ -175,7 +217,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public virtual void OnCommandBackfire()
         {
-
+            Debug.Log($"{Name} by {User.Name} backfired!");
         }
 
         /// <summary>
@@ -184,7 +226,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public virtual void OnMenuSelected()
         {
-            BattleUIManager.Instance.StartTargetSelection(ActionStart, SelectionType, BattleManager.Instance.GetEntities(EntityType));
+            BattleUIManager.Instance.StartTargetSelection(ActionStart, SelectionType, BattleManager.Instance.GetEntities(EntityType, HeightsAffected));
         }
 
         /// <summary>
@@ -194,7 +236,7 @@ namespace PaperMarioBattleSystem
         private void ActionStart(BattleEntity[] targets)
         {
             BattleUIManager.Instance.ClearMenuStack();
-            BattleManager.Instance.EntityTurn.StartAction(this, targets);
+            User.StartAction(this, targets);
         }
 
         /// <summary>

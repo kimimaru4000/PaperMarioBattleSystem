@@ -375,18 +375,22 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Tells whether the entity has a set of physical attributes or not
         /// </summary>
+        /// <param name="checkAny">If true, checks the entity has any of the physical attributes rather than all</param>
         /// <param name="attributes">The set of physical attributes to check the entity has</param>
-        /// <returns>true if the entity has all of the physical attributes in the set, otherwise false</returns>
-        public bool HasPhysAttributes(params PhysicalAttributes[] attributes)
+        /// <returns>true if the entity has any or all, based on the value of checkAny, of the physical attributes in the set, otherwise false</returns>
+        public bool HasPhysAttributes(bool checkAny, params PhysicalAttributes[] attributes)
         {
             if (attributes == null) return false;
 
+            //Loop through and look at each attribute
+            //If we're looking for all attributes, return false if one is not found
+            //If we're looking for any attribute, return true if one is found
             for (int i = 0; i < attributes.Length; i++)
             {
-                if (PhysAttributes.ContainsKey(attributes[i]) == false) return false;
+                if (PhysAttributes.ContainsKey(attributes[i]) == checkAny) return checkAny;
             }
 
-            return true;
+            return !checkAny;
         }
 
         /// <summary>

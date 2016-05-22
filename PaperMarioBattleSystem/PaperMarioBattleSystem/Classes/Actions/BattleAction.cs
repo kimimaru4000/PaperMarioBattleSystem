@@ -19,11 +19,10 @@ namespace PaperMarioBattleSystem
         /// Values for each branch of a sequence.
         /// BattleActions switch branches based on what happens
         /// </summary>
-        //COMMENTED AS IMPLEMENTATION IS DELAYED FOR NOW
-        //public enum SequenceBranch
-        //{
-        //    Start, End, Success, Failed, Backfire
-        //}
+        public enum SequenceBranch
+        {
+            Start, End, Command, Success, Failed, Backfire
+        }
 
         /// <summary>
         /// The name of the action
@@ -92,6 +91,11 @@ namespace PaperMarioBattleSystem
         public int SequenceStep { get; protected set; } = 0;
 
         /// <summary>
+        /// The current branch of the sequence
+        /// </summary>
+        protected SequenceBranch CurBranch { get; private set; } = SequenceBranch.Start;
+
+        /// <summary>
         /// The current SequenceAction being performed
         /// </summary>
         protected SequenceAction CurSequence { get; set; } = null;
@@ -109,11 +113,11 @@ namespace PaperMarioBattleSystem
             
         }
 
-        /// <summary>
-        /// TEMPORARY NAME AND LOCATION FOR THIS
-        /// </summary>
-        /// <param name="entityToAttack"></param>
-        /// <returns>true if the interaction was successful, false otherwise</returns>
+        // <summary>
+        // TEMPORARY NAME AND LOCATION FOR THIS
+        // </summary>
+        // <param name="entityToAttack"></param>
+        // <returns>true if the interaction was successful, false otherwise</returns>
         //protected bool HandleInteraction(BattleEntity entityToAttack)
         //{
         //    //Check if you successfully jump on the entity
@@ -145,7 +149,9 @@ namespace PaperMarioBattleSystem
         /// <param name="targets">The targets to perform the sequence on</param>
         public void StartSequence(params BattleEntity[] targets)
         {
+            CurBranch = SequenceBranch.Start;
             InSequence = true;
+            SequenceStep = 0;
 
             EntitiesAffected = targets;
 
@@ -168,6 +174,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void EndSequence()
         {
+            CurBranch = SequenceBranch.End;
             InSequence = false;
             SequenceStep = 0;
             CurSequence = null;
@@ -240,6 +247,15 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Prints an error message when an invalid sequence is occurred.
+        /// It includes information such as the action and the entity performing it, the sequence branch, and the sequence step
+        /// </summary>
+        protected void PrintInvalidSequence()
+        {
+            Debug.LogError($"{User.Name} entered an invalid state in {Name} with a {nameof(SequenceStep)} of {SequenceStep} in {nameof(CurBranch)}: {CurBranch}");
+        }
+
+        /// <summary>
         /// Progresses the BattleAction further into its sequence
         /// </summary>
         /// <param name="progressAmount">The amount to progress the sequence</param>
@@ -255,26 +271,74 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// A separate method for the top-most base for progressing the sequence.
-        /// Move the entity back to its battle position
+        /// Switches to a new sequence branch. This also resets the current step
         /// </summary>
-        protected void OnProgressBase()
+        /// <param name="newBranch">The new branch to switch to</param>
+        protected void ChangeSequenceBranch(SequenceBranch newBranch)
         {
-            switch (SequenceStep)
-            {
-                default:
-                    CurSequence = new MoveTo(User.BattlePosition, 1000f);
-                    break;
-            }
+            CurBranch = newBranch;
+
+            //Set to -1 as it'll be incremented next time the sequence progresses
+            SequenceStep = -1;
         }
 
         /// <summary>
         /// What occurs next in the sequence when it's progressed.
-        /// <para>Base functionality moves the entity back to its battle position</para>
         /// </summary>
-        protected virtual void OnProgressSequence()
+        protected void OnProgressSequence()
         {
-            OnProgressBase();
+            switch (CurBranch)
+            {
+                case SequenceBranch.Start:
+                    SequenceStartBranch();
+                    break;
+                case SequenceBranch.Command:
+                    SequenceCommandBranch();
+                    break;
+                case SequenceBranch.Success:
+                    SequenceSuccessBranch();
+                    break;
+                case SequenceBranch.Failed:
+                    SequenceFailedBranch();
+                    break;
+                case SequenceBranch.Backfire:
+                    SequenceBackfireBranch();
+                    break;
+                case SequenceBranch.End:
+                default:
+                    SequenceEndBranch();
+                    break;
+            }
+        }
+
+        protected virtual void SequenceStartBranch()
+        {
+            
+        }
+
+        protected virtual void SequenceEndBranch()
+        {
+            
+        }
+
+        protected virtual void SequenceCommandBranch()
+        {
+            
+        }
+
+        protected virtual void SequenceSuccessBranch()
+        {
+            ChangeSequenceBranch(SequenceBranch.End);
+        }
+
+        protected virtual void SequenceFailedBranch()
+        {
+            ChangeSequenceBranch(SequenceBranch.End);
+        }
+
+        protected virtual void SequenceBackfireBranch()
+        {
+            ChangeSequenceBranch(SequenceBranch.End);
         }
 
         public void Update()

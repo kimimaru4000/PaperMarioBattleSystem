@@ -11,8 +11,9 @@ namespace PaperMarioBattleSystem
     public sealed class PowerBounce : Jump
     {
         private int DamageValue = 0;
-        private bool Repeat = false;
         private int Bounces = 0;
+
+        protected override int DamageDealt => DamageValue;
 
         public PowerBounce()
         {
@@ -28,42 +29,27 @@ namespace PaperMarioBattleSystem
             DamageValue = BaseDamage;
         }
 
-        public override void OnCommandSuccess()
-        {
-            Repeat = true;
-        }
-
-        public override void OnCommandFailed()
-        {
-            
-        }
-
-        protected override void OnProgressSequence()
+        protected override void SequenceSuccessBranch()
         {
             switch (SequenceStep)
             {
                 case 0:
-                case 1:
-                case 2:
-                    Repeat = false;
-                    base.OnProgressSequence();
-                    break;
-                case 3:
-                    DealDamage(DamageValue);
+                    DealDamage(DamageDealt);
                     DamageValue = UtilityGlobals.Clamp(DamageValue - 1, 1, BattleGlobals.MaxDamage);
 
                     Bounces++;
 
-                    if (Repeat == true && Bounces < BattleGlobals.MaxPowerBounces)
+                    if (Bounces < BattleGlobals.MaxPowerBounces)
                     {
-                        SequenceStep = 0;
+                        ChangeSequenceBranch(SequenceBranch.Command);
+                    }
+                    else
+                    {
+                        ChangeSequenceBranch(SequenceBranch.End);
                     }
                     break;
-                case 4:
-                    CurSequence = new MoveTo(User.BattlePosition, WalkDuration);
-                    break;
                 default:
-                    EndSequence();
+                    PrintInvalidSequence();
                     break;
             }
         }

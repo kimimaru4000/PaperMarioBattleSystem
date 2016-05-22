@@ -55,11 +55,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        protected override void OnProgressSequence()
+        protected override void SequenceStartBranch()
         {
-            float x = User.EntityType == Enumerations.EntityTypes.Player ? 100f : -100f;
-
-            switch (SequenceStep)
+            switch(SequenceStep)
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
@@ -68,24 +66,49 @@ namespace PaperMarioBattleSystem
                 case 1:
                     User.PlayAnimation(PickupAnimName, true);
                     CurSequence = new WaitForAnimation(PickupAnimName);
+                    ChangeSequenceBranch(SequenceBranch.Command);
                     break;
-                case 2:
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        protected override void SequenceCommandBranch()
+        {
+            switch(SequenceStep)
+            {
+                case 0:
                     User.PlayAnimation(WindupAnimName);
                     if (CommandEnabled == true) Command.StartInput();
                     CurSequence = new WaitForCommand(1500f, Command, CommandEnabled);
                     break;
-                case 3:
+                case 1:
                     User.PlayAnimation(SlamAnimName, true);
                     DealDamage(BaseDamage * DamageMod);
                     CurSequence = new WaitForAnimation(SlamAnimName);
+                    ChangeSequenceBranch(SequenceBranch.End);
                     break;
-                case 4:
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        protected override void SequenceEndBranch()
+        {
+            switch (SequenceStep)
+            {
+                case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequence = new MoveTo(User.BattlePosition, WalkDuration);
                     break;
-                default:
+                case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName, true);
                     EndSequence();
+                    break;
+                default:
+                    PrintInvalidSequence();
                     break;
             }
         }

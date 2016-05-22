@@ -15,6 +15,9 @@ namespace PaperMarioBattleSystem
     {
         protected float WalkDuration = 1000f;
         protected float JumpDuration = 1000f;
+        protected float JumpHeight = 100f;
+
+        protected virtual int DamageDealt => BaseDamage;
 
         public Jump()
         {
@@ -30,12 +33,12 @@ namespace PaperMarioBattleSystem
         public override void OnCommandSuccess()
         {
             //Show "NICE" here or something
-            SequenceStep += 1;
+            ChangeSequenceBranch(SequenceBranch.Success);
         }
 
         public override void OnCommandFailed()
         {
-
+            ChangeSequenceBranch(SequenceBranch.Failed);
         }
 
         public override void OnCommandResponse(int response)
@@ -48,40 +51,96 @@ namespace PaperMarioBattleSystem
             base.OnMenuSelected();
         }
 
-        protected override void OnProgressSequence()
+        protected override void SequenceStartBranch()
         {
-            switch(SequenceStep)
+            switch (SequenceStep)
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), WalkDuration);
+                    ChangeSequenceBranch(SequenceBranch.Command);
+                    break;
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        protected override void SequenceCommandBranch()
+        {
+            switch (SequenceStep)
+            {
+                case 0:
+                    User.PlayAnimation(AnimationGlobals.IdleName);
+                    CurSequence = new MoveAmount(new Vector2(0f, -JumpHeight), JumpDuration);
+                    break;
+                case 1:
+                    if (CommandEnabled == true) Command.StartInput();
+                    else ChangeSequenceBranch(SequenceBranch.Failed);
+                    CurSequence = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration);
+                    break;
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        protected override void SequenceSuccessBranch()
+        {
+            switch (SequenceStep)
+            {
+                case 0:
+                    DealDamage(DamageDealt);
+                    CurSequence = new MoveAmount(new Vector2(0f, -JumpHeight), JumpDuration);
+                    break;
+                case 1:
+                    CurSequence = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration);
+                    break;
+                case 2:
+                    DealDamage(DamageDealt);
+                    ChangeSequenceBranch(SequenceBranch.End);
+                    break;
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        protected override void SequenceFailedBranch()
+        {
+            switch (SequenceStep)
+            {
+                case 0:
+                    DealDamage(DamageDealt);
+                    ChangeSequenceBranch(SequenceBranch.End);
+                    break;
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        protected override void SequenceEndBranch()
+        {
+            switch (SequenceStep)
+            {
+                case 0:
+                    User.PlayAnimation(AnimationGlobals.RunningName);
+                    CurSequence = new MoveTo(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName);
-                    CurSequence = new MoveAmount(new Vector2(0f, -100f), JumpDuration);
-                    break;
-                case 2:
-                    if (SequenceStep == 2 && CommandEnabled == true) Command.StartInput();
-                    CurSequence = new MoveAmount(new Vector2(0f, 100f), JumpDuration);
-                    break;
-                case 3:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
-                    DealDamage(BaseDamage);
-                    CurSequence = new MoveTo(User.BattlePosition, WalkDuration);
-                    if (SequenceStep == 3) SequenceStep += 500;
-                    break;
-                case 4:
-                    DealDamage(BaseDamage);
-                    goto case 1;
-                case 5:
-                    goto case 2;
-                case 6:
-                    goto case 3;
-                default:
-                    User.PlayAnimation(AnimationGlobals.IdleName);
                     EndSequence();
                     break;
+                default:
+                    PrintInvalidSequence();
+                    break;
             }
+        }
+
+        protected override void SequenceBackfireBranch()
+        {
+            //Make the entity recoil
         }
     }
 }

@@ -75,7 +75,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public BattleAction PreviousAction { get; protected set; } = null;
 
-        public bool IsDead => CurHP <= 0;
+        public bool IsDead => HealthState == HealthStates.Dead;
 
         //TEMPORARY
         public bool UsedTurn = false;
@@ -120,7 +120,7 @@ namespace PaperMarioBattleSystem
 
             BStats.HP = UtilityGlobals.Clamp(BStats.HP - hp, 0, BStats.MaxHP);
             UpdateHealthState();
-            if (HealthState == HealthStates.Dead)
+            if (IsDead == true)
             {
                 Die();
             }
@@ -159,6 +159,8 @@ namespace PaperMarioBattleSystem
         public void Die()
         {
             BStats.HP = 0;
+            HealthState = HealthStates.Dead;
+            PlayAnimation(AnimationGlobals.DeathName, true);
 
             OnDeath();
         }

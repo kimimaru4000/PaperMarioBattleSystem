@@ -77,9 +77,9 @@ namespace PaperMarioBattleSystem
         private BattlePartner Partner = null;
 
         /// <summary>
-        /// Enemy array. Enemies are displayed in the array order
+        /// Enemy list. Enemies are displayed in order
         /// </summary>
-        private BattleEnemy[] Enemies = new BattleEnemy[5];
+        private List<BattleEnemy> Enemies = new List<BattleEnemy>(5);
 
         /// <summary>
         /// The number of enemies alive
@@ -89,7 +89,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Helper property showing the max number of enemies
         /// </summary>
-        private int MaxEnemies => Enemies.Length;
+        private int MaxEnemies => Enemies.Count;
 
         /// <summary>
         /// Helper property telling whether enemy spots are available or not
@@ -98,7 +98,11 @@ namespace PaperMarioBattleSystem
 
         private BattleManager()
         {
-        
+            //TEMPORARY: For compatibility with the old array system until we migrate over completely
+            for (int i = 0; i < Enemies.Capacity; i++)
+            {
+                Enemies.Add(null);
+            }
         }
 
         /// <summary>
@@ -128,6 +132,7 @@ namespace PaperMarioBattleSystem
 
         public void Update()
         {
+            //If a turn just ended, update the current state
             if (State == BattleState.TurnEnd)
             {
                 TurnStart();
@@ -141,7 +146,7 @@ namespace PaperMarioBattleSystem
             Mario.Update();
             Partner?.Update();
 
-            for (int i = 0; i < Enemies.Length; i++)
+            for (int i = 0; i < MaxEnemies; i++)
             {
                 Enemies[i]?.Update();
             }
@@ -152,7 +157,7 @@ namespace PaperMarioBattleSystem
             Mario.Draw();
             Partner?.Draw();
 
-            for (int i = 0; i < Enemies.Length; i++)
+            for (int i = 0; i < MaxEnemies; i++)
             {
                 Enemies[i]?.Draw();
             }
@@ -248,13 +253,23 @@ namespace PaperMarioBattleSystem
 
         public void TurnEnd()
         {
-            EntityTurn.OnTurnEnd();
-
-            UpdateBattleState();
-
             if (State == BattleState.Done)
             {
                 Debug.LogError($"Attemping to END turn when the battle is over!");
+                return;
+            }
+
+            EntityTurn.OnTurnEnd();
+
+            //Handle all dead entities
+            CheckDeadEntities();
+
+            //Update the battle state
+            UpdateBattleState();
+
+            //The battle is finished
+            if (State == BattleState.Done)
+            {
                 return;
             }
 
@@ -315,6 +330,34 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Checks for dead entities and handles them accordingly
+        /// </summary>
+        private void CheckDeadEntities()
+        {
+            if (Mario.IsDead == true)
+            {
+                Mario.PlayAnimation(AnimationGlobals.DeathName);
+            }
+            if (Partner.IsDead == true)
+            {
+                Partner.PlayAnimation(AnimationGlobals.DeathName);
+            }
+
+            List<BattleEnemy> deadEnemies = new List<BattleEnemy>();
+
+            for (int i = 0; i < MaxEnemies; i++)
+            {
+                if (Enemies[i] != null && Enemies[i].IsDead == true)
+                {
+                    deadEnemies.Add(Enemies[i]);
+                }
+            }
+
+            //Remove enemies from battle here
+            RemoveEnemies(deadEnemies);
+        }
+
         #region Helper Methods
 
         /// <summary>
@@ -328,7 +371,7 @@ namespace PaperMarioBattleSystem
             {
                 if (EnemySpotsAvailable == false)
                 {
-                    Debug.LogError($"Cannot add enemy {enemies[i].Name} because there is no available spots left in battle! Exiting loop!");
+                    Debug.LogError($"Cannot add enemy {enemies[i].Name} because there are no available spots left in battle! Exiting loop!");
                     break;
                 }
                 int index = FindAvailableEnemyIndex(0);
@@ -410,7 +453,7 @@ namespace PaperMarioBattleSystem
         {
             List<BattleEnemy> aliveEnemies = new List<BattleEnemy>();
 
-            for (int i = 0; i < Enemies.Length; i++)
+            for (int i = 0; i < MaxEnemies; i++)
             {
                 if (Enemies[i] != null)
                 {
@@ -510,6 +553,25 @@ namespace PaperMarioBattleSystem
             if (entity.EntityType == EntityTypes.Enemy) xdiff.X = -xdiff.X;
 
             return (entity.BattlePosition + xdiff);
+        }
+
+        /// <summary>
+        /// Sorts enemies by battle indices, with lower indices appearing first
+        /// </summary>
+        private int SortEnemiesByBattleIndex(BattleEnemy enemy1, BattleEnemy enemy2)
+        {
+            if (enemy1 == null)
+                return 1;
+            else if (enemy2 == null)
+                return -1;
+
+            //Compare battle indices
+            if (enemy1.BattleIndex < enemy2.BattleIndex)
+                return -1;
+            else if (enemy1.BattleIndex > enemy2.BattleIndex)
+                return 1;
+
+            return 0;
         }
 
         #endregion

@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class BattleEnemy : BattleEntity
     {
-        public int BattleIndex { get; protected set; } = -1;
+        public int BattleIndex { get; private set; } = -1;
 
         protected BattleEnemy(Stats stats) : base(stats)
         {
@@ -24,13 +24,6 @@ namespace PaperMarioBattleSystem
         public void SetBattleIndex(int battleIndex)
         {
             BattleIndex = battleIndex;
-        }
-
-        public override void OnDeath()
-        {
-            base.OnDeath();
-
-            BattleManager.Instance.RemoveEnemies(new List<BattleEnemy>() { this });
         }
     }
 }

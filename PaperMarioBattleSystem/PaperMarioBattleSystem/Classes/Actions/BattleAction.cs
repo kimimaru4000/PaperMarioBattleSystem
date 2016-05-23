@@ -212,20 +212,10 @@ namespace PaperMarioBattleSystem
         /// Handles BattleAction responses sent from an ActionCommand that are not a definite Success or Failure.
         /// Unlike a Success or Failure, the ActionCommand is not required to send this down at all
         /// <para>For example, the Hammer command sends back the number of lights lit up, and the Hammer action responds
-        /// by speeding up Mario's hammer windup animation
-        /// </para>
+        /// by speeding up Mario's hammer windup animation</para>
         /// </summary>
         /// <param name="response">A number representing a response from the action command</param>
         public abstract void OnCommandResponse(int response);
-
-        /// <summary>
-        /// What occurs when the command backfires.
-        /// The most notable example of this is when Mario takes damage when jumping on a spiked enemy
-        /// </summary>
-        public virtual void OnCommandBackfire()
-        {
-            Debug.Log($"{Name} by {User.Name} backfired!");
-        }
 
         /// <summary>
         /// What happens when the BattleAction is selected on the menu.
@@ -311,35 +301,36 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        protected virtual void SequenceStartBranch()
-        {
-            
-        }
+        /// <summary>
+        /// The start of the action sequence
+        /// </summary>
+        protected abstract void SequenceStartBranch();
 
-        protected virtual void SequenceEndBranch()
-        {
-            
-        }
+        /// <summary>
+        /// The end of the action sequence
+        /// </summary>
+        protected abstract void SequenceEndBranch();
 
-        protected virtual void SequenceCommandBranch()
-        {
-            
-        }
+        /// <summary>
+        /// The part of the action sequence revolving around the action command
+        /// </summary>
+        protected abstract void SequenceCommandBranch();
+        
+        /// <summary>
+        /// What occurs when the action command for this action is performed successfully
+        /// </summary>
+        protected abstract void SequenceSuccessBranch();
 
-        protected virtual void SequenceSuccessBranch()
-        {
-            ChangeSequenceBranch(SequenceBranch.End);
-        }
+        /// <summary>
+        /// What occurs when the action command for this action is failed
+        /// </summary>
+        protected abstract void SequenceFailedBranch();
 
-        protected virtual void SequenceFailedBranch()
-        {
-            ChangeSequenceBranch(SequenceBranch.End);
-        }
-
-        protected virtual void SequenceBackfireBranch()
-        {
-            ChangeSequenceBranch(SequenceBranch.End);
-        }
+        /// <summary>
+        /// What occurs when the action backfires.
+        /// The most notable example of this is when Mario takes damage from jumping on a spiked enemy
+        /// </summary>
+        protected abstract void SequenceBackfireBranch();
 
         public void Update()
         {

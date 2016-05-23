@@ -39,11 +39,13 @@ namespace PaperMarioBattleSystem
         public override void OnCommandSuccess()
         {
             DamageMod *= 2;
+
+            ChangeSequenceBranch(SequenceBranch.Success);
         }
 
         public override void OnCommandFailed()
         {
-            
+            ChangeSequenceBranch(SequenceBranch.Failed);
         }
 
         public override void OnCommandResponse(int response)
@@ -83,7 +85,33 @@ namespace PaperMarioBattleSystem
                     if (CommandEnabled == true) Command.StartInput();
                     CurSequence = new WaitForCommand(1500f, Command, CommandEnabled);
                     break;
-                case 1:
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        protected override void SequenceSuccessBranch()
+        {
+            switch (SequenceStep)
+            {
+                case 0:
+                    User.PlayAnimation(SlamAnimName, true);
+                    DealDamage(BaseDamage * DamageMod);
+                    CurSequence = new WaitForAnimation(SlamAnimName);
+                    ChangeSequenceBranch(SequenceBranch.End);
+                    break;
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        protected override void SequenceFailedBranch()
+        {
+            switch (SequenceStep)
+            {
+                case 0:
                     User.PlayAnimation(SlamAnimName, true);
                     DealDamage(BaseDamage * DamageMod);
                     CurSequence = new WaitForAnimation(SlamAnimName);
@@ -111,6 +139,11 @@ namespace PaperMarioBattleSystem
                     PrintInvalidSequence();
                     break;
             }
+        }
+
+        protected override void SequenceBackfireBranch()
+        {
+            
         }
     }
 }

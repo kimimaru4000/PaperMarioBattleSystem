@@ -53,6 +53,10 @@ namespace PaperMarioBattleSystem
         public int CurHP => BattleStats.HP;
         public int CurFP => BattleStats.FP;
 
+        //NOTE: Unused right now
+        public int TurnsUsed { get; protected set; } = 0;
+        public int MaxTurns { get; protected set; } = 1;
+
         public string Name { get; protected set; } = "Entity";
         
         /// <summary>
@@ -196,15 +200,15 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        /// <summary>
-        /// Entity-specific handling of being damaged by a source the entity is weak to.
-        /// The default behavior is to double the damage dealt.
-        /// <para>The weakness can still apply even if the total damage dealt is 0.
-        /// An example of handling this behavior is when Clefts are turned on their backs when hit by explosive damage.</para>
-        /// </summary>
-        /// <param name="element">The element used to damage the entity</param>
-        /// <param name="damage">The damage dealt to the entity</param>
-        /// <returns>The new damage dealt if the weakness handles damage, otherwise the original damage</returns>
+        // <summary>
+        // Entity-specific handling of being damaged by a source the entity is weak to.
+        // The default behavior is to double the damage dealt.
+        // <para>The weakness can still apply even if the total damage dealt is 0.
+        // An example of handling this behavior is when Clefts are turned on their backs when hit by explosive damage.</para>
+        // </summary>
+        // <param name="element">The element used to damage the entity</param>
+        // <param name="damage">The damage dealt to the entity</param>
+        // <returns>The new damage dealt if the weakness handles damage, otherwise the original damage</returns>
         //protected virtual int HandleWeakness(Elements element, int damage)
         //{
         //    if (Weaknesses.ContainsKey(element) == false) return damage;

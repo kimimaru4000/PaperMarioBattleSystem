@@ -32,5 +32,35 @@ namespace PaperMarioBattleSystem
         {
 
         }
+
+        protected override void SequenceStartBranch()
+        {
+            
+        }
+
+        protected override void SequenceCommandBranch()
+        {
+            
+        }
+
+        protected override void SequenceSuccessBranch()
+        {
+            
+        }
+
+        protected override void SequenceFailedBranch()
+        {
+            
+        }
+
+        protected override void SequenceEndBranch()
+        {
+            
+        }
+
+        protected override void SequenceBackfireBranch()
+        {
+            
+        }
     }
 }

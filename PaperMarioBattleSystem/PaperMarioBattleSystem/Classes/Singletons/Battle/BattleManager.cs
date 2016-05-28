@@ -79,7 +79,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Enemy list. Enemies are displayed in order
         /// </summary>
-        private List<BattleEnemy> Enemies = new List<BattleEnemy>(5);
+        private List<BattleEnemy> Enemies = new List<BattleEnemy>(BattleGlobals.MaxEnemies);
 
         /// <summary>
         /// The number of enemies alive
@@ -89,7 +89,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Helper property showing the max number of enemies
         /// </summary>
-        private int MaxEnemies => Enemies.Count;
+        private int MaxEnemies => Enemies.Capacity;
 
         /// <summary>
         /// Helper property telling whether enemy spots are available or not
@@ -99,7 +99,7 @@ namespace PaperMarioBattleSystem
         private BattleManager()
         {
             //TEMPORARY: For compatibility with the old array system until we migrate over completely
-            for (int i = 0; i < Enemies.Capacity; i++)
+            for (int i = 0; i < MaxEnemies; i++)
             {
                 Enemies.Add(null);
             }
@@ -478,19 +478,9 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < entities.Count; i++)
             {
                 BattleEntity entity = entities[i];
-                bool found = false;
-                for (int j = 0; j < heightStates.Length; i++)
-                {
-                    HeightStates heightstate = heightStates[j];
-                    if (entity.HeightState == heightstate)
-                    {
-                        found = true;
-                        break;
-                    }
-                }
 
                 //Remove the entity if it wasn't in any of the height states passed in
-                if (found == false)
+                if (heightStates.Contains(entity.HeightState) == false)
                 {
                     entities.RemoveAt(i);
                     i--;

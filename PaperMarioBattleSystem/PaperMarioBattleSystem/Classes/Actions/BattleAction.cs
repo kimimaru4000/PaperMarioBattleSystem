@@ -249,7 +249,7 @@ namespace PaperMarioBattleSystem
         /// Progresses the BattleAction further into its sequence
         /// </summary>
         /// <param name="progressAmount">The amount to progress the sequence</param>
-        public void ProgressSequence(uint progressAmount)
+        private void ProgressSequence(uint progressAmount)
         {
             SequenceStep += (int)progressAmount;
 
@@ -275,7 +275,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// What occurs next in the sequence when it's progressed.
         /// </summary>
-        protected void OnProgressSequence()
+        private void OnProgressSequence()
         {
             switch (CurBranch)
             {

@@ -119,9 +119,6 @@ namespace PaperMarioBattleSystem
 
         public virtual void LoseHP(int hp)
         {
-            //TEMPORARY: Fix for removing enemies multiple times during overkill
-            if (BStats.HP == 0) return;
-
             BStats.HP = UtilityGlobals.Clamp(BStats.HP - hp, 0, BStats.MaxHP);
             UpdateHealthState();
             if (IsDead == true)

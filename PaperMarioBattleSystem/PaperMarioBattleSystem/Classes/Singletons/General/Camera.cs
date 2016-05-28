@@ -33,6 +33,11 @@ namespace PaperMarioBattleSystem
         #endregion
 
         /// <summary>
+        /// The constant for translating the camera to the center of the screen
+        /// </summary>
+        private const float TranslationConstant = .5f;
+        
+        /// <summary>
         /// The position of the camera. (0,0) is the center of the screen
         /// </summary>
         public Vector2 Position { get; protected set; } = Vector2.Zero;
@@ -104,7 +109,7 @@ namespace PaperMarioBattleSystem
         /// <returns>The position on the UI layer corresponding to the position on the Sprite layer</returns>
         public Vector2 SpriteToUIPos(Vector2 position)
         {
-            Vector2 convert = SpriteRenderer.Instance.WindowSize * .5f;
+            Vector2 convert = SpriteRenderer.Instance.WindowSize * TranslationConstant;
             convert.X = (int)convert.X;
             convert.Y = (int)convert.Y;
             return position + convert;
@@ -117,7 +122,7 @@ namespace PaperMarioBattleSystem
         /// <returns>The position on the Sprite layer corresponding to the position on the UI layer</returns>
         public Vector2 UIToSpritePos(Vector2 position)
         {
-            Vector2 convert = -SpriteRenderer.Instance.WindowSize * .5f;
+            Vector2 convert = -SpriteRenderer.Instance.WindowSize * TranslationConstant;
             convert.X = (int)convert.X;
             convert.Y = (int)convert.Y;
             return position + convert;
@@ -136,7 +141,7 @@ namespace PaperMarioBattleSystem
             Transform = Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0f)) *
                         Matrix.CreateRotationZ(Rotation) *
                         Matrix.CreateScale(new Vector3(Scale, Scale, 0)) *
-                        Matrix.CreateTranslation(windowSize.X * .5f, windowSize.Y * .5f, 0f);
+                        Matrix.CreateTranslation(windowSize.X * TranslationConstant, windowSize.Y * TranslationConstant, 0f);
 
             return Transform;
         }

@@ -178,6 +178,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class BattleGlobals
     {
+        public const int MaxEnemies = 5;
+
         public const int MinDamage = 0;
         public const int MaxDamage = 99;
 

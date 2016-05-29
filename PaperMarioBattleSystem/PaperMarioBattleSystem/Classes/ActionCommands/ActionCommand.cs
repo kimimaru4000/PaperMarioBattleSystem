@@ -15,6 +15,11 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class ActionCommand
     {
+        public enum CommandResults
+        {
+            Success, Failure
+        }
+
         public bool AcceptingInput { get; protected set; } = false;
         protected BattleAction Action = null;
 
@@ -39,9 +44,38 @@ namespace PaperMarioBattleSystem
             AcceptingInput = false;
         }
 
-        protected abstract void OnSuccess();
+        /// <summary>
+        /// Called by derived classes to send a completion response to the Action associated with the Command.
+        /// This also ends input for the Command
+        /// </summary>
+        /// <param name="result">The final result of the ActionCommand</param>
+        protected void OnComplete(CommandResults result)
+        {
+            Debug.Log($"Command for {Action.Name} has completed with a {result} result!");
 
-        protected abstract void OnFailure();
+            if (result == CommandResults.Success)
+            {
+                Action.OnCommandSuccess();
+            }
+            else if (result == CommandResults.Failure)
+            {
+                Action.OnCommandFailed();
+            }
+
+            //The Command is finished, so end input
+            EndInput();
+        }
+
+        /// <summary>
+        /// Sends a response to the Action, which handles the value given
+        /// </summary>
+        /// <param name="response">An int value representing a response</param>
+        protected void SendResponse(int response)
+        {
+            Debug.Log($"Command for {Action.Name} has sent a response of {response}!");
+
+            Action.OnCommandResponse(response);
+        }
 
         /// <summary>
         /// Reads input for the action command

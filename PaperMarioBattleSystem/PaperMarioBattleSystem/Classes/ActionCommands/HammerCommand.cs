@@ -17,8 +17,8 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The max number of lights. The last light is the big one that Left must be released on
         /// </summary>
-        protected readonly int MaxLights = 4;
-        protected readonly float TimeEachLight = 500f;
+        protected int MaxLights = 4;
+        protected float TimeEachLight = 500f;
 
         protected float EndTime = 1500f;
         protected float PrevEndTime = 0f;
@@ -26,6 +26,8 @@ namespace PaperMarioBattleSystem
         protected bool HeldLeft = false;
         protected int LightsLit = 0;
         protected float PrevLightTime = 0f;
+
+        protected Keys ButtonToHold = Keys.Left;
 
         protected Texture2D CircleImage = null;
 
@@ -43,18 +45,6 @@ namespace PaperMarioBattleSystem
             PrevEndTime = (float)Time.ActiveMilliseconds + EndTime;
         }
 
-        protected override void OnSuccess()
-        {
-            Action.OnCommandSuccess();
-            EndInput();
-        }
-
-        protected override void OnFailure()
-        {
-            Action.OnCommandFailed();
-            EndInput();
-        }
-
         protected override void ReadInput()
         {
             float time = (float)Time.ActiveMilliseconds;
@@ -62,12 +52,12 @@ namespace PaperMarioBattleSystem
             //Didn't hold Left in time
             if (HeldLeft == false && time >= PrevEndTime)
             {
-                OnFailure();
+                OnComplete(CommandResults.Failure);
                 return;
             }
 
             //Holding Left
-            if (Input.GetKey(Keys.Left))
+            if (Input.GetKey(ButtonToHold))
             {
                 //The first time you hold left, the first light instantly lights up
                 if (time >= PrevLightTime || HeldLeft == false)
@@ -76,12 +66,12 @@ namespace PaperMarioBattleSystem
                     PrevLightTime = time + TimeEachLight;
 
                     //Send the number of lights lit
-                    Action.OnCommandResponse(LightsLit);
+                    SendResponse(LightsLit);
 
                     //Held Left too long (past the last light)
                     if (LightsLit > MaxLights)
                     {
-                        OnFailure();
+                        OnComplete(CommandResults.Failure);
                     }
                 }
 
@@ -93,12 +83,12 @@ namespace PaperMarioBattleSystem
                 //Released Left at the right time
                 if (LightsLit == MaxLights)
                 {
-                    OnSuccess();
+                    OnComplete(CommandResults.Success);
                 }
                 //Released Left too early
                 else
                 {
-                    OnFailure();
+                    OnComplete(CommandResults.Failure);
                 }
             }
         }

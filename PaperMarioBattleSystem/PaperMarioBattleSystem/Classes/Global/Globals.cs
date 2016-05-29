@@ -65,7 +65,7 @@ namespace PaperMarioBattleSystem
             //TTYD Partners
             Goombella, Koops, Flurrie, Yoshi, Vivian, Bobbery, MsMowz,
             //Unused or temporary partners
-            Goompa, Goombaria, Twink
+            Goompa, Goombaria, Twink, ProfFrankly, Flavio
         }
 
         public enum BattleActions

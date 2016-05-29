@@ -51,18 +51,6 @@ namespace PaperMarioBattleSystem
             StartTime = 0d;
         }
 
-        protected override void OnSuccess()
-        {
-            Action.OnCommandSuccess();
-            EndInput();
-        }
-
-        protected override void OnFailure()
-        {
-            Action.OnCommandFailed();
-            EndInput();
-        }
-
         /// <summary>
         /// Gets the next button to press for the command
         /// </summary>
@@ -77,7 +65,7 @@ namespace PaperMarioBattleSystem
         {
             if (Time.ActiveMilliseconds >= StartTime)
             {
-                OnSuccess();
+                OnComplete(CommandResults.Success);
                 return;
             }
 
@@ -102,7 +90,7 @@ namespace PaperMarioBattleSystem
                     {
                         //Add the button to the list, send the response, and retrieve the new one
                         ButtonsPressed.Add(NextButtonToPress);
-                        Action.OnCommandResponse(ButtonsPressed.Count);
+                        SendResponse(ButtonsPressed.Count);
 
                         NextButtonToPress = GetNextButton();
                         pressedCorrectButton = true;
@@ -118,7 +106,7 @@ namespace PaperMarioBattleSystem
             //If the correct button wasn't pressed and another button out of the possible options was pressed, it's a failure
             if (pressedIncorrectButton == true && pressedCorrectButton == false)
             {
-                OnFailure();
+                OnComplete(CommandResults.Failure);
             }
         }
 

@@ -18,6 +18,8 @@ namespace PaperMarioBattleSystem
         private float EndRange = 0f;
         private float TotalRange = 0f;
 
+        private Keys ButtonToPress = Keys.Z;
+
         private bool WithinRange
         {
             get
@@ -41,38 +43,26 @@ namespace PaperMarioBattleSystem
             EndRange = (float)Time.ActiveMilliseconds + TotalRange;
         }
 
-        protected override void OnSuccess()
-        {
-            Action.OnCommandSuccess();
-            EndInput();
-        }
-
-        protected override void OnFailure()
-        {
-            Action.OnCommandFailed();
-            EndInput();
-        }
-
         protected override void ReadInput()
         {
             //Failure if it wasn't pressed
             if ((float)Time.ActiveMilliseconds >= EndRange)
             {
-                OnFailure();
+                OnComplete(CommandResults.Failure);
                 return;
             }
 
-            if (Input.GetKeyDown(Keys.Z))
+            if (Input.GetKeyDown(ButtonToPress))
             {
                 //Success if within range
                 if (WithinRange == true)
                 {
-                    OnSuccess();
+                    OnComplete(CommandResults.Success);
                 }
                 //Otherwise failure
                 else
                 {
-                    OnFailure();
+                    OnComplete(CommandResults.Failure);
                 }
             }
         }

@@ -380,6 +380,16 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Gets the damage modifier for the entity when damaged with a particular element
+        /// </summary>
+        /// <param name="element">The element this entity is damaged with</param>
+        /// <returns>The modifier for damage dealt to the entity based on the element damaged with and its physical attributes</returns>
+        public float GetPhysAttributesModifier(Elements element)
+        {
+            return BattleGlobals.GetDamageModifier(element, PhysAttributes.Keys.ToArray());
+        }
+
+        /// <summary>
         /// Used for update logic that applies to the entity regardless of whether it is its turn or not
         /// </summary>
         public void Update()

@@ -16,20 +16,14 @@ namespace PaperMarioBattleSystem
     public abstract class BattleEntity
     {
         /// <summary>
-        /// The physical attributes the entity possesses
-        /// </summary>
-        protected Dictionary<PhysicalAttributes, bool> PhysAttributes { get; private set; } = new Dictionary<PhysicalAttributes, bool>();
-
-        /// <summary>
-        /// Weaknesses an entity has to particular elements.
-        /// Each weakness can be handled differently by each entity
-        /// </summary>
-        protected Dictionary<Elements, bool> Weaknesses { get; private set; } = new Dictionary<Elements, bool>();
-
-        /// <summary>
         /// The animations, referred to by string, of the BattleEntity
         /// </summary>
-        protected Dictionary<string, Animation> Animations { get; private set; } = new Dictionary<string, Animation>();
+        protected readonly Dictionary<string, Animation> Animations = new Dictionary<string, Animation>();
+
+        /// <summary>
+        /// The physical attributes the entity possesses. This is a set of flags
+        /// </summary>
+        protected readonly Dictionary<PhysicalAttributes, bool> PhysAttributes = new Dictionary<PhysicalAttributes, bool>();
 
         /// <summary>
         /// The HeightState of the entity
@@ -47,9 +41,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected Animation CurrentAnim = null;
 
-        protected Stats BStats;
-
-        public Stats BattleStats { get { return BStats; } }
+        public Stats BattleStats { get; set; } = Stats.Default;
         public int CurHP => BattleStats.HP;
         public int CurFP => BattleStats.FP;
 
@@ -91,7 +83,7 @@ namespace PaperMarioBattleSystem
 
         protected BattleEntity(Stats stats) : this()
         {
-            BStats = stats;
+            BattleStats = stats;
         }
 
         #region Stat Manipulations
@@ -106,7 +98,7 @@ namespace PaperMarioBattleSystem
 
         public virtual void HealHP(int hp)
         {
-            BStats.HP = UtilityGlobals.Clamp(BStats.HP + hp, 0, BStats.MaxHP);
+            BattleStats.HP = UtilityGlobals.Clamp(BattleStats.HP + hp, 0, BattleStats.MaxHP);
 
             UpdateHealthState();
             Debug.Log($"{Name} healed {hp} HP!");
@@ -114,12 +106,12 @@ namespace PaperMarioBattleSystem
 
         public void HealFP(int fp)
         {
-            BStats.FP = UtilityGlobals.Clamp(BStats.FP + fp, 0, BStats.MaxFP);
+            BattleStats.FP = UtilityGlobals.Clamp(BattleStats.FP + fp, 0, BattleStats.MaxFP);
         }
 
         public virtual void LoseHP(int hp)
         {
-            BStats.HP = UtilityGlobals.Clamp(BStats.HP - hp, 0, BStats.MaxHP);
+            BattleStats.HP = UtilityGlobals.Clamp(BattleStats.HP - hp, 0, BattleStats.MaxHP);
             UpdateHealthState();
             if (IsDead == true)
             {
@@ -131,7 +123,7 @@ namespace PaperMarioBattleSystem
 
         public void LoseFP(int fp)
         {
-            BStats.FP = UtilityGlobals.Clamp(BStats.FP - fp, 0, BStats.MaxFP);
+            BattleStats.FP = UtilityGlobals.Clamp(BattleStats.FP - fp, 0, BattleStats.MaxFP);
         }
 
         public void RaiseAttack(int attack)
@@ -159,7 +151,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void Die()
         {
-            BStats.HP = 0;
+            BattleStats.HP = 0;
             HealthState = HealthStates.Dead;
             PlayAnimation(AnimationGlobals.DeathName, true);
 
@@ -196,22 +188,6 @@ namespace PaperMarioBattleSystem
                 HealthState = HealthStates.Dead;
             }
         }
-
-        // <summary>
-        // Entity-specific handling of being damaged by a source the entity is weak to.
-        // The default behavior is to double the damage dealt.
-        // <para>The weakness can still apply even if the total damage dealt is 0.
-        // An example of handling this behavior is when Clefts are turned on their backs when hit by explosive damage.</para>
-        // </summary>
-        // <param name="element">The element used to damage the entity</param>
-        // <param name="damage">The damage dealt to the entity</param>
-        // <returns>The new damage dealt if the weakness handles damage, otherwise the original damage</returns>
-        //protected virtual int HandleWeakness(Elements element, int damage)
-        //{
-        //    if (Weaknesses.ContainsKey(element) == false) return damage;
-        //
-        //    return damage * 2;
-        //}
 
         #endregion
 
@@ -362,6 +338,8 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
+            Debug.Log($"Added the physical attribute {physicalAttribute} to {Name}'s existing attributes!");
+
             PhysAttributes.Add(physicalAttribute, true);
         }
 
@@ -372,7 +350,12 @@ namespace PaperMarioBattleSystem
         /// <returns>true if the physical attribute was successfully found and removed, false otherwise</returns>
         public bool RemovePhysAttribute(PhysicalAttributes physicalAttribute)
         {
-            return PhysAttributes.Remove(physicalAttribute);
+            bool removed = PhysAttributes.Remove(physicalAttribute);
+
+            if (removed == true)
+                Debug.Log($"Removed the physical attribute {physicalAttribute} from {Name}'s existing attributes!");
+
+            return removed;
         }
 
         /// <summary>

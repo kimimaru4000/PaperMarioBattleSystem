@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Mario's partners in battle
     /// </summary>
-    public abstract class BattlePartner : BattleEntity
+    public abstract class BattlePartner : BattlePlayer
     {
         public Enumerations.PartnerTypes PartnerType { get; protected set; } = Enumerations.PartnerTypes.None;
 

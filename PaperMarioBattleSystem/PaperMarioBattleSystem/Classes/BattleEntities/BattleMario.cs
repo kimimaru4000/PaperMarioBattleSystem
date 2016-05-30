@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Mario in battle
     /// </summary>
-    public class BattleMario : BattleEntity
+    public class BattleMario : BattlePlayer
     {
         /// <summary>
         /// Constructor

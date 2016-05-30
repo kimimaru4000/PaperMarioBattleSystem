@@ -75,6 +75,7 @@
     <Compile Include="Classes\BattleEntities\BattleEntity.cs" />
     <Compile Include="Classes\BattleEntities\BattleMario.cs" />
     <Compile Include="Classes\BattleEntities\BattlePartner.cs" />
+    <Compile Include="Classes\BattleEntities\BattlePlayer.cs" />
     <Compile Include="Classes\BattleEntities\Goomba.cs" />
     <Compile Include="Classes\BattleEntities\Goombario.cs" />
     <Compile Include="Classes\BattleEntities\SpikedGoomba.cs" />

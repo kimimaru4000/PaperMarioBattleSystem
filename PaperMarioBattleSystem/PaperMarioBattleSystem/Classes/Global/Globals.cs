@@ -7,13 +7,13 @@ using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
-    #region Structs
+    #region Classes
 
     /// <summary>
-    /// A structure containing all the stats in the game.
-    /// Mario is the only character that uses all of them
+    /// A class containing all the stats in the game.
+    /// Only playable characters use Level, and only Mario uses FP
     /// </summary>
-    public struct Stats
+    public class Stats
     {
         public int Level;
 
@@ -178,6 +178,27 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class BattleGlobals
     {
+        #region Structs
+
+        
+        private struct DamageModifierHolder
+        {
+            public float DamageModifier;
+            public Enumerations.PhysicalAttributes[] Attributes;
+
+            public DamageModifierHolder(float damageMod, params Enumerations.PhysicalAttributes[] attributes)
+            {
+                DamageModifier = damageMod;
+                Attributes = attributes;
+            }
+        }
+
+        #endregion
+
+        #region Constants
+
+        private const float DefaultElementModifier = 1f;
+
         public const int MaxEnemies = 5;
 
         public const int MinDamage = 0;
@@ -189,6 +210,56 @@ namespace PaperMarioBattleSystem
         public const int MaxDangerHP = 5;
         public const int PerilHP = 1;
         public const int DeathHP = 0;
+
+        #endregion
+
+        #region Fields
+
+        private static readonly Dictionary<Enumerations.Elements, DamageModifierHolder> DamageTable = null;
+
+        #endregion
+
+        #region Methods
+
+        public static float GetDamageModifier(Enumerations.Elements element, BattleEntity entity)
+        {
+            //Return the default value
+            if (DamageTable.ContainsKey(element) == false || entity == null) return DefaultElementModifier;
+
+            float modifier = DamageTable[element].DamageModifier;
+            Enumerations.PhysicalAttributes[] attributes = DamageTable[element].Attributes;
+
+            //Look through the physical attributes this element affects, and check if the attributes in question match
+            if (entity.HasPhysAttributes(true, attributes) == true)
+            {
+                return modifier;
+            }
+            
+            return DefaultElementModifier;
+        }
+
+        #endregion
+
+        static BattleGlobals()
+        {
+            //1. The element being used
+            //2. The physical attributes to test against
+            //3. The modifier, rounded down, against the types
+            //Ex. Water has a 2f modifier against Burning, so it does (damage * 2f) to the enemy
+
+            //The default modifier is the value of the const, DefaultElementModifier, and is used when no modifiers are found
+            //For cases where elements heal certain attributes (Ex. Fire moves healing Burning enemies), the modifier is negative
+            DamageTable = new Dictionary<Enumerations.Elements, DamageModifierHolder>()
+            {
+                { Enumerations.Elements.Water, new DamageModifierHolder(2f, Enumerations.PhysicalAttributes.Burning) },
+                { Enumerations.Elements.Fire, new DamageModifierHolder(-1f, Enumerations.PhysicalAttributes.Burning) },
+
+                //THIS ONE'S FOR TESTING
+                { Enumerations.Elements.Sharp, new DamageModifierHolder(1.5f, Enumerations.PhysicalAttributes.Electrified,
+                                                                              Enumerations.PhysicalAttributes.Flying,
+                                                                              Enumerations.PhysicalAttributes.None) }
+            };
+        }
     }
 
     /// <summary>

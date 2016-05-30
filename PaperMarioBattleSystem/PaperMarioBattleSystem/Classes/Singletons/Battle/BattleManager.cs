@@ -435,8 +435,8 @@ namespace PaperMarioBattleSystem
             }
             else if (entityType == EntityTypes.Player)
             {
-                entities.Add(Mario);
-                entities.Add(Partner);
+                entities.Add(GetMario());
+                entities.Add(GetPartner());
             }
 
             //Filter by height states
@@ -462,6 +462,16 @@ namespace PaperMarioBattleSystem
             }
 
             return aliveEnemies.ToArray();
+        }
+
+        public BattleMario GetMario()
+        {
+            return Mario;
+        }
+
+        public BattlePartner GetPartner()
+        {
+            return Partner;
         }
 
         /// <summary>

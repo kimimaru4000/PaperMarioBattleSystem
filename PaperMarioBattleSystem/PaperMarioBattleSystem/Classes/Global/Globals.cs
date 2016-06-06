@@ -123,6 +123,15 @@ namespace PaperMarioBattleSystem
         {
             None, JumpContact, HammerContact
         }
+
+        /// <summary>
+        /// The result of a ContactType and the PhysicalAttributes of an entity.
+        /// A Failure indicates that the action backfired
+        /// </summary>
+        public enum ContactResult
+        {
+            Success, Failure
+        }
     }
 
     /// <summary>
@@ -180,7 +189,7 @@ namespace PaperMarioBattleSystem
     {
         #region Constants
 
-        private const float DefaultElementModifier = 1f;
+        public const float DefaultElementModifier = 1f;
 
         public const int MaxEnemies = 5;
 
@@ -193,128 +202,6 @@ namespace PaperMarioBattleSystem
         public const int MaxDangerHP = 5;
         public const int PerilHP = 1;
         public const int DeathHP = 0;
-
-        #endregion
-
-        #region Fields
-
-        /// <summary>
-        /// The table that determines the damage modifier each Element deals to each PhysicalAttribute
-        /// </summary>
-        private static Dictionary<Enumerations.Elements, Dictionary<Enumerations.PhysicalAttributes, float>> DamageTable = null;
-
-        #endregion
-
-        static BattleGlobals()
-        {
-            //1. The element being used
-            //2. The physical attribute to test against
-            //3. The modifier against the attribute
-            //Ex. Water has a 2f modifier against Burning, so it does (damage * 2f) to the enemy
-
-            //The default modifier is the value of the const, DefaultElementModifier, and is used when no modifiers are found
-            //For cases where elements heal certain attributes (Ex. Fire moves healing Burning enemies), the modifier is negative
-            InitializeDamageTable();
-        }
-
-        #region Methods
-
-        public static float GetDamageModifier(Enumerations.Elements element, params Enumerations.PhysicalAttributes[] physAttributes)
-        {
-            //Return the default value
-            if (DamageTable.ContainsKey(element) == false || physAttributes == null)
-            {
-                Debug.LogWarning($"{nameof(physAttributes)} array is null or {nameof(DamageTable)} does not contain the element {element}!");
-                return DefaultElementModifier;
-            }
-
-            //NOTE: Since I can't find any cases in the first two Paper Mario games where moves have more than one element
-            //or enemies weak to more than one element, this logic is up in the air. I'm going with the Pokémon approach
-            //of factoring in all the modifiers. Like Pokémon, this will be done multiplicatively rather than additively.
-            //Undesirable values may result, but it works perfectly fine with only one modifier like in the actual games
-
-            //Start out at null and assign it to the first one we find
-            //This ensures we multiply them correctly and prevents problems with the modifiers ending up at 0
-            float? totalModifier = null;
-
-            //Look through the physical attributes this element affects, and check if the attributes in question match
-            for (int i = 0; i < physAttributes.Length; i++)
-            {
-                Dictionary<Enumerations.PhysicalAttributes, float> tableForElement = DamageTable[element];
-                Enumerations.PhysicalAttributes attribute = physAttributes[i];
-                if (tableForElement.ContainsKey(attribute) == true)
-                {
-                    float modifier = tableForElement[attribute];
-
-                    if (totalModifier.HasValue == false) totalModifier = modifier;
-                    else totalModifier *= modifier;
-                }
-            }            
-            
-            //If no matches were found return the default modifier, otherwise return the result
-            return totalModifier.HasValue == false ? DefaultElementModifier : totalModifier.Value;
-        }
-
-        #endregion
-
-        #region Initialization Methods
-
-        /// <summary>
-        /// Initializes the damage table. This is called in the static constructor
-        /// </summary>
-        private static void InitializeDamageTable()
-        {
-            DamageTable = new Dictionary<Enumerations.Elements, Dictionary<Enumerations.PhysicalAttributes, float>>();
-
-            InitializeSharpTable();
-            InitializeWaterTable();
-            InitializeFireTable();
-            InitializeElectricTable();
-            InitializeIceTable();
-            InitializePoisonTable();
-            InitializeExplosionTable();
-        }
-
-        private static void InitializeSharpTable()
-        {
-            
-        }
-
-        private static void InitializeWaterTable()
-        {
-            DamageTable.Add(Enumerations.Elements.Water, new Dictionary<Enumerations.PhysicalAttributes, float>()
-                    {
-                        { Enumerations.PhysicalAttributes.Burning, 2f }
-                    });
-        }
-
-        private static void InitializeFireTable()
-        {
-            DamageTable.Add(Enumerations.Elements.Fire, new Dictionary<Enumerations.PhysicalAttributes, float>()
-                    {
-                        { Enumerations.PhysicalAttributes.Burning, -1f }
-                    });
-        }
-
-        private static void InitializeElectricTable()
-        {
-
-        }
-
-        private static void InitializeIceTable()
-        {
-
-        }
-        
-        private static void InitializePoisonTable()
-        {
-        
-        }
-
-        private static void InitializeExplosionTable()
-        {
-
-        }
 
         #endregion
     }

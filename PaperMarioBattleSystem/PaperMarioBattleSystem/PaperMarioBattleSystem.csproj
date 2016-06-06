@@ -82,6 +82,7 @@
     <Compile Include="Classes\Global\Debug.cs" />
     <Compile Include="Classes\Global\Extensions.cs" />
     <Compile Include="Classes\Global\FPSCounter.cs" />
+    <Compile Include="Classes\Global\Interactions.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\ActionSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\BonkSubMenu.cs" />

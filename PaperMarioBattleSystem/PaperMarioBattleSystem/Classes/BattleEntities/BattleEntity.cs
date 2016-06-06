@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
         protected readonly Dictionary<string, Animation> Animations = new Dictionary<string, Animation>();
 
         /// <summary>
-        /// The physical attributes the entity possesses. This is a set of flags
+        /// The physical attributes the entity possesses
         /// </summary>
         protected readonly Dictionary<PhysicalAttributes, bool> PhysAttributes = new Dictionary<PhysicalAttributes, bool>();
 
@@ -90,10 +90,23 @@ namespace PaperMarioBattleSystem
 
         public virtual void TakeDamage(Elements element, int damage)
         {
-            int newDamage = damage;
-            newDamage = UtilityGlobals.Clamp(newDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            //Modifiers are applied first
+            float damageMod = GetPhysAttributesDamageModifier(element);
+            int newDamage = (int)(damage * damageMod);
 
-            LoseHP(newDamage);
+            //If the damage dealt is greater than 0, make the entity lose damage like normal, factoring in Defense
+            if (newDamage >= 0)
+            {
+                newDamage = UtilityGlobals.Clamp(newDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+                LoseHP(newDamage);
+            }
+            //If the damage dealt is less than 0, then the entity should heal from the attack, still factoring in Defense
+            else
+            {
+                newDamage = UtilityGlobals.Clamp(newDamage + BattleStats.Defense, -BattleGlobals.MaxDamage, BattleGlobals.MinDamage);
+                newDamage = -newDamage;
+                HealHP(newDamage);
+            }
         }
 
         public virtual void HealHP(int hp)
@@ -171,22 +184,41 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected void UpdateHealthState()
         {
+            HealthStates newHealthState = HealthState;
             if (CurHP > BattleGlobals.MaxDangerHP)
             {
-                HealthState = HealthStates.Normal;
+                newHealthState = HealthStates.Normal;
             }
             else if (CurHP >= BattleGlobals.MinDangerHP)
             {
-                HealthState = HealthStates.Danger;
+                newHealthState = HealthStates.Danger;
             }
             else if (CurHP == BattleGlobals.PerilHP)
             {
-                HealthState = HealthStates.Peril;
+                newHealthState = HealthStates.Peril;
             }
             else
             {
-                HealthState = HealthStates.Dead;
+                newHealthState = HealthStates.Dead;
             }
+
+            //Change health states if they're no longer the same
+            if (newHealthState != HealthState)
+            {
+                OnHealthStateChange(newHealthState);
+
+                //Change to the new health state
+                HealthState = newHealthState;
+            }
+        }
+
+        /// <summary>
+        /// What occurs when an entity changes HealthStates
+        /// </summary>
+        /// <param name="newHealthState">The new HealthState of the entity</param>
+        protected virtual void OnHealthStateChange(HealthStates newHealthState)
+        {
+
         }
 
         #endregion
@@ -384,9 +416,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="element">The element this entity is damaged with</param>
         /// <returns>The modifier for damage dealt to the entity based on the element damaged with and its physical attributes</returns>
-        public float GetPhysAttributesModifier(Elements element)
+        public float GetPhysAttributesDamageModifier(Elements element)
         {
-            return BattleGlobals.GetDamageModifier(element, PhysAttributes.Keys.ToArray());
+            return Interactions.GetDamageModifier(element, PhysAttributes.Keys.ToArray());
         }
 
         /// <summary>

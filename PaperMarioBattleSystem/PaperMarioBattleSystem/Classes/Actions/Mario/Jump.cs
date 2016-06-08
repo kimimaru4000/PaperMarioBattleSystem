@@ -90,15 +90,15 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    DealDamage(DamageDealt);
+                    AttemptDamage(DamageDealt, EntitiesAffected);
                     CurSequence = new MoveAmount(new Vector2(0f, -JumpHeight), JumpDuration);
                     break;
                 case 1:
                     CurSequence = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration);
                     break;
                 case 2:
-                    DealDamage(DamageDealt);
                     ChangeSequenceBranch(SequenceBranch.End);
+                    AttemptDamage(DamageDealt, EntitiesAffected);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -111,8 +111,8 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    DealDamage(DamageDealt);
                     ChangeSequenceBranch(SequenceBranch.End);
+                    AttemptDamage(DamageDealt, EntitiesAffected);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -140,7 +140,25 @@ namespace PaperMarioBattleSystem
 
         protected override void SequenceBackfireBranch()
         {
-            //Make the entity recoil
+            switch(SequenceStep)
+            {
+                case 0:
+                    User.PlayAnimation(AnimationGlobals.SpikedTipHurtName, true);
+                    
+                    Vector2 pos = BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]) + new Vector2(-50, -JumpHeight);
+                    CurSequence = new MoveTo(pos, WalkDuration / 4d);
+                    break;
+                case 1:
+                    CurSequence = new Wait(JumpDuration / 2f);
+                    break;
+                case 2:
+                    CurSequence = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration / 2f);
+                    ChangeSequenceBranch(SequenceBranch.End);
+                    break;
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
         }
     }
 }

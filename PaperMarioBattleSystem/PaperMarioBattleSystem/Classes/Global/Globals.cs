@@ -78,7 +78,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum Elements
         {
-            Normal, Sharp, Water, Fire, Electric, Ice, Poison, Explosion
+            Normal, Sharp, Water, Fire, Electric, Ice, Poison, Explosion, Star
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum PhysicalAttributes
         {
-            None, Flying, Spiked, Electrified, Burning
+            None, Flying, Spiked, Electrified, Fiery, Poisony, Starry
         }
 
         /// <summary>
@@ -160,6 +160,8 @@ namespace PaperMarioBattleSystem
         public const string HurtName = "Hurt";
         public const string DeathName = "Death";
         public const string VictoryName = "Victory";
+
+        public const string SpikedTipHurtName = "SpikedTipHurt";
 
         /// <summary>
         /// Battle animations specific to playable characters

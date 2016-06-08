@@ -83,8 +83,8 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    DealDamage(BaseDamage + AdditionalDamage);
                     ChangeSequenceBranch(SequenceBranch.End);
+                    AttemptDamage(BaseDamage + AdditionalDamage, EntitiesAffected);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -97,8 +97,8 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    DealDamage(BaseDamage + AdditionalDamage);
                     ChangeSequenceBranch(SequenceBranch.End);
+                    AttemptDamage(BaseDamage + AdditionalDamage, EntitiesAffected);
                     break;
                 default:
                     PrintInvalidSequence();

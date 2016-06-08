@@ -110,37 +110,65 @@ namespace PaperMarioBattleSystem
 
         protected BattleAction()
         {
-            
+
         }
 
-        // <summary>
-        // TEMPORARY NAME AND LOCATION FOR THIS
-        // </summary>
-        // <param name="entityToAttack"></param>
-        // <returns>true if the interaction was successful, false otherwise</returns>
-        //protected bool HandleInteraction(BattleEntity entityToAttack)
-        //{
-        //    //Check if you successfully jump on the entity
-        //    if (ContactType == ContactTypes.JumpContact)
-        //    {
-        //        if (entityToAttack.HasPhysAttributes(true,
-        //            PhysicalAttributes.Spiked, PhysicalAttributes.Burning, PhysicalAttributes.Electrified) == true)
-        //        {
-        //            //Get hurt, not successful jump
-        //            OnCommandBackfire();
-        //            return false;
-        //        }
-        //    }
-        //
-        //    return true;
-        //}
-
-        public void DealDamage(int damage)
+        /// <summary>
+        /// Attempt to deal damage to a set of entities with this BattleAction.
+        /// <para>Based on the ContactType of this BattleAction, this can fail, resulting in a backfire.
+        /// In the event of a backfire, no further entities are tested, the ActionCommand is ended, and 
+        /// we go into the Backfire branch</para>
+        /// <para>NOTE: This must be placed after any branch changes in a sequence, or the branch change
+        /// will override the change to the backfire branch that occurs in here</para>
+        /// </summary>
+        /// <param name="damage">The total damage to be dealt to the entities if the attempt was successful</param>
+        /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
+        protected void AttemptDamage(int damage, BattleEntity[] entities)
         {
-            for (int i = 0; i < EntitiesAffected.Length; i++)
+            if (entities == null || entities.Length == 0)
             {
-                EntitiesAffected[i].LoseHP(damage);
+                Debug.LogWarning($"{nameof(entities)} is null or empty in {nameof(AttemptDamage)} for Action {Name}!");
+                return;
             }
+
+            //Go through all the entities and attempt damage
+            for (int i = 0; i < entities.Length; i++)
+            {
+                BattleEntity victim = entities[i];
+
+                //Check the contact result
+                ContactResult result = victim.GetContactResult(ContactType);
+                
+                //If it's a Success, deal damage and continue
+                if (result == ContactResult.Success)
+                {
+                    DealDamage(damage, victim);
+                }
+                //If it's a failure, end the ActionCommand's input and move to the backfire branch
+                else if (result == ContactResult.Failure)
+                {
+                    if (CommandEnabled == true) Command.EndInput();
+
+                    //Handle the damage the entity performing the action should take
+                    //NOTE: This damage value will have to be handled based on what physical attributes the entity
+                    //has, along with which status effects it has.
+                    //The Payback status is a special case because it isn't technically a failure, as half the damage
+                    //the victim receives is dealt to the attack, but any subsequent attacks by the attacker in the
+                    //same turn are canceled. As a result the two may have to be handled separately
+                    int backfireDamage = 1;
+
+                    User.LoseHP(backfireDamage);
+
+                    ChangeSequenceBranch(SequenceBranch.Backfire);
+                    break;
+                }
+            }
+        }
+
+        private void DealDamage(int damage, BattleEntity entity)
+        {
+            //NOTE: Normal element for now; this will be changed once the damage system is in place
+            entity.TakeDamage(Elements.Normal, damage);
         }
 
         /// <summary>

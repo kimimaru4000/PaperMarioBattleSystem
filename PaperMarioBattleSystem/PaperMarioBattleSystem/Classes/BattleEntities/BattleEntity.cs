@@ -90,23 +90,10 @@ namespace PaperMarioBattleSystem
 
         public virtual void TakeDamage(Elements element, int damage)
         {
-            //Modifiers are applied first
-            float damageMod = GetPhysAttributesDamageModifier(element);
-            int newDamage = (int)(damage * damageMod);
+            int newDamage = damage;
 
-            //If the damage dealt is greater than 0, make the entity lose damage like normal, factoring in Defense
-            if (newDamage >= 0)
-            {
-                newDamage = UtilityGlobals.Clamp(newDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
-                LoseHP(newDamage);
-            }
-            //If the damage dealt is less than 0, then the entity should heal from the attack, still factoring in Defense
-            else
-            {
-                newDamage = UtilityGlobals.Clamp(newDamage + BattleStats.Defense, -BattleGlobals.MaxDamage, BattleGlobals.MinDamage);
-                newDamage = -newDamage;
-                HealHP(newDamage);
-            }
+            newDamage = UtilityGlobals.Clamp(newDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            LoseHP(newDamage);
         }
 
         public virtual void HealHP(int hp)
@@ -412,13 +399,13 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets the damage modifier for the entity when damaged with a particular element
+        /// Determines the result of contact, based on the type of contact made, when it's made with this entity
         /// </summary>
-        /// <param name="element">The element this entity is damaged with</param>
-        /// <returns>The modifier for damage dealt to the entity based on the element damaged with and its physical attributes</returns>
-        public float GetPhysAttributesDamageModifier(Elements element)
+        /// <param name="contactType">The type of contact made with this entity</param>
+        /// <returns>The result of the interaction</returns>
+        public ContactResult GetContactResult(ContactTypes contactType)
         {
-            return Interactions.GetDamageModifier(element, PhysAttributes.Keys.ToArray());
+            return Interactions.GetContactResult(contactType, PhysAttributes.Keys.ToArray());
         }
 
         /// <summary>

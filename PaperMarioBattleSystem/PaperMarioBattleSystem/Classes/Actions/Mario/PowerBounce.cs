@@ -34,9 +34,6 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    DealDamage(DamageDealt);
-                    DamageValue = UtilityGlobals.Clamp(DamageValue - 1, 1, BattleGlobals.MaxDamage);
-
                     Bounces++;
 
                     if (Bounces < BattleGlobals.MaxPowerBounces)
@@ -47,6 +44,9 @@ namespace PaperMarioBattleSystem
                     {
                         ChangeSequenceBranch(SequenceBranch.End);
                     }
+
+                    AttemptDamage(DamageDealt, EntitiesAffected);
+                    DamageValue = UtilityGlobals.Clamp(DamageValue - 1, 1, BattleGlobals.MaxDamage);
                     break;
                 default:
                     PrintInvalidSequence();

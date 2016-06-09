@@ -339,6 +339,7 @@ namespace PaperMarioBattleSystem
         public virtual void TurnUpdate()
         {
             PreviousAction?.Update();
+            PreviousAction?.PostUpdate();
         }
 
         #endregion

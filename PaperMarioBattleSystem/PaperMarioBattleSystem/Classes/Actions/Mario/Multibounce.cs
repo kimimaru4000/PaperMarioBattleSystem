@@ -50,9 +50,6 @@ namespace PaperMarioBattleSystem
                 case 0:
                     AttemptDamage(DamageDealt, CurTarget);
 
-                    //TEMPORARY
-                    if (CurBranch != SequenceBranch.Success) break;
-
                     //Restart with the next target
                     if (NextTargetIndex < EntitiesAffected.Length)
                     {

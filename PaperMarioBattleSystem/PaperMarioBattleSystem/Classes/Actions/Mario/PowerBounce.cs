@@ -49,6 +49,9 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    AttemptDamage(DamageDealt, EntitiesAffected);
+                    DamageValue = UtilityGlobals.Clamp(DamageValue - 1, 1, BattleGlobals.MaxDamage);
+
                     if (Bounces < BattleGlobals.MaxPowerBounces)
                     {
                         ChangeSequenceBranch(SequenceBranch.Command);
@@ -58,9 +61,6 @@ namespace PaperMarioBattleSystem
                         Debug.Log($"Reached Power Bounce limit with {Bounces} and real max is {BattleGlobals.MaxPowerBounces}!");
                         ChangeSequenceBranch(SequenceBranch.End);
                     }
-
-                    AttemptDamage(DamageDealt, EntitiesAffected);
-                    DamageValue = UtilityGlobals.Clamp(DamageValue - 1, 1, BattleGlobals.MaxDamage);
                     break;
                 default:
                     PrintInvalidSequence();

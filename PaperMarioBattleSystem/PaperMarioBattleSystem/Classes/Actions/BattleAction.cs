@@ -103,6 +103,12 @@ namespace PaperMarioBattleSystem
         protected BattleEntity[] EntitiesAffected { get; private set; } = null;
 
         /// <summary>
+        /// A value denoting if we should jump to the Backfire branch or not after the sequence progresses.
+        /// This allows the sequences to remain flexible and not cause any sequence or branch conflicts with Backfire
+        /// </summary>
+        protected bool JumpToBackfire { get; private set; } = false;
+
+        /// <summary>
         /// Tells whether the action command is enabled or not.
         /// Action commands are always disabled for enemies
         /// </summary>
@@ -159,9 +165,8 @@ namespace PaperMarioBattleSystem
 
                     User.LoseHP(backfireDamage);
 
-                    //Change the sequence itself to cancel out anything that it will be waiting for to finish
-                    CurSequence = new Wait(0d);
-                    ChangeSequenceBranch(SequenceBranch.Backfire);
+                    //Specify to go to the Backfire branch
+                    JumpToBackfire = true;
                     break;
                 }
             }
@@ -193,6 +198,8 @@ namespace PaperMarioBattleSystem
             InSequence = true;
             SequenceStep = 0;
 
+            JumpToBackfire = false;
+
             EntitiesAffected = targets;
 
             OnStart();
@@ -218,6 +225,8 @@ namespace PaperMarioBattleSystem
             InSequence = false;
             SequenceStep = 0;
             CurSequence = null;
+
+            JumpToBackfire = false;
 
             EntitiesAffected = null;
 
@@ -389,6 +398,23 @@ namespace PaperMarioBattleSystem
                 {
                     ProgressSequence(1);
                 }
+            }
+        }
+
+        /// <summary>
+        /// Handles anything that needs to be done directly after updating the sequence.
+        /// This is where it jumps to the Backfire branch, if it should
+        /// </summary>
+        public void PostUpdate()
+        {
+            if (InSequence == true && JumpToBackfire == true)
+            {
+                //Change the sequence action itself to cancel out anything that it will be waiting for to finish
+                //We don't end the previous sequence action because it has been interrupted by the Backfire
+                CurSequence = new Wait(0d);
+                ChangeSequenceBranch(SequenceBranch.Backfire);
+
+                JumpToBackfire = false;
             }
         }
 

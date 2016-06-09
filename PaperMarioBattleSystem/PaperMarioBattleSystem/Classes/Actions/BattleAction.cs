@@ -121,7 +121,7 @@ namespace PaperMarioBattleSystem
         /// <para>NOTE: This must be placed after any branch changes or sequence changes in a sequence, or 
         /// the changes will override the change to the backfire branch that occurs in here</para>
         /// </summary>
-        /// <param name="damage">The total damage to be dealt to the entities if the attempt was successful</param>
+        /// <param name="damage">The total raw damage to be dealt to the entities if the attempt was successful</param>
         /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
         protected void AttemptDamage(int damage, BattleEntity[] entities)
         {
@@ -165,6 +165,16 @@ namespace PaperMarioBattleSystem
                     break;
                 }
             }
+        }
+
+        /// <summary>
+        /// Convenience function for attempting damage with only one entity.
+        /// </summary>
+        /// <param name="damage">The total raw damage to be dealt to the entity if the attempt was successful</param>
+        /// <param name="entity">The BattleEntity to attempt to inflict damage on</param>
+        protected void AttemptDamage(int damage, BattleEntity entity)
+        {
+            AttemptDamage(damage, new BattleEntity[] { entity });
         }
 
         private void DealDamage(int damage, BattleEntity entity)

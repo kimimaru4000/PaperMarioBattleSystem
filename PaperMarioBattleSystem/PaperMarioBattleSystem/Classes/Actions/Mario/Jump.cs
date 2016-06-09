@@ -18,6 +18,7 @@ namespace PaperMarioBattleSystem
         protected float JumpHeight = 100f;
 
         protected virtual int DamageDealt => BaseDamage;
+        protected virtual BattleEntity CurTarget => EntitiesAffected[0];
 
         public Jump()
         {
@@ -57,7 +58,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), WalkDuration);
+                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(CurTarget), WalkDuration);
                     ChangeSequenceBranch(SequenceBranch.Command);
                     break;
                 default:
@@ -91,14 +92,14 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     CurSequence = new MoveAmount(new Vector2(0f, -JumpHeight), JumpDuration);
-                    AttemptDamage(DamageDealt, EntitiesAffected);
+                    AttemptDamage(DamageDealt, CurTarget);
                     break;
                 case 1:
                     CurSequence = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration);
                     break;
                 case 2:
                     ChangeSequenceBranch(SequenceBranch.End);
-                    AttemptDamage(DamageDealt, EntitiesAffected);
+                    AttemptDamage(DamageDealt, CurTarget);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -112,7 +113,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     ChangeSequenceBranch(SequenceBranch.End);
-                    AttemptDamage(DamageDealt, EntitiesAffected);
+                    AttemptDamage(DamageDealt, CurTarget);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -145,7 +146,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.PlayAnimation(AnimationGlobals.SpikedTipHurtName, true);
                     
-                    Vector2 pos = BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]) + new Vector2(-50, -JumpHeight);
+                    Vector2 pos = BattleManager.Instance.GetPositionInFront(CurTarget) + new Vector2(-50, -JumpHeight);
                     CurSequence = new MoveTo(pos, WalkDuration / 4d);
                     break;
                 case 1:

@@ -505,7 +505,7 @@ namespace PaperMarioBattleSystem
         {
             if (Weaknesses.ContainsKey(element) == false)
             {
-                Debug.Log($"{Name} does not have a weakness for {element}");
+                //Debug.Log($"{Name} does not have a weakness for {element}");
                 return WeaknessHolder.Default;
             }
 
@@ -521,7 +521,7 @@ namespace PaperMarioBattleSystem
         {
             if (Resistances.ContainsKey(element) == false)
             {
-                Debug.Log($"{Name} does not have a resistance for {element}");
+                //Debug.Log($"{Name} does not have a resistance for {element}");
                 return ResistanceHolder.Default;
             }
 

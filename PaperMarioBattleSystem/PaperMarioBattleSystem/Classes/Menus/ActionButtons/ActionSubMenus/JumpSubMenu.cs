@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
         public JumpSubMenu()
         {
             Position = new Vector2(230, 150);
-            Initialize(new List<BattleAction>() { new Jump(), new PowerBounce() });
+            Initialize(new List<BattleAction>() { new Jump(), new PowerBounce(), new Multibounce() });
         }
     }
 }

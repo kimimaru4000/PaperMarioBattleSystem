@@ -27,6 +27,21 @@ namespace PaperMarioBattleSystem
             base.OnStart();
 
             DamageValue = BaseDamage;
+            Bounces = 0;
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            Bounces = 0;
+        }
+
+        public override void OnCommandSuccess()
+        {
+            base.OnCommandSuccess();
+
+            Bounces++;
         }
 
         protected override void SequenceSuccessBranch()
@@ -34,14 +49,13 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    Bounces++;
-
                     if (Bounces < BattleGlobals.MaxPowerBounces)
                     {
                         ChangeSequenceBranch(SequenceBranch.Command);
                     }
                     else
                     {
+                        Debug.Log($"Reached Power Bounce limit with {Bounces} and real max is {BattleGlobals.MaxPowerBounces}!");
                         ChangeSequenceBranch(SequenceBranch.End);
                     }
 

@@ -90,8 +90,8 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    AttemptDamage(DamageDealt, EntitiesAffected);
                     CurSequence = new MoveAmount(new Vector2(0f, -JumpHeight), JumpDuration);
+                    AttemptDamage(DamageDealt, EntitiesAffected);
                     break;
                 case 1:
                     CurSequence = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration);

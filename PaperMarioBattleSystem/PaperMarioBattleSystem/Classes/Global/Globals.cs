@@ -7,6 +7,66 @@ using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
+    #region Enums
+
+    /// <summary>
+    /// The result of elemental damage dealt on an entity based on its weaknesses and/or resistances
+    /// </summary>
+    public enum ElementInteractionResult
+    {
+        Damage, KO, Heal
+    }
+
+    /// <summary>
+    /// The ways to handle weaknesses
+    /// </summary>
+    public enum WeaknessTypes
+    {
+        None, PlusDamage, KO
+    }
+
+    /// <summary>
+    /// The ways to handle resistances
+    /// </summary>
+    public enum ResistanceTypes
+    {
+        None, MinusDamage, NoDamage, Heal
+    }
+
+    #endregion
+
+    #region Structs
+
+    public struct WeaknessHolder
+    {
+        public WeaknessTypes WeaknessType;
+        public int Value;
+
+        public static WeaknessHolder Default => new WeaknessHolder(WeaknessTypes.None, 0);
+
+        public WeaknessHolder(WeaknessTypes weaknessType, int value)
+        {
+            WeaknessType = weaknessType;
+            Value = value;
+        }
+    }
+
+    public struct ResistanceHolder
+    {
+        public ResistanceTypes ResistanceType;
+        public int Value;
+
+        public static ResistanceHolder Default => new ResistanceHolder(ResistanceTypes.None, 0);
+
+        public ResistanceHolder(ResistanceTypes resistanceType, int value)
+        {
+            ResistanceType = resistanceType;
+            Value = value;
+        }
+    }
+
+    #endregion
+
     #region Classes
 
     /// <summary>

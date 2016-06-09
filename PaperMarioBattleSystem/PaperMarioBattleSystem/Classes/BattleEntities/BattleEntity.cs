@@ -26,6 +26,16 @@ namespace PaperMarioBattleSystem
         protected readonly Dictionary<PhysicalAttributes, bool> PhysAttributes = new Dictionary<PhysicalAttributes, bool>();
 
         /// <summary>
+        /// The Weaknesses the entity has
+        /// </summary>
+        protected readonly Dictionary<Elements, WeaknessHolder> Weaknesses = new Dictionary<Elements, WeaknessHolder>();
+
+        /// <summary>
+        /// The Resistances the entity has
+        /// </summary>
+        protected readonly Dictionary<Elements, ResistanceHolder> Resistances = new Dictionary<Elements, ResistanceHolder>();
+
+        /// <summary>
         /// The HeightState of the entity
         /// </summary>
         public HeightStates HeightState { get; protected set; } = HeightStates.Grounded;
@@ -88,12 +98,40 @@ namespace PaperMarioBattleSystem
 
         #region Stat Manipulations
 
+        /// <summary>
+        /// Makes the entity take damage from an attack, factoring in stats such as defense, weaknesses, and resistances
+        /// </summary>
+        /// <param name="element">The element to damage the entity with</param>
+        /// <param name="damage">The damage to deal to the entity</param>
         public virtual void TakeDamage(Elements element, int damage)
         {
-            int newDamage = damage;
+            int totalDamage = damage;
 
-            newDamage = UtilityGlobals.Clamp(newDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
-            LoseHP(newDamage);
+            totalDamage = UtilityGlobals.Clamp(totalDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+
+            //Get weaknesses and resistances
+            ElementInteractionResult result = HandleElementDamage(element, ref totalDamage);
+
+            //NOTE: We do this because we still need to show the correct amount of damage being done on an instant KO
+            if (result == ElementInteractionResult.Damage || result == ElementInteractionResult.KO)
+            {
+                //Lose HP
+                LoseHP(totalDamage);
+
+                //If this damage doesn't kill the entity on an instant KO, kill the entity now
+                if (result == ElementInteractionResult.KO && IsDead == false)
+                {
+                    Die();
+                }
+            }
+            //Heal the entity
+            else if (result == ElementInteractionResult.Heal)
+            {
+                Debug.Log($"{Name} is being healed because it has a {nameof(ResistanceTypes.Heal)} resistance to Element {element}");
+
+                //Heal the damage
+                HealHP(totalDamage);
+            }
         }
 
         public virtual void HealHP(int hp)
@@ -208,11 +246,61 @@ namespace PaperMarioBattleSystem
 
         }
 
+        /// <summary>
+        /// Calculates the final result of elemental damage on this entity, based on its weaknesses and resistances to that element
+        /// </summary>
+        /// <param name="element">The element the entity is attacked with</param>
+        /// <param name="damage">The damage of the attack. It's passed by ref, as it can be modified</param>
+        /// <returns>An ElementInteractionResult stating the final result of the elemental damage dealt to this entity</returns>
+        private ElementInteractionResult HandleElementDamage(Elements element, ref int damage)
+        {
+            ElementInteractionResult result = ElementInteractionResult.Damage;
+            int newDamage = damage;
+
+            //NOTE: If an entity is both resistant and weak to a particular element, they cancel out.
+            //I decided to go with this approach because it's the simplest for this situation, which
+            //doesn't seem desirable to begin with but could be interesting in its application
+            WeaknessHolder weakness = GetWeakness(element);
+            ResistanceHolder resistance = GetResistance(element);
+
+            //If there's both a weakness and resistance, return
+            if (weakness.WeaknessType == WeaknessTypes.None && resistance.ResistanceType == ResistanceTypes.None) return result;
+
+            //Handle weaknesses
+            if (weakness.WeaknessType == WeaknessTypes.PlusDamage)
+            {
+                newDamage = UtilityGlobals.Clamp(newDamage + weakness.Value, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            }
+            else if (weakness.WeaknessType == WeaknessTypes.KO)
+            {
+                result = ElementInteractionResult.KO;
+            }
+
+            //Handle resistances
+            if (resistance.ResistanceType == ResistanceTypes.MinusDamage)
+            {
+                newDamage = UtilityGlobals.Clamp(newDamage - resistance.Value, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            }
+            else if (resistance.ResistanceType == ResistanceTypes.NoDamage)
+            {
+                newDamage = BattleGlobals.MinDamage;
+            }
+            else if (resistance.ResistanceType == ResistanceTypes.Heal)
+            {
+                result = ElementInteractionResult.Heal;
+            }
+
+            //Set the damage value
+            damage = newDamage;
+
+            return result;
+        }
+
         #endregion
 
         #region Damage Calculations
 
-        
+
 
         #endregion
 
@@ -406,6 +494,38 @@ namespace PaperMarioBattleSystem
         public ContactResult GetContactResult(ContactTypes contactType)
         {
             return Interactions.GetContactResult(contactType, PhysAttributes.Keys.ToArray());
+        }
+
+        /// <summary>
+        /// Gets this entity's weakness to a particular Element
+        /// </summary>
+        /// <param name="element">The Element to test a weakness for</param>
+        /// <returns>A copy of the WeaknessHolder associated with the element if found, otherwise default weakness data</returns>
+        public WeaknessHolder GetWeakness(Elements element)
+        {
+            if (Weaknesses.ContainsKey(element) == false)
+            {
+                Debug.Log($"{Name} does not have a weakness for {element}");
+                return WeaknessHolder.Default;
+            }
+
+            return Weaknesses[element];
+        }
+
+        /// <summary>
+        /// Gets this entity's resistance to a particular Element
+        /// </summary>
+        /// <param name="element">The element to test a resistance towards</param>
+        /// <returns>A copy of the ResistanceHolder associated with the element if found, otherwise default resistance data</returns>
+        public ResistanceHolder GetResistance(Elements element)
+        {
+            if (Resistances.ContainsKey(element) == false)
+            {
+                Debug.Log($"{Name} does not have a resistance for {element}");
+                return ResistanceHolder.Default;
+            }
+
+            return Resistances[element];
         }
 
         /// <summary>

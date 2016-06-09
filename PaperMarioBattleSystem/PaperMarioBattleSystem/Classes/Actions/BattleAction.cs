@@ -118,8 +118,8 @@ namespace PaperMarioBattleSystem
         /// <para>Based on the ContactType of this BattleAction, this can fail, resulting in a backfire.
         /// In the event of a backfire, no further entities are tested, the ActionCommand is ended, and 
         /// we go into the Backfire branch</para>
-        /// <para>NOTE: This must be placed after any branch changes in a sequence, or the branch change
-        /// will override the change to the backfire branch that occurs in here</para>
+        /// <para>NOTE: This must be placed after any branch changes or sequence changes in a sequence, or 
+        /// the changes will override the change to the backfire branch that occurs in here</para>
         /// </summary>
         /// <param name="damage">The total damage to be dealt to the entities if the attempt was successful</param>
         /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
@@ -159,6 +159,8 @@ namespace PaperMarioBattleSystem
 
                     User.LoseHP(backfireDamage);
 
+                    //Change the sequence itself to cancel out anything that it will be waiting for to finish
+                    CurSequence = new Wait(0d);
                     ChangeSequenceBranch(SequenceBranch.Backfire);
                     break;
                 }

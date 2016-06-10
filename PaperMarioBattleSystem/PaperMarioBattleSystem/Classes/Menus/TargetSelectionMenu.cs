@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
     {
         public enum EntitySelectionType
         {
-            Single, All
+            Single, All, First
         }
 
         private Texture2D Cursor = null;
@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
 
         protected override void HandleCursorInput()
         {
-            if (SelectionType == EntitySelectionType.All) return;
+            if (SelectionType == EntitySelectionType.First || SelectionType == EntitySelectionType.All) return;
 
             base.HandleCursorInput();
         }
@@ -63,7 +63,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnConfirm()
         {
-            if (SelectionType == EntitySelectionType.Single)
+            if (SelectionType == EntitySelectionType.Single || SelectionType == EntitySelectionType.First)
             {
                 Selection?.Invoke(Targets[CurSelection]);
             }
@@ -90,7 +90,7 @@ namespace PaperMarioBattleSystem
 
         public override void Draw()
         {
-            if (SelectionType == EntitySelectionType.Single)
+            if (SelectionType == EntitySelectionType.Single || SelectionType == EntitySelectionType.First)
             {
                 DrawSingle();
             }

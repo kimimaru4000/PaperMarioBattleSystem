@@ -29,6 +29,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Hammer";
             Description = "Whack an enemy with your Hammer.";
+            SelectionType = TargetSelectionMenu.EntitySelectionType.First;
             ContactType = Enumerations.ContactTypes.HammerContact;
             BaseDamage = 1;
             HeightsAffected = new HeightStates[] { HeightStates.Grounded };

@@ -19,7 +19,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The frames per second the game runs at
         /// </summary>
-        //public static float FPS = 60f;
+        public static double FPS = 60d;
+
+        /// <summary>
+        /// Whether the game's frame rate is updated at the end of each frame or not
+        /// </summary>
+        public static bool UpdateFPS { get; private set; } = false;
 
         /// <summary>
         /// Whether in-game time is enabled or not. If set to false, ActiveMilliseconds won't be updated
@@ -60,6 +65,15 @@ namespace PaperMarioBattleSystem
         public static void DisableTime()
         {
             TimeEnabled = false;
+        }
+
+        /// <summary>
+        /// Enables or disables updating the game's framerate at the end of each frame
+        /// </summary>
+        /// <param name="enableUpdateFPS">true to enable updating the FPS, false to disable it</param>
+        public static void ToggleFPSUpdate(bool enableUpdateFPS)
+        {
+            UpdateFPS = enableUpdateFPS;
         }
 
         /// <summary>

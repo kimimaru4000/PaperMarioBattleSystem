@@ -19,8 +19,8 @@ namespace PaperMarioBattleSystem
         {
             graphics = new GraphicsDeviceManager(this);
 
-            //Variable timestep
-            IsFixedTimeStep = false;
+            //false for variable timestep, true for fixed
+            IsFixedTimeStep = true;
         }
 
         /// <summary>
@@ -105,8 +105,16 @@ namespace PaperMarioBattleSystem
         {
             SoundManager.Instance.Update();
             Input.UpdateInputState();
-
+            
             base.Update(gameTime);
+
+            //This should always be at the end of PostUpdate()
+            if (Time.UpdateFPS == true)
+            {
+                //Set the FPS - TimeSpan normally rounds, so to be precise we'll create them from ticks
+                double val = Math.Round(Time.FPS <= 0d ? 0d : (1d / Time.FPS), 7);
+                TargetElapsedTime = TimeSpan.FromTicks((long)(TimeSpan.TicksPerSecond * val));
+            }
         }
 
         /// <summary>

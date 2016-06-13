@@ -25,7 +25,7 @@ namespace PaperMarioBattleSystem
 
         public override void OnCommandFailed()
         {
-            EndSequence();
+            
         }
 
         public override void OnCommandResponse(int response)

@@ -59,6 +59,7 @@
   <PropertyGroup />
   <ItemGroup>
     <Compile Include="Classes\ActionCommands\ActionCommand.cs" />
+    <Compile Include="Classes\ActionCommands\GuardCommand.cs" />
     <Compile Include="Classes\ActionCommands\HammerCommand.cs" />
     <Compile Include="Classes\ActionCommands\JumpCommand.cs" />
     <Compile Include="Classes\ActionCommands\TidalWaveCommand.cs" />

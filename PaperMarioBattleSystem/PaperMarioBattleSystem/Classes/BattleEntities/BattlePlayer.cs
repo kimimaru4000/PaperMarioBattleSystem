@@ -20,5 +20,15 @@ namespace PaperMarioBattleSystem
         {
             
         }
+
+        public override void BraceAttack(BattleEntity attacker)
+        {
+            base.BraceAttack(attacker);
+        }
+
+        public override void StopBracing()
+        {
+            base.StopBracing();
+        }
     }
 }

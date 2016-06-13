@@ -121,6 +121,8 @@ namespace PaperMarioBattleSystem
                 //If this damage doesn't kill the entity on an instant KO, kill the entity now
                 if (result == ElementInteractionResult.KO && IsDead == false)
                 {
+                    Debug.Log($"{Name} is instantly KO'd from {element} because it has a {nameof(WeaknessTypes.KO)} weakness");
+
                     Die();
                 }
             }
@@ -340,6 +342,24 @@ namespace PaperMarioBattleSystem
         {
             PreviousAction?.Update();
             PreviousAction?.PostUpdate();
+        }
+
+        /// <summary>
+        /// Makes the entity brace for an attack against it.
+        /// The common use-case for this is starting the inputs for Guard and Superguard
+        /// </summary>
+        /// <param name="attacker">The entity attacking this one</param>
+        public virtual void BraceAttack(BattleEntity attacker)
+        {
+            
+        }
+
+        /// <summary>
+        /// Stops the entity from bracing for an attack, as the attack is now over
+        /// </summary>
+        public virtual void StopBracing()
+        {
+
         }
 
         #endregion

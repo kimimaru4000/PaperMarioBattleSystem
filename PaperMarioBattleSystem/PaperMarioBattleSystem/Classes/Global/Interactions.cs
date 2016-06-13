@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
             ContactTable.Add(ContactTypes.JumpContact, new Dictionary<PhysicalAttributes, ContactResult>()
             {
                 { PhysicalAttributes.Spiked, ContactResult.Failure },
-                { PhysicalAttributes.Electrified, ContactResult.Failure },
+                { PhysicalAttributes.Electrified, ContactResult.PartialSuccess },
                 { PhysicalAttributes.Fiery, ContactResult.Failure }
             });
         }
@@ -88,7 +88,7 @@ namespace PaperMarioBattleSystem
                 if (tableForContact.ContainsKey(attribute) == true)
                 {
                     ContactResult contactResult = tableForContact[attribute];
-                    if (contactResult == ContactResult.Failure) return contactResult;
+                    return contactResult;
                 }
             }
 

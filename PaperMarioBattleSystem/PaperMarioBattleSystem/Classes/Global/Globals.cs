@@ -186,11 +186,12 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// The result of a ContactType and the PhysicalAttributes of an entity.
-        /// A Failure indicates that the action backfired
+        /// A Failure indicates that the action backfired.
+        /// PartialSuccess indicates that damage is dealt and the attacker suffers a backfire.
         /// </summary>
         public enum ContactResult
         {
-            Success, Failure
+            Success, Failure, PartialSuccess
         }
     }
 

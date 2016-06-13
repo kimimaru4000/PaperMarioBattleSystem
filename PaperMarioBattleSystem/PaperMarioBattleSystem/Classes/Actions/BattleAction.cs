@@ -17,11 +17,13 @@ namespace PaperMarioBattleSystem
     {
         /// <summary>
         /// Values for each branch of a sequence.
-        /// BattleActions switch branches based on what happens
+        /// BattleActions switch branches based on what happens.
+        /// <para>The None branch is only used to indicate whether to jump to a certain branch after the sequence updates.
+        /// The most common use-case is switching to the Backfire branch</para>
         /// </summary>
         public enum SequenceBranch
         {
-            Start, End, Command, Success, Failed, Backfire
+            None, Start, End, Command, Success, Failed, Backfire
         }
 
         /// <summary>
@@ -103,10 +105,10 @@ namespace PaperMarioBattleSystem
         protected BattleEntity[] EntitiesAffected { get; private set; } = null;
 
         /// <summary>
-        /// A value denoting if we should jump to the Backfire branch or not after the sequence progresses.
-        /// This allows the sequences to remain flexible and not cause any sequence or branch conflicts with Backfire
+        /// A value denoting if we should jump to a particular branch or not after the sequence progresses.
+        /// This allows the sequences to remain flexible and not cause any sequence or branch conflicts with this branch
         /// </summary>
-        protected bool JumpToBackfire { get; private set; } = false;
+        protected SequenceBranch JumpToBranch { get; private set; } = SequenceBranch.None;
 
         /// <summary>
         /// Tells whether the action command is enabled or not.
@@ -145,13 +147,14 @@ namespace PaperMarioBattleSystem
                 //Check the contact result
                 ContactResult result = victim.GetContactResult(ContactType);
                 
-                //If it's a Success, deal damage and continue
-                if (result == ContactResult.Success)
+                //If it's a complete or partial success, deal damage and continue
+                if (result == ContactResult.Success || result == ContactResult.PartialSuccess)
                 {
                     DealDamage(damage, victim);
                 }
-                //If it's a failure, end the ActionCommand's input and move to the backfire branch
-                else if (result == ContactResult.Failure)
+
+                //If it's a complete or partial failure, end the ActionCommand's input and move to the backfire branch
+                if (result == ContactResult.Failure || result == ContactResult.PartialSuccess)
                 {
                     if (CommandEnabled == true) Command.EndInput();
 
@@ -166,7 +169,7 @@ namespace PaperMarioBattleSystem
                     User.LoseHP(backfireDamage);
 
                     //Specify to go to the Backfire branch
-                    JumpToBackfire = true;
+                    JumpToBranch = SequenceBranch.Backfire;
                     break;
                 }
             }
@@ -198,9 +201,12 @@ namespace PaperMarioBattleSystem
             InSequence = true;
             SequenceStep = 0;
 
-            JumpToBackfire = false;
+            JumpToBranch = SequenceBranch.None;
 
             EntitiesAffected = targets;
+            //Brace for the attack
+            for (int i = 0; i < EntitiesAffected.Length; i++)
+                EntitiesAffected[i].BraceAttack(User);
 
             OnStart();
 
@@ -226,7 +232,11 @@ namespace PaperMarioBattleSystem
             SequenceStep = 0;
             CurSequence = null;
 
-            JumpToBackfire = false;
+            JumpToBranch = SequenceBranch.None;
+
+            //Stop bracing for the attack
+            for (int i = 0; i < EntitiesAffected.Length; i++)
+                EntitiesAffected[i].StopBracing();
 
             EntitiesAffected = null;
 
@@ -407,14 +417,14 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void PostUpdate()
         {
-            if (InSequence == true && JumpToBackfire == true)
+            if (InSequence == true && JumpToBranch != SequenceBranch.None)
             {
                 //Change the sequence action itself to cancel out anything that it will be waiting for to finish
-                //We don't end the previous sequence action because it has been interrupted by the Backfire
+                //We don't end the previous sequence action because it has been interrupted by the new branch
                 CurSequence = new Wait(0d);
-                ChangeSequenceBranch(SequenceBranch.Backfire);
+                ChangeSequenceBranch(JumpToBranch);
 
-                JumpToBackfire = false;
+                JumpToBranch = SequenceBranch.None;
             }
         }
 

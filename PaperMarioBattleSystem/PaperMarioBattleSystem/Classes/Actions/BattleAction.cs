@@ -19,12 +19,18 @@ namespace PaperMarioBattleSystem
         /// Values for each branch of a sequence.
         /// BattleActions switch branches based on what happens.
         /// <para>The None branch is only used to indicate whether to jump to a certain branch after the sequence updates.
-        /// The most common use-case is switching to the Backfire branch</para>
+        /// The most common use-case is switching to the Interruption branch</para>
         /// </summary>
         public enum SequenceBranch
         {
-            None, Start, End, Command, Success, Failed, Backfire
+            None, Start, End, Command, Success, Failed, Interruption
         }
+
+        /// <summary>
+        /// A delegate for handling the sequence interruption branch.
+        /// It should follow the same conventions as the other branches
+        /// </summary>
+        protected delegate void InterruptionDelegate();
 
         /// <summary>
         /// The name of the action
@@ -111,6 +117,12 @@ namespace PaperMarioBattleSystem
         protected SequenceBranch JumpToBranch { get; private set; } = SequenceBranch.None;
 
         /// <summary>
+        /// The handler used for interruptions. This exists so each action can specify different handlers for
+        /// different types of damage. It defaults to the base method at the start and end of each action
+        /// </summary>
+        protected InterruptionDelegate InterruptionHandler = null;
+
+        /// <summary>
         /// Tells whether the action command is enabled or not.
         /// Action commands are always disabled for enemies
         /// </summary>
@@ -118,16 +130,14 @@ namespace PaperMarioBattleSystem
 
         protected BattleAction()
         {
-
+            InterruptionHandler = BaseInterruptionHandler;
         }
 
         /// <summary>
         /// Attempt to deal damage to a set of entities with this BattleAction.
-        /// <para>Based on the ContactType of this BattleAction, this can fail, resulting in a backfire.
-        /// In the event of a backfire, no further entities are tested, the ActionCommand is ended, and 
-        /// we go into the Backfire branch</para>
-        /// <para>NOTE: This must be placed after any branch changes or sequence changes in a sequence, or 
-        /// the changes will override the change to the backfire branch that occurs in here</para>
+        /// <para>Based on the ContactType of this BattleAction, this can fail, resulting in an interruption.
+        /// In the event of an interruption, no further entities are tested, the ActionCommand is ended, and 
+        /// we go into the Interruption branch</para>
         /// </summary>
         /// <param name="damage">The total raw damage to be dealt to the entities if the attempt was successful</param>
         /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
@@ -153,7 +163,7 @@ namespace PaperMarioBattleSystem
                     DealDamage(damage, victim);
                 }
 
-                //If it's a complete or partial failure, end the ActionCommand's input and move to the backfire branch
+                //If it's a complete or partial failure, end the ActionCommand's input and move to the interruption branch
                 if (result == ContactResult.Failure || result == ContactResult.PartialSuccess)
                 {
                     if (CommandEnabled == true) Command.EndInput();
@@ -164,12 +174,12 @@ namespace PaperMarioBattleSystem
                     //The Payback status is a special case because it isn't technically a failure, as half the damage
                     //the victim receives is dealt to the attack, but any subsequent attacks by the attacker in the
                     //same turn are canceled. As a result the two may have to be handled separately
-                    int backfireDamage = 1;
+                    int interruptionDamage = 1;
 
-                    User.LoseHP(backfireDamage);
+                    User.TakeDamage(Elements.Sharp, interruptionDamage);
 
-                    //Specify to go to the Backfire branch
-                    JumpToBranch = SequenceBranch.Backfire;
+                    //Specify to go to the Interruption branch
+                    JumpToBranch = SequenceBranch.Interruption;
                     break;
                 }
             }
@@ -208,6 +218,8 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < EntitiesAffected.Length; i++)
                 EntitiesAffected[i].BraceAttack(User);
 
+            InterruptionHandler = BaseInterruptionHandler;
+
             OnStart();
 
             //Start the first sequence
@@ -239,6 +251,8 @@ namespace PaperMarioBattleSystem
                 EntitiesAffected[i].StopBracing();
 
             EntitiesAffected = null;
+
+            InterruptionHandler = BaseInterruptionHandler;
 
             OnEnd();
 
@@ -350,8 +364,8 @@ namespace PaperMarioBattleSystem
                 case SequenceBranch.Failed:
                     SequenceFailedBranch();
                     break;
-                case SequenceBranch.Backfire:
-                    SequenceBackfireBranch();
+                case SequenceBranch.Interruption:
+                    SequenceInterruptionBranch();
                     break;
                 case SequenceBranch.End:
                 default:
@@ -386,10 +400,60 @@ namespace PaperMarioBattleSystem
         protected abstract void SequenceFailedBranch();
 
         /// <summary>
-        /// What occurs when the action backfires.
+        /// What occurs when the action is interrupted.
         /// The most notable example of this is when Mario takes damage from jumping on a spiked enemy
+        /// <para>This is overrideable through the InterruptionHandler, as actions can handle this in more than one way</para>
         /// </summary>
-        protected abstract void SequenceBackfireBranch();
+        protected void SequenceInterruptionBranch()
+        {
+            if (InterruptionHandler == null)
+            {
+                Debug.LogError($"{nameof(InterruptionHandler)} is null for {Name}! This should NEVER happen - look into it ASAP");
+                return;
+            }
+
+            InterruptionHandler();
+        }
+
+        /// <summary>
+        /// The base interruption handler
+        /// </summary>
+        protected void BaseInterruptionHandler()
+        {
+            float moveX = -20f;
+            float moveY = 70f;
+
+            double time = 500d;
+
+            switch (SequenceStep)
+            {
+                case 0:
+                    User.PlayAnimation(AnimationGlobals.HurtName, true);
+
+                    Vector2 pos = User.Position + new Vector2(moveX, -moveY);
+                    CurSequence = new MoveTo(pos, time / 2d);
+                    break;
+                case 1:
+                    CurSequence = new Wait(time);
+                    break;
+                case 2:
+                    CurSequence = new MoveAmount(new Vector2(0f, moveY), time);
+                    ChangeSequenceBranch(SequenceBranch.End);
+                    break;
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Sets the InterruptionHandler based on the type of damage dealt; this occurs if the entity received damage mid-sequence
+        /// </summary>
+        /// <param name="element">The elemental damage being dealt</param>
+        public virtual void OnInterruption(Elements element)
+        {
+            InterruptionHandler = BaseInterruptionHandler;
+        }
 
         public void Update()
         {
@@ -413,7 +477,7 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Handles anything that needs to be done directly after updating the sequence.
-        /// This is where it jumps to the Backfire branch, if it should
+        /// This is where it jumps to a new branch, if it should
         /// </summary>
         public void PostUpdate()
         {

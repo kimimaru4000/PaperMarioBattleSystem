@@ -57,10 +57,5 @@ namespace PaperMarioBattleSystem
         {
             
         }
-
-        protected override void SequenceBackfireBranch()
-        {
-            
-        }
     }
 }

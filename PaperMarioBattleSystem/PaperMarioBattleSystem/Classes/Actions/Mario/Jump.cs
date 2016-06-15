@@ -139,9 +139,18 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        protected override void SequenceBackfireBranch()
+        public override void OnInterruption(Elements element)
         {
-            switch(SequenceStep)
+            if (element == Elements.Sharp) InterruptionHandler = SpikedEntityInterruption;
+            else base.OnInterruption(element);
+        }
+
+        /// <summary>
+        /// The interruption that occurs when jumping on a Spiked entity
+        /// </summary>
+        protected void SpikedEntityInterruption()
+        {
+            switch (SequenceStep)
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.SpikedTipHurtName, true);

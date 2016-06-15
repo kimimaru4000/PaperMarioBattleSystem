@@ -65,6 +65,24 @@ namespace PaperMarioBattleSystem
         }
     }
 
+    public struct DamageHolder
+    {
+        public int Damage;
+        public Enumerations.Elements Element;
+        public Enumerations.ContactTypes ContactType;
+        public bool Piercing;
+
+        public static DamageHolder Default => new DamageHolder(0, Enumerations.Elements.Normal, Enumerations.ContactTypes.None, false);
+
+        public DamageHolder(int damage, Enumerations.Elements element, Enumerations.ContactTypes contactType, bool piercing)
+        {
+            Damage = damage;
+            Element = element;
+            ContactType = contactType;
+            Piercing = piercing;
+        }
+    }
+
     #endregion
 
     #region Classes

@@ -82,6 +82,7 @@ namespace PaperMarioBattleSystem
         public BattleAction PreviousAction { get; protected set; } = null;
 
         public bool IsDead => HealthState == HealthStates.Dead;
+        public bool IsTurn => BattleManager.Instance.EntityTurn == this;
 
         //TEMPORARY
         public bool UsedTurn = false;
@@ -106,6 +107,12 @@ namespace PaperMarioBattleSystem
         public virtual void TakeDamage(Elements element, int damage)
         {
             int totalDamage = damage;
+
+            //If this entity received damage during its action sequence, it has been interrupted
+            if (IsTurn == true && PreviousAction.InSequence == true)
+            {
+                PreviousAction.OnInterruption(element);
+            }
 
             totalDamage = UtilityGlobals.Clamp(totalDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
 

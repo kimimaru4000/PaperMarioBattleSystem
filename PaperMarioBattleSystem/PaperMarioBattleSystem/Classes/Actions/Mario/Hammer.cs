@@ -141,15 +141,5 @@ namespace PaperMarioBattleSystem
                     break;
             }
         }
-
-        protected override void SequenceBackfireBranch()
-        {
-            switch (SequenceStep)
-            {
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
     }
 }

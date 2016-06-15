@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
         /// <para>The default value is a Success, meaning the ContactType will deal damage. A Failure indicates a backfire (Ex. Mario
         /// jumping on a spiked enemy)</para>
         /// </summary>
-        private static Dictionary<ContactTypes, Dictionary<PhysicalAttributes, ContactResult>> ContactTable = null;
+        private static Dictionary<ContactTypes, Dictionary<PhysicalAttributes, ContactResultInfo>> ContactTable = null;
 
         #endregion
 
@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
 
         private static void InitalizeContactTable()
         {
-            ContactTable = new Dictionary<ContactTypes, Dictionary<PhysicalAttributes, ContactResult>>();
+            ContactTable = new Dictionary<ContactTypes, Dictionary<PhysicalAttributes, ContactResultInfo>>();
 
             InitializeNoneContactTable();
             InitializeJumpContactTable();
@@ -48,11 +48,11 @@ namespace PaperMarioBattleSystem
 
         private static void InitializeJumpContactTable()
         {
-            ContactTable.Add(ContactTypes.JumpContact, new Dictionary<PhysicalAttributes, ContactResult>()
+            ContactTable.Add(ContactTypes.JumpContact, new Dictionary<PhysicalAttributes, ContactResultInfo>()
             {
-                { PhysicalAttributes.Spiked, ContactResult.Failure },
-                { PhysicalAttributes.Electrified, ContactResult.PartialSuccess },
-                { PhysicalAttributes.Fiery, ContactResult.Failure }
+                { PhysicalAttributes.Spiked, new ContactResultInfo(Elements.Sharp, ContactResult.Failure) },
+                { PhysicalAttributes.Electrified, new ContactResultInfo(Elements.Electric, ContactResult.PartialSuccess) },
+                { PhysicalAttributes.Fiery, new ContactResultInfo(Elements.Fire, ContactResult.Failure) }
             });
         }
 
@@ -70,29 +70,35 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="contactType">The ContactType performed</param>
         /// <param name="physAttributes">The set of PhysicalAttributes to test against</param>
-        /// <returns>A ContactResult of the interaction</returns>
-        public static ContactResult GetContactResult(ContactTypes contactType, params PhysicalAttributes[] physAttributes)
+        /// <param name="attributesToIgnore">A set of PhysicalAttributes to ignore</param>
+        /// <returns>A ContactResultInfo of the interaction</returns>
+        public static ContactResultInfo GetContactResult(ContactTypes contactType, PhysicalAttributes[] physAttributes, params PhysicalAttributes[] attributesToIgnore)
         {
             //Return the default value
             if (ContactTable.ContainsKey(contactType) == false || physAttributes == null)
             {
                 Debug.LogWarning($"{nameof(physAttributes)} array is null or {nameof(ContactTable)} does not contain the ContactType {contactType}!");
-                return ContactResult.Success;
+                return ContactResultInfo.Default;
             }
 
-            //Look through the attributes and see if there are any Failures. A single Failure overrides all Successes
+            //Look through the attributes and find the first match
             for (int i = 0; i < physAttributes.Length; i++)
             {
-                Dictionary<PhysicalAttributes, ContactResult> tableForContact = ContactTable[contactType];
+                Dictionary<PhysicalAttributes, ContactResultInfo> tableForContact = ContactTable[contactType];
                 PhysicalAttributes attribute = physAttributes[i];
+
+                //If this attribute is ignored, move onto the next
+                if (attributesToIgnore?.Contains(attribute) == true)
+                    continue;
+
                 if (tableForContact.ContainsKey(attribute) == true)
                 {
-                    ContactResult contactResult = tableForContact[attribute];
+                    ContactResultInfo contactResult = tableForContact[attribute];
                     return contactResult;
                 }
             }
 
-            return ContactResult.Success;
+            return ContactResultInfo.Default;
         }
 
         #endregion

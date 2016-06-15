@@ -65,21 +65,17 @@ namespace PaperMarioBattleSystem
         }
     }
 
-    public struct DamageHolder
+    public struct ContactResultInfo
     {
-        public int Damage;
         public Enumerations.Elements Element;
-        public Enumerations.ContactTypes ContactType;
-        public bool Piercing;
+        public Enumerations.ContactResult ContactResult;
 
-        public static DamageHolder Default => new DamageHolder(0, Enumerations.Elements.Normal, Enumerations.ContactTypes.None, false);
+        public static ContactResultInfo Default => new ContactResultInfo(Enumerations.Elements.Normal, Enumerations.ContactResult.Success);
 
-        public DamageHolder(int damage, Enumerations.Elements element, Enumerations.ContactTypes contactType, bool piercing)
+        public ContactResultInfo(Enumerations.Elements element, Enumerations.ContactResult contactResult)
         {
-            Damage = damage;
             Element = element;
-            ContactType = contactType;
-            Piercing = piercing;
+            ContactResult = contactResult;
         }
     }
 
@@ -120,6 +116,22 @@ namespace PaperMarioBattleSystem
             MaxFP = FP = maxFP;
             BaseAttack = Attack = attack;
             BaseDefense = Defense = defense;
+        }
+    }
+
+    public class DamageHolder
+    {
+        public int Damage = 0;
+        public Enumerations.Elements Element = Enumerations.Elements.Normal;
+        public Enumerations.ContactTypes ContactType = Enumerations.ContactTypes.None;
+        public bool Piercing = false;
+
+        public DamageHolder(int damage, Enumerations.Elements element, Enumerations.ContactTypes contactType, bool piercing)
+        {
+            Damage = damage;
+            Element = element;
+            ContactType = contactType;
+            Piercing = piercing;
         }
     }
 

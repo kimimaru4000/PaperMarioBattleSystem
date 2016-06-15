@@ -22,6 +22,7 @@ namespace PaperMarioBattleSystem
             Description = "A surge of water hits all enemies";
             SelectionType = TargetSelectionMenu.EntitySelectionType.All;
             ContactType = Enumerations.ContactTypes.None;
+            Element = Enumerations.Elements.Water;
             BaseDamage = 1;
             HeightsAffected = new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded, Enumerations.HeightStates.Airborne, Enumerations.HeightStates.Ceiling };
 

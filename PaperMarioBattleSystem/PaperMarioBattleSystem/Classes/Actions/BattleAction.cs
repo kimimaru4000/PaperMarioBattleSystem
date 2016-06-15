@@ -68,6 +68,11 @@ namespace PaperMarioBattleSystem
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
         /// <summary>
+        /// The type of Elemental damage this action deals
+        /// </summary>
+        public Elements Element { get; protected set; } = Elements.Normal;
+
+        /// <summary>
         /// The type of contact this action makes
         /// </summary>
         public ContactTypes ContactType { get; protected set; } = ContactTypes.None;
@@ -155,16 +160,16 @@ namespace PaperMarioBattleSystem
                 BattleEntity victim = entities[i];
 
                 //Check the contact result
-                ContactResult result = victim.GetContactResult(ContactType);
-                
+                ContactResultInfo result = victim.GetContactResult(ContactType);
+
                 //If it's a complete or partial success, deal damage and continue
-                if (result == ContactResult.Success || result == ContactResult.PartialSuccess)
+                if (result.ContactResult == ContactResult.Success || result.ContactResult == ContactResult.PartialSuccess)
                 {
                     DealDamage(damage, victim);
                 }
 
                 //If it's a complete or partial failure, end the ActionCommand's input and move to the interruption branch
-                if (result == ContactResult.Failure || result == ContactResult.PartialSuccess)
+                if (result.ContactResult == ContactResult.Failure || result.ContactResult == ContactResult.PartialSuccess)
                 {
                     if (CommandEnabled == true) Command.EndInput();
 
@@ -176,7 +181,7 @@ namespace PaperMarioBattleSystem
                     //same turn are canceled. As a result the two may have to be handled separately
                     int interruptionDamage = 1;
 
-                    User.TakeDamage(Elements.Sharp, interruptionDamage);
+                    User.TakeDamage(result.Element, interruptionDamage, true);
 
                     //Specify to go to the Interruption branch
                     JumpToBranch = SequenceBranch.Interruption;
@@ -197,8 +202,8 @@ namespace PaperMarioBattleSystem
 
         private void DealDamage(int damage, BattleEntity entity)
         {
-            //NOTE: Normal element for now; this will be changed once the damage system is in place
-            entity.TakeDamage(Elements.Normal, damage);
+            //NOTE: This might be changed once the damage system is in place
+            entity.TakeDamage(Element, damage, false);
         }
 
         /// <summary>

@@ -104,8 +104,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="element">The element to damage the entity with</param>
         /// <param name="damage">The damage to deal to the entity</param>
-        public virtual void TakeDamage(Elements element, int damage)
+        /// <param name="piercing">Whether the attack penetrates Defense or not</param>
+        public virtual void TakeDamage(Elements element, int damage, bool piercing)
         {
+            Debug.Log($"{Name} was hit with {element} " + (piercing ? "piercing" : "non-piercing") + " damage!");
+
             int totalDamage = damage;
 
             //If this entity received damage during its action sequence, it has been interrupted
@@ -114,7 +117,11 @@ namespace PaperMarioBattleSystem
                 PreviousAction.OnInterruption(element);
             }
 
-            totalDamage = UtilityGlobals.Clamp(totalDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            //Subtract Defense on non-piercing damage
+            if (piercing == false)
+            {
+                totalDamage = UtilityGlobals.Clamp(totalDamage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            }
 
             //Get weaknesses and resistances
             ElementInteractionResult result = HandleElementDamage(element, ref totalDamage);
@@ -518,8 +525,8 @@ namespace PaperMarioBattleSystem
         /// Determines the result of contact, based on the type of contact made, when it's made with this entity
         /// </summary>
         /// <param name="contactType">The type of contact made with this entity</param>
-        /// <returns>The result of the interaction</returns>
-        public ContactResult GetContactResult(ContactTypes contactType)
+        /// <returns>A ContactResultInfo containing the result of the interaction</returns>
+        public ContactResultInfo GetContactResult(ContactTypes contactType)
         {
             return Interactions.GetContactResult(contactType, PhysAttributes.Keys.ToArray());
         }

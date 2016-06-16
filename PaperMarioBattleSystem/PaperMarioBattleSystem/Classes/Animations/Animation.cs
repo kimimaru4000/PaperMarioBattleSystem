@@ -15,6 +15,11 @@ namespace PaperMarioBattleSystem
     public class Animation
     {
         /// <summary>
+        /// The key for the animation. This is set when it is added to a BattleEntity's animation dictionary
+        /// </summary>
+        public string Key { get; private set; } = string.Empty;
+
+        /// <summary>
         /// The sprite sheet containing the sprites to be used in the animation
         /// </summary>
         public Texture2D SpriteSheet = null;
@@ -72,6 +77,15 @@ namespace PaperMarioBattleSystem
 
         protected double ElapsedFrameTime => (Time.ActiveMilliseconds - PrevFrameTimer);
         protected double TrueCurFrameDuration => (CurFrame.Duration * (Speed <= 0f ? 0f : (1f/Speed)));
+
+        /// <summary>
+        /// Sets the animation's key
+        /// </summary>
+        /// <param name="key">The key to reference the animation by</param>
+        public void SetKey(string key)
+        {
+            Key = key;
+        }
 
         /// <summary>
         /// Tells if the current frame is complete

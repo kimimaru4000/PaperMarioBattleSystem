@@ -418,6 +418,7 @@ namespace PaperMarioBattleSystem
                 Animations.Remove(animName);
             }
 
+            anim.SetKey(animName);
             Animations.Add(animName, anim);
 
             //Play the most recent animation that gets added is the default, and play it

@@ -10,8 +10,8 @@ namespace PaperMarioBattleSystem
 {
     public class LoopAnimation : Animation
     {
-        public int MaxLoops = 1;
-        public int Loops = 0;
+        public int MaxLoops { get; protected set; } = 1;
+        public int Loops { get; protected set; } = 0;
 
         public LoopAnimation(Texture2D spriteSheet, int maxLoops, params Frame[] frames) : this(spriteSheet, maxLoops, false, frames)
         {
@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
                 {
                     Loops = MaxLoops;
                     CurFrameNum = MaxFrameIndex;
-                    AnimDone = true;
+                    End();
                 }
             }
 

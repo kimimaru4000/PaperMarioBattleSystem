@@ -15,6 +15,11 @@ namespace PaperMarioBattleSystem
     public class Animation
     {
         /// <summary>
+        /// The definition to denote delegates that are called when the Animation is finished
+        /// </summary>
+        public delegate void AnimFinish();
+
+        /// <summary>
         /// The key for the animation. This is set when it is added to a BattleEntity's animation dictionary
         /// </summary>
         public string Key { get; private set; } = string.Empty;
@@ -53,6 +58,11 @@ namespace PaperMarioBattleSystem
         public bool Paused { get; private set; } = false;
         private double PausedTime = 0d;
 
+        /// <summary>
+        /// A delegate to be called when the Animation is finished. This delegate is only called once
+        /// </summary>
+        protected AnimFinish OnFinish = null;
+
         public bool Finished => AnimDone;
         protected int MaxFrameIndex => MaxFrames - 1;
         protected Frame CurFrame => Frames[CurFrameNum];
@@ -65,12 +75,12 @@ namespace PaperMarioBattleSystem
             MaxFrames = Frames.Length;
         }
 
-        public Animation (Texture2D spriteSheet, bool isUIAnim, params Frame[] frames) : this(spriteSheet, frames)
+        public Animation(Texture2D spriteSheet, bool isUIAnim, params Frame[] frames) : this(spriteSheet, frames)
         {
             IsUIAnim = isUIAnim;
         }
 
-        public Animation(Texture2D spriteSheet, float speed, bool isUIAnim, params Frame[] frames) : this (spriteSheet, isUIAnim, frames)
+        public Animation(Texture2D spriteSheet, float speed, bool isUIAnim, params Frame[] frames) : this(spriteSheet, isUIAnim, frames)
         {
             
         }
@@ -106,7 +116,7 @@ namespace PaperMarioBattleSystem
             {
                 CurFrameNum = MaxFrameIndex;
 
-                AnimDone = true;
+                End();
             }
 
             ResetFrameDur();
@@ -115,10 +125,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Plays the animation from the start
         /// </summary>
-        public void Play()
+        public void Play(AnimFinish onFinish = null)
         {
             Reset();
             Resume();
+
+            OnFinish = onFinish;
         }
 
         /// <summary>
@@ -154,6 +166,7 @@ namespace PaperMarioBattleSystem
             CurFrameNum = 0;
             PausedTime = 0d;
             ResetFrameDur();
+            OnFinish = null;
 
             //Reset the animation's speed if specified
             if (resetSpeed == true)
@@ -167,6 +180,18 @@ namespace PaperMarioBattleSystem
         protected virtual void DerivedReset()
         {
 
+        }
+
+        /// <summary>
+        /// Ends the animation
+        /// </summary>
+        public void End()
+        {
+            CurFrameNum = MaxFrameIndex;
+            AnimDone = true;
+
+            OnFinish?.Invoke();
+            OnFinish = null;
         }
 
         /// <summary>

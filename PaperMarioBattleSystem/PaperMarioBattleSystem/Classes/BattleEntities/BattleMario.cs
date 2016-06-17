@@ -40,7 +40,13 @@ namespace PaperMarioBattleSystem
             AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerSlamName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(334, 319, 42, 50), 200d),
                 new Animation.Frame(new Rectangle(340, 166, 32, 44), 300d)));
+            AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(392, 747, 42, 44), 1000d)));
             AddAnimation(AnimationGlobals.VictoryName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(447, 281, 42, 50), 1000d)));
+
+            AddAnimation(AnimationGlobals.SpikedTipHurtName, new LoopAnimation(spriteSheet, 10,
+                new Animation.Frame(new Rectangle(393, 450, 38, 52), 30d),
+                new Animation.Frame(new Rectangle(393, 385, 38, 55), 30d)));
         }
 
         public override void OnTurnStart()

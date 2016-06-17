@@ -439,7 +439,7 @@ namespace PaperMarioBattleSystem
                     CurSequence = new MoveTo(pos, time / 2d);
                     break;
                 case 1:
-                    CurSequence = new Wait(time);
+                    CurSequence = new WaitForAnimation(AnimationGlobals.HurtName);
                     break;
                 case 2:
                     CurSequence = new MoveAmount(new Vector2(0f, moveY), time);

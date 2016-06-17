@@ -159,7 +159,7 @@ namespace PaperMarioBattleSystem
                     CurSequence = new MoveTo(pos, WalkDuration / 4d);
                     break;
                 case 1:
-                    CurSequence = new Wait(JumpDuration / 2f);
+                    CurSequence = new WaitForAnimation(AnimationGlobals.SpikedTipHurtName);
                     break;
                 case 2:
                     CurSequence = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration / 2f);

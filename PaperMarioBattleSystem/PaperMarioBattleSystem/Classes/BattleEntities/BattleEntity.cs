@@ -47,6 +47,11 @@ namespace PaperMarioBattleSystem
         public HealthStates HealthState { get; private set; } = HealthStates.Normal;
 
         /// <summary>
+        /// The previous animation that has been played
+        /// </summary>
+        protected Animation PreviousAnim = null;
+
+        /// <summary>
         /// The current animation being played
         /// </summary>
         protected Animation CurrentAnim = null;
@@ -111,12 +116,6 @@ namespace PaperMarioBattleSystem
 
             int totalDamage = damage;
 
-            //If this entity received damage during its action sequence, it has been interrupted
-            if (IsTurn == true && PreviousAction.InSequence == true)
-            {
-                PreviousAction.OnInterruption(element);
-            }
-
             //Subtract Defense on non-piercing damage
             if (piercing == false)
             {
@@ -147,6 +146,12 @@ namespace PaperMarioBattleSystem
 
                 //Heal the damage
                 HealHP(totalDamage);
+            }
+
+            //If this entity received damage during its action sequence, it has been interrupted
+            if (IsTurn == true && PreviousAction.InSequence == true)
+            {
+                PreviousAction.OnInterruption(element);
             }
         }
 
@@ -448,7 +453,7 @@ namespace PaperMarioBattleSystem
         /// <param name="animName">The name of the animation to play</param>
         /// <param name="resetPrevious">If true, resets the previous animation that was playing, if any.
         /// This will also reset its speed</param>
-        public void PlayAnimation(string animName, bool resetPrevious = false)
+        public void PlayAnimation(string animName, bool resetPrevious = false, Animation.AnimFinish onFinish = null)
         {
             Animation animToPlay = GetAnimation(animName);
 
@@ -464,9 +469,12 @@ namespace PaperMarioBattleSystem
                 CurrentAnim?.Reset(true);
             }
 
+            //Set previous animation
+            PreviousAnim = CurrentAnim;
+
             //Play animation
             CurrentAnim = animToPlay;
-            CurrentAnim.Play();
+            CurrentAnim.Play(onFinish);
         }
 
         /// <summary>

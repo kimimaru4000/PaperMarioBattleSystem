@@ -223,6 +223,19 @@ namespace PaperMarioBattleSystem
         {
             Success, Failure, PartialSuccess
         }
+
+        /// <summary>
+        /// The types of StatusEffects BattleEntities can be afflicted with
+        /// </summary>
+        public enum StatusTypes
+        {
+            //Neutral
+            None, Allergic,
+            //Positive
+            Charged, Dodgy, Electrified, Fast, Huge, Invisible, Payback, Regeneration, Stone,
+            //Negative
+            Burn, Confused, Dizzy, Frozen, Immobilized, NoSkills, Poison, Sleep, Slow, Soft, Tiny
+        }
     }
 
     /// <summary>

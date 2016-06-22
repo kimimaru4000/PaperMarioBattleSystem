@@ -115,6 +115,7 @@
     <Compile Include="Classes\Singletons\General\SoundManager.cs" />
     <Compile Include="Classes\Singletons\General\SpriteRenderer.cs" />
     <Compile Include="Classes\Global\Time.cs" />
+    <Compile Include="Classes\StatusEffects\StatusEffect.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />

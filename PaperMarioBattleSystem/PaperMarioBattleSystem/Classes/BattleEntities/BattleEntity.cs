@@ -36,6 +36,11 @@ namespace PaperMarioBattleSystem
         protected readonly Dictionary<Elements, ResistanceHolder> Resistances = new Dictionary<Elements, ResistanceHolder>();
 
         /// <summary>
+        /// The StatusEffects the entity is afflicted with
+        /// </summary>
+        protected readonly Dictionary<StatusTypes, StatusEffect> Statuses = new Dictionary<StatusTypes, StatusEffect>();
+
+        /// <summary>
         /// The HeightState of the entity
         /// </summary>
         public HeightStates HeightState { get; protected set; } = HeightStates.Grounded;
@@ -340,7 +345,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public virtual void OnTurnEnd()
         {
-
+            
         }
 
         public void EndTurn()
@@ -570,6 +575,58 @@ namespace PaperMarioBattleSystem
             }
 
             return Resistances[element];
+        }
+
+        /// <summary>
+        /// Afflicts the entity with a StatusEffect
+        /// </summary>
+        /// <param name="status">The StatusEffect to afflict the entity with</param>
+        public void AfflictStatus(StatusEffect status)
+        {
+            //Don't do anything if the entity already has this StatusEffect
+            if (HasStatus(status.StatusType) == true)
+            {
+                Debug.Log($"{Name} is already afflicted with the {status.StatusType} Status!");
+                return;
+            }
+
+            StatusEffect newStatus = status.Copy();
+
+            //Add the status then afflict it
+            Statuses.Add(newStatus.StatusType, newStatus);
+            newStatus.SetEntity(this);
+            newStatus.OnAfflict();
+        }
+
+        /// <summary>
+        /// Ends and removes a StatusEffect on the entity
+        /// </summary>
+        /// <param name="statusType">The StatusTypes of the StatusEffect to remove</param>
+        public void RemoveStatus(StatusTypes statusType)
+        {
+            //Don't do anything if the entity doesn't have this status
+            if (HasStatus(statusType) == false)
+            {
+                Debug.Log($"{Name} is not currently afflicted with the {statusType} Status!");
+                return;
+            }
+
+            StatusEffect status = Statuses[statusType];
+
+            //End the status then remove it
+            status.OnEnd();
+            status.ClearEntity();
+            Statuses.Remove(statusType);
+        }
+
+        /// <summary>
+        /// Tells if the entity is currently afflicted with a particular StatusEffect
+        /// </summary>
+        /// <param name="statusType">The StatusTypes of the StatusEffect to check</param>
+        /// <returns>true if the entity is afflicted with the StatusEffect, otherwise false</returns>
+        public bool HasStatus(StatusTypes statusType)
+        {
+            return Statuses.ContainsKey(statusType);
         }
 
         /// <summary>

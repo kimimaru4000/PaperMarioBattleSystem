@@ -333,6 +333,34 @@ namespace PaperMarioBattleSystem
         #region Turn Methods
 
         /// <summary>
+        /// What happens at the start of the entity's phase
+        /// </summary>
+        public virtual void OnPhaseStart()
+        {
+            Debug.Log($"Started phase for {Name}!");
+
+            StatusEffect[] statuses = Statuses.Values.ToArray();
+            for (int i = 0; i < statuses.Length; i++)
+            {
+                statuses[i].OnPhaseStart();
+            }
+        }
+
+        /// <summary>
+        /// What happens at the end of the entity's phase
+        /// </summary>
+        public virtual void OnPhaseEnd()
+        {
+            Debug.Log($"Ended phase for {Name}");
+
+            StatusEffect[] statuses = Statuses.Values.ToArray();
+            for (int i = 0; i < statuses.Length; i++)
+            {
+                statuses[i].OnPhaseEnd();
+            }
+        }
+
+        /// <summary>
         /// What happens when the entity's turn starts
         /// </summary>
         public virtual void OnTurnStart()
@@ -596,6 +624,8 @@ namespace PaperMarioBattleSystem
             Statuses.Add(newStatus.StatusType, newStatus);
             newStatus.SetEntity(this);
             newStatus.OnAfflict();
+
+            Debug.LogWarning($"Afflicted {Name} with the {newStatus.StatusType} Status!");
         }
 
         /// <summary>
@@ -614,9 +644,11 @@ namespace PaperMarioBattleSystem
             StatusEffect status = Statuses[statusType];
 
             //End the status then remove it
-            status.OnEnd();
+            status.End();
             status.ClearEntity();
             Statuses.Remove(statusType);
+
+            Debug.LogWarning($"Removed the {statusType} Status on {Name}!");
         }
 
         /// <summary>

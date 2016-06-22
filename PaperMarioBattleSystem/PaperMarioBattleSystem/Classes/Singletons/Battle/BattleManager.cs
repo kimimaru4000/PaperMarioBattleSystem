@@ -171,6 +171,7 @@ namespace PaperMarioBattleSystem
         public void StartBattle()
         {
             State = BattleState.TurnEnd;
+            Phase = BattlePhase.Player;
 
             EntityTurn = Mario;
         }
@@ -190,14 +191,24 @@ namespace PaperMarioBattleSystem
             if (Phase == BattlePhase.Player)
             {
                 EntityTurn = Mario;
+
+                Mario.OnPhaseStart();
+                Partner.OnPhaseStart();
+
+                for (int i = 0; i < MaxEnemies; i++) Enemies[i]?.OnPhaseEnd();
             }
             else if (Phase == BattlePhase.Enemy)
             {
                 Mario.UsedTurn = false;
                 if (Partner != null) Partner.UsedTurn = false;
 
+                Mario.OnPhaseEnd();
+                Partner.OnPhaseEnd();
+
                 EnemyTurn = FindOccupiedEnemyIndex(0);
                 EntityTurn = Enemies[EnemyTurn];
+
+                for (int i = 0; i < MaxEnemies; i++) Enemies[i]?.OnPhaseStart();
             }
         }
 

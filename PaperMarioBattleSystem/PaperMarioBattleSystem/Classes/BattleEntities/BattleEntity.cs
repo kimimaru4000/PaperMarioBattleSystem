@@ -105,7 +105,7 @@ namespace PaperMarioBattleSystem
         public bool IsDead => HealthState == HealthStates.Dead;
         public bool IsTurn => BattleManager.Instance.EntityTurn == this;
 
-        public bool UsedTurn => (TurnsUsed >= MaxTurns);
+        public bool UsedTurn => (TurnsUsed >= MaxTurns || IsDead == true);
 
         protected BattleEntity()
         {

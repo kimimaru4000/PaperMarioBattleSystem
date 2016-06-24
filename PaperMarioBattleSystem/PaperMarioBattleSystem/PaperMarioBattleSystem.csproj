@@ -118,6 +118,7 @@
     <Compile Include="Classes\StatusEffects\BurnStatus.cs" />
     <Compile Include="Classes\StatusEffects\FastStatus.cs" />
     <Compile Include="Classes\StatusEffects\PoisonStatus.cs" />
+    <Compile Include="Classes\StatusEffects\SlowStatus.cs" />
     <Compile Include="Classes\StatusEffects\StatusEffect.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />
     <Compile Include="Main.cs" />

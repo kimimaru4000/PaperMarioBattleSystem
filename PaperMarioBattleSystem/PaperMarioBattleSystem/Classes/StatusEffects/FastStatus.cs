@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace PaperMarioBattleSystem
 {
+    /// <summary>
+    /// The Fast Status Effect.
+    /// Entities afflicted with this can move an additional turn each phase it's active
+    /// </summary>
     public sealed class FastStatus : StatusEffect
     {
         private const int AdditionalTurns = 1;

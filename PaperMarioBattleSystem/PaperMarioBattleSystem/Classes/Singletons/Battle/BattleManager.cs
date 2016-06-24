@@ -135,7 +135,15 @@ namespace PaperMarioBattleSystem
             //If a turn just ended, update the current state
             if (State == BattleState.TurnEnd)
             {
-                TurnStart();
+                //If the current entity doesn't have any turns at the start due to the death or the Slow status, end the turn
+                if (EntityTurn.UsedTurn == true)
+                {
+                    TurnEnd();
+                }
+                else
+                {
+                    TurnStart();
+                }
             }
 
             if (State == BattleState.Turn)

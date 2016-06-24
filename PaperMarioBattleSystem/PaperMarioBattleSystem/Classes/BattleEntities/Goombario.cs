@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
 {
     public sealed class Goombario : BattlePartner
     {
-        public Goombario() : base(new Stats(1, 1, 0, 1, 0))
+        public Goombario() : base(new Stats(1, 50, 0, 1, 0))
         {
             Name = "Goombario";
             PartnerType = Enumerations.PartnerTypes.Goombario;

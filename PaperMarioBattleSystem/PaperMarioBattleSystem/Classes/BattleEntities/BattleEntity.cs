@@ -65,9 +65,20 @@ namespace PaperMarioBattleSystem
         public int CurHP => BattleStats.HP;
         public int CurFP => BattleStats.FP;
 
-        //NOTE: Unused right now
+        /// <summary>
+        /// The base number of turns the BattleEntity has in each phase
+        /// </summary>
+        public int BaseTurns { get; protected set; } = BattleGlobals.DefaultTurnCount;
+
+        /// <summary>
+        /// The number of turns the BattleEntity used in this phase
+        /// </summary>
         public int TurnsUsed { get; protected set; } = 0;
-        public int MaxTurns { get; protected set; } = 1;
+
+        /// <summary>
+        /// The current max number of turns the BattleEntity has in this phase
+        /// </summary>
+        public int MaxTurns { get; protected set; } = BattleGlobals.DefaultTurnCount;
 
         public string Name { get; protected set; } = "Entity";
         
@@ -94,8 +105,7 @@ namespace PaperMarioBattleSystem
         public bool IsDead => HealthState == HealthStates.Dead;
         public bool IsTurn => BattleManager.Instance.EntityTurn == this;
 
-        //TEMPORARY
-        public bool UsedTurn = false;
+        public bool UsedTurn => (TurnsUsed >= MaxTurns);
 
         protected BattleEntity()
         {
@@ -339,6 +349,9 @@ namespace PaperMarioBattleSystem
         {
             Debug.Log($"Started phase for {Name}!");
 
+            TurnsUsed = 0;
+            MaxTurns = BaseTurns;
+
             StatusEffect[] statuses = Statuses.Values.ToArray();
             for (int i = 0; i < statuses.Length; i++)
             {
@@ -352,6 +365,9 @@ namespace PaperMarioBattleSystem
         public virtual void OnPhaseEnd()
         {
             Debug.Log($"Ended phase for {Name}");
+
+            TurnsUsed = 0;
+            MaxTurns = BaseTurns;
 
             StatusEffect[] statuses = Statuses.Values.ToArray();
             for (int i = 0; i < statuses.Length; i++)
@@ -384,6 +400,7 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
+            TurnsUsed++;
             BattleManager.Instance.TurnEnd();
         }
 
@@ -394,6 +411,25 @@ namespace PaperMarioBattleSystem
         {
             PreviousAction?.Update();
             PreviousAction?.PostUpdate();
+        }
+
+        /// <summary>
+        /// Sets the max number of turns the entity has during this phase
+        /// </summary>
+        /// <param name="maxTurns">The new number of turns the entity has for this phase</param>
+        public void SetMaxTurns(int maxTurns)
+        {
+            MaxTurns = maxTurns;
+        }
+
+        /// <summary>
+        /// Sets the number of turns used by the entity during this phase.
+        /// This is primarily used by StatusEffects
+        /// </summary>
+        /// <param name="turnsUsed">The new number of turns the entity used in this phase</param>
+        public void SetTurnsUsed(int turnsUsed)
+        {
+            TurnsUsed = turnsUsed;
         }
 
         /// <summary>

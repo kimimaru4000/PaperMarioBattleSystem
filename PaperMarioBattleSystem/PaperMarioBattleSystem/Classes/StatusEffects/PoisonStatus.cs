@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The Poison Status Effect
+    /// The Poison Status Effect.
+    /// The entity takes 1 HP in Poison damage at the start of each phase
     /// </summary>
     public sealed class PoisonStatus : StatusEffect
     {

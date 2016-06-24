@@ -171,7 +171,7 @@ namespace PaperMarioBattleSystem
         public void StartBattle()
         {
             State = BattleState.TurnEnd;
-            Phase = BattlePhase.Player;
+            SwitchPhase(BattlePhase.Player);
 
             EntityTurn = Mario;
         }
@@ -198,10 +198,7 @@ namespace PaperMarioBattleSystem
                 for (int i = 0; i < MaxEnemies; i++) Enemies[i]?.OnPhaseEnd();
             }
             else if (Phase == BattlePhase.Enemy)
-            {
-                Mario.UsedTurn = false;
-                if (Partner != null) Partner.UsedTurn = false;
-
+            {                
                 Mario.OnPhaseEnd();
                 Partner.OnPhaseEnd();
 
@@ -285,6 +282,12 @@ namespace PaperMarioBattleSystem
             }
 
             State = BattleState.TurnEnd;
+
+            //Effectively restart the turn for the entity if it isn't dead and didn't use up all of its turns
+            if (EntityTurn.IsDead == false && EntityTurn.UsedTurn == false)
+            {
+                return;
+            }
 
             if (Phase == BattlePhase.Enemy)
             {

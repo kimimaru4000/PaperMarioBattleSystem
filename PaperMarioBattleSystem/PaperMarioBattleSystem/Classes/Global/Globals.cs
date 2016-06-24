@@ -295,8 +295,7 @@ namespace PaperMarioBattleSystem
     {
         #region Constants
 
-        public const float DefaultElementModifier = 1f;
-
+        public const int DefaultTurnCount = 1;
         public const int MaxEnemies = 5;
 
         public const int MinDamage = 0;
@@ -310,6 +309,17 @@ namespace PaperMarioBattleSystem
         public const int DeathHP = 0;
 
         #endregion
+    }
+
+    /// <summary>
+    /// Class for global values dealing with StatusEffects
+    /// </summary>
+    public static class StatusGlobals
+    {
+        /// <summary>
+        /// Denotes a duration value for a StatusEffect that does not go away
+        /// </summary>
+        public const int InfiniteDuration = 0;
     }
 
     /// <summary>

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Audio;
 using static PaperMarioBattleSystem.Enumerations;
+using static PaperMarioBattleSystem.StatusGlobals;
 
 namespace PaperMarioBattleSystem
 {
@@ -49,7 +50,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public BattleEntity EntityAfflicted { get; private set; } = null;
 
-        public bool IsFinished => (TurnsPassed >= Duration);
+        private bool IsInfinite => (Duration <= InfiniteDuration);
+        public bool IsFinished => (IsInfinite == false && TurnsPassed >= Duration);
 
         /// <summary>
         /// Sets the BattleEntity that is afflicted with this StatusEffect
@@ -80,8 +82,11 @@ namespace PaperMarioBattleSystem
                 Debug.LogError($"Attempting to increment turns for {StatusType} on entity {EntityAfflicted.Name} when it's already finished!");
             }
 
-            //Increment the number of turns passed
-            TurnsPassed++;
+            //Increment the number of turns passed, unless this StatusEffect doesn't go away
+            if (IsInfinite == false)
+            {
+                TurnsPassed++;
+            }
 
             //When the StatusEffect is finished, remove it
             if (IsFinished == true)

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The Burn Status Effect
+    /// The Burn Status Effect.
+    /// The entity takes 1 HP in Fire damage at the end of each phase
     /// </summary>
     public sealed class BurnStatus : StatusEffect
     {

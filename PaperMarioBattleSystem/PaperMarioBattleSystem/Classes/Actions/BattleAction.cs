@@ -263,7 +263,6 @@ namespace PaperMarioBattleSystem
 
             if (User == BattleManager.Instance.EntityTurn)
             {
-                User.UsedTurn = true;
                 User.EndTurn();
             }
         }

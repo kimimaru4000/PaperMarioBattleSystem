@@ -20,9 +20,14 @@ namespace PaperMarioBattleSystem
             Duration = duration;
         }
 
-        public override void OnAfflict()
+        protected override void OnAfflict()
         {
-
+            //Remove the Frozen status if the entity was afflicted with Burn
+            if (EntityAfflicted.HasStatus(Enumerations.StatusTypes.Frozen) == true)
+            {
+                Debug.Log($"{StatusType} removed {Enumerations.StatusTypes.Frozen} on the entity!");
+                EntityAfflicted.RemoveStatus(Enumerations.StatusTypes.Frozen);
+            }
         }
 
         protected override void OnEnd()
@@ -30,12 +35,12 @@ namespace PaperMarioBattleSystem
 
         }
 
-        public override void OnPhaseStart()
+        protected override void OnPhaseStart()
         {
             
         }
 
-        public override void OnPhaseEnd()
+        protected override void OnPhaseEnd()
         {
             EntityAfflicted.TakeDamage(Enumerations.Elements.Fire, 1, true);
             IncrementTurns();

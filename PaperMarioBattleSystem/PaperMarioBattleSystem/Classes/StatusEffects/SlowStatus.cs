@@ -22,19 +22,23 @@ namespace PaperMarioBattleSystem
             Duration = duration;
         }
 
-        public override void OnAfflict()
+        protected override void OnAfflict()
         {
             //On affliction end the entity's turn
-            EntityAfflicted.SetMaxTurns(0);
-            EntityAfflicted.SetTurnsUsed(EntityAfflicted.MaxTurns);
+            //PreventMovement can be false here if this StatusEffect was previously suspended
+            if (PreventMovement == true)
+            {
+                EntityAfflicted.SetMaxTurns(0);
+                EntityAfflicted.SetTurnsUsed(EntityAfflicted.MaxTurns);
+            }
         }
 
         protected override void OnEnd()
         {
-            
+            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
         }
 
-        public override void OnPhaseStart()
+        protected override void OnPhaseStart()
         {
             //If the entity shouldn't move this turn, set its max turns to 0
             if (PreventMovement == true)
@@ -44,7 +48,7 @@ namespace PaperMarioBattleSystem
             PreventMovement = !PreventMovement;
         }
 
-        public override void OnPhaseEnd()
+        protected override void OnPhaseEnd()
         {
             IncrementTurns();
         }

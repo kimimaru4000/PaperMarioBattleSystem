@@ -164,7 +164,9 @@ namespace PaperMarioBattleSystem
             }
 
             //If this entity received damage during its action sequence, it has been interrupted
-            if (IsTurn == true && PreviousAction.InSequence == true)
+            //The null check is necessary in the event that a StatusEffect that deals damage at the start of the phase, such as Poison,
+            //is inflicted at the start of the battle before any entity has moved
+            if (IsTurn == true && PreviousAction?.InSequence == true)
             {
                 PreviousAction.OnInterruption(element);
             }
@@ -226,8 +228,11 @@ namespace PaperMarioBattleSystem
         public void Die()
         {
             BattleStats.HP = 0;
-            HealthState = HealthStates.Dead;
+            UpdateHealthState();
             PlayAnimation(AnimationGlobals.DeathName, true);
+
+            //Remove all StatusEffects on the entity
+            RemoveAllStatuses();
 
             OnDeath();
         }
@@ -352,10 +357,10 @@ namespace PaperMarioBattleSystem
             TurnsUsed = 0;
             MaxTurns = BaseTurns;
 
-            StatusEffect[] statuses = Statuses.Values.ToArray();
+            StatusEffect[] statuses = GetStatuses();
             for (int i = 0; i < statuses.Length; i++)
             {
-                statuses[i].OnPhaseStart();
+                statuses[i].PhaseStart();
             }
         }
 
@@ -369,10 +374,10 @@ namespace PaperMarioBattleSystem
             TurnsUsed = 0;
             MaxTurns = BaseTurns;
 
-            StatusEffect[] statuses = Statuses.Values.ToArray();
+            StatusEffect[] statuses = GetStatuses();
             for (int i = 0; i < statuses.Length; i++)
             {
-                statuses[i].OnPhaseEnd();
+                statuses[i].PhaseEnd();
             }
         }
 
@@ -654,12 +659,19 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
+            //If the entity is afflicted with Allergic, prevent any new StatusEffects from being afflicted
+            if (HasStatus(StatusTypes.Allergic) == true)
+            {
+                Debug.Log($"{Name} is afflicted with the {StatusTypes.Allergic} Status and cannot be afflicted with any new StatusEffects!");
+                return;
+            }
+
             StatusEffect newStatus = status.Copy();
 
             //Add the status then afflict it
             Statuses.Add(newStatus.StatusType, newStatus);
             newStatus.SetEntity(this);
-            newStatus.OnAfflict();
+            newStatus.Afflict();
 
             Debug.LogWarning($"Afflicted {Name} with the {newStatus.StatusType} Status!");
         }
@@ -677,6 +689,14 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
+            //If the entity is afflicted with Allergic, not dead, and the status to remove isn't Allergic,
+            //prevent any StatusEffects from being removed
+            if (HasStatus(StatusTypes.Allergic) == true && IsDead == false && statusType != StatusTypes.Allergic)
+            {
+                Debug.Log($"{Name} is afflicted with the {StatusTypes.Allergic} Status and cannot remove any StatusEffects!");
+                return;
+            }
+
             StatusEffect status = Statuses[statusType];
 
             //End the status then remove it
@@ -688,6 +708,20 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Ends and removes all StatusEffects on the entity
+        /// </summary>
+        private void RemoveAllStatuses()
+        {
+            StatusEffect[] statusEffects = GetStatuses();
+            for (int i = 0; i < statusEffects.Length; i++)
+            {
+                //Unsuspend all statuses to end them properly
+                statusEffects[i].Suspended = false;
+                RemoveStatus(statusEffects[i].StatusType);
+            }
+        }
+
+        /// <summary>
         /// Tells if the entity is currently afflicted with a particular StatusEffect
         /// </summary>
         /// <param name="statusType">The StatusTypes of the StatusEffect to check</param>
@@ -695,6 +729,15 @@ namespace PaperMarioBattleSystem
         public bool HasStatus(StatusTypes statusType)
         {
             return Statuses.ContainsKey(statusType);
+        }
+
+        /// <summary>
+        /// Returns all StatusEffects the entity is afflicted with
+        /// </summary>
+        /// <returns>An array of StatusEffects. If no StatusEffects are on the entity, it'll return an empty array</returns>
+        public StatusEffect[] GetStatuses()
+        {
+            return Statuses.Values.ToArray();
         }
 
         /// <summary>

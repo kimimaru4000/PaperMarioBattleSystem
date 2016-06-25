@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
             Duration = duration;
         }
 
-        public override void OnAfflict()
+        protected override void OnAfflict()
         {
             
         }
@@ -30,13 +30,13 @@ namespace PaperMarioBattleSystem
             
         }
 
-        public override void OnPhaseStart()
+        protected override void OnPhaseStart()
         {
             EntityAfflicted.TakeDamage(Enumerations.Elements.Poison, 1, true);
             IncrementTurns();
         }
 
-        public override void OnPhaseEnd()
+        protected override void OnPhaseEnd()
         {
 
         }

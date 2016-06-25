@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
             Duration = duration;
         }
 
-        public override void OnAfflict()
+        protected override void OnAfflict()
         {
             //Set this on affliction as well, as the entity could have not used its turn yet if it's in the same phase
             EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
@@ -30,15 +30,15 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEnd()
         {
-
+            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
         }
 
-        public override void OnPhaseStart()
+        protected override void OnPhaseStart()
         {
             EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
         }
 
-        public override void OnPhaseEnd()
+        protected override void OnPhaseEnd()
         {
             IncrementTurns();
         }

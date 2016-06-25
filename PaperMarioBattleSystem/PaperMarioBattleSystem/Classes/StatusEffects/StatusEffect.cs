@@ -50,6 +50,36 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public BattleEntity EntityAfflicted { get; private set; } = null;
 
+        /// <summary>
+        /// Tells whether the StatusEffect is Suspended or not
+        /// </summary>
+        public bool Suspended
+        {
+            get { return IsSuspended; }
+            set
+            {
+                bool prevSuspended = IsSuspended;
+                IsSuspended = value;
+
+                //Only do something if the suspended value is different
+                if (prevSuspended != IsSuspended)
+                {
+                    //If it's no longer suspended, perform the StatusEffect's afflict logic
+                    if (IsSuspended == false)
+                    {
+                        OnAfflict();
+                    }
+                    //If it's now suspended, perform the StatusEffect's end logic
+                    else
+                    {
+                        OnEnd();
+                    }
+                }
+            }
+        }
+
+        private bool IsSuspended = false;
+
         private bool IsInfinite => (Duration <= InfiniteDuration);
         public bool IsFinished => (IsInfinite == false && TurnsPassed >= Duration);
 
@@ -96,6 +126,14 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Applies the StatusEffect's initial affliction logic to the entity
+        /// </summary>
+        public void Afflict()
+        {
+            OnAfflict();
+        }
+
+        /// <summary>
         /// Immediately ends the StatusEffect.
         /// This does not remove it from the entity
         /// </summary>
@@ -107,9 +145,31 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Applies the StatusEffects's effects to the entity at the start of the entity's phase
+        /// </summary>
+        public void PhaseStart()
+        {
+            //Don't do anything if the StatusEffect is suspended
+            if (Suspended == true) return;    
+
+            OnPhaseStart();
+        }
+
+        /// <summary>
+        /// Applies the StatusEffects's effects to the entity at the end of the entity's phase
+        /// </summary>
+        public void PhaseEnd()
+        {
+            //Don't do anything if the StatusEffect is suspended
+            if (Suspended == true) return;
+
+            OnPhaseEnd();
+        }
+
+        /// <summary>
         /// What the StatusEffect does to the entity when it's applied
         /// </summary>
-        public abstract void OnAfflict();
+        protected abstract void OnAfflict();
 
         /// <summary>
         /// What the StatusEffect does to the entity when it wears off
@@ -119,12 +179,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// What the StatusEffect does when the phase for the entity starts
         /// </summary>
-        public abstract void OnPhaseStart();
+        protected abstract void OnPhaseStart();
 
         /// <summary>
         /// What the StatusEffect does when the phase for the entity ends
         /// </summary>
-        public abstract void OnPhaseEnd();
+        protected abstract void OnPhaseEnd();
 
         /// <summary>
         /// Returns a new instance of this StatusEffect with the same properties

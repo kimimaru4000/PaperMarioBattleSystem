@@ -25,7 +25,9 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             //Set this on affliction as well, as the entity could have not used its turn yet if it's in the same phase
-            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
+            //First check if the max turn count is greater than 0, as a turn count of 0 indicates the entity was not able to move this turn
+            if (EntityAfflicted.MaxTurns > 0)
+                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
         }
 
         protected override void OnEnd()
@@ -35,7 +37,8 @@ namespace PaperMarioBattleSystem
 
         protected override void OnPhaseStart()
         {
-            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
+            if (EntityAfflicted.MaxTurns > 0)
+                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
         }
 
         protected override void OnPhaseEnd()

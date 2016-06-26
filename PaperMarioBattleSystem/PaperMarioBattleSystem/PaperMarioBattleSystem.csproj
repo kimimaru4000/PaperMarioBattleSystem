@@ -117,10 +117,15 @@
     <Compile Include="Classes\Global\Time.cs" />
     <Compile Include="Classes\StatusEffects\AllergicStatus.cs" />
     <Compile Include="Classes\StatusEffects\BurnStatus.cs" />
+    <Compile Include="Classes\StatusEffects\ElectrifiedStatus.cs" />
     <Compile Include="Classes\StatusEffects\FastStatus.cs" />
+    <Compile Include="Classes\StatusEffects\FrozenStatus.cs" />
+    <Compile Include="Classes\StatusEffects\ImmobilizedStatus.cs" />
     <Compile Include="Classes\StatusEffects\PoisonStatus.cs" />
+    <Compile Include="Classes\StatusEffects\SleepStatus.cs" />
     <Compile Include="Classes\StatusEffects\SlowStatus.cs" />
     <Compile Include="Classes\StatusEffects\StatusEffect.cs" />
+    <Compile Include="Classes\StatusEffects\StoneStatus.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />
@@ -137,6 +142,9 @@
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>

@@ -234,9 +234,9 @@ namespace PaperMarioBattleSystem
             //Neutral
             None, Allergic,
             //Positive
-            Charged, Dodgy, Electrified, Fast, Huge, Invisible, Payback, Regeneration, Stone,
+            Charged, DEFUp, Dodgy, Electrified, Fast, Huge, Invisible, Payback, POWUp, Regeneration, Stone,
             //Negative
-            Burn, Confused, Dizzy, Frozen, Immobilized, NoSkills, Poison, Sleep, Slow, Soft, Tiny
+            Burn, Confused, DEFDown, Dizzy, Frozen, Immobilized, NoSkills, Poison, POWDown, Sleep, Slow, Soft, Tiny
         }
     }
 

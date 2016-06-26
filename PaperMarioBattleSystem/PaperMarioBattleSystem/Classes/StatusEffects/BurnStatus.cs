@@ -25,8 +25,11 @@ namespace PaperMarioBattleSystem
             //Remove the Frozen status if the entity was afflicted with Burn
             if (EntityAfflicted.HasStatus(Enumerations.StatusTypes.Frozen) == true)
             {
-                Debug.Log($"{StatusType} removed {Enumerations.StatusTypes.Frozen} on the entity!");
+                Debug.Log($"{StatusType} was inflicted on an entity afflicted with {Enumerations.StatusTypes.Frozen}, negating both effects!");
                 EntityAfflicted.RemoveStatus(Enumerations.StatusTypes.Frozen);
+
+                //Also remove Burn, as these two statuses negate each other
+                EntityAfflicted.RemoveStatus(Enumerations.StatusTypes.Burn);
             }
         }
 

@@ -8,7 +8,8 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Slow Status Effect.
-    /// Entities afflicted with this can move only once every two phases
+    /// Entities afflicted with this can move only once every two phases.
+    /// <para>Mario and his Partner can still Guard and Superguard when afflicted with this Status Effect</para>
     /// </summary>
     public sealed class SlowStatus : StatusEffect
     {

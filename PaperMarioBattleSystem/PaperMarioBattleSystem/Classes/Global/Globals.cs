@@ -104,6 +104,8 @@ namespace PaperMarioBattleSystem
         public int Attack;
         public int Defense;
 
+        public int Evasion;
+
         /// <summary>
         /// Default stats
         /// </summary>

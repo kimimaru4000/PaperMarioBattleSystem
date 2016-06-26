@@ -222,6 +222,11 @@ namespace PaperMarioBattleSystem
 
         }
 
+        public void ModifyEvasion(int evasion)
+        {
+            BattleStats.Evasion = UtilityGlobals.Clamp(BattleStats.Evasion + evasion, 0, 100);
+        }
+
         /// <summary>
         /// Kills the entity instantly
         /// </summary>
@@ -339,9 +344,20 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        #region Damage Calculations
+        #region Damage Related
 
-
+        /// <summary>
+        /// Makes the entity attempt to evade an attack, returning a value indicating the result
+        /// </summary>
+        /// <returns>true if the entity successful evaded the attack, false if the attack hits</returns>
+        //NOTE: When dealing with Badges such as Close Call, we should compare the entity's Evasion first, then perform
+        //the test again with the Badges' Evasion added in. If the Badges' Evasion bonus allows the entity to evade the attack,
+        //that's when we'd play the "LUCKY" animation
+        public bool AttemptEvade()
+        {
+            int valueTest = GeneralGlobals.Randomizer.Next(0, 100);
+            return (valueTest < BattleStats.Evasion);
+        }
 
         #endregion
 

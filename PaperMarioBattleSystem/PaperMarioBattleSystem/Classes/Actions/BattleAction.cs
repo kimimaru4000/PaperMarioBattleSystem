@@ -202,7 +202,6 @@ namespace PaperMarioBattleSystem
 
         private void DealDamage(int damage, BattleEntity entity)
         {
-            //NOTE: This might be changed once the damage system is in place
             entity.TakeDamage(Element, damage, false);
         }
 

@@ -160,7 +160,7 @@ namespace PaperMarioBattleSystem
                 BattleEntity victim = entities[i];
 
                 //Check the contact result
-                ContactResultInfo result = victim.GetContactResult(ContactType);
+                ContactResultInfo result = victim.GetContactResult(User, ContactType);
 
                 //If it's a complete or partial success, deal damage and continue
                 if (result.ContactResult == ContactResult.Success || result.ContactResult == ContactResult.PartialSuccess)

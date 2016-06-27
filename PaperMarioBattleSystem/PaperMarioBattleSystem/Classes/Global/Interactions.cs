@@ -50,9 +50,9 @@ namespace PaperMarioBattleSystem
         {
             ContactTable.Add(ContactTypes.JumpContact, new Dictionary<PhysicalAttributes, ContactResultInfo>()
             {
-                { PhysicalAttributes.Spiked, new ContactResultInfo(Elements.Sharp, ContactResult.Failure) },
-                { PhysicalAttributes.Electrified, new ContactResultInfo(Elements.Electric, ContactResult.PartialSuccess) },
-                { PhysicalAttributes.Fiery, new ContactResultInfo(Elements.Fire, ContactResult.Failure) }
+                { PhysicalAttributes.Spiked, new ContactResultInfo(Elements.Sharp, ContactResult.Failure, false) },
+                { PhysicalAttributes.Electrified, new ContactResultInfo(Elements.Electric, ContactResult.PartialSuccess, true) },
+                { PhysicalAttributes.Fiery, new ContactResultInfo(Elements.Fire, ContactResult.Failure, false) }
             });
         }
 
@@ -68,11 +68,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets the result of a ContactType on a set of PhysicalAttributes
         /// </summary>
+        /// <param name="attacker">The BattleEntity performing the attack</param>
         /// <param name="contactType">The ContactType performed</param>
         /// <param name="physAttributes">The set of PhysicalAttributes to test against</param>
         /// <param name="attributesToIgnore">A set of PhysicalAttributes to ignore</param>
         /// <returns>A ContactResultInfo of the interaction</returns>
-        public static ContactResultInfo GetContactResult(ContactTypes contactType, PhysicalAttributes[] physAttributes, params PhysicalAttributes[] attributesToIgnore)
+        public static ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType, PhysicalAttributes[] physAttributes, params PhysicalAttributes[] attributesToIgnore)
         {
             //Return the default value
             if (ContactTable.ContainsKey(contactType) == false || physAttributes == null)
@@ -94,6 +95,9 @@ namespace PaperMarioBattleSystem
                 if (tableForContact.ContainsKey(attribute) == true)
                 {
                     ContactResultInfo contactResult = tableForContact[attribute];
+                    //If the ContactResult is a Success if the entity has the same PhysicalAttribute as the one tested, set its result to Success
+                    if (contactResult.SuccessIfSameAttr == true && attacker.HasPhysAttributes(true, attribute) == true)
+                        contactResult.ContactResult = ContactResult.Success;
                     return contactResult;
                 }
             }

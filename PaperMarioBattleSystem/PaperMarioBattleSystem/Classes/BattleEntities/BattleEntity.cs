@@ -623,11 +623,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Determines the result of contact, based on the type of contact made, when it's made with this entity
         /// </summary>
+        /// <param name="attacker">The entity attacking this one</param>
         /// <param name="contactType">The type of contact made with this entity</param>
         /// <returns>A ContactResultInfo containing the result of the interaction</returns>
-        public ContactResultInfo GetContactResult(ContactTypes contactType)
+        public ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType)
         {
-            return Interactions.GetContactResult(contactType, PhysAttributes.Keys.ToArray());
+            return Interactions.GetContactResult(attacker, contactType, PhysAttributes.Keys.ToArray());
         }
 
         /// <summary>

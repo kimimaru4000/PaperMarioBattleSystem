@@ -69,13 +69,15 @@ namespace PaperMarioBattleSystem
     {
         public Enumerations.Elements Element;
         public Enumerations.ContactResult ContactResult;
+        public bool SuccessIfSameAttr;
 
-        public static ContactResultInfo Default => new ContactResultInfo(Enumerations.Elements.Normal, Enumerations.ContactResult.Success);
+        public static ContactResultInfo Default => new ContactResultInfo(Enumerations.Elements.Normal, Enumerations.ContactResult.Success, false);
 
-        public ContactResultInfo(Enumerations.Elements element, Enumerations.ContactResult contactResult)
+        public ContactResultInfo(Enumerations.Elements element, Enumerations.ContactResult contactResult, bool successIfSameAttr)
         {
             Element = element;
             ContactResult = contactResult;
+            SuccessIfSameAttr = successIfSameAttr;
         }
     }
 

@@ -106,7 +106,8 @@ namespace PaperMarioBattleSystem
         public int Attack;
         public int Defense;
 
-        public int Evasion;
+        public int Accuracy = 100;
+        public int Evasion = 0;
 
         /// <summary>
         /// Default stats

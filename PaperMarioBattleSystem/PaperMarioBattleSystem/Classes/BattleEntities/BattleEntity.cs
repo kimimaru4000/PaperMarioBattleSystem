@@ -222,6 +222,11 @@ namespace PaperMarioBattleSystem
 
         }
 
+        public void ModifyAccuracy(int accuracy)
+        {
+            BattleStats.Accuracy = UtilityGlobals.Clamp(BattleStats.Accuracy + accuracy, 0, 100);
+        }
+
         public void ModifyEvasion(int evasion)
         {
             BattleStats.Evasion = UtilityGlobals.Clamp(BattleStats.Evasion + evasion, 0, 100);
@@ -347,13 +352,33 @@ namespace PaperMarioBattleSystem
         #region Damage Related
 
         /// <summary>
+        /// Checks if the entity's attempt to hit another entity is successful based on the entity's Accuracy and the victim's Evasion
+        /// </summary>
+        /// <param name="victim">The entity trying to evade</param>
+        /// <returns>true if the entity hits and the victim doesn't evade, false otherwise</returns>
+        public bool AttemptHitEntity(BattleEntity victim)
+        {
+            return (AttemptHit() == true && victim.AttemptEvade() == false);
+        }
+
+        /// <summary>
+        /// Performs a check to see if the entity hit based on its Accuracy stat
+        /// </summary>
+        /// <returns>true if the entity successfully hit, false if the entity fails</returns>
+        private bool AttemptHit()
+        {
+            int valueTest = GeneralGlobals.Randomizer.Next(0, 100);
+            return (valueTest < BattleStats.Accuracy);
+        }
+
+        /// <summary>
         /// Makes the entity attempt to evade an attack, returning a value indicating the result
         /// </summary>
         /// <returns>true if the entity successful evaded the attack, false if the attack hits</returns>
         //NOTE: When dealing with Badges such as Close Call, we should compare the entity's Evasion first, then perform
         //the test again with the Badges' Evasion added in. If the Badges' Evasion bonus allows the entity to evade the attack,
         //that's when we'd play the "LUCKY" animation
-        public bool AttemptEvade()
+        private bool AttemptEvade()
         {
             int valueTest = GeneralGlobals.Randomizer.Next(0, 100);
             return (valueTest < BattleStats.Evasion);

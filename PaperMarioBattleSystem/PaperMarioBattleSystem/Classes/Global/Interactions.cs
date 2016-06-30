@@ -46,6 +46,10 @@ namespace PaperMarioBattleSystem
 
         }
 
+        //NOTE: In the actual games, if you have the Payback status, it takes priority over any PhysicalAttributes when being dealt damage
+        //For example, if you have both Return Postage and Zap Tap equipped, sucking enemies like Fuzzies will be able to touch you
+        //However, normal properties apply when attacking enemies (you'll be able to jump on Electrified enemies)
+
         private static void InitializeJumpContactTable()
         {
             ContactTable.Add(ContactTypes.JumpContact, new Dictionary<PhysicalAttributes, ContactResultInfo>()

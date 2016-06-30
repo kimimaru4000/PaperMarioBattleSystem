@@ -121,6 +121,7 @@
     <Compile Include="Classes\StatusEffects\FastStatus.cs" />
     <Compile Include="Classes\StatusEffects\FrozenStatus.cs" />
     <Compile Include="Classes\StatusEffects\ImmobilizedStatus.cs" />
+    <Compile Include="Classes\StatusEffects\PaybackStatus.cs" />
     <Compile Include="Classes\StatusEffects\PoisonStatus.cs" />
     <Compile Include="Classes\StatusEffects\SleepStatus.cs" />
     <Compile Include="Classes\StatusEffects\SlowStatus.cs" />

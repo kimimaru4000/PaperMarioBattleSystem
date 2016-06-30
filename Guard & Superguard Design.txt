@@ -1,0 +1,66 @@
+Overview
+--------
+Guard and Superguard are unique in that they take effect during an enemy's turn rather than your own.
+
+They may still take effect during another party member's turn. This means that attacks made on you 
+by your own party members (Ex. due to Confusion or other statuses) are also Guardable or Superguardable.
+
+Guarding Logic
+--------------
+We can check for a Guard or Superguard action on the victim when attempting an attack. On a successful
+Guard, whichever status effects, provided they don't go through Guard, that would be inflicted are
+not inflicted, and the damage of the ATTACK ITSELF is reduced by 1. Contact IS considered to be made
+on a successful Guard.
+
+Reasons for reducing the damage of the attack itself:
+-Guarding reduces the damage of defense-piercing attacks
+-Damage Dodge badges contribute to your total Defense when Guarding; they do not reduce the damage
+of the attack itself, hence why they're ineffective against defense-piercing attacks
+
+Superguards:
+------------
+On a Superguard, the damage of the attack is reduced to 0.
+
+Unlike Guards, contact is NOT considered to be made by the enemy on a Superguard. Status effects
+such as Payback will not be triggered and the enemy will receive 1 damage and play its normal hurt animation.
+
+Certain projectiles, such as Pokey balls, will get reflected back to the attacker by a Superguard.
+
+There are also moves that cannot be Guarded or Superguarded by any means, such as Hooktail's bite
+and Bulky Bob-Ombs' explosions.
+
+Implementation
+--------------
+When an entity is targeted, we can call a method to prepare them for the attack. For Mario and his Partner, this can start the input for Guard and Superguard. This method will be entity-specific to allow for more options down the road.
+
+When an attempt to attack is made, we check for the result of the entity's preparation and
+enact the outcome on both the victim and the entity making the attack, including projectiles.
+
+Current Obstacles
+-----------------
+1. There's no way to know when a move is about to hit
+2. There's no way to allow things to happen between the attack and the damage being dealt. For example, Superguarding
+3. There's no default behavior for if an attack fails but didn't necessarily backfire (Ex. jumping on an Electrified entity)
+4. Continuing the above, there needs to be a way to override this default behavior for certain interactions (Ex. jumping on a Spiked
+   enemy will play a different animation)
+   
+Solutions
+---------
+1. After researching, I found that the Guard and Superguard windows do NOT overlap, and the game checks which frame
+you pressed A or B on, respectively. If it's before or after the respective window, the Guard or Superguard fails.
+Therefore, we can just track the time you pressed A or B during the Guard/Superguard Action Commands and compare that with
+the time the attack actually hits to determine whether you Guarded or Superguarded.
+
+2. Currently, only the result of contact moves are determined between the attack and the damage being dealt. We need to define
+a way to allow anything to happen in between them, which includes damaging another entity and more.
+
+3. Rework the Backfire branch into a general Interruption branch and call that method when the action is interrupted.
+
+4. Add a delegate that defaults to the base method, and allow BattleActions to change their delegates based on the Element of
+the action got interrupted by.
+
+Updates
+-------
+1. I think we can finally figure out when a move can hit. Currently all damage happens after a specific SequenceAction, so what we need to do is start the timer at the start of each SequenceAction and check and see if the player pressed the correct inputs within the SequenceAction's duration.
+
+Either that, or specify IN the sequence when to prepare for a Guard or Superguard and the total duration until damage is dealt. I think either approach would be sufficient without causing many problems, but they will of course have to be tested first.

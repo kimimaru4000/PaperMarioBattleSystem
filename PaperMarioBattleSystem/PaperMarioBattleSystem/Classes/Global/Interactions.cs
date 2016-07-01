@@ -14,8 +14,24 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class Interactions
     {
+        #region Structs
+        
+        private struct ElementDamageHolder
+        {
+            public ElementInteractionResult InteractionResult;
+            public int Damage;
+
+            public ElementDamageHolder(ElementInteractionResult interactionResult, int damage)
+            {
+                InteractionResult = interactionResult;
+                Damage = damage;
+            }
+        }
+
+        #endregion
+
         #region Fields    
-    
+
         /// <summary>
         /// The table that determines the result of a particular ContactType and a particular PhysicalAttribute.
         /// <para>The default value is a Success, meaning the ContactType will deal damage. A Failure indicates a backfire (Ex. Mario
@@ -107,6 +123,83 @@ namespace PaperMarioBattleSystem
             }
 
             return ContactResultInfo.Default;
+        }
+
+        #endregion
+
+        #region Interaction Methods
+
+        public static List<InteractionHolder> GetDamageInteraction(BattleEntity attacker, BattleEntity victim, int damage, Elements element,
+            ContactTypes contactType, StatusEffect[] statuses)
+        {
+            List<InteractionHolder> interactionResults = new List<InteractionHolder>();
+
+            ContactResultInfo contactResultInfo = victim.GetContactResult(attacker, contactType);
+
+            ContactResult contactResult = contactResultInfo.ContactResult;
+
+            if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
+            {
+                ElementDamageHolder victimElementDamage = HandleElementalDamage(victim, element, damage);
+                interactionResults.Add(new InteractionHolder(victim, victimElementDamage.Damage, element, victimElementDamage.InteractionResult,
+                    contactType, false, null));
+            }
+            if (contactResult == ContactResult.Failure || contactResult == ContactResult.PartialSuccess)
+            {
+                ElementDamageHolder attackerElementDamage = HandleElementalDamage(attacker, contactResultInfo.Element, 1);
+                interactionResults.Add(new InteractionHolder(attacker, attackerElementDamage.Damage, contactResultInfo.Element,
+                    attackerElementDamage.InteractionResult, ContactTypes.None, true, null));
+            }
+
+            return interactionResults;
+        }
+
+        /// <summary>
+        /// Calculates the result of elemental damage on a BattleEntity, based on its weaknesses and resistances to that Element
+        /// </summary>
+        /// <param name="entity">The BattleEntity being damaged</param>
+        /// <param name="element">The element the entity is attacked with</param>
+        /// <param name="damage">The initial damage of the attack</param>
+        /// <returns>An ElementDamageHolder stating the result and final damage dealt to this entity</returns>
+        private static ElementDamageHolder HandleElementalDamage(BattleEntity entity, Elements element, int damage)
+        {
+            ElementDamageHolder elementDamageResult = new ElementDamageHolder(ElementInteractionResult.Damage, damage);
+
+            //NOTE: If an entity is both resistant and weak to a particular element, they cancel out.
+            //I decided to go with this approach because it's the simplest for this situation, which
+            //doesn't seem desirable to begin with but could be interesting in its application
+            WeaknessHolder weakness = entity.GetWeakness(element);
+            ResistanceHolder resistance = entity.GetResistance(element);
+
+            //If there's both a weakness and resistance, return
+            if (weakness.WeaknessType == WeaknessTypes.None && resistance.ResistanceType == ResistanceTypes.None)
+                return elementDamageResult;
+
+            //Handle weaknesses
+            if (weakness.WeaknessType == WeaknessTypes.PlusDamage)
+            {
+                elementDamageResult.Damage = UtilityGlobals.Clamp(elementDamageResult.Damage + weakness.Value, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            }
+            else if (weakness.WeaknessType == WeaknessTypes.KO)
+            {
+                elementDamageResult.InteractionResult = ElementInteractionResult.KO;
+            }
+
+            //Handle resistances
+            if (resistance.ResistanceType == ResistanceTypes.MinusDamage)
+            {
+                elementDamageResult.Damage = UtilityGlobals.Clamp(elementDamageResult.Damage - resistance.Value, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            }
+            else if (resistance.ResistanceType == ResistanceTypes.NoDamage)
+            {
+                elementDamageResult.Damage = BattleGlobals.MinDamage;
+            }
+            else if (resistance.ResistanceType == ResistanceTypes.Heal)
+            {
+                elementDamageResult.InteractionResult = ElementInteractionResult.Heal;
+            }
+
+            return elementDamageResult;
         }
 
         #endregion

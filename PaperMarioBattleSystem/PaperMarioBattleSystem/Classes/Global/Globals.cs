@@ -81,6 +81,33 @@ namespace PaperMarioBattleSystem
         }
     }
 
+    /// <summary>
+    /// Holds immutable data for the result of a damage interaction.
+    /// It includes the BattleEntity that got damaged, the amount and type of damage dealt, the Status Effects inflicted, and more.
+    /// </summary>
+    public struct InteractionHolder
+    {
+        public BattleEntity Entity { get; private set; }
+        public int TotalDamage { get; private set; }
+        public Enumerations.Elements DamageElement { get; private set; }
+        public ElementInteractionResult ElementResult { get; private set; }
+        public Enumerations.ContactTypes ContactType { get; private set; }
+        public bool Piercing { get; private set; }
+        public StatusEffect[] StatusesInflicted { get; private set; }
+
+        public InteractionHolder(BattleEntity entity, int totalDamage, Enumerations.Elements damageElement,
+            ElementInteractionResult elementResult,Enumerations.ContactTypes contactType, bool piercing, StatusEffect[] statusesInflicted)
+        {
+            Entity = entity;
+            TotalDamage = totalDamage;
+            DamageElement = damageElement;
+            ElementResult = elementResult;
+            ContactType = contactType;
+            Piercing = piercing;
+            StatusesInflicted = statusesInflicted;
+        }
+    }
+
     #endregion
 
     #region Classes
@@ -121,22 +148,6 @@ namespace PaperMarioBattleSystem
             MaxFP = FP = maxFP;
             BaseAttack = Attack = attack;
             BaseDefense = Defense = defense;
-        }
-    }
-
-    public class DamageHolder
-    {
-        public int Damage = 0;
-        public Enumerations.Elements Element = Enumerations.Elements.Normal;
-        public Enumerations.ContactTypes ContactType = Enumerations.ContactTypes.None;
-        public bool Piercing = false;
-
-        public DamageHolder(int damage, Enumerations.Elements element, Enumerations.ContactTypes contactType, bool piercing)
-        {
-            Damage = damage;
-            Element = element;
-            ContactType = contactType;
-            Piercing = piercing;
         }
     }
 

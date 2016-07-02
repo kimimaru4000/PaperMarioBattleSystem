@@ -16,6 +16,9 @@ namespace PaperMarioBattleSystem
     {
         #region Structs
         
+        /// <summary>
+        /// Holds the result and damage value of an damage interaction involving an Element
+        /// </summary>
         private struct ElementDamageHolder
         {
             public ElementInteractionResult InteractionResult;
@@ -129,10 +132,10 @@ namespace PaperMarioBattleSystem
 
         #region Interaction Methods
 
-        public static List<InteractionHolder> GetDamageInteraction(BattleEntity attacker, BattleEntity victim, int damage, Elements element,
+        public static InteractionResult GetDamageInteraction(BattleEntity attacker, BattleEntity victim, int damage, Elements element,
             ContactTypes contactType, StatusEffect[] statuses)
         {
-            List<InteractionHolder> interactionResults = new List<InteractionHolder>();
+            InteractionResult finalInteractionResult = new InteractionResult();
 
             ContactResultInfo contactResultInfo = victim.GetContactResult(attacker, contactType);
 
@@ -140,18 +143,18 @@ namespace PaperMarioBattleSystem
 
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
             {
-                ElementDamageHolder victimElementDamage = HandleElementalDamage(victim, element, damage);
-                interactionResults.Add(new InteractionHolder(victim, victimElementDamage.Damage, element, victimElementDamage.InteractionResult,
-                    contactType, false, null));
+                ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, damage);
+                finalInteractionResult.VictimResult = new InteractionHolder(victim, victimElementDamage.Damage, element, 
+                    victimElementDamage.InteractionResult, contactType, false, null);
             }
             if (contactResult == ContactResult.Failure || contactResult == ContactResult.PartialSuccess)
             {
-                ElementDamageHolder attackerElementDamage = HandleElementalDamage(attacker, contactResultInfo.Element, 1);
-                interactionResults.Add(new InteractionHolder(attacker, attackerElementDamage.Damage, contactResultInfo.Element,
-                    attackerElementDamage.InteractionResult, ContactTypes.None, true, null));
+                ElementDamageHolder attackerElementDamage = GetElementalDamage(attacker, contactResultInfo.Element, 1);
+                finalInteractionResult.AttackerResult = new InteractionHolder(attacker, attackerElementDamage.Damage, contactResultInfo.Element,
+                    attackerElementDamage.InteractionResult, ContactTypes.None, true, null);
             }
 
-            return interactionResults;
+            return finalInteractionResult;
         }
 
         /// <summary>
@@ -161,7 +164,7 @@ namespace PaperMarioBattleSystem
         /// <param name="element">The element the entity is attacked with</param>
         /// <param name="damage">The initial damage of the attack</param>
         /// <returns>An ElementDamageHolder stating the result and final damage dealt to this entity</returns>
-        private static ElementDamageHolder HandleElementalDamage(BattleEntity entity, Elements element, int damage)
+        private static ElementDamageHolder GetElementalDamage(BattleEntity entity, Elements element, int damage)
         {
             ElementDamageHolder elementDamageResult = new ElementDamageHolder(ElementInteractionResult.Damage, damage);
 

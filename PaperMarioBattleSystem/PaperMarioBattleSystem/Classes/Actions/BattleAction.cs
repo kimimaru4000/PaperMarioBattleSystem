@@ -159,32 +159,20 @@ namespace PaperMarioBattleSystem
             {
                 BattleEntity victim = entities[i];
 
-                //Check the contact result
-                ContactResultInfo result = victim.GetContactResult(User, ContactType);
+                InteractionResult finalResult = Interactions.GetDamageInteraction(User, victim, damage, Element, ContactType, null);
 
-                //If it's a complete or partial success, deal damage and continue
-                if (result.ContactResult == ContactResult.Success || result.ContactResult == ContactResult.PartialSuccess)
+                //Make the victim take damage upon a PartialSuccess or a Success
+                if (finalResult.VictimResult.HasValue == true)
                 {
-                    DealDamage(damage, victim);
+                    finalResult.VictimResult.Entity.TakeDamage(finalResult.VictimResult);
                 }
 
-                //If it's a complete or partial failure, end the ActionCommand's input and move to the interruption branch
-                if (result.ContactResult == ContactResult.Failure || result.ContactResult == ContactResult.PartialSuccess)
+                //Make the attacker take damage upon a PartialSuccess or a Failure
+                //Break out of the loop when the attacker takes damage
+                if (finalResult.AttackerResult.HasValue == true)
                 {
-                    if (CommandEnabled == true) Command.EndInput();
+                    finalResult.AttackerResult.Entity.TakeDamage(finalResult.AttackerResult);
 
-                    //Handle the damage the entity performing the action should take
-                    //NOTE: This damage value will have to be handled based on what physical attributes the entity
-                    //has, along with which status effects it has.
-                    //The Payback status is a special case because it isn't technically a failure, as half the damage
-                    //the victim receives is dealt to the attack, but any subsequent attacks by the attacker in the
-                    //same turn are canceled. As a result the two may have to be handled separately
-                    int interruptionDamage = 1;
-
-                    User.TakeDamage(result.Element, interruptionDamage, true);
-
-                    //Specify to go to the Interruption branch
-                    JumpToBranch = SequenceBranch.Interruption;
                     break;
                 }
             }
@@ -198,11 +186,6 @@ namespace PaperMarioBattleSystem
         protected void AttemptDamage(int damage, BattleEntity entity)
         {
             AttemptDamage(damage, new BattleEntity[] { entity });
-        }
-
-        private void DealDamage(int damage, BattleEntity entity)
-        {
-            entity.TakeDamage(Element, damage, false);
         }
 
         /// <summary>
@@ -450,10 +433,25 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Sets the InterruptionHandler based on the type of damage dealt; this occurs if the entity received damage mid-sequence
+        /// Starts the interruption, which occurs when a BattleEntity takes damage mid-sequence
         /// </summary>
         /// <param name="element">The elemental damage being dealt</param>
-        public virtual void OnInterruption(Elements element)
+        public void StartInterruption(Elements element)
+        {
+            //End the ActionCommand's input if it's active
+            if (CommandEnabled == true) Command.EndInput();
+
+            JumpToBranch = SequenceBranch.Interruption;
+
+            //Call the action-specific interruption method to set the interruption handler
+            OnInterruption(element);
+        }
+
+        /// <summary>
+        /// Sets the InterruptionHandler based on the type of damage dealt
+        /// </summary>
+        /// <param name="element">The elemental damage being dealt</param>
+        protected virtual void OnInterruption(Elements element)
         {
             InterruptionHandler = BaseInterruptionHandler;
         }

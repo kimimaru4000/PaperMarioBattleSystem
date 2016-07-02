@@ -139,7 +139,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public override void OnInterruption(Elements element)
+        protected override void OnInterruption(Elements element)
         {
             if (element == Elements.Sharp) InterruptionHandler = SpikedEntityInterruption;
             else base.OnInterruption(element);

@@ -95,6 +95,12 @@ namespace PaperMarioBattleSystem
         public bool Piercing { get; private set; }
         public StatusEffect[] StatusesInflicted { get; private set; }
 
+        /// <summary>
+        /// Tells if the InteractionHolder has a usable value
+        /// </summary>
+        public bool HasValue => (Entity != null);
+        public static InteractionHolder Default => new InteractionHolder();
+
         public InteractionHolder(BattleEntity entity, int totalDamage, Enumerations.Elements damageElement,
             ElementInteractionResult elementResult,Enumerations.ContactTypes contactType, bool piercing, StatusEffect[] statusesInflicted)
         {
@@ -148,6 +154,26 @@ namespace PaperMarioBattleSystem
             MaxFP = FP = maxFP;
             BaseAttack = Attack = attack;
             BaseDefense = Defense = defense;
+        }
+    }
+
+    /// <summary>
+    /// The final result of an interaction, containing InteractionHolders for both the attacker and victim
+    /// </summary>
+    public class InteractionResult
+    {
+        public InteractionHolder AttackerResult;
+        public InteractionHolder VictimResult;
+
+        public InteractionResult()
+        {
+            
+        }
+
+        public InteractionResult(InteractionHolder attackerResult, InteractionHolder victimResult)
+        {
+            AttackerResult = attackerResult;
+            VictimResult = victimResult;
         }
     }
 

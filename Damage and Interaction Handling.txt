@@ -41,3 +41,11 @@ public static List<InteractionHolder> GetDamageInteraction(BattleEntity attacker
 Inside this method, we will consolidate what BattleAction.AttemptDamage() and BattleEntity.TakeDamage() do regarding determining results, with some alterations, allowing us to fill out the InteractionHolder's fields. The reason a List is returned is because both entities can be damaged in a PartialSuccess. Since entity-specific percentages for being affected by Status Effects aren't in yet, keep that field null for now.
 
 All weaknesses and resistances will be accounted for.
+
+Update (7/1/16)
+---------------
+The new system is in and working. GetDamageInteraction() returns an instance of a new InteractionResult class that holds the
+Attacker and the Victim's InteractionHolders.
+
+BattleEntity.TakeDamage() still does what it did before, except instead of calculating the element result it uses the one from
+the InteractionHolder passed in.

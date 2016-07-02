@@ -83,6 +83,11 @@ namespace PaperMarioBattleSystem
         public HeightStates[] HeightsAffected { get; protected set; } = null;
 
         /// <summary>
+        /// The Status Effects this action can afflict
+        /// </summary>
+        public StatusEffect[] StatusesInflicted { get; protected set; } = null;
+
+        /// <summary>
         /// The user of this action.
         /// Aside from the Guard action, it will be the entity whose turn it currently is
         /// </summary>
@@ -159,7 +164,7 @@ namespace PaperMarioBattleSystem
             {
                 BattleEntity victim = entities[i];
 
-                InteractionResult finalResult = Interactions.GetDamageInteraction(User, victim, damage, Element, ContactType, null);
+                InteractionResult finalResult = Interactions.GetDamageInteraction(User, victim, damage, Element, ContactType, StatusesInflicted);
 
                 //Make the victim take damage upon a PartialSuccess or a Success
                 if (finalResult.VictimResult.HasValue == true)

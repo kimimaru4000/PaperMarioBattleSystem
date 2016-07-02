@@ -128,6 +128,7 @@ namespace PaperMarioBattleSystem
             Elements element = damageResult.DamageElement;
             int damage = damageResult.TotalDamage;
             bool piercing = damageResult.Piercing;
+            StatusEffect[] statusesInflicted = damageResult.StatusesInflicted;
 
             //Subtract Defense on non-piercing damage
             if (piercing == false)
@@ -164,6 +165,15 @@ namespace PaperMarioBattleSystem
                 HealHP(damage);
             }
 
+            //Inflict Statuses
+            if (statusesInflicted != null)
+            {
+                for (int i = 0; i < statusesInflicted.Length; i++)
+                {
+                    AfflictStatus(statusesInflicted[i]);
+                }
+            }
+
             //If this entity received damage during its action sequence, it has been interrupted
             //The null check is necessary in the event that a StatusEffect that deals damage at the start of the phase, such as Poison,
             //is inflicted at the start of the battle before any entity has moved
@@ -174,7 +184,8 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Makes the entity take damage from an attack, factoring in stats such as defense, weaknesses, and resistances
+        /// Makes the entity take damage from an attack, factoring in stats such as defense, weaknesses, and resistances.
+        /// <para>This method is a shorthand for inflicting simple damage such as Poison damage every turn from a Status Effect</para>
         /// </summary>
         /// <param name="element">The element to damage the entity with</param>
         /// <param name="damage">The damage to deal to the entity</param>

@@ -138,18 +138,22 @@ namespace PaperMarioBattleSystem
             InteractionResult finalInteractionResult = new InteractionResult();
 
             ContactResultInfo contactResultInfo = victim.GetContactResult(attacker, contactType);
-
             ContactResult contactResult = contactResultInfo.ContactResult;
 
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
             {
                 ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, damage);
+
+                //NOTE: Statuses are always afflicted for now until entities get percentages of being affected by them
                 finalInteractionResult.VictimResult = new InteractionHolder(victim, victimElementDamage.Damage, element, 
-                    victimElementDamage.InteractionResult, contactType, false, null);
+                    victimElementDamage.InteractionResult, contactType, false, statuses);
             }
             if (contactResult == ContactResult.Failure || contactResult == ContactResult.PartialSuccess)
             {
                 ElementDamageHolder attackerElementDamage = GetElementalDamage(attacker, contactResultInfo.Element, 1);
+
+                //NOTE: Statuses are not afflicted on the attacker unless contact with the victim causes it.
+                //This isn't in place yet so don't pass anything in for now
                 finalInteractionResult.AttackerResult = new InteractionHolder(attacker, attackerElementDamage.Damage, contactResultInfo.Element,
                     attackerElementDamage.InteractionResult, ContactTypes.None, true, null);
             }

@@ -117,6 +117,8 @@
     <Compile Include="Classes\Global\Time.cs" />
     <Compile Include="Classes\StatusEffects\AllergicStatus.cs" />
     <Compile Include="Classes\StatusEffects\BurnStatus.cs" />
+    <Compile Include="Classes\StatusEffects\DizzyStatus.cs" />
+    <Compile Include="Classes\StatusEffects\DodgyStatus.cs" />
     <Compile Include="Classes\StatusEffects\ElectrifiedStatus.cs" />
     <Compile Include="Classes\StatusEffects\FastStatus.cs" />
     <Compile Include="Classes\StatusEffects\FrozenStatus.cs" />

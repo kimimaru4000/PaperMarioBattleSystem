@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum SequenceBranch
         {
-            None, Start, End, Command, Success, Failed, Interruption
+            None, Start, End, Command, Success, Failed, Interruption, Miss
         }
 
         /// <summary>
@@ -358,6 +358,9 @@ namespace PaperMarioBattleSystem
                 case SequenceBranch.Interruption:
                     SequenceInterruptionBranch();
                     break;
+                case SequenceBranch.Miss:
+                    SequenceMissBranch();
+                    break;
                 case SequenceBranch.End:
                 default:
                     SequenceEndBranch();
@@ -407,6 +410,11 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// What occurs when the action misses
+        /// </summary>
+        protected abstract void SequenceMissBranch();
+
+        /// <summary>
         /// The base interruption handler
         /// </summary>
         protected void BaseInterruptionHandler()
@@ -450,6 +458,15 @@ namespace PaperMarioBattleSystem
 
             //Call the action-specific interruption method to set the interruption handler
             OnInterruption(element);
+        }
+
+        /// <summary>
+        /// How the action handles a miss.
+        /// The base implementation is to do nothing, but actions such as Jump may go to the Miss branch
+        /// </summary>
+        public virtual void OnMiss()
+        {
+            Debug.Log($"{Name} has missed and will act accordingly");
         }
 
         /// <summary>

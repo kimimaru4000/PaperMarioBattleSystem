@@ -43,6 +43,9 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The likelihood of the entity being affected by each StatusEffect. Empty entries are treated as a 0% chance
         /// </summary>
+        //NOTE: Each entity needs its own StatusEffect durations.
+        //Additionally, there needs to be a way to define more varied properties such as the percentages of being affected by
+        //things such as Fright, instant KO moves, and being lifted or blown out of battle. These should all be in this Dictionary
         protected readonly Dictionary<StatusTypes, int> StatusPercentages = new Dictionary<StatusTypes, int>();
 
         /// <summary>
@@ -252,12 +255,12 @@ namespace PaperMarioBattleSystem
 
         public void ModifyAccuracy(int accuracy)
         {
-            BattleStats.Accuracy = UtilityGlobals.Clamp(BattleStats.Accuracy + accuracy, 0, 100);
+            BattleStats.Accuracy = UtilityGlobals.Clamp(BattleStats.Accuracy + accuracy, 0, int.MaxValue);
         }
 
         public void ModifyEvasion(int evasion)
         {
-            BattleStats.Evasion = UtilityGlobals.Clamp(BattleStats.Evasion + evasion, 0, 100);
+            BattleStats.Evasion = UtilityGlobals.Clamp(BattleStats.Evasion + evasion, 0, int.MaxValue);
         }
 
         /// <summary>

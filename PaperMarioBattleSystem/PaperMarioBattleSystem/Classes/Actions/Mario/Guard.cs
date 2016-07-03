@@ -57,5 +57,10 @@ namespace PaperMarioBattleSystem
         {
             
         }
+
+        protected override void SequenceMissBranch()
+        {
+            
+        }
     }
 }

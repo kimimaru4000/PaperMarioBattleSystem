@@ -124,5 +124,10 @@ namespace PaperMarioBattleSystem
                     break;
             }
         }
+
+        protected override void SequenceMissBranch()
+        {
+            
+        }
     }
 }

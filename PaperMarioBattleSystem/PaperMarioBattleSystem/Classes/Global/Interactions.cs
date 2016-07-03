@@ -143,10 +143,11 @@ namespace PaperMarioBattleSystem
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
             {
                 ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, damage);
+                StatusEffect[] inflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
 
                 //NOTE: Statuses are always afflicted for now until entities get percentages of being affected by them
                 finalInteractionResult.VictimResult = new InteractionHolder(victim, victimElementDamage.Damage, element, 
-                    victimElementDamage.InteractionResult, contactType, false, statuses);
+                    victimElementDamage.InteractionResult, contactType, false, inflictedStatuses);
             }
             if (contactResult == ContactResult.Failure || contactResult == ContactResult.PartialSuccess)
             {
@@ -207,6 +208,33 @@ namespace PaperMarioBattleSystem
             }
 
             return elementDamageResult;
+        }
+
+        /// <summary>
+        /// Filters an array of StatusEffects depending on whether they will be inflicted on a BattleEntity
+        /// depending on the entity's status percentages
+        /// </summary>
+        /// <param name="entity">The BattleEntity to attempt to afflict the StatusEffects with</param>
+        /// <param name="statusesToInflict">The original array of StatusEffects</param>
+        /// <returns>An array of StatusEffects that has succeeded in being inflicted on the entity</returns>
+        private static StatusEffect[] GetFilteredInflictedStatuses(BattleEntity entity, StatusEffect[] statusesToInflict)
+        {
+            //Construct a list with the original elements
+            List<StatusEffect> filteredStatuses = new List<StatusEffect>(statusesToInflict);
+
+            //Look through the list and remove any StatusEffects that fail to be afflicted onto the entity
+            for (int i = 0; i < filteredStatuses.Count; i++)
+            {
+                StatusEffect status = filteredStatuses[i];
+                if (entity.TryAfflictStatus(status) == false)
+                {
+                    Debug.Log($"Failed to inflict {status.StatusType} on {entity.Name}");
+                    filteredStatuses.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            return filteredStatuses.ToArray();
         }
 
         #endregion

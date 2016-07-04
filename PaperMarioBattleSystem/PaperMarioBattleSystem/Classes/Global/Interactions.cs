@@ -144,10 +144,11 @@ namespace PaperMarioBattleSystem
             {
                 ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, damage);
                 StatusEffect[] inflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
+                bool hit = attacker.AttemptHitEntity(victim);
 
                 //NOTE: Statuses are always afflicted for now until entities get percentages of being affected by them
                 finalInteractionResult.VictimResult = new InteractionHolder(victim, victimElementDamage.Damage, element, 
-                    victimElementDamage.InteractionResult, contactType, false, inflictedStatuses);
+                    victimElementDamage.InteractionResult, contactType, false, inflictedStatuses, hit);
             }
             if (contactResult == ContactResult.Failure || contactResult == ContactResult.PartialSuccess)
             {
@@ -156,7 +157,7 @@ namespace PaperMarioBattleSystem
                 //NOTE: Statuses are not afflicted on the attacker unless contact with the victim causes it.
                 //This isn't in place yet so don't pass anything in for now
                 finalInteractionResult.AttackerResult = new InteractionHolder(attacker, attackerElementDamage.Damage, contactResultInfo.Element,
-                    attackerElementDamage.InteractionResult, ContactTypes.None, true, null);
+                    attackerElementDamage.InteractionResult, ContactTypes.None, true, null, true);
             }
 
             return finalInteractionResult;
@@ -219,6 +220,9 @@ namespace PaperMarioBattleSystem
         /// <returns>An array of StatusEffects that has succeeded in being inflicted on the entity</returns>
         private static StatusEffect[] GetFilteredInflictedStatuses(BattleEntity entity, StatusEffect[] statusesToInflict)
         {
+            //Handle null
+            if (statusesToInflict == null) return statusesToInflict;
+
             //Construct a list with the original elements
             List<StatusEffect> filteredStatuses = new List<StatusEffect>(statusesToInflict);
 

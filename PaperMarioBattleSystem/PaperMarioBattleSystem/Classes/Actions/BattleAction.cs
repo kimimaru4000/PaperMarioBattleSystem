@@ -169,7 +169,16 @@ namespace PaperMarioBattleSystem
                 //Make the victim take damage upon a PartialSuccess or a Success
                 if (finalResult.VictimResult.HasValue == true)
                 {
-                    finalResult.VictimResult.Entity.TakeDamage(finalResult.VictimResult);
+                    //Check if the attacker hit
+                    if (finalResult.VictimResult.Hit == true)
+                    {
+                        finalResult.VictimResult.Entity.TakeDamage(finalResult.VictimResult);
+                    }
+                    //Handle a miss otherwise
+                    else
+                    {
+                        OnMiss();
+                    }
                 }
 
                 //Make the attacker take damage upon a PartialSuccess or a Failure
@@ -203,7 +212,7 @@ namespace PaperMarioBattleSystem
             InSequence = true;
             SequenceStep = 0;
 
-            JumpToBranch = SequenceBranch.None;
+            ChangeJumpBranch(SequenceBranch.None);
 
             EntitiesAffected = targets;
             //Brace for the attack
@@ -236,7 +245,7 @@ namespace PaperMarioBattleSystem
             SequenceStep = 0;
             CurSequence = null;
 
-            JumpToBranch = SequenceBranch.None;
+            ChangeJumpBranch(SequenceBranch.None);
 
             //Stop bracing for the attack
             for (int i = 0; i < EntitiesAffected.Length; i++)
@@ -334,6 +343,15 @@ namespace PaperMarioBattleSystem
 
             //Set to -1 as it'll be incremented next time the sequence progresses
             SequenceStep = -1;
+        }
+
+        /// <summary>
+        /// Sets the branch to jump to after the current sequence updates
+        /// </summary>
+        /// <param name="newJumpBranch">The new branch to jump to</param>
+        protected void ChangeJumpBranch(SequenceBranch newJumpBranch)
+        {
+            JumpToBranch = newJumpBranch;
         }
 
         /// <summary>
@@ -454,7 +472,7 @@ namespace PaperMarioBattleSystem
             //End the ActionCommand's input if it's active
             if (CommandEnabled == true) Command.EndInput();
 
-            JumpToBranch = SequenceBranch.Interruption;
+            ChangeJumpBranch(SequenceBranch.Interruption);
 
             //Call the action-specific interruption method to set the interruption handler
             OnInterruption(element);
@@ -464,9 +482,9 @@ namespace PaperMarioBattleSystem
         /// How the action handles a miss.
         /// The base implementation is to do nothing, but actions such as Jump may go to the Miss branch
         /// </summary>
-        public virtual void OnMiss()
+        protected virtual void OnMiss()
         {
-            Debug.Log($"{Name} has missed and will act accordingly");
+            Debug.Log($"{User.Name} has missed with the {Name} Action and will act accordingly");
         }
 
         /// <summary>
@@ -511,7 +529,7 @@ namespace PaperMarioBattleSystem
                 CurSequence = new Wait(0d);
                 ChangeSequenceBranch(JumpToBranch);
 
-                JumpToBranch = SequenceBranch.None;
+                ChangeJumpBranch(SequenceBranch.None);
             }
         }
 

@@ -139,6 +139,12 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        protected override void OnMiss()
+        {
+            base.OnMiss();
+            ChangeJumpBranch(SequenceBranch.Miss);
+        }
+
         protected override void OnInterruption(Elements element)
         {
             if (element == Elements.Sharp) InterruptionHandler = SpikedEntityInterruption;
@@ -173,7 +179,17 @@ namespace PaperMarioBattleSystem
 
         protected override void SequenceMissBranch()
         {
-            
+            switch (SequenceStep)
+            {
+                case 0:
+                    User.PlayAnimation(AnimationGlobals.JumpMissName, true);
+                    CurSequence = new WaitForAnimation(AnimationGlobals.JumpMissName);
+                    ChangeSequenceBranch(SequenceBranch.End);
+                    break;
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
         }
     }
 }

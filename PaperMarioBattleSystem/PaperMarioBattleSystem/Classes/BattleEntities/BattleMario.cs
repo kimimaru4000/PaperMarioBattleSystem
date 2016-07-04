@@ -44,6 +44,12 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(392, 747, 42, 44), 1000d)));
             AddAnimation(AnimationGlobals.VictoryName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(447, 281, 42, 50), 1000d)));
 
+            AddAnimation(AnimationGlobals.JumpMissName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(444, 499, 45, 39), 700d),
+                new Animation.Frame(new Rectangle(499, 536, 31, 42), 100d),
+                new Animation.Frame(new Rectangle(499, 487, 31, 43), 100d),
+                new Animation.Frame(new Rectangle(499, 438, 31, 44), 100d)));
+
             AddAnimation(AnimationGlobals.SpikedTipHurtName, new LoopAnimation(spriteSheet, 10,
                 new Animation.Frame(new Rectangle(393, 450, 38, 52), 30d),
                 new Animation.Frame(new Rectangle(393, 385, 38, 55), 30d)));

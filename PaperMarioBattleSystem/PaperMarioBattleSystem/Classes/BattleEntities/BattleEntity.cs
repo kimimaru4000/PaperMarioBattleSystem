@@ -200,7 +200,7 @@ namespace PaperMarioBattleSystem
         /// <param name="piercing">Whether the attack penetrates Defense or not</param>
         public void TakeDamage(Elements element, int damage, bool piercing)
         {
-            TakeDamage(new InteractionHolder(null, damage, element, ElementInteractionResult.Damage, ContactTypes.None, piercing, null));
+            TakeDamage(new InteractionHolder(null, damage, element, ElementInteractionResult.Damage, ContactTypes.None, piercing, null, true));
         }
 
         public virtual void HealHP(int hp)

@@ -94,6 +94,7 @@ namespace PaperMarioBattleSystem
         public Enumerations.ContactTypes ContactType { get; private set; }
         public bool Piercing { get; private set; }
         public StatusEffect[] StatusesInflicted { get; private set; }
+        public bool Hit { get; private set; }
 
         /// <summary>
         /// Tells if the InteractionHolder has a usable value
@@ -101,8 +102,8 @@ namespace PaperMarioBattleSystem
         public bool HasValue => (Entity != null);
         public static InteractionHolder Default => new InteractionHolder();
 
-        public InteractionHolder(BattleEntity entity, int totalDamage, Enumerations.Elements damageElement,
-            ElementInteractionResult elementResult,Enumerations.ContactTypes contactType, bool piercing, StatusEffect[] statusesInflicted)
+        public InteractionHolder(BattleEntity entity, int totalDamage, Enumerations.Elements damageElement, ElementInteractionResult elementResult,
+            Enumerations.ContactTypes contactType, bool piercing, StatusEffect[] statusesInflicted, bool hit)
         {
             Entity = entity;
             TotalDamage = totalDamage;
@@ -111,6 +112,7 @@ namespace PaperMarioBattleSystem
             ContactType = contactType;
             Piercing = piercing;
             StatusesInflicted = statusesInflicted;
+            Hit = hit;
         }
     }
 
@@ -305,6 +307,7 @@ namespace PaperMarioBattleSystem
         //Shared animations
         public const string IdleName = "Idle";
         public const string JumpName = "Jump";
+        public const string JumpMissName = "JumpMiss";
         public const string RunningName = "Run";
         public const string HurtName = "Hurt";
         public const string DeathName = "Death";

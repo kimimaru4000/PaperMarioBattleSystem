@@ -73,6 +73,7 @@
     <Compile Include="Classes\Actions\Sushie\TidalWave.cs" />
     <Compile Include="Classes\Animations\Animation.cs" />
     <Compile Include="Classes\Animations\LoopAnimation.cs" />
+    <Compile Include="Classes\Animations\ReverseAnimation.cs" />
     <Compile Include="Classes\BattleEntities\BattleEnemy.cs" />
     <Compile Include="Classes\BattleEntities\BattleEntity.cs" />
     <Compile Include="Classes\BattleEntities\BattleMario.cs" />

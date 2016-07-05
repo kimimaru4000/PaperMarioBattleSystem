@@ -19,6 +19,9 @@ namespace PaperMarioBattleSystem
         public static bool DebugEnabled { get; private set; } = false;
         public static bool LogsEnabled { get; private set; } = false;
 
+        public static bool DebugPaused { get; private set; } = false;
+        public static bool AdvanceNextFrame { get; private set; } = false;
+
         static Debug()
         {
             #if DEBUG
@@ -81,7 +84,7 @@ namespace PaperMarioBattleSystem
         {
             #if DEBUG
                 //Toggle debug
-                if (Input.GetKey(Keys.LeftControl) && Input.GetKeyDown(Keys.P))
+                if (Input.GetKey(Keys.LeftControl) && Input.GetKeyDown(Keys.D))
                 {
                     ToggleDebug();
                 }
@@ -90,10 +93,27 @@ namespace PaperMarioBattleSystem
             //Return if debug isn't enabled
             if (DebugEnabled == false) return;
 
-            //Toggle logs
-            if (Input.GetKey(Keys.LeftControl) && Input.GetKeyDown(Keys.L))
+            //Reset frame advance
+            AdvanceNextFrame = false;
+
+            //Debug controls
+            if (Input.GetKey(Keys.LeftControl))
             {
-                ToggleLogs();
+                //Toggle pause
+                if (Input.GetKeyDown(Keys.P))
+                {
+                    DebugPaused = !DebugPaused;
+                }
+                //Toggle frame advance
+                else if (Input.GetKeyDown(Keys.OemSemicolon))
+                {
+                    AdvanceNextFrame = true;
+                }
+                //Toggle logs
+                else if (Input.GetKeyDown(Keys.L))
+                {
+                    ToggleLogs();
+                }
             }
 
             //Camera controls

@@ -92,7 +92,9 @@ namespace PaperMarioBattleSystem
         {
             PreUpdate(gameTime);
 
-            MainUpdate(gameTime);
+            //This conditional is for enabling frame advance debugging
+            if (Debug.DebugPaused == false || Debug.AdvanceNextFrame == true)
+                MainUpdate(gameTime);
 
             PostUpdate(gameTime);
         }

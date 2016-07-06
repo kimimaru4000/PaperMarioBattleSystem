@@ -8,7 +8,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Fast Status Effect.
-    /// Entities afflicted with this can move an additional turn each phase it's active
+    /// Entities afflicted with this can move an additional turn each phase cycle it's active
     /// </summary>
     public sealed class FastStatus : StatusEffect
     {
@@ -27,17 +27,22 @@ namespace PaperMarioBattleSystem
             //Set this on affliction as well, as the entity could have not used its turn yet if it's in the same phase
             //First check if the max turn count is greater than 0, as a turn count of 0 indicates the entity was not able to move this turn
             if (EntityAfflicted.MaxTurns > 0)
+            {
                 EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
+                Debug.Log($"{StatusType} set MaxTurns to {EntityAfflicted.BaseTurns + AdditionalTurns} for {EntityAfflicted.Name}");
+            }
         }
 
         protected override void OnEnd()
         {
             EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+            Debug.Log($"{StatusType} set MaxTurns to {EntityAfflicted.BaseTurns} for {EntityAfflicted.Name}");
         }
 
         protected override void OnPhaseCycleStart()
         {
             EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
+            Debug.Log($"{StatusType} set MaxTurns to {EntityAfflicted.BaseTurns + AdditionalTurns} for {EntityAfflicted.Name}");
             IncrementTurns();
         }
 

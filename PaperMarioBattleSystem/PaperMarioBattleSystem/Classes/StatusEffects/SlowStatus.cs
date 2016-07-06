@@ -8,7 +8,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Slow Status Effect.
-    /// Entities afflicted with this can move only once every two phases.
+    /// Entities afflicted with this can move only once every two phase cycles.
     /// <para>Mario and his Partner can still Guard and Superguard when afflicted with this Status Effect</para>
     /// </summary>
     public sealed class SlowStatus : StatusEffect
@@ -28,23 +28,34 @@ namespace PaperMarioBattleSystem
             //On affliction end the entity's turn
             EntityAfflicted.SetMaxTurns(0);
             EntityAfflicted.SetTurnsUsed(EntityAfflicted.MaxTurns);
+            Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");
         }
 
         protected override void OnEnd()
         {
-            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+            if (EntityAfflicted.MaxTurns < EntityAfflicted.BaseTurns)
+            {
+                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+                Debug.Log($"{StatusType} set MaxTurns to {EntityAfflicted.BaseTurns} for {EntityAfflicted.Name}");
+            }
         }
 
         protected override void OnPhaseCycleStart()
         {
-            //If the entity shouldn't move this turn, set its max turns to 0
-            if (PreventMovement == true)
-                EntityAfflicted.SetMaxTurns(0);
-
-            //Flip the flag telling whether the entity can move next turn or not
-            PreventMovement = !PreventMovement;
-
             IncrementTurns();
+
+            if (IsFinished == false)
+            {
+                //If the entity shouldn't move this turn, set its max turns to 0
+                if (PreventMovement == true)
+                {
+                    EntityAfflicted.SetMaxTurns(0);
+                    Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");
+                }
+
+                //Flip the flag telling whether the entity can move next turn or not
+                PreventMovement = !PreventMovement;
+            }
         }
 
         protected override void OnSuspend()

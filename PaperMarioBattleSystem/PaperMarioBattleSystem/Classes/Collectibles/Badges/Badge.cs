@@ -11,6 +11,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The base class for all Badges
     /// </summary>
+    
+    //Notes on the Feeling Fine Badge:
+    //It protects against every StatusEffect EXCEPT Burn, Frozen, and Allergic
     public abstract class Badge : Collectible
     {
         public int BPCost { get; protected set; } = 0;

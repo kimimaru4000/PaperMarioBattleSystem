@@ -9,8 +9,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Immobilized Status Effect.
     /// Entities afflicted with this cannot move until it wears off.
-    /// This Status Effect cannot be prevented via Guarding, only Superguarding
     /// <para>Mario and his Partner cannot Guard or Superguard when afflicted with this Status Effect</para>
+    /// <para>This Status Effect cannot be prevented via Guarding, only Superguarding.
+    /// This is not true for StatusEffects derived from this one. However, Guarding will still reduce the chances of it being inflicted.</para>
     /// </summary>
     public class ImmobilizedStatus : StatusEffect
     {
@@ -27,19 +28,26 @@ namespace PaperMarioBattleSystem
             //Prevent the entity from moving on affliction and mark it as using up all of its turns
             EntityAfflicted.SetMaxTurns(0);
             EntityAfflicted.SetTurnsUsed(EntityAfflicted.MaxTurns);
+            Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");
         }
 
         protected override void OnEnd()
         {
-            if (EntityAfflicted.MaxTurns > 0)
+            if (EntityAfflicted.MaxTurns > 0 && EntityAfflicted.MaxTurns < EntityAfflicted.BaseTurns)
+            {
                 EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+                Debug.Log($"{StatusType} set MaxTurns to {EntityAfflicted.BaseTurns} for {EntityAfflicted.Name}");
+            }
         }
 
         protected override void OnPhaseCycleStart()
         {
             IncrementTurns();
             if (IsFinished == false)
+            {
                 EntityAfflicted.SetMaxTurns(0);
+                Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");
+            }
         }
 
         protected override void OnSuspend()

@@ -46,11 +46,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected int TurnsPassed { get; private set; } = 0;
 
-        // <summary>
-        // The priority of the StatusEffect.
-        // StatusEffects with higher priorities have lower Priority values and affect the BattleEntity sooner
-        // </summary>
-        //protected int Priority { get; private set; } = 0;
+        /// <summary>
+        /// The priority of the StatusEffect.
+        /// StatusEffects with higher priorities have higher Priority values and affect the BattleEntity sooner
+        /// </summary>
+        protected int Priority => StatusGlobals.GetStatusPriority(StatusType);
 
         /// <summary>
         /// The BattleEntity afflicted with the StatusEffect
@@ -71,15 +71,15 @@ namespace PaperMarioBattleSystem
                 //Only do something if the suspended value is different
                 if (prevSuspended != IsSuspended)
                 {
-                    //If it's no longer suspended, perform the StatusEffect's afflict logic
+                    //If it's no longer suspended, perform the StatusEffect's resume logic
                     if (IsSuspended == false)
                     {
-                        OnAfflict();
+                        OnResume();
                     }
-                    //If it's now suspended, perform the StatusEffect's end logic
+                    //If it's now suspended, perform the StatusEffect's suspend logic
                     else
                     {
-                        OnEnd();
+                        OnSuspend();
                     }
                 }
             }
@@ -132,15 +132,6 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        // <summary>
-        // Sets the Priority of the StatusEffect
-        // </summary>
-        // <param name="priority">The value to set the Priority to</param>
-        //protected void SetPriority(int priority)
-        //{
-        //    Priority = priority;
-        //}
-
         /// <summary>
         /// Applies the StatusEffect's initial affliction logic to the entity
         /// </summary>
@@ -155,6 +146,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void End()
         {
+            //Unsuspend to end the StatusEffect properly
+            Suspended = false;
+
             TurnsPassed = Duration;
 
             OnEnd();
@@ -181,21 +175,50 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected abstract void OnEnd();
 
-        //NOTE: USE THESE INSTEAD OF OnAfflict() OR OnEnd()
-        //What the StatusEffect does to the entity when it is resumed
-        //protected abstract void OnResume();
-        //What the StatusEffect does to the entity when it is suspended
-        //protected abstract void OnSuspend();
-
         /// <summary>
         /// What the StatusEffect does when the phase cycle starts
         /// </summary>
         protected abstract void OnPhaseCycleStart();
 
         /// <summary>
+        /// What the StatusEffect does to the entity when it is suspended
+        /// </summary>
+        protected abstract void OnSuspend();
+
+        /// <summary>
+        /// What the StatusEffect does to the entity when it is resumed
+        /// </summary>
+        protected abstract void OnResume();
+
+        /// <summary>
         /// Returns a new instance of this StatusEffect with the same properties
         /// </summary>
         /// <returns>A deep copy of this StatusEffect</returns>
         public abstract StatusEffect Copy();
+
+        #region Static Methods
+
+        /// <summary>
+        /// A Comparison method used to sort StatusEffects by their Priorities
+        /// </summary>
+        /// <param name="status1">The first StatusEffect to compare</param>
+        /// <param name="status2">The second StatusEffect to compare</param>
+        /// <returns>-1 if status1 has a higher priority, 1 if status2 has a higher priority, 0 if they have the same priorities</returns>
+        public static int StatusPrioritySort(StatusEffect status1, StatusEffect status2)
+        {
+            if (status1 == null)
+                return 1;
+            if (status2 == null)
+                return -1;
+
+            if (status1.Priority < status2.Priority)
+                return 1;
+            else if (status1.Priority > status2.Priority)
+                return -1;
+
+            return 0;
+        }
+
+        #endregion
     }
 }

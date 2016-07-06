@@ -43,6 +43,16 @@ namespace PaperMarioBattleSystem.Classes.StatusEffects
             IncrementTurns();
         }
 
+        protected override void OnSuspend()
+        {
+
+        }
+
+        protected override void OnResume()
+        {
+
+        }
+
         public override StatusEffect Copy()
         {
             return new PaybackStatus(Duration, PaybackDamageType, StatusesInflicted);

@@ -51,7 +51,23 @@ namespace PaperMarioBattleSystem
         protected override void OnPhaseCycleStart()
         {
             IncrementTurns();
-        }        
+        }
+
+        protected override void OnSuspend()
+        {
+            if (ElectrifiedEntity == true)
+            {
+                EntityAfflicted.RemovePhysAttribute(Enumerations.PhysicalAttributes.Electrified);
+            }
+        }
+
+        protected override void OnResume()
+        {
+            if (ElectrifiedEntity == true)
+            {
+                EntityAfflicted.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
+            }
+        }
 
         public override StatusEffect Copy()
         {

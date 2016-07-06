@@ -31,7 +31,6 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEnd()
         {
-            //The MaxTurns check is for if entities are inflicted with Slow
             if (EntityAfflicted.MaxTurns > 0)
                 EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
         }
@@ -41,6 +40,16 @@ namespace PaperMarioBattleSystem
             IncrementTurns();
             if (IsFinished == false)
                 EntityAfflicted.SetMaxTurns(0);
+        }
+
+        protected override void OnSuspend()
+        {
+            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+        }
+
+        protected override void OnResume()
+        {
+            EntityAfflicted.SetMaxTurns(0);
         }
 
         public override StatusEffect Copy()

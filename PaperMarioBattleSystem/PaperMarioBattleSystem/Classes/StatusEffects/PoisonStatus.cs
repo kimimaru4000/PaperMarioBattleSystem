@@ -36,6 +36,16 @@ namespace PaperMarioBattleSystem
             IncrementTurns();
         }
 
+        protected override void OnSuspend()
+        {
+
+        }
+
+        protected override void OnResume()
+        {
+
+        }
+
         public override StatusEffect Copy()
         {
             return new PoisonStatus(Duration);

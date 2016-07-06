@@ -1,0 +1,46 @@
+Misc Properties Design (7/6/16)
+-------------------------------
+
+What they are
+-------------
+Misc Properties are unrelated properties that BattleEntities can have.
+
+Examples include:
+-Chance of being frightened away from battle
+-Chance of being blown or lifted away from battle
+-Chance of being hit by an Instant KO move
+-Whether the BattleEntity is immune to StatusEffects or not
+
+Implementation
+--------------
+We can have these defined in the following ways:
+
+enum MiscProperty
+{
+    Frightened
+    LiftedAway,
+    BlownAway,
+    StatusImmune
+}
+
+In BattleEntity:
+
+protected readonly Dictionary<MiscProperties, object> MiscProperties;
+
+The value of the MiscProperties dictionary is an object because these properties aren't related.
+It allows us to be as flexible as possible with them.
+
+For example:
+
+(Mario uses a Fright Mask on all enemies in battle)
+The enemy's chance of running away would be:
+
+int frightenedChance = (int)MiscProperties[MiscProperty.Frightened];
+
+Similarly, we can check if an entity is StatusImmune in the following manner:
+
+bool statusImmune = (bool)MiscProperties[MiscProperty.StatusImmune];
+
+The Dictionary allows us to quickly and easily add new properties, remove existing ones, and access their values.
+
+Add methods for adding properties, removing properties, accessing a property's value, and checking if a property exists.

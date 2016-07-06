@@ -279,7 +279,7 @@ namespace PaperMarioBattleSystem
             //Neutral
             None, Allergic,
             //Positive
-            Charged, DEFUp, Dodgy, Electrified, Fast, Huge, Invisible, Payback, POWUp, Regeneration, Stone,
+            Charged, DEFUp, Dodgy, Electrified, Fast, Huge, Invisible, Payback, POWUp, HPRegen, FPRegen, Stone,
             //Negative
             Burn, Confused, DEFDown, Dizzy, Frozen, Immobilized, NoSkills, Poison, POWDown, Sleep, Slow, Soft, Tiny
         }
@@ -364,10 +364,72 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class StatusGlobals
     {
+        #region Fields
+
+        /// <summary>
+        /// Defines the priority of StatusEffects.
+        /// <para>Related StatusEffects are grouped together in lines for readability</para>
+        /// </summary>
+        private readonly static Dictionary<Enumerations.StatusTypes, int> StatusOrder = new Dictionary<Enumerations.StatusTypes, int>()
+        {
+            { Enumerations.StatusTypes.Poison, 200 }, { Enumerations.StatusTypes.Burn, 199 },
+            { Enumerations.StatusTypes.Fast, 150 }, { Enumerations.StatusTypes.Slow, 149 },
+            { Enumerations.StatusTypes.Stone, 148 }, { Enumerations.StatusTypes.Sleep, 147 }, { Enumerations.StatusTypes.Immobilized, 146 }, {Enumerations.StatusTypes.Frozen, 145 },
+            { Enumerations.StatusTypes.POWDown, 130 }, { Enumerations.StatusTypes.POWUp, 129 }, { Enumerations.StatusTypes.DEFDown, 128 }, { Enumerations.StatusTypes.DEFUp, 127 },
+            { Enumerations.StatusTypes.Soft, 110 }, { Enumerations.StatusTypes.Tiny, 109 }, { Enumerations.StatusTypes.Huge, 108 },
+            { Enumerations.StatusTypes.HPRegen, 90 }, { Enumerations.StatusTypes.FPRegen, 89 },
+            { Enumerations.StatusTypes.Dizzy, 80 }, { Enumerations.StatusTypes.Dodgy, 79 },
+            { Enumerations.StatusTypes.Electrified, 70 }, { Enumerations.StatusTypes.Invisible, 69 },
+            { Enumerations.StatusTypes.Confused, 50 },
+            { Enumerations.StatusTypes.Payback, 20 },
+            { Enumerations.StatusTypes.NoSkills, 10 },
+            { Enumerations.StatusTypes.Charged, 1 },
+            { Enumerations.StatusTypes.Allergic, -1 }
+        };
+
+        //public enum StatusOrder
+        //{
+        //    Poison = 200, Burn = 199,
+        //    Fast = 150, Slow = 149,
+        //    Stone = 148, Sleep = 147, Immobilized = 146, Frozen = 145,
+        //    POWDown = 130, POWUp = 129, DEFDown = 128, DEFUp = 127,
+        //    Soft = 110, Tiny = 109, Huge = 108,
+        //    HPRegen = 90, FPRegen = 89,
+        //    Dizzy = 80, Dodgy = 79,
+        //    Electrified = 70, Invisible = 69,
+        //    Confused = 50,
+        //    Payback = 20,
+        //    NoSkills = 10,
+        //    Charged = 1,
+        //    Allergic = -1,
+        //}
+
+        #endregion
+
+        #region Constants
+
         /// <summary>
         /// Denotes a duration value for a StatusEffect that does not go away
         /// </summary>
         public const int InfiniteDuration = 0;
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Gets the Priority value of a particular type of StatusEffect
+        /// </summary>
+        /// <param name="statusType">The StatusType to get priority for</param>
+        /// <returns>The Priority value corresponding to the StatusType if it has an entry, otherwise 0</returns>
+        public static int GetStatusPriority(Enumerations.StatusTypes statusType)
+        {
+            if (StatusOrder.ContainsKey(statusType) == false) return 0;
+
+            return StatusOrder[statusType];
+        }
+
+        #endregion
     }
 
     /// <summary>

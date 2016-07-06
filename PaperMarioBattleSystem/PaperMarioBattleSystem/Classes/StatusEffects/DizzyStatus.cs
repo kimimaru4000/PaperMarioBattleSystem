@@ -35,6 +35,16 @@ namespace PaperMarioBattleSystem
             IncrementTurns();
         }
 
+        protected override void OnSuspend()
+        {
+            OnEnd();
+        }
+
+        protected override void OnResume()
+        {
+            OnAfflict();
+        }
+
         public override StatusEffect Copy()
         {
             return new DizzyStatus(Duration);

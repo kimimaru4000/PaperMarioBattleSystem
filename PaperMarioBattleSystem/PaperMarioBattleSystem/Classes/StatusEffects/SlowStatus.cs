@@ -26,33 +26,38 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             //On affliction end the entity's turn
-            //PreventMovement can be false here if this StatusEffect was previously suspended
-            if (PreventMovement == true)
-            {
-                EntityAfflicted.SetMaxTurns(0);
-                EntityAfflicted.SetTurnsUsed(EntityAfflicted.MaxTurns);
-            }
+            EntityAfflicted.SetMaxTurns(0);
+            EntityAfflicted.SetTurnsUsed(EntityAfflicted.MaxTurns);
         }
 
         protected override void OnEnd()
         {
-            //The MaxTurns check is for if entities are Immobilized
-            if (IsFinished == false && EntityAfflicted.MaxTurns > 0)
-                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
         }
 
         protected override void OnPhaseCycleStart()
         {
+            //If the entity shouldn't move this turn, set its max turns to 0
+            if (PreventMovement == true)
+                EntityAfflicted.SetMaxTurns(0);
+
+            //Flip the flag telling whether the entity can move next turn or not
+            PreventMovement = !PreventMovement;
+
             IncrementTurns();
+        }
 
-            if (IsFinished == false)
+        protected override void OnSuspend()
+        {
+            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+        }
+
+        protected override void OnResume()
+        {
+            if (PreventMovement == true)
             {
-                //If the entity shouldn't move this turn, set its max turns to 0
-                if (PreventMovement == true)
-                    EntityAfflicted.SetMaxTurns(0);
-
-                //Flip the flag telling whether the entity can move next turn or not
-                PreventMovement = !PreventMovement;
+                EntityAfflicted.SetMaxTurns(0);
+                EntityAfflicted.SetTurnsUsed(EntityAfflicted.MaxTurns);
             }
         }
 

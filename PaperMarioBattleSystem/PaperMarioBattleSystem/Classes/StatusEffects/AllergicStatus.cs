@@ -60,6 +60,16 @@ namespace PaperMarioBattleSystem
             IncrementTurns();
         }
 
+        protected override void OnSuspend()
+        {
+            Debug.LogError($"The {StatusType} Status CANNOT be Suspended. Remove any cases where it is suspended");
+        }
+
+        protected override void OnResume()
+        {
+            Debug.LogError($"The {StatusType} Status CANNOT be Resumed because it CANNOT be Suspended. Remove any cases where it is suspended");
+        }
+
         public override StatusEffect Copy()
         {
             return new AllergicStatus(Duration);

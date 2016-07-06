@@ -74,7 +74,7 @@ namespace PaperMarioBattleSystem
         public int CurFP => BattleStats.FP;
 
         /// <summary>
-        /// The base number of turns the BattleEntity has in each phase
+        /// The base number of turns the BattleEntity has in each of its phases
         /// </summary>
         public int BaseTurns { get; protected set; } = BattleGlobals.DefaultTurnCount;
 
@@ -748,8 +748,6 @@ namespace PaperMarioBattleSystem
             StatusEffect[] statusEffects = GetStatuses();
             for (int i = 0; i < statusEffects.Length; i++)
             {
-                //Unsuspend all statuses to end them properly
-                statusEffects[i].Suspended = false;
                 RemoveStatus(statusEffects[i].StatusType);
             }
         }
@@ -765,12 +763,16 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Returns all StatusEffects the entity is afflicted with
+        /// Returns all StatusEffects the entity is afflicted with, sorted by their Priority
         /// </summary>
-        /// <returns>An array of StatusEffects. If no StatusEffects are on the entity, it'll return an empty array</returns>
+        /// <returns>An array of StatusEffects sorted by their Priority. If no StatusEffects are on the entity, it'll return an empty array</returns>
         public StatusEffect[] GetStatuses()
         {
-            return Statuses.Values.ToArray();
+            //Get the values in a list, then sort them
+            List<StatusEffect> statusList = Statuses.Values.ToList();
+            statusList.Sort(StatusEffect.StatusPrioritySort);
+
+            return statusList.ToArray();
         }
 
         /// <summary>

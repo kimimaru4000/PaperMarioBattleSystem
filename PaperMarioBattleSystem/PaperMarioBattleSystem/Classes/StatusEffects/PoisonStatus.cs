@@ -8,7 +8,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Poison Status Effect.
-    /// The entity takes 1 HP in Poison damage at the start of each phase
+    /// The entity takes 1 HP in Poison damage at the start of each phase cycle
     /// </summary>
     public sealed class PoisonStatus : StatusEffect
     {
@@ -30,15 +30,10 @@ namespace PaperMarioBattleSystem
             
         }
 
-        protected override void OnPhaseStart()
+        protected override void OnPhaseCycleStart()
         {
             EntityAfflicted.TakeDamage(Enumerations.Elements.Poison, 1, true);
             IncrementTurns();
-        }
-
-        protected override void OnPhaseEnd()
-        {
-
         }
 
         public override StatusEffect Copy()

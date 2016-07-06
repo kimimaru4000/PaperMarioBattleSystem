@@ -36,22 +36,24 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEnd()
         {
-            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+            //The MaxTurns check is for if entities are Immobilized
+            if (IsFinished == false && EntityAfflicted.MaxTurns > 0)
+                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
         }
 
-        protected override void OnPhaseStart()
-        {
-            //If the entity shouldn't move this turn, set its max turns to 0
-            if (PreventMovement == true)
-                EntityAfflicted.SetMaxTurns(0);
-
-            //Flip the flag telling whether the entity can move next turn or not
-            PreventMovement = !PreventMovement;
-        }
-
-        protected override void OnPhaseEnd()
+        protected override void OnPhaseCycleStart()
         {
             IncrementTurns();
+
+            if (IsFinished == false)
+            {
+                //If the entity shouldn't move this turn, set its max turns to 0
+                if (PreventMovement == true)
+                    EntityAfflicted.SetMaxTurns(0);
+
+                //Flip the flag telling whether the entity can move next turn or not
+                PreventMovement = !PreventMovement;
+            }
         }
 
         public override StatusEffect Copy()

@@ -13,7 +13,8 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The base class for Status Effects.
-    /// <para>Status Effects that take effect regularly occur at the start and/or end of a phase, not each entity's individual turn.</para>
+    /// <para>Status Effects increment a turn at the start of each phase cycle.
+    /// Status Effects that take effect each turn also occur at the start of each phase cycle</para>
     /// </summary>
     public abstract class StatusEffect
     {
@@ -44,6 +45,12 @@ namespace PaperMarioBattleSystem
         /// The current number of turns the StatusEffect has been in effect
         /// </summary>
         protected int TurnsPassed { get; private set; } = 0;
+
+        // <summary>
+        // The priority of the StatusEffect.
+        // StatusEffects with higher priorities have lower Priority values and affect the BattleEntity sooner
+        // </summary>
+        //protected int Priority { get; private set; } = 0;
 
         /// <summary>
         /// The BattleEntity afflicted with the StatusEffect
@@ -125,6 +132,15 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        // <summary>
+        // Sets the Priority of the StatusEffect
+        // </summary>
+        // <param name="priority">The value to set the Priority to</param>
+        //protected void SetPriority(int priority)
+        //{
+        //    Priority = priority;
+        //}
+
         /// <summary>
         /// Applies the StatusEffect's initial affliction logic to the entity
         /// </summary>
@@ -145,46 +161,36 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Applies the StatusEffects's effects to the entity at the start of the entity's phase
+        /// Applies the StatusEffect's effects to the entity at the start of the phase cycle
         /// </summary>
-        public void PhaseStart()
-        {
-            //Don't do anything if the StatusEffect is suspended
-            if (Suspended == true) return;    
-
-            OnPhaseStart();
-        }
-
-        /// <summary>
-        /// Applies the StatusEffects's effects to the entity at the end of the entity's phase
-        /// </summary>
-        public void PhaseEnd()
+        public void PhaseCycleStart()
         {
             //Don't do anything if the StatusEffect is suspended
             if (Suspended == true) return;
 
-            OnPhaseEnd();
+            OnPhaseCycleStart();
         }
 
         /// <summary>
-        /// What the StatusEffect does to the entity when it's applied
+        /// What the StatusEffect does to the entity when it's applied or resumed
         /// </summary>
         protected abstract void OnAfflict();
 
         /// <summary>
-        /// What the StatusEffect does to the entity when it wears off
+        /// What the StatusEffect does to the entity when it wears off or suspended
         /// </summary>
         protected abstract void OnEnd();
 
-        /// <summary>
-        /// What the StatusEffect does when the phase for the entity starts
-        /// </summary>
-        protected abstract void OnPhaseStart();
+        //NOTE: USE THESE INSTEAD OF OnAfflict() OR OnEnd()
+        //What the StatusEffect does to the entity when it is resumed
+        //protected abstract void OnResume();
+        //What the StatusEffect does to the entity when it is suspended
+        //protected abstract void OnSuspend();
 
         /// <summary>
-        /// What the StatusEffect does when the phase for the entity ends
+        /// What the StatusEffect does when the phase cycle starts
         /// </summary>
-        protected abstract void OnPhaseEnd();
+        protected abstract void OnPhaseCycleStart();
 
         /// <summary>
         /// Returns a new instance of this StatusEffect with the same properties

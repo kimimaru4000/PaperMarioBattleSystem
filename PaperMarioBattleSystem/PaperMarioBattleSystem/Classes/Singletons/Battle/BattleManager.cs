@@ -54,10 +54,18 @@ namespace PaperMarioBattleSystem
         private readonly int PositionXDiff = 30;
 
         /// <summary>
+        /// How many phase cycles (Player and Enemy turns) passed
+        /// </summary>
+        public int PhaseCycleCount { get; private set; } = 0;
+
+        /// <summary>
         /// Unless scripted, the battle always starts on the player phase, with Mario always going first
         /// </summary>
         private BattlePhase Phase = BattlePhase.Player;
 
+        /// <summary>
+        /// The current state of the battle
+        /// </summary>
         private BattleState State = BattleState.Init;
 
         /// <summary>
@@ -200,10 +208,23 @@ namespace PaperMarioBattleSystem
             {
                 EntityTurn = Mario;
 
+                //Increment the phase cycles when switching to the Player phase
+                //This is because the cycle always starts with the Player phase in the Paper Mario games
+                PhaseCycleCount++;
+
+                Debug.Log($"Started new phase cycle. Current cycle count: {PhaseCycleCount}");
+
+                Mario.OnPhaseCycleStart();
+                Partner.OnPhaseCycleStart();
+
                 Mario.OnPhaseStart();
                 Partner.OnPhaseStart();
 
-                for (int i = 0; i < MaxEnemies; i++) Enemies[i]?.OnPhaseEnd();
+                for (int i = 0; i < MaxEnemies; i++)
+                {
+                    Enemies[i]?.OnPhaseEnd();
+                    Enemies[i]?.OnPhaseCycleStart();
+                }
             }
             else if (Phase == BattlePhase.Enemy)
             {                
@@ -213,7 +234,10 @@ namespace PaperMarioBattleSystem
                 EnemyTurn = FindOccupiedEnemyIndex(0);
                 EntityTurn = Enemies[EnemyTurn];
 
-                for (int i = 0; i < MaxEnemies; i++) Enemies[i]?.OnPhaseStart();
+                for (int i = 0; i < MaxEnemies; i++)
+                {
+                    Enemies[i]?.OnPhaseStart();
+                }
             }
         }
 

@@ -32,18 +32,15 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEnd()
         {
-            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+            if (IsFinished == false && EntityAfflicted.MaxTurns > 0)
+                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
         }
 
-        protected override void OnPhaseStart()
-        {
-            if (EntityAfflicted.MaxTurns > 0)
-                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
-        }
-
-        protected override void OnPhaseEnd()
+        protected override void OnPhaseCycleStart()
         {
             IncrementTurns();
+            if (IsFinished == false && EntityAfflicted.MaxTurns > 0)
+                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
         }
 
         public override StatusEffect Copy()

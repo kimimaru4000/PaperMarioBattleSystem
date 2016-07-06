@@ -38,14 +38,9 @@ namespace PaperMarioBattleSystem.Classes.StatusEffects
             
         }
 
-        protected override void OnPhaseStart()
+        protected override void OnPhaseCycleStart()
         {
             IncrementTurns();
-        }
-
-        protected override void OnPhaseEnd()
-        {
-            
         }
 
         public override StatusEffect Copy()

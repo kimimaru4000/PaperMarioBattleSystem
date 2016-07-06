@@ -8,7 +8,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Burn Status Effect.
-    /// The entity takes 1 HP in Fire damage at the end of each phase
+    /// The entity takes 1 HP in Fire damage at the start of each phase cycle
     /// </summary>
     public sealed class BurnStatus : StatusEffect
     {
@@ -38,12 +38,7 @@ namespace PaperMarioBattleSystem
 
         }
 
-        protected override void OnPhaseStart()
-        {
-            
-        }
-
-        protected override void OnPhaseEnd()
+        protected override void OnPhaseCycleStart()
         {
             EntityAfflicted.TakeDamage(Enumerations.Elements.Fire, 1, true);
             IncrementTurns();

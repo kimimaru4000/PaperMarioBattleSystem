@@ -55,12 +55,7 @@ namespace PaperMarioBattleSystem
             SuspendedStatuses = null;
         }
 
-        protected override void OnPhaseStart()
-        {
-            
-        }
-
-        protected override void OnPhaseEnd()
+        protected override void OnPhaseCycleStart()
         {
             IncrementTurns();
         }

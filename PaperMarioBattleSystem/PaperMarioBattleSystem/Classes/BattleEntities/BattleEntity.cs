@@ -370,20 +370,26 @@ namespace PaperMarioBattleSystem
         #region Turn Methods
 
         /// <summary>
-        /// What happens at the start of the entity's phase
+        /// What happens at the start of the phase cycle
         /// </summary>
-        public virtual void OnPhaseStart()
+        public virtual void OnPhaseCycleStart()
         {
-            Debug.Log($"Started phase for {Name}!");
-
             TurnsUsed = 0;
             MaxTurns = BaseTurns;
 
             StatusEffect[] statuses = GetStatuses();
             for (int i = 0; i < statuses.Length; i++)
             {
-                statuses[i].PhaseStart();
+                statuses[i].PhaseCycleStart();
             }
+        }
+
+        /// <summary>
+        /// What happens at the start of the entity's phase
+        /// </summary>
+        public virtual void OnPhaseStart()
+        {
+            Debug.Log($"Started phase for {Name}!");
         }
 
         /// <summary>
@@ -392,15 +398,6 @@ namespace PaperMarioBattleSystem
         public virtual void OnPhaseEnd()
         {
             Debug.Log($"Ended phase for {Name}");
-
-            TurnsUsed = 0;
-            MaxTurns = BaseTurns;
-
-            StatusEffect[] statuses = GetStatuses();
-            for (int i = 0; i < statuses.Length; i++)
-            {
-                statuses[i].PhaseEnd();
-            }
         }
 
         /// <summary>

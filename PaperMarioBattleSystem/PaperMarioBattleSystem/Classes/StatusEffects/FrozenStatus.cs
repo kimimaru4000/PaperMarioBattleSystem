@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnEnd();
 
-            //The entity takes 1 ice damage when Frozen ends
+            //The entity takes 1 Ice damage when Frozen ends
             EntityAfflicted.TakeDamage(Enumerations.Elements.Ice, 1, true);
         }
 

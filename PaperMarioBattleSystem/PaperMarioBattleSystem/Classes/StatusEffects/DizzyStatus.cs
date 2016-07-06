@@ -30,14 +30,9 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.ModifyAccuracy(50);
         }
 
-        protected override void OnPhaseStart()
+        protected override void OnPhaseCycleStart()
         {
             IncrementTurns();
-        }
-
-        protected override void OnPhaseEnd()
-        {
-            
         }
 
         public override StatusEffect Copy()

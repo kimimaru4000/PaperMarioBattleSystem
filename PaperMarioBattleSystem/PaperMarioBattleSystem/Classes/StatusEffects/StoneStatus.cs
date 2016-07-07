@@ -19,6 +19,46 @@ namespace PaperMarioBattleSystem
             Alignment = StatusAlignments.Positive;
         }
 
+        protected sealed override void OnAfflict()
+        {
+            base.OnAfflict();
+
+            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.StatusImmune, new MiscValueHolder(true));
+            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.Invincible, new MiscValueHolder(true));
+
+            EntityAfflicted.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
+        }
+
+        protected sealed override void OnEnd()
+        {
+            base.OnEnd();
+
+            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.StatusImmune);
+            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.Invincible);
+
+            EntityAfflicted.PlayAnimation(AnimationGlobals.IdleName);
+        }
+
+        protected sealed override void OnSuspend()
+        {
+            base.OnSuspend();
+
+            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.StatusImmune);
+            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.Invincible);
+
+            EntityAfflicted.PlayAnimation(AnimationGlobals.IdleName);
+        }
+
+        protected sealed override void OnResume()
+        {
+            base.OnResume();
+
+            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.StatusImmune, new MiscValueHolder(true));
+            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.Invincible, new MiscValueHolder(true));
+
+            EntityAfflicted.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
+        }
+
         public sealed override StatusEffect Copy()
         {
             return new StoneStatus(Duration);

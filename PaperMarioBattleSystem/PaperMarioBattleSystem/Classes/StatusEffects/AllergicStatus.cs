@@ -32,18 +32,23 @@ namespace PaperMarioBattleSystem
 
             //Don't suspend Allergic, as it was just inflicted
             bool removed = SuspendedStatuses.Remove(this);
-            if (removed == true) Debug.Log($"Removed current {StatusType} from the suspended list");
 
             for (int i = 0; i < SuspendedStatuses.Count; i++)
             {
                 SuspendedStatuses[i].Suspended = true;
             }
 
+            //Add the StatusImmune MiscProperty
+            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.StatusImmune, new MiscValueHolder(true));
+
             Debug.Log($"{StatusType} has been inflicted and suspended all StatusEffects on {EntityAfflicted.Name}!");
         }
 
         protected override void OnEnd()
         {
+            //Remove the StatusImmune MiscProperty
+            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.StatusImmune);
+
             //Unsuspend all of the entity's StatusEffects
             for (int i = 0; i < SuspendedStatuses.Count; i++)
             {

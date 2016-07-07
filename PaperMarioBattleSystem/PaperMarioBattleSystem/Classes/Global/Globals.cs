@@ -321,7 +321,8 @@ namespace PaperMarioBattleSystem
             LiftedAway,
             BlownAway,
             InstantKO,
-            StatusImmune
+            StatusImmune,
+            Invincible
         }
     }
 
@@ -373,6 +374,14 @@ namespace PaperMarioBattleSystem
             public const string HammerPickupName = "HammerPickup";
             public const string HammerWindupName = "HammerWindup";
             public const string HammerSlamName = "HammerSlam";
+        }
+
+        /// <summary>
+        /// Status Effect-related animations in battle
+        /// </summary>
+        public static class StatusBattleAnimations
+        {
+            public const string StoneName = "StoneName";
         }
     }
 

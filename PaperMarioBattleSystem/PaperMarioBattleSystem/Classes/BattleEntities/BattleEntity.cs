@@ -150,6 +150,16 @@ namespace PaperMarioBattleSystem
             //Handle the elemental interaction results
             ElementInteractionResult elementResult = damageResult.ElementResult;
 
+            //Check for Invincibility
+            bool invincible = GetMiscProperty(MiscProperty.Invincible).BoolValue;
+            //If the entity is invincible, don't deal any damage and negate all weaknesses and resistances
+            //The entity wouldn't heal if it should because invincibility means it can't get hit
+            if (invincible == true)
+            {
+                damage = 0;
+                elementResult = ElementInteractionResult.Damage;
+            }
+
             if (elementResult == ElementInteractionResult.Damage || elementResult == ElementInteractionResult.KO)
             {
                 if (elementResult == ElementInteractionResult.Damage)
@@ -679,6 +689,10 @@ namespace PaperMarioBattleSystem
             int percentage = GetStatusPercentage(status.StatusType);
             int valueTest = GeneralGlobals.Randomizer.Next(1, 101);
 
+            //Test for StatusEffect immunity - if the entity is immune, don't allow the StatusEffect to be inflicted
+            bool statusImmune = GetMiscProperty(MiscProperty.StatusImmune).BoolValue;
+            if (statusImmune == true) percentage = 0;
+
             return (valueTest <= percentage);
         }
 
@@ -692,13 +706,6 @@ namespace PaperMarioBattleSystem
             if (HasStatus(status.StatusType) == true)
             {
                 Debug.Log($"{Name} is already afflicted with the {status.StatusType} Status!");
-                return;
-            }
-
-            //If the entity is afflicted with Allergic, prevent any new StatusEffects from being afflicted
-            if (HasStatus(StatusTypes.Allergic) == true)
-            {
-                Debug.Log($"{Name} is afflicted with the {StatusTypes.Allergic} Status and cannot be afflicted with any new StatusEffects!");
                 return;
             }
 
@@ -722,14 +729,6 @@ namespace PaperMarioBattleSystem
             if (HasStatus(statusType) == false)
             {
                 Debug.Log($"{Name} is not currently afflicted with the {statusType} Status!");
-                return;
-            }
-
-            //If the entity is afflicted with Allergic, not dead, and the status to remove isn't Allergic,
-            //prevent any StatusEffects from being removed
-            if (HasStatus(StatusTypes.Allergic) == true && IsDead == false && statusType != StatusTypes.Allergic)
-            {
-                Debug.Log($"{Name} is afflicted with the {StatusTypes.Allergic} Status and cannot remove any StatusEffects!");
                 return;
             }
 
@@ -870,10 +869,9 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Gets the value of a MiscProperty the entity has.
-        /// Check if the property exists before attempting to get this value.
         /// </summary>
         /// <param name="property">The MiscProperty to get the value for</param>
-        /// <returns>The value of the MiscProperty if it has an entry, otherwise null</returns>
+        /// <returns>A MiscValueHolder corresponding to the MiscProperty if it has an entry, otherwise a default MiscValueHolder</returns>
         public MiscValueHolder GetMiscProperty(MiscProperty property)
         {
             if (HasMiscProperty(property) == false)

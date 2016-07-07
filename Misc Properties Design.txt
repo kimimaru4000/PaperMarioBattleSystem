@@ -44,3 +44,22 @@ bool statusImmune = (bool)MiscProperties[MiscProperty.StatusImmune];
 The Dictionary allows us to quickly and easily add new properties, remove existing ones, and access their values.
 
 Add methods for adding properties, removing properties, accessing a property's value, and checking if a property exists.
+
+Update (7/7/16)
+---------------
+Instead of an object as the value, create a new immutable struct called MiscValueHolder and use that as the value:
+
+struct MiscValueHolder
+{
+    public int IntValue { get; private set; }
+    public bool BoolValue { get; private set; }
+    public string StringValue { get; private set; }
+}
+
+The problem with object as the value is there's no way to get a default value if the property doesn't exist, and it can
+cause an InvalidCastException or NullReferenceException, both of which must be prevented by checking if the property
+exists in the dictionary.
+
+This is a pain, so to ease things, let's use MiscValueHolders as the value and return
+an empty one with default values if a property doesn't exist in the dictionary. This
+makes it easier to work with and allows us to have default values for each property.

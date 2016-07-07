@@ -82,6 +82,37 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
+    /// Holds immutable data for a MiscProperty. Only one field should need to be used for each MiscProperty
+    /// </summary>
+    public struct MiscValueHolder
+    {
+        public int IntValue { get; private set; }
+        public bool BoolValue { get; private set; }
+        public string StringValue { get; private set; }
+
+        public MiscValueHolder(int intValue)
+        {
+            IntValue = intValue;
+            BoolValue = false;
+            StringValue = string.Empty;
+        }
+
+        public MiscValueHolder(bool boolValue)
+        {
+            IntValue = 0;
+            BoolValue = boolValue;
+            StringValue = string.Empty;
+        }
+
+        public MiscValueHolder(string stringValue)
+        {
+            IntValue = 0;
+            BoolValue = false;
+            StringValue = stringValue;
+        }
+    }
+
+    /// <summary>
     /// Holds immutable data for the result of a damage interaction.
     /// It includes the BattleEntity that got damaged, the amount and type of damage dealt, the Status Effects inflicted, and more.
     /// </summary>

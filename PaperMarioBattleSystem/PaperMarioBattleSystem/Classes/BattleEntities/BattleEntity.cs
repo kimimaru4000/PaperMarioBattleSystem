@@ -49,7 +49,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Miscellaneous properties of the entity
         /// </summary>
-        protected readonly Dictionary<MiscProperty, object> MiscProperties = new Dictionary<MiscProperty, object>();
+        protected readonly Dictionary<MiscProperty, MiscValueHolder> MiscProperties = new Dictionary<MiscProperty, MiscValueHolder>();
 
         /// <summary>
         /// The HeightState of the entity
@@ -831,7 +831,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="property">The MiscProperty to add</param>
         /// <param name="value">The value of the MiscProperty</param>
-        public void AddMiscProperty(MiscProperty property, object value)
+        public void AddMiscProperty(MiscProperty property, MiscValueHolder value)
         {
             //Return if the entity already has it
             if (HasMiscProperty(property) == true)
@@ -874,11 +874,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="property">The MiscProperty to get the value for</param>
         /// <returns>The value of the MiscProperty if it has an entry, otherwise null</returns>
-        public object GetMiscProperty(MiscProperty property)
+        public MiscValueHolder GetMiscProperty(MiscProperty property)
         {
             if (HasMiscProperty(property) == false)
             {
-                return null;
+                return new MiscValueHolder();
             }
 
             return MiscProperties[property];

@@ -283,6 +283,15 @@ namespace PaperMarioBattleSystem
             //Negative
             Burn, Confused, DEFDown, Dizzy, Frozen, Immobilized, NoSkills, Poison, POWDown, Sleep, Slow, Soft, Tiny
         }
+
+        public enum MiscProperty
+        {
+            Frightened,
+            LiftedAway,
+            BlownAway,
+            InstantKO,
+            StatusImmune
+        }
     }
 
     /// <summary>

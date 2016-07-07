@@ -44,9 +44,12 @@ namespace PaperMarioBattleSystem
         /// The likelihood of the entity being affected by each StatusEffect. Empty entries are treated as a 0% chance
         /// </summary>
         //NOTE: Each entity needs its own StatusEffect durations.
-        //Additionally, there needs to be a way to define more varied properties such as the percentages of being affected by
-        //things such as Fright, instant KO moves, and being lifted or blown out of battle. These should all be in this Dictionary
         protected readonly Dictionary<StatusTypes, int> StatusPercentages = new Dictionary<StatusTypes, int>();
+
+        /// <summary>
+        /// Miscellaneous properties of the entity
+        /// </summary>
+        protected readonly Dictionary<MiscProperty, object> MiscProperties = new Dictionary<MiscProperty, object>();
 
         /// <summary>
         /// The HeightState of the entity
@@ -821,6 +824,64 @@ namespace PaperMarioBattleSystem
             }
 
             return percentage;
+        }
+
+        /// <summary>
+        /// Adds a MiscProperty to the entity if it doesn't already have it
+        /// </summary>
+        /// <param name="property">The MiscProperty to add</param>
+        /// <param name="value">The value of the MiscProperty</param>
+        public void AddMiscProperty(MiscProperty property, object value)
+        {
+            //Return if the entity already has it
+            if (HasMiscProperty(property) == true)
+            {
+                Debug.LogWarning($"{Name} already has the {property} property!");
+                return;
+            }
+
+            MiscProperties.Add(property, value);
+            Debug.Log($"Added the {property} property to {Name}!");
+        }
+
+        /// <summary>
+        /// Removes a MiscProperty from the entity
+        /// </summary>
+        /// <param name="property">The MiscProperty to remove</param>
+        public void RemoveMiscProperty(MiscProperty property)
+        {
+            if (HasMiscProperty(property) == true)
+            {
+                Debug.Log($"Removed the {property} property on {Name}!");
+            }
+            
+            MiscProperties.Remove(property);
+        }
+
+        /// <summary>
+        /// Checks if the entity has a MiscProperty
+        /// </summary>
+        /// <param name="property">The MiscProperty to check</param>
+        /// <returns>true if the entity has the MiscProperty, otherwise false</returns>
+        public bool HasMiscProperty(MiscProperty property)
+        {
+            return MiscProperties.ContainsKey(property);
+        }
+
+        /// <summary>
+        /// Gets the value of a MiscProperty the entity has.
+        /// Check if the property exists before attempting to get this value.
+        /// </summary>
+        /// <param name="property">The MiscProperty to get the value for</param>
+        /// <returns>The value of the MiscProperty if it has an entry, otherwise null</returns>
+        public object GetMiscProperty(MiscProperty property)
+        {
+            if (HasMiscProperty(property) == false)
+            {
+                return null;
+            }
+
+            return MiscProperties[property];
         }
 
         /// <summary>

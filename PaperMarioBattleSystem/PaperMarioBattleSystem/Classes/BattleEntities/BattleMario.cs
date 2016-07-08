@@ -22,11 +22,6 @@ namespace PaperMarioBattleSystem
             Name = "Mario";
             EntityType = Enumerations.EntityTypes.Player;
 
-            AddStatusPercentage(Enumerations.StatusTypes.Fast, 100);
-            AddStatusPercentage(Enumerations.StatusTypes.Slow, 100);
-            AddStatusPercentage(Enumerations.StatusTypes.Immobilized, 100);
-            AddStatusPercentage(Enumerations.StatusTypes.Frozen, 100);
-
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Mario");
             AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(228, 918, 29, 51), 1000d)));
             AddAnimation(AnimationGlobals.RunningName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,

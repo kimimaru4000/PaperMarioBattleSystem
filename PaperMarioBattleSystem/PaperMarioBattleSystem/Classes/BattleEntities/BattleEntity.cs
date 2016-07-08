@@ -41,10 +41,11 @@ namespace PaperMarioBattleSystem
         protected readonly Dictionary<StatusTypes, StatusEffect> Statuses = new Dictionary<StatusTypes, StatusEffect>();
 
         /// <summary>
-        /// The likelihood of the entity being affected by each StatusEffect. Empty entries are treated as a 0% chance
+        /// Properties relating to how the entity is affected by each StatusEffect.
+        /// Examples include the likelihood of being inflicted by a StatusEffect-inducing attack and
+        /// how many additional turns the entity is affected by the StatusEffect
         /// </summary>
-        //NOTE: Each entity needs its own StatusEffect durations.
-        protected readonly Dictionary<StatusTypes, int> StatusPercentages = new Dictionary<StatusTypes, int>();
+        protected readonly Dictionary<StatusTypes, StatusPropertyHolder> StatusProperties = new Dictionary<StatusTypes, StatusPropertyHolder>();
 
         /// <summary>
         /// Miscellaneous properties of the entity
@@ -695,8 +696,10 @@ namespace PaperMarioBattleSystem
                 return false;
             }
 
+            StatusPropertyHolder statusProperty = GetStatusProperty(status.StatusType);
+
             //Test the percentage
-            int percentage = GetStatusPercentage(status.StatusType);
+            int percentage = statusProperty.StatusPercentage;
             int valueTest = GeneralGlobals.Randomizer.Next(1, 101);
 
             return (valueTest <= percentage);
@@ -784,51 +787,45 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Adds a percentage chance of the entity being inflicted with a StatusEffect.
-        /// If a percentage already exists for a StatusEffect, it will be replaced
+        /// Adds a StatusProperty for a particular StatusEffect to the entity.
+        /// If a StatusProperty already exists for a StatusEffect, it will be replaced.
         /// </summary>
-        /// <param name="statusType">The StatusType of the StatusEffect</param>
-        /// <param name="percentage">The percentage of being inflicted with the StatusEffect. This value cannot be lower than 0.</param>
-        protected void AddStatusPercentage(StatusTypes statusType, int percentage)
+        /// <param name="statusType">The StatusType of the StatusEffect.</param>
+        /// <param name="statusProperty">The StatusPropertyHolder associated with the StatusEffect.</param>
+        protected void AddStatusProperty(StatusTypes statusType, StatusPropertyHolder statusProperty)
         {
-            if (StatusPercentages.ContainsKey(statusType) == true)
+            if (StatusProperties.ContainsKey(statusType) == true)
             {
-                Debug.Log($"Replacing percentage for the {statusType} Status as {Name} already has one!");
+                Debug.Log($"Replacing {nameof(StatusPropertyHolder)} for the {statusType} Status as {Name} already has one!");
+                StatusProperties.Remove(statusType);
             }
 
-            //Clamp the percentage value
-            percentage = UtilityGlobals.Clamp(percentage, 0, int.MaxValue);
-
-            StatusPercentages.Add(statusType, percentage);
+            StatusProperties.Add(statusType, statusProperty);
         }
 
         /// <summary>
-        /// Tells if the entity has a percentage value for being inflicted with a particular StatusEffect or not
+        /// Tells if the entity has a StatusPropertyHolder associated with a particular StatusEffect or not
         /// </summary>
         /// <param name="statusType">The StatusType of the StatusEffect</param>
-        /// <returns>true if a percentage can be found for the specified StatusType, false otherwise</returns>
-        protected bool HasStatusPercentage(StatusTypes statusType)
+        /// <returns>true if a StatusPropertyHolder can be found for the specified StatusType, false otherwise</returns>
+        protected bool HasStatusProperty(StatusTypes statusType)
         {
-            return StatusPercentages.ContainsKey(statusType);
+            return StatusProperties.ContainsKey(statusType);
         }
 
         /// <summary>
-        /// Retrieves the percentage chance of the entity being afflicted with a particular StatusEffect
+        /// Retrieves the StatusPropertyHolder associated with a particular StatusEffect
         /// </summary>
         /// <param name="statusType">The StatusType of the StatusEffect</param>
-        /// <returns>The percentage corresponding to the specified StatusType, or 0 if there is no percentage value</returns>
-        public int GetStatusPercentage(StatusTypes statusType)
+        /// <returns>The StatusPropertyHolder corresponding to the specified StatusType. If there is no entry, returns a default one</returns>
+        public StatusPropertyHolder GetStatusProperty(StatusTypes statusType)
         {
-            //Initialize to 0
-            int percentage = 0;
-
-            //Set the percentage to the correct value if one can be found
-            if (HasStatusPercentage(statusType) == true)
+            if (HasStatusProperty(statusType) == false)
             {
-                percentage = StatusPercentages[statusType];
+                return StatusPropertyHolder.Default;
             }
 
-            return percentage;
+            return StatusProperties[statusType];
         }
 
         /// <summary>

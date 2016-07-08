@@ -82,6 +82,30 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
+    /// Holds immutable data for a StatusProperty.
+    /// </summary>
+    public struct StatusPropertyHolder
+    {
+        /// <summary>
+        /// The likelihood of being afflicted by a StatusEffect-inducing move. This value cannot be lower than 0.
+        /// </summary>
+        public int StatusPercentage { get; private set; }
+
+        /// <summary>
+        /// The number of turns to add onto the StatusEffect's base duration. This can be negative to reduce the duration.
+        /// </summary>
+        public int AdditionalTurns { get; private set; }
+
+        public static StatusPropertyHolder Default => new StatusPropertyHolder(100, 0);
+
+        public StatusPropertyHolder(int statusPercentage, int additionalTurns)
+        {
+            StatusPercentage = UtilityGlobals.Clamp(statusPercentage, 0, int.MaxValue);
+            AdditionalTurns = additionalTurns;
+        }
+    }
+
+    /// <summary>
     /// Holds immutable data for a MiscProperty. Only one field should need to be used for each MiscProperty
     /// </summary>
     public struct MiscValueHolder

@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Immobilized Status Effect.
     /// Entities afflicted with this cannot move until it wears off.
-    /// <para>Mario and his Partner cannot Guard or Superguard when afflicted with this Status Effect</para>
+    /// <para>Mario and his Partner cannot Guard or Superguard when afflicted with this Status Effect.</para>
     /// <para>This Status Effect cannot be prevented via Guarding, only Superguarding.
     /// This is not true for StatusEffects derived from this one. However, Guarding will still reduce the chances of it being inflicted.</para>
     /// </summary>

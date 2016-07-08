@@ -8,8 +8,9 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Stone Status Effect.
-    /// This is essentially Immobilized except the entity afflicted with it is immune to damage.
-    /// <para>This has a Positive Alignment because entities that attack an entity afflicted with this basically waste their turns</para>
+    /// The entity afflicted with it is immobilized and immune to damage and negative StatusEffects.
+    /// The entity also has its negative StatusEffects suppressed until it ends.
+    /// <para>This has a Positive Alignment because entities that attack an entity afflicted with this basically waste their turns.</para>
     /// </summary>
     public sealed class StoneStatus : ImmobilizedStatus
     {
@@ -23,27 +24,39 @@ namespace PaperMarioBattleSystem
         {
             base.OnAfflict();
 
-            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.StatusImmune, new MiscValueHolder(true));
+            //Suspend all entity's Negative StatusEffects
+            EntityAfflicted.SuspendOrResumeAlignmentStatuses(true, StatusAlignments.Negative, StatusType);
+
+            //Add the NegativeStatusImmune and Invincible MiscProperties
+            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune, new MiscValueHolder(true));
             EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.Invincible, new MiscValueHolder(true));
 
             EntityAfflicted.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
+
+            Debug.Log($"{StatusType} has been inflicted and Suspended all negative StatusEffects on {EntityAfflicted.Name}!");
         }
 
         protected sealed override void OnEnd()
         {
             base.OnEnd();
 
-            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.StatusImmune);
+            //Remove the NegativeStatusImmune and Invincible MiscProperties
+            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune);
             EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.Invincible);
 
+            //Resume all of the entity's Negative StatusEffects
+            EntityAfflicted.SuspendOrResumeAlignmentStatuses(false, StatusAlignments.Negative, StatusType);
+
             EntityAfflicted.PlayAnimation(AnimationGlobals.IdleName);
+
+            Debug.Log($"{StatusType} has ended and Resumed all negative StatusEffects on {EntityAfflicted.Name}!");
         }
 
         protected sealed override void OnSuspend()
         {
             base.OnSuspend();
 
-            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.StatusImmune);
+            //Remove Invincibility and don't do anything else to avoid Suspending/Resuming conflicts with other StatusEffects
             EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.Invincible);
 
             EntityAfflicted.PlayAnimation(AnimationGlobals.IdleName);
@@ -53,7 +66,11 @@ namespace PaperMarioBattleSystem
         {
             base.OnResume();
 
-            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.StatusImmune, new MiscValueHolder(true));
+            //Suspend all entity's Negative StatusEffects once again
+            EntityAfflicted.SuspendOrResumeAlignmentStatuses(true, StatusAlignments.Negative, StatusType);
+
+            //Add back the NegativeStatusImmune and Invincible MiscProperties
+            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune, new MiscValueHolder(true));
             EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.Invincible, new MiscValueHolder(true));
 
             EntityAfflicted.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);

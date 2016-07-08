@@ -321,7 +321,8 @@ namespace PaperMarioBattleSystem
             LiftedAway,
             BlownAway,
             InstantKO,
-            StatusImmune,
+            PositiveStatusImmune,
+            NegativeStatusImmune,
             Invincible
         }
     }
@@ -423,7 +424,7 @@ namespace PaperMarioBattleSystem
         {
             { Enumerations.StatusTypes.Poison, 200 }, { Enumerations.StatusTypes.Burn, 199 },
             { Enumerations.StatusTypes.Fast, 150 }, { Enumerations.StatusTypes.Slow, 149 },
-            { Enumerations.StatusTypes.Stone, 148 }, { Enumerations.StatusTypes.Sleep, 147 }, { Enumerations.StatusTypes.Immobilized, 146 }, {Enumerations.StatusTypes.Frozen, 145 },
+            { Enumerations.StatusTypes.Stone, -1 }, { Enumerations.StatusTypes.Sleep, 147 }, { Enumerations.StatusTypes.Immobilized, 146 }, {Enumerations.StatusTypes.Frozen, 145 },
             { Enumerations.StatusTypes.POWDown, 130 }, { Enumerations.StatusTypes.POWUp, 129 }, { Enumerations.StatusTypes.DEFDown, 128 }, { Enumerations.StatusTypes.DEFUp, 127 },
             { Enumerations.StatusTypes.Soft, 110 }, { Enumerations.StatusTypes.Tiny, 109 }, { Enumerations.StatusTypes.Huge, 108 },
             { Enumerations.StatusTypes.HPRegen, 90 }, { Enumerations.StatusTypes.FPRegen, 89 },
@@ -433,25 +434,8 @@ namespace PaperMarioBattleSystem
             { Enumerations.StatusTypes.Payback, 20 },
             { Enumerations.StatusTypes.NoSkills, 10 },
             { Enumerations.StatusTypes.Charged, 1 },
-            { Enumerations.StatusTypes.Allergic, -1 }
+            { Enumerations.StatusTypes.Allergic, -10 }
         };
-
-        //public enum StatusOrder
-        //{
-        //    Poison = 200, Burn = 199,
-        //    Fast = 150, Slow = 149,
-        //    Stone = 148, Sleep = 147, Immobilized = 146, Frozen = 145,
-        //    POWDown = 130, POWUp = 129, DEFDown = 128, DEFUp = 127,
-        //    Soft = 110, Tiny = 109, Huge = 108,
-        //    HPRegen = 90, FPRegen = 89,
-        //    Dizzy = 80, Dodgy = 79,
-        //    Electrified = 70, Invisible = 69,
-        //    Confused = 50,
-        //    Payback = 20,
-        //    NoSkills = 10,
-        //    Charged = 1,
-        //    Allergic = -1,
-        //}
 
         #endregion
 

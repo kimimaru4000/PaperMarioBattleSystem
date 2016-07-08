@@ -680,18 +680,24 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Attempts to afflict the entity with a StatusEffect, based on its status percentage for the StatusEffect
+        /// Attempts to afflict the entity with a StatusEffect, based on its properties and status percentage for the StatusEffect
         /// </summary>
         /// <param name="status">The StatusEffect to afflict the entity with</param>
         /// <returns>true if the StatusEffect was successfully afflicted, false otherwise</returns>
         public bool TryAfflictStatus(StatusEffect status)
         {
+            //Test for StatusEffect immunity - if the entity is immune to a particular alignment, don't allow the StatusEffect to be inflicted
+            bool positiveStatusImmune = GetMiscProperty(MiscProperty.PositiveStatusImmune).BoolValue;
+            bool negativeStatusImmune = GetMiscProperty(MiscProperty.NegativeStatusImmune).BoolValue;
+            if ((status.Alignment == StatusEffect.StatusAlignments.Positive && positiveStatusImmune == true)
+                || (status.Alignment == StatusEffect.StatusAlignments.Negative && negativeStatusImmune == true))
+            {
+                return false;
+            }
+
+            //Test the percentage
             int percentage = GetStatusPercentage(status.StatusType);
             int valueTest = GeneralGlobals.Randomizer.Next(1, 101);
-
-            //Test for StatusEffect immunity - if the entity is immune, don't allow the StatusEffect to be inflicted
-            bool statusImmune = GetMiscProperty(MiscProperty.StatusImmune).BoolValue;
-            if (statusImmune == true) percentage = 0;
 
             return (valueTest <= percentage);
         }

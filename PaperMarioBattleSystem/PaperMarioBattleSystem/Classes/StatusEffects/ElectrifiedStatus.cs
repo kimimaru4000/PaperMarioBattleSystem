@@ -16,7 +16,9 @@ namespace PaperMarioBattleSystem
         public ElectrifiedStatus(int duration)
         {
             StatusType = Enumerations.StatusTypes.Electrified;
-            Alignment = StatusAlignments.Positive;
+            //Despite having positive effects, Electrified is classified as a Negative StatusEffect.
+            //Stone Caps suppress Electrified
+            Alignment = StatusAlignments.Negative;
 
             Duration = duration;
         }

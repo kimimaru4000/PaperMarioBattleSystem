@@ -146,7 +146,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void End()
         {
-            //Unsuspend to end the StatusEffect properly
+            //Resume to end the StatusEffect properly
             Suspended = false;
 
             TurnsPassed = Duration;

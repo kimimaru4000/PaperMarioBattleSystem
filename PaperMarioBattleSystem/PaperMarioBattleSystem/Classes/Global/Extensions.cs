@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -126,6 +127,50 @@ namespace PaperMarioBattleSystem
         public static Vector2 HalveInt(this Vector2 vector2)
         {
             return new Vector2((int)(vector2.X / 2f), (int)(vector2.Y / 2f));
+        }
+
+        #endregion
+
+        #region BattleEntity Extensions
+
+        /// <summary>
+        /// Suspends or Resumes all StatusEffects on the BattleEntity
+        /// </summary>
+        /// <param name="entity">The BattleEntity</param>
+        /// <param name="suspended">true to Suspend the StatusEffects, false to Resume them</param>
+        /// <param name="exclusion">A StatusType to exclude.
+        /// This is often the StatusType of the StatusEffect that suspended or resumed the other StatusEffects</param>
+        public static void SuspendOrResumeStatuses(this BattleEntity entity, bool suspended, StatusTypes exclusion)
+        {
+            StatusEffect[] statuses = entity.GetStatuses();
+            for (int i = 0; i < statuses.Length; i++)
+            {
+                if (statuses[i].StatusType != exclusion)
+                {
+                    statuses[i].Suspended = suspended;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Suspends or Resumes all StatusEffects with a particular StatusAlignment on the BattleEntity
+        /// </summary>
+        /// <param name="entity">The BattleEntity</param>
+        /// <param name="suspended">true to Suspend the StatusEffects, false to Resume them</param>
+        /// <param name="alignment">The StatusAlignment to Suspend or Resume</param>
+        /// <param name="exclusion">A StatusType to exclude.
+        /// This is often the StatusType of the StatusEffect that suspended or resumed the other StatusEffects</param>
+        public static void SuspendOrResumeAlignmentStatuses(this BattleEntity entity, bool suspended, StatusEffect.StatusAlignments alignment,
+            StatusTypes exclusion)
+        {
+            StatusEffect[] statuses = entity.GetStatuses();
+            for (int i = 0; i < statuses.Length; i++)
+            {
+                if (statuses[i].Alignment == alignment && statuses[i].StatusType != exclusion)
+                {
+                    statuses[i].Suspended = suspended;
+                }
+            }
         }
 
         #endregion

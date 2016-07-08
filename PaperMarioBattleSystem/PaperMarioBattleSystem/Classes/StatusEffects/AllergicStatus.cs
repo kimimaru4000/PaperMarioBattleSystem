@@ -8,15 +8,10 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Allergic Status Effect.
-    /// All Status Effects affecting the entity are suspended and the entity cannot be inflicted with any new Status Effects
+    /// All Status Effects affecting the entity are suspended, and the entity cannot be inflicted with any new Status Effects
     /// </summary>
     public sealed class AllergicStatus : StatusEffect
     {
-        /// <summary>
-        /// The list of StatusEffects that are suspended until Allergic ends
-        /// </summary>
-        private List<StatusEffect> SuspendedStatuses = null;
-
         public AllergicStatus(int duration)
         {
             StatusType = Enumerations.StatusTypes.Allergic;
@@ -27,37 +22,26 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-            //Get all the StatusEffects afflicted on the entity and suspend them
-            SuspendedStatuses = EntityAfflicted.GetStatuses().ToList();
+            //Suspend all entity's StatusEffects aside from this one
+            EntityAfflicted.SuspendOrResumeStatuses(true, StatusType);
 
-            //Don't suspend Allergic, as it was just inflicted
-            bool removed = SuspendedStatuses.Remove(this);
+            //Make the entity immune to all StatusEffects
+            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.PositiveStatusImmune, new MiscValueHolder(true));
+            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune, new MiscValueHolder(true));
 
-            for (int i = 0; i < SuspendedStatuses.Count; i++)
-            {
-                SuspendedStatuses[i].Suspended = true;
-            }
-
-            //Add the StatusImmune MiscProperty
-            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.StatusImmune, new MiscValueHolder(true));
-
-            Debug.Log($"{StatusType} has been inflicted and suspended all StatusEffects on {EntityAfflicted.Name}!");
+            Debug.Log($"{StatusType} has been inflicted and Suspended all StatusEffects on {EntityAfflicted.Name}!");
         }
 
         protected override void OnEnd()
         {
-            //Remove the StatusImmune MiscProperty
-            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.StatusImmune);
+            //Remove the StatusEffect immunities
+            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.PositiveStatusImmune);
+            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune);
 
-            //Unsuspend all of the entity's StatusEffects
-            for (int i = 0; i < SuspendedStatuses.Count; i++)
-            {
-                SuspendedStatuses[i].Suspended = false;
-            }
+            //Resume all of the entity's StatusEffects
+            EntityAfflicted.SuspendOrResumeStatuses(false, StatusType);
 
-            Debug.Log($"{StatusType} has ended and unsuspended all StatusEffects on {EntityAfflicted.Name}!");
-
-            SuspendedStatuses = null;
+            Debug.Log($"{StatusType} has ended and Resumed all StatusEffects on {EntityAfflicted.Name}!");
         }
 
         protected override void OnPhaseCycleStart()

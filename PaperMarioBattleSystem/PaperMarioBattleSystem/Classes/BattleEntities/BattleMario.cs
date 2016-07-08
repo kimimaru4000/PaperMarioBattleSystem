@@ -57,6 +57,8 @@ namespace PaperMarioBattleSystem
             AddAnimation(AnimationGlobals.SpikedTipHurtName, new LoopAnimation(spriteSheet, 10,
                 new Animation.Frame(new Rectangle(393, 450, 38, 52), 30d),
                 new Animation.Frame(new Rectangle(393, 385, 38, 55), 30d)));
+
+            AddAnimation(AnimationGlobals.StatusBattleAnimations.StoneName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(66, 859, 35, 41), 0d)));
         }
 
         public override void OnTurnStart()

@@ -165,7 +165,7 @@ namespace PaperMarioBattleSystem
             {
                 if (elementResult == ElementInteractionResult.Damage)
                 {
-                    Debug.Log($"{Name} was hit with {element} " + (piercing ? "piercing" : "non-piercing") + " damage!");
+                    Debug.Log($"{Name} was hit with {damage} {element} " + (piercing ? "piercing" : "non-piercing") + " damage!");
 
                     //Lose HP
                     LoseHP(damage);
@@ -181,7 +181,7 @@ namespace PaperMarioBattleSystem
             //Heal the entity
             else if (elementResult == ElementInteractionResult.Heal)
             {
-                Debug.Log($"{Name} was healed because it has a {nameof(ResistanceTypes.Heal)} resistance to Element {element}");
+                Debug.Log($"{Name} was healed for {damage} HP because it has a {nameof(ResistanceTypes.Heal)} resistance to Element {element}");
 
                 //Heal the damage
                 HealHP(damage);
@@ -725,7 +725,7 @@ namespace PaperMarioBattleSystem
             newStatus.SetEntity(this);
             newStatus.Afflict();
 
-            Debug.LogWarning($"Afflicted {Name} with the {newStatus.StatusType} Status!");
+            Debug.LogWarning($"Afflicted {Name} with the {newStatus.StatusType} Status for {newStatus.TotalDuration} turns!");
         }
 
         /// <summary>
@@ -748,7 +748,7 @@ namespace PaperMarioBattleSystem
             status.ClearEntity();
             Statuses.Remove(statusType);
 
-            Debug.LogWarning($"Removed the {statusType} Status on {Name}!");
+            Debug.LogWarning($"Removed the {statusType} Status on {Name} after being inflicted for {status.TotalDuration} turns!");
         }
 
         /// <summary>

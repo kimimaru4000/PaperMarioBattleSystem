@@ -42,6 +42,12 @@ namespace PaperMarioBattleSystem
         public int Duration { get; protected set; } = 1;
 
         /// <summary>
+        /// The additional duration of the StatusEffect based on an entity's StatusProperties, in turns.
+        /// This is automatically set when the StatusEffect is assigned a BattleEntity reference.
+        /// </summary>
+        public int AdditionalDuration { get; protected set; } = 0;
+
+        /// <summary>
         /// The current number of turns the StatusEffect has been in effect
         /// </summary>
         protected int TurnsPassed { get; private set; } = 0;
@@ -85,18 +91,33 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// The total duration of the StatusEffect, which is the sum of both the base Duration and the AdditionalDuration
+        /// </summary>
+        public int TotalDuration
+        {
+            get
+            {
+                int totalDur = Duration + AdditionalDuration;
+                return (totalDur < 0) ? 0 : totalDur;
+            }
+        }
+
         private bool IsSuspended = false;
 
         private bool IsInfinite => (Duration <= InfiniteDuration);
-        public bool IsFinished => (IsInfinite == false && TurnsPassed >= Duration);
+        public bool IsFinished => (IsInfinite == false && TurnsPassed >= TotalDuration);
 
         /// <summary>
-        /// Sets the BattleEntity that is afflicted with this StatusEffect
+        /// Sets the BattleEntity that is afflicted with this StatusEffect and factors in the entity's StatusProperties for this StatusEffect.
         /// </summary>
-        /// <param name="entity">The BattleEntity to afflict with this StatusEffect</param>
+        /// <param name="entity">The BattleEntity to afflict with this StatusEffect.</param>
         public void SetEntity(BattleEntity entity)
         {
             EntityAfflicted = entity;
+
+            //Set the additional duration
+            AdditionalDuration = EntityAfflicted.GetStatusProperty(StatusType).AdditionalTurns;
         }
 
         /// <summary>

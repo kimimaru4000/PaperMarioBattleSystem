@@ -135,6 +135,17 @@ namespace PaperMarioBattleSystem
         /// Makes the entity take damage from an attack, factoring in stats such as defense, weaknesses, and resistances
         /// </summary>
         /// <param name="damageResult">The InteractionHolder containing the result of a damage interaction</param>
+        /*This is how Paper Mario: The Thousand Year Door calculates damage:
+        1. Start with base attack
+        2. Subtract damage from Defend Plus, Defend Command, and any additional Defense
+        3. Subtract or Add from P-Down D-up and P-Up D-Down
+        5. Reduce damage to 0 if superguarded. Reduce by 1 + each Damage Dodge if guarded
+        6. Multiply by the number of Double Pains + 1
+        7. Divide by the number of Last Stands + 1 (if in danger)
+        
+        Therefore, two Double Pains = Triple Pain.
+        Max Damage is 99.*/
+
         public void TakeDamage(InteractionHolder damageResult)
         {
             Elements element = damageResult.DamageElement;
@@ -146,6 +157,12 @@ namespace PaperMarioBattleSystem
             if (piercing == false)
             {
                 damage = UtilityGlobals.Clamp(damage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            }
+
+            //Check for a damage received multiplier on the entity. We need to check if it has one since the default value is 0
+            if (HasMiscProperty(MiscProperty.DamageReceivedMultiplier) == true)
+            {
+                damage *= GetMiscProperty(MiscProperty.DamageReceivedMultiplier).IntValue;
             }
 
             //Handle the elemental interaction results

@@ -347,7 +347,9 @@ namespace PaperMarioBattleSystem
             InstantKO,
             PositiveStatusImmune,
             NegativeStatusImmune,
-            Invincible
+            Invincible,
+            DamageDealtMultiplier,
+            DamageReceivedMultiplier
         }
     }
 

@@ -492,6 +492,91 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
+    /// Class for global values dealing with Badges
+    /// </summary>
+    public static class BadgeGlobals
+    {
+        #region Enums
+
+        /// <summary>
+        /// The various types of Badges (what the actual Badges are)
+        /// </summary>
+        public enum BadgeTypes
+        {
+            //Default value
+            None,
+            PowerJump, MegaJump, Multibounce, JumpCharge, SJumpCharge, ShrinkStomp,
+            DizzyStomp, DDownJump, PowerBounce, PowerSmash, MegaSmash,
+            SmashCharge, SSmashCharge, QuakeJump, QuakeHammer, PowerQuake, HammerThrow, DDownPound, PiercingBlow,
+            DoubleDip, TripleDip, GroupFocus, QuickChange, HappyHeart, HappyFlower,
+            DeepFocus, HPPlus, FPPlus, PowerPlus, DefendPlus,
+            DamageDodge, PDownDUp, PUpDDown, AllOrNothing, MegaRush,
+            LastStand, PowerRush, CloseCall, PrettyLucky, LuckyDay, 
+            AngersPower, DoublePain, IcePower,
+            FireShield, SpikeShield, FeelingFine, ZapTap, SuperAppeal,
+            RunawayPay, Refund, ISpy, SpeedySpin, DizzyAttack,
+            BumpAttack, Charge,
+            AttackFXB, AttackFXC, AttackFXE, AttackFXF, AttackFXG,
+            AttackFXP, AttackFXR, AttackFXY
+        }
+
+        #endregion
+
+        #region Fields
+
+        /// <summary>
+        /// Defines the sort order of Badges by BadgeType in the Inventory, with lower values appearing first.
+        /// <para>Related Badges are grouped together in lines for readability.
+        /// The placement of Badges that exist in only one game are based off their placements in their respective games.</para>
+        /// </summary>
+        private static readonly Dictionary<BadgeTypes, int> BadgeOrder = new Dictionary<BadgeTypes, int>()
+        {
+            { BadgeTypes.PowerJump, 1 }, { BadgeTypes.MegaJump, 10 },
+            { BadgeTypes.Multibounce, 20 }, { BadgeTypes.PowerBounce, 30 },
+            { BadgeTypes.Charge, 40 }, { BadgeTypes.JumpCharge, 50 }, { BadgeTypes.SJumpCharge, 51 },
+            { BadgeTypes.SmashCharge, 60 }, { BadgeTypes.SSmashCharge, 61 },
+            { BadgeTypes.QuakeJump, 70 }, { BadgeTypes.QuakeHammer, 80 }, { BadgeTypes.PowerQuake, 90 },
+            { BadgeTypes.HammerThrow, 100 }, { BadgeTypes.DDownPound, 110 }, { BadgeTypes.PiercingBlow, 111 },
+            { BadgeTypes.DoubleDip, 120 }, { BadgeTypes.TripleDip, 121 },
+            { BadgeTypes.GroupFocus, 130 }, { BadgeTypes.DeepFocus, 140 },
+            { BadgeTypes.QuickChange, 150 },
+            { BadgeTypes.HappyHeart, 160 }, { BadgeTypes.HappyFlower, 170 },
+            { BadgeTypes.HPPlus, 180 }, { BadgeTypes.FPPlus, 190 }, { BadgeTypes.PowerPlus, 200 }, { BadgeTypes.DefendPlus, 210 },
+            { BadgeTypes.DamageDodge, 220 }, { BadgeTypes.PDownDUp, 230 }, { BadgeTypes.PUpDDown, 231 },
+            { BadgeTypes.AllOrNothing, 240 },
+            { BadgeTypes.MegaRush, 250 }, { BadgeTypes.LastStand, 260 }, { BadgeTypes.PowerRush, 270 },
+            { BadgeTypes.CloseCall, 280 }, { BadgeTypes.PrettyLucky, 290 }, { BadgeTypes.LuckyDay, 300 },
+            { BadgeTypes.AngersPower, 310 },
+            { BadgeTypes.DoublePain, 320 },
+            { BadgeTypes.IcePower, 330 }, { BadgeTypes.FireShield, 340 }, { BadgeTypes.SpikeShield, 350 },
+            { BadgeTypes.FeelingFine, 360 }, { BadgeTypes.ZapTap, 370 },
+            { BadgeTypes.SuperAppeal, 380 }, { BadgeTypes.RunawayPay, 390 }, { BadgeTypes.ISpy, 400 },
+            { BadgeTypes.SpeedySpin, 410 }, { BadgeTypes.DizzyAttack, 420 }, { BadgeTypes.BumpAttack, 430 },
+            { BadgeTypes.AttackFXB, 500 }, { BadgeTypes.AttackFXC, 501 }, { BadgeTypes.AttackFXE, 502 },
+            { BadgeTypes.AttackFXF, 503 }, { BadgeTypes.AttackFXG, 504 }, { BadgeTypes.AttackFXP, 505 },
+            { BadgeTypes.AttackFXR, 506 }, { BadgeTypes.AttackFXY, 507 }
+        };
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Gets the order of a particular BadgeType
+        /// </summary>
+        /// <param name="badgeType">The BadgeType to get priority for</param>
+        /// <returns>A value corresponding to the StatusType if it has an entry, otherwise the max value of an int</returns>
+        public static int GetBadgeOrderValue(BadgeTypes badgeType)
+        {
+            if (BadgeOrder.ContainsKey(badgeType) == false) return int.MaxValue;
+
+            return BadgeOrder[badgeType];
+        }
+
+        #endregion
+    }
+
+    /// <summary>
     /// Class for global values dealing with rendering
     /// </summary>
     public static class RenderingGlobals

@@ -113,6 +113,7 @@
     <Compile Include="Classes\Singletons\General\Camera.cs" />
     <Compile Include="Classes\Global\Globals.cs" />
     <Compile Include="Classes\Global\Input.cs" />
+    <Compile Include="Classes\Singletons\General\Inventory.cs" />
     <Compile Include="Classes\Singletons\General\SoundManager.cs" />
     <Compile Include="Classes\Singletons\General\SpriteRenderer.cs" />
     <Compile Include="Classes\Global\Time.cs" />

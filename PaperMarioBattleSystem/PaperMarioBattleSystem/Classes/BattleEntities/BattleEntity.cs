@@ -139,9 +139,9 @@ namespace PaperMarioBattleSystem
         1. Start with base attack
         2. Subtract damage from Defend Plus, Defend Command, and any additional Defense
         3. Subtract or Add from P-Down D-up and P-Up D-Down
-        5. Reduce damage to 0 if superguarded. Reduce by 1 + each Damage Dodge if guarded
-        6. Multiply by the number of Double Pains + 1
-        7. Divide by the number of Last Stands + 1 (if in danger)
+        4. Reduce damage to 0 if superguarded. Reduce by 1 + each Damage Dodge if guarded
+        5. Multiply by the number of Double Pains + 1
+        6. Divide by the number of Last Stands + 1 (if in danger)
         
         Therefore, two Double Pains = Triple Pain.
         Max Damage is 99.*/
@@ -154,12 +154,14 @@ namespace PaperMarioBattleSystem
             StatusEffect[] statusesInflicted = damageResult.StatusesInflicted;
 
             //Subtract Defense on non-piercing damage
+            //NOTE: Don't do this here, do it in Interactions according to the order in the comments above (Step 2)
             if (piercing == false)
             {
                 damage = UtilityGlobals.Clamp(damage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
             }
 
             //Check for a damage received multiplier on the entity. We need to check if it has one since the default value is 0
+            //NOTE: Don't do this here, do it in Interactions according to the order in the comments above (Steps 5/6)
             if (HasMiscProperty(MiscProperty.DamageReceivedMultiplier) == true)
             {
                 damage *= GetMiscProperty(MiscProperty.DamageReceivedMultiplier).IntValue;
@@ -360,6 +362,15 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        /// <summary>
+        /// What occurs when the battle is started for the entity.
+        /// Here's where you can apply Badges.
+        /// </summary>
+        public void OnBattleStart()
+        {
+            
+        }
 
         #region Damage Related
 

@@ -30,5 +30,11 @@ namespace PaperMarioBattleSystem
         {
             base.StopBracing();
         }
+
+        public override bool HasBadge(BadgeGlobals.BadgeTypes badgeType)
+        {
+            //TEMPORARY
+            return false;
+        }
     }
 }

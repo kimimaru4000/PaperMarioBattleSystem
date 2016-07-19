@@ -257,6 +257,14 @@ namespace PaperMarioBattleSystem
             Goompa, Goombaria, Twink, ProfFrankly, Flavio
         }
 
+        /// <summary>
+        /// The types of Collectibles in the game
+        /// </summary>
+        public enum CollectibleTypes
+        {
+            None, Item, Badge
+        }
+
         public enum BattleActions
         {
             Misc, Item, Jump, Hammer, Focus, Special
@@ -515,10 +523,48 @@ namespace PaperMarioBattleSystem
             AngersPower, DoublePain, IcePower,
             FireShield, SpikeShield, FeelingFine, ZapTap, SuperAppeal,
             RunawayPay, Refund, ISpy, SpeedySpin, DizzyAttack,
-            BumpAttack, Charge,
+            BumpAttack, Charge, ReturnPostage, Simplifier, UnSimplifier,
             AttackFXB, AttackFXC, AttackFXE, AttackFXF, AttackFXG,
             AttackFXP, AttackFXR, AttackFXY
         }
+
+        /// <summary>
+        /// Who the Badge affects.
+        /// <para>For Players, Self refers to Mario. For Enemies, Partner doesn't have any affect.</para>
+        /// </summary>
+        public enum AffectedTypes
+        {
+            Self, Partner
+        }
+
+        #endregion
+
+        #region Structs
+
+        // <summary>
+        // Holds a Badge reference and the number of the respective Badge
+        // </summary>
+        /*public struct BadgeHolder
+        {
+            public Badge BadgeRef { get; private set; }
+            public int BadgeCount { get; private set; }
+
+            public BadgeHolder(Badge badge, int badgeCount)
+            {
+                BadgeRef = badge;
+                BadgeCount = badgeCount;
+            }
+
+            public void IncrementCount()
+            {
+                BadgeCount++;
+            }
+
+            public void DecrementCount()
+            {
+                BadgeCount--;
+            }
+        }*/
 
         #endregion
 
@@ -552,6 +598,8 @@ namespace PaperMarioBattleSystem
             { BadgeTypes.FeelingFine, 360 }, { BadgeTypes.ZapTap, 370 },
             { BadgeTypes.SuperAppeal, 380 }, { BadgeTypes.RunawayPay, 390 }, { BadgeTypes.ISpy, 400 },
             { BadgeTypes.SpeedySpin, 410 }, { BadgeTypes.DizzyAttack, 420 }, { BadgeTypes.BumpAttack, 430 },
+            { BadgeTypes.ReturnPostage, 435 },
+            { BadgeTypes.Simplifier, 440 }, { BadgeTypes.UnSimplifier, 441 },
             { BadgeTypes.AttackFXB, 500 }, { BadgeTypes.AttackFXC, 501 }, { BadgeTypes.AttackFXE, 502 },
             { BadgeTypes.AttackFXF, 503 }, { BadgeTypes.AttackFXG, 504 }, { BadgeTypes.AttackFXP, 505 },
             { BadgeTypes.AttackFXR, 506 }, { BadgeTypes.AttackFXY, 507 }

@@ -26,9 +26,19 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public BadgeTypes BadgeType { get; protected set; } = BadgeTypes.None;
 
+        /// <summary>
+        /// Which type of entity the Badge affects when equipped
+        /// </summary>
+        public AffectedTypes AffectedType { get; protected set; } = AffectedTypes.Self;
+
+        /// <summary>
+        /// Whether the Badge is equipped or not
+        /// </summary>
+        public bool Equipped { get; private set; } = false;
+
         protected Badge()
         {
-
+            CollectibleType = Enumerations.CollectibleTypes.Badge;
         }
 
         /// <summary>
@@ -37,73 +47,44 @@ namespace PaperMarioBattleSystem
         public int Order => BadgeGlobals.GetBadgeOrderValue(BadgeType);
 
         /// <summary>
+        /// Tells if the Badge can be equipped or not
+        /// </summary>
+        public bool CanEquip => (Inventory.Instance.BP >= BPCost);
+
+        /// <summary>
+        /// Equips the Badge
+        /// </summary>
+        public void Equip()
+        {
+            //Don't perform the equip effects again
+            if (Equipped == true) return;
+
+            Equipped = true;
+
+            OnEquip();
+        }
+
+        /// <summary>
+        /// Unequips the Badge
+        /// </summary>
+        public void UnEquip()
+        {
+            //Don't perform the unequip effects again
+            if (Equipped == false) return;
+
+            Equipped = false;
+            
+            OnUnequip();
+        }
+
+        /// <summary>
         /// What occurs when the Badge is equipped
         /// </summary>
-        public abstract void OnEquip();
+        protected abstract void OnEquip();
 
         /// <summary>
         /// What occurs when the Badge is unequipped
         /// </summary>
-        public abstract void OnUnequip();
-
-        #region Static Sort Methods
-
-        /// <summary>
-        /// A Comparison method used to sort Badges by their Orders (Types)
-        /// </summary>
-        /// <param name="badge1">The first Badge to compare</param>
-        /// <param name="badge2">The second Badge to compare</param>
-        /// <returns>-1 if badge1 has a lower Order, 1 if badge2 has a lower Order, 0 if they have the same Order</returns>
-        public static int BadgeOrderSort(Badge badge1, Badge badge2)
-        {
-            if (badge1 == null && badge2 == null) return 0;
-            if (badge1 == null) return 1;
-            if (badge2 == null) return -1;
-
-            if (badge1.Order < badge2.Order)
-                return -1;
-            if (badge1.Order > badge2.Order)
-                return 1;
-
-            return 0;
-        }
-
-        /// <summary>
-        /// A Comparison method used to sort Badges alphabetically (ABC)
-        /// </summary>
-        /// <param name="badge1">The first Badge to compare</param>
-        /// <param name="badge2">The second Badge to compare</param>
-        /// <returns>-1 if badge1 has a lower Order, 1 if badge2 has a lower Order, 0 if they have the same Order</returns>
-        public static int BadgeAlphabeticalSort(Badge badge1, Badge badge2)
-        {
-            if (badge1 == null && badge2 == null) return 0;
-            if (badge1 == null) return 1;
-            if (badge2 == null) return -1;
-
-            return string.Compare(badge1.Name, badge2.Name, StringComparison.CurrentCulture);
-        }
-
-        /// <summary>
-        /// A Comparison method used to sort Badges by BP cost (BP Needed)
-        /// </summary>
-        /// <param name="badge1">The first Badge to compare</param>
-        /// <param name="badge2">The second Badge to compare</param>
-        /// <returns>-1 if badge1 has a lower BP cost, 1 if badge2 has a lower BP cost, 0 if they have the same BP cost and Order</returns>
-        public static int BadgeBPSort(Badge badge1, Badge badge2)
-        {
-            if (badge1 == null && badge2 == null) return 0;
-            if (badge1 == null) return 1;
-            if (badge2 == null) return -1;
-
-            if (badge1.BPCost < badge2.BPCost)
-                return -1;
-            if (badge1.BPCost > badge2.BPCost)
-                return 1;
-
-            //Resort to their Orders if they have the same BP cost
-            return BadgeOrderSort(badge1, badge2);
-        }
-
-        #endregion
+        protected abstract void OnUnequip();
     }
 }

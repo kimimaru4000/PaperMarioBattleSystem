@@ -529,6 +529,8 @@ namespace PaperMarioBattleSystem
             PreviousAction.StartSequence(targets);
         }
 
+        #region Animation Methods
+
         /// <summary>
         /// Adds an animation for the entity.
         /// If an animation already exists, it will be replaced.
@@ -612,6 +614,10 @@ namespace PaperMarioBattleSystem
             CurrentAnim.Play(onFinish);
         }
 
+        #endregion
+
+        #region Phys Attribute Methods
+
         /// <summary>
         /// Adds a physical attribute to the entity
         /// </summary>
@@ -676,6 +682,10 @@ namespace PaperMarioBattleSystem
             return Interactions.GetContactResult(attacker, contactType, PhysAttributes.Keys.ToArray());
         }
 
+        #endregion
+
+        #region Weakness/Resistance Methods
+
         /// <summary>
         /// Gets this entity's weakness to a particular Element
         /// </summary>
@@ -707,6 +717,10 @@ namespace PaperMarioBattleSystem
 
             return Resistances[element];
         }
+
+        #endregion
+
+        #region Status Effect Methods
 
         /// <summary>
         /// Attempts to afflict the entity with a StatusEffect, based on its properties and status percentage for the StatusEffect
@@ -856,6 +870,10 @@ namespace PaperMarioBattleSystem
             return StatusProperties[statusType];
         }
 
+        #endregion
+
+        #region Misc Property Methods
+
         /// <summary>
         /// Adds a MiscProperty to the entity if it doesn't already have it
         /// </summary>
@@ -912,6 +930,14 @@ namespace PaperMarioBattleSystem
 
             return MiscProperties[property];
         }
+
+        #endregion
+
+        #region Equipment Methods
+
+        public abstract bool HasBadge(BadgeGlobals.BadgeTypes badgeType);
+
+        #endregion
 
         /// <summary>
         /// Used for update logic that applies to the entity regardless of whether it is its turn or not

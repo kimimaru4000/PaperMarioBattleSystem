@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
 
         protected Item()
         {
-
+            CollectibleType = Enumerations.CollectibleTypes.Item;
         }
     }
 }

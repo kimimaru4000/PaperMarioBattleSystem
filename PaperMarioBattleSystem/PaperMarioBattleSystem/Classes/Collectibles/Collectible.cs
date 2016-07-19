@@ -21,25 +21,28 @@ namespace PaperMarioBattleSystem
         public string Name { get; protected set; } = "Item";
 
         /// <summary>
+        /// The description of the Collectible
+        /// </summary>
+        public string Description { get; protected set; } = "N/A";
+
+        /// <summary>
         /// The icon for the Collectible
         /// </summary>
         public Texture2D Icon { get; protected set; } = null;
 
         /// <summary>
-        /// The price  value of the Collectible
+        /// The type of Collectible this is
+        /// </summary>
+        public Enumerations.CollectibleTypes CollectibleType { get; protected set; } = Enumerations.CollectibleTypes.None;
+
+        /// <summary>
+        /// The price value of the Collectible
         /// </summary>
         public int PriceValue { get; protected set; } = 0;
 
         protected Collectible()
         {
 
-        }
-
-        protected Collectible(string name, Texture2D icon, int priceValue)
-        {
-            Name = name;
-            Icon = icon;
-            PriceValue = priceValue;
         }
     }
 }

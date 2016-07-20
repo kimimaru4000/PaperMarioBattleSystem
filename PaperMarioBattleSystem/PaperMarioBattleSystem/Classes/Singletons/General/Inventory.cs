@@ -148,7 +148,7 @@ namespace PaperMarioBattleSystem
             AllBadges.Add(badge);
 
             //Increment number if a Badge of this type already exists
-            if (HasBadge(badge.BadgeType) == true)
+            if (HasBadgeType(badge.BadgeType) == true)
             {
                 AllBadgeCounts[badge.BadgeType]++;
             }
@@ -157,6 +157,8 @@ namespace PaperMarioBattleSystem
             {
                 AllBadgeCounts.Add(badge.BadgeType, 1);
             }
+
+            Debug.Log($"Added {badge.Name} to the Inventory!");
         }
 
         /// <summary>
@@ -172,7 +174,7 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            if (HasBadge(badge.BadgeType) == false)
+            if (HasBadgeType(badge.BadgeType) == false)
             {
                 Debug.LogWarning($"Badge of type {badge.BadgeType} cannot be removed because it doesn't exist in the Inventory!");
                 return;
@@ -189,37 +191,66 @@ namespace PaperMarioBattleSystem
             //Remove from active badges if it's active, and unequip it
             if (badge.Equipped == true)
             {
-                //Unequip badge first to remove its effects
+                //Unequip badge to remove its effects and deactivate it
                 badge.UnEquip();
-                
-                //Remove from the active badges list
-                ActiveBadges.Remove(badge);
-                ActiveBadgeCounts[badge.BadgeType]--;
-                if (ActiveBadgeCounts[badge.BadgeType] <= 0)
-                {
-                    ActiveBadgeCounts.Remove(badge.BadgeType);
-                }
             }
+
+            Debug.Log($"Removed {badge.Name} from the Inventory!");
         }
 
         /// <summary>
         /// Finds the first instance of a Badge with a particular BadgeType
         /// </summary>
         /// <param name="badgeType">The BadgeType of the Badge</param>
-        /// <param name="equipped">Whether the Badge is equipped or not</param>
+        /// <param name="badgeFilter">The filter for finding the Badge</param>
         /// <returns>null if no Badge was found, otherwise the first Badge matching the parameters</returns>
-        public Badge GetBadge(BadgeTypes badgeType, bool equipped)
+        public Badge GetBadge(BadgeTypes badgeType, BadgeFilterType badgeFilter)
         {
-            if (HasBadge(badgeType) == false) return null;
+            if (HasBadgeType(badgeType) == false) return null;
         
-            if (equipped == true)
-            {
-                return GetActiveBadge(badgeType);
-            }
-            else
+            //Look through all Badges
+            if (badgeFilter == BadgeFilterType.All)
             {
                 return AllBadges.Find((badge) => badge.BadgeType == badgeType);
             }
+            //Look through all equipped Badges
+            else if (badgeFilter == BadgeFilterType.Equipped)
+            {
+                return GetActiveBadge(badgeType);
+            }
+            //Look through all unequipped Badges
+            else if (badgeFilter == BadgeFilterType.UnEquipped)
+            {
+                return AllBadges.Find((badge) => (badge.BadgeType == badgeType && badge.Equipped == false));
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Finds all instances of a Badge with a particular BadgeType
+        /// </summary>
+        /// <param name="badgeType">The BadgeType of the Badges</param>
+        /// <param name="badgeFilter">The filter for finding the Badges</param>
+        /// <returns>A list of all Badges matching the parameters, and an empty list if none were found</returns>
+        public List<Badge> GetBadges(BadgeTypes badgeType, BadgeFilterType badgeFilter)
+        {
+            if (HasBadgeType(badgeType) == false) return new List<Badge>();
+
+            if (badgeFilter == BadgeFilterType.All)
+            {
+                return AllBadges.FindAll((badge) => badge.BadgeType == badgeType);
+            }
+            else if (badgeFilter == BadgeFilterType.Equipped)
+            {
+                return GetActiveBadges(badgeType);
+            }
+            else if (badgeFilter == BadgeFilterType.UnEquipped)
+            {
+                return AllBadges.FindAll((badge) => (badge.BadgeType == badgeType && badge.Equipped == false));
+            }
+
+            return new List<Badge>();
         }
 
         /// <summary>
@@ -229,22 +260,89 @@ namespace PaperMarioBattleSystem
         /// <returns>The number of Badges of the BadgeType in the Player's Inventory</returns>
         public int GetBadgeCount(BadgeTypes badgeType)
         {
-            if (HasBadge(badgeType) == false) return 0;
+            if (HasBadgeType(badgeType) == false) return 0;
 
             return AllBadgeCounts[badgeType];
         }
 
         /// <summary>
-        /// Tells whether the Player owns a particular Badge or not
+        /// Tells whether the Player owns a Badge of a particular BadgeType or not
         /// </summary>
         /// <param name="badgeType">The BadgeType</param>
-        /// <returns>true if the Player owns the badge, false if not</returns>
-        public bool HasBadge(BadgeTypes badgeType)
+        /// <returns>true if the Player owns a Badge of the BadgeType, false if not</returns>
+        public bool HasBadgeType(BadgeTypes badgeType)
         {
             return AllBadgeCounts.ContainsKey(badgeType);
         }
 
         /*Active Badges*/
+
+        /// <summary>
+        /// Adds a Badge to the active Badge list. This is called when the Badge is equipped to a Player entity.
+        /// Do not add new Badges instances here. Add only Badges that are already in the Inventory.
+        /// </summary>
+        /// <param name="badge">The Badge to activate</param>
+        public void ActivateBadge(Badge badge)
+        {
+            if (badge == null)
+            {
+                Debug.LogError($"Attempting to activate a null Badge!");
+                return;
+            }
+
+            //The Badge is already equipped, so it shouldn't be added again
+            if (badge.Equipped == true)
+            {
+                Debug.LogError($"This instance of {badge.Name} is already equipped and thus cannot be activated.");
+                return;
+            }
+
+            //Add to the active Badge list
+            ActiveBadges.Add(badge);
+
+            //Increment number if a Badge of this type is already active
+            if (IsBadgeTypeActive(badge.BadgeType) == true)
+            {
+                ActiveBadgeCounts[badge.BadgeType]++;
+            }
+            //Otherwise add a new entry with a count of 1
+            else
+            {
+                ActiveBadgeCounts.Add(badge.BadgeType, 1);
+            }
+
+            Debug.Log($"Activated a(n) {badge.Name} Badge!");
+        }
+
+        /// <summary>
+        /// Removes a Badge from the active Badge list. This is called when the Badge is unequipped from a Player entity.
+        /// </summary>
+        /// <param name="badge">The Badge to deactivate</param>
+        public void DeactivateBadge(Badge badge)
+        {
+            if (badge == null)
+            {
+                Debug.LogError($"Attempting to deactivate a null Badge!");
+                return;
+            }
+
+            //The Badge isn't equipped, so it shouldn't be removed
+            if (badge.Equipped == false)
+            {
+                Debug.LogError($"This instance of {badge.Name} isn't equipped and thus cannot be deactivated.");
+                return;
+            }
+
+            //Remove from the active badges list
+            ActiveBadges.Remove(badge);
+            ActiveBadgeCounts[badge.BadgeType]--;
+            if (ActiveBadgeCounts[badge.BadgeType] <= 0)
+            {
+                ActiveBadgeCounts.Remove(badge.BadgeType);
+            }
+
+            Debug.Log($"Deactivated a(n) {badge.Name} Badge!");
+        }
 
         /// <summary>
         /// Finds the first instance of an active Badge with a particular BadgeType
@@ -253,9 +351,21 @@ namespace PaperMarioBattleSystem
         /// <returns>null if no Badge was found, otherwise the first active Badge matching the BadgeType</returns>
         private Badge GetActiveBadge(BadgeTypes badgeType)
         {
-            if (IsBadgeActive(badgeType) == false) return null;
+            if (IsBadgeTypeActive(badgeType) == false) return null;
 
             return ActiveBadges.Find((badge) => badge.BadgeType == badgeType);
+        }
+
+        /// <summary>
+        /// Finds all instances of active Badges with a particular BadgeType
+        /// </summary>
+        /// <param name="badgeType">The BadgeType of the Badges</param>
+        /// <returns>A list of all active Badges of the BadgeType, and an empty list if none were found</returns>
+        private List<Badge> GetActiveBadges(BadgeTypes badgeType)
+        {
+            if (IsBadgeTypeActive(badgeType) == false) return new List<Badge>();
+
+            return ActiveBadges.FindAll((badge) => badge.BadgeType == badgeType);
         }
 
         /// <summary>
@@ -265,7 +375,7 @@ namespace PaperMarioBattleSystem
         /// <returns>The number of active Badges of the BadgeType</returns>
         public int GetActiveBadgeCount(BadgeTypes badgeType)
         {
-            if (IsBadgeActive(badgeType) == false) return 0;
+            if (IsBadgeTypeActive(badgeType) == false) return 0;
 
             return ActiveBadgeCounts[badgeType];
         }
@@ -274,10 +384,28 @@ namespace PaperMarioBattleSystem
         /// Tells whether the Player has an active Badge of a particular type
         /// </summary>
         /// <param name="badgeType">The BadgeType</param>
-        /// <returns>true if the Player owns the and the Badge is active, false otherwise</returns>
-        public bool IsBadgeActive(BadgeTypes badgeType)
+        /// <returns>true if the Player owns the Badge and the Badge is active, false otherwise</returns>
+        public bool IsBadgeTypeActive(BadgeTypes badgeType)
         {
             return ActiveBadgeCounts.ContainsKey(badgeType);
+        }
+
+        /// <summary>
+        /// Gets all active Badges affecting Mario
+        /// </summary>
+        /// <returns>A List of all active Badges affecting Mario</returns>
+        public List<Badge> GetActiveMarioBadges()
+        {
+            return ActiveBadges.FindAll((badge) => badge.AffectedType == AffectedTypes.Self);
+        }
+
+        /// <summary>
+        /// Gets all active Badges affecting Mario's Partners
+        /// </summary>
+        /// <returns>A List of all active Badges affecting Mario's Partners</returns>
+        public List<Badge> GetActivePartnerBadges()
+        {
+            return ActiveBadges.FindAll((badge) => badge.AffectedType == AffectedTypes.Partner);
         }
 
         #endregion

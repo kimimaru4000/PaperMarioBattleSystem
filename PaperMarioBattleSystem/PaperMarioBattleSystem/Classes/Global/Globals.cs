@@ -357,7 +357,10 @@ namespace PaperMarioBattleSystem
             NegativeStatusImmune,
             Invincible,
             DamageDealtMultiplier,
-            DamageReceivedMultiplier
+            DamageReceivedMultiplier,
+            //Badge properties
+            JumpSpikedEntity,
+            JumpFieryEntity
         }
     }
 
@@ -535,6 +538,14 @@ namespace PaperMarioBattleSystem
         public enum AffectedTypes
         {
             Self, Partner
+        }
+
+        /// <summary>
+        /// Filter options for finding Badges
+        /// </summary>
+        public enum BadgeFilterType
+        {
+            All, Equipped,UnEquipped
         }
 
         #endregion

@@ -34,12 +34,24 @@ namespace PaperMarioBattleSystem
             graphics.PreferMultiSampling = true;
             graphics.PreferredBackBufferWidth = RenderingGlobals.WindowWidth;
             graphics.PreferredBackBufferHeight = RenderingGlobals.WindowHeight;
-            
+
+            //FOR TESTING
+            InitializeInventory();
+
             AssetManager.Instance.Initialize(Content);
             SpriteRenderer.Instance.Initialize(graphics);
             BattleManager.Instance.Initialize(new BattleMario(new Stats(1, 50, 5, 1, 0)), new Goombario(), new List<BattleEnemy>() { new Goomba(), new SpikedGoomba() });
 
             base.Initialize();
+        }
+
+        /// <summary>
+        /// FOR TESTING
+        /// </summary>
+        private void InitializeInventory()
+        {
+            Inventory.Instance.AddBadge(new PowerPlusBadge());
+            Inventory.Instance.AddBadge(new SpikeShieldBadge());
         }
 
         /// <summary>

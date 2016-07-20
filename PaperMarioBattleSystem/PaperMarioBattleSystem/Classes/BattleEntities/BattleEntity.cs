@@ -365,9 +365,8 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// What occurs when the battle is started for the entity.
-        /// Here's where you can apply Badges.
         /// </summary>
-        public void OnBattleStart()
+        public virtual void OnBattleStart()
         {
             
         }
@@ -672,6 +671,31 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Returns a set of PhysicalAttributes to ignore when the BattleEntity makes contact, whether based on equipment or innately
+        /// </summary>
+        /// <param name="contactType">The type of contact this BattleEntity made</param>
+        /// <returns>An array of PhysicalAttributes this BattleEntity can ignore when making contact, otherwise an empty array</returns>
+        public PhysicalAttributes[] GetContactExceptions(ContactTypes contactType)
+        {
+            List<PhysicalAttributes> attributesIgnored = new List<PhysicalAttributes>();
+
+            //Jump contact
+            if (contactType == ContactTypes.JumpContact)
+            {
+                if (GetMiscProperty(MiscProperty.JumpSpikedEntity).BoolValue == true)
+                {
+                    attributesIgnored.Add(PhysicalAttributes.Spiked);
+                }
+                if (GetMiscProperty(MiscProperty.JumpFieryEntity).BoolValue == true)
+                {
+                    attributesIgnored.Add(PhysicalAttributes.Fiery);
+                }
+            }
+
+            return attributesIgnored.ToArray();
+        } 
+
+        /// <summary>
         /// Determines the result of contact, based on the type of contact made, when it's made with this entity
         /// </summary>
         /// <param name="attacker">The entity attacking this one</param>
@@ -679,7 +703,7 @@ namespace PaperMarioBattleSystem
         /// <returns>A ContactResultInfo containing the result of the interaction</returns>
         public ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType)
         {
-            return Interactions.GetContactResult(attacker, contactType, PhysAttributes.Keys.ToArray());
+            return Interactions.GetContactResult(attacker, contactType, PhysAttributes.Keys.ToArray(), attacker.GetContactExceptions(contactType));
         }
 
         #endregion
@@ -935,7 +959,7 @@ namespace PaperMarioBattleSystem
 
         #region Equipment Methods
 
-        public abstract bool HasBadge(BadgeGlobals.BadgeTypes badgeType);
+        
 
         #endregion
 

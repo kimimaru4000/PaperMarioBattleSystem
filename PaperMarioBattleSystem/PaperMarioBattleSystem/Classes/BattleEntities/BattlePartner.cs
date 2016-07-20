@@ -19,5 +19,23 @@ namespace PaperMarioBattleSystem
 
             EntityType = Enumerations.EntityTypes.Player;
         }
+
+        //public void EquipAllBadges()
+        //{
+        //    List<Badge> badges = Inventory.Instance.GetActivePartnerBadges();
+        //    for (int i = 0; i < badges.Count; i++)
+        //    {
+        //        badges[i].Equip(this);
+        //    }
+        //}
+
+        //public void UnEquipAllBadges()
+        //{
+        //    List<Badge> badges = Inventory.Instance.GetActivePartnerBadges();
+        //    for (int i = 0; i < badges.Count; i++)
+        //    {
+        //        badges[i].UnEquip();
+        //    }
+        //}
     }
 }

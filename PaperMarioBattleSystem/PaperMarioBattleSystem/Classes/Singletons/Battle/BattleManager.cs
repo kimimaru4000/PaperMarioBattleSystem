@@ -126,10 +126,17 @@ namespace PaperMarioBattleSystem
 
             Mario.Position = MarioPos;
             Mario.SetBattlePosition(MarioPos);
+
+            //Start battle for Mario
+            Mario.OnBattleStart();
+
             if (Partner != null)
             {
                 Partner.Position = PartnerPos;
                 Partner.SetBattlePosition(PartnerPos);
+
+                //Start battle for the Partner
+                Partner.OnBattleStart();
             }
 
             //Add and initialize enemies
@@ -431,6 +438,9 @@ namespace PaperMarioBattleSystem
                 enemy.Position = battlepos;
                 enemy.SetBattlePosition(battlepos);
                 enemy.SetBattleIndex(index);
+
+                //Start battle for the enemy
+                enemy.OnBattleStart();
 
                 IncrementEnemiesAlive();
             }

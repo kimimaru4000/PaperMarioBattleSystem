@@ -34,9 +34,19 @@ namespace PaperMarioBattleSystem
             BattleIndex = battleIndex;
         }
 
-        public override bool HasBadge(BadgeGlobals.BadgeTypes badgeType)
+        public override void OnBattleStart()
         {
-            return (HeldCollectible?.CollectibleType == Enumerations.CollectibleTypes.Badge);
+            base.OnBattleStart();
+
+            //Equip the held Badge, if one is held
+            if (HeldCollectible?.CollectibleType == Enumerations.CollectibleTypes.Badge)
+            {
+                Badge heldBadge = (Badge)HeldCollectible;
+                if (heldBadge.AffectedType == BadgeGlobals.AffectedTypes.Self)
+                {
+                    heldBadge.Equip(this);
+                }
+            }
         }
     }
 }

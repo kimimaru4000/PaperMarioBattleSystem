@@ -32,6 +32,11 @@ namespace PaperMarioBattleSystem
         public AffectedTypes AffectedType { get; protected set; } = AffectedTypes.Self;
 
         /// <summary>
+        /// The BattleEntity the Badge is equipped to
+        /// </summary>
+        public BattleEntity EntityEquipped { get; private set; } = null;
+
+        /// <summary>
         /// Whether the Badge is equipped or not
         /// </summary>
         public bool Equipped { get; private set; } = false;
@@ -52,29 +57,75 @@ namespace PaperMarioBattleSystem
         public bool CanEquip => (Inventory.Instance.BP >= BPCost);
 
         /// <summary>
-        /// Equips the Badge
+        /// Equips the Badge to a BattleEntity
         /// </summary>
-        public void Equip()
+        public void Equip(BattleEntity entity)
         {
             //Don't perform the equip effects again
-            if (Equipped == true) return;
+            if (Equipped == true)
+            {
+                Debug.LogWarning($"Badge {Name} is already equipped to {EntityEquipped?.Name} and thus cannot be re-equipped");
+                return;
+            }
 
+            EntityEquipped = entity;
+
+            //Activate the Badge if equipped to a Player entity
+            if (EntityEquipped?.EntityType == Enumerations.EntityTypes.Player)
+            {
+                Inventory.Instance.ActivateBadge(this);
+            }
+
+            //Set the equipped flag after activation
             Equipped = true;
 
+            if (EntityEquipped == null)
+            {
+                Debug.LogError($"Equipping Badge to NULL BattleEntity! Fix ASAP");
+            }
+            else
+            {
+                Debug.Log($"Equipped {Name} Badge to {EntityEquipped.Name}");
+            }
+
+            //Apply Equip effects
             OnEquip();
         }
 
         /// <summary>
-        /// Unequips the Badge
+        /// Unequips the Badge from the BattleEntity
         /// </summary>
         public void UnEquip()
         {
             //Don't perform the unequip effects again
-            if (Equipped == false) return;
+            if (Equipped == false)
+            {
+                Debug.LogWarning($"Badge {Name} is not equipped to {EntityEquipped?.Name} and thus cannot be unequipped");
+                return;
+            }
 
+            //Apply UnEquip effects
+            OnUnequip();
+
+            //Dectivate the Badge if unequipped from a Player entity
+            if (EntityEquipped?.EntityType == Enumerations.EntityTypes.Player)
+            {
+                Inventory.Instance.DeactivateBadge(this);
+            }
+
+            //Clear the equipped flag after deactivation
             Equipped = false;
             
-            OnUnequip();
+            if (EntityEquipped == null)
+            {
+                Debug.LogError($"Unequipping Badge from NULL BattleEntity! Fix ASAP");
+            }
+            else
+            {
+                Debug.Log($"Unequipped {Name} Badge from {EntityEquipped.Name}");
+            }
+
+            EntityEquipped = null;
         }
 
         /// <summary>

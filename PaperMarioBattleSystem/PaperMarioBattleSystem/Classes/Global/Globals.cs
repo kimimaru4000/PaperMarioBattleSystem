@@ -359,8 +359,7 @@ namespace PaperMarioBattleSystem
             DamageDealtMultiplier,
             DamageReceivedMultiplier,
             //Badge properties
-            JumpSpikedEntity,
-            JumpFieryEntity
+            
         }
     }
 

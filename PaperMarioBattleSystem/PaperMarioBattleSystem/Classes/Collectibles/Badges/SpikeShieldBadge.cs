@@ -24,12 +24,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            EntityEquipped.AddMiscProperty(Enumerations.MiscProperty.JumpSpikedEntity, new MiscValueHolder(true));
+            EntityEquipped.AddContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Spiked);
         }
 
         protected override void OnUnequip()
         {
-            EntityEquipped.RemoveMiscProperty(Enumerations.MiscProperty.JumpSpikedEntity);
+            EntityEquipped.RemoveContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Spiked);
         }
     }
 }

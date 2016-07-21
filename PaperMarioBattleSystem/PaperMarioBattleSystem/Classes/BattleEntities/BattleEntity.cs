@@ -23,7 +23,13 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The physical attributes the entity possesses
         /// </summary>
-        protected readonly Dictionary<PhysicalAttributes, bool> PhysAttributes = new Dictionary<PhysicalAttributes, bool>();
+        protected readonly Dictionary<PhysicalAttributes, int> PhysAttributes = new Dictionary<PhysicalAttributes, int>();
+
+        /// <summary>
+        /// The exceptions this entity has for certain types of contact against certain PhysicalAttributes.
+        /// <para>This is used for Badges such as Spike Shield and Ice Power.</para>
+        /// </summary>
+        protected readonly Dictionary<ContactTypes, List<PhysicalAttributes>> ContactExceptions = new Dictionary<ContactTypes, List<PhysicalAttributes>>();
 
         /// <summary>
         /// The Weaknesses the entity has
@@ -288,12 +294,12 @@ namespace PaperMarioBattleSystem
 
         public void ModifyAccuracy(int accuracy)
         {
-            BattleStats.Accuracy = UtilityGlobals.Clamp(BattleStats.Accuracy + accuracy, 0, int.MaxValue);
+            BattleStats.Accuracy = UtilityGlobals.Clamp(BattleStats.Accuracy + accuracy, int.MinValue, int.MaxValue);
         }
 
         public void ModifyEvasion(int evasion)
         {
-            BattleStats.Evasion = UtilityGlobals.Clamp(BattleStats.Evasion + evasion, 0, int.MaxValue);
+            BattleStats.Evasion = UtilityGlobals.Clamp(BattleStats.Evasion + evasion, int.MinValue, int.MaxValue);
         }
 
         /// <summary>
@@ -625,28 +631,41 @@ namespace PaperMarioBattleSystem
         {
             if (PhysAttributes.ContainsKey(physicalAttribute) == true)
             {
-                Debug.LogError($"{Name} already has the {physicalAttribute} {nameof(PhysicalAttributes)}!");
+                PhysAttributes[physicalAttribute]++;
+                Debug.Log($"Incremented the physical attribute {physicalAttribute} for {Name}!");
                 return;
             }
-
-            Debug.Log($"Added the physical attribute {physicalAttribute} to {Name}'s existing attributes!");
-
-            PhysAttributes.Add(physicalAttribute, true);
+            else
+            {
+                Debug.Log($"Added the physical attribute {physicalAttribute} to {Name}'s existing attributes!");
+                PhysAttributes.Add(physicalAttribute, 1);
+            }
         }
 
         /// <summary>
         /// Removes a physical attribute from the entity
         /// </summary>
         /// <param name="physicalAttribute">The physical attribute to remove</param>
-        /// <returns>true if the physical attribute was successfully found and removed, false otherwise</returns>
-        public bool RemovePhysAttribute(PhysicalAttributes physicalAttribute)
+        public void RemovePhysAttribute(PhysicalAttributes physicalAttribute)
         {
-            bool removed = PhysAttributes.Remove(physicalAttribute);
+            if (PhysAttributes.ContainsKey(physicalAttribute) == false)
+            {
+                Debug.LogWarning($"Cannot remove physical attribute {physicalAttribute} because {Name} does not have it!");
+                return;
+            }
 
-            if (removed == true)
+            
+
+            PhysAttributes[physicalAttribute]--;
+            if (PhysAttributes[physicalAttribute] <= 0)
+            {
+                PhysAttributes.Remove(physicalAttribute);
                 Debug.Log($"Removed the physical attribute {physicalAttribute} from {Name}'s existing attributes!");
-
-            return removed;
+            }
+            else
+            {
+                Debug.Log($"Decremented the physical attribute {physicalAttribute} for {Name}!");
+            }
         }
 
         /// <summary>
@@ -671,31 +690,6 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Returns a set of PhysicalAttributes to ignore when the BattleEntity makes contact, whether based on equipment or innately
-        /// </summary>
-        /// <param name="contactType">The type of contact this BattleEntity made</param>
-        /// <returns>An array of PhysicalAttributes this BattleEntity can ignore when making contact, otherwise an empty array</returns>
-        public PhysicalAttributes[] GetContactExceptions(ContactTypes contactType)
-        {
-            List<PhysicalAttributes> attributesIgnored = new List<PhysicalAttributes>();
-
-            //Jump contact
-            if (contactType == ContactTypes.JumpContact)
-            {
-                if (GetMiscProperty(MiscProperty.JumpSpikedEntity).BoolValue == true)
-                {
-                    attributesIgnored.Add(PhysicalAttributes.Spiked);
-                }
-                if (GetMiscProperty(MiscProperty.JumpFieryEntity).BoolValue == true)
-                {
-                    attributesIgnored.Add(PhysicalAttributes.Fiery);
-                }
-            }
-
-            return attributesIgnored.ToArray();
-        } 
-
-        /// <summary>
         /// Determines the result of contact, based on the type of contact made, when it's made with this entity
         /// </summary>
         /// <param name="attacker">The entity attacking this one</param>
@@ -704,6 +698,66 @@ namespace PaperMarioBattleSystem
         public ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType)
         {
             return Interactions.GetContactResult(attacker, contactType, PhysAttributes.Keys.ToArray(), attacker.GetContactExceptions(contactType));
+        }
+
+        #endregion
+
+        #region Contact Exception Methods
+
+        /// <summary>
+        /// Adds a contact exception to the entity
+        /// </summary>
+        /// <param name="contactType"></param>
+        /// <param name="physAttribute"></param>
+        public void AddContactException(ContactTypes contactType, PhysicalAttributes physAttribute)
+        {
+            //Add a new key if one doesn't exist
+            if (ContactExceptions.ContainsKey(contactType) == false)
+            {
+                ContactExceptions.Add(contactType, new List<PhysicalAttributes>());
+            }
+
+            //Add to the list
+            ContactExceptions[contactType].Add(physAttribute);
+
+            Debug.Log($"Added contact exception on {Name} for the {physAttribute} PhysicalAttribute during {contactType} contact!");
+        }
+
+        public void RemoveContactException(ContactTypes contactType, PhysicalAttributes physAttribute)
+        {
+            if (ContactExceptions.ContainsKey(contactType) == false)
+            {
+                Debug.LogError($"Cannot remove {physAttribute} from the exception list on {Name} for {contactType} because no list exists!");
+                return;
+            }
+
+            bool removed = ContactExceptions[contactType].Remove(physAttribute);
+            if (removed == true)
+            {
+                Debug.Log($"Removed {physAttribute} attribute exception on {Name} for {contactType} contact!");
+            }
+
+            //If there are no PhysicalAttributes in the exceptions list for this ContactType, remove the key
+            if (ContactExceptions[contactType].Count == 0)
+            {
+                ContactExceptions.Remove(contactType);
+            }
+        }
+
+        /// <summary>
+        /// Returns a set of PhysicalAttributes to ignore when the BattleEntity makes contact
+        /// </summary>
+        /// <param name="contactType">The type of contact this BattleEntity made</param>
+        /// <returns>An array of PhysicalAttributes this BattleEntity can ignore when making contact, otherwise an empty array</returns>
+        public PhysicalAttributes[] GetContactExceptions(ContactTypes contactType)
+        {
+            //Return an empty array if no exceptions exist for this type of contact
+            if (ContactExceptions.ContainsKey(contactType) == false)
+            {
+                return new PhysicalAttributes[0];
+            }
+
+            return ContactExceptions[contactType].ToArray();
         }
 
         #endregion

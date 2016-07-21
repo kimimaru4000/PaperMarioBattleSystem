@@ -1,0 +1,50 @@
+Updated PhysicalAttributes
+--------------------------
+Currently PhysicalAttributes are stored in each BattleEntity like so:
+
+Dictionary<PhysicalAttributes, bool> PhysAttributes;
+
+The bool value is completely unused and thus redundant. Normally this is fine,
+but there's a problem when having different sources apply and remove the same
+PhysicalAttribute. This will be discussed further in the Contact Exceptions section,
+as it applies here too.
+
+In short, make the value an integer. When a PhysicalAttribute is added, increment
+the value or add the entry in the Dictionary depending on whether it was already
+present in the Dictionary or not. When removing a PhysicalAttribute, decrement
+the value and completely remove the key if the new value is <= 0. This solves
+all conflicts with different sources applying the same PhysicalAttribute because
+we can safely remove it without completely eliminating the attribute on a still-active
+source.
+
+Contact Exceptions
+------------------
+Currently contact exceptions are determined based on MiscProperties. This is no good,
+and the example below will explain why.
+
+There are two Badges in the Paper Mario series that grant the ability to jump on
+Fiery enemies: Ice Power, and Fire Shield. Say we equipped both Badges, and each one
+applied the JumpFieryEntity MiscProperty. All is fine right now...then we remove
+the Fire Shield Badge. This will remove the JumpFieryEntity MiscProperty, preventing
+Mario from jumping on a Fiery enemy, but we still have the Ice Power Badge equipped!
+
+Solution
+--------
+Here's how we can fix this problem:
+
+Add a Dictionary<ContactTypes, List<PhysicalAttribute>> called ContactExceptions to BattleEntity.
+When adding an exception, simply add a PhysicalAttribute to the list. It may seem redundant to
+have more than one of the same PhysicalAttribute in the list, but it helps us track them from all sources.
+
+So in the example above, we'd add Fiery to the list under the JumpContact key each time either Ice Power or
+Fire Shield is equipped. This would cause the list to look like: (Fiery, Fiery)
+
+When we unequip Fire Shield, The list would just be: (Fiery). This is what we want because though we
+unequipped Fire Shield, Ice Power is still active AND Mario can still jump on Fire enemies!
+
+This is also a more scalable solution for this type of thing than MiscProperties, which are meant to be small
+unique properties that are specific.
+
+More Applications
+-----------------
+We can extend this sort of thing to Evasion, Accuracy, and more so the correct values are always preserved.

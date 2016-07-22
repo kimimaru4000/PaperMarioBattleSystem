@@ -764,6 +764,39 @@ namespace PaperMarioBattleSystem
 
         #region Weakness/Resistance Methods
 
+        // <summary>
+        // Adds a Weakness on the BattleEntity
+        // </summary>
+        // <param name="element">The Element the BattleEntity is weak to</param>
+        // <param name="weaknessHolder">The data for the Weakness</param>
+        //public void AddWeakness(Elements element, WeaknessHolder weaknessHolder)
+        //{
+        //    if (Weaknesses.ContainsKey(element) == true)
+        //    {
+        //        Debug.LogWarning($"{Name} already has a weakness to the {element} Element!");
+        //        return;
+        //    }
+        //
+        //    Weaknesses.Add(element, weaknessHolder);
+        //    Debug.Log($"Added {weaknessHolder.WeaknessType} Weakness to {Name} for the {element} Element!");
+        //}
+
+        // <summary>
+        // Removes a Weakness on the BattleEntity
+        // </summary>
+        // <param name="element">The Element the BattleEntity is weak to</param>
+        //public void RemoveWeakness(Elements element)
+        //{
+        //    if (Weaknesses.ContainsKey(element) == false)
+        //    {
+        //        Debug.LogWarning($"{Name} does not have a weakness for {element}");
+        //        return;
+        //    }
+        //
+        //    Weaknesses.Remove(element);
+        //    Debug.Log($"Removed Weakness to the {element} Element on {Name}!");
+        //}
+
         /// <summary>
         /// Gets this entity's weakness to a particular Element
         /// </summary>
@@ -779,6 +812,39 @@ namespace PaperMarioBattleSystem
 
             return Weaknesses[element];
         }
+
+        // <summary>
+        // Adds a Weakness on the BattleEntity
+        // </summary>
+        // <param name="element">The element the BattleEntity is resistant to</param>
+        // <param name="resistanceHolder">The data for the Resistance</param>
+        //public void AddResistance(Elements element, ResistanceHolder resistanceHolder)
+        //{
+        //    if (Resistances.ContainsKey(element) == true)
+        //    {
+        //        Debug.LogWarning($"{Name} already has a resistance to the {element} Element!");
+        //        return;
+        //    }
+        //
+        //    Resistances.Add(element, resistanceHolder);
+        //    Debug.Log($"Added {resistanceHolder.ResistanceType} Resistance to {Name} for the {element} Element!");
+        //}
+
+        // <summary>
+        // Removes a Resistance on the BattleEntity
+        // </summary>
+        // <param name="element">The Element the BattleEntity is resistant to</param>
+        //public void RemoveResistance(Elements element)
+        //{
+        //    if (Resistances.ContainsKey(element) == false)
+        //    {
+        //        Debug.LogWarning($"{Name} does not have a resistance for {element}");
+        //        return;
+        //    }
+        //
+        //    Resistances.Remove(element);
+        //    Debug.Log($"Removed Resistance to the {element} Element on {Name}!");
+        //}
 
         /// <summary>
         /// Gets this entity's resistance to a particular Element

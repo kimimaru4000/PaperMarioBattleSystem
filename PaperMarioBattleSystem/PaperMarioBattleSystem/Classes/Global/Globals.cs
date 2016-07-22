@@ -284,7 +284,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum HeightStates
         {
-            Grounded, Airborne, Ceiling
+            Grounded, /*Elevated, */Airborne, Ceiling
         }
 
         /// <summary>

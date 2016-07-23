@@ -13,6 +13,7 @@ namespace PaperMarioBattleSystem
     public sealed class IcePowerBadge : Badge
     {
         private readonly ResistanceHolder FireResistance = new ResistanceHolder(ResistanceTypes.MinusDamage, 1);
+        private const int FireDamageMod = 1;
 
         public IcePowerBadge()
         {
@@ -30,9 +31,7 @@ namespace PaperMarioBattleSystem
             EntityEquipped.AddContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
 
             EntityEquipped.AddResistance(Enumerations.Elements.Fire, FireResistance);
-
-            //NOTE: Add Strengths for dealing more damage to entities with specific PhysicalAttributes, as Ice Power
-            //does NOT make your moves Ice but instead just deals more damage to Fiery entities
+            EntityEquipped.AddDamageMod(Enumerations.PhysicalAttributes.Fiery, FireDamageMod);
         }
 
         protected override void OnUnequip()
@@ -40,6 +39,7 @@ namespace PaperMarioBattleSystem
             EntityEquipped.RemoveContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
 
             EntityEquipped.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
+            EntityEquipped.RemoveDamageMod(Enumerations.PhysicalAttributes.Fiery, FireDamageMod);
         }
     }
 }

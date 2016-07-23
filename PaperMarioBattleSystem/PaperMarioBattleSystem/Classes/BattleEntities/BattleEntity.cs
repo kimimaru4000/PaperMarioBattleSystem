@@ -44,6 +44,11 @@ namespace PaperMarioBattleSystem
         protected readonly Dictionary<Elements, List<ResistanceHolder>> Resistances = new Dictionary<Elements, List<ResistanceHolder>>();
 
         /// <summary>
+        /// The damage modifiers used when dealing damage to BattleEntities with particular PhysicalAttributes
+        /// </summary>
+        protected readonly Dictionary<PhysicalAttributes, int> DamageMods = new Dictionary<PhysicalAttributes, int>();
+
+        /// <summary>
         /// The StatusEffects the entity is afflicted with
         /// </summary>
         protected readonly Dictionary<StatusTypes, StatusEffect> Statuses = new Dictionary<StatusTypes, StatusEffect>();
@@ -656,8 +661,6 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            
-
             PhysAttributes[physicalAttribute]--;
             if (PhysAttributes[physicalAttribute] <= 0)
             {
@@ -699,7 +702,107 @@ namespace PaperMarioBattleSystem
         /// <returns>A ContactResultInfo containing the result of the interaction</returns>
         public ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType)
         {
-            return Interactions.GetContactResult(attacker, contactType, PhysAttributes.Keys.ToArray(), attacker.GetContactExceptions(contactType));
+            return Interactions.GetContactResult(attacker, contactType, GetAllPhysAttributes(), attacker.GetContactExceptions(contactType));
+        }
+
+        /// <summary>
+        /// Returns all PhysicalAttributes the BattleEntity has
+        /// </summary>
+        /// <returns>An array of all PhysicalAttributes the BattleEntity has</returns>
+        private PhysicalAttributes[] GetAllPhysAttributes()
+        {
+            return PhysAttributes.Keys.ToArray();
+        }
+
+        #endregion
+
+        #region Damage Modifier Methods
+
+        /// <summary>
+        /// Adds a DamageMod for this BattleEntity against a PhysicalAttribute
+        /// </summary>
+        /// <param name="attribute">The PhysicalAttribute associated with the DamageMod</param>
+        /// <param name="damageValue">The damage modifier to add</param>
+        public void AddDamageMod(PhysicalAttributes attribute, int damageValue)
+        {
+            //Don't allow 0, as it can mess up the accuracy if it's the first value
+            if (damageValue == 0)
+            {
+                Debug.LogWarning($"Attempting to add a modifier of 0 against the {attribute} PhysicalAttribute for {Name}!" +
+                                   " This isn't supported, as it can break the accuracy of the total modifier");
+                return;
+            }
+
+            if (HasDamageMod(attribute) == false)
+            {
+                DamageMods.Add(attribute, 0);
+            }
+
+            DamageMods[attribute] += damageValue;
+            Debug.Log($"Added damage mod of {damageValue} against the {attribute} PhysicalAttribute for {Name}");
+        }
+
+        /// <summary>
+        /// Removes a DamageMod this BattleEntity has against a PhysicalAttribute
+        /// </summary>
+        /// <param name="attribute">The PhysicalAttribute associated with the DamageMod</param>
+        /// <param name="damageValue">The damage modifier to remove</param>
+        public void RemoveDamageMod(PhysicalAttributes attribute, int damageValue)
+        {
+            if (HasDamageMod(attribute) == false)
+            {
+                Debug.LogWarning($"{Name} does not contain a damage modifier for the {attribute} PhysicalAttribute and thus cannot remove one!");
+                return;
+            }
+
+            DamageMods[attribute] -= damageValue;
+            //Remove if the total value is 0
+            if (DamageMods[attribute] == 0)
+            {
+                DamageMods.Remove(attribute);
+            }
+        }
+
+        /// <summary>
+        /// Retrieves the DamageMod associated with a PhysicalAttribute
+        /// </summary>
+        /// <param name="attribute">The PhysicalAttribute associated with the DamageMod</param>
+        /// <returns>An int for the DamageMod if it exists, otherwise 0</returns>
+        public int GetDamageMod(PhysicalAttributes attribute)
+        {
+            if (HasDamageMod(attribute) == false) return 0;
+
+            return DamageMods[attribute];
+        }
+
+        /// <summary>
+        /// Tells if the BattleEntity has a DamageMod against a particular PhysicalAttribute
+        /// </summary>
+        /// <param name="attribute">The PhysicalAttribute associated with the DamageMod</param>
+        /// <returns>true if the DamageMod exists for the PhysicalAttribute, otherwise false</returns>
+        public bool HasDamageMod(PhysicalAttributes attribute)
+        {
+            return DamageMods.ContainsKey(attribute);
+        }
+
+        /// <summary>
+        /// Retrieves the total damage modifier another BattleEntity has for this BattleEntity
+        /// </summary>
+        /// <param name="attacker">The BattleEntity attacking this one</param>
+        /// <returns>A sum of the damage modifiers the BattleEntity attacking will have against this BattleEntity</returns>
+        public int GetTotalDamageMod(BattleEntity attacker)
+        {
+            int totalDamageMod = 0;
+            PhysicalAttributes[] attributes = GetAllPhysAttributes();
+            for (int i = 0; i < attributes.Length; i++)
+            {
+                if (HasPhysAttributes(true, attributes[i]) == true)
+                {
+                    totalDamageMod += attacker.GetDamageMod(attributes[i]);
+                }
+            }
+
+            return totalDamageMod;
         }
 
         #endregion
@@ -773,7 +876,7 @@ namespace PaperMarioBattleSystem
         /// <param name="weaknessHolder">The data for the Weakness</param>
         public void AddWeakness(Elements element, WeaknessHolder weaknessHolder)
         {
-            if (Weaknesses.ContainsKey(element) == false)
+            if (HasWeakness(element) == false)
             {
                 Weaknesses.Add(element, new List<WeaknessHolder>());
             }
@@ -788,7 +891,7 @@ namespace PaperMarioBattleSystem
         /// <param name="element">The Element the BattleEntity is weak to</param>
         public void RemoveWeakness(Elements element, WeaknessHolder weakness)
         {
-            if (Weaknesses.ContainsKey(element) == false)
+            if (HasWeakness(element) == false)
             {
                 Debug.LogWarning($"{Name} does not have a weakness for {element}");
                 return;
@@ -811,7 +914,7 @@ namespace PaperMarioBattleSystem
         /// <returns>A copy of the WeaknessHolder associated with the element if found, otherwise default weakness data</returns>
         public WeaknessHolder GetWeakness(Elements element)
         {
-            if (Weaknesses.ContainsKey(element) == false)
+            if (HasWeakness(element) == false)
             {
                 //Debug.Log($"{Name} does not have a weakness for {element}");
                 return WeaknessHolder.Default;
@@ -831,6 +934,16 @@ namespace PaperMarioBattleSystem
             return weaknessHolder;
         }
 
+        /// <summary>
+        /// Tells if the BattleEntity has a Weakness to a particular Element
+        /// </summary>
+        /// <param name="element">The Element</param>
+        /// <returns>true if the BattleEntity has a Weakness to the Element, false otherwise</returns>
+        public bool HasWeakness(Elements element)
+        {
+            return Weaknesses.ContainsKey(element);
+        }
+
         ///<summary>
         ///Adds a Weakness on the BattleEntity
         ///</summary>
@@ -838,7 +951,7 @@ namespace PaperMarioBattleSystem
         ///<param name="resistanceHolder">The data for the Resistance</param>
         public void AddResistance(Elements element, ResistanceHolder resistanceHolder)
         {
-            if (Resistances.ContainsKey(element) == false)
+            if (HasResistance(element) == false)
             {
                 Resistances.Add(element, new List<ResistanceHolder>());
             }
@@ -853,7 +966,7 @@ namespace PaperMarioBattleSystem
         /// <param name="element">The Element the BattleEntity is resistant to</param>
         public void RemoveResistance(Elements element, ResistanceHolder resistanceHolder)
         {
-            if (Resistances.ContainsKey(element) == false)
+            if (HasResistance(element) == false)
             {
                 Debug.LogWarning($"{Name} does not have a resistance for {element}");
                 return;
@@ -876,7 +989,7 @@ namespace PaperMarioBattleSystem
         /// <returns>A copy of the ResistanceHolder associated with the element if found, otherwise default resistance data</returns>
         public ResistanceHolder GetResistance(Elements element)
         {
-            if (Resistances.ContainsKey(element) == false)
+            if (HasResistance(element) == false)
             {
                 //Debug.Log($"{Name} does not have a resistance for {element}");
                 return ResistanceHolder.Default;
@@ -894,6 +1007,16 @@ namespace PaperMarioBattleSystem
             });
 
             return resistanceHolder;
+        }
+
+        /// <summary>
+        /// Tells if the BattleEntity has a Resistance to a particular Element
+        /// </summary>
+        /// <param name="element">The Element</param>
+        /// <returns>true if the BattleEntity has a Resistance to the Element, false otherwise</returns>
+        public bool HasResistance(Elements element)
+        {
+            return Resistances.ContainsKey(element);
         }
 
         #endregion

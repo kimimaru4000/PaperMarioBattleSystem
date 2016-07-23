@@ -140,9 +140,14 @@ namespace PaperMarioBattleSystem
             ContactResultInfo contactResultInfo = victim.GetContactResult(attacker, contactType);
             ContactResult contactResult = contactResultInfo.ContactResult;
 
+            //Calculating damage dealt to the Victim
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
             {
-                ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, damage);
+                //Calculate modifier damage
+                int modifierDamage = victim.GetTotalDamageMod(attacker);
+                int newDamage = damage + modifierDamage;
+
+                ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, newDamage);
                 StatusEffect[] inflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
                 bool hit = attacker.AttemptHitEntity(victim);
 
@@ -150,6 +155,8 @@ namespace PaperMarioBattleSystem
                 finalInteractionResult.VictimResult = new InteractionHolder(victim, victimElementDamage.Damage, element, 
                     victimElementDamage.InteractionResult, contactType, false, inflictedStatuses, hit);
             }
+
+            //Calculating damage dealt to the Attacker
             if (contactResult == ContactResult.Failure || contactResult == ContactResult.PartialSuccess)
             {
                 ElementDamageHolder attackerElementDamage = GetElementalDamage(attacker, contactResultInfo.Element, 1);
@@ -179,7 +186,7 @@ namespace PaperMarioBattleSystem
             //doesn't seem desirable to begin with but could be interesting in its application
             WeaknessHolder weakness = entity.GetWeakness(element);
             ResistanceHolder resistance = entity.GetResistance(element);
-
+            
             //If there's both a weakness and resistance, return
             if (weakness.WeaknessType == WeaknessTypes.None && resistance.ResistanceType == ResistanceTypes.None)
                 return elementDamageResult;

@@ -11,6 +11,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class FireShieldBadge : Badge
     {
+        private readonly ResistanceHolder FireResistance = new ResistanceHolder(ResistanceTypes.MinusDamage, 1);
+
         public FireShieldBadge()
         {
             Name = "Fire Shield";
@@ -26,12 +28,14 @@ namespace PaperMarioBattleSystem
         {
             EntityEquipped.AddContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
 
-            //NOTE: Handle adding and removing Resistances/Weaknesses later as they're currently not supported outside BattleEntity
+            EntityEquipped.AddResistance(Enumerations.Elements.Fire, FireResistance);
         }
 
         protected override void OnUnequip()
         {
             EntityEquipped.RemoveContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
+
+            EntityEquipped.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
         }
     }
 }

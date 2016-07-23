@@ -49,6 +49,40 @@ namespace PaperMarioBattleSystem
             WeaknessType = weaknessType;
             Value = value;
         }
+
+        #region Comparison Operators
+
+        public static bool operator==(WeaknessHolder holder1, WeaknessHolder holder2)
+        {
+            return (holder1.WeaknessType == holder2.WeaknessType && holder1.Value == holder2.Value);
+        }
+
+        public static bool operator!=(WeaknessHolder holder1, WeaknessHolder holder2)
+        {
+            return (holder1.WeaknessType != holder2.WeaknessType || holder1.Value != holder2.Value);
+        }
+
+        public static bool operator>(WeaknessHolder holder1, WeaknessHolder holder2)
+        {
+            return (holder1.WeaknessType > holder2.WeaknessType || holder1.Value > holder2.Value);
+        }
+
+        public static bool operator<(WeaknessHolder holder1, WeaknessHolder holder2)
+        {
+            return (holder1.WeaknessType < holder2.WeaknessType || holder1.Value < holder2.Value);
+        }
+
+        public static bool operator>=(WeaknessHolder holder1, WeaknessHolder holder2)
+        {
+            return (holder1 > holder2 || holder1 == holder2);
+        }
+
+        public static bool operator<=(WeaknessHolder holder1, WeaknessHolder holder2)
+        {
+            return (holder1 < holder2 || holder1 == holder2);
+        }
+
+        #endregion
     }
 
     public struct ResistanceHolder
@@ -63,6 +97,40 @@ namespace PaperMarioBattleSystem
             ResistanceType = resistanceType;
             Value = value;
         }
+
+        #region Comparison Operators
+
+        public static bool operator==(ResistanceHolder holder1, ResistanceHolder holder2)
+        {
+            return (holder1.ResistanceType == holder2.ResistanceType && holder1.Value == holder2.Value);
+        }
+
+        public static bool operator!=(ResistanceHolder holder1, ResistanceHolder holder2)
+        {
+            return (holder1.ResistanceType != holder2.ResistanceType || holder1.Value != holder2.Value);
+        }
+
+        public static bool operator>(ResistanceHolder holder1, ResistanceHolder holder2)
+        {
+            return (holder1.ResistanceType > holder2.ResistanceType || holder1.Value > holder2.Value);
+        }
+
+        public static bool operator<(ResistanceHolder holder1, ResistanceHolder holder2)
+        {
+            return (holder1.ResistanceType < holder2.ResistanceType || holder1.Value < holder2.Value);
+        }
+
+        public static bool operator>=(ResistanceHolder holder1, ResistanceHolder holder2)
+        {
+            return (holder1 > holder2 || holder1 == holder2);
+        }
+
+        public static bool operator<=(ResistanceHolder holder1, ResistanceHolder holder2)
+        {
+            return (holder1 < holder2 || holder1 == holder2);
+        }
+
+        #endregion
     }
 
     public struct ContactResultInfo

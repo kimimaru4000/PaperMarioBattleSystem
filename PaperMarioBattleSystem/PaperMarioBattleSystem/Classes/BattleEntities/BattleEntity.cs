@@ -32,14 +32,16 @@ namespace PaperMarioBattleSystem
         protected readonly Dictionary<ContactTypes, List<PhysicalAttributes>> ContactExceptions = new Dictionary<ContactTypes, List<PhysicalAttributes>>();
 
         /// <summary>
-        /// The Weaknesses the entity has
+        /// The Weaknesses the entity has.
+        /// <para>A List is used for the value so additional Weaknesses can be added via moves or equipment.</para>
         /// </summary>
-        protected readonly Dictionary<Elements, WeaknessHolder> Weaknesses = new Dictionary<Elements, WeaknessHolder>();
+        protected readonly Dictionary<Elements, List<WeaknessHolder>> Weaknesses = new Dictionary<Elements, List<WeaknessHolder>>();
 
         /// <summary>
         /// The Resistances the entity has
+        /// <para>A List is used for the value so additional Resistances can be added via moves or equipment.</para>
         /// </summary>
-        protected readonly Dictionary<Elements, ResistanceHolder> Resistances = new Dictionary<Elements, ResistanceHolder>();
+        protected readonly Dictionary<Elements, List<ResistanceHolder>> Resistances = new Dictionary<Elements, List<ResistanceHolder>>();
 
         /// <summary>
         /// The StatusEffects the entity is afflicted with
@@ -764,41 +766,46 @@ namespace PaperMarioBattleSystem
 
         #region Weakness/Resistance Methods
 
-        // <summary>
-        // Adds a Weakness on the BattleEntity
-        // </summary>
-        // <param name="element">The Element the BattleEntity is weak to</param>
-        // <param name="weaknessHolder">The data for the Weakness</param>
-        //public void AddWeakness(Elements element, WeaknessHolder weaknessHolder)
-        //{
-        //    if (Weaknesses.ContainsKey(element) == true)
-        //    {
-        //        Debug.LogWarning($"{Name} already has a weakness to the {element} Element!");
-        //        return;
-        //    }
-        //
-        //    Weaknesses.Add(element, weaknessHolder);
-        //    Debug.Log($"Added {weaknessHolder.WeaknessType} Weakness to {Name} for the {element} Element!");
-        //}
-
-        // <summary>
-        // Removes a Weakness on the BattleEntity
-        // </summary>
-        // <param name="element">The Element the BattleEntity is weak to</param>
-        //public void RemoveWeakness(Elements element)
-        //{
-        //    if (Weaknesses.ContainsKey(element) == false)
-        //    {
-        //        Debug.LogWarning($"{Name} does not have a weakness for {element}");
-        //        return;
-        //    }
-        //
-        //    Weaknesses.Remove(element);
-        //    Debug.Log($"Removed Weakness to the {element} Element on {Name}!");
-        //}
+        /// <summary>
+        /// Adds a Weakness on the BattleEntity
+        /// </summary>
+        /// <param name="element">The Element the BattleEntity is weak to</param>
+        /// <param name="weaknessHolder">The data for the Weakness</param>
+        public void AddWeakness(Elements element, WeaknessHolder weaknessHolder)
+        {
+            if (Weaknesses.ContainsKey(element) == false)
+            {
+                Weaknesses.Add(element, new List<WeaknessHolder>());
+            }
+        
+            Weaknesses[element].Add(weaknessHolder);
+            Debug.Log($"Added {weaknessHolder.WeaknessType} Weakness to {Name} for the {element} Element!");
+        }
 
         /// <summary>
-        /// Gets this entity's weakness to a particular Element
+        /// Removes a Weakness on the BattleEntity
+        /// </summary>
+        /// <param name="element">The Element the BattleEntity is weak to</param>
+        public void RemoveWeakness(Elements element, WeaknessHolder weakness)
+        {
+            if (Weaknesses.ContainsKey(element) == false)
+            {
+                Debug.LogWarning($"{Name} does not have a weakness for {element}");
+                return;
+            }
+            
+            bool removed = Weaknesses[element].Remove(weakness);
+            if (Weaknesses[element].Count == 0)
+            {
+                Weaknesses.Remove(element);
+            }
+
+            if (removed == true)
+                Debug.Log($"Removed {weakness.WeaknessType} Weakness to the {element} Element on {Name}!");
+        }
+
+        /// <summary>
+        /// Gets this entity's total weakness to a particular Element
         /// </summary>
         /// <param name="element">The Element to test a weakness for</param>
         /// <returns>A copy of the WeaknessHolder associated with the element if found, otherwise default weakness data</returns>
@@ -810,44 +817,60 @@ namespace PaperMarioBattleSystem
                 return WeaknessHolder.Default;
             }
 
-            return Weaknesses[element];
+            WeaknessHolder weaknessHolder = default(WeaknessHolder);
+
+            //Get the total Weakness
+            Weaknesses[element].ForEach((weakness) =>
+            {
+                weaknessHolder.Value += weakness.Value;
+                //Stronger WeaknessTypes are prioritized
+                if (weakness.WeaknessType > weaknessHolder.WeaknessType)
+                    weaknessHolder.WeaknessType = weakness.WeaknessType;
+            });
+
+            return weaknessHolder;
         }
 
-        // <summary>
-        // Adds a Weakness on the BattleEntity
-        // </summary>
-        // <param name="element">The element the BattleEntity is resistant to</param>
-        // <param name="resistanceHolder">The data for the Resistance</param>
-        //public void AddResistance(Elements element, ResistanceHolder resistanceHolder)
-        //{
-        //    if (Resistances.ContainsKey(element) == true)
-        //    {
-        //        Debug.LogWarning($"{Name} already has a resistance to the {element} Element!");
-        //        return;
-        //    }
-        //
-        //    Resistances.Add(element, resistanceHolder);
-        //    Debug.Log($"Added {resistanceHolder.ResistanceType} Resistance to {Name} for the {element} Element!");
-        //}
-
-        // <summary>
-        // Removes a Resistance on the BattleEntity
-        // </summary>
-        // <param name="element">The Element the BattleEntity is resistant to</param>
-        //public void RemoveResistance(Elements element)
-        //{
-        //    if (Resistances.ContainsKey(element) == false)
-        //    {
-        //        Debug.LogWarning($"{Name} does not have a resistance for {element}");
-        //        return;
-        //    }
-        //
-        //    Resistances.Remove(element);
-        //    Debug.Log($"Removed Resistance to the {element} Element on {Name}!");
-        //}
+        ///<summary>
+        ///Adds a Weakness on the BattleEntity
+        ///</summary>
+        ///<param name="element">The element the BattleEntity is resistant to</param>
+        ///<param name="resistanceHolder">The data for the Resistance</param>
+        public void AddResistance(Elements element, ResistanceHolder resistanceHolder)
+        {
+            if (Resistances.ContainsKey(element) == false)
+            {
+                Resistances.Add(element, new List<ResistanceHolder>());
+            }
+        
+            Resistances[element].Add(resistanceHolder);
+            Debug.Log($"Added {resistanceHolder.ResistanceType} Resistance to {Name} for the {element} Element!");
+        }
 
         /// <summary>
-        /// Gets this entity's resistance to a particular Element
+        /// Removes a Resistance on the BattleEntity
+        /// </summary>
+        /// <param name="element">The Element the BattleEntity is resistant to</param>
+        public void RemoveResistance(Elements element, ResistanceHolder resistanceHolder)
+        {
+            if (Resistances.ContainsKey(element) == false)
+            {
+                Debug.LogWarning($"{Name} does not have a resistance for {element}");
+                return;
+            }
+        
+            bool removed = Resistances[element].Remove(resistanceHolder);
+            if (Resistances[element].Count == 0)
+            {
+                Resistances.Remove(element);
+            }
+
+            if (removed == true)
+                Debug.Log($"Removed {resistanceHolder.ResistanceType} Resistance to the {element} Element on {Name}!");
+        }
+
+        /// <summary>
+        /// Gets this entity's total resistance to a particular Element
         /// </summary>
         /// <param name="element">The element to test a resistance towards</param>
         /// <returns>A copy of the ResistanceHolder associated with the element if found, otherwise default resistance data</returns>
@@ -859,7 +882,18 @@ namespace PaperMarioBattleSystem
                 return ResistanceHolder.Default;
             }
 
-            return Resistances[element];
+            ResistanceHolder resistanceHolder = default(ResistanceHolder);
+
+            //Get the total resistance
+            Resistances[element].ForEach((resistance) =>
+            {
+                resistanceHolder.Value += resistance.Value;
+                //Stronger ResistanceTypes are prioritized
+                if (resistance.ResistanceType > resistanceHolder.ResistanceType)
+                    resistanceHolder.ResistanceType = resistance.ResistanceType;
+            });
+
+            return resistanceHolder;
         }
 
         #endregion

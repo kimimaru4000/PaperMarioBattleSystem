@@ -709,7 +709,7 @@ namespace PaperMarioBattleSystem
         /// Returns all PhysicalAttributes the BattleEntity has
         /// </summary>
         /// <returns>An array of all PhysicalAttributes the BattleEntity has</returns>
-        private PhysicalAttributes[] GetAllPhysAttributes()
+        protected PhysicalAttributes[] GetAllPhysAttributes()
         {
             return PhysAttributes.Keys.ToArray();
         }

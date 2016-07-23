@@ -32,6 +32,11 @@ namespace PaperMarioBattleSystem
         public AffectedTypes AffectedType { get; protected set; } = AffectedTypes.Self;
 
         /// <summary>
+        /// The Type Number of the Badge
+        /// </summary>
+        public int TypeNumber { get; protected set; } = 0;
+
+        /// <summary>
         /// The BattleEntity the Badge is equipped to
         /// </summary>
         public BattleEntity EntityEquipped { get; private set; } = null;
@@ -41,20 +46,15 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool Equipped { get; private set; } = false;
 
+        /// <summary>
+        /// Tells if the Badge can be equipped by the Player or not
+        /// </summary>
+        public bool CanEquip => (Inventory.Instance.BP >= BPCost);
+
         protected Badge()
         {
             CollectibleType = Enumerations.CollectibleTypes.Badge;
         }
-
-        /// <summary>
-        /// Gets the order value of the Badge, based on its BadgeType
-        /// </summary>
-        public int Order => BadgeGlobals.GetBadgeOrderValue(BadgeType);
-
-        /// <summary>
-        /// Tells if the Badge can be equipped or not
-        /// </summary>
-        public bool CanEquip => (Inventory.Instance.BP >= BPCost);
 
         /// <summary>
         /// Equips the Badge to a BattleEntity

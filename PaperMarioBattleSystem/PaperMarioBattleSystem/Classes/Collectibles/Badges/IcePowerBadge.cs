@@ -21,6 +21,7 @@ namespace PaperMarioBattleSystem
             Description = "Make Mario damage-proof when jumping on fire enemies. Attack power against fire enemies increases by 1, and damage taken from fire attacks drops by 1.";
             
             BPCost = 1;
+            TypeNumber = 59;
 
             BadgeType = BadgeGlobals.BadgeTypes.IcePower;
             AffectedType = BadgeGlobals.AffectedTypes.Self;

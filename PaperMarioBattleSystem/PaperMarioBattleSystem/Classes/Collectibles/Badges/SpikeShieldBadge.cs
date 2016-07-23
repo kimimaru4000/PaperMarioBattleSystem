@@ -17,6 +17,7 @@ namespace PaperMarioBattleSystem
             Description = "Make Mario damage-proof when jumping on spiky foes.";
 
             BPCost = 3;
+            TypeNumber = 61;
 
             BadgeType = BadgeGlobals.BadgeTypes.SpikeShield;
             AffectedType = BadgeGlobals.AffectedTypes.Self;

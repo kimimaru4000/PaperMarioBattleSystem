@@ -17,6 +17,7 @@ namespace PaperMarioBattleSystem
             Description = "Boost Mario's Defense by 1.";
 
             BPCost = 5;
+            TypeNumber = 44;
 
             BadgeType = BadgeGlobals.BadgeTypes.DefendPlus;
             AffectedType = BadgeGlobals.AffectedTypes.Self;

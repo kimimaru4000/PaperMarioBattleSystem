@@ -17,11 +17,11 @@ namespace PaperMarioBattleSystem
         {
             Name = "Goomba";
 
-            AddStatusProperty(Enumerations.StatusTypes.Sleep, new StatusPropertyHolder(100, 0));
-            AddStatusProperty(Enumerations.StatusTypes.Immobilized, new StatusPropertyHolder(110, 0));
-            AddStatusProperty(Enumerations.StatusTypes.Dizzy, new StatusPropertyHolder(100, 0));
-            AddStatusProperty(Enumerations.StatusTypes.Soft, new StatusPropertyHolder(100, 0));
-            AddStatusProperty(Enumerations.StatusTypes.Poison, new StatusPropertyHolder(100, 0));
+            EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Sleep, new StatusPropertyHolder(100, 0));
+            EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Immobilized, new StatusPropertyHolder(110, 0));
+            EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Dizzy, new StatusPropertyHolder(100, 0));
+            EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Soft, new StatusPropertyHolder(100, 0));
+            EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Poison, new StatusPropertyHolder(100, 0));
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Goomba");
             AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(67, 107, 26, 28), 1000d)));

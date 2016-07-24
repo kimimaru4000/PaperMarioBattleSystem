@@ -28,8 +28,8 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.SuspendOrResumeAlignmentStatuses(true, StatusAlignments.Negative, StatusType);
 
             //Add the NegativeStatusImmune and Invincible MiscProperties
-            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune, new MiscValueHolder(true));
-            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.Invincible, new MiscValueHolder(true));
+            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune, new MiscValueHolder(true));
+            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.Invincible, new MiscValueHolder(true));
 
             EntityAfflicted.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
 
@@ -41,8 +41,8 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             //Remove the NegativeStatusImmune and Invincible MiscProperties
-            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune);
-            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.Invincible);
+            EntityAfflicted.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune);
+            EntityAfflicted.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.Invincible);
 
             //Resume all of the entity's Negative StatusEffects
             EntityAfflicted.SuspendOrResumeAlignmentStatuses(false, StatusAlignments.Negative, StatusType);
@@ -57,7 +57,7 @@ namespace PaperMarioBattleSystem
             base.OnSuspend();
 
             //Remove Invincibility and don't do anything else to avoid Suspending/Resuming conflicts with other StatusEffects
-            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.Invincible);
+            EntityAfflicted.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.Invincible);
 
             EntityAfflicted.PlayAnimation(AnimationGlobals.IdleName);
         }
@@ -70,8 +70,8 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.SuspendOrResumeAlignmentStatuses(true, StatusAlignments.Negative, StatusType);
 
             //Add back the NegativeStatusImmune and Invincible MiscProperties
-            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune, new MiscValueHolder(true));
-            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.Invincible, new MiscValueHolder(true));
+            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune, new MiscValueHolder(true));
+            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.Invincible, new MiscValueHolder(true));
 
             EntityAfflicted.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
         }

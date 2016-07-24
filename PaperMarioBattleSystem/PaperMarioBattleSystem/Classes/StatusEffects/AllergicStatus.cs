@@ -26,8 +26,8 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.SuspendOrResumeStatuses(true, StatusType);
 
             //Make the entity immune to all StatusEffects
-            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.PositiveStatusImmune, new MiscValueHolder(true));
-            EntityAfflicted.AddMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune, new MiscValueHolder(true));
+            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.PositiveStatusImmune, new MiscValueHolder(true));
+            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune, new MiscValueHolder(true));
 
             Debug.Log($"{StatusType} has been inflicted and Suspended all StatusEffects on {EntityAfflicted.Name}!");
         }
@@ -35,8 +35,8 @@ namespace PaperMarioBattleSystem
         protected override void OnEnd()
         {
             //Remove the StatusEffect immunities
-            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.PositiveStatusImmune);
-            EntityAfflicted.RemoveMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune);
+            EntityAfflicted.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.PositiveStatusImmune);
+            EntityAfflicted.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune);
 
             //Resume all of the entity's StatusEffects
             EntityAfflicted.SuspendOrResumeStatuses(false, StatusType);

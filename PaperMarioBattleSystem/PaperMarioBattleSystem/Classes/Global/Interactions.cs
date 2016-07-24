@@ -119,7 +119,7 @@ namespace PaperMarioBattleSystem
                 {
                     ContactResultInfo contactResult = tableForContact[attribute];
                     //If the ContactResult is a Success if the entity has the same PhysicalAttribute as the one tested, set its result to Success
-                    if (contactResult.SuccessIfSameAttr == true && attacker.HasPhysAttributes(true, attribute) == true)
+                    if (contactResult.SuccessIfSameAttr == true && attacker.EntityProperties.HasPhysAttributes(true, attribute) == true)
                         contactResult.ContactResult = ContactResult.Success;
                     return contactResult;
                 }
@@ -137,14 +137,14 @@ namespace PaperMarioBattleSystem
         {
             InteractionResult finalInteractionResult = new InteractionResult();
 
-            ContactResultInfo contactResultInfo = victim.GetContactResult(attacker, contactType);
+            ContactResultInfo contactResultInfo = victim.EntityProperties.GetContactResult(attacker, contactType);
             ContactResult contactResult = contactResultInfo.ContactResult;
 
             //Calculating damage dealt to the Victim
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
             {
                 //Calculate modifier damage
-                int modifierDamage = victim.GetTotalDamageMod(attacker);
+                int modifierDamage = victim.EntityProperties.GetTotalDamageMod(attacker);
                 int newDamage = damage + modifierDamage;
 
                 ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, newDamage);
@@ -184,8 +184,8 @@ namespace PaperMarioBattleSystem
             //NOTE: If an entity is both resistant and weak to a particular element, they cancel out.
             //I decided to go with this approach because it's the simplest for this situation, which
             //doesn't seem desirable to begin with but could be interesting in its application
-            WeaknessHolder weakness = entity.GetWeakness(element);
-            ResistanceHolder resistance = entity.GetResistance(element);
+            WeaknessHolder weakness = entity.EntityProperties.GetWeakness(element);
+            ResistanceHolder resistance = entity.EntityProperties.GetResistance(element);
             
             //If there's both a weakness and resistance, return
             if (weakness.WeaknessType == WeaknessTypes.None && resistance.ResistanceType == ResistanceTypes.None)
@@ -237,7 +237,7 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < filteredStatuses.Count; i++)
             {
                 StatusEffect status = filteredStatuses[i];
-                if (entity.TryAfflictStatus(status) == false)
+                if (entity.EntityProperties.TryAfflictStatus(status) == false)
                 {
                     Debug.Log($"Failed to inflict {status.StatusType} on {entity.Name}");
                     filteredStatuses.RemoveAt(i);

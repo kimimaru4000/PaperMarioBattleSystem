@@ -27,16 +27,16 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            EntityEquipped.AddContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
+            EntityEquipped.EntityProperties.AddContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
 
-            EntityEquipped.AddResistance(Enumerations.Elements.Fire, FireResistance);
+            EntityEquipped.EntityProperties.AddResistance(Enumerations.Elements.Fire, FireResistance);
         }
 
         protected override void OnUnequip()
         {
-            EntityEquipped.RemoveContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
+            EntityEquipped.EntityProperties.RemoveContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
 
-            EntityEquipped.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
+            EntityEquipped.EntityProperties.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
         }
     }
 }

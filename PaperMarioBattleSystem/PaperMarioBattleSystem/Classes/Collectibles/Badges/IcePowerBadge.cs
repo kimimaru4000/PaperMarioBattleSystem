@@ -29,18 +29,18 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            EntityEquipped.AddContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
+            EntityEquipped.EntityProperties.AddContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
 
-            EntityEquipped.AddResistance(Enumerations.Elements.Fire, FireResistance);
-            EntityEquipped.AddDamageMod(Enumerations.PhysicalAttributes.Fiery, FireDamageMod);
+            EntityEquipped.EntityProperties.AddResistance(Enumerations.Elements.Fire, FireResistance);
+            EntityEquipped.EntityProperties.AddDamageMod(Enumerations.PhysicalAttributes.Fiery, FireDamageMod);
         }
 
         protected override void OnUnequip()
         {
-            EntityEquipped.RemoveContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
+            EntityEquipped.EntityProperties.RemoveContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
 
-            EntityEquipped.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
-            EntityEquipped.RemoveDamageMod(Enumerations.PhysicalAttributes.Fiery, FireDamageMod);
+            EntityEquipped.EntityProperties.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
+            EntityEquipped.EntityProperties.RemoveDamageMod(Enumerations.PhysicalAttributes.Fiery, FireDamageMod);
         }
     }
 }

@@ -20,22 +20,24 @@ namespace PaperMarioBattleSystem
             EntityType = Enumerations.EntityTypes.Player;
         }
 
-        //public void EquipAllBadges()
-        //{
-        //    List<Badge> badges = Inventory.Instance.GetActivePartnerBadges();
-        //    for (int i = 0; i < badges.Count; i++)
-        //    {
-        //        badges[i].Equip(this);
-        //    }
-        //}
+        /// <summary>
+        /// Swaps Badges from one Partner to another new Partner to apply the effects to that Partner
+        /// </summary>
+        /// <param name="partnerEquipped">The Partner currently equipped with the Badges</param>
+        /// <param name="newPartner">The Partner to equip the Badges to</param>
+        public static void SwapPartnerBadges(BattlePartner partnerEquipped, BattlePartner newPartner)
+        {
+            List<Badge> partnerBadges = Inventory.Instance.GetActivePartnerBadges();
 
-        //public void UnEquipAllBadges()
-        //{
-        //    List<Badge> badges = Inventory.Instance.GetActivePartnerBadges();
-        //    for (int i = 0; i < badges.Count; i++)
-        //    {
-        //        badges[i].UnEquip();
-        //    }
-        //}
+            //Go through all the Badges
+            for (int i = 0; i < partnerBadges.Count; i++)
+            {
+                //Unequip them from the current Partner
+                partnerBadges[i].UnEquip();
+
+                //Equip them onto the new Partner
+                partnerBadges[i].Equip(newPartner);
+            }
+        }
     }
 }

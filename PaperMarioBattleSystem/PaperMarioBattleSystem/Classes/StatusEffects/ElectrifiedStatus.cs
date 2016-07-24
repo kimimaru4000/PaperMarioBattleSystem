@@ -20,12 +20,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-            EntityAfflicted.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
+            EntityAfflicted.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
         }
 
         protected override void OnEnd()
         {
-            EntityAfflicted.RemovePhysAttribute(Enumerations.PhysicalAttributes.Electrified);
+            EntityAfflicted.EntityProperties.RemovePhysAttribute(Enumerations.PhysicalAttributes.Electrified);
         }
 
         protected override void OnPhaseCycleStart()
@@ -35,12 +35,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnSuspend()
         {
-            EntityAfflicted.RemovePhysAttribute(Enumerations.PhysicalAttributes.Electrified);
+            EntityAfflicted.EntityProperties.RemovePhysAttribute(Enumerations.PhysicalAttributes.Electrified);
         }
 
         protected override void OnResume()
         {
-            EntityAfflicted.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
+            EntityAfflicted.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
         }
 
         public override StatusEffect Copy()

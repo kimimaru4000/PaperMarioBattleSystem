@@ -117,7 +117,7 @@ namespace PaperMarioBattleSystem
             EntityAfflicted = entity;
 
             //Set the additional duration
-            AdditionalDuration = EntityAfflicted.GetStatusProperty(StatusType).AdditionalTurns;
+            AdditionalDuration = EntityAfflicted.EntityProperties.GetStatusProperty(StatusType).AdditionalTurns;
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace PaperMarioBattleSystem
             //When the StatusEffect is finished, remove it
             if (IsFinished == true)
             {
-                EntityAfflicted.RemoveStatus(StatusType);
+                EntityAfflicted.EntityProperties.RemoveStatus(StatusType);
             }
         }
 

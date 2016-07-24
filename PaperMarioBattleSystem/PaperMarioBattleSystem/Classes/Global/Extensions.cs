@@ -142,7 +142,7 @@ namespace PaperMarioBattleSystem
         /// This is often the StatusType of the StatusEffect that suspended or resumed the other StatusEffects</param>
         public static void SuspendOrResumeStatuses(this BattleEntity entity, bool suspended, StatusTypes exclusion)
         {
-            StatusEffect[] statuses = entity.GetStatuses();
+            StatusEffect[] statuses = entity.EntityProperties.GetStatuses();
             for (int i = 0; i < statuses.Length; i++)
             {
                 if (statuses[i].StatusType != exclusion)
@@ -163,7 +163,7 @@ namespace PaperMarioBattleSystem
         public static void SuspendOrResumeAlignmentStatuses(this BattleEntity entity, bool suspended, StatusEffect.StatusAlignments alignment,
             StatusTypes exclusion)
         {
-            StatusEffect[] statuses = entity.GetStatuses();
+            StatusEffect[] statuses = entity.EntityProperties.GetStatuses();
             for (int i = 0; i < statuses.Length; i++)
             {
                 if (statuses[i].Alignment == alignment && statuses[i].StatusType != exclusion)

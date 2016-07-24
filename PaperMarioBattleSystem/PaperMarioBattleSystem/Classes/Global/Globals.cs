@@ -579,11 +579,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The various types of Badges (what the actual Badges are)
         /// </summary>
+        //NOTE: Define values for these as each Badge's Type Number, as it's easier than going through numerous classes
         public enum BadgeTypes
         {
             //Default value
-            None,
-            PowerJump, MegaJump, Multibounce, JumpCharge, SJumpCharge, ShrinkStomp,
+            None = 0,
+            PowerJump = 1, MegaJump, Multibounce, JumpCharge, SJumpCharge, ShrinkStomp,
             DizzyStomp, DDownJump, PowerBounce, PowerSmash, MegaSmash,
             SmashCharge, SSmashCharge, QuakeJump, QuakeHammer, PowerQuake, HammerThrow, DDownPound, PiercingBlow,
             DoubleDip, TripleDip, GroupFocus, QuickChange, HappyHeart, HappyFlower,

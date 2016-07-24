@@ -1,0 +1,53 @@
+Separated Entity Properties and Updated DamageMods (7/23/16)
+------------------------------------------------------------
+The BattleEntity class is being cluttered with many definitions and methods 
+for various things. These include:
+
+1. Weaknesses
+2. Resistances
+3. StatusProperties
+4. MiscProperties
+5. PhysAttributes
+6. ContactExceptions
+7. DamageMods
+8. Statuses
+
+While all of these are essential, it's best to put them in a separate BattleEntityProperties class.
+
+public class BattleEntityProperties;
+
+In addition to everything listed above, BattleEntityProperties will have a reference to the BattleEntity
+it's on.
+
+In the BattleEntity class, it will be this simple to create and initialize it:
+
+public readonly BattleEntityProperties EntityProperties = null;
+
+public BattleEntity()
+{
+    EntityProperties = new BattleEntityProperties(this);
+}
+
+Nothing other than BattleEntity (in its constructor) will be able to modify this reference, and other classes will be
+free to use it to access or modify any information they need from there.
+
+This will drastically clean out BattleEntity and allow it to more concisely represent an entity that takes part in Battle.
+
+Updated DamageMods
+------------------
+I made a mistake in interpreting how the Ice Power Badge works. Since it's the only effect in either Paper Mario game
+that deals more damage to only enemies with a specific property, I thought it simply increased damage against said enemies.
+
+However, Lava Piranha (Round 2) in the first game has a Weakness to Ice and gets crippled and loses its Fiery properties
+when hit by Ice attacks. The Ice Power Badge does this same crippling effect to Lava Piranha. That means that when the Ice
+Power Badge is equipped, it applies the Ice Element only when hitting a Fiery entity. The +2 damage is a result of Lava
+Piranha's +2 Weakness to Ice moves, not the Ice Power Badge itself. This means Ice Power's description itself is
+misleading in a technical sense but not a literal one since all Fire enemies happen to have a +2 Weakness to Ice moves.
+
+So, we should restructure DamageMods to be overrideable Elements applied to the BattleEntity's attack when it hits another
+BattleEntity that has the appropriate PhysicalAttribute. We can structure it like this:
+
+protected readonly Dictionary<PhysicalAttributes, Elements> ElementOverrides;
+
+Only one Element can be allowed for each PhysicalAttribute. This is because there's no way to determine which Element
+would take priority, considering Ice Power is the only case where this is used across the first two Paper Mario games.

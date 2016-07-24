@@ -343,7 +343,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum Elements
         {
-            Normal, Sharp, Water, Fire, Electric, Ice, Poison, Explosion, Star
+            Invalid, Normal, Sharp, Water, Fire, Electric, Ice, Poison, Explosion, Star
         }
 
         /// <summary>
@@ -368,7 +368,7 @@ namespace PaperMarioBattleSystem
         //to the latter
         public enum PhysicalAttributes
         {
-            None, Flying, Spiked, Electrified, Fiery, Poisony, Explosive, Starry
+            None, Flying, Spiked, Electrified, Icy, Fiery, Poisony, Explosive, Starry
         }
 
         /// <summary>

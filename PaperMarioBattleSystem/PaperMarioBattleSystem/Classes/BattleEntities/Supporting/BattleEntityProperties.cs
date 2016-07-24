@@ -41,9 +41,9 @@ namespace PaperMarioBattleSystem
         protected readonly Dictionary<Elements, List<ResistanceHolder>> Resistances = new Dictionary<Elements, List<ResistanceHolder>>();
 
         /// <summary>
-        /// The damage modifiers used when dealing damage to BattleEntities with particular PhysicalAttributes
+        /// The types of Elemental damage to use when dealing damage to BattleEntities with particular PhysicalAttributes
         /// </summary>
-        protected readonly Dictionary<PhysicalAttributes, int> DamageMods = new Dictionary<PhysicalAttributes, int>();
+        protected readonly Dictionary<PhysicalAttributes, Elements> ElementOverrides = new Dictionary<PhysicalAttributes, Elements>();
 
         /// <summary>
         /// The StatusEffects the entity is afflicted with
@@ -71,7 +71,7 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        #region Phys Attribute Methods
+        #region Physical Attribute Methods
 
         /// <summary>
         /// Adds a physical attribute to the entity
@@ -149,103 +149,92 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Returns all PhysicalAttributes the BattleEntity has
+        /// Returns all PhysicalAttributes the BattleEntity has, sorted by value in decreasing order
         /// </summary>
-        /// <returns>An array of all PhysicalAttributes the BattleEntity has</returns>
+        /// <returns>An array of all PhysicalAttributes the BattleEntity has, sorted with higher PhysicalAttribute values first</returns>
         protected PhysicalAttributes[] GetAllPhysAttributes()
         {
-            return PhysAttributes.Keys.ToArray();
+            //Get the values in a list, then sort them
+            List<PhysicalAttributes> physAttributeList = new List<PhysicalAttributes>(PhysAttributes.Keys.ToArray());
+            physAttributeList.Sort(SortPhysicalAttributes);
+
+            return physAttributeList.ToArray();
         }
 
         #endregion
 
-        #region Damage Modifier Methods
+        #region Element Override Methods
 
         /// <summary>
-        /// Adds a DamageMod for this BattleEntity against a PhysicalAttribute
+        /// Adds an Element Override for this BattleEntity for a PhysicalAttribute
         /// </summary>
-        /// <param name="attribute">The PhysicalAttribute associated with the DamageMod</param>
-        /// <param name="damageValue">The damage modifier to add</param>
-        public void AddDamageMod(PhysicalAttributes attribute, int damageValue)
+        /// <param name="attribute">The PhysicalAttribute associated with the Element Override</param>
+        /// <param name="element">The Element to add for this PhysicalAttribute</param>
+        public void AddElementOverride(PhysicalAttributes attribute, Elements element)
         {
-            //Don't allow 0, as it can mess up the accuracy if it's the first value
-            if (damageValue == 0)
+            if (HasElementOverride(attribute) == true)
             {
-                Debug.LogWarning($"Attempting to add a modifier of 0 against the {attribute} PhysicalAttribute for {Entity.Name}!" +
-                                   " This isn't supported, as it can break the accuracy of the total modifier");
+                Debug.LogWarning($"{Entity.Name} already has an element override for the {attribute} PhysicalAttribute!");
+            }
+
+            ElementOverrides.Add(attribute, element);
+            Debug.Log($"Added a(n) {element} override to {Entity.Name} for the {attribute} PhysicalAttribute!");
+        }
+
+        /// <summary>
+        /// Removes an Element Override this BattleEntity has for a PhysicalAttribute
+        /// </summary>
+        /// <param name="attribute">The PhysicalAttribute associated with the Element Override</param>
+        public void RemoveElementOverride(PhysicalAttributes attribute)
+        {
+            if (HasElementOverride(attribute) == false)
+            {
+                Debug.LogWarning($"{Entity.Name} does not contain an element override for the {attribute} PhysicalAttribute and thus cannot remove one!");
                 return;
             }
 
-            if (HasDamageMod(attribute) == false)
-            {
-                DamageMods.Add(attribute, 0);
-            }
-
-            DamageMods[attribute] += damageValue;
-            Debug.Log($"Added damage mod of {damageValue} against the {attribute} PhysicalAttribute for {Entity.Name}");
+            ElementOverrides.Remove(attribute);
+            Debug.Log($"Removed element override for the {attribute} PhysicalAttribute on {Entity.Name}");
         }
 
         /// <summary>
-        /// Removes a DamageMod this BattleEntity has against a PhysicalAttribute
+        /// Retrieves the Element Override associated with a PhysicalAttribute
         /// </summary>
-        /// <param name="attribute">The PhysicalAttribute associated with the DamageMod</param>
-        /// <param name="damageValue">The damage modifier to remove</param>
-        public void RemoveDamageMod(PhysicalAttributes attribute, int damageValue)
+        /// <param name="attribute">The PhysicalAttribute associated with the Element Override</param>
+        /// <returns>An Element for the override if it exists, otherwise 0</returns>
+        public Elements GetElementOverride(PhysicalAttributes attribute)
         {
-            if (HasDamageMod(attribute) == false)
-            {
-                Debug.LogWarning($"{Entity.Name} does not contain a damage modifier for the {attribute} PhysicalAttribute and thus cannot remove one!");
-                return;
-            }
+            if (HasElementOverride(attribute) == false) return Elements.Normal;
 
-            DamageMods[attribute] -= damageValue;
-            //Remove if the total value is 0
-            if (DamageMods[attribute] == 0)
-            {
-                DamageMods.Remove(attribute);
-            }
+            return ElementOverrides[attribute];
         }
 
         /// <summary>
-        /// Retrieves the DamageMod associated with a PhysicalAttribute
+        /// Tells if the BattleEntity has an Element Override for a particular PhysicalAttribute
         /// </summary>
-        /// <param name="attribute">The PhysicalAttribute associated with the DamageMod</param>
-        /// <returns>An int for the DamageMod if it exists, otherwise 0</returns>
-        public int GetDamageMod(PhysicalAttributes attribute)
+        /// <param name="attribute">The PhysicalAttribute associated with the Element Override</param>
+        /// <returns>true if the Element Override exists for the PhysicalAttribute, otherwise false</returns>
+        public bool HasElementOverride(PhysicalAttributes attribute)
         {
-            if (HasDamageMod(attribute) == false) return 0;
-
-            return DamageMods[attribute];
+            return ElementOverrides.ContainsKey(attribute);
         }
 
         /// <summary>
-        /// Tells if the BattleEntity has a DamageMod against a particular PhysicalAttribute
+        /// Retrieves the Element Override this BattleEntity has for the first PhysicalAttribute found on a victim
         /// </summary>
-        /// <param name="attribute">The PhysicalAttribute associated with the DamageMod</param>
-        /// <returns>true if the DamageMod exists for the PhysicalAttribute, otherwise false</returns>
-        public bool HasDamageMod(PhysicalAttributes attribute)
+        /// <param name="attacker">The BattleEntity this one is attacking</param>
+        /// <returns>The type of Element damage this BattleEntity will do to the victim</returns>
+        public Elements GetTotalElementOverride(BattleEntity victim)
         {
-            return DamageMods.ContainsKey(attribute);
-        }
+            PhysicalAttributes[] victimAttributes = victim.EntityProperties.GetAllPhysAttributes();
 
-        /// <summary>
-        /// Retrieves the total damage modifier another BattleEntity has for this BattleEntity
-        /// </summary>
-        /// <param name="attacker">The BattleEntity attacking this one</param>
-        /// <returns>A sum of the damage modifiers the BattleEntity attacking will have against this BattleEntity</returns>
-        public int GetTotalDamageMod(BattleEntity attacker)
-        {
-            int totalDamageMod = 0;
-            PhysicalAttributes[] attributes = GetAllPhysAttributes();
-            for (int i = 0; i < attributes.Length; i++)
+            for (int i = 0; i < victimAttributes.Length; i++)
             {
-                if (HasPhysAttributes(true, attributes[i]) == true)
-                {
-                    totalDamageMod += attacker.EntityProperties.GetDamageMod(attributes[i]);
-                }
+                if (HasElementOverride(victimAttributes[i]) == true)
+                    return ElementOverrides[victimAttributes[i]];
             }
 
-            return totalDamageMod;
+            return Elements.Invalid;
         }
 
         #endregion
@@ -681,6 +670,27 @@ namespace PaperMarioBattleSystem
             }
 
             return MiscProperties[property];
+        }
+
+        #endregion
+
+        
+        #region Physical Attribute Sort Methods
+
+        /// <summary>
+        /// A Comparison sort method for PhysicalAttributes, putting higher valued attributes first for consistency with Element Overrides
+        /// </summary>
+        /// <param name="physAttr1"></param>
+        /// <param name="physAttr2"></param>
+        /// <returns></returns>
+        private static int SortPhysicalAttributes(PhysicalAttributes physAttr1, PhysicalAttributes physAttr2)
+        {
+            if (physAttr1 > physAttr2)
+                return -1;
+            else if (physAttr1 < physAttr2)
+                return 1;
+
+            return 0;
         }
 
         #endregion

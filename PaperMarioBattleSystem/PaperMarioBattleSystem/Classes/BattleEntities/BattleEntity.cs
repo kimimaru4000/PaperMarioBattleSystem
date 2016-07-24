@@ -430,6 +430,9 @@ namespace PaperMarioBattleSystem
             
         }
 
+        /// <summary>
+        /// Notifies the BattleManager to officially end the BattleEntity's turn
+        /// </summary>
         public void EndTurn()
         {
             if (this != BattleManager.Instance.EntityTurn)

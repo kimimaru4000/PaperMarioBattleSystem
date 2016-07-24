@@ -143,15 +143,17 @@ namespace PaperMarioBattleSystem
             //Calculating damage dealt to the Victim
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
             {
-                //Calculate modifier damage
-                int modifierDamage = victim.EntityProperties.GetTotalDamageMod(attacker);
-                int newDamage = damage + modifierDamage;
+                //Retrieve an overridden type of Elemental damage to inflict based on the Victim's PhysicalAttributes
+                Elements newElement = attacker.EntityProperties.GetTotalElementOverride(victim);
+                if (newElement != Elements.Invalid)
+                {
+                    element = newElement;
+                }
 
-                ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, newDamage);
+                ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, damage);
                 StatusEffect[] inflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
                 bool hit = attacker.AttemptHitEntity(victim);
 
-                //NOTE: Statuses are always afflicted for now until entities get percentages of being affected by them
                 finalInteractionResult.VictimResult = new InteractionHolder(victim, victimElementDamage.Damage, element, 
                     victimElementDamage.InteractionResult, contactType, false, inflictedStatuses, hit);
             }

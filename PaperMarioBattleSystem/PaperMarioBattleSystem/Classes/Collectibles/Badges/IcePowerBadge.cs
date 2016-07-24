@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     public sealed class IcePowerBadge : Badge
     {
         private readonly ResistanceHolder FireResistance = new ResistanceHolder(ResistanceTypes.MinusDamage, 1);
-        private const int FireDamageMod = 1;
+        private const Enumerations.Elements IceElementOverride = Enumerations.Elements.Ice;
 
         public IcePowerBadge()
         {
@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
             EntityEquipped.EntityProperties.AddContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
 
             EntityEquipped.EntityProperties.AddResistance(Enumerations.Elements.Fire, FireResistance);
-            EntityEquipped.EntityProperties.AddDamageMod(Enumerations.PhysicalAttributes.Fiery, FireDamageMod);
+            EntityEquipped.EntityProperties.AddElementOverride(Enumerations.PhysicalAttributes.Fiery, IceElementOverride);
         }
 
         protected override void OnUnequip()
@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
             EntityEquipped.EntityProperties.RemoveContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
 
             EntityEquipped.EntityProperties.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
-            EntityEquipped.EntityProperties.RemoveDamageMod(Enumerations.PhysicalAttributes.Fiery, FireDamageMod);
+            EntityEquipped.EntityProperties.RemoveElementOverride(Enumerations.PhysicalAttributes.Fiery);
         }
     }
 }

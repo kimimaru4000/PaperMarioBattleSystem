@@ -10,7 +10,8 @@ using static PaperMarioBattleSystem.BadgeGlobals;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The base class for all Badges
+    /// The base class for all Badges.
+    /// <para>"P" Badges should derive from their regular counterparts and will only need to update their BPCost, BadgeType, and AffectedType.</para>
     /// </summary>
     //Notes on the Feeling Fine Badge:
     //It protects against every StatusEffect EXCEPT Burn, Frozen, and Allergic
@@ -34,7 +35,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The Type Number of the Badge
         /// </summary>
-        public int TypeNumber { get; protected set; } = 0;
+        public int TypeNumber => (int)BadgeType;
 
         /// <summary>
         /// The BattleEntity the Badge is equipped to

@@ -577,26 +577,46 @@ namespace PaperMarioBattleSystem
         #region Enums
 
         /// <summary>
-        /// The various types of Badges (what the actual Badges are)
+        /// The various types of Badges (what the actual Badges are).
+        /// <para>The values are defined by each Badge type's Type Number.
+        /// If Badges exist in the same spot and aren't in both games, Badges with lower alphabetical values will be placed first.
+        /// In cases where one Badge is before another Badge in one game and after that Badge in the other game, the Badge is grouped
+        /// with similar Badges around it.</para>
         /// </summary>
-        //NOTE: Define values for these as each Badge's Type Number, as it's easier than going through numerous classes
         public enum BadgeTypes
         {
             //Default value
             None = 0,
-            PowerJump = 1, MegaJump, Multibounce, JumpCharge, SJumpCharge, ShrinkStomp,
-            DizzyStomp, DDownJump, PowerBounce, PowerSmash, MegaSmash,
-            SmashCharge, SSmashCharge, QuakeJump, QuakeHammer, PowerQuake, HammerThrow, DDownPound, PiercingBlow,
-            DoubleDip, TripleDip, GroupFocus, QuickChange, HappyHeart, HappyFlower,
-            DeepFocus, HPPlus, FPPlus, PowerPlus, DefendPlus,
-            DamageDodge, PDownDUp, PUpDDown, AllOrNothing, MegaRush,
-            LastStand, PowerRush, CloseCall, PrettyLucky, LuckyDay, 
-            AngersPower, DoublePain, IcePower,
-            FireShield, SpikeShield, FeelingFine, ZapTap, SuperAppeal,
-            RunawayPay, Refund, ISpy, SpeedySpin, DizzyAttack,
-            BumpAttack, Charge, ReturnPostage, Simplifier, UnSimplifier,
-            AttackFXB, AttackFXC, AttackFXE, AttackFXF, AttackFXG,
-            AttackFXP, AttackFXR, AttackFXY
+            PowerJump = 1, MegaJump = 2, Multibounce = 3, JumpCharge = 4, SJumpCharge = 5, ShrinkStomp = 6,
+            SleepStomp = 7, DizzyStomp = 8, SoftStomp = 9, DDownJump = 10, TornadoJump = 11,
+            PowerBounce = 12, PowerSmash = 13, MegaSmash = 14, PiercingBlow = 14,
+            SmashCharge = 15, SSmashCharge = 16, SpinSmash = 17, HammerThrow = 18,
+            HeadRattle = 19, IceSmash = 20,
+            QuakeHammer = 21, PowerQuake = 22, MegaQuake = 23, DDownPound = 24,
+            FireDrive = 25, Charge = 26, ChargeP = 27,
+            DoubleDip = 28, DoubleDipP = 29, TripleDip = 30, GroupFocus = 31, 
+            DodgeMaster = 32, DeepFocus = 33, HPPlus = 34, HPPlusP = 35, FPPlus = 36,
+            PowerPlus = 37, PowerPlusP = 38, AllOrNothing = 39, Jumpman = 40, Hammerman = 41,
+            PUpDDown = 42, PUpDDownP = 43, PDownDUp = 44, PDownDUpP = 45,
+            DefendPlus = 46, DefendPlusP = 47, DamageDodge = 48, DamageDodgeP = 49,
+            DoublePain = 50, PowerRush = 51, PowerRushP = 52, LastStand = 53, LastStandP = 54,
+            MegaRush = 55, MegaRushP = 56, CloseCall = 57, CloseCallP = 58,
+            PrettyLucky = 59, PrettyLuckyP = 60, LuckyDay = 61, LuckyStart = 62,
+            HappyHeart = 63, HappyHeartP = 64, HappyFlower = 65,
+            FlowerSaver = 66, FlowerSaverP = 67, PityFlower = 68, HPDrain = 69, HPDrainP = 70,
+            FPDrain = 71, HeartFinder = 72, FlowerFinder = 73, ItemHog = 74, RunawayPay = 75,
+            Refund = 76, PayOff = 77, MoneyMoney = 78,
+            IcePower = 79, FireShield = 80, SpikeShield = 81,
+            ZapTap = 82, ReturnPostage = 83,
+            FeelingFine = 84, FeelingFineP = 85, SuperAppeal = 86, SuperAppealP = 87,
+            Peekaboo = 88, ISpy = 89, QuickChange = 90, TimingTutor = 91,
+            Simplifier = 92, UnSimplifier = 93, ChillOut = 94,
+            SpeedySpin = 95, DizzyAttack = 96, SpinAttack = 97, FirstAttack = 98, BumpAttack = 99,
+            LEmblem = 100, WEmblem = 101, SlowGo = 102,
+            AttackFXA = 103, AttackFXB = 104, AttackFXC = 105, AttackFXD = 106, AttackFXE = 107,
+            AttackFXR = 108, AttackFXY = 109, AttackFXG = 110, AttackFXP = 111,
+            //Unused & Beta Badges
+            AngersPower = 112
         }
 
         /// <summary>

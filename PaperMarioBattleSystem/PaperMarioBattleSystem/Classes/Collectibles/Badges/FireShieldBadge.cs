@@ -19,7 +19,6 @@ namespace PaperMarioBattleSystem
             Description = "Makes the damage Mario takes from fire enemies go down by 1. Mario won't take damage when he jumps on a fire enemy.";
 
             BPCost = 2;
-            TypeNumber = 60;
 
             BadgeType = BadgeGlobals.BadgeTypes.FireShield;
             AffectedType = BadgeGlobals.AffectedTypes.Self;

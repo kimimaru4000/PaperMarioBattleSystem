@@ -19,7 +19,6 @@ namespace PaperMarioBattleSystem
             Description = "Boost Mario's jump and hammer attacks by 1.";
 
             BPCost = 6;
-            TypeNumber = 42;
 
             BadgeType = BadgeGlobals.BadgeTypes.PowerPlus;
             AffectedType = BadgeGlobals.AffectedTypes.Self;

@@ -135,15 +135,16 @@ namespace PaperMarioBattleSystem
 
     public struct ContactResultInfo
     {
-        public Enumerations.Elements Element;
+        public StatusGlobals.PaybackHolder Paybackholder;
         public Enumerations.ContactResult ContactResult;
         public bool SuccessIfSameAttr;
 
-        public static ContactResultInfo Default => new ContactResultInfo(Enumerations.Elements.Normal, Enumerations.ContactResult.Success, false);
+        public static ContactResultInfo Default => 
+            new ContactResultInfo(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Constant, Enumerations.Elements.Normal, 1, null), Enumerations.ContactResult.Success, false);
 
-        public ContactResultInfo(Enumerations.Elements element, Enumerations.ContactResult contactResult, bool successIfSameAttr)
+        public ContactResultInfo(StatusGlobals.PaybackHolder paybackHolder, Enumerations.ContactResult contactResult, bool successIfSameAttr)
         {
-            Element = element;
+            Paybackholder = paybackHolder;
             ContactResult = contactResult;
             SuccessIfSameAttr = successIfSameAttr;
         }
@@ -533,35 +534,55 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Holds information about Payback damage
         /// </summary>
-        public struct PaybackDamageHolder
+        public struct PaybackHolder
         {
             /// <summary>
             /// The type of Payback damage
             /// </summary>
-            public PaybackTypes PaybackType;
+            public PaybackTypes PaybackType { get; private set; }
 
             /// <summary>
             /// The Elemental damage dealt
             /// </summary>
-            public Enumerations.Elements Element;
+            public Enumerations.Elements Element { get; private set; }
 
             /// <summary>
             /// The amount of damage to deal if the PaybackType is Constant
             /// </summary>
-            public int ConstantDamage;
-            
-            public PaybackDamageHolder(PaybackTypes paybackType, Enumerations.Elements element)
+            public int ConstantDamage { get; private set; }
+
+            /// <summary>
+            /// The Status Effects to inflict
+            /// </summary>
+            public StatusEffect[] StatusesInflicted { get; private set; }
+
+            public PaybackHolder(PaybackTypes paybackType, Enumerations.Elements element, params StatusEffect[] statusesInflicted)
             {
                 PaybackType = paybackType;
                 Element = element;
                 ConstantDamage = 0;
+                StatusesInflicted = statusesInflicted;
             }
 
-            public PaybackDamageHolder(PaybackTypes paybackType, Enumerations.Elements element, int constantDamage)
+            public PaybackHolder(PaybackTypes paybackType, Enumerations.Elements element, int constantDamage, params StatusEffect[] statusesInflicted)
+                : this(paybackType, element, statusesInflicted)
             {
-                PaybackType = paybackType;
-                Element = element;
                 ConstantDamage = constantDamage;
+            }
+
+            /// <summary>
+            /// Gets the Payback damage that this PaybackHolder deals
+            /// </summary>
+            /// <param name="damageDealt">The amount of damage to deal</param>
+            /// <returns>All the damage dealt, half of it, or a constant amount of damage based on the PaybackType</returns>
+            public int GetPaybackDamage(int damageDealt)
+            {
+                switch (PaybackType)
+                {
+                    case PaybackTypes.Full: return damageDealt;
+                    case PaybackTypes.Half: return (damageDealt / 2);
+                    default: return ConstantDamage;
+                }
             }
         }
 

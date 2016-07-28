@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using static PaperMarioBattleSystem.Enumerations;
+using static PaperMarioBattleSystem.StatusGlobals;
 
 namespace PaperMarioBattleSystem
 {
@@ -73,9 +74,9 @@ namespace PaperMarioBattleSystem
         {
             ContactTable.Add(ContactTypes.JumpContact, new Dictionary<PhysicalAttributes, ContactResultInfo>()
             {
-                { PhysicalAttributes.Spiked, new ContactResultInfo(Elements.Sharp, ContactResult.Failure, false) },
-                { PhysicalAttributes.Electrified, new ContactResultInfo(Elements.Electric, ContactResult.PartialSuccess, true) },
-                { PhysicalAttributes.Fiery, new ContactResultInfo(Elements.Fire, ContactResult.Failure, false) }
+                { PhysicalAttributes.Spiked, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Sharp, 1), ContactResult.Failure, false) },
+                { PhysicalAttributes.Electrified, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Electric, 1), ContactResult.PartialSuccess, true) },
+                { PhysicalAttributes.Fiery, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Fire, 1), ContactResult.Failure, false) }
             });
         }
 
@@ -132,6 +133,18 @@ namespace PaperMarioBattleSystem
 
         #region Interaction Methods
 
+        /// <summary>
+        /// Calculates and returns the entire damage interaction between two BattleEntities.
+        /// <para>This returns all the necessary information for both BattleEntities, including the total amount of damage dealt,
+        /// the type of Elemental damage to deal, the Status Effects to inflict, and whether the attack successfully hit or not.</para>
+        /// </summary>
+        /// <param name="attacker">The BattleEntity attacking</param>
+        /// <param name="victim">The BattleEntity being attacked</param>
+        /// <param name="damage">The amount of damage the attacker is attempting to deal to the victim</param>
+        /// <param name="element">The type of Elemental damage the attacker is hitting the victim with</param>
+        /// <param name="contactType">The type of contact the attacker is making with the victim</param>
+        /// <param name="statuses">The Status Effects the attacker is attempting to afflict the victim with</param>
+        /// <returns>An InteractionResult containing InteractionHolders for both the victim and the attacker</returns>
         public static InteractionResult GetDamageInteraction(BattleEntity attacker, BattleEntity victim, int damage, Elements element,
             ContactTypes contactType, StatusEffect[] statuses)
         {
@@ -139,6 +152,12 @@ namespace PaperMarioBattleSystem
 
             ContactResultInfo contactResultInfo = victim.EntityProperties.GetContactResult(attacker, contactType);
             ContactResult contactResult = contactResultInfo.ContactResult;
+
+            /*Get the total damage dealt to the Victim. The amount of Full or Half Payback damage dealt to the Attacker
+              uses the resulting damage value from this because Payback uses the total damage that would be dealt to the Victim.
+              This occurs before factoring in elemental resistances/weaknesses from the Attacker*/
+            //NOTE: Confirm this 100% by testing in TTYD with Embers who are holding a Spite Pouch
+            ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, damage);
 
             //Calculating damage dealt to the Victim
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
@@ -150,23 +169,31 @@ namespace PaperMarioBattleSystem
                     element = newElement;
                 }
 
-                ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, damage);
-                StatusEffect[] inflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
+                
+                StatusEffect[] victimInflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
                 bool hit = attacker.AttemptHitEntity(victim);
 
                 finalInteractionResult.VictimResult = new InteractionHolder(victim, victimElementDamage.Damage, element, 
-                    victimElementDamage.InteractionResult, contactType, false, inflictedStatuses, hit);
+                    victimElementDamage.InteractionResult, contactType, false, victimInflictedStatuses, hit);
             }
 
             //Calculating damage dealt to the Attacker
             if (contactResult == ContactResult.Failure || contactResult == ContactResult.PartialSuccess)
             {
-                ElementDamageHolder attackerElementDamage = GetElementalDamage(attacker, contactResultInfo.Element, 1);
+                //The damage the Attacker dealt to the Victim
+                int damageDealt = victimElementDamage.Damage;
+                PaybackHolder paybackHolder = contactResultInfo.Paybackholder;
 
-                //NOTE: Statuses are not afflicted on the attacker unless contact with the victim causes it.
-                //This isn't in place yet so don't pass anything in for now
-                finalInteractionResult.AttackerResult = new InteractionHolder(attacker, attackerElementDamage.Damage, contactResultInfo.Element,
-                    attackerElementDamage.InteractionResult, ContactTypes.None, true, null, true);
+                ElementDamageHolder attackerElementDamage = GetElementalDamage(attacker, paybackHolder.Element, damageDealt);
+                
+                //Get Payback damage - Payback damage is calculated after everything else
+                attackerElementDamage.Damage = paybackHolder.GetPaybackDamage(attackerElementDamage.Damage);
+
+                //Get the Status Effects to inflict
+                StatusEffect[] attackerInflictedStatuses = GetFilteredInflictedStatuses(attacker, paybackHolder.StatusesInflicted);
+                    
+                finalInteractionResult.AttackerResult = new InteractionHolder(attacker, attackerElementDamage.Damage, paybackHolder.Element,
+                    attackerElementDamage.InteractionResult, ContactTypes.None, true, attackerInflictedStatuses, true);
             }
 
             return finalInteractionResult;

@@ -1,0 +1,14 @@
+New Badge Ideas (7/27/16)
+-------------------------
+With this system, we can create new Badges that the original games don't have.
+This file serves as a brainstorming session for new types of Badges that I'd like to implement.
+
+Superguard Plus
+---------------
+BP: 7
+Description: Increases the damage of Mario's Superguards by 1.
+
+Superguard Plus P
+-----------------
+BP: 7
+Description: Increases the damage of your Partner's Superguards by 1.

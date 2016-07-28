@@ -422,6 +422,7 @@ namespace PaperMarioBattleSystem
             BlownAway,
             InstantKO,
             PositiveStatusImmune,
+            NeutralStatusImmune,
             NegativeStatusImmune,
             Invincible,
             DamageDealtMultiplier,
@@ -518,6 +519,54 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class StatusGlobals
     {
+        #region Enums
+
+        public enum PaybackTypes
+        {
+            Full, Half, Constant
+        }
+
+        #endregion
+
+        #region Structs
+
+        /// <summary>
+        /// Holds information about Payback damage
+        /// </summary>
+        public struct PaybackDamageHolder
+        {
+            /// <summary>
+            /// The type of Payback damage
+            /// </summary>
+            public PaybackTypes PaybackType;
+
+            /// <summary>
+            /// The Elemental damage dealt
+            /// </summary>
+            public Enumerations.Elements Element;
+
+            /// <summary>
+            /// The amount of damage to deal if the PaybackType is Constant
+            /// </summary>
+            public int ConstantDamage;
+            
+            public PaybackDamageHolder(PaybackTypes paybackType, Enumerations.Elements element)
+            {
+                PaybackType = paybackType;
+                Element = element;
+                ConstantDamage = 0;
+            }
+
+            public PaybackDamageHolder(PaybackTypes paybackType, Enumerations.Elements element, int constantDamage)
+            {
+                PaybackType = paybackType;
+                Element = element;
+                ConstantDamage = constantDamage;
+            }
+        }
+
+        #endregion
+
         #region Fields
 
         /// <summary>

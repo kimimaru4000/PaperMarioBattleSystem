@@ -3,7 +3,7 @@ TTYD Allergic Tests 7/25/16
 Actual testing of how Allergic works in TTYD by getting Mario afflicted with Status Effects and using Space Food on him.
 
 Space Food doesn't have a 100% chance of inflicting Allergic, so I used Triple Dip with both Mario and his Partner
-to use multiple Space Foods a one turn.
+to use multiple Space Foods in one turn.
 
 For Status Effects that prevent Mario and his Partner from moving, such as Frozen, I had Feeling Fine P equipped so
 the Partner would be able to use Space Food on Mario when he's afflicted with that Status Effect.

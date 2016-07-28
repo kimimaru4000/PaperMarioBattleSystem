@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace PaperMarioBattleSystem
 {
+    /// <summary>
+    /// The Electrified Status Effect.
+    /// This grants the Electrified PhysicalAttribute to the entity, causing direct contact from non-Electrified entities to hurt the attacker.
+    /// </summary>
     public sealed class ElectrifiedStatus : StatusEffect
     {
         public ElectrifiedStatus(int duration)

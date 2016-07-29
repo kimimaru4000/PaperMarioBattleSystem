@@ -114,3 +114,25 @@ Conclusion
 1. Allergic can be inflicted on Mario regardless of which Status Effects he has on him, aside from Allergic.
 2. While Allergic and another Status Effect are on Mario, everything functions normally and the Status Effect
 increments turns like normal.
+
+Update (7/28/16)
+----------------
+Using cheat codes in Dolphin, I managed to test Slow and Fast, and found a functional Status Effect for the unused Status Effect icon in the game!
+
+23. Slow -> Space Food
+
+Result: Allergic afflicted
+
+24. Fast -> Space Food
+
+Result: Allergic afflicted
+
+Notes
+-----
+-I was unable to find a code to inflict No Skills, but I realized that the Jumpman and Hammerman Badges likely do the same exact thing. While
+equipped, you can inflict Allergic on yourself, so I think it's safe to say that it's possible to inflict Allergic over No Skills.
+
+-When Fast and Slow were inflicted at the same time, Fast always overrode Slow. Despite Slow being inflicted and showing the icon, it acted as if Slow wasn't there and only did Fast.
+
+-The unused Status Effect was referred to as "Fear" in the cheat code description and reduced Mario's Attack by at least 13. I couldn't find
+out whether it did anything else or not.

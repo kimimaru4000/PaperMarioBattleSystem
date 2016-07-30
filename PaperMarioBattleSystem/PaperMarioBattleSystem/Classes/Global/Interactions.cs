@@ -156,7 +156,6 @@ namespace PaperMarioBattleSystem
             /*Get the total damage dealt to the Victim. The amount of Full or Half Payback damage dealt to the Attacker
               uses the resulting damage value from this because Payback uses the total damage that would be dealt to the Victim.
               This occurs before factoring in elemental resistances/weaknesses from the Attacker*/
-            //NOTE: Confirm this 100% by testing in TTYD with Embers who are holding a Spite Pouch
             ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, damage);
 
             //Calculating damage dealt to the Victim
@@ -169,7 +168,6 @@ namespace PaperMarioBattleSystem
                     element = newElement;
                 }
 
-                
                 StatusEffect[] victimInflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
                 bool hit = attacker.AttemptHitEntity(victim);
 
@@ -185,8 +183,9 @@ namespace PaperMarioBattleSystem
                 PaybackHolder paybackHolder = contactResultInfo.Paybackholder;
 
                 ElementDamageHolder attackerElementDamage = GetElementalDamage(attacker, paybackHolder.Element, damageDealt);
-                
-                //Get Payback damage - Payback damage is calculated after everything else
+
+                //Get Payback damage - Payback damage is calculated after everything else, including Constant Payback.
+                //However, it does NOT factor in Double Pain or any sort of Defense modifiers
                 attackerElementDamage.Damage = paybackHolder.GetPaybackDamage(attackerElementDamage.Damage);
 
                 //Get the Status Effects to inflict

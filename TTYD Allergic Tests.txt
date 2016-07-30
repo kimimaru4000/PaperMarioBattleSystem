@@ -136,3 +136,9 @@ equipped, you can inflict Allergic on yourself, so I think it's safe to say that
 
 -The unused Status Effect was referred to as "Fear" in the cheat code description and reduced Mario's Attack by at least 13. I couldn't find
 out whether it did anything else or not.
+
+Update 2 (7/28/16)
+------------------
+-After testing the unused "Fear" Status Effect more, it turns out that it causes the entity to always do 0 damage. Exceptions include
+Special Moves, Items, and Weaknesses. So for example, Mario can use Ice Smash on an Ember and deal 1 damage, even if he has the unused
+"Fear" Status Effect

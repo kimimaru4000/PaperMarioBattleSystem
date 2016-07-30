@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static PaperMarioBattleSystem.Enumerations;
+using static PaperMarioBattleSystem.StatusGlobals;
 
-namespace PaperMarioBattleSystem.Classes.StatusEffects
+namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Payback Status Effect.
@@ -14,18 +15,16 @@ namespace PaperMarioBattleSystem.Classes.StatusEffects
     /// </summary>
     public sealed class PaybackStatus : StatusEffect
     {
-        private Elements PaybackDamageType = Elements.Normal;
-        private StatusEffect[] StatusesInflicted = null;
+        private PaybackHolder Paybackholder = default(PaybackHolder);
 
-        public PaybackStatus(int duration, Elements paybackDamageType, params StatusEffect[] statusesToInflict)
+        public PaybackStatus(int duration, PaybackHolder paybackHolder)
         {
             StatusType = StatusTypes.Payback;
             Alignment = StatusAlignments.Positive;
 
             Duration = duration;
-            PaybackDamageType = paybackDamageType;
 
-            StatusesInflicted = statusesToInflict;
+            Paybackholder = paybackHolder;
         }
 
         protected override void OnAfflict()
@@ -55,7 +54,7 @@ namespace PaperMarioBattleSystem.Classes.StatusEffects
 
         public override StatusEffect Copy()
         {
-            return new PaybackStatus(Duration, PaybackDamageType, StatusesInflicted);
+            return new PaybackStatus(Duration, Paybackholder);
         }
     }
 }

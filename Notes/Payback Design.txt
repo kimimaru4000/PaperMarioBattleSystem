@@ -1,0 +1,26 @@
+Payback Design (7/31/16)
+------------------------
+Recently I changed the Contact Table to take in and use PaybackHolders to determine how much damage, the type of damage, and Status Effects
+a BattleEntity would be inflicted with when making contact with another BattleEntity with specific PhysicalAttributes. The goal of this is
+to extend that to the Payback Status Effect and the various other sources of inflicting Payback.
+
+Notes from The Thousand Year Door
+---------------------------------
+-Contact deals the total damage YOU dealt TO THEM back to you
+-Double Pain and other Damage Modifiers do NOT affect the damage you receive
+-Electrified, and other attributes like it, adds to the damage that you receive
+-Adding more Payback from a different source it makes enemies take full damage instead of half when attacking you
+  -You can combine this with Electrified to make enemies take 1 more damage from their own attack than you took from it
+-The sources of Payback seem to have a priority. For instance, it doesn't matter whether you use the Spite Pouch first
+or Bobbery's Hold Fast first; the elemental damage dealt will be explosive from Hold Fast if both sources of Payback are active
+
+Unknowns
+--------
+What happens when you combine Poison Puff's Poison Charge and Bobbery's Hold Fast? There's a way to do this with cheats to inflict
+the Payback from Hold Fast on enemies. I'll have to test it on a Poison Puff.
+
+Update --- I tested this and confirmed the result. Contact with the Poison Puff still inflicted Poison but also had the explosion effect
+(as in, it make Mario all black from smoke when he took damage from contact). From this we know that it deals Explosive damage, but it's unknown if Poison Puffs deal any Poison damage from this because there is nothing in the game that I know of to be either weak or resistant to Poison damage.
+
+Implementation
+--------------

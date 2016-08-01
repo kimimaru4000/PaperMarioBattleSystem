@@ -12,3 +12,10 @@ Superguard Plus P
 -----------------
 BP: 7
 Description: Increases the damage of your Partner's Superguards by 1.
+
+Fire Jump
+---------
+BP: 3
+FP Cost: 3 FP
+Description: Wear this to use Fire Jump. 3 FP are required to use this attack, which lets you stomp on a foe to deal fire damage with a chance to burn.
+Wearing two or more of these badges requires more FP for the move, but enemies stay burned for longer. 

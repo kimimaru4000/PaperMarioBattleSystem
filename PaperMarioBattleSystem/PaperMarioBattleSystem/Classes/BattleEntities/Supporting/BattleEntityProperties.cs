@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static PaperMarioBattleSystem.Enumerations;
+using static PaperMarioBattleSystem.StatusGlobals;
 
 namespace PaperMarioBattleSystem
 {
@@ -61,6 +62,11 @@ namespace PaperMarioBattleSystem
         /// Miscellaneous properties of the entity
         /// </summary>
         protected readonly Dictionary<MiscProperty, MiscValueHolder> MiscProperties = new Dictionary<MiscProperty, MiscValueHolder>();
+
+        /// <summary>
+        /// The Payback data of the entity
+        /// </summary>
+        public PaybackHolder PaybackData { get; protected set; } = null;
 
         #region Constructor
 
@@ -138,14 +144,27 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Determines the result of contact, based on the type of contact made, when it's made with this entity
+        /// Determines the result of contact, based on the type of contact made, when it's made with this entity.
+        /// <para>Contacts that aren't a Success are prioritized over any Payback.
+        /// If a ContactResult of Success is found, then the Payback for this entity is added if it exists
+        /// and the ContactResult becomes a PartialSuccess.</para>
         /// </summary>
         /// <param name="attacker">The entity attacking this one</param>
         /// <param name="contactType">The type of contact made with this entity</param>
         /// <returns>A ContactResultInfo containing the result of the interaction</returns>
         public ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType)
         {
-            return Interactions.GetContactResult(attacker, contactType, GetAllPhysAttributes(), attacker.EntityProperties.GetContactExceptions(contactType));
+            ContactResultInfo contactResultInfo =  Interactions.GetContactResult(attacker, contactType, GetAllPhysAttributes(), attacker.EntityProperties.GetContactExceptions(contactType));
+
+            //On a Success, check if this Entity has any Payback and add it if so
+            if ((contactResultInfo.ContactResult == ContactResult.Success/* || contactResultInfo.ContactResult == ContactResult.PartialSuccess*/)
+                && PaybackData != null)
+            {
+                contactResultInfo.ContactResult = ContactResult.PartialSuccess;
+                contactResultInfo.Paybackholder = PaybackData;//new PaybackHolder(PaybackData.PaybackType, PaybackData.Element, contactResultInfo.Paybackholder.ConstantDamage, PaybackData.StatusesInflicted);
+            }
+
+            return contactResultInfo;
         }
 
         /// <summary>
@@ -611,6 +630,48 @@ namespace PaperMarioBattleSystem
             }
 
             return StatusProperties[statusType];
+        }
+
+        #endregion
+
+        #region Payback Data Methods
+
+        /// <summary>
+        /// Adds Payback to the BattleEntity
+        /// </summary>
+        /// <param name="paybackHolder">The Payback to add</param>
+        public void AddPaybackData(PaybackHolder paybackHolder)
+        {
+            if (paybackHolder == null)
+            {
+                Debug.LogWarning($"Attempting to add invalid Payback data to {Entity.Name}!");
+                return;
+            }
+
+            Debug.Log($"Added {paybackHolder.Element} Payback of type {paybackHolder.PaybackType} to {Entity.Name}!");
+
+            PaybackData = paybackHolder;
+
+            if (PaybackData.PaybackType == PaybackTypes.Half)
+            {
+                Debug.Log($"Upgraded {Entity.Name}'s Payback from Half to Full. It's also now {paybackHolder.Element} Payback of type {paybackHolder.PaybackType}!");
+                PaybackData = new PaybackHolder(PaybackTypes.Full, paybackHolder.Element, paybackHolder.ConstantDamage, paybackHolder.StatusesInflicted);
+            }
+        }
+
+        /// <summary>
+        /// Removes the BattleEntity's Payback
+        /// </summary>
+        public void RemovePaybackData()
+        {
+            if (PaybackData == null)
+            {
+                Debug.LogWarning($"Attempting to remove non-existent Payback on {Entity.Name}");
+                return;
+            }
+
+            Debug.Log($"Successfully removed Payback on {Entity.Name}");
+            PaybackData = null;
         }
 
         #endregion

@@ -524,37 +524,37 @@ namespace PaperMarioBattleSystem
 
         public enum PaybackTypes
         {
-            Full, Half, Constant
+            Constant, Half, Full
         }
 
         #endregion
 
-        #region Structs
+        #region Classes
 
         /// <summary>
         /// Holds information about Payback damage
         /// </summary>
-        public struct PaybackHolder
+        public class PaybackHolder
         {
             /// <summary>
             /// The type of Payback damage
             /// </summary>
-            public PaybackTypes PaybackType { get; private set; }
+            public PaybackTypes PaybackType { get; private set; } = PaybackTypes.Constant;
 
             /// <summary>
             /// The Elemental damage dealt
             /// </summary>
-            public Enumerations.Elements Element { get; private set; }
+            public Enumerations.Elements Element { get; private set; } = Enumerations.Elements.Normal;
 
             /// <summary>
             /// The amount of damage to deal if the PaybackType is Constant
             /// </summary>
-            public int ConstantDamage { get; private set; }
+            public int ConstantDamage { get; private set; } = 0;
 
             /// <summary>
             /// The Status Effects to inflict
             /// </summary>
-            public StatusEffect[] StatusesInflicted { get; private set; }
+            public StatusEffect[] StatusesInflicted { get; private set; } = null;
 
             public PaybackHolder(PaybackTypes paybackType, Enumerations.Elements element, params StatusEffect[] statusesInflicted)
             {

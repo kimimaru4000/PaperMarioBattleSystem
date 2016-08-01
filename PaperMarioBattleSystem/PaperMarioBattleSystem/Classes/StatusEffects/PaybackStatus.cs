@@ -10,12 +10,17 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Payback Status Effect.
-    /// When direct contact is made with the entity afflicted, the attacker receives half the damage dealt in a specific Element.
-    /// Additionally, the attacker can be inflicted with one or more StatusEffects
+    /// When direct contact is made with the entity afflicted, the attacker receives half the damage dealt in a specific Element
+    /// and can be inflicted with one or more StatusEffects.
+    /// <para>If the entity already has the Payback effect when this is afflicted, the Element and StatusEffects should change to the new
+    /// values if they are their default values (for now).</para>
     /// </summary>
+    
+    /*TTYD Notes via testing:
+      -If Electrified, the 1 damage is ADDED to the Payback damage an enemy takes*/
     public sealed class PaybackStatus : StatusEffect
     {
-        private PaybackHolder Paybackholder = default(PaybackHolder);
+        private PaybackHolder Paybackholder = null;
 
         public PaybackStatus(int duration, PaybackHolder paybackHolder)
         {
@@ -29,12 +34,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-            
+            EntityAfflicted.EntityProperties.AddPaybackData(Paybackholder);
         }
 
         protected override void OnEnd()
         {
-            
+            EntityAfflicted.EntityProperties.RemovePaybackData();
         }
 
         protected override void OnPhaseCycleStart()
@@ -44,12 +49,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnSuspend()
         {
-
+            EntityAfflicted.EntityProperties.RemovePaybackData();
         }
 
         protected override void OnResume()
         {
-
+            EntityAfflicted.EntityProperties.AddPaybackData(Paybackholder);
         }
 
         public override StatusEffect Copy()

@@ -369,7 +369,7 @@ namespace PaperMarioBattleSystem
         //to the latter
         public enum PhysicalAttributes
         {
-            None, Flying, Spiked, Electrified, Icy, Fiery, Poisony, Explosive, Starry
+            None, Flying, Electrified, Poisony, Spiked, Icy, Fiery, Explosive, Starry
         }
 
         /// <summary>

@@ -741,7 +741,7 @@ namespace PaperMarioBattleSystem
         #region Physical Attribute Sort Methods
 
         /// <summary>
-        /// A Comparison sort method for PhysicalAttributes, putting higher valued attributes first for consistency with Element Overrides
+        /// A Comparison sort method for PhysicalAttributes, putting higher valued attributes first for consistency with contact results
         /// </summary>
         /// <param name="physAttr1"></param>
         /// <param name="physAttr2"></param>

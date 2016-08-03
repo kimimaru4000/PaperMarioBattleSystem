@@ -15,12 +15,9 @@ namespace PaperMarioBattleSystem
     /// <para>If the entity already has the Payback effect when this is afflicted, the Element and StatusEffects should change to the new
     /// values if they are their default values (for now).</para>
     /// </summary>
-    
-    /*TTYD Notes via testing:
-      -If Electrified, the 1 damage is ADDED to the Payback damage an enemy takes*/
     public sealed class PaybackStatus : StatusEffect
     {
-        private PaybackHolder Paybackholder = null;
+        private PaybackHolder Paybackholder = PaybackHolder.Default;
 
         public PaybackStatus(int duration, PaybackHolder paybackHolder)
         {
@@ -34,12 +31,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-            EntityAfflicted.EntityProperties.AddPaybackData(Paybackholder);
+            EntityAfflicted.EntityProperties.AddPayback(Paybackholder);
         }
 
         protected override void OnEnd()
         {
-            EntityAfflicted.EntityProperties.RemovePaybackData();
+            EntityAfflicted.EntityProperties.RemovePayback(Paybackholder);
         }
 
         protected override void OnPhaseCycleStart()
@@ -49,12 +46,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnSuspend()
         {
-            EntityAfflicted.EntityProperties.RemovePaybackData();
+            EntityAfflicted.EntityProperties.RemovePayback(Paybackholder);
         }
 
         protected override void OnResume()
         {
-            EntityAfflicted.EntityProperties.AddPaybackData(Paybackholder);
+            EntityAfflicted.EntityProperties.AddPayback(Paybackholder);
         }
 
         public override StatusEffect Copy()

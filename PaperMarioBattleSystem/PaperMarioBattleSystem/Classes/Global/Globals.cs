@@ -529,45 +529,48 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        #region Classes
+        #region Structs
 
         /// <summary>
         /// Holds information about Payback damage
         /// </summary>
-        public class PaybackHolder
+        public struct PaybackHolder
         {
             /// <summary>
             /// The type of Payback damage
             /// </summary>
-            public PaybackTypes PaybackType { get; private set; } = PaybackTypes.Constant;
+            public PaybackTypes PaybackType { get; private set; }
 
             /// <summary>
             /// The Elemental damage dealt
             /// </summary>
-            public Enumerations.Elements Element { get; private set; } = Enumerations.Elements.Normal;
+            public Enumerations.Elements Element { get; private set; }
 
             /// <summary>
-            /// The amount of damage to deal if the PaybackType is Constant
+            /// The amount of damage to deal.
+            /// <para>If the PaybackType is Constant, this is the total damage dealt. Otherwise, this damage is added to the total.</para>
             /// </summary>
-            public int ConstantDamage { get; private set; } = 0;
+            public int Damage { get; private set; }
 
             /// <summary>
             /// The Status Effects to inflict
             /// </summary>
-            public StatusEffect[] StatusesInflicted { get; private set; } = null;
+            public StatusEffect[] StatusesInflicted { get; private set; }
+
+            public static PaybackHolder Default => new PaybackHolder(PaybackTypes.Constant, Enumerations.Elements.Normal, 1, null);
 
             public PaybackHolder(PaybackTypes paybackType, Enumerations.Elements element, params StatusEffect[] statusesInflicted)
             {
                 PaybackType = paybackType;
                 Element = element;
-                ConstantDamage = 0;
+                Damage = 0;
                 StatusesInflicted = statusesInflicted;
             }
 
             public PaybackHolder(PaybackTypes paybackType, Enumerations.Elements element, int constantDamage, params StatusEffect[] statusesInflicted)
                 : this(paybackType, element, statusesInflicted)
             {
-                ConstantDamage = constantDamage;
+                Damage = constantDamage;
             }
 
             /// <summary>
@@ -579,9 +582,9 @@ namespace PaperMarioBattleSystem
             {
                 switch (PaybackType)
                 {
-                    case PaybackTypes.Full: return damageDealt;
-                    case PaybackTypes.Half: return (damageDealt / 2);
-                    default: return ConstantDamage;
+                    case PaybackTypes.Full: return damageDealt + Damage;
+                    case PaybackTypes.Half: return (damageDealt / 2) + Damage;
+                    default: return Damage;
                 }
             }
         }

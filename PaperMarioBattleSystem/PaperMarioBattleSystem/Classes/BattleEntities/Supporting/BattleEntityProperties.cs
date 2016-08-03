@@ -66,7 +66,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The Payback data of the entity
         /// </summary>
-        public PaybackHolder PaybackData { get; protected set; } = null;
+        protected readonly List<PaybackHolder> Paybacks = new List<PaybackHolder>();
 
         #region Constructor
 
@@ -157,11 +157,19 @@ namespace PaperMarioBattleSystem
             ContactResultInfo contactResultInfo =  Interactions.GetContactResult(attacker, contactType, GetAllPhysAttributes(), attacker.EntityProperties.GetContactExceptions(contactType));
 
             //On a Success, check if this Entity has any Payback and add it if so
-            if ((contactResultInfo.ContactResult == ContactResult.Success/* || contactResultInfo.ContactResult == ContactResult.PartialSuccess*/)
-                && PaybackData != null)
+            if ((contactResultInfo.ContactResult == ContactResult.Success || contactResultInfo.ContactResult == ContactResult.PartialSuccess) && HasPayback() == true)
             {
+                PaybackHolder paybackholder;
+
+                //Factor in the contact's Payback on a PartialSuccess
+                if (contactResultInfo.ContactResult == ContactResult.PartialSuccess)
+                    paybackholder = GetPayback(contactResultInfo.Paybackholder);
+                //Get only the BattleEntity's Payback on a Success
+                else paybackholder = GetPayback();
+
+                //Since there's Payback, the result is now a PartialSuccess
                 contactResultInfo.ContactResult = ContactResult.PartialSuccess;
-                contactResultInfo.Paybackholder = PaybackData;//new PaybackHolder(PaybackData.PaybackType, PaybackData.Element, contactResultInfo.Paybackholder.ConstantDamage, PaybackData.StatusesInflicted);
+                contactResultInfo.Paybackholder = paybackholder;
             }
 
             return contactResultInfo;
@@ -637,41 +645,93 @@ namespace PaperMarioBattleSystem
         #region Payback Data Methods
 
         /// <summary>
-        /// Adds Payback to the BattleEntity
+        /// Adds Payback to the BattleEntity, causing it to deal damage to direct attackers.
         /// </summary>
-        /// <param name="paybackHolder">The Payback to add</param>
-        public void AddPaybackData(PaybackHolder paybackHolder)
+        /// <param name="paybackHolder">The PaybackHolder to add.</param>
+        public void AddPayback(PaybackHolder paybackHolder)
         {
-            if (paybackHolder == null)
-            {
-                Debug.LogWarning($"Attempting to add invalid Payback data to {Entity.Name}!");
-                return;
-            }
-
             Debug.Log($"Added {paybackHolder.Element} Payback of type {paybackHolder.PaybackType} to {Entity.Name}!");
 
-            PaybackData = paybackHolder;
+            Paybacks.Add(paybackHolder);
+        }
 
-            if (PaybackData.PaybackType == PaybackTypes.Half)
+        /// <summary>
+        /// Removes a Payback on the BattleEntity.
+        /// </summary>
+        /// <param name="paybackHolder">The PaybackHolder to remove.</param>
+        public void RemovePayback(PaybackHolder paybackHolder)
+        {
+            bool removed = Paybacks.Remove(paybackHolder);
+
+            if (removed == true)
             {
-                Debug.Log($"Upgraded {Entity.Name}'s Payback from Half to Full. It's also now {paybackHolder.Element} Payback of type {paybackHolder.PaybackType}!");
-                PaybackData = new PaybackHolder(PaybackTypes.Full, paybackHolder.Element, paybackHolder.ConstantDamage, paybackHolder.StatusesInflicted);
+                Debug.Log($"Successfully removed {paybackHolder.Element} Payback of type {paybackHolder.PaybackType} on {Entity.Name}!");
             }
         }
 
         /// <summary>
-        /// Removes the BattleEntity's Payback
+        /// Gets the total Payback a BattleEntity has by combining all of the current Paybacks affecting the BattleEntity.
         /// </summary>
-        public void RemovePaybackData()
+        /// <param name="additionalPaybacks">Any additional PaybackHolders to factor in. This is used when determining the total contact result.</param>
+        /// <returns>A PaybackHolder with the combined properties of all the Paybacks the BattleEntity has</returns>
+        public PaybackHolder GetPayback(params PaybackHolder[] additionalPaybacks)
         {
-            if (PaybackData == null)
+            //Gather all the entity's Paybacks in the list
+            List<PaybackHolder> allPaybacks = new List<PaybackHolder>(Paybacks);
+
+            //Add any additional Paybacks
+            if (additionalPaybacks != null && additionalPaybacks.Length > 0)
             {
-                Debug.LogWarning($"Attempting to remove non-existent Payback on {Entity.Name}");
-                return;
+                allPaybacks.AddRange(additionalPaybacks);
             }
 
-            Debug.Log($"Successfully removed Payback on {Entity.Name}");
-            PaybackData = null;
+            //Initialize default values
+            PaybackTypes totalType = PaybackTypes.Constant;
+            Elements totalElement = Elements.Normal;
+            int totalDamage = 0;
+            List<StatusEffect> totalStatuses = new List<StatusEffect>();
+
+            //Go through all the Paybacks and add them up
+            for (int i = 0; i < allPaybacks.Count; i++)
+            {
+                PaybackHolder paybackHolder = allPaybacks[i];
+
+                //If there's a Half or Full Payback, upgrade the current one from Half to Full if it's currently Half
+                if (paybackHolder.PaybackType != PaybackTypes.Constant)
+                {
+                    //If there are at least two Half Paybacks, upgrade it to Full
+                    if (totalType == PaybackTypes.Half && paybackHolder.PaybackType == PaybackTypes.Half)
+                        totalType = PaybackTypes.Full;
+                    else if (totalType != PaybackTypes.Full)
+                        totalType = paybackHolder.PaybackType;
+                }
+
+                //Check for a higher priority Element
+                if (paybackHolder.Element > totalElement)
+                    totalElement = paybackHolder.Element;
+
+                //Add up all the damage
+                totalDamage += paybackHolder.Damage;
+
+                //Add in all the StatusEffects - note that StatusEffects with the same StatusType will increase the chance of
+                //that StatusEffect being inflicted, as the first one may not succeed in being inflicted depending on the BattleEntity
+                if (paybackHolder.StatusesInflicted != null && paybackHolder.StatusesInflicted.Length > 0)
+                {
+                    totalStatuses.AddRange(paybackHolder.StatusesInflicted);
+                }
+            }
+
+            //Return the final Payback
+            return new PaybackHolder(totalType, totalElement, totalDamage, totalStatuses.ToArray());
+        }
+
+        /// <summary>
+        /// Tells if the BattleEntity has any Payback at all
+        /// </summary>
+        /// <returns>true if the Payback list has at least one entry, otherwise false</returns>
+        public bool HasPayback()
+        {
+            return (Paybacks.Count > 0);
         }
 
         #endregion

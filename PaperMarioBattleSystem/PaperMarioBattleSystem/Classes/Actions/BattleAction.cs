@@ -11,7 +11,7 @@ using static PaperMarioBattleSystem.Enumerations;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// An action that is performed by an entity in battle
+    /// An action that is performed by a BattleEntity in battle
     /// </summary>
     public abstract class BattleAction
     {
@@ -31,6 +31,8 @@ namespace PaperMarioBattleSystem
         /// It should follow the same conventions as the other branches
         /// </summary>
         protected delegate void InterruptionDelegate();
+
+        #region Fields/Properties
 
         /// <summary>
         /// The name of the action
@@ -138,6 +140,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected bool CommandEnabled => (Command != null && User.EntityType != EntityTypes.Enemy);
 
+        #endregion
+
         protected BattleAction()
         {
             InterruptionHandler = BaseInterruptionHandler;
@@ -149,9 +153,11 @@ namespace PaperMarioBattleSystem
         /// In the event of an interruption, no further entities are tested, the ActionCommand is ended, and 
         /// we go into the Interruption branch</para>
         /// </summary>
-        /// <param name="damage">The total raw damage to be dealt to the entities if the attempt was successful</param>
+        /// <param name="damage">The damage the BattleAction deals to the entity if the attempt was successful</param>
         /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
-        protected void AttemptDamage(int damage, BattleEntity[] entities)
+        // <param name="isTotalDamage">Indicates if the damage value passed in is already the total damage or not.
+        // Some BattleActions such as Power Bounce need to calculate the total damage ahead of time.</param>
+        protected void AttemptDamage(int damage, BattleEntity[] entities/*, bool isTotalDamage = false*/)
         {
             if (entities == null || entities.Length == 0)
             {
@@ -159,12 +165,16 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
+            //Get the true total damage, factoring in the attacker's properties
+            //If the damage passed in is designated as the total damage, use that damage value instead
+            int totalDamage = damage;//isTotalDamage == true ? damage : GetTotalDamage(damage);
+
             //Go through all the entities and attempt damage
             for (int i = 0; i < entities.Length; i++)
             {
                 BattleEntity victim = entities[i];
 
-                InteractionResult finalResult = Interactions.GetDamageInteraction(User, victim, damage, Element, ContactType, StatusesInflicted);
+                InteractionResult finalResult = Interactions.GetDamageInteraction(User, victim, totalDamage, Element, ContactType, StatusesInflicted);
 
                 //Make the victim take damage upon a PartialSuccess or a Success
                 if (finalResult.VictimResult.HasValue == true)
@@ -195,11 +205,25 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Convenience function for attempting damage with only one entity.
         /// </summary>
-        /// <param name="damage">The total raw damage to be dealt to the entity if the attempt was successful</param>
+        /// <param name="damage">The damage the BattleAction deals to the entity if the attempt was successful</param>
         /// <param name="entity">The BattleEntity to attempt to inflict damage on</param>
         protected void AttemptDamage(int damage, BattleEntity entity)
         {
             AttemptDamage(damage, new BattleEntity[] { entity });
+        }
+
+        /// <summary>
+        /// Gets the total raw damage a BattleEntity can deal using this BattleAction
+        /// </summary>
+        /// <param name="actionDamage">The damage the BattleAction deals</param>
+        /// <returns>An int with the total raw damage the BattleEntity can deal when using this BattleAction</returns>
+        protected int GetTotalDamage(int actionDamage)
+        {
+            int totalDamage = actionDamage + User.BattleStats.Attack;
+
+            totalDamage = UtilityGlobals.Clamp(totalDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+
+            return totalDamage;
         }
 
         /// <summary>

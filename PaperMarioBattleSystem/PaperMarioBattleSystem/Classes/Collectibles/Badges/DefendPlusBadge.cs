@@ -24,12 +24,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            EntityEquipped.BattleStats.Defense += 1;
+            EntityEquipped.RaiseDefense(1);
         }
 
         protected override void OnUnequip()
         {
-            EntityEquipped.BattleStats.Defense -= 1;
+            EntityEquipped.LowerDefense(1);
         }
     }
 }

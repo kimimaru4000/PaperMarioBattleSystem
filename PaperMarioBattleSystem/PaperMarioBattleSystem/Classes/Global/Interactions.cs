@@ -150,6 +150,9 @@ namespace PaperMarioBattleSystem
         {
             InteractionResult finalInteractionResult = new InteractionResult();
 
+            //Subtract damage reduction first
+            damage -= victim.BattleStats.DamageReduction;
+
             ContactResultInfo contactResultInfo = victim.EntityProperties.GetContactResult(attacker, contactType);
             ContactResult contactResult = contactResultInfo.ContactResult;
 
@@ -162,12 +165,14 @@ namespace PaperMarioBattleSystem
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
             {
                 //Retrieve an overridden type of Elemental damage to inflict based on the Victim's PhysicalAttributes
+                //(Ex. The Ice Power Badge only deals Ice damage to Fiery entities)
                 Elements newElement = attacker.EntityProperties.GetTotalElementOverride(victim);
                 if (newElement != Elements.Invalid)
                 {
                     element = newElement;
                 }
 
+                //Get the Status Effects to inflict on the Victim
                 StatusEffect[] victimInflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
                 bool hit = attacker.AttemptHitEntity(victim);
 
@@ -216,7 +221,7 @@ namespace PaperMarioBattleSystem
             ResistanceHolder resistance = entity.EntityProperties.GetResistance(element);
             
             //If there's both a weakness and resistance, return
-            if (weakness.WeaknessType == WeaknessTypes.None && resistance.ResistanceType == ResistanceTypes.None)
+            if (weakness.WeaknessType != WeaknessTypes.None && resistance.ResistanceType != ResistanceTypes.None)
                 return elementDamageResult;
 
             //Handle weaknesses

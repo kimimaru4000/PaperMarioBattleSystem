@@ -265,6 +265,13 @@ namespace PaperMarioBattleSystem
         public int Attack;
         public int Defense;
 
+        /// <summary>
+        /// Different from Defense - this modifies the total damage the attack itself does, making it possible to reduce damage dealt
+        /// to you from Piercing attacks. This value can be negative.
+        /// <para>The P-Up, D-Down and P-Down, D-Up Badges modify this value.</para>
+        /// </summary>
+        public int DamageReduction;
+
         public int Accuracy = 100;
         public int Evasion = 0;
 

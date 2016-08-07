@@ -241,22 +241,22 @@ namespace PaperMarioBattleSystem
 
         public void RaiseAttack(int attack)
         {
-
+            BattleStats.Attack += attack;
         }
         
         public void RaiseDefense(int defense)
         {
-            
+            BattleStats.Defense += defense;
         }
 
         public void LowerAttack(int attack)
         {
-
+            BattleStats.Attack -= attack;
         }
 
         public void LowerDefense(int defense)
         {
-
+            BattleStats.Defense -= defense;
         }
 
         public void ModifyAccuracy(int accuracy)

@@ -1,0 +1,17 @@
+Remaining Damage System Implementation (8/7/16)
+-----------------------------------------------
+Here's a list of things left to implement before the damage system is complete:
+
+1. Simplifier/Unsimplifier - More robust Action Command timing will be necessary, as these modify the windows
+   for executing the Action Commands
+   
+2. All Or Nothing - This ties in with 1 in that the Action Commands will need to be more robust. In this case,
+   we'll need to add to the total damage dealt if the Action Command was successfully performed and set it to 0
+   if the Action Command was failed. The 0 damage can't be affected by weaknesses/resistances or anything else to make it positive.
+   
+3. Guarding/Superguarding - On a Guard, the damage of the attack itself is reduced by 1. On a Superguard, the damage Mario takes is 0
+   no matter what. Damage Dodge Badges add to Mario's Defense and thus are ineffective against Piercing attacks.
+   
+4. Double Pain & Last Stand - The formula for Double Pain is: Damage * (# of Double Pains equipped + 1)
+   The formula for Last Stand is: Damage / (# of Last Stands equipped + 1); this is rounded down in PM and up in TTYD. Let's go with the latter.
+   Double Pain is calculated first. Then, if Mario is in Danger or Peril, Last Stand is factored in.

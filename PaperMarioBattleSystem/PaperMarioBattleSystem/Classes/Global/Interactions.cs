@@ -138,17 +138,24 @@ namespace PaperMarioBattleSystem
         /// <para>This returns all the necessary information for both BattleEntities, including the total amount of damage dealt,
         /// the type of Elemental damage to deal, the Status Effects to inflict, and whether the attack successfully hit or not.</para>
         /// </summary>
-        /// <param name="attacker">The BattleEntity attacking</param>
-        /// <param name="victim">The BattleEntity being attacked</param>
-        /// <param name="damage">The amount of damage the attacker is attempting to deal to the victim</param>
-        /// <param name="element">The type of Elemental damage the attacker is hitting the victim with</param>
-        /// <param name="contactType">The type of contact the attacker is making with the victim</param>
-        /// <param name="statuses">The Status Effects the attacker is attempting to afflict the victim with</param>
+        /// <param name="interactionParam">An InteractionParamHolder containing the BattleEntities interacting and data about their interaction</param>
+        // <param name="attacker">The BattleEntity attacking</param>
+        // <param name="victim">The BattleEntity being attacked</param>
+        // <param name="damage">The amount of damage the attacker is attempting to deal to the victim</param>
+        // <param name="element">The type of Elemental damage the attacker is hitting the victim with</param>
+        // <param name="contactType">The type of contact the attacker is making with the victim</param>
+        // <param name="statuses">The Status Effects the attacker is attempting to afflict the victim with</param>
         /// <returns>An InteractionResult containing InteractionHolders for both the victim and the attacker</returns>
-        public static InteractionResult GetDamageInteraction(BattleEntity attacker, BattleEntity victim, int damage, Elements element,
-            ContactTypes contactType, StatusEffect[] statuses)
+        public static InteractionResult GetDamageInteraction(InteractionParamHolder interactionParam)
         {
             InteractionResult finalInteractionResult = new InteractionResult();
+
+            BattleEntity attacker = interactionParam.Attacker;
+            BattleEntity victim = interactionParam.Victim;
+            ContactTypes contactType = interactionParam.ContactType;
+            Elements element = interactionParam.DamagingElement;
+            StatusEffect[] statuses = interactionParam.Statuses;
+            int damage = interactionParam.Damage;
 
             //Subtract damage reduction first
             damage -= victim.BattleStats.DamageReduction;

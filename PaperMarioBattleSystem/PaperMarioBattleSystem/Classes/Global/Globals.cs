@@ -206,6 +206,31 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
+    /// Holds the required data for initiating a damage interaction.
+    /// This is passed to methods that involve calculating damage interactions.
+    /// </summary>
+    public struct InteractionParamHolder
+    {
+        public BattleEntity Attacker;
+        public BattleEntity Victim;
+        public int Damage;
+        public Enumerations.Elements DamagingElement;
+        public Enumerations.ContactTypes ContactType;
+        public StatusEffect[] Statuses;
+
+        public InteractionParamHolder(BattleEntity attacker, BattleEntity victim, int damage, Enumerations.Elements element,
+            Enumerations.ContactTypes contactType, StatusEffect[] statuses)
+        {
+            Attacker = attacker;
+            Victim = victim;
+            Damage = damage;
+            DamagingElement = element;
+            ContactType = contactType;
+            Statuses = statuses;
+        }
+    }
+
+    /// <summary>
     /// Holds immutable data for the result of a damage interaction.
     /// It includes the BattleEntity that got damaged, the amount and type of damage dealt, the Status Effects inflicted, and more.
     /// </summary>

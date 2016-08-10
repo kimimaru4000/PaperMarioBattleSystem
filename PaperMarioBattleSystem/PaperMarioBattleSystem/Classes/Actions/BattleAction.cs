@@ -174,7 +174,7 @@ namespace PaperMarioBattleSystem
             {
                 BattleEntity victim = entities[i];
 
-                InteractionResult finalResult = Interactions.GetDamageInteraction(User, victim, totalDamage, Element, ContactType, StatusesInflicted);
+                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage, Element, ContactType, StatusesInflicted));
 
                 //Make the victim take damage upon a PartialSuccess or a Success
                 if (finalResult.VictimResult.HasValue == true)

@@ -21,6 +21,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Mario";
             EntityType = Enumerations.EntityTypes.Player;
+            PlayerType = Enumerations.PlayerTypes.Mario;
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Mario");
             AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(228, 918, 29, 51), 1000d)));

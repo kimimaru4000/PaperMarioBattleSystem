@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -11,6 +12,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class BattlePlayer : BattleEntity
     {
+        public PlayerTypes PlayerType { get; protected set; } = PlayerTypes.Mario;
+
         public BattlePlayer()
         {
             

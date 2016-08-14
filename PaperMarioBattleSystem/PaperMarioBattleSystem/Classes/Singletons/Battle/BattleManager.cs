@@ -475,13 +475,14 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Returns all entities of a specified type in an array
+        /// Returns all entities of a specified type in a list.
+        /// This method is used internally in the BattleManager to allow for easy manipulation of the returned list.
         /// </summary>
         /// <param name="entityType">The type of entities to return</param>
         /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
         /// If null, will include entities of all height states</param>
         /// <returns>Entities matching the type and height states specified</returns>
-        public BattleEntity[] GetEntities(EntityTypes entityType, params HeightStates[] heightStates)
+        private List<BattleEntity> GetEntitiesList(EntityTypes entityType, params HeightStates[] heightStates)
         {
             List<BattleEntity> entities = new List<BattleEntity>();
 
@@ -498,6 +499,19 @@ namespace PaperMarioBattleSystem
             //Filter by height states
             FilterEntitiesByHeights(entities, heightStates);
 
+            return entities;
+        }
+
+        /// <summary>
+        /// Returns all entities of a specified type in an array
+        /// </summary>
+        /// <param name="entityType">The type of entities to return</param>
+        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
+        /// If null, will include entities of all height states</param>
+        /// <returns>Entities matching the type and height states specified</returns>
+        public BattleEntity[] GetEntities(EntityTypes entityType, params HeightStates[] heightStates)
+        {
+            List<BattleEntity> entities = GetEntitiesList(entityType, heightStates);
             return entities.ToArray();
         }
 
@@ -531,9 +545,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Filters a set of entities by specified height states
+        /// Filters a set of entities by specified height states. This method is called internally by the BattleManager.
         /// </summary>
-        /// <param name="entities">The list of entities to filter</param>
+        /// <param name="entities">The list of entities to filter. This list is modified directly.</param>
         /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
         /// If null or empty, will return the entities passed in</param>
         private void FilterEntitiesByHeights(List<BattleEntity> entities, params HeightStates[] heightStates)
@@ -555,16 +569,132 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Filters a set of entities by specified height states
+        /// </summary>
+        /// <param name="entities">The array of entities to filter</param>
+        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
+        /// If null or empty, will return the entities passed in</param>
+        /// <returns>An array of BattleEntities filtered by HeightStates</returns>
+        public BattleEntity[] FilterEntitiesByHeights(BattleEntity[] entities, params HeightStates[] heightStates)
+        {
+            if (entities == null || entities.Length == 0 || heightStates == null || heightStates.Length == 0) return entities;
+
+            List<BattleEntity> filteredEntities = new List<BattleEntity>(entities);
+            FilterEntitiesByHeights(filteredEntities, heightStates);
+
+            return filteredEntities.ToArray();
+        }
+
+        /// <summary>
+        /// Filters out dead BattleEntities from a set
+        /// </summary>
+        /// <param name="entities">The BattleEntities to filter</param>
+        /// <returns>An array of all the alive BattleEntities</returns>
+        public BattleEntity[] FilterDeadEntities(BattleEntity[] entities)
+        {
+            if (entities == null || entities.Length == 0) return entities;
+
+            List<BattleEntity> aliveEntities = new List<BattleEntity>(entities);
+
+            for (int i = 0; i < aliveEntities.Count; i++)
+            {
+                if (aliveEntities[i].IsDead == true)
+                {
+                    aliveEntities.RemoveAt(i);
+                    i--;
+                }
+            }
+
+            return aliveEntities.ToArray();
+        }
+
+        /// <summary>
+        /// Gets all allies of a particular BattleEntity.
+        /// </summary>
+        /// <param name="entity">The BattleEntity whose allies to get</param>
+        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
+        /// If null or empty, will return the entities passed in</param>
+        /// <returns>An array of allies the BattleEntity has</returns>
+        public BattleEntity[] GetEntityAllies(BattleEntity entity, params HeightStates[] heightStates)
+        {
+            List<BattleEntity> allies = GetEntitiesList(entity.EntityType, heightStates);
+            allies.Remove(entity);
+
+            //Return all allies
+            return allies.ToArray();
+        }
+
+        /// <summary>
+        /// Gets the BattleEntities adjacent to a particular BattleEntity.
+        /// <para>This considers all foreground entities (Ex. Adjacent to Mario would be his Partner and the first Enemy)</para>
+        /// </summary>
+        /// <param name="entity">The BattleEntity to find entities adjacent to</param>
+        /// <param name="getDead">Gets any adjacent entities even if they're dead</param>
+        /// <returns>An array of adjacent BattleEntities</returns>
+        public BattleEntity[] GetAdjacentEntities(BattleEntity entity)
+        {
+            List<BattleEntity> adjacentEntities = new List<BattleEntity>();
+
+            //If the entity is an enemy, it can either be two Enemies or Mario and another Enemy
+            if (entity.EntityType == EntityTypes.Enemy)
+            {
+                BattleEnemy enemy = entity as BattleEnemy;
+
+                int enemyIndex = enemy.BattleIndex;
+                int prevEnemyIndex = FindOccupiedEnemyIndex(enemyIndex - 1, true);
+                int nextEnemyIndex = FindOccupiedEnemyIndex(enemyIndex + 1);
+
+                //Check if there's an Enemy before this one
+                if (prevEnemyIndex >= 0) adjacentEntities.Add(Enemies[prevEnemyIndex]);
+                //There's no Enemy, so target Mario
+                else adjacentEntities.Add(GetMario());
+
+                //Check if there's an Enemy after this one
+                if (nextEnemyIndex >= 0) adjacentEntities.Add(Enemies[nextEnemyIndex]);
+            }
+            //If it's a Player, it will be either Mario/Partner and the first enemy
+            else if (entity.EntityType == EntityTypes.Player)
+            {
+                //The previous entity for Players is always Mario or his Partner, unless the latter has 0 HP
+                BattlePlayer player = entity as BattlePlayer;
+
+                if (player.PlayerType == PlayerTypes.Partner)
+                    adjacentEntities.Add(GetMario());
+                else if (player.PlayerType == PlayerTypes.Mario && Partner.IsDead == false)
+                    adjacentEntities.Add(GetPartner());
+
+                //Add the next enemy
+                int nextEnemy = FindOccupiedEnemyIndex(0);
+                if (nextEnemy >= 0) adjacentEntities.Add(Enemies[nextEnemy]);
+            }
+
+            return adjacentEntities.ToArray();
+        }
+
+        /// <summary>
         /// Finds the next available enemy index
         /// </summary>
         /// <param name="start">The index to start searching from</param>
+        /// <param name="backwards">Whether to search backwards or not</param>
         /// <returns>The next available enemy index if found, otherwise -1</returns>
-        private int FindAvailableEnemyIndex(int start)
+        private int FindAvailableEnemyIndex(int start, bool backwards = false)
         {
-            for (int i = start; i < MaxEnemies; i++)
+            //More code, but more readable too
+            if (backwards == false)
             {
-                if (Enemies[i] == null)
-                    return i;
+                for (int i = start; i < MaxEnemies; i++)
+                {
+                    if (Enemies[i] == null)
+                        return i;
+                }
+            }
+            else
+            {
+                for (int i = start; i >= 0; i--)
+                {
+                    if (Enemies[i] == null)
+                        return i;
+                }
             }
 
             return -1;
@@ -574,13 +704,26 @@ namespace PaperMarioBattleSystem
         /// Finds the next occupied enemy index
         /// </summary>
         /// <param name="start">The index to start searching from</param>
+        /// <param name="backwards">Whether to search backwards or not</param>
         /// <returns>The next occupied enemy index if found, otherwise -1</returns>
-        private int FindOccupiedEnemyIndex(int start)
+        private int FindOccupiedEnemyIndex(int start, bool backwards = false)
         {
-            for (int i = start; i < MaxEnemies; i++)
+            //More code, but more readable too
+            if (backwards == false)
             {
-                if (Enemies[i] != null)
-                    return i;
+                for (int i = start; i < MaxEnemies; i++)
+                {
+                    if (Enemies[i] != null)
+                        return i;
+                }
+            }
+            else
+            {
+                for (int i = start; i >= 0; i--)
+                {
+                    if (Enemies[i] != null)
+                        return i;
+                }
             }
 
             return -1;

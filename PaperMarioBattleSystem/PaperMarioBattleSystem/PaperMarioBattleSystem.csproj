@@ -70,6 +70,7 @@
     <Compile Include="Classes\Actions\Mario\Jump.cs" />
     <Compile Include="Classes\Actions\Mario\Multibounce.cs" />
     <Compile Include="Classes\Actions\Mario\PowerBounce.cs" />
+    <Compile Include="Classes\Actions\NoAction.cs" />
     <Compile Include="Classes\Actions\Sushie\TidalWave.cs" />
     <Compile Include="Classes\Animations\Animation.cs" />
     <Compile Include="Classes\Animations\LoopAnimation.cs" />
@@ -125,6 +126,7 @@
     <Compile Include="Classes\Global\Time.cs" />
     <Compile Include="Classes\StatusEffects\AllergicStatus.cs" />
     <Compile Include="Classes\StatusEffects\BurnStatus.cs" />
+    <Compile Include="Classes\StatusEffects\ConfusedStatus.cs" />
     <Compile Include="Classes\StatusEffects\DizzyStatus.cs" />
     <Compile Include="Classes\StatusEffects\DodgyStatus.cs" />
     <Compile Include="Classes\StatusEffects\ElectrifiedStatus.cs" />

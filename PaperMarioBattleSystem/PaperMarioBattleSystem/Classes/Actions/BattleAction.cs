@@ -138,7 +138,13 @@ namespace PaperMarioBattleSystem
         /// Tells whether the action command is enabled or not.
         /// Action commands are always disabled for enemies
         /// </summary>
-        protected bool CommandEnabled => (Command != null && User.EntityType != EntityTypes.Enemy);
+        protected bool CommandEnabled => (Command != null && User.EntityType != EntityTypes.Enemy && DisableActionCommand == false);
+
+        /// <summary>
+        /// Whether Action Commands are disabled on this action.
+        /// This value automatically resets to false after the action is completed.
+        /// </summary>
+        public bool DisableActionCommand = false;
 
         #endregion
 
@@ -268,6 +274,7 @@ namespace PaperMarioBattleSystem
             InSequence = false;
             SequenceStep = 0;
             CurSequence = null;
+            DisableActionCommand = false;
 
             ChangeJumpBranch(SequenceBranch.None);
 

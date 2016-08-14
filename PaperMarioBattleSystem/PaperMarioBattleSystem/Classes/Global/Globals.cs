@@ -345,6 +345,14 @@ namespace PaperMarioBattleSystem
         }
         
         /// <summary>
+        /// The types of playable characters
+        /// </summary>
+        public enum PlayerTypes
+        {
+            Mario, Partner
+        }
+
+        /// <summary>
         /// The types of partners in the game
         /// </summary>
         public enum PartnerTypes
@@ -460,6 +468,7 @@ namespace PaperMarioBattleSystem
             Invincible,
             DamageDealtMultiplier,
             DamageReceivedMultiplier,
+            ConfusionPercent
             //Badge properties
             
         }
@@ -545,6 +554,32 @@ namespace PaperMarioBattleSystem
         public const int DeathHP = 0;
 
         #endregion
+
+        #region Structs
+
+        /// <summary>
+        /// Holds information about a BattleAction being used and the BattleEntities it targets
+        /// </summary>
+        public struct ActionHolder
+        {
+            /// <summary>
+            /// The BattleAction being used.
+            /// </summary>
+            public BattleAction Action { get; private set; }
+
+            /// <summary>
+            /// The BattleEntities the action targets.
+            /// </summary>
+            public BattleEntity[] Targets { get; private set; }
+
+            public ActionHolder(BattleAction action, params BattleEntity[] targets)
+            {
+                Action = action;
+                Targets = targets;
+            }
+        }
+
+        #endregion
     }
 
     /// <summary>
@@ -618,6 +653,19 @@ namespace PaperMarioBattleSystem
                     case PaybackTypes.Half: return (damageDealt / 2) + Damage;
                     default: return Damage;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Holds information about Confusion
+        /// </summary>
+        public struct ConfusionHolder
+        {
+            public int ConfusionPercent { get; private set; }
+
+            public ConfusionHolder(int confusionPercent)
+            {
+                ConfusionPercent = confusionPercent;
             }
         }
 
@@ -783,6 +831,21 @@ namespace PaperMarioBattleSystem
         public static int Wrap(int value, int min, int max) => (value < min) ? max : (value > max) ? min : value;
         public static float Wrap(float value, float min, float max) => (value < min) ? max : (value > max) ? min : value;
         public static double Wrap(double value, double min, double max) => (value < min) ? max : (value > max) ? min : value;
+
+        /// <summary>
+        /// Tests a random condition
+        /// </summary>
+        /// <param name="minValue">The minimum possible value</param>
+        /// <param name="maxValue">The maximum possible value</param>
+        /// <param name="valueTested">The value to test against</param>
+        /// <param name="checkEquals">If true, will also check if the randomized value matches the value tested</param>
+        /// <returns>true if the condition succeeded, false otherwise</returns>
+        public static bool TestRandomCondition(int minValue, int maxValue, int valueTested, bool checkEquals)
+        {
+            int value = GeneralGlobals.Randomizer.Next(minValue, maxValue);
+
+            return (checkEquals == false) ? (value < valueTested) : (value <= valueTested);
+        }
 
         /// <summary>
         /// Chooses a random index in a list of percentages

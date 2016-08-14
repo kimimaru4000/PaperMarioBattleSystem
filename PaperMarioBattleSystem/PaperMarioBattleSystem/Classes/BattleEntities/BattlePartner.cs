@@ -18,6 +18,7 @@ namespace PaperMarioBattleSystem
             Name = "Partner";
 
             EntityType = Enumerations.EntityTypes.Player;
+            PlayerType = Enumerations.PlayerTypes.Partner;
         }
 
         /// <summary>

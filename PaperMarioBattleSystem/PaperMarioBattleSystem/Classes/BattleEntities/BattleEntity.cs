@@ -498,10 +498,108 @@ namespace PaperMarioBattleSystem
             BattlePosition = battlePos;
         }
 
+        /// <summary>
+        /// Determines if the BattleEntity gets affected by the Confused status, if it has it.
+        /// If the BattleEntity is affected, it may perform a different action or target different entities with its original one.
+        /// </summary>
+        /// <param name="action">The BattleAction originally used.</param>
+        /// <param name="targets">The original set of BattleEntities to target</param>
+        /// <returns>An ActionHolder with a new BattleAction to perform or a different target list if the entity was affected by Confused.
+        /// If not affected, the originals of each will be returned.</returns>
+        private BattleGlobals.ActionHolder HandleConfusion(BattleAction action, params BattleEntity[] targets)
+        {
+            BattleAction actualAction = action;
+            BattleEntity[] actualTargets = targets;
+
+            //Check for Confusion's effects and change actions or targets depending on what happens
+            int percent = EntityProperties.GetMiscProperty(MiscProperty.ConfusionPercent).IntValue;
+
+            //See if Confusion should take effect
+            if (UtilityGlobals.TestRandomCondition(0, 100, percent, false) == true)
+            {
+                Debug.Log($"{Name} is affected by Confusion and will do something unpredictable!");
+
+                int changeTargets = GeneralGlobals.Randomizer.Next(0, 2);
+                //int changeAction;
+
+                //Change to an ally
+                /*Steps:
+                  1. If the action hits the first entity, find the adjacent allies. If not, find all allies
+                  2. Filter by heights based on what the action can hit
+                  3. Filter out dead allies
+                  4. If the action hits everyone, go with the remaining list. Otherwise, choose a random ally to attack
+                  5. If there are no allies to attack after all the filtering, make the entity do nothing*/
+                if (changeTargets == 0)
+                {
+                    BattleEntity[] allies = null;
+
+                    //If this action targets only the first player/enemy, look for adjacent allies
+                    if (actualAction.SelectionType == TargetSelectionMenu.EntitySelectionType.First)
+                    {
+                        Debug.Log($"{Name} is looking for valid adjacent allies to attack!");
+
+                        //Find adjacent allies and filter out all non-ally entities
+                        List<BattleEntity> adjacentEntities = new List<BattleEntity>(BattleManager.Instance.GetAdjacentEntities(this));
+                        adjacentEntities.RemoveAll((adjacent) => adjacent.EntityType != EntityType);
+                        allies = adjacentEntities.ToArray();
+                    }
+                    else
+                    {
+                        //Find all allies
+                        allies = BattleManager.Instance.GetEntityAllies(this);
+                    }
+
+                    //Filter by heights
+                    allies = BattleManager.Instance.FilterEntitiesByHeights(allies, actualAction.HeightsAffected);
+
+                    //Filter dead entities
+                    allies = BattleManager.Instance.FilterDeadEntities(allies);
+
+                    //Choose a random ally to attack if the action only targets one entity
+                    if (allies.Length > 0 && actualAction.SelectionType != TargetSelectionMenu.EntitySelectionType.All)
+                    {
+                        int randTarget = GeneralGlobals.Randomizer.Next(0, allies.Length);
+                        allies = new BattleEntity[] { allies[randTarget] };
+
+                        Debug.Log($"{Name} is choosing to attack ally {allies[0].Name} in Confusion!");
+                    }
+
+                    //Set the actual targets to be the set of allies
+                    actualTargets = allies;
+
+                    //If you can't attack any allies, do nothing
+                    if (actualTargets.Length == 0)
+                    {
+                        actualAction = new NoAction();
+
+                        Debug.Log($"{Name} did nothing as there either are no allies to attack or they're not in range!");
+                    }
+                    else
+                    {
+                        //Disable action commands when attacking allies from Confusion
+                        actualAction.DisableActionCommand = true;
+                    }
+                }
+            }
+
+            return new BattleGlobals.ActionHolder(actualAction, actualTargets);
+        }
+
         public void StartAction(BattleAction action, params BattleEntity[] targets)
         {
-            PreviousAction = action;
-            PreviousAction.StartSequence(targets);
+            BattleAction actualAction = action;
+            BattleEntity[] actualTargets = targets;
+
+            //Check for Confused and handle it appropriately
+            if (EntityProperties.HasMiscProperty(MiscProperty.ConfusionPercent) == true)
+            {
+                BattleGlobals.ActionHolder holder = HandleConfusion(action, targets);
+                actualAction = holder.Action;
+                actualTargets = holder.Targets;
+            }
+
+            PreviousAction = actualAction;
+            PreviousAction.StartSequence(actualTargets);
         }
 
         #region Animation Methods

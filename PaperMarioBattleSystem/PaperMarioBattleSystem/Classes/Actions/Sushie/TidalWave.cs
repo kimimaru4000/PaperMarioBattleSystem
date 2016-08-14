@@ -71,6 +71,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.PlayAnimation(AnimationGlobals.IdleName);
                     if (CommandEnabled == true) Command.StartInput();
+                    else ChangeSequenceBranch(SequenceBranch.Failed);
                     CurSequence = new WaitForCommand(1500f, Command, CommandEnabled);
                     break;
                 default:

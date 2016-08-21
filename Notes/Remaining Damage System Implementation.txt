@@ -15,3 +15,10 @@ Here's a list of things left to implement before the damage system is complete:
 4. Double Pain & Last Stand - The formula for Double Pain is: Damage * (# of Double Pains equipped + 1)
    The formula for Last Stand is: Damage / (# of Last Stands equipped + 1); this is rounded down in PM and up in TTYD. Let's go with the latter.
    Double Pain is calculated first. Then, if Mario is in Danger or Peril, Last Stand is factored in.
+   
+Update (8/20/16)
+----------------
+5. Damage Dodge - Increases your Defense by 1 for each equipped, but only when you have successfully Guarded and only for the move you Guarded.
+   Since it increases your Defense, it does not reduce the damage of Piercing moves. For example, a Crazee Dayzee in TTYD has an Attack of 2,
+   and its Sing move deals Piercing damage. Guarding with or without any Damage Dodge badges equipped causes it to do 1 damage since only the
+   Guard action reduces the damage of the attack.

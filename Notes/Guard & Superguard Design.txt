@@ -64,3 +64,26 @@ Updates
 1. I think we can finally figure out when a move can hit. Currently all damage happens after a specific SequenceAction, so what we need to do is start the timer at the start of each SequenceAction and check and see if the player pressed the correct inputs within the SequenceAction's duration.
 
 Either that, or specify IN the sequence when to prepare for a Guard or Superguard and the total duration until damage is dealt. I think either approach would be sufficient without causing many problems, but they will of course have to be tested first.
+
+Update (8/20/16)
+----------------
+Guarding and Superguarding should always be active inputs, regardless of turn. This is because things can happen in between turns that cause
+damage. Examples would include stage hazards in TTYD. There also needs to be a flag on actions to determine if they can be
+Guarded/Superguarded.
+
+Currently the only moves I know that can't be Guarded/Superguarded are:
+-Bulky Bob-omb's and Bob-ulk's Explosion
+-Hooktail, Gloomtail, and Bonetail's Bite
+-All items
+
+Create a new base DefensiveAction class that doesn't inherit from BattleAction, as they're different. We may need to abstract
+out the BattleAction class even more in the near future to allow for all types of moves or actions to be classified as one base thing.
+
+The only two Defensive Actions in the entire Paper Mario series are Guard and Superguard. Defend is not one because it occurs on Mario
+or his Partner's turn.
+
+In it we need the following:
+-Some means to influence the total damage dealt
+-Some way to track input for their Action Commands
+-A way to enable/disable their action commands (Lucky Star)
+-A way to deal damage like normal (Superguards)

@@ -92,6 +92,8 @@ namespace PaperMarioBattleSystem
 
         public bool UsedTurn => (TurnsUsed >= MaxTurns || IsDead == true);
 
+        protected readonly List<DefensiveAction> DefensiveActions = new List<DefensiveAction>();
+
         protected BattleEntity()
         {
             EntityProperties = new BattleEntityProperties(this);
@@ -140,6 +142,22 @@ namespace PaperMarioBattleSystem
                 damage *= EntityProperties.GetMiscProperty(MiscProperty.DamageReceivedMultiplier).IntValue;
             }
 
+            //Handle Defensive Actions
+            for (int i = 0; i < DefensiveActions.Count; i++)
+            {
+                if (DefensiveActions[i].IsSuccessful == true)
+                {
+                    BattleGlobals.DefensiveActionHolder holder = DefensiveActions[i].HandleSuccess(damage, statusesInflicted);
+                    damage = holder.Damage;
+                    statusesInflicted = holder.Statuses;
+
+                    //NOTE: TEMPORARY
+                    PlayAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName);
+
+                    break;
+                }
+            }
+
             //Handle the elemental interaction results
             ElementInteractionResult elementResult = damageResult.ElementResult;
 
@@ -151,6 +169,7 @@ namespace PaperMarioBattleSystem
             {
                 damage = 0;
                 elementResult = ElementInteractionResult.Damage;
+                statusesInflicted = null;
             }
 
             if (elementResult == ElementInteractionResult.Damage || elementResult == ElementInteractionResult.KO)
@@ -701,6 +720,11 @@ namespace PaperMarioBattleSystem
         public void Update()
         {
             CurrentAnim?.Update();
+
+            for (int i = 0; i < DefensiveActions.Count; i++)
+            {
+                DefensiveActions[i].Update();
+            }
         }
 
         public virtual void Draw()

@@ -14,14 +14,9 @@ namespace PaperMarioBattleSystem
     {
         public PlayerTypes PlayerType { get; protected set; } = PlayerTypes.Mario;
 
-        public BattlePlayer()
-        {
-            
-        }
-
         public BattlePlayer(Stats stats) : base(stats)
         {
-            
+            DefensiveActions.Add(new Guard(this));
         }
 
         public override void BraceAttack(BattleEntity attacker)

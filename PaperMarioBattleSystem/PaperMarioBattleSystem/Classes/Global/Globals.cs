@@ -579,6 +579,25 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        public struct DefensiveActionHolder
+        {
+            /// <summary>
+            /// The final damage, influenced by the Defensive Action
+            /// </summary>
+            public int Damage { get; private set; }
+
+            /// <summary>
+            /// A filtered set of StatusEffects, influenced by the Defensive Action
+            /// </summary>
+            public StatusEffect[] Statuses { get; private set; }
+
+            public DefensiveActionHolder(int damage, StatusEffect[] statuses)
+            {
+                Damage = damage;
+                Statuses = statuses;
+            }
+        }
+
         #endregion
     }
 

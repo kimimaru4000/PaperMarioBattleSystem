@@ -64,6 +64,7 @@
     <Compile Include="Classes\ActionCommands\JumpCommand.cs" />
     <Compile Include="Classes\ActionCommands\TidalWaveCommand.cs" />
     <Compile Include="Classes\Actions\BattleAction.cs" />
+    <Compile Include="Classes\Actions\Defensive\DefensiveAction.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\Mario\Guard.cs" />
     <Compile Include="Classes\Actions\Mario\Hammer.cs" />
@@ -210,6 +211,7 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Classes\Actions\Player\" />
     <Folder Include="Content\Audio\Music\" />
   </ItemGroup>
   <ItemGroup>

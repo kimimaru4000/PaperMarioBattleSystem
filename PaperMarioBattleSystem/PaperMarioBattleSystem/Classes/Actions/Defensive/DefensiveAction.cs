@@ -20,13 +20,30 @@ namespace PaperMarioBattleSystem
 
         protected bool CommandEnabled => (Command != null);
 
-        protected float CommandSuccessTimer = 0f;
-        protected float PrevCommandTimer = 0f;
+        protected double CommandSuccessTimer = 0f;
+        protected double PrevCommandTimer = 0f;
 
-        protected DefensiveAction()
+        public bool IsSuccessful => (PrevCommandTimer >= Time.ActiveMilliseconds);
+
+        protected DefensiveAction(BattleEntity user)
         {
-            
+            User = user;
         }
+
+        public virtual void OnCommandResponse(int response)
+        {
+            PrevCommandTimer = Time.ActiveMilliseconds + CommandSuccessTimer;
+        }
+
+        /// <summary>
+        /// What happens when the Defensive Action is successfully performed.
+        /// <para>This can be called for only one Defensive Action at a time (Ex. You can't both Guard and Superguard).
+        /// Whichever is successful first in the BattleEntity's DefensiveAction list is the one that gets called.</para>
+        /// </summary>
+        /// <param name="damage">The original damage that would be dealt to the BattleEntity</param>
+        /// <param name="statusEffects">The original StatusEffects that would be inflicted on the BattleEntity</param>
+        /// <returns>A DefensiveActionHolder containing the modified damage dealt and a filtered set of StatusEffects inflicted</returns>
+        public abstract BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusEffect[] statusEffects);
 
         public void Update()
         {

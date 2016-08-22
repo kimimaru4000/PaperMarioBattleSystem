@@ -23,6 +23,14 @@ namespace PaperMarioBattleSystem
         public bool AcceptingInput { get; protected set; } = false;
         protected BattleAction Action = null;
 
+        //NOTE: TEMPORARY
+        protected DefensiveAction DAction = null;
+
+        protected ActionCommand()
+        {
+            
+        }
+
         protected ActionCommand(BattleAction battleAction)
         {
             Action = battleAction;

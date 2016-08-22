@@ -11,56 +11,37 @@ namespace PaperMarioBattleSystem
     /// Mario's Guard action when being attacked.
     /// It's unique in that it reduces the damage Piercing attacks do
     /// </summary>
-    public class Guard : BattleAction
+    public class Guard : DefensiveAction
     {
-        public Guard()
+        public Guard(BattleEntity user) : base(user)
         {
-            Name = "Guard";
+            CommandSuccessTimer = (8d / 60d) * 1000d;
+
+            Command = new GuardCommand(this);
+            Command.StartInput();
         }
 
-        public override void OnCommandSuccess()
+        public override BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusEffect[] statusEffects)
         {
-            
-        }
+            int newDamage = UtilityGlobals.Clamp(damage - 1, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            StatusEffect[] newStatuses = null;
+            if (statusEffects != null && statusEffects.Length != 0)
+            {
+                List<StatusEffect> filteredStatuses = new List<StatusEffect>(statusEffects);
+                for (int i = 0; i < filteredStatuses.Count; i++)
+                {
+                    //NOTE: Hardcoded and temporary for now
+                    if (filteredStatuses[i].StatusType != Enumerations.StatusTypes.Immobilized)
+                    {
+                        filteredStatuses.RemoveAt(i);
+                        i--;
+                    }
+                }
 
-        public override void OnCommandFailed()
-        {
-            
-        }
+                newStatuses = filteredStatuses.ToArray();
+            }
 
-        public override void OnCommandResponse(int response)
-        {
-
-        }
-
-        protected override void SequenceStartBranch()
-        {
-            
-        }
-
-        protected override void SequenceCommandBranch()
-        {
-            
-        }
-
-        protected override void SequenceSuccessBranch()
-        {
-            
-        }
-
-        protected override void SequenceFailedBranch()
-        {
-            
-        }
-
-        protected override void SequenceEndBranch()
-        {
-            
-        }
-
-        protected override void SequenceMissBranch()
-        {
-            
+            return new BattleGlobals.DefensiveActionHolder(newDamage, newStatuses);
         }
     }
 }

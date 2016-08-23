@@ -12,27 +12,39 @@ namespace PaperMarioBattleSystem
     /// <para>A Defensive Action is defined as one that can be done when it's not the entities turn.
     /// In the first two Paper Mario games, the only Defensive Actions are Guard and Superguard.</para>
     /// </summary>
-    public abstract class DefensiveAction
+    public abstract class DefensiveAction : BattleAction, ICommandAction
     {
-        protected BattleEntity User = null;
+        protected BattleEntity actionUser { get; set; } = null;
 
-        protected ActionCommand Command { get; set; } = null;
-
-        protected bool CommandEnabled => (Command != null);
+        public ActionCommand actionCommand { get; set; } = null;
+        public bool DisableActionCommand { get; set; } = false;
 
         protected double CommandSuccessTimer = 0f;
         protected double PrevCommandTimer = 0f;
 
+        public override BattleEntity User => actionUser;
+
+        public bool CommandEnabled => (actionCommand != null);
         public bool IsSuccessful => (PrevCommandTimer >= Time.ActiveMilliseconds);
 
         protected DefensiveAction(BattleEntity user)
         {
-            User = user;
+            actionUser = user;
+        }
+
+        public virtual void OnCommandSuccess()
+        {
+            PrevCommandTimer = Time.ActiveMilliseconds + CommandSuccessTimer;
+        }
+        
+        public virtual void OnCommandFailed()
+        {
+
         }
 
         public virtual void OnCommandResponse(int response)
         {
-            PrevCommandTimer = Time.ActiveMilliseconds + CommandSuccessTimer;
+            
         }
 
         /// <summary>
@@ -45,11 +57,11 @@ namespace PaperMarioBattleSystem
         /// <returns>A DefensiveActionHolder containing the modified damage dealt and a filtered set of StatusEffects inflicted</returns>
         public abstract BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusEffect[] statusEffects);
 
-        public void Update()
+        public override void Update()
         {
             if (CommandEnabled == true)
             {
-                Command.Update();
+                actionCommand.Update();
             }
         }
     }

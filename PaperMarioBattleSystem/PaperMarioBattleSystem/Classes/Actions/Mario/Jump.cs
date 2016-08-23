@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Mario's Jump action
     /// </summary>
-    public class Jump : BattleAction
+    public class Jump : OffensiveAction
     {
         protected float WalkDuration = 1000f;
         protected float JumpDuration = 1000f;
@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
             ContactType = Enumerations.ContactTypes.JumpContact;
             BaseDamage = 1;
 
-            Command = new JumpCommand(this, JumpDuration, (int)(JumpDuration / 2f));
+            actionCommand = new JumpCommand(this, JumpDuration, (int)(JumpDuration / 2f));
             HeightsAffected = new Enumerations.HeightStates[] { HeightStates.Grounded, HeightStates.Airborne };
         }
 
@@ -59,7 +59,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(CurTarget), WalkDuration);
-                    ChangeSequenceBranch(SequenceBranch.Command);
+                    ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -67,7 +67,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        protected override void SequenceCommandBranch()
+        protected override void SequenceMainBranch()
         {
             switch (SequenceStep)
             {
@@ -76,7 +76,7 @@ namespace PaperMarioBattleSystem
                     CurSequence = new MoveAmount(new Vector2(0f, -JumpHeight), JumpDuration);
                     break;
                 case 1:
-                    if (CommandEnabled == true) Command.StartInput();
+                    if (CommandEnabled == true) actionCommand.StartInput();
                     else ChangeSequenceBranch(SequenceBranch.Failed);
                     CurSequence = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration);
                     break;

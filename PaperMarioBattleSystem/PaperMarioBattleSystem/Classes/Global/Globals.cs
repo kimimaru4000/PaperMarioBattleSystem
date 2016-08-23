@@ -558,21 +558,21 @@ namespace PaperMarioBattleSystem
         #region Structs
 
         /// <summary>
-        /// Holds information about a BattleAction being used and the BattleEntities it targets
+        /// Holds information about a MoveAction being used and the BattleEntities it targets
         /// </summary>
         public struct ActionHolder
         {
             /// <summary>
-            /// The BattleAction being used.
+            /// The MoveAction being used.
             /// </summary>
-            public BattleAction Action { get; private set; }
+            public MoveAction Action { get; private set; }
 
             /// <summary>
             /// The BattleEntities the action targets.
             /// </summary>
             public BattleEntity[] Targets { get; private set; }
 
-            public ActionHolder(BattleAction action, params BattleEntity[] targets)
+            public ActionHolder(MoveAction action, params BattleEntity[] targets)
             {
                 Action = action;
                 Targets = targets;

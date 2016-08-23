@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
 
                     if (Bounces < BattleGlobals.MaxPowerBounces)
                     {
-                        ChangeSequenceBranch(SequenceBranch.Command);
+                        ChangeSequenceBranch(SequenceBranch.Main);
                     }
                     else
                     {

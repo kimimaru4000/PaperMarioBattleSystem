@@ -85,7 +85,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The previous BattleAction the entity used
         /// </summary>
-        public BattleAction PreviousAction { get; protected set; } = null;
+        public MoveAction PreviousAction { get; protected set; } = null;
 
         public bool IsDead => HealthState == HealthStates.Dead;
         public bool IsTurn => BattleManager.Instance.EntityTurn == this;
@@ -525,9 +525,9 @@ namespace PaperMarioBattleSystem
         /// <param name="targets">The original set of BattleEntities to target</param>
         /// <returns>An ActionHolder with a new BattleAction to perform or a different target list if the entity was affected by Confused.
         /// If not affected, the originals of each will be returned.</returns>
-        private BattleGlobals.ActionHolder HandleConfusion(BattleAction action, params BattleEntity[] targets)
+        private BattleGlobals.ActionHolder HandleConfusion(MoveAction action, params BattleEntity[] targets)
         {
-            BattleAction actualAction = action;
+            MoveAction actualAction = action;
             BattleEntity[] actualTargets = targets;
 
             //Check for Confusion's effects and change actions or targets depending on what happens
@@ -541,6 +541,9 @@ namespace PaperMarioBattleSystem
                 int changeTargets = GeneralGlobals.Randomizer.Next(0, 2);
                 //int changeAction;
 
+                //If it's not an offensive action, it can't target anyone else
+                OffensiveAction offensiveAction = actualAction as OffensiveAction;
+
                 //Change to an ally
                 /*Steps:
                   1. If the action hits the first entity, find the adjacent allies. If not, find all allies
@@ -548,7 +551,7 @@ namespace PaperMarioBattleSystem
                   3. Filter out dead allies
                   4. If the action hits everyone, go with the remaining list. Otherwise, choose a random ally to attack
                   5. If there are no allies to attack after all the filtering, make the entity do nothing*/
-                if (changeTargets == 0)
+                if (changeTargets == 0 && offensiveAction != null)
                 {
                     BattleEntity[] allies = null;
 
@@ -569,7 +572,7 @@ namespace PaperMarioBattleSystem
                     }
 
                     //Filter by heights
-                    allies = BattleManager.Instance.FilterEntitiesByHeights(allies, actualAction.HeightsAffected);
+                    allies = BattleManager.Instance.FilterEntitiesByHeights(allies, offensiveAction.HeightsAffected);
 
                     //Filter dead entities
                     allies = BattleManager.Instance.FilterDeadEntities(allies);
@@ -596,7 +599,7 @@ namespace PaperMarioBattleSystem
                     else
                     {
                         //Disable action commands when attacking allies from Confusion
-                        actualAction.DisableActionCommand = true;
+                        offensiveAction.DisableActionCommand = true;
                     }
                 }
             }
@@ -604,9 +607,9 @@ namespace PaperMarioBattleSystem
             return new BattleGlobals.ActionHolder(actualAction, actualTargets);
         }
 
-        public void StartAction(BattleAction action, params BattleEntity[] targets)
+        public void StartAction(MoveAction action, params BattleEntity[] targets)
         {
-            BattleAction actualAction = action;
+            MoveAction actualAction = action;
             BattleEntity[] actualTargets = targets;
 
             //Check for Confused and handle it appropriately
@@ -721,6 +724,7 @@ namespace PaperMarioBattleSystem
         {
             CurrentAnim?.Update();
 
+            //Update Defensive actions
             for (int i = 0; i < DefensiveActions.Count; i++)
             {
                 DefensiveActions[i].Update();

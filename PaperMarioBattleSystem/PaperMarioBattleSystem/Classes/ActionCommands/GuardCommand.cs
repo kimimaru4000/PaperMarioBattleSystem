@@ -36,9 +36,9 @@ namespace PaperMarioBattleSystem
         private Keys GuardButton = Keys.Z;
         //private Keys SuperguardButton = Keys.X;
 
-        public GuardCommand(DefensiveAction dAction)
+        public GuardCommand(ICommandAction commandAction) : base(commandAction)
         {
-            DAction = dAction;
+            
         }
 
         public override void StartInput()
@@ -63,7 +63,7 @@ namespace PaperMarioBattleSystem
             {
                 //Debug.Log("Pressed correct time for Guard!");
 
-                DAction.OnCommandResponse(1);
+                Action.OnCommandSuccess();
                 PrevGuardInputTime = Time.ActiveMilliseconds;
                 PrevGuardCooldown = Time.ActiveMilliseconds + GuardCooldown;
             }

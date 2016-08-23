@@ -11,23 +11,8 @@ namespace PaperMarioBattleSystem
     /// <para>This is used when Mario or his Partner take the "Do Nothing" action and when entities are unable to attack an ally
     /// because it has no allies remaining or the move can't reach the ally.</para>
     /// </summary>
-    public sealed class NoAction : BattleAction
+    public sealed class NoAction : MoveAction
     {
-        public override void OnCommandFailed()
-        {
-            
-        }
-
-        public override void OnCommandResponse(int response)
-        {
-            
-        }
-
-        public override void OnCommandSuccess()
-        {
-            
-        }
-
         protected override void SequenceStartBranch()
         {
             switch (SequenceStep)
@@ -46,7 +31,7 @@ namespace PaperMarioBattleSystem
             PrintInvalidSequence();
         }
 
-        protected override void SequenceCommandBranch()
+        protected override void SequenceMainBranch()
         {
             PrintInvalidSequence();
         }

@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// A menu for the BattleActions relating to a ActionMenu. For example, any Jump actions would be in the ActionSubMenu for Jump.
+    /// A menu for the MoveActions relating to a ActionMenu. For example, any Jump actions would be in the ActionSubMenu for Jump.
     /// ActionSubMenus can lead to more ActionSubMenus, as is the case with "Change Partner"
     /// This is only used by the player
     /// <para>All ActionSubMenus have the "SubMenu" suffix</para>
@@ -23,9 +23,9 @@ namespace PaperMarioBattleSystem
         */
 
         /// <summary>
-        /// The list of battle actions in the submenu
+        /// The list of move actions in the submenu
         /// </summary>
-        public List<BattleAction> BattleActions { get; protected set; } = new List<BattleAction>();
+        public List<MoveAction> BattleActions { get; protected set; } = new List<MoveAction>();
 
         /// <summary>
         /// The position of the submenu
@@ -41,14 +41,14 @@ namespace PaperMarioBattleSystem
             BoxMenu = new TextBox(new Vector2(SpriteRenderer.Instance.WindowCenter.X, SpriteRenderer.Instance.WindowCenter.Y + 220f), new Vector2(320f, 80f), null);
         }
 
-        protected ActionSubMenu(List<BattleAction> battleActions) : this()
+        protected ActionSubMenu(List<MoveAction> moveActions) : this()
         {
-            Initialize(battleActions);
+            Initialize(moveActions);
         }
 
-        public void Initialize(List<BattleAction> battleActions)
+        public void Initialize(List<MoveAction> moveActions)
         {
-            BattleActions = battleActions;
+            BattleActions = moveActions;
             BoxMenu.SetText(BattleActions[0].Description);
         }
 

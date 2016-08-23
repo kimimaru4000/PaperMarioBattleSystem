@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Sushie's Tidal Wave attack
     /// </summary>
-    public class TidalWave : BattleAction
+    public class TidalWave : OffensiveAction
     {
         protected float WalkDuration = 700f;
         protected int AdditionalDamage = 0;
@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
             BaseDamage = 1;
             HeightsAffected = new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded, Enumerations.HeightStates.Airborne, Enumerations.HeightStates.Ceiling };
 
-            Command = new TidalWaveCommand(this);
+            actionCommand = new TidalWaveCommand(this);
         }
 
         protected override void OnEnd()
@@ -56,7 +56,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Player)[0]), WalkDuration);
-                    ChangeSequenceBranch(SequenceBranch.Command);
+                    ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -64,15 +64,15 @@ namespace PaperMarioBattleSystem
             }
         }
         
-        protected override void SequenceCommandBranch()
+        protected override void SequenceMainBranch()
         {
             switch (SequenceStep)
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.IdleName);
-                    if (CommandEnabled == true) Command.StartInput();
+                    if (CommandEnabled == true) actionCommand.StartInput();
                     else ChangeSequenceBranch(SequenceBranch.Failed);
-                    CurSequence = new WaitForCommand(1500f, Command, CommandEnabled);
+                    CurSequence = new WaitForCommand(1500f, actionCommand, CommandEnabled);
                     break;
                 default:
                     PrintInvalidSequence();

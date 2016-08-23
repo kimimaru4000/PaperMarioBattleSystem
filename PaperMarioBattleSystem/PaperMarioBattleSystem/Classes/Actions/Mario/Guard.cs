@@ -17,8 +17,8 @@ namespace PaperMarioBattleSystem
         {
             CommandSuccessTimer = (8d / 60d) * 1000d;
 
-            Command = new GuardCommand(this);
-            Command.StartInput();
+            actionCommand = new GuardCommand(this);
+            actionCommand.StartInput();
         }
 
         public override BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusEffect[] statusEffects)

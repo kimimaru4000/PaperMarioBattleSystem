@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
 
         protected Texture2D CircleImage = null;
 
-        public HammerCommand(BattleAction battleAction) : base(battleAction)
+        public HammerCommand(ICommandAction commandAction) : base(commandAction)
         {
             CircleImage = AssetManager.Instance.LoadAsset<Texture2D>($"UI/Circle");
         }

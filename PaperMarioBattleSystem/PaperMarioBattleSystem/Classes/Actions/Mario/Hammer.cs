@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Mario's Hammer action
     /// </summary>
-    public class Hammer : BattleAction
+    public class Hammer : OffensiveAction
     {
         protected float WalkDuration = 1000f;
         protected int DamageMod = 1;
@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
             BaseDamage = 1;
             HeightsAffected = new HeightStates[] { HeightStates.Grounded };
 
-            Command = new HammerCommand(this);
+            actionCommand = new HammerCommand(this);
         }
 
         public override void OnCommandSuccess()
@@ -69,7 +69,7 @@ namespace PaperMarioBattleSystem
                 case 1:
                     User.PlayAnimation(PickupAnimName, true);
                     CurSequence = new WaitForAnimation(PickupAnimName);
-                    ChangeSequenceBranch(SequenceBranch.Command);
+                    ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -77,15 +77,15 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        protected override void SequenceCommandBranch()
+        protected override void SequenceMainBranch()
         {
             switch(SequenceStep)
             {
                 case 0:
                     User.PlayAnimation(WindupAnimName);
-                    if (CommandEnabled == true) Command.StartInput();
+                    if (CommandEnabled == true) actionCommand.StartInput();
                     else ChangeSequenceBranch(SequenceBranch.Failed);
-                    CurSequence = new WaitForCommand(1500f, Command, CommandEnabled);
+                    CurSequence = new WaitForCommand(1500f, actionCommand, CommandEnabled);
                     break;
                 default:
                     PrintInvalidSequence();

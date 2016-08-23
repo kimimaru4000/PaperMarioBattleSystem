@@ -1,0 +1,25 @@
+Abstracting BattleActions (8/22/16)
+-----------------------------------
+Currently we have two types of actions: BattleActions and DefensiveActions.
+
+We need to consolidate this and have clearly define the types of actions we want.
+
+BattleActions need to be classified into different types based on how they're performed. Here are all the cases:
+
+1) Has an action command
+  -Performed on your turn (Jump, Run Away)
+  -Not performed on your turn (Guard & Superguard)
+2) Does not have an action command
+  -Performed on your turn (Appeal, Defend)
+  
+Let's cover these cases:
+
+1. CommandAction can be an interface with CommandSuccess(), CommandFailed(), and CommandResponse() methods. It also has an ActionCommand property. Its Action Command can also be flagged as enabled or disabled. If disabled, its Action Command is automatically failed whenever it relies on an Action Command's input in the sequence.
+
+2. MoveAction will have a sequence and all the other information. It doesn't require an ActionCommand.
+
+Examples:
+---------
+For Jump, we can create a new OffensiveAction class that has an ActionCommand reference and derives from both MoveAction and CommandAction
+For Appeal we simply derive from MoveAction and perform the sequence 
+For Guard & Superguard we create a DefensiveAction class that implements CommandAction and handles it accordingly.

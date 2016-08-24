@@ -47,11 +47,6 @@ namespace PaperMarioBattleSystem
             
         }
 
-        public override void OnMenuSelected()
-        {
-            base.OnMenuSelected();
-        }
-
         protected override void SequenceStartBranch()
         {
             switch (SequenceStep)
@@ -76,8 +71,7 @@ namespace PaperMarioBattleSystem
                     CurSequence = new MoveAmount(new Vector2(0f, -JumpHeight), JumpDuration);
                     break;
                 case 1:
-                    if (CommandEnabled == true) actionCommand.StartInput();
-                    else ChangeSequenceBranch(SequenceBranch.Failed);
+                    StartActionCommandInput();
                     CurSequence = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration);
                     break;
                 default:

@@ -15,31 +15,17 @@ namespace PaperMarioBattleSystem
     {
         public Guard(BattleEntity user) : base(user)
         {
+            actionCommand = new GuardCommand(this);
+
             CommandSuccessTimer = (8d / 60d) * 1000d;
 
-            actionCommand = new GuardCommand(this);
-            actionCommand.StartInput();
+            AllowedStatuses = new Enumerations.StatusTypes[] { Enumerations.StatusTypes.Immobilized };
         }
 
         public override BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusEffect[] statusEffects)
         {
             int newDamage = UtilityGlobals.Clamp(damage - 1, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
-            StatusEffect[] newStatuses = null;
-            if (statusEffects != null && statusEffects.Length != 0)
-            {
-                List<StatusEffect> filteredStatuses = new List<StatusEffect>(statusEffects);
-                for (int i = 0; i < filteredStatuses.Count; i++)
-                {
-                    //NOTE: Hardcoded and temporary for now
-                    if (filteredStatuses[i].StatusType != Enumerations.StatusTypes.Immobilized)
-                    {
-                        filteredStatuses.RemoveAt(i);
-                        i--;
-                    }
-                }
-
-                newStatuses = filteredStatuses.ToArray();
-            }
+            StatusEffect[] newStatuses = FilterStatuses(statusEffects);
 
             return new BattleGlobals.DefensiveActionHolder(newDamage, newStatuses);
         }

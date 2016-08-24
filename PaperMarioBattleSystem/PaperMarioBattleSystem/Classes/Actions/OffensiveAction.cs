@@ -31,11 +31,6 @@ namespace PaperMarioBattleSystem
         public ContactTypes ContactType { get; protected set; } = ContactTypes.None;
 
         /// <summary>
-        /// The heights of enemies this action affects
-        /// </summary>
-        public HeightStates[] HeightsAffected { get; protected set; } = null;
-
-        /// <summary>
         /// The Status Effects this action can afflict
         /// </summary>
         public StatusEffect[] StatusesInflicted { get; protected set; } = null;
@@ -60,6 +55,16 @@ namespace PaperMarioBattleSystem
         protected OffensiveAction()
         {
 
+        }
+
+        /// <summary>
+        /// Starts the Action Command's input.
+        /// If the Action Command is not enabled, it will switch to the Failed branch
+        /// </summary>
+        protected void StartActionCommandInput()
+        {
+            if (CommandEnabled == true) actionCommand.StartInput();
+            else ChangeSequenceBranch(SequenceBranch.Failed);
         }
 
         protected override void OnEnd()

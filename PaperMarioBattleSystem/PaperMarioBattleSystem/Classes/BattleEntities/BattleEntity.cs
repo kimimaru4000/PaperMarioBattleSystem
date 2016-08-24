@@ -439,6 +439,12 @@ namespace PaperMarioBattleSystem
         public virtual void OnTurnStart()
         {
             Debug.LogWarning($"Started {Name}'s turn!");
+
+            //End all DefensiveAction inputs
+            for (int i = 0; i < DefensiveActions.Count; i++)
+            {
+                DefensiveActions[i].actionCommand.EndInput();
+            }
         }
 
         /// <summary>
@@ -446,7 +452,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public virtual void OnTurnEnd()
         {
-            
+            //Start all DefensiveAction inputs
+            for (int i = 0; i < DefensiveActions.Count; i++)
+            {
+                DefensiveActions[i].actionCommand.StartInput();
+            }
         }
 
         /// <summary>
@@ -541,8 +551,9 @@ namespace PaperMarioBattleSystem
                 int changeTargets = GeneralGlobals.Randomizer.Next(0, 2);
                 //int changeAction;
 
-                //If it's not an offensive action, it can't target anyone else
-                OffensiveAction offensiveAction = actualAction as OffensiveAction;
+                //NOTE: Find a way to make it so we can control what happens based on the type of action.
+                //For example, if Tattle was used, it doesn't target anyone else.
+                //If you use a Healing item, it uses it on the opposing side, whereas if you use an attack it uses it on an ally.
 
                 //Change to an ally
                 /*Steps:
@@ -551,7 +562,7 @@ namespace PaperMarioBattleSystem
                   3. Filter out dead allies
                   4. If the action hits everyone, go with the remaining list. Otherwise, choose a random ally to attack
                   5. If there are no allies to attack after all the filtering, make the entity do nothing*/
-                if (changeTargets == 0 && offensiveAction != null)
+                if (changeTargets == 0)
                 {
                     BattleEntity[] allies = null;
 
@@ -572,7 +583,7 @@ namespace PaperMarioBattleSystem
                     }
 
                     //Filter by heights
-                    allies = BattleManager.Instance.FilterEntitiesByHeights(allies, offensiveAction.HeightsAffected);
+                    allies = BattleManager.Instance.FilterEntitiesByHeights(allies, actualAction.HeightsAffected);
 
                     //Filter dead entities
                     allies = BattleManager.Instance.FilterDeadEntities(allies);
@@ -598,8 +609,10 @@ namespace PaperMarioBattleSystem
                     }
                     else
                     {
-                        //Disable action commands when attacking allies from Confusion
-                        offensiveAction.DisableActionCommand = true;
+                        //Disable action commands when attacking allies from Confusion, if the action has an Action Command
+                        ICommandAction commandAction = actualAction as ICommandAction;
+                        if (commandAction != null)
+                            commandAction.DisableActionCommand = true;
                     }
                 }
             }

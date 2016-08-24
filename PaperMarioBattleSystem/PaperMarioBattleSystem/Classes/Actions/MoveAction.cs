@@ -56,6 +56,11 @@ namespace PaperMarioBattleSystem
         public EntitySelectionType SelectionType { get; protected set; } = EntitySelectionType.Single;
 
         /// <summary>
+        /// The heights of entities this action affects
+        /// </summary>
+        public HeightStates[] HeightsAffected { get; protected set; } = null;
+
+        /// <summary>
         /// The type of entities this action selects
         /// </summary>
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
@@ -172,7 +177,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public virtual void OnMenuSelected()
         {
-            BattleUIManager.Instance.StartTargetSelection(ActionStart, SelectionType, BattleManager.Instance.GetEntities(EntityType));
+            BattleUIManager.Instance.StartTargetSelection(ActionStart, SelectionType, BattleManager.Instance.GetEntities(EntityType, HeightsAffected));
         }
 
         /// <summary>

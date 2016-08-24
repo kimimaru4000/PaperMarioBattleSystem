@@ -67,7 +67,7 @@
     <Compile Include="Classes\Actions\Defensive\DefensiveAction.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\ICommandAction.cs" />
-    <Compile Include="Classes\Actions\Mario\Guard.cs" />
+    <Compile Include="Classes\Actions\Defensive\Guard.cs" />
     <Compile Include="Classes\Actions\Mario\Hammer.cs" />
     <Compile Include="Classes\Actions\Mario\Jump.cs" />
     <Compile Include="Classes\Actions\Mario\Multibounce.cs" />

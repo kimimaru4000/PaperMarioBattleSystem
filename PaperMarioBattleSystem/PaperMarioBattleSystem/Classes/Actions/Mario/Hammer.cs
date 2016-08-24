@@ -83,8 +83,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(WindupAnimName);
-                    if (CommandEnabled == true) actionCommand.StartInput();
-                    else ChangeSequenceBranch(SequenceBranch.Failed);
+                    StartActionCommandInput();
                     CurSequence = new WaitForCommand(1500f, actionCommand, CommandEnabled);
                     break;
                 default:

@@ -128,19 +128,12 @@ namespace PaperMarioBattleSystem
             bool piercing = damageResult.Piercing;
             StatusEffect[] statusesInflicted = damageResult.StatusesInflicted;
 
-            //Subtract Defense on non-piercing damage
-            //NOTE: Don't do this here, do it in Interactions according to the order in the comments above (Step 2)
-            if (piercing == false)
-            {
-                damage = UtilityGlobals.Clamp(damage - BattleStats.Defense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
-            }
-
             //Check for a damage received multiplier on the entity. We need to check if it has one since the default value is 0
             //NOTE: Don't do this here, do it in Interactions according to the order in the comments above (Steps 5/6)
-            if (EntityProperties.HasMiscProperty(MiscProperty.DamageReceivedMultiplier) == true)
-            {
-                damage *= EntityProperties.GetMiscProperty(MiscProperty.DamageReceivedMultiplier).IntValue;
-            }
+            //if (EntityProperties.HasMiscProperty(MiscProperty.DamageReceivedMultiplier) == true)
+            //{
+            //    damage *= EntityProperties.GetMiscProperty(MiscProperty.DamageReceivedMultiplier).IntValue;
+            //}
 
             //Handle the elemental interaction results
             ElementInteractionResult elementResult = damageResult.ElementResult;

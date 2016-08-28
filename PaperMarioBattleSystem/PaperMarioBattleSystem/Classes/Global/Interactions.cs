@@ -133,6 +133,16 @@ namespace PaperMarioBattleSystem
 
         #region Interaction Methods
 
+        /* Damage Calculation Order:
+         * 1. Base damage
+         * 2. If Guarded, subtract 1 from the damage and add the # of Damage Dodge Badges to the victim's Defense. If Superguarded, damage = 0
+         * 3. Subtract or add to the damage based on the # of P-Up, D-Down and P-Down, D-Up Badges are equipped
+         * 4. Check Element Overrides to change the attacker's Element damage based on the PhysicalAttributes of the victim (Ex. Ice Power Badge)
+         * 5. Calculate the victim's Weaknesses/Resistances to the element
+         * 6. If the damage dealt is not Piercing, subtract the victim's Defense from the damage
+         * 6. 
+         */
+
         /// <summary>
         /// Calculates and returns the entire damage interaction between two BattleEntities.
         /// <para>This returns all the necessary information for both BattleEntities, including the total amount of damage dealt,
@@ -150,6 +160,7 @@ namespace PaperMarioBattleSystem
             Elements element = interactionParam.DamagingElement;
             StatusEffect[] statuses = interactionParam.Statuses;
             int damage = interactionParam.Damage;
+            bool piercing = interactionParam.Piercing;
 
             //Get contact results
             ContactResultInfo contactResultInfo = victim.EntityProperties.GetContactResult(attacker, contactType);
@@ -169,31 +180,41 @@ namespace PaperMarioBattleSystem
                 }
             }
 
+            //Defense added from Damage Dodge Badges upon a successful Guard
+            int damageDodgeDefense = 0;
+
             //Subtract damage reduction (P-Up, D-Down and P-Down, D-Up Badges)
             damage -= victim.BattleStats.DamageReduction;
+
+            //Retrieve an overridden type of Elemental damage to inflict based on the Victim's PhysicalAttributes
+            //(Ex. The Ice Power Badge only deals Ice damage to Fiery entities)
+            Elements newElement = attacker.EntityProperties.GetTotalElementOverride(victim);
+            if (newElement != Elements.Invalid)
+            {
+                element = newElement;
+            }
 
             /*Get the total damage dealt to the Victim. The amount of Full or Half Payback damage dealt to the Attacker
               uses the resulting damage value from this because Payback uses the total damage that would be dealt to the Victim.
               This occurs before factoring in elemental resistances/weaknesses from the Attacker*/
             ElementDamageResultHolder victimElementDamage = GetElementalDamage(victim, element, damage);
 
+            //Subtract Defense on non-piercing damage
+            if (piercing == false)
+            {
+                int totalDefense = victim.BattleStats.Defense + damageDodgeDefense;
+                victimElementDamage.Damage = UtilityGlobals.Clamp(victimElementDamage.Damage - totalDefense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            }
+
             //Calculating damage dealt to the Victim
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
             {
-                //Retrieve an overridden type of Elemental damage to inflict based on the Victim's PhysicalAttributes
-                //(Ex. The Ice Power Badge only deals Ice damage to Fiery entities)
-                Elements newElement = attacker.EntityProperties.GetTotalElementOverride(victim);
-                if (newElement != Elements.Invalid)
-                {
-                    element = newElement;
-                }
-
                 //Get the Status Effects to inflict on the Victim
                 StatusEffect[] victimInflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
                 bool hit = attacker.AttemptHitEntity(victim);
 
                 finalInteractionResult.VictimResult = new InteractionHolder(victim, victimElementDamage.Damage, element, 
-                    victimElementDamage.InteractionResult, contactType, false, victimInflictedStatuses, hit);
+                    victimElementDamage.InteractionResult, contactType, piercing, victimInflictedStatuses, hit);
             }
 
             //Calculating damage dealt to the Attacker
@@ -215,13 +236,16 @@ namespace PaperMarioBattleSystem
 
                 //Get Payback damage - Payback damage is calculated after everything else, including Constant Payback.
                 //However, it does NOT factor in Double Pain or any sort of Defense modifiers.
-                attackerElementDamage.Damage = paybackHolder.GetPaybackDamage(attackerElementDamage.Damage);
+                int paybackDamage = paybackHolder.GetPaybackDamage(attackerElementDamage.Damage);
 
                 //If Constant Payback, update the damage value to use the element
                 if (paybackHolder.PaybackType == PaybackTypes.Constant)
                 {
-                    attackerElementDamage.Damage = GetElementalDamage(attacker, paybackHolder.Element, attackerElementDamage.Damage).Damage;
+                    paybackDamage = GetElementalDamage(attacker, paybackHolder.Element, paybackDamage).Damage;
                 }
+
+                //Clamp damage
+                attackerElementDamage.Damage = UtilityGlobals.Clamp(paybackDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
 
                 //Get the Status Effects to inflict
                 StatusEffect[] attackerInflictedStatuses = GetFilteredInflictedStatuses(attacker, paybackHolder.StatusesInflicted);

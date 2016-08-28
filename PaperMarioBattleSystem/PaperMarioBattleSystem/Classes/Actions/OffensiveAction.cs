@@ -36,6 +36,11 @@ namespace PaperMarioBattleSystem
         public StatusEffect[] StatusesInflicted { get; protected set; } = null;
 
         /// <summary>
+        /// Whether the action deals Piercing damage or not
+        /// </summary>
+        public bool Piercing { get; protected set; } = false;
+
+        /// <summary>
         /// The ActionCommand associated with the BattleAction
         /// </summary>
         public ActionCommand actionCommand { get; set; }
@@ -100,7 +105,7 @@ namespace PaperMarioBattleSystem
             {
                 BattleEntity victim = entities[i];
 
-                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage, Element, ContactType, StatusesInflicted));
+                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage, Element, Piercing, ContactType, StatusesInflicted));
 
                 //Make the victim take damage upon a PartialSuccess or a Success
                 if (finalResult.VictimResult.HasValue == true)

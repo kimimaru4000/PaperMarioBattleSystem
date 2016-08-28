@@ -50,6 +50,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void InitializeInventory()
         {
+            Inventory.Instance.AddBadge(new DefendPlusBadge());
             Inventory.Instance.AddBadge(new PowerPlusBadge());
             Inventory.Instance.AddBadge(new SpikeShieldBadge());
             Inventory.Instance.AddBadge(new FireShieldBadge());

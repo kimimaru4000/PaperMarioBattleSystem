@@ -22,3 +22,9 @@ Update (8/20/16)
    Since it increases your Defense, it does not reduce the damage of Piercing moves. For example, a Crazee Dayzee in TTYD has an Attack of 2,
    and its Sing move deals Piercing damage. Guarding with or without any Damage Dodge badges equipped causes it to do 1 damage since only the
    Guard action reduces the damage of the attack.
+   
+Update (8/28/16)
+----------------
+3. Finished, aside from adding Damage Dodge to your Defense.
+
+5. Needs to be implemented to complete 3.

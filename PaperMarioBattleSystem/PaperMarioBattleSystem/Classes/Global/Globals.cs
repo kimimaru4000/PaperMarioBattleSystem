@@ -239,16 +239,18 @@ namespace PaperMarioBattleSystem
         public BattleEntity Victim;
         public int Damage;
         public Enumerations.Elements DamagingElement;
+        public bool Piercing;
         public Enumerations.ContactTypes ContactType;
         public StatusEffect[] Statuses;
 
         public InteractionParamHolder(BattleEntity attacker, BattleEntity victim, int damage, Enumerations.Elements element,
-            Enumerations.ContactTypes contactType, StatusEffect[] statuses)
+            bool piercing, Enumerations.ContactTypes contactType, StatusEffect[] statuses)
         {
             Attacker = attacker;
             Victim = victim;
             Damage = damage;
             DamagingElement = element;
+            Piercing = piercing;
             ContactType = contactType;
             Statuses = statuses;
         }

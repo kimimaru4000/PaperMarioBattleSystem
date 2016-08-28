@@ -175,6 +175,30 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
+    /// Holds immutable data for elemental damage
+    /// </summary>
+    public struct ElementDamageHolder
+    {
+        /// <summary>
+        /// The damage dealt
+        /// </summary>
+        public int Damage { get; private set; }
+
+        /// <summary>
+        /// The type of Elemental damage dealt
+        /// </summary>
+        public Enumerations.Elements Element { get; private set; }
+
+        public static ElementDamageHolder Default => new ElementDamageHolder(0, Enumerations.Elements.Normal);
+
+        public ElementDamageHolder(int damage, Enumerations.Elements element)
+        {
+            Damage = damage;
+            Element = element;
+        }
+    }
+
+    /// <summary>
     /// Holds immutable data for a MiscProperty. Only one field should need to be used for each MiscProperty
     /// </summary>
     public struct MiscValueHolder
@@ -428,6 +452,7 @@ namespace PaperMarioBattleSystem
         /// The type of contact actions will make on entities.
         /// JumpContact and HammerContact means the action attacks from the top and side, respectively
         /// </summary>
+        //NOTE: Rename these; JumpContact should be renamed Direct, and HammerContact probably isn't necessary, as it's indirect
         public enum ContactTypes
         {
             None, JumpContact, HammerContact
@@ -591,10 +616,21 @@ namespace PaperMarioBattleSystem
             /// </summary>
             public StatusEffect[] Statuses { get; private set; }
 
-            public DefensiveActionHolder(int damage, StatusEffect[] statuses)
+            /// <summary>
+            /// The type and amount of damage dealt to the attacker.
+            /// If none, set to null.
+            /// </summary>
+            public ElementDamageHolder? ElementHolder { get; private set; }
+
+            public DefensiveActionHolder(int damage, StatusEffect[] statuses) : this(damage, statuses, null)
+            {
+            }
+
+            public DefensiveActionHolder(int damage, StatusEffect[] statuses, ElementDamageHolder? elementHolder)
             {
                 Damage = damage;
                 Statuses = statuses;
+                ElementHolder = elementHolder;
             }
         }
 

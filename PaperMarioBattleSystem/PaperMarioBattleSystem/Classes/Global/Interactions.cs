@@ -20,12 +20,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Holds the result and damage value of an damage interaction involving an Element
         /// </summary>
-        private struct ElementDamageHolder
+        private struct ElementDamageResultHolder
         {
             public ElementInteractionResult InteractionResult;
             public int Damage;
 
-            public ElementDamageHolder(ElementInteractionResult interactionResult, int damage)
+            public ElementDamageResultHolder(ElementInteractionResult interactionResult, int damage)
             {
                 InteractionResult = interactionResult;
                 Damage = damage;
@@ -139,12 +139,6 @@ namespace PaperMarioBattleSystem
         /// the type of Elemental damage to deal, the Status Effects to inflict, and whether the attack successfully hit or not.</para>
         /// </summary>
         /// <param name="interactionParam">An InteractionParamHolder containing the BattleEntities interacting and data about their interaction</param>
-        // <param name="attacker">The BattleEntity attacking</param>
-        // <param name="victim">The BattleEntity being attacked</param>
-        // <param name="damage">The amount of damage the attacker is attempting to deal to the victim</param>
-        // <param name="element">The type of Elemental damage the attacker is hitting the victim with</param>
-        // <param name="contactType">The type of contact the attacker is making with the victim</param>
-        // <param name="statuses">The Status Effects the attacker is attempting to afflict the victim with</param>
         /// <returns>An InteractionResult containing InteractionHolders for both the victim and the attacker</returns>
         public static InteractionResult GetDamageInteraction(InteractionParamHolder interactionParam)
         {
@@ -157,16 +151,31 @@ namespace PaperMarioBattleSystem
             StatusEffect[] statuses = interactionParam.Statuses;
             int damage = interactionParam.Damage;
 
-            //Subtract damage reduction first
-            damage -= victim.BattleStats.DamageReduction;
-
+            //Get contact results
             ContactResultInfo contactResultInfo = victim.EntityProperties.GetContactResult(attacker, contactType);
             ContactResult contactResult = contactResultInfo.ContactResult;
+
+            //Defensive actions take priority
+            BattleGlobals.DefensiveActionHolder? victimDefenseData = victim.GetDefensiveActionResult(damage, statuses);
+            if (victimDefenseData.HasValue == true)
+            {
+                damage = victimDefenseData.Value.Damage;
+                statuses = victimDefenseData.Value.Statuses;
+                //If the Defensive action dealt damage and the contact was direct
+                //the Defensive action has causes a Failure for the Attacker (Ex. Superguarding)
+                if (contactType == ContactTypes.JumpContact && victimDefenseData.Value.ElementHolder.HasValue == true)
+                {
+                    contactResult = ContactResult.Failure;
+                }
+            }
+
+            //Subtract damage reduction (P-Up, D-Down and P-Down, D-Up Badges)
+            damage -= victim.BattleStats.DamageReduction;
 
             /*Get the total damage dealt to the Victim. The amount of Full or Half Payback damage dealt to the Attacker
               uses the resulting damage value from this because Payback uses the total damage that would be dealt to the Victim.
               This occurs before factoring in elemental resistances/weaknesses from the Attacker*/
-            ElementDamageHolder victimElementDamage = GetElementalDamage(victim, element, damage);
+            ElementDamageResultHolder victimElementDamage = GetElementalDamage(victim, element, damage);
 
             //Calculating damage dealt to the Victim
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
@@ -193,12 +202,26 @@ namespace PaperMarioBattleSystem
                 //The damage the Attacker dealt to the Victim
                 int damageDealt = victimElementDamage.Damage;
                 PaybackHolder paybackHolder = contactResultInfo.Paybackholder;
+                
+                //Override the PaybackHolder with a Defensive Action's results, if any
+                if (victimDefenseData.HasValue == true && victimDefenseData.Value.ElementHolder.HasValue == true)
+                {
+                    damageDealt = victimDefenseData.Value.ElementHolder.Value.Damage;
+                    paybackHolder = new PaybackHolder(PaybackTypes.Constant, victimDefenseData.Value.ElementHolder.Value.Element, damageDealt);
+                }
 
-                ElementDamageHolder attackerElementDamage = GetElementalDamage(attacker, paybackHolder.Element, damageDealt);
+                //Get the damage done to the Attacker, factoring in Weaknesses/Resistances
+                ElementDamageResultHolder attackerElementDamage = GetElementalDamage(attacker, paybackHolder.Element, damageDealt);
 
                 //Get Payback damage - Payback damage is calculated after everything else, including Constant Payback.
-                //However, it does NOT factor in Double Pain or any sort of Defense modifiers
+                //However, it does NOT factor in Double Pain or any sort of Defense modifiers.
                 attackerElementDamage.Damage = paybackHolder.GetPaybackDamage(attackerElementDamage.Damage);
+
+                //If Constant Payback, update the damage value to use the element
+                if (paybackHolder.PaybackType == PaybackTypes.Constant)
+                {
+                    attackerElementDamage.Damage = GetElementalDamage(attacker, paybackHolder.Element, attackerElementDamage.Damage).Damage;
+                }
 
                 //Get the Status Effects to inflict
                 StatusEffect[] attackerInflictedStatuses = GetFilteredInflictedStatuses(attacker, paybackHolder.StatusesInflicted);
@@ -217,9 +240,9 @@ namespace PaperMarioBattleSystem
         /// <param name="element">The element the entity is attacked with</param>
         /// <param name="damage">The initial damage of the attack</param>
         /// <returns>An ElementDamageHolder stating the result and final damage dealt to this entity</returns>
-        private static ElementDamageHolder GetElementalDamage(BattleEntity entity, Elements element, int damage)
+        private static ElementDamageResultHolder GetElementalDamage(BattleEntity entity, Elements element, int damage)
         {
-            ElementDamageHolder elementDamageResult = new ElementDamageHolder(ElementInteractionResult.Damage, damage);
+            ElementDamageResultHolder elementDamageResult = new ElementDamageResultHolder(ElementInteractionResult.Damage, damage);
 
             //NOTE: If an entity is both resistant and weak to a particular element, they cancel out.
             //I decided to go with this approach because it's the simplest for this situation, which

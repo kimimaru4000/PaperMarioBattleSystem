@@ -142,22 +142,6 @@ namespace PaperMarioBattleSystem
                 damage *= EntityProperties.GetMiscProperty(MiscProperty.DamageReceivedMultiplier).IntValue;
             }
 
-            //Handle Defensive Actions
-            for (int i = 0; i < DefensiveActions.Count; i++)
-            {
-                if (DefensiveActions[i].IsSuccessful == true)
-                {
-                    BattleGlobals.DefensiveActionHolder holder = DefensiveActions[i].HandleSuccess(damage, statusesInflicted);
-                    damage = holder.Damage;
-                    statusesInflicted = holder.Statuses;
-
-                    //NOTE: TEMPORARY
-                    PlayAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName);
-
-                    break;
-                }
-            }
-
             //Handle the elemental interaction results
             ElementInteractionResult elementResult = damageResult.ElementResult;
 
@@ -396,6 +380,27 @@ namespace PaperMarioBattleSystem
         {
             int valueTest = GeneralGlobals.Randomizer.Next(0, 100);
             return (valueTest < BattleStats.Evasion);
+        }
+
+        /// <summary>
+        /// Gets the result of the first successful Defensive Action performed.
+        /// </summary>
+        /// <param name="damage">The original damage of the attack.</param>
+        /// <param name="statusesInflicted">The original set of StatusEffects inflicted.</param>
+        /// <returns>A nullable DefensiveActionHolder? with a DefensiveAction's result if successful, otherwise null.</returns>
+        public BattleGlobals.DefensiveActionHolder? GetDefensiveActionResult(int damage, StatusEffect[] statusesInflicted)
+        {
+            //Handle Defensive Actions
+            for (int i = 0; i < DefensiveActions.Count; i++)
+            {
+                if (DefensiveActions[i].IsSuccessful == true)
+                {
+                    BattleGlobals.DefensiveActionHolder holder = DefensiveActions[i].HandleSuccess(damage, statusesInflicted);
+                    return holder;
+                }
+            }
+
+            return null;
         }
 
         #endregion

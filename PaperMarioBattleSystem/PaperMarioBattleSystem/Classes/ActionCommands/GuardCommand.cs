@@ -11,30 +11,14 @@ namespace PaperMarioBattleSystem
     /// The action command for Guard.
     /// <para>The result is not known until the attack hits. As such, this action command's responses aid in determining the result</para>
     /// </summary>
-    public sealed class GuardCommand : ActionCommand
+    public class GuardCommand : ActionCommand
     {
-        /// <summary>
-        /// The timer for Guarding, based on a frame rate of 60 FPS.
-        /// This window can be lengthened or shortened based on the Simplifier or Unsimplifier badges respectively
-        /// </summary>
-        private double GuardTimer = (8d / 60d);
+        protected double GuardCooldown = (10d / 60d) * 1000d;
 
-        /// <summary>
-        /// The timer for Superguarding, based on a frame rate of 60 FPS.
-        /// This window can be lengthened or shortened based on the Simplifier or Unsimplifier badges respectively
-        /// </summary>
-        //private double SuperguardTimer = (3d / 60d);
+        protected double PrevGuardInputTime = 0f;
+        protected double PrevGuardCooldown = 0f;
 
-        private double GuardCooldown = (10d / 60d);
-        //private double SuperguardCooldown = (10d / 60d);
-
-        private double PrevGuardInputTime = 0f;
-        private double PrevGuardCooldown = 0f;
-        //private double PrevSuperguardInputTime = 0f;
-        //private double PrevSuperguardCooldown = 0f;
-
-        private Keys GuardButton = Keys.Z;
-        //private Keys SuperguardButton = Keys.X;
+        protected Keys GuardButton = Keys.Z;
 
         public GuardCommand(ICommandAction commandAction) : base(commandAction)
         {
@@ -45,16 +29,16 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput();
 
-            PrevGuardInputTime = 0f;//PrevSuperguardInputTime = 0f;
-            PrevGuardCooldown = 0f;//PrevSuperguardCooldown = 0f;
+            PrevGuardInputTime = 0f;
+            PrevGuardCooldown = 0f;
         }
 
         public override void EndInput()
         {
             base.EndInput();
 
-            PrevGuardInputTime = 0f;//PrevSuperguardInputTime = 0f;
-            PrevGuardCooldown = 0f;//PrevSuperguardCooldown = 0f;
+            PrevGuardInputTime = 0f;
+            PrevGuardCooldown = 0f;
         }
 
         protected override void ReadInput()
@@ -67,12 +51,6 @@ namespace PaperMarioBattleSystem
                 PrevGuardInputTime = Time.ActiveMilliseconds;
                 PrevGuardCooldown = Time.ActiveMilliseconds + GuardCooldown;
             }
-
-            //if (Input.GetKeyDown(SuperguardButton) == true && Time.ActiveMilliseconds >= PrevSuperguardCooldown)
-            //{
-            //    PrevSuperguardInputTime = Time.ActiveMilliseconds;
-            //    PrevSuperguardCooldown = Time.ActiveMilliseconds + SuperguardCooldown;
-            //}
         }
     }
 }

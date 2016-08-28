@@ -536,6 +536,7 @@ namespace PaperMarioBattleSystem
         {
             public const string ChoosingActionName = "ChoosingAction";
             public const string GuardName = "Guard";
+            public const string SuperguardName = "Superguard";
             public const string DangerName = "Danger";
         }
 

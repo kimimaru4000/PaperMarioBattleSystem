@@ -17,6 +17,7 @@ namespace PaperMarioBattleSystem
         public BattlePlayer(Stats stats) : base(stats)
         {
             DefensiveActions.Add(new Guard(this));
+            DefensiveActions.Add(new Superguard(this));
         }
 
         public override void BraceAttack(BattleEntity attacker)

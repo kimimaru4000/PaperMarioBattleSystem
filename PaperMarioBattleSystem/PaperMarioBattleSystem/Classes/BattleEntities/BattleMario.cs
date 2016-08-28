@@ -58,6 +58,9 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(337, 908, 35, 41), 700d)));
 
             AddAnimation(AnimationGlobals.StatusBattleAnimations.StoneName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(66, 859, 35, 41), 0d)));
+
+            AddAnimation(AnimationGlobals.PlayerBattleAnimations.SuperguardName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(392, 335, 42, 45), 700d)));
         }
 
         public override void OnTurnStart()

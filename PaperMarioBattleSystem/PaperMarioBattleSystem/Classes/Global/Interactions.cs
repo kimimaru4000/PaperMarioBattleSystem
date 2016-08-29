@@ -140,7 +140,8 @@ namespace PaperMarioBattleSystem
          * 4. Check Element Overrides to change the attacker's Element damage based on the PhysicalAttributes of the victim (Ex. Ice Power Badge)
          * 5. Calculate the victim's Weaknesses/Resistances to the element
          * 6. If the damage dealt is not Piercing, subtract the victim's Defense from the damage
-         * 6. 
+         * 7. Multiply by: (number of Double Pains equipped + 1)
+         * 8. If in Danger or Peril, divide by: (number of Last Stands equipped + 1) (round up the damage if it's > 0 and < 1)
          */
 
         /// <summary>
@@ -166,6 +167,9 @@ namespace PaperMarioBattleSystem
             ContactResultInfo contactResultInfo = victim.EntityProperties.GetContactResult(attacker, contactType);
             ContactResult contactResult = contactResultInfo.ContactResult;
 
+            //Defense added from Damage Dodge Badges upon a successful Guard
+            int damageDodgeDefense = 0;
+
             //Defensive actions take priority
             BattleGlobals.DefensiveActionHolder? victimDefenseData = victim.GetDefensiveActionResult(damage, statuses);
             if (victimDefenseData.HasValue == true)
@@ -178,10 +182,10 @@ namespace PaperMarioBattleSystem
                 {
                     contactResult = ContactResult.Failure;
                 }
-            }
 
-            //Defense added from Damage Dodge Badges upon a successful Guard
-            int damageDodgeDefense = 0;
+                //Factor in the additional Guard defense for all DefensiveActions (for now, at least)
+                damageDodgeDefense = victim.EntityProperties.GetMiscProperty(MiscProperty.AdditionalGuardDefense).IntValue;
+            }
 
             //Subtract damage reduction (P-Up, D-Down and P-Down, D-Up Badges)
             damage -= victim.BattleStats.DamageReduction;

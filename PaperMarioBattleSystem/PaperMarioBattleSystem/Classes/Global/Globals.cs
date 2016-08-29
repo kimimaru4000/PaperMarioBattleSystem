@@ -495,9 +495,9 @@ namespace PaperMarioBattleSystem
             Invincible,
             DamageDealtMultiplier,
             DamageReceivedMultiplier,
-            ConfusionPercent
+            ConfusionPercent,
             //Badge properties
-            
+            AdditionalGuardDefense
         }
     }
 

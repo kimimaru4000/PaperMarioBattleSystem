@@ -134,14 +134,22 @@ namespace PaperMarioBattleSystem
         #region Interaction Methods
 
         /* Damage Calculation Order:
+         * Victim:
+         * -------
          * 1. Base damage
-         * 2. If Guarded, subtract 1 from the damage and add the # of Damage Dodge Badges to the victim's Defense. If Superguarded, damage = 0
-         * 3. Subtract or add to the damage based on the # of P-Up, D-Down and P-Down, D-Up Badges are equipped
-         * 4. Check Element Overrides to change the attacker's Element damage based on the PhysicalAttributes of the victim (Ex. Ice Power Badge)
-         * 5. Calculate the victim's Weaknesses/Resistances to the element
-         * 6. If the damage dealt is not Piercing, subtract the victim's Defense from the damage
-         * 7. Multiply by: (number of Double Pains equipped + 1)
-         * 8. If in Danger or Peril, divide by: (number of Last Stands equipped + 1) (round up the damage if it's > 0 and < 1)
+         * 2. Get the contact result (Success, PartialSuccess, Failure)
+         * 3. Check Element Overrides to change the attacker's Element damage based on the PhysicalAttributes of the victim (Ex. Ice Power Badge)
+         * 4. Calculate the victim's Weaknesses/Resistances to the Element
+         * 5. Subtract or add to the damage based on the # of P-Up, D-Down and P-Down, D-Up Badges equipped
+         * 6. Multiply by: (number of Double Pains equipped + 1)
+         * 7. If in Danger or Peril, divide by: (number of Last Stands equipped + 1) (round up the damage if it's > 0 and < 1)
+         * 8. If Guarded, subtract 1 from the damage and add the # of Damage Dodge Badges to the victim's Defense. If Superguarded, damage = 0
+         * 9. If the damage dealt is not Piercing, subtract the victim's Defense from the damage
+         * 
+         * 10. Clamp the damage: Min = 0, Max = 99
+         * 
+         * Attacker:
+         * ---------
          */
 
         /// <summary>
@@ -167,29 +175,6 @@ namespace PaperMarioBattleSystem
             ContactResultInfo contactResultInfo = victim.EntityProperties.GetContactResult(attacker, contactType);
             ContactResult contactResult = contactResultInfo.ContactResult;
 
-            //Defense added from Damage Dodge Badges upon a successful Guard
-            int damageDodgeDefense = 0;
-
-            //Defensive actions take priority
-            BattleGlobals.DefensiveActionHolder? victimDefenseData = victim.GetDefensiveActionResult(damage, statuses);
-            if (victimDefenseData.HasValue == true)
-            {
-                damage = victimDefenseData.Value.Damage;
-                statuses = victimDefenseData.Value.Statuses;
-                //If the Defensive action dealt damage and the contact was direct
-                //the Defensive action has causes a Failure for the Attacker (Ex. Superguarding)
-                if (contactType == ContactTypes.JumpContact && victimDefenseData.Value.ElementHolder.HasValue == true)
-                {
-                    contactResult = ContactResult.Failure;
-                }
-
-                //Factor in the additional Guard defense for all DefensiveActions (for now, at least)
-                damageDodgeDefense = victim.EntityProperties.GetMiscProperty(MiscProperty.AdditionalGuardDefense).IntValue;
-            }
-
-            //Subtract damage reduction (P-Up, D-Down and P-Down, D-Up Badges)
-            damage -= victim.BattleStats.DamageReduction;
-
             //Retrieve an overridden type of Elemental damage to inflict based on the Victim's PhysicalAttributes
             //(Ex. The Ice Power Badge only deals Ice damage to Fiery entities)
             Elements newElement = attacker.EntityProperties.GetTotalElementOverride(victim);
@@ -203,12 +188,46 @@ namespace PaperMarioBattleSystem
               This occurs before factoring in elemental resistances/weaknesses from the Attacker*/
             ElementDamageResultHolder victimElementDamage = GetElementalDamage(victim, element, damage);
 
+            //Subtract damage reduction (P-Up, D-Down and P-Down, D-Up Badges)
+            victimElementDamage.Damage -= victim.BattleStats.DamageReduction;
+
+            //Factor in Double Pain for the Victim
+
+
+            //Factor in Last Stand for the Victim, if the Victim is in Danger or Peril
+
+
+            //Defense added from Damage Dodge Badges upon a successful Guard
+            int damageDodgeDefense = 0;
+
+            //Defensive actions take priority
+            BattleGlobals.DefensiveActionHolder? victimDefenseData = victim.GetDefensiveActionResult(victimElementDamage.Damage, statuses);
+            if (victimDefenseData.HasValue == true)
+            {
+                victimElementDamage.Damage = victimDefenseData.Value.Damage;
+                statuses = victimDefenseData.Value.Statuses;
+                //If the Defensive action dealt damage and the contact was direct
+                //the Defensive action has causes a Failure for the Attacker (Ex. Superguarding)
+                if (contactType == ContactTypes.JumpContact && victimDefenseData.Value.ElementHolder.HasValue == true)
+                {
+                    contactResult = ContactResult.Failure;
+                }
+
+                //Factor in the additional Guard defense for all DefensiveActions (for now, at least)
+                damageDodgeDefense = victim.EntityProperties.GetMiscProperty(MiscProperty.AdditionalGuardDefense).IntValue;
+            }
+
             //Subtract Defense on non-piercing damage
             if (piercing == false)
             {
                 int totalDefense = victim.BattleStats.Defense + damageDodgeDefense;
-                victimElementDamage.Damage = UtilityGlobals.Clamp(victimElementDamage.Damage - totalDefense, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+                victimElementDamage.Damage -= totalDefense;
             }
+
+            //Clamp Victim damage
+            victimElementDamage.Damage = UtilityGlobals.Clamp(victimElementDamage.Damage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+
+            #region Victim Damage Dealt
 
             //Calculating damage dealt to the Victim
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
@@ -220,6 +239,10 @@ namespace PaperMarioBattleSystem
                 finalInteractionResult.VictimResult = new InteractionHolder(victim, victimElementDamage.Damage, element, 
                     victimElementDamage.InteractionResult, contactType, piercing, victimInflictedStatuses, hit);
             }
+
+            #endregion
+
+            #region Attacker Damage Dealt
 
             //Calculating damage dealt to the Attacker
             if (contactResult == ContactResult.Failure || contactResult == ContactResult.PartialSuccess)
@@ -242,13 +265,15 @@ namespace PaperMarioBattleSystem
                 //However, it does NOT factor in Double Pain or any sort of Defense modifiers.
                 int paybackDamage = paybackHolder.GetPaybackDamage(attackerElementDamage.Damage);
 
+                //NOTE: Do Double Pain and Last Stand work against Payback damage? Need to test
+
                 //If Constant Payback, update the damage value to use the element
                 if (paybackHolder.PaybackType == PaybackTypes.Constant)
                 {
                     paybackDamage = GetElementalDamage(attacker, paybackHolder.Element, paybackDamage).Damage;
                 }
 
-                //Clamp damage
+                //Clamp Attacker damage
                 attackerElementDamage.Damage = UtilityGlobals.Clamp(paybackDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
 
                 //Get the Status Effects to inflict
@@ -257,6 +282,8 @@ namespace PaperMarioBattleSystem
                 finalInteractionResult.AttackerResult = new InteractionHolder(attacker, attackerElementDamage.Damage, paybackHolder.Element,
                     attackerElementDamage.InteractionResult, ContactTypes.None, true, attackerInflictedStatuses, true);
             }
+
+            #endregion
 
             return finalInteractionResult;
         }

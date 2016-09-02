@@ -28,3 +28,9 @@ Update (8/28/16)
 3. Finished, aside from adding Damage Dodge to your Defense.
 
 5. Needs to be implemented to complete 3.
+
+Update (9/1/16)
+---------------
+3 and 5 are finished.
+
+Next we need to see if Double Pain and Last Stand are factored into Payback damage.

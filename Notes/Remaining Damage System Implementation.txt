@@ -34,3 +34,38 @@ Update (9/1/16)
 3 and 5 are finished.
 
 Next we need to see if Double Pain and Last Stand are factored into Payback damage.
+
+Update (9/3/16)
+---------------
+Double Pain and Last Stand are not factored into Payback damage. I also did some testing to confirm some damage results:
+
+Double Pain acts before Last Stand:
+-Tested on a Hyper Spiky Goomba (3 Attack) in TTYD with both Double Pain and Last Stand equipped
+-The total damage dealt from an uncharged attack was 3. If Last Stand had acted first, it would've reduced
+ the damage to 2, then Double Pain would've doubled it to 4
+ 
+Guarding acts before Double Pain:
+-Tested on a Hyper Spiky Goomba (3 Attack) in TTYD with Double Pain equipped
+-The total damage dealt from a guarded uncharged attack was 4. If Double Pain had acted first, it would've
+ doubled the damage to 6, then Guard would've reduced it to 5
+
+Defense is factored in before Double Pain:
+-Tested on a Hyper Spiky Goomba (3 Attack) in TTYD with Double Pain and Defend Plus equipped
+-The total damage dealt from a guarded uncharged attack was 2. If Double Pain had acted first, it would've doubled
+ the damage to 6, then Guard and Defend Plus would've reduced it to 4
+ 
+Damage Dodge is also factored in before Double Pain:
+-Tested on a Hyper Spiky Goomba (3 Attack) in TTYD with Double Pain and Damage Dodge equipped
+-The total damage dealt from a guarded uncharged attack was 2. If Double Pain had acted first, it would've doubled
+ the damage to 6, then Guard and Damage Dodge would've reduced it to 4
+
+More complicated test:
+-Tested on a charged Hyper Spiky Goomba (9 Attack) in TTYD with Double Pain, Last Stand, 1 Damage Dodge, and 1 Defend Plus equipped
+-The total damage dealt from a guarded charged attack was 6. Explanation:
+ 1. Guard reduced the damage to 8
+ 2. Damage Dodge reduced the damage to 7
+ 3. Defend Plus reduced the damage to 6
+ 4. Double Pain doubled the damage to 12
+ 5. Last Stand halved the damage to 6
+ 
+Irrelevant discovery that I thought was interesting: Going into Peril seems to max out your audience!

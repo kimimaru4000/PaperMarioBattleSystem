@@ -327,17 +327,48 @@ namespace PaperMarioBattleSystem
         public int Evasion = 0;
 
         /// <summary>
+        /// Retrieves the BootLevel stat. If not Mario, this will be the lowest BootLevel.
+        /// </summary>
+        public virtual EquipmentGlobals.BootLevels GetBootLevel => EquipmentGlobals.BootLevels.Normal;
+
+        /// <summary>
+        /// Retrieves the HammerLevel stat. If not Mario, this will be the lowest HammerLevel.
+        /// </summary>
+        public virtual EquipmentGlobals.HammerLevels GetHammerLevel => EquipmentGlobals.HammerLevels.Normal;
+
+        /// <summary>
         /// Default stats
         /// </summary>
-        public static Stats Default => new Stats(1, 10, 5, 1, 0);
+        public static Stats Default => new Stats(1, 10, 5, 0, 0);
 
-        public Stats(int level, int maxHp, int maxFP, int attack, int defense)
+        public Stats(int level, int maxHP, int maxFP, int attack, int defense)
         {
             Level = level;
-            MaxHP = HP = maxHp;
+            MaxHP = HP = maxHP;
             MaxFP = FP = maxFP;
             BaseAttack = Attack = attack;
             BaseDefense = Defense = defense;
+        }
+    }
+
+    public sealed class MarioStats : Stats
+    {
+        /// <summary>
+        /// The level of Mario's Boots
+        /// </summary>
+        public EquipmentGlobals.BootLevels BootLevel = EquipmentGlobals.BootLevels.Normal;
+
+        /// <summary>
+        /// The level of Mario's Hammer
+        /// </summary>
+        public EquipmentGlobals.HammerLevels HammerLevel = EquipmentGlobals.HammerLevels.Normal;
+
+        public override EquipmentGlobals.BootLevels GetBootLevel => BootLevel;
+        public override EquipmentGlobals.HammerLevels GetHammerLevel => HammerLevel;
+
+        public MarioStats(int level, int maxHp, int maxFP, int attack, int defense) : base(level, maxHp, maxFP, attack, defense)
+        {
+
         }
     }
 
@@ -775,6 +806,32 @@ namespace PaperMarioBattleSystem
             if (StatusOrder.ContainsKey(statusType) == false) return 0;
 
             return StatusOrder[statusType];
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Class for global values dealing with general equipment
+    /// </summary>
+    public static class EquipmentGlobals
+    {
+        #region Enums
+
+        /// <summary>
+        /// The types of Boot levels for Mario.
+        /// </summary>
+        public enum BootLevels
+        {
+            Normal = 1, Super = 2, Ultra = 3
+        }
+
+        /// <summary>
+        /// The types of Hammer levels for Mario.
+        /// </summary>
+        public enum HammerLevels
+        {
+            Normal = 1, Super = 2, Ultra = 3
         }
 
         #endregion

@@ -46,7 +46,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected Animation CurrentAnim = null;
 
-        public Stats BattleStats { get; set; } = Stats.Default;
+        public Stats BattleStats { get; protected set; } = Stats.Default;
         public int CurHP => BattleStats.HP;
         public int CurFP => BattleStats.FP;
 

@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
 
             AssetManager.Instance.Initialize(Content);
             SpriteRenderer.Instance.Initialize(graphics);
-            BattleManager.Instance.Initialize(new BattleMario(new Stats(1, 50, 5, 1, 0)), new Goombario(), new List<BattleEnemy>() { new Goomba(), new SpikedGoomba() });
+            BattleManager.Instance.Initialize(new BattleMario(new MarioStats(1, 50, 5, 0, 0)), new Goombario(), new List<BattleEnemy>() { new Goomba(), new SpikedGoomba() });
 
             base.Initialize();
         }

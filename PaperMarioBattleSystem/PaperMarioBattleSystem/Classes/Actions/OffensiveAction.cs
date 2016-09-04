@@ -88,7 +88,7 @@ namespace PaperMarioBattleSystem
         /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
         // <param name="isTotalDamage">Indicates if the damage value passed in is already the total damage or not.
         // Some BattleActions such as Power Bounce need to calculate the total damage ahead of time.</param>
-        protected void AttemptDamage(int damage, BattleEntity[] entities/*, bool isTotalDamage = false*/)
+        protected void AttemptDamage(int damage, BattleEntity[] entities)
         {
             if (entities == null || entities.Length == 0)
             {
@@ -144,15 +144,14 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets the total raw damage a BattleEntity can deal using this BattleAction
+        /// Gets the total raw damage a BattleEntity can deal using this BattleAction.
+        /// This factors in a BattleEntity's Attack stat and anything else that may influence the damage dealt.
         /// </summary>
         /// <param name="actionDamage">The damage the BattleAction deals</param>
         /// <returns>An int with the total raw damage the BattleEntity can deal when using this BattleAction</returns>
         protected int GetTotalDamage(int actionDamage)
         {
             int totalDamage = actionDamage + User.BattleStats.Attack;
-
-            totalDamage = UtilityGlobals.Clamp(totalDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
 
             return totalDamage;
         }

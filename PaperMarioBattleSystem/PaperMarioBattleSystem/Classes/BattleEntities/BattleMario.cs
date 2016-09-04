@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         /// Constructor
         /// </summary>
         /// <param name="marioStats">Mario's stats</param>
-        public BattleMario(Stats marioStats) : base(marioStats)
+        public BattleMario(MarioStats marioStats) : base(marioStats)
         {
             Name = "Mario";
             EntityType = Enumerations.EntityTypes.Player;

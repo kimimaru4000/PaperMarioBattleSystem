@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class Goomba : BattleEnemy
     {
-        public Goomba() : base(new Stats(1, 2, 0, 1, 0))
+        public Goomba() : base(new Stats(1, 2, 0, 0, 0))
         {
             Name = "Goomba";
 

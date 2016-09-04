@@ -69,3 +69,13 @@ More complicated test:
  5. Last Stand halved the damage to 6
  
 Irrelevant discovery that I thought was interesting: Going into Peril seems to max out your audience!
+
+Update (9/4/16)
+---------------
+It looks like I was wrong about how Ice Power actually works:
+
+In TTYD, you can observe a case where hitting a Lava Bubble with Ice Smash, with Ice Power equipped, will deal 2 additional damage instead of 1.
+This means that Ice Power does indeed add damage if you're attacking entities of a specific type.
+
+However, Ice Power is also dealing Ice damage, as seen when crippling Lava Piranha Phase 2 in PM. Either they changed the behavior between
+the games, or I still don't understand how it works.

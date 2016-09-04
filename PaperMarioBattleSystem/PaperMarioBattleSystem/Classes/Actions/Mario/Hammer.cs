@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
             Description = "Whack an enemy with your Hammer.";
             SelectionType = TargetSelectionMenu.EntitySelectionType.First;
             ContactType = Enumerations.ContactTypes.HammerContact;
-            BaseDamage = 1;
+            BaseDamage = (int)User.BattleStats.GetHammerLevel;
             HeightsAffected = new HeightStates[] { HeightStates.Grounded };
 
             actionCommand = new HammerCommand(this);
@@ -98,7 +98,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(SlamAnimName, true);
-                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected);
+                    AttemptDamage(GetTotalDamage(BaseDamage * DamageMod), EntitiesAffected);
                     CurSequence = new WaitForAnimation(SlamAnimName);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
@@ -114,7 +114,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(SlamAnimName, true);
-                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected);
+                    AttemptDamage(GetTotalDamage(BaseDamage * DamageMod), EntitiesAffected);
                     CurSequence = new WaitForAnimation(SlamAnimName);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;

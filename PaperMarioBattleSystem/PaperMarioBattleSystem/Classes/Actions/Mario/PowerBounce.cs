@@ -19,14 +19,13 @@ namespace PaperMarioBattleSystem
         {
             Name = "Power Bounce";
             Description = "Bounce multiple times on an enemy";
-            BaseDamage = 5;
         }
 
         protected override void OnStart()
         {
             base.OnStart();
 
-            DamageValue = BaseDamage;
+            DamageValue = GetTotalDamage(BaseDamage);
             Bounces = 0;
         }
 
@@ -49,6 +48,10 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+
+                    //IDEA: Have AttemptDamage return the total damage this entity dealt with this action
+                    //If it's 0, all subsequent attacks will deal 0 damage as well, otherwise it'll be capped at 1
+
                     AttemptDamage(DamageDealt, EntitiesAffected);
                     DamageValue = UtilityGlobals.Clamp(DamageValue - 1, 1, BattleGlobals.MaxDamage);
 

@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
         public SpikedGoomba()
         {
             Name = "Spiked Goomba";
-            BattleStats = new Stats(1, 2, 0, 2, 0);
+            BattleStats = new Stats(1, 2, 0, 1, 0);
 
             EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Spiked);
 

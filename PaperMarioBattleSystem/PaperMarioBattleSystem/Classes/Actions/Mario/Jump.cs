@@ -25,7 +25,7 @@ namespace PaperMarioBattleSystem
             Name = "Jump";
             Description = "Jump and stomp on an enemy.";
             ContactType = Enumerations.ContactTypes.JumpContact;
-            BaseDamage = 1;
+            BaseDamage = (int)User.BattleStats.GetBootLevel;
 
             actionCommand = new JumpCommand(this, JumpDuration, (int)(JumpDuration / 2f));
             HeightsAffected = new Enumerations.HeightStates[] { HeightStates.Grounded, HeightStates.Airborne };
@@ -85,14 +85,14 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    AttemptDamage(DamageDealt, CurTarget);
+                    AttemptDamage(GetTotalDamage(DamageDealt), CurTarget);
                     CurSequence = new MoveAmount(new Vector2(0f, -JumpHeight), JumpDuration);
                     break;
                 case 1:
                     CurSequence = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration);
                     break;
                 case 2:
-                    AttemptDamage(DamageDealt, CurTarget);
+                    AttemptDamage(GetTotalDamage(DamageDealt), CurTarget);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -106,7 +106,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    AttemptDamage(DamageDealt, CurTarget);
+                    AttemptDamage(GetTotalDamage(DamageDealt), CurTarget);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

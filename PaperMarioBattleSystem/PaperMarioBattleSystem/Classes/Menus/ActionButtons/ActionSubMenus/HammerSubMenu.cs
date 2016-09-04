@@ -16,7 +16,7 @@ namespace PaperMarioBattleSystem
         public HammerSubMenu()
         {
             Position = new Vector2(230, 150);
-            Initialize(new List<MoveAction>() { new Hammer() });
+            Initialize(new List<MoveAction>() { new Hammer(), new IceSmash() });
         }
     }
 }

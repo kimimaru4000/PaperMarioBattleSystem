@@ -86,26 +86,27 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="damage">The damage the BattleAction deals to the entity if the attempt was successful</param>
         /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
-        // <param name="isTotalDamage">Indicates if the damage value passed in is already the total damage or not.
-        // Some BattleActions such as Power Bounce need to calculate the total damage ahead of time.</param>
-        protected void AttemptDamage(int damage, BattleEntity[] entities)
+        /// <returns>An int array containing the damage dealt to each BattleEntity targeted, in order</returns>
+        protected int[] AttemptDamage(int damage, BattleEntity[] entities)
         {
             if (entities == null || entities.Length == 0)
             {
                 Debug.LogWarning($"{nameof(entities)} is null or empty in {nameof(AttemptDamage)} for Action {Name}!");
-                return;
+                return new int[0];
             }
 
-            //Get the true total damage, factoring in the attacker's properties
-            //If the damage passed in is designated as the total damage, use that damage value instead
-            int totalDamage = damage;//isTotalDamage == true ? damage : GetTotalDamage(damage);
+            //The damage dealt to each BattleEntity
+            int[] damageValues = new int[entities.Length];
 
             //Go through all the entities and attempt damage
             for (int i = 0; i < entities.Length; i++)
             {
                 BattleEntity victim = entities[i];
 
-                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage, Element, Piercing, ContactType, StatusesInflicted));
+                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, damage, Element, Piercing, ContactType, StatusesInflicted));
+
+                //Set the total damage dealt to the victim
+                damageValues[i] = finalResult.VictimResult.TotalDamage;
 
                 //Make the victim take damage upon a PartialSuccess or a Success
                 if (finalResult.VictimResult.HasValue == true)
@@ -131,6 +132,8 @@ namespace PaperMarioBattleSystem
                     break;
                 }
             }
+
+            return damageValues;
         }
 
         /// <summary>

@@ -12,6 +12,12 @@ namespace PaperMarioBattleSystem
     {
         private int DamageValue = 0;
         private int Bounces = 0;
+        
+        /// <summary>
+        /// Whether to decrease Power Bounce's damage or not.
+        /// If the damage dealt was 1, this will be set to true to continue dealing 1 damage.
+        /// </summary>
+        private bool StopDecreasing = false;
 
         protected override int DamageDealt => DamageValue;
 
@@ -27,6 +33,8 @@ namespace PaperMarioBattleSystem
 
             DamageValue = GetTotalDamage(BaseDamage);
             Bounces = 0;
+            
+            StopDecreasing = false;
         }
 
         protected override void OnEnd()
@@ -34,6 +42,8 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             Bounces = 0;
+            
+            StopDecreasing = false;
         }
 
         public override void OnCommandSuccess()
@@ -49,12 +59,18 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
 
-                    //IDEA: Have AttemptDamage return the total damage this entity dealt with this action
-                    //If it's 0, all subsequent attacks will deal 0 damage as well, otherwise it'll be capped at 1
+                    //Check the damage dealt
+                    int[] damageValues = AttemptDamage(DamageDealt, EntitiesAffected);
 
-                    AttemptDamage(DamageDealt, EntitiesAffected);
-                    DamageValue = UtilityGlobals.Clamp(DamageValue - 1, 1, BattleGlobals.MaxDamage);
+                    //If the total damage dealt was 1, stop decreasing the damage to keep it doing 1
+                    if (StopDecreasing == false && damageValues[0] == 1)
+                        StopDecreasing = true;
+                    
+                    //Only decrease the value if we're not at 1 damage
+                    if (StopDecreasing == false)
+                        DamageValue = UtilityGlobals.Clamp(DamageValue - 1, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
 
+                    //Repeat the sequence if the player is under the Power Bounce cap
                     if (Bounces < BattleGlobals.MaxPowerBounces)
                     {
                         ChangeSequenceBranch(SequenceBranch.Main);

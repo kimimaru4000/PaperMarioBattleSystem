@@ -366,9 +366,11 @@ namespace PaperMarioBattleSystem
         public override EquipmentGlobals.BootLevels GetBootLevel => BootLevel;
         public override EquipmentGlobals.HammerLevels GetHammerLevel => HammerLevel;
 
-        public MarioStats(int level, int maxHp, int maxFP, int attack, int defense) : base(level, maxHp, maxFP, attack, defense)
+        public MarioStats(int level, int maxHp, int maxFP, int attack, int defense,
+            EquipmentGlobals.BootLevels bootLevel, EquipmentGlobals.HammerLevels hammerLevel) : base(level, maxHp, maxFP, attack, defense)
         {
-
+            BootLevel = bootLevel;
+            HammerLevel = hammerLevel;
         }
     }
 

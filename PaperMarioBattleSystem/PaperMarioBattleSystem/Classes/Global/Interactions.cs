@@ -180,12 +180,12 @@ namespace PaperMarioBattleSystem
             Elements newElement = attacker.EntityProperties.GetTotalElementOverride(victim);
             if (newElement != Elements.Invalid)
             {
-                //Add 1 to the damage if the element used already exists as an override.
+                //Add 1 to the damage if the element used already exists as an override and the victim has a Weakness to the Element.
                 //This allows Badges such as Ice Power to deal more damage if used in conjunction with attacks
                 //that deal the same type of damage (Ex. Ice Power and Ice Smash deal 2 additional damage total rather than 1).
                 //If any new knowledge is discovered to improve this, this will be changed. At the moment, it seems unlikely because
                 //Ice Power is the only Badge of its kind across the first two PM games that does anything like this
-                if (element == newElement)
+                if (element == newElement && victim.EntityProperties.HasWeakness(element) == true)
                 {
                     damage += 1;
                 }

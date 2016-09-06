@@ -1,0 +1,157 @@
+Simplifier & Unsimplifier's Effects on Action Commands (9/5/16)
+---------------------------------------------------------------
+These are the results of how Simplifier and Unsimplifier affect various action commands in TTYD.
+Dodge Master from PM is also included here.
+
+Simplifier is listed first, and Unsimplifier is listed second in descriptions. For example, "Raises/Lowers the window for execution"
+means that Simplifier increases the window for execution and Unsimplifier decreases it. Dodge Master will be abbreviated with a "DM - "
+in its notes.
+
+Preliminary Notes:
+------------------
+-Dodge Master in PM affects only Mario, whereas Simplifier and Unsimplifier in TTYD affects both Mario and his Partners
+-Special Moves are unaffected in either game
+
+Mario
+-----
+Jump/Multibounce/Shrink Stomp/Sleepy Stomp/Soft Stomp
+-Raises/Reduces the start window for execution
+
+Power Bounce
+-Raises/Reduces the start window for execution
+-DM - Increases the Power Bounce cap (applies only to PM)
+
+Spin Jump
+-Raises/Reduces the start window for execution
+
+Spring Jump
+-Raises/Reduces the start window for execution
+
+Tornado Jump
+-Raises/Reduces the start window for the jump
+-Raises/Reduces the end window for execution greatly
+
+Hammer/Ice Smash/Head Rattle/Piercing Blow/Hammer Throw/Power Smash/Quake Hammer
+-Raises/Reduces the end window for execution
+
+Fire Drive
+-Raises/Reduces the end window for execution slightly
+
+Guard
+-Raises/Reduces the window for execution
+-DM - Raises/Reduces the window for execution
+
+Superguard
+-Raises/Reduces the window for execution
+
+Goombella
+---------
+Headbonk
+-Raises/Reduces the start window for execution
+
+Tattle
+-Raises/Reduces the speed of the cursor
+
+Multibonk
+-Raises/Reduces the start window for execution
+
+Rally Wink
+-Increases/Decreases the amount the bar goes up for each A press
+
+Koops
+-----
+Shell Toss
+-Lowers/Increases how fast the bar moves
+
+Power Shell
+-Lowers/Increases the speed of the bar
+-Increases/Lowers the window for execution
+
+Shell Shield
+-Lowers/Increases the speed of the marker greatly
+
+Shell Slam
+-Increases/Decreases the amount the bar goes up for each Left tilt on the Control Stick
+
+Flurrie
+-------
+Body Slam
+-Decreases/Increases the amount the cursor moves
+
+Gale Force
+-Increases/Decreases the amount of time you can hold A for each press
+
+Lip Lock
+-Increases/Decreases the amount the bar goes up when holding A. With 2 Unsimplifiers, it seems impossible to get 100%
+
+Dodgy Fog
+-Increases/Decreases the window for pressing the directions
+
+Yoshi
+-----
+Ground Pound
+-Increases/Decreases the amount the bar goes up when pressing R slightly
+
+Gulp
+-Lowers/Increases both the speed of the bar
+-Increases/Lowers the window for execution
+
+Mini-Egg
+-Lowers/Increases the speed the bar moves
+
+Stampede
+-Increases/Decreases the amount the bar goes up when pressing L and R slightly
+
+Vivian
+------
+Shade Fist
+-Increases/Decreases the end window for execution
+
+Veil
+-Increases/Decreases the end window for execution
+
+Fiery Jinx
+-Increases/Decreases the end window for execution
+
+Infatuate
+-Increases/Decreases the end window for execution for each heart
+
+Bobbery
+-------
+Bomb
+-Increases/Decreases the end window for execution
+
+Bomb Squad
+-Decreases/Increases the speed of the cursor
+
+Hold Fast
+-Increases/Decreases the end window of execution for each light
+
+Bob-ombast
+-Increases/Decreases the amount the bar goes up for each A press
+-Decreases/Increases the speed Bobbery moves, adjusting the total length of the action command
+
+Ms. Mowz
+--------
+Love Slap
+-Increases/Decreases the amount the bar goes up for each Left and Right tilt
+
+Kiss Thief
+-Decreases/Increases the acceleration rate of the bar
+
+Tease
+-Decreases/Increases the amount the bar goes up when A is held
+
+Smooch
+-Decreases/Increases the speed Ms. Mowz moves, adjusting the total length of the action command
+
+Tactics
+-------
+Run Away
+-Increases/Decreases the amount the bar goes up for each A press
+
+Further notes:
+--------------
+-There is a rank below "Nice," which is a "Nice" in much smaller words!
+-I haven't noticed Dodge Master changing the timing on any attack action commands.
+ MarioWiki currently says that it makes some of them slightly harder, so I asked for verification to confirm

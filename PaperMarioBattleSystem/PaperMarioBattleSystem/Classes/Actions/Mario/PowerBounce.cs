@@ -60,7 +60,7 @@ namespace PaperMarioBattleSystem
                 case 0:
 
                     //Check the damage dealt
-                    int[] damageValues = AttemptDamage(DamageDealt, EntitiesAffected);
+                    int[] damageValues = AttemptDamage(DamageDealt, EntitiesAffected, true);
 
                     //If the total damage dealt was 1, stop decreasing the damage to keep it doing 1
                     if (StopDecreasing == false && damageValues[0] == 1)

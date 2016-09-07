@@ -98,7 +98,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(SlamAnimName, true);
-                    AttemptDamage(GetTotalDamage(BaseDamage * DamageMod), EntitiesAffected);
+                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, false);
                     CurSequence = new WaitForAnimation(SlamAnimName);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
@@ -114,7 +114,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(SlamAnimName, true);
-                    AttemptDamage(GetTotalDamage(BaseDamage * DamageMod), EntitiesAffected);
+                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, false);
                     CurSequence = new WaitForAnimation(SlamAnimName);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;

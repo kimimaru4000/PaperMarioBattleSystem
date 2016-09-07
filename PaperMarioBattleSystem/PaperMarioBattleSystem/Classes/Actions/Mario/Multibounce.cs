@@ -48,7 +48,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    AttemptDamage(GetTotalDamage(DamageDealt), CurTarget);
+                    AttemptDamage(DamageDealt, CurTarget, false);
 
                     //Restart with the next target
                     if (NextTargetIndex < EntitiesAffected.Length)

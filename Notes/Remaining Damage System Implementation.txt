@@ -84,3 +84,8 @@ Fire enemies instead. So since these effects differ between games, how can we co
 
 I went through all cases and decided that the most accurate result may be to add 1 damage if the element used is already the override found.
 This would make Ice Power work with Ice Smash, and they both would deal the appropriate amount of damage separately.
+
+Update (9/6/16)
+---------------
+I confirmed that P-Down, D-Up does indeed reduce the damage dealt from Piercing attacks, as well as Last Stand. Additionally, the Defend action
+just increases Defense by 1 and doesn't reduce the damage of Piercing attacks.

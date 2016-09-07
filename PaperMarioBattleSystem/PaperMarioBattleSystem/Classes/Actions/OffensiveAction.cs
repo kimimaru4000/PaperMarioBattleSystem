@@ -86,14 +86,18 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="damage">The damage the BattleAction deals to the entity if the attempt was successful</param>
         /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
+        /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
+        /// If false, the total damage will be calculated</param>
         /// <returns>An int array containing the damage dealt to each BattleEntity targeted, in order</returns>
-        protected int[] AttemptDamage(int damage, BattleEntity[] entities)
+        protected int[] AttemptDamage(int damage, BattleEntity[] entities, bool isTotalDamage)
         {
             if (entities == null || entities.Length == 0)
             {
                 Debug.LogWarning($"{nameof(entities)} is null or empty in {nameof(AttemptDamage)} for Action {Name}!");
                 return new int[0];
             }
+
+            int totalDamage = isTotalDamage == true ? damage : GetTotalDamage(damage);
 
             //The damage dealt to each BattleEntity
             int[] damageValues = new int[entities.Length];
@@ -103,7 +107,7 @@ namespace PaperMarioBattleSystem
             {
                 BattleEntity victim = entities[i];
 
-                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, damage, Element, Piercing, ContactType, StatusesInflicted));
+                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage, Element, Piercing, ContactType, StatusesInflicted));
 
                 //Set the total damage dealt to the victim
                 damageValues[i] = finalResult.VictimResult.TotalDamage;
@@ -141,9 +145,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="damage">The damage the BattleAction deals to the entity if the attempt was successful</param>
         /// <param name="entity">The BattleEntity to attempt to inflict damage on</param>
-        protected void AttemptDamage(int damage, BattleEntity entity)
+        /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
+        /// If false, the total damage will be calculated</param>
+        protected void AttemptDamage(int damage, BattleEntity entity, bool isTotalDamage)
         {
-            AttemptDamage(damage, new BattleEntity[] { entity });
+            AttemptDamage(damage, new BattleEntity[] { entity }, isTotalDamage);
         }
 
         /// <summary>

@@ -46,9 +46,9 @@ namespace PaperMarioBattleSystem
             StopDecreasing = false;
         }
 
-        public override void OnCommandSuccess()
+        protected override void CommandSuccess()
         {
-            base.OnCommandSuccess();
+            base.CommandSuccess();
 
             Bounces++;
         }

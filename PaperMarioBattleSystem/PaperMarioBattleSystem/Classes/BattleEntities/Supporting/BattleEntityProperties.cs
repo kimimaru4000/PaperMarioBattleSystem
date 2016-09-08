@@ -202,6 +202,7 @@ namespace PaperMarioBattleSystem
             if (HasElementOverride(attribute) == true)
             {
                 Debug.LogWarning($"{Entity.Name} already has an element override for the {attribute} PhysicalAttribute!");
+                return;
             }
 
             ElementOverrides.Add(attribute, element);
@@ -222,18 +223,6 @@ namespace PaperMarioBattleSystem
 
             ElementOverrides.Remove(attribute);
             Debug.Log($"Removed element override for the {attribute} PhysicalAttribute on {Entity.Name}");
-        }
-
-        /// <summary>
-        /// Retrieves the Element Override associated with a PhysicalAttribute
-        /// </summary>
-        /// <param name="attribute">The PhysicalAttribute associated with the Element Override</param>
-        /// <returns>An Element for the override if it exists, otherwise 0</returns>
-        public Elements GetElementOverride(PhysicalAttributes attribute)
-        {
-            if (HasElementOverride(attribute) == false) return Elements.Normal;
-
-            return ElementOverrides[attribute];
         }
 
         /// <summary>

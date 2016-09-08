@@ -37,14 +37,14 @@ namespace PaperMarioBattleSystem
             actionCommand = new HammerCommand(this);
         }
 
-        public override void OnCommandSuccess()
+        protected override void CommandSuccess()
         {
             DamageMod *= 2;
 
             ChangeSequenceBranch(SequenceBranch.Success);
         }
 
-        public override void OnCommandFailed()
+        protected override void CommandFailed()
         {
             ChangeSequenceBranch(SequenceBranch.Failed);
         }

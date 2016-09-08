@@ -530,7 +530,8 @@ namespace PaperMarioBattleSystem
             DamageReceivedMultiplier,
             ConfusionPercent,
             //Badge properties
-            AdditionalGuardDefense
+            AdditionalGuardDefense,
+            AllOrNothingCount
         }
     }
 

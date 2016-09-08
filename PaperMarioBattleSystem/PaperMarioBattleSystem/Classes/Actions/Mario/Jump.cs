@@ -31,13 +31,13 @@ namespace PaperMarioBattleSystem
             HeightsAffected = new Enumerations.HeightStates[] { HeightStates.Grounded, HeightStates.Airborne };
         }
 
-        public override void OnCommandSuccess()
+        protected override void CommandSuccess()
         {
             //Show "NICE" here or something
             ChangeSequenceBranch(SequenceBranch.Success);
         }
 
-        public override void OnCommandFailed()
+        protected override void CommandFailed()
         {
             ChangeSequenceBranch(SequenceBranch.Failed);
         }

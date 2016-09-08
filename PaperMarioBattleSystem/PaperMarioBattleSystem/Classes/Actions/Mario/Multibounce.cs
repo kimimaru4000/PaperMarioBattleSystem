@@ -37,9 +37,9 @@ namespace PaperMarioBattleSystem
             CurrentTargetIndex = NextTargetIndex = 0;
         }
 
-        public override void OnCommandSuccess()
+        protected override void CommandSuccess()
         {
-            base.OnCommandSuccess();
+            base.CommandSuccess();
             NextTargetIndex++;
         }
 

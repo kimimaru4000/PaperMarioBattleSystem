@@ -34,12 +34,12 @@ namespace PaperMarioBattleSystem
             AdditionalDamage = 0;
         }
 
-        public override void OnCommandSuccess()
+        protected override void CommandSuccess()
         {
             ChangeSequenceBranch(SequenceBranch.Success);
         }
 
-        public override void OnCommandFailed()
+        protected override void CommandFailed()
         {
             ChangeSequenceBranch(SequenceBranch.Failed);
         }

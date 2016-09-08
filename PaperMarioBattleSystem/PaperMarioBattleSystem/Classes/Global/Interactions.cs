@@ -139,17 +139,25 @@ namespace PaperMarioBattleSystem
          * 1. Base damage
          * 2. Get the contact result (Success, PartialSuccess, Failure)
          * 3. Check Element Overrides to change the attacker's Element damage based on the PhysicalAttributes of the victim (Ex. Ice Power Badge)
-         * 4. Calculate the victim's Weaknesses/Resistances to the Element
+         * 4. Calculate the Victim's Weaknesses/Resistances to the Element
          * 5. Subtract or add to the damage based on the # of P-Up, D-Down and P-Down, D-Up Badges equipped
-         * 6. Multiply by: (number of Double Pains equipped + 1)
-         * 7. If in Danger or Peril, divide by: (number of Last Stands equipped + 1) (round up the damage if it's > 0 and < 1)
-         * 8. If Guarded, subtract 1 from the damage and add the # of Damage Dodge Badges to the victim's Defense. If Superguarded, damage = 0
-         * 9. If the damage dealt is not Piercing, subtract the victim's Defense from the damage
+         * 6. If Guarded, subtract 1 from the damage and add the # of Damage Dodge Badges to the victim's Defense. If Superguarded, damage = 0
+         * 7. If the damage dealt is not Piercing, subtract the victim's Defense from the damage
+         * 8. Multiply by: (number of Double Pains equipped + 1)
+         * 9. If in Danger or Peril, divide by: (number of Last Stands equipped + 1) (round up the damage if it's > 0 and < 1)
          * 
          * 10. Clamp the damage: Min = 0, Max = 99
          * 
          * Attacker:
          * ---------
+         * 1. Start with the total damage dealt to the Victim
+         * 2. Get the Payback from the Contact Result
+         * 3. If the Victim performed a Superguard, override the Payback with the the Superguard's Payback
+         * 4. Calculate the Attacker's Weaknesses/Resistances to the Payback Element
+         * 5. Calculate the Payback damage based off the PaybackType
+         * 6. If the PaybackType is Constant, set the damage dealt to the Payback's damage
+         * 
+         * 7. Clamp the damage: Min = 0, Max = 99
          */
 
         /// <summary>
@@ -201,12 +209,6 @@ namespace PaperMarioBattleSystem
             //Subtract damage reduction (P-Up, D-Down and P-Down, D-Up Badges)
             victimElementDamage.Damage -= victim.BattleStats.DamageReduction;
 
-            //Factor in Double Pain for the Victim
-
-
-            //Factor in Last Stand for the Victim, if the Victim is in Danger or Peril
-
-
             //Defense added from Damage Dodge Badges upon a successful Guard
             int damageDodgeDefense = 0;
 
@@ -233,6 +235,12 @@ namespace PaperMarioBattleSystem
                 int totalDefense = victim.BattleStats.Defense + damageDodgeDefense;
                 victimElementDamage.Damage -= totalDefense;
             }
+
+            //Factor in Double Pain for the Victim
+
+
+            //Factor in Last Stand for the Victim, if the Victim is in Danger or Peril
+
 
             //Clamp Victim damage
             victimElementDamage.Damage = UtilityGlobals.Clamp(victimElementDamage.Damage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
@@ -274,8 +282,6 @@ namespace PaperMarioBattleSystem
                 //Get Payback damage - Payback damage is calculated after everything else, including Constant Payback.
                 //However, it does NOT factor in Double Pain or any sort of Defense modifiers.
                 int paybackDamage = paybackHolder.GetPaybackDamage(attackerElementDamage.Damage);
-
-                //NOTE: Do Double Pain and Last Stand work against Payback damage? Need to test
 
                 //If Constant Payback, update the damage value to use the element
                 if (paybackHolder.PaybackType == PaybackTypes.Constant)
@@ -322,7 +328,7 @@ namespace PaperMarioBattleSystem
             //Handle weaknesses
             if (weakness.WeaknessType == WeaknessTypes.PlusDamage)
             {
-                elementDamageResult.Damage = UtilityGlobals.Clamp(elementDamageResult.Damage + weakness.Value, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+                elementDamageResult.Damage += weakness.Value;
             }
             else if (weakness.WeaknessType == WeaknessTypes.KO)
             {
@@ -332,7 +338,7 @@ namespace PaperMarioBattleSystem
             //Handle resistances
             if (resistance.ResistanceType == ResistanceTypes.MinusDamage)
             {
-                elementDamageResult.Damage = UtilityGlobals.Clamp(elementDamageResult.Damage - resistance.Value, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+                elementDamageResult.Damage -= resistance.Value;
             }
             else if (resistance.ResistanceType == ResistanceTypes.NoDamage)
             {

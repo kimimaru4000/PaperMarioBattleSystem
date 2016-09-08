@@ -57,6 +57,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool DisableActionCommand { get; set; }
 
+        /// <summary>
+        /// The result of performing the Action Command
+        /// </summary>
+        protected ActionCommand.CommandResults CommandResult { get; private set; } = ActionCommand.CommandResults.Success;
+
         protected OffensiveAction()
         {
 
@@ -69,13 +74,20 @@ namespace PaperMarioBattleSystem
         protected void StartActionCommandInput()
         {
             if (CommandEnabled == true) actionCommand.StartInput();
-            else ChangeSequenceBranch(SequenceBranch.Failed);
+            else OnCommandFailed();
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+            CommandResult = ActionCommand.CommandResults.Success;
         }
 
         protected override void OnEnd()
         {
             base.OnEnd();
             DisableActionCommand = false;
+            CommandResult = ActionCommand.CommandResults.Success;
         }
 
         /// <summary>
@@ -98,6 +110,21 @@ namespace PaperMarioBattleSystem
             }
 
             int totalDamage = isTotalDamage == true ? damage : GetTotalDamage(damage);
+
+            //Check for the All or Nothing Badge
+            //If it's equipped, add 1 if the Action Command succeeded, otherwise set the damage to the minimum value
+            int allOrNothingCount = User.EntityProperties.GetMiscProperty(MiscProperty.AllOrNothingCount).IntValue;
+            if (allOrNothingCount > 0)
+            {
+                if (CommandResult == ActionCommand.CommandResults.Success)
+                {
+                    totalDamage += allOrNothingCount;
+                }
+                else if (CommandResult == ActionCommand.CommandResults.Failure)
+                {
+                    totalDamage = int.MinValue;
+                }
+            }
 
             //The damage dealt to each BattleEntity
             int[] damageValues = new int[entities.Length];
@@ -165,9 +192,28 @@ namespace PaperMarioBattleSystem
             return totalDamage;
         }
 
-        public abstract void OnCommandSuccess();
-        public abstract void OnCommandFailed();
+        //We have OnCommandSuccess() non-virtual so we can perform general functionality for successfully completing any Action Command
+        //Examples include showing the degrees of success ("Nice," "Great," etc.) and increasing the damage dealt by All or Nothing
+        public void OnCommandSuccess()
+        {
+            CommandResult = ActionCommand.CommandResults.Success;
+
+            CommandSuccess();
+        }
+
+        //We have OnCommandFailed() non-virtual so we can perform general functionality for failing to complete any Action Command
+        //Examples include dealing no damage with the All or Nothing Badge
+        public void OnCommandFailed()
+        {
+            CommandResult = ActionCommand.CommandResults.Failure;
+
+            CommandFailed();
+        }
+
         public abstract void OnCommandResponse(int response);
+
+        protected abstract void CommandSuccess();
+        protected abstract void CommandFailed();
 
         public override void StartInterruption(Elements element)
         {

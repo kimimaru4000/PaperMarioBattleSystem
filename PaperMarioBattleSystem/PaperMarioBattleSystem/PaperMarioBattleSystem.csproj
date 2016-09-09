@@ -65,6 +65,7 @@
     <Compile Include="Classes\ActionCommands\SuperguardCommand.cs" />
     <Compile Include="Classes\ActionCommands\TidalWaveCommand.cs" />
     <Compile Include="Classes\Actions\BattleAction.cs" />
+    <Compile Include="Classes\Actions\CommandMoveAction.cs" />
     <Compile Include="Classes\Actions\Defensive\DefensiveAction.cs" />
     <Compile Include="Classes\Actions\Defensive\Superguard.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />

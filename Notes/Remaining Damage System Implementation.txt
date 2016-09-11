@@ -89,3 +89,9 @@ Update (9/6/16)
 ---------------
 I confirmed that P-Down, D-Up does indeed reduce the damage dealt from Piercing attacks, as well as Last Stand. Additionally, the Defend action
 just increases Defense by 1 and doesn't reduce the damage of Piercing attacks.
+
+Update (9/10/16)
+----------------
+4 is finished.
+
+1 is left, which involves implementing the Simplifier and Unsimplifier Badges.

@@ -526,12 +526,13 @@ namespace PaperMarioBattleSystem
             NeutralStatusImmune,
             NegativeStatusImmune,
             Invincible,
-            DamageDealtMultiplier,
-            DamageReceivedMultiplier,
             ConfusionPercent,
+            
             //Badge properties
             AdditionalGuardDefense,
-            AllOrNothingCount
+            AllOrNothingCount,
+            DamageTakenMultiplier,
+            DangerDamageDivider
         }
     }
 

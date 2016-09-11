@@ -56,6 +56,8 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new FireShieldBadge());
             Inventory.Instance.AddBadge(new IcePowerBadge());
             Inventory.Instance.AddBadge(new AllOrNothingBadge());
+            Inventory.Instance.AddBadge(new DoublePainBadge());
+            Inventory.Instance.AddBadge(new LastStandBadge());
 
             Inventory.Instance.AddBadge(new DamageDodgeBadge());
             Inventory.Instance.AddBadge(new DamageDodgeBadge());

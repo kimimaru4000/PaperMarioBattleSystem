@@ -206,8 +206,10 @@ namespace PaperMarioBattleSystem
               This occurs before factoring in elemental resistances/weaknesses from the Attacker*/
             ElementDamageResultHolder victimElementDamage = GetElementalDamage(victim, element, damage);
 
+            int unscaledVictimDamage = victimElementDamage.Damage;
+
             //Subtract damage reduction (P-Up, D-Down and P-Down, D-Up Badges)
-            victimElementDamage.Damage -= victim.BattleStats.DamageReduction;
+            unscaledVictimDamage -= victim.BattleStats.DamageReduction;
 
             //Defense added from Damage Dodge Badges upon a successful Guard
             int damageDodgeDefense = 0;
@@ -216,7 +218,7 @@ namespace PaperMarioBattleSystem
             BattleGlobals.DefensiveActionHolder? victimDefenseData = victim.GetDefensiveActionResult(victimElementDamage.Damage, statuses);
             if (victimDefenseData.HasValue == true)
             {
-                victimElementDamage.Damage = victimDefenseData.Value.Damage;
+                unscaledVictimDamage = victimDefenseData.Value.Damage;
                 statuses = victimDefenseData.Value.Statuses;
                 //If the Defensive action dealt damage and the contact was direct
                 //the Defensive action has causes a Failure for the Attacker (Ex. Superguarding)
@@ -233,17 +235,25 @@ namespace PaperMarioBattleSystem
             if (piercing == false)
             {
                 int totalDefense = victim.BattleStats.Defense + damageDodgeDefense;
-                victimElementDamage.Damage -= totalDefense;
+                unscaledVictimDamage -= totalDefense;
             }
 
-            //Factor in Double Pain for the Victim
+            int scaledVictimDamage = unscaledVictimDamage;
 
+            //Factor in Double Pain for the Victim
+            scaledVictimDamage *=  (1 + victim.EntityProperties.GetMiscProperty(MiscProperty.DamageTakenMultiplier).IntValue);
 
             //Factor in Last Stand for the Victim, if the Victim is in Danger or Peril
-
+            if (victim.IsInDanger == true)
+            {
+                //NOTE: PM rounds down, whereas TTYD rounds up. We're going with the latter
+                //I'm not sure if TTYD always ceilings the value (Ex. 3.2 turns to 4) or does standard rounding, so I'll stick with standard rounding for now
+                int lastStandDivider = (1 + victim.EntityProperties.GetMiscProperty(MiscProperty.DangerDamageDivider).IntValue);
+                scaledVictimDamage = (int)Math.Round(scaledVictimDamage / (float)lastStandDivider);
+            }
 
             //Clamp Victim damage
-            victimElementDamage.Damage = UtilityGlobals.Clamp(victimElementDamage.Damage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            scaledVictimDamage = UtilityGlobals.Clamp(scaledVictimDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
 
             #region Victim Damage Dealt
 
@@ -254,7 +264,7 @@ namespace PaperMarioBattleSystem
                 StatusEffect[] victimInflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
                 bool hit = attacker.AttemptHitEntity(victim);
 
-                finalInteractionResult.VictimResult = new InteractionHolder(victim, victimElementDamage.Damage, element, 
+                finalInteractionResult.VictimResult = new InteractionHolder(victim, scaledVictimDamage, element, 
                     victimElementDamage.InteractionResult, contactType, piercing, victimInflictedStatuses, hit);
             }
 
@@ -266,7 +276,7 @@ namespace PaperMarioBattleSystem
             if (contactResult == ContactResult.Failure || contactResult == ContactResult.PartialSuccess)
             {
                 //The damage the Attacker dealt to the Victim
-                int damageDealt = victimElementDamage.Damage;
+                int damageDealt = unscaledVictimDamage;
                 PaybackHolder paybackHolder = contactResultInfo.Paybackholder;
                 
                 //Override the PaybackHolder with a Defensive Action's results, if any

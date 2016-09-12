@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
         public BonkSubMenu()
         {
             Position = new Vector2(210, 150);
-            Initialize(new List<MoveAction> { new Bonk(), new TidalWave() });
+            Initialize(new List<MoveAction> { new Bonk(), new TidalWave(), new Gulp() });
         }
     }
 }

@@ -53,11 +53,19 @@ namespace PaperMarioBattleSystem
             int line = 0;
             string method = "";
 
-            string[] file = trace.GetFileName().Split('\\');
+            string traceFileName = trace.GetFileName();
+            if (string.IsNullOrEmpty(traceFileName) == true)
+                traceFileName = "N/A";
+
+            string[] file = traceFileName.Split('\\');
             string fileName = file?[file.Length - 1];
+            if (string.IsNullOrEmpty(fileName) == true)
+                fileName = "N/A FileName";
 
             line = trace.GetFileLineNumber();
             method = trace.GetMethod()?.Name;
+            if (string.IsNullOrEmpty(method) == true)
+                method = "N/A MethodName";
 
             return $"{fileName}->{method}({line}):";
         }

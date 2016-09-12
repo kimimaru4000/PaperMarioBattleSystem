@@ -74,6 +74,10 @@ namespace PaperMarioBattleSystem
         public BattleEntity EntityTurn = null;
         private int EnemyTurn = 0;
 
+        //NOTE: Add Front and Back references for the Players (Ex. assign Mario to the Front and the Partner to the Back initially
+        //and change it when they switch positions)
+        //Then, add a method that gets a set of entities behind a particular one
+
         /// <summary>
         /// Mario reference
         /// </summary>

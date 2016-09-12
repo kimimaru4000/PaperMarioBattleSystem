@@ -588,6 +588,14 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Yoshi-specific battle animations
+        /// </summary>
+        public static class YoshiBattleAnimations
+        {
+            public const string GulpEat = "GulpEat";
+        }
+
+        /// <summary>
         /// Status Effect-related animations in battle
         /// </summary>
         public static class StatusBattleAnimations

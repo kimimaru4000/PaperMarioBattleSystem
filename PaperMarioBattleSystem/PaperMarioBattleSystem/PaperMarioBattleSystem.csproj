@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Classes\ActionCommands\ActionCommand.cs" />
     <Compile Include="Classes\ActionCommands\GuardCommand.cs" />
+    <Compile Include="Classes\ActionCommands\GulpCommand.cs" />
     <Compile Include="Classes\ActionCommands\HammerCommand.cs" />
     <Compile Include="Classes\ActionCommands\JumpCommand.cs" />
     <Compile Include="Classes\ActionCommands\SuperguardCommand.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="Classes\Actions\NoAction.cs" />
     <Compile Include="Classes\Actions\OffensiveAction.cs" />
     <Compile Include="Classes\Actions\Sushie\TidalWave.cs" />
+    <Compile Include="Classes\Actions\Yoshi\Gulp.cs" />
     <Compile Include="Classes\Animations\Animation.cs" />
     <Compile Include="Classes\Animations\LoopAnimation.cs" />
     <Compile Include="Classes\Animations\ReverseAnimation.cs" />

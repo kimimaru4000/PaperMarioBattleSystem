@@ -79,6 +79,16 @@ namespace PaperMarioBattleSystem
         //Then, add a method that gets a set of entities behind a particular one
 
         /// <summary>
+        /// The BattlePlayer in the Front
+        /// </summary>
+        private BattlePlayer FrontPlayer = null;
+
+        /// <summary>
+        /// The BattlePlayer in the Back
+        /// </summary>
+        private BattlePlayer BackPlayer = null;
+
+        /// <summary>
         /// Mario reference
         /// </summary>
         private BattleMario Mario = null;
@@ -127,6 +137,10 @@ namespace PaperMarioBattleSystem
         {
             Mario = mario;
             Partner = partner;
+
+            //Mario always starts out in the front, and the Partner always starts out in the back
+            FrontPlayer = Mario;
+            BackPlayer = Partner;
 
             Mario.Position = MarioPos;
             Mario.SetBattlePosition(MarioPos);
@@ -217,7 +231,7 @@ namespace PaperMarioBattleSystem
 
             if (Phase == BattlePhase.Player)
             {
-                EntityTurn = Mario;
+                EntityTurn = FrontPlayer;
 
                 //Increment the phase cycles when switching to the Player phase
                 //This is because the cycle always starts with the Player phase in the Paper Mario games
@@ -253,34 +267,70 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Switches Mario and his Partner's turn. This cannot be performed if either have already used their turn
+        /// Switches Mario and his Partner's positions and updates the Front and Back player references
         /// </summary>
-        /// <param name="partner"></param>
-        public void SwitchToTurn(bool partner)
+        /// <param name="frontPlayer"></param>
+        /// <param name="backPlayer"></param>
+        private void SwitchPlayers(BattlePlayer frontPlayer, BattlePlayer backPlayer)
         {
-            if (partner == true)
+            Vector2 frontBattlePosition = FrontPlayer.BattlePosition;
+            Vector2 backBattlePosition = BackPlayer.BattlePosition;
+
+            FrontPlayer.SetBattlePosition(BackPlayer.BattlePosition);
+            FrontPlayer.Position = FrontPlayer.BattlePosition;
+
+            BackPlayer.SetBattlePosition(frontBattlePosition);
+            BackPlayer.Position = BackPlayer.BattlePosition;
+
+            FrontPlayer = frontPlayer;
+            BackPlayer = backPlayer;
+        }
+
+        /// <summary>
+        /// Switches Mario and his Partner's positions in battle. This cannot be performed if either have already used their turn
+        /// </summary>
+        /// <param name="playerType">The PlayerTypes to switch to - either Mario or the Partner</param>
+        /// <param name="setTurn">If true, will set the turn to the Player switched to.
+        /// This should only be true when manually switching during either Mario or the Partner's turn</param>
+        public void SwitchToTurn(PlayerTypes playerType, bool setTurn)
+        {
+            if (playerType == PlayerTypes.Partner)
             {
-                if (Partner.UsedTurn == true)
+                //If we're not setting the turn, this means we're forcing them to switch because the Partner is dead
+                //In this case, don't worry about whether the turn was used or not
+                if (Partner.UsedTurn == true && setTurn == true)
                 {
                     Debug.LogError($"Cannot swap turns with {Partner.Name} because he/she already used his/her turn!");
                     return;
                 }
 
+                SwitchPlayers(Partner, Mario);
+
                 //Perform Mario-specific turn end logic
-                EntityTurn.OnTurnEnd();
-                EntityTurn = Partner;
+                if (setTurn == true)
+                {
+                    EntityTurn.OnTurnEnd();
+                    EntityTurn = Partner;
+                }
             }
             else
             {
-                if (Mario.UsedTurn == true)
+                //If we're not setting the turn, this means we're forcing them to switch because the Partner is dead
+                //In this case, don't worry about whether the turn was used or not
+                if (Mario.UsedTurn == true && setTurn == true)
                 {
                     Debug.LogError($"Cannot swap turns with Mario because he already used his turn!");
                     return;
                 }
 
-                //Perform Partner-specific turn end logic
-                EntityTurn.OnTurnEnd();
-                EntityTurn = Mario;
+                SwitchPlayers(Mario, Partner);
+
+                if (setTurn == true)
+                {
+                    //Perform Partner-specific turn end logic
+                    EntityTurn.OnTurnEnd();
+                    EntityTurn = Mario;
+                }
             }
 
             //Perform Mario or Partner-specific turn start logic
@@ -398,6 +448,13 @@ namespace PaperMarioBattleSystem
             }
             if (Partner.IsDead == true)
             {
+                //If the Partner died and is in front, switch places with Mario
+                if (Partner == FrontPlayer)
+                {
+                    SwitchToTurn(PlayerTypes.Mario, false);
+                }
+                
+                //NOTE: Don't play this animation again if the Partner is still dead
                 Partner.PlayAnimation(AnimationGlobals.DeathName);
             }
 
@@ -496,8 +553,8 @@ namespace PaperMarioBattleSystem
             }
             else if (entityType == EntityTypes.Player)
             {
-                entities.Add(GetMario());
-                entities.Add(GetPartner());
+                entities.Add(FrontPlayer);
+                entities.Add(BackPlayer);
             }
 
             //Filter by height states
@@ -546,6 +603,16 @@ namespace PaperMarioBattleSystem
         public BattlePartner GetPartner()
         {
             return Partner;
+        }
+
+        public BattlePlayer GetFrontPlayer()
+        {
+            return FrontPlayer;
+        }
+
+        public BattlePlayer GetBackPlayer()
+        {
+            return BackPlayer;
         }
 
         /// <summary>
@@ -634,12 +701,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="entity">The BattleEntity to find entities adjacent to</param>
         /// <param name="getDead">Gets any adjacent entities even if they're dead</param>
-        /// <returns>An array of adjacent BattleEntities</returns>
+        /// <returns>An array of adjacent BattleEntities. If none are adjacent, an empty array.</returns>
         public BattleEntity[] GetAdjacentEntities(BattleEntity entity)
         {
             List<BattleEntity> adjacentEntities = new List<BattleEntity>();
 
-            //If the entity is an enemy, it can either be two Enemies or Mario and another Enemy
+            //If the entity is an enemy, it can either be two Enemies or the front Player and another Enemy
             if (entity.EntityType == EntityTypes.Enemy)
             {
                 BattleEnemy enemy = entity as BattleEnemy;
@@ -650,8 +717,8 @@ namespace PaperMarioBattleSystem
 
                 //Check if there's an Enemy before this one
                 if (prevEnemyIndex >= 0) adjacentEntities.Add(Enemies[prevEnemyIndex]);
-                //There's no Enemy, so target Mario
-                else adjacentEntities.Add(GetMario());
+                //There's no Enemy, so target the Front Player
+                else adjacentEntities.Add(FrontPlayer);
 
                 //Check if there's an Enemy after this one
                 if (nextEnemyIndex >= 0) adjacentEntities.Add(Enemies[nextEnemyIndex]);
@@ -673,6 +740,43 @@ namespace PaperMarioBattleSystem
             }
 
             return adjacentEntities.ToArray();
+        }
+
+        /// <summary>
+        /// Gets the BattleEntities behind a particular BattleEntity.
+        /// </summary>
+        /// <param name="entity">The BattleEntity to find entities behind</param>
+        /// <returns>An array of BattleEntities behind the given one. If none are behind, an empty array.</returns>
+        public BattleEntity[] GetEntitiesBehind(BattleEntity entity)
+        {
+            List<BattleEntity> behindEntities = new List<BattleEntity>();
+
+            //If it's a Player, check if the entity is in the front or the back
+            if (entity.EntityType == EntityTypes.Player)
+            {
+                //If the entity is in the front, return the Back player
+                if (entity == FrontPlayer)
+                    behindEntities.Add(BackPlayer);
+            }
+            else
+            {
+                BattleEnemy battleEnemy = entity as BattleEnemy;
+
+                //Get this enemy's BattleIndex
+                int enemyIndex = battleEnemy.BattleIndex;
+
+                //Look for all enemies with a BattleIndex greater than this one, which indicates it's behind
+                for (int i = 0; i < Enemies.Count; i++)
+                {
+                    BattleEnemy enemy = Enemies[i];
+                    if (enemy != null && enemy.BattleIndex > enemyIndex)
+                    {
+                        behindEntities.Add(enemy);
+                    }
+                }
+            }
+
+            return behindEntities.ToArray();
         }
 
         /// <summary>

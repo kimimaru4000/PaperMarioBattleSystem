@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
         {
             if (Input.GetKeyDown(Keys.X)) OnBackOut();
             else if (Input.GetKeyDown(Keys.Z)) OnConfirm();
-            else if (Input.GetKeyDown(Keys.C)) BattleManager.Instance.SwitchToTurn(false);
+            else if (Input.GetKeyDown(Keys.C)) BattleManager.Instance.SwitchToTurn(Enumerations.PlayerTypes.Mario, true);
         }
 
         protected override void OnConfirm()

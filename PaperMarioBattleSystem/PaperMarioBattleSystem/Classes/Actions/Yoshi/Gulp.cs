@@ -52,7 +52,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetMario()), WalkDuration / 4f);
+                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), WalkDuration / 4f);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -82,12 +82,19 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.GulpEat, true);
 
+                    //The entity spit out
                     BattleEntity eatenEntity = EntitiesAffected[0];
 
                     //Get the entity behind the one spit out
                     //If it can be hit by this move, make that entity take damage as well
+                    BattleEntity[] behindEntities = BattleManager.Instance.GetEntitiesBehind(eatenEntity);
+                    behindEntities = BattleManager.Instance.FilterEntitiesByHeights(behindEntities, HeightsAffected);
 
                     AttemptDamage(BaseDamage, eatenEntity, false);
+                    if (behindEntities.Length > 0)
+                    {
+                        AttemptDamage(BaseDamage, behindEntities[0], false);
+                    }
 
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
@@ -117,7 +124,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequence = new MoveTo(User.BattlePosition, WalkDuration);
+                    CurSequence = new MoveTo(User.BattlePosition, WalkDuration / 4f);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName);

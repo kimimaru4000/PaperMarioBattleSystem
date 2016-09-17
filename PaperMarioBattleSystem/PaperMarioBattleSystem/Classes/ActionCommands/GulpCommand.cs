@@ -11,34 +11,20 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// Hold R until the light lights up.
-    /// <para>The amount the bar increases is based on elapsed time and the speed scale.</para>
+    /// <para>The amount the bar increases is based on elapsed time and the speed scale.
+    /// The MaxBarValue represents the total duration of the Action Command.</para>
     /// </summary>
-    public sealed class GulpCommand : ActionCommand
+    public sealed class GulpCommand : FillBarCommand
     {
-        /// <summary>
-        /// The amount the bar progressed
-        /// </summary>
-        private double CurProgress = 0d;
-
         /// <summary>
         /// The value the success range starts
         /// </summary>
         private double SuccessStartValue = 0d;
 
         /// <summary>
-        /// The value the success range ends
-        /// </summary>
-        private double SuccessEndValue = 0d;
-
-        /// <summary>
         /// The amount of time the light is lit up for the success to be valid
         /// </summary>
         private double SuccessRange = 0d;
-
-        /// <summary>
-        /// The total duration of the action command
-        /// </summary>
-        private double TotalDuration = 0d;
 
         /// <summary>
         /// How much to progress of the bar
@@ -51,18 +37,15 @@ namespace PaperMarioBattleSystem
 
         private bool StartedHolding = false;
 
-        private Texture2D BarImage = null;
         private Texture2D CircleImage = null;
 
-        private bool WithinRange => (CurProgress >= SuccessStartValue && CurProgress < SuccessEndValue);
+        private bool WithinRange => (CurBarValue >= SuccessStartValue && CurBarValue < MaxBarValue);
 
-        public GulpCommand(ICommandAction commandAction, double totalDuration, double successRange, double speedScale) : base(commandAction)
+        public GulpCommand(ICommandAction commandAction, double totalDuration, double successRange, double speedScale) : base(commandAction, totalDuration)
         {
-            TotalDuration = totalDuration;
             SuccessRange = successRange;
             SpeedScale = speedScale;
 
-            BarImage = AssetManager.Instance.LoadAsset<Texture2D>("UI/Box");
             CircleImage = AssetManager.Instance.LoadAsset<Texture2D>($"UI/Circle");
         }
 
@@ -70,11 +53,9 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput();
 
-            CurProgress = 0d;
-            SuccessEndValue = TotalDuration;
-            SuccessStartValue = SuccessEndValue - SuccessRange;
+            SuccessStartValue = MaxBarValue - SuccessRange;
 
-            EndTime = Time.ActiveMilliseconds + TotalDuration;
+            EndTime = Time.ActiveMilliseconds + MaxBarValue;
         }
 
         protected override void ReadInput()
@@ -106,9 +87,9 @@ namespace PaperMarioBattleSystem
             {
                 StartedHolding = true;
 
-                CurProgress += (Time.ElapsedMilliseconds * SpeedScale);
+                FillBar(Time.ElapsedMilliseconds * SpeedScale);
                 //If the button was held too long, it's a failure
-                if (CurProgress > SuccessEndValue)
+                if (CurBarValue > MaxBarValue)
                 {
                     OnComplete(CommandResults.Failure);
                 }
@@ -135,11 +116,8 @@ namespace PaperMarioBattleSystem
             Vector2 startPos = new Vector2(250, 150);
             Vector2 barStartPos = new Vector2(startPos.X, startPos.Y - (barScale.Y / 2f));
 
-            double progressScale = CurProgress / SuccessStartValue;
-            float progressDisplay = (float)progressScale * barScale.X;
-
-            SpriteRenderer.Instance.Draw(BarImage, barStartPos, null, Color.Black, 0f, BarImage.GetCenterOrigin(), barScale, false, .7f, true);
-            SpriteRenderer.Instance.Draw(BarImage, barStartPos, null, Color.White, 0f, BarImage.GetCenterOrigin(), new Vector2(Math.Min(progressDisplay, barScale.X), barScale.Y), false, .71f, true);
+            DrawBar(barStartPos, barScale, SuccessStartValue);
+            
             SpriteRenderer.Instance.Draw(CircleImage, new Vector2(startPos.X + 100f, startPos.Y), null, circleColor, 0f, CircleImage.GetOrigin(0f, .5f), 2f, false, .8f, true);
         }
     }

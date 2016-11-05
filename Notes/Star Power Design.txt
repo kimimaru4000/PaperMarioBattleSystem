@@ -1,0 +1,60 @@
+Star Power Design (11/5/16)
+---------------------------
+Specifics about how TTYD's Star Power works was found from Jdaster64's Super Mario Files blog:
+https://supermariofiles.wordpress.com/2013/01/19/now-youre-playing-with-star-power/
+
+Each circle of Star Power is represented as 100 Star Power units (SPU). So half of one Star Power circle is 50 SPU.
+
+The max SPU you can obtain in TTYD is 800, as there are 7 Crystal Stars and the Magical Map grants the first Star Power, Sweet Treat.
+
+For Appealing, the calculation is as follows:
+
+SPU gained = 25 * (number of Super Appeals (P) + 1) + (number of active audience) / 4
+
+So for Appealing, the types of audience members don't matter, but "active" audience members means that they can't be sleeping or unable
+to participate in any way.
+
+For attacks, it goes like this:
+
+SPU gained = floor(sqrt(Audience Value) * (Action Command Value) * (Danger Status) * (BINGO Status)).
+
+All ACTIVE audience members are worth 1 point, with the exceptions being Toads, which are worth 3, and Dull Bones, which are worth 0.
+The total audience value is the sum of all the audience members' individual values.
+
+Action Command Values (Normal)  (Stylish)
+---------------------------------------------
+Miss                    0           1
+Nice-2                  .5          3
+Nice-1                  .75         3.5
+Nice                    1           4
+Good                    1.25        4.5
+Great                   1.5         5
+Wonderful               1.75        5.5
+Excellent               2           6
+
+
+Danger Status (Partner>5 HP)  (Partner<=5 HP) (Partner<= 1 HP)
+--------------------------------------------------------------
+Mario>5 HP          1.0             1.5             2.0
+Mario<=5 HP         2.0             3.0             4.0
+Mario at 1 HP       3.0             4.5             6.0
+
+The BINGO value defaults to 1 and changes for a few turns after a BINGO, indicated while the Audience is jumping up and down.
+Mushroom, Flower, and Star BINGOs set the BINGO value to 2, and Shine Sprite BINGOs set the value to 3.
+
+
+Star Spirits Star Power
+-----------------------
+We can also represent the Star Power in PM the same way. Gaining Star Power is simple in PM, as it adds a set amount each turn, at the start of the phase cycle.
+
+The max SPU you can obtain in PM is 700, as there are 7 Star Spirits.
+
+Each turn, you get 12.5 SPU (8 turns for 100, a full bar).
+
+Focus, without any Deep Focus badges, grants 50 SPU, or half a bar.
+
+With 1 Deep Focus badge, 75, or 3/4 of a bar.
+With 2 Deep Focus badges, 100, or a full bar.
+With 3 Deep Focus badges, 125, or 1 and 1/4 bars.
+
+Each Deep Focus badge adds an additional 25 SPU gained to the Focus command.

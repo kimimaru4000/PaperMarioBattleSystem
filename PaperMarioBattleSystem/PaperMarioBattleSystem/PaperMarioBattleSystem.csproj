@@ -140,6 +140,8 @@
     <Compile Include="Classes\Singletons\General\SoundManager.cs" />
     <Compile Include="Classes\Singletons\General\SpriteRenderer.cs" />
     <Compile Include="Classes\Global\Time.cs" />
+    <Compile Include="Classes\StarPower\Crystal Stars\CrystalStarPower.cs" />
+    <Compile Include="Classes\StarPower\StarPowerBase.cs" />
     <Compile Include="Classes\StatusEffects\AllergicStatus.cs" />
     <Compile Include="Classes\StatusEffects\BurnStatus.cs" />
     <Compile Include="Classes\StatusEffects\ConfusedStatus.cs" />
@@ -227,6 +229,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Classes\Actions\Player\" />
+    <Folder Include="Classes\StarPower\StarSpirits\" />
     <Folder Include="Content\Audio\Music\" />
   </ItemGroup>
   <ItemGroup>

@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         {
             actionCommand = new GuardCommand(this);
 
-            CommandSuccessTimer = (8d / 60d) * 1000d;
+            CommandSuccessTimer = (8d / 60d) * Time.MsPerS;
 
             AllowedStatuses = new Enumerations.StatusTypes[] { Enumerations.StatusTypes.Immobilized };
         }

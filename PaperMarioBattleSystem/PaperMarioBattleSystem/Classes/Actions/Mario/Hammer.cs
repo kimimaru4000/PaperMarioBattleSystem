@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
             BaseDamage = (int)User.BattleStats.GetHammerLevel;
             HeightsAffected = new HeightStates[] { HeightStates.Grounded };
 
-            actionCommand = new HammerCommand(this);
+            actionCommand = new HammerCommand(this, 4, 500d);
         }
 
         protected override void CommandSuccess()

@@ -12,6 +12,11 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class Time
     {
+        /// <summary>
+        /// The number of milliseconds in a second.
+        /// </summary>
+        public const double MsPerS = 1000d;
+
         private static TimeSpan TotalTime = default(TimeSpan);
         private static TimeSpan ElapsedTime = default(TimeSpan);
         private static double ActiveElapsedTime = 0d;

@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
         private double SuccessRange = 0d;
 
         /// <summary>
-        /// How much to progress of the bar
+        /// How much faster or slower to progress the bar
         /// </summary>
         private double SpeedScale = 1f;
 

@@ -12,36 +12,26 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Hold Left until the fourth light lights up
     /// </summary>
-    public class HammerCommand : ActionCommand
+    public class HammerCommand : FillLightsCommand
     {
-        /// <summary>
-        /// The max number of lights. The last light is the big one that Left must be released on
-        /// </summary>
-        protected int MaxLights = 4;
-        protected float TimeEachLight = 500f;
-
         protected float EndTime = 1500f;
         protected float PrevEndTime = 0f;
 
         protected bool HeldLeft = false;
-        protected int LightsLit = 0;
-        protected float PrevLightTime = 0f;
 
         protected Keys ButtonToHold = Keys.Left;
 
-        protected Texture2D CircleImage = null;
-
-        public HammerCommand(ICommandAction commandAction) : base(commandAction)
+        public HammerCommand(ICommandAction commandAction, int maxLights, double timeBetweenLights) : base(commandAction, maxLights, timeBetweenLights)
         {
-            CircleImage = AssetManager.Instance.LoadAsset<Texture2D>($"UI/Circle");
+
         }
 
         public override void StartInput()
         {
             base.StartInput();
 
-            LightsLit = 0;
-            PrevLightTime = (float)Time.ActiveMilliseconds + TimeEachLight;
+            LightsFilled = 0;
+            PrevLightTime = (float)Time.ActiveMilliseconds + TimeBetweenLights;
             PrevEndTime = (float)Time.ActiveMilliseconds + EndTime;
         }
 
@@ -62,14 +52,13 @@ namespace PaperMarioBattleSystem
                 //The first time you hold left, the first light instantly lights up
                 if (time >= PrevLightTime || HeldLeft == false)
                 {
-                    LightsLit++;
-                    PrevLightTime = time + TimeEachLight;
+                    FillNextLight();
 
                     //Send the number of lights lit
-                    SendResponse(LightsLit);
+                    SendResponse(LightsFilled);
 
                     //Held Left too long (past the last light)
-                    if (LightsLit > MaxLights)
+                    if (LightsFilled > MaxLights)
                     {
                         OnComplete(CommandResults.Failure);
                     }
@@ -81,7 +70,7 @@ namespace PaperMarioBattleSystem
             else if (HeldLeft == true)
             {
                 //Released Left at the right time
-                if (LightsLit == MaxLights)
+                if (AllLightsFilled == true)
                 {
                     OnComplete(CommandResults.Success);
                 }
@@ -99,28 +88,15 @@ namespace PaperMarioBattleSystem
 
             string text = "NO!";
             Color color = Color.Red;
-            if (LightsLit == MaxLights)
+            if (AllLightsFilled)
             {
                 text = "OKAY!";
                 color = Color.Green;
             }
 
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, text, new Vector2(300, 100), color, .7f);
-            Vector2 startPos = new Vector2(250, 150);
 
-            for (int i = 0; i < MaxLights; i++)
-            {
-                Vector2 newpos = startPos + new Vector2((i * CircleImage.Width) + 15, 0);
-                float scale = 1f;
-                if (i == (MaxLights - 1))
-                {
-                    newpos += new Vector2(CircleImage.Width / 2, -(CircleImage.Height / 2));
-                    scale = 2f;
-                }
-                Color circleColor = i >= LightsLit ? Color.Black : Color.White;
-
-                SpriteRenderer.Instance.Draw(CircleImage, newpos, null, circleColor, 0f, CircleImage.GetCenterOrigin(), scale, false, .7f, true);
-            }
+            DrawLights(new Vector2(250, 150), 0, true);
         }
     }
 }

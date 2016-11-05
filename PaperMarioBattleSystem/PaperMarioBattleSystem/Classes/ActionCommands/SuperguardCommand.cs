@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
         {
             GuardButton = Keys.X;
 
-            GuardCooldown = (5d / 60d) * 1000d;
+            GuardCooldown = (5d / 60d) * Time.MsPerS;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
         {
             actionCommand = new SuperguardCommand(this);
 
-            CommandSuccessTimer = (3d / 60d) * 1000d;
+            CommandSuccessTimer = (3d / 60d) * Time.MsPerS;
 
             AllowedStatuses = null;
         }

@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class GuardCommand : ActionCommand
     {
-        protected double GuardCooldown = (10d / 60d) * 1000d;
+        protected double GuardCooldown = (10d / 60d) * Time.MsPerS;
 
         protected double PrevGuardInputTime = 0f;
         protected double PrevGuardCooldown = 0f;

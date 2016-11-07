@@ -684,6 +684,92 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
+    /// Class for global values dealing with StarPower.
+    /// </summary>
+    public static class StarPowerGlobals
+    {
+        #region Danger Status Values
+
+        public const float NormalMod = 1f;
+
+        public const float MarioDangerMod = 2f;
+        public const float MarioPerilMod = 3f;
+
+        public const float PartnerDangerMod = 1.5f;
+        public const float PartnerPerilMod = 2f;
+
+        /// <summary>
+        /// Gets Mario's Danger status value based on his current HealthState.
+        /// </summary>
+        /// <param name="partner">Mario.</param>
+        /// <returns>A float of Mario's Danger status value.</returns>
+        private static float GetMarioDangerStatusValue(BattleMario mario)
+        {
+            if (mario == null)
+            {
+                Debug.LogError($"{nameof(mario)} is null, which should never happen");
+                return NormalMod;
+            }
+
+            Enumerations.HealthStates marioHealthState = mario.HealthState;
+
+            switch (marioHealthState)
+            {
+                case Enumerations.HealthStates.Normal:
+                    return NormalMod;
+                case Enumerations.HealthStates.Danger:
+                    return MarioDangerMod;
+                case Enumerations.HealthStates.Peril:
+                case Enumerations.HealthStates.Dead:
+                default:
+                    return MarioPerilMod;
+            }
+        }
+
+        /// <summary>
+        /// Gets a Partner's Danger status value based on its current HealthState.
+        /// </summary>
+        /// <param name="partner">Mario's Partner.</param>
+        /// <returns>A float of the Partner's Danger status value.</returns>
+        private static float GetPartnerDangerStatusValue(BattlePartner partner)
+        {
+            if (partner == null)
+            {
+                return NormalMod;
+            }
+
+            Enumerations.HealthStates partnerHealthState = partner.HealthState;
+
+            switch (partnerHealthState)
+            {
+                case Enumerations.HealthStates.Normal:
+                    return NormalMod;
+                case Enumerations.HealthStates.Danger:
+                    return PartnerDangerMod;
+                case Enumerations.HealthStates.Peril:
+                case Enumerations.HealthStates.Dead:
+                default:
+                    return PartnerPerilMod;
+            }
+        }
+
+        /// <summary>
+        /// Gets the total Danger status value for Mario and his Partner based on their HealthStates.
+        /// This is factored in when calculating the amount of Crystal Star Star Power gained from an attack.
+        /// </summary>
+        /// <returns>A float of the Danger status value based on the HealthStates of both Mario and his Partner.</returns>
+        public static float GetDangerStatusValue(BattleMario mario, BattlePartner partner)
+        {
+            float marioDangerStatusValue = GetMarioDangerStatusValue(mario);
+            float partnerDangerStatusValue = GetPartnerDangerStatusValue(partner);
+
+            return marioDangerStatusValue * partnerDangerStatusValue;
+        }
+
+        #endregion
+    }
+
+    /// <summary>
     /// Class for global values dealing with StatusEffects
     /// </summary>
     public static class StatusGlobals

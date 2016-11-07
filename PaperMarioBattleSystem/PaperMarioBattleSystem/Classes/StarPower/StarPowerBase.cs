@@ -16,7 +16,57 @@ namespace PaperMarioBattleSystem
         //Each usable Star Power circle/bar is represented as 100.
         //So in PM, a full bar of 1 Star Power is 100 and in TTYD one filled circle is 100
 
-        public float StarPowerLevel { get; protected set; } = 0;
-        public float MaxStarPowerLevel { get; protected set; } = 700f;
+        /// <summary>
+        /// The current amount of Star Power units Mario has.
+        /// <para>100 is equivalent to one bar/circle of Star Power in PM/TTYD.</para>
+        /// </summary>
+        public float SPU { get; protected set; } = 0;
+
+        /// <summary>
+        /// The max Star Power units Mario has.
+        /// </summary>
+        public float MaxSPU { get; protected set; } = 700f;
+
+        protected StarPowerBase()
+        {
+            
+        }
+
+        /// <summary>
+        /// Tells if Mario has enough Star Power to use a special move.
+        /// </summary>
+        /// <param name="spuCost">The cost of the Star Power, in Star Power units.</param>
+        /// <returns>true if the current SPU is greater than or equal to the cost, otherwise false.</returns>
+        public bool CanUseStarPower(float spuCost) => (SPU >= spuCost);
+
+        /// <summary>
+        /// Increases the current number of Star Power units Mario has.
+        /// </summary>
+        /// <param name="spuGained">The number of Star Power units to add. If negative, this value will be changed to positive.</param>
+        public void GainStarPower(float spuGained)
+        {
+            if (spuGained <= 0)
+            {
+                Debug.LogError($"{nameof(spuGained)} is less than or equal to 0, which should never happen. Changing to positive");
+                spuGained = -spuGained;
+            }
+
+            SPU = UtilityGlobals.Clamp(SPU + spuGained, 0f, MaxSPU);
+        }
+
+        /// <summary>
+        /// Decreases the current number of Star Power units Mario has.
+        /// </summary>
+        /// <param name="spuLost">The number of Star Power units to subtract. If positive, this value will be changed to negative.</param>
+        public void LoseStarPower(float spuLost)
+        {
+            if (spuLost >= 0)
+            {
+                Debug.LogError($"{nameof(spuLost)} is greater than or equal to 0, which should never happen. Changing to negative");
+                spuLost = -spuLost;
+            }
+
+            SPU = UtilityGlobals.Clamp(SPU - spuLost, 0f, MaxSPU);
+        }
     }
 }

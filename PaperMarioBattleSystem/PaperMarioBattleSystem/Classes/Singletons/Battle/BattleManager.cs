@@ -336,7 +336,7 @@ namespace PaperMarioBattleSystem
             //Perform Mario or Partner-specific turn start logic
             EntityTurn.OnTurnStart();
 
-            //SoundManager.Instance.PlaySound(SoundManager.Sound.SwitchPartner);
+            SoundManager.Instance.PlaySound(SoundManager.Sound.SwitchPartner);
         }
 
         public void TurnStart()
@@ -469,7 +469,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Remove enemies from battle here
-            RemoveEnemies(deadEnemies);
+            RemoveEnemies(deadEnemies, true);
         }
 
         #region Helper Methods
@@ -511,7 +511,8 @@ namespace PaperMarioBattleSystem
         /// Removes enemies from battle
         /// </summary>
         /// <param name="enemies">A list containing the enemies to remove from battle</param>
-        public void RemoveEnemies(List<BattleEnemy> enemies)
+        /// <param name="removedFromDeath">Whether the enemies are removed because they died in battle. If true, will play the death sound.</param>
+        public void RemoveEnemies(List<BattleEnemy> enemies, bool removedFromDeath)
         {
             //Go through all the enemies and remove them from battle
             for (int i = 0; i < enemies.Count; i++)
@@ -532,6 +533,11 @@ namespace PaperMarioBattleSystem
                 //Set to null and decrease number alive
                 Enemies[enemyIndex] = null;
                 DecrementEnemiesAlive();
+
+                if (removedFromDeath)
+                {
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyDeath);
+                }
             }
         }
 

@@ -48,11 +48,14 @@ namespace PaperMarioBattleSystem
 
         private static Dictionary<Sound, string> SoundMap = new Dictionary<Sound, string>()
         {
-            { Sound.SwitchPartner, $"{ContentGlobals.SoundRoot}Switch Partner.wav" },
-            { Sound.EnemyDeath, $"{ContentGlobals.SoundRoot}Enemy Death.wav" },
-            { Sound.PartnerAway, $"{ContentGlobals.SoundRoot}Partner Away.wav" }
+            { Sound.SwitchPartner, $"{ContentGlobals.SoundRoot}Switch Partner" },
+            { Sound.EnemyDeath, $"{ContentGlobals.SoundRoot}Enemy Death" },
+            { Sound.PartnerAway, $"{ContentGlobals.SoundRoot}Partner Away" }
         };
 
+        /// <summary>
+        /// The global BGM volume
+        /// </summary>
         public float MusicVolume 
         {
             get
@@ -65,11 +68,14 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// The global SFX volume
+        /// </summary>
         public float SoundVolume
         {
             get
             {
-                return musicVolume;
+                return soundVolume;
             }
             set
             {
@@ -175,7 +181,15 @@ namespace PaperMarioBattleSystem
             /// </summary>
             public bool IsPlaying => (SoundInstance != null && SoundInstance.State == SoundState.Playing);
 
+            /// <summary>
+            /// The volume of this sound instance. This is multiplied by the global sound volume to get the final volume to play the sound
+            /// </summary>
             public float CurrentVolume { get; private set; } = 1f;
+
+            /// <summary>
+            /// The length of the SoundEffectInstance.
+            /// </summary>
+            private TimeSpan Duration = TimeSpan.Zero;
 
             /// <summary>
             /// The SoundEffectInstance of the sound to play
@@ -195,8 +209,12 @@ namespace PaperMarioBattleSystem
             public void Dispose()
             {
                 Stop(true);
-                SoundInstance.Dispose();
-                SoundInstance = null;
+
+                if (SoundInstance != null)
+                {
+                    SoundInstance.Dispose();
+                    SoundInstance = null;
+                }
             }
 
             public void SetSound(Sound sound)
@@ -208,17 +226,29 @@ namespace PaperMarioBattleSystem
 
                 //Load the sound asset and create an instance
                 SoundEffect newSound = AssetManager.Instance.LoadAsset<SoundEffect>(SoundMap[SoundID]);
-                SoundInstance = newSound.CreateInstance();
+                if (newSound != null)
+                {
+                    if (newSound.Duration == TimeSpan.Zero)
+                    {
+                        Debug.LogError($"Sound {SoundMap[SoundID]} has a duration of 0 and is invalid");
+                        return;
+                    }
+
+                    Duration = newSound.Duration;
+                    SoundInstance = newSound.CreateInstance();
+                }
             }
 
             public void Play()
             {
-                SoundInstance.Play();
+                if (SoundInstance != null)
+                    SoundInstance.Play();
             }
 
             public void Stop(bool immediate = false)
             {
-                SoundInstance.Stop(immediate);
+                if (SoundInstance != null)
+                    SoundInstance.Stop(immediate);
             }
 
             public void SetVolume(float volume)
@@ -229,7 +259,8 @@ namespace PaperMarioBattleSystem
 
             public void UpdateVolume()
             {
-                SoundInstance.Volume = CurrentVolume * SoundManager.Instance.SoundVolume;
+                if (SoundInstance != null)
+                    SoundInstance.Volume = CurrentVolume * SoundManager.Instance.SoundVolume;
             }
         }
     }

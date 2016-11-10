@@ -66,7 +66,17 @@ namespace PaperMarioBattleSystem
         /// <returns>The asset if it was successfully found. Returns the same instance if the same asset was loaded previously</returns>
         public T LoadAsset<T>(string assetPath)
         {
-            return Content.Load<T>(assetPath);
+            //NOTE: I opted for this rather than not handling the exception to make the content workflow less of a hassle
+            //I find that missing assets are very easy to spot, so just look at the logs if you notice an asset missing
+            try
+            {
+                return Content.Load<T>(assetPath);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogError($"Error loading asset {assetPath}: {exception.Message}");
+                return default(T);
+            }
         }
     }
 }

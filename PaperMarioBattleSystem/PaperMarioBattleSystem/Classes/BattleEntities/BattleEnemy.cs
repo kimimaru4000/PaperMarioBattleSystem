@@ -42,11 +42,26 @@ namespace PaperMarioBattleSystem
             if (HeldCollectible?.CollectibleType == Enumerations.CollectibleTypes.Badge)
             {
                 Badge heldBadge = (Badge)HeldCollectible;
-                if (heldBadge.AffectedType == BadgeGlobals.AffectedTypes.Self)
+                if (heldBadge.AffectedType == BadgeGlobals.AffectedTypes.Self || heldBadge.AffectedType == BadgeGlobals.AffectedTypes.Both)
                 {
                     heldBadge.Equip(this);
                 }
             }
+        }
+
+        public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
+        {
+            if (HeldCollectible?.CollectibleType == Enumerations.CollectibleTypes.Badge)
+            {
+                Badge heldBadge = (Badge)HeldCollectible;
+                if (heldBadge.BadgeType == badgeType && (heldBadge.AffectedType == BadgeGlobals.AffectedTypes.Self
+                    || heldBadge.AffectedType == BadgeGlobals.AffectedTypes.Both))
+                {
+                    return 1;
+                }
+            }
+
+            return 0;
         }
     }
 }

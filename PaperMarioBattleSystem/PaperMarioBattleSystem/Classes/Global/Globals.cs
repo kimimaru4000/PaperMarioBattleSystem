@@ -987,11 +987,12 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Who the Badge affects.
-        /// <para>For Players, Self refers to Mario. For Enemies, Partner doesn't have any effect.</para>
+        /// <para>For Players, Self refers to Mario. For Enemies, Partner doesn't have any effect.
+        /// Both is for Badges such as Simplifier and Unsimplifier that affect both Mario and Partners.</para>
         /// </summary>
         public enum AffectedTypes
         {
-            Self, Partner
+            Self, Partner, Both
         }
 
         /// <summary>

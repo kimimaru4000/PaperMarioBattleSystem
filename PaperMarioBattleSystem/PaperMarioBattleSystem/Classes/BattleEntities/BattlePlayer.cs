@@ -20,14 +20,9 @@ namespace PaperMarioBattleSystem
             DefensiveActions.Add(new Superguard(this));
         }
 
-        public override void BraceAttack(BattleEntity attacker)
+        public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
         {
-            base.BraceAttack(attacker);
-        }
-
-        public override void StopBracing()
-        {
-            base.StopBracing();
+            return Inventory.Instance.GetActiveBadgeCount(badgeType);
         }
     }
 }

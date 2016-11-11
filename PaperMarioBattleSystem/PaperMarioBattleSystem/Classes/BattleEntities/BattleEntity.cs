@@ -505,24 +505,6 @@ namespace PaperMarioBattleSystem
             TurnsUsed = turnsUsed;
         }
 
-        /// <summary>
-        /// Makes the entity brace for an attack against it.
-        /// The common use-case for this is starting the inputs for Guard and Superguard
-        /// </summary>
-        /// <param name="attacker">The entity attacking this one</param>
-        public virtual void BraceAttack(BattleEntity attacker)
-        {
-            
-        }
-
-        /// <summary>
-        /// Stops the entity from bracing for an attack, as the attack is now over
-        /// </summary>
-        public virtual void StopBracing()
-        {
-
-        }
-
         #endregion
 
         public void SetBattlePosition(Vector2 battlePos)
@@ -729,7 +711,12 @@ namespace PaperMarioBattleSystem
 
         #region Equipment Methods
 
-        
+        /// <summary>
+        /// Gets the number of Badges of a particular BadgeType that the BattleEntity has equipped.
+        /// </summary>
+        /// <param name="badgeType">The BadgeType to check for.</param>
+        /// <returns>The number of Badges of the BadgeType that the BattleEntity has equipped.</returns>
+        public abstract int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType);
 
         #endregion
 

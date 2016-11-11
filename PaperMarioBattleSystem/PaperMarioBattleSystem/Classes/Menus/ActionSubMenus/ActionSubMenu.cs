@@ -39,6 +39,7 @@ namespace PaperMarioBattleSystem
         protected ActionSubMenu() : base(MenuTypes.Vertical)
         {
             BoxMenu = new TextBox(new Vector2(SpriteRenderer.Instance.WindowCenter.X, SpriteRenderer.Instance.WindowCenter.Y + 220f), new Vector2(320f, 80f), null);
+            BoxMenu.SetText(string.Empty);
         }
 
         protected ActionSubMenu(List<MoveAction> moveActions) : this()

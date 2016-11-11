@@ -396,7 +396,7 @@ namespace PaperMarioBattleSystem
         /// <returns>A List of all active Badges affecting Mario</returns>
         public List<Badge> GetActiveMarioBadges()
         {
-            return ActiveBadges.FindAll((badge) => badge.AffectedType == AffectedTypes.Self);
+            return ActiveBadges.FindAll((badge) => (badge.AffectedType == AffectedTypes.Self || badge.AffectedType == AffectedTypes.Both));
         }
 
         /// <summary>
@@ -405,7 +405,7 @@ namespace PaperMarioBattleSystem
         /// <returns>A List of all active Badges affecting Mario's Partners</returns>
         public List<Badge> GetActivePartnerBadges()
         {
-            return ActiveBadges.FindAll((badge) => badge.AffectedType == AffectedTypes.Partner);
+            return ActiveBadges.FindAll((badge) => (badge.AffectedType == AffectedTypes.Partner || badge.AffectedType == AffectedTypes.Both));
         }
 
         #endregion

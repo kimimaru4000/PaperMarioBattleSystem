@@ -19,6 +19,8 @@ namespace PaperMarioBattleSystem
                            "3 FP are required to use this attack, which can freeze and immobilize an enemy if executed superbly. " +
                            "Wearing two or more of these badges requires more FP for the move, but enemies stay frozen longer.";
             Element = Enumerations.Elements.Ice;
+
+            actionCommand = new HammerCommand(this, 4, 1000d);
         }
     }
 }

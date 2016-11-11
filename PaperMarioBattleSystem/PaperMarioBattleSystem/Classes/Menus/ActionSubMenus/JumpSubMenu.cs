@@ -15,7 +15,14 @@ namespace PaperMarioBattleSystem
         public JumpSubMenu()
         {
             Position = new Vector2(230, 150);
-            Initialize(new List<MoveAction>() { new Jump(), new PowerBounce(), new Multibounce() });
+
+            BattleActions.Add(new Jump());
+            BattleActions.Add(new PowerBounce());
+            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.Multibounce) > 0)
+            {
+                BattleActions.Add(new Multibounce());
+            }
+            Initialize(BattleActions);
         }
     }
 }

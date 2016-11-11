@@ -58,6 +58,8 @@ namespace PaperMarioBattleSystem
         /// <returns>A Vector2 with the origin</returns>
         public static Vector2 GetOrigin(this SpriteFont spriteFont, string text, float x, float y)
         {
+            if (string.IsNullOrEmpty(text) == true) return Vector2.Zero;
+
             Vector2 size = spriteFont.MeasureString(text);
             size.X *= UtilityGlobals.Clamp(x, 0f, 1f);
             size.Y *= UtilityGlobals.Clamp(y, 0f, 1f);

@@ -25,6 +25,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Power Bounce";
             Description = "Bounce multiple times on an enemy";
+
+            FPCost = 3;
         }
 
         protected override void OnStart()

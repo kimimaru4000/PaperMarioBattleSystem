@@ -17,7 +17,10 @@ namespace PaperMarioBattleSystem
             Position = new Vector2(230, 150);
 
             BattleActions.Add(new Jump());
-            BattleActions.Add(new PowerBounce());
+            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PowerBounce) > 0)
+            {
+                BattleActions.Add(new PowerBounce());
+            }
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.Multibounce) > 0)
             {
                 BattleActions.Add(new Multibounce());

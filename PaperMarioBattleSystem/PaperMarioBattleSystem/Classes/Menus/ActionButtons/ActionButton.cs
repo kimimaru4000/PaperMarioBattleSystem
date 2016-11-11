@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
@@ -10,28 +11,35 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A button representing the main actions during battle. This includes battle actions like Jump, Hammer, etc.
     /// This is only used by the player
-    /// <para>All ActionButtons have the "Button" suffix</para>
     /// </summary>
-    public abstract class ActionButton
+    public sealed class ActionButton
     {
         /// <summary>
-        /// The name of the action the button represents
+        /// The name of the main action the button represents.
         /// </summary>
-        protected string Name = "Button";
+        private string Name = "Button";
 
         /// <summary>
-        /// The image of the button
+        /// The image to use for the button.
         /// </summary>
-        protected Texture2D ButtonImage = null;
+        private Texture2D ButtonImage = null;
 
-        protected ActionButton(string name)
+        /// <summary>
+        /// The position of the button.
+        /// </summary>
+        private Vector2 Position = Vector2.Zero;
+
+        /// <summary>
+        /// The ActionSubMenu that this button leads to.
+        /// </summary>
+        private ActionSubMenu SubMenu = null;
+
+        public ActionButton(string name, Texture2D buttonImage, Vector2 position, ActionSubMenu subMenu)
         {
             Name = name;
-        }
-
-        protected ActionButton(Texture2D buttonImage)
-        {
             ButtonImage = buttonImage;
+            Position = position;
+            SubMenu = subMenu;
         }
 
         /// <summary>
@@ -39,14 +47,27 @@ namespace PaperMarioBattleSystem
         /// In most cases, this would bring up a SubMenu, but in other instances (Ex. having no additional Jump badges equipped)
         /// This can lead directly to an action
         /// </summary>
-        public virtual void OnSelected()
+        public void OnSelected()
         {
-            
+            if (SubMenu != null)
+            {
+                BattleUIManager.Instance.PushMenu(SubMenu);
+            }
+            else
+            {
+                Debug.LogError($"{nameof(SubMenu)} is null for {Name} so no actions further can be taken in this menu option. Fix this");
+            }
         }
 
-        public virtual void Draw(bool selected)
+        public void Draw(bool selected)
         {
+            Color color = Color.White * .75f;
+            if (selected == true) color = Color.White;
 
+            Vector2 uiPos = Camera.Instance.SpriteToUIPos(Position);
+
+            SpriteRenderer.Instance.Draw(ButtonImage, uiPos, color, false, .4f, true);
+            SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, Name, uiPos - new Vector2(0, 30), color, .45f);
         }
     }
 }

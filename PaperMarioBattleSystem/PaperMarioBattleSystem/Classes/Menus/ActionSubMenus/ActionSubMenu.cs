@@ -46,7 +46,7 @@ namespace PaperMarioBattleSystem
             Initialize(moveActions);
         }
 
-        public void Initialize(List<MoveAction> moveActions)
+        protected void Initialize(List<MoveAction> moveActions)
         {
             BattleActions = moveActions;
             BoxMenu.SetText(BattleActions[0].Description);
@@ -60,7 +60,6 @@ namespace PaperMarioBattleSystem
         protected override void OnBackOut()
         {
             base.OnBackOut();
-            CurSelection = 0;
             BattleUIManager.Instance.PopMenu();
         }
 
@@ -68,7 +67,6 @@ namespace PaperMarioBattleSystem
         {
             base.OnConfirm();
             BattleActions[CurSelection].OnMenuSelected();
-            CurSelection = 0;
         }
 
         public override void Draw()

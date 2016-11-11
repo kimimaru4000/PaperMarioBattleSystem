@@ -113,13 +113,10 @@
     <Compile Include="Classes\Global\Interactions.cs" />
     <Compile Include="Classes\Collectibles\Collectible.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
-    <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\ActionSubMenu.cs" />
-    <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\BonkSubMenu.cs" />
-    <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\HammerSubMenu.cs" />
-    <Compile Include="Classes\Menus\ActionButtons\ActionSubMenus\JumpSubMenu.cs" />
-    <Compile Include="Classes\Menus\ActionButtons\BonkButton.cs" />
-    <Compile Include="Classes\Menus\ActionButtons\HammerButton.cs" />
-    <Compile Include="Classes\Menus\ActionButtons\JumpButton.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\ActionSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\BonkSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\HammerSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\JumpSubMenu.cs" />
     <Compile Include="Classes\Menus\BattleMenu.cs" />
     <Compile Include="Classes\Menus\MarioBattleMenu.cs" />
     <Compile Include="Classes\Menus\PartnerBattleMenu.cs" />

@@ -1004,6 +1004,62 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Returns a non-Partner BadgeTypes corresponding to a particular BadgeTypes.
+        /// </summary>
+        /// <param name="pBadgeType">The Partner version of the BadgeTypes to find a non-Partner version for.</param>
+        /// <returns>A non-Partner version of the BadgeTypes passed in. If already a non-Partner version, it will be returned. null if none was found.</returns>
+        public static BadgeTypes? GetNonPartnerBadgeType(BadgeTypes pBadgeType)
+        {
+            string pBadgeName = pBadgeType.ToString();
+
+            //Check the last character for a "P"
+            string checkP = pBadgeName.Substring(pBadgeName.Length - 1);
+
+            //This is the non-Partner version, so return it
+            if (checkP != "P")
+                return pBadgeType;
+
+            //Remove the "P" and see if there is a corresponding value
+            string nonPBadgeName = pBadgeName.Substring(0, pBadgeName.Length - 1);
+
+            BadgeTypes nonPBadgeType;
+            bool success = Enum.TryParse(nonPBadgeName, out nonPBadgeType);
+
+            if (success == true) return nonPBadgeType;
+            return null;
+        }
+
+        /// <summary>
+        /// Returns a Partner BadgeTypes corresponding to a particular non-Partner BadgeTypes.
+        /// </summary>
+        /// <param name="pBadgeType">The non-Partner version of the BadgeTypes to find a Partner version for.</param>
+        /// <returns>A Partner version of the BadgeTypes passed in. If already a Partner version, it will be returned. null if none was found.</returns>
+        public static BadgeTypes? GetPartnerBadgeType(BadgeTypes badgeType)
+        {
+            string badgeName = badgeType.ToString();
+
+            //Check the last character for a "P"
+            string checkP = badgeName.Substring(badgeName.Length - 1);
+            
+            //This is the Partner version, so return it
+            if (checkP == "P")
+                return badgeType;
+
+            //Add a "P" and see if there is a corresponding value
+            string pBadgeName = badgeName + "P";
+
+            BadgeTypes pBadgeType;
+            bool success = Enum.TryParse(pBadgeName, out pBadgeType);
+
+            if (success == true) return pBadgeType;
+            return null;
+        }
+
+        #endregion
     }
 
     /// <summary>

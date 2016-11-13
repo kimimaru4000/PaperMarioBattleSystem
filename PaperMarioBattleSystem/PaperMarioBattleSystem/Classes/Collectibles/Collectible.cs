@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The price value of the Collectible
         /// </summary>
-        public int PriceValue { get; protected set; } = 0;
+        public uint PriceValue { get; protected set; } = 0u;
 
         protected Collectible()
         {

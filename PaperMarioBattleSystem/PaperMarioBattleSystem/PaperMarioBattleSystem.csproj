@@ -108,7 +108,17 @@
     <Compile Include="Classes\Collectibles\Badges\PowerBounceBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PowerPlusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SpikeShieldBadge.cs" />
+    <Compile Include="Classes\Collectibles\Items\HoneySyrup.cs" />
+    <Compile Include="Classes\Collectibles\Items\IDamagingItem.cs" />
+    <Compile Include="Classes\Collectibles\Items\IFPHealingItem.cs" />
+    <Compile Include="Classes\Collectibles\Items\IHPHealingItem.cs" />
+    <Compile Include="Classes\Collectibles\Items\IStatusHealingItem.cs" />
+    <Compile Include="Classes\Collectibles\Items\IStatusInflictingItem.cs" />
     <Compile Include="Classes\Collectibles\Items\Item.cs" />
+    <Compile Include="Classes\Collectibles\Items\Mushroom.cs" />
+    <Compile Include="Classes\Collectibles\Items\ShootingStar.cs" />
+    <Compile Include="Classes\Collectibles\Items\SleepySheep.cs" />
+    <Compile Include="Classes\Collectibles\Items\TastyTonic.cs" />
     <Compile Include="Classes\Global\Debug.cs" />
     <Compile Include="Classes\Global\Extensions.cs" />
     <Compile Include="Classes\Global\FPSCounter.cs" />

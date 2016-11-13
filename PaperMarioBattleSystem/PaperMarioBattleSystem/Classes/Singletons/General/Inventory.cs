@@ -31,6 +31,32 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Currency Fields
+
+        /// <summary>
+        /// The max number of Coins that can be held at a time.
+        /// </summary>
+        public const uint MaxCoins = 999u;
+
+        /// <summary>
+        /// The max number of Star Pieces that can be held at a time.
+        /// </summary>
+        public const uint MaxStarPieces = 99u;
+
+        /// <summary>
+        /// The number of Coins the Player has.
+        /// </summary>
+        public uint Coins { get; private set; } = 0u;
+
+        /// <summary>
+        /// The number of Star Pieces the Player has.
+        /// </summary>
+        public uint StarPieces { get; private set; } = 0u;
+
+        #endregion
+
+        #region Badge Related Fields
+
         /// <summary>
         /// The number of Badge Points (BP) Mario currently has available
         /// </summary>
@@ -61,6 +87,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private readonly Dictionary<BadgeTypes, int> ActiveBadgeCounts = new Dictionary<BadgeTypes, int>();
 
+        #endregion
+
+        #region Item Related Fields
+
         /// <summary>
         /// The Player's Item inventory
         /// </summary>
@@ -71,10 +101,36 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private readonly List<Item> KeyItems = new List<Item>();
 
+        #endregion
+
         private Inventory()
         {
             
         }
+
+        #region Currency Methods
+
+        public void AddCoins(uint coinsAdded)
+        {
+            Coins = UtilityGlobals.Clamp(Coins + coinsAdded, 0u, MaxCoins);
+        }
+
+        public void SubtractCoins(uint coinsSubtracted)
+        {
+            Coins = UtilityGlobals.Clamp(Coins - coinsSubtracted, 0u, MaxCoins);
+        }
+
+        public void AddStarPieces(uint starPiecesAdded)
+        {
+            StarPieces = UtilityGlobals.Clamp(StarPieces + starPiecesAdded, 0u, MaxStarPieces);
+        }
+
+        public void SubtractStarPieces(uint starPiecesSubtracted)
+        {
+            StarPieces = UtilityGlobals.Clamp(StarPieces - starPiecesSubtracted, 0u, MaxStarPieces);
+        }
+
+        #endregion
 
         #region Item Methods
 

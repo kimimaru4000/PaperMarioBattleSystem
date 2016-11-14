@@ -74,6 +74,7 @@
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\ICommandAction.cs" />
     <Compile Include="Classes\Actions\Defensive\Guard.cs" />
+    <Compile Include="Classes\Actions\Kooper\ShellToss.cs" />
     <Compile Include="Classes\Actions\Mario\Hammer.cs" />
     <Compile Include="Classes\Actions\Mario\IceSmash.cs" />
     <Compile Include="Classes\Actions\Mario\Jump.cs" />
@@ -94,6 +95,7 @@
     <Compile Include="Classes\BattleEntities\BattlePlayer.cs" />
     <Compile Include="Classes\BattleEntities\Goomba.cs" />
     <Compile Include="Classes\BattleEntities\Goombario.cs" />
+    <Compile Include="Classes\BattleEntities\Kooper.cs" />
     <Compile Include="Classes\BattleEntities\SpikedGoomba.cs" />
     <Compile Include="Classes\BattleEntities\Supporting\BattleEntityProperties.cs" />
     <Compile Include="Classes\Collectibles\Badges\AllOrNothingBadge.cs" />
@@ -129,7 +131,9 @@
     <Compile Include="Classes\Menus\ActionSubMenus\BonkSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\HammerSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\JumpSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\KooperSubMenu.cs" />
     <Compile Include="Classes\Menus\BattleMenu.cs" />
+    <Compile Include="Classes\Menus\KooperBattleMenu.cs" />
     <Compile Include="Classes\Menus\MarioBattleMenu.cs" />
     <Compile Include="Classes\Menus\PartnerBattleMenu.cs" />
     <Compile Include="Classes\Menus\TargetSelectionMenu.cs" />
@@ -194,6 +198,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Characters\Goombario.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Characters\Kooper.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Enemies\Goomba.png">

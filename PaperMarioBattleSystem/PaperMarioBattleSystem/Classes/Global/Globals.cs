@@ -588,6 +588,14 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Kooper-specific battle animations
+        /// </summary>
+        public static class KooperBattleAnimations
+        {
+            public const string ShellSpinName = "ShellSpin";
+        }
+
+        /// <summary>
         /// Yoshi-specific battle animations
         /// </summary>
         public static class YoshiBattleAnimations

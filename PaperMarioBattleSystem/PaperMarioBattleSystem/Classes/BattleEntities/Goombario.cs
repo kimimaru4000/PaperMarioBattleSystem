@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
         public override void OnTurnStart()
         {
             base.OnTurnStart();
-            BattleUIManager.Instance.PushMenu(new PartnerBattleMenu());
+            BattleUIManager.Instance.PushMenu(new PartnerBattleMenu(new GoombarioSubMenu()));
         }
 
         public override void TurnUpdate()

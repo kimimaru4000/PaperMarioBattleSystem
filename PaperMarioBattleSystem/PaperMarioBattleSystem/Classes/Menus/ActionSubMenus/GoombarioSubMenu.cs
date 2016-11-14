@@ -7,9 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
-    public class BonkSubMenu : ActionSubMenu
+    public class GoombarioSubMenu : ActionSubMenu
     {
-        public BonkSubMenu()
+        public GoombarioSubMenu()
         {
             Position = new Vector2(210, 150);
             Initialize(new List<MoveAction> { new Bonk(), new TidalWave(), new Gulp() });

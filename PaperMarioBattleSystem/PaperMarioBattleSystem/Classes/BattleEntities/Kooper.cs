@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
         public override void OnTurnStart()
         {
             base.OnTurnStart();
-            BattleUIManager.Instance.PushMenu(new KooperBattleMenu());
+            BattleUIManager.Instance.PushMenu(new PartnerBattleMenu(new KooperSubMenu()));
         }
 
         public override void OnTurnEnd()

@@ -35,12 +35,16 @@ namespace PaperMarioBattleSystem
             graphics.PreferredBackBufferWidth = RenderingGlobals.WindowWidth;
             graphics.PreferredBackBufferHeight = RenderingGlobals.WindowHeight;
 
+            AssetManager.Instance.Initialize(Content);
+            SpriteRenderer.Instance.Initialize(graphics);
+
             //FOR TESTING
             InitializeInventory();
 
-            AssetManager.Instance.Initialize(Content);
-            SpriteRenderer.Instance.Initialize(graphics);
-            BattleManager.Instance.Initialize(new BattleMario(new MarioStats(1, 50, 5, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)), new Kooper(), new List<BattleEnemy>() { new Goomba(), new SpikedGoomba() });
+            BattleManager.Instance.Initialize(
+                new BattleMario(new MarioStats(1, 50, 5, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
+                Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Kooper),
+                new List<BattleEnemy>() { new Goomba(), new SpikedGoomba() });
 
             base.Initialize();
         }
@@ -50,6 +54,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void InitializeInventory()
         {
+            Inventory.Instance.partnerInventory.AddPartner(new Goombario());
+            Inventory.Instance.partnerInventory.AddPartner(new Kooper());
+
             Inventory.Instance.AddBadge(new DefendPlusBadge());
             Inventory.Instance.AddBadge(new PowerPlusBadge());
             Inventory.Instance.AddBadge(new SpikeShieldBadge());

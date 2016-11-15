@@ -1148,5 +1148,10 @@ namespace PaperMarioBattleSystem
             //Return the last one if it goes through
             return percentages.Count - 1;
         }
+
+        public static T[] GetEnumValues<T>()
+        {
+            return (T[])Enum.GetValues(typeof(T));
+        }
     }
 }

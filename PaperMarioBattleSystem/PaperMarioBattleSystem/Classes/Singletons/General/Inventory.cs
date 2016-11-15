@@ -32,6 +32,12 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Partner Inventory
+
+        public readonly PartnerInventory partnerInventory = new PartnerInventory();
+
+        #endregion
+
         #region Currency Fields
 
         /// <summary>
@@ -528,51 +534,59 @@ namespace PaperMarioBattleSystem
         #endregion
 
 
-        #region Partner Inventory
+        #region Partner Inventory Class
 
         /// <summary>
         /// The inventory for Mario's Partners.
-        /// This tells which Partners Mario currently has available, along with Mario's current active Partner.
+        /// This tells which Partners Mario currently has available.
         /// </summary>
         public class PartnerInventory
         {
             private readonly Dictionary<PartnerTypes, BattlePartner> Partners = new Dictionary<PartnerTypes, BattlePartner>();
 
-            public BattlePartner ActivePartner { get; private set; } = null;
+            //public BattlePartner ActivePartner { get; private set; } = null;
 
             public PartnerInventory()
             {
                 
             }
 
-            public void SetActivePartner(BattlePartner battlePartner)
-            {
-                ActivePartner = battlePartner;
-            }
+            //public void SetActivePartner(BattlePartner battlePartner)
+            //{
+            //    ActivePartner = battlePartner;
+            //}
 
-            public void AddPartner(PartnerTypes partner, BattlePartner battlePartner)
+            /// <summary>
+            /// Adds a Partner to the party.
+            /// </summary>
+            /// <param name="battlePartner">The BattlePartner to add to the party.</param>
+            public void AddPartner(BattlePartner battlePartner)
             {
-                if (HasPartner(partner) == true)
-                {
-                    Debug.LogError($"Mario already has {partner} as a Partner");
-                    return;
-                }
-
                 if (battlePartner == null)
                 {
-                    Debug.LogError($"{nameof(battlePartner)} is null! Partner {partner} will not be added as a result");
+                    Debug.LogError($"{nameof(battlePartner)} is null! Partner will not be added as a result");
                     return;
                 }
 
-                Partners.Add(partner, battlePartner);
-
-                //If no previous Partners exist, the active Partner is the one that was just added
-                if (Partners.Count == 0)
+                if (HasPartner(battlePartner.PartnerType) == true)
                 {
-                    SetActivePartner(battlePartner);
+                    Debug.LogError($"Mario already has {battlePartner.PartnerType} as a Partner");
+                    return;
                 }
+
+                Partners.Add(battlePartner.PartnerType, battlePartner);
+
+                ////If no previous Partners exist, the active Partner is the one that was just added
+                //if (Partners.Count == 0)
+                //{
+                //    SetActivePartner(battlePartner);
+                //}
             }
 
+            /// <summary>
+            /// Removes a Partner from the party.
+            /// </summary>
+            /// <param name="partner">The PartnerType of the Partner.</param>
             public void RemovePartner(PartnerTypes partner)
             {
                 if (HasPartner(partner) == false)
@@ -585,13 +599,18 @@ namespace PaperMarioBattleSystem
 
                 Partners.Remove(partner);
 
-                //If the last partner that left the party was the current active one, get another Partner to be active
-                if (battlePartner == ActivePartner)
-                {
-                    SetActivePartner(GetNextPartner());
-                }
+                ////If the last partner that left the party was the current active one, get another Partner to be active
+                //if (battlePartner == ActivePartner)
+                //{
+                //    SetActivePartner(GetNextPartner());
+                //}
             }
 
+            /// <summary>
+            /// Gets a particular Partner in the party.
+            /// </summary>
+            /// <param name="partner">The PartnerType of the Partner.</param>
+            /// <returns>A BattlePartner with the specified PartnerType if it exists in the party, otherwise null.</returns>
             public BattlePartner GetPartner(PartnerTypes partner)
             {
                 if (HasPartner(partner) == true)
@@ -601,26 +620,50 @@ namespace PaperMarioBattleSystem
                 else return null;
             }
 
+            /// <summary>
+            /// Tells whether a particular Partner is in the party or not.
+            /// </summary>
+            /// <param name="partner">The PartnerTypes of the Partner.</param>
+            /// <returns>true if a BattlePartner with the specified PartnerType is in the party, otherwise false.</returns>
             public bool HasPartner(PartnerTypes partner)
             {
                 return Partners.ContainsKey(partner);
             }
 
             /// <summary>
-            /// Goes down the list of all defined Partners and finds one in the party. If no Partners are in the party, null is returned.
+            /// Goes down the list of all defined Partners and finds all that are in the party.
+            /// If none are in the party, an empty array is returned.
             /// </summary>
-            /// <returns>The first found BattlePartner in the party, otherwise null if no BattlePartners exist in the party.</returns>
-            private BattlePartner GetNextPartner()
+            /// <returns>An array of BattlePartners in the party. An empty array if no BattlePartners exist in the party.</returns>
+            public BattlePartner[] GetAllPartners()
             {
-                PartnerTypes[] partnerTypes = (PartnerTypes[])Enum.GetValues(typeof(PartnerTypes));
+                PartnerTypes[] partnerTypes = UtilityGlobals.GetEnumValues<PartnerTypes>();
+
+                List<BattlePartner> battlePartners = new List<BattlePartner>();
 
                 for (int i = 0; i < partnerTypes.Length; i++)
                 {
-                    BattlePartner partner = GetPartner(partnerTypes[i]);
-                    if (partner != null)
+                    if (HasPartner(partnerTypes[i]) == true)
                     {
-                        return partner;
+                        battlePartners.Add(GetPartner(partnerTypes[i]));
                     }
+                }
+
+                return battlePartners.ToArray();
+            }
+
+            /// <summary>
+            /// Gets a random Partner that is in the party.
+            /// </summary>
+            /// <returns>A random BattlePartner in the party. null if no BattlePartners exist in the party.</returns>
+            private BattlePartner GetRandomPartner()
+            {
+                BattlePartner[] battlePartners = GetAllPartners();
+
+                if (battlePartners != null && battlePartners.Length > 0)
+                {
+                    int randPartner = GeneralGlobals.Randomizer.Next(0, battlePartners.Length);
+                    return battlePartners[randPartner];
                 }
 
                 return null;

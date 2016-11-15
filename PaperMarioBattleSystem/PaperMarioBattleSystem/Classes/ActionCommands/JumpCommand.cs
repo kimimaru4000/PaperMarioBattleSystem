@@ -29,7 +29,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public JumpCommand(ICommandAction commandAction, float totalRange, float leniency) : base(commandAction)
+        public JumpCommand(IActionCommand commandAction, float totalRange, float leniency) : base(commandAction)
         {
             TotalRange = totalRange;
             Leniency = leniency;

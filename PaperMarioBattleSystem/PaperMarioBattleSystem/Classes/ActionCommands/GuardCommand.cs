@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
 
         protected Keys GuardButton = Keys.Z;
 
-        public GuardCommand(ICommandAction commandAction) : base(commandAction)
+        public GuardCommand(IActionCommand commandAction) : base(commandAction)
         {
             
         }

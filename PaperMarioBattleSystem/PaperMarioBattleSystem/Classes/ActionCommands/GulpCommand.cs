@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
 
         private bool WithinRange => (CurBarValue >= SuccessStartValue && CurBarValue < MaxBarValue);
 
-        public GulpCommand(ICommandAction commandAction, double totalDuration, double successRange, double speedScale) : base(commandAction, totalDuration)
+        public GulpCommand(IActionCommand commandAction, double totalDuration, double successRange, double speedScale) : base(commandAction, totalDuration)
         {
             SuccessRange = successRange;
             SpeedScale = speedScale;

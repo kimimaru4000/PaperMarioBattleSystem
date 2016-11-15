@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A MoveAction that has an Action Command.
     /// </summary>
-    public abstract class CommandMoveAction : MoveAction, ICommandAction
+    public abstract class CommandMoveAction : MoveAction, IActionCommand
     {
         /// <summary>
         /// The ActionCommand associated with the BattleAction

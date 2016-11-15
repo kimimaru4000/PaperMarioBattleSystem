@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// <para>A Defensive Action is defined as one that can be done when it's not the entities turn.
     /// In the first two Paper Mario games, the only Defensive Actions are Guard and Superguard.</para>
     /// </summary>
-    public abstract class DefensiveAction : BattleAction, ICommandAction
+    public abstract class DefensiveAction : BattleAction, IActionCommand
     {
         public ActionCommand actionCommand { get; set; } = null;
         public bool DisableActionCommand { get; set; } = false;

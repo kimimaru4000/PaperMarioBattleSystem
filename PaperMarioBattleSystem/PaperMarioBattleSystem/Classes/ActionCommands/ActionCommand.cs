@@ -21,9 +21,9 @@ namespace PaperMarioBattleSystem
         }
 
         public bool AcceptingInput { get; protected set; } = false;
-        protected ICommandAction Action = null;
+        protected IActionCommand Action = null;
 
-        protected ActionCommand(ICommandAction commandAction)
+        protected ActionCommand(IActionCommand commandAction)
         {
             Action = commandAction;
         }

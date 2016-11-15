@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// An interface for all BattleActions that utilize ActionCommands
+    /// An interface for BattleActions that utilize ActionCommands
     /// </summary>
-    public interface ICommandAction
+    public interface IActionCommand
     {
         /// <summary>
         /// The name of the BattleAction

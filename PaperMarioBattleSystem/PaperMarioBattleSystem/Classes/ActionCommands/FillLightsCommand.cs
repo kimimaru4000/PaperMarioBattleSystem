@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
 
         public bool AllLightsFilled => (LightsFilled == MaxLights);
 
-        public FillLightsCommand(ICommandAction commandAction, int maxLights, double timeBetweenLights) : base(commandAction)
+        public FillLightsCommand(IActionCommand commandAction, int maxLights, double timeBetweenLights) : base(commandAction)
         {
             MaxLights = maxLights;
             TimeBetweenLights = timeBetweenLights;

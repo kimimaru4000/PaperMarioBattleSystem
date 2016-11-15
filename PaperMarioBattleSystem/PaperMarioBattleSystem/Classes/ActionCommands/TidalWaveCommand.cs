@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
 
         private Keys[] PossibleButtons = new Keys[] { Keys.Z, Keys.X, Keys.C };
 
-        public TidalWaveCommand(ICommandAction commandAction, double totalDuration = 3500d, int inputLimit = 14) : base(commandAction)
+        public TidalWaveCommand(IActionCommand commandAction, double totalDuration = 3500d, int inputLimit = 14) : base(commandAction)
         {
             TotalDuration = totalDuration;
             InputLimit = inputLimit;

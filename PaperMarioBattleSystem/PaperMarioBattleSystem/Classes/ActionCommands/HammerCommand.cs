@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
 
         protected Keys ButtonToHold = Keys.Left;
 
-        public HammerCommand(ICommandAction commandAction, int maxLights, double timeBetweenLights) : base(commandAction, maxLights, timeBetweenLights)
+        public HammerCommand(IActionCommand commandAction, int maxLights, double timeBetweenLights) : base(commandAction, maxLights, timeBetweenLights)
         {
 
         }

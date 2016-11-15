@@ -1,0 +1,92 @@
+MoveAction Redesign (11/14/16)
+------------------------------
+Creating new MoveActions is time consuming and cumbersome. Furthermore, they're not as flexible as I'd like them to be in many regards.
+This was most noticeable when I was unable to find an effective way to implement items in battle using the current system.
+
+MoveAction Purpose
+------------------
+A MoveAction is defined as any type of BattleAction selectable from a menu. This means that it can occur only on the BattleEntity's turn.
+
+As such, MoveActions can be very dynamic, ranging from simple moves such as Tattle to something complicated like Sweet Treat.
+
+Breakdown
+---------
+We can break down MoveActions into 3 parts:
+
+1. The Sequence performed
+2. The Action Command performed
+3. Which BattleEntities are affected, along with any effects (usually damage)
+
+With the ICommandAction interface, 2 is essentially separated already, and 3 is partially separated with the OffensiveAction subclass.
+However, this isn't enough. We need to separate them all equally so that combining their parts will allow us to create the exact MoveAction
+we want. How the parts are defined (Ex. deals damage or not) will determine which kind of action it is.
+
+Solution
+--------
+1. Completely separate Sequences into their own classes. Each class would include:
+
+-All sequence fields (CurBranch, CurSequence, SequenceStep, JumpToBranch, etc.)
+-All sequence methods (StartSequence, EndSequence, OnProgressSequence, SequenceStartBranch, InterruptionHandler, etc.)
+-Implement the IActionCommandHandler interface (more on this below)
+
+Considering anything the action does is in the Sequence, it seems fitting to have these separated into their own classes so they can be easily
+modified or swapped out with other Sequences without having to change the action itself.
+
+Each MoveAction will have a Sequence reference. Sequences are REQUIRED for any MoveAction to function.
+If a Sequence is not present, it should be known in the logs or through an exception.
+
+2. Since Action Commands are already separated into their own classes, they need far less work done to them.
+However, there are still some issues:
+
+-The ICommandAction interface serves its purpose well but will need to be separated into two parts:
+ 1. IActionCommand (includes all fields, such as actionCommand, CommandEnabled, DisableActionCommand, etc.)
+ 2. IActionCommandHandler (includes all methods: OnCommandSuccess, OnCommandFailed, OnCommandResponse)
+ 
+The reason for this is that DefensiveActions are not MoveActions and require both interfaces, whereas Sequences would only be IActionCommandHandlers.
+
+-Each MoveAction should have its own ActionCommand reference by implementing the IActionCommand interface.
+
+3. This one will require a bit more work:
+
+-Each MoveAction will REQUIRE a new MoveActionData struct, which will have the following fields (from current MoveAction class):
+ -Icon
+ -FPCost
+ -Description
+ -SelectionType
+ -EntityType
+ -HeightsAffected
+
+-For damage, allow each MoveAction to have a nullable InteractionParamHolder reference. This doesn't need to be used at all for non-damaging actions.
+Set the Attacker and Victim references before attempting to deal damage.
+-All the methods in OffensiveAction (AttemptDamage, GetTotalDamage). Not all MoveActions will use these, but it's nice to have them available.
+
+Solution - Wrap up
+------------------
+So all-in-all, MoveActions will have the following components:
+
+1. A Sequence reference
+2. An ActionCommand reference
+3. MoveActionData and InteractionParamHolder references
+
+This should supply us with everything we need. As a result, this would give us the ability to create new actions on the fly without having to subclass.
+This is especially useful for items, as we can do whatever we want without having to figure out the type of MoveAction to create.
+
+We can have various constructors taking in specific data, which will then define what the MoveAction does. For example:
+
+public MoveAction(Sequence sequence, MoveActionData moveActionData)
+
+This constructor would mean that this MoveAction does not deal damage or have an Action Command. We can follow up by having the following bools:
+
+-HasActionCommand
+-DealsDamage
+
+These would be set in their appropriate constructors, and these values would make it trivial to check what kind of MoveAction it is at runtime.
+
+Of course, we will still allow subclassing of MoveActions for anything that would be better suited for it.
+
+Summary
+-------
+My hope is that these changes would make it easier to create MoveActions by defining their parts separately and combining them together, allowing
+for more flexibility.
+
+There's a whole lot to this, and I'm probably missing some things, but I will update this document if anything needs to be changed or any issues arise.

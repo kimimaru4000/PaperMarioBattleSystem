@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PaperMarioBattleSystem.Enumerations;
 using static PaperMarioBattleSystem.BadgeGlobals;
 
 namespace PaperMarioBattleSystem
@@ -522,6 +523,108 @@ namespace PaperMarioBattleSystem
 
             //Resort to their TypeNumbers if they have the same BP cost
             return BadgeTypeNumberSort(badge1, badge2);
+        }
+
+        #endregion
+
+
+        #region Partner Inventory
+
+        /// <summary>
+        /// The inventory for Mario's Partners.
+        /// This tells which Partners Mario currently has available, along with Mario's current active Partner.
+        /// </summary>
+        public class PartnerInventory
+        {
+            private readonly Dictionary<PartnerTypes, BattlePartner> Partners = new Dictionary<PartnerTypes, BattlePartner>();
+
+            public BattlePartner ActivePartner { get; private set; } = null;
+
+            public PartnerInventory()
+            {
+                
+            }
+
+            public void SetActivePartner(BattlePartner battlePartner)
+            {
+                ActivePartner = battlePartner;
+            }
+
+            public void AddPartner(PartnerTypes partner, BattlePartner battlePartner)
+            {
+                if (HasPartner(partner) == true)
+                {
+                    Debug.LogError($"Mario already has {partner} as a Partner");
+                    return;
+                }
+
+                if (battlePartner == null)
+                {
+                    Debug.LogError($"{nameof(battlePartner)} is null! Partner {partner} will not be added as a result");
+                    return;
+                }
+
+                Partners.Add(partner, battlePartner);
+
+                //If no previous Partners exist, the active Partner is the one that was just added
+                if (Partners.Count == 0)
+                {
+                    SetActivePartner(battlePartner);
+                }
+            }
+
+            public void RemovePartner(PartnerTypes partner)
+            {
+                if (HasPartner(partner) == false)
+                {
+                    Debug.LogError($"Mario doesn't have {partner} as a Partner, so he/she cannot be from the party");
+                    return;
+                }
+
+                BattlePartner battlePartner = GetPartner(partner);
+
+                Partners.Remove(partner);
+
+                //If the last partner that left the party was the current active one, get another Partner to be active
+                if (battlePartner == ActivePartner)
+                {
+                    SetActivePartner(GetNextPartner());
+                }
+            }
+
+            public BattlePartner GetPartner(PartnerTypes partner)
+            {
+                if (HasPartner(partner) == true)
+                {
+                    return Partners[partner];
+                }
+                else return null;
+            }
+
+            public bool HasPartner(PartnerTypes partner)
+            {
+                return Partners.ContainsKey(partner);
+            }
+
+            /// <summary>
+            /// Goes down the list of all defined Partners and finds one in the party. If no Partners are in the party, null is returned.
+            /// </summary>
+            /// <returns>The first found BattlePartner in the party, otherwise null if no BattlePartners exist in the party.</returns>
+            private BattlePartner GetNextPartner()
+            {
+                PartnerTypes[] partnerTypes = (PartnerTypes[])Enum.GetValues(typeof(PartnerTypes));
+
+                for (int i = 0; i < partnerTypes.Length; i++)
+                {
+                    BattlePartner partner = GetPartner(partnerTypes[i]);
+                    if (partner != null)
+                    {
+                        return partner;
+                    }
+                }
+
+                return null;
+            }
         }
 
         #endregion

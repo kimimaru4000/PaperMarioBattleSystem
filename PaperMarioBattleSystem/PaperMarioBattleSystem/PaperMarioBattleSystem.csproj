@@ -144,7 +144,16 @@
     <Compile Include="Classes\SequenceActions\Wait.cs" />
     <Compile Include="Classes\SequenceActions\WaitForAnimation.cs" />
     <Compile Include="Classes\SequenceActions\WaitForCommand.cs" />
+    <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
+    <Compile Include="Classes\Sequences\Kooper\ShellTossSequence.cs" />
+    <Compile Include="Classes\Sequences\Mario\HammerSequence.cs" />
+    <Compile Include="Classes\Sequences\Mario\IceSmashSequence.cs" />
+    <Compile Include="Classes\Sequences\Mario\JumpSequence.cs" />
+    <Compile Include="Classes\Sequences\Mario\MultibounceSequence.cs" />
+    <Compile Include="Classes\Sequences\Mario\PowerBounceSequence.cs" />
     <Compile Include="Classes\Sequences\Sequence.cs" />
+    <Compile Include="Classes\Sequences\Sushie\TidalWaveSequence.cs" />
+    <Compile Include="Classes\Sequences\Yoshi\GulpSequence.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleUIManager.cs" />
     <Compile Include="Classes\Singletons\General\AssetManager.cs" />

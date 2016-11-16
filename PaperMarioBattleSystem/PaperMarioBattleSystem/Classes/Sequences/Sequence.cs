@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Sequence used in a MoveAction.
     /// </summary>
-    public abstract class Sequence
+    public abstract class Sequence : IActionCommandHandler
     {
         /// <summary>
         /// Values for each branch of a sequence.
@@ -33,22 +33,28 @@ namespace PaperMarioBattleSystem
 
         #region Fields/Properties
 
-        private string Name => Action.Name;
+        /// <summary>
+        /// The reference to the MoveAction this Sequence is a part of.
+        /// </summary>
+        public MoveAction Action { get; private set; } = null;
 
-        private BattleEntity User => Action.User;
+        protected string Name => Action.Name;
+
+        protected BattleEntity User => Action.User;
+
+        protected ActionCommand actionCommand => null;
+
+        protected bool CommandEnabled => true;
+
+        protected int BaseDamage { get; set; }
 
         //NOTE: TEMPORARY - May be removed
-        private BattleEntity[] EntitiesAffected = null;
+        protected BattleEntity[] EntitiesAffected { get; private set; }
 
         /// <summary>
         /// Whether the Sequence is currently being performed or not.
         /// </summary>
         public bool InSequence { get; protected set; } = false;
-
-        /// <summary>
-        /// The reference to the MoveAction this Sequence is a part of.
-        /// </summary>
-        public MoveAction Action { get; private set; } = null;
 
         /// <summary>
         /// The current step of the sequence.
@@ -77,11 +83,16 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected InterruptionDelegate InterruptionHandler = null;
 
+        /// <summary>
+        /// The result of performing the Action Command.
+        /// </summary>
+        protected ActionCommand.CommandResults CommandResult { get; private set; } = ActionCommand.CommandResults.Success;
+
         #endregion
 
         protected Sequence()
         {
-            
+            InterruptionHandler = BaseInterruptionHandler;
         }
 
         #region Methods
@@ -337,7 +348,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Sets the InterruptionHandler based on the type of damage dealt
+        /// Sets the InterruptionHandler based on the type of damage dealt.
         /// </summary>
         /// <param name="element">The elemental damage being dealt</param>
         protected virtual void OnInterruption(Elements element)
@@ -347,17 +358,64 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Action Command Methods
+
+        //We have OnCommandSuccess() non-virtual so we can perform general functionality for successfully completing any Action Command
+        //Examples include showing the degrees of success ("Nice," "Great," etc.) and increasing the damage dealt by All or Nothing
+        public void OnCommandSuccess()
+        {
+            CommandResult = ActionCommand.CommandResults.Success;
+
+            CommandSuccess();
+        }
+
+        //We have OnCommandFailed() non-virtual so we can perform general functionality for failing to complete any Action Command
+        //Examples include dealing no damage with the All or Nothing Badge
+        public void OnCommandFailed()
+        {
+            CommandResult = ActionCommand.CommandResults.Failure;
+
+            CommandFailed();
+        }
+
+        public virtual void OnCommandResponse(object response)
+        {
+
+        }
+
+        protected virtual void CommandSuccess()
+        {
+            ChangeSequenceBranch(SequenceBranch.Success);
+        }
+
+        protected virtual void CommandFailed()
+        {
+            ChangeSequenceBranch(SequenceBranch.Failed);
+        }
+
+        /// <summary>
+        /// Starts the Action Command's input.
+        /// If the Action Command is not enabled, it will switch to the Failed branch.
+        /// </summary>
+        protected void StartActionCommandInput()
+        {
+            if (CommandEnabled == true) actionCommand.StartInput();
+            else OnCommandFailed();
+        }
+
+        #endregion
+
         #region Update Methods
 
         /// <summary>
-        /// What occurs right before the Sequence updates
+        /// What occurs right before the Sequence updates.
         /// </summary>
         protected virtual void PreSequenceUpdate()
         {
 
         }
 
-        public virtual void Update()
+        public void Update()
         {
             //Perform sequence
             if (InSequence == true)
@@ -394,6 +452,114 @@ namespace PaperMarioBattleSystem
         public virtual void Draw()
         {
 
+        }
+
+        #endregion
+
+        #region Damage Methods
+
+        /// <summary>
+        /// Attempt to deal damage to a set of entities with this BattleAction.
+        /// <para>Based on the ContactType of this BattleAction, this can fail, resulting in an interruption.
+        /// In the event of an interruption, no further entities are tested, the ActionCommand is ended, and 
+        /// we go into the Interruption branch</para>
+        /// </summary>
+        /// <param name="damage">The damage the BattleAction deals to the entity if the attempt was successful</param>
+        /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
+        /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
+        /// If false, the total damage will be calculated</param>
+        /// <returns>An int array containing the damage dealt to each BattleEntity targeted, in order</returns>
+        protected int[] AttemptDamage(int damage, BattleEntity[] entities, bool isTotalDamage)
+        {
+            if (entities == null || entities.Length == 0)
+            {
+                Debug.LogWarning($"{nameof(entities)} is null or empty in {nameof(AttemptDamage)} for Action {Name}!");
+                return new int[0];
+            }
+
+            int totalDamage = isTotalDamage == true ? damage : GetTotalDamage(damage);
+
+            //Check for the All or Nothing Badge
+            //If it's equipped, add 1 if the Action Command succeeded, otherwise set the damage to the minimum value
+            int allOrNothingCount = User.EntityProperties.GetMiscProperty(MiscProperty.AllOrNothingCount).IntValue;
+            if (allOrNothingCount > 0)
+            {
+                if (CommandResult == ActionCommand.CommandResults.Success)
+                {
+                    totalDamage += allOrNothingCount;
+                }
+                else if (CommandResult == ActionCommand.CommandResults.Failure)
+                {
+                    totalDamage = int.MinValue;
+                }
+            }
+
+            //The damage dealt to each BattleEntity
+            int[] damageValues = new int[entities.Length];
+
+            //Go through all the entities and attempt damage
+            for (int i = 0; i < entities.Length; i++)
+            {
+                BattleEntity victim = entities[i];
+
+                InteractionParamHolder holder = Action.DamageValues.Value;
+
+                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage, holder.DamagingElement, holder.Piercing, holder.ContactType, holder.Statuses));
+
+                //Set the total damage dealt to the victim
+                damageValues[i] = finalResult.VictimResult.TotalDamage;
+
+                //Make the victim take damage upon a PartialSuccess or a Success
+                if (finalResult.VictimResult.HasValue == true)
+                {
+                    //Check if the attacker hit
+                    if (finalResult.VictimResult.Hit == true)
+                    {
+                        finalResult.VictimResult.Entity.TakeDamage(finalResult.VictimResult);
+                    }
+                    //Handle a miss otherwise
+                    else
+                    {
+                        OnMiss();
+                    }
+                }
+
+                //Make the attacker take damage upon a PartialSuccess or a Failure
+                //Break out of the loop when the attacker takes damage
+                if (finalResult.AttackerResult.HasValue == true)
+                {
+                    finalResult.AttackerResult.Entity.TakeDamage(finalResult.AttackerResult);
+
+                    break;
+                }
+            }
+
+            return damageValues;
+        }
+
+        /// <summary>
+        /// Convenience function for attempting damage with only one entity.
+        /// </summary>
+        /// <param name="damage">The damage the BattleAction deals to the entity if the attempt was successful</param>
+        /// <param name="entity">The BattleEntity to attempt to inflict damage on</param>
+        /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
+        /// If false, the total damage will be calculated</param>
+        protected void AttemptDamage(int damage, BattleEntity entity, bool isTotalDamage)
+        {
+            AttemptDamage(damage, new BattleEntity[] { entity }, isTotalDamage);
+        }
+
+        /// <summary>
+        /// Gets the total raw damage a BattleEntity can deal using this BattleAction.
+        /// This factors in a BattleEntity's Attack stat and anything else that may influence the damage dealt.
+        /// </summary>
+        /// <param name="actionDamage">The damage the BattleAction deals</param>
+        /// <returns>An int with the total raw damage the BattleEntity can deal when using this BattleAction</returns>
+        protected int GetTotalDamage(int actionDamage)
+        {
+            int totalDamage = actionDamage + User.BattleStats.Attack;
+
+            return totalDamage;
         }
 
         #endregion

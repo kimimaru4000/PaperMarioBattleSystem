@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
@@ -288,6 +289,33 @@ namespace PaperMarioBattleSystem
             Piercing = piercing;
             StatusesInflicted = statusesInflicted;
             Hit = hit;
+        }
+    }
+
+    /// <summary>
+    /// Holds properties of a MoveAction.
+    /// </summary>
+    public struct MoveActionData
+    {
+        public Texture2D Icon;
+        public int FPCost;
+        public string Description;
+        public TargetSelectionMenu.EntitySelectionType SelectionType;
+        public Enumerations.EntityTypes EntityType;
+        public Enumerations.HeightStates[] HeightsAffected;
+
+        public static MoveActionData Default => new MoveActionData(null, 0, "Error", TargetSelectionMenu.EntitySelectionType.Single,
+            Enumerations.EntityTypes.Enemy, null);
+
+        public MoveActionData(Texture2D icon, int fpCost, string description, TargetSelectionMenu.EntitySelectionType selectionType,
+            Enumerations.EntityTypes entityType, Enumerations.HeightStates[] heightsAffected)
+        {
+            Icon = icon;
+            FPCost = fpCost;
+            Description = description;
+            SelectionType = selectionType;
+            EntityType = entityType;
+            HeightsAffected = heightsAffected;
         }
     }
 

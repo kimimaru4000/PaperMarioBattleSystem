@@ -102,11 +102,28 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected InterruptionDelegate InterruptionHandler = null;
 
+        public InteractionParamHolder? DamageValues { get; private set; } = null;
+
+        public MoveActionData MoveProperties { get; private set; } = MoveActionData.Default;
+
+        public Sequence MoveSequence { get; private set; } = null;
+
         #endregion
 
         protected MoveAction()
         {
             InterruptionHandler = BaseInterruptionHandler;
+        }
+
+        public MoveAction(MoveActionData moveProperties, Sequence moveSequence)
+        {
+            MoveProperties = moveProperties;
+            MoveSequence = moveSequence;
+        }
+
+        public MoveAction(MoveActionData moveProperties, Sequence moveSequence, ActionCommand actioncommand) : this(moveProperties, moveSequence)
+        {
+            
         }
 
         /// <summary>

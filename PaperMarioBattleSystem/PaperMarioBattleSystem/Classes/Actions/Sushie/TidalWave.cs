@@ -11,123 +11,18 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Sushie's Tidal Wave attack
     /// </summary>
-    public class TidalWave : OffensiveAction
+    public class TidalWave : MoveAction
     {
-        protected float WalkDuration = 700f;
-        protected int AdditionalDamage = 0;
-
         public TidalWave()
         {
             Name = "Tidal Wave";
-            Description = "A surge of water hits all enemies";
-            SelectionType = TargetSelectionMenu.EntitySelectionType.All;
-            ContactType = Enumerations.ContactTypes.None;
-            Element = Enumerations.Elements.Water;
-            BaseDamage = 1;
-            HeightsAffected = new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded, Enumerations.HeightStates.Airborne, Enumerations.HeightStates.Ceiling };
+            MoveInfo = new MoveActionData(null, 4, "A surge of water hits all enemies", TargetSelectionMenu.EntitySelectionType.All,
+                Enumerations.EntityTypes.Enemy, new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded, Enumerations.HeightStates.Airborne, Enumerations.HeightStates.Ceiling });
 
-            actionCommand = new TidalWaveCommand(this);
-        }
+            DamageInfo = new InteractionParamHolder(null, null, 1, Enumerations.Elements.Water, false, Enumerations.ContactTypes.None, null);
 
-        protected override void OnEnd()
-        {
-            AdditionalDamage = 0;
-        }
-
-        protected override void CommandSuccess()
-        {
-            ChangeSequenceBranch(SequenceBranch.Success);
-        }
-
-        protected override void CommandFailed()
-        {
-            ChangeSequenceBranch(SequenceBranch.Failed);
-        }
-
-        public override void OnCommandResponse(int response)
-        {
-            AdditionalDamage = response;
-        }
-
-        protected override void SequenceStartBranch()
-        {
-            switch (SequenceStep)
-            {
-                case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Player)[0]), WalkDuration);
-                    ChangeSequenceBranch(SequenceBranch.Main);
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
-        
-        protected override void SequenceMainBranch()
-        {
-            switch (SequenceStep)
-            {
-                case 0:
-                    User.PlayAnimation(AnimationGlobals.IdleName);
-                    StartActionCommandInput();
-                    CurSequence = new WaitForCommand(1500f, actionCommand, CommandEnabled);
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
-
-        protected override void SequenceSuccessBranch()
-        {
-            switch (SequenceStep)
-            {
-                case 0:
-                    AttemptDamage(BaseDamage + AdditionalDamage, EntitiesAffected, false);
-                    ChangeSequenceBranch(SequenceBranch.End);
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
-
-        protected override void SequenceFailedBranch()
-        {
-            switch (SequenceStep)
-            {
-                case 0:
-                    AttemptDamage(BaseDamage + AdditionalDamage, EntitiesAffected, false);
-                    ChangeSequenceBranch(SequenceBranch.End);
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
-
-        protected override void SequenceEndBranch()
-        {
-            switch(SequenceStep)
-            {
-                case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequence = new MoveTo(User.BattlePosition, WalkDuration);
-                    break;
-                case 1:
-                    User.PlayAnimation(AnimationGlobals.IdleName);
-                    EndSequence();
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
-
-        protected override void SequenceMissBranch()
-        {
-            
+            SetMoveSequence(new TidalWaveSequence(this));
+            actionCommand = new TidalWaveCommand(MoveSequence);
         }
     }
 }

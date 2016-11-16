@@ -50,12 +50,12 @@ namespace PaperMarioBattleSystem
         protected void Initialize(List<MoveAction> moveActions)
         {
             BattleActions = moveActions;
-            BoxMenu.SetText(BattleActions[0].Description);
+            BoxMenu.SetText(BattleActions[0].MoveProperties.Description);
         }
 
         protected override void OnSelectionChanged(int newSelection)
         {
-            BoxMenu.SetText(BattleActions[CurSelection].Description);
+            BoxMenu.SetText(BattleActions[CurSelection].MoveProperties.Description);
         }
 
         protected override void OnBackOut()

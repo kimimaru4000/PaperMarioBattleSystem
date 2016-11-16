@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class BonkSequence : JumpSequence
     {
-        public BonkSequence()
+        public BonkSequence(MoveAction moveAction) : base(moveAction)
         {
 
         }

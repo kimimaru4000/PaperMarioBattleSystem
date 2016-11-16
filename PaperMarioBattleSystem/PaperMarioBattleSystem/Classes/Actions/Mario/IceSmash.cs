@@ -15,12 +15,18 @@ namespace PaperMarioBattleSystem
         public IceSmash()
         {
             Name = "Ice Smash";
-            Description = "Wear this to use Ice Smash. " +
+
+            MoveInfo.Description = "Wear this to use Ice Smash. " +
                            "3 FP are required to use this attack, which can freeze and immobilize an enemy if executed superbly. " +
                            "Wearing two or more of these badges requires more FP for the move, but enemies stay frozen longer.";
-            Element = Enumerations.Elements.Ice;
 
-            actionCommand = new HammerCommand(this, 4, 1000d);
+            //NOTE: May want to rethink this to make it easier to make a few changes, but for now it works
+            InteractionParamHolder damageInfo = (InteractionParamHolder)DamageInfo;
+            damageInfo.DamagingElement = Enumerations.Elements.Ice;
+            DamageInfo = damageInfo;
+
+            SetMoveSequence(new IceSmashSequence(this));
+            actionCommand = new HammerCommand(MoveSequence, 4, 1000d);
         }
     }
 }

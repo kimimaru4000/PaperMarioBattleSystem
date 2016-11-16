@@ -10,6 +10,8 @@ namespace PaperMarioBattleSystem
     {
         public Superguard(BattleEntity user) : base(user)
         {
+            Name = "Superguard";
+
             actionCommand = new SuperguardCommand(this);
 
             CommandSuccessTimer = (3d / 60d) * Time.MsPerS;

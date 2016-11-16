@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
 
         protected bool IsBarFull => (CurBarValue >= MaxBarValue);
 
-        public FillBarCommand(IActionCommand commandAction, double maxBarValue) : base(commandAction)
+        public FillBarCommand(IActionCommandHandler commandAction, double maxBarValue) : base(commandAction)
         {
             MaxBarValue = maxBarValue;
 

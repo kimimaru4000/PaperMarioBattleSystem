@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
 {
     public sealed class SuperguardCommand : GuardCommand
     {
-        public SuperguardCommand(IActionCommand commandAction) : base(commandAction)
+        public SuperguardCommand(IActionCommandHandler commandAction) : base(commandAction)
         {
             GuardButton = Keys.X;
 

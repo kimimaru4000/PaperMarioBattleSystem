@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
 
         protected Keys GuardButton = Keys.Z;
 
-        public GuardCommand(IActionCommand commandAction) : base(commandAction)
+        public GuardCommand(IActionCommandHandler commandAction) : base(commandAction)
         {
             
         }
@@ -43,11 +43,19 @@ namespace PaperMarioBattleSystem
 
         protected override void ReadInput()
         {
-            if (Input.GetKeyDown(GuardButton) == true && Time.ActiveMilliseconds >= PrevGuardCooldown)
+            if (Input.GetKeyDown(GuardButton) == true)
             {
-                //Debug.Log("Pressed correct time for Guard!");
+                if (Time.ActiveMilliseconds >= PrevGuardCooldown)
+                {
+                    //Debug.Log("Pressed correct time for Guard!");
 
-                Action.OnCommandSuccess();
+                    Handler.OnCommandSuccess();
+                }
+                else
+                {
+                    Handler.OnCommandFailed();
+                }
+
                 PrevGuardInputTime = Time.ActiveMilliseconds;
                 PrevGuardCooldown = Time.ActiveMilliseconds + GuardCooldown;
             }

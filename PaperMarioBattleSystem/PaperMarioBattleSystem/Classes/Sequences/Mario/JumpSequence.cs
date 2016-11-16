@@ -13,22 +13,16 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class JumpSequence : Sequence
     {
-        protected float WalkDuration = 1000f;
-        protected float JumpDuration = 1000f;
-        protected float JumpHeight = 100f;
+        public float WalkDuration = 1000f;
+        public float JumpDuration = 1000f;
+        public float JumpHeight = 100f;
 
-        protected virtual int DamageDealt => BaseDamage;
-        protected virtual BattleEntity CurTarget => EntitiesAffected[0];
+        public virtual int DamageDealt => BaseDamage;
+        public virtual BattleEntity CurTarget => EntitiesAffected[0];
 
-        public JumpSequence()
+        public JumpSequence(MoveAction moveAction) : base(moveAction)
         {
-            //Name = "Jump";
-            //Description = "Jump and stomp on an enemy.";
-            //ContactType = Enumerations.ContactTypes.JumpContact;
-            //BaseDamage = (int)User.BattleStats.GetBootLevel;
-            //
-            //actionCommand = new JumpCommand(this, JumpDuration, (int)(JumpDuration / 2f));
-            //HeightsAffected = new Enumerations.HeightStates[] { HeightStates.Grounded, HeightStates.Airborne };
+            
         }
 
         protected override void CommandSuccess()

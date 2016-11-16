@@ -11,140 +11,19 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Mario's Hammer action
     /// </summary>
-    public class Hammer : OffensiveAction
+    public class Hammer : MoveAction
     {
-        protected float WalkDuration = 1000f;
-        protected int DamageMod = 1;
-
-        /// <summary>
-        /// The number of lights lit at which the hammer windup animation's speed increases
-        /// </summary>
-        protected int LitWindupSpeed = 3;
-
-        protected string PickupAnimName = AnimationGlobals.MarioBattleAnimations.HammerPickupName;
-        protected string WindupAnimName = AnimationGlobals.MarioBattleAnimations.HammerWindupName;
-        protected string SlamAnimName = AnimationGlobals.MarioBattleAnimations.HammerSlamName;
-
         public Hammer()
         {
             Name = "Hammer";
-            Description = "Whack an enemy with your Hammer.";
-            SelectionType = TargetSelectionMenu.EntitySelectionType.First;
-            ContactType = Enumerations.ContactTypes.HammerContact;
-            BaseDamage = (int)User.BattleStats.GetHammerLevel;
-            HeightsAffected = new HeightStates[] { HeightStates.Grounded };
 
-            actionCommand = new HammerCommand(this, 4, 500d);
-        }
+            MoveInfo = new MoveActionData(null, 0, "Whack an enemy with your Hammer.", TargetSelectionMenu.EntitySelectionType.First,
+                EntityTypes.Enemy, new HeightStates[] { HeightStates.Grounded });
 
-        protected override void CommandSuccess()
-        {
-            DamageMod *= 2;
+            DamageInfo = new InteractionParamHolder(null, null, (int)User.BattleStats.GetHammerLevel, Elements.Normal, false, ContactTypes.HammerContact, null);
 
-            ChangeSequenceBranch(SequenceBranch.Success);
-        }
-
-        protected override void CommandFailed()
-        {
-            ChangeSequenceBranch(SequenceBranch.Failed);
-        }
-
-        public override void OnCommandResponse(int response)
-        {
-            if (response == LitWindupSpeed)
-            {
-                Animation windupAnim = User.GetAnimation(WindupAnimName);
-                windupAnim?.SetSpeed(2f);
-            }
-        }
-
-        protected override void SequenceStartBranch()
-        {
-            switch(SequenceStep)
-            {
-                case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequence = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), WalkDuration);
-                    break;
-                case 1:
-                    User.PlayAnimation(PickupAnimName, true);
-                    CurSequence = new WaitForAnimation(PickupAnimName);
-                    ChangeSequenceBranch(SequenceBranch.Main);
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
-
-        protected override void SequenceMainBranch()
-        {
-            switch(SequenceStep)
-            {
-                case 0:
-                    User.PlayAnimation(WindupAnimName);
-                    StartActionCommandInput();
-                    CurSequence = new WaitForCommand(1500f, actionCommand, CommandEnabled);
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
-
-        protected override void SequenceSuccessBranch()
-        {
-            switch (SequenceStep)
-            {
-                case 0:
-                    User.PlayAnimation(SlamAnimName, true);
-                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, false);
-                    CurSequence = new WaitForAnimation(SlamAnimName);
-                    ChangeSequenceBranch(SequenceBranch.End);
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
-
-        protected override void SequenceFailedBranch()
-        {
-            switch (SequenceStep)
-            {
-                case 0:
-                    User.PlayAnimation(SlamAnimName, true);
-                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, false);
-                    CurSequence = new WaitForAnimation(SlamAnimName);
-                    ChangeSequenceBranch(SequenceBranch.End);
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
-
-        protected override void SequenceEndBranch()
-        {
-            switch (SequenceStep)
-            {
-                case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequence = new MoveTo(User.BattlePosition, WalkDuration);
-                    break;
-                case 1:
-                    User.PlayAnimation(AnimationGlobals.IdleName, true);
-                    EndSequence();
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
-
-        protected override void SequenceMissBranch()
-        {
-            
+            SetMoveSequence(new HammerSequence(this));
+            actionCommand = new HammerCommand(MoveSequence, 4, 500d);
         }
     }
 }

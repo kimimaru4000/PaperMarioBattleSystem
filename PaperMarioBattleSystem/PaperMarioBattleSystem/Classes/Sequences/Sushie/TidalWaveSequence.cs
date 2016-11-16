@@ -11,20 +11,12 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class TidalWaveSequence : Sequence
     {
-        protected float WalkDuration = 700f;
-        protected int AdditionalDamage = 0;
+        public float WalkDuration = 700f;
+        public int AdditionalDamage = 0;
 
-        public TidalWaveSequence()
+        public TidalWaveSequence(MoveAction moveAction) : base(moveAction)
         {
-            //Name = "Tidal Wave";
-            //Description = "A surge of water hits all enemies";
-            //SelectionType = TargetSelectionMenu.EntitySelectionType.All;
-            //ContactType = Enumerations.ContactTypes.None;
-            //Element = Enumerations.Elements.Water;
-            //BaseDamage = 1;
-            //HeightsAffected = new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded, Enumerations.HeightStates.Airborne, Enumerations.HeightStates.Ceiling };
-            //
-            //actionCommand = new TidalWaveCommand(this);
+            
         }
 
         protected override void OnEnd()

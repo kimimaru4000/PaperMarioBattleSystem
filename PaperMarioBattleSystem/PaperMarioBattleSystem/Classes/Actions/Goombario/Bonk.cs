@@ -15,8 +15,11 @@ namespace PaperMarioBattleSystem
         public Bonk()
         {
             Name = "Bonk";
-            Description = "Headbonk an enemy.";
-            BaseDamage = 1;
+            MoveInfo.Description = "Headbonk an enemy.";
+
+            InteractionParamHolder damageInfo = (InteractionParamHolder)DamageInfo;
+            damageInfo.Damage = 1;
+            DamageInfo = damageInfo;
         }
     }
 }

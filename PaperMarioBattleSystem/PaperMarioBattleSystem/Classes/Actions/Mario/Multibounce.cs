@@ -10,64 +10,15 @@ namespace PaperMarioBattleSystem
 {
     public sealed class Multibounce : Jump
     {
-        private int NextTargetIndex = 0;
-        private int CurrentTargetIndex = 0;
-
-        protected override BattleEntity CurTarget => EntitiesAffected[CurrentTargetIndex];
-
         public Multibounce()
         {
             Name = "Multibounce";
-            Description = "Lets you do a Multibounce. Uses 2 FP. Jumps on all enemies in a row if action command is timed right.";
 
-            FPCost = 2;
+            MoveInfo.Description = "Lets you do a Multibounce. Uses 2 FP. Jumps on all enemies in a row if action command is timed right.";
+            MoveInfo.FPCost = 2;
+            MoveInfo.SelectionType = TargetSelectionMenu.EntitySelectionType.All;
 
-            SelectionType = TargetSelectionMenu.EntitySelectionType.All;
-        }
-
-        protected override void OnStart()
-        {
-            base.OnStart();
-
-            CurrentTargetIndex = NextTargetIndex = 0;
-        }
-
-        protected override void OnEnd()
-        {
-            base.OnEnd();
-
-            CurrentTargetIndex = NextTargetIndex = 0;
-        }
-
-        protected override void CommandSuccess()
-        {
-            base.CommandSuccess();
-            NextTargetIndex++;
-        }
-
-        protected override void SequenceSuccessBranch()
-        {
-            switch (SequenceStep)
-            {
-                case 0:
-                    AttemptDamage(DamageDealt, CurTarget, false);
-
-                    //Restart with the next target
-                    if (NextTargetIndex < EntitiesAffected.Length)
-                    {
-                        CurrentTargetIndex = NextTargetIndex;
-                        ChangeSequenceBranch(SequenceBranch.Start);
-                    }
-                    //Otherwise end it since we're on the last target
-                    else
-                    {
-                        ChangeSequenceBranch(SequenceBranch.End);
-                    }
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
+            SetMoveSequence(new MultibounceSequence(this));
         }
     }
 }

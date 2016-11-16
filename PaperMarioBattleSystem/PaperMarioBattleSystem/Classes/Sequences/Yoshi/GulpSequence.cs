@@ -13,19 +13,9 @@ namespace PaperMarioBattleSystem
     {
         public double WalkDuration = 4000f;
 
-        public GulpSequence()
+        public GulpSequence(MoveAction moveAction) : base(moveAction)
         {
-            //Name = "Gulp";
-            //
-            //ContactType = Enumerations.ContactTypes.None;
-            //
-            //FPCost = 4;
-            //BaseDamage = 4;
-            //Piercing = true;
-            //
-            //actionCommand = new GulpCommand(this, WalkDuration / 2f, 500f, 1f);
-            //SelectionType = TargetSelectionMenu.EntitySelectionType.First;
-            //HeightsAffected = new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded };
+            
         }
 
         protected override void CommandSuccess()

@@ -9,8 +9,18 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// An interface for BattleActions that handle ActionCommands.
     /// </summary>
-    interface IActionCommandHandler
+    public interface IActionCommandHandler
     {
+        /// <summary>
+        /// The name of the Action Command Handler.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
+        /// The result of performing the Action Command.
+        /// </summary>
+        ActionCommand.CommandResults CommandResult { get; }
+
         /// <summary>
         /// What occurs when the action command is successfully performed.
         /// </summary>

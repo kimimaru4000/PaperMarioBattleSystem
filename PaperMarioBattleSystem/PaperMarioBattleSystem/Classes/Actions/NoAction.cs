@@ -13,42 +13,12 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class NoAction : MoveAction
     {
-        protected override void SequenceStartBranch()
+        public NoAction()
         {
-            switch (SequenceStep)
-            {
-                case 0:
-                    EndSequence();
-                    break;
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
+            Name = "Do Nothing";
+            MoveInfo = new MoveActionData(null, 0, "Causes you to skip your turn.", TargetSelectionMenu.EntitySelectionType.Single, Enumerations.EntityTypes.Player, null);
 
-        protected override void SequenceEndBranch()
-        {
-            PrintInvalidSequence();
-        }
-
-        protected override void SequenceMainBranch()
-        {
-            PrintInvalidSequence();
-        }
-
-        protected override void SequenceSuccessBranch()
-        {
-            PrintInvalidSequence();
-        }
-
-        protected override void SequenceFailedBranch()
-        {
-            PrintInvalidSequence();
-        }
-
-        protected override void SequenceMissBranch()
-        {
-            PrintInvalidSequence();
+            SetMoveSequence(new NoSequence(this));
         }
     }
 }

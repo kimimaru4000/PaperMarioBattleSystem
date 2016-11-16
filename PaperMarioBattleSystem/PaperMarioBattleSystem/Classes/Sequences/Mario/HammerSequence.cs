@@ -23,16 +23,9 @@ namespace PaperMarioBattleSystem
         protected string WindupAnimName = AnimationGlobals.MarioBattleAnimations.HammerWindupName;
         protected string SlamAnimName = AnimationGlobals.MarioBattleAnimations.HammerSlamName;
 
-        public HammerSequence()
+        public HammerSequence(MoveAction moveAction) : base(moveAction)
         {
-            //Name = "Hammer";
-            //Description = "Whack an enemy with your Hammer.";
-            //SelectionType = TargetSelectionMenu.EntitySelectionType.First;
-            //ContactType = Enumerations.ContactTypes.HammerContact;
-            //BaseDamage = (int)User.BattleStats.GetHammerLevel;
-            //HeightsAffected = new HeightStates[] { HeightStates.Grounded };
-            //
-            //actionCommand = new HammerCommand(this, 4, 500d);
+            
         }
 
         protected override void CommandSuccess()

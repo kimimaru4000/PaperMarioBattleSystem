@@ -15,16 +15,11 @@ namespace PaperMarioBattleSystem
         private int NextTargetIndex = 0;
         private int CurrentTargetIndex = 0;
 
-        protected override BattleEntity CurTarget => EntitiesAffected[CurrentTargetIndex];
+        public override BattleEntity CurTarget => EntitiesAffected[CurrentTargetIndex];
 
-        public MultibounceSequence()
+        public MultibounceSequence(MoveAction moveAction) : base(moveAction)
         {
-            //Name = "Multibounce";
-            //Description = "Lets you do a Multibounce. Uses 2 FP. Jumps on all enemies in a row if action command is timed right.";
-            //
-            //FPCost = 2;
-            //
-            //SelectionType = TargetSelectionMenu.EntitySelectionType.All;
+            
         }
 
         protected override void OnStart()

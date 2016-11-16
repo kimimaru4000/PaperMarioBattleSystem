@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// <para>A Defensive Action is defined as one that can be done when it's not the entities turn.
     /// In the first two Paper Mario games, the only Defensive Actions are Guard and Superguard.</para>
     /// </summary>
-    public abstract class DefensiveAction : BattleAction, IActionCommand
+    public abstract class DefensiveAction : BattleAction, IActionCommand, IActionCommandHandler
     {
         public ActionCommand actionCommand { get; set; } = null;
         public bool DisableActionCommand { get; set; } = false;
@@ -21,6 +21,9 @@ namespace PaperMarioBattleSystem
 
         public bool CommandEnabled => (actionCommand != null && DisableActionCommand == false);
         public bool IsSuccessful => (PrevCommandTimer >= Time.ActiveMilliseconds);
+
+        //NOTE: Ideally, check the CommandResult instead of the timer - not super important right now, though
+        public ActionCommand.CommandResults CommandResult { get; set; } = ActionCommand.CommandResults.Failure;
 
         protected BattleEntity actionUser = null;
 
@@ -48,14 +51,16 @@ namespace PaperMarioBattleSystem
         public virtual void OnCommandSuccess()
         {
             PrevCommandTimer = Time.ActiveMilliseconds + CommandSuccessTimer;
+
+            CommandResult = ActionCommand.CommandResults.Success;
         }
         
         public virtual void OnCommandFailed()
         {
-
+            CommandResult = ActionCommand.CommandResults.Failure;
         }
 
-        public virtual void OnCommandResponse(int response)
+        public virtual void OnCommandResponse(object response)
         {
             
         }

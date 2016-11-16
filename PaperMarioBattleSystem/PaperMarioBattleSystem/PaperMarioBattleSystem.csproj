@@ -68,7 +68,6 @@
     <Compile Include="Classes\ActionCommands\SuperguardCommand.cs" />
     <Compile Include="Classes\ActionCommands\TidalWaveCommand.cs" />
     <Compile Include="Classes\Actions\BattleAction.cs" />
-    <Compile Include="Classes\Actions\CommandMoveAction.cs" />
     <Compile Include="Classes\Actions\Defensive\DefensiveAction.cs" />
     <Compile Include="Classes\Actions\Defensive\Superguard.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
@@ -83,7 +82,6 @@
     <Compile Include="Classes\Actions\Mario\PowerBounce.cs" />
     <Compile Include="Classes\Actions\MoveAction.cs" />
     <Compile Include="Classes\Actions\NoAction.cs" />
-    <Compile Include="Classes\Actions\OffensiveAction.cs" />
     <Compile Include="Classes\Actions\Sushie\TidalWave.cs" />
     <Compile Include="Classes\Actions\Yoshi\Gulp.cs" />
     <Compile Include="Classes\Animations\Animation.cs" />
@@ -151,6 +149,7 @@
     <Compile Include="Classes\Sequences\Mario\JumpSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\MultibounceSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\PowerBounceSequence.cs" />
+    <Compile Include="Classes\Sequences\NoSequence.cs" />
     <Compile Include="Classes\Sequences\Sequence.cs" />
     <Compile Include="Classes\Sequences\Sushie\TidalWaveSequence.cs" />
     <Compile Include="Classes\Sequences\Yoshi\GulpSequence.cs" />

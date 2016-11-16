@@ -131,7 +131,7 @@ namespace PaperMarioBattleSystem
             int damage = damageResult.TotalDamage;
             bool piercing = damageResult.Piercing;
             StatusEffect[] statusesInflicted = damageResult.StatusesInflicted;
-
+            
             //Check for a damage received multiplier on the entity. We need to check if it has one since the default value is 0
             //NOTE: Don't do this here, do it in Interactions according to the order in the comments above (Steps 5/6)
             //if (EntityProperties.HasMiscProperty(MiscProperty.DamageReceivedMultiplier) == true)
@@ -192,9 +192,9 @@ namespace PaperMarioBattleSystem
             //If this entity received damage during its action sequence, it has been interrupted
             //The null check is necessary in the event that a StatusEffect that deals damage at the start of the phase, such as Poison,
             //is inflicted at the start of the battle before any entity has moved
-            if (IsTurn == true && PreviousAction?.InSequence == true)
+            if (IsTurn == true && PreviousAction?.MoveSequence.InSequence == true)
             {
-                PreviousAction.StartInterruption(element);
+                PreviousAction.MoveSequence.StartInterruption(element);
             }
         }
 
@@ -483,7 +483,6 @@ namespace PaperMarioBattleSystem
         public virtual void TurnUpdate()
         {
             PreviousAction?.Update();
-            PreviousAction?.PostUpdate();
         }
 
         /// <summary>
@@ -552,7 +551,7 @@ namespace PaperMarioBattleSystem
                     BattleEntity[] allies = null;
 
                     //If this action targets only the first player/enemy, look for adjacent allies
-                    if (actualAction.SelectionType == TargetSelectionMenu.EntitySelectionType.First)
+                    if (actualAction.MoveProperties.SelectionType == TargetSelectionMenu.EntitySelectionType.First)
                     {
                         Debug.Log($"{Name} is looking for valid adjacent allies to attack!");
 
@@ -568,13 +567,13 @@ namespace PaperMarioBattleSystem
                     }
 
                     //Filter by heights
-                    allies = BattleManager.Instance.FilterEntitiesByHeights(allies, actualAction.HeightsAffected);
+                    allies = BattleManager.Instance.FilterEntitiesByHeights(allies, actualAction.MoveProperties.HeightsAffected);
 
                     //Filter dead entities
                     allies = BattleManager.Instance.FilterDeadEntities(allies);
 
                     //Choose a random ally to attack if the action only targets one entity
-                    if (allies.Length > 0 && actualAction.SelectionType != TargetSelectionMenu.EntitySelectionType.All)
+                    if (allies.Length > 0 && actualAction.MoveProperties.SelectionType != TargetSelectionMenu.EntitySelectionType.All)
                     {
                         int randTarget = GeneralGlobals.Randomizer.Next(0, allies.Length);
                         allies = new BattleEntity[] { allies[randTarget] };

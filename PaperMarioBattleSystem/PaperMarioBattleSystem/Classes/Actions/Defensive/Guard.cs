@@ -15,6 +15,8 @@ namespace PaperMarioBattleSystem
     {
         public Guard(BattleEntity user) : base(user)
         {
+            Name = "Guard";
+
             actionCommand = new GuardCommand(this);
 
             CommandSuccessTimer = (8d / 60d) * Time.MsPerS;

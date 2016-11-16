@@ -21,11 +21,16 @@ namespace PaperMarioBattleSystem
         }
 
         public bool AcceptingInput { get; protected set; } = false;
-        protected IActionCommand Action = null;
+        public IActionCommandHandler Handler { get; private set; } = null;
 
-        protected ActionCommand(IActionCommand commandAction)
+        protected ActionCommand(IActionCommandHandler commandHandler)
         {
-            Action = commandAction;
+            SetHandler(commandHandler);
+        }
+
+        public void SetHandler(IActionCommandHandler commandHandler)
+        {
+            Handler = commandHandler;
         }
 
         /// <summary>
@@ -51,15 +56,15 @@ namespace PaperMarioBattleSystem
         /// <param name="result">The final result of the ActionCommand</param>
         protected void OnComplete(CommandResults result)
         {
-            Debug.Log($"Command for {Action.Name} has completed with a {result} result!");
+            Debug.Log($"Command for {Handler.Name} has completed with a {result} result!");
 
             if (result == CommandResults.Success)
             {
-                Action.OnCommandSuccess();
+                Handler.OnCommandSuccess();
             }
             else if (result == CommandResults.Failure)
             {
-                Action.OnCommandFailed();
+                Handler.OnCommandFailed();
             }
 
             //The Command is finished, so end input
@@ -72,9 +77,9 @@ namespace PaperMarioBattleSystem
         /// <param name="response">An int value representing a response</param>
         protected void SendResponse(int response)
         {
-            Debug.Log($"Command for {Action.Name} has sent a response of {response}!");
+            Debug.Log($"Command for {Handler.Name} has sent a response of {response}!");
 
-            Action.OnCommandResponse(response);
+            Handler.OnCommandResponse(response);
         }
 
         /// <summary>

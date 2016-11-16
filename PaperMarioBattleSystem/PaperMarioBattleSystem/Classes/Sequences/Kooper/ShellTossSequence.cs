@@ -15,16 +15,9 @@ namespace PaperMarioBattleSystem
         private float SpinMoveDuration = 1000f;
         private int DamageMod = 1;
 
-        public ShellTossSequence()
+        public ShellTossSequence(MoveAction moveAction) : base(moveAction)
         {
-            //Name = "Shell Toss";
-            //Description = "Shoot yourself at an enemy.";
-            //SelectionType = TargetSelectionMenu.EntitySelectionType.First;
-            //ContactType = Enumerations.ContactTypes.None;
-            //BaseDamage = 1;
-            //HeightsAffected = new HeightStates[] { HeightStates.Grounded };
-            //
-            //actionCommand = new HammerCommand(this, 4, 500d);
+            
         }
 
         protected override void CommandSuccess()

@@ -38,15 +38,15 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public MoveAction Action { get; private set; } = null;
 
-        protected string Name => Action.Name;
+        public string Name => Action.Name;
 
         protected BattleEntity User => Action.User;
 
-        protected ActionCommand actionCommand => null;
+        protected ActionCommand actionCommand => Action.actionCommand;
 
-        protected bool CommandEnabled => true;
+        protected bool CommandEnabled => Action.CommandEnabled;
 
-        protected int BaseDamage { get; set; }
+        protected int BaseDamage => Action.DamageInfo.HasValue ? Action.DamageInfo.Value.Damage : 0;
 
         //NOTE: TEMPORARY - May be removed
         protected BattleEntity[] EntitiesAffected { get; private set; }
@@ -86,12 +86,13 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The result of performing the Action Command.
         /// </summary>
-        protected ActionCommand.CommandResults CommandResult { get; private set; } = ActionCommand.CommandResults.Success;
+        public ActionCommand.CommandResults CommandResult { get; private set; } = ActionCommand.CommandResults.Success;
 
         #endregion
 
-        protected Sequence()
+        protected Sequence(MoveAction moveAction)
         {
+            SetAction(moveAction);
             InterruptionHandler = BaseInterruptionHandler;
         }
 
@@ -99,17 +100,18 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Sets the MoveAction this Sequence is associated with.
+        /// This is automatically set in the MoveAction's constructor if a MoveAction is being instantiated directly.
         /// </summary>
         /// <param name="moveAction">The MoveAction this Sequence is being performed by.</param>
-        protected void SetAction(MoveAction moveAction)
+        public void SetAction(MoveAction moveAction)
         {
             Action = moveAction;
         }
 
         /// <summary>
-        /// Starts the action sequence
+        /// Starts the action sequence.
         /// </summary>
-        /// <param name="targets">The targets to perform the sequence on</param>
+        /// <param name="targets">The targets to perform the sequence on.</param>
         public void StartSequence(params BattleEntity[] targets)
         {
             CurBranch = SequenceBranch.Start;
@@ -185,6 +187,8 @@ namespace PaperMarioBattleSystem
         {
             SequenceStep += (int)progressAmount;
 
+            //Debug.LogWarning($"SequenceStep for {Name} is {SequenceStep}");
+
             OnProgressSequence();
             if (InSequence == true)
             {
@@ -198,6 +202,8 @@ namespace PaperMarioBattleSystem
         /// <param name="newBranch">The new branch to switch to</param>
         protected void ChangeSequenceBranch(SequenceBranch newBranch)
         {
+            //Debug.LogWarning($"Changing from {CurBranch} to {newBranch}");
+
             CurBranch = newBranch;
 
             //Set to -1 as it'll be incremented next time the sequence progresses
@@ -412,7 +418,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void PreSequenceUpdate()
         {
-
+            //If the action command is enabled, let it handle the sequence
+            if (CommandEnabled == true)
+            {
+                if (actionCommand.AcceptingInput == true)
+                    actionCommand.Update();
+            }
         }
 
         public void Update()
@@ -477,6 +488,13 @@ namespace PaperMarioBattleSystem
                 return new int[0];
             }
 
+            //Ensure the MoveAction associated with this sequence supports damage
+            if (Action.DealsDamage == false)
+            {
+                Debug.LogError($"Attempting to deal damage when {Action.Name} does not support it, as {nameof(Action.DamageInfo)} is null");
+                return new int[0];
+            }
+
             int totalDamage = isTotalDamage == true ? damage : GetTotalDamage(damage);
 
             //Check for the All or Nothing Badge
@@ -494,6 +512,9 @@ namespace PaperMarioBattleSystem
                 }
             }
 
+            //Quick accessor for the damage info
+            InteractionParamHolder damageInfo = Action.DamageInfo.Value;
+
             //The damage dealt to each BattleEntity
             int[] damageValues = new int[entities.Length];
 
@@ -502,9 +523,7 @@ namespace PaperMarioBattleSystem
             {
                 BattleEntity victim = entities[i];
 
-                InteractionParamHolder holder = Action.DamageValues.Value;
-
-                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage, holder.DamagingElement, holder.Piercing, holder.ContactType, holder.Statuses));
+                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage, damageInfo.DamagingElement, damageInfo.Piercing, damageInfo.ContactType, damageInfo.Statuses));
 
                 //Set the total damage dealt to the victim
                 damageValues[i] = finalResult.VictimResult.TotalDamage;

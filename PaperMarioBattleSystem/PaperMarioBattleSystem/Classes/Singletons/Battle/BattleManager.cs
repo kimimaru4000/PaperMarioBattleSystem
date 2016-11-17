@@ -341,14 +341,41 @@ namespace PaperMarioBattleSystem
         /// <param name="newPartner">The new BattlePartner to take part in battle.</param>
         public void SwapPartner(BattlePartner newPartner)
         {
-            //NOTE: We will have to move player turns to the BattleManager, as swapping out a Partner
-            //causes the original Partner's turn to be used but not the new Partner's turn
+            //NOTE: Tested in TTYD regarding turns. If switching partners without Quick Change, it uses the number of turns
+            //that the previous partner had out. So for example, if Vivian is inflicted with Fast and you switch out to Yoshi
+            //who is not inflicted with Fast, Yoshi will be able to move once after the switch. Conversely, switching to Vivian
+            //with Yoshi will cause Vivian to not be able to move after the switch
 
             BattlePartner oldPartner = Partner;
 
             Partner = newPartner;
             Partner.Position = oldPartner.Position;
             Partner.SetBattlePosition(oldPartner.BattlePosition);
+
+            //Set the new Partner to use the same number of turns as the old Partner would have, if the old Partner used this action
+            if (EntityTurn == oldPartner)
+            {
+                //if (oldPartner.MaxTurns < Partner.MaxTurns)
+                //{
+                //    //If the next turn for the old Partner is the last one, make the new Partner unable to go
+                //    if ((oldPartner.TurnsUsed + 1) >= oldPartner.MaxTurns)
+                //    {
+                //        Partner.SetTurnsUsed(Partner.MaxTurns);
+                //    }
+                //}
+                //else
+                //{
+                //    Partner.SetTurnsUsed(oldPartner.TurnsUsed + 1);
+                //}
+
+                //Partner.SetMaxTurns(oldPartner.MaxTurns);
+                //Partner.SetTurnsUsed(oldPartner.TurnsUsed + 1);
+                //oldPartner.SetTurnsUsed(oldPartner.MaxTurns - 1);
+            }
+            else
+            {
+                //Partner.SetTurnsUsed(oldPartner.TurnsUsed);
+            }
 
             //Swap Partner badges with the new Partner
             BattlePartner.SwapPartnerBadges(oldPartner, Partner);

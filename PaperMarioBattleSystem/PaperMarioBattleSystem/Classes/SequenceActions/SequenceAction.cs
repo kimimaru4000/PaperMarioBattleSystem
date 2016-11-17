@@ -17,13 +17,16 @@ namespace PaperMarioBattleSystem
         protected double StartTime = 0d;
         protected bool Done { get; private set; } = false;
 
-        public BattleEntity Entity => BattleManager.Instance.EntityTurn;
+        /// <summary>
+        /// The BattleEntity the SequenceAction affects.
+        /// </summary>
+        public BattleEntity Entity { get; private set; } = BattleManager.Instance.EntityTurn;
 
         public bool IsDone => Done;
 
         protected SequenceAction()
         {
-            
+
         }
 
         protected SequenceAction(double duration)
@@ -34,6 +37,11 @@ namespace PaperMarioBattleSystem
                 Debug.LogWarning($"{nameof(Duration)} is negative - turning it positive!");
                 Duration = Math.Abs(Duration);
             }
+        }
+
+        protected SequenceAction(BattleEntity entity, double duration) : this(duration)
+        {
+            Entity = entity;
         }
 
         public void Start()

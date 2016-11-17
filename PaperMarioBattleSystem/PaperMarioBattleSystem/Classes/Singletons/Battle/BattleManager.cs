@@ -71,12 +71,8 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The current entity going
         /// </summary>
-        public BattleEntity EntityTurn = null;
+        public BattleEntity EntityTurn { get; private set; } = null;
         private int EnemyTurn = 0;
-
-        //NOTE: Add Front and Back references for the Players (Ex. assign Mario to the Front and the Partner to the Back initially
-        //and change it when they switch positions)
-        //Then, add a method that gets a set of entities behind a particular one
 
         /// <summary>
         /// The BattlePlayer in the Front
@@ -337,6 +333,35 @@ namespace PaperMarioBattleSystem
             EntityTurn.OnTurnStart();
 
             SoundManager.Instance.PlaySound(SoundManager.Sound.SwitchPartner);
+        }
+
+        /// <summary>
+        /// Swaps out Mario's current Partner for a different one.
+        /// </summary>
+        /// <param name="newPartner">The new BattlePartner to take part in battle.</param>
+        public void SwapPartner(BattlePartner newPartner)
+        {
+            //NOTE: We will have to move player turns to the BattleManager, as swapping out a Partner
+            //causes the original Partner's turn to be used but not the new Partner's turn
+
+            BattlePartner oldPartner = Partner;
+
+            Partner = newPartner;
+            Partner.Position = oldPartner.Position;
+            Partner.SetBattlePosition(oldPartner.BattlePosition);
+
+            //Swap Partner badges with the new Partner
+            BattlePartner.SwapPartnerBadges(oldPartner, Partner);
+
+            //Check if the Partner is in the front or back and set the correct reference
+            if (oldPartner == FrontPlayer)
+            {
+                FrontPlayer = Partner;
+            }
+            else if (oldPartner == BackPlayer)
+            {
+                BackPlayer = Partner;
+            }
         }
 
         public void TurnStart()

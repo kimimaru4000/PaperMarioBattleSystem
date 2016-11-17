@@ -13,6 +13,7 @@ namespace PaperMarioBattleSystem
         public Kooper() : base(new Stats(1, 50, 0, 0, 1))
         {
             Name = "Kooper";
+            PartnerDescription = "He can throw his shell at enemies!";
             PartnerType = Enumerations.PartnerTypes.Kooper;
             
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Kooper");

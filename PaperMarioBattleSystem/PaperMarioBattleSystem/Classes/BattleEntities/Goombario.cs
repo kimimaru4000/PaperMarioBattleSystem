@@ -13,6 +13,7 @@ namespace PaperMarioBattleSystem
         public Goombario() : base(new Stats(1, 50, 0, 0, 0))
         {
             Name = "Goombario";
+            PartnerDescription = "He can Headbonk on enemies!";
             PartnerType = Enumerations.PartnerTypes.Goombario;
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Goombario");

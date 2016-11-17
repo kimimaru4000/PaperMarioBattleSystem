@@ -13,6 +13,8 @@ namespace PaperMarioBattleSystem
     {
         public Enumerations.PartnerTypes PartnerType { get; protected set; } = Enumerations.PartnerTypes.None;
 
+        public string PartnerDescription { get; protected set; } = string.Empty;
+
         public BattlePartner(Stats stats) : base(stats)
         {
             Name = "Partner";

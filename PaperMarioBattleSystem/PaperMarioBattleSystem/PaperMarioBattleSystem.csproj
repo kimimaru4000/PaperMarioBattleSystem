@@ -127,6 +127,7 @@
     <Compile Include="Classes\Collectibles\Collectible.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ActionSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\ChangePartnerSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\GoombarioSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\HammerSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\JumpSubMenu.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="Classes\SequenceActions\Wait.cs" />
     <Compile Include="Classes\SequenceActions\WaitForAnimation.cs" />
     <Compile Include="Classes\SequenceActions\WaitForCommand.cs" />
+    <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
     <Compile Include="Classes\Sequences\Kooper\ShellTossSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\HammerSequence.cs" />

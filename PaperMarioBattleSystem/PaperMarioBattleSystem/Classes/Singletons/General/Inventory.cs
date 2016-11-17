@@ -652,6 +652,11 @@ namespace PaperMarioBattleSystem
                 return battlePartners.ToArray();
             }
 
+            public int GetPartnerCount()
+            {
+                return Partners.Count;
+            }
+
             /// <summary>
             /// Gets a random Partner that is in the party.
             /// </summary>

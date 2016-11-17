@@ -171,7 +171,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Prints an error message when an invalid sequence is occurred.
+        /// Prints an error message when an invalid sequence has occurred.
         /// It includes information such as the action and the entity performing it, the sequence branch, and the sequence step
         /// </summary>
         protected void PrintInvalidSequence()

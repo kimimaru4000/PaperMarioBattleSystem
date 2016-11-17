@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
             PlayerType = playerType;
 
             ActionButtons.Add(new ActionButton("Tactics", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
-                new Vector2(-270, 50), new JumpSubMenu()));
+                new Vector2(-270, 50), new ChangePartnerSubMenu()));
             ActionButtons.Add(new ActionButton("Items", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
                 new Vector2(-220, 50), new HammerSubMenu()));
         }

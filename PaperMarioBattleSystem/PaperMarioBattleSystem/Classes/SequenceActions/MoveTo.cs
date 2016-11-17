@@ -31,6 +31,11 @@ namespace PaperMarioBattleSystem
             MoveDest = destination;
         }
 
+        public MoveTo(BattleEntity entity, Vector2 destination, double duration) : base(entity, duration)
+        {
+            MoveDest = destination;
+        }
+
         protected MoveTo(double duration) : base(duration)
         {
 

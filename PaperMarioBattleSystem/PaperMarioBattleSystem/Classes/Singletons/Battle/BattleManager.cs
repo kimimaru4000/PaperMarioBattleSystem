@@ -116,6 +116,8 @@ namespace PaperMarioBattleSystem
 
         private BattleManager()
         {
+            SoundManager.Instance.SoundVolume = 0f;
+
             //TEMPORARY: For compatibility with the old array system until we migrate over completely
             for (int i = 0; i < MaxEnemies; i++)
             {
@@ -164,15 +166,7 @@ namespace PaperMarioBattleSystem
             //If a turn just ended, update the current state
             if (State == BattleState.TurnEnd)
             {
-                //If the current entity doesn't have any turns at the start due to the death or the Slow status, end the turn
-                if (EntityTurn.UsedTurn == true)
-                {
-                    TurnEnd();
-                }
-                else
-                {
-                    TurnStart();
-                }
+                TurnStart();
             }
 
             if (State == BattleState.Turn)
@@ -428,42 +422,8 @@ namespace PaperMarioBattleSystem
 
             State = BattleState.TurnEnd;
 
-            //Effectively restart the turn for the entity if it isn't dead and didn't use up all of its turns
-            if (EntityTurn.IsDead == false && EntityTurn.UsedTurn == false)
-            {
-                return;
-            }
-
-            if (Phase == BattlePhase.Enemy)
-            {
-                int nextEnemy = FindOccupiedEnemyIndex(EnemyTurn + 1);
-                if (nextEnemy < 0)
-                {
-                    SwitchPhase(BattlePhase.Player);
-                }
-                else
-                {
-                    EnemyTurn = nextEnemy;
-                    EntityTurn = Enemies[nextEnemy];
-                }
-            }
-            else
-            {
-                if (Mario.UsedTurn)
-                {
-                    if (Partner != null && Partner.UsedTurn == false)
-                    {
-                        EntityTurn = Partner;
-                    }
-                    else SwitchPhase(BattlePhase.Enemy);
-                }
-                else
-                {
-                    if (Mario.UsedTurn == false)
-                        EntityTurn = Mario;
-                    else SwitchPhase(BattlePhase.Enemy);
-                }
-            }
+            //Find the next entity to go
+            FindNextEntityTurn();
         }
 
         /// <summary>
@@ -472,9 +432,6 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void UpdateBattleState()
         {
-            //Go through all entities and check which ones are dead at the end of each turn
-            //Enemies are only removed from battle at the end of a turn
-
             if (Mario.IsDead == true)
             {
                 State = BattleState.Done;
@@ -522,6 +479,54 @@ namespace PaperMarioBattleSystem
 
             //Remove enemies from battle here
             RemoveEnemies(deadEnemies, true);
+        }
+
+        /// <summary>
+        /// Finds the next BattleEntity that should go.
+        /// </summary>
+        private void FindNextEntityTurn()
+        {
+            //Enemy phase
+            if (Phase == BattlePhase.Enemy)
+            {
+                //Look through all enemies, starting from the current
+                //Find the first one that has turns remaining
+                int nextEnemy = -1;
+                for (int i = EnemyTurn; i < Enemies.Count; i++)
+                {
+                    if (Enemies[i] != null && Enemies[i].UsedTurn == false)
+                    {
+                        nextEnemy = EnemyTurn = i;
+                        EntityTurn = Enemies[nextEnemy];
+                        break;
+                    }
+                }
+
+                //If all enemies are done with their turns, go to the player phase
+                if (nextEnemy < 0)
+                {
+                    SwitchPhase(BattlePhase.Player);
+                }
+            }
+            //Player phase
+            else
+            {
+                //If the front player has turns remaining, it goes up next
+                if (FrontPlayer.UsedTurn == false)
+                {
+                    EntityTurn = FrontPlayer;
+                }
+                //Next check the back player - if it has turns remaining, it goes up
+                else if (BackPlayer.UsedTurn == false)
+                {
+                    EntityTurn = BackPlayer;
+                }
+                //Neither player has turns remaining, so go to the enemy phase
+                else
+                {
+                    SwitchPhase(BattlePhase.Enemy);
+                }
+            }
         }
 
         #region Helper Methods

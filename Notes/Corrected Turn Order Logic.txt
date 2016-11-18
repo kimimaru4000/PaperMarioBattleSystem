@@ -26,6 +26,11 @@ Result: Correct for players at least, as I haven't tested with enemies. I put Go
 use Quake Hammer in Twilight Trail to make the background props fall down and bring Goombella down to 0 HP.
 After being revived, Goombella went.
 
+Additional Notes
+----------------
+-From what I observed, Rally Wink does not actually grant the Fast status, as using it when Mario already has Fast
+will still give him another turn. When a status effect is inflicted on someone that already has that status, the
+timer for the status refreshes. This leads me to believe that Rally Wink simply adds 1 to Mario's max turn count.
 
 Solutions
 ---------
@@ -33,12 +38,14 @@ Based on the above tests, I think we need to make the following changes to turn 
 
 -After any player character turn, check if the player in front has a turn, then check if the player in back has a turn.
 Switch the turn to that player. The end of the Player phase occurs when neither the front nor the back player has a turn.
-
+-After any enemy turn, check if the current enemy has a turn. If not, find the next enemy with a turn and set the enemy turn value to that one.
+-For enemies that were spawned (via Koopatrol summon or some other method), set their current turn count to their max turn count to prevent
+them from going
 
 Partner Turn Count
 ------------------
-Partners are unique to any other type of entity in Paper Mario because they can be switched out for another one. They also
-share many properties amongst each other, such as effects of P Badges.
+Partners are unique to any other type of entity in the first two Paper Mario games because they can be switched
+out for another one. They also share many properties amongst each other, such as the effects of P Badges.
 
 I tested partner turn count in the following scenario, without Quick Change equipped:
 -Vivian was inflicted with Fast, Yoshi was not

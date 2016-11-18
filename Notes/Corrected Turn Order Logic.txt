@@ -64,3 +64,35 @@ A few things to note based off this data:
 of the Player phase has
 2. Partner turns are shared. If one Partner has already used up all of its turns, no other Partners are able to
 move until the next Player phase
+
+Update (11/18/16)
+-----------------
+I decided to do tests with Slow to see if it follows the same logic.
+
+Without Quick Change (Yoshi was inflicted with Slow and Vivian wasn't):
+-Yoshi had no turns; using Mario, switching to Vivian caused Vivian to not go
+-Vivian had 1 turn; using Mario, switching to Yoshi caused Yoshi to have 1 turn
+
+With Quick Change (same as above; Yoshi inflicted with Slow, Vivian wasn't):
+-Yoshi had no turns; using Mario, switching to Vivian caused Vivian to not go
+-When Yoshi had 1 turn, switching to Vivian caused Vivian to have 1 turn
+-When Vivian had 1 turn, switching to Yoshi caused Yoshi to have 1 turn
+
+It turns out it does follow the same logic, so the number of turns all Partners have is indeed determined at the start of the player phase.
+
+Additional Notes
+----------------
+-The interesting thing about Slow is that it doesn't partially black out your character as if they used a turn already.
+If a Partner afflicted with Slow cannot go because of the status and you switch out to another partner, the new partner
+will be blacked out.
+
+Testing Slow with Fast
+----------------------
+To confirm this even more, I did tests using Slow on one Partner and Fast on another.
+
+I inflicted Slow on Yoshi and Fast on Bobbery with cheats:
+
+-Bobbery had 2 turns max. Switching to Yoshi gave him 1 turn. So in total, 2 turns across both partners, which is as expected.
+-Yoshi had 1 turn. Switching to Bobbery gave him no turns (without Quick Change), so 1 turn across both partners, which is as expected.
+
+This means my conclusion undoubtedly holds true: the number of turns all Partners have is determined at the start of the player phase.

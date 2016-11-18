@@ -15,12 +15,25 @@ namespace PaperMarioBattleSystem
 
         public string PartnerDescription { get; protected set; } = string.Empty;
 
+        /// <summary>
+        /// The number of max turns all Partners have this phase cycle. All Partners share turns.
+        /// </summary>
+        public static int PartnerMaxTurns { get; private set; } = 0;
+
         public BattlePartner(Stats stats) : base(stats)
         {
             Name = "Partner";
 
             EntityType = Enumerations.EntityTypes.Player;
             PlayerType = Enumerations.PlayerTypes.Partner;
+        }
+
+        public override void OnPhaseCycleStart()
+        {
+            base.OnPhaseCycleStart();
+
+            //Set the number of max turns each Partner should have to the number of max turns this one does
+            PartnerMaxTurns = MaxTurns;
         }
 
         /// <summary>

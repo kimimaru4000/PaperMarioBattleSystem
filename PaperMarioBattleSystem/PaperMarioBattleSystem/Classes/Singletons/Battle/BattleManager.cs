@@ -323,6 +323,9 @@ namespace PaperMarioBattleSystem
                 }
             }
 
+            //NOTE: This doesn't look like it works right for Partner death...
+            //Move these lines into the setTurn checks
+
             //Perform Mario or Partner-specific turn start logic
             EntityTurn.OnTurnStart();
 
@@ -335,40 +338,26 @@ namespace PaperMarioBattleSystem
         /// <param name="newPartner">The new BattlePartner to take part in battle.</param>
         public void SwapPartner(BattlePartner newPartner)
         {
-            //NOTE: Tested in TTYD regarding turns. If switching partners without Quick Change, it uses the number of turns
-            //that the previous partner had out. So for example, if Vivian is inflicted with Fast and you switch out to Yoshi
-            //who is not inflicted with Fast, Yoshi will be able to move once after the switch. Conversely, switching to Vivian
-            //with Yoshi will cause Vivian to not be able to move after the switch
-
             BattlePartner oldPartner = Partner;
 
             Partner = newPartner;
             Partner.Position = oldPartner.Position;
             Partner.SetBattlePosition(oldPartner.BattlePosition);
 
-            //Set the new Partner to use the same number of turns as the old Partner would have, if the old Partner used this action
+            //Set the new Partner to use the same max number of turns all Partners have this phase cycle
+            Partner.SetMaxTurns(BattlePartner.PartnerMaxTurns);
+
+            //If the entity swapping out partners is the old one increment the turn count for the new partner,
+            //as the old one's turn count will be incremented after the action is finished
             if (EntityTurn == oldPartner)
             {
-                //if (oldPartner.MaxTurns < Partner.MaxTurns)
-                //{
-                //    //If the next turn for the old Partner is the last one, make the new Partner unable to go
-                //    if ((oldPartner.TurnsUsed + 1) >= oldPartner.MaxTurns)
-                //    {
-                //        Partner.SetTurnsUsed(Partner.MaxTurns);
-                //    }
-                //}
-                //else
-                //{
-                //    Partner.SetTurnsUsed(oldPartner.TurnsUsed + 1);
-                //}
-
-                //Partner.SetMaxTurns(oldPartner.MaxTurns);
-                //Partner.SetTurnsUsed(oldPartner.TurnsUsed + 1);
-                //oldPartner.SetTurnsUsed(oldPartner.MaxTurns - 1);
+                Partner.SetTurnsUsed(oldPartner.TurnsUsed + 1);
             }
+            //Otherwise, the entity swapping out partners must be Mario, so set the new Partner's turn count to the old one's
+            //(or an enemy via an attack, but none of those attacks exist in the PM games...I'm hinting at a new attack idea :P)
             else
             {
-                //Partner.SetTurnsUsed(oldPartner.TurnsUsed);
+                Partner.SetTurnsUsed(oldPartner.TurnsUsed);
             }
 
             //Swap Partner badges with the new Partner
@@ -517,7 +506,10 @@ namespace PaperMarioBattleSystem
                     EntityTurn = FrontPlayer;
                 }
                 //Next check the back player - if it has turns remaining, it goes up
-                else if (BackPlayer.UsedTurn == false)
+                //The dead check is only for the BackPlayer because any dead Partners
+                //get moved to the back. If Mario dies, it shouldn't get here because
+                //the battle would be over
+                else if (BackPlayer.UsedTurn == false && BackPlayer.IsDead == false)
                 {
                     EntityTurn = BackPlayer;
                 }

@@ -1,0 +1,59 @@
+Corrected Turn Order Logic (10/17/16)
+-------------------------------------
+The recent implementation of swapping Partners highlighted flaws in how the turn order is determined for BattleEntities with multiple turns.
+
+I will be performing tests in TTYD to see the behaviors of turn switching. I will list my predictions of how TTYD handles specific cases
+and document the results. After those results, I'll then decide how to recreate that logic with the current system we have in place.
+
+1. The character (Mario or Parter) in back cannot go until the character in front has used up all of his/her turns.
+If the character in front gains a new turn while the character in back still has a turn (Ex. Goombella's Rally Wink),
+the character in front will go.
+---------------------------------------------------------------------------------------------------------------------
+Result: I was correct. The test I did involved inflicting Fast on Goombella via cheats, then using Mario's turn and
+using Rally Wink on him. Mario went instead of Goombella. Interestingly, on Mario's turn after Rally Wink, I was
+unable to switch Goombella in front despite both Mario and Goombella having turns remaining, which I think is an
+oversight they didn't care to fix considering how hard it is to actually get a player character inflicted with Fast.
+
+2. Enemies do not follow the logic from above. For examplem if Beldam, who is always last in the battles she's in, inflicts Fast
+on Marilyn, Marilyn will not go. Similarly, if a Koopatrol summons another Koopatrol in front of him, the new Koopatrol will not go.
+------------------------------------------------------------------------------------------------------------------------------------
+Result: I was correct for the first example. The second example holds true in both PM and TTYD, even if the new Koopatrol is summoned
+behind the one who called him.
+
+3. When a character dies when it's not their turn and gets revived with a Life Shroom, that character still goes
+----------------------------------------------------------------------------------------------------------------
+Result: Correct for players at least, as I haven't tested with enemies. I put Goombella in Peril and had Mario
+use Quake Hammer in Twilight Trail to make the background props fall down and bring Goombella down to 0 HP.
+After being revived, Goombella went.
+
+
+Solutions
+---------
+Based on the above tests, I think we need to make the following changes to turn order:
+
+-After any player character turn, check if the player in front has a turn, then check if the player in back has a turn.
+Switch the turn to that player. The end of the Player phase occurs when neither the front nor the back player has a turn.
+
+
+Partner Turn Count
+------------------
+Partners are unique to any other type of entity in Paper Mario because they can be switched out for another one. They also
+share many properties amongst each other, such as effects of P Badges.
+
+I tested partner turn count in the following scenario, without Quick Change equipped:
+-Vivian was inflicted with Fast, Yoshi was not
+-When switching from Vivian to Yoshi, Yoshi had another turn left
+-However, when switching from Yoshi to Vivian, Vivian did not have another turn left
+
+With Quick Change (Yoshi was inflicted with Fast and Vivian wasn't this time):
+-When switching from Yoshi to Vivian, Vivian had 2 turns left
+-When switching from Vivian to Yoshi, Yoshi had 1 turn left
+-Switching back to the original partner that was out at the start of the phase yielded the same number of turns regardless
+-Using Mario to switch from Yoshi back to Vivian, Vivian had no turns left
+
+A few things to note based off this data:
+
+1. The number of turns all partners have is determined by the number of turns the current partner out at the start
+of the Player phase has
+2. Partner turns are shared. If one Partner has already used up all of its turns, no other Partners are able to
+move until the next Player phase

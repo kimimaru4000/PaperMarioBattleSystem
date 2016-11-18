@@ -12,8 +12,6 @@ namespace PaperMarioBattleSystem
     /// The Payback Status Effect.
     /// When direct contact is made with the entity afflicted, the attacker receives half the damage dealt in a specific Element
     /// and can be inflicted with one or more StatusEffects.
-    /// <para>If the entity already has the Payback effect when this is afflicted, the Element and StatusEffects should change to the new
-    /// values if they are their default values (for now).</para>
     /// </summary>
     public sealed class PaybackStatus : StatusEffect
     {

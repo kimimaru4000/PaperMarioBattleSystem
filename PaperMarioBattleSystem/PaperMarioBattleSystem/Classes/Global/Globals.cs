@@ -720,6 +720,23 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
+    /// Class for global values dealing with BattlePlayers.
+    /// </summary>
+    public static class BattlePlayerGlobals
+    {
+        #region Enums
+
+        public enum PlayerProperties
+        {
+            QuickChangeCount,
+            SimplifierCount,
+            UnsimplifierCount
+        }
+
+        #endregion
+    }
+
+    /// <summary>
     /// Class for global values dealing with StarPower.
     /// </summary>
     public static class StarPowerGlobals

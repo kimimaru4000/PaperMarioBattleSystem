@@ -457,18 +457,20 @@ namespace PaperMarioBattleSystem
         /// Gets all active Badges affecting Mario
         /// </summary>
         /// <returns>A List of all active Badges affecting Mario</returns>
-        public List<Badge> GetActiveMarioBadges()
+        /// <param name="excludeBoth">Whether to exclude Badges that affect both Mario and his Partners or not.</param>
+        public List<Badge> GetActiveMarioBadges(bool excludeBoth)
         {
-            return ActiveBadges.FindAll((badge) => (badge.AffectedType == AffectedTypes.Self || badge.AffectedType == AffectedTypes.Both));
+            return ActiveBadges.FindAll((badge) => (badge.AffectedType == AffectedTypes.Self || (excludeBoth == false && badge.AffectedType == AffectedTypes.Both)));
         }
 
         /// <summary>
         /// Gets all active Badges affecting Mario's Partners
         /// </summary>
         /// <returns>A List of all active Badges affecting Mario's Partners</returns>
-        public List<Badge> GetActivePartnerBadges()
+        /// <param name="excludeBoth">Whether to exclude Badges that affect both Mario and his Partners or not.</param>
+        public List<Badge> GetActivePartnerBadges(bool excludeBoth)
         {
-            return ActiveBadges.FindAll((badge) => (badge.AffectedType == AffectedTypes.Partner || badge.AffectedType == AffectedTypes.Both));
+            return ActiveBadges.FindAll((badge) => (badge.AffectedType == AffectedTypes.Partner || (excludeBoth == false && badge.AffectedType == AffectedTypes.Both)));
         }
 
         #endregion

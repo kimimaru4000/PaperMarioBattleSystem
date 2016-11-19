@@ -1029,7 +1029,7 @@ namespace PaperMarioBattleSystem
             ZapTap = 82, ReturnPostage = 83,
             FeelingFine = 84, FeelingFineP = 85, SuperAppeal = 86, SuperAppealP = 87,
             Peekaboo = 88, ISpy = 89, QuickChange = 90, TimingTutor = 91,
-            Simplifier = 92, UnSimplifier = 93, ChillOut = 94,
+            Simplifier = 92, Unsimplifier = 93, ChillOut = 94,
             SpeedySpin = 95, DizzyAttack = 96, SpinAttack = 97, FirstAttack = 98, BumpAttack = 99,
             LEmblem = 100, WEmblem = 101, SlowGo = 102,
             AttackFXA = 103, AttackFXB = 104, AttackFXC = 105, AttackFXD = 106, AttackFXE = 107,

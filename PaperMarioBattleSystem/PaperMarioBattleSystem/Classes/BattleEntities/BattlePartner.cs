@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
         /// <param name="newPartner">The Partner to equip the Badges to</param>
         public static void SwapPartnerBadges(BattlePartner partnerEquipped, BattlePartner newPartner)
         {
-            List<Badge> partnerBadges = Inventory.Instance.GetActivePartnerBadges();
+            List<Badge> partnerBadges = Inventory.Instance.GetActivePartnerBadges(true);
 
             //Go through all the Badges
             for (int i = 0; i < partnerBadges.Count; i++)

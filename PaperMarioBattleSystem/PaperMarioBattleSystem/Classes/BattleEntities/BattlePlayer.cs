@@ -25,6 +25,10 @@ namespace PaperMarioBattleSystem
 
         public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
         {
+            //NOTE: This isn't entity-specific right now, so it technically doesn't work properly.
+            //For example, if a Partner had Mario's Jump, it could use Power Bounce if Mario had
+            //the Badge equipped even if the Partner didn't
+
             return Inventory.Instance.GetActiveBadgeCount(badgeType);
         }
 
@@ -36,7 +40,12 @@ namespace PaperMarioBattleSystem
         {
             private readonly Dictionary<PlayerProperties, object> Properties = new Dictionary<PlayerProperties, object>();
 
-            public void AddProperty<T>(PlayerProperties property, T value)
+            /// <summary>
+            /// Adds a player property, replacing the current value if one already exists.
+            /// </summary>
+            /// <param name="property">The PlayerProperties to add.</param>
+            /// <param name="value">An object of the value corresponding to the PlayerProperties.</param>
+            public void AddProperty(PlayerProperties property, object value)
             {
                 if (HasProperty(property) == true)
                 {
@@ -48,6 +57,10 @@ namespace PaperMarioBattleSystem
                 Debug.Log($"Added player property {property} with value {value}");
             }
 
+            /// <summary>
+            /// Removes a property.
+            /// </summary>
+            /// <param name="property">The PlayerProperties to remove.</param>
             public void RemoveProperty(PlayerProperties property)
             {
                 if (HasProperty(property) == false)
@@ -64,6 +77,12 @@ namespace PaperMarioBattleSystem
                 }
             }
 
+            /// <summary>
+            /// Gets a property, returning a default value if none were found.
+            /// </summary>
+            /// <typeparam name="T">The type of property to get.</typeparam>
+            /// <param name="property">The PlayerProperties to get the value for.</param>
+            /// <returns>The value corresponding to the property passed in. If no value was found, returns the default value of type T.</returns>
             public T GetProperty<T>(PlayerProperties property)
             {
                 if (HasProperty(property) == false)
@@ -74,6 +93,11 @@ namespace PaperMarioBattleSystem
                 return (T)Properties[property];
             }
 
+            /// <summary>
+            /// Tells if a property exists.
+            /// </summary>
+            /// <param name="property">The PlayerProperties to check a value for.</param>
+            /// <returns>true if a value corresponding to the PlayerProperties exists, otherwise false.</returns>
             public bool HasProperty(PlayerProperties property)
             {
                 return Properties.ContainsKey(property);

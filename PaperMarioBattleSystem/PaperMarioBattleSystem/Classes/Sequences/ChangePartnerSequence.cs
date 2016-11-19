@@ -95,5 +95,13 @@ namespace PaperMarioBattleSystem
                     break;
             }
         }
+
+        //This Sequence can't get interrupted. If it does, print an error
+        protected override void OnInterruption(Enumerations.Elements element)
+        {
+            base.OnInterruption(element);
+
+            Debug.LogError($"Sequence {nameof(ChangePartnerSequence)} CANNOT be interrupted. This is a critical error that should be fixed ASAP");
+        }
     }
 }

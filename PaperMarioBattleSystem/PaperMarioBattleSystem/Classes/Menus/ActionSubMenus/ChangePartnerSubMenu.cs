@@ -24,9 +24,7 @@ namespace PaperMarioBattleSystem
                 //NOTE: We will need a way to gray out options so they're not selectable. For now, this works
                 if (partners[i] == BattleManager.Instance.GetPartner()) continue;
 
-                MoveAction partnerChange = new MoveAction(partners[i].Name, new MoveActionData(null, 0, partners[i].PartnerDescription,
-                    TargetSelectionMenu.EntitySelectionType.Single, Enumerations.EntityTypes.Player, null),
-                    new ChangePartnerSequence(null, partners[i]));
+                ChangePartner partnerChange = new ChangePartner(partners[i]);
 
                 BattleActions.Add(partnerChange);
             }

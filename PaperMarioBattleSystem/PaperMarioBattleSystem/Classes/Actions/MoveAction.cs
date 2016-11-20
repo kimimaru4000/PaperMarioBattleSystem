@@ -116,7 +116,7 @@ namespace PaperMarioBattleSystem
         /// Clears the menu stack and makes the entity whose turn it is start performing this action
         /// </summary>
         /// <param name="targets"></param>
-        private void ActionStart(BattleEntity[] targets)
+        protected void ActionStart(BattleEntity[] targets)
         {
             BattleUIManager.Instance.ClearMenuStack();
             User.StartAction(this, targets);

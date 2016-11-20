@@ -347,15 +347,6 @@ namespace PaperMarioBattleSystem
             //Set the new Partner to use the same max number of turns all Partners have this phase cycle
             Partner.SetMaxTurns(BattlePartner.PartnerMaxTurns);
 
-            //Check for the Quick Change Badge
-            int quickChangeCount = BattlePlayer.PlayerProperties.GetProperty<int>(BattlePlayerGlobals.PlayerProperties.QuickChangeCount);
-
-            //If Quick Change is equipped and Partners were swapped by a Player, don't use up a turn
-            if (quickChangeCount > 0 && EntityTurn.EntityType == EntityTypes.Player)
-            {
-                EntityTurn.SetTurnsUsed(EntityTurn.TurnsUsed - 1);
-            }
-
             //If the entity swapping out partners is the old one increment the turn count for the new partner,
             //as the old one's turn count will be incremented after the action is finished
             if (EntityTurn == oldPartner)

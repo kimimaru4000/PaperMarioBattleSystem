@@ -1157,13 +1157,20 @@ namespace PaperMarioBattleSystem
         public static double Wrap(double value, double min, double max) => (value < min) ? max : (value > max) ? min : value;
 
         /// <summary>
-        /// Tests a random condition
+        /// Tests a random condition.
         /// </summary>
         /// <param name="minValue">The minimum possible value</param>
         /// <param name="maxValue">The maximum possible value</param>
         /// <param name="valueTested">The value to test against</param>
         /// <param name="checkEquals">If true, will also check if the randomized value matches the value tested</param>
         /// <returns>true if the condition succeeded, false otherwise</returns>
+        //NOTE: (Leaving this here for now)
+        //TTYD checks rand(100) < enemy susceptibility for a given value, such as chance of being inflicted with Dizzy
+        //Clock Out and Showstopper are a bit different:
+        //Clock Out has a 1x multiplier if the bar is filled at all and a 1.27x multiplier if the bar is full
+        //Showstopper has a .5x multiplier that's increased by .1x for each successful button set, totaling a 1x multiplier
+        //These multipliers are multiplied by the random value to increase or decrease the chances of the condition evaluating to true
+
         public static bool TestRandomCondition(int minValue, int maxValue, int valueTested, bool checkEquals)
         {
             int value = GeneralGlobals.Randomizer.Next(minValue, maxValue);

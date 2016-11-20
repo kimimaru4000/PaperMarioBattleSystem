@@ -82,6 +82,7 @@
     <Compile Include="Classes\Actions\Mario\PowerBounce.cs" />
     <Compile Include="Classes\Actions\MoveAction.cs" />
     <Compile Include="Classes\Actions\NoAction.cs" />
+    <Compile Include="Classes\Actions\Player\ChangePartner.cs" />
     <Compile Include="Classes\Actions\Sushie\TidalWave.cs" />
     <Compile Include="Classes\Actions\Yoshi\Gulp.cs" />
     <Compile Include="Classes\Animations\Animation.cs" />
@@ -250,7 +251,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Classes\Actions\Player\" />
     <Folder Include="Classes\StarPower\StarSpirits\" />
     <Folder Include="Content\Audio\Music\" />
   </ItemGroup>

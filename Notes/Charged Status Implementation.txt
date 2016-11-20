@@ -1,0 +1,49 @@
+Charged Status Implementation (11/20/16)
+----------------------------------------
+The Charged Status Effect increases the power of your next attack and is stackable.
+
+It persists until the BattleEntity inflicted with it dies or uses an attack to expend
+the charge.
+
+Excluding Moves From Charged
+----------------------------
+I tested in TTYD and found two attacks that deal damage but don't use the extra damage from Charged.
+
+They are:
+-Yoshi's Mini-Egg
+-Bobbery's Bomb Squad
+
+Why are they excluded? I'm not really sure.
+
+What they have in common is their damage sources are indirect. Bomb Squad involves little bombs that
+deal damage a few turns later, and Mini-Egg involves Yoshi throwing eggs to deal damage.
+
+However, Vivian's Fiery Jinx is indirect as well and uses the extra damage from Charged.
+
+My guess is that the way Mini-Egg and Bomb Squad were implemented didn't allow them to use
+Charged's bonus damage, or just the designers didn't want those attacks using Charged for whatever reason.
+
+Either way, we'll need to come up with a way to exclude certain moves from being able to use the extra
+damage and expend the charge in the implementation.
+
+Problems
+--------
+1. The immediate problem that comes to mind is deciding when to expend the charge.
+
+It has to be at the end of the BattleEntity's turn as that's when actions end. However, how do we
+decide whether an action can use and expend the Charge?
+
+2. All Status Effects last a certain duration, but Charged lasts until death or an action that uses the charge
+is completed.
+
+3. Status Effects cannot be inflicted more than once on a BattleEntity, so how would we stack Charged?
+
+Solutions
+---------
+1. Both using the bonus damage and expending the charge go hand-in-hand, so there should be a single bool
+in MoveActionData called UsesCharge. This would give us max flexibility regarding which MoveActions can
+use and expend the charge and which ones don't. For example, this will allow us to create an Item that can be influenced
+by the Charged status.
+
+We'll just have to be careful when creating the actions to ensure that the charge
+isn't expended for actions that shouldn't expend it (Ex. Changing Partners).

@@ -109,7 +109,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public virtual void OnMenuSelected()
         {
-            BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, BattleManager.Instance.GetEntities(MoveProperties.EntityType, MoveProperties.HeightsAffected));
+            //If this action targets an entity, bring up the target selection menu
+            if (MoveProperties.TargetsEntity == true)
+                BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, BattleManager.Instance.GetEntities(MoveProperties.EntityType, MoveProperties.HeightsAffected));
+            //Otherwise, simply start the action
+            else ActionStart(null);
         }
 
         /// <summary>

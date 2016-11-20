@@ -302,10 +302,11 @@ namespace PaperMarioBattleSystem
         public string Description;
         public TargetSelectionMenu.EntitySelectionType SelectionType;
         public Enumerations.EntityTypes EntityType;
+        public bool TargetsEntity;
         public Enumerations.HeightStates[] HeightsAffected;
 
         public static MoveActionData Default => new MoveActionData(null, 0, "Error", TargetSelectionMenu.EntitySelectionType.Single,
-            Enumerations.EntityTypes.Enemy, null);
+            Enumerations.EntityTypes.Enemy, true, null);
 
         public MoveActionData(Texture2D icon, int fpCost, string description, TargetSelectionMenu.EntitySelectionType selectionType,
             Enumerations.EntityTypes entityType, Enumerations.HeightStates[] heightsAffected)
@@ -315,7 +316,15 @@ namespace PaperMarioBattleSystem
             Description = description;
             SelectionType = selectionType;
             EntityType = entityType;
+            TargetsEntity = true;
             HeightsAffected = heightsAffected;
+        }
+
+        public MoveActionData(Texture2D icon, int fpCost, string description, TargetSelectionMenu.EntitySelectionType selectionType,
+            Enumerations.EntityTypes entityType, bool targetsEntity, Enumerations.HeightStates[] heightsAffected) : this(icon, fpCost,
+                description, selectionType, entityType, heightsAffected)
+        {
+            TargetsEntity = targetsEntity;
         }
     }
 
@@ -555,7 +564,7 @@ namespace PaperMarioBattleSystem
             NegativeStatusImmune,
             Invincible,
             ConfusionPercent,
-            
+
             //Badge properties
             AdditionalGuardDefense,
             AllOrNothingCount,

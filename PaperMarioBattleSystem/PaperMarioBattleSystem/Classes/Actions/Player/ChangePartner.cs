@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
             Name = NewPartner.Name;
 
             MoveInfo = new MoveActionData(null, 0, NewPartner.PartnerDescription, TargetSelectionMenu.EntitySelectionType.Single,
-                Enumerations.EntityTypes.Player, null);
+                Enumerations.EntityTypes.Player, false, null);
 
             SetMoveSequence(new ChangePartnerSequence(this, NewPartner));
         }
@@ -42,7 +42,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Changing Partners doesn't require target selection, so go straight into the sequence
-            ActionStart(null);
+            base.OnMenuSelected();
         }
     }
 }

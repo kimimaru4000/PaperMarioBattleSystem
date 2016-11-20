@@ -532,8 +532,22 @@ namespace PaperMarioBattleSystem
             {
                 Debug.Log($"{Name} is affected by Confusion and will do something unpredictable!");
 
-                int changeTargets = GeneralGlobals.Randomizer.Next(0, 2);
-                //int changeAction;
+                //int changeAction = 0;
+                //Check if the action can target entities to see if we should change targets
+                //if (actualAction.MoveProperties.TargetsEntity == true)
+                //{
+                //    //Get the opposite type of entities to target
+                //    //Items targets enemies, but attacks target allies
+                //    EntityTypes oppositeType = actualAction.MoveProperties.EntityType;
+                //    if (oppositeType == EntityTypes.Player) oppositeType = EntityTypes.Enemy;
+                //    else if (oppositeType == EntityTypes.Enemy) oppositeType = EntityTypes.Player;
+                //}
+
+                int changeTargets = 0;
+
+                //Don't give a chance to change targets if the action doesn't have targets
+                //NOTE: This means we'll need to handle changing actions first, as not all actions target something
+                if (targets != null && targets.Length > 0) changeTargets = GeneralGlobals.Randomizer.Next(0, 2);
 
                 //NOTE: Find a way to make it so we can control what happens based on the type of action.
                 //For example, if Tattle was used, it doesn't target anyone else.
@@ -546,7 +560,7 @@ namespace PaperMarioBattleSystem
                   3. Filter out dead allies
                   4. If the action hits everyone, go with the remaining list. Otherwise, choose a random ally to attack
                   5. If there are no allies to attack after all the filtering, make the entity do nothing*/
-                if (changeTargets == 0)
+                if (changeTargets == 1)
                 {
                     BattleEntity[] allies = null;
 

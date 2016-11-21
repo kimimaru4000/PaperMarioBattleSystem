@@ -34,9 +34,11 @@ It has to be at the end of the BattleEntity's turn as that's when actions end. H
 decide whether an action can use and expend the Charge?
 
 2. All Status Effects last a certain duration, but Charged lasts until death or an action that uses the charge
-is completed.
+is completed. There's no way to obtain a specific StatusEffect on an entity because they manage themselves, so
+there would be no way to end Charged until the end of the phase cycle. Charged is the only StatusEffect like this
+in the entire PM series.
 
-3. Status Effects cannot be inflicted more than once on a BattleEntity, so how would we stack Charged?
+3. Status Effects are refreshed when inflicted more than once on a BattleEntity, so how would we stack Charged?
 
 Solutions
 ---------
@@ -47,3 +49,11 @@ by the Charged status.
 
 We'll just have to be careful when creating the actions to ensure that the charge
 isn't expended for actions that shouldn't expend it (Ex. Changing Partners).
+
+2. All StatusEffects are removed on death, so that case isn't an issue. We can have Charged always have a duration
+of 0 so it lasts forever. After a MoveAction where UsesCharge is true ended, we can check for Charged and remove it
+if the entity has it.
+
+3. We can use a MiscProperty called ChargedDamage, which will be controlled by the Charged status. When Charged
+is afflicted or refreshed, we will add to ChargedDamage with the values passed in and completely remove the
+MiscProperty when Charged ends, which is when it is removed by the MoveAction.

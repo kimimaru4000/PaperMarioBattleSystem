@@ -508,10 +508,16 @@ namespace PaperMarioBattleSystem
         /// <param name="status">The StatusEffect to afflict the entity with</param>
         public void AfflictStatus(StatusEffect status)
         {
-            //Don't do anything if the entity already has this StatusEffect
+            //If the entity already has this StatusEffect, refresh its properties with the new properties.
+            //By default, the duration is refreshed.
+            //We don't remove the status then reafflict it because that would end it. With a status like Frozen,
+            //it would deal damage to the entity when being removed and we don't want that
             if (HasStatus(status.StatusType) == true)
             {
-                Debug.Log($"{Entity.Name} is already afflicted with the {status.StatusType} Status!");
+                StatusEffect refreshedStatus = GetStatus(status.StatusType);
+                refreshedStatus.Refresh(status);
+                
+                Debug.Log($"{status.StatusType} Status on {Entity.Name} was refreshed with a duration of {status.Duration}!");
                 return;
             }
 
@@ -568,6 +574,21 @@ namespace PaperMarioBattleSystem
         public bool HasStatus(StatusTypes statusType)
         {
             return Statuses.ContainsKey(statusType);
+        }
+
+        /// <summary>
+        /// Retrieves a specific StatusEffect. This method is internal.
+        /// </summary>
+        /// <param name="statusType">The StatusTypes of the StatusEffect to get.</param>
+        /// <returns>null if the entity isn't afflicted with the StatusEffect, otherwise the StatusEffect it's afflicted with.</returns>
+        private StatusEffect GetStatus(StatusTypes statusType)
+        {
+            if (HasStatus(statusType) == true)
+            {
+                return Statuses[statusType];
+            }
+
+            return null;
         }
 
         /// <summary>

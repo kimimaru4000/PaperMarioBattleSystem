@@ -129,6 +129,18 @@ namespace PaperMarioBattleSystem
         }
         
         /// <summary>
+        /// Refreshes the StatusEffect with properties from a new one with the same StatusType.
+        /// This occurs if the StatusEffect is already inflicted on the BattleEntity.
+        /// Default behavior is to refresh the duration.
+        /// </summary>
+        /// <param name="newStatus">The new StatusEffect, with the same StatusType as this one.</param>
+        public virtual void Refresh(StatusEffect newStatus)
+        {
+            Duration = newStatus.Duration;
+            TurnsPassed = 0;
+        }
+
+        /// <summary>
         /// Increments the number of turns the StatusEffect has been active and removes it from the entity afflicted when finished
         /// </summary>
         protected void IncrementTurns()
@@ -170,7 +182,7 @@ namespace PaperMarioBattleSystem
             //Resume to end the StatusEffect properly
             Suspended = false;
 
-            TurnsPassed = Duration;
+            TurnsPassed = TotalDuration;
 
             OnEnd();
         }

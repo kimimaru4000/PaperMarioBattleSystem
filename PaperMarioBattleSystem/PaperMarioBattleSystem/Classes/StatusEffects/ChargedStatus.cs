@@ -35,13 +35,11 @@ namespace PaperMarioBattleSystem
 
             TotalChargeDamage += charged.TotalChargeDamage;
 
-            EntityAfflicted.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.ChargedDamage);
             EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.ChargedDamage, new MiscValueHolder(TotalChargeDamage));
         }
 
         protected override void OnAfflict()
         {
-            EntityAfflicted.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.ChargedDamage);
             EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.ChargedDamage, new MiscValueHolder(TotalChargeDamage));
         }
 

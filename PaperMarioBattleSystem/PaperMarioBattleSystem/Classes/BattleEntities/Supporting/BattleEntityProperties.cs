@@ -749,17 +749,17 @@ namespace PaperMarioBattleSystem
         #region Misc Property Methods
 
         /// <summary>
-        /// Adds a MiscProperty to the entity if it doesn't already have it
+        /// Adds a MiscProperty to the entity.
+        /// If it already has the property, it replaces its value with the new value.
         /// </summary>
         /// <param name="property">The MiscProperty to add</param>
         /// <param name="value">The value of the MiscProperty</param>
         public void AddMiscProperty(MiscProperty property, MiscValueHolder value)
         {
-            //Return if the entity already has it
+            //Remove if the entity already has it
             if (HasMiscProperty(property) == true)
             {
-                Debug.LogWarning($"{Entity.Name} already has the {property} property!");
-                return;
+                RemoveMiscProperty(property);
             }
 
             MiscProperties.Add(property, value);

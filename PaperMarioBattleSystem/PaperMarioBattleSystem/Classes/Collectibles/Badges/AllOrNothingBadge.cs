@@ -25,7 +25,6 @@ namespace PaperMarioBattleSystem
         protected override void OnEquip()
         {
             int allOrNothingCount = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.MiscProperty.AllOrNothingCount).IntValue + 1;
-            EntityEquipped.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.AllOrNothingCount);
             EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.AllOrNothingCount, new MiscValueHolder(allOrNothingCount));
         }
 

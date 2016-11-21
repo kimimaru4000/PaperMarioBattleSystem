@@ -27,7 +27,6 @@ namespace PaperMarioBattleSystem
         protected override void OnEquip()
         {
             int multiplier = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.MiscProperty.DamageTakenMultiplier).IntValue + 1;
-            EntityEquipped.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.DamageTakenMultiplier);
             EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.DamageTakenMultiplier, new MiscValueHolder(multiplier));
         }
 

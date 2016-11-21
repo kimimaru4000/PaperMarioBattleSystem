@@ -22,7 +22,6 @@ namespace PaperMarioBattleSystem
         protected override void OnEquip()
         {
             int divider = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.MiscProperty.DangerDamageDivider).IntValue + 1;
-            EntityEquipped.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.DangerDamageDivider);
             EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.DangerDamageDivider, new MiscValueHolder(divider));
         }
 

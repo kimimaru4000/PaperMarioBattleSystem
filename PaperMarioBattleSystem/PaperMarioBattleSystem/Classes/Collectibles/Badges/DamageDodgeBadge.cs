@@ -24,7 +24,6 @@ namespace PaperMarioBattleSystem
         {
             //Add 1 to AdditionalGuardDefense
             int additional = EntityEquipped.EntityProperties.GetMiscProperty(MiscProperty.AdditionalGuardDefense).IntValue + 1;
-            EntityEquipped.EntityProperties.RemoveMiscProperty(MiscProperty.AdditionalGuardDefense);
 
             EntityEquipped.EntityProperties.AddMiscProperty(MiscProperty.AdditionalGuardDefense, new MiscValueHolder(additional));
         }

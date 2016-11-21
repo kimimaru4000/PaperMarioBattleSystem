@@ -473,6 +473,13 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
+            //If the last action can expend a charge, check to see if the entity has a charge and remove it
+            if (PreviousAction.MoveProperties.UsesCharge == true && EntityProperties.HasStatus(StatusTypes.Charged) == true
+                && EntityProperties.HasMiscProperty(MiscProperty.ChargedDamage) == true)
+            {
+                EntityProperties.RemoveStatus(StatusTypes.Charged);
+            }
+
             TurnsUsed++;
             BattleManager.Instance.TurnEnd();
         }

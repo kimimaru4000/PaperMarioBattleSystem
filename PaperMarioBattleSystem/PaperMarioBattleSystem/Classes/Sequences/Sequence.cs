@@ -576,9 +576,19 @@ namespace PaperMarioBattleSystem
         /// <returns>An int with the total raw damage the BattleEntity can deal when using this BattleAction</returns>
         protected int GetTotalDamage(int actionDamage)
         {
-            int totalDamage = actionDamage + User.BattleStats.Attack;
+            int totalDamage = actionDamage + User.BattleStats.Attack + GetChargeDamage();
 
             return totalDamage;
+        }
+
+        /// <summary>
+        /// Gets the extra damage the user has charged up if the action uses a charge.
+        /// </summary>
+        /// <returns>The charged damage if the action can use a charge, otherwise 0.</returns>
+        private int GetChargeDamage()
+        {
+            return Action.MoveProperties.UsesCharge == true ?
+                User.EntityProperties.GetMiscProperty(MiscProperty.ChargedDamage).IntValue : 0;
         }
 
         #endregion

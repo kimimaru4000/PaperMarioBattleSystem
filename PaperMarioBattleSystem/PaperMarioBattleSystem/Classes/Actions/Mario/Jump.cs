@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Jump";
 
-            MoveInfo = new MoveActionData(null, 0, "Jump and stomp on an enemy.", TargetSelectionMenu.EntitySelectionType.Single,
+            MoveInfo = new MoveActionData(null, 0, true, "Jump and stomp on an enemy.", TargetSelectionMenu.EntitySelectionType.Single,
                 EntityTypes.Enemy, new HeightStates[] { HeightStates.Grounded, HeightStates.Airborne });
 
             DamageInfo = new InteractionParamHolder(null, null, (int)User.BattleStats.GetBootLevel, Elements.Normal, false, ContactTypes.JumpContact, null);

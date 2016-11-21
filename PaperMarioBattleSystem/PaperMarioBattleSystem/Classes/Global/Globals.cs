@@ -299,6 +299,7 @@ namespace PaperMarioBattleSystem
     {
         public Texture2D Icon;
         public int FPCost;
+        public bool UsesCharge;
         public string Description;
         public TargetSelectionMenu.EntitySelectionType SelectionType;
         public Enumerations.EntityTypes EntityType;
@@ -313,6 +314,20 @@ namespace PaperMarioBattleSystem
         {
             Icon = icon;
             FPCost = fpCost;
+            UsesCharge = false;
+            Description = description;
+            SelectionType = selectionType;
+            EntityType = entityType;
+            TargetsEntity = true;
+            HeightsAffected = heightsAffected;
+        }
+
+        public MoveActionData(Texture2D icon, int fpCost, bool usesCharge, string description, TargetSelectionMenu.EntitySelectionType selectionType,
+            Enumerations.EntityTypes entityType, Enumerations.HeightStates[] heightsAffected)
+        {
+            Icon = icon;
+            FPCost = fpCost;
+            UsesCharge = usesCharge;
             Description = description;
             SelectionType = selectionType;
             EntityType = entityType;
@@ -564,6 +579,7 @@ namespace PaperMarioBattleSystem
             NegativeStatusImmune,
             Invincible,
             ConfusionPercent,
+            ChargedDamage,
 
             //Badge properties
             AdditionalGuardDefense,

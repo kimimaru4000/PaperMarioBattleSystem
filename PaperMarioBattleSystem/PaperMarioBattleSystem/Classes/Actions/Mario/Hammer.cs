@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Hammer";
 
-            MoveInfo = new MoveActionData(null, 0, "Whack an enemy with your Hammer.", TargetSelectionMenu.EntitySelectionType.First,
+            MoveInfo = new MoveActionData(null, 0, true, "Whack an enemy with your Hammer.", TargetSelectionMenu.EntitySelectionType.First,
                 EntityTypes.Enemy, new HeightStates[] { HeightStates.Grounded });
 
             DamageInfo = new InteractionParamHolder(null, null, (int)User.BattleStats.GetHammerLevel, Elements.Normal, false, ContactTypes.HammerContact, null);

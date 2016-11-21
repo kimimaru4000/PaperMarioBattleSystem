@@ -173,6 +173,7 @@
     <Compile Include="Classes\StarPower\StarPowerBase.cs" />
     <Compile Include="Classes\StatusEffects\AllergicStatus.cs" />
     <Compile Include="Classes\StatusEffects\BurnStatus.cs" />
+    <Compile Include="Classes\StatusEffects\ChargedStatus.cs" />
     <Compile Include="Classes\StatusEffects\ConfusedStatus.cs" />
     <Compile Include="Classes\StatusEffects\DizzyStatus.cs" />
     <Compile Include="Classes\StatusEffects\DodgyStatus.cs" />

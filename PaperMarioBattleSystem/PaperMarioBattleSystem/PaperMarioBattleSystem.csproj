@@ -100,6 +100,8 @@
     <Compile Include="Classes\BattleEntities\Supporting\BattleEntityProperties.cs" />
     <Compile Include="Classes\Collectibles\Badges\AllOrNothingBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\Badge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\ChargeBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\ChargePBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DamageDodgeBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DefendPlusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DoublePainBadge.cs" />
@@ -136,6 +138,7 @@
     <Compile Include="Classes\Menus\ActionSubMenus\HammerSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\JumpSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\KooperSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\TacticsSubMenu.cs" />
     <Compile Include="Classes\Menus\BattleMenu.cs" />
     <Compile Include="Classes\Menus\MarioBattleMenu.cs" />
     <Compile Include="Classes\Menus\PartnerBattleMenu.cs" />
@@ -148,6 +151,7 @@
     <Compile Include="Classes\SequenceActions\WaitForAnimation.cs" />
     <Compile Include="Classes\SequenceActions\WaitForCommand.cs" />
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />
+    <Compile Include="Classes\Sequences\ChargeSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
     <Compile Include="Classes\Sequences\Kooper\ShellTossSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\HammerSequence.cs" />

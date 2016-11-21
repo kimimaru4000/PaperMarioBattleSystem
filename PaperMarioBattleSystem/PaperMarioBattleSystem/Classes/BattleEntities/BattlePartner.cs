@@ -28,6 +28,13 @@ namespace PaperMarioBattleSystem
             PlayerType = Enumerations.PlayerTypes.Partner;
         }
 
+        public override void OnBattleStart()
+        {
+            base.OnBattleStart();
+
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ChargeP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+        }
+
         public override void OnPhaseCycleStart()
         {
             base.OnPhaseCycleStart();

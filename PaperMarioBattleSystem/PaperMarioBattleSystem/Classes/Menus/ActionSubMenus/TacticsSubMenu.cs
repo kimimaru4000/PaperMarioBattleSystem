@@ -16,6 +16,10 @@ namespace PaperMarioBattleSystem
         {
             Position = new Vector2(230, 150);
 
+            BattleActions.Add(new MenuAction("Change Partner", null, "Change your current partner.", new ChangePartnerSubMenu()));
+
+            #region Charge Menu
+
             BadgeGlobals.BadgeTypes chargeBadgeType = BadgeGlobals.BadgeTypes.Charge;
 
             BattleEntity entity = BattleManager.Instance.EntityTurn;
@@ -40,6 +44,8 @@ namespace PaperMarioBattleSystem
                 BattleActions.Add(new MoveAction("Charge", new MoveActionData(null, chargeCount, "Save up strength to power up your next attack",
                     TargetSelectionMenu.EntitySelectionType.Single, entity.EntityType, false, null), new ChargeSequence(null, chargeAmount)));
             }
+
+            #endregion
 
             //Do nothing action
             BattleActions.Add(new NoAction());

@@ -80,6 +80,7 @@
     <Compile Include="Classes\Actions\Mario\Jump.cs" />
     <Compile Include="Classes\Actions\Mario\Multibounce.cs" />
     <Compile Include="Classes\Actions\Mario\PowerBounce.cs" />
+    <Compile Include="Classes\Actions\MenuAction.cs" />
     <Compile Include="Classes\Actions\MoveAction.cs" />
     <Compile Include="Classes\Actions\NoAction.cs" />
     <Compile Include="Classes\Actions\Player\ChangePartner.cs" />

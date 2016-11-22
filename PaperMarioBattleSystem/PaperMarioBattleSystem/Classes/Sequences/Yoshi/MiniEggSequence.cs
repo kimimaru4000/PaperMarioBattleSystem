@@ -7,30 +7,43 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The Sequence for Yoshi's Gulp.
+    /// The Sequence for Yoshi's Mini-Egg.
     /// </summary>
-    public sealed class GulpSequence : Sequence
+    public sealed class MiniEggSequence : Sequence
     {
-        public double WalkDuration = 4000f;
+        private int EggsToThrow = 1;
+        private float MoveDuration = 500f;
+        private double EggWait = 500d;
 
-        public GulpSequence(MoveAction moveAction) : base(moveAction)
+        //Mini-Egg will only do 1 damage each egg.
+        //However, Power Plus P will increase Yoshi's Attack, causing the eggs to do more damage
+        private int EggDamage = 1;
+
+        public MiniEggSequence(MoveAction moveAction) : base(moveAction)
+        {
+
+        }
+
+        protected override void OnStart()
+        {
+            EggDamage = GetTotalDamage(1);
+        }
+
+        //Do nothing for success for failure, as only the number of eggs thrown, which is received from the response, changes
+        protected override void CommandSuccess()
         {
             
         }
 
-        protected override void CommandSuccess()
-        {
-            ChangeSequenceBranch(SequenceBranch.Success);
-        }
-
         protected override void CommandFailed()
         {
-            ChangeSequenceBranch(SequenceBranch.Failed);
+            
         }
 
         public override void OnCommandResponse(object response)
         {
-
+            User.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.EggLayName);
+            EggsToThrow = 1 + (int)response;
         }
 
         protected override void SequenceStartBranch()
@@ -39,7 +52,11 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), WalkDuration / 4f);
+                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), MoveDuration);
+                    break;
+                case 1:
+                    User.PlayAnimation(AnimationGlobals.IdleName);
+                    CurSequenceAction = new Wait(0f);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -54,10 +71,24 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     StartActionCommandInput();
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), WalkDuration);
+                    CurSequenceAction = new WaitForCommand(10000d, actionCommand, CommandEnabled);
+                    break;
+                case 1:
+                    CurSequenceAction = new Wait(EggWait);
                     break;
                 default:
-                    PrintInvalidSequence();
+                    //Throw an egg, then wait
+                    ThrowEgg();
+                    EggsToThrow--;
+
+                    CurSequenceAction = new Wait(500d);
+
+                    //If there are no more eggs to throw, switch to the end
+                    if (EggsToThrow <= 0)
+                    {
+                        ChangeSequenceBranch(SequenceBranch.End);
+                    }
+
                     break;
             }
         }
@@ -66,25 +97,6 @@ namespace PaperMarioBattleSystem
         {
             switch (SequenceStep)
             {
-                case 0:
-                    User.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.GulpEatName, true);
-
-                    //The entity spit out
-                    BattleEntity eatenEntity = EntitiesAffected[0];
-
-                    //Get the entity behind the one spit out
-                    //If it can be hit by this move, make that entity take damage as well
-                    BattleEntity[] behindEntities = BattleManager.Instance.GetEntitiesBehind(eatenEntity);
-                    behindEntities = BattleManager.Instance.FilterEntitiesByHeights(behindEntities, Action.MoveProperties.HeightsAffected);
-
-                    AttemptDamage(BaseDamage, eatenEntity, false);
-                    if (behindEntities.Length > 0)
-                    {
-                        AttemptDamage(BaseDamage, behindEntities[0], false);
-                    }
-
-                    ChangeSequenceBranch(SequenceBranch.End);
-                    break;
                 default:
                     PrintInvalidSequence();
                     break;
@@ -95,10 +107,6 @@ namespace PaperMarioBattleSystem
         {
             switch (SequenceStep)
             {
-                case 0:
-                    User.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.GulpEatName, true);
-                    ChangeSequenceBranch(SequenceBranch.End);
-                    break;
                 default:
                     PrintInvalidSequence();
                     break;
@@ -111,7 +119,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(User.BattlePosition, WalkDuration / 4f);
+                    CurSequenceAction = new MoveTo(User.BattlePosition, MoveDuration);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName);
@@ -127,13 +135,17 @@ namespace PaperMarioBattleSystem
         {
             switch (SequenceStep)
             {
-                case 0:
-                    ChangeSequenceBranch(SequenceBranch.End);
-                    break;
                 default:
                     PrintInvalidSequence();
                     break;
             }
+        }
+
+        private void ThrowEgg()
+        {
+            int rand = GeneralGlobals.Randomizer.Next(0, EntitiesAffected.Length);
+            BattleEntity target = EntitiesAffected[rand];
+            AttemptDamage(EggDamage, target, true);
         }
     }
 }

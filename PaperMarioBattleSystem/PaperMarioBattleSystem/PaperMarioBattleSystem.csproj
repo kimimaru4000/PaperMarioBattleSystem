@@ -65,6 +65,7 @@
     <Compile Include="Classes\ActionCommands\GulpCommand.cs" />
     <Compile Include="Classes\ActionCommands\HammerCommand.cs" />
     <Compile Include="Classes\ActionCommands\JumpCommand.cs" />
+    <Compile Include="Classes\ActionCommands\TimedLightCommand.cs" />
     <Compile Include="Classes\ActionCommands\SuperguardCommand.cs" />
     <Compile Include="Classes\ActionCommands\TidalWaveCommand.cs" />
     <Compile Include="Classes\Actions\BattleAction.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="Classes\Actions\Player\ChangePartner.cs" />
     <Compile Include="Classes\Actions\Sushie\TidalWave.cs" />
     <Compile Include="Classes\Actions\Yoshi\Gulp.cs" />
+    <Compile Include="Classes\Actions\Yoshi\MiniEgg.cs" />
     <Compile Include="Classes\Animations\Animation.cs" />
     <Compile Include="Classes\Animations\LoopAnimation.cs" />
     <Compile Include="Classes\Animations\ReverseAnimation.cs" />
@@ -164,6 +166,7 @@
     <Compile Include="Classes\Sequences\Sequence.cs" />
     <Compile Include="Classes\Sequences\Sushie\TidalWaveSequence.cs" />
     <Compile Include="Classes\Sequences\Yoshi\GulpSequence.cs" />
+    <Compile Include="Classes\Sequences\Yoshi\MiniEggSequence.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleUIManager.cs" />
     <Compile Include="Classes\Singletons\General\AssetManager.cs" />
@@ -208,11 +211,14 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />

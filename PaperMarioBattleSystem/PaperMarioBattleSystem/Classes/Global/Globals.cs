@@ -653,7 +653,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public static class YoshiBattleAnimations
         {
-            public const string GulpEat = "GulpEat";
+            public const string GulpEatName = "GulpEat";
+            public const string EggLayName = "EggLay";
+            public const string EggThrowName = "EggThrow";
         }
 
         /// <summary>

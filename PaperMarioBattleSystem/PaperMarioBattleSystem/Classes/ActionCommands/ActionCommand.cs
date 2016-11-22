@@ -74,8 +74,8 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Sends a response to the Action, which handles the value given
         /// </summary>
-        /// <param name="response">An int value representing a response</param>
-        protected void SendResponse(int response)
+        /// <param name="response">An object representing a response</param>
+        protected void SendResponse(object response)
         {
             Debug.Log($"Command for {Handler.Name} has sent a response of {response}!");
 

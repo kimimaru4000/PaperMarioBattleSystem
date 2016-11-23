@@ -15,6 +15,14 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class ActionCommand
     {
+        /// <summary>
+        /// Indicates how well the player performed the Action Command.
+        /// </summary>
+        public enum CommandRank
+        {
+            None = 0, NiceM2, NiceM1, Nice, Good, Great, Wonderful, Excellent
+        }
+
         public enum CommandResults
         {
             Success, Failure
@@ -72,7 +80,18 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Sends a response to the Action, which handles the value given
+        /// Sends a CommandRank to the Handler, which handles the value given.
+        /// </summary>
+        /// <param name="commandRank">The CommandRank indicating how well the Player performed the action command.</param>
+        protected void SendCommandRank(CommandRank commandRank)
+        {
+            Debug.Log($"Command for {Handler.Name} has sent a {nameof(CommandRank)} of {commandRank}");
+
+            Handler.OnCommandRankResult(commandRank);
+        }
+
+        /// <summary>
+        /// Sends a response to the Handler, which handles the value given
         /// </summary>
         /// <param name="response">An object representing a response</param>
         protected void SendResponse(object response)

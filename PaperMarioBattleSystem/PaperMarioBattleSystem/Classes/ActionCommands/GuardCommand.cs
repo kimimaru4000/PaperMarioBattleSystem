@@ -20,6 +20,8 @@ namespace PaperMarioBattleSystem
 
         protected Keys GuardButton = Keys.Z;
 
+        protected CommandRank RankToSend = CommandRank.Nice;
+
         public GuardCommand(IActionCommandHandler commandAction) : base(commandAction)
         {
             
@@ -48,6 +50,7 @@ namespace PaperMarioBattleSystem
                 if (Time.ActiveMilliseconds >= PrevGuardCooldown)
                 {
                     //Debug.Log("Pressed correct time for Guard!");
+                    //SendCommandRank(RankToSend);
 
                     Handler.OnCommandSuccess();
                 }

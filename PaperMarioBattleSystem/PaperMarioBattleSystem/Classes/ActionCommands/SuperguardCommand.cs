@@ -14,6 +14,8 @@ namespace PaperMarioBattleSystem
             GuardButton = Keys.X;
 
             GuardCooldown = (5d / 60d) * Time.MsPerS;
+
+            RankToSend = CommandRank.Great;
         }
     }
 }

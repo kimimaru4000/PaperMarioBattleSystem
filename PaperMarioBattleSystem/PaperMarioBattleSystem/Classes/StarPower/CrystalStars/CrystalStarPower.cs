@@ -33,15 +33,15 @@ namespace PaperMarioBattleSystem
         /// Calculates the amount of Star Power the Audience give Mario after either he or his Partner attacks.
         /// </summary>
         /// <param name="audienceValue">The total value of the Audience.</param>
-        /// <param name="actionCommandValue">The Action Command value earned during the attack. This should also factor whether a Stylish move was performed or not.</param>
+        /// <param name="commandRankValue">The CommandRank value earned during the attack. This should also factor whether a Stylish move was performed or not.</param>
         /// <param name="dangerStatus">The Danger status value.</param>
         /// <param name="BINGOStatus">The value of the current BINGO! status. 0 for Poison Shrooms, 2 for Mushrooms, Flowers, and Stars, and 3 for Shine Sprites.</param>
         /// <returns>The total amount of Star Power gained from the attack.</returns>
-        public float CalculateStarPowerFromAudience(int audienceValue, float actionCommandValue, float dangerStatus, float BINGOStatus)
+        public float CalculateStarPowerFromAudience(int audienceValue, float commandRankValue, float dangerStatus, float BINGOStatus)
         {
             float audienceSquared = (float)Math.Sqrt((double)audienceValue);
 
-            float value = audienceSquared * actionCommandValue * dangerStatus * BINGOStatus;
+            float value = audienceSquared * commandRankValue * dangerStatus * BINGOStatus;
 
             //Cap the amount of SPU you can gain to be your max SPU
             float totalSPUGained = UtilityGlobals.Clamp((float)Math.Floor(value), 0f, MaxSPU);

@@ -48,7 +48,9 @@ namespace PaperMarioBattleSystem
 
         protected int BaseDamage => Action.DamageInfo.HasValue ? Action.DamageInfo.Value.Damage : 0;
 
-        //NOTE: TEMPORARY - May be removed
+        /// <summary>
+        /// The BattleEntities the move associated with the Sequence can affect.
+        /// </summary>
         protected BattleEntity[] EntitiesAffected { get; private set; }
 
         /// <summary>
@@ -88,6 +90,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public ActionCommand.CommandResults CommandResult { get; private set; } = ActionCommand.CommandResults.Success;
 
+        /// <summary>
+        /// The highest CommandRank the player obtained when performing the Action Command.
+        /// </summary>
+        public ActionCommand.CommandRank HighestCommandRank { get; private set; } = ActionCommand.CommandRank.None;
+
         #endregion
 
         protected Sequence(MoveAction moveAction)
@@ -117,6 +124,7 @@ namespace PaperMarioBattleSystem
             CurBranch = SequenceBranch.Start;
             InSequence = true;
             SequenceStep = 0;
+            HighestCommandRank = ActionCommand.CommandRank.None;
 
             ChangeJumpBranch(SequenceBranch.None);
 
@@ -147,6 +155,7 @@ namespace PaperMarioBattleSystem
             InSequence = false;
             SequenceStep = 0;
             CurSequenceAction = null;
+            HighestCommandRank = ActionCommand.CommandRank.None;
 
             ChangeJumpBranch(SequenceBranch.None);
 
@@ -382,6 +391,36 @@ namespace PaperMarioBattleSystem
             CommandResult = ActionCommand.CommandResults.Failure;
 
             CommandFailed();
+        }
+
+        //NOTE: For some moves, these only show up when you hit (Ex. Jump, Hammer, Power Shell).
+        //Other moves show them as you perform the command, even if they deal damage (Ex. Mini-Egg, Earth Tremor).
+        //Find a way to define when to show them in each move
+        public void OnCommandRankResult(ActionCommand.CommandRank commandRank)
+        {
+            //Don't bother if the CommandRank is nothing
+            if (commandRank == ActionCommand.CommandRank.None) return;
+
+            //Get how many Simplifiers and Unsimplifiers the entity has equipped
+            int simplifierCount = UtilityGlobals.Clamp(User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.Simplifier), 0, BadgeGlobals.MaxSimplifierCount);
+            int unsimplifierCount = UtilityGlobals.Clamp(User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.Unsimplifier), 0, BadgeGlobals.MaxUnsimplifierCount);
+
+            int rankInt = (int)commandRank;
+
+            //Subtract Simplifier count and add Unsimplifier count to the final rank
+            rankInt -= simplifierCount;
+            rankInt += unsimplifierCount;
+
+            //Clamp the rank to the final values
+            rankInt = UtilityGlobals.Clamp(rankInt, (int)ActionCommand.CommandRank.NiceM2, (int)ActionCommand.CommandRank.Excellent);
+
+            ActionCommand.CommandRank finalRank = (ActionCommand.CommandRank)rankInt;
+
+            //Update the highest command rank
+            if (finalRank > HighestCommandRank)
+            {
+                HighestCommandRank = finalRank;
+            }
         }
 
         public virtual void OnCommandResponse(object response)

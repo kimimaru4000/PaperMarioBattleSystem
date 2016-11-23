@@ -72,6 +72,7 @@ namespace PaperMarioBattleSystem
                 //Released Left at the right time
                 if (AllLightsFilled == true)
                 {
+                    SendCommandRank(CommandRank.Nice);
                     OnComplete(CommandResults.Success);
                 }
                 //Released Left too early

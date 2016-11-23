@@ -768,6 +768,53 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class StarPowerGlobals
     {
+        #region Command Rank Data
+
+        /// <summary>
+        /// The table of Crystal Star Power modifiers based on the highest CommandRank earned.
+        /// </summary>
+        private static readonly Dictionary<ActionCommand.CommandRank, float> CommandRankModifierTable = new Dictionary<ActionCommand.CommandRank, float>()
+        {
+            { ActionCommand.CommandRank.None, 0.00f },
+            { ActionCommand.CommandRank.NiceM2, 0.50f },
+            { ActionCommand.CommandRank.NiceM1, 0.75f },
+            { ActionCommand.CommandRank.Nice, 1.00f },
+            { ActionCommand.CommandRank.Good, 1.25f },
+            { ActionCommand.CommandRank.Great, 1.50f },
+            { ActionCommand.CommandRank.Wonderful, 1.75f },
+            { ActionCommand.CommandRank.Excellent, 2.00f }
+        };
+
+        /// <summary>
+        /// The table of Crystal Star Power modifiers based on whether any Stylish moves were performed or not for a particular CommandRank.
+        /// </summary>
+        private static readonly Dictionary<ActionCommand.CommandRank, float> StylishModifierTable = new Dictionary<ActionCommand.CommandRank, float>()
+        {
+            { ActionCommand.CommandRank.None, 1.00f },
+            { ActionCommand.CommandRank.NiceM2, 3.00f },
+            { ActionCommand.CommandRank.NiceM1, 3.50f },
+            { ActionCommand.CommandRank.Nice, 4.00f },
+            { ActionCommand.CommandRank.Good, 4.50f },
+            { ActionCommand.CommandRank.Great, 5.00f },
+            { ActionCommand.CommandRank.Wonderful, 5.50f },
+            { ActionCommand.CommandRank.Excellent, 6.00f }
+        };
+
+        /// <summary>
+        /// Gets the total CommandRank value based on how well Mario or his Partner performed an Action Command.
+        /// This is factored in when calculating the amount of Crystal Star Star Power gained from an attack.
+        /// </summary>
+        /// <param name="highestRank">The highest CommandRank earned while performing the Action Command.</param>
+        /// <param name="performedStylish">Whether any Stylish moves were performed or not.</param>
+        /// <returns>A float of the CommandRank value.</returns>
+        public static float GetCommandRankValue(ActionCommand.CommandRank highestRank, bool performedStylish)
+        {
+            if (performedStylish == true) return StylishModifierTable[highestRank];
+            else return CommandRankModifierTable[highestRank];
+        }
+
+        #endregion
+
         #region Danger Status Values
 
         public const float NormalMod = 1f;
@@ -1020,6 +1067,20 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class BadgeGlobals
     {
+        #region Fields
+
+        /// <summary>
+        /// The max number of Simplifiers that can affect ActionCommands.
+        /// </summary>
+        public const int MaxSimplifierCount = 3;
+
+        /// <summary>
+        /// The max number of Unsimplifiers that can affect ActionCommands.
+        /// </summary>
+        public const int MaxUnsimplifierCount = 3;
+
+        #endregion
+
         #region Enums
 
         /// <summary>

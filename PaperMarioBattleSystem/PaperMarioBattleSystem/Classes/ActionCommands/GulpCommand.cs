@@ -72,6 +72,7 @@ namespace PaperMarioBattleSystem
             {
                 if (WithinRange == true)
                 {
+                    SendCommandRank(CommandRank.Nice);
                     OnComplete(CommandResults.Success);
                 }
                 else

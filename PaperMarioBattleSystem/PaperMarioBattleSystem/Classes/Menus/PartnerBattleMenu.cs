@@ -18,7 +18,9 @@ namespace PaperMarioBattleSystem
             PartnerSubMenu = partnerSubMenu;
 
             ActionButtons.Add(new ActionButton("Abilities", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
-                new Vector2(-170, 50), PartnerSubMenu));
+                /*new Vector2(-170, 50),*/ PartnerSubMenu));
+
+            Initialize(2);
         }
     }
 }

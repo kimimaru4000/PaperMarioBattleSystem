@@ -27,18 +27,18 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The position of the button.
         /// </summary>
-        private Vector2 Position = Vector2.Zero;
+        public Vector2 Position = Vector2.Zero;
 
         /// <summary>
         /// The ActionSubMenu that this button leads to.
         /// </summary>
         private ActionSubMenu SubMenu = null;
 
-        public ActionButton(string name, Texture2D buttonImage, Vector2 position, ActionSubMenu subMenu)
+        public ActionButton(string name, Texture2D buttonImage, /*Vector2 position,*/ ActionSubMenu subMenu)
         {
             Name = name;
             ButtonImage = buttonImage;
-            Position = position;
+            //Position = position;
             SubMenu = subMenu;
         }
 

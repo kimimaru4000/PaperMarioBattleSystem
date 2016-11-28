@@ -25,7 +25,6 @@ namespace PaperMarioBattleSystem
             {
                 BattleActions.Add(new Multibounce());
             }
-            Initialize(BattleActions);
         }
     }
 }

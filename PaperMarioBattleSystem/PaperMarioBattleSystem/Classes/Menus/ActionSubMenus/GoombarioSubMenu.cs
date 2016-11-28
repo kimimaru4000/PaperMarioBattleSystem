@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
         public GoombarioSubMenu()
         {
             Position = new Vector2(210, 150);
-            Initialize(new List<MoveAction> { new Bonk(), new TidalWave(), new Gulp(), new MiniEgg() });
+            BattleActions = new List<MoveAction> { new Bonk(), new TidalWave(), new Gulp(), new MiniEgg() };
         }
     }
 }

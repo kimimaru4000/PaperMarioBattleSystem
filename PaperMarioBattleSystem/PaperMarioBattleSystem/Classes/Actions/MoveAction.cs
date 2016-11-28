@@ -36,6 +36,11 @@ namespace PaperMarioBattleSystem
         public InteractionParamHolder? DamageInfo { get; protected set; } = null;
 
         /// <summary>
+        /// The category of this action. It is automatically set by the menus.
+        /// </summary>
+        public MoveCategories MoveCategory { get; private set; } = MoveCategories.Enemy;
+
+        /// <summary>
         /// The ActionCommand associated with the BattleAction
         /// </summary>
         public ActionCommand actionCommand { get; set; }
@@ -101,6 +106,11 @@ namespace PaperMarioBattleSystem
             {
                 actionCommand.SetHandler(MoveSequence);
             }
+        }
+
+        public virtual void SetMoveCategory(MoveCategories moveCategory)
+        {
+            MoveCategory = moveCategory;
         }
 
         /// <summary>

@@ -17,9 +17,9 @@ namespace PaperMarioBattleSystem
         public MarioBattleMenu() : base(Enumerations.PlayerTypes.Mario)
         {
             ActionButtons.Add(new ActionButton("Jump", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
-                /*new Vector2(-170, 50),*/ new JumpSubMenu()));
+                Enumerations.MoveCategories.Jump, new JumpSubMenu()));
             ActionButtons.Add(new ActionButton("Hammer", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
-                /*new Vector2(-120, 50),*/ new HammerSubMenu()));
+                Enumerations.MoveCategories.Hammer, new HammerSubMenu()));
             
             Initialize(2);
         }

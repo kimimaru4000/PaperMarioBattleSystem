@@ -60,9 +60,9 @@ namespace PaperMarioBattleSystem
             PlayerType = playerType;
             
             ActionButtons.Add(new ActionButton("Tactics", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
-                /*new Vector2(-270, 50),*/ new TacticsSubMenu()));
+                MoveCategories.Tactics, new TacticsSubMenu()));
             ActionButtons.Add(new ActionButton("Items", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
-                /*new Vector2(-220, 50),*/ new HammerSubMenu()));
+                MoveCategories.Item, new HammerSubMenu()));
         }
 
         /// <summary>
@@ -74,6 +74,11 @@ namespace PaperMarioBattleSystem
             Position = BattleManager.Instance.EntityTurn.BattlePosition;
 
             ChangeSelection(startingSelection);
+
+            for (int i = 0; i < ActionButtons.Count; i++)
+            {
+                ActionButtons[i].Initialize();
+            }
         }
 
         protected override void OnSelectionChanged(int newSelection)

@@ -17,15 +17,15 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class ActionSubMenu : BattleMenu
     {
-        /*IMPORTANT
-        * Make sure the UI supports deeper submenus. For example, the "Change Partner" option in "Strategies"
-        * brings up the partner menu. Selecting a partner on that menu then switches partners
-        */
-
         /// <summary>
         /// The list of move actions in the submenu
         /// </summary>
         public List<MoveAction> BattleActions { get; protected set; } = new List<MoveAction>();
+
+        /// <summary>
+        /// The category of the menu.
+        /// </summary>
+        public Enumerations.MoveCategories MoveCategory = Enumerations.MoveCategories.None;
 
         /// <summary>
         /// The position of the submenu
@@ -42,15 +42,14 @@ namespace PaperMarioBattleSystem
             BoxMenu.SetText(string.Empty);
         }
 
-        protected ActionSubMenu(List<MoveAction> moveActions) : this()
+        public void Initialize()
         {
-            Initialize(moveActions);
-        }
-
-        protected void Initialize(List<MoveAction> moveActions)
-        {
-            BattleActions = moveActions;
             BoxMenu.SetText(BattleActions[0].MoveProperties.Description);
+
+            for (int i = 0; i < BattleActions.Count; i++)
+            {
+                BattleActions[i].SetMoveCategory(MoveCategory);
+            }
         }
 
         protected override void OnSelectionChanged(int newSelection)

@@ -485,9 +485,12 @@ namespace PaperMarioBattleSystem
             None, Item, Badge
         }
 
-        public enum BattleActions
+        /// <summary>
+        /// The root-level categories of moves
+        /// </summary>
+        public enum MoveCategories
         {
-            Misc, Item, Jump, Hammer, Focus, Special
+            None, Tactics, Item, Jump, Hammer, Special, Partner, Enemy
         }
 
         /// <summary>

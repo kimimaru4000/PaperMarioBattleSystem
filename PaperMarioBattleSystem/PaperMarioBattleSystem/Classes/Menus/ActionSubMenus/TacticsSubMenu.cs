@@ -49,8 +49,6 @@ namespace PaperMarioBattleSystem
 
             //Do nothing action
             BattleActions.Add(new NoAction());
-
-            Initialize(BattleActions);
         }
     }
 }

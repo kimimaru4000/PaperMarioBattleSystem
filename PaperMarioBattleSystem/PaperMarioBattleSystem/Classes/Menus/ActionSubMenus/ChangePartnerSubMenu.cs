@@ -28,8 +28,6 @@ namespace PaperMarioBattleSystem
 
                 BattleActions.Add(partnerChange);
             }
-
-            Initialize(BattleActions);
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -25,6 +26,11 @@ namespace PaperMarioBattleSystem
         private Texture2D ButtonImage = null;
 
         /// <summary>
+        /// The move category of the button. All moves accessed through the button have the same category.
+        /// </summary>
+        public MoveCategories Category { get; private set; } = MoveCategories.None;
+
+        /// <summary>
         /// The position of the button.
         /// </summary>
         public Vector2 Position = Vector2.Zero;
@@ -34,12 +40,21 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private ActionSubMenu SubMenu = null;
 
-        public ActionButton(string name, Texture2D buttonImage, /*Vector2 position,*/ ActionSubMenu subMenu)
+        public ActionButton(string name, Texture2D buttonImage, MoveCategories moveCategory, ActionSubMenu subMenu)
         {
             Name = name;
             ButtonImage = buttonImage;
-            //Position = position;
+            Category = moveCategory;
             SubMenu = subMenu;
+        }
+
+        public void Initialize()
+        {
+            if (SubMenu != null)
+            {
+                SubMenu.MoveCategory = Category;
+                SubMenu.Initialize();
+            }
         }
 
         /// <summary>

@@ -28,6 +28,16 @@ namespace PaperMarioBattleSystem
             SubMenu = subMenu;
         }
 
+        public override void SetMoveCategory(Enumerations.MoveCategories moveCategory)
+        {
+            base.SetMoveCategory(moveCategory);
+            if (SubMenu != null)
+            {
+                SubMenu.MoveCategory = MoveCategory;
+                SubMenu.Initialize();
+            }
+        }
+
         public override void OnMenuSelected()
         {
             if (SubMenu != null)

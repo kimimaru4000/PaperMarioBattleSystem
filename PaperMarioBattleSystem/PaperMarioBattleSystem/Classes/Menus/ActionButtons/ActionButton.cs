@@ -40,6 +40,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private ActionSubMenu SubMenu = null;
 
+        /// <summary>
+        /// Whether the button is disabled and cannot be selected.
+        /// This is often set by the NoSkills Status Effect.
+        /// </summary>
+        public bool Disabled { get; private set; } = false;
+
         public ActionButton(string name, Texture2D buttonImage, MoveCategories moveCategory, ActionSubMenu subMenu)
         {
             Name = name;
@@ -55,6 +61,9 @@ namespace PaperMarioBattleSystem
                 SubMenu.MoveCategory = Category;
                 SubMenu.Initialize();
             }
+
+            //Check if the button should be disabled
+            Disabled = BattleManager.Instance.EntityTurn.EntityProperties.IsMoveCategoryDisabled(Category);
         }
 
         /// <summary>
@@ -66,7 +75,15 @@ namespace PaperMarioBattleSystem
         {
             if (SubMenu != null)
             {
-                BattleUIManager.Instance.PushMenu(SubMenu);
+                if (Disabled == false)
+                {
+                    BattleUIManager.Instance.PushMenu(SubMenu);
+                }
+                else
+                {
+                    //NOTE: Show the dialog here that the action can't be selected
+                    Debug.LogError($"All {Category} moves are currently disabled for {BattleManager.Instance.EntityTurn.Name}!");
+                }
             }
             else
             {
@@ -76,13 +93,13 @@ namespace PaperMarioBattleSystem
 
         public void Draw(bool selected)
         {
-            Color color = Color.White * .75f;
-            if (selected == true) color = Color.White;
+            Color iconColor = Disabled == false ? Color.White : Color.LightSlateGray;
+            if (selected == false) iconColor = iconColor * .75f;
 
             Vector2 uiPos = Camera.Instance.SpriteToUIPos(Position);
 
-            SpriteRenderer.Instance.Draw(ButtonImage, uiPos, color, false, .4f, true);
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, Name, uiPos - new Vector2(0, 30), color, .45f);
+            SpriteRenderer.Instance.Draw(ButtonImage, uiPos, iconColor, false, .4f, true);
+            SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, Name, uiPos - new Vector2(0, 30), iconColor, .45f);
         }
     }
 }

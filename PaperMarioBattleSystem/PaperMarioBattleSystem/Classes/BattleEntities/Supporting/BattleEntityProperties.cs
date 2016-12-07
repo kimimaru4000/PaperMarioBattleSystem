@@ -68,6 +68,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected readonly List<PaybackHolder> Paybacks = new List<PaybackHolder>();
 
+        /// <summary>
+        /// The move categories the entity cannot perform because they are disabled
+        /// </summary>
+        protected readonly Dictionary<MoveCategories, bool> DisabledMoveCategories = new Dictionary<MoveCategories, bool>();
+
         #region Constructor
 
         public BattleEntityProperties(BattleEntity entity)
@@ -807,7 +812,60 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        
+        #region Move Category Methods
+
+        /// <summary>
+        /// Disables a particular MoveCategory from being used by the entity.
+        /// </summary>
+        /// <param name="category">The type of moves to disable.</param>
+        public void DisableMoveCategory(MoveCategories category)
+        {
+            if (IsMoveCategoryDisabled(category) == true)
+            {
+                Debug.LogWarning($"Category {category} is already disabled for {Entity.Name}!");
+                return;
+            }
+
+            Debug.Log($"Disabled {category} moves from use for {Entity.Name}");
+
+            DisabledMoveCategories.Add(category, true);
+        }
+
+        /// <summary>
+        /// Clears a particular MoveCategory from being disabled.
+        /// </summary>
+        /// <param name="category">The type of moves to enable.</param>
+        public void EnableMoveCategory(MoveCategories category)
+        {
+            bool removed = DisabledMoveCategories.Remove(category);
+
+            if (removed == true)
+            {
+                Debug.Log($"Enabled {category} moves for {Entity.Name} to use once again");
+            }
+        }
+
+        /// <summary>
+        /// Tells whether a particular MoveCategory is disabled for this entity.
+        /// </summary>
+        /// <param name="category">The type of moves to check.</param>
+        /// <returns>true if the category is in the disabled dictionary, otherwise false.</returns>
+        public bool IsMoveCategoryDisabled(MoveCategories category)
+        {
+            return DisabledMoveCategories.ContainsKey(category);
+        }
+
+        /// <summary>
+        /// Gets all of the entity's currently disabled MoveCategories.
+        /// </summary>
+        /// <returns>An array of MoveCategories that are disabled. If none are disabled, an empty array is returned.</returns>
+        public MoveCategories[] GetDisabledMoveCategories()
+        {
+            return DisabledMoveCategories.Keys.ToArray();
+        }
+
+        #endregion
+
         #region Physical Attribute Sort Methods
 
         /// <summary>

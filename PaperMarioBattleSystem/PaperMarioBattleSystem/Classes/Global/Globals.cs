@@ -486,7 +486,8 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// The root-level categories of moves
+        /// The root-level categories of moves.
+        /// <para>In the PM games, Tactics, Special, and Enemy moves are never disabled. Be extra careful if you want to disable those.</para>
         /// </summary>
         public enum MoveCategories
         {

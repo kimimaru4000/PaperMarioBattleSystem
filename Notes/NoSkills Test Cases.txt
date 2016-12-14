@@ -1,0 +1,82 @@
+Case 1:
+-------
+Disable Jump for 2 turns
+
+Duration = 2
+TurnsPassed = 1
+
+Disable Hammer for 1 turn
+
+Duration should = 2 and TurnsPassed = 1
+
+Case 2:
+-------
+Disable Jump for 2 turns
+
+Duration = 2
+TurnsPassed = 1
+
+Disable Hammer for 2 turns
+
+Duration should = 3 and TurnsPassed = 1
+
+
+What's the difference here?
+---------------------------
+In the latter case, 1+2 = 3 which is greater than Duration, which was 2
+
+Case 3:
+-------
+Disable Jump for 3 turns
+
+Duration = 3
+TurnsPassed = 2
+
+Disable Hammer for 2 turns
+Duration = 4
+TurnsPassed = 2
+
+Duration = 4
+TurnsPassed = 3
+Jump Re-Enabled
+
+Disable Items for 2 turns
+Duration = 5
+TurnsPassed = 3
+
+Duration = 5
+TurnsPassed = 4
+Hammer Re-Enabled
+
+Disable Jump for 2 turns
+Duration = 6
+TurnsPassed = 4
+
+So it's true, if ((TurnsPassed + newDuration) > Duration) then set Duration to that value
+
+Case 4:
+-------
+AdditionalDuration = 3
+
+Disable Jump for 2 turns
+Duration = 2
+TurnsPassed = 0
+
+Duration = 2
+TurnsPassed = 3
+Jump Not Re-Enabled Yet
+
+Disable Hammer for 2 turns
+Duration = 5
+TurnsPassed = 3
+
+Duration = 5
+TurnsPassed = 5
+Jump Re-Enabled
+Hammer Not Re-Enabled Yet
+
+Duration = 5
+TurnsPassed = 8
+Hammer Re-Enabled
+
+This also works with AdditionalDuration, so it's good to go!

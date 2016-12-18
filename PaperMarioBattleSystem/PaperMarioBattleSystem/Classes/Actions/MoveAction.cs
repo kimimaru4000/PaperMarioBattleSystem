@@ -67,6 +67,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool DealsDamage => (DamageInfo != null);
 
+        /// <summary>
+        /// Tells if the MoveAction costs FP or not.
+        /// </summary>
+        public bool CostsFP => (MoveProperties.FPCost > 0);
+
         #endregion
 
         protected MoveAction()

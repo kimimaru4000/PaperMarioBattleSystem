@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// The NoSkills Status Effect.
     /// The entity has MoveCategories disabled for a number of turns.
     /// <para>The MoveCategory disabled should always be one that isn't currently disabled.
-    /// This Status Effect also cannot have its duration refreshed like other Status Effects due to its nature (you can't remove a skill twice).</para>
+    /// This Status Effect also refreshes differently than other Status Effects due to its nature (you can't remove a skill twice).</para>
     /// </summary>
     public sealed class NoSkillsStatus : StatusEffect
     {
@@ -36,7 +36,7 @@ namespace PaperMarioBattleSystem
         }
 
         //NoSkills cannot be refreshed like other status effects, as a move category cannot be disabled more than once
-        //This instead serves to add new categories to disable and track how long they should be disabled
+        //This serves to add new categories to disable and track how long they should be disabled
         public override void Refresh(StatusEffect newStatus)
         {
             //Convert the new status, then check if its category isn't already in the status' disabled dictionary
@@ -44,7 +44,7 @@ namespace PaperMarioBattleSystem
             NoSkillsStatus noSkills = (NoSkillsStatus)newStatus;
             if (EntityAfflicted.EntityProperties.IsMoveCategoryDisabled(noSkills.CategoryDisabled) == true)
             {
-                Debug.LogWarning($"{noSkills.CategoryDisabled} moves are already disabled for this entity. " +
+                Debug.LogWarning($"{noSkills.CategoryDisabled} moves are already disabled for {EntityAfflicted.Name}. " +
                     $"Not disabling in {nameof(NoSkillsStatus)} as they could've been disabled through other means");
 
                 return;
@@ -88,7 +88,7 @@ namespace PaperMarioBattleSystem
             }
             else
             {
-                Debug.LogWarning($"{CategoryDisabled} moves are already disabled for this entity. " +
+                Debug.LogWarning($"{CategoryDisabled} moves are already disabled for {EntityAfflicted.Name}. " +
                     $"Not disabling in {nameof(NoSkillsStatus)} as they could've been disabled through other means");
             }
         }

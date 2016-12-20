@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// Star Power granted by Crystal Stars that can be used by Mario.
     /// This is the TTYD Star Power. This Star Power is gained from your battle performance, as determined by the Audience.
     /// </summary>
-    public class CrystalStarPower : StarPowerBase
+    public sealed class CrystalStarPower : StarPowerBase
     {
         /// <summary>
         /// Calculates the amount of Star Power the Audience gives Mario after either he or his Partner use Appeal.

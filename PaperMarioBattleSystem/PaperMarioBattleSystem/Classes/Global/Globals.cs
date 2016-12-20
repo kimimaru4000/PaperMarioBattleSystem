@@ -348,8 +348,8 @@ namespace PaperMarioBattleSystem
     #region Classes
 
     /// <summary>
-    /// A class containing all the stats in the game.
-    /// Only playable characters use Level, and only Mario uses FP
+    /// A class containing the main stats in the game.
+    /// Enemies have internal levels, likely related to Star Point gain.
     /// </summary>
     public class Stats
     {
@@ -360,12 +360,28 @@ namespace PaperMarioBattleSystem
         public int MaxFP;
 
         //Base stats going into battle
+
+        /// <summary>
+        /// Base Attack without any modifications.
+        /// </summary>
         public int BaseAttack;
+
+        /// <summary>
+        /// Base Defense without any modifications.
+        /// </summary>
         public int BaseDefense;
 
         public int HP;
         public int FP;
+
+        /// <summary>
+        /// The Attack amount modified.
+        /// </summary>
         public int Attack;
+
+        /// <summary>
+        /// The Defense amount modified.
+        /// </summary>
         public int Defense;
 
         /// <summary>
@@ -379,30 +395,49 @@ namespace PaperMarioBattleSystem
         public int Evasion = 0;
 
         /// <summary>
-        /// Retrieves the BootLevel stat. If not Mario, this will be the lowest BootLevel.
-        /// </summary>
-        public virtual EquipmentGlobals.BootLevels GetBootLevel => EquipmentGlobals.BootLevels.Normal;
-
-        /// <summary>
-        /// Retrieves the HammerLevel stat. If not Mario, this will be the lowest HammerLevel.
-        /// </summary>
-        public virtual EquipmentGlobals.HammerLevels GetHammerLevel => EquipmentGlobals.HammerLevels.Normal;
-
-        /// <summary>
         /// Default stats
         /// </summary>
         public static Stats Default => new Stats(1, 10, 5, 0, 0);
+
+        /// <summary>
+        /// The BattleEntity's BaseAttack combined with any modifiers.
+        /// </summary>
+        public int TotalAttack => BaseAttack + Attack;
+
+        /// <summary>
+        /// The BattleEntity's BaseDefense combined with any modifiers.
+        /// </summary>
+        public int TotalDefense => BaseDefense + Defense;
 
         public Stats(int level, int maxHP, int maxFP, int attack, int defense)
         {
             Level = level;
             MaxHP = HP = maxHP;
             MaxFP = FP = maxFP;
-            BaseAttack = Attack = attack;
-            BaseDefense = Defense = defense;
+            BaseAttack = attack;
+            BaseDefense = defense;
+            Attack = 0;
+            Defense = 0;
         }
     }
 
+    /// <summary>
+    /// Stats for Mario's Partners.
+    /// </summary>
+    public sealed class PartnerStats : Stats
+    {
+        public PartnerGlobals.PartnerRanks PartnerRank = PartnerGlobals.PartnerRanks.Normal;
+
+        public PartnerStats(PartnerGlobals.PartnerRanks partnerRank, int maxHP, int attack, int defense)
+            : base((int)partnerRank, maxHP, 0, attack, defense)
+        {
+            PartnerRank = partnerRank;
+        }
+    }
+
+    /// <summary>
+    /// Stats for Mario.
+    /// </summary>
     public sealed class MarioStats : Stats
     {
         /// <summary>
@@ -415,8 +450,16 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public EquipmentGlobals.HammerLevels HammerLevel = EquipmentGlobals.HammerLevels.Normal;
 
-        public override EquipmentGlobals.BootLevels GetBootLevel => BootLevel;
-        public override EquipmentGlobals.HammerLevels GetHammerLevel => HammerLevel;
+        /// <summary>
+        /// Mario's Crystal Star Power.
+        /// </summary>
+        public CrystalStarPower CSStarPower = new CrystalStarPower();
+
+        /// <summary>
+        /// The number of Star Points Mario has.
+        /// When it reaches 100, it resets back to 0 and Mario goes up one level.
+        /// </summary>
+        public int StarPoints = 0;
 
         public MarioStats(int level, int maxHp, int maxFP, int attack, int defense,
             EquipmentGlobals.BootLevels bootLevel, EquipmentGlobals.HammerLevels hammerLevel) : base(level, maxHp, maxFP, attack, defense)
@@ -992,7 +1035,7 @@ namespace PaperMarioBattleSystem
         #region Fields
 
         /// <summary>
-        /// Defines the priority of StatusEffects.
+        /// Defines the priority of StatusEffects. Higher priorities affect BattleEntities sooner.
         /// <para>Related StatusEffects are grouped together in lines for readability</para>
         /// </summary>
         private readonly static Dictionary<Enumerations.StatusTypes, int> StatusOrder = new Dictionary<Enumerations.StatusTypes, int>()
@@ -1035,6 +1078,24 @@ namespace PaperMarioBattleSystem
             if (StatusOrder.ContainsKey(statusType) == false) return 0;
 
             return StatusOrder[statusType];
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Class for global values dealing with Partners.
+    /// </summary>
+    public static class PartnerGlobals
+    {
+        #region Enums
+
+        /// <summary>
+        /// The Ranks for Partners.
+        /// </summary>
+        public enum PartnerRanks
+        {
+            Normal, Super, Ultra
         }
 
         #endregion

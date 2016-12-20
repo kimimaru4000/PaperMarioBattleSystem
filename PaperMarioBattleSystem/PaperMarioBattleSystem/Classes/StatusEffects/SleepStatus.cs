@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         {
             StatusType = Enumerations.StatusTypes.Sleep;
         }
-
+        
         public sealed override StatusEffect Copy()
         {
             return new SleepStatus(Duration);

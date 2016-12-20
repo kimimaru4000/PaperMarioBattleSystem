@@ -57,12 +57,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Decreases the current number of Star Power units Mario has.
         /// </summary>
-        /// <param name="spuLost">The number of Star Power units to subtract. If positive, this value will be changed to negative.</param>
+        /// <param name="spuLost">The number of Star Power units to subtract. If negative, this value will be changed to positive.</param>
         public void LoseStarPower(float spuLost)
         {
-            if (spuLost >= 0)
+            if (spuLost <= 0)
             {
-                Debug.LogError($"{nameof(spuLost)} is greater than or equal to 0, which should never happen. Changing to negative");
+                Debug.LogError($"{nameof(spuLost)} is less than or equal to 0, which should never happen. Changing to negative");
                 spuLost = -spuLost;
             }
 

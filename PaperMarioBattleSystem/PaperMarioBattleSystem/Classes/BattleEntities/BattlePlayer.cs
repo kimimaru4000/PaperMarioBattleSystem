@@ -23,6 +23,34 @@ namespace PaperMarioBattleSystem
             DefensiveActions.Add(new Superguard(this));
         }
 
+        /// <summary>
+        /// Returns Mario's FP for BattlePlayers, as they share the same FP pool for Mario.
+        /// </summary>
+        public override int CurFP => BattleManager.Instance.GetMario().BattleStats.FP;
+
+        /// <summary>
+        /// While any BattleEntity can have FP, only Mario actually uses it.
+        /// Both Partners and Mario add to Mario's FP pool.
+        /// </summary>
+        /// <param name="fp"></param>
+        public override void HealFP(int fp)
+        {
+            BattleMario mario = BattleManager.Instance.GetMario();
+            mario.BattleStats.FP = UtilityGlobals.Clamp(mario.BattleStats.FP + fp, 0, mario.BattleStats.MaxFP);
+            Debug.Log($"{mario.Name} healed {fp} FP!");
+        }
+
+        /// <summary>
+        /// While any BattleEntity can have FP, only Mario actually uses it.
+        /// Both Partners and Mario subtract from Mario's FP pool.
+        /// </summary>
+        public override void LoseFP(int fp)
+        {
+            BattleMario mario = BattleManager.Instance.GetMario();
+            mario.BattleStats.FP = UtilityGlobals.Clamp(mario.BattleStats.FP - fp, 0, mario.BattleStats.MaxFP);
+            Debug.Log($"{mario.Name} healed {fp} FP!");
+        }
+
         public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
         {
             //NOTE: This isn't entity-specific right now, so it technically doesn't work properly.

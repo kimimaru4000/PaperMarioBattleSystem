@@ -189,7 +189,9 @@
     <Compile Include="Classes\StatusEffects\DodgyStatus.cs" />
     <Compile Include="Classes\StatusEffects\ElectrifiedStatus.cs" />
     <Compile Include="Classes\StatusEffects\FastStatus.cs" />
+    <Compile Include="Classes\StatusEffects\FPRegenStatus.cs" />
     <Compile Include="Classes\StatusEffects\FrozenStatus.cs" />
+    <Compile Include="Classes\StatusEffects\HPRegenStatus.cs" />
     <Compile Include="Classes\StatusEffects\HugeStatus.cs" />
     <Compile Include="Classes\StatusEffects\ImmobilizedStatus.cs" />
     <Compile Include="Classes\StatusEffects\InvisibleStatus.cs" />

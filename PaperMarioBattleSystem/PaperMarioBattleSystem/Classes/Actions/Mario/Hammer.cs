@@ -20,7 +20,13 @@ namespace PaperMarioBattleSystem
             MoveInfo = new MoveActionData(null, 0, true, "Whack an enemy with your Hammer.", TargetSelectionMenu.EntitySelectionType.First,
                 EntityTypes.Enemy, new HeightStates[] { HeightStates.Grounded });
 
-            DamageInfo = new InteractionParamHolder(null, null, (int)User.BattleStats.GetHammerLevel, Elements.Normal, false, ContactTypes.HammerContact, null);
+            //The base damage for Hammer is Mario's current Hammer level
+            //If Mario isn't the one using this move, it defaults to 1
+            int baseDamage = 1;
+            MarioStats marioStats = User.BattleStats as MarioStats;
+            if (marioStats != null) baseDamage = (int)marioStats.HammerLevel;
+
+            DamageInfo = new InteractionParamHolder(null, null, baseDamage, Elements.Normal, false, ContactTypes.HammerContact, null);
 
             SetMoveSequence(new HammerSequence(this));
             actionCommand = new HammerCommand(MoveSequence, 4, 500d);

@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public static int PartnerMaxTurns { get; private set; } = 0;
 
-        public BattlePartner(Stats stats) : base(stats)
+        public BattlePartner(PartnerStats stats) : base(stats)
         {
             Name = "Partner";
 

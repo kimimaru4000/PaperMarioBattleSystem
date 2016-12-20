@@ -615,7 +615,7 @@ namespace PaperMarioBattleSystem
         /// <returns>An int with the total raw damage the BattleEntity can deal when using this BattleAction</returns>
         protected int GetTotalDamage(int actionDamage)
         {
-            int totalDamage = actionDamage + User.BattleStats.Attack + GetChargeDamage();
+            int totalDamage = actionDamage + User.BattleStats.TotalAttack + GetChargeDamage();
 
             return totalDamage;
         }

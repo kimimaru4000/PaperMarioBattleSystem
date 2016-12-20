@@ -221,7 +221,7 @@ namespace PaperMarioBattleSystem
                 unscaledVictimDamage = victimDefenseData.Value.Damage;
                 statuses = victimDefenseData.Value.Statuses;
                 //If the Defensive action dealt damage and the contact was direct
-                //the Defensive action has causes a Failure for the Attacker (Ex. Superguarding)
+                //the Defensive action has caused a Failure for the Attacker (Ex. Superguarding)
                 if (contactType == ContactTypes.JumpContact && victimDefenseData.Value.ElementHolder.HasValue == true)
                 {
                     contactResult = ContactResult.Failure;
@@ -234,7 +234,7 @@ namespace PaperMarioBattleSystem
             //Subtract Defense on non-piercing damage
             if (piercing == false)
             {
-                int totalDefense = victim.BattleStats.Defense + damageDodgeDefense;
+                int totalDefense = victim.BattleStats.TotalDefense + damageDodgeDefense;
                 unscaledVictimDamage -= totalDefense;
             }
 

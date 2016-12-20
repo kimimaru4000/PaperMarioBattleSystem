@@ -48,7 +48,7 @@ namespace PaperMarioBattleSystem
 
         public Stats BattleStats { get; protected set; } = Stats.Default;
         public int CurHP => BattleStats.HP;
-        public int CurFP => BattleStats.FP;
+        public virtual int CurFP => BattleStats.FP;
 
         /// <summary>
         /// The base number of turns the BattleEntity has in each of its phases
@@ -218,9 +218,10 @@ namespace PaperMarioBattleSystem
             Debug.Log($"{Name} healed {hp} HP!");
         }
 
-        public void HealFP(int fp)
+        public virtual void HealFP(int fp)
         {
             BattleStats.FP = UtilityGlobals.Clamp(BattleStats.FP + fp, 0, BattleStats.MaxFP);
+            Debug.Log($"{Name} healed {fp} FP!");
         }
 
         public virtual void LoseHP(int hp)
@@ -235,9 +236,10 @@ namespace PaperMarioBattleSystem
             Debug.Log($"{Name} took {hp} points of damage!");
         }
 
-        public void LoseFP(int fp)
+        public virtual void LoseFP(int fp)
         {
             BattleStats.FP = UtilityGlobals.Clamp(BattleStats.FP - fp, 0, BattleStats.MaxFP);
+            Debug.Log($"{Name} lost {fp} FP!");
         }
 
         public void RaiseAttack(int attack)

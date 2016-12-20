@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
 {
     public sealed class Kooper : BattlePartner
     {
-        public Kooper() : base(new Stats(1, 50, 0, 0, 1))
+        public Kooper() : base(new PartnerStats(PartnerGlobals.PartnerRanks.Normal, 50, 0, 1))
         {
             Name = "Kooper";
             PartnerDescription = "He can throw his shell at enemies!";

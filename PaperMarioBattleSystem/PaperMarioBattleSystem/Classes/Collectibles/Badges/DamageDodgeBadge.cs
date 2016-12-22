@@ -23,21 +23,21 @@ namespace PaperMarioBattleSystem
         protected override void OnEquip()
         {
             //Add 1 to AdditionalGuardDefense
-            int additional = EntityEquipped.EntityProperties.GetMiscProperty(MiscProperty.AdditionalGuardDefense).IntValue + 1;
+            //int additional = EntityEquipped.EntityProperties.GetMiscProperty(AdditionalProperty.AdditionalGuardDefense).IntValue + 1;
 
-            EntityEquipped.EntityProperties.AddMiscProperty(MiscProperty.AdditionalGuardDefense, new MiscValueHolder(additional));
+            //EntityEquipped.EntityProperties.AddMiscProperty(AdditionalProperty.AdditionalGuardDefense, new MiscValueHolder(additional));
         }
 
         protected override void OnUnequip()
         {
             //Subtract 1 from AdditionalGuardDefense
-            int subtracted = EntityEquipped.EntityProperties.GetMiscProperty(MiscProperty.AdditionalGuardDefense).IntValue - 1;
-            EntityEquipped.EntityProperties.RemoveMiscProperty(MiscProperty.AdditionalGuardDefense);
+            //int subtracted = EntityEquipped.EntityProperties.GetMiscProperty(AdditionalProperty.AdditionalGuardDefense).IntValue - 1;
+            //EntityEquipped.EntityProperties.RemoveMiscProperty(AdditionalProperty.AdditionalGuardDefense);
 
-            if (subtracted > 0)
-            {
-                EntityEquipped.EntityProperties.AddMiscProperty(MiscProperty.AdditionalGuardDefense, new MiscValueHolder(subtracted));
-            }
+            //if (subtracted > 0)
+            //{
+            //    EntityEquipped.EntityProperties.AddMiscProperty(AdditionalProperty.AdditionalGuardDefense, new MiscValueHolder(subtracted));
+            //}
         }
     }
 }

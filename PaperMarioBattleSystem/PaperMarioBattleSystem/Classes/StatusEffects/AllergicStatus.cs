@@ -23,16 +23,17 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             //Make the entity immune to all StatusEffects
-            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.PositiveStatusImmune, new MiscValueHolder(true));
-            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.NeutralStatusImmune, new MiscValueHolder(true));
-            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune, new MiscValueHolder(true));
+            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, true);
+            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, true);
+            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
         }
 
         protected override void OnEnd()
         {
             //Remove the StatusEffect immunities
-            EntityAfflicted.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.PositiveStatusImmune);
-            EntityAfflicted.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.NegativeStatusImmune);
+            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune);
+            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune);
+            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune);
         }
 
         protected override void OnPhaseCycleStart()

@@ -27,8 +27,8 @@ namespace PaperMarioBattleSystem
             //Quick Change on Enemies shouldn't affect Players
             if (EntityEquipped.EntityType != Enumerations.EntityTypes.Player) return;
 
-            int count = BattlePlayer.PlayerProperties.GetProperty<int>(BattlePlayerGlobals.PlayerProperties.QuickChangeCount);
-            BattlePlayer.PlayerProperties.AddProperty(BattlePlayerGlobals.PlayerProperties.QuickChangeCount, count + 1);
+            //int count = BattlePlayer.PlayerProperties.GetProperty<int>(BattlePlayerGlobals.PlayerProperties.QuickChangeCount);
+            //BattlePlayer.PlayerProperties.AddProperty(BattlePlayerGlobals.PlayerProperties.QuickChangeCount, count + 1);
         }
 
         protected override void OnUnequip()
@@ -36,13 +36,13 @@ namespace PaperMarioBattleSystem
             //Quick Change on Enemies shouldn't affect Players
             if (EntityEquipped.EntityType != Enumerations.EntityTypes.Player) return;
 
-            int count = BattlePlayer.PlayerProperties.GetProperty<int>(BattlePlayerGlobals.PlayerProperties.QuickChangeCount) - 1;
-            BattlePlayer.PlayerProperties.RemoveProperty(BattlePlayerGlobals.PlayerProperties.QuickChangeCount);
-
-            if (count > 0)
-            {
-                BattlePlayer.PlayerProperties.AddProperty(BattlePlayerGlobals.PlayerProperties.QuickChangeCount, count);
-            }
+            //int count = BattlePlayer.PlayerProperties.GetProperty<int>(BattlePlayerGlobals.PlayerProperties.QuickChangeCount) - 1;
+            //BattlePlayer.PlayerProperties.RemoveProperty(BattlePlayerGlobals.PlayerProperties.QuickChangeCount);
+            //
+            //if (count > 0)
+            //{
+            //    BattlePlayer.PlayerProperties.AddProperty(BattlePlayerGlobals.PlayerProperties.QuickChangeCount, count);
+            //}
         }
     }
 }

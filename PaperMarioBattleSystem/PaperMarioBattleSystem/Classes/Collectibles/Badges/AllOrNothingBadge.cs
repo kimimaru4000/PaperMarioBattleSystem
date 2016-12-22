@@ -24,18 +24,18 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            int allOrNothingCount = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.MiscProperty.AllOrNothingCount).IntValue + 1;
-            EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.AllOrNothingCount, new MiscValueHolder(allOrNothingCount));
+            //int allOrNothingCount = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.AdditionalProperty.AllOrNothingCount).IntValue + 1;
+            //EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.AdditionalProperty.AllOrNothingCount, new MiscValueHolder(allOrNothingCount));
         }
 
         protected override void OnUnequip()
         {
-            int allOrNothingCount = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.MiscProperty.AllOrNothingCount).IntValue - 1;
-            EntityEquipped.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.AllOrNothingCount);
-            if (allOrNothingCount > 0)
-            {
-                EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.AllOrNothingCount, new MiscValueHolder(allOrNothingCount));
-            }
+            //int allOrNothingCount = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.AdditionalProperty.AllOrNothingCount).IntValue - 1;
+            //EntityEquipped.EntityProperties.RemoveMiscProperty(Enumerations.AdditionalProperty.AllOrNothingCount);
+            //if (allOrNothingCount > 0)
+            //{
+            //    EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.AdditionalProperty.AllOrNothingCount, new MiscValueHolder(allOrNothingCount));
+            //}
         }
     }
 }

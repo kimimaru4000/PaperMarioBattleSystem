@@ -21,18 +21,18 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            int divider = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.MiscProperty.DangerDamageDivider).IntValue + 1;
-            EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.DangerDamageDivider, new MiscValueHolder(divider));
+            //int divider = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.AdditionalProperty.DangerDamageDivider).IntValue + 1;
+            //EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.AdditionalProperty.DangerDamageDivider, new MiscValueHolder(divider));
         }
 
         protected override void OnUnequip()
         {
-            int divider = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.MiscProperty.DangerDamageDivider).IntValue - 1;
-            EntityEquipped.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.DangerDamageDivider);
-            if (divider > 0)
-            {
-                EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.DangerDamageDivider, new MiscValueHolder(divider));
-            }
+            //int divider = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.AdditionalProperty.DangerDamageDivider).IntValue - 1;
+            //EntityEquipped.EntityProperties.RemoveMiscProperty(Enumerations.AdditionalProperty.DangerDamageDivider);
+            //if (divider > 0)
+            //{
+            //    EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.AdditionalProperty.DangerDamageDivider, new MiscValueHolder(divider));
+            //}
         }
     }
 }

@@ -35,18 +35,18 @@ namespace PaperMarioBattleSystem
 
             TotalChargeDamage += charged.TotalChargeDamage;
 
-            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.ChargedDamage, new MiscValueHolder(TotalChargeDamage));
+            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage, TotalChargeDamage);
         }
 
         protected override void OnAfflict()
         {
-            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.ChargedDamage, new MiscValueHolder(TotalChargeDamage));
+            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage, TotalChargeDamage);
         }
 
         protected override void OnEnd()
         {
             TotalChargeDamage = 0;
-            EntityAfflicted.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.ChargedDamage);
+            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage);
         }
 
         protected override void OnPhaseCycleStart()
@@ -56,13 +56,13 @@ namespace PaperMarioBattleSystem
 
         protected override void OnSuspend()
         {
-            EntityAfflicted.EntityProperties.RemoveMiscProperty(Enumerations.MiscProperty.ChargedDamage);
+            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage);
         }
 
         protected override void OnResume()
         {
             //Add the property back with the previous charged damage
-            EntityAfflicted.EntityProperties.AddMiscProperty(Enumerations.MiscProperty.ChargedDamage, new MiscValueHolder(TotalChargeDamage));
+            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage, TotalChargeDamage);
         }
 
         public override StatusEffect Copy()

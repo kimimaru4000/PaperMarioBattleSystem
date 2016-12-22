@@ -27,8 +27,8 @@ namespace PaperMarioBattleSystem
             //Shouldn't affect Players if equipped on Enemies
             if (EntityEquipped.EntityType != Enumerations.EntityTypes.Player) return;
 
-            int count = BattlePlayer.PlayerProperties.GetProperty<int>(BattlePlayerGlobals.PlayerProperties.SimplifierCount);
-            BattlePlayer.PlayerProperties.AddProperty(BattlePlayerGlobals.PlayerProperties.SimplifierCount, count + 1);
+            //int count = BattlePlayer.PlayerProperties.GetProperty<int>(BattlePlayerGlobals.PlayerProperties.SimplifierCount);
+            //BattlePlayer.PlayerProperties.AddProperty(BattlePlayerGlobals.PlayerProperties.SimplifierCount, count + 1);
         }
 
         protected override void OnUnequip()
@@ -36,13 +36,13 @@ namespace PaperMarioBattleSystem
             //Shouldn't affect Players if equipped on Enemies
             if (EntityEquipped.EntityType != Enumerations.EntityTypes.Player) return;
 
-            int count = BattlePlayer.PlayerProperties.GetProperty<int>(BattlePlayerGlobals.PlayerProperties.SimplifierCount) - 1;
-            BattlePlayer.PlayerProperties.RemoveProperty(BattlePlayerGlobals.PlayerProperties.SimplifierCount);
-
-            if (count > 0)
-            {
-                BattlePlayer.PlayerProperties.AddProperty(BattlePlayerGlobals.PlayerProperties.SimplifierCount, count);
-            }
+            //int count = BattlePlayer.PlayerProperties.GetProperty<int>(BattlePlayerGlobals.PlayerProperties.SimplifierCount) - 1;
+            //BattlePlayer.PlayerProperties.RemoveProperty(BattlePlayerGlobals.PlayerProperties.SimplifierCount);
+            //
+            //if (count > 0)
+            //{
+            //    BattlePlayer.PlayerProperties.AddProperty(BattlePlayerGlobals.PlayerProperties.SimplifierCount, count);
+            //}
         }
     }
 }

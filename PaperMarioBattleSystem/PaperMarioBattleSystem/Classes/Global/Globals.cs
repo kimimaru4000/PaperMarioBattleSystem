@@ -200,37 +200,6 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
-    /// Holds immutable data for a MiscProperty. Only one field should need to be used for each MiscProperty
-    /// </summary>
-    public struct MiscValueHolder
-    {
-        public int IntValue { get; private set; }
-        public bool BoolValue { get; private set; }
-        public string StringValue { get; private set; }
-
-        public MiscValueHolder(int intValue)
-        {
-            IntValue = intValue;
-            BoolValue = false;
-            StringValue = string.Empty;
-        }
-
-        public MiscValueHolder(bool boolValue)
-        {
-            IntValue = 0;
-            BoolValue = boolValue;
-            StringValue = string.Empty;
-        }
-
-        public MiscValueHolder(string stringValue)
-        {
-            IntValue = 0;
-            BoolValue = false;
-            StringValue = stringValue;
-        }
-    }
-
-    /// <summary>
     /// Holds the required data for initiating a damage interaction.
     /// This is passed to methods that involve calculating damage interactions.
     /// </summary>
@@ -615,7 +584,7 @@ namespace PaperMarioBattleSystem
             Burn, Confused, DEFDown, Dizzy, Frozen, Immobilized, NoSkills, Poison, POWDown, Sleep, Slow, Soft, Tiny
         }
 
-        public enum MiscProperty
+        public enum AdditionalProperty
         {
             Frightened,
             LiftedAway,
@@ -629,10 +598,10 @@ namespace PaperMarioBattleSystem
             ChargedDamage,
 
             //Badge properties
-            AdditionalGuardDefense,
-            AllOrNothingCount,
-            DamageTakenMultiplier,
-            DangerDamageDivider
+            //AdditionalGuardDefense,
+            //AllOrNothingCount,
+            //DamageTakenMultiplier,
+            //DangerDamageDivider
         }
     }
 
@@ -1095,7 +1064,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum PartnerRanks
         {
-            Normal, Super, Ultra
+            Normal = 1, Super = 2, Ultra = 3
         }
 
         #endregion

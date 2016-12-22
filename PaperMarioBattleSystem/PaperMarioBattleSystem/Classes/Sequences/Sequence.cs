@@ -538,7 +538,7 @@ namespace PaperMarioBattleSystem
 
             //Check for the All or Nothing Badge
             //If it's equipped, add 1 if the Action Command succeeded, otherwise set the damage to the minimum value
-            int allOrNothingCount = User.EntityProperties.GetMiscProperty(MiscProperty.AllOrNothingCount).IntValue;
+            int allOrNothingCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.AllOrNothing);
             if (allOrNothingCount > 0)
             {
                 if (CommandResult == ActionCommand.CommandResults.Success)
@@ -627,7 +627,7 @@ namespace PaperMarioBattleSystem
         private int GetChargeDamage()
         {
             return Action.MoveProperties.UsesCharge == true ?
-                User.EntityProperties.GetMiscProperty(MiscProperty.ChargedDamage).IntValue : 0;
+                User.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.ChargedDamage) : 0;
         }
 
         #endregion

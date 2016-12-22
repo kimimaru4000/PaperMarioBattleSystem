@@ -228,7 +228,7 @@ namespace PaperMarioBattleSystem
                 }
 
                 //Factor in the additional Guard defense for all DefensiveActions (for now, at least)
-                damageDodgeDefense = victim.EntityProperties.GetMiscProperty(MiscProperty.AdditionalGuardDefense).IntValue;
+                damageDodgeDefense = victim.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DamageDodge);
             }
 
             //Subtract Defense on non-piercing damage
@@ -241,14 +241,14 @@ namespace PaperMarioBattleSystem
             int scaledVictimDamage = unscaledVictimDamage;
 
             //Factor in Double Pain for the Victim
-            scaledVictimDamage *=  (1 + victim.EntityProperties.GetMiscProperty(MiscProperty.DamageTakenMultiplier).IntValue);
+            scaledVictimDamage *= (1 + victim.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DoublePain));
 
             //Factor in Last Stand for the Victim, if the Victim is in Danger or Peril
             if (victim.IsInDanger == true)
             {
                 //NOTE: PM rounds down, whereas TTYD rounds up. We're going with the latter
                 //I'm not sure if TTYD always ceilings the value (Ex. 3.2 turns to 4) or does standard rounding, so I'll stick with standard rounding for now
-                int lastStandDivider = (1 + victim.EntityProperties.GetMiscProperty(MiscProperty.DangerDamageDivider).IntValue);
+                int lastStandDivider = (1 + victim.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.LastStand));
                 scaledVictimDamage = (int)Math.Round(scaledVictimDamage / (float)lastStandDivider);
             }
 

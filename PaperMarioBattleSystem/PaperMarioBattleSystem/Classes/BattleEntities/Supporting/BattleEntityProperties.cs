@@ -59,9 +59,9 @@ namespace PaperMarioBattleSystem
         protected readonly Dictionary<StatusTypes, StatusPropertyHolder> StatusProperties = new Dictionary<StatusTypes, StatusPropertyHolder>();
 
         /// <summary>
-        /// Miscellaneous properties of the entity
+        /// Additional properties of the entity
         /// </summary>
-        protected readonly Dictionary<MiscProperty, MiscValueHolder> MiscProperties = new Dictionary<MiscProperty, MiscValueHolder>();
+        protected readonly Dictionary<AdditionalProperty, object> AdditionalProperties = new Dictionary<AdditionalProperty, object>();
 
         /// <summary>
         /// The Payback data of the entity
@@ -488,9 +488,9 @@ namespace PaperMarioBattleSystem
         public bool TryAfflictStatus(StatusEffect status)
         {
             //Test for StatusEffect immunity - if the entity is immune to a particular alignment, don't allow the StatusEffect to be inflicted
-            bool positiveStatusImmune = GetMiscProperty(MiscProperty.PositiveStatusImmune).BoolValue;
-            bool negativeStatusImmune = GetMiscProperty(MiscProperty.NegativeStatusImmune).BoolValue;
-            bool neutralStatusImmune = GetMiscProperty(MiscProperty.NeutralStatusImmune).BoolValue;
+            bool positiveStatusImmune = GetAdditionalProperty<bool>(AdditionalProperty.PositiveStatusImmune);
+            bool negativeStatusImmune = GetAdditionalProperty<bool>(AdditionalProperty.NegativeStatusImmune);
+            bool neutralStatusImmune = GetAdditionalProperty<bool>(AdditionalProperty.NeutralStatusImmune);
             if ((status.Alignment == StatusEffect.StatusAlignments.Positive && positiveStatusImmune == true)
                 || (status.Alignment == StatusEffect.StatusAlignments.Negative && negativeStatusImmune == true)
                 || (status.Alignment == StatusEffect.StatusAlignments.Neutral && neutralStatusImmune == true))
@@ -751,63 +751,64 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        #region Misc Property Methods
+        #region Additional Property Methods
 
         /// <summary>
-        /// Adds a MiscProperty to the entity.
+        /// Adds an AdditionalProperty to the entity.
         /// If it already has the property, it replaces its value with the new value.
         /// </summary>
-        /// <param name="property">The MiscProperty to add</param>
-        /// <param name="value">The value of the MiscProperty</param>
-        public void AddMiscProperty(MiscProperty property, MiscValueHolder value)
+        /// <param name="property">The AdditionalProperty to add.</param>
+        /// <param name="value">An object of the value corresponding to the AdditionalProperty.</param>
+        public void AddAdditionalProperty(AdditionalProperty property, object value)
         {
             //Remove if the entity already has it
-            if (HasMiscProperty(property) == true)
+            if (HasAdditionalProperty(property) == true)
             {
-                RemoveMiscProperty(property);
+                RemoveAdditionalProperty(property);
             }
 
-            MiscProperties.Add(property, value);
+            AdditionalProperties.Add(property, value);
             Debug.Log($"Added the {property} property to {Entity.Name}!");
         }
 
         /// <summary>
-        /// Removes a MiscProperty from the entity
+        /// Removes an AdditionalProperty from the entity
         /// </summary>
-        /// <param name="property">The MiscProperty to remove</param>
-        public void RemoveMiscProperty(MiscProperty property)
+        /// <param name="property">The AdditionalProperty to remove.</param>
+        public void RemoveAdditionalProperty(AdditionalProperty property)
         {
-            if (HasMiscProperty(property) == true)
+            if (HasAdditionalProperty(property) == true)
             {
                 Debug.Log($"Removed the {property} property on {Entity.Name}!");
             }
 
-            MiscProperties.Remove(property);
+            AdditionalProperties.Remove(property);
         }
 
         /// <summary>
-        /// Checks if the entity has a MiscProperty
+        /// Checks if the entity has an AdditionalProperty.
         /// </summary>
-        /// <param name="property">The MiscProperty to check</param>
-        /// <returns>true if the entity has the MiscProperty, otherwise false</returns>
-        public bool HasMiscProperty(MiscProperty property)
+        /// <param name="property">The AdditionalProperty to check.</param>
+        /// <returns>true if the entity has the AdditionalProperty, otherwise false</returns>
+        public bool HasAdditionalProperty(AdditionalProperty property)
         {
-            return MiscProperties.ContainsKey(property);
+            return AdditionalProperties.ContainsKey(property);
         }
 
         /// <summary>
-        /// Gets the value of a MiscProperty the entity has.
+        /// Gets the value of an AdditionalProperty the entity has.
         /// </summary>
-        /// <param name="property">The MiscProperty to get the value for</param>
-        /// <returns>A MiscValueHolder corresponding to the MiscProperty if it has an entry, otherwise a default MiscValueHolder</returns>
-        public MiscValueHolder GetMiscProperty(MiscProperty property)
+        /// <typeparam name="T">The type of property to get.</typeparam>
+        /// <param name="property">The AdditionalProperty to get the value for.</param>
+        /// <returns>The value corresponding to the property passed in. If no value was found, returns the default value of type T.</returns>
+        public T GetAdditionalProperty<T>(AdditionalProperty property)
         {
-            if (HasMiscProperty(property) == false)
+            if (HasAdditionalProperty(property) == false)
             {
-                return new MiscValueHolder();
+                return default(T);
             }
 
-            return MiscProperties[property];
+            return (T)AdditionalProperties[property];
         }
 
         #endregion

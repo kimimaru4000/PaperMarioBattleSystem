@@ -477,7 +477,7 @@ namespace PaperMarioBattleSystem
 
             //If the last action can expend a charge, check to see if the entity has a charge and remove it
             if (PreviousAction.MoveProperties.UsesCharge == true && EntityProperties.HasStatus(StatusTypes.Charged) == true
-                && EntityProperties.HasMiscProperty(MiscProperty.ChargedDamage) == true)
+                && EntityProperties.HasAdditionalProperty(AdditionalProperty.ChargedDamage) == true)
             {
                 EntityProperties.RemoveStatus(StatusTypes.Charged);
             }
@@ -534,7 +534,7 @@ namespace PaperMarioBattleSystem
             BattleEntity[] actualTargets = targets;
 
             //Check for Confusion's effects and change actions or targets depending on what happens
-            int percent = EntityProperties.GetMiscProperty(MiscProperty.ConfusionPercent).IntValue;
+            int percent = EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.ConfusionPercent);
 
             //See if Confusion should take effect
             if (UtilityGlobals.TestRandomCondition(0, 100, percent, false) == true)
@@ -632,7 +632,7 @@ namespace PaperMarioBattleSystem
             BattleEntity[] actualTargets = targets;
 
             //Check for Confused and handle it appropriately
-            if (EntityProperties.HasMiscProperty(MiscProperty.ConfusionPercent) == true)
+            if (EntityProperties.HasAdditionalProperty(AdditionalProperty.ConfusionPercent) == true)
             {
                 BattleGlobals.ActionHolder holder = HandleConfusion(action, targets);
                 actualAction = holder.Action;

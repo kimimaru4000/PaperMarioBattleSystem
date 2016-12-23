@@ -28,6 +28,32 @@ namespace PaperMarioBattleSystem
             PlayerType = Enumerations.PlayerTypes.Partner;
         }
 
+        /// <summary>
+        /// Returns Mario's FP for BattlePartners, as they share the same FP pool for Mario.
+        /// </summary>
+        public override int CurFP => BattleManager.Instance.GetMario().BattleStats.FP;
+
+        /// <summary>
+        /// Partners and Mario add to Mario's FP pool.
+        /// </summary>
+        /// <param name="fp"></param>
+        public override void HealFP(int fp)
+        {
+            BattleMario mario = BattleManager.Instance.GetMario();
+            mario.BattleStats.FP = UtilityGlobals.Clamp(mario.BattleStats.FP + fp, 0, mario.BattleStats.MaxFP);
+            Debug.Log($"{mario.Name} healed {fp} FP!");
+        }
+
+        /// <summary>
+        /// Partners and Mario subtract from Mario's FP pool.
+        /// </summary>
+        public override void LoseFP(int fp)
+        {
+            BattleMario mario = BattleManager.Instance.GetMario();
+            mario.BattleStats.FP = UtilityGlobals.Clamp(mario.BattleStats.FP - fp, 0, mario.BattleStats.MaxFP);
+            Debug.Log($"{mario.Name} healed {fp} FP!");
+        }
+
         public override void OnBattleStart()
         {
             base.OnBattleStart();
@@ -41,6 +67,27 @@ namespace PaperMarioBattleSystem
 
             //Set the number of max turns each Partner should have to the number of max turns this one does
             PartnerMaxTurns = MaxTurns;
+        }
+
+        public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
+        {
+            BadgeGlobals.BadgeTypes newBadgeType = badgeType;
+
+            //Find the Partner version of the Badge
+            BadgeGlobals.BadgeTypes? tempBadgeType = BadgeGlobals.GetPartnerBadgeType(badgeType);
+            if (tempBadgeType != null)
+            {
+                newBadgeType = badgeType;
+            }
+            else
+            {
+                //If there is no Partner version, get the Badge and check if it affects Partners
+                Badge badge = Inventory.Instance.GetBadge(newBadgeType, BadgeGlobals.BadgeFilterType.Equipped);
+                //The Badge isn't equipped or doesn't affect the Both or the Partner, none are equipped to this Partner
+                if (badge == null || badge.AffectedType == BadgeGlobals.AffectedTypes.Self) return 0;
+            }
+
+            return Inventory.Instance.GetActiveBadgeCount(newBadgeType);
         }
 
         /// <summary>

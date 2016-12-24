@@ -36,6 +36,11 @@ namespace PaperMarioBattleSystem
         public InteractionParamHolder? DamageInfo { get; protected set; } = null;
 
         /// <summary>
+        /// The healing information of this MoveAction.
+        /// </summary>
+        public HealingData? HealingInfo { get; protected set; } = null;
+
+        /// <summary>
         /// The category of this action. It is automatically set by the menus.
         /// </summary>
         public MoveCategories MoveCategory { get; private set; } = MoveCategories.Enemy;
@@ -72,6 +77,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool CostsFP => (MoveProperties.FPCost > 0);
 
+        /// <summary>
+        /// Tells if the MoveAction heals in some capacity or not.
+        /// </summary>
+        public bool Heals => (HealingInfo != null);
+
         #endregion
 
         protected MoveAction()
@@ -100,6 +110,16 @@ namespace PaperMarioBattleSystem
         public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actioncommand, InteractionParamHolder damageInfo) : this(name, moveProperties, moveSequence, actioncommand)
         {
             DamageInfo = damageInfo;
+        }
+
+        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, HealingData healingInfo) : this(name, moveProperties, moveSequence)
+        {
+            HealingInfo = healingInfo;
+        }
+
+        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actionCommand, HealingData healingInfo) : this(name, moveProperties, moveSequence, actionCommand)
+        {
+            HealingInfo = HealingInfo;
         }
 
         protected void SetMoveSequence(Sequence moveSequence)
@@ -178,6 +198,8 @@ namespace PaperMarioBattleSystem
 
                     actionCommand?.Draw();
                 }
+
+                MoveSequence.Draw();
             }
         }
     }

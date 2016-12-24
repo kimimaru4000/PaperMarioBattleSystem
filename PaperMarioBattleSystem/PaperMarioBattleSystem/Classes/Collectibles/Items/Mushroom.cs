@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The most basic item. It restores 5 HP.
     /// </summary>
-    public class Mushroom : Item, IHPHealingItem
+    public class Mushroom : BattleItem, IHPHealingItem
     {
         public int HPRestored { get; protected set; }
 
@@ -21,6 +21,9 @@ namespace PaperMarioBattleSystem
             ItemType = ItemTypes.Healing;
 
             HPRestored = 5;
+
+            SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
+            EntityType = Enumerations.EntityTypes.Player;
         }
     }
 }

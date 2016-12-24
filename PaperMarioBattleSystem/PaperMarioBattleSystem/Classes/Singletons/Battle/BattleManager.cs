@@ -219,6 +219,10 @@ namespace PaperMarioBattleSystem
         {
             Phase = phase;
 
+            //NOTE: This breaks Immobilization similar turn-hindering Status Effects for the first entity.
+            //We still assume the first entity should go, but what we really need to do is check who can go next
+            //Make this use FindNextEntityTurn()
+
             if (Phase == BattlePhase.Player)
             {
                 EntityTurn = FrontPlayer;

@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The most basic FP restoring item. It restores 5 FP.
     /// </summary>
-    public class HoneySyrup : Item, IFPHealingItem
+    public class HoneySyrup : BattleItem, IFPHealingItem
     {
         public int FPRestored { get; protected set; }
 
@@ -21,6 +21,10 @@ namespace PaperMarioBattleSystem
             ItemType = ItemTypes.Healing;
 
             FPRestored = 5;
+
+            SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
+            EntityType = Enumerations.EntityTypes.Player;
+            
         }
     }
 }

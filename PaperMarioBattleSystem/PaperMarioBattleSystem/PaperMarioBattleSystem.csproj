@@ -75,6 +75,7 @@
     <Compile Include="Classes\Actions\IActionCommand.cs" />
     <Compile Include="Classes\Actions\Defensive\Guard.cs" />
     <Compile Include="Classes\Actions\IActionCommandHandler.cs" />
+    <Compile Include="Classes\Actions\ItemAction.cs" />
     <Compile Include="Classes\Actions\Kooper\ShellToss.cs" />
     <Compile Include="Classes\Actions\Mario\Hammer.cs" />
     <Compile Include="Classes\Actions\Mario\IceSmash.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Classes\Collectibles\Badges\SimplifierBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SpikeShieldBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\UnsimplifierBadge.cs" />
+    <Compile Include="Classes\Collectibles\Items\BattleItem.cs" />
     <Compile Include="Classes\Collectibles\Items\HoneySyrup.cs" />
     <Compile Include="Classes\Collectibles\Items\IDamagingItem.cs" />
     <Compile Include="Classes\Collectibles\Items\IFPHealingItem.cs" />
@@ -139,6 +141,7 @@
     <Compile Include="Classes\Menus\ActionSubMenus\ChangePartnerSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\GoombarioSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\HammerSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\ItemSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\JumpSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\KooperSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\TacticsSubMenu.cs" />
@@ -156,6 +159,7 @@
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />
     <Compile Include="Classes\Sequences\ChargeSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
+    <Compile Include="Classes\Sequences\ItemSequence.cs" />
     <Compile Include="Classes\Sequences\Kooper\ShellTossSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\HammerSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\IceSmashSequence.cs" />

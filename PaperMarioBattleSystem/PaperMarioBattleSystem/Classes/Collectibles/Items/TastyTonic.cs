@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Tasty Tonic item. It removes Poison and Shrinking on Mario.
     /// </summary>
-    public sealed class TastyTonic : Item, IStatusHealingItem
+    public sealed class TastyTonic : BattleItem, IStatusHealingItem
     {
         public StatusTypes[] StatusesHealed { get; private set; }
 
@@ -22,6 +22,9 @@ namespace PaperMarioBattleSystem
             ItemType = ItemTypes.Healing;
 
             StatusesHealed = new StatusTypes[] { StatusTypes.Poison, StatusTypes.Tiny};
+
+            SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
+            EntityType = EntityTypes.Player;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Sleepy Sheep item. It inflicts Sleep on all enemies.
     /// </summary>
-    public sealed class SleepySheep : Item, IStatusInflictingItem
+    public sealed class SleepySheep : BattleItem, IStatusInflictingItem
     {
         public StatusEffect[] StatusesInflicted { get; private set; }
 
@@ -21,6 +21,9 @@ namespace PaperMarioBattleSystem
             ItemType = ItemTypes.Damage;
 
             StatusesInflicted = new StatusEffect[] { new SleepStatus(2) };
+
+            SelectionType = TargetSelectionMenu.EntitySelectionType.All;
+            EntityType = Enumerations.EntityTypes.Enemy;
         }
     }
 }

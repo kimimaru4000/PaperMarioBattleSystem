@@ -101,12 +101,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The Player's Item inventory
         /// </summary>
-        private readonly List<Item> Items = new List<Item>();
+        private readonly List<Item> Items = new List<Item>(10);
 
         /// <summary>
         /// The key items the Player possesses
         /// </summary>
-        private readonly List<Item> KeyItems = new List<Item>();
+        private readonly List<Item> KeyItems = new List<Item>(20);
 
         #endregion
 
@@ -149,11 +149,25 @@ namespace PaperMarioBattleSystem
         {
             if (item.ItemType == Item.ItemTypes.KeyItem)
             {
-                KeyItems.Add(item);
+                if (KeyItems.Count < KeyItems.Capacity)
+                {
+                    KeyItems.Add(item);
+                }
+                else
+                {
+                    Debug.LogWarning($"Unable to add Key Item {item.Name} as there are too many Key Items in the Inventory. This should not happen.");
+                }
             }
             else
             {
-                Items.Add(item);
+                if (Items.Count < Items.Capacity)
+                {
+                    Items.Add(item);
+                }
+                else
+                {
+                    Debug.LogWarning($"Unable to add Item {item.Name} as the Inventory is full.");
+                }
             }
         }
 
@@ -189,6 +203,35 @@ namespace PaperMarioBattleSystem
             {
                 return Items.Find((item) => item.Name == name);
             }
+        }
+
+        /// <summary>
+        /// Finds and returns all instances of Items in the Inventory with the designated ItemTypes.
+        /// </summary>
+        /// <param name="itemTypes">The array of ItemTypes to look for. If null, will not include any items.</param>
+        /// <returns>An array of all items with the designated ItemTypes. If none are found, an empty array.</returns>
+        public Item[] FindItems(params Item.ItemTypes[] itemTypes)
+        {
+            List<Item> itemsToFind = new List<Item>();
+
+            if (itemTypes != null)
+            {
+                for (int i = 0; i < itemTypes.Length; i++)
+                {
+                    //If searching for Key Items, add all Key Items to the list
+                    if (itemTypes[i] == Item.ItemTypes.KeyItem)
+                    {
+                        itemsToFind.AddRange(KeyItems);
+                    }
+                    //Otherwise look in the normal Item list for all Items with this ItemTypes and add them
+                    else
+                    {
+                        itemsToFind.AddRange(Items.FindAll((item) => item.ItemType == itemTypes[i]));
+                    }
+                }
+            }
+
+            return itemsToFind.ToArray();
         }
 
         #endregion

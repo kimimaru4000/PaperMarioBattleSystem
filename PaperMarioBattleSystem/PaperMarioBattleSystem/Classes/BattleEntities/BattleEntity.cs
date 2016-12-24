@@ -711,6 +711,8 @@ namespace PaperMarioBattleSystem
             //If animation cannot be found, return
             if (animToPlay == null)
             {
+                //Call the delegate
+                onFinish?.Invoke();
                 return;
             }
 

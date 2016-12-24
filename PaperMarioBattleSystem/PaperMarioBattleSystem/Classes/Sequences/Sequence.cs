@@ -46,7 +46,7 @@ namespace PaperMarioBattleSystem
 
         protected bool CommandEnabled => Action.CommandEnabled;
 
-        protected int BaseDamage => Action.DamageInfo.HasValue ? Action.DamageInfo.Value.Damage : 0;
+        protected int BaseDamage => Action.DealsDamage ? Action.DamageInfo.Value.Damage : 0;
 
         /// <summary>
         /// The BattleEntities the move associated with the Sequence can affect.
@@ -602,9 +602,9 @@ namespace PaperMarioBattleSystem
         /// <param name="entity">The BattleEntity to attempt to inflict damage on</param>
         /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
         /// If false, the total damage will be calculated</param>
-        protected void AttemptDamage(int damage, BattleEntity entity, bool isTotalDamage)
+        protected int[] AttemptDamage(int damage, BattleEntity entity, bool isTotalDamage)
         {
-            AttemptDamage(damage, new BattleEntity[] { entity }, isTotalDamage);
+            return AttemptDamage(damage, new BattleEntity[] { entity }, isTotalDamage);
         }
 
         /// <summary>
@@ -628,6 +628,50 @@ namespace PaperMarioBattleSystem
         {
             return Action.MoveProperties.UsesCharge == true ?
                 User.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.ChargedDamage) : 0;
+        }
+
+        #endregion
+
+        #region Healing Methods
+
+        //NOTE: Test if healing moves can miss (Ms. Mowz' last move - Smooch I think)
+        /// <summary>
+        /// Heals a set of BattleEntities with this MoveAction.
+        /// </summary>
+        /// <param name="healingData">The HealingData containing HP, FP, and more.</param>
+        /// <param name="entities">The BattleEntities to heal.</param>
+        public void PerformHeal(HealingData healingData, BattleEntity[] entities)
+        {
+            for (int i = 0; i < entities.Length; i++)
+            {
+                BattleEntity entityHealed = entities[i];
+
+                //Heal HP and FP
+                entityHealed.HealHP(healingData.HPHealed);
+                entityHealed.HealFP(healingData.FPHealed);
+
+                //Heal Status Effects
+                StatusTypes[] statusesHealed = healingData.StatusEffectsHealed;
+                if (statusesHealed != null)
+                {
+                    for (int j = 0; j < statusesHealed.Length; j++)
+                    {
+                        StatusTypes statusHealed = statusesHealed[j];
+
+                        entityHealed.EntityProperties.RemoveStatus(statusHealed);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Convenience function for healing with only one entity.
+        /// </summary>
+        /// <param name="healingData">The HealingData containing HP, FP, and more.</param>
+        /// <param name="entity">The BattleEntity to heal.</param>
+        public void PerformHeal(HealingData healingData, BattleEntity entity)
+        {
+            PerformHeal(healingData, new BattleEntity[] { entity });
         }
 
         #endregion

@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Shooting Star item. It deals 6 Star damage to all enemies.
     /// </summary>
-    public sealed class ShootingStar : Item, IDamagingItem
+    public sealed class ShootingStar : BattleItem, IDamagingItem
     {
         public int Damage { get; private set; }
 
@@ -25,6 +25,9 @@ namespace PaperMarioBattleSystem
 
             Damage = 6;
             Element = Elements.Star;
+
+            SelectionType = TargetSelectionMenu.EntitySelectionType.All;
+            EntityType = EntityTypes.Enemy;
         }
     }
 }

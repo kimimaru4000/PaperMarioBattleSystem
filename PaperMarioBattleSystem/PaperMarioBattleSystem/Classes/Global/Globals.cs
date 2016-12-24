@@ -312,6 +312,36 @@ namespace PaperMarioBattleSystem
         }
     }
 
+    /// <summary>
+    /// Holds data regarding healing, including HP, FP, and Status Effects.
+    /// </summary>
+    public struct HealingData
+    {
+        /// <summary>
+        /// The amount of HP healed.
+        /// </summary>
+        public int HPHealed;
+
+        /// <summary>
+        /// The amount of FP healed.
+        /// </summary>
+        public int FPHealed;
+
+        /// <summary>
+        /// The StatusEffects healed.
+        /// </summary>
+        public Enumerations.StatusTypes[] StatusEffectsHealed;
+
+        public static HealingData Default => new HealingData(0, 0, null);
+
+        public HealingData(int hpHealed, int fpHealed, Enumerations.StatusTypes[] statusesHealed)
+        {
+            HPHealed = hpHealed;
+            FPHealed = fpHealed;
+            StatusEffectsHealed = statusesHealed;
+        }
+    }
+
     #endregion
 
     #region Classes
@@ -632,6 +662,8 @@ namespace PaperMarioBattleSystem
         public const string HurtName = "Hurt";
         public const string DeathName = "Death";
         public const string VictoryName = "Victory";
+
+        public const string GetItemName = "GetItem";
 
         public const string SpikedTipHurtName = "SpikedTipHurt";
 

@@ -16,9 +16,11 @@ namespace PaperMarioBattleSystem
         protected double WalkDuration = 500d;
         protected double WaitDuration = 1500d;
 
+        protected ItemAction itemAction { get; private set; } = null;
+
         public ItemSequence(ItemAction moveAction) : base(moveAction)
         {
-            
+            itemAction = moveAction;
         }
 
         protected override void SequenceStartBranch()
@@ -53,6 +55,11 @@ namespace PaperMarioBattleSystem
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName);
+
+                    //Remove the item from the Inventory when it's finished
+                    //NOTE: I'm not sure if this is the best place to do this yet
+                    Inventory.Instance.RemoveItem(itemAction.ItemUsed);
+
                     EndSequence();
                     break;
                 default:

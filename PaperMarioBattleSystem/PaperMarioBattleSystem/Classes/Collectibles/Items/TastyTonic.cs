@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
 
             ItemType = ItemTypes.Healing;
 
-            StatusesHealed = new StatusTypes[] { StatusTypes.Poison, StatusTypes.Tiny};
+            StatusesHealed = new StatusTypes[] { StatusTypes.Poison, StatusTypes.Tiny };
 
             SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
             EntityType = EntityTypes.Player;

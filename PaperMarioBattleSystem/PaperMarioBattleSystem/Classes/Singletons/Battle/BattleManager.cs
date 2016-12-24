@@ -203,8 +203,6 @@ namespace PaperMarioBattleSystem
         {
             State = BattleState.TurnEnd;
             SwitchPhase(BattlePhase.Player);
-
-            EntityTurn = Mario;
         }
 
         /// <summary>
@@ -225,8 +223,6 @@ namespace PaperMarioBattleSystem
 
             if (Phase == BattlePhase.Player)
             {
-                EntityTurn = FrontPlayer;
-
                 //Increment the phase cycles when switching to the Player phase
                 //This is because the cycle always starts with the Player phase in the Paper Mario games
                 PhaseCycleCount++;
@@ -250,14 +246,13 @@ namespace PaperMarioBattleSystem
                 Mario.OnPhaseEnd();
                 Partner.OnPhaseEnd();
 
-                EnemyTurn = FindOccupiedEnemyIndex(0);
-                EntityTurn = Enemies[EnemyTurn];
-
                 for (int i = 0; i < MaxEnemies; i++)
                 {
                     Enemies[i]?.OnPhaseStart();
                 }
             }
+
+            FindNextEntityTurn();
         }
 
         /// <summary>

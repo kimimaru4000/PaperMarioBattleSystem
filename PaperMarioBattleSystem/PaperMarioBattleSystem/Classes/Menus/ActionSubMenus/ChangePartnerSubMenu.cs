@@ -21,10 +21,14 @@ namespace PaperMarioBattleSystem
 
             for (int i = 0; i < partners.Length; i++)
             {
-                //NOTE: We will need a way to gray out options so they're not selectable. For now, this works
-                if (partners[i] == BattleManager.Instance.GetPartner()) continue;
-
                 ChangePartner partnerChange = new ChangePartner(partners[i]);
+
+                //If this partner is the current one out in battle, disable the option
+                if (partners[i] == BattleManager.Instance.GetPartner())
+                {
+                    partnerChange.Disabled = true;
+                    partnerChange.DisabledString = $"{partners[i].Name} is already out!";
+                }
 
                 BattleActions.Add(partnerChange);
             }

@@ -92,7 +92,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The text displayed when selecting a MoveAction when it's disabled.
         /// </summary>
-        public string DisabledString { get; protected set; } = string.Empty;
+        public string DisabledString { get; set; } = string.Empty;
 
         #endregion
 

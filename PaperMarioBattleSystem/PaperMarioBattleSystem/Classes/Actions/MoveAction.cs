@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// A type of BattleAction selectable from a BattleMenu.
     /// They have sequences that the BattleEntity performs.
     /// </summary>
-    public class MoveAction : BattleAction, IActionCommand
+    public class MoveAction : BattleAction, IActionCommand, IDisableable
     {
         #region Fields/Properties
 
@@ -82,6 +82,18 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool Heals => (HealingInfo != null);
 
+        /// <summary>
+        /// Whether the MoveAction is disabled in the menu or not.
+        /// <para>This is often true if the user doesn't have enough FP to perform the move.
+        /// It's also true if the move can't hit any BattleEntities it targets.</para>
+        /// </summary>
+        public bool Disabled { get; set; } = false;
+
+        /// <summary>
+        /// The text displayed when selecting a MoveAction when it's disabled.
+        /// </summary>
+        public string DisabledString { get; protected set; } = string.Empty;
+
         #endregion
 
         protected MoveAction()
@@ -130,6 +142,39 @@ namespace PaperMarioBattleSystem
             if (HasActionCommand == true)
             {
                 actionCommand.SetHandler(MoveSequence);
+            }
+        }
+
+        //Virtual to account for all types of MoveActions (Ex. Special Moves check for SP instead of FP)
+        public virtual void Initialize()
+        {
+            /*Check if the MoveAction should be disabled or not
+               1. Check the FP cost, if it costs FP
+               2. Check if the move can hit any BattleEntities it targets
+             */
+            
+            if (CostsFP == true)
+            {
+                if (MoveProperties.FPCost > User.CurFP)
+                {
+                    Disabled = true;
+                    DisabledString = "Not enough FP.";
+                    return;
+                }
+            }
+
+            //If the move targets entities, check if any entities can be targeted
+            if (MoveProperties.TargetsEntity == true)
+            {
+                BattleEntity[] entities = BattleManager.Instance.GetEntities(MoveProperties.EntityType, MoveProperties.HeightsAffected);
+
+                //There are no entities this move can target
+                if (entities.Length == 0)
+                {
+                    Disabled = true;
+                    DisabledString = "There's no one this move can target!";
+                    return;
+                }
             }
         }
 

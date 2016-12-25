@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// A button representing the main actions during battle. This includes battle actions like Jump, Hammer, etc.
     /// This is only used by the player
     /// </summary>
-    public sealed class ActionButton
+    public sealed class ActionButton : IDisableable
     {
         /// <summary>
         /// The name of the main action the button represents.
@@ -44,7 +44,7 @@ namespace PaperMarioBattleSystem
         /// Whether the button is disabled and cannot be selected.
         /// This is often set by the NoSkills Status Effect.
         /// </summary>
-        public bool Disabled { get; private set; } = false;
+        public bool Disabled { get; set; } = false;
 
         public ActionButton(string name, Texture2D buttonImage, MoveCategories moveCategory, ActionSubMenu subMenu)
         {

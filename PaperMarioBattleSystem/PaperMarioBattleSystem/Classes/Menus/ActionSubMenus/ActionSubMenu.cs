@@ -49,6 +49,7 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < BattleActions.Count; i++)
             {
                 BattleActions[i].SetMoveCategory(MoveCategory);
+                BattleActions[i].Initialize();
             }
         }
 
@@ -66,7 +67,18 @@ namespace PaperMarioBattleSystem
         protected override void OnConfirm()
         {
             base.OnConfirm();
-            BattleActions[CurSelection].OnMenuSelected();
+
+            if (BattleActions[CurSelection].Disabled == false)
+            {
+                BattleActions[CurSelection].OnMenuSelected();
+            }
+            else
+            {
+                //NOTE: Show the dialog here that the move can't be selected and state why
+                string disabledString = BattleActions[CurSelection].DisabledString;
+
+                Debug.LogError($"{BattleActions[CurSelection].Name} is disabled: {disabledString}");
+            }
         }
 
         public override void Draw()
@@ -75,7 +87,7 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < BattleActions.Count; i++)
             {
                 Vector2 pos = Position + new Vector2(0, i * 20);
-                Color color = Color.White;
+                Color color = BattleActions[i].Disabled == false ? Color.White : Color.LightSlateGray;
                 if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) color *= .7f;
                 SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, BattleActions[i].Name, pos, color, 0f, Vector2.Zero, 1f, .4f);
             }
@@ -83,21 +95,5 @@ namespace PaperMarioBattleSystem
             //Show description window at the bottom
             BoxMenu.Draw();
         }
-
-        /*protected class SubMenuEntry
-        {
-            public BattleAction BAction = null;
-            
-            public SubMenuEntry(BattleAction battleAction)
-            {
-                BAction = battleAction;
-            }
-
-            public void Draw(bool selected)
-            {
-                Color color = Color.White;
-                if (selected == false) color *= .7f;     
-            }
-        }*/
     }
 }

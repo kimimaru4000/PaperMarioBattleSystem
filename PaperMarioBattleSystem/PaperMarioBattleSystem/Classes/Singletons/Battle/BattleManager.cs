@@ -193,7 +193,7 @@ namespace PaperMarioBattleSystem
                 Enemies[i]?.Draw();
             }
 
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, $"Current turn: {EntityTurn.Name}", new Vector2(250, 10), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
+            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"Current turn: {EntityTurn.Name}", new Vector2(250, 10), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
         }
 
         /// <summary>

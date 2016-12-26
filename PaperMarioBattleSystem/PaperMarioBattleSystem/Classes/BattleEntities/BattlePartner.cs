@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
         {
             BattleMario mario = BattleManager.Instance.GetMario();
             mario.BattleStats.FP = UtilityGlobals.Clamp(mario.BattleStats.FP - fp, 0, mario.BattleStats.MaxFP);
-            Debug.Log($"{mario.Name} healed {fp} FP!");
+            Debug.Log($"{mario.Name} lost {fp} FP!");
         }
 
         public override void OnBattleStart()

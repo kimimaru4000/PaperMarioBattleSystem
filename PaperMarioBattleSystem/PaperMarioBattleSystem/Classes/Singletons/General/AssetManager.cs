@@ -38,6 +38,18 @@ namespace PaperMarioBattleSystem
 
         public SpriteFont Font = null;
 
+        /// <summary>
+        /// The font used in Paper Mario (pmdialog2).
+        /// <para>Credit: Retriever II from MFGG</para>
+        /// </summary>
+        public SpriteFont PMFont = null;
+
+        /// <summary>
+        /// The font used in Paper Mario The Thousand Year Door (Hey Gorgeous).
+        /// <para>Credit: http://www.kevinandamanda.com/fonts/freescrapbookfonts/hey-gorgeous/ </para>
+        /// </summary>
+        public SpriteFont TTYDFont = null;
+
         private AssetManager()
         {
             
@@ -49,6 +61,8 @@ namespace PaperMarioBattleSystem
             Content.RootDirectory = ContentGlobals.ContentRoot;
 
             Font = LoadAsset<SpriteFont>("Fonts/Font");
+            PMFont = LoadAsset<SpriteFont>("Fonts/PM Font");
+            TTYDFont = LoadAsset<SpriteFont>("Fonts/TTYD Font");
         }
 
         public void Dispose()

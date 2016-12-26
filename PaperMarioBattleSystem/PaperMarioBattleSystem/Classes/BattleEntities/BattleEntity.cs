@@ -640,6 +640,14 @@ namespace PaperMarioBattleSystem
             }
 
             PreviousAction = actualAction;
+
+            //Subtract FP if the move costs FP. The BattleEntity must have enough FP
+            //at this point, as the action is not selectable from the menu if it doesn't have enough
+            if (PreviousAction.CostsFP == true)
+            {
+                LoseFP(PreviousAction.MoveProperties.FPCost);
+            }
+
             PreviousAction.StartSequence(actualTargets);
         }
 

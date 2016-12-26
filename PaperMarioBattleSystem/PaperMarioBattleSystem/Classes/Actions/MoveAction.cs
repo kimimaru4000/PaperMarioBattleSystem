@@ -237,7 +237,7 @@ namespace PaperMarioBattleSystem
             {
                 if (CommandEnabled == true)
                 {
-                    SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font,
+                    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont,
                     $"Command: {Name} performed by {User.Name}",
                     new Vector2(SpriteRenderer.Instance.WindowCenter.X, 50f), Color.Black, 0f, new Vector2(.5f, .5f), 1.1f, .9f, true);
 

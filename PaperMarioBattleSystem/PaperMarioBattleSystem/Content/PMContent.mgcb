@@ -31,3 +31,15 @@
 /processorParam:Quality=Best
 /build:Audio/SFX/Partner Away.wav
 
+#begin SpriteFonts/TTYD Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:SpriteFonts/TTYD Font.spritefont
+
+#begin SpriteFonts/PM Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:SpriteFonts/PM Font.spritefont
+

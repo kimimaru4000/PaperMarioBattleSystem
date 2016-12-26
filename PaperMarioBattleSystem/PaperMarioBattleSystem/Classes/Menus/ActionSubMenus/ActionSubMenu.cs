@@ -89,7 +89,7 @@ namespace PaperMarioBattleSystem
                 Vector2 pos = Position + new Vector2(0, i * 20);
                 Color color = BattleActions[i].Disabled == false ? Color.White : Color.LightSlateGray;
                 if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) color *= .7f;
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.Font, BattleActions[i].Name, pos, color, 0f, Vector2.Zero, 1f, .4f);
+                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, BattleActions[i].Name, pos, color, 0f, Vector2.Zero, 1f, .4f);
             }
 
             //Show description window at the bottom

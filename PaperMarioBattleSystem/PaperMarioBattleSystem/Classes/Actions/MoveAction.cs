@@ -94,6 +94,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public string DisabledString { get; set; } = string.Empty;
 
+        /// <summary>
+        /// Tells if the original FP cost was lowered by Flower Saver or Flower Saver P.
+        /// </summary>
+        public bool LoweredFPCost { get; protected set; } = false;
+
         #endregion
 
         protected MoveAction()
@@ -152,9 +157,17 @@ namespace PaperMarioBattleSystem
                1. Check the FP cost, if it costs FP
                2. Check if the move can hit any BattleEntities it targets
              */
-            
+
             if (CostsFP == true)
             {
+                //Check for the number of Flower Saver Badges on the entity and reduce the FP cost by that amount; minimum of 1
+                int flowerSaverCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.FlowerSaver);
+                MoveInfo.FPCost = UtilityGlobals.Clamp(MoveInfo.FPCost - flowerSaverCount, 1, 99);
+
+                //If there is at least one Flower Saver Badge equipped, display the FP count in a bluish-gray
+                if (flowerSaverCount > 0)
+                    LoweredFPCost = true;
+
                 if (MoveProperties.FPCost > User.CurFP)
                 {
                     Disabled = true;

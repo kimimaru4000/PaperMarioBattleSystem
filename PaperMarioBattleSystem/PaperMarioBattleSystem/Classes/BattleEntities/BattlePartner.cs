@@ -59,6 +59,7 @@ namespace PaperMarioBattleSystem
             base.OnBattleStart();
 
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ChargeP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaverP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
         }
 
         public override void OnPhaseCycleStart()
@@ -77,7 +78,7 @@ namespace PaperMarioBattleSystem
             BadgeGlobals.BadgeTypes? tempBadgeType = BadgeGlobals.GetPartnerBadgeType(badgeType);
             if (tempBadgeType != null)
             {
-                newBadgeType = badgeType;
+                newBadgeType = tempBadgeType.Value;
             }
             else
             {

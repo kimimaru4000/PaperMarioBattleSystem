@@ -86,10 +86,30 @@ namespace PaperMarioBattleSystem
             //List out actions with their name, icon, description, and FP cost
             for (int i = 0; i < BattleActions.Count; i++)
             {
+                MoveAction moveAction = BattleActions[i];
+
+                float alphaMod = 1f;
+
                 Vector2 pos = Position + new Vector2(0, i * 20);
-                Color color = BattleActions[i].Disabled == false ? Color.White : Color.LightSlateGray;
-                if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) color *= .7f;
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, BattleActions[i].Name, pos, color, 0f, Vector2.Zero, 1f, .4f);
+                Color color = moveAction.Disabled == false ? Color.White : Color.LightSlateGray;
+                if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) alphaMod *= .7f;
+                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, moveAction.Name, pos, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+
+                //Show FP count if the move costs FP
+                if (moveAction.CostsFP == true)
+                {
+                    Color fpColor = color;
+
+                    //If the FP cost was lowered, show it a bluish-gray color (This feature is from PM)
+                    //Keep it gray if the move is disabled for any reason
+                    if (moveAction.Disabled == false && moveAction.LoweredFPCost)
+                    {
+                        Color blueGray = new Color(102, 153, 204);
+                        fpColor = blueGray;
+                    }
+
+                    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"{moveAction.MoveProperties.FPCost} FP", pos + new Vector2(200, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+                }
             }
 
             //Show description window at the bottom

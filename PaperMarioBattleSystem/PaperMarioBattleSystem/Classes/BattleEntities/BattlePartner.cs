@@ -59,7 +59,7 @@ namespace PaperMarioBattleSystem
             base.OnBattleStart();
 
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ChargeP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaverP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaverP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
         }
 
         public override void OnPhaseCycleStart()

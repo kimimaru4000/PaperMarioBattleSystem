@@ -24,6 +24,7 @@ namespace PaperMarioBattleSystem
             //NOTE: May want to rethink this to make it easier to make a few changes, but for now it works
             InteractionParamHolder damageInfo = (InteractionParamHolder)DamageInfo;
             damageInfo.DamagingElement = Enumerations.Elements.Ice;
+            damageInfo.Statuses = new StatusEffect[] { new FrozenStatus(3) };
             DamageInfo = damageInfo;
 
             SetMoveSequence(new IceSmashSequence(this));

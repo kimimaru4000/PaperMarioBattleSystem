@@ -105,6 +105,11 @@ namespace PaperMarioBattleSystem
 
         private bool IsSuspended = false;
 
+        /// <summary>
+        /// Tells whether the StatusEffect already ended or not.
+        /// </summary>
+        private bool Ended = false;
+
         private bool IsInfinite => (Duration <= InfiniteDuration);
         public bool IsFinished => (IsInfinite == false && TurnsPassed >= TotalDuration);
 
@@ -179,8 +184,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void End()
         {
+            //If the StatusEffect already ended, don't end it again
+            if (Ended == true) return;
+
             //Resume to end the StatusEffect properly
             Suspended = false;
+            Ended = true;
 
             TurnsPassed = TotalDuration;
 

@@ -104,7 +104,8 @@ namespace PaperMarioBattleSystem
                     //Keep it gray if the move is disabled for any reason
                     if (moveAction.Disabled == false && moveAction.LoweredFPCost)
                     {
-                        Color blueGray = new Color(102, 153, 204);
+                        //NOTE: Change back to blue gray later, this is just so it's visible now
+                        Color blueGray = Color.Blue;//new Color(102, 153, 204);
                         fpColor = blueGray;
                     }
 

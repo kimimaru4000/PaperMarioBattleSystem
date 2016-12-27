@@ -27,6 +27,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public float MaxSPU { get; protected set; } = 700f;
 
+        /// <summary>
+        /// The type of Star Power this is.
+        /// </summary>
+        public StarPowerGlobals.StarPowerTypes StarPowerType { get; protected set; } = StarPowerGlobals.StarPowerTypes.StarSpirit;
+
         protected StarPowerBase()
         {
             

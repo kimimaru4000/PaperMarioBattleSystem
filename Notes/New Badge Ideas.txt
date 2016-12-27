@@ -28,3 +28,12 @@ Description: Unlocks your Partner's hidden potential and gives them each a new m
 Notes: Gives Flurrie her unused thunder attack ("Drop lightning on all enemies. As a bonus, you might become electrified.")
 as well as giving one new move (TBD) to every other Partner. The new moves will require FP.
 Only one of these badges will exist.
+
+SP Saver
+--------
+BP: 12
+Description: Reduces the SP that Special Moves use by 1.
+
+Notes: The high BP cost correlates to how good the Badge is. This Badge would actually reduce the SP Special Moves use by 100,
+so the "1" in the description represents one bar/circle of Star Power.
+A Special Move cannot go below the minimum 100 SP requirement.

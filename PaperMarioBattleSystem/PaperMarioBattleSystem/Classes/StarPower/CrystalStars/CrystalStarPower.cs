@@ -12,6 +12,11 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class CrystalStarPower : StarPowerBase
     {
+        public CrystalStarPower()
+        {
+            StarPowerType = StarPowerGlobals.StarPowerTypes.CrystalStar;
+        }
+
         /// <summary>
         /// Calculates the amount of Star Power the Audience gives Mario after either he or his Partner use Appeal.
         /// </summary>

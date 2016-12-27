@@ -450,6 +450,11 @@ namespace PaperMarioBattleSystem
         public EquipmentGlobals.HammerLevels HammerLevel = EquipmentGlobals.HammerLevels.Normal;
 
         /// <summary>
+        /// Mario's Star Spirit Star Power.
+        /// </summary>
+        public StarSpiritPower SSStarPower = new StarSpiritPower();
+
+        /// <summary>
         /// Mario's Crystal Star Power.
         /// </summary>
         public CrystalStarPower CSStarPower = new CrystalStarPower();
@@ -465,6 +470,25 @@ namespace PaperMarioBattleSystem
         {
             BootLevel = bootLevel;
             HammerLevel = hammerLevel;
+        }
+
+        /// <summary>
+        /// Retrieves the type of Star Power based on a given StarPowerTypes.
+        /// </summary>
+        /// <param name="starPowerType">The type of Star Power to get.</param>
+        /// <returns>StarSpiritPower or CrystalStarPower if the respective type is passed in. Otherwise, it returns null.</returns>
+        public StarPowerBase GetStarPowerFromType(StarPowerGlobals.StarPowerTypes starPowerType)
+        {
+            if (starPowerType == StarPowerGlobals.StarPowerTypes.StarSpirit)
+            {
+                return SSStarPower;
+            }
+            else if (starPowerType == StarPowerGlobals.StarPowerTypes.CrystalStar)
+            {
+                return CSStarPower;
+            }
+
+            return null;
         }
     }
 
@@ -799,16 +823,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class BattlePlayerGlobals
     {
-        #region Enums
 
-        public enum PlayerProperties
-        {
-            QuickChangeCount,
-            SimplifierCount,
-            UnsimplifierCount
-        }
-
-        #endregion
     }
 
     /// <summary>
@@ -816,6 +831,19 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class StarPowerGlobals
     {
+        #region Enums
+
+        /// <summary>
+        /// The types of Star Power.
+        /// <para>PM has the Star Spirits, and TTYD has the Crystal Stars.</para>
+        /// </summary>
+        public enum StarPowerTypes
+        {
+            None, StarSpirit, CrystalStar
+        }
+
+        #endregion
+
         #region Command Rank Data
 
         /// <summary>

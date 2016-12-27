@@ -648,6 +648,20 @@ namespace PaperMarioBattleSystem
                 LoseFP(PreviousAction.MoveProperties.FPCost);
             }
 
+            //Subtract Star Power if the move costs SP.
+            //The BattleEntity must have SP, and enough of it, at this point, as the action is not selectable from the menu otherwise
+            if (PreviousAction.CostsSP)
+            {
+                //Cast as a Special Move
+                SpecialMoveAction specialMove = PreviousAction as SpecialMoveAction;
+                
+                //Subtract Star Power
+                MarioStats marioStats = BattleStats as MarioStats;
+                StarPowerBase starPower = marioStats.GetStarPowerFromType(specialMove.SPType);
+                starPower.LoseStarPower(specialMove.SPCost);
+            }
+
+            //Start the action
             PreviousAction.StartSequence(actualTargets);
         }
 

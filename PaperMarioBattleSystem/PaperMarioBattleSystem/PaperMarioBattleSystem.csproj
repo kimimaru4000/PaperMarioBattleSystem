@@ -75,7 +75,7 @@
     <Compile Include="Classes\Actions\IActionCommand.cs" />
     <Compile Include="Classes\Actions\Defensive\Guard.cs" />
     <Compile Include="Classes\Actions\IActionCommandHandler.cs" />
-    <Compile Include="Classes\Actions\ItemAction.cs" />
+    <Compile Include="Classes\Actions\Item\ItemAction.cs" />
     <Compile Include="Classes\Actions\Kooper\ShellToss.cs" />
     <Compile Include="Classes\Actions\Mario\Hammer.cs" />
     <Compile Include="Classes\Actions\Mario\IceSmash.cs" />
@@ -86,6 +86,7 @@
     <Compile Include="Classes\Actions\MoveAction.cs" />
     <Compile Include="Classes\Actions\NoAction.cs" />
     <Compile Include="Classes\Actions\Player\ChangePartner.cs" />
+    <Compile Include="Classes\Actions\Special\SpecialMoveAction.cs" />
     <Compile Include="Classes\Actions\Sushie\TidalWave.cs" />
     <Compile Include="Classes\Actions\Yoshi\Gulp.cs" />
     <Compile Include="Classes\Actions\Yoshi\MiniEgg.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Classes\Global\Time.cs" />
     <Compile Include="Classes\StarPower\CrystalStars\CrystalStarPower.cs" />
     <Compile Include="Classes\StarPower\StarPowerBase.cs" />
+    <Compile Include="Classes\StarPower\StarSpirits\StarSpiritPower.cs" />
     <Compile Include="Classes\StatusEffects\AllergicStatus.cs" />
     <Compile Include="Classes\StatusEffects\BurnStatus.cs" />
     <Compile Include="Classes\StatusEffects\ChargedStatus.cs" />
@@ -280,7 +282,6 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Classes\StarPower\StarSpirits\" />
     <Folder Include="Content\Audio\Music\" />
   </ItemGroup>
   <ItemGroup>

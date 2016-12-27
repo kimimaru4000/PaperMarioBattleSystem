@@ -78,6 +78,11 @@ namespace PaperMarioBattleSystem
         public bool CostsFP => (MoveProperties.FPCost > 0);
 
         /// <summary>
+        /// Tells if the MoveAction costs SP (Star Power) or not.
+        /// </summary>
+        public virtual bool CostsSP => false;
+
+        /// <summary>
         /// Tells if the MoveAction heals in some capacity or not.
         /// </summary>
         public bool Heals => (HealingInfo != null);

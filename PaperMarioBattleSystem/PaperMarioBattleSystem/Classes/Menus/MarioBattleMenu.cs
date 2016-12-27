@@ -20,7 +20,9 @@ namespace PaperMarioBattleSystem
                 Enumerations.MoveCategories.Jump, new JumpSubMenu()));
             ActionButtons.Add(new ActionButton("Hammer", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
                 Enumerations.MoveCategories.Hammer, new HammerSubMenu()));
-            
+            ActionButtons.Add(new ActionButton("Special", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JUmpButton"),
+                Enumerations.MoveCategories.Special, new SpecialSubMenu()));
+
             Initialize(2);
         }
     }

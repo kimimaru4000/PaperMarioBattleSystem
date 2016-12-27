@@ -69,6 +69,12 @@ namespace PaperMarioBattleSystem
             SelectionMenu.StartSelection(onSelection, selectionType, targets);
         }
 
+        public void StartTargetSelection(TargetSelectionMenu.OnSelection onSelection, TargetSelectionMenu.EntitySelectionType selectionType, int startIndex, params BattleEntity[] targets)
+        {
+            PushMenu(SelectionMenu);
+            SelectionMenu.StartSelection(onSelection, selectionType, startIndex, targets);
+        }
+
         #region Battle Menu Stack
 
         public void PushMenu(BattleMenu menu)

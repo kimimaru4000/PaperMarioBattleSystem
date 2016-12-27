@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
-            StartAction(new Jump(), BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Player)[0]);
+            StartAction(new Jump(), BattleManager.Instance.GetFrontPlayer());
         }
 
         public override void TurnUpdate()

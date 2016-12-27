@@ -147,6 +147,7 @@
     <Compile Include="Classes\Menus\ActionSubMenus\ItemSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\JumpSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\KooperSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\SpecialSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\TacticsSubMenu.cs" />
     <Compile Include="Classes\Menus\BattleMenu.cs" />
     <Compile Include="Classes\Menus\MarioBattleMenu.cs" />
@@ -162,7 +163,7 @@
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />
     <Compile Include="Classes\Sequences\ChargeSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
-    <Compile Include="Classes\Sequences\ItemSequence.cs" />
+    <Compile Include="Classes\Sequences\Item\ItemSequence.cs" />
     <Compile Include="Classes\Sequences\Kooper\ShellTossSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\HammerSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\IceSmashSequence.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Classes\Sequences\Mario\PowerBounceSequence.cs" />
     <Compile Include="Classes\Sequences\NoSequence.cs" />
     <Compile Include="Classes\Sequences\Sequence.cs" />
+    <Compile Include="Classes\Sequences\Special\SpecialMoveSequence.cs" />
     <Compile Include="Classes\Sequences\Sushie\TidalWaveSequence.cs" />
     <Compile Include="Classes\Sequences\Yoshi\GulpSequence.cs" />
     <Compile Include="Classes\Sequences\Yoshi\MiniEggSequence.cs" />

@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PaperMarioBattleSystem.StarPowerGlobals;
 
 namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The base class for Special Moves, which use up Star Power.
     /// </summary>
-    public abstract class SpecialMoveAction : MoveAction
+    public class SpecialMoveAction : MoveAction
     {
         /// <summary>
         /// The type of Star Power this Special Move uses.
         /// </summary>
-        public StarPowerGlobals.StarPowerTypes SPType { get; protected set; } = StarPowerGlobals.StarPowerTypes.StarSpirit;
+        public StarPowerTypes SPType { get; protected set; } = StarPowerTypes.StarSpirit;
 
         /// <summary>
         /// The amount of Star Power the Special Move costs.
@@ -22,6 +23,41 @@ namespace PaperMarioBattleSystem
         public float SPCost { get; protected set; } = 0f;
 
         public override bool CostsSP => (SPCost > 0f);
+
+        protected SpecialMoveAction()
+        {
+
+        }
+
+        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, StarPowerTypes spType, float spCost) : base(name, moveProperties, moveSequence)
+        {
+            SPType = spType;
+            SPCost = spCost;
+        }
+
+        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, HealingData healingData, StarPowerTypes spType, float spCost) : base(name, moveProperties, moveSequence, healingData)
+        {
+            SPType = spType;
+            SPCost = spCost;
+        }
+
+        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actionCommand, HealingData healingData, StarPowerTypes spType, float spCost) : base(name, moveProperties, moveSequence, actionCommand, healingData)
+        {
+            SPType = spType;
+            SPCost = spCost;
+        }
+
+        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, InteractionParamHolder damageInfo, StarPowerTypes spType, float spCost) : base(name, moveProperties, moveSequence, damageInfo)
+        {
+            SPType = spType;
+            SPCost = spCost;
+        }
+
+        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actionCommand, InteractionParamHolder damageInfo, StarPowerTypes spType, float spCost) : base(name, moveProperties, moveSequence, actionCommand, damageInfo)
+        {
+            SPType = spType;
+            SPCost = spCost;
+        }
 
         public override void Initialize()
         {

@@ -42,6 +42,11 @@ namespace PaperMarioBattleSystem
             BoxMenu.SetText(string.Empty);
         }
 
+        public ActionSubMenu(params MoveAction[] battleActions)
+        {
+            BattleActions.AddRange(battleActions);
+        }
+
         public void Initialize()
         {
             BoxMenu.SetText(BattleActions[0].MoveProperties.Description);

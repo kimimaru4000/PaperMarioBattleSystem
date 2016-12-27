@@ -49,6 +49,17 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        public void StartSelection(OnSelection onSelection, EntitySelectionType selectionType, int startIndex, params BattleEntity[] targets)
+        {
+            StartSelection(onSelection, selectionType, targets);
+
+            //Works with the failsafe in the other overload
+            if (Targets != null)
+            {
+                ChangeSelection(startIndex);
+            }
+        }
+
         protected override void HandleCursorInput()
         {
             if (SelectionType == EntitySelectionType.First || SelectionType == EntitySelectionType.All) return;

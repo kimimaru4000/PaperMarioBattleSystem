@@ -67,6 +67,8 @@ namespace PaperMarioBattleSystem
         {
             BattleEntity[] entities = null;
 
+            int startIndex = 0;
+
             //If the item targets the user, only choose the user as the target
             if (ItemUsed.TargetsSelf == true)
             {
@@ -78,7 +80,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Bring up the target selection menu
-            BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, entities);
+            BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, startIndex, entities);
         }
     }
 }

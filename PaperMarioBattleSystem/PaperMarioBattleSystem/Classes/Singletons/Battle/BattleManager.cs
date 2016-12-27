@@ -607,8 +607,9 @@ namespace PaperMarioBattleSystem
             }
             else if (entityType == EntityTypes.Player)
             {
-                entities.Add(FrontPlayer);
+                //To be consistent, go from left to right
                 entities.Add(BackPlayer);
+                entities.Add(FrontPlayer);
             }
 
             //Filter by height states
@@ -627,6 +628,21 @@ namespace PaperMarioBattleSystem
         public BattleEntity[] GetEntities(EntityTypes entityType, params HeightStates[] heightStates)
         {
             List<BattleEntity> entities = GetEntitiesList(entityType, heightStates);
+            return entities.ToArray();
+        }
+
+        /// <summary>
+        /// Returns all entities of a specified type in an array.
+        /// The entities are returned in reverse order. Entities in the back are the first elements in the array.
+        /// </summary>
+        /// <param name="entityType">The type of entities to return.</param>
+        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
+        /// If null, will include entities of all height states.</param>
+        /// <returns>Entities matching the type and height states specified, in reverse.</returns>
+        public BattleEntity[] GetEntitiesReversed(EntityTypes entityType, params HeightStates[] heightStates)
+        {
+            List<BattleEntity> entities = GetEntitiesList(entityType, heightStates);
+            entities.Reverse();
             return entities.ToArray();
         }
 
@@ -781,16 +797,23 @@ namespace PaperMarioBattleSystem
             else if (entity.EntityType == EntityTypes.Player)
             {
                 //The previous entity for Players is always Mario or his Partner, unless the latter has 0 HP
-                BattlePlayer player = entity as BattlePlayer;
+                //The back Player has no one else adjacent to him/her aside from the Front player
+                if (entity == BackPlayer)
+                {
+                    adjacentEntities.Add(FrontPlayer);
+                }
+                else if (entity == FrontPlayer)
+                {
+                    //NOTE: The dead check is being removed for consistency with other methods
+                    //if (BackPlayer.IsDead == false)
+                    //{
+                        adjacentEntities.Add(BackPlayer);
+                    //}
 
-                if (player.PlayerType == PlayerTypes.Partner)
-                    adjacentEntities.Add(GetMario());
-                else if (player.PlayerType == PlayerTypes.Mario && Partner.IsDead == false)
-                    adjacentEntities.Add(GetPartner());
-
-                //Add the next enemy
-                int nextEnemy = FindOccupiedEnemyIndex(0);
-                if (nextEnemy >= 0) adjacentEntities.Add(Enemies[nextEnemy]);
+                    //Add the next enemy
+                    int nextEnemy = FindOccupiedEnemyIndex(0);
+                    if (nextEnemy >= 0) adjacentEntities.Add(Enemies[nextEnemy]);
+                }
             }
 
             return adjacentEntities.ToArray();

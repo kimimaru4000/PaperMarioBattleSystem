@@ -109,6 +109,8 @@
     <Compile Include="Classes\Collectibles\Badges\ChargePBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DamageDodgeBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DefendPlusBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\DoubleDipBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\DoubleDipPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DoublePainBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FireShieldBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FlowerSaverBadge.cs" />
@@ -121,6 +123,7 @@
     <Compile Include="Classes\Collectibles\Badges\QuickChangeBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SimplifierBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SpikeShieldBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\TripleDipBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\UnsimplifierBadge.cs" />
     <Compile Include="Classes\Collectibles\Items\BattleItem.cs" />
     <Compile Include="Classes\Collectibles\Items\HoneySyrup.cs" />
@@ -150,6 +153,7 @@
     <Compile Include="Classes\Menus\ActionSubMenus\SpecialSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\TacticsSubMenu.cs" />
     <Compile Include="Classes\Menus\BattleMenu.cs" />
+    <Compile Include="Classes\Menus\CancelDipMenu.cs" />
     <Compile Include="Classes\Menus\MarioBattleMenu.cs" />
     <Compile Include="Classes\Menus\PartnerBattleMenu.cs" />
     <Compile Include="Classes\Menus\PlayerBattleMenu.cs" />

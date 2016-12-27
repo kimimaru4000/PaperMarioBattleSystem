@@ -476,7 +476,7 @@ namespace PaperMarioBattleSystem
             }
 
             //If the last action can expend a charge, check to see if the entity has a charge and remove it
-            if (PreviousAction.MoveProperties.UsesCharge == true && EntityProperties.HasStatus(StatusTypes.Charged) == true
+            if (PreviousAction?.MoveProperties.UsesCharge == true && EntityProperties.HasStatus(StatusTypes.Charged) == true
                 && EntityProperties.HasAdditionalProperty(AdditionalProperty.ChargedDamage) == true)
             {
                 EntityProperties.RemoveStatus(StatusTypes.Charged);

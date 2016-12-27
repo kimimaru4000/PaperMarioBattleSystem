@@ -145,5 +145,22 @@ namespace PaperMarioBattleSystem
         {
             
         }
+
+        /// <summary>
+        /// A class for a generic menu option. It contains a text string and a delegate.
+        /// </summary>
+        public class BattleMenuOption
+        {
+            public delegate void OnSelect();
+
+            public string Option = string.Empty;
+            public OnSelect OnSelectOption = null;
+
+            public BattleMenuOption(string option, OnSelect onSelectOption)
+            {
+                Option = option;
+                OnSelectOption = onSelectOption;
+            }
+        }
     }
 }

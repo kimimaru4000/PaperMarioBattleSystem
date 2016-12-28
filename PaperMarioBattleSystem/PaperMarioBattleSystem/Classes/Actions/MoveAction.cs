@@ -232,11 +232,11 @@ namespace PaperMarioBattleSystem
                 User.LoseFP(MoveProperties.FPCost);
             }
 
-            //If it's not an item move, remove the dip turns property
+            //If it's not an item move, remove the dip item turns property
             //This ensures that no item turns remain if the entity was using Double/Triple Dip but did something else via Confusion
-            if (User.EntityProperties.HasAdditionalProperty(AdditionalProperty.DipTurns) == true)
+            if (User.EntityProperties.HasAdditionalProperty(AdditionalProperty.DipItemTurns) == true)
             {
-                User.EntityProperties.RemoveAdditionalProperty(AdditionalProperty.DipTurns);
+                User.EntityProperties.RemoveAdditionalProperty(AdditionalProperty.DipItemTurns);
             }
         }
 

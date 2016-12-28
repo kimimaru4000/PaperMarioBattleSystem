@@ -654,7 +654,7 @@ namespace PaperMarioBattleSystem
             /// <summary>
             /// The number of Item turns the BattleEntity has. Set when using an item in the Double and Triple Dip menus.
             /// </summary>
-            DipTurns
+            DipItemTurns
         }
     }
 

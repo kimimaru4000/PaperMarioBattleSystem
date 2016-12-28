@@ -30,19 +30,9 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(258, 222, 28, 25), 250d)));
         }
 
-        public override void OnTurnStart()
+        protected sealed override BattleMenu GetMainBattleMenu()
         {
-            base.OnTurnStart();
-
-            int itemTurns = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.DipTurns);
-            if (itemTurns > 0)
-            {
-                BattleUIManager.Instance.PushMenu(new ItemSubMenu(1, 0, true));
-            }
-            else
-            {
-                BattleUIManager.Instance.PushMenu(new PartnerBattleMenu(new KooperSubMenu()));
-            }
+            return new PartnerBattleMenu(new KooperSubMenu());
         }
 
         public override void OnTurnEnd()

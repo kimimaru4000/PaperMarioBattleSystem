@@ -98,7 +98,7 @@ namespace PaperMarioBattleSystem
 
             //Get remaining item turn count minus 1
             //Get this here, as the property will automatically be removed by the base behavior for safety
-            int dipTurns = User.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.DipTurns) - 1;
+            int dipTurns = User.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.DipItemTurns) - 1;
 
             //Perform base behavior
             base.OnActionStarted();
@@ -108,7 +108,7 @@ namespace PaperMarioBattleSystem
             if (dipTurns > 0)
             {
                 User.SetTurnsUsed(User.TurnsUsed - 1);
-                User.EntityProperties.AddAdditionalProperty(AdditionalProperty.DipTurns, dipTurns);
+                User.EntityProperties.AddAdditionalProperty(AdditionalProperty.DipItemTurns, dipTurns);
             }
         }
 

@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Mario in battle
     /// </summary>
-    public class BattleMario : BattlePlayer
+    public sealed class BattleMario : BattlePlayer
     {
         /// <summary>
         /// Constructor
@@ -63,12 +63,9 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(392, 335, 42, 45), 700d)));
         }
 
-        public override void OnBattleStart()
+        public sealed override void OnBattleStart()
         {
             base.OnBattleStart();
-
-            EntityProperties.AfflictStatus(new SlowStatus(4));
-            EntityProperties.AfflictStatus(new FastStatus(4));
 
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.SpikeShield, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerPlus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
@@ -84,19 +81,9 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TripleDip, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
         }
 
-        public override void OnTurnStart()
+        protected sealed override BattleMenu GetMainBattleMenu()
         {
-            base.OnTurnStart();
-
-            int itemTurns = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.DipTurns);
-            if (itemTurns > 0)
-            {
-                BattleUIManager.Instance.PushMenu(new ItemSubMenu(1, 0, true));
-            }
-            else
-            {
-                BattleUIManager.Instance.PushMenu(new MarioBattleMenu());
-            }
+            return new MarioBattleMenu();
         }
 
         public override void TurnUpdate()
@@ -110,7 +97,7 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.ClearMenuStack();
         }
 
-        public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
+        public sealed override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
         {
             //NOTE: This isn't entity-specific right now, so it technically doesn't work properly.
             //For example, if a Partner had Mario's Jump, it could use Power Bounce if Mario had

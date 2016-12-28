@@ -101,7 +101,7 @@ namespace PaperMarioBattleSystem
 
         private void SetEntityDipTurnCount()
         {
-            BattleManager.Instance.EntityTurn.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.DipTurns, DipTurnCount);
+            BattleManager.Instance.EntityTurn.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.DipItemTurns, DipTurnCount);
         }
     }
 }

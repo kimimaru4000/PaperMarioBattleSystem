@@ -20,19 +20,9 @@ namespace PaperMarioBattleSystem
             AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(67, 89, 26, 30), 1000d)));
         }
 
-        public override void OnTurnStart()
+        protected sealed override BattleMenu GetMainBattleMenu()
         {
-            base.OnTurnStart();
-
-            int itemTurns = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.DipTurns);
-            if (itemTurns > 0)
-            {
-                BattleUIManager.Instance.PushMenu(new ItemSubMenu(1, 0, true));
-            }
-            else
-            {
-                BattleUIManager.Instance.PushMenu(new PartnerBattleMenu(new GoombarioSubMenu()));
-            }
+            return new PartnerBattleMenu(new GoombarioSubMenu());
         }
 
         public override void TurnUpdate()

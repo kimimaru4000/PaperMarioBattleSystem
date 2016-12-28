@@ -650,12 +650,7 @@ namespace PaperMarioBattleSystem
             Invincible,
             ConfusionPercent,
             ChargedDamage,
-
-            //Badge properties
-            //AdditionalGuardDefense,
-            //AllOrNothingCount,
-            //DamageTakenMultiplier,
-            //DangerDamageDivider
+            DipTurns
         }
     }
 

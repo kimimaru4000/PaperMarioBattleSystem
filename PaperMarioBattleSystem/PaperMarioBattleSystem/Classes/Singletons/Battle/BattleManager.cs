@@ -217,10 +217,6 @@ namespace PaperMarioBattleSystem
         {
             Phase = phase;
 
-            //NOTE: This breaks Immobilization similar turn-hindering Status Effects for the first entity.
-            //We still assume the first entity should go, but what we really need to do is check who can go next
-            //Make this use FindNextEntityTurn()
-
             if (Phase == BattlePhase.Player)
             {
                 //Increment the phase cycles when switching to the Player phase
@@ -240,6 +236,9 @@ namespace PaperMarioBattleSystem
                     Enemies[i]?.OnPhaseEnd();
                     Enemies[i]?.OnPhaseCycleStart();
                 }
+
+                //Reset the enemy that should go next
+                EnemyTurn = 0;
             }
             else if (Phase == BattlePhase.Enemy)
             {                
@@ -250,6 +249,9 @@ namespace PaperMarioBattleSystem
                 {
                     Enemies[i]?.OnPhaseStart();
                 }
+
+                //Reset the enemy that should go next
+                EnemyTurn = 0;
             }
 
             FindNextEntityTurn();

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PaperMarioBattleSystem.Classes.Collectibles.Badges
+namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Double Dip P Badge - Allows Mario's Partner to use two items in one turn.

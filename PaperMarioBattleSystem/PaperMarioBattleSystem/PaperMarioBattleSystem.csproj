@@ -147,6 +147,7 @@
     <Compile Include="Classes\Menus\ActionSubMenus\ChangePartnerSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\GoombarioSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\HammerSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\ItemDipSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ItemSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\JumpSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\KooperSubMenu.cs" />

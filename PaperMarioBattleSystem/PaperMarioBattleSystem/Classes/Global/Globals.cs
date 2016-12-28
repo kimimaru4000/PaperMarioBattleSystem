@@ -650,6 +650,10 @@ namespace PaperMarioBattleSystem
             Invincible,
             ConfusionPercent,
             ChargedDamage,
+
+            /// <summary>
+            /// The number of Item turns the BattleEntity has. Set when using an item in the Double and Triple Dip menus.
+            /// </summary>
             DipTurns
         }
     }

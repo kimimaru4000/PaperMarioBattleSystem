@@ -475,12 +475,8 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            //If the last action can expend a charge, check to see if the entity has a charge and remove it
-            if (PreviousAction?.MoveProperties.UsesCharge == true && EntityProperties.HasStatus(StatusTypes.Charged) == true
-                && EntityProperties.HasAdditionalProperty(AdditionalProperty.ChargedDamage) == true)
-            {
-                EntityProperties.RemoveStatus(StatusTypes.Charged);
-            }
+            //End the action
+            PreviousAction?.OnActionEnded();
 
             TurnsUsed++;
             BattleManager.Instance.TurnEnd();
@@ -641,27 +637,8 @@ namespace PaperMarioBattleSystem
 
             PreviousAction = actualAction;
 
-            //Subtract FP if the move costs FP. The BattleEntity must have enough FP
-            //at this point, as the action is not selectable from the menu if it doesn't have enough
-            if (PreviousAction.CostsFP == true)
-            {
-                LoseFP(PreviousAction.MoveProperties.FPCost);
-            }
-
-            //Subtract Star Power if the move costs SP.
-            //The BattleEntity must have SP, and enough of it, at this point, as the action is not selectable from the menu otherwise
-            if (PreviousAction.CostsSP)
-            {
-                //Cast as a Special Move
-                SpecialMoveAction specialMove = PreviousAction as SpecialMoveAction;
-                
-                //Subtract Star Power
-                MarioStats marioStats = BattleStats as MarioStats;
-                StarPowerBase starPower = marioStats.GetStarPowerFromType(specialMove.SPType);
-                starPower.LoseStarPower(specialMove.SPCost);
-            }
-
             //Start the action
+            PreviousAction.OnActionStarted();
             PreviousAction.StartSequence(actualTargets);
         }
 

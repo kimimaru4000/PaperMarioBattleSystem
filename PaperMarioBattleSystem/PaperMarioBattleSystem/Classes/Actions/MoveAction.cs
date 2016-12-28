@@ -78,11 +78,6 @@ namespace PaperMarioBattleSystem
         public bool CostsFP => (MoveProperties.FPCost > 0);
 
         /// <summary>
-        /// Tells if the MoveAction costs SP (Star Power) or not.
-        /// </summary>
-        public virtual bool CostsSP => false;
-
-        /// <summary>
         /// Tells if the MoveAction heals in some capacity or not.
         /// </summary>
         public bool Heals => (HealingInfo != null);
@@ -169,7 +164,7 @@ namespace PaperMarioBattleSystem
                 int flowerSaverCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.FlowerSaver);
                 MoveInfo.FPCost = UtilityGlobals.Clamp(MoveInfo.FPCost - flowerSaverCount, 1, 99);
 
-                //If there is at least one Flower Saver Badge equipped, display the FP count in a bluish-gray
+                //If there is at least one Flower Saver Badge equipped, display the FP count in a bluish-gray color
                 if (flowerSaverCount > 0)
                     LoweredFPCost = true;
 
@@ -202,7 +197,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What happens when the BattleAction is selected on the menu.
+        /// What happens when the MoveAction is selected on the menu.
         /// The default behavior is to start target selection with the ActionStart method
         /// </summary>
         public virtual void OnMenuSelected()
@@ -222,6 +217,42 @@ namespace PaperMarioBattleSystem
         {
             BattleUIManager.Instance.ClearMenuStack();
             User.StartAction(this, targets);
+        }
+
+        /// <summary>
+        /// What happens when the MoveAction starts.
+        /// This is called immediately before starting the Sequence.
+        /// </summary>
+        public virtual void OnActionStarted()
+        {
+            //Subtract FP if the move costs FP. The BattleEntity must have enough FP
+            //at this point, as the action is not selectable from the menu if it doesn't have enough
+            if (CostsFP == true)
+            {
+                User.LoseFP(MoveProperties.FPCost);
+            }
+
+            //If it's not an item move, remove the dip turns property
+            //This ensures that no item turns remain if the entity was using Double/Triple Dip but did something else via Confusion
+            if (User.EntityProperties.HasAdditionalProperty(AdditionalProperty.DipTurns) == true)
+            {
+                User.EntityProperties.RemoveAdditionalProperty(AdditionalProperty.DipTurns);
+            }
+        }
+
+        /// <summary>
+        /// What happens when the MoveAction ends.
+        /// This is called immediately after ending the Sequence.
+        /// </summary>
+        public virtual void OnActionEnded()
+        {
+            //If the last action can expend a charge, check to see if the entity has a charge and remove it
+            //We check for both the Charged Status and the ChargedDamage property because the Status could be suspended
+            if (MoveProperties.UsesCharge == true && User.EntityProperties.HasStatus(StatusTypes.Charged) == true
+                && User.EntityProperties.HasAdditionalProperty(AdditionalProperty.ChargedDamage) == true)
+            {
+                User.EntityProperties.RemoveStatus(StatusTypes.Charged);
+            }
         }
 
         public void StartSequence(params BattleEntity[] targets)

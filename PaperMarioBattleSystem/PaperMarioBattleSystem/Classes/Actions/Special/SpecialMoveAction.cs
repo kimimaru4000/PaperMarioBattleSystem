@@ -22,7 +22,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public float SPCost { get; protected set; } = 0f;
 
-        public override bool CostsSP => (SPCost > 0f);
+        /// <summary>
+        /// Tells if this Special Move costs SP.
+        /// </summary>
+        public bool CostsSP => (SPCost > 0f);
 
         protected SpecialMoveAction()
         {
@@ -59,7 +62,7 @@ namespace PaperMarioBattleSystem
             SPCost = spCost;
         }
 
-        public override void Initialize()
+        public sealed override void Initialize()
         {
             float starPower = 0f;
 
@@ -82,6 +85,21 @@ namespace PaperMarioBattleSystem
 
             //Check base aspects to determine whether the move should be disabled or not
             base.Initialize();
+        }
+
+        public sealed override void OnActionStarted()
+        {
+            base.OnActionStarted();
+
+            //Subtract Star Power if the Special Move costs SP (Focus, Star Beam, and Peach Beam are Special Moves that doesn't cost SP)
+            //The BattleEntity must have SP, and enough of it, at this point, as the action is not selectable from the menu otherwise
+            if (CostsSP == true)
+            {
+                //Subtract Star Power
+                MarioStats marioStats = User.BattleStats as MarioStats;
+                StarPowerBase starPower = marioStats.GetStarPowerFromType(SPType);
+                starPower.LoseStarPower(SPCost);
+            }
         }
     }
 }

@@ -768,7 +768,7 @@ namespace PaperMarioBattleSystem
             }
 
             AdditionalProperties.Add(property, value);
-            Debug.Log($"Added the {property} property to {Entity.Name}!");
+            Debug.Log($"Added the {property} property to {Entity.Name} with a value of {value}!");
         }
 
         /// <summary>

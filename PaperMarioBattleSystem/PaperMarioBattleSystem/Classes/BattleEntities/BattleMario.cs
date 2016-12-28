@@ -67,6 +67,9 @@ namespace PaperMarioBattleSystem
         {
             base.OnBattleStart();
 
+            EntityProperties.AfflictStatus(new SlowStatus(4));
+            EntityProperties.AfflictStatus(new FastStatus(4));
+
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.SpikeShield, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerPlus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerBounce, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
@@ -76,12 +79,24 @@ namespace PaperMarioBattleSystem
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Charge, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AllOrNothing, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoublePain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDip, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDip, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TripleDip, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
         }
 
         public override void OnTurnStart()
         {
             base.OnTurnStart();
-            BattleUIManager.Instance.PushMenu(new MarioBattleMenu());
+
+            int itemTurns = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.DipTurns);
+            if (itemTurns > 0)
+            {
+                BattleUIManager.Instance.PushMenu(new ItemSubMenu(1, 0, true));
+            }
+            else
+            {
+                BattleUIManager.Instance.PushMenu(new MarioBattleMenu());
+            }
         }
 
         public override void TurnUpdate()
@@ -111,13 +126,13 @@ namespace PaperMarioBattleSystem
             BadgeGlobals.BadgeTypes? tempBadgeType = BadgeGlobals.GetNonPartnerBadgeType(badgeType);
             if (tempBadgeType != null)
             {
-                newBadgeType = badgeType;
+                newBadgeType = tempBadgeType.Value;
             }
             else
             {
                 //If there is no non-Partner version, get the Badge and check if it affects Mario
                 Badge badge = Inventory.Instance.GetBadge(newBadgeType, BadgeGlobals.BadgeFilterType.Equipped);
-                //The Badge isn't equipped or doesn't affect the Both or Mario, none are equipped to Mario
+                //If the Badge isn't equipped or doesn't affect Both or Mario, none are equipped to Mario
                 if (badge == null || badge.AffectedType == BadgeGlobals.AffectedTypes.Partner) return 0;
             }
 

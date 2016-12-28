@@ -60,6 +60,8 @@ namespace PaperMarioBattleSystem
 
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ChargeP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaverP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDipP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDipP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
         }
 
         public override void OnPhaseCycleStart()
@@ -84,7 +86,7 @@ namespace PaperMarioBattleSystem
             {
                 //If there is no Partner version, get the Badge and check if it affects Partners
                 Badge badge = Inventory.Instance.GetBadge(newBadgeType, BadgeGlobals.BadgeFilterType.Equipped);
-                //The Badge isn't equipped or doesn't affect the Both or the Partner, none are equipped to this Partner
+                //If the Badge isn't equipped or doesn't affect Both or the Partner, none are equipped to this Partner
                 if (badge == null || badge.AffectedType == BadgeGlobals.AffectedTypes.Self) return 0;
             }
 

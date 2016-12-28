@@ -44,6 +44,9 @@ namespace PaperMarioBattleSystem
         private void OnChooseYes()
         {
             BattleUIManager.Instance.ClearMenuStack();
+
+            //Remove any remaining item turns from the BattleEntity and end its turn if it no longer wants to use items
+            BattleManager.Instance.EntityTurn.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.DipTurns);
             BattleManager.Instance.EntityTurn.EndTurn();
         }
 

@@ -82,6 +82,12 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new FlowerSaverBadge());
             Inventory.Instance.AddBadge(new FlowerSaverPBadge());
 
+            Inventory.Instance.AddBadge(new DoubleDipBadge());
+            Inventory.Instance.AddBadge(new DoubleDipBadge());
+            Inventory.Instance.AddBadge(new DoubleDipPBadge());
+            Inventory.Instance.AddBadge(new DoubleDipPBadge());
+            Inventory.Instance.AddBadge(new TripleDipBadge());
+
             Inventory.Instance.AddItem(new Mushroom());
             Inventory.Instance.AddItem(new HoneySyrup());
             Inventory.Instance.AddItem(new Mushroom());

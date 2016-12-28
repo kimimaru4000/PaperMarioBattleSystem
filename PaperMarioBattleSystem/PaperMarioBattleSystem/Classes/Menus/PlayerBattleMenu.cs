@@ -61,8 +61,14 @@ namespace PaperMarioBattleSystem
             
             ActionButtons.Add(new ActionButton("Tactics", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
                 MoveCategories.Tactics, new TacticsSubMenu()));
+
+            ActionSubMenu itemMenu = null;
+            if (CheckUseDipMenu() == false)
+                itemMenu = new ItemSubMenu(1, 0);
+            else itemMenu = new ItemDipSubMenu();
+
             ActionButtons.Add(new ActionButton("Items", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
-                MoveCategories.Item, new ItemSubMenu()));
+                MoveCategories.Item, itemMenu));
         }
 
         /// <summary>
@@ -118,6 +124,18 @@ namespace PaperMarioBattleSystem
                 double rotation = (spacing * i) + RotationOffset + GlobalRotOffset;
                 ActionButtons[i].Position = Position + new Vector2((int)(WheelRadius * (float)Math.Cos(rotation)), (int)(WheelRadius * (float)Math.Sin(rotation)));
             }
+        }
+
+        /// <summary>
+        /// Tells whether to add the alternate Item menu containing the Double Dip and/or Triple Dip options.
+        /// </summary>
+        /// <returns>true if the BattleEntity using this menu has at least one Double Dip or Triple Dip Badge equipped.</returns>
+        private bool CheckUseDipMenu()
+        {
+            int doubleDipCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DoubleDip);
+            int tripleDipCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.TripleDip);
+
+            return (doubleDipCount > 0 || tripleDipCount > 0);
         }
     }
 }

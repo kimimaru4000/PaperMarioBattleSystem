@@ -33,7 +33,16 @@ namespace PaperMarioBattleSystem
         public override void OnTurnStart()
         {
             base.OnTurnStart();
-            BattleUIManager.Instance.PushMenu(new PartnerBattleMenu(new KooperSubMenu()));
+
+            int itemTurns = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.DipTurns);
+            if (itemTurns > 0)
+            {
+                BattleUIManager.Instance.PushMenu(new ItemSubMenu(1, 0, true));
+            }
+            else
+            {
+                BattleUIManager.Instance.PushMenu(new PartnerBattleMenu(new KooperSubMenu()));
+            }
         }
 
         public override void OnTurnEnd()

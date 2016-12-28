@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PaperMarioBattleSystem.Enumerations;
 
 /// <summary>
 /// The base class for MoveActions involving Items.
@@ -11,6 +12,16 @@ namespace PaperMarioBattleSystem
 {
     public class ItemAction : MoveAction
     {
+        /// <summary>
+        /// Delegate for determining what happens if an item is used.
+        /// </summary>
+        public delegate void ItemUsedDelegate();
+
+        /// <summary>
+        /// What happens when the item is used before the Sequence starts.
+        /// </summary>
+        public ItemUsedDelegate OnItemUsed { get; private set; }
+
         /// <summary>
         /// The Item used.
         /// </summary>
@@ -22,13 +33,8 @@ namespace PaperMarioBattleSystem
 
             if (ItemUsed == null || ItemUsed.ItemType == Item.ItemTypes.None || ItemUsed.ItemType == Item.ItemTypes.KeyItem)
             {
-                Debug.LogError($"Invalid item passed into the ItemAction!");
+                Debug.LogError($"Invalid item with {nameof(Item.ItemType)} of {ItemUsed.ItemType} passed into the ItemAction!");
             }
-
-            //NOTE: Right now it's not possible to both heal yourself and hurt enemies with any item (Ex. Meteor Meal)
-            //In fact, it's not possible to heal at all without deriving. We need this to work for all items with only
-            //the Sequences being different.
-            //Add a HealingInfo field as a new struct that takes in HP, FP, and StatusEffects healed
 
             Name = item.Name;
 
@@ -63,7 +69,7 @@ namespace PaperMarioBattleSystem
             SetMoveSequence(new ItemSequence(this));
         }
 
-        public override void OnMenuSelected()
+        public sealed override void OnMenuSelected()
         {
             BattleEntity[] entities = null;
 
@@ -81,6 +87,47 @@ namespace PaperMarioBattleSystem
 
             //Bring up the target selection menu
             BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, startIndex, entities);
+        }
+
+        public sealed override void OnActionStarted()
+        {
+            //Call the item used delegate
+            //If this is set to perform Double/Triple Dip, this will occur after getting the number of Item turns
+            //This allows the correct number of item turns to 
+            OnItemUsed?.Invoke();
+
+            //Get remaining item turn count minus 1
+            //Get this here, as the property will automatically be removed by the base behavior for safety
+            int dipTurns = User.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.DipTurns) - 1;
+
+            //Perform base behavior
+            base.OnActionStarted();
+
+            //If there are items left to use, subtract 1 from the number of turns used and adjust the dip count
+            //Subtracting preserves the turn count and works well with other methods of changing turn count (Fast Status, etc.)
+            if (dipTurns > 0)
+            {
+                User.SetTurnsUsed(User.TurnsUsed - 1);
+                User.EntityProperties.AddAdditionalProperty(AdditionalProperty.DipTurns, dipTurns);
+            }
+        }
+
+        /// <summary>
+        /// Sets the FP cost of this item. This is only used if the ItemAction is in the Double or Triple Dip menu.
+        /// </summary>
+        /// <param name="fp"></param>
+        public void SetDipFPCost(int fp)
+        {
+            MoveInfo.FPCost = fp;
+        }
+
+        /// <summary>
+        /// Sets the ItemUsedDelegate to call when the item is used. This is used if the ItemAction is in the Double or Triple Dip menu.
+        /// </summary>
+        /// <param name="onItemUsed"></param>
+        public void SetOnItemUsed(ItemUsedDelegate onItemUsed)
+        {
+            OnItemUsed = onItemUsed;
         }
     }
 }

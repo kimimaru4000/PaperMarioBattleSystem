@@ -101,7 +101,7 @@ namespace PaperMarioBattleSystem
                 SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, moveAction.Name, pos, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
 
                 //Show FP count if the move costs FP
-                if (moveAction.CostsFP == true)
+                if (moveAction.CostsFP == true && moveAction.MoveProperties.HideFPCost == false)
                 {
                     Color fpColor = color;
 

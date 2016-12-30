@@ -28,6 +28,19 @@ namespace PaperMarioBattleSystem
             SubMenu = subMenu;
         }
 
+        /// <summary>
+        /// This constructor is for showing the FP cost for a menu item (Ex. Double Dip and Triple Dip).
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="icon"></param>
+        /// <param name="description"></param>
+        /// <param name="fpCost"></param>
+        /// <param name="subMenu"></param>
+        public MenuAction(string name, Texture2D icon, string description, int fpCost, ActionSubMenu subMenu) : this(name, icon, description, subMenu)
+        {
+            MoveInfo.FPCost = fpCost;
+        }
+
         public override void SetMoveCategory(Enumerations.MoveCategories moveCategory)
         {
             base.SetMoveCategory(moveCategory);

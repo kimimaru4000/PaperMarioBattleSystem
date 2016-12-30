@@ -274,6 +274,7 @@ namespace PaperMarioBattleSystem
         public Enumerations.EntityTypes EntityType;
         public bool TargetsEntity;
         public Enumerations.HeightStates[] HeightsAffected;
+        public bool HideFPCost;
 
         public static MoveActionData Default => new MoveActionData(null, 0, "Error", TargetSelectionMenu.EntitySelectionType.Single,
             Enumerations.EntityTypes.Enemy, true, null);
@@ -289,6 +290,7 @@ namespace PaperMarioBattleSystem
             EntityType = entityType;
             TargetsEntity = true;
             HeightsAffected = heightsAffected;
+            HideFPCost = false;
         }
 
         public MoveActionData(Texture2D icon, int fpCost, bool usesCharge, string description, TargetSelectionMenu.EntitySelectionType selectionType,
@@ -302,6 +304,7 @@ namespace PaperMarioBattleSystem
             EntityType = entityType;
             TargetsEntity = true;
             HeightsAffected = heightsAffected;
+            HideFPCost = false;
         }
 
         public MoveActionData(Texture2D icon, int fpCost, string description, TargetSelectionMenu.EntitySelectionType selectionType,

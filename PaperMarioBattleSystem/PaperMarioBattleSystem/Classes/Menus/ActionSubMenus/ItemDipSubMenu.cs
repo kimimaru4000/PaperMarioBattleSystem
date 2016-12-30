@@ -24,13 +24,13 @@ namespace PaperMarioBattleSystem
             //Add Double Dip
             if (doubleDipCount > 0)
             {
-                BattleActions.Add(new MenuAction("Double Dip", null, "Lets you use 2 items in one turn.", new ItemSubMenu(2, 4)));
+                BattleActions.Add(new MenuAction("Double Dip", null, "Lets you use 2 items in one turn.", 4, new ItemSubMenu(2, 4)));
             }
 
             //Add Triple Dip
             if (doubleDipCount > 1 || tripleDipCount > 0)
             {
-                BattleActions.Add(new MenuAction("Triple Dip", null, "Lets you use 3 items in one turn.", new ItemSubMenu(3, 8)));
+                BattleActions.Add(new MenuAction("Triple Dip", null, "Lets you use 3 items in one turn.", 8, new ItemSubMenu(3, 8)));
             }
         }
     }

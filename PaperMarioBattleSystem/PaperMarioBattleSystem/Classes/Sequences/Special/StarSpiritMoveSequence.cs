@@ -11,6 +11,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class StarSpiritMoveSequence : SpecialMoveSequence
     {
+        protected double WaitTime = 700d;
+
         public StarSpiritMoveSequence(SpecialMoveAction specialAction) : base(specialAction)
         {
 
@@ -28,12 +30,12 @@ namespace PaperMarioBattleSystem
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName);
-                    CurSequenceAction = new WaitForAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName);
+                    CurSequenceAction = new Wait(WaitTime);
                     break;
                 case 2:
                     User.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarPrayName);
                     //NOTE: Show Star Spirit appearing and VFX and such
-                    CurSequenceAction = new WaitForAnimation(AnimationGlobals.PlayerBattleAnimations.StarPrayName);
+                    CurSequenceAction = new Wait(WaitTime);
                     break;
                 case 3:
                     User.PlayAnimation(AnimationGlobals.IdleName);

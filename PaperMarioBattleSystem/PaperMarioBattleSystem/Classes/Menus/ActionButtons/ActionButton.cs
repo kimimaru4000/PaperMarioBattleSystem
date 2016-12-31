@@ -77,7 +77,14 @@ namespace PaperMarioBattleSystem
             {
                 if (Disabled == false)
                 {
-                    BattleUIManager.Instance.PushMenu(SubMenu);
+                    if (SubMenu.BattleActions.Count == 1 && SubMenu.AutoSelectSingle == true)
+                    {
+                        SubMenu.BattleActions[0].OnMenuSelected();
+                    }
+                    else
+                    {
+                        BattleUIManager.Instance.PushMenu(SubMenu);
+                    }
                 }
                 else
                 {

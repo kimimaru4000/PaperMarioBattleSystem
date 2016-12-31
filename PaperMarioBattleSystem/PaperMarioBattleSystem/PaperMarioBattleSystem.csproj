@@ -117,6 +117,7 @@
     <Compile Include="Classes\Collectibles\Badges\FireShieldBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FlowerSaverBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FlowerSaverPBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\GroupFocusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\IcePowerBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LastStandBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MultibounceBadge.cs" />

@@ -15,6 +15,7 @@ namespace PaperMarioBattleSystem
         public JumpSubMenu()
         {
             Position = new Vector2(230, 150);
+            AutoSelectSingle = true;
 
             BattleActions.Add(new Jump());
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PowerBounce) > 0)

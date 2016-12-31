@@ -20,6 +20,16 @@ namespace PaperMarioBattleSystem
             ActionButtons.Add(new ActionButton("Abilities", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
                 Enumerations.MoveCategories.Partner, PartnerSubMenu));
 
+            //Add Focus to the Partner battle menu if the Group Focus badge is equipped
+            int groupFocusCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.GroupFocus);
+            if (groupFocusCount > 0)
+            {
+                ActionSubMenu focusMenu = new ActionSubMenu(new Focus());
+                focusMenu.AutoSelectSingle = true;
+                ActionButtons.Add(new ActionButton("Focus", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
+                    Enumerations.MoveCategories.Special, focusMenu));
+            }
+
             Initialize(2);
         }
     }

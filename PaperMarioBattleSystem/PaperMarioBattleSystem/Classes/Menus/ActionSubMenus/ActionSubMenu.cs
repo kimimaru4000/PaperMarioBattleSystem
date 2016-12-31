@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     /// This is only used by the player
     /// <para>All ActionSubMenus have the "SubMenu" suffix</para>
     /// </summary>
-    public abstract class ActionSubMenu : BattleMenu
+    public class ActionSubMenu : BattleMenu
     {
         /// <summary>
         /// The list of move actions in the submenu
@@ -26,6 +26,12 @@ namespace PaperMarioBattleSystem
         /// The category of the menu.
         /// </summary>
         public Enumerations.MoveCategories MoveCategory = Enumerations.MoveCategories.None;
+
+        /// <summary>
+        /// Tells if the ActionSubMenu should auto-select the first action if it's the only one available.
+        /// This is used for Mario's Jump and Hammer moves.
+        /// </summary>
+        public bool AutoSelectSingle = false;
 
         /// <summary>
         /// The position of the submenu
@@ -42,7 +48,7 @@ namespace PaperMarioBattleSystem
             BoxMenu.SetText(string.Empty);
         }
 
-        public ActionSubMenu(params MoveAction[] battleActions)
+        public ActionSubMenu(params MoveAction[] battleActions) : this()
         {
             BattleActions.AddRange(battleActions);
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using static PaperMarioBattleSystem.StarPowerGlobals;
 
 namespace PaperMarioBattleSystem
@@ -29,7 +30,7 @@ namespace PaperMarioBattleSystem
 
         protected SpecialMoveAction()
         {
-
+            
         }
 
         public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, StarPowerTypes spType, float spCost) : base(name, moveProperties, moveSequence)
@@ -100,6 +101,24 @@ namespace PaperMarioBattleSystem
                 StarPowerBase starPower = marioStats.GetStarPowerFromType(SPType);
                 starPower.LoseStarPower(SPCost);
             }
+        }
+
+        public override void DrawMenuInfo(Vector2 position, Color color, float alphaMod)
+        {
+            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Name, position, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+
+            //Show SP count if the Special Move costs SP
+            if (CostsSP == true && MoveProperties.HideCost == false)
+            {
+                Color spColor = color;
+
+                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, GetCostString(), position + new Vector2(200, 0), spColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+            }
+        }
+
+        public override string GetCostString()
+        {
+            return $"{SPCost} SP";
         }
     }
 }

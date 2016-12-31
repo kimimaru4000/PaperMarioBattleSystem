@@ -274,7 +274,7 @@ namespace PaperMarioBattleSystem
         public Enumerations.EntityTypes EntityType;
         public bool TargetsEntity;
         public Enumerations.HeightStates[] HeightsAffected;
-        public bool HideFPCost;
+        public bool HideCost;
 
         public static MoveActionData Default => new MoveActionData(null, 0, "Error", TargetSelectionMenu.EntitySelectionType.Single,
             Enumerations.EntityTypes.Enemy, true, null);
@@ -290,7 +290,7 @@ namespace PaperMarioBattleSystem
             EntityType = entityType;
             TargetsEntity = true;
             HeightsAffected = heightsAffected;
-            HideFPCost = false;
+            HideCost = false;
         }
 
         public MoveActionData(Texture2D icon, int fpCost, bool usesCharge, string description, TargetSelectionMenu.EntitySelectionType selectionType,
@@ -304,7 +304,7 @@ namespace PaperMarioBattleSystem
             EntityType = entityType;
             TargetsEntity = true;
             HeightsAffected = heightsAffected;
-            HideFPCost = false;
+            HideCost = false;
         }
 
         public MoveActionData(Texture2D icon, int fpCost, string description, TargetSelectionMenu.EntitySelectionType selectionType,
@@ -702,6 +702,8 @@ namespace PaperMarioBattleSystem
             public const string GuardName = "Guard";
             public const string SuperguardName = "Superguard";
             public const string DangerName = "Danger";
+            public const string StarSpecialName = "StarSpecial";
+            public const string StarPrayName = "StarPray";
         }
 
         /// <summary>
@@ -970,6 +972,30 @@ namespace PaperMarioBattleSystem
 
             return marioDangerStatusValue * partnerDangerStatusValue;
         }
+
+        #endregion
+
+        #region Constants
+
+        /// <summary>
+        /// The amount of Star Power Units (SPU) per usable Star Power (how much SPU each full bar/circle equates to).
+        /// </summary>
+        public const float SPUPerStarPower = 100f;
+
+        /// <summary>
+        /// The amount of Star Spirit Star Power the Focus move gives.
+        /// </summary>
+        public const float FocusSPUGain = SPUPerStarPower / 2f;
+
+        /// <summary>
+        /// The amount of additional Star Spirit Star Power each Deep Focus Badge gives to Focus.
+        /// </summary>
+        public const float DeepFocusSPUIncrease = SPUPerStarPower / 4f;
+
+        /// <summary>
+        /// The amount of Star Spirit Star Power Mario gains each turn.
+        /// </summary>
+        public const float StarSpiritSPUPerTurn = SPUPerStarPower / 8f;
 
         #endregion
     }

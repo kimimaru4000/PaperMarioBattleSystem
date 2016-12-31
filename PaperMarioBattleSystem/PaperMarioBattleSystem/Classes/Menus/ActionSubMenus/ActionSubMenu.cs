@@ -98,24 +98,27 @@ namespace PaperMarioBattleSystem
                 Vector2 pos = Position + new Vector2(0, i * 20);
                 Color color = moveAction.Disabled == false ? Color.White : Color.LightSlateGray;
                 if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) alphaMod *= .7f;
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, moveAction.Name, pos, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+                //SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, moveAction.Name, pos, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+
+                //Draw all information including name and FP cost
+                moveAction.DrawMenuInfo(pos, color, alphaMod);
 
                 //Show FP count if the move costs FP
-                if (moveAction.CostsFP == true && moveAction.MoveProperties.HideFPCost == false)
-                {
-                    Color fpColor = color;
-
-                    //If the FP cost was lowered, show it a bluish-gray color (This feature is from PM)
-                    //Keep it gray if the move is disabled for any reason
-                    if (moveAction.Disabled == false && moveAction.LoweredFPCost)
-                    {
-                        //NOTE: Change back to blue gray later, this is just so it's visible now
-                        Color blueGray = Color.Blue;//new Color(102, 153, 204);
-                        fpColor = blueGray;
-                    }
-
-                    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"{moveAction.MoveProperties.FPCost} FP", pos + new Vector2(200, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
-                }
+                //if (moveAction.CostsFP == true && moveAction.MoveProperties.HideFPCost == false)
+                //{
+                //    Color fpColor = color;
+                //
+                //    //If the FP cost was lowered, show it a bluish-gray color (This feature is from PM)
+                //    //Keep it gray if the move is disabled for any reason
+                //    if (moveAction.Disabled == false && moveAction.LoweredFPCost)
+                //    {
+                //        //NOTE: Change back to blue gray later, this is just so it's visible now
+                //        Color blueGray = Color.Blue;//new Color(102, 153, 204);
+                //        fpColor = blueGray;
+                //    }
+                //
+                //    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"{moveAction.MoveProperties.FPCost} FP", pos + new Vector2(200, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+                //}
             }
 
             //Show description window at the bottom

@@ -15,9 +15,11 @@ namespace PaperMarioBattleSystem
     {
         protected double WalkDuration = 500d;
 
-        public SpecialMoveSequence(MoveAction moveAction) : base(moveAction)
-        {
+        protected SpecialMoveAction SpecialAction { get; private set; } = null;
 
+        public SpecialMoveSequence(SpecialMoveAction specialAction) : base(specialAction)
+        {
+            SpecialAction = specialAction;
         }
 
         protected override void SequenceEndBranch()

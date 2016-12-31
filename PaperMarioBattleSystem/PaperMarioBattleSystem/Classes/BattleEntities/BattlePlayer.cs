@@ -25,6 +25,8 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
+            PlayAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName);
+
             int itemTurns = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.DipItemTurns);
             if (itemTurns > 0)
             {
@@ -36,10 +38,24 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        public override void OnTurnEnd()
+        {
+            base.OnTurnEnd();
+
+            PlayAnimation(AnimationGlobals.IdleName);
+        }
+
         /// <summary>
         /// Gets the BattleMenu the BattlePlayer uses at the start of its turn.
         /// </summary>
         /// <returns></returns>
         protected abstract BattleMenu GetMainBattleMenu();
+
+        /// <summary>
+        /// Getse the BattlePlayer's Star Power.
+        /// Mario returns his own, while Partners use Mario's.
+        /// </summary>
+        /// <returns>A StarPowerBase with the StarPower the BattlePlayer uses.</returns>
+        public abstract StarPowerBase GetStarPower(StarPowerGlobals.StarPowerTypes starPowerType);
     }
 }

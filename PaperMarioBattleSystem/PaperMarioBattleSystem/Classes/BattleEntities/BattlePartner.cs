@@ -72,7 +72,7 @@ namespace PaperMarioBattleSystem
             PartnerMaxTurns = MaxTurns;
         }
 
-        public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
+        public sealed override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
         {
             BadgeGlobals.BadgeTypes newBadgeType = badgeType;
 
@@ -91,6 +91,11 @@ namespace PaperMarioBattleSystem
             }
 
             return Inventory.Instance.GetActiveBadgeCount(newBadgeType);
+        }
+
+        public sealed override StarPowerBase GetStarPower(StarPowerGlobals.StarPowerTypes starPowerType)
+        {
+            return BattleManager.Instance.GetMario().MStats.GetStarPowerFromType(starPowerType);
         }
 
         /// <summary>

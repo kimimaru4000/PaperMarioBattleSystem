@@ -57,6 +57,8 @@ namespace PaperMarioBattleSystem
             }
 
             SPU = UtilityGlobals.Clamp(SPU + spuGained, 0f, MaxSPU);
+
+            Debug.Log($"Gained {spuGained} SPU for {StarPowerType} Star Power! Total SPU: {SPU}");
         }
 
         /// <summary>
@@ -72,6 +74,8 @@ namespace PaperMarioBattleSystem
             }
 
             SPU = UtilityGlobals.Clamp(SPU - spuLost, 0f, MaxSPU);
+
+            Debug.Log($"Lost {spuLost} SPU for {StarPowerType} Star Power! Total SPU: {SPU}");
         }
     }
 }

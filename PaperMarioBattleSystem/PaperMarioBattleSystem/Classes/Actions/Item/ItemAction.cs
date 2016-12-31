@@ -119,7 +119,7 @@ namespace PaperMarioBattleSystem
         public void SetDipFPCost(int fp)
         {
             MoveInfo.FPCost = fp;
-            MoveInfo.HideFPCost = true;
+            MoveInfo.HideCost = true;
         }
 
         /// <summary>

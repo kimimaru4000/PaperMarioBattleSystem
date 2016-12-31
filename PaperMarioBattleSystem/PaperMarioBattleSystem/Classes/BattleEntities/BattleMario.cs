@@ -13,6 +13,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class BattleMario : BattlePlayer
     {
+        public MarioStats MStats { get; private set; } = null;
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -22,6 +24,10 @@ namespace PaperMarioBattleSystem
             Name = "Mario";
             EntityType = Enumerations.EntityTypes.Player;
             PlayerType = Enumerations.PlayerTypes.Mario;
+
+            MStats = marioStats;
+
+            #region Initialize Animations
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Mario");
             AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(228, 918, 29, 51), 1000d)));
@@ -54,6 +60,9 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(393, 450, 38, 52), 30d),
                 new Animation.Frame(new Rectangle(393, 385, 38, 55), 30d)));
 
+            AddAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(402, 569, 34, 51), 30d)));
+
             AddAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(337, 908, 35, 41), 700d)));
 
@@ -61,6 +70,11 @@ namespace PaperMarioBattleSystem
 
             AddAnimation(AnimationGlobals.PlayerBattleAnimations.SuperguardName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(392, 335, 42, 45), 700d)));
+
+            AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(449, 222, 40, 53), 700d)));
+
+            #endregion
         }
 
         public sealed override void OnBattleStart()
@@ -84,6 +98,11 @@ namespace PaperMarioBattleSystem
         protected sealed override BattleMenu GetMainBattleMenu()
         {
             return new MarioBattleMenu();
+        }
+
+        public sealed override StarPowerBase GetStarPower(StarPowerGlobals.StarPowerTypes starPowerType)
+        {
+            return MStats.GetStarPowerFromType(starPowerType);
         }
 
         public override void TurnUpdate()

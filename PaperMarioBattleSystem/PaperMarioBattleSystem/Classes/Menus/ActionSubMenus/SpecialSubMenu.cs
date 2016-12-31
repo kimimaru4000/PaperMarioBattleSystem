@@ -18,6 +18,8 @@ namespace PaperMarioBattleSystem
         {
             Position = new Vector2(230, 150);
 
+            BattleActions.Add(new Focus());
+
             if (BattleActions.Count == 0)
             {
                 SpecialMoveAction test = new SpecialMoveAction("No Specials", new MoveActionData(null, 0, "No Special Moves are available.",

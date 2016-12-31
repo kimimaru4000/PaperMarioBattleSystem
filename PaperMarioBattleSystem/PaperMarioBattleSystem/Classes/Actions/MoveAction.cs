@@ -296,5 +296,43 @@ namespace PaperMarioBattleSystem
                 MoveSequence.Draw();
             }
         }
+
+        /// <summary>
+        /// Draws the information about this action in the menu.
+        /// This can include the name and FP cost.
+        /// </summary>
+        /// <param name="position">The position to draw the information at.</param>
+        /// <param name="color">The color to draw the information.</param>
+        /// <param name="alphaMod">The alpha value of the color. This is less than 1 if this MoveAction isn't currently selected on the menu.</param>
+        public virtual void DrawMenuInfo(Vector2 position, Color color, float alphaMod)
+        {
+            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Name, position, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+
+            //Show FP count if the move costs FP
+            if (CostsFP == true && MoveProperties.HideCost == false)
+            {
+                Color fpColor = color;
+
+                //If the FP cost was lowered, show it a bluish-gray color (This feature is from PM)
+                //Keep it gray if the move is disabled for any reason
+                if (Disabled == false && LoweredFPCost)
+                {
+                    //NOTE: Change back to blue gray later, this is just so it's visible now
+                    Color blueGray = Color.Blue;//new Color(102, 153, 204);
+                    fpColor = blueGray;
+                }
+
+                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, GetCostString(), position + new Vector2(200, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+            }
+        }
+
+        /// <summary>
+        /// Gets the cost of the MoveAction. This is the FP cost for most moves and SP cost for Special Moves.
+        /// </summary>
+        /// <returns>A string of the cost to use the action.</returns>
+        public virtual string GetCostString()
+        {
+            return $"{MoveProperties.FPCost} FP";
+        }
     }
 }

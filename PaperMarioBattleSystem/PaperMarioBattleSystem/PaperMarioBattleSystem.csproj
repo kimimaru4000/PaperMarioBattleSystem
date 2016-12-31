@@ -109,6 +109,7 @@
     <Compile Include="Classes\Collectibles\Badges\ChargeBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ChargePBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DamageDodgeBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\DeepFocusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DefendPlusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DoubleDipBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DoubleDipPBadge.cs" />

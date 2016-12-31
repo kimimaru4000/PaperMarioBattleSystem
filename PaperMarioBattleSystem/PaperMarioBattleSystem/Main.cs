@@ -88,6 +88,11 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new DoubleDipPBadge());
             Inventory.Instance.AddBadge(new TripleDipBadge());
 
+            Inventory.Instance.AddBadge(new DeepFocusBadge());
+            Inventory.Instance.AddBadge(new DeepFocusBadge());
+            Inventory.Instance.AddBadge(new DeepFocusBadge());
+
+            //Items
             Inventory.Instance.AddItem(new Mushroom());
             Inventory.Instance.AddItem(new HoneySyrup());
             Inventory.Instance.AddItem(new Mushroom());

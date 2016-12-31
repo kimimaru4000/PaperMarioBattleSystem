@@ -38,6 +38,8 @@ namespace PaperMarioBattleSystem
 
         private TargetSelectionMenu SelectionMenu = null;
 
+        private BattleHUD battleHUD = null;
+
         /// <summary>
         /// The BattleMenu at the top of the stack
         /// </summary>
@@ -54,6 +56,7 @@ namespace PaperMarioBattleSystem
         {
             BattleMenus = new Stack<BattleMenu>();
             SelectionMenu = new TargetSelectionMenu();
+            battleHUD = new BattleHUD();
         }
 
         public void Dispose()
@@ -101,6 +104,8 @@ namespace PaperMarioBattleSystem
 
         public void Draw()
         {
+            battleHUD.Draw();
+
             TopMenu?.Draw();
         }
     }

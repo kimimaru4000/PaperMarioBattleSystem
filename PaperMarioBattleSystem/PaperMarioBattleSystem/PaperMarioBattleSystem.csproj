@@ -224,6 +224,7 @@
     <Compile Include="Classes\StatusEffects\StatusEffect.cs" />
     <Compile Include="Classes\StatusEffects\StoneStatus.cs" />
     <Compile Include="Classes\StatusEffects\TinyStatus.cs" />
+    <Compile Include="Classes\UIElements\BattleHUD.cs" />
     <Compile Include="Classes\UIElements\IDisableable.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />
     <Compile Include="Main.cs" />

@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
             Single, All, First
         }
 
-        private Texture2D Cursor = null;
+        private ReverseAnimation Cursor = null;
 
         private BattleEntity[] Targets = null;
 
@@ -32,7 +32,14 @@ namespace PaperMarioBattleSystem
 
         public TargetSelectionMenu() : base(MenuTypes.Horizontal)
         {
-            Cursor = AssetManager.Instance.LoadAsset<Texture2D>("UI/Cursor");
+            Texture2D cursorSheet = AssetManager.Instance.LoadAsset<Texture2D>("UI/Cursor");
+
+            Cursor = new ReverseAnimation(cursorSheet, AnimationGlobals.InfiniteLoop, true,
+                new Animation.Frame(new Rectangle(4, 5, 14, 20), 110d),
+                new Animation.Frame(new Rectangle(26, 5, 16, 20), 110d),
+                new Animation.Frame(new Rectangle(49, 5, 20, 20), 110d),
+                new Animation.Frame(new Rectangle(75, 5, 22, 16), 110d),
+                new Animation.Frame(new Rectangle(105, 5, 21, 16), 110d));
         }
 
         public void StartSelection(OnSelection onSelection, EntitySelectionType selectionType, params BattleEntity[] targets)
@@ -97,6 +104,15 @@ namespace PaperMarioBattleSystem
             {
                 BattleUIManager.Instance.PopMenu();
             }
+
+            Cursor.Reset();
+        }
+
+        public override void Update()
+        {
+            Cursor.Update();
+
+            base.Update();
         }
 
         public override void Draw()
@@ -113,19 +129,17 @@ namespace PaperMarioBattleSystem
 
         private void DrawAll()
         {
-            Rectangle rect = new Rectangle(4, 5, 14, 20);
             for (int i = 0; i < Targets.Length; i++)
             {
                 Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[i].Position + new Vector2(0, -20));
-                SpriteRenderer.Instance.Draw(Cursor, pos, rect, Color.White, true, .3f, true);
+                Cursor.Draw(pos, Color.White, false, .3f);
             }
         }
 
         private void DrawSingle()
         {
-            Rectangle rect = new Rectangle(4, 5, 14, 20);
             Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[CurSelection].Position + new Vector2(0, -20));
-            SpriteRenderer.Instance.Draw(Cursor, pos, rect, Color.White, true, .3f, true);
+            Cursor.Draw(pos, Color.White, false, .3f);
         }
     }
 }

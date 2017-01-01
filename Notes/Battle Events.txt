@@ -1,0 +1,52 @@
+Battle Events (12/31/16)
+------------------------
+There needs to be a system that allows events in battles so it waits
+for specific things to happen before starting the next character's turn.
+
+Examples in the PM games:
+-------------------------
+-Hurt and death animations finishing
+-Dialogue from characters during event battles
+-Enemies running after using a Fright Jar/Fright Mask
+-Status Effects taking effect at the start of the phase cycle, such as Burn and Frozen
+-Status Effects completing at the start of the phase cycle (character jumps up)
+-Battle messages like for Burn ("Burned! The fire will steadily do damage!") or not being able to run away ("Can't flee this fight!")
+
+Details/Thoughts
+----------------
+Some events happen after others.
+
+Poison will take effect before Burn. While Poison happens before Burn in the current system, it doesn't have Poison take
+effect on all entities and wait, then have Burn take effect on all entities and wait for it to finish.
+
+Before delving into that, let's start simpler and on a global battle scale. Battle Messages are the simplest events.
+
+Scratching the surface, this can be implemented using a queue. When a Battle Message is supposed to show up, add it to the queue
+and wait for it to finish before moving onto the next event. When no more events exist, start the next character's turn.
+However, this won't work for the Status Effects as described above.
+
+We can likely use a Dictionary for this. Some more info:
+-The keys would be integer values, with higher values meaning higher priorities and vice versa
+-The values would be a List of BattleEvent objects
+-We would track the highest priority in a separate field and update the list of BattleEvents corresponding to that priority first
+-The highest priority value would be updated after each finished BattleEvent. If the list for that priority is finished,
+it finds the next highest priority to update
+
+Example:
+--------
+Dictionary<int, List<BattleEvent>> BattleEvents = new Dictionary<int, List<BattleEvent>>();
+int CurHighestPriority;
+
+
+public void AddBattleEvent(int priority, BattleEvent battleEvent)
+{
+	//Do stuff here
+}
+
+public void UpdateBattleEvents()
+{
+	//Update battle events
+	//Remove event if done
+	//If no more events for priority
+	//Get next highest priority
+}

@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPartner(), BattleManager.Instance.GetMario().BattlePosition, 300d);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPartner(), BattleManager.Instance.GetMario().BattlePosition, 300d);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    CurSequenceAction = new Wait(300d);
+                    CurSequenceAction = new WaitSeqAction(300d);
                     break;
                 case 1:
                     BattleManager.Instance.SwapPartner(NewPartner);
@@ -75,7 +75,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPartner(), BattleManager.Instance.GetPartner().BattlePosition, 300d);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPartner(), BattleManager.Instance.GetPartner().BattlePosition, 300d);
                     break;
                 case 1:
                     EndSequence();

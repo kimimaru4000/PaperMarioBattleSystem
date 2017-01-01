@@ -45,7 +45,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), WalkDuration);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -61,7 +61,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.PlayAnimation(AnimationGlobals.IdleName);
                     StartActionCommandInput();
-                    CurSequenceAction = new WaitForCommand(1500f, actionCommand, CommandEnabled);
+                    CurSequenceAction = new WaitForCommandSeqAction(1500f, actionCommand, CommandEnabled);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -103,7 +103,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(User.BattlePosition, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName);

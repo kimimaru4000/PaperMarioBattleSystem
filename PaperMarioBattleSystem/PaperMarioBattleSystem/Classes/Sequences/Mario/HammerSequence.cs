@@ -55,11 +55,11 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), WalkDuration);
                     break;
                 case 1:
                     User.PlayAnimation(PickupAnimName, true);
-                    CurSequenceAction = new WaitForAnimation(PickupAnimName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(PickupAnimName);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -75,7 +75,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.PlayAnimation(WindupAnimName);
                     StartActionCommandInput();
-                    CurSequenceAction = new WaitForCommand(1500f, actionCommand, CommandEnabled);
+                    CurSequenceAction = new WaitForCommandSeqAction(1500f, actionCommand, CommandEnabled);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -90,7 +90,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.PlayAnimation(SlamAnimName, true);
                     AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, false);
-                    CurSequenceAction = new WaitForAnimation(SlamAnimName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(SlamAnimName);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -106,7 +106,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.PlayAnimation(SlamAnimName, true);
                     AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, false);
-                    CurSequenceAction = new WaitForAnimation(SlamAnimName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(SlamAnimName);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -121,7 +121,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(User.BattlePosition, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName, true);

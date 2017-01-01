@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPositionInFront(CurTarget), WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(CurTarget), WalkDuration);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -62,11 +62,11 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.IdleName);
-                    CurSequenceAction = new MoveAmount(new Vector2(0f, -JumpHeight), JumpDuration);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration);
                     break;
                 case 1:
                     StartActionCommandInput();
-                    CurSequenceAction = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -80,10 +80,10 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     AttemptDamage(DamageDealt, CurTarget, false);
-                    CurSequenceAction = new MoveAmount(new Vector2(0f, -JumpHeight), JumpDuration);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration);
                     break;
                 case 1:
-                    CurSequenceAction = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration);
                     break;
                 case 2:
                     AttemptDamage(DamageDealt, CurTarget, false);
@@ -115,7 +115,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(User.BattlePosition, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName);
@@ -150,13 +150,13 @@ namespace PaperMarioBattleSystem
                     User.PlayAnimation(AnimationGlobals.SpikedTipHurtName, true);
 
                     Vector2 pos = BattleManager.Instance.GetPositionInFront(CurTarget) + new Vector2(-50, -JumpHeight);
-                    CurSequenceAction = new MoveTo(pos, WalkDuration / 4d);
+                    CurSequenceAction = new MoveToSeqAction(pos, WalkDuration / 4d);
                     break;
                 case 1:
-                    CurSequenceAction = new WaitForAnimation(AnimationGlobals.SpikedTipHurtName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.SpikedTipHurtName);
                     break;
                 case 2:
-                    CurSequenceAction = new MoveAmount(new Vector2(0f, JumpHeight), JumpDuration / 2f);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration / 2f);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -171,7 +171,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.JumpMissName, true);
-                    CurSequenceAction = new WaitForAnimation(AnimationGlobals.JumpMissName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.JumpMissName);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

@@ -52,11 +52,11 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), MoveDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), MoveDuration);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName);
-                    CurSequenceAction = new Wait(0f);
+                    CurSequenceAction = new WaitSeqAction(0f);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -71,17 +71,17 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     StartActionCommandInput();
-                    CurSequenceAction = new WaitForCommand(10000d, actionCommand, CommandEnabled);
+                    CurSequenceAction = new WaitForCommandSeqAction(10000d, actionCommand, CommandEnabled);
                     break;
                 case 1:
-                    CurSequenceAction = new Wait(EggWait);
+                    CurSequenceAction = new WaitSeqAction(EggWait);
                     break;
                 default:
                     //Throw an egg, then wait
                     ThrowEgg();
                     EggsToThrow--;
 
-                    CurSequenceAction = new Wait(500d);
+                    CurSequenceAction = new WaitSeqAction(500d);
 
                     //If there are no more eggs to throw, switch to the end
                     if (EggsToThrow <= 0)
@@ -119,7 +119,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(User.BattlePosition, MoveDuration);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, MoveDuration);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName);

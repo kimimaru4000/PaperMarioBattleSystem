@@ -26,16 +26,16 @@ namespace PaperMarioBattleSystem
                     //NOTE: Mario moves up a tiny bit when he's in the front, I haven't confirmed how it works in the back yet
 
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(User.BattlePosition, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName);
-                    CurSequenceAction = new Wait(WaitTime);
+                    CurSequenceAction = new WaitSeqAction(WaitTime);
                     break;
                 case 2:
                     User.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarPrayName);
                     //NOTE: Show Star Spirit appearing and VFX and such
-                    CurSequenceAction = new Wait(WaitTime);
+                    CurSequenceAction = new WaitSeqAction(WaitTime);
                     break;
                 case 3:
                     User.PlayAnimation(AnimationGlobals.IdleName);

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace PaperMarioBattleSystem
 {
-    public class Wait : SequenceAction
+    public class WaitSeqAction : SequenceAction
     {
         protected double EndTime = 0f;
 
-        public Wait(double duration) : base(duration)
+        public WaitSeqAction(double duration) : base(duration)
         {
             
         }

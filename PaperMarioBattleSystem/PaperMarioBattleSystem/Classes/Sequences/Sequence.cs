@@ -326,13 +326,13 @@ namespace PaperMarioBattleSystem
                     User.PlayAnimation(AnimationGlobals.HurtName, true);
 
                     Vector2 pos = User.Position + new Vector2(moveX, -moveY);
-                    CurSequenceAction = new MoveTo(pos, time / 2d);
+                    CurSequenceAction = new MoveToSeqAction(pos, time / 2d);
                     break;
                 case 1:
-                    CurSequenceAction = new WaitForAnimation(AnimationGlobals.HurtName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.HurtName);
                     break;
                 case 2:
-                    CurSequenceAction = new MoveAmount(new Vector2(0f, moveY), time);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, moveY), time);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -492,7 +492,7 @@ namespace PaperMarioBattleSystem
             {
                 //Change the sequence action itself to cancel out anything that it will be waiting for to finish
                 //We don't end the previous sequence action because it has been interrupted by the new branch
-                CurSequenceAction = new Wait(0d);
+                CurSequenceAction = new WaitSeqAction(0d);
                 ChangeSequenceBranch(JumpToBranch);
 
                 ChangeJumpBranch(SequenceBranch.None);

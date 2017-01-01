@@ -58,16 +58,16 @@
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
-    <Compile Include="Classes\ActionCommands\ActionCommand.cs" />
-    <Compile Include="Classes\ActionCommands\FillBarCommand.cs" />
-    <Compile Include="Classes\ActionCommands\FillLightsCommand.cs" />
-    <Compile Include="Classes\ActionCommands\GuardCommand.cs" />
-    <Compile Include="Classes\ActionCommands\GulpCommand.cs" />
-    <Compile Include="Classes\ActionCommands\HammerCommand.cs" />
-    <Compile Include="Classes\ActionCommands\JumpCommand.cs" />
-    <Compile Include="Classes\ActionCommands\TimedLightCommand.cs" />
-    <Compile Include="Classes\ActionCommands\SuperguardCommand.cs" />
-    <Compile Include="Classes\ActionCommands\TidalWaveCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\ActionCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\FillBarCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\FillLightsCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\GuardCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\GulpCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\HammerCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\JumpCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\TimedLightCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\SuperguardCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\TidalWaveCommand.cs" />
     <Compile Include="Classes\Actions\BattleAction.cs" />
     <Compile Include="Classes\Actions\Defensive\DefensiveAction.cs" />
     <Compile Include="Classes\Actions\Defensive\Superguard.cs" />
@@ -104,6 +104,9 @@
     <Compile Include="Classes\BattleEntities\Kooper.cs" />
     <Compile Include="Classes\BattleEntities\SpikedGoomba.cs" />
     <Compile Include="Classes\BattleEntities\Supporting\BattleEntityProperties.cs" />
+    <Compile Include="Classes\BattleEvents\BattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\WaitBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\WaitForAnimBattleEvent.cs" />
     <Compile Include="Classes\Collectibles\Badges\AllOrNothingBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\Badge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ChargeBadge.cs" />
@@ -162,12 +165,12 @@
     <Compile Include="Classes\Menus\PartnerBattleMenu.cs" />
     <Compile Include="Classes\Menus\PlayerBattleMenu.cs" />
     <Compile Include="Classes\Menus\TargetSelectionMenu.cs" />
-    <Compile Include="Classes\SequenceActions\MoveAmount.cs" />
-    <Compile Include="Classes\SequenceActions\MoveTo.cs" />
+    <Compile Include="Classes\SequenceActions\MoveAmountSeqAction.cs" />
+    <Compile Include="Classes\SequenceActions\MoveToSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\SequenceAction.cs" />
-    <Compile Include="Classes\SequenceActions\Wait.cs" />
-    <Compile Include="Classes\SequenceActions\WaitForAnimation.cs" />
-    <Compile Include="Classes\SequenceActions\WaitForCommand.cs" />
+    <Compile Include="Classes\SequenceActions\WaitSeqAction.cs" />
+    <Compile Include="Classes\SequenceActions\WaitForAnimationSeqAction.cs" />
+    <Compile Include="Classes\SequenceActions\WaitForCommandSeqAction.cs" />
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />
     <Compile Include="Classes\Sequences\ChargeSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />

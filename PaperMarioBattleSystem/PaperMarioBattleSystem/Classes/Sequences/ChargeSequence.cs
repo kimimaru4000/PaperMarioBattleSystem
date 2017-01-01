@@ -29,13 +29,13 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    CurSequenceAction = new MoveTo(User.BattlePosition - new Vector2(10, 0), 100d);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition - new Vector2(10, 0), 100d);
                     break;
                 case 1:
-                    CurSequenceAction = new MoveTo(User.BattlePosition, 100d);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, 100d);
                     break;
                 case 2:
-                    CurSequenceAction = new MoveTo(User.BattlePosition + new Vector2(10, 0), 100d);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition + new Vector2(10, 0), 100d);
                     break;
                 case 3:
                     goto case 1;

@@ -12,12 +12,12 @@ namespace PaperMarioBattleSystem
     /// A SequenceAction that moves a BattleEntity a relative amount over the Duration.
     /// An example would be relative to the entity's current position, such as (50, -12)
     /// </summary>
-    public sealed class MoveAmount : MoveTo
+    public sealed class MoveAmountSeqAction : MoveToSeqAction
     {
         private Vector2 AmountMoved = Vector2.Zero;
         private Vector2 OrigPos = Vector2.Zero;
 
-        public MoveAmount(Vector2 amount, double duration) : base(duration)
+        public MoveAmountSeqAction(Vector2 amount, double duration) : base(duration)
         {
             MoveDest = amount;
         }

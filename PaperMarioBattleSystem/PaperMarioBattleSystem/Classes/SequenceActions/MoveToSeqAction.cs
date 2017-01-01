@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// A SequenceAction that moves a BattleEntity to a desired location over the Duration.
     /// An example would be a position on the screen, such as (350, 400)
     /// </summary>
-    public class MoveTo : SequenceAction
+    public class MoveToSeqAction : SequenceAction
     {
         protected Vector2 MoveDest = Vector2.Zero;
         protected Vector2 MoveDir = Vector2.Zero;
@@ -26,17 +26,17 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public MoveTo(Vector2 destination, double duration) : base(duration)
+        public MoveToSeqAction(Vector2 destination, double duration) : base(duration)
         {
             MoveDest = destination;
         }
 
-        public MoveTo(BattleEntity entity, Vector2 destination, double duration) : base(entity, duration)
+        public MoveToSeqAction(BattleEntity entity, Vector2 destination, double duration) : base(entity, duration)
         {
             MoveDest = destination;
         }
 
-        protected MoveTo(double duration) : base(duration)
+        protected MoveToSeqAction(double duration) : base(duration)
         {
 
         }

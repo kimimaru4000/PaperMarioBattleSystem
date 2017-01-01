@@ -29,11 +29,11 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName, true);
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), WalkDuration);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.GetItemName, false);
-                    CurSequenceAction = new Wait(WaitDuration);
+                    CurSequenceAction = new WaitSeqAction(WaitDuration);
                     break;
                 case 2:
                     User.PlayAnimation(AnimationGlobals.IdleName);
@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(User.BattlePosition, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName);
@@ -80,14 +80,14 @@ namespace PaperMarioBattleSystem
                     if (Action.Heals == true)
                     {
                         PerformHeal(Action.HealingInfo.Value, EntitiesAffected);
-                        CurSequenceAction = new Wait(WaitDuration);
+                        CurSequenceAction = new WaitSeqAction(WaitDuration);
                     }
                     break;
                 case 1:
                     if (Action.DealsDamage == true)
                     {
                         AttemptDamage(BaseDamage, EntitiesAffected, true);
-                        CurSequenceAction = new Wait(WaitDuration);
+                        CurSequenceAction = new WaitSeqAction(WaitDuration);
                     }
                     break;
                 case 2:

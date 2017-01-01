@@ -10,16 +10,16 @@ namespace PaperMarioBattleSystem
     /// A SequenceAction that waits for an animation to finish before proceeding.
     /// Do not use this for animations that loop infinitely, as this will never end
     /// </summary>
-    public class WaitForAnimation : SequenceAction
+    public class WaitForAnimationSeqAction : SequenceAction
     {
         protected Animation Anim = null;
 
-        public WaitForAnimation(string animName)
+        public WaitForAnimationSeqAction(string animName)
         {
             Anim = Entity.GetAnimation(animName);
         }
 
-        public WaitForAnimation(Animation anim)
+        public WaitForAnimationSeqAction(Animation anim)
         {
             Anim = anim;
         }

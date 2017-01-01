@@ -44,7 +44,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetMario()), WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetMario()), WalkDuration);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -60,7 +60,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.PlayAnimation(AnimationGlobals.KooperBattleAnimations.ShellSpinName, true);
                     StartActionCommandInput();
-                    CurSequenceAction = new WaitForCommand(1500d, actionCommand, CommandEnabled);
+                    CurSequenceAction = new WaitForCommandSeqAction(1500d, actionCommand, CommandEnabled);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -74,7 +74,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.GetAnimation(AnimationGlobals.KooperBattleAnimations.ShellSpinName).SetSpeed(3f);
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), SpinMoveDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), SpinMoveDuration);
                     break;
                 case 1:
                     AttemptDamage(BaseDamage * DamageMod, EntitiesAffected[0], false);
@@ -92,7 +92,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.GetAnimation(AnimationGlobals.KooperBattleAnimations.ShellSpinName).SetSpeed(2f);
-                    CurSequenceAction = new MoveTo(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), SpinMoveDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), SpinMoveDuration);
                     break;
                 case 1:
                     AttemptDamage(BaseDamage * DamageMod, EntitiesAffected[0], false);
@@ -110,7 +110,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.PlayAnimation(AnimationGlobals.RunningName, true);
-                    CurSequenceAction = new MoveTo(User.BattlePosition, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     User.PlayAnimation(AnimationGlobals.IdleName, true);

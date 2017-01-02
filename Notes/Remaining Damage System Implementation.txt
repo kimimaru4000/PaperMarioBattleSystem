@@ -95,3 +95,8 @@ Update (9/10/16)
 4 is finished.
 
 1 is left, which involves implementing the Simplifier and Unsimplifier Badges.
+
+Update (1/1/17)
+---------------
+1 is still not fully implemented, but I realized it has nothing to do with the damage system itself,
+so it's not needed. It's more appropriate for the Star Power system.

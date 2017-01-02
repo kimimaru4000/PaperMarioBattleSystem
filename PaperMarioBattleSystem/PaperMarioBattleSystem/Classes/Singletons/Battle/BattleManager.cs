@@ -114,6 +114,21 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private bool EnemySpotsAvailable => (EnemiesAlive < MaxEnemies);
 
+        #region Battle Events
+
+        /// <summary>
+        /// The current Battle Events taking place. These are completed before the next BattleEntity's turn takes place.
+        /// </summary>
+        public readonly Dictionary<int, BattleEvent> BattleEvents = new Dictionary<int, BattleEvent>();
+
+        /// <summary>
+        /// The current, highest priority of Battle Events taking place.
+        /// Once these are all done, the next highest priority of Battle Events is found and takes place.
+        /// </summary>
+        public int CurHighestPriority { get; private set; } = 0;
+
+        #endregion
+
         private BattleManager()
         {
             SoundManager.Instance.SoundVolume = 0f;
@@ -960,6 +975,28 @@ namespace PaperMarioBattleSystem
                 return 1;
 
             return 0;
+        }
+
+        #endregion
+
+        #region Battle Event Methods
+
+        /// <summary>
+        /// Adds a Battle Event to occur.
+        /// </summary>
+        /// <param name="priority">The priority the Battle Event has.</param>
+        /// <param name="battleEvent">The Battle Event to add.</param>
+        public void AddBattleEvent(int priority, BattleEvent battleEvent)
+        {
+            //NOTE: Complete this
+        }
+
+        /// <summary>
+        /// Updates the current set of Battle Events.
+        /// </summary>
+        private void UpdateBattleEvents()
+        {
+            //NOTE: Complete this
         }
 
         #endregion

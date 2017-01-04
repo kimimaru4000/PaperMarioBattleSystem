@@ -18,6 +18,8 @@ namespace PaperMarioBattleSystem
             Alignment = StatusAlignments.Positive;
 
             Duration = duration;
+
+            AfflictedMessage = "Invisible! Attacks will now miss!";
         }
 
         protected override void OnAfflict()

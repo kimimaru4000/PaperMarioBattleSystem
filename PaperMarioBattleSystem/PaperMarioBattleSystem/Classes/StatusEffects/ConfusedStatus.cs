@@ -32,6 +32,8 @@ namespace PaperMarioBattleSystem
             Alignment = StatusAlignments.Negative;
 
             Duration = duration;
+
+            AfflictedMessage = "Confused! Movement will be hindered for a while!";
         }
 
         protected override void OnAfflict()

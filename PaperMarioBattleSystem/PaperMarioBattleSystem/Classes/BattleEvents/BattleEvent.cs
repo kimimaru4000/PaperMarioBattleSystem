@@ -17,12 +17,22 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The Priority of the Battle Event.
         /// </summary>
-        public int Priority { get; protected set; } = 0;
+        //public int Priority { get; protected set; } = 0;
+
+        /// <summary>
+        /// Whether the Battle Event started or not.
+        /// </summary>
+        protected bool Started { get; private set; } = false;
 
         /// <summary>
         /// Whether the Battle Event is done or not.
         /// </summary>
         protected bool Done { get; private set; } = false;
+
+        /// <summary>
+        /// Tells if the Battle Event has started.
+        /// </summary>
+        public bool HasStarted => Started;
 
         /// <summary>
         /// Tells if the Battle Event is finished.
@@ -34,9 +44,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public BattleEntity[] Entities { get; protected set; } = null;
 
-        protected BattleEvent(int priority)
+        protected BattleEvent()//int priority)
         {
-            Priority = priority;
+            //Priority = priority;
         }
 
         /// <summary>
@@ -44,6 +54,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void Start()
         {
+            Started = true;
+
             OnStart();
         }
 

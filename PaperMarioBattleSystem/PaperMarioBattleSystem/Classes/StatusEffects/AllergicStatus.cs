@@ -18,6 +18,8 @@ namespace PaperMarioBattleSystem
             Alignment = StatusAlignments.Neutral;
 
             Duration = duration;
+
+            AfflictedMessage = "Status hasn't changed!";
         }
 
         protected override void OnAfflict()

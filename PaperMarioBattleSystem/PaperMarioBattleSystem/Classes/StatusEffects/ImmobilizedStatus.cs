@@ -21,6 +21,8 @@ namespace PaperMarioBattleSystem
             Alignment = StatusAlignments.Negative;
 
             Duration = duration;
+
+            AfflictedMessage = "Immobilized! Movement will be impossible for a while!";
         }
 
         protected override void OnAfflict()

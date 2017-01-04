@@ -119,13 +119,18 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The current Battle Events taking place. These are completed before the next BattleEntity's turn takes place.
         /// </summary>
-        public readonly Dictionary<int, BattleEvent> BattleEvents = new Dictionary<int, BattleEvent>();
+        public readonly Dictionary<int, List<BattleEvent>> BattleEvents = new Dictionary<int, List<BattleEvent>>();
 
         /// <summary>
         /// The current, highest priority of Battle Events taking place.
         /// Once these are all done, the next highest priority of Battle Events is found and takes place.
         /// </summary>
         public int CurHighestPriority { get; private set; } = 0;
+
+        /// <summary>
+        /// Tells if there are Battle Events.
+        /// </summary>
+        public bool HasBattleEvents => (BattleEvents.Count > 0);
 
         #endregion
 
@@ -181,7 +186,14 @@ namespace PaperMarioBattleSystem
             //If a turn just ended, update the current state
             if (State == BattleState.TurnEnd)
             {
-                TurnStart();
+                if (HasBattleEvents == false)
+                {
+                    TurnStart();
+                }
+                else
+                {
+                    UpdateBattleEvents();
+                }
             }
 
             if (State == BattleState.Turn)
@@ -984,11 +996,34 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Adds a Battle Event to occur.
         /// </summary>
-        /// <param name="priority">The priority the Battle Event has.</param>
+        /// <param name="priority">The priority the Battle Event has. Must be greater than or equal to 0.</param>
         /// <param name="battleEvent">The Battle Event to add.</param>
         public void AddBattleEvent(int priority, BattleEvent battleEvent)
         {
-            //NOTE: Complete this
+            if (priority < 0)
+            {
+                Debug.LogError($"Not adding BattleEvent because the priority's value is {priority} which is less than 0!");
+                return;
+            }
+
+            if (battleEvent == null)
+            {
+                Debug.LogError($"Trying to add null BattleEvent with priority of {priority}! Not adding BattleEvent");
+                return;
+            }
+
+            //Set the current highest priority to the priority if there are no Battle Events
+            if (HasBattleEvents == false)
+            {
+                CurHighestPriority = priority;
+            }
+
+            if (BattleEvents.ContainsKey(priority) == false)
+            {
+                BattleEvents.Add(priority, new List<BattleEvent>());
+            }
+
+            BattleEvents[priority].Add(battleEvent);
         }
 
         /// <summary>
@@ -996,7 +1031,56 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void UpdateBattleEvents()
         {
-            //NOTE: Complete this
+            //There are no more BattleEvents to update
+            if (HasBattleEvents == false)
+            {
+                return;
+            }
+
+            //Update all Battle Events
+            for (int i = 0; i < BattleEvents[CurHighestPriority].Count; i++)
+            {
+                BattleEvent battleEvent = BattleEvents[CurHighestPriority][i];
+
+                //Start the Battle Event if it hasn't started already
+                if (battleEvent.HasStarted == false)
+                {
+                    battleEvent.Start();
+                }
+
+                battleEvent.Update();
+                if (battleEvent.IsDone == true)
+                {
+                    //Remove the BattleEvent if it's finished
+                    BattleEvents[CurHighestPriority].RemoveAt(i);
+                    i--;
+                }
+            }
+
+            //If we're done with all Battle Events with this priority, remove the priority and find the next highest priority to update
+            if (BattleEvents[CurHighestPriority].Count == 0)
+            {
+                BattleEvents.Remove(CurHighestPriority);
+                CurHighestPriority = FindNextHighestBattleEventPriority();
+            }
+        }
+
+        /// <summary>
+        /// Finds the next highest priority for the set of Battle Events to update.
+        /// </summary>
+        /// <returns>-1 if there are no Battle Events to update, otherwise the highest priority value for the Battle Events to update.</returns>
+        private int FindNextHighestBattleEventPriority()
+        {
+            if (HasBattleEvents == false) return -1;
+
+            int highestPriority = -1;
+
+            foreach (int priority in BattleEvents.Keys)
+            {
+                if (priority > highestPriority) highestPriority = priority;
+            }
+
+            return highestPriority;
         }
 
         #endregion

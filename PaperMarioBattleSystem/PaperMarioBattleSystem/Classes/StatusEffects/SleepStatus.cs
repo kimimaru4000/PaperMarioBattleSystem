@@ -16,6 +16,8 @@ namespace PaperMarioBattleSystem
         public SleepStatus(int duration) : base(duration)
         {
             StatusType = Enumerations.StatusTypes.Sleep;
+
+            AfflictedMessage = "Sleepy! It'll take time for the sleepiness to wear off!";
         }
         
         public sealed override StatusEffect Copy()

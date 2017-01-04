@@ -50,3 +50,18 @@ public void UpdateBattleEvents()
 	//If no more events for priority
 	//Get next highest priority
 }
+
+Update (1/3/17)
+---------------
+Battle Events can only occur if the BattleState is TurnEnd. The only exception to this, that I can find so far, is taking damage and Battle Messages
+in a specific case:
+If the audience throws something at Mario or his Partner, it'll start a damage or Battle Message event if the item is negative or positive
+respectively, bring down their menus when the event starts, then bring the menus back up when the event is done.
+I'll have to double-check to see if there any other instances of events occurring at different times.
+
+This wasn't specified previously, but if a higher priority Battle Event is added while the Battle Events are being performed, the current
+priority finishes before moving on.
+
+Furthermore, BattleEvents themselves may need to have their priorities defined. I'll start a first-pass implementation to see how the current
+design works then modify it as needed, as doing that will constrain each Battle Event to a priority. Let's not allow priorities less than 0 to
+keep things simple.

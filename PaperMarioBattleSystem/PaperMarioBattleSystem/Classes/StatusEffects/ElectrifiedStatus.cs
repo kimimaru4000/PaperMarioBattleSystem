@@ -20,6 +20,8 @@ namespace PaperMarioBattleSystem
             Alignment = StatusAlignments.Negative;
 
             Duration = duration;
+
+            AfflictedMessage = "Electrified! Enemies that make contact will get hurt!";
         }
 
         protected override void OnAfflict()

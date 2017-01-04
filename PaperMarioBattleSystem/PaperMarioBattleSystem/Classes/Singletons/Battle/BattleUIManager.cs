@@ -34,6 +34,8 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        private List<UIElement> BattleUIElements = new List<UIElement>();
+
         private Stack<BattleMenu> BattleMenus = null;
 
         private TargetSelectionMenu SelectionMenu = null;
@@ -97,9 +99,34 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Battle UI Elements
+
+        public void AddUIElement(UIElement uiElement)
+        {
+            if (uiElement == null)
+            {
+                Debug.LogError($"{nameof(uiElement)} is null and won't be added to the list");
+                return;
+            }
+
+            BattleUIElements.Add(uiElement);
+        }
+
+        public bool RemoveUIElement(UIElement uiElement)
+        {
+            return BattleUIElements.Remove(uiElement);
+        }
+
+        #endregion
+
         public void Update()
         {
             TopMenu?.Update();
+
+            for (int i = 0; i < BattleUIElements.Count; i++)
+            {
+                BattleUIElements[i].Update();
+            }
         }
 
         public void Draw()
@@ -107,6 +134,11 @@ namespace PaperMarioBattleSystem
             battleHUD.Draw();
 
             TopMenu?.Draw();
+
+            for (int i = 0; i < BattleUIElements.Count; i++)
+            {
+                BattleUIElements[i].Draw();
+            }
         }
     }
 }

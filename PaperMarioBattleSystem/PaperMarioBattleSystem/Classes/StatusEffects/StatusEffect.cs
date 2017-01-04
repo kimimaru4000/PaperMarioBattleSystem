@@ -110,6 +110,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private bool Ended = false;
 
+        /// <summary>
+        /// The Battle Message shown when a BattleEntity is afflicted with the StatusEffect.
+        /// </summary>
+        public string AfflictedMessage { get; protected set; } = string.Empty;
+
         private bool IsInfinite => (Duration <= InfiniteDuration);
         public bool IsFinished => (IsInfinite == false && TurnsPassed >= TotalDuration);
 
@@ -175,6 +180,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void Afflict()
         {
+            //Show a battle message when the status is afflicted
+            BattleManager.Instance.AddBattleEvent(5, new MessageBattleEvent(AfflictedMessage, 2000d));
+
             OnAfflict();
         }
 

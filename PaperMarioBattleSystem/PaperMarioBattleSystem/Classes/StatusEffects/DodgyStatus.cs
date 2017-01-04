@@ -18,6 +18,8 @@ namespace PaperMarioBattleSystem
             Alignment = StatusAlignments.Positive;
 
             Duration = duration;
+
+            AfflictedMessage = "Dodgy! Some attacks will automatically be dodged!";
         }
 
         protected override void OnAfflict()

@@ -18,6 +18,8 @@ namespace PaperMarioBattleSystem
             Alignment = StatusAlignments.Negative;
 
             Duration = duration;
+
+            AfflictedMessage = "Burned! The fire will steadily do damage!";
         }
 
         protected override void OnAfflict()

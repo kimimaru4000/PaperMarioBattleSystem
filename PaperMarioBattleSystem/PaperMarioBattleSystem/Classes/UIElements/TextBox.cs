@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A textbox that shows text
     /// </summary>
-    public class TextBox
+    public class TextBox : UIElement
     {
         /// <summary>
         /// The position of the center of the textbox
@@ -75,12 +75,23 @@ namespace PaperMarioBattleSystem
             Text = text;
         }
 
-        public void Update()
+        public void ScaleToText(SpriteFont font)
+        {
+            ScaleToText(font, Text);
+        }
+
+        public void ScaleToText(SpriteFont font, string text)
+        {
+            //Measure the size of the string with the font and add some padding
+            SetSize(font.MeasureString(text) + new Vector2(10, 10));
+        }
+
+        public override void Update()
         {
 
         }
 
-        public void Draw()
+        public override void Draw()
         {
             Vector2 drawPos = Position - Size.HalveInt();
             SpriteRenderer.Instance.Draw(Image, drawPos, null, BoxColor, 0f, Vector2.Zero, Size, false, Layer, true);

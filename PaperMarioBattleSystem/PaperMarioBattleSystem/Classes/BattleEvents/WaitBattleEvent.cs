@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected double EndTime = 0d;
 
-        public WaitBattleEvent(double waitDuration) : base(0)
+        public WaitBattleEvent(double waitDuration)// : base(0)
         {
             WaitDuration = waitDuration;
         }

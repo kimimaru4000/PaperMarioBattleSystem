@@ -15,6 +15,8 @@ namespace PaperMarioBattleSystem.Classes.StatusEffects
         public HugeStatus(int duration) : base(2, duration)
         {
             StatusType = Enumerations.StatusTypes.Huge;
+
+            AfflictedMessage = "Huge! Attack power is now boosted!";
         }
 
         public override StatusEffect Copy()

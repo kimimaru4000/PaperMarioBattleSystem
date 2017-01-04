@@ -105,6 +105,7 @@
     <Compile Include="Classes\BattleEntities\SpikedGoomba.cs" />
     <Compile Include="Classes\BattleEntities\Supporting\BattleEntityProperties.cs" />
     <Compile Include="Classes\BattleEvents\BattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\MessageBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitForAnimBattleEvent.cs" />
     <Compile Include="Classes\Collectibles\Badges\AllOrNothingBadge.cs" />
@@ -232,6 +233,7 @@
     <Compile Include="Classes\UIElements\BattleHUD.cs" />
     <Compile Include="Classes\UIElements\IDisableable.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />
+    <Compile Include="Classes\UIElements\UIElement.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

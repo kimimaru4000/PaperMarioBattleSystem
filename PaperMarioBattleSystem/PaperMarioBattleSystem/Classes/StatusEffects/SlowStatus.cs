@@ -21,6 +21,8 @@ namespace PaperMarioBattleSystem
             Alignment = StatusAlignments.Negative;
 
             Duration = duration;
+
+            AfflictedMessage = "Less chances to attack are now available!";
         }
 
         protected override void OnAfflict()

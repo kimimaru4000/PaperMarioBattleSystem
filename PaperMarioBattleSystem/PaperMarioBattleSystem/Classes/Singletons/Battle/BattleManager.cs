@@ -513,7 +513,7 @@ namespace PaperMarioBattleSystem
                 int nextEnemy = -1;
                 for (int i = EnemyTurn; i < Enemies.Count; i++)
                 {
-                    if (Enemies[i] != null && Enemies[i].UsedTurn == false)
+                    if (Enemies[i] != null && Enemies[i].UsedTurn == false && Enemies[i].IsDead == false)
                     {
                         nextEnemy = EnemyTurn = i;
                         EntityTurn = Enemies[nextEnemy];

@@ -34,6 +34,12 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        /// <summary>
+        /// Tells whether the Battle Menus are suppressed or not.
+        /// When suppressed, they won't update or draw.
+        /// </summary>
+        private bool SuppressBattleMenus = false;
+
         private List<UIElement> BattleUIElements = new List<UIElement>();
 
         private Stack<BattleMenu> BattleMenus = null;
@@ -97,6 +103,16 @@ namespace PaperMarioBattleSystem
             BattleMenus.Clear();
         }
 
+        public void SuppressMenus()
+        {
+            SuppressBattleMenus = true;
+        }
+
+        public void UnsuppressMenus()
+        {
+            SuppressBattleMenus = false;
+        }
+
         #endregion
 
         #region Battle UI Elements
@@ -121,7 +137,10 @@ namespace PaperMarioBattleSystem
 
         public void Update()
         {
-            TopMenu?.Update();
+            if (SuppressBattleMenus == false)
+            {
+                TopMenu?.Update();
+            }
 
             for (int i = 0; i < BattleUIElements.Count; i++)
             {
@@ -133,7 +152,10 @@ namespace PaperMarioBattleSystem
         {
             battleHUD.Draw();
 
-            TopMenu?.Draw();
+            if (SuppressBattleMenus == false)
+            {
+                TopMenu?.Draw();
+            }
 
             for (int i = 0; i < BattleUIElements.Count; i++)
             {

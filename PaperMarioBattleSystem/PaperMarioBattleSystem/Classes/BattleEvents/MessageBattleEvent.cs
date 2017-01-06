@@ -28,6 +28,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnStart();
 
+            BattleUIManager.Instance.SuppressMenus();
             BattleUIManager.Instance.AddUIElement(BattleTextBox);
         }
 
@@ -35,6 +36,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnEnd();
 
+            BattleUIManager.Instance.UnsuppressMenus();
             BattleUIManager.Instance.RemoveUIElement(BattleTextBox);
         }
     }

@@ -131,13 +131,6 @@ namespace PaperMarioBattleSystem
             int damage = damageResult.TotalDamage;
             bool piercing = damageResult.Piercing;
             StatusEffect[] statusesInflicted = damageResult.StatusesInflicted;
-            
-            //Check for a damage received multiplier on the entity. We need to check if it has one since the default value is 0
-            //NOTE: Don't do this here, do it in Interactions according to the order in the comments above (Steps 5/6)
-            //if (EntityProperties.HasMiscProperty(MiscProperty.DamageReceivedMultiplier) == true)
-            //{
-            //    damage *= EntityProperties.GetMiscProperty(MiscProperty.DamageReceivedMultiplier).IntValue;
-            //}
 
             //Handle the elemental interaction results
             ElementInteractionResult elementResult = damageResult.ElementResult;
@@ -180,8 +173,8 @@ namespace PaperMarioBattleSystem
                 HealHP(damage);
             }
 
-            //Inflict Statuses
-            if (statusesInflicted != null)
+            //Inflict Statuses if the entity isn't dead
+            if (HealthState != HealthStates.Dead && statusesInflicted != null)
             {
                 for (int i = 0; i < statusesInflicted.Length; i++)
                 {

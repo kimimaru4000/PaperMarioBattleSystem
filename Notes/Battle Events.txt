@@ -65,3 +65,18 @@ priority finishes before moving on.
 Furthermore, BattleEvents themselves may need to have their priorities defined. I'll start a first-pass implementation to see how the current
 design works then modify it as needed, as doing that will constrain each Battle Event to a priority. Let's not allow priorities less than 0 to
 keep things simple.
+
+Update (1/5/17)
+---------------
+I found another exception. If you try to select a menu option that's not available, such as No Items, or Run Away when you can't,
+the Battle Message shows up and interrupts the menu. The menu then goes back to how it was before the interruption.
+
+We can make a way to suppress all BattleMenus so they don't show up or update. That alone would allow the
+Battle Messages to preserve the menu, but we still need to have BattleEvents work when it's an entity's turn.
+
+For now I think each BattleEvent should designate the BattleStates it takes effect on, and we'll have to update FindNextHighestBattleEventPriority()
+to check the state as well.
+
+This covers most cases, but I'm not sure if it covers or works for all yet.
+
+To fully understand this system, I'll have to do even more research and testing.

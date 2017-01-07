@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using static PaperMarioBattleSystem.Enumerations;
+using static PaperMarioBattleSystem.BattleGlobals;
 
 namespace PaperMarioBattleSystem
 {
@@ -57,6 +58,11 @@ namespace PaperMarioBattleSystem
         /// How many phase cycles (Player and Enemy turns) passed
         /// </summary>
         public int PhaseCycleCount { get; private set; } = 0;
+
+        /// <summary>
+        /// The BattlePhase the battle starts on.
+        /// </summary>
+        //private const BattlePhase StartingPhase = BattlePhase.Player;
 
         /// <summary>
         /// Unless scripted, the battle always starts on the player phase, with Mario always going first
@@ -122,6 +128,12 @@ namespace PaperMarioBattleSystem
         public readonly Dictionary<int, List<BattleEvent>> BattleEvents = new Dictionary<int, List<BattleEvent>>();
 
         /// <summary>
+        /// The pending Battle Events waiting to be added.
+        /// They are added once the Battle State matches the state they should be added in.
+        /// </summary>
+        public readonly List<PendingBattleEventHolder> PendingBattleEvents = new List<PendingBattleEventHolder>();
+
+        /// <summary>
         /// The current, highest priority of Battle Events taking place.
         /// Once these are all done, the next highest priority of Battle Events is found and takes place.
         /// </summary>
@@ -183,17 +195,18 @@ namespace PaperMarioBattleSystem
 
         public void Update()
         {
+            //Update battle events if there are any
+            if (HasBattleEvents == true)
+            {
+                UpdateBattleEvents();
+            }
+
             //If a turn just ended, update the current state
             if (State == BattleState.TurnEnd)
             {
+                //Don't start the next turn until all Battle Events are finished
                 if (HasBattleEvents == false)
-                {
                     TurnStart();
-                }
-                else
-                {
-                    UpdateBattleEvents();
-                }
             }
 
             if (State == BattleState.Turn)
@@ -228,7 +241,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void StartBattle()
         {
-            State = BattleState.TurnEnd;
+            ChangeBattleState(BattleState.TurnEnd);
             SwitchPhase(BattlePhase.Player);
         }
 
@@ -237,7 +250,18 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void EndBattle()
         {
-            State = BattleState.Done;
+            ChangeBattleState(BattleState.Done);
+        }
+
+        /// <summary>
+        /// Changes the current state of the battle.
+        /// </summary>
+        /// <param name="state">The new BattleState the battle is in.</param>
+        private void ChangeBattleState(BattleState state)
+        {
+            State = state;
+
+            AddPendingEvents();
         }
 
         private void SwitchPhase(BattlePhase phase)
@@ -410,7 +434,7 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            State = BattleState.Turn;
+            ChangeBattleState(BattleState.Turn);
 
             EntityTurn.OnTurnStart();
         }
@@ -439,7 +463,7 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            State = BattleState.TurnEnd;
+            ChangeBattleState(BattleState.TurnEnd);
 
             //Find the next entity to go
             FindNextEntityTurn();
@@ -453,12 +477,12 @@ namespace PaperMarioBattleSystem
         {
             if (Mario.IsDead == true)
             {
-                State = BattleState.Done;
+                ChangeBattleState(BattleState.Done);
                 Debug.Log("GAME OVER");
             }
             else if (EnemiesAlive <= 0)
             {
-                State = BattleState.Done;
+                ChangeBattleState(BattleState.Done);
                 Mario.PlayAnimation(AnimationGlobals.VictoryName);
                 Partner.PlayAnimation(AnimationGlobals.VictoryName);
                 Debug.Log("VICTORY");
@@ -994,11 +1018,53 @@ namespace PaperMarioBattleSystem
         #region Battle Event Methods
 
         /// <summary>
+        /// Places a Battle Event on the pending list.
+        /// <para>If the current BattleState matches a BattleState the Battle Event takes effect in, it will take effect immediately.
+        /// Otherwise, it will wait and take effect once the current BattleState matches.</para>
+        /// </summary>
+        /// <param name="priority">The priority the Battle Event has. Must be greater than or equal to 0.</param>
+        /// <param name="battleStates">The BattleStates the Battle Event takes effect in.</param>
+        /// <param name="battleEvent">The Battle Event to add.</param>
+        public void QueueBattleEvent(int priority, BattleState[] battleStates, BattleEvent battleEvent)
+        {
+            if (priority < 0)
+            {
+                Debug.LogError($"Not queue BattleEvent because the priority's value is {priority} which is less than 0!");
+                return;
+            }
+
+            if (battleEvent == null)
+            {
+                Debug.LogError($"Trying to queue null BattleEvent with priority of {priority}! Not adding BattleEvent");
+                return;
+            }
+
+            if (battleStates == null || battleStates.Length == 0)
+            {
+                Debug.LogError($"BattleEvent {battleEvent} with Priority {priority} was queued, but no BattleStates were specified. Not queueing.");
+                return;
+            }
+
+            //Add the Battle Event directly if the current state is the state to add it in
+            if (battleStates.Contains(State) == true)
+            {
+                AddBattleEvent(priority, battleEvent);
+            }
+            //Otherwise put it in the pending list
+            else
+            {
+                PendingBattleEvents.Add(new PendingBattleEventHolder(priority, battleStates, battleEvent));
+
+                Debug.Log($"Queued BattleEvent {battleEvent} with Priority {priority}");
+            }
+        }
+
+        /// <summary>
         /// Adds a Battle Event to occur.
         /// </summary>
         /// <param name="priority">The priority the Battle Event has. Must be greater than or equal to 0.</param>
         /// <param name="battleEvent">The Battle Event to add.</param>
-        public void AddBattleEvent(int priority, BattleEvent battleEvent)
+        private void AddBattleEvent(int priority, BattleEvent battleEvent)
         {
             if (priority < 0)
             {
@@ -1024,6 +1090,8 @@ namespace PaperMarioBattleSystem
             }
 
             BattleEvents[priority].Add(battleEvent);
+
+            Debug.Log($"Added BattleEvent {battleEvent} with Priority {priority} to take effect");
         }
 
         /// <summary>
@@ -1081,6 +1149,24 @@ namespace PaperMarioBattleSystem
             }
 
             return highestPriority;
+        }
+
+        /// <summary>
+        /// Adds pending Battle Events if the BattleState is the state matches the state they're added in.
+        /// </summary>
+        private void AddPendingEvents()
+        {
+            for (int i = 0; i < PendingBattleEvents.Count; i++)
+            {
+                //Check if the states match
+                if (PendingBattleEvents[i].States.Contains(State))
+                {
+                    //Add the event and remove it from the pending list
+                    AddBattleEvent(PendingBattleEvents[i].Priority, PendingBattleEvents[i].PendingBattleEvent);
+                    PendingBattleEvents.RemoveAt(i);
+                    i--;
+                }
+            }
         }
 
         #endregion

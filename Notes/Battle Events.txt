@@ -9,8 +9,9 @@ Examples in the PM games:
 -Dialogue from characters during event battles
 -Enemies running after using a Fright Jar/Fright Mask
 -Status Effects taking effect at the start of the phase cycle, such as Burn and Frozen
--Status Effects completing at the start of the phase cycle (character jumps up)
--Battle messages like for Burn ("Burned! The fire will steadily do damage!") or not being able to run away ("Can't flee this fight!")
+-Status Effects completing at the start of the phase cycle (character jumps up with accompanying sound effect)
+-Battle messages, such as ones for Burn ("Burned! The fire will steadily do damage!") or not being able to run away ("Can't flee this fight!")
+-All Stage-related events and hitting items away from Audience members
 
 Details/Thoughts
 ----------------
@@ -80,3 +81,16 @@ to check the state as well.
 This covers most cases, but I'm not sure if it covers or works for all yet.
 
 To fully understand this system, I'll have to do even more research and testing.
+
+Update (1/6/17)
+---------------
+To implement the above, I thought of having a new struct that accepts a BattleEvent, its Priority, and the BattleState it should take effect in.
+
+We can have a List of this struct and look through it to add any pending BattleEvents whenever we change BattleState. If the BattleState matches,
+add it to the Dictionary. A list isn't the most efficient thing, but I'm trying to get a feel for this system and get it working first.
+
+Update: I implemented it like this and it looks good, but instead it should be an array of BattleStates, as some Battle Events can occur on both.
+If the array is null or empty, don't add it at all since specifying the state it appears in is required.
+
+If this works out well, the next step would be figuring out how to prevent multiple of the same BattleEvent from being added at once. For
+example, if you put two enemies to sleep with a Sleepy Sheep, it'll queue up and add two Battle Messages with the same contents.

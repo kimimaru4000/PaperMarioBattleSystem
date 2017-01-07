@@ -181,7 +181,7 @@ namespace PaperMarioBattleSystem
         public void Afflict()
         {
             //Show a battle message when the status is afflicted
-            BattleManager.Instance.AddBattleEvent(5, new MessageBattleEvent(AfflictedMessage, 2000d));
+            BattleManager.Instance.QueueBattleEvent(5, new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(AfflictedMessage, 2000d));
 
             OnAfflict();
         }

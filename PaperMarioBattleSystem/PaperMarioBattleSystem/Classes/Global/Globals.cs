@@ -820,6 +820,24 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Holds a pending Battle Event with its priority and the Battle States it should be added in.
+        /// The fields in this struct are immutable.
+        /// </summary>
+        public struct PendingBattleEventHolder
+        {
+            public int Priority { get; private set; }
+            public BattleManager.BattleState[] States { get; private set; }
+            public BattleEvent PendingBattleEvent { get; private set; }
+
+            public PendingBattleEventHolder(int priority, BattleManager.BattleState[] battleStates, BattleEvent battleEvent)
+            {
+                Priority = priority;
+                States = battleStates;
+                PendingBattleEvent = battleEvent;
+            }
+        }
+
         #endregion
     }
 

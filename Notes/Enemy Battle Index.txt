@@ -1,0 +1,45 @@
+Enemy Battle Index (1/6/17)
+---------------------------
+In the PM games, there is support for many enemy slots, with more being added dynamically through moves (Ex. Koopatrol, the Yuxes).
+
+Right now our system supports a number of enemies specified by the capacity of the Enemies list. It acts as an array, nulling out
+old enemies and putting new enemies in the same index. This will need to be changed to be more dynamic, but I won't work on this yet.
+
+Instead I'm just going to explain my findings.
+
+Observations
+------------
+When testing enemy poison animations in TTYD, I have cheats for poisoning enemies based on their index. One time I
+encountered Koopatrol and a Hammer Bro. As expected, the first index correlated to the first Koopatrol. I didn't attack that turn.
+The Koopatrol summoned another Koopatrol and I once again used the cheat, but it poisoned the second Koopatrol from the left.
+I tried poisoning the third index, and it poisoned the new Koopatrol.
+
+This means that when a new enemy is spawned, regardless of its battle position, its Battle Index is 1 higher than the previous highest index.
+
+More Observations
+-----------------
+I killed the Hammer Bro, who was index 2. The same Koopatrol summoned another Koopatrol behind him. The new Koopatrol has index 2.
+
+So this is interesting...he preserved the index. Let's see what happens when we kill index 1.
+
+We killed index 1, and using the cheat does nothing. The other 2 preserved their indices.
+
+...But wait. I used Confusion on Index 1 and swapped partners, and now my Partner is Confused? Still trying to figure this out.
+
+I killed index 3, the first Koopatrol that was summoned. Index 2 (the second Koopatrol summoned) summoned a third one in front of him.
+
+Inflicting poison on index 1 poisoned my Partner yet again.
+
+Poison on index 2 poisoned the second Koopatrol, as expected.
+
+Poison on index 3 did...nothing?
+
+Poison on index 4 did...nothing. I can't seem to poison this new one.
+
+Poison on index 5 did nothing yet again. I'm not sure what's going on, but I turned on Dizzy for various indices to get it to work on him,
+and it ended up Dizzying Koops, Flurrie, and Vivian.
+
+I killed that one, and he summoned another. This time I tried every index to no avail, but I inflicted slow on my Partner and it actually
+put it on him instead. Very weird...
+
+This means the above is NOT true. I'll need to do way more testing to figure this out, since it seems pretty bizarre...

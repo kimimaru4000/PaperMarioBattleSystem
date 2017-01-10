@@ -18,6 +18,8 @@ namespace PaperMarioBattleSystem
             Alignment = StatusAlignments.Negative;
 
             Duration = duration;
+
+            AfflictedMessage = "Dizzy! Attacks might miss!";
         }
 
         protected override void OnAfflict()

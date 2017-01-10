@@ -101,6 +101,32 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Color Fields
+
+        /// <summary>
+        /// The color used for displaying the text for MoveActions in special cases.
+        /// <para>Examples include indicating the FP cost was lowered with Flower Saver, or Quick Change being active.</para>
+        /// </summary>
+        //NOTE: Change back to blue gray later, this is just so it's visible now
+        public static readonly Color SpecialCaseColor = Color.Blue;//new Color(102, 153, 204);
+
+        /// <summary>
+        /// The color used for displaying when a MoveAction is enabled.
+        /// </summary>
+        public static readonly Color EnabledColor = Color.White;
+
+        /// <summary>
+        /// The color used for displaying when a MoveAction is disabled.
+        /// </summary>
+        public static readonly Color DisabledColor = Color.LightSlateGray;
+
+        /// <summary>
+        /// The alpha of the MoveAction's entry in the menu when it's not selected.
+        /// </summary>
+        public const float UnselectedAlpha = .7f;
+
+        #endregion
+
         protected MoveAction()
         {
             
@@ -317,8 +343,7 @@ namespace PaperMarioBattleSystem
                 //Keep it gray if the move is disabled for any reason
                 if (Disabled == false && LoweredFPCost)
                 {
-                    //NOTE: Change back to blue gray later, this is just so it's visible now
-                    Color blueGray = Color.Blue;//new Color(102, 153, 204);
+                    Color blueGray = SpecialCaseColor;
                     fpColor = blueGray;
                 }
 

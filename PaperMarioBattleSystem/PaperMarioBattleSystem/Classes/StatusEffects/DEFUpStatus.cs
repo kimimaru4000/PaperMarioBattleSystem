@@ -24,6 +24,8 @@ namespace PaperMarioBattleSystem
 
             DefenseValue = defenseValue;
             Duration = duration;
+
+            AfflictedMessage = "Defense is boosted!";
         }
 
         protected override void OnAfflict()

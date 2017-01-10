@@ -33,6 +33,8 @@ namespace PaperMarioBattleSystem
             Duration = duration;
 
             CategoryDisabled = categoryDisabled;
+
+            AfflictedMessage = GetMessageFromCategory(CategoryDisabled);
         }
 
         //NoSkills cannot be refreshed like other status effects, as a move category cannot be disabled more than once
@@ -146,6 +148,27 @@ namespace PaperMarioBattleSystem
         public override StatusEffect Copy()
         {
             return new NoSkillsStatus(CategoryDisabled, Duration);
+        }
+
+        private string GetMessageFromCategory(MoveCategories categoryDisabled)
+        {
+            //NOTE: From what I've tested, NoSkills doesn't remove the Item command in TTYD, so the PM message is used
+            //The messages for Tactics, Special, and Enemy are made up, as they are either never disabled
+            //or disabled only in Tutorials where there is no message
+
+            switch (categoryDisabled)
+            {
+                case MoveCategories.Item: return "You can't use any items now!";
+                case MoveCategories.Jump: return "You can't jump!";
+                case MoveCategories.Hammer: return "Can't use a hammer!";
+                case MoveCategories.Partner: return "You can't use moves!";
+
+                case MoveCategories.Tactics: return "You can't use any tactics now!";
+                case MoveCategories.Special: return "You can't use special moves!";
+                case MoveCategories.Enemy: return "Enemies can't attack now!";
+
+                default: return string.Empty;
+            }
         }
     }
 }

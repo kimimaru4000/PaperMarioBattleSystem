@@ -18,6 +18,8 @@ namespace PaperMarioBattleSystem
             Alignment = StatusAlignments.Negative;    
 
             Duration = duration;
+
+            AfflictedMessage = "Poisoned! The toxins will\nsteadily do damage!";
         }
 
         protected override void OnAfflict()

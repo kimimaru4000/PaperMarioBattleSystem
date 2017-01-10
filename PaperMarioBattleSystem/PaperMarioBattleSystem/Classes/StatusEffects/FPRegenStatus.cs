@@ -24,6 +24,8 @@ namespace PaperMarioBattleSystem
 
             AmountHealed = amountHealed;
             Duration = duration;
+
+            AfflictedMessage = "FP will briefly recover!";
         }
 
         protected override void OnAfflict()

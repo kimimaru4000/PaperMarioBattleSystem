@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
 
             Duration = duration;
 
-            AfflictedMessage = "Invisible! Attacks will now miss!";
+            AfflictedMessage = "Invisible! Attacks will now\nmiss!";
         }
 
         protected override void OnAfflict()

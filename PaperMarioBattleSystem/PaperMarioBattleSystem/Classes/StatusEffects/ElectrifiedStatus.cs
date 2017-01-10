@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
 
             Duration = duration;
 
-            AfflictedMessage = "Electrified! Enemies that make contact will get hurt!";
+            AfflictedMessage = "Electrified! Enemies that\nmake contact will get hurt!";
         }
 
         protected override void OnAfflict()

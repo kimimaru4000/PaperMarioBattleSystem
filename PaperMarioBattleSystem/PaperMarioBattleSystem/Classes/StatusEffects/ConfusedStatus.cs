@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
 
             Duration = duration;
 
-            AfflictedMessage = "Confused! Movement will be hindered for a while!";
+            AfflictedMessage = "Confused! Movement will be\nhindered for a while!";
         }
 
         protected override void OnAfflict()

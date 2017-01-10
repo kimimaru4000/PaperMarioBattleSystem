@@ -18,6 +18,9 @@ namespace PaperMarioBattleSystem
         {
             StatusType = Enumerations.StatusTypes.Stone;
             Alignment = StatusAlignments.Positive;
+
+            //Stone doesn't have a Battle Message when used
+            AfflictedMessage = string.Empty;
         }
 
         protected sealed override void OnAfflict()

@@ -24,6 +24,8 @@ namespace PaperMarioBattleSystem
 
             DefenseValue = defenseValue;
             Duration = duration;
+
+            AfflictedMessage = "Defense has dropped!";
         }
 
         protected override void OnAfflict()

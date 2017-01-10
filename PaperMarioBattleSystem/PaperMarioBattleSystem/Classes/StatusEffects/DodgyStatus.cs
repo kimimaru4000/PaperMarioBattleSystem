@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
 
             Duration = duration;
 
-            AfflictedMessage = "Dodgy! Some attacks will automatically be dodged!";
+            AfflictedMessage = "Dodgy! Some attacks will\nautomatically be dodged!";
         }
 
         protected override void OnAfflict()

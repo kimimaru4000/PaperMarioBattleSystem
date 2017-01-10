@@ -16,7 +16,7 @@ namespace PaperMarioBattleSystem
         {
             StatusType = Enumerations.StatusTypes.Tiny;
 
-            AfflictedMessage = "Tiny! Attack power has now dropped!";
+            AfflictedMessage = "Tiny! Attack power has\nnow dropped!";
         }
 
         public override StatusEffect Copy()

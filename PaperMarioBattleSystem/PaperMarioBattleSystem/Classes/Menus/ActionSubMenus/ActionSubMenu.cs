@@ -102,8 +102,8 @@ namespace PaperMarioBattleSystem
                 float alphaMod = 1f;
 
                 Vector2 pos = Position + new Vector2(0, i * 20);
-                Color color = moveAction.Disabled == false ? Color.White : Color.LightSlateGray;
-                if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) alphaMod *= .7f;
+                Color color = moveAction.Disabled == false ? MoveAction.EnabledColor : MoveAction.DisabledColor;
+                if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) alphaMod = MoveAction.UnselectedAlpha;
                 //SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, moveAction.Name, pos, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
 
                 //Draw all information including name and FP cost

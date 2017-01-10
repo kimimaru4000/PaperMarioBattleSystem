@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
 
             CommandSuccessTimer = (8d / 60d) * Time.MsPerS;
 
-            AllowedStatuses = new Enumerations.StatusTypes[] { Enumerations.StatusTypes.Immobilized };
+            AllowedStatuses = null;
         }
 
         public override BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusEffect[] statusEffects)

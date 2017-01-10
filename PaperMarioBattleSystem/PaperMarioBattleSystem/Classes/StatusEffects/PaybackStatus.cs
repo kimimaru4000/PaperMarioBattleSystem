@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
 
             Duration = duration;
 
-            AfflictedMessage = "Direct attacks will be countered!";
+            AfflictedMessage = "Direct attacks will be\ncountered!";
 
             Paybackholder = paybackHolder;
         }

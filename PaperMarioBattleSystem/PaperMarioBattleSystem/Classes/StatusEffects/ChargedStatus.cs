@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
             
             Duration = StatusGlobals.InfiniteDuration;
 
-            AfflictedMessage = "Charged! Attack Power is now boosted!";
+            AfflictedMessage = "Charged! Attack Power is\nnow boosted!";
 
             TotalChargeDamage = chargeDamage;
         }

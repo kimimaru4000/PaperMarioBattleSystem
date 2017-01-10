@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
             
             Duration = duration;
 
-            AfflictedMessage = "More chances to attack are now available!";
+            AfflictedMessage = "More chances to attack\nare now available!";
         }
 
         protected override void OnAfflict()

@@ -16,6 +16,8 @@ namespace PaperMarioBattleSystem
         public FrozenStatus(int duration) : base(duration)
         {
             StatusType = Enumerations.StatusTypes.Frozen;
+
+            AfflictedMessage = "Frozen! Movement will be\nimpossible for a while!";
         }
 
         protected sealed override void OnEnd()

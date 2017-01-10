@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
 
             Duration = duration;
 
-            AfflictedMessage = "Burned! The fire will steadily do damage!";
+            AfflictedMessage = "Burned! The fire will\nsteadily do damage!";
         }
 
         protected override void OnAfflict()

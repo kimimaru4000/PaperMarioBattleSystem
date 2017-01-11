@@ -57,25 +57,5 @@ namespace PaperMarioBattleSystem
                     break;
             }
         }
-
-        protected override void SequenceSuccessBranch()
-        {
-            switch (SequenceStep)
-            {
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
-
-        protected override void SequenceFailedBranch()
-        {
-            switch (SequenceStep)
-            {
-                default:
-                    PrintInvalidSequence();
-                    break;
-            }
-        }
     }
 }

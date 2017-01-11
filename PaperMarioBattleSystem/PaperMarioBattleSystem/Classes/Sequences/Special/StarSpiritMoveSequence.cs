@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new WaitSeqAction(WaitTime);
                     break;
                 case 2:
-                    User.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarPrayName);
+                    User.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarWishName);
                     //NOTE: Show Star Spirit appearing and VFX and such
                     CurSequenceAction = new WaitSeqAction(WaitTime);
                     break;
@@ -41,6 +41,28 @@ namespace PaperMarioBattleSystem
                     User.PlayAnimation(AnimationGlobals.IdleName);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        //Star Spirit Special Moves don't have action commands
+        protected sealed override void SequenceSuccessBranch()
+        {
+            switch (SequenceStep)
+            {
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        //Star Spirit Special Moves don't have action commands
+        protected sealed override void SequenceFailedBranch()
+        {
+            switch (SequenceStep)
+            {
                 default:
                     PrintInvalidSequence();
                     break;

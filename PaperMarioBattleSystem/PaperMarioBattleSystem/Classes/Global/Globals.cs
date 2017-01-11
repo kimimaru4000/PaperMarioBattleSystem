@@ -704,7 +704,7 @@ namespace PaperMarioBattleSystem
             public const string SuperguardName = "Superguard";
             public const string DangerName = "Danger";
             public const string StarSpecialName = "StarSpecial";
-            public const string StarPrayName = "StarPray";
+            public const string StarWishName = "StarWish";
         }
 
         /// <summary>
@@ -1118,7 +1118,7 @@ namespace PaperMarioBattleSystem
         {
             { Enumerations.StatusTypes.Poison, 200 }, { Enumerations.StatusTypes.Burn, 199 },
             { Enumerations.StatusTypes.Fast, 150 }, { Enumerations.StatusTypes.Slow, 149 },
-            { Enumerations.StatusTypes.Stone, -1 }, { Enumerations.StatusTypes.Sleep, 147 }, { Enumerations.StatusTypes.Immobilized, 146 }, {Enumerations.StatusTypes.Frozen, 145 },
+            { Enumerations.StatusTypes.Stone, 2 }, { Enumerations.StatusTypes.Sleep, 147 }, { Enumerations.StatusTypes.Immobilized, 146 }, {Enumerations.StatusTypes.Frozen, 145 },
             { Enumerations.StatusTypes.POWDown, 130 }, { Enumerations.StatusTypes.POWUp, 129 }, { Enumerations.StatusTypes.DEFDown, 128 }, { Enumerations.StatusTypes.DEFUp, 127 },
             { Enumerations.StatusTypes.Soft, 110 }, { Enumerations.StatusTypes.Tiny, 109 }, { Enumerations.StatusTypes.Huge, 108 },
             { Enumerations.StatusTypes.HPRegen, 90 }, { Enumerations.StatusTypes.FPRegen, 89 },
@@ -1127,8 +1127,8 @@ namespace PaperMarioBattleSystem
             { Enumerations.StatusTypes.Confused, 50 },
             { Enumerations.StatusTypes.Payback, 20 },
             { Enumerations.StatusTypes.NoSkills, 10 },
-            { Enumerations.StatusTypes.Charged, 1 },
-            { Enumerations.StatusTypes.Allergic, -10 }
+            { Enumerations.StatusTypes.Charged, 5 },
+            { Enumerations.StatusTypes.Allergic, 1 }
         };
 
         #endregion

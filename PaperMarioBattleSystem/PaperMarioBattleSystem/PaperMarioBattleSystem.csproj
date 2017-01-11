@@ -87,6 +87,7 @@
     <Compile Include="Classes\Actions\NoAction.cs" />
     <Compile Include="Classes\Actions\Player\ChangePartner.cs" />
     <Compile Include="Classes\Actions\Special\Focus.cs" />
+    <Compile Include="Classes\Actions\Special\Refresh.cs" />
     <Compile Include="Classes\Actions\Special\SpecialMoveAction.cs" />
     <Compile Include="Classes\Actions\Sushie\TidalWave.cs" />
     <Compile Include="Classes\Actions\Yoshi\Gulp.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="Classes\Sequences\NoSequence.cs" />
     <Compile Include="Classes\Sequences\Sequence.cs" />
     <Compile Include="Classes\Sequences\Special\FocusSequence.cs" />
+    <Compile Include="Classes\Sequences\Special\RefreshSequence.cs" />
     <Compile Include="Classes\Sequences\Special\SpecialMoveSequence.cs" />
     <Compile Include="Classes\Sequences\Special\StarSpiritMoveSequence.cs" />
     <Compile Include="Classes\Sequences\Sushie\TidalWaveSequence.cs" />

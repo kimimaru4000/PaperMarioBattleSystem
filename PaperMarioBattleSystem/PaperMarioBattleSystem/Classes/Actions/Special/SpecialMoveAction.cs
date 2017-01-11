@@ -118,7 +118,7 @@ namespace PaperMarioBattleSystem
 
         public override string GetCostString()
         {
-            return $"{SPCost} SP";
+            return $"{SPCost/SPUPerStarPower} SP";
         }
     }
 }

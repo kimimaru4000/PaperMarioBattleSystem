@@ -94,3 +94,42 @@ If the array is null or empty, don't add it at all since specifying the state it
 
 If this works out well, the next step would be figuring out how to prevent multiple of the same BattleEvent from being added at once. For
 example, if you put two enemies to sleep with a Sleepy Sheep, it'll queue up and add two Battle Messages with the same contents.
+
+Update (1/13/17)
+----------------
+There needs to be an easy way to designate the Priority of Battle Events to make sure it's organized.
+
+We can have an enum that designates the start of certain types of Battle Events. For instance:
+
+public enum StartEventPriorities
+{
+	Stage = 0, Status = 500, Dialogue = 1000
+}
+
+So in this case, 0 to 500 should be reserved for Stage-specific Battle Events. For Status Effects, we can add their Status Priority values to
+the Status value in this enum, allowing all of them to occur in the correct order.
+
+Furthermore, BattleEvents should have a bool determining whether there can be multiple of it at the same Priority value or not. If only one is
+allowed, when adding that event it'll look to see if a BattleEvent with the same priority exists and add it if not and not add it if so.
+
+
+
+
+
+
+Specific Battle Event Information
+---------------------------------
+Here's information I found about specific Battle Events in TTYD.
+
+-Doopliss' transformation actually ISN'T a move! It's just something he can do at the start of the enemy phase. This explains why he can still
+move after transforming.
+
+My steps to confirm this were as follows:
+1. I got into the 2nd Shadow Sirens Battle
+2. I got Doopliss down to under half HP at the end of the player phase
+3. Doopliss transformed, THEN Beldam began her dialogue asking if he's doing okay and such
+4. Doopliss attacked after Beldam's dialogue
+
+-The above also means that mid-battle enemy dialogues happen at the start of the enemy PHASE, not each enemy's turn.
+-First Strikes override any dialogue at the start of the battle. For example, if you get a First Strike on the 2nd Shadow Sirens battle,
+which is done through hitting an enemy on the overworld with a battle modifier cheat, they won't say their dialogue at the start.

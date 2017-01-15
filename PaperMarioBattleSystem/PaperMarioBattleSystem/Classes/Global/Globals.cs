@@ -749,6 +749,15 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class BattleGlobals
     {
+        #region Enums
+
+        public enum StartEventPriorities
+        {
+            Message = 0, Stage = 500, Status = 1000, Dialogue = 1500
+        }
+
+        #endregion
+
         #region Constants
 
         public const int DefaultTurnCount = 1;

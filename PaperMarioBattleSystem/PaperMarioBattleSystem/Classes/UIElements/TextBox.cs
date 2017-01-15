@@ -14,6 +14,11 @@ namespace PaperMarioBattleSystem
     public class TextBox : UIElement
     {
         /// <summary>
+        /// The default buffer room used when fitting the TextBox to text.
+        /// </summary>
+        public static readonly Vector2 DefaultBufferRoom = new Vector2(10, 10);
+
+        /// <summary>
         /// The position of the center of the textbox
         /// </summary>
         public Vector2 Position = Vector2.Zero;
@@ -75,15 +80,37 @@ namespace PaperMarioBattleSystem
             Text = text;
         }
 
+        /// <summary>
+        /// Scales the TextBox to fit its current text, with some buffer room.
+        /// <para>The default buffer room is used.</para>
+        /// </summary>
+        /// <param name="font">The font to scale by.</param>
         public void ScaleToText(SpriteFont font)
         {
             ScaleToText(font, Text);
         }
 
+        /// <summary>
+        /// Scales the TextBox to fit a particular string, with some buffer room.
+        /// </summary>
+        /// <param name="font">The font to scale by.</param>
+        /// <param name="text">The text to use to scale.</param>
+        /// <para>The default buffer room is used.</para>
         public void ScaleToText(SpriteFont font, string text)
         {
+            ScaleToText(font, text, DefaultBufferRoom);
+        }
+
+        /// <summary>
+        /// Scales the TextBox to fit a particular string, with a designated amount of buffer room.
+        /// </summary>
+        /// <param name="font">The font to scale by.</param>
+        /// <param name="text">The text to use to scale.</param>
+        /// <param name="bufferRoom">The amount of buffer room on each side.</param>
+        public void ScaleToText(SpriteFont font, string text, Vector2 bufferRoom)
+        {
             //Measure the size of the string with the font and add some padding
-            SetSize(font.MeasureString(text) + new Vector2(10, 10));
+            SetSize(font.MeasureString(text) + bufferRoom);
         }
 
         public override void Update()

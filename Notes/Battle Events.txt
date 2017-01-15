@@ -112,7 +112,12 @@ the Status value in this enum, allowing all of them to occur in the correct orde
 Furthermore, BattleEvents should have a bool determining whether there can be multiple of it at the same Priority value or not. If only one is
 allowed, when adding that event it'll look to see if a BattleEvent with the same priority exists and add it if not and not add it if so.
 
-
+Update (1/14/17)
+----------------
+I decided to not deal with duplicates in this system because it doesn't make sense to call a method to add a Battle Event and it doesn't
+add it for an arbitrary reason. For existing systems, there's always a clear reason something isn't added (Ex. TryAfflictStatus() implies
+that the Status Effect has a chance at not being inflicted). Instead, it'll be up to the coder to ensure that a BattleEvent isn't added
+more than once if it shouldn't be. However, the system itself won't prevent duplicates.
 
 
 
@@ -133,3 +138,5 @@ My steps to confirm this were as follows:
 -The above also means that mid-battle enemy dialogues happen at the start of the enemy PHASE, not each enemy's turn.
 -First Strikes override any dialogue at the start of the battle. For example, if you get a First Strike on the 2nd Shadow Sirens battle,
 which is done through hitting an enemy on the overworld with a battle modifier cheat, they won't say their dialogue at the start.
+
+-The "Can't flee this fight" message occurs before Lucky Start kicks in

@@ -14,6 +14,11 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class MessageBattleEvent : WaitBattleEvent
     {
+        /// <summary>
+        /// The default duration of a Battle Message.
+        /// </summary>
+        public static readonly double DefaultWaitDuration = 2000d;
+
         private TextBox BattleTextBox = null;
         private string BattleMessage = string.Empty;
 

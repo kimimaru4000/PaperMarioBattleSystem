@@ -85,8 +85,12 @@ namespace PaperMarioBattleSystem
             }
             else
             {
-                //NOTE: Show the dialog here that the move can't be selected and state why
+                //Show the dialog here that the move can't be selected and state why
                 string disabledString = BattleActions[CurSelection].DisabledString;
+
+                BattleManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Message,
+                    new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                    new MessageBattleEvent(disabledString, MessageBattleEvent.DefaultWaitDuration));
 
                 Debug.LogError($"{BattleActions[CurSelection].Name} is disabled: {disabledString}");
             }

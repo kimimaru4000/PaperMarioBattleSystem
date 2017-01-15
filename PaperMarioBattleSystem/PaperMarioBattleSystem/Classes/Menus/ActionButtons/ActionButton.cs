@@ -88,7 +88,13 @@ namespace PaperMarioBattleSystem
                 }
                 else
                 {
-                    //NOTE: Show the dialog here that the action can't be selected
+                    //NOTE: Find a way to get the correct message when the action can't be selected
+                    string disabledString = $"Your {Category} moves are disabled!";
+
+                    BattleManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Message,
+                        new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                        new MessageBattleEvent(disabledString, MessageBattleEvent.DefaultWaitDuration));
+
                     Debug.LogError($"All {Category} moves are currently disabled for {BattleManager.Instance.EntityTurn.Name}!");
                 }
             }
@@ -100,8 +106,8 @@ namespace PaperMarioBattleSystem
 
         public void Draw(bool selected)
         {
-            Color iconColor = Disabled == false ? Color.White : Color.LightSlateGray;
-            if (selected == false) iconColor = iconColor * .75f;
+            Color iconColor = Disabled == false ? MoveAction.EnabledColor : MoveAction.DisabledColor;
+            if (selected == false) iconColor = iconColor * MoveAction.UnselectedAlpha;
 
             Vector2 uiPos = Camera.Instance.SpriteToUIPos(Position);
 

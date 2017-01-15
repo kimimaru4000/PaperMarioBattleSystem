@@ -23,11 +23,10 @@ namespace PaperMarioBattleSystem
 
             if (BattleActions.Count == 0)
             {
-                SpecialMoveAction test = new SpecialMoveAction("No Specials", new MoveActionData(null, 0, "No Special Moves are available.",
-                    TargetSelectionMenu.EntitySelectionType.Single, Enumerations.EntityTypes.Player, false, null), new NoSequence(null),
-                    StarPowerGlobals.StarPowerTypes.CrystalStar, 0f);
+                MessageAction noSpecials = new MessageAction("No Specials", null, "No Special Moves are available.",
+                    (int)BattleGlobals.StartEventPriorities.Message, "You can't select that!");
 
-                BattleActions.Add(test);
+                BattleActions.Add(noSpecials);
             }
         }
     }

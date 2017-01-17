@@ -98,7 +98,33 @@ namespace PaperMarioBattleSystem
             if (Input.GetKeyDown(Keys.X)) OnBackOut();
             else if (Input.GetKeyDown(Keys.Z)) OnConfirm();
             else if (Input.GetKeyDown(Keys.C))
-                BattleManager.Instance.SwitchToTurn(PlayerType == PlayerTypes.Partner ? PlayerTypes.Mario : PlayerTypes.Partner, true);
+            {
+                BattlePlayer otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.GetFrontPlayer()
+                    ? BattleManager.Instance.GetBackPlayer() : BattleManager.Instance.GetFrontPlayer();
+
+                //Don't switch if the back player is dead
+                if (otherPlayer.UsedTurn == false && otherPlayer.IsDead == false)
+                {
+                    //Switch turns with Mario or the Partner
+                    //This updates the front and back player references and their battle positions
+                    BattleManager.Instance.SwitchToTurn(PlayerType == PlayerTypes.Partner ? PlayerTypes.Mario : PlayerTypes.Partner);
+
+                    //End the current player's turn. This won't affect the number of turns the
+                    //players have, as that is handled in the entity's own EndTurn() method
+                    BattleManager.Instance.TurnEnd();
+
+                    //Queue a Battle Event to swap the current positions of Mario and his Partner
+                    //Since we updated the references earlier, their new positions are their own battle positions
+                    BattleManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Stage,
+                        new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                        new SwapPositionBattleEvent(BattleManager.Instance.GetBackPlayer(), BattleManager.Instance.GetFrontPlayer(),
+                        BattleManager.Instance.GetBackPlayer().BattlePosition, BattleManager.Instance.GetFrontPlayer().BattlePosition, 500f));
+                }
+                else
+                {
+                    Debug.LogError($"{otherPlayer.Name} used all of his/her turns or is dead, so turns cannot be swapped with him/her.");
+                }
+            }
         }
 
         protected override void OnConfirm()

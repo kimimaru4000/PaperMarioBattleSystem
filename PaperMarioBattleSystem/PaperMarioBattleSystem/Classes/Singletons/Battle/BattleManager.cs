@@ -309,7 +309,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Switches Mario and his Partner's positions and updates the Front and Back player references
+        /// Switches Mario and his Partner's battle positions and updates the Front and Back player references.
+        /// <para>The actual players' positions are not changed here but in a Battle Event.</para>
+        /// <see cref="SwapPositionBattleEvent"/>
         /// </summary>
         /// <param name="frontPlayer"></param>
         /// <param name="backPlayer"></param>
@@ -318,68 +320,34 @@ namespace PaperMarioBattleSystem
             Vector2 frontBattlePosition = FrontPlayer.BattlePosition;
             Vector2 backBattlePosition = BackPlayer.BattlePosition;
 
-            FrontPlayer.SetBattlePosition(BackPlayer.BattlePosition);
-            FrontPlayer.Position = FrontPlayer.BattlePosition;
+            FrontPlayer.SetBattlePosition(backBattlePosition);
+            //FrontPlayer.Position = FrontPlayer.BattlePosition;
 
             BackPlayer.SetBattlePosition(frontBattlePosition);
-            BackPlayer.Position = BackPlayer.BattlePosition;
+            //BackPlayer.Position = BackPlayer.BattlePosition;
 
             FrontPlayer = frontPlayer;
             BackPlayer = backPlayer;
         }
 
         /// <summary>
-        /// Switches Mario and his Partner's positions in battle. This cannot be performed if either have already used their turn
+        /// Switches Mario and his Partner's positions in battle.
         /// </summary>
         /// <param name="playerType">The PlayerTypes to switch to - either Mario or the Partner</param>
         /// <param name="setTurn">If true, will set the turn to the Player switched to.
         /// This should only be true when manually switching during either Mario or the Partner's turn</param>
-        public void SwitchToTurn(PlayerTypes playerType, bool setTurn)
+        public void SwitchToTurn(PlayerTypes playerType)
         {
             if (playerType == PlayerTypes.Partner)
             {
-                //If we're not setting the turn, this means we're forcing them to switch because the Partner is dead
-                //In this case, don't worry about whether the turn was used or not
-                if (Partner.UsedTurn == true && setTurn == true)
-                {
-                    Debug.LogError($"Cannot swap turns with {Partner.Name} because he/she already used his/her turn!");
-                    return;
-                }
-
+                //Put the Partner in front and Mario in the back
                 SwitchPlayers(Partner, Mario);
-
-                //Perform Mario-specific turn end logic
-                if (setTurn == true)
-                {
-                    EntityTurn.OnTurnEnd();
-                    EntityTurn = Partner;
-                }
             }
             else
             {
-                //If we're not setting the turn, this means we're forcing them to switch because the Partner is dead
-                //In this case, don't worry about whether the turn was used or not
-                if (Mario.UsedTurn == true && setTurn == true)
-                {
-                    Debug.LogError($"Cannot swap turns with Mario because he already used his turn!");
-                    return;
-                }
-
+                //Put Mario in front and the Partner in the back
                 SwitchPlayers(Mario, Partner);
-
-                if (setTurn == true)
-                {
-                    //Perform Partner-specific turn end logic
-                    EntityTurn.OnTurnEnd();
-                    EntityTurn = Mario;
-                }
             }
-
-            //NOTE: This doesn't look like it works right for Partner death...
-            //Move these lines into the setTurn checks
-
-            //Perform Mario or Partner-specific turn start logic
-            EntityTurn.OnTurnStart();
 
             SoundManager.Instance.PlaySound(SoundManager.Sound.SwitchPartner);
         }
@@ -503,7 +471,12 @@ namespace PaperMarioBattleSystem
                 //If the Partner died and is in front, switch places with Mario
                 if (Partner == FrontPlayer)
                 {
-                    SwitchToTurn(PlayerTypes.Mario, false);
+                    //Queue the event to switch Mario with his Partner
+                    QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Stage, new BattleState[] { BattleState.Turn, BattleState.TurnEnd },
+                        new SwapPositionBattleEvent(FrontPlayer, BackPlayer, BackPlayer.BattlePosition, FrontPlayer.BattlePosition, 500f));
+
+                    //Switch Mario in front
+                    SwitchToTurn(PlayerTypes.Mario);
                 }
                 
                 //NOTE: Don't play this animation again if the Partner is still dead

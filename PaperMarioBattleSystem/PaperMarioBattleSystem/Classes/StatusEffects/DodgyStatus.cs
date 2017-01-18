@@ -8,10 +8,15 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Dodgy Status Effect.
-    /// The entity's Evasion increases until it ends
+    /// The entity's Evasion increases until it ends.
     /// </summary>
-    public sealed class DodgyStatus : StatusEffect
+    public class DodgyStatus : StatusEffect
     {
+        /// <summary>
+        /// The amount of Evasion to add.
+        /// </summary>
+        protected int EvasionValue = 50;
+
         public DodgyStatus(int duration)
         {
             StatusType = Enumerations.StatusTypes.Dodgy;
@@ -24,12 +29,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-            EntityAfflicted.ModifyEvasion(50);
+            EntityAfflicted.ModifyEvasion(EvasionValue);
         }
 
         protected override void OnEnd()
         {
-            EntityAfflicted.ModifyEvasion(-50);
+            EntityAfflicted.ModifyEvasion(-EvasionValue);
         }
 
         protected override void OnPhaseCycleStart()

@@ -210,6 +210,7 @@
     <Compile Include="Classes\StatusEffects\AllergicStatus.cs" />
     <Compile Include="Classes\StatusEffects\BurnStatus.cs" />
     <Compile Include="Classes\StatusEffects\ChargedStatus.cs" />
+    <Compile Include="Classes\StatusEffects\CloudNineStatus.cs" />
     <Compile Include="Classes\StatusEffects\ConfusedStatus.cs" />
     <Compile Include="Classes\StatusEffects\DEFDownStatus.cs" />
     <Compile Include="Classes\StatusEffects\DEFUpStatus.cs" />
@@ -222,8 +223,10 @@
     <Compile Include="Classes\StatusEffects\HPRegenStatus.cs" />
     <Compile Include="Classes\StatusEffects\HugeStatus.cs" />
     <Compile Include="Classes\StatusEffects\ImmobilizedStatus.cs" />
+    <Compile Include="Classes\StatusEffects\InjuredStatus.cs" />
     <Compile Include="Classes\StatusEffects\InvisibleStatus.cs" />
     <Compile Include="Classes\StatusEffects\NoSkillsStatus.cs" />
+    <Compile Include="Classes\StatusEffects\ParalyzedStatus.cs" />
     <Compile Include="Classes\StatusEffects\PaybackStatus.cs" />
     <Compile Include="Classes\StatusEffects\PoisonStatus.cs" />
     <Compile Include="Classes\StatusEffects\POWDownStatus.cs" />
@@ -234,6 +237,8 @@
     <Compile Include="Classes\StatusEffects\StatusEffect.cs" />
     <Compile Include="Classes\StatusEffects\StoneStatus.cs" />
     <Compile Include="Classes\StatusEffects\TinyStatus.cs" />
+    <Compile Include="Classes\StatusEffects\TurboChargeStatus.cs" />
+    <Compile Include="Classes\StatusEffects\WaterBlockStatus.cs" />
     <Compile Include="Classes\UIElements\BattleHUD.cs" />
     <Compile Include="Classes\UIElements\IDisableable.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />

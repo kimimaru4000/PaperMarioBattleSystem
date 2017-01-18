@@ -9,10 +9,15 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Frozen Status Effect.
     /// Entities afflicted with this cannot move until it ends, in which the entity will take 1 Ice damage.
-    /// If the entity is afflicted with Burn while it is Frozen, both effects will negate each other
+    /// If the entity is afflicted with Burn while it is Frozen, both effects will negate each other.
     /// </summary>
     public sealed class FrozenStatus : ImmobilizedStatus
     {
+        /// <summary>
+        /// The amount of Ice damage the entity takes when the status ends.
+        /// </summary>
+        private const int IceDamage = 1;
+
         public FrozenStatus(int duration) : base(duration)
         {
             StatusType = Enumerations.StatusTypes.Frozen;
@@ -25,7 +30,7 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             //The entity takes 1 Ice damage when Frozen ends
-            EntityAfflicted.TakeDamage(Enumerations.Elements.Ice, 1, true);
+            EntityAfflicted.TakeDamage(Enumerations.Elements.Ice, IceDamage, true);
         }
 
         public sealed override StatusEffect Copy()

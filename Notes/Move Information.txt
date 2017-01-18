@@ -9,8 +9,8 @@ of Immobilized that does the same thing.
 
 Watt
 ----
-Power Shock - Inflict Paralysis, which is a subset of Immobilized.
-Mega Shock - Inflicts Paralysis, which is a subset of Immobilized.
+Power Shock - Inflict Paralyzed, which is a subset of Immobilized.
+Mega Shock - Inflicts Paralyzed, which is a subset of Immobilized.
 
 Message for both: "Your enemy's paralyzed and can't move!"
 

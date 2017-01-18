@@ -996,19 +996,19 @@ namespace PaperMarioBattleSystem
         /// Otherwise, it will wait and take effect once the current BattleState matches.</para>
         /// </summary>
         /// <param name="priority">The priority the Battle Event has. Must be greater than or equal to 0.</param>
-        /// <param name="battleStates">The BattleStates the Battle Event takes effect in.</param>
+        /// <param name="battleStates">The BattleStates the Battle Event takes effect in. If none are specified, the event isn't added.</param>
         /// <param name="battleEvent">The Battle Event to add.</param>
         public void QueueBattleEvent(int priority, BattleState[] battleStates, BattleEvent battleEvent)
         {
             if (priority < 0)
             {
-                Debug.LogError($"Not queue BattleEvent because the priority's value is {priority} which is less than 0!");
+                Debug.LogError($"Not queueing BattleEvent because the priority's value is {priority} which is less than 0!");
                 return;
             }
 
             if (battleEvent == null)
             {
-                Debug.LogError($"Trying to queue null BattleEvent with priority of {priority}! Not adding BattleEvent");
+                Debug.LogError($"Trying to queue null BattleEvent with priority of {priority}! Not queueing BattleEvent");
                 return;
             }
 
@@ -1125,7 +1125,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Adds pending Battle Events if the BattleState is the state matches the state they're added in.
+        /// Adds pending Battle Events if the BattleState is the state that matches the state they're added in.
         /// </summary>
         private void AddPendingEvents()
         {

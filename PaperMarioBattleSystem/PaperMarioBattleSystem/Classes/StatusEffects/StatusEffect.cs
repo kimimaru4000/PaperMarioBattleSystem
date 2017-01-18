@@ -115,6 +115,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public string AfflictedMessage { get; protected set; } = string.Empty;
 
+        /// <summary>
+        /// The Battle Message shown when the StatusEffect is removed from the BattleEntity.
+        /// </summary>
+        public string RemovedMessage { get; protected set; } = string.Empty;
+
         private bool IsInfinite => (Duration <= InfiniteDuration);
         public bool IsFinished => (IsInfinite == false && TurnsPassed >= TotalDuration);
 

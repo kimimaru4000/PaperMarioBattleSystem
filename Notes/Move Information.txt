@@ -1,0 +1,60 @@
+Move Information (1/17/17)
+--------------------------
+Here's where detailed information about specific moves and features will be documented.
+
+Partner General
+---------------
+In PM, if a partner takes damage they'll be inflicted with Injured, which is a subset
+of Immobilized that does the same thing.
+
+Watt
+----
+Power Shock - Inflict Paralysis, which is a subset of Immobilized.
+Mega Shock - Inflicts Paralysis, which is a subset of Immobilized.
+
+Message for both: "Your enemy's paralyzed and can't move!"
+
+Turbo Charge - Gives Mario Turbo Charge, which adds 1 Attack to Mario. This is a subset
+of POWUp.
+
+Message: "Your attack power will go up for a short time!"
+Remove message: "Your attack power has returned to normal!"
+
+Sushie
+------
+Water Block - Adds 1 Defense to Mario AND adds a +1 Resistance to Fire. This is a
+separate, unique Status Effect.
+
+Message: "Mario will be protected by Water Block for a short time!"
+Remove message: "The Water Block's effect has worn off!"
+
+Lakilester
+----------
+Cloud Nine - Gives Mario Cloud Nine, which is a subset of Dodgy. Unsure of evasion increase,
+but seems less than 50%.
+
+Message: "Chances of being attacked will decrease!"
+Remove message: "The effect of Cloud Nine have worn off!"
+
+Notes: If Mario is inflicted with Stone, Lakilester will come down and scoop him up
+instead of Mario jumping onto the cloud.
+
+General
+-------
+For the Cloud Nine, Water Block, and Turbo Charge Status Effects, it shows the order
+they take place in with their icons on the upper-left side of the screen.
+
+The order is:
+1. Water Block
+2. Cloud Nine
+3. Turbo Charge
+
+This has been confirmed by performing their Action Commands better or worse to inflict
+them for different durations and synchronize their turn counts with each other. They
+ended, with the Battle Messages appearing, in the order above.
+
+Water Block happens before Poison, Electrified, and Invisible.
+Cloud Nine happens before Poison, Electrified, and Invisible.
+Turbo Charge happens before Poison, Electrified, and Invisible.
+
+Poison happens before Electrified and Invisible.

@@ -33,6 +33,8 @@ Lakilester
 Cloud Nine - Gives Mario Cloud Nine, which is a subset of Dodgy. Unsure of evasion increase,
 but seems less than 50%.
 
+Confirmed thanks to Jdaster64: Cloud Nine grants a 50% chance of evasion
+
 Message: "Chances of being attacked will decrease!"
 Remove message: "The effect of Cloud Nine have worn off!"
 

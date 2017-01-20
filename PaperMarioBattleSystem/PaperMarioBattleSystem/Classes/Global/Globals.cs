@@ -1241,6 +1241,7 @@ namespace PaperMarioBattleSystem
         /// If Badges exist in the same spot and aren't in both games, Badges with lower alphabetical values will be placed first.
         /// In cases where one Badge is before another Badge in one game and after that Badge in the other game, the Badge is grouped
         /// with similar Badges around it.</para>
+        /// <para>If adding brand new badges, put them at the bottom.</para>
         /// </summary>
         public enum BadgeTypes
         {
@@ -1276,6 +1277,7 @@ namespace PaperMarioBattleSystem
             AttackFXR = 108, AttackFXY = 109, AttackFXG = 110, AttackFXP = 111,
             //Unused & Beta Badges
             AngersPower = 112
+            //New badges
         }
 
         /// <summary>
@@ -1395,6 +1397,9 @@ namespace PaperMarioBattleSystem
         public static int Wrap(int value, int min, int max) => (value < min) ? max : (value > max) ? min : value;
         public static float Wrap(float value, float min, float max) => (value < min) ? max : (value > max) ? min : value;
         public static double Wrap(double value, double min, double max) => (value < min) ? max : (value > max) ? min : value;
+
+        public static T Min<T>(T val1, T val2) where T : IComparable => (val1.CompareTo(val2) < 0) ? val1 : (val2.CompareTo(val1) < 0) ? val2 : val1;
+        public static T Max<T>(T val1, T val2) where T : IComparable => (val1.CompareTo(val2) > 0) ? val1 : (val2.CompareTo(val1) > 0) ? val2 : val1;
 
         /// <summary>
         /// Tests a random condition.

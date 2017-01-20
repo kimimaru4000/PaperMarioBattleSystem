@@ -18,7 +18,15 @@ namespace PaperMarioBattleSystem
             Position = new Vector2(230, 150);
             AutoSelectSingle = true;
 
-            BattleActions = new List<MoveAction>() { new Hammer(), new IceSmash() };
+            BattleActions.Add(new Hammer());
+            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.IceSmash) > 0)
+            {
+                BattleActions.Add(new IceSmash());
+            }
+            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.HeadRattle) > 0)
+            {
+                BattleActions.Add(new HeadRattle());
+            }
         }
     }
 }

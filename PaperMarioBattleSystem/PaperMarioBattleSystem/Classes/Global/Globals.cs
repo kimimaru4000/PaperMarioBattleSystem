@@ -166,12 +166,23 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public int AdditionalTurns { get; private set; }
 
+        /// <summary>
+        /// Whether the entity is currently immune to the StatusEffect or not.
+        /// </summary>
+        public bool Immune { get; private set; }
+
         public static StatusPropertyHolder Default => new StatusPropertyHolder(100, 0);
 
         public StatusPropertyHolder(int statusPercentage, int additionalTurns)
         {
             StatusPercentage = UtilityGlobals.Clamp(statusPercentage, 0, int.MaxValue);
             AdditionalTurns = additionalTurns;
+            Immune = false;
+        }
+
+        public StatusPropertyHolder(int statusPercentage, int additionalTurns, bool immune) : this (statusPercentage, additionalTurns)
+        {
+            Immune = immune;
         }
     }
 

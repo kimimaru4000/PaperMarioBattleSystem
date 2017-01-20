@@ -89,6 +89,7 @@
     <Compile Include="Classes\Actions\NoAction.cs" />
     <Compile Include="Classes\Actions\Player\ChangePartner.cs" />
     <Compile Include="Classes\Actions\Special\Focus.cs" />
+    <Compile Include="Classes\Actions\Special\Lullaby.cs" />
     <Compile Include="Classes\Actions\Special\Refresh.cs" />
     <Compile Include="Classes\Actions\Special\SpecialMoveAction.cs" />
     <Compile Include="Classes\Actions\Sushie\TidalWave.cs" />
@@ -122,6 +123,8 @@
     <Compile Include="Classes\Collectibles\Badges\DoubleDipBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DoubleDipPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DoublePainBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\FeelingFineBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\FeelingFinePBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FireShieldBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FlowerSaverBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FlowerSaverPBadge.cs" />
@@ -191,6 +194,7 @@
     <Compile Include="Classes\Sequences\NoSequence.cs" />
     <Compile Include="Classes\Sequences\Sequence.cs" />
     <Compile Include="Classes\Sequences\Special\FocusSequence.cs" />
+    <Compile Include="Classes\Sequences\Special\LullabySequence.cs" />
     <Compile Include="Classes\Sequences\Special\RefreshSequence.cs" />
     <Compile Include="Classes\Sequences\Special\SpecialMoveSequence.cs" />
     <Compile Include="Classes\Sequences\Special\StarSpiritMoveSequence.cs" />

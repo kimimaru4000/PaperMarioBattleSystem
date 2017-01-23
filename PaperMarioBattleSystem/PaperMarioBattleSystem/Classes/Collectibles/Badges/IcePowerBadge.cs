@@ -13,12 +13,14 @@ namespace PaperMarioBattleSystem
     public sealed class IcePowerBadge : Badge
     {
         private readonly ResistanceHolder FireResistance = new ResistanceHolder(ResistanceTypes.MinusDamage, 1);
+        //private readonly StrengthHolder FireStrength = new StrengthHolder(1);
         private const Enumerations.Elements IceElementOverride = Enumerations.Elements.Ice;
 
         public IcePowerBadge()
         {
             Name = "Ice Power";
-            Description = "Make Mario damage-proof when jumping on fire enemies. Attack power against fire enemies increases by 1, and damage taken from fire attacks drops by 1.";
+            Description = "Make Mario damage-proof when jumping on fire enemies. Attack power against fire enemies increases by 1, "
+                + "and damage taken from fire attacks drops by 1.";
             
             BPCost = 1;
 
@@ -32,6 +34,7 @@ namespace PaperMarioBattleSystem
 
             EntityEquipped.EntityProperties.AddResistance(Enumerations.Elements.Fire, FireResistance);
             EntityEquipped.EntityProperties.AddElementOverride(Enumerations.PhysicalAttributes.Fiery, IceElementOverride);
+            //EntityEquipped.EntityProperties.AddStrength(Enumerations.PhysicalAttributes.Fiery, FireStrength);
         }
 
         protected override void OnUnequip()
@@ -40,6 +43,7 @@ namespace PaperMarioBattleSystem
 
             EntityEquipped.EntityProperties.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
             EntityEquipped.EntityProperties.RemoveElementOverride(Enumerations.PhysicalAttributes.Fiery);
+            //EntityEquipped.EntityProperties.RemoveStrength(Enumerations.PhysicalAttributes.Fiery, FireStrength);
         }
     }
 }

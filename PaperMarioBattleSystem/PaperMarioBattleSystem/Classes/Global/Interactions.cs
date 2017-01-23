@@ -204,7 +204,7 @@ namespace PaperMarioBattleSystem
             /*Get the total damage dealt to the Victim. The amount of Full or Half Payback damage dealt to the Attacker
               uses the resulting damage value from this because Payback uses the total damage that would be dealt to the Victim.
               This occurs before factoring in elemental resistances/weaknesses from the Attacker*/
-            ElementDamageResultHolder victimElementDamage = GetElementalDamage(victim, element, damage);
+            ElementDamageResultHolder victimElementDamage = GetElementalDamage(victim, element, damage);//GetElementalDamageWithStrengths(attacker, victim, element, damage);
 
             int unscaledVictimDamage = victimElementDamage.Damage;
 
@@ -315,22 +315,22 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Calculates the result of elemental damage on a BattleEntity, based on its weaknesses and resistances to that Element
+        /// Calculates the result of elemental damage on a BattleEntity, based on its weaknesses and resistances to that Element.
         /// </summary>
-        /// <param name="entity">The BattleEntity being damaged</param>
-        /// <param name="element">The element the entity is attacked with</param>
-        /// <param name="damage">The initial damage of the attack</param>
-        /// <returns>An ElementDamageHolder stating the result and final damage dealt to this entity</returns>
-        private static ElementDamageResultHolder GetElementalDamage(BattleEntity entity, Elements element, int damage)
+        /// <param name="victim">The BattleEntity being damaged.</param>
+        /// <param name="element">The element the entity is attacked with.</param>
+        /// <param name="damage">The initial damage of the attack.</param>
+        /// <returns>An ElementDamageHolder stating the result and final damage dealt to this entity.</returns>
+        private static ElementDamageResultHolder GetElementalDamage(BattleEntity victim, Elements element, int damage)
         {
             ElementDamageResultHolder elementDamageResult = new ElementDamageResultHolder(ElementInteractionResult.Damage, damage);
 
             //NOTE: If an entity is both resistant and weak to a particular element, they cancel out.
             //I decided to go with this approach because it's the simplest for this situation, which
             //doesn't seem desirable to begin with but could be interesting in its application
-            WeaknessHolder weakness = entity.EntityProperties.GetWeakness(element);
-            ResistanceHolder resistance = entity.EntityProperties.GetResistance(element);
-            
+            WeaknessHolder weakness = victim.EntityProperties.GetWeakness(element);
+            ResistanceHolder resistance = victim.EntityProperties.GetResistance(element);
+
             //If there's both a weakness and resistance, return
             if (weakness.WeaknessType != WeaknessTypes.None && resistance.ResistanceType != ResistanceTypes.None)
                 return elementDamageResult;
@@ -361,6 +361,26 @@ namespace PaperMarioBattleSystem
 
             return elementDamageResult;
         }
+
+        /*/// <summary>
+        /// Calculates the result of elemental damage on a BattleEntity, based on its weaknesses and resistances to that Element.
+        /// This also factors in the strengths of the attacker based on the BattleEntity's PhysicalAttributes.
+        /// </summary>
+        /// <param name="attacker">The BattleEntity dealing damage.</param>
+        /// <param name="victim">The BattleEntity being damaged.</param>
+        /// <param name="element">The element the entity is attacked with.</param>
+        /// <param name="damage">The initial damage of the attack.</param>
+        /// <returns>An ElementDamageHolder stating the result and final damage dealt to this entity.</returns>
+        private static ElementDamageResultHolder GetElementalDamageWithStrengths(BattleEntity attacker, BattleEntity victim, Elements element, int damage)
+        {
+            ElementDamageResultHolder elementDamageResult = GetElementalDamage(victim, element, damage);
+
+            //Factor in strengths
+            StrengthHolder strength = attacker.EntityProperties.GetTotalStrength(victim);
+            elementDamageResult.Damage += strength.Value;
+
+            return elementDamageResult;
+        }*/
 
         /// <summary>
         /// Filters an array of StatusEffects depending on whether they will be inflicted on a BattleEntity

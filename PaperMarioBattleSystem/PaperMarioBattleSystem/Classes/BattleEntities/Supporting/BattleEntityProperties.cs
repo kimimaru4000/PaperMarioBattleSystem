@@ -36,10 +36,15 @@ namespace PaperMarioBattleSystem
         protected readonly Dictionary<Elements, List<WeaknessHolder>> Weaknesses = new Dictionary<Elements, List<WeaknessHolder>>();
 
         /// <summary>
-        /// The Resistances the entity has
+        /// The Resistances the entity has.
         /// <para>A List is used for the value so additional Resistances can be added via moves or equipment.</para>
         /// </summary>
         protected readonly Dictionary<Elements, List<ResistanceHolder>> Resistances = new Dictionary<Elements, List<ResistanceHolder>>();
+
+        ///// <summary>
+        ///// The Strengths the entity has against entities with PhysicalAttributes.
+        ///// </summary>
+        //protected readonly Dictionary<PhysicalAttributes, List<StrengthHolder>> Strengths = new Dictionary<PhysicalAttributes, List<StrengthHolder>>();
 
         /// <summary>
         /// The types of Elemental damage to use when dealing damage to BattleEntities with particular PhysicalAttributes
@@ -402,7 +407,7 @@ namespace PaperMarioBattleSystem
         #region Resistance Methods
 
         ///<summary>
-        ///Adds a Weakness on the BattleEntity
+        ///Adds a Resistance on the BattleEntity
         ///</summary>
         ///<param name="element">The element the BattleEntity is resistant to</param>
         ///<param name="resistanceHolder">The data for the Resistance</param>
@@ -475,6 +480,101 @@ namespace PaperMarioBattleSystem
         {
             return Resistances.ContainsKey(element);
         }
+
+        #endregion
+
+        #region Strength Methods
+
+        ///<summary>
+        ///Adds a Strength to the BattleEntity.
+        ///</summary>
+        ///<param name="physAttribute">The PhysicalAttribute the BattleEntity is strong against.</param>
+        ///<param name="strengthHolder">The data for the Strength.</param>
+        /*public void AddStrength(PhysicalAttributes physAttribute, StrengthHolder strengthHolder)
+        {
+            if (HasStrength(physAttribute) == false)
+            {
+                Strengths.Add(physAttribute, new List<StrengthHolder>());
+            }
+
+            Strengths[physAttribute].Add(strengthHolder);
+            Debug.Log($"Added strength value of {strengthHolder.Value} to {Entity.Name} for the {physAttribute} PhysicalAttribute!");
+        }
+
+        /// <summary>
+        /// Removes a Strength from the BattleEntity.
+        /// </summary>
+        /// <param name="physAttribute">The PhysicalAttribute the BattleEntity is strong against.</param>
+        public void RemoveStrength(PhysicalAttributes physAttribute, StrengthHolder strengthHolder)
+        {
+            if (HasStrength(physAttribute) == false)
+            {
+                Debug.LogWarning($"{Entity.Name} does not have a strength for {physAttribute}");
+                return;
+            }
+
+            bool removed = Strengths[physAttribute].Remove(strengthHolder);
+            if (Strengths[physAttribute].Count == 0)
+            {
+                Strengths.Remove(physAttribute);
+            }
+
+            if (removed == true)
+                Debug.Log($"Removed strength value of {strengthHolder.Value} from the {physAttribute} PhysicalAttribute on {Entity.Name}!");
+        }
+
+        /// <summary>
+        /// Gets this entity's total strength to a particular PhysicalAttribute.
+        /// </summary>
+        /// <param name="physAttribute">The PhysicalAttribute to test a strength towards.</param>
+        /// <returns>A copy of the StrengthHolder associated with the element if found, otherwise default strength data.</returns>
+        private StrengthHolder GetStrength(PhysicalAttributes physAttribute)
+        {
+            if (HasStrength(physAttribute) == false)
+            {
+                //Debug.Log($"{Entity.Name} does not have a strength for {physAttribute}");
+                return StrengthHolder.Default;
+            }
+
+            StrengthHolder strengthHolder = default(StrengthHolder);
+
+            //Get the total resistance
+            Strengths[physAttribute].ForEach((strength) =>
+            {
+                strengthHolder.Value += strength.Value;
+            });
+
+            return strengthHolder;
+        }
+
+        /// <summary>
+        /// Tells if the BattleEntity has a Strength to a particular PhysicalAttribute.
+        /// </summary>
+        /// <param name="physAttribute">The PhysicalAttribute.</param>
+        /// <returns>true if the BattleEntity has a Strength to the PhysicalAttribute, false otherwise.</returns>
+        public bool HasStrength(PhysicalAttributes physAttribute)
+        {
+            return Strengths.ContainsKey(physAttribute);
+        }
+
+        /// <summary>
+        /// Retrieves the total Strength this BattleEntity has against all PhysicalAttributes found on a victim.
+        /// </summary>
+        /// <param name="attacker">The BattleEntity this one is attacking.</param>
+        /// <returns>A StrengthHolder with information about how much additional damage this BattleEntity will do to the victim.</returns>
+        public StrengthHolder GetTotalStrength(BattleEntity victim)
+        {
+            StrengthHolder totalStrength = StrengthHolder.Default;
+            PhysicalAttributes[] victimAttributes = victim.EntityProperties.GetAllPhysAttributes();
+
+            for (int i = 0; i < victimAttributes.Length; i++)
+            {
+                StrengthHolder attributeStrength = GetStrength(victimAttributes[i]);
+                totalStrength.Value += attributeStrength.Value;
+            }
+
+            return totalStrength;
+        }*/
 
         #endregion
 

@@ -134,6 +134,18 @@ namespace PaperMarioBattleSystem
         #endregion
     }
 
+    public struct StrengthHolder
+    {
+        public int Value;
+
+        public static StrengthHolder Default => new StrengthHolder(0);
+
+        public StrengthHolder(int value)
+        {
+            Value = value;
+        }
+    }
+
     public struct ContactResultInfo
     {
         public StatusGlobals.PaybackHolder Paybackholder;

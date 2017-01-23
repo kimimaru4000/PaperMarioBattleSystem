@@ -51,3 +51,9 @@ protected readonly Dictionary<PhysicalAttributes, Elements> ElementOverrides;
 
 Only one Element can be allowed for each PhysicalAttribute. This is because there's no way to determine which Element
 would take priority, considering Ice Power is the only case where this is used across the first two Paper Mario games.
+
+Update (1/22/17)
+----------------
+Thanks to Jdaster64, we now know that equipping multiple Ice Power badges increases your damage against Fire enemies by 1 per badge equipped.
+
+I need to figure out how to implement this to make it as flexible as possible and work well with other attacks like Ice Smash.

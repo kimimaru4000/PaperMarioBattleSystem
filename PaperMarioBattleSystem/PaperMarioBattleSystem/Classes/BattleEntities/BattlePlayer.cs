@@ -42,7 +42,19 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnEnd();
 
-            PlayAnimation(AnimationGlobals.IdleName);
+            PlayAnimation(GetIdleAnim());
+        }
+
+        public override string GetIdleAnim()
+        {
+            switch (HealthState)
+            {
+                case HealthStates.Danger:
+                case HealthStates.Peril:
+                    return AnimationGlobals.PlayerBattleAnimations.DangerName;
+            }
+            
+            return base.GetIdleAnim();
         }
 
         /// <summary>

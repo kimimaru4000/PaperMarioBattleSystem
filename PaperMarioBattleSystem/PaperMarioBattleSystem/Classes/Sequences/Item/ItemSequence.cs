@@ -36,7 +36,7 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new WaitSeqAction(WaitDuration);
                     break;
                 case 2:
-                    User.PlayAnimation(AnimationGlobals.IdleName);
+                    User.PlayAnimation(User.GetIdleAnim());
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
-                    User.PlayAnimation(AnimationGlobals.IdleName);
+                    User.PlayAnimation(User.GetIdleAnim());
 
                     //Remove the item from the Inventory when it's finished
                     //NOTE: I'm not sure if this is the best place to do this yet

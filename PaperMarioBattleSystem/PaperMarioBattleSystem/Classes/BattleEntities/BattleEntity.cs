@@ -722,6 +722,19 @@ namespace PaperMarioBattleSystem
             CurrentAnim.Play(onFinish);
         }
 
+        /// <summary>
+        /// Gets the idle animation of the BattleEntity based on its HealthState and the Status Effects it's inflicted with.
+        /// </summary>
+        /// <returns>A string with the idle animation name the BattleEntity has.</returns>
+        public virtual string GetIdleAnim()
+        {
+            switch (HealthState)
+            {
+                case HealthStates.Dead: return AnimationGlobals.DeathName;
+                default: return AnimationGlobals.IdleName;
+            }
+        }
+
         #endregion
 
         #region Equipment Methods

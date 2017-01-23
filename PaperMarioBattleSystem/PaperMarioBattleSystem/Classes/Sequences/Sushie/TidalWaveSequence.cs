@@ -59,7 +59,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.IdleName);
+                    User.PlayAnimation(User.GetIdleAnim());
                     StartActionCommandInput();
                     CurSequenceAction = new WaitForCommandSeqAction(1500f, actionCommand, CommandEnabled);
                     break;
@@ -106,7 +106,7 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
-                    User.PlayAnimation(AnimationGlobals.IdleName);
+                    User.PlayAnimation(User.GetIdleAnim());
                     EndSequence();
                     break;
                 default:

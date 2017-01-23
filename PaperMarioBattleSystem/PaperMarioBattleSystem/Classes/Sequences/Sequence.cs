@@ -617,6 +617,10 @@ namespace PaperMarioBattleSystem
         {
             int totalDamage = actionDamage + User.BattleStats.TotalAttack + GetChargeDamage();
 
+            //Factor in strengths
+            //StrengthHolder strength = attacker.EntityProperties.GetTotalStrength(victim);
+            //elementDamageResult.Damage += strength.Value;
+
             return totalDamage;
         }
 

@@ -144,7 +144,7 @@ namespace PaperMarioBattleSystem
          * 6. If Guarded, subtract 1 from the damage and add the # of Damage Dodge Badges to the victim's Defense. If Superguarded, damage = 0
          * 7. If the damage dealt is not Piercing, subtract the victim's Defense from the damage
          * 8. Multiply by: (number of Double Pains equipped + 1)
-         * 9. If in Danger or Peril, divide by: (number of Last Stands equipped + 1) (round up the damage if it's > 0 and < 1)
+         * 9. If in Danger or Peril, divide by: (number of Last Stands equipped + 1) (ceiling the damage if it's > 0)
          * 
          * 10. Clamp the damage: Min = 0, Max = 99
          * 
@@ -204,7 +204,7 @@ namespace PaperMarioBattleSystem
             /*Get the total damage dealt to the Victim. The amount of Full or Half Payback damage dealt to the Attacker
               uses the resulting damage value from this because Payback uses the total damage that would be dealt to the Victim.
               This occurs before factoring in elemental resistances/weaknesses from the Attacker*/
-            ElementDamageResultHolder victimElementDamage = GetElementalDamage(victim, element, damage);//GetElementalDamageWithStrengths(attacker, victim, element, damage);
+            ElementDamageResultHolder victimElementDamage = GetElementalDamage(victim, element, damage);
 
             int unscaledVictimDamage = victimElementDamage.Damage;
 
@@ -246,10 +246,10 @@ namespace PaperMarioBattleSystem
             //Factor in Last Stand for the Victim, if the Victim is in Danger or Peril
             if (victim.IsInDanger == true)
             {
-                //NOTE: PM rounds down, whereas TTYD rounds up. We're going with the latter
-                //I'm not sure if TTYD always ceilings the value (Ex. 3.2 turns to 4) or does standard rounding, so I'll stick with standard rounding for now
+                //PM rounds down, whereas TTYD rounds up. We're going with the latter
+                //TTYD always ceilings the value (Ex. 3.2 turns to 4)
                 int lastStandDivider = (1 + victim.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.LastStand));
-                scaledVictimDamage = (int)Math.Round(scaledVictimDamage / (float)lastStandDivider);
+                scaledVictimDamage = (int)Math.Ceiling(scaledVictimDamage / (float)lastStandDivider);
             }
 
             //Clamp Victim damage
@@ -361,26 +361,6 @@ namespace PaperMarioBattleSystem
 
             return elementDamageResult;
         }
-
-        /*/// <summary>
-        /// Calculates the result of elemental damage on a BattleEntity, based on its weaknesses and resistances to that Element.
-        /// This also factors in the strengths of the attacker based on the BattleEntity's PhysicalAttributes.
-        /// </summary>
-        /// <param name="attacker">The BattleEntity dealing damage.</param>
-        /// <param name="victim">The BattleEntity being damaged.</param>
-        /// <param name="element">The element the entity is attacked with.</param>
-        /// <param name="damage">The initial damage of the attack.</param>
-        /// <returns>An ElementDamageHolder stating the result and final damage dealt to this entity.</returns>
-        private static ElementDamageResultHolder GetElementalDamageWithStrengths(BattleEntity attacker, BattleEntity victim, Elements element, int damage)
-        {
-            ElementDamageResultHolder elementDamageResult = GetElementalDamage(victim, element, damage);
-
-            //Factor in strengths
-            StrengthHolder strength = attacker.EntityProperties.GetTotalStrength(victim);
-            elementDamageResult.Damage += strength.Value;
-
-            return elementDamageResult;
-        }*/
 
         /// <summary>
         /// Filters an array of StatusEffects depending on whether they will be inflicted on a BattleEntity

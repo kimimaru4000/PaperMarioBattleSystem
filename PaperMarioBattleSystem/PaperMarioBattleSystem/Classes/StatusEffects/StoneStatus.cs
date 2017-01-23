@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
             //Resume all of the entity's Negative StatusEffects
             EntityAfflicted.SuspendOrResumeAlignmentStatuses(false, StatusAlignments.Negative, StatusType);
 
-            EntityAfflicted.PlayAnimation(AnimationGlobals.IdleName);
+            EntityAfflicted.PlayAnimation(EntityAfflicted.GetIdleAnim());
 
             Debug.Log($"{StatusType} has ended and Resumed all negative StatusEffects on {EntityAfflicted.Name}!");
         }
@@ -62,7 +62,7 @@ namespace PaperMarioBattleSystem
             //Remove Invincibility and don't do anything else to avoid Suspending/Resuming conflicts with other StatusEffects
             EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Invincible);
 
-            EntityAfflicted.PlayAnimation(AnimationGlobals.IdleName);
+            EntityAfflicted.PlayAnimation(EntityAfflicted.GetIdleAnim());
         }
 
         protected sealed override void OnResume()

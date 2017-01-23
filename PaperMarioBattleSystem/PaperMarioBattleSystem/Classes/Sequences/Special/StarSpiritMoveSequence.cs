@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new WaitSeqAction(WaitTime);
                     break;
                 case 3:
-                    User.PlayAnimation(AnimationGlobals.IdleName);
+                    User.PlayAnimation(User.GetIdleAnim());
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:

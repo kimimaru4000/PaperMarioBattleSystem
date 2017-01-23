@@ -72,8 +72,10 @@ namespace PaperMarioBattleSystem
             SecondStartPos = SecondEntity.Position;
 
             //Play running animations
-            FirstEntity.PlayAnimation(AnimationGlobals.RunningName);
-            SecondEntity.PlayAnimation(AnimationGlobals.RunningName);
+            if (FirstEntity.IsDead == false)
+                FirstEntity.PlayAnimation(AnimationGlobals.RunningName);
+            if (SecondEntity.IsDead == false)
+                SecondEntity.PlayAnimation(AnimationGlobals.RunningName);
 
             ElapsedTime = 0f;
         }
@@ -87,8 +89,10 @@ namespace PaperMarioBattleSystem
 
             //Play idle animations again
             //NOTE: Get the correct idle (Ex. Danger/Peril and various Status Effects cause entities to have different idle animations)
-            FirstEntity.PlayAnimation(AnimationGlobals.IdleName);
-            SecondEntity.PlayAnimation(AnimationGlobals.IdleName);
+            if (FirstEntity.IsDead == false)
+                FirstEntity.PlayAnimation(FirstEntity.GetIdleAnim());
+            if (SecondEntity.IsDead == false)
+                SecondEntity.PlayAnimation(FirstEntity.GetIdleAnim());
 
             ElapsedTime = 0f;
         }

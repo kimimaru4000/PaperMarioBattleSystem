@@ -114,7 +114,7 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration / 4f);
                     break;
                 case 1:
-                    User.PlayAnimation(AnimationGlobals.IdleName);
+                    User.PlayAnimation(User.GetIdleAnim());
                     EndSequence();
                     break;
                 default:

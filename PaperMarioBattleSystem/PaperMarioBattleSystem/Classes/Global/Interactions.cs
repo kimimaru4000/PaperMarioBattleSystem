@@ -169,6 +169,9 @@ namespace PaperMarioBattleSystem
         /// <returns>An InteractionResult containing InteractionHolders for both the victim and the attacker</returns>
         public static InteractionResult GetDamageInteraction(InteractionParamHolder interactionParam)
         {
+            //NOTE: Instant kills also seem to be Status Effects, as indicated by Showstopper
+            //Look more into this
+
             InteractionResult finalInteractionResult = new InteractionResult();
 
             BattleEntity attacker = interactionParam.Attacker;
@@ -251,6 +254,9 @@ namespace PaperMarioBattleSystem
                 int lastStandDivider = (1 + victim.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.LastStand));
                 scaledVictimDamage = (int)Math.Ceiling(scaledVictimDamage / (float)lastStandDivider);
             }
+
+            //NOTE: If the Attacker is Invincible, ignore all Payback damage and effects, including Electrified
+            //If the Victim is Invincible, ignore all damage and Status Effects
 
             //Clamp Victim damage
             scaledVictimDamage = UtilityGlobals.Clamp(scaledVictimDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);

@@ -298,6 +298,7 @@ namespace PaperMarioBattleSystem
         public bool TargetsEntity;
         public Enumerations.HeightStates[] HeightsAffected;
         public bool HideCost;
+        public bool AllOrNothingAffected;
 
         public static MoveActionData Default => new MoveActionData(null, 0, "Error", TargetSelectionMenu.EntitySelectionType.Single,
             Enumerations.EntityTypes.Enemy, true, null);
@@ -314,6 +315,7 @@ namespace PaperMarioBattleSystem
             TargetsEntity = true;
             HeightsAffected = heightsAffected;
             HideCost = false;
+            AllOrNothingAffected = true;
         }
 
         public MoveActionData(Texture2D icon, int fpCost, bool usesCharge, string description, TargetSelectionMenu.EntitySelectionType selectionType,
@@ -328,6 +330,7 @@ namespace PaperMarioBattleSystem
             TargetsEntity = true;
             HeightsAffected = heightsAffected;
             HideCost = false;
+            AllOrNothingAffected = true;
         }
 
         public MoveActionData(Texture2D icon, int fpCost, string description, TargetSelectionMenu.EntitySelectionType selectionType,
@@ -335,6 +338,13 @@ namespace PaperMarioBattleSystem
                 description, selectionType, entityType, heightsAffected)
         {
             TargetsEntity = targetsEntity;
+        }
+
+        public MoveActionData(Texture2D icon, int fpCost, string description, bool allOrNothingAffected,
+            TargetSelectionMenu.EntitySelectionType selectionType, Enumerations.EntityTypes entityType, Enumerations.HeightStates[] heightsAffected)
+            : this(icon, fpCost, description, selectionType, entityType, heightsAffected)
+        {
+            AllOrNothingAffected = allOrNothingAffected;
         }
     }
 

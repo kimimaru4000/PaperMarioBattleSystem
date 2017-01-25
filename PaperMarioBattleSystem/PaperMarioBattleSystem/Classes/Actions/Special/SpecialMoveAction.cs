@@ -10,6 +10,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The base class for Special Moves, which use up Star Power.
+    /// <para>Special Moves are unaffected by All Or Nothing; make sure AllOrNothingAffected is false when defining move data.</para>
     /// </summary>
     public class SpecialMoveAction : MoveAction
     {

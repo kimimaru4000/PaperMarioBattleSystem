@@ -14,7 +14,12 @@ namespace PaperMarioBattleSystem
     {
         protected Animation Anim = null;
 
-        public WaitForAnimBattleEvent(Animation anim)// : base(0)
+        protected WaitForAnimBattleEvent()
+        {
+
+        }
+
+        public WaitForAnimBattleEvent(Animation anim)
         {
             Anim = anim;
         }

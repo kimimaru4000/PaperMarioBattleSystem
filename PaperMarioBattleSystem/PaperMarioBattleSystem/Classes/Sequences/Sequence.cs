@@ -536,18 +536,22 @@ namespace PaperMarioBattleSystem
 
             int totalDamage = isTotalDamage == true ? damage : GetTotalDamage(damage);
 
-            //Check for the All or Nothing Badge
-            //If it's equipped, add 1 if the Action Command succeeded, otherwise set the damage to the minimum value
-            int allOrNothingCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.AllOrNothing);
-            if (allOrNothingCount > 0)
+            //Check for the All or Nothing Badge if the move is affected by it
+            //We check for it here since the CommandResult is fully determined by this point
+            if (Action.MoveProperties.AllOrNothingAffected == true)
             {
-                if (CommandResult == ActionCommand.CommandResults.Success)
+                //If it's equipped, add the number to the damage if the Action Command succeeded, otherwise set the damage to the minimum value
+                int allOrNothingCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.AllOrNothing);
+                if (allOrNothingCount > 0)
                 {
-                    totalDamage += allOrNothingCount;
-                }
-                else if (CommandResult == ActionCommand.CommandResults.Failure)
-                {
-                    totalDamage = int.MinValue;
+                    if (CommandResult == ActionCommand.CommandResults.Success)
+                    {
+                        totalDamage += allOrNothingCount;
+                    }
+                    else if (CommandResult == ActionCommand.CommandResults.Failure)
+                    {
+                        totalDamage = int.MinValue;
+                    }
                 }
             }
 
@@ -638,9 +642,9 @@ namespace PaperMarioBattleSystem
 
         #region Healing Methods
 
-        //NOTE: Test if healing moves can miss (Ms. Mowz' last move - Smooch I think)
         /// <summary>
         /// Heals a set of BattleEntities with this MoveAction.
+        /// <para>Healing moves cannot miss.</para>
         /// </summary>
         /// <param name="healingData">The HealingData containing HP, FP, and more.</param>
         /// <param name="entities">The BattleEntities to heal.</param>

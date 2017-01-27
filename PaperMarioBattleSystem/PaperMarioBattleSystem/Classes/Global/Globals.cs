@@ -670,18 +670,15 @@ namespace PaperMarioBattleSystem
             //Neutral
             None, Allergic,
             //Positive
-            Charged, DEFUp, Dodgy, Electrified, Fast, Huge, Invisible, Payback, POWUp, HPRegen, FPRegen, Stone,
+            Charged, DEFUp, Dodgy, Electrified, Fast, Huge, Invisible, Payback, POWUp, HoldFast, HPRegen, FPRegen, Stone,
             TurboCharge, WaterBlock, CloudNine,
             //Negative
-            Burn, Confused, DEFDown, Dizzy, Frozen, Immobilized, NoSkills, Poison, POWDown, Sleep, Slow, Soft, Tiny, Injured, Paralyzed
+            Burn, Confused, DEFDown, Dizzy, Frozen, Immobilized, NoSkills, Poison, POWDown, Sleep, Slow, Soft, Tiny, Injured, Paralyzed,
+            KO, Fright, Blown, Lifted
         }
 
         public enum AdditionalProperty
         {
-            Frightened,
-            LiftedAway,
-            BlownAway,
-            InstantKO,
             PositiveStatusImmune,
             NeutralStatusImmune,
             NegativeStatusImmune,
@@ -1159,6 +1156,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private readonly static Dictionary<Enumerations.StatusTypes, int> StatusOrder = new Dictionary<Enumerations.StatusTypes, int>()
         {
+            { Enumerations.StatusTypes.KO, 350 }, { Enumerations.StatusTypes.Fright, 349 }, { Enumerations.StatusTypes.Blown, 348 }, { Enumerations.StatusTypes.Lifted, 347 },
             { Enumerations.StatusTypes.WaterBlock, 250 }, { Enumerations.StatusTypes.CloudNine, 249 }, { Enumerations.StatusTypes.TurboCharge, 248 },
             { Enumerations.StatusTypes.Poison, 200 }, { Enumerations.StatusTypes.Burn, 199 },
             { Enumerations.StatusTypes.Fast, 150 }, { Enumerations.StatusTypes.Slow, 149 },
@@ -1169,7 +1167,7 @@ namespace PaperMarioBattleSystem
             { Enumerations.StatusTypes.Dizzy, 80 }, { Enumerations.StatusTypes.Dodgy, 79 },
             { Enumerations.StatusTypes.Electrified, 70 }, { Enumerations.StatusTypes.Invisible, 69 },
             { Enumerations.StatusTypes.Confused, 50 },
-            { Enumerations.StatusTypes.Payback, 20 },
+            { Enumerations.StatusTypes.Payback, 25 }, { Enumerations.StatusTypes.HoldFast, 24 },
             { Enumerations.StatusTypes.NoSkills, 10 },
             { Enumerations.StatusTypes.Charged, 5 },
             { Enumerations.StatusTypes.Allergic, 1 }

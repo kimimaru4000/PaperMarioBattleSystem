@@ -13,9 +13,9 @@ namespace PaperMarioBattleSystem
     /// When direct contact is made with the entity afflicted, the attacker receives half the damage dealt in a specific Element
     /// and can be inflicted with one or more StatusEffects.
     /// </summary>
-    public sealed class PaybackStatus : StatusEffect
+    public class PaybackStatus : StatusEffect
     {
-        private PaybackHolder Paybackholder = PaybackHolder.Default;
+        protected PaybackHolder Paybackholder = PaybackHolder.Default;
 
         public PaybackStatus(int duration, PaybackHolder paybackHolder)
         {
@@ -29,27 +29,27 @@ namespace PaperMarioBattleSystem
             Paybackholder = paybackHolder;
         }
 
-        protected override void OnAfflict()
+        protected sealed override void OnAfflict()
         {
             EntityAfflicted.EntityProperties.AddPayback(Paybackholder);
         }
 
-        protected override void OnEnd()
+        protected sealed override void OnEnd()
         {
             EntityAfflicted.EntityProperties.RemovePayback(Paybackholder);
         }
 
-        protected override void OnPhaseCycleStart()
+        protected sealed override void OnPhaseCycleStart()
         {
             IncrementTurns();
         }
 
-        protected override void OnSuspend()
+        protected sealed override void OnSuspend()
         {
             EntityAfflicted.EntityProperties.RemovePayback(Paybackholder);
         }
 
-        protected override void OnResume()
+        protected sealed override void OnResume()
         {
             EntityAfflicted.EntityProperties.AddPayback(Paybackholder);
         }

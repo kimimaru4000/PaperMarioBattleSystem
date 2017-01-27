@@ -1,0 +1,24 @@
+Additional Status Effects (1/26/17)
+-----------------------------------
+By attempting to find a way to inflict the unused POWDown Status Effect with a Thunder Rage in TTYD,
+I found out that several other effects are actually Status Effects.
+
+Hold Fast - A subset of Payback. It doesn't have an icon, but it has the same battle message.
+KO - Caused by Showstopper. This Status Effect instantly kills any entity afflicted with it.
+Fright - A subset of KO. This Status Effect causes any entity afflicted with it to run away from battle, essentially killing it.
+Gale Force - A subset of KO. This Status Effect causes any entity afflicted with it to be blown away from battle, essentially killing it.
+
+Air Lift
+--------
+Though there's nothing indicating this is a Status Effect, it's best to classify this as a subset of KO.
+
+-All KO Status Effects and subsets of KO are the highest priority Status Effects. Most do not have battle messages, but I will confirm this.
+
+Allergic
+--------
+Through testing, I inflicted Immobilized and Allergic on a Goomba at the same time. What's interesting is that when Allergic was inflicted,
+Immobilized wasn't inflicted despite it having a higher priority than Allergic. This indicates that either the Battle Message priorities of the
+two Status Effects are different than the priorities of their actual Statuses, or that no other Status Effect can be inflicted with Allergic
+at the same time.
+
+-Another thing to check is to see if Allergic prevents KO from being inflicted.

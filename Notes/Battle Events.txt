@@ -140,3 +140,8 @@ My steps to confirm this were as follows:
 which is done through hitting an enemy on the overworld with a battle modifier cheat, they won't say their dialogue at the start.
 
 -The "Can't flee this fight" message occurs before Lucky Start kicks in
+
+-Stage hazard events happen before the Battle Messages for Status Effects inflicted do.
+
+-When an attack inflicts multiple Status Effects (via cheats), the last one inflicted's sound and splash effect is played, but all Battle Messages
+still go in order of status priority.

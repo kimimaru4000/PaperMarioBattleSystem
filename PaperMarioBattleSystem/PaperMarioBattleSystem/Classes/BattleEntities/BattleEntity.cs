@@ -203,7 +203,7 @@ namespace PaperMarioBattleSystem
             TakeDamage(new InteractionHolder(null, damage, element, ElementInteractionResult.Damage, ContactTypes.None, piercing, null, true));
         }
 
-        public virtual void HealHP(int hp)
+        public void HealHP(int hp)
         {
             BattleStats.HP = UtilityGlobals.Clamp(BattleStats.HP + hp, 0, BattleStats.MaxHP);
 
@@ -217,7 +217,7 @@ namespace PaperMarioBattleSystem
             Debug.Log($"{Name} healed {fp} FP!");
         }
 
-        public virtual void LoseHP(int hp)
+        public void LoseHP(int hp)
         {
             BattleStats.HP = UtilityGlobals.Clamp(BattleStats.HP - hp, 0, BattleStats.MaxHP);
             UpdateHealthState();

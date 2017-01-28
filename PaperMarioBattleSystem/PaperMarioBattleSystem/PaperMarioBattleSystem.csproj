@@ -258,6 +258,7 @@
     <Compile Include="Classes\StatusEffects\TurboChargeStatus.cs" />
     <Compile Include="Classes\StatusEffects\WaterBlockStatus.cs" />
     <Compile Include="Classes\UIElements\BattleHUD.cs" />
+    <Compile Include="Classes\ExtendedTypes\CroppedTexture2D.cs" />
     <Compile Include="Classes\UIElements\IDisableable.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />
     <Compile Include="Classes\UIElements\UIElement.cs" />
@@ -305,6 +306,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Items.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\UI\Battle\BattleGFX.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\UI\Battle\BattleHUD.png">

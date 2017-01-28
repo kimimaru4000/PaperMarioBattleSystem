@@ -160,7 +160,53 @@ namespace PaperMarioBattleSystem
                 }
             }
 
+            //Battle Debug
+            if (Input.GetKey(Keys.RightShift) == true)
+            {
+                DebugBattle();
+            }
+
             FPSCounter.Update();
+        }
+
+        public static void DebugBattle()
+        {
+            //Default to Players - if holding 0, switch to Enemies
+            Enumerations.EntityTypes entityType = Enumerations.EntityTypes.Player;
+            if (Input.GetKey(Keys.D0) == true) entityType = Enumerations.EntityTypes.Enemy;
+
+            int turnCount = 3;
+
+            //Inflict Poison
+            if (Input.GetKeyDown(Keys.P) == true)
+            {
+                DebugInflictStatus(new PoisonStatus(turnCount), entityType);
+            }
+            //Inflict Invisible
+            else if (Input.GetKeyDown(Keys.I) == true)
+            {
+                DebugInflictStatus(new InvisibleStatus(turnCount), entityType);
+            }
+            //Inflict Electrified
+            else if (Input.GetKeyDown(Keys.E) == true)
+            {
+                DebugInflictStatus(new ElectrifiedStatus(turnCount), entityType);
+            }
+            //Inflict Fast
+            else if (Input.GetKeyDown(Keys.F) == true)
+            {
+                DebugInflictStatus(new FastStatus(turnCount), entityType);
+            }
+        }
+
+        private static void DebugInflictStatus(StatusEffect status, Enumerations.EntityTypes entityType)
+        {
+            BattleEntity[] entities = BattleManager.Instance.GetEntities(entityType, null);
+
+            for (int i = 0; i < entities.Length; i++)
+            {
+                entities[i].EntityProperties.AfflictStatus(status);
+            }
         }
 
         public static void DebugDraw()

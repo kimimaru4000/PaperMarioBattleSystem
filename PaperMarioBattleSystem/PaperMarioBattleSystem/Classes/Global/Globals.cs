@@ -627,7 +627,7 @@ namespace PaperMarioBattleSystem
         //to the latter
         public enum PhysicalAttributes
         {
-            None, Flying, Electrified, Poisony, Spiked, Icy, Fiery, Explosive, Starry
+            None, Flying, Electrified, Poisonous, Spiked, Icy, Fiery, Explosive, Starry
         }
 
         /// <summary>
@@ -1181,6 +1181,11 @@ namespace PaperMarioBattleSystem
         /// Denotes a duration value for a StatusEffect that does not go away
         /// </summary>
         public const int InfiniteDuration = 0;
+
+        /// <summary>
+        /// Denotes the Y offset for displaying StatusEffect icons if a BattleEntity is afflicted with more than one.
+        /// </summary>
+        public const int IconYOffset = 35;
 
         #endregion
 

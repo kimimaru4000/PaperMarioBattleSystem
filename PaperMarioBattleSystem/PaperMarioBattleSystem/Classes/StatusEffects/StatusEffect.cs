@@ -120,6 +120,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public string RemovedMessage { get; protected set; } = string.Empty;
 
+        /// <summary>
+        /// The icon of the StatusEffect.
+        /// </summary>
+        public CroppedTexture2D StatusIcon { get; protected set; } = null;
+
         private bool IsInfinite => (Duration <= InfiniteDuration);
         public bool IsFinished => (IsInfinite == false && TurnsPassed >= TotalDuration);
 

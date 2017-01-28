@@ -766,6 +766,38 @@ namespace PaperMarioBattleSystem
         {
             CurrentAnim?.Draw(Position, Color.White, EntityType != EntityTypes.Enemy, .1f);
             PreviousAction?.Draw();
+
+            //Draw Status Effect icons on the BattleEntity
+            //You can't see the icons unless it's Mario or his Partner's turn and they're not in a Sequence
+            if (BattleManager.Instance.EntityTurn.EntityType == EntityTypes.Player
+                && BattleManager.Instance.EntityTurn.PreviousAction?.MoveSequence.InSequence != true)
+            {
+                Vector2 statusIconPos = new Vector2(Position.X + 10, Position.Y - 40);
+                StatusEffect[] statuses = EntityProperties.GetStatuses();
+                for (int i = 0; i < statuses.Length; i++)
+                {
+                    float yOffset = ((i + 1) * StatusGlobals.IconYOffset);
+                    Vector2 iconPos = Camera.Instance.SpriteToUIPos(new Vector2(statusIconPos.X, statusIconPos.Y - yOffset));
+
+                    float depth = .35f - (i * .01f);
+                    float turnStringDepth = depth + .0001f;
+                    string turnCountString = statuses[i].TotalDuration.ToString();
+                    if (statuses[i].TotalDuration <= StatusGlobals.InfiniteDuration) turnCountString = string.Empty;
+
+                    CroppedTexture2D texture = statuses[i].StatusIcon;
+
+                    if (texture != null && texture.Tex != null)
+                    {
+                        SpriteRenderer.Instance.Draw(texture.Tex, iconPos, texture.SourceRect, Color.White,
+                            false, depth, true);
+                    }
+                    if (string.IsNullOrEmpty(turnCountString) == false)
+                    {
+                        SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, turnCountString, iconPos + new Vector2(52, 20),
+                            Color.White, 0f, new Vector2(1f, 0f), 1f, turnStringDepth);
+                    }
+                }
+            }
         }
     }
 }

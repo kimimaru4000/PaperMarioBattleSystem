@@ -32,6 +32,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private const double GlobalRotOffset = -(Math.PI / MaxWheelActions);
 
+        /// <summary>
+        /// The icon indicating if Mario or his Partner can switch with each other.
+        /// </summary>
+        private CroppedTexture2D SwitchIcon = null;
+
         protected override int LastSelection
         {
             get
@@ -57,6 +62,9 @@ namespace PaperMarioBattleSystem
 
         protected PlayerBattleMenu(PlayerTypes playerType) : base(MenuTypes.Horizontal)
         {
+            SwitchIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+                new Rectangle(651, 13, 78, 30));
+
             PlayerType = playerType;
             
             ActionButtons.Add(new ActionButton("Tactics", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
@@ -103,7 +111,7 @@ namespace PaperMarioBattleSystem
                     ? BattleManager.Instance.GetBackPlayer() : BattleManager.Instance.GetFrontPlayer();
 
                 //Don't switch if the back player is dead
-                if (otherPlayer.UsedTurn == false && otherPlayer.IsDead == false)
+                if (CanSwitch() == true)
                 {
                     //Switch turns with Mario or the Partner
                     //This updates the front and back player references and their battle positions
@@ -139,6 +147,16 @@ namespace PaperMarioBattleSystem
             {
                 ActionButtons[i].Draw(CurSelection == i);
             }
+
+            //If Mario and his Partner can switch with each other, indicate it with the icon
+            if (CanSwitch() == true)
+            {
+                if (SwitchIcon != null && SwitchIcon.Tex != null)
+                {
+                    Vector2 pos = Camera.Instance.SpriteToUIPos(new Vector2(Position.X - 40f, Position.Y + 70f));
+                    SpriteRenderer.Instance.Draw(SwitchIcon.Tex, pos, SwitchIcon.SourceRect, Color.White, false, .2f, true);
+                }
+            }
         }
 
         private void ArrangeInCircle()
@@ -162,6 +180,18 @@ namespace PaperMarioBattleSystem
             int tripleDipCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.TripleDip);
 
             return (doubleDipCount > 0 || tripleDipCount > 0);
+        }
+
+        /// <summary>
+        /// Tells whether Mario and his Partner can switch places with each other.
+        /// </summary>
+        /// <returns>true if Mario or his Partner hasn't used up all of his or her turns and isn't dead, otherwise false.</returns>
+        private bool CanSwitch()
+        {
+            BattlePlayer otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.GetFrontPlayer()
+                    ? BattleManager.Instance.GetBackPlayer() : BattleManager.Instance.GetFrontPlayer();
+
+            return (otherPlayer.UsedTurn == false && otherPlayer.IsDead == false);
         }
     }
 }

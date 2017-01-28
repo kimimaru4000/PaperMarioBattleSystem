@@ -9,6 +9,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Zap Tap Badge - When equipped, makes Mario Electrified.
     /// </summary>
+    //NOTE: You can use a Volt Shroom with this Badge equipped. When that happens, the Volt Shroom inflicts Electrified for 5 turns,
+    //then when it ends, it does the "status ended" event and still shows you with an infinite Electrified status.
+    //The current implementation won't allow this, so find a way to make it work
     public sealed class ZapTapBadge : Badge
     {
         public ZapTapBadge()

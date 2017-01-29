@@ -192,10 +192,13 @@ namespace PaperMarioBattleSystem
             {
                 DebugInflictStatus(new ElectrifiedStatus(turnCount), entityType);
             }
-            //Inflict Fast
+            //Inflict Fast or Frozen
             else if (Input.GetKeyDown(Keys.F) == true)
             {
-                DebugInflictStatus(new FastStatus(turnCount), entityType);
+                StatusEffect status = new FastStatus(turnCount);
+                //Inflict Frozen
+                if (Input.GetKey(Keys.R) == true) status = new FrozenStatus(turnCount);
+                DebugInflictStatus(status, entityType);
             }
         }
 

@@ -41,6 +41,11 @@ Remove message: "The effect of Cloud Nine have worn off!"
 Notes: If Mario is inflicted with Stone, Lakilester will come down and scoop him up
 instead of Mario jumping onto the cloud.
 
+Spin Smash
+----------
+Using Spin Smash on Kent C. Koopa's Tail when he's flipped over causes him to drop 6 coins, which then are
+added to your total in battle shortly afterwards. This can be repeated.
+
 General
 -------
 For the Cloud Nine, Water Block, and Turbo Charge Status Effects, it shows the order

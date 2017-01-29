@@ -321,10 +321,7 @@ namespace PaperMarioBattleSystem
             Vector2 backBattlePosition = BackPlayer.BattlePosition;
 
             FrontPlayer.SetBattlePosition(backBattlePosition);
-            //FrontPlayer.Position = FrontPlayer.BattlePosition;
-
             BackPlayer.SetBattlePosition(frontBattlePosition);
-            //BackPlayer.Position = BackPlayer.BattlePosition;
 
             FrontPlayer = frontPlayer;
             BackPlayer = backPlayer;
@@ -333,9 +330,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Switches Mario and his Partner's positions in battle.
         /// </summary>
-        /// <param name="playerType">The PlayerTypes to switch to - either Mario or the Partner</param>
-        /// <param name="setTurn">If true, will set the turn to the Player switched to.
-        /// This should only be true when manually switching during either Mario or the Partner's turn</param>
+        /// <param name="playerType">The PlayerTypes to switch to - either Mario or the Partner.</param>
         public void SwitchToTurn(PlayerTypes playerType)
         {
             if (playerType == PlayerTypes.Partner)

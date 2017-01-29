@@ -64,6 +64,12 @@ namespace PaperMarioBattleSystem
         protected AnimFinish OnFinish = null;
 
         public bool Finished => AnimDone;
+
+        /// <summary>
+        /// Tells if the Animation is playing.
+        /// </summary>
+        public bool IsPlaying => (Finished == false && Paused == false);
+
         protected int MaxFrameIndex => MaxFrames - 1;
         protected Frame CurFrame => Frames[CurFrameNum];
 

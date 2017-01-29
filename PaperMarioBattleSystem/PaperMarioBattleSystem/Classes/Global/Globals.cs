@@ -762,6 +762,8 @@ namespace PaperMarioBattleSystem
             public const string HammerPickupName = "HammerPickup";
             public const string HammerWindupName = "HammerWindup";
             public const string HammerSlamName = "HammerSlam";
+
+            public const string MapLiftName = "MapLift";
         }
 
         /// <summary>
@@ -898,11 +900,28 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
-    /// Class for global values dealing with BattlePlayers.
+    /// Class for global values dealing with Action Commands.
     /// </summary>
-    public static class BattlePlayerGlobals
+    public static class ActionCommandGlobals
     {
+        #region Structs
+        
+        /// <summary>
+        /// A struct holding information Art Attack's Action Command sends.
+        /// </summary>
+        public struct ArtAttackResponse
+        {
+            public Vector2 CurStarPos;
+            public double CurElapsedTime;
 
+            public ArtAttackResponse(Vector2 curStarPos, double curElapsedTime)
+            {
+                CurStarPos = curStarPos;
+                CurElapsedTime = curElapsedTime;
+            }
+        }
+
+        #endregion
     }
 
     /// <summary>

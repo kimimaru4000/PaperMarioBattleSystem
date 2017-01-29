@@ -440,7 +440,7 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Starts the Action Command's input.
-        /// If the Action Command is not enabled, it will switch to the Failed branch.
+        /// If the Action Command is not enabled, it will call OnCommandFailed().
         /// </summary>
         protected void StartActionCommandInput()
         {

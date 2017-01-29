@@ -21,6 +21,7 @@ namespace PaperMarioBattleSystem
             BattleActions.Add(new Focus());
             BattleActions.Add(new Refresh());
             BattleActions.Add(new Lullaby());
+            BattleActions.Add(new ArtAttack());
 
             if (BattleActions.Count == 0)
             {

@@ -267,7 +267,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="status1">The first StatusEffect to compare</param>
         /// <param name="status2">The second StatusEffect to compare</param>
-        /// <returns>-1 if status1 has a higher priority, 1 if status2 has a higher priority, 0 if they have the same priorities</returns>
+        /// <returns>-1 if status1 has a higher priority, 1 if status2 has a higher priority, and 0 if they have the same priorities.</returns>
         public static int StatusPrioritySort(StatusEffect status1, StatusEffect status2)
         {
             if (status1 == null)
@@ -275,9 +275,23 @@ namespace PaperMarioBattleSystem
             if (status2 == null)
                 return -1;
 
-            if (status1.Priority < status2.Priority)
+            return StatusTypePrioritySort(status1.StatusType, status2.StatusType);
+        }
+
+        /// <summary>
+        /// A Comparison method used to sort StatusTypes by their Priorities.
+        /// </summary>
+        /// <param name="statusType1">The first StatusType to compare.</param>
+        /// <param name="statusType2">The second StatusType to compare.</param>
+        /// <returns>-1 if statusType1 has a higher priority, 1 if statusType2 has a higher priority, and 0 if they have the same priorities.</returns>
+        public static int StatusTypePrioritySort(StatusTypes statusType1, StatusTypes statusType2)
+        {
+            int priority1 = GetStatusPriority(statusType1);
+            int priority2 = GetStatusPriority(statusType2);
+
+            if (priority1 < priority2)
                 return 1;
-            else if (status1.Priority > status2.Priority)
+            else if (priority1 > priority2)
                 return -1;
 
             return 0;

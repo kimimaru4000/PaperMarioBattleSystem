@@ -774,28 +774,38 @@ namespace PaperMarioBattleSystem
             {
                 Vector2 statusIconPos = new Vector2(Position.X + 10, Position.Y - 40);
                 StatusEffect[] statuses = EntityProperties.GetStatuses();
+                int index = 0;
+
                 for (int i = 0; i < statuses.Length; i++)
                 {
-                    float yOffset = ((i + 1) * StatusGlobals.IconYOffset);
+                    StatusEffect status = statuses[i];
+                    CroppedTexture2D texture = status.StatusIcon;
+
+                    //Don't draw the status if it doesn't have an icon
+                    if (texture == null || texture.Tex == null)
+                    {
+                        continue;
+                    }
+
+                    float yOffset = ((index + 1) * StatusGlobals.IconYOffset);
                     Vector2 iconPos = Camera.Instance.SpriteToUIPos(new Vector2(statusIconPos.X, statusIconPos.Y - yOffset));
 
-                    float depth = .35f - (i * .01f);
+                    float depth = .35f - (index * .01f);
                     float turnStringDepth = depth + .0001f;
-                    string turnCountString = statuses[i].TotalDuration.ToString();
-                    if (statuses[i].TotalDuration <= StatusGlobals.InfiniteDuration) turnCountString = string.Empty;
+                    string turnCountString = status.TotalDuration.ToString();
+                    if (status.TotalDuration <= StatusGlobals.InfiniteDuration) turnCountString = string.Empty;
 
-                    CroppedTexture2D texture = statuses[i].StatusIcon;
+                    //Draw icon
+                    SpriteRenderer.Instance.Draw(texture.Tex, iconPos, texture.SourceRect, Color.White, false, depth, true);
 
-                    if (texture != null && texture.Tex != null)
-                    {
-                        SpriteRenderer.Instance.Draw(texture.Tex, iconPos, texture.SourceRect, Color.White,
-                            false, depth, true);
-                    }
+                    //Draw turn count if it's not infinite
                     if (string.IsNullOrEmpty(turnCountString) == false)
                     {
                         SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, turnCountString, iconPos + new Vector2(52, 20),
                             Color.White, 0f, new Vector2(1f, 0f), 1f, turnStringDepth);
                     }
+
+                    index++;
                 }
             }
         }

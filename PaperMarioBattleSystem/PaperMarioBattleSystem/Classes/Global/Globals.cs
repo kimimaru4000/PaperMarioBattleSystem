@@ -378,6 +378,22 @@ namespace PaperMarioBattleSystem
         }
     }
 
+    /// <summary>
+    /// Holds information about the result of TryGetValue from a Dictionary, including the value and whether the value was found.
+    /// </summary>
+    /// <typeparam name="V">The type of the value.</typeparam>
+    public struct DictionaryVal<V>
+    {
+        public bool Found { get; private set; }
+        public V Value { get; private set; }
+
+        public DictionaryVal(bool found, V value)
+        {
+            Found = found;
+            Value = value;
+        }
+    }
+
     #endregion
 
     #region Classes
@@ -1148,6 +1164,44 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Classes
+
+        /// <summary>
+        /// Compares StatusEffects by their priorities.
+        /// </summary>
+        public class StatusComparer : IComparer<StatusEffect>
+        {
+            /// <summary>
+            /// An IComparer method used to sort StatusEffects by their Priorities.
+            /// </summary>
+            /// <param name="status1">The first StatusEffect to compare.</param>
+            /// <param name="status2">The second StatusEffect to compare.</param>
+            /// <returns>-1 if status1 has a higher priority, 1 if status2 has a higher priority, 0 if they have the same priorities.</returns>
+            public int Compare(StatusEffect status1, StatusEffect status2)
+            {
+                return StatusEffect.StatusPrioritySort(status1, status2);
+            }
+        }
+
+        /// <summary>
+        /// Compares StatusTypes by their priorities.
+        /// </summary>
+        public class StatusTypeComparer : IComparer<Enumerations.StatusTypes>
+        {
+            /// <summary>
+            /// An IComparer method used to sort StatusTypes by their Priorities.
+            /// </summary>
+            /// <param name="statusType1">The first StatusType to compare.</param>
+            /// <param name="statusType2">The second StatusType to compare.</param>
+            /// <returns>-1 if statusType1 has a higher priority, 1 if statusType2 has a higher priority, and 0 if they have the same priorities.</returns>
+            public int Compare(Enumerations.StatusTypes statusType1, Enumerations.StatusTypes statusType2)
+            {
+                return StatusEffect.StatusTypePrioritySort(statusType1, statusType2);
+            }
+        }
+
+        #endregion
+
         #region Fields
 
         /// <summary>
@@ -1201,6 +1255,33 @@ namespace PaperMarioBattleSystem
             if (StatusOrder.ContainsKey(statusType) == false) return 0;
 
             return StatusOrder[statusType];
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Class for global values dealing with PhysicalAttributes.
+    /// </summary>
+    public static class PhysAttributeGlobals
+    {
+        #region Classes
+
+        /// <summary>
+        /// Compares PhysicalAttributes by their values.
+        /// </summary>
+        public class PhysAttributeComparer : IComparer<Enumerations.PhysicalAttributes>
+        {
+            /// <summary>
+            /// An IComparer method used to sort PhysicalAttributes by their Priorities.
+            /// </summary>
+            /// <param name="physAttr1">The first PhysicalAttribute to compare.</param>
+            /// <param name="physAttr2">The second PhysicalAttribute to compare.</param>
+            /// <returns>-1 if status1 has a higher priority, 1 if physAttribute2 has a higher priority, 0 if they have the same priorities.</returns>
+            public int Compare(Enumerations.PhysicalAttributes physAttr1, Enumerations.PhysicalAttributes physAttr2)
+            {
+                return BattleEntityProperties.SortPhysicalAttributes(physAttr1, physAttr2);
+            }
         }
 
         #endregion

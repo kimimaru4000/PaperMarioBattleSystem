@@ -19,9 +19,9 @@ namespace PaperMarioBattleSystem
         protected readonly BattleEntity Entity = null;
 
         /// <summary>
-        /// The physical attributes the entity possesses
+        /// The physical attributes the entity possesses. When added, they are sorted in decreasing order.
         /// </summary>
-        protected readonly Dictionary<PhysicalAttributes, int> PhysAttributes = new Dictionary<PhysicalAttributes, int>();
+        protected readonly SortedDictionary<PhysicalAttributes, int> PhysAttributes = new SortedDictionary<PhysicalAttributes, int>(new PhysAttributeGlobals.PhysAttributeComparer());
 
         /// <summary>
         /// The exceptions this entity has for certain types of contact against certain PhysicalAttributes.
@@ -52,9 +52,11 @@ namespace PaperMarioBattleSystem
         protected readonly Dictionary<PhysicalAttributes, Elements> ElementOverrides = new Dictionary<PhysicalAttributes, Elements>();
 
         /// <summary>
-        /// The StatusEffects the entity is afflicted with
+        /// The StatusEffects the entity is afflicted with. When added, they are sorted by their priorities in the StatusOrder table.
+        /// <para></para>
+        /// <see cref="StatusGlobals.StatusOrder"/>
         /// </summary>
-        protected readonly Dictionary<StatusTypes, StatusEffect> Statuses = new Dictionary<StatusTypes, StatusEffect>();
+        protected readonly SortedDictionary<StatusTypes, StatusEffect> Statuses = new SortedDictionary<StatusTypes, StatusEffect>(new StatusGlobals.StatusTypeComparer());
 
         /// <summary>
         /// Properties relating to how the entity is affected by each StatusEffect.
@@ -186,16 +188,12 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Returns all PhysicalAttributes the BattleEntity has, sorted by value in decreasing order
+        /// Returns all PhysicalAttributes the BattleEntity has.
         /// </summary>
-        /// <returns>An array of all PhysicalAttributes the BattleEntity has, sorted with higher PhysicalAttribute values first</returns>
+        /// <returns>An array of all PhysicalAttributes the BattleEntity has, with higher PhysicalAttribute values first.</returns>
         protected PhysicalAttributes[] GetAllPhysAttributes()
         {
-            //Get the values in a list, then sort them
-            List<PhysicalAttributes> physAttributeList = new List<PhysicalAttributes>(PhysAttributes.Keys.ToArray());
-            physAttributeList.Sort(SortPhysicalAttributes);
-
-            return physAttributeList.ToArray();
+            return PhysAttributes.Keys.ToArray();
         }
 
         #endregion
@@ -703,16 +701,12 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Returns all StatusEffects the entity is afflicted with, sorted by their Priority
+        /// Returns all StatusEffects the entity is afflicted with, in order of Priority.
         /// </summary>
-        /// <returns>An array of StatusEffects sorted by their Priority. If no StatusEffects are on the entity, it'll return an empty array</returns>
+        /// <returns>An array of StatusEffects in order of Priority. If no StatusEffects are on the entity, it'll return an empty array.</returns>
         public StatusEffect[] GetStatuses()
         {
-            //Get the values in a list, then sort them
-            List<StatusEffect> statusList = Statuses.Values.ToList();
-            statusList.Sort(StatusEffect.StatusPrioritySort);
-
-            return statusList.ToArray();
+            return Statuses.Values.ToArray();
         }
 
         #endregion
@@ -727,7 +721,7 @@ namespace PaperMarioBattleSystem
         /// <param name="statusProperty">The StatusPropertyHolder associated with the StatusEffect.</param>
         public void AddStatusProperty(StatusTypes statusType, StatusPropertyHolder statusProperty)
         {
-            if (StatusProperties.ContainsKey(statusType) == true)
+            if (HasStatusProperty(statusType) == true)
             {
                 Debug.Log($"Replacing {nameof(StatusPropertyHolder)} for the {statusType} Status as {Entity.Name} already has one!");
                 StatusProperties.Remove(statusType);
@@ -981,7 +975,7 @@ namespace PaperMarioBattleSystem
         /// <param name="physAttr1"></param>
         /// <param name="physAttr2"></param>
         /// <returns></returns>
-        private static int SortPhysicalAttributes(PhysicalAttributes physAttr1, PhysicalAttributes physAttr2)
+        public static int SortPhysicalAttributes(PhysicalAttributes physAttr1, PhysicalAttributes physAttr2)
         {
             if (physAttr1 > physAttr2)
                 return -1;

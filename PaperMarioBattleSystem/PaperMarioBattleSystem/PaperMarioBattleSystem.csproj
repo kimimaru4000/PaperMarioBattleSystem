@@ -118,6 +118,7 @@
     <Compile Include="Classes\BattleEvents\WaitForAnimBattleEvent.cs" />
     <Compile Include="Classes\Collectibles\Badges\AllOrNothingBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\Badge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\BumpAttackBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ChargeBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ChargePBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ChillOutBadge.cs" />
@@ -127,12 +128,14 @@
     <Compile Include="Classes\Collectibles\Badges\DamageDodgePBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DeepFocusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DefendPlusBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\DizzyAttackBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DoubleDipBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DoubleDipPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DoublePainBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FeelingFineBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FeelingFinePBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FireShieldBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\FirstAttackBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FlowerSaverBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FlowerSaverPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\GroupFocusBadge.cs" />

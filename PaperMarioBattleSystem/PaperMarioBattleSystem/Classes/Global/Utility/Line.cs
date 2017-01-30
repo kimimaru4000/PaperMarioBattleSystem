@@ -12,8 +12,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public struct Line : IEquatable<Line>
     {
-        Point P1;
-        Point P2;
+        public Point P1;
+        public Point P2;
 
         public Line(Point p1, Point p2)
         {
@@ -21,11 +21,16 @@ namespace PaperMarioBattleSystem
             P2 = p2;
         }
 
+        public Line(int x1, int y1, int x2, int y2) : this (new Point(x1, y1), new Point(x2, y2))
+        {
+
+        }
+
         /// <summary>
-        /// Determines of this Line intersects another Line.
+        /// Determines if this Line intersects another Line.
         /// </summary>
         /// <param name="other">The Line to test intersection with.</param>
-        /// <remarks>Code obtained from here: http://gamedev.stackexchange.com/a/26022</remarks>
+        /// <remarks>Code obtained from here: http://gamedev.stackexchange.com/a/26022 </remarks>
         /// <returns>true if this Line intersects the other, otherwise false.</returns>
         public bool Intersects(Line other)
         {

@@ -12,8 +12,8 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Move the star around to draw. Draw around enemies to damage them based on how much of their hurtbox is covered.
     /// <para>This is likely the most complex Action Command in the entire Paper Mario series.
-    /// It only gives Command Ranks when you encircle all enemies with it, even if they're dead from the attack.</para>
-    /// <para>Overlapping another point while it doesn't close causes it to clear the drawing.</para>
+    /// It only increases the Command Rank when you encircle all enemies with it, even if they're dead from the attack.</para>
+    /// <para>Overlapping another line while it doesn't close causes it to clear the drawing.</para>
     /// </summary>
     public sealed class ArtAttackCommand : ActionCommand
     {
@@ -108,14 +108,15 @@ namespace PaperMarioBattleSystem
             StarPos += moveAmt;
 
             //If a circle is completed, send a response with the position of the star and the elapsed draw time, then end with a Success
-            if (CheckCompletedCircle() == true)
+            if (CheckCompletedShape() == true)
             {
                 SendResponse(new ActionCommandGlobals.ArtAttackResponse(StarPos, ElapsedDrawTime));
                 OnComplete(CommandResults.Success);
             }
         }
 
-        //NOTE: This will be changed and vastly improved; just getting something working now
+        //NOTE: Use the Line struct and create a new Line every few frames the user is drawing, or if the direction was changed
+        //Consider using a List instead of a Dictionary, and put Lines in it instead of Vector2s
         private void PlotPoints(Vector2 pointOffset)
         {
             float multiplierX = (pointOffset.X < 0) ? -1 : (pointOffset.X > 0) ? 1 : 0;
@@ -134,10 +135,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Checks if a circle is completed based on the points.
+        /// Checks if a shape is completed, based on whether the new line intersected with an existing line or not.
         /// </summary>
         /// <returns></returns>
-        private bool CheckCompletedCircle()
+        private bool CheckCompletedShape()
         {
             return false;
         }

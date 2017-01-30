@@ -166,6 +166,8 @@
     <Compile Include="Classes\Global\FPSCounter.cs" />
     <Compile Include="Classes\Global\Interactions.cs" />
     <Compile Include="Classes\Collectibles\Collectible.cs" />
+    <Compile Include="Classes\Global\Utility\Line.cs" />
+    <Compile Include="Classes\Global\Utility\UtilityGlobals.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ActionSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ChangePartnerSubMenu.cs" />

@@ -10,8 +10,10 @@ using Microsoft.Xna.Framework.Input;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Move the star around to draw. Draw circles around enemies to damage them based on how much of their hurtbox is covered.
-    /// <para>This is likely the most complex Action Command in the entire Paper Mario series.</para>
+    /// Move the star around to draw. Draw around enemies to damage them based on how much of their hurtbox is covered.
+    /// <para>This is likely the most complex Action Command in the entire Paper Mario series.
+    /// It only gives Command Ranks when you encircle all enemies with it, even if they're dead from the attack.</para>
+    /// <para>Overlapping another point while it doesn't close causes it to clear the drawing.</para>
     /// </summary>
     public sealed class ArtAttackCommand : ActionCommand
     {
@@ -59,6 +61,7 @@ namespace PaperMarioBattleSystem
             base.StartInput();
 
             ElapsedDrawTime = 0d;
+            Points.Clear();
         }
 
         public override void EndInput()
@@ -66,6 +69,7 @@ namespace PaperMarioBattleSystem
             base.EndInput();
 
             ElapsedDrawTime = 0d;
+            Points.Clear();
         }
 
         protected override void ReadInput()
@@ -114,21 +118,19 @@ namespace PaperMarioBattleSystem
         //NOTE: This will be changed and vastly improved; just getting something working now
         private void PlotPoints(Vector2 pointOffset)
         {
-            float multiplierX = pointOffset.X < 0 ? -1 : 1;
-            float multiplierY = pointOffset.X < 0 ? -1 : 1;
-            int increment = 0;
+            float multiplierX = (pointOffset.X < 0) ? -1 : (pointOffset.X > 0) ? 1 : 0;
+            float multiplierY = (pointOffset.Y < 0) ? -1 : (pointOffset.Y > 0) ? 1 : 0;
 
-            do
+            if (multiplierX == 0 && multiplierY == 0) return;
+
+            for (int i = 0; i <= StarSpeed; i++)
             {
-                Vector2 starPos = StarPos + new Vector2(increment * multiplierX, increment * multiplierY);
+                Vector2 starPos = StarPos + new Vector2(i * multiplierX, i * multiplierY);
                 if (Points.ContainsKey(starPos) == false)
                 {
                     Points.Add(starPos, true);
                 }
-
-                increment++;
             }
-            while (increment <= StarSpeed);
         }
 
         /// <summary>

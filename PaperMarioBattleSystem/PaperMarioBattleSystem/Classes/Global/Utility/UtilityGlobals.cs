@@ -23,6 +23,12 @@ namespace PaperMarioBattleSystem
         public static T Min<T>(T val1, T val2) where T : IComparable => (val1.CompareTo(val2) < 0) ? val1 : (val2.CompareTo(val1) < 0) ? val2 : val1;
         public static T Max<T>(T val1, T val2) where T : IComparable => (val1.CompareTo(val2) > 0) ? val1 : (val2.CompareTo(val1) > 0) ? val2 : val1;
 
+        public static float ToDegrees(float radians) => Microsoft.Xna.Framework.MathHelper.ToDegrees(radians);
+        public static float ToRadians(float degrees) => Microsoft.Xna.Framework.MathHelper.ToRadians(degrees);
+
+        public static double ToDegrees(double radians) => (radians * (180d / Math.PI));
+        public static double ToRadians(double degrees) => (degrees * (Math.PI / 180d));
+
         /// <summary>
         /// Tests a random condition.
         /// </summary>

@@ -23,6 +23,16 @@ namespace PaperMarioBattleSystem
         private const int StarSpeed = 3;
 
         /// <summary>
+        /// The thickness of each line when drawing.
+        /// </summary>
+        private const float LineThickness = 1;
+
+        /// <summary>
+        /// The color of the lines.
+        /// </summary>
+        private Color LineColor = Color.White;
+
+        /// <summary>
         /// The position of the Star, or where you're currently drawing.
         /// </summary>
         private Vector2 StarPos = Vector2.Zero;
@@ -38,10 +48,15 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public double ElapsedDrawTime = 0d;
 
+        // <summary>
+        // The points to draw.
+        // </summary>
+        //private readonly Dictionary<Vector2, bool> Points = new Dictionary<Vector2, bool>();
+
         /// <summary>
-        /// The points to draw.
+        /// The Lines to draw.
         /// </summary>
-        private readonly Dictionary<Vector2, bool> Points = new Dictionary<Vector2, bool>();
+        private readonly List<Line> Lines = new List<Line>();
 
         /// <summary>
         /// The texture to display the points.
@@ -61,7 +76,7 @@ namespace PaperMarioBattleSystem
             base.StartInput();
 
             ElapsedDrawTime = 0d;
-            Points.Clear();
+            Lines.Clear();
         }
 
         public override void EndInput()
@@ -69,7 +84,7 @@ namespace PaperMarioBattleSystem
             base.EndInput();
 
             ElapsedDrawTime = 0d;
-            Points.Clear();
+            Lines.Clear();
         }
 
         protected override void ReadInput()
@@ -119,19 +134,19 @@ namespace PaperMarioBattleSystem
         //Consider using a List instead of a Dictionary, and put Lines in it instead of Vector2s
         private void PlotPoints(Vector2 pointOffset)
         {
-            float multiplierX = (pointOffset.X < 0) ? -1 : (pointOffset.X > 0) ? 1 : 0;
-            float multiplierY = (pointOffset.Y < 0) ? -1 : (pointOffset.Y > 0) ? 1 : 0;
-
-            if (multiplierX == 0 && multiplierY == 0) return;
-
-            for (int i = 0; i <= StarSpeed; i++)
-            {
-                Vector2 starPos = StarPos + new Vector2(i * multiplierX, i * multiplierY);
-                if (Points.ContainsKey(starPos) == false)
-                {
-                    Points.Add(starPos, true);
-                }
-            }
+            //float multiplierX = (pointOffset.X < 0) ? -1 : (pointOffset.X > 0) ? 1 : 0;
+            //float multiplierY = (pointOffset.Y < 0) ? -1 : (pointOffset.Y > 0) ? 1 : 0;
+            //
+            //if (multiplierX == 0 && multiplierY == 0) return;
+            //
+            //for (int i = 0; i <= StarSpeed; i++)
+            //{
+            //    Vector2 starPos = StarPos + new Vector2(i * multiplierX, i * multiplierY);
+            //    if (Points.ContainsKey(starPos) == false)
+            //    {
+            //        Points.Add(starPos, true);
+            //    }
+            //}
         }
 
         /// <summary>
@@ -143,12 +158,50 @@ namespace PaperMarioBattleSystem
             return false;
         }
 
+        /// <summary>
+        /// Gets the angle of a Line in degrees.
+        /// </summary>
+        /// <param name="line">The Line to get degrees in.</param>
+        /// <returns>A float of the angle the Line is pointing, in degrees.</returns>
+        private float GetLineAngle(Line line)
+        {
+            Vector2 point1 = line.P1.ToVector2();
+            Vector2 point2 = line.P2.ToVector2();
+
+            float m = (float)Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
+            float degrees = m * UtilityGlobals.ToDegrees(m);
+
+            return degrees;
+        }
+
+        /// <summary>
+        /// Gets the scale of a Line.
+        /// </summary>
+        /// <param name="line">The Line to get the scale of.</param>
+        /// <returns>A Vector2 of the Line's scale.</returns>
+        private Vector2 GetLineScale(Line line)
+        {
+            Vector2 scale = line.P2.ToVector2() - line.P1.ToVector2();
+            //scale.X = UtilityGlobals.Max(LineThickness, scale.X * (float)Math.Cos(angle) * LineThickness);
+            //scale.Y = UtilityGlobals.Max(LineThickness, scale.Y * (float)Math.Sin(angle) * LineThickness);
+
+            return scale;
+        }
+
         protected override void OnDraw()
         {
-            foreach (KeyValuePair<Vector2, bool> point in Points)
+            for (int i = 0; i < Lines.Count; i++)
             {
-                SpriteRenderer.Instance.Draw(PointTexture, point.Key, Color.White, false, .8f, true);
+                Line line = Lines[i];
+                float angle = GetLineAngle(line);
+                Vector2 scale = GetLineScale(line);
+
+                SpriteRenderer.Instance.Draw(PointTexture, line.P1.ToVector2(), null, LineColor, angle, Vector2.Zero, scale, false, .8f, true);
             }
+            //foreach (KeyValuePair<Vector2, bool> point in Points)
+            //{
+            //    SpriteRenderer.Instance.Draw(PointTexture, point.Key, Color.White, false, .8f, true);
+            //}
         }
     }
 }

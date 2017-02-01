@@ -945,11 +945,13 @@ namespace PaperMarioBattleSystem
         {
             public Vector2 CurStarPos;
             public double CurElapsedTime;
+            public Rectangle BoundingBox;
 
-            public ArtAttackResponse(Vector2 curStarPos, double curElapsedTime)
+            public ArtAttackResponse(Vector2 curStarPos, double curElapsedTime, Rectangle boundingBox)
             {
                 CurStarPos = curStarPos;
                 CurElapsedTime = curElapsedTime;
+                BoundingBox = boundingBox;
             }
         }
 

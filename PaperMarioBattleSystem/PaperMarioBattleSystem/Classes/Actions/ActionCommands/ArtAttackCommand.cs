@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// How many frames max before a Line is created.
         /// </summary>
-        private const int CreateLineFrames = 5;
+        private const int CreateLineFrames = 3;
 
         /// <summary>
         /// The speed at which the Star cursor moves when drawing.
@@ -76,6 +76,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private Texture2D LineTexture = null;
 
+        private Line? LastLine => Lines.Count == 0 ? null : (Line?)Lines[Lines.Count - 1];
+
         public ArtAttackCommand(IActionCommandHandler commandHandler, Vector2 startPos, double drawTime) : base(commandHandler)
         {
             StarPos = startPos;
@@ -93,6 +95,13 @@ namespace PaperMarioBattleSystem
             PrevStarVelocity = Vector2.Zero;
             ElapsedDrawTime = 0d;
             Lines.Clear();
+
+            //TEST
+            //Lines.Add(new Line(400, 400, 450, 400));
+            //Lines.Add(new Line(450, 401, 450, 440));
+            //Lines.Add(new Line(449, 440, 430, 440));
+            //Lines.Add(new Line(430, 439, 430, 410));
+            //Lines.Add(new Line(430, 410, 514, 410));
         }
 
         public override void EndInput()
@@ -126,6 +135,7 @@ namespace PaperMarioBattleSystem
             StarVelocity = Vector2.Zero;
 
             //Use any of the keys to move
+            //NOTE: Place bounds on moving the cursor so you can't draw off the edge of the screen
             if (Input.GetKey(Keys.Up) == true)
             {
                 StarVelocity.Y -= StarSpeed;
@@ -141,7 +151,7 @@ namespace PaperMarioBattleSystem
             if (Input.GetKey(Keys.Right) == true)
             {
                 StarVelocity.X += StarSpeed;
-            }
+            }            
 
             StarPos += StarVelocity;
 
@@ -157,14 +167,19 @@ namespace PaperMarioBattleSystem
                 StartPoint = PrevStarPos;
 
                 //Check for a completed shape
-                if (CheckCompletedShape() == true)
+                int collisionIndex = CheckCompletedShape();
+                if (collisionIndex >= 0)
                 {
-                    SendResponse(new ActionCommandGlobals.ArtAttackResponse(StarPos, ElapsedDrawTime));
+                    Rectangle rect = GetShapeBoundingBox(collisionIndex);
+                    SendResponse(new ActionCommandGlobals.ArtAttackResponse(StarPos, ElapsedDrawTime, rect));
                     OnComplete(CommandResults.Success);
                 }
             }
         }
 
+        /// <summary>
+        /// Adds a new Line to the player's drawing.
+        /// </summary>
         private void AddNewLine()
         {
             Line line = new Line((int)StartPoint.X, (int)StartPoint.Y, (int)PrevStarPos.X, (int)PrevStarPos.Y);
@@ -174,26 +189,67 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Checks if a shape is completed, based on whether the new line intersected with an existing line or not.
         /// </summary>
-        /// <returns></returns>
-        private bool CheckCompletedShape()
+        /// <returns>The index of the Line that was intersected to completed the shape, otherwise -1.</returns>
+        private int CheckCompletedShape()
         {
             //NOTE: There will always be an intersection because the start of a new line is at the end of the previous line...
-            //Find a way to fix this
+            //Change the start of the new line to be set after the last line was created
+            //Ex. Drawing up after creating a new line starts the next line 1 pixel above the end of the other one
+
+            //Additionally, fix the coincident bug where it says two lines intersect when they actually don't if they have
+            //the same lengths and are pointing in the same directions
 
             //After an intersection is true, get the index of the line it intersected with
             //Then, create a bounding box around those lines and see if any enemies are in them
 
-            //if (Lines.Count < 2) return false;
-            //
+            if (Lines.Count < 2) return -1;
+            
             //Line lastLine = Lines[Lines.Count - 1];
             //
             //for (int i = 0; i < (Lines.Count - 1); i++)
             //{
             //    if (lastLine.Intersects(Lines[i]) == true)
-            //        return true;
+            //        return i;
             //}
 
-            return false;
+            return -1;
+        }
+
+        /// <summary>
+        /// Gets the bounding box of the shape the player completed as a Rectangle.
+        /// </summary>
+        /// <param name="collisionIndex">The index of the Line the last drawn Line intersected with.</param>
+        /// <returns>A Rectangle of the bounding box corresponding to the shape the player completed.</returns>
+        private Rectangle GetShapeBoundingBox(int collisionIndex)
+        {
+            int minX = int.MaxValue;
+            int minY = int.MaxValue;
+            int maxX = int.MinValue;
+            int maxY = int.MinValue;
+
+            //Check for the min and max X and Y positions
+            //The min is the start of the rectangle, and the max is used to determine the width and height of the rectangle
+            for (int i = collisionIndex; i < Lines.Count; i++)
+            {
+                Line line = Lines[i];
+                Point p1 = line.P1;
+                Point p2 = line.P2;
+
+                //Check for all min and max values
+                if (p1.X < minX) minX = p1.X;
+                if (p1.Y < minY) minY = p1.Y;
+                if (p1.X > maxX) maxX = p1.X;
+                if (p1.Y > maxY) maxY = p1.Y;
+
+                if (p2.X < minX) minX = p2.X;
+                if (p2.Y < minY) minY = p2.Y;
+                if (p2.X > maxX) maxX = p2.X;
+                if (p2.Y > maxY) maxY = p2.Y;
+            }
+
+            Rectangle boundingBox = new Rectangle(minX, minY, Math.Abs(maxX - minX), Math.Abs(maxY - minY));
+
+            return boundingBox;
         }
 
         /// <summary>

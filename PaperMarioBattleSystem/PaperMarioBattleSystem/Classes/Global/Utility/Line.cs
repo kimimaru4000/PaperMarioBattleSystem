@@ -97,6 +97,73 @@ namespace PaperMarioBattleSystem
             return line1.Intersects(line2);
         }
 
+        /// <summary>
+        /// Gets the length of the Line as a Vector2.
+        /// </summary>
+        /// <param name="keepSigns">true if the signs of the Vector2 are kept, otherwise it'll Abs the components of the Vector2.</param>
+        /// <returns>A Vector2 with the length of the Line.</returns>
+        public Vector2 GetLength(bool keepSigns)
+        {
+            Vector2 diff = P2.ToVector2() - P1.ToVector2();
+            if (keepSigns == false)
+            {
+                diff.X = Math.Abs(diff.X);
+                diff.Y = Math.Abs(diff.Y);
+            }
+
+            return diff;
+        }
+
+        /// <summary>
+        /// Gets the direction of the Line.
+        /// </summary>
+        /// <returns>A normalized Vector2 showing the direction the Line is pointing.</returns>
+        public Vector2 GetDirection()
+        {
+            Vector2 direction = GetLength(true);
+            direction.Normalize();
+
+            return direction;
+        }
+
+        /// <summary>
+        /// Gets the angle of the Line, in radians or degrees.
+        /// </summary>
+        /// <returns>A float of the angle the Line is pointing, in radians or degrees.</returns>
+        public float GetLineAngle(bool inDegrees)
+        {
+            Vector2 point1 = P1.ToVector2();
+            Vector2 point2 = P2.ToVector2();
+
+            double radians = Math.Atan2(point2.Y - point1.Y, point2.X - point1.X);
+            if (inDegrees == false) return (float)radians;
+
+            double degrees = UtilityGlobals.ToDegrees(radians);
+
+            return (float)degrees;
+        }
+
+        /// <summary>
+        /// Gets the center of the Line.
+        /// </summary>
+        /// <returns>Gets the center point of the line</returns>
+        public Vector2 GetCenter()
+        {
+            Vector2 diff = (GetLength(false) / 2f);
+
+            return new Vector2(P1.X + (int)diff.X, P1.Y + (int)diff.Y);
+        }
+
+        /// <summary>
+        /// Gets the center origin of the Line.
+        /// </summary>
+        /// <returns>A Vector2 with the center origin of the Line.</returns>
+        public Vector2 GetCenterOrigin()
+        {
+            Vector2 diff = GetLength(false);
+            return (diff / 2);
+        }
+
         #region Comparison and Operator Overloading
 
         public bool Equals(Line other)

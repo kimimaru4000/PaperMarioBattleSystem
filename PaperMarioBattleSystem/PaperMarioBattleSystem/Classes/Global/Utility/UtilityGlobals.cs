@@ -94,12 +94,18 @@ namespace PaperMarioBattleSystem
             /// </summary>
             /// <param name="line1">The first Line to test overlap with.</param>
             /// <param name="line2">The second Line to test overlap with.</param>
-            /// <remarks>Code obtained from here: http://stackoverflow.com/q/22456517 </remarks>
+            /// <remarks>Code obtained from here: http://stackoverflow.com/q/22456517 and modified to handle division by 0.</remarks>
             /// <returns>A Line containing the overlap points between the two lines. null if no overlap exists.</returns>
             public static Line? GetLineOverlap(Line line1, Line line2)
             {
-                double slope = (line1.P2.Y - line1.P1.Y) / (line1.P2.X - line1.P1.X);
-                bool isHorizontal = AlmostZero(slope);
+                bool undefinedSlope = false;
+                double xDiff = (line1.P2.X - line1.P1.X);
+                if (xDiff == 0f) undefinedSlope = true;
+
+                double slope = 0d;
+                if (undefinedSlope == false) slope = (line1.P2.Y - line1.P1.Y) / (line1.P2.X - line1.P1.X);
+
+                bool isHorizontal = (undefinedSlope == true) ? false : AlmostZero(slope);
                 bool isDescending = slope < 0 && !isHorizontal;
                 double invertY = isDescending || isHorizontal ? -1 : 1;
 

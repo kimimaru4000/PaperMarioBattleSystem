@@ -38,20 +38,20 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets the length of the Line as a Vector2.
+        /// Gets the length of the Line.
         /// </summary>
-        /// <param name="keepSigns">true if the signs of the Vector2 are kept, otherwise it'll Abs the components of the Vector2.</param>
-        /// <returns>A Vector2 with the length of the Line.</returns>
-        public Vector2 GetLength(bool keepSigns)
+        /// <returns>A double corresponding to the length of the Line.</returns>
+        public double GetLength()
         {
+            //Use the distance formula: d = sqrt((x2 - x1)^2 + (y2 - y1)^2)
             Vector2 diff = P2.ToVector2() - P1.ToVector2();
-            if (keepSigns == false)
-            {
-                diff.X = Math.Abs(diff.X);
-                diff.Y = Math.Abs(diff.Y);
-            }
 
-            return diff;
+            double xSquared = Math.Pow(diff.X, 2);
+            double ySquared = Math.Pow(diff.Y, 2);
+
+            double length = Math.Sqrt(xSquared + ySquared);
+
+            return length;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace PaperMarioBattleSystem
         /// <returns>A normalized Vector2 showing the direction the Line is pointing.</returns>
         public Vector2 GetDirection()
         {
-            Vector2 direction = GetLength(true);
+            Vector2 direction = P2.ToVector2() - P1.ToVector2();
             direction.Normalize();
 
             return direction;
@@ -89,7 +89,7 @@ namespace PaperMarioBattleSystem
         /// <returns>Gets the center point of the line</returns>
         public Vector2 GetCenter()
         {
-            Vector2 diff = (GetLength(false) / 2f);
+            Vector2 diff = ((P2.ToVector2() - P1.ToVector2()) / 2f);
 
             return new Vector2(P1.X + (int)diff.X, P1.Y + (int)diff.Y);
         }
@@ -100,7 +100,10 @@ namespace PaperMarioBattleSystem
         /// <returns>A Vector2 with the center origin of the Line.</returns>
         public Vector2 GetCenterOrigin()
         {
-            Vector2 diff = GetLength(false);
+            Vector2 diff = P2.ToVector2() - P1.ToVector2();
+            diff.X = Math.Abs(diff.X);
+            diff.Y = Math.Abs(diff.Y);
+
             return (diff / 2);
         }
 

@@ -38,17 +38,45 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private Color LineColor = Color.White;
 
+        /// <summary>
+        /// The current number of elapsed frames.
+        /// </summary>
         private int CurFrames = 0;
 
         /// <summary>
-        /// The position of the Star, or where you're currently drawing.
+        /// The position of the Star cursor, or where you're currently drawing.
         /// </summary>
         private Vector2 StarPos = Vector2.Zero;
+        
+        /// <summary>
+        /// The current velocity of the Star cursor.
+        /// </summary>
         private Vector2 StarVelocity = Vector2.Zero;
+
+        /// <summary>
+        /// The previous position of the Star cursor.
+        /// </summary>
         private Vector2 PrevStarPos = Vector2.Zero;
+        
+        /// <summary>
+        /// The previous velocity of the Star cursor.
+        /// </summary>
         private Vector2 PrevStarVelocity = Vector2.Zero;
 
+        /// <summary>
+        /// The point at which the next line starts.
+        /// </summary>
         private Vector2 StartPoint = Vector2.Zero;
+
+        /// <summary>
+        /// The start point at which the next line is created.
+        /// </summary>
+        private Vector2 StartLinePoint = Vector2.Zero;
+
+        /// <summary>
+        /// Tells whether at least one line was added or not.
+        /// </summary>
+        private bool AddedLine = false;
 
         /// <summary>
         /// The amount of time to draw.
@@ -60,11 +88,6 @@ namespace PaperMarioBattleSystem
         /// The amount of elapsed draw time.
         /// </summary>
         public double ElapsedDrawTime = 0d;
-
-        // <summary>
-        // The points to draw.
-        // </summary>
-        //private readonly Dictionary<Vector2, bool> Points = new Dictionary<Vector2, bool>();
 
         /// <summary>
         /// The Lines to draw.
@@ -90,8 +113,10 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput();
 
+            AddedLine = false;
+
             StarVelocity = Vector2.Zero;
-            PrevStarPos = StartPoint = StarPos;
+            PrevStarPos = StartPoint = StartLinePoint = StarPos;
             PrevStarVelocity = Vector2.Zero;
             ElapsedDrawTime = 0d;
             Lines.Clear();
@@ -107,6 +132,8 @@ namespace PaperMarioBattleSystem
         public override void EndInput()
         {
             base.EndInput();
+
+            AddedLine = false;
 
             ElapsedDrawTime = 0d;
             Lines.Clear();
@@ -151,7 +178,7 @@ namespace PaperMarioBattleSystem
             if (Input.GetKey(Keys.Right) == true)
             {
                 StarVelocity.X += StarSpeed;
-            }            
+            }
 
             StarPos += StarVelocity;
 
@@ -162,7 +189,21 @@ namespace PaperMarioBattleSystem
 
                 //Don't add new lines if the star cursor isn't moving
                 if (StartPoint != PrevStarPos)
+                {
+                    //If we added at least one line, offset the start point of the next line so the lines don't automatically intersect
+                    if (AddedLine == true)
+                    {
+                        //Get the previous velocity, as that indicates where the line is heading before it's created
+                        Point change = new Point((int)PrevStarVelocity.X, (int)PrevStarVelocity.Y);
+                        if (change.X != 0) change.X = (change.X < 0) ? -1 : 1;
+                        if (change.Y != 0) change.Y = (change.Y < 0) ? -1 : 1;
+
+                        StartLinePoint = new Vector2((int)StartPoint.X + change.X, (int)StartPoint.Y + change.Y);
+                    }
+
                     AddNewLine();
+                    AddedLine = true;
+                }
 
                 StartPoint = PrevStarPos;
 
@@ -182,8 +223,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void AddNewLine()
         {
-            Line line = new Line((int)StartPoint.X, (int)StartPoint.Y, (int)PrevStarPos.X, (int)PrevStarPos.Y);
+            Line line = new Line((int)StartLinePoint.X, (int)StartLinePoint.Y, (int)PrevStarPos.X, (int)PrevStarPos.Y);
             Lines.Add(line);
+
+            //Debug.Log($"line {line} start = {StartPoint} starpos = {PrevStarPos} prevstarvel = {PrevStarVelocity} starvel = {StarVelocity}");
         }
 
         /// <summary>
@@ -192,25 +235,18 @@ namespace PaperMarioBattleSystem
         /// <returns>The index of the Line that was intersected to completed the shape, otherwise -1.</returns>
         private int CheckCompletedShape()
         {
-            //NOTE: There will always be an intersection because the start of a new line is at the end of the previous line...
-            //Change the start of the new line to be set after the last line was created
-            //Ex. Drawing up after creating a new line starts the next line 1 pixel above the end of the other one
-
-            //Additionally, fix the coincident bug where it says two lines intersect when they actually don't if they have
-            //the same lengths and are pointing in the same directions
-
             //After an intersection is true, get the index of the line it intersected with
             //Then, create a bounding box around those lines and see if any enemies are in them
 
             if (Lines.Count < 2) return -1;
             
-            //Line lastLine = Lines[Lines.Count - 1];
-            //
-            //for (int i = 0; i < (Lines.Count - 1); i++)
-            //{
-            //    if (lastLine.Intersects(Lines[i]) == true)
-            //        return i;
-            //}
+            Line lastLine = Lines[Lines.Count - 1];
+            
+            for (int i = 0; i < (Lines.Count - 1); i++)
+            {
+                if (lastLine.Intersects(Lines[i]) == true)
+                    return i;
+            }
 
             return -1;
         }
@@ -259,13 +295,14 @@ namespace PaperMarioBattleSystem
         /// <returns>A Vector2 of the Line's scale.</returns>
         private Vector2 GetLineScale(Line line)
         {
-            Vector2 diff = line.GetLength(false);
-
-            float diffXAbs = Math.Abs(diff.X);
-            float diffYAbs = Math.Abs(diff.Y);
+            float lineLength = (float)line.GetLength();
+            
+            //Add one because the scale counts the start pixel
+            //For example, a Line with points (0, 0) to (10, 0) will have a scale of 10 but only render from (0, 0) to (9, 0)
+            lineLength += 1f;
 
             //Use only the X for the scale; the rotation will determine where the line points
-            Vector2 scale = new Vector2((diffXAbs > diffYAbs) ? diffXAbs : diffYAbs, LineThickness);
+            Vector2 scale = new Vector2(lineLength, LineThickness);
 
             return scale;
         }

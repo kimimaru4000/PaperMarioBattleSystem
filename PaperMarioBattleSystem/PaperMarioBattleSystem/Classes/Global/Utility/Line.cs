@@ -34,67 +34,7 @@ namespace PaperMarioBattleSystem
         /// <returns>true if this Line intersects the other, otherwise false.</returns>
         public bool Intersects(Line other)
         {
-            //Find if a Line intersects:
-            /*Formula:
-             *Pa = P1+Ua(P2-P1)
-             *Pb = P3+Ub(P4-P3)
-             * 0 for U = start, 1 = end
-             * Pa=Pb
-             * P1+Ua(P2-P1)=P3+Ub(P4-P3)
-             * X-Y Terms:
-             * x1+Ua(x2-x1)=x3+Ub(x4-x3)
-             * y1+Ua(y2-y1)=y3+Ub(y4-y3)
-             * 
-             * Solve for U:
-             * Ua=((x4-x3)(y1-y3)-(y4-y3)(x1-x3))/((y4-y3)(x2-x1)-(x4-x3)(y2-y1))
-             * Ub=((x2-x1)(y1-y3)-(y2-y1)(x1-x3))/((y4-y3)(x2-x1)-(x4-x3)(y2-y1))
-             * 
-             * Solve denominator first: if 0, then the lines are parallel and don't intersect
-             * If both numerators are 0, then the two lines are coincident (exacty the same)
-             * 
-             * Check:
-             * 0<=Ua<= 1
-             * 0<=Ub<=1
-             * 
-             * If so, the lines intersect. To find point of intersection:
-             * x=x1+Ua(x2-x1)
-             * y=y1+Ua(y2-y1)
-            */
-
-            const float closeToZero = 0.00001f;
-
-            Point a = P1;
-            Point b = P2;
-            Point c = other.P1;
-            Point d = other.P2;
-
-            float denominator = ((d.Y - c.Y) * (b.X - a.X)) - ((d.X - c.X) * (b.Y - a.Y));
-            float numerator1 = ((d.X - c.X) * (a.Y - c.Y)) - ((d.Y - c.Y) * (a.X - c.X));
-            float numerator2 = ((b.X - a.X) * (a.Y - c.Y)) - ((b.Y - a.Y) * (a.X - c.X));
-
-            //Check for parallel - check for a close to 0 value since these are floats
-            if (Math.Abs(denominator) <= closeToZero)
-            {
-                //Parallel; check if they are coincident
-                //NOTE: This will still return an intersection if the lines are coincident but don't overlap
-                return (Math.Abs(numerator1) <= closeToZero && Math.Abs(numerator2) <= closeToZero);
-            }
-
-            float r = numerator1 / denominator;
-            float s = numerator2 / denominator;
-
-            return ((r >= 0 && r <= 1) && (s >= 0 && s <= 1));
-        }
-
-        /// <summary>
-        /// Determines if two Lines intersect each other.
-        /// </summary>
-        /// <param name="line1">The first Line to test intersection with.</param>
-        /// <param name="line2">The second Line to test intersection with.</param>
-        /// <returns>true if the Lines intersect each other, otherwise false.</returns>
-        public static bool Intersects(Line line1, Line line2)
-        {
-            return line1.Intersects(line2);
+            return UtilityGlobals.LineIntersection.Intersects(this, other);
         }
 
         /// <summary>
@@ -162,6 +102,15 @@ namespace PaperMarioBattleSystem
         {
             Vector2 diff = GetLength(false);
             return (diff / 2);
+        }
+
+        public static void UnitTestCoincident()
+        {
+            Line line1 = new Line(400, 80, 450, 80);
+            Line line2 = new Line(200, 80, 399, 80);
+
+            Debug.Log($"line 1: {line1} and line 2: {line2}");
+            Debug.Log($"Do they intersect? {line1.Intersects(line2)}");
         }
 
         #region Comparison and Operator Overloading

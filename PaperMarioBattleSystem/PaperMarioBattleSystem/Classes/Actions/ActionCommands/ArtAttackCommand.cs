@@ -309,18 +309,65 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            //NOTE: Currently, lines going Left and/or Up are incorrect
-            //Find an origin that'll work for all lines
-
             for (int i = 0; i < Lines.Count; i++)
             {
                 Line line = Lines[i];
                 float angle = line.GetLineAngle(false);
                 Vector2 scale = GetLineScale(line);
                 Vector2 origin = Vector2.Zero;
-                //Vector2 direction = line.GetDirection();
+                Vector2 direction = line.GetDirection();
+                Vector2 position = line.P1.ToVector2();
 
-                SpriteRenderer.Instance.Draw(LineTexture, line.P1.ToVector2(), null, LineColor, angle, origin, scale, false, .8f, true);
+                //Due to the way drawing a single pixel rotated and scaled at an origin of (0, 0) works
+                //we need to offset specific cases so lines are drawn in their correct locations
+                //These offsets allow the lines to match up one-to-one with their actual positions
+                AdjustLineOffset(line, ref scale, ref position);
+
+                SpriteRenderer.Instance.Draw(LineTexture, position, null, LineColor, angle, origin, scale, false, .8f, true);
+            }
+        }
+
+        /// <summary>
+        /// Adjusts a Line to render it correctly.
+        /// </summary>
+        /// <param name="line">The Line to render.</param>
+        /// <param name="scale">The current scale to render the Line with.</param>
+        /// <param name="position">The current position the Line is drawn at.</param>
+        private void AdjustLineOffset(Line line, ref Vector2 scale, ref Vector2 position)
+        {
+            //Get the direction the line is pointing
+            Vector2 direction = line.GetDirection();
+
+            //Offset lines going down
+            if (direction.Y < 0)
+            {
+                position.Y += 1;
+
+                //Lines facing up-left are short by 1, likely due to rotation issues
+                if (direction.X < 0)
+                {
+                    position.X += 1;
+                    position.Y += 1;
+                    scale.X += 1;
+                }
+            }
+            //Offset lines going up
+            else if (direction.Y > 0)
+            {
+                position.X += 1;
+
+                //Lines facing down-left are short by 1, likely due to rotation issues
+                if (direction.X < 0)
+                {
+                    scale.X += 1;
+                    position.X += 1;
+                }
+            }
+            //Offset lines going straight left
+            else if (direction.X < 0f && direction.Y == 0f)
+            {
+                position.X += 1;
+                position.Y += 1;
             }
         }
     }

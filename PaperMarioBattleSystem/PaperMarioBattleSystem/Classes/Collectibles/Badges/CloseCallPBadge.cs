@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The Close Call P Badge - Increases Partner's Evasion by about 33% when he or she is in Danger or Peril.
+    /// The Close Call P Badge - Increases Partner's Evasion by 33% when he or she is in Danger or Peril.
     /// </summary>
     public sealed class CloseCallPBadge : CloseCallBadge
     {

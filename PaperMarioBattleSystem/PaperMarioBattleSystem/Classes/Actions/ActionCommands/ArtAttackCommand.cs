@@ -229,7 +229,7 @@ namespace PaperMarioBattleSystem
                 if (collisionIndex >= 0)
                 {
                     Rectangle rect = GetShapeBoundingBox(collisionIndex);
-                    SendResponse(new ActionCommandGlobals.ArtAttackResponse(StarPos, ElapsedDrawTime, rect));
+                    SendResponse(new ActionCommandGlobals.ArtAttackResponse(rect));
                     OnComplete(CommandResults.Success);
                 }
             }

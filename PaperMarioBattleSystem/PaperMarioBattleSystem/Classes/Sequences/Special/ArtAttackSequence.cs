@@ -41,9 +41,8 @@ namespace PaperMarioBattleSystem
                 case 0:
                     //1. Start Art Attack's Action Command
                     //2. Start drawing
-                    //3. For each circle completed, a response will be sent down with the elapsed time and current star position,
-                    //then go to the Success branch
-                    //4. Go back to this branch and restart the command at the current star position with the elapsed time as the total time
+                    //3. For each circle completed, a response will be sent down with the bounding box, then go to the Success branch
+                    //4. Go back to this branch and restart the command
 
                     StartActionCommandInput();
                     CurSequenceAction = new WaitForCommandSeqAction(0d, actionCommand, CommandEnabled);

@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Art Attack";
 
-            SPCost = 0;//400;
+            SPCost = 400;
 
             MoveInfo = new MoveActionData(null, 0, "Draw around the enemy as many times as you can!",
                 false, TargetSelectionMenu.EntitySelectionType.All, Enumerations.EntityTypes.Enemy, null);

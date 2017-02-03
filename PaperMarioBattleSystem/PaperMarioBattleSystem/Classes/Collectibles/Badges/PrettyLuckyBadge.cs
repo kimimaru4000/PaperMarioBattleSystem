@@ -7,19 +7,19 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The Close Call Badge - Increases Mario's Evasion by 33% (30% in PM) when he's in Danger or Peril.
+    /// The Pretty Lucky Badge - Increases Mario's Evasion by 10%. Evasion is stacked multiplicatively.
     /// </summary>
-    public class CloseCallBadge : Badge
+    public class PrettyLuckyBadge : Badge
     {
-        public CloseCallBadge()
+        public PrettyLuckyBadge()
         {
-            Name = "Close Call";
-            Description = "When Mario's in Danger, cause enemies to sometimes miss.";
+            Name = "Pretty Lucky";
+            Description = "When Mario's attacked, cause enemies to sometimes miss.";
 
-            BPCost = 1;
-            PriceValue = 50;
+            BPCost = 2;
+            PriceValue = 75;
 
-            BadgeType = BadgeGlobals.BadgeTypes.CloseCall;
+            BadgeType = BadgeGlobals.BadgeTypes.PrettyLucky;
             AffectedType = BadgeGlobals.AffectedTypes.Self;
         }
 

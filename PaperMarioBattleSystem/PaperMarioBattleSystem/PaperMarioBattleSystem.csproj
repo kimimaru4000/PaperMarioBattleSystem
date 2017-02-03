@@ -143,9 +143,12 @@
     <Compile Include="Classes\Collectibles\Badges\IcePowerBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\IceSmashBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LastStandBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\LuckyDayBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MultibounceBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PowerBounceBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PowerPlusBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\PrettyLuckyBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\PrettyLuckyPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\QuickChangeBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SimplifierBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SpikeShieldBadge.cs" />

@@ -475,6 +475,9 @@ namespace PaperMarioBattleSystem
         public int DamageReduction;
 
         public int Accuracy = 100;
+
+        //NOTE: Evasion stacks multiplicatively
+        //For example, with 3 Pretty Lucky and 1 Lucky Day badge equipped, the chance of attacks missing is: (0.9)(0.9)(0.9)(0.75) = .54675
         public int Evasion = 0;
 
         /// <summary>
@@ -943,14 +946,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public struct ArtAttackResponse
         {
-            public Vector2 CurStarPos;
-            public double CurElapsedTime;
             public Rectangle BoundingBox;
 
-            public ArtAttackResponse(Vector2 curStarPos, double curElapsedTime, Rectangle boundingBox)
+            public ArtAttackResponse(Rectangle boundingBox)
             {
-                CurStarPos = curStarPos;
-                CurElapsedTime = curElapsedTime;
                 BoundingBox = boundingBox;
             }
         }

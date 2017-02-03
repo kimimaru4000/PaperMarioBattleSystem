@@ -18,6 +18,30 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class ArtAttackCommand : ActionCommand
     {
+        #region Color Fields
+
+        /// <summary>
+        /// The colors the lines cycle through.
+        /// </summary>
+        private readonly Color[] CycleColors = new Color[] { Color.White, Color.Brown, Color.Silver, Color.Gold, Color.Purple };
+
+        /// <summary>
+        /// The time it takes to fully lerp to the next color.
+        /// </summary>
+        private const double ColorDuration = 1000d;
+
+        /// <summary>
+        /// The amount of time elapsed
+        /// </summary>
+        private double ColorElapsedTime = 0d;
+
+        /// <summary>
+        /// The current color to lerp from. This is compared with the next color and wraps around to the first color upon reaching the end.
+        /// </summary>
+        private int ColorIndex = 0;
+
+        #endregion
+
         /// <summary>
         /// How many frames max before a Line is created.
         /// </summary>
@@ -118,15 +142,7 @@ namespace PaperMarioBattleSystem
             StarVelocity = Vector2.Zero;
             PrevStarPos = StartPoint = StartLinePoint = StarPos;
             PrevStarVelocity = Vector2.Zero;
-            ElapsedDrawTime = 0d;
             Lines.Clear();
-
-            //TEST
-            //Lines.Add(new Line(400, 400, 450, 400));
-            //Lines.Add(new Line(450, 401, 450, 440));
-            //Lines.Add(new Line(449, 440, 430, 440));
-            //Lines.Add(new Line(430, 439, 430, 410));
-            //Lines.Add(new Line(430, 410, 514, 410));
         }
 
         public override void EndInput()
@@ -135,7 +151,6 @@ namespace PaperMarioBattleSystem
 
             AddedLine = false;
 
-            ElapsedDrawTime = 0d;
             Lines.Clear();
         }
 
@@ -143,7 +158,6 @@ namespace PaperMarioBattleSystem
          * 2. If the velocity isn't 0, create a new Line from the start of the Star cursor after a few frames or if the velocity changed
          * 3. When this new Line is created, check for intersection with any of the other lines. If true, end the Action Command
          */
-
         protected override void ReadInput()
         {
             //End the Action Command with a Failure when time is up
@@ -152,6 +166,9 @@ namespace PaperMarioBattleSystem
                 OnComplete(CommandResults.Failure);
                 return;
             }
+
+            //Update the color of the lines
+            CycleLineColors();
 
             //Increment time afterwards; this is how it seems to work in the game if you complete a circle right before it ends
             ElapsedDrawTime += Time.ElapsedMilliseconds;
@@ -368,6 +385,28 @@ namespace PaperMarioBattleSystem
             {
                 position.X += 1;
                 position.Y += 1;
+            }
+        }
+
+        /// <summary>
+        /// Updates the color of the lines by cycling through the array of defined colors.
+        /// </summary>
+        private void CycleLineColors()
+        {
+            //Increment elapsed time
+            ColorElapsedTime += Time.ElapsedMilliseconds;
+
+            //Compare the current color with the next, and wrap around
+            int nextColorIndex = UtilityGlobals.Wrap(ColorIndex + 1, 0, CycleColors.Length - 1);
+
+            //Lerp the colors
+            LineColor = Color.Lerp(CycleColors[ColorIndex], CycleColors[nextColorIndex], (float)(ColorElapsedTime / ColorDuration));
+
+            //Move onto the next color and reset the elapsed time
+            if (ColorElapsedTime >= ColorDuration)
+            {
+                ColorIndex = nextColorIndex;
+                ColorElapsedTime = 0d;
             }
         }
     }

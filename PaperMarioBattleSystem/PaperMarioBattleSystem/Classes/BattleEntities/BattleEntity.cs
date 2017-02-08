@@ -347,32 +347,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="victim">The entity trying to evade</param>
         /// <returns>true if the entity hits and the victim doesn't evade, false otherwise</returns>
-        public bool AttemptHitEntity(BattleEntity victim)
-        {
-            return (AttemptHit() == true && victim.AttemptEvade() == false);
-        }
-
-        /// <summary>
-        /// Performs a check to see if the entity hit based on its Accuracy stat
-        /// </summary>
-        /// <returns>true if the entity successfully hit, false if the entity fails</returns>
-        private bool AttemptHit()
-        {
-            int valueTest = GeneralGlobals.Randomizer.Next(0, 100);
-            return (valueTest < BattleStats.Accuracy);
-        }
-
-        /// <summary>
-        /// Makes the entity attempt to evade an attack, returning a value indicating the result
-        /// </summary>
-        /// <returns>true if the entity successful evaded the attack, false if the attack hits</returns>
         //NOTE: When dealing with Badges such as Close Call, we should compare the entity's Evasion first, then perform
         //the test again with the Badges' Evasion added in. If the Badges' Evasion bonus allows the entity to evade the attack,
         //that's when we'd play the "LUCKY" animation
-        private bool AttemptEvade()
+        public bool AttemptHitEntity(BattleEntity victim)
         {
-            int valueTest = GeneralGlobals.Randomizer.Next(0, 100);
-            return (valueTest < BattleStats.Evasion);
+            return UtilityGlobals.TestRandomCondition(BattleStats.Accuracy, victim.BattleStats.Evasion);
         }
 
         /// <summary>
@@ -526,7 +506,7 @@ namespace PaperMarioBattleSystem
             int percent = EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.ConfusionPercent);
 
             //See if Confusion should take effect
-            if (UtilityGlobals.TestRandomCondition(0, 100, percent, false) == true)
+            if (UtilityGlobals.TestRandomCondition(percent) == true)
             {
                 Debug.Log($"{Name} is affected by Confusion and will do something unpredictable!");
 

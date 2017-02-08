@@ -30,14 +30,6 @@ namespace PaperMarioBattleSystem
         public static double ToDegrees(double radians) => (radians * (180d / Math.PI));
         public static double ToRadians(double degrees) => (degrees * (Math.PI / 180d));
 
-        /// <summary>
-        /// Tests a random condition.
-        /// </summary>
-        /// <param name="minValue">The minimum possible value</param>
-        /// <param name="maxValue">The maximum possible value</param>
-        /// <param name="valueTested">The value to test against</param>
-        /// <param name="checkEquals">If true, will also check if the randomized value matches the value tested</param>
-        /// <returns>true if the condition succeeded, false otherwise</returns>
         //NOTE: (Leaving this here for now)
         //TTYD checks rand(100) < enemy susceptibility for a given value, such as chance of being inflicted with Dizzy
         //Clock Out and Showstopper are a bit different:
@@ -45,11 +37,33 @@ namespace PaperMarioBattleSystem
         //Showstopper has a .5x multiplier that's increased by .1x for each successful button set, totaling a 1x multiplier
         //These multipliers are multiplied by the random value to increase or decrease the chances of the condition evaluating to true
 
-        public static bool TestRandomCondition(int minValue, int maxValue, int valueTested, bool checkEquals)
+        /// <summary>
+        /// Tests a random condition with two values.
+        /// This is commonly used when calculating a total percentage of something happening.
+        /// For example, this is used when testing whether a move will inflict a Status Effect on a BattleEntity.
+        /// <para>Two values are multiplied by each other then divided by <see cref="GeneralGlobals.RandomConditionVal"/>.
+        /// A random value is then rolled; if it's less than the result, it returns true. This works for any non-negative values.</para>
+        /// </summary>
+        /// <param name="value1">The first value to test with.</param>
+        /// <param name="value2">The second value to test with.</param>
+        /// <returns>true if the RNG value is less than a calculated percentage result, otherwise false.</returns>
+        public static bool TestRandomCondition(int value1, int value2)
         {
-            int value = GeneralGlobals.Randomizer.Next(minValue, maxValue);
+            int value = GeneralGlobals.GenerateRandomVal();
 
-            return (checkEquals == false) ? (value < valueTested) : (value <= valueTested);
+            int percentageResult = ((value1 * value2) / GeneralGlobals.RandomConditionVal);
+
+            return (value < percentageResult);
+        }
+
+        /// <summary>
+        /// Tests a random condition with one value.
+        /// </summary>
+        /// <param name="value">The value to test.</param>
+        /// <returns>true if the RNG value is less than a calculated percentage result, otherwise false.</returns>
+        public static bool TestRandomCondition(int value)
+        {
+            return TestRandomCondition(value, GeneralGlobals.RandomConditionVal);
         }
 
         /// <summary>

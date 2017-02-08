@@ -740,7 +740,12 @@ namespace PaperMarioBattleSystem
             /// <summary>
             /// The number of Item turns the BattleEntity has. Set when using an item in the Double and Triple Dip menus.
             /// </summary>
-            DipItemTurns
+            DipItemTurns,
+
+            /// <summary>
+            /// Whether a BattleEntity is immobile or not. The BattleEntity's defensive actions are disabled and it cannot move.
+            /// </summary>
+            Immobile
         }
     }
 
@@ -749,7 +754,14 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class GeneralGlobals
     {
+        /// <summary>
+        /// The value that is used in random conditions. If this is less than the result, it returns true.
+        /// </summary>
+        public const int RandomConditionVal = 100;
+
         public static readonly Random Randomizer = new Random();
+
+        public static int GenerateRandomVal() => Randomizer.Next(RandomConditionVal);
     }
 
     /// <summary>

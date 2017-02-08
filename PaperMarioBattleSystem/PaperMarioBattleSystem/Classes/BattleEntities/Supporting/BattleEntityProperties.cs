@@ -605,10 +605,9 @@ namespace PaperMarioBattleSystem
             }
 
             //Test the percentage
+            //NOTE: Factor in the the move/item's chance of inflicting the StatusEffect
             int percentage = statusProperty.StatusPercentage;
-            int valueTest = GeneralGlobals.Randomizer.Next(1, 101);
-
-            return (valueTest <= percentage);
+            return UtilityGlobals.TestRandomCondition(percentage);
         }
 
         /// <summary>

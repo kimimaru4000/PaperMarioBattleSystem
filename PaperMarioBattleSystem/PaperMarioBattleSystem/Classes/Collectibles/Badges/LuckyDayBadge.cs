@@ -11,6 +11,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class LuckyDayBadge : Badge
     {
+        private const double EvasionValue = .75d;
+
         public LuckyDayBadge()
         {
             Name = "Lucky Day";
@@ -25,12 +27,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            
+            EntityEquipped.AddEvasionMod(EvasionValue);
         }
 
         protected override void OnUnequip()
         {
-            
+            EntityEquipped.RemoveEvasionMod(EvasionValue);
         }
     }
 }

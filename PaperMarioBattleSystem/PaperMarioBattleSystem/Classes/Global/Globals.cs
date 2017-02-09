@@ -474,11 +474,41 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public int DamageReduction;
 
+        /// <summary>
+        /// Accuracy; the value is interpreted as the percentage of hitting.
+        /// Higher values indicate a greater chance of hitting, and lower values indicate a smaller chance of hitting.
+        /// <para>Accuracy stacks multiplicatively.</para>
+        /// </summary>
         public int Accuracy = 100;
+
+        /// <summary>
+        /// The total Accuracy modifier, recalculated each time one is added or removed. A value of 1 represents the base value.
+        /// </summary>
+        public double AccuracyMod { get; protected set; } = 1d;
+
+        /// <summary>
+        /// The list of Accuracy modifiers.
+        /// </summary>
+        public readonly List<double> AccuracyModifiers = new List<double>();
 
         //NOTE: Evasion stacks multiplicatively
         //For example, with 3 Pretty Lucky and 1 Lucky Day badge equipped, the chance of attacks missing is: (0.9)(0.9)(0.9)(0.75) = .54675
-        public int Evasion = 0;
+        /// <summary>
+        /// Evasion; the value is interpreted as the percentage of being hit.
+        /// Lower values indicate a lower chance of getting hit, and higher values indicate a higher chance of getting hit.
+        /// <para>Evasion stacks multiplicatively.</para>
+        /// </summary>
+        public int Evasion = 100;
+
+        /// <summary>
+        /// The total Evasion modifier, recalculated each time one is added or removed. A value of 1 represents the base value.
+        /// </summary>
+        public double EvasionMod { get; protected set; } = 1f;
+
+        /// <summary>
+        /// The list of Evasion modifiers.
+        /// </summary>
+        public readonly List<double> EvasionModifiers = new List<double>();
 
         /// <summary>
         /// Default stats
@@ -504,6 +534,39 @@ namespace PaperMarioBattleSystem
             BaseDefense = defense;
             Attack = 0;
             Defense = 0;
+        }
+
+        public double GetTotalAccuracy() => (Accuracy * AccuracyMod);
+        public double GetTotalEvasion() => (Evasion * EvasionMod);
+
+        /// <summary>
+        /// Calculates the total Accuracy modifier.
+        /// </summary>
+        public void CalculateTotalAccuracyMod()
+        {
+            double totalAccuracyMod = 1d;
+
+            for (int i = 0; i < AccuracyModifiers.Count; i++)
+            {
+                totalAccuracyMod *= AccuracyModifiers[i];
+            }
+
+            AccuracyMod = totalAccuracyMod;
+        }
+
+        /// <summary>
+        /// Calculates the total Evasion modifier.
+        /// </summary>
+        public void CalculateTotalEvasionMod()
+        {
+            double totalEvasionMod = 1d;
+
+            for (int i = 0; i < EvasionModifiers.Count; i++)
+            {
+                totalEvasionMod *= EvasionModifiers[i];
+            }
+
+            EvasionMod = totalEvasionMod;
         }
     }
 
@@ -761,7 +824,8 @@ namespace PaperMarioBattleSystem
 
         public static readonly Random Randomizer = new Random();
 
-        public static int GenerateRandomVal() => Randomizer.Next(RandomConditionVal);
+        public static double GenerateRandomDouble() => (Randomizer.NextDouble() * RandomConditionVal);
+        public static int GenerateRandomInt() => Randomizer.Next(RandomConditionVal);
     }
 
     /// <summary>

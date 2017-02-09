@@ -11,6 +11,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class CloseCallBadge : Badge
     {
+        protected const double EvasionValue = .66d;
+
         public CloseCallBadge()
         {
             Name = "Close Call";

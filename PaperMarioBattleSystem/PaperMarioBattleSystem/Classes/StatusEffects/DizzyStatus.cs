@@ -12,6 +12,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class DizzyStatus : StatusEffect
     {
+        private double AccuracyValue = .5d;
+
         public DizzyStatus(int duration)
         {
             StatusType = Enumerations.StatusTypes.Dizzy;
@@ -24,12 +26,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-            EntityAfflicted.ModifyAccuracy(-50);
+            EntityAfflicted.AddAccuracyMod(AccuracyValue);
         }
 
         protected override void OnEnd()
         {
-            EntityAfflicted.ModifyAccuracy(50);
+            EntityAfflicted.RemoveAccuracyMod(AccuracyValue);
         }
 
         protected override void OnPhaseCycleStart()

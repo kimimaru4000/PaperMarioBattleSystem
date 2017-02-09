@@ -11,6 +11,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class PrettyLuckyBadge : Badge
     {
+        protected const double EvasionValue = .9d;
+
         public PrettyLuckyBadge()
         {
             Name = "Pretty Lucky";
@@ -25,12 +27,12 @@ namespace PaperMarioBattleSystem
 
         protected sealed override void OnEquip()
         {
-            
+            EntityEquipped.AddEvasionMod(EvasionValue);
         }
 
         protected sealed override void OnUnequip()
         {
-            
+            EntityEquipped.RemoveEvasionMod(EvasionValue);
         }
     }
 }

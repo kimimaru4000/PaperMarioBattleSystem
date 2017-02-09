@@ -13,9 +13,9 @@ namespace PaperMarioBattleSystem
     public class DodgyStatus : StatusEffect
     {
         /// <summary>
-        /// The amount of Evasion to add.
+        /// The Evasion modifier.
         /// </summary>
-        protected int EvasionValue = 50;
+        protected double EvasionValue = .5d;
 
         public DodgyStatus(int duration)
         {
@@ -29,12 +29,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-            EntityAfflicted.ModifyEvasion(EvasionValue);
+            EntityAfflicted.AddEvasionMod(EvasionValue);
         }
 
         protected override void OnEnd()
         {
-            EntityAfflicted.ModifyEvasion(-EvasionValue);
+            EntityAfflicted.RemoveEvasionMod(EvasionValue);
         }
 
         protected override void OnPhaseCycleStart()

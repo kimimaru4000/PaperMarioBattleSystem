@@ -36,7 +36,6 @@ namespace PaperMarioBattleSystem
         //Clock Out has a 1x multiplier if the bar is filled at all and a 1.27x multiplier if the bar is full
         //Showstopper has a .5x multiplier that's increased by .1x for each successful button set, totaling a 1x multiplier
         //These multipliers are multiplied by the random value to increase or decrease the chances of the condition evaluating to true
-
         /// <summary>
         /// Tests a random condition with two values.
         /// This is commonly used when calculating a total percentage of something happening.
@@ -44,14 +43,14 @@ namespace PaperMarioBattleSystem
         /// <para>Two values are multiplied by each other then divided by <see cref="GeneralGlobals.RandomConditionVal"/>.
         /// A random value is then rolled; if it's less than the result, it returns true. This works for any non-negative values.</para>
         /// </summary>
-        /// <param name="value1">The first value to test with.</param>
-        /// <param name="value2">The second value to test with.</param>
+        /// <param name="value1">The first value to test with, representing a percentage with a number from 0 to 100+.</param>
+        /// <param name="value2">The second value to test with, representing a percentage with a number from 0 to 100+.</param>
         /// <returns>true if the RNG value is less than a calculated percentage result, otherwise false.</returns>
-        public static bool TestRandomCondition(int value1, int value2)
+        public static bool TestRandomCondition(double value1, double value2)
         {
-            int value = GeneralGlobals.GenerateRandomVal();
+            double value = GeneralGlobals.GenerateRandomDouble();
 
-            int percentageResult = ((value1 * value2) / GeneralGlobals.RandomConditionVal);
+            double percentageResult = ((value1 * value2) / (double)GeneralGlobals.RandomConditionVal);
 
             return (value < percentageResult);
         }
@@ -59,7 +58,36 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Tests a random condition with one value.
         /// </summary>
-        /// <param name="value">The value to test.</param>
+        /// <param name="value">The value to test, representing a percentage with a number from 0 to 100+.</param>
+        /// <returns>true if the RNG value is less than a calculated percentage result, otherwise false.</returns>
+        public static bool TestRandomCondition(double value)
+        {
+            return TestRandomCondition(value, (double)GeneralGlobals.RandomConditionVal);
+        }
+
+        /// <summary>
+        /// Tests a random condition with two values. An int overload.
+        /// This is commonly used when calculating a total percentage of something happening.
+        /// For example, this is used when testing whether a move will inflict a Status Effect on a BattleEntity.
+        /// <para>Two values are multiplied by each other then divided by <see cref="GeneralGlobals.RandomConditionVal"/>.
+        /// A random value is then rolled; if it's less than the result, it returns true. This works for any non-negative values.</para>
+        /// </summary>
+        /// <param name="value1">The first value to test with, representing a percentage with a number from 0 to 100+.</param>
+        /// <param name="value2">The second value to test with, representing a percentage with a number from 0 to 100+.</param>
+        /// <returns>true if the RNG value is less than a calculated percentage result, otherwise false.</returns>
+        public static bool TestRandomCondition(int value1, int value2)
+        {
+            int value = GeneralGlobals.GenerateRandomInt();
+
+            int percentageResult = ((value1 * value2) / GeneralGlobals.RandomConditionVal);
+
+            return (value < percentageResult);
+        }
+
+        /// <summary>
+        /// Tests a random condition with one value. An int overload.
+        /// </summary>
+        /// <param name="value">The value to test, representing a percentage with a number from 0 to 100+.</param>
         /// <returns>true if the RNG value is less than a calculated percentage result, otherwise false.</returns>
         public static bool TestRandomCondition(int value)
         {

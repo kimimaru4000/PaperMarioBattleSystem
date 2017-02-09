@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
             StatusType = Enumerations.StatusTypes.CloudNine;
 
             //Cloud Nine's Evasion is 50%
-            EvasionValue = 50;
+            EvasionValue = .5d;
 
             AfflictedMessage = "Chances of being attacked will decrease!";
             RemovedMessage = "The effect of Cloud Nine have worn off!";

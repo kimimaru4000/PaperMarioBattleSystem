@@ -255,14 +255,52 @@ namespace PaperMarioBattleSystem
             BattleStats.Defense -= defense;
         }
 
-        public void ModifyAccuracy(int accuracy)
+        /// <summary>
+        /// Adds an Accuracy modifier. 
+        /// </summary>
+        /// <param name="accuracyMod">The percentage change in decimal form. For example, .6 would indicate a 60% decrease in Accuracy.</param>
+        public void AddAccuracyMod(double accuracyMod)
         {
-            BattleStats.Accuracy = UtilityGlobals.Clamp(BattleStats.Accuracy + accuracy, int.MinValue, int.MaxValue);
+            BattleStats.AccuracyModifiers.Add(accuracyMod);
+            BattleStats.CalculateTotalAccuracyMod();
+
+            Debug.Log($"Added accuracy mod of {accuracyMod}. Total accuracy mod is now: {BattleStats.AccuracyMod}");
         }
 
-        public void ModifyEvasion(int evasion)
+        /// <summary>
+        /// Removes an Accuracy modifier.
+        /// </summary>
+        /// <param name="accuracyMod">The percentage change in decimal form. For example, .6 would indicate a 60% decrease in Accuracy.</param>
+        public void RemoveAccuracyMod(double accuracyMod)
         {
-            BattleStats.Evasion = UtilityGlobals.Clamp(BattleStats.Evasion + evasion, int.MinValue, int.MaxValue);
+            BattleStats.AccuracyModifiers.Remove(accuracyMod);
+            BattleStats.CalculateTotalAccuracyMod();
+
+            Debug.Log($"Removed accuracy mod of {accuracyMod}. Total accuracy mod is now: {BattleStats.AccuracyMod}");
+        }
+
+        /// <summary>
+        /// Adds an Evasion modifier.
+        /// </summary>
+        /// <param name="evasionMod">The percentage change in decimal form. For example, .6 would indicate a 60% decrease in Evasion.</param>
+        public void AddEvasionMod(double evasionMod)
+        {
+            BattleStats.EvasionModifiers.Add(evasionMod);
+            BattleStats.CalculateTotalEvasionMod();
+
+            Debug.Log($"Added evasion mod of {evasionMod}. Total evasion mod is now: {BattleStats.EvasionMod}");
+        }
+
+        /// <summary>
+        /// Removes an Evasion modifier.
+        /// </summary>
+        /// <param name="evasionMod">The percentage change in decimal form. For example, .6 would indicate a 60% decrease in Evasion.</param>
+        public void RemoveEvasionMod(double evasionMod)
+        {
+            BattleStats.EvasionModifiers.Remove(evasionMod);
+            BattleStats.CalculateTotalEvasionMod();
+
+            Debug.Log($"Removed evasion mod of {evasionMod}. Total evasion mod is now: {BattleStats.EvasionMod}");
         }
 
         /// <summary>
@@ -343,16 +381,16 @@ namespace PaperMarioBattleSystem
         #region Damage Related
 
         /// <summary>
-        /// Checks if the entity's attempt to hit another entity is successful based on the entity's Accuracy and the victim's Evasion
+        /// Checks if the entity's attempt to hit another entity is successful based on the entity's Accuracy and the victim's Evasion.
         /// </summary>
-        /// <param name="victim">The entity trying to evade</param>
-        /// <returns>true if the entity hits and the victim doesn't evade, false otherwise</returns>
+        /// <param name="victim">The entity trying to evade.</param>
+        /// <returns>true if the entity hits and the victim doesn't evade, otherwise false.</returns>
         //NOTE: When dealing with Badges such as Close Call, we should compare the entity's Evasion first, then perform
         //the test again with the Badges' Evasion added in. If the Badges' Evasion bonus allows the entity to evade the attack,
         //that's when we'd play the "LUCKY" animation
         public bool AttemptHitEntity(BattleEntity victim)
         {
-            return UtilityGlobals.TestRandomCondition(BattleStats.Accuracy, victim.BattleStats.Evasion);
+            return UtilityGlobals.TestRandomCondition(BattleStats.GetTotalAccuracy(), victim.BattleStats.GetTotalEvasion());
         }
 
         /// <summary>

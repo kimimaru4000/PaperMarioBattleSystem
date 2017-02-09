@@ -12,6 +12,12 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class InvisibleStatus : StatusEffect
     {
+        /// <summary>
+        /// The Evasion modifier, which is set to 0.
+        /// This makes it so no moves can hit, unless those moves are guaranteed to hit (Ex. Crystal Star Special Moves).
+        /// </summary>
+        private const double EvasionValue = 0d;
+
         public InvisibleStatus(int duration)
         {
             StatusType = Enumerations.StatusTypes.Invisible;
@@ -24,12 +30,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-            EntityAfflicted.ModifyEvasion(100);
+            EntityAfflicted.AddEvasionMod(EvasionValue);
         }
 
         protected override void OnEnd()
         {
-            EntityAfflicted.ModifyEvasion(-100);
+            EntityAfflicted.RemoveEvasionMod(EvasionValue);
         }
 
         protected override void OnPhaseCycleStart()

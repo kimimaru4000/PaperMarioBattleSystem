@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
                 new StatusEffect[] { new TinyStatus(3) });
 
             SetMoveSequence(new MiniEggSequence(this));
-            actionCommand = new TimedLightCommand(MoveSequence, 4000d, 3, 500d, 1d);
+            actionCommand = new TimedLightCommand(MoveSequence, 4000d, 3, 500d, 1d, TimedLightCommand.LightDistributions.LastLightAtEnd);
         }
     }
 }

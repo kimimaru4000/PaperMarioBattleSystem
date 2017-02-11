@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class MiniEggSequence : Sequence
     {
-        private int EggsToThrow = 1;
+        private int EggsToThrow = 0;
         private float MoveDuration = 500f;
         private double EggWait = 500d;
 
@@ -29,7 +29,7 @@ namespace PaperMarioBattleSystem
             EggDamage = GetTotalDamage(1);
         }
 
-        //Do nothing for success for failure, as only the number of eggs thrown, which is received from the response, changes
+        //Do nothing for success or failure, as only the number of eggs thrown, which is received from the response, changes
         protected override void CommandSuccess()
         {
             
@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
         public override void OnCommandResponse(object response)
         {
             User.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.EggLayName);
-            EggsToThrow = 1 + (int)response;
+            EggsToThrow = (int)response;
         }
 
         protected override void SequenceStartBranch()
@@ -77,16 +77,18 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new WaitSeqAction(EggWait);
                     break;
                 default:
-                    //Throw an egg, then wait
-                    ThrowEgg();
-                    EggsToThrow--;
-
-                    CurSequenceAction = new WaitSeqAction(500d);
-
                     //If there are no more eggs to throw, switch to the end
                     if (EggsToThrow <= 0)
                     {
                         ChangeSequenceBranch(SequenceBranch.End);
+                    }
+                    else
+                    {
+                        //Throw an egg, then wait
+                        ThrowEgg();
+                        EggsToThrow--;
+
+                        CurSequenceAction = new WaitSeqAction(500d);
                     }
 
                     break;

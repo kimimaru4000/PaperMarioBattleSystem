@@ -123,7 +123,7 @@ namespace PaperMarioBattleSystem
 
                     //Queue a Battle Event to swap the current positions of Mario and his Partner
                     //Since we updated the references earlier, their new positions are their own battle positions
-                    BattleManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Stage,
+                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Stage,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                         new SwapPositionBattleEvent(BattleManager.Instance.GetBackPlayer(), BattleManager.Instance.GetFrontPlayer(),
                         BattleManager.Instance.GetBackPlayer().BattlePosition, BattleManager.Instance.GetFrontPlayer().BattlePosition, 500f));

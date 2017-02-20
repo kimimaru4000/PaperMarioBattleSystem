@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
 
                 return instance;
             }
-        }    
+        }
 
         private static BattleManager instance = null;
 
@@ -72,7 +72,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The current state of the battle
         /// </summary>
-        private BattleState State = BattleState.Init;
+        public BattleState State { get; private set; } = BattleState.Init;
 
         /// <summary>
         /// The current entity going
@@ -119,32 +119,6 @@ namespace PaperMarioBattleSystem
         /// Helper property telling whether enemy spots are available or not
         /// </summary>
         private bool EnemySpotsAvailable => (EnemiesAlive < MaxEnemies);
-
-        #region Battle Events
-
-        /// <summary>
-        /// The current Battle Events taking place. These are completed before the next BattleEntity's turn takes place.
-        /// </summary>
-        public readonly Dictionary<int, List<BattleEvent>> BattleEvents = new Dictionary<int, List<BattleEvent>>();
-
-        /// <summary>
-        /// The pending Battle Events waiting to be added.
-        /// They are added once the Battle State matches the state they should be added in.
-        /// </summary>
-        public readonly List<PendingBattleEventHolder> PendingBattleEvents = new List<PendingBattleEventHolder>();
-
-        /// <summary>
-        /// The current, highest priority of Battle Events taking place.
-        /// Once these are all done, the next highest priority of Battle Events is found and takes place.
-        /// </summary>
-        public int CurHighestPriority { get; private set; } = 0;
-
-        /// <summary>
-        /// Tells if there are Battle Events.
-        /// </summary>
-        public bool HasBattleEvents => (BattleEvents.Count > 0);
-
-        #endregion
 
         private BattleManager()
         {
@@ -195,17 +169,19 @@ namespace PaperMarioBattleSystem
 
         public void Update()
         {
+            //NOTE: Create a general way to halt turns in battle in place of these hardcoded event check
+
             //Update battle events if there are any
-            if (HasBattleEvents == true)
+            if (BattleEventManager.Instance.HasBattleEvents == true)
             {
-                UpdateBattleEvents();
+                BattleEventManager.Instance.UpdateBattleEvents();
             }
 
             //If a turn just ended, update the current state
             if (State == BattleState.TurnEnd)
             {
                 //Don't start the next turn until all Battle Events are finished
-                if (HasBattleEvents == false)
+                if (BattleEventManager.Instance.HasBattleEvents == false)
                     TurnStart();
             }
 
@@ -261,7 +237,7 @@ namespace PaperMarioBattleSystem
         {
             State = state;
 
-            AddPendingEvents();
+            BattleEventManager.Instance.AddPendingEvents();
         }
 
         private void SwitchPhase(BattlePhase phase)
@@ -467,7 +443,7 @@ namespace PaperMarioBattleSystem
                 if (Partner == FrontPlayer)
                 {
                     //Queue the event to switch Mario with his Partner
-                    QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Stage, new BattleState[] { BattleState.Turn, BattleState.TurnEnd },
+                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Stage, new BattleState[] { BattleState.Turn, BattleState.TurnEnd },
                         new SwapPositionBattleEvent(FrontPlayer, BackPlayer, BackPlayer.BattlePosition, FrontPlayer.BattlePosition, 500f));
 
                     //Switch Mario in front
@@ -979,162 +955,6 @@ namespace PaperMarioBattleSystem
                 return 1;
 
             return 0;
-        }
-
-        #endregion
-
-        #region Battle Event Methods
-
-        /// <summary>
-        /// Places a Battle Event on the pending list.
-        /// <para>If the current BattleState matches a BattleState the Battle Event takes effect in, it will take effect immediately.
-        /// Otherwise, it will wait and take effect once the current BattleState matches.</para>
-        /// </summary>
-        /// <param name="priority">The priority the Battle Event has. Must be greater than or equal to 0.</param>
-        /// <param name="battleStates">The BattleStates the Battle Event takes effect in. If none are specified, the event isn't added.</param>
-        /// <param name="battleEvent">The Battle Event to add.</param>
-        public void QueueBattleEvent(int priority, BattleState[] battleStates, BattleEvent battleEvent)
-        {
-            if (priority < 0)
-            {
-                Debug.LogError($"Not queueing BattleEvent because the priority's value is {priority} which is less than 0!");
-                return;
-            }
-
-            if (battleEvent == null)
-            {
-                Debug.LogError($"Trying to queue null BattleEvent with priority of {priority}! Not queueing BattleEvent");
-                return;
-            }
-
-            if (battleStates == null || battleStates.Length == 0)
-            {
-                Debug.LogError($"BattleEvent {battleEvent} with Priority {priority} was queued, but no BattleStates were specified. Not queueing.");
-                return;
-            }
-
-            //Add the Battle Event directly if the current state is the state to add it in
-            if (battleStates.Contains(State) == true)
-            {
-                AddBattleEvent(priority, battleEvent);
-            }
-            //Otherwise put it in the pending list
-            else
-            {
-                PendingBattleEvents.Add(new PendingBattleEventHolder(priority, battleStates, battleEvent));
-
-                Debug.Log($"Queued BattleEvent {battleEvent} with Priority {priority}");
-            }
-        }
-
-        /// <summary>
-        /// Adds a Battle Event to occur.
-        /// </summary>
-        /// <param name="priority">The priority the Battle Event has. Must be greater than or equal to 0.</param>
-        /// <param name="battleEvent">The Battle Event to add.</param>
-        private void AddBattleEvent(int priority, BattleEvent battleEvent)
-        {
-            if (priority < 0)
-            {
-                Debug.LogError($"Not adding BattleEvent because the priority's value is {priority} which is less than 0!");
-                return;
-            }
-
-            if (battleEvent == null)
-            {
-                Debug.LogError($"Trying to add null BattleEvent with priority of {priority}! Not adding BattleEvent");
-                return;
-            }
-
-            //Set the current highest priority to the priority if there are no Battle Events
-            if (HasBattleEvents == false)
-            {
-                CurHighestPriority = priority;
-            }
-
-            if (BattleEvents.ContainsKey(priority) == false)
-            {
-                BattleEvents.Add(priority, new List<BattleEvent>());
-            }
-
-            BattleEvents[priority].Add(battleEvent);
-
-            Debug.Log($"Added BattleEvent {battleEvent} with Priority {priority} to take effect");
-        }
-
-        /// <summary>
-        /// Updates the current set of Battle Events.
-        /// </summary>
-        private void UpdateBattleEvents()
-        {
-            //There are no more BattleEvents to update
-            if (HasBattleEvents == false)
-            {
-                return;
-            }
-
-            //Update all Battle Events
-            for (int i = 0; i < BattleEvents[CurHighestPriority].Count; i++)
-            {
-                BattleEvent battleEvent = BattleEvents[CurHighestPriority][i];
-
-                //Start the Battle Event if it hasn't started already
-                if (battleEvent.HasStarted == false)
-                {
-                    battleEvent.Start();
-                }
-
-                battleEvent.Update();
-                if (battleEvent.IsDone == true)
-                {
-                    //Remove the BattleEvent if it's finished
-                    BattleEvents[CurHighestPriority].RemoveAt(i);
-                    i--;
-                }
-            }
-
-            //If we're done with all Battle Events with this priority, remove the priority and find the next highest priority to update
-            if (BattleEvents[CurHighestPriority].Count == 0)
-            {
-                BattleEvents.Remove(CurHighestPriority);
-                CurHighestPriority = FindNextHighestBattleEventPriority();
-            }
-        }
-
-        /// <summary>
-        /// Finds the next highest priority for the set of Battle Events to update.
-        /// </summary>
-        /// <returns>-1 if there are no Battle Events to update, otherwise the highest priority value for the Battle Events to update.</returns>
-        private int FindNextHighestBattleEventPriority()
-        {
-            if (HasBattleEvents == false) return -1;
-
-            int highestPriority = -1;
-
-            foreach (int priority in BattleEvents.Keys)
-            {
-                if (priority > highestPriority) highestPriority = priority;
-            }
-
-            return highestPriority;
-        }
-
-        /// <summary>
-        /// Adds pending Battle Events if the BattleState is the state that matches the state they're added in.
-        /// </summary>
-        private void AddPendingEvents()
-        {
-            for (int i = 0; i < PendingBattleEvents.Count; i++)
-            {
-                //Check if the states match
-                if (PendingBattleEvents[i].States.Contains(State))
-                {
-                    //Add the event and remove it from the pending list
-                    AddBattleEvent(PendingBattleEvents[i].Priority, PendingBattleEvents[i].PendingBattleEvent);
-                    PendingBattleEvents.RemoveAt(i);
-                    i--;
-                }
-            }
         }
 
         #endregion

@@ -25,6 +25,13 @@ namespace PaperMarioBattleSystem
         protected bool Started { get; private set; } = false;
 
         /// <summary>
+        /// Tells if the Battle Event is unique.
+        /// <para>If unique, its contents will be checked for equality with other Battle Events with the same priority.
+        /// If they have the same contents, other Battle Events will be disregarded.</para>
+        /// </summary>
+        public bool IsUnique { get; protected set; } = false;
+
+        /// <summary>
         /// Whether the Battle Event is done or not.
         /// </summary>
         protected bool Done { get; private set; } = false;
@@ -100,5 +107,15 @@ namespace PaperMarioBattleSystem
         /// What the Battle Event does.
         /// </summary>
         protected abstract void OnUpdate();
+
+        /// <summary>
+        /// Tells if this Battle Event's contents are equal to another Battle Event's contents.
+        /// </summary>
+        /// <param name="other">The Battle Event to compare this one to.</param>
+        /// <returns>true if the contents are equal, otherwise false.</returns>
+        public virtual bool AreContentsEqual(BattleEvent other)
+        {
+            return (this == other);
+        }
     }
 }

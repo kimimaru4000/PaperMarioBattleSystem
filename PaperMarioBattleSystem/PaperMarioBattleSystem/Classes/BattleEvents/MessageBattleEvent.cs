@@ -27,6 +27,8 @@ namespace PaperMarioBattleSystem
             BattleMessage = battleMessage;
             BattleTextBox = new TextBox(SpriteRenderer.Instance.WindowCenter, new Vector2(100, 50), BattleMessage);
             BattleTextBox.ScaleToText(AssetManager.Instance.TTYDFont);
+
+            IsUnique = true;
         }
 
         protected override void OnStart()
@@ -43,6 +45,15 @@ namespace PaperMarioBattleSystem
 
             BattleUIManager.Instance.UnsuppressMenus();
             BattleUIManager.Instance.RemoveUIElement(BattleTextBox);
+        }
+
+        public override bool AreContentsEqual(BattleEvent other)
+        {
+            if (base.AreContentsEqual(other) == true) return true;
+
+            MessageBattleEvent messageEvent = other as MessageBattleEvent;
+
+            return (messageEvent == null || messageEvent.BattleMessage == BattleMessage);
         }
     }
 }

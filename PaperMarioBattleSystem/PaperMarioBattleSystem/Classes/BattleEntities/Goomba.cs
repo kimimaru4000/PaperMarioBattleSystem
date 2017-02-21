@@ -26,6 +26,10 @@ namespace PaperMarioBattleSystem
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Goomba");
             AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(67, 107, 26, 28), 1000d)));
+            AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet, 
+                new Animation.Frame(new Rectangle(65, 76, 29, 27), 500d),
+                new Animation.Frame(new Rectangle(2, 109, 27, 26), 500d)));
+            AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(2, 109, 27, 26), 1000d)));
         }
 
         public override void OnTurnStart()

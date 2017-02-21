@@ -53,7 +53,7 @@ namespace PaperMarioBattleSystem
 
             MessageBattleEvent messageEvent = other as MessageBattleEvent;
 
-            return (messageEvent == null || messageEvent.BattleMessage == BattleMessage);
+            return (messageEvent != null && messageEvent.BattleMessage == BattleMessage);
         }
     }
 }

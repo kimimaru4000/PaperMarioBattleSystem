@@ -18,6 +18,8 @@ namespace PaperMarioBattleSystem
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Goombario");
             AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(67, 89, 26, 30), 1000d)));
+            AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(49, 164, 30, 27), 1000d)));
+            AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(81, 163, 30, 28), 1000d)));
         }
 
         protected sealed override BattleMenu GetMainBattleMenu()

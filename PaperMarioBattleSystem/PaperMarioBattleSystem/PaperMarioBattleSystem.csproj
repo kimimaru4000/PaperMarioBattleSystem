@@ -112,6 +112,7 @@
     <Compile Include="Classes\BattleEntities\Supporting\BattleEntityProperties.cs" />
     <Compile Include="Classes\BattleEvents\BattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DamagedBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\DeathBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\MessageBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\SwapPositionBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitBattleEvent.cs" />

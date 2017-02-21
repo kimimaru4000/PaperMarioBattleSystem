@@ -35,6 +35,9 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(228, 918, 29, 51), 30d),
                 new Animation.Frame(new Rectangle(228, 861, 29, 49), 30d),
                 new Animation.Frame(new Rectangle(68, 1056, 31, 48), 30d)));
+            AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(596, 554, 42, 44), 1000d)));
+            AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(57, 1022, 53, 26), 1000d)));
+
 
             AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerPickupName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(173, 664, 30, 49), 100d),

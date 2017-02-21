@@ -153,6 +153,14 @@ namespace PaperMarioBattleSystem
                 {
                     Debug.Log($"{Name} was hit with {damage} {element} " + (piercing ? "piercing" : "non-piercing") + " damage!");
 
+                    //If the entity took damage during their sequence, it's an interruption, and this event should not occur
+                    if (damage > 0 && (IsTurn == false || PreviousAction?.MoveSequence.InSequence == false))
+                    {
+                        BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage,
+                            new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                            new DamagedBattleEvent(this));
+                    }
+
                     //Lose HP
                     LoseHP(damage);
                 }
@@ -221,6 +229,7 @@ namespace PaperMarioBattleSystem
         {
             BattleStats.HP = UtilityGlobals.Clamp(BattleStats.HP - hp, 0, BattleStats.MaxHP);
             UpdateHealthState();
+
             if (IsDead == true)
             {
                 Die();
@@ -310,7 +319,14 @@ namespace PaperMarioBattleSystem
         {
             BattleStats.HP = 0;
             UpdateHealthState();
-            PlayAnimation(AnimationGlobals.DeathName, true);
+            //PlayAnimation(AnimationGlobals.DeathName, true);
+
+            //NOTE: The death event occurs for standard enemies like Goombas during their sequence if it was interrupted
+            //I'm not sure about bosses yet, so that'll need to be tested
+
+            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Death,
+                new BattleManager.BattleState[] { /*BattleManager.BattleState.Turn,*/ BattleManager.BattleState.TurnEnd },
+                new DeathBattleEvent(this));
 
             //Remove all StatusEffects on the entity
             EntityProperties.RemoveAllStatuses();

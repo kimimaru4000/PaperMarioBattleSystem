@@ -391,10 +391,10 @@ namespace PaperMarioBattleSystem
             //Handle all dead entities
             /*NOTE: If an entity dies from something that happens at the start of the turn, such as Frozen, then it will stay alive until
               the next turn when this is called. Find a fix for this*/
-            CheckDeadEntities();
+            //CheckDeadEntities();
 
             //Update the battle state
-            UpdateBattleState();
+            //UpdateBattleState();
 
             //The battle is finished
             if (State == BattleState.Done)
@@ -406,6 +406,12 @@ namespace PaperMarioBattleSystem
 
             //Find the next entity to go
             FindNextEntityTurn();
+        }
+
+        public void HandleEntityDeaths()
+        {
+            CheckDeadEntities();
+            UpdateBattleState();
         }
 
         /// <summary>
@@ -433,10 +439,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void CheckDeadEntities()
         {
-            if (Mario.IsDead == true)
-            {
-                Mario.PlayAnimation(AnimationGlobals.DeathName);
-            }
+            //if (Mario.IsDead == true)
+            //{
+            //    Mario.PlayAnimation(AnimationGlobals.DeathName);
+            //}
             if (Partner.IsDead == true)
             {
                 //If the Partner died and is in front, switch places with Mario
@@ -451,7 +457,7 @@ namespace PaperMarioBattleSystem
                 }
                 
                 //NOTE: Don't play this animation again if the Partner is still dead
-                Partner.PlayAnimation(AnimationGlobals.DeathName);
+                //Partner.PlayAnimation(AnimationGlobals.DeathName);
             }
 
             List<BattleEnemy> deadEnemies = new List<BattleEnemy>();

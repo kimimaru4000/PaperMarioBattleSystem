@@ -8,16 +8,19 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// A BattleEvent that plays the character's damaged animation.
-    /// This event doesn't occur when the entity is damaged during its own Sequence.
+    /// <para>This event doesn't occur when the entity is damaged during its own Sequence, as Sequence interruptions handle that.</para>
     /// </summary>
-    public sealed class DamagedBattleEvent : WaitForAnimBattleEvent
+    public sealed class DamagedBattleEvent : BattleEvent
     {
         private BattleEntity Entity = null;
+        private Animation HurtAnim = null;
 
         public DamagedBattleEvent(BattleEntity entity)
         {
             Entity = entity;
-            Anim = Entity.GetAnimation(AnimationGlobals.HurtName);
+            HurtAnim = Entity.GetAnimation(AnimationGlobals.HurtName);
+
+            IsUnique = true;
         }
 
         protected override void OnStart()
@@ -25,7 +28,7 @@ namespace PaperMarioBattleSystem
             base.OnStart();
             BattleUIManager.Instance.SuppressMenus();
 
-            Anim.Play();
+            Entity.PlayAnimation(AnimationGlobals.HurtName, true);
         }
 
         protected override void OnEnd()
@@ -34,6 +37,35 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.UnsuppressMenus();
 
             Entity.PlayAnimation(Entity.GetIdleAnim());
+        }
+
+        protected override void OnUpdate()
+        {
+            //If the hurt animation doesn't exist, end immediately
+            if (HurtAnim == null)
+            {
+                End();
+                return;
+            }
+
+            if (HurtAnim.Finished == true)
+            {
+                //NOTE: Check if the entity is being targeted here and replay the animation if so.
+                //This prevents the death event from occurring until the entity is completely done being attacked
+                //if (Entity.IsTargeted == true)
+                    //HurtAnim.Play();
+                //else
+                End();
+            }
+        }
+
+        public override bool AreContentsEqual(BattleEvent other)
+        {
+            if (base.AreContentsEqual(other) == true) return true;
+
+            DamagedBattleEvent damagedEvent = other as DamagedBattleEvent;
+
+            return (damagedEvent != null && damagedEvent.Entity == Entity);
         }
     }
 }

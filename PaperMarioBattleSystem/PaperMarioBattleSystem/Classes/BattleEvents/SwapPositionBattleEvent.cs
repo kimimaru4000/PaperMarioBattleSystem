@@ -92,7 +92,7 @@ namespace PaperMarioBattleSystem
             if (FirstEntity.IsDead == false)
                 FirstEntity.PlayAnimation(FirstEntity.GetIdleAnim());
             if (SecondEntity.IsDead == false)
-                SecondEntity.PlayAnimation(FirstEntity.GetIdleAnim());
+                SecondEntity.PlayAnimation(SecondEntity.GetIdleAnim());
 
             ElapsedTime = 0f;
         }

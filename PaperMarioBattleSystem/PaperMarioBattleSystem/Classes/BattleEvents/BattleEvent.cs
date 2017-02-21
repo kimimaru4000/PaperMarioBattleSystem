@@ -110,6 +110,7 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Tells if this Battle Event's contents are equal to another Battle Event's contents.
+        /// <para>The base behavior is to compare this Battle Event to the Battle Event passed in.</para>
         /// </summary>
         /// <param name="other">The Battle Event to compare this one to.</param>
         /// <returns>true if the contents are equal, otherwise false.</returns>

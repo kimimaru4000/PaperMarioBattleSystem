@@ -26,6 +26,10 @@ namespace PaperMarioBattleSystem
             {
                 BattleActions.Add(new Multibounce());
             }
+            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.TornadoJump) > 0)
+            {
+                BattleActions.Add(new TornadoJump());
+            }
         }
     }
 }

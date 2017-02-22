@@ -147,7 +147,7 @@ namespace PaperMarioBattleSystem
         {
             int rand = GeneralGlobals.Randomizer.Next(0, EntitiesAffected.Length);
             BattleEntity target = EntitiesAffected[rand];
-            AttemptDamage(EggDamage, target, true);
+            AttemptDamage(EggDamage, target, Action.DamageInfo.Value, true);
         }
     }
 }

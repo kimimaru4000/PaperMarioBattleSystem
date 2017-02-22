@@ -77,7 +77,7 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), SpinMoveDuration);
                     break;
                 case 1:
-                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected[0], false);
+                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected[0], Action.DamageInfo.Value, false);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -95,7 +95,7 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), SpinMoveDuration);
                     break;
                 case 1:
-                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected[0], false);
+                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected[0], Action.DamageInfo.Value, false);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

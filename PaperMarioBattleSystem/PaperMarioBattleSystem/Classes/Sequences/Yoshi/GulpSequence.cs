@@ -77,10 +77,10 @@ namespace PaperMarioBattleSystem
                     BattleEntity[] behindEntities = BattleManager.Instance.GetEntitiesBehind(eatenEntity);
                     behindEntities = BattleManager.Instance.FilterEntitiesByHeights(behindEntities, Action.MoveProperties.HeightsAffected);
 
-                    AttemptDamage(BaseDamage, eatenEntity, false);
+                    AttemptDamage(BaseDamage, eatenEntity, Action.DamageInfo.Value, false);
                     if (behindEntities.Length > 0)
                     {
-                        AttemptDamage(BaseDamage, behindEntities[0], false);
+                        AttemptDamage(BaseDamage, behindEntities[0], Action.DamageInfo.Value, false);
                     }
 
                     ChangeSequenceBranch(SequenceBranch.End);

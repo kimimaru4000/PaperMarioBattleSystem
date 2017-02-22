@@ -516,10 +516,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="damage">The damage the BattleAction deals to the entity if the attempt was successful</param>
         /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
+        /// <param name="damageInfo">The damage information to use.</param>
         /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
         /// If false, the total damage will be calculated</param>
         /// <returns>An int array containing the damage dealt to each BattleEntity targeted, in order</returns>
-        protected int[] AttemptDamage(int damage, BattleEntity[] entities, bool isTotalDamage)
+        protected int[] AttemptDamage(int damage, BattleEntity[] entities, InteractionParamHolder damageInfo, bool isTotalDamage)
         {
             if (entities == null || entities.Length == 0)
             {
@@ -554,9 +555,6 @@ namespace PaperMarioBattleSystem
                     }
                 }
             }
-
-            //Quick accessor for the damage info
-            InteractionParamHolder damageInfo = Action.DamageInfo.Value;
 
             //The damage dealt to each BattleEntity
             int[] damageValues = new int[entities.Length];
@@ -604,11 +602,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="damage">The damage the BattleAction deals to the entity if the attempt was successful</param>
         /// <param name="entity">The BattleEntity to attempt to inflict damage on</param>
+        /// <param name="damageInfo">The damage information to use.</param>
         /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
         /// If false, the total damage will be calculated</param>
-        protected int[] AttemptDamage(int damage, BattleEntity entity, bool isTotalDamage)
+        protected int[] AttemptDamage(int damage, BattleEntity entity, InteractionParamHolder damageInfo, bool isTotalDamage)
         {
-            return AttemptDamage(damage, new BattleEntity[] { entity }, isTotalDamage);
+            return AttemptDamage(damage, new BattleEntity[] { entity }, damageInfo, isTotalDamage);
         }
 
         /// <summary>

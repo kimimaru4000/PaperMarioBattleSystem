@@ -86,7 +86,7 @@ namespace PaperMarioBattleSystem
                 case 1:
                     if (Action.DealsDamage == true)
                     {
-                        AttemptDamage(BaseDamage, EntitiesAffected, true);
+                        AttemptDamage(BaseDamage, EntitiesAffected, Action.DamageInfo.Value, true);
                         CurSequenceAction = new WaitSeqAction(WaitDuration);
                     }
                     break;

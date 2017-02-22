@@ -69,6 +69,7 @@
     <Compile Include="Classes\Actions\ActionCommands\TimedLightCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\SuperguardCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\TidalWaveCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\TornadoJumpCommand.cs" />
     <Compile Include="Classes\Actions\BattleAction.cs" />
     <Compile Include="Classes\Actions\Defensive\DefensiveAction.cs" />
     <Compile Include="Classes\Actions\Defensive\Superguard.cs" />
@@ -84,6 +85,7 @@
     <Compile Include="Classes\Actions\Mario\Jump.cs" />
     <Compile Include="Classes\Actions\Mario\Multibounce.cs" />
     <Compile Include="Classes\Actions\Mario\PowerBounce.cs" />
+    <Compile Include="Classes\Actions\Mario\TornadoJump.cs" />
     <Compile Include="Classes\Actions\MenuAction.cs" />
     <Compile Include="Classes\Actions\MessageAction.cs" />
     <Compile Include="Classes\Actions\MoveAction.cs" />
@@ -153,6 +155,7 @@
     <Compile Include="Classes\Collectibles\Badges\QuickChangeBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SimplifierBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SpikeShieldBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\TornadoJumpBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\TripleDipBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\UnsimplifierBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ZapTapBadge.cs" />
@@ -208,6 +211,7 @@
     <Compile Include="Classes\Sequences\Mario\JumpSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\MultibounceSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\PowerBounceSequence.cs" />
+    <Compile Include="Classes\Sequences\Mario\TornadoJumpSequence.cs" />
     <Compile Include="Classes\Sequences\NoSequence.cs" />
     <Compile Include="Classes\Sequences\Sequence.cs" />
     <Compile Include="Classes\Sequences\Special\ArtAttackSequence.cs" />

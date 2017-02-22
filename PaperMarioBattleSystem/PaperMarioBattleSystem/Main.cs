@@ -75,6 +75,7 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new MultibounceBadge());
             Inventory.Instance.AddBadge(new IceSmashBadge());
             Inventory.Instance.AddBadge(new HeadRattleBadge());
+            Inventory.Instance.AddBadge(new TornadoJumpBadge());
 
             Inventory.Instance.AddBadge(new FeelingFineBadge());
             Inventory.Instance.AddBadge(new FeelingFinePBadge());

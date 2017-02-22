@@ -11,16 +11,16 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Press the jump button once before Mario almost hits the enemy
     /// </summary>
-    public sealed class JumpCommand : ActionCommand
+    public class JumpCommand : ActionCommand
     {
-        private float Leniency = 500f;
-        private float StartRange = 0f;
-        private float EndRange = 0f;
-        private float TotalRange = 0f;
+        protected float Leniency = 500f;
+        protected float StartRange = 0f;
+        protected float EndRange = 0f;
+        protected float TotalRange = 0f;
 
-        private Keys ButtonToPress = Keys.Z;
+        protected Keys ButtonToPress = Keys.Z;
 
-        private bool WithinRange
+        protected bool WithinRange
         {
             get
             {

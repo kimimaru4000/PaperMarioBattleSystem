@@ -846,7 +846,7 @@ namespace PaperMarioBattleSystem
                     float depth = .35f - (index * .01f);
                     float turnStringDepth = depth + .0001f;
                     string turnCountString = status.TotalDuration.ToString();
-                    if (status.TotalDuration <= StatusGlobals.InfiniteDuration) turnCountString = string.Empty;
+                    if (status.IsInfinite == true) turnCountString = string.Empty;
 
                     //Draw icon
                     SpriteRenderer.Instance.Draw(texture.Tex, iconPos, texture.SourceRect, Color.White, false, depth, true);

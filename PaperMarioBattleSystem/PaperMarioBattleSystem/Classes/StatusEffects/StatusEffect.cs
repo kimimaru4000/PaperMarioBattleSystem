@@ -125,7 +125,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public CroppedTexture2D StatusIcon { get; protected set; } = null;
 
-        private bool IsInfinite => (Duration <= InfiniteDuration);
+        public bool IsInfinite => (Duration <= InfiniteDuration);
         public bool IsFinished => (IsInfinite == false && TurnsPassed >= TotalDuration);
 
         /// <summary>

@@ -624,8 +624,10 @@ namespace PaperMarioBattleSystem
             {
                 StatusEffect refreshedStatus = GetStatus(status.StatusType);
                 refreshedStatus.Refresh(status);
-                
-                Debug.Log($"{status.StatusType} Status on {Entity.Name} was refreshed with a duration of {status.Duration}!");
+
+                string refreshedTurnMessage = refreshedStatus.Duration.ToString();
+                if (refreshedStatus.IsInfinite == true) refreshedTurnMessage = "Infinite";
+                Debug.Log($"{status.StatusType} Status on {Entity.Name} was refreshed with a duration of {refreshedTurnMessage}!");
                 return;
             }
 
@@ -636,7 +638,9 @@ namespace PaperMarioBattleSystem
             newStatus.SetEntity(Entity);
             newStatus.Afflict();
 
-            Debug.LogWarning($"Afflicted {Entity.Name} with the {newStatus.StatusType} Status for {newStatus.TotalDuration} turns!");
+            string turnMessage = newStatus.TotalDuration.ToString();
+            if (newStatus.IsInfinite == true) turnMessage = "Infinite";
+            Debug.LogWarning($"Afflicted {Entity.Name} with the {newStatus.StatusType} Status for {turnMessage} turns!");
         }
 
         /// <summary>
@@ -659,7 +663,9 @@ namespace PaperMarioBattleSystem
             status.ClearEntity();
             Statuses.Remove(statusType);
 
-            Debug.LogWarning($"Removed the {statusType} Status on {Entity.Name} after being inflicted for {status.TotalDuration} turns!");
+            string turnMessage = status.TotalDuration.ToString();
+            if (status.IsInfinite == true) turnMessage = "Infinite";
+            Debug.LogWarning($"Removed the {statusType} Status on {Entity.Name} after being inflicted for {turnMessage} turns!");
         }
 
         /// <summary>

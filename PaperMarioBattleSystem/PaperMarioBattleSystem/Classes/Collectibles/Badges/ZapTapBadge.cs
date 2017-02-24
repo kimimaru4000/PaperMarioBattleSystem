@@ -28,12 +28,40 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            EntityEquipped.EntityProperties.AfflictStatus(new ElectrifiedStatus(StatusGlobals.InfiniteDuration));
+            EntityEquipped.PhaseCycleStartEvent -= InflictElectrified;
+            EntityEquipped.PhaseCycleStartEvent += InflictElectrified;
+
+            InflictElectrified();
         }
 
         protected override void OnUnequip()
         {
-            EntityEquipped.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Electrified);
+            EntityEquipped.PhaseCycleStartEvent -= InflictElectrified;
+
+            RemoveElectrified();
+        }
+
+        /// <summary>
+        /// Causes Zap Tap to inflict Electrified if the BattleEntity equipped isn't afflicted with it.
+        /// This bypasses any immunities or other conditions that would prevent it from being afflicted (Ex. Allergic).
+        /// </summary>
+        private void InflictElectrified()
+        {
+            if (EntityEquipped.EntityProperties.HasStatus(Enumerations.StatusTypes.Electrified) == false)
+            {
+                EntityEquipped.EntityProperties.AfflictStatus(new ElectrifiedStatus(StatusGlobals.InfiniteDuration));
+            }
+        }
+
+        /// <summary>
+        /// Removes Electrified the BattleEntity is afflicted with it. This is called when removing the badge.
+        /// </summary>
+        private void RemoveElectrified()
+        {
+            if (EntityEquipped.EntityProperties.HasStatus(Enumerations.StatusTypes.Electrified) == true)
+            {
+                EntityEquipped.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Electrified);
+            }
         }
     }
 }

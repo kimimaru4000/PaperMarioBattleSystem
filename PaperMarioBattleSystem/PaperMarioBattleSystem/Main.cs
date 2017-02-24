@@ -105,6 +105,7 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new PrettyLuckyBadge());
             Inventory.Instance.AddBadge(new LuckyDayBadge());
 
+            Inventory.Instance.AddBadge(new ZapTapBadge());
             Inventory.Instance.AddBadge(new ReturnPostageBadge());
 
             //Items
@@ -115,6 +116,7 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddItem(new SleepySheep());
             Inventory.Instance.AddItem(new TastyTonic());
             Inventory.Instance.AddItem(new TastyTonic());
+            Inventory.Instance.AddItem(new VoltShroom());
         }
 
         /// <summary>

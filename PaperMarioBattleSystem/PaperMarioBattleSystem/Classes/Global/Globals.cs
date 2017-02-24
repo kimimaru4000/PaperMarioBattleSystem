@@ -1273,7 +1273,7 @@ namespace PaperMarioBattleSystem
                 switch (PaybackType)
                 {
                     case PaybackTypes.Full: return damageDealt + Damage;
-                    case PaybackTypes.Half: return (damageDealt / 2) + Damage;
+                    case PaybackTypes.Half: return (int)Math.Ceiling(damageDealt / 2f) + Damage;
                     default: return Damage;
                 }
             }

@@ -13,6 +13,11 @@ namespace PaperMarioBattleSystem
     {
         protected const double EvasionValue = .66d;
 
+        /// <summary>
+        /// Tells whether the Evasion bonus was granted or not.
+        /// </summary>
+        private bool GaveBonus = false;
+
         public CloseCallBadge()
         {
             Name = "Close Call";
@@ -27,12 +32,55 @@ namespace PaperMarioBattleSystem
 
         protected sealed override void OnEquip()
         {
-            
+            EntityEquipped.HealthStateChangedEvent -= OnEntityHealthStateChange;
+            EntityEquipped.HealthStateChangedEvent += OnEntityHealthStateChange;
+
+            //Add the Evasion bonus on equip if the BattleEntity is in Danger or Peril
+            if (EntityEquipped.IsInDanger == true)
+                AddEvasionBonus();
         }
 
         protected sealed override void OnUnequip()
         {
-            
+            EntityEquipped.HealthStateChangedEvent -= OnEntityHealthStateChange;
+
+            RemoveEvasionBonus();
+        }
+
+        private void OnEntityHealthStateChange(Enumerations.HealthStates newHealthState)
+        {
+            if (EntityEquipped.IsInDanger == true)
+            {
+                AddEvasionBonus();
+            }
+            else
+            {
+                RemoveEvasionBonus();
+            }
+        }
+
+        /// <summary>
+        /// Adds Close Call's Evasion value if it wasn't already added.
+        /// </summary>
+        private void AddEvasionBonus()
+        {
+            if (GaveBonus == false)
+            {
+                EntityEquipped.AddEvasionMod(EvasionValue);
+                GaveBonus = true;
+            }
+        }
+
+        /// <summary>
+        /// Removes Close Call's Evasion value if it was added.
+        /// </summary>
+        private void RemoveEvasionBonus()
+        {
+            if (GaveBonus == true)
+            {
+                EntityEquipped.RemoveEvasionMod(EvasionValue);
+                GaveBonus = false;
+            }
         }
     }
 }

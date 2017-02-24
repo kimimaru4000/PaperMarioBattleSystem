@@ -140,7 +140,7 @@ namespace PaperMarioBattleSystem
             //NOTE: In TTYD this acts differently, as if you press any button on the controller, including ones
             //not used in this Action Command, it counts as a failure
             //On a computer it's harder to define what you can and can't press, as you can also be using a controller
-            //This will remain the same unless we define a set of buttons that can be mapped, but this is unlikely as it's very limiting
+            //This will remain the same unless we define a set of buttons that can be mapped
             bool pressedIncorrectButton = false;
 
             for (int i = 0; i < PossibleButtons.Length; i++)

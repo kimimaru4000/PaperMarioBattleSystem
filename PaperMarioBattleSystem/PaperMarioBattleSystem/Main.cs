@@ -105,6 +105,8 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new PrettyLuckyBadge());
             Inventory.Instance.AddBadge(new LuckyDayBadge());
 
+            Inventory.Instance.AddBadge(new ReturnPostageBadge());
+
             //Items
             Inventory.Instance.AddItem(new Mushroom());
             Inventory.Instance.AddItem(new HoneySyrup());

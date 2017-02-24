@@ -15,6 +15,21 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class BattleEntity
     {
+        #region Delegates and Events
+
+        public delegate void HealthStateChanged(HealthStates newHealthState);
+        public event HealthStateChanged HealthStateChangedEvent = null;
+
+        public delegate void PhaseCycleStarted();
+        /// <summary>
+        /// The event invoked at the start of each phase cycle. This is invoked after all Statuses take effect.
+        /// <para>Use this for anything that doesn't need to occur before or after anything else.
+        /// Status Effects don't use this event since they need to take effect in a specific order.</para>
+        /// </summary>
+        public event PhaseCycleStarted PhaseCycleStartEvent = null;
+
+        #endregion
+
         /// <summary>
         /// Various unique properties belonging to the BattleEntity
         /// </summary>
@@ -369,6 +384,7 @@ namespace PaperMarioBattleSystem
             if (newHealthState != HealthState)
             {
                 OnHealthStateChange(newHealthState);
+                HealthStateChangedEvent?.Invoke(newHealthState);
 
                 //Change to the new health state
                 HealthState = newHealthState;
@@ -447,6 +463,9 @@ namespace PaperMarioBattleSystem
             {
                 statuses[i].PhaseCycleStart();
             }
+
+            //Invoke the event
+            PhaseCycleStartEvent?.Invoke();
         }
 
         /// <summary>

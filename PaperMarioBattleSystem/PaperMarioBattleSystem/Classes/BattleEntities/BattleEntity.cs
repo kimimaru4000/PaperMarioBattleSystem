@@ -845,18 +845,21 @@ namespace PaperMarioBattleSystem
 
                     float depth = .35f - (index * .01f);
                     float turnStringDepth = depth + .0001f;
-                    string turnCountString = status.TotalDuration.ToString();
-                    if (status.IsInfinite == true) turnCountString = string.Empty;
 
-                    //Draw icon
-                    SpriteRenderer.Instance.Draw(texture.Tex, iconPos, texture.SourceRect, Color.White, false, depth, true);
+                    status.DrawStatusInfo(iconPos, depth, turnStringDepth);
+
+                    //string turnCountString = status.TotalDuration.ToString();
+                    //if (status.IsInfinite == true) turnCountString = string.Empty;
+                    //
+                    ////Draw icon
+                    //SpriteRenderer.Instance.Draw(texture.Tex, iconPos, texture.SourceRect, Color.White, false, depth, true);
 
                     //Draw turn count if it's not infinite
-                    if (string.IsNullOrEmpty(turnCountString) == false)
-                    {
-                        SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, turnCountString, iconPos + new Vector2(52, 20),
-                            Color.White, 0f, new Vector2(1f, 0f), 1f, turnStringDepth);
-                    }
+                    //if (string.IsNullOrEmpty(turnCountString) == false)
+                    //{
+                    //    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, turnCountString, iconPos + new Vector2(52, 20),
+                    //        Color.White, 0f, new Vector2(1f, 0f), 1f, turnStringDepth);
+                    //}
 
                     index++;
                 }

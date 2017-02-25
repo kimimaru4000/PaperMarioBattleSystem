@@ -260,6 +260,29 @@ namespace PaperMarioBattleSystem
         /// <returns>A deep copy of this StatusEffect</returns>
         public abstract StatusEffect Copy();
 
+        /// <summary>
+        /// Draws information about the Status Effect, including its icon and turn count.
+        /// </summary>
+        public virtual void DrawStatusInfo(Vector2 iconPos, float depth, float turnStringDepth)
+        {
+            //Don't draw the status if it doesn't have an icon
+            if (StatusIcon == null || StatusIcon.Tex == null)
+                return;
+
+            string turnCountString = TotalDuration.ToString();
+            if (IsInfinite == true) turnCountString = string.Empty;
+
+            //Draw icon
+            SpriteRenderer.Instance.Draw(StatusIcon.Tex, iconPos, StatusIcon.SourceRect, Color.White, false, depth, true);
+
+            //Draw turn count if it's not infinite
+            if (string.IsNullOrEmpty(turnCountString) == false)
+            {
+                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, turnCountString, iconPos + new Vector2(52, 20),
+                    Color.White, 0f, new Vector2(1f, 0f), 1f, turnStringDepth);
+            }
+        }
+
         #region Static Methods
 
         /// <summary>

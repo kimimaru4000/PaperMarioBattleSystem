@@ -200,6 +200,11 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKey(Keys.R) == true) status = new FrozenStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
+            //Inflict Dizzy
+            else if (Input.GetKeyDown(Keys.D) == true)
+            {
+                DebugInflictStatus(new DizzyStatus(turnCount), entityType);
+            }
         }
 
         private static void DebugInflictStatus(StatusEffect status, Enumerations.EntityTypes entityType)

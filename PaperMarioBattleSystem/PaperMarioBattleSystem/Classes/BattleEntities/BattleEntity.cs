@@ -208,7 +208,7 @@ namespace PaperMarioBattleSystem
             //If this entity received damage during its action sequence, it has been interrupted
             //The null check is necessary in the event that a StatusEffect that deals damage at the start of the phase, such as Poison,
             //is inflicted at the start of the battle before any entity has moved
-            if (IsTurn == true && PreviousAction?.MoveSequence.InSequence == true)
+            if (damage > 0 && IsTurn == true && PreviousAction?.MoveSequence.InSequence == true)
             {
                 PreviousAction.MoveSequence.StartInterruption(element);
             }

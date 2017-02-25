@@ -12,7 +12,9 @@ namespace PaperMarioBattleSystem.Classes.StatusEffects
     /// </summary>
     public sealed class HugeStatus : POWUpStatus
     {
-        public HugeStatus(int duration) : base(2, duration)
+        private const int AttackBoost = 2;
+
+        public HugeStatus(int duration) : base(AttackBoost, duration)
         {
             StatusType = Enumerations.StatusTypes.Huge;
 

@@ -14,6 +14,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class PoisonStatus : StatusEffect
     {
+        private int PoisonDamage = 1;
+
         public PoisonStatus(int duration)
         {
             StatusType = Enumerations.StatusTypes.Poison;
@@ -39,7 +41,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnPhaseCycleStart()
         {
-            EntityAfflicted.TakeDamage(Enumerations.Elements.Poison, 1, true);
+            EntityAfflicted.TakeDamage(Enumerations.Elements.Poison, PoisonDamage, true);
             IncrementTurns();
         }
 

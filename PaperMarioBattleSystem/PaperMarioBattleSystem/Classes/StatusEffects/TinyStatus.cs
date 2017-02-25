@@ -12,7 +12,9 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class TinyStatus : POWDownStatus
     {
-        public TinyStatus(int duration) : base(2, duration)
+        private const int AttackReduction = 2;
+
+        public TinyStatus(int duration) : base(AttackReduction, duration)
         {
             StatusType = Enumerations.StatusTypes.Tiny;
 

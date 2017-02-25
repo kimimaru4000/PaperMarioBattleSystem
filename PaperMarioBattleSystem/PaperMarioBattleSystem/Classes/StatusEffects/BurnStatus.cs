@@ -12,6 +12,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class BurnStatus : StatusEffect
     {
+        private int FireDamage = 1;
+
         public BurnStatus(int duration)
         {
             StatusType = Enumerations.StatusTypes.Burn;
@@ -42,7 +44,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnPhaseCycleStart()
         {
-            EntityAfflicted.TakeDamage(Enumerations.Elements.Fire, 1, true);
+            EntityAfflicted.TakeDamage(Enumerations.Elements.Fire, FireDamage, true);
             IncrementTurns();
         }
 

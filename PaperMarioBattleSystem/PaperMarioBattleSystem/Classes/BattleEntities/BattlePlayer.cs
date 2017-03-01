@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
-            PlayAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName);
+            AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName);
 
             int itemTurns = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.DipItemTurns);
             if (itemTurns > 0)
@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnEnd();
 
-            PlayAnimation(GetIdleAnim());
+            AnimManager.PlayAnimation(GetIdleAnim());
         }
 
         public override string GetIdleAnim()

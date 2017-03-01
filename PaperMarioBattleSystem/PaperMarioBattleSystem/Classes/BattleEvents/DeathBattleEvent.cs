@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
         public DeathBattleEvent(BattleEntity entity)
         {
             Entity = entity;
-            DeathAnim = Entity.GetAnimation(AnimationGlobals.DeathName);
+            DeathAnim = Entity.AnimManager.GetAnimation(AnimationGlobals.DeathName);
 
             IsUnique = true;
         }
@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
             base.OnStart();
             BattleUIManager.Instance.SuppressMenus();
 
-            Entity.PlayAnimation(AnimationGlobals.DeathName, true);
+            Entity.AnimManager.PlayAnimation(AnimationGlobals.DeathName, true);
         }
 
         protected override void OnEnd()

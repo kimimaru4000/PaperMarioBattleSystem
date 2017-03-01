@@ -27,11 +27,11 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
-                    User.PlayAnimation(User.GetIdleAnim());
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     EndSequence();
                     break;
                 default:

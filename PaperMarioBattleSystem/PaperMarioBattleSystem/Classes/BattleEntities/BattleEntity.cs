@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Any fighter that takes part in battle
     /// </summary>
-    public abstract class BattleEntity
+    public abstract class BattleEntity : INameable
     {
         #region Delegates and Events
 
@@ -36,9 +36,9 @@ namespace PaperMarioBattleSystem
         public readonly BattleEntityProperties EntityProperties = null;
 
         /// <summary>
-        /// The animations, referred to by string, of the BattleEntity
+        /// The BattleEntity's animation manager.
         /// </summary>
-        protected readonly Dictionary<string, Animation> Animations = new Dictionary<string, Animation>();
+        public readonly ObjAnimManager AnimManager = null;
 
         /// <summary>
         /// The HeightState of the entity
@@ -50,16 +50,6 @@ namespace PaperMarioBattleSystem
         /// This can apply to any entity, but only Mario and his Partners utilize Danger and Peril
         /// </summary>
         public HealthStates HealthState { get; private set; } = HealthStates.Normal;
-
-        /// <summary>
-        /// The previous animation that has been played
-        /// </summary>
-        protected Animation PreviousAnim = null;
-
-        /// <summary>
-        /// The current animation being played
-        /// </summary>
-        protected Animation CurrentAnim = null;
 
         public Stats BattleStats { get; protected set; } = Stats.Default;
         public int CurHP => BattleStats.HP;
@@ -116,6 +106,7 @@ namespace PaperMarioBattleSystem
         protected BattleEntity()
         {
             EntityProperties = new BattleEntityProperties(this);
+            AnimManager = new ObjAnimManager(this);
         }
 
         protected BattleEntity(Stats stats) : this()
@@ -334,7 +325,7 @@ namespace PaperMarioBattleSystem
         {
             BattleStats.HP = 0;
             UpdateHealthState();
-            //PlayAnimation(AnimationGlobals.DeathName, true);
+            //AnimManager.PlayAnimation(AnimationGlobals.DeathName, true);
 
             //NOTE: The death event occurs for standard enemies like Goombas during their sequence if it was interrupted
             //I'm not sure about bosses yet, so that'll need to be tested
@@ -688,93 +679,6 @@ namespace PaperMarioBattleSystem
             PreviousAction.StartSequence(actualTargets);
         }
 
-        #region Animation Methods
-
-        /// <summary>
-        /// Adds an animation for the entity.
-        /// If an animation already exists, it will be replaced.
-        /// </summary>
-        /// <param name="animName">The name of the animation</param>
-        /// <param name="anim">The animation reference</param>
-        protected void AddAnimation(string animName, Animation anim)
-        {
-            //Return if trying to add null animation
-            if (anim == null)
-            {
-                Debug.LogError($"Trying to add null animation called \"{animName}\" to entity {Name}, so it won't be added");
-                return;
-            }
-
-            if (Animations.ContainsKey(animName) == true)
-            {
-                Debug.LogWarning($"Entity {Name} already has an animation called \"{animName}\" and will be replaced");
-
-                //Clear the current animation reference if it is the animation being removed
-                Animation prevAnim = Animations[animName];
-                if (CurrentAnim == prevAnim)
-                { 
-                    CurrentAnim = null;
-                }
-
-                Animations.Remove(animName);
-            }
-
-            anim.SetKey(animName);
-            Animations.Add(animName, anim);
-
-            //Play the most recent animation that gets added is the default, and play it
-            //This allows us to safely have a valid animation reference at all times, provided at least one is added
-            if (CurrentAnim == null)
-            {
-                PlayAnimation(animName);
-            }
-        }
-
-        public Animation GetAnimation(string animName)
-        {
-            //If animation cannot be found
-            if (Animations.ContainsKey(animName) == false)
-            {
-                Debug.LogError($"Cannot find animation called \"{animName}\" for entity {Name} to play");
-                return null;
-            }
-
-            return Animations[animName];
-        }
-
-        /// <summary>
-        /// Plays an animation that the entity has, specified by its name. If the animation does not have the specified animation,
-        /// nothing happens
-        /// </summary>
-        /// <param name="animName">The name of the animation to play</param>
-        /// <param name="resetPrevious">If true, resets the previous animation that was playing, if any.
-        /// This will also reset its speed</param>
-        public void PlayAnimation(string animName, bool resetPrevious = false, Animation.AnimFinish onFinish = null)
-        {
-            Animation animToPlay = GetAnimation(animName);
-
-            //If animation cannot be found, return
-            if (animToPlay == null)
-            {
-                //Call the delegate
-                onFinish?.Invoke();
-                return;
-            }
-
-            //Reset the previous animation if specified
-            if (resetPrevious == true)
-            {
-                CurrentAnim?.Reset(true);
-            }
-
-            //Set previous animation
-            PreviousAnim = CurrentAnim;
-
-            //Play animation
-            CurrentAnim = animToPlay;
-            CurrentAnim.Play(onFinish);
-        }
-
         /// <summary>
         /// Gets the idle animation of the BattleEntity based on its HealthState and the Status Effects it's inflicted with.
         /// </summary>
@@ -787,8 +691,6 @@ namespace PaperMarioBattleSystem
                 default: return AnimationGlobals.IdleName;
             }
         }
-
-        #endregion
 
         #region Equipment Methods
 
@@ -806,7 +708,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void Update()
         {
-            CurrentAnim?.Update();
+            AnimManager.CurrentAnim?.Update();
 
             //Update Defensive actions
             for (int i = 0; i < DefensiveActions.Count; i++)
@@ -817,7 +719,7 @@ namespace PaperMarioBattleSystem
 
         public virtual void Draw()
         {
-            CurrentAnim?.Draw(Position, Color.White, EntityType != EntityTypes.Enemy, .1f);
+            AnimManager.CurrentAnim?.Draw(Position, Color.White, EntityType != EntityTypes.Enemy, .1f);
             PreviousAction?.Draw();
 
             //Draw Status Effect icons on the BattleEntity

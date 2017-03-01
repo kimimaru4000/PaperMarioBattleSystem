@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), WalkDuration / 4f);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
@@ -67,7 +67,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.GulpEatName, true);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.GulpEatName, true);
 
                     //The entity spit out
                     BattleEntity eatenEntity = EntitiesAffected[0];
@@ -96,7 +96,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.GulpEatName, true);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.GulpEatName, true);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -110,11 +110,11 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration / 4f);
                     break;
                 case 1:
-                    User.PlayAnimation(User.GetIdleAnim());
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     EndSequence();
                     break;
                 default:

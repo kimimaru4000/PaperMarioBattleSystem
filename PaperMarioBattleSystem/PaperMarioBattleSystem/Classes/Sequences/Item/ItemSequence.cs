@@ -28,15 +28,15 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName, true);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName, true);
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), WalkDuration);
                     break;
                 case 1:
-                    User.PlayAnimation(AnimationGlobals.GetItemName, false);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.GetItemName, false);
                     CurSequenceAction = new WaitSeqAction(WaitDuration);
                     break;
                 case 2:
-                    User.PlayAnimation(User.GetIdleAnim());
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -50,11 +50,11 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
-                    User.PlayAnimation(User.GetIdleAnim());
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
 
                     //Remove the item from the Inventory when it's finished
                     //NOTE: I'm not sure if this is the best place to do this yet

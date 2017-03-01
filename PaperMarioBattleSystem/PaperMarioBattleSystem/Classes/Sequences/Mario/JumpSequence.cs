@@ -46,7 +46,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(CurTarget), WalkDuration);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
@@ -61,7 +61,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(User.GetIdleAnim());
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration);
                     break;
                 case 1:
@@ -114,11 +114,11 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
-                    User.PlayAnimation(User.GetIdleAnim());
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     EndSequence();
                     break;
                 default:
@@ -147,7 +147,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.SpikedTipHurtName, true);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.SpikedTipHurtName, true);
 
                     Vector2 pos = BattleManager.Instance.GetPositionInFront(CurTarget) + new Vector2(-50, -JumpHeight);
                     CurSequenceAction = new MoveToSeqAction(pos, WalkDuration / 4d);
@@ -170,7 +170,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.JumpMissName, true);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpMissName, true);
                     CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.JumpMissName);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;

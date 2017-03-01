@@ -205,6 +205,11 @@ namespace PaperMarioBattleSystem
             {
                 DebugInflictStatus(new DizzyStatus(turnCount), entityType);
             }
+            //Inflict Stone
+            else if (Input.GetKeyDown(Keys.S) == true)
+            {
+                DebugInflictStatus(new StoneStatus(turnCount), entityType);
+            }
         }
 
         private static void DebugInflictStatus(StatusEffect status, Enumerations.EntityTypes entityType)

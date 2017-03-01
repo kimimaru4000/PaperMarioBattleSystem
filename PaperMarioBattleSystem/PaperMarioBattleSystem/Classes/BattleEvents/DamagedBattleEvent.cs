@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
         public DamagedBattleEvent(BattleEntity entity)
         {
             Entity = entity;
-            HurtAnim = Entity.GetAnimation(AnimationGlobals.HurtName);
+            HurtAnim = Entity.AnimManager.GetAnimation(AnimationGlobals.HurtName);
 
             IsUnique = true;
         }
@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
             base.OnStart();
             BattleUIManager.Instance.SuppressMenus();
 
-            Entity.PlayAnimation(AnimationGlobals.HurtName, true);
+            Entity.AnimManager.PlayAnimation(AnimationGlobals.HurtName, true);
         }
 
         protected override void OnEnd()
@@ -36,7 +36,7 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
             BattleUIManager.Instance.UnsuppressMenus();
 
-            Entity.PlayAnimation(Entity.GetIdleAnim());
+            Entity.AnimManager.PlayAnimation(Entity.GetIdleAnim());
         }
 
         protected override void OnUpdate()

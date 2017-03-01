@@ -137,7 +137,7 @@ namespace PaperMarioBattleSystem
                     }
                     else
                     {
-                        User.PlayAnimation(AnimationGlobals.MarioBattleAnimations.TornadoJumpFailName);
+                        User.AnimManager.PlayAnimation(AnimationGlobals.MarioBattleAnimations.TornadoJumpFailName);
                         CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.MarioBattleAnimations.TornadoJumpFailName);
                     }
                     break;

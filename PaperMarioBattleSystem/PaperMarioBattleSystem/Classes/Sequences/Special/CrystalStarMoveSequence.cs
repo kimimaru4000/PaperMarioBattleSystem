@@ -25,17 +25,17 @@ namespace PaperMarioBattleSystem
                 case 0:
                     //NOTE: Mario moves up a bit when he's in the front, I haven't confirmed how it works in the back yet
 
-                    User.PlayAnimation(AnimationGlobals.RunningName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     //NOTE: Show all Crystal Stars coming from the map with VFX and such
 
-                    User.PlayAnimation(AnimationGlobals.MarioBattleAnimations.MapLiftName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.MarioBattleAnimations.MapLiftName);
                     CurSequenceAction = new WaitSeqAction(WaitTime);
                     break;
                 case 2:
-                    User.PlayAnimation(User.GetIdleAnim());
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:

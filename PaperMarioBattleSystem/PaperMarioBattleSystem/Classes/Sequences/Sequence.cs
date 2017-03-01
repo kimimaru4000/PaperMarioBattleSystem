@@ -323,7 +323,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.HurtName, true);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.HurtName, true);
 
                     Vector2 pos = User.Position + new Vector2(moveX, -moveY);
                     CurSequenceAction = new MoveToSeqAction(pos, time / 2d);

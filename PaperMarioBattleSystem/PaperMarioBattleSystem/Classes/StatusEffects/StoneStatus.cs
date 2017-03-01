@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
             EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Invincible, true);
 
-            EntityAfflicted.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
+            EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
 
             Debug.Log($"{StatusType} has been inflicted and Suspended all negative StatusEffects on {EntityAfflicted.Name}!");
         }
@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
             //Resume all of the entity's Negative StatusEffects
             EntityAfflicted.SuspendOrResumeAlignmentStatuses(false, StatusAlignments.Negative, StatusType);
 
-            EntityAfflicted.PlayAnimation(EntityAfflicted.GetIdleAnim());
+            EntityAfflicted.AnimManager.PlayAnimation(EntityAfflicted.GetIdleAnim());
 
             Debug.Log($"{StatusType} has ended and Resumed all negative StatusEffects on {EntityAfflicted.Name}!");
         }
@@ -62,7 +62,7 @@ namespace PaperMarioBattleSystem
             //Remove Invincibility and don't do anything else to avoid Suspending/Resuming conflicts with other StatusEffects
             EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Invincible);
 
-            EntityAfflicted.PlayAnimation(EntityAfflicted.GetIdleAnim());
+            EntityAfflicted.AnimManager.PlayAnimation(EntityAfflicted.GetIdleAnim());
         }
 
         protected sealed override void OnResume()
@@ -76,7 +76,7 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
             EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Invincible, true);
 
-            EntityAfflicted.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
+            EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
         }
 
         public sealed override StatusEffect Copy()

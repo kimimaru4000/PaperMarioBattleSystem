@@ -30,49 +30,51 @@ namespace PaperMarioBattleSystem
             #region Initialize Animations
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Mario");
-            AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(228, 918, 29, 51), 1000d)));
-            AddAnimation(AnimationGlobals.RunningName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+            AnimManager.SetSpriteSheet(spriteSheet);
+
+            AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(228, 918, 29, 51), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.RunningName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(228, 918, 29, 51), 30d),
                 new Animation.Frame(new Rectangle(228, 861, 29, 49), 30d),
                 new Animation.Frame(new Rectangle(68, 1056, 31, 48), 30d)));
-            AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(596, 554, 42, 44), 1000d)));
-            AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(57, 1022, 53, 26), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(596, 554, 42, 44), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(57, 1022, 53, 26), 1000d)));
 
 
-            AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerPickupName, new Animation(spriteSheet,
+            AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerPickupName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(173, 664, 30, 49), 100d),
                 new Animation.Frame(new Rectangle(174, 607, 29, 50), 100d),
                 new Animation.Frame(new Rectangle(340, 421, 32, 46), 200d)));
-            AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerWindupName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+            AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerWindupName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(341, 9, 36, 50), 150d),
                 new Animation.Frame(new Rectangle(341, 64, 38, 50), 150d)));
-            AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerSlamName, new Animation(spriteSheet,
+            AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerSlamName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(334, 319, 42, 50), 200d),
                 new Animation.Frame(new Rectangle(340, 166, 32, 44), 300d)));
-            AddAnimation(AnimationGlobals.VictoryName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(447, 281, 42, 50), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.VictoryName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(447, 281, 42, 50), 1000d)));
 
-            AddAnimation(AnimationGlobals.JumpMissName, new Animation(spriteSheet,
+            AnimManager.AddAnimation(AnimationGlobals.JumpMissName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(444, 499, 45, 39), 700d),
                 new Animation.Frame(new Rectangle(499, 536, 31, 42), 100d),
                 new Animation.Frame(new Rectangle(499, 487, 31, 43), 100d),
                 new Animation.Frame(new Rectangle(499, 438, 31, 44), 100d)));
 
-            AddAnimation(AnimationGlobals.SpikedTipHurtName, new LoopAnimation(spriteSheet, 10,
+            AnimManager.AddAnimation(AnimationGlobals.SpikedTipHurtName, new LoopAnimation(spriteSheet, 10,
                 new Animation.Frame(new Rectangle(393, 450, 38, 52), 30d),
                 new Animation.Frame(new Rectangle(393, 385, 38, 55), 30d)));
 
-            AddAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName, new Animation(spriteSheet,
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(402, 569, 34, 51), 30d)));
 
-            AddAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName, new Animation(spriteSheet,
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(337, 908, 35, 41), 700d)));
 
-            AddAnimation(AnimationGlobals.StatusBattleAnimations.StoneName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(66, 859, 35, 41), 0d)));
+            AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.StoneName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(66, 859, 35, 41), 0d)));
 
-            AddAnimation(AnimationGlobals.PlayerBattleAnimations.SuperguardName, new Animation(spriteSheet,
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.SuperguardName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(392, 335, 42, 45), 700d)));
 
-            AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName, new Animation(spriteSheet,
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(449, 222, 40, 53), 700d)));
 
             #endregion

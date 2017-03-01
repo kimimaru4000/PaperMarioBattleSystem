@@ -101,6 +101,7 @@
     <Compile Include="Classes\Actions\Yoshi\MiniEgg.cs" />
     <Compile Include="Classes\Animations\Animation.cs" />
     <Compile Include="Classes\Animations\LoopAnimation.cs" />
+    <Compile Include="Classes\Animations\ObjAnimManager.cs" />
     <Compile Include="Classes\Animations\ReverseAnimation.cs" />
     <Compile Include="Classes\BattleEntities\BattleEnemy.cs" />
     <Compile Include="Classes\BattleEntities\BattleEntity.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Classes\Collectibles\Collectible.cs" />
     <Compile Include="Classes\Global\Utility\Line.cs" />
     <Compile Include="Classes\Global\Utility\UtilityGlobals.cs" />
+    <Compile Include="Classes\Interfaces\INameable.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ActionSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ChangePartnerSubMenu.cs" />
@@ -310,6 +312,9 @@
     <Content Include="Content\Audio\SFX\Switch Partner.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Sprites\Characters\Mario.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Sprites\Characters\Goombario.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -317,9 +322,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Enemies\Goomba.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Sprites\Characters\Mario.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Enemies\SpikedGoomba.png">

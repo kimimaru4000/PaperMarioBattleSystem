@@ -428,8 +428,8 @@ namespace PaperMarioBattleSystem
             else if (EnemiesAlive <= 0)
             {
                 ChangeBattleState(BattleState.Done);
-                Mario.PlayAnimation(AnimationGlobals.VictoryName);
-                Partner.PlayAnimation(AnimationGlobals.VictoryName);
+                Mario.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
+                Partner.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
                 Debug.Log("VICTORY");
             }
         }

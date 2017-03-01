@@ -42,7 +42,7 @@ namespace PaperMarioBattleSystem
 
         public override void OnCommandResponse(object response)
         {
-            User.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.EggLayName);
+            User.AnimManager.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.EggLayName);
             EggsToThrow = (int)response;
         }
 
@@ -51,11 +51,11 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), MoveDuration);
                     break;
                 case 1:
-                    User.PlayAnimation(User.GetIdleAnim());
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     CurSequenceAction = new WaitSeqAction(0f);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
@@ -120,11 +120,11 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.PlayAnimation(AnimationGlobals.RunningName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, MoveDuration);
                     break;
                 case 1:
-                    User.PlayAnimation(User.GetIdleAnim());
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     EndSequence();
                     break;
                 default:

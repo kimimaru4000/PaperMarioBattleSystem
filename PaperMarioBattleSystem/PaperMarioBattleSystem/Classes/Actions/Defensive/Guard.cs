@@ -29,7 +29,9 @@ namespace PaperMarioBattleSystem
             int newDamage = UtilityGlobals.Clamp(damage - 1, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
             StatusEffect[] newStatuses = FilterStatuses(statusEffects);
 
-            User.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName, true);
+            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage,
+                new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
+                new WaitForAnimBattleEvent(User, AnimationGlobals.PlayerBattleAnimations.GuardName, true));
 
             return new BattleGlobals.DefensiveActionHolder(newDamage, newStatuses);
         }

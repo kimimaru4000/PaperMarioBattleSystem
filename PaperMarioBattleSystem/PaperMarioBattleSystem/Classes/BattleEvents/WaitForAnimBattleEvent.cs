@@ -7,21 +7,41 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// A Battle Event that waits for an animation to finish.
+    /// A BattleEvent plays an animation for the character and waits for it to finish.
     /// Do not use this for animations that loop infinitely, as it will never end.
     /// </summary>
     public class WaitForAnimBattleEvent : BattleEvent
     {
+        protected BattleEntity Entity = null;
         protected Animation Anim = null;
+        protected bool PlayIdleOnEnd = true;
+        private string AnimName = string.Empty;
 
-        protected WaitForAnimBattleEvent()
+        public WaitForAnimBattleEvent(BattleEntity entity, string animName, bool playIdleOnEnd)
         {
+            Entity = entity;
+            AnimName = animName;
+            Anim = Entity.AnimManager.GetAnimation(AnimName);
+            PlayIdleOnEnd = playIdleOnEnd;
 
+            IsUnique = true;
         }
 
-        public WaitForAnimBattleEvent(Animation anim)
+        protected override void OnStart()
         {
-            Anim = anim;
+            base.OnStart();
+
+            Entity.AnimManager.PlayAnimation(AnimName, true);
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (PlayIdleOnEnd == true)
+            {
+                Entity.AnimManager.PlayAnimation(Entity.GetIdleAnim());
+            }
         }
 
         protected override void OnUpdate()
@@ -37,6 +57,17 @@ namespace PaperMarioBattleSystem
             {
                 End();
             }
+        }
+
+        public override bool AreContentsEqual(BattleEvent other)
+        {
+            if (base.AreContentsEqual(other) == true) return true;
+
+            WaitForAnimBattleEvent waitForAnimEvent = other as WaitForAnimBattleEvent;
+
+            //Don't compare the animation. In cases where two or more of this event have the same priority and same entity,
+            //we don't want a latter animation to override this one
+            return (waitForAnimEvent != null && waitForAnimEvent.Entity == Entity);
         }
     }
 }

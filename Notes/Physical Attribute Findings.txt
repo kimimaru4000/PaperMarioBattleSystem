@@ -1,0 +1,8 @@
+Physical Attribute Findings (3/2/17)
+------------------------------------
+I've been testing Confused enemies in TTYD. Here's what I found:
+
+-Spiked Goombas take damage when attacking other Spiked Goombas
+-Spiky Parabuzzies take damage when attacking Pokeys
+-Spiky Parabuzzies take damage when attacking Spike Tops
+-Pokeys take damage when attacking Spiked Parabuzzies. This also shows that they can attack Flying enemies, at least when they're tall

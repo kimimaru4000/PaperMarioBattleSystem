@@ -736,10 +736,11 @@ namespace PaperMarioBattleSystem
         /// <para>Flying does not mean that the entity is Airborne. Flying entities, such as Ruff Puffs,
         /// can still be damaged by ground moves if they hover at ground level.</para>
         /// </summary>
-        //NOTE: The case of Explosive on contact in the actual games are with enraged Bob-Ombs and when Bobbery uses Hold Fast
-        //If you make contact with these enemies, they deal explosive damage and die instantly, with Hold Fast being an exception
-        //to the latter
-        //NOTE: Test if Spiked enemies get hurt by jumping on other Spiked enemies
+        /*NOTE: The case of Explosive on contact in the actual games are with enraged Bob-Ombs and when Bobbery uses Hold Fast.
+          If you make contact with these enemies, they deal explosive damage and die instantly, with Hold Fast being an exception
+          to the latter*/
+        /*NOTE: Test if Spiked enemies get hurt by jumping on other Spiked enemies
+          Confirmed - Spiked enemies get hurt when jumping on other Spiked enemies*/
         public enum PhysicalAttributes
         {
             None, Flying, Electrified, Poisonous, Spiked, Icy, Fiery, Explosive, Starry

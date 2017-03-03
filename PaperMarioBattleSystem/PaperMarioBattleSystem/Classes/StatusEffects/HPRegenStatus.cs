@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
@@ -17,15 +19,23 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private int AmountHealed = 0;
 
+        private CroppedTexture2D HPIcon = null;
+
         public HPRegenStatus(int amountHealed, int duration)
         {
             StatusType = Enumerations.StatusTypes.HPRegen;
             Alignment = StatusAlignments.Positive;
 
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+                new Rectangle(658, 106, 38, 46));
+
             AmountHealed = amountHealed;
             Duration = duration;
 
             AfflictedMessage = "HP will briefly recover!";
+
+            HPIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+                new Rectangle(503, 60, 35, 24));
         }
 
         protected override void OnAfflict()
@@ -57,6 +67,13 @@ namespace PaperMarioBattleSystem
         public override StatusEffect Copy()
         {
             return new HPRegenStatus(AmountHealed, Duration);
+        }
+
+        public override void DrawStatusInfo(Vector2 iconPos, float depth, float turnStringDepth)
+        {
+            base.DrawStatusInfo(iconPos, depth, turnStringDepth);
+
+            //The HP icon tweens between yellow (about the same yellow as Electrified's Spark icon) and dark pink, starting with dark pink
         }
     }
 }

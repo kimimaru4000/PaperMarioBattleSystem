@@ -45,9 +45,12 @@ namespace PaperMarioBattleSystem
         {
             BattleUIManager.Instance.ClearMenuStack();
 
-            //Remove any remaining item turns from the BattleEntity and end its turn if it no longer wants to use items
+            //Remove any remaining item turns from the BattleEntity and make it do nothing if it no longer wants to use items
             BattleManager.Instance.EntityTurn.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.DipItemTurns);
-            BattleManager.Instance.EntityTurn.EndTurn();
+
+            //Make the entity perform the NoAction
+            //It does this instead of directly ending the entity's turn since choosing not to use an item is affected by Confusion
+            BattleManager.Instance.EntityTurn.StartAction(new NoAction(), null);
         }
 
         private void OnChooseNo()

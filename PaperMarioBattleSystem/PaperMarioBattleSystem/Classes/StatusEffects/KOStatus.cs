@@ -17,6 +17,9 @@ namespace PaperMarioBattleSystem
             StatusType = Enumerations.StatusTypes.KO;
             Alignment = StatusAlignments.Negative;
 
+            //KO doesn't have an icon, as once it's inflicted, the entity dies
+            StatusIcon = null;
+
             //KO doesn't have a duration, as once it's inflicted, the entity dies
             Duration = 1;
         }

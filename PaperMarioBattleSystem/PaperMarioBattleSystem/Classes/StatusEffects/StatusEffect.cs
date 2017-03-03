@@ -269,7 +269,7 @@ namespace PaperMarioBattleSystem
             if (StatusIcon == null || StatusIcon.Tex == null)
                 return;
 
-            string turnCountString = TotalDuration.ToString();
+            string turnCountString = (TotalDuration - TurnsPassed).ToString();
             if (IsInfinite == true) turnCountString = string.Empty;
 
             //Draw icon

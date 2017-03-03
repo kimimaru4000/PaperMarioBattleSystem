@@ -17,6 +17,8 @@ namespace PaperMarioBattleSystem
         {
             StatusType = Enumerations.StatusTypes.Injured;
 
+            StatusIcon = null;
+
             AfflictedMessage = "You're injured--you can't move!";
         }
 

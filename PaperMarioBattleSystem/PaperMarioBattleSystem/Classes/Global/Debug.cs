@@ -214,18 +214,44 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKey(Keys.O) == true) status = new DodgyStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
-            //Inflict Sleep or Stone
+            //Inflict Sleep, Stone, or Slow
             else if (Input.GetKeyDown(Keys.S) == true)
             {
                 StatusEffect status = new SleepStatus(turnCount);
                 //Inflict Stone
                 if (Input.GetKey(Keys.T) == true) status = new StoneStatus(turnCount);
+                //Inflict Slow
+                else if (Input.GetKey(Keys.L) == true) status = new SlowStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Confused
             else if (Input.GetKeyDown(Keys.C) == true)
             {
                 StatusEffect status = new ConfusedStatus(turnCount);
+                DebugInflictStatus(status, entityType);
+            }
+            //Inflict Burn
+            else if (Input.GetKeyDown(Keys.B) == true)
+            {
+                StatusEffect status = new BurnStatus(turnCount);
+                DebugInflictStatus(status, entityType);
+            }
+            //Inflict Tiny
+            else if (Input.GetKeyDown(Keys.T) == true)
+            {
+                StatusEffect status = new TinyStatus(turnCount);
+                DebugInflictStatus(status, entityType);
+            }
+            //Inflict Huge
+            else if (Input.GetKeyDown(Keys.H) == true)
+            {
+                StatusEffect status = new HugeStatus(turnCount);
+                DebugInflictStatus(status, entityType);
+            }
+            //Inflict Allergic
+            else if (Input.GetKeyDown(Keys.A) == true)
+            {
+                StatusEffect status = new AllergicStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
@@ -21,6 +23,9 @@ namespace PaperMarioBattleSystem
         {
             StatusType = Enumerations.StatusTypes.POWDown;
             Alignment = StatusAlignments.Negative;
+
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+                new Rectangle(707, 154, 40, 48));
 
             AttackValue = attackValue;
             Duration = duration;

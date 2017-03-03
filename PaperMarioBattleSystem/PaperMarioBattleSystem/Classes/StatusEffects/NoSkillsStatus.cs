@@ -30,6 +30,8 @@ namespace PaperMarioBattleSystem
             StatusType = StatusTypes.NoSkills;
             Alignment = StatusAlignments.Negative;
 
+            StatusIcon = null;
+
             Duration = duration;
 
             CategoryDisabled = categoryDisabled;

@@ -659,6 +659,12 @@ namespace PaperMarioBattleSystem
             return new BattleGlobals.ActionHolder(actualAction, actualTargets);
         }
 
+        /// <summary>
+        /// Makes the BattleEntity perform a MoveAction.
+        /// The actual action performed may not be the one passed in if the BattleEntity is affected by Confusion.
+        /// </summary>
+        /// <param name="action">The MoveAction to perform.</param>
+        /// <param name="targets">The BattleEntities the MoveAction targets.</param>
         public void StartAction(MoveAction action, params BattleEntity[] targets)
         {
             MoveAction actualAction = action;

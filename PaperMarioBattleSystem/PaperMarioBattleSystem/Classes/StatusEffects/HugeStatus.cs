@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace PaperMarioBattleSystem.Classes.StatusEffects
+namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The Huge Status Effect.
@@ -17,6 +19,9 @@ namespace PaperMarioBattleSystem.Classes.StatusEffects
         public HugeStatus(int duration) : base(AttackBoost, duration)
         {
             StatusType = Enumerations.StatusTypes.Huge;
+
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+                new Rectangle(658, 204, 38, 46));
 
             AfflictedMessage = "Huge! Attack power is\nnow boosted!";
         }

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using static PaperMarioBattleSystem.Enumerations;
 using static PaperMarioBattleSystem.StatusGlobals;
 
@@ -17,10 +19,18 @@ namespace PaperMarioBattleSystem
     {
         protected PaybackHolder Paybackholder = PaybackHolder.Default;
 
+        public PaybackStatus(int duration) : this(duration, new PaybackHolder(PaybackTypes.Half, Elements.Normal, null))
+        {
+
+        }
+
         public PaybackStatus(int duration, PaybackHolder paybackHolder)
         {
             StatusType = StatusTypes.Payback;
             Alignment = StatusAlignments.Positive;
+
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+                new Rectangle(555, 107, 38, 46));
 
             Duration = duration;
 

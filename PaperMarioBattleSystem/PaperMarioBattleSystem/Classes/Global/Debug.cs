@@ -177,15 +177,21 @@ namespace PaperMarioBattleSystem
 
             int turnCount = 3;
 
-            //Inflict Poison
+            //Inflict Poison or Payback
             if (Input.GetKeyDown(Keys.P) == true)
             {
-                DebugInflictStatus(new PoisonStatus(turnCount), entityType);
+                StatusEffect status = new PoisonStatus(turnCount);
+                //Inflict Payback
+                if (Input.GetKey(Keys.B) == true) status = new PaybackStatus(turnCount);
+                DebugInflictStatus(status, entityType);
             }
-            //Inflict Invisible
+            //Inflict Invisible or Immobilized
             else if (Input.GetKeyDown(Keys.I) == true)
             {
-                DebugInflictStatus(new InvisibleStatus(turnCount), entityType);
+                StatusEffect status = new InvisibleStatus(turnCount);
+                //Inflict Immobilized
+                if (Input.GetKey(Keys.M) == true) status = new ImmobilizedStatus(turnCount);
+                DebugInflictStatus(status, entityType);
             }
             //Inflict Electrified
             else if (Input.GetKeyDown(Keys.E) == true)
@@ -200,15 +206,27 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKey(Keys.R) == true) status = new FrozenStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
-            //Inflict Dizzy
+            //Inflict Dizzy or Dodgy
             else if (Input.GetKeyDown(Keys.D) == true)
             {
-                DebugInflictStatus(new DizzyStatus(turnCount), entityType);
+                StatusEffect status = new DizzyStatus(turnCount);
+                //Inflict Dodgy
+                if (Input.GetKey(Keys.O) == true) status = new DodgyStatus(turnCount);
+                DebugInflictStatus(status, entityType);
             }
-            //Inflict Stone
+            //Inflict Sleep or Stone
             else if (Input.GetKeyDown(Keys.S) == true)
             {
-                DebugInflictStatus(new StoneStatus(turnCount), entityType);
+                StatusEffect status = new SleepStatus(turnCount);
+                //Inflict Stone
+                if (Input.GetKey(Keys.T) == true) status = new StoneStatus(turnCount);
+                DebugInflictStatus(status, entityType);
+            }
+            //Inflict Confused
+            else if (Input.GetKeyDown(Keys.C) == true)
+            {
+                StatusEffect status = new ConfusedStatus(turnCount);
+                DebugInflictStatus(status, entityType);
             }
         }
 

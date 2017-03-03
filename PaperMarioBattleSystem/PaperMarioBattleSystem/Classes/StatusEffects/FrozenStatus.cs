@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
@@ -21,6 +23,9 @@ namespace PaperMarioBattleSystem
         public FrozenStatus(int duration) : base(duration)
         {
             StatusType = Enumerations.StatusTypes.Frozen;
+
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+                new Rectangle(604, 107, 38, 46));
 
             AfflictedMessage = "Frozen! Movement will be\nimpossible for a while!";
         }

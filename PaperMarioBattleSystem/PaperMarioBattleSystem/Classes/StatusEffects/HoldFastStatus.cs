@@ -17,6 +17,8 @@ namespace PaperMarioBattleSystem
             new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Half, Enumerations.Elements.Explosion, null))
         {
             StatusType = Enumerations.StatusTypes.HoldFast;
+
+            StatusIcon = null;
         }
 
         public override StatusEffect Copy()

@@ -739,6 +739,7 @@ namespace PaperMarioBattleSystem
         //NOTE: The case of Explosive on contact in the actual games are with enraged Bob-Ombs and when Bobbery uses Hold Fast
         //If you make contact with these enemies, they deal explosive damage and die instantly, with Hold Fast being an exception
         //to the latter
+        //NOTE: Test if Spiked enemies get hurt by jumping on other Spiked enemies
         public enum PhysicalAttributes
         {
             None, Flying, Electrified, Poisonous, Spiked, Icy, Fiery, Explosive, Starry

@@ -281,6 +281,11 @@ namespace PaperMarioBattleSystem
                 EnemyTurn = 0;
             }
 
+            //NOTE: There's a bug: if all players and enemies have no turns, all BattleEvents will be delayed until one of them
+            //has a turn. This is because it never gets to Update() since it searches for a turn, switches phases, then searches
+            //for a turn again, switches phases again, and repeats.
+            //This is easiest to replicate by inflicting everyone with Immobilized or a derived status (Ex. Frozen)
+
             FindNextEntityTurn();
         }
 

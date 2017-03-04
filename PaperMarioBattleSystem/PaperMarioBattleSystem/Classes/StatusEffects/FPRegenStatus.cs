@@ -21,6 +21,10 @@ namespace PaperMarioBattleSystem
 
         private CroppedTexture2D FPIcon = null;
 
+        //The FP icon tweens between green and light blue, starting with green
+        private readonly Color StartColor = new Color(63, 210, 23);
+        private readonly Color EndColor = new Color(96, 232, 225);
+
         public FPRegenStatus(int amountHealed, int duration)
         {
             StatusType = Enumerations.StatusTypes.FPRegen;
@@ -73,7 +77,15 @@ namespace PaperMarioBattleSystem
         {
             base.DrawStatusInfo(iconPos, depth, turnStringDepth);
 
-            //The FP icon tweens between green and light blue, starting with green
+            float factor = Math.Abs((float)Math.Sin(Time.ActiveMilliseconds / StatusGlobals.RegenColorLerpTime));
+
+            Color lerpedColor = Color.Lerp(StartColor, EndColor, factor);
+
+            Vector2 fpOrigin = FPIcon.SourceRect.Value.GetCenterOrigin();
+            Vector2 fpPos = iconPos + new Vector2((int)(fpOrigin.X / 2) - 6, (int)(fpOrigin.Y / 2));
+            float fpDepth = depth + .00001f;
+
+            SpriteRenderer.Instance.Draw(FPIcon.Tex, fpPos, FPIcon.SourceRect, lerpedColor, false, fpDepth, true);
         }
     }
 }

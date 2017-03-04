@@ -21,6 +21,10 @@ namespace PaperMarioBattleSystem
 
         private CroppedTexture2D HPIcon = null;
 
+        //The HP icon tweens between yellow (about the same yellow as Electrified's Spark icon) and dark pink, starting with dark pink
+        private readonly Color StartColor = new Color(237, 22, 90);
+        private readonly Color EndColor = new Color(254, 231, 5);
+
         public HPRegenStatus(int amountHealed, int duration)
         {
             StatusType = Enumerations.StatusTypes.HPRegen;
@@ -73,7 +77,15 @@ namespace PaperMarioBattleSystem
         {
             base.DrawStatusInfo(iconPos, depth, turnStringDepth);
 
-            //The HP icon tweens between yellow (about the same yellow as Electrified's Spark icon) and dark pink, starting with dark pink
+            float factor = Math.Abs((float)Math.Sin(Time.ActiveMilliseconds / StatusGlobals.RegenColorLerpTime));
+
+            Color lerpedColor = Color.Lerp(StartColor, EndColor, factor);
+
+            Vector2 hpOrigin = HPIcon.SourceRect.Value.GetCenterOrigin();
+            Vector2 hpPos = iconPos + new Vector2((int)(hpOrigin.X / 2) - 6, (int)(hpOrigin.Y / 2) + 1);
+            float hpDepth = depth + .00001f;
+
+            SpriteRenderer.Instance.Draw(HPIcon.Tex, hpPos, HPIcon.SourceRect, lerpedColor, false, hpDepth, true);
         }
     }
 }

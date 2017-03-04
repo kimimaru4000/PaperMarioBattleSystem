@@ -1373,6 +1373,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public const int IconYOffset = 35;
 
+        /// <summary>
+        /// The time it takes for the HPRegen and FPRegen Status Effects to lerp between their colors.
+        /// </summary>
+        public const double RegenColorLerpTime = 330d;
+
         #endregion
 
         #region Methods

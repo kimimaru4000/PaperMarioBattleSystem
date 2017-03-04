@@ -200,12 +200,14 @@ namespace PaperMarioBattleSystem
             {
                 DebugInflictStatus(new ElectrifiedStatus(turnCount), entityType);
             }
-            //Inflict Fast or Frozen
+            //Inflict Fast, Frozen, or FPRegen
             else if (Input.GetKeyDown(Keys.F) == true)
             {
                 StatusEffect status = new FastStatus(turnCount);
                 //Inflict Frozen
                 if (Input.GetKey(Keys.R) == true) status = new FrozenStatus(turnCount);
+                //Inflict FPRegen
+                else if (Input.GetKey(Keys.P) == true) status = new FPRegenStatus(2, turnCount);
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Dizzy or Dodgy
@@ -244,10 +246,12 @@ namespace PaperMarioBattleSystem
                 StatusEffect status = new TinyStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
-            //Inflict Huge
+            //Inflict Huge or HPRegen
             else if (Input.GetKeyDown(Keys.H) == true)
             {
                 StatusEffect status = new HugeStatus(turnCount);
+                //Inflict HPRegen
+                if (Input.GetKey(Keys.P) == true) status = new HPRegenStatus(2, turnCount);
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Allergic

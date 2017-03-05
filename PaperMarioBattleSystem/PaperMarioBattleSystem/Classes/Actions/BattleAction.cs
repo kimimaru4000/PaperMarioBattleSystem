@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// An action that is performed by a BattleEntity in battle
     /// </summary>
-    public abstract class BattleAction
+    public abstract class BattleAction : INameable
     {
         #region Fields/Properties
 

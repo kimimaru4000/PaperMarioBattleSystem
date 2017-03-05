@@ -214,11 +214,16 @@ namespace PaperMarioBattleSystem
             //Subtract damage reduction (P-Up, D-Down and P-Down, D-Up Badges)
             unscaledVictimDamage -= victim.BattleStats.DamageReduction;
 
+            //Check if the attack hit. If not, then don't consider defensive actions
+            bool attackHit = attacker.AttemptHitEntity(victim);
+
             //Defense added from Damage Dodge Badges upon a successful Guard
             int damageDodgeDefense = 0;
 
-            //Defensive actions take priority
-            BattleGlobals.DefensiveActionHolder? victimDefenseData = victim.GetDefensiveActionResult(victimElementDamage.Damage, statuses);
+            //Defensive actions take priority. If the attack didn't hit, don't check for defensive actions
+            BattleGlobals.DefensiveActionHolder? victimDefenseData = null;
+            if (attackHit == true) victimDefenseData = victim.GetDefensiveActionResult(victimElementDamage.Damage, statuses);
+
             if (victimDefenseData.HasValue == true)
             {
                 unscaledVictimDamage = victimDefenseData.Value.Damage;
@@ -268,10 +273,17 @@ namespace PaperMarioBattleSystem
             {
                 //Get the Status Effects to inflict on the Victim
                 StatusEffect[] victimInflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
-                bool hit = attacker.AttemptHitEntity(victim);
+
+                //Check if the Victim is Invincible. If so, ignore all damage and Status Effects
+                if (victim.EntityProperties.GetAdditionalProperty<bool>(AdditionalProperty.Invincible) == true)
+                {
+                    scaledVictimDamage = 0;
+                    victimElementDamage.InteractionResult = ElementInteractionResult.Damage;
+                    victimInflictedStatuses = null;
+                }
 
                 finalInteractionResult.VictimResult = new InteractionHolder(victim, scaledVictimDamage, element, 
-                    victimElementDamage.InteractionResult, contactType, piercing, victimInflictedStatuses, hit);
+                    victimElementDamage.InteractionResult, contactType, piercing, victimInflictedStatuses, attackHit);
             }
 
             #endregion
@@ -310,7 +322,15 @@ namespace PaperMarioBattleSystem
 
                 //Get the Status Effects to inflict
                 StatusEffect[] attackerInflictedStatuses = GetFilteredInflictedStatuses(attacker, paybackHolder.StatusesInflicted);
-                    
+
+                //Check if the Attacker is Invincible. If so, ignore all damage and Status Effects
+                if (attacker.EntityProperties.GetAdditionalProperty<bool>(AdditionalProperty.Invincible) == true)
+                {
+                    attackerElementDamage.Damage = 0;
+                    attackerElementDamage.InteractionResult = ElementInteractionResult.Damage;
+                    attackerInflictedStatuses = null;
+                }
+
                 finalInteractionResult.AttackerResult = new InteractionHolder(attacker, attackerElementDamage.Damage, paybackHolder.Element,
                     attackerElementDamage.InteractionResult, ContactTypes.None, true, attackerInflictedStatuses, true);
             }

@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     //NOTE: There is a hard cap of 32 for any type of collectible being dropped at once by an enemy encounter.
     //This includes Coins, Hearts, Flowers, Items, and Badges
-    public abstract class Collectible
+    public abstract class Collectible : INameable
     {
         /// <summary>
         /// The name of the Collectible

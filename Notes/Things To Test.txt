@@ -1,0 +1,18 @@
+Things To Test (3/9/17)
+-----------------------
+Here's a simple list of things to test in the first two Paper Mario games.
+
+Pokey Parts
+-----------
+Which moves remove a Pokey part, and which other enemies have properties that act similar?
+Stilt Guys might be worth looking into.
+
+Payback and Invincibility
+--------------------------
+How does Payback work with true invincibility? The Shadow Queen doesn't have any contact moves, so test on Bowser in PM.
+Test with Zap Tap equipped and note the differences of when he stomps on you with and without his Star Rod powers in effect.
+The Iron Clefts in TTYD don't take any Payback damage whatsoever, and Superguarding their attacks causes them to recoil back with no damage
+instead of getting damaged and playing their hurt animation like other Clefts.
+
+Since there's no Superguarding in PM, it looks like the only instance of Superguarding an invincible enemy is the Iron Clefts. Look for more
+invincible enemies to make sure.

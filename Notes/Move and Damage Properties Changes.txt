@@ -42,8 +42,10 @@ so when these are implemented, it's only a matter of putting them in.
 -Uses Charge
 -Guaranteed to hit
   -This will be used for Crystal Star Special Moves, which can hit Invisible entities
--Attack Effect (Flips Shelled, Removes Wings)
+-Penetrates Defensive Actions (None, Guard, Superguard, All)
+  -None indicates that the move can be Guarded or Superguarded. All means the move can't be Guarded or Superguarded.
+-Attack Effects (Flips Shelled, Removes Wings, Removes Part) - can have multiple at a time
   -Flips Shelled flips any shelled enemies over when hit, provided they can be flipped
   -Removes Wings knocks any flying enemies to the ground and removes their ability to fly, provided they have wings or can be hit to the ground
-
-
+  -Removes Part, would be used for Kooper and Koops' shell moves against Pokeys. I'll need to do testing with other moves and on enemies that
+   might be similar, like Stilt Guys, to find more instances of this property.

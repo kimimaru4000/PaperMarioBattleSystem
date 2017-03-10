@@ -46,6 +46,12 @@ Spin Smash
 Using Spin Smash on Kent C. Koopa's Tail when he's flipped over causes him to drop 6 coins, which then are
 added to your total in battle shortly afterwards. This can be repeated.
 
+Bowser
+------
+Shockwave Drain (Star Rod wave attack) - Removes all positive Status Effects on Mario (and presumably his Partner if this were in TTYD)
+Power Up - Removes all negative Status Effects on Bowser, makes him Invincible, and doubles the power of all attacks except Shockwave Drain
+
+
 General
 -------
 For the Cloud Nine, Water Block, and Turbo Charge Status Effects, it shows the order

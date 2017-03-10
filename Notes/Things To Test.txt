@@ -16,3 +16,28 @@ instead of getting damaged and playing their hurt animation like other Clefts.
 
 Since there's no Superguarding in PM, it looks like the only instance of Superguarding an invincible enemy is the Iron Clefts. Look for more
 invincible enemies to make sure.
+
+Results:
+
+Without Star Rod
+----------------
+-Bowser stomps on Mario, then takes recoil damage and bounces off in a manner similar to when he uses his claw attack
+-Most interesting of all, it DOESN'T inflict NoSkills and remove an ability for Mario, even though it wasn't Guarded
+
+With Star Rod
+-------------
+-Bowser stomps on Mario, ignoring Zap Tap completely
+-Like normal, it inflicts NoSkills and removes an ability for Mario
+
+Invincibility and Debuffs
+-------------------------
+Does debuffing Bowser in PM with Chill Out cause him to have -3 attack when he reactivates his Star Rod powers again?
+
+Result: No. Bowser's Star Rod powers immediately remove all Status Effects he's afflicted with.
+
+
+Life Shrooms and NoSkills
+-------------------------
+Do Life Shrooms take effect if items are disabled with NoSkills?
+
+Result: Yes, they do.

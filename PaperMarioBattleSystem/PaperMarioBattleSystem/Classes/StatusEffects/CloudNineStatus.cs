@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
@@ -19,6 +21,11 @@ namespace PaperMarioBattleSystem
 
             //Cloud Nine's Evasion is 50%
             EvasionValue = .5d;
+
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+                new Rectangle(461, 350, 30, 27));
+
+            //CloudRect = new Rectangle(503, 353, 35, 21);
 
             AfflictedMessage = "Chances of being attacked will decrease!";
             RemovedMessage = "The effect of Cloud Nine have worn off!";

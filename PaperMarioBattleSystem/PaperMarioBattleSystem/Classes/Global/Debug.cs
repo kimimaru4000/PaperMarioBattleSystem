@@ -184,7 +184,7 @@ namespace PaperMarioBattleSystem
                 //Inflict Payback
                 if (Input.GetKey(Keys.B) == true) status = new PaybackStatus(turnCount);
                 //Inflict Paralyzed
-                else if (Input.GetKey(Keys.R) == true) status = new ParalyzedStatus(turnCount);
+                else if (Input.GetKey(Keys.Z) == true) status = new ParalyzedStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Invisible or Immobilized

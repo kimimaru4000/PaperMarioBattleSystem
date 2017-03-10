@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The HUD shown during Battle.
     /// </summary>
-    public sealed class BattleHUD
+    public sealed class BattleHUD : IUpdateable, IDrawable
     {
         private Texture2D HUDTex = null;
 

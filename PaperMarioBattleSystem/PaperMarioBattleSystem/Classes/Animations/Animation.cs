@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// The base class for sprite animation.
     /// It plays an animation forwards once, stopping on the last frame.
     /// </summary>
-    public class Animation
+    public class Animation : IUpdateable
     {
         /// <summary>
         /// The definition to denote delegates that are called when the Animation is finished

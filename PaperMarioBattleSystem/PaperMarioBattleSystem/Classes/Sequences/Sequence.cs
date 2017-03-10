@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Sequence used in a MoveAction.
     /// </summary>
-    public abstract class Sequence : IActionCommandHandler
+    public abstract class Sequence : IActionCommandHandler, IUpdateable, IDrawable
     {
         /// <summary>
         /// Values for each branch of a sequence.

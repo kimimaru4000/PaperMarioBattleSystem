@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// They have a priority value, with higher priorities taking precedence over lower priority events.
     /// <para>Examples of Battle Events include Battle Messages, entities dying or taking damage, dialogue, and Status Effect animations.</para>
     /// </summary>
-    public abstract class BattleEvent
+    public abstract class BattleEvent : IUpdateable
     {
         /// <summary>
         /// The Priority of the Battle Event.

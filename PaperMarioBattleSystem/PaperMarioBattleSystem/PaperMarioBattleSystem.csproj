@@ -182,8 +182,10 @@
     <Compile Include="Classes\Collectibles\Collectible.cs" />
     <Compile Include="Classes\Global\Utility\Line.cs" />
     <Compile Include="Classes\Global\Utility\UtilityGlobals.cs" />
+    <Compile Include="Classes\Interfaces\IDrawable.cs" />
     <Compile Include="Classes\Interfaces\INameable.cs" />
     <Compile Include="Classes\Interfaces\ITransformable.cs" />
+    <Compile Include="Classes\Interfaces\IUpdateable.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ActionSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ChangePartnerSubMenu.cs" />

@@ -16,6 +16,11 @@ namespace PaperMarioBattleSystem
     {
         private CroppedTexture2D SparkIcon = null;
 
+        /// <summary>
+        /// The time Paralyzed was afflicted.
+        /// </summary>
+        private double AfflictionTime = 0d;
+
         public ParalyzedStatus(int duration) : base(duration)
         {
             StatusType = Enumerations.StatusTypes.Paralyzed;
@@ -27,6 +32,13 @@ namespace PaperMarioBattleSystem
 
             SparkIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
                 new Rectangle(377, 391, 8, 12));
+        }
+
+        protected override void OnAfflict()
+        {
+            base.OnAfflict();
+
+            AfflictionTime = Time.ActiveMilliseconds;
         }
 
         public override StatusEffect Copy()
@@ -42,8 +54,7 @@ namespace PaperMarioBattleSystem
 
             base.DrawStatusInfo(iconPos, depth, turnStringDepth);
 
-            //NOTE: The Spark offset timing needs to be instance-based; find out how to do this effectively
-            //Also figure out a good way to draw PM-only Status Effect icons, as they're much smaller than TTYD ones
+            //Figure out a good way to draw PM-only Status Effect icons, as they're much smaller than TTYD ones
 
             #region Spark Position Offset Logic
 
@@ -75,9 +86,14 @@ namespace PaperMarioBattleSystem
             const double secondMoveInterval = firstMoveInterval + offsetIntervalFour;
             const double totalInterval = staticInterval + firstMoveInterval + secondMoveInterval;
 
-            double totalRange = (Time.ActiveMilliseconds % totalInterval);
+            //Offset the total time by the time Paralyzed was afflicted
+            //This corrects Paralyzed's icon animation to be instance-based instead of global
+            double totalTime = Time.ActiveMilliseconds - AfflictionTime;
+
+            double totalRange = (totalTime % totalInterval);
 
             Vector2 offsetPos = Vector2.Zero;
+            const int offsetAmount = 1;
 
             //After we're past the static interval, check when to offset the spark
             if (totalRange > staticInterval)
@@ -93,7 +109,7 @@ namespace PaperMarioBattleSystem
                     if ((firstRange > offsetInterval && firstRange < offsetIntervalTwo)
                         || (firstRange > offsetIntervalThree && firstRange < offsetIntervalFour))
                     {
-                        offsetPos.X = 1;
+                        offsetPos.X = offsetAmount;
                     }
                 }
                 //Otherwise we're in the second movement interval
@@ -106,7 +122,7 @@ namespace PaperMarioBattleSystem
                     //There's only one movement in this interval
                     if ((secondRange > offsetInterval && secondRange < offsetIntervalTwo))
                     {
-                        offsetPos.X = 1;
+                        offsetPos.X = offsetAmount;
                     }
                 }
             }
@@ -116,7 +132,7 @@ namespace PaperMarioBattleSystem
             Vector2 sparkPos = iconPos + new Vector2(sparkOrigin.X, 2) + offsetPos;
             float sparkDepth = depth + .00001f;
 
-            SpriteRenderer.Instance.Draw(SparkIcon.Tex, sparkPos, SparkIcon.SourceRect, Color.White, false, sparkDepth, true);
+            SpriteRenderer.Instance.Draw(SparkIcon.Tex, sparkPos, SparkIcon.SourceRect, Color.White, 0f, Vector2.Zero, 1f, false, sparkDepth, true);
         }
     }
 }

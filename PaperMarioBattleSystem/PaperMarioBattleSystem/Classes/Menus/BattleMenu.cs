@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The base class for all battle menus
     /// </summary>
-    public abstract class BattleMenu
+    public abstract class BattleMenu : IUpdateable, IDrawable
     {
         #region Enumerations
 

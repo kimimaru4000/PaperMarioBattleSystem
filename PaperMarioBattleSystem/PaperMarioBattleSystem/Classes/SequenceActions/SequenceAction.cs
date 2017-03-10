@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// This can be used to do about anything to the BattleEntity performing the action.
     /// Examples include moving, waiting, playing an animation, and more
     /// </summary>
-    public abstract class SequenceAction
+    public abstract class SequenceAction : IUpdateable
     {
         public double Duration { get; protected set; } = 0d;
         protected double StartTime = 0d;

@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Handles all audio playback
     /// <para>This is a Singleton</para>
     /// </summary>
-    public class SoundManager : IDisposable
+    public class SoundManager : IDisposable, IUpdateable
     {
         #region Singleton Fields
 

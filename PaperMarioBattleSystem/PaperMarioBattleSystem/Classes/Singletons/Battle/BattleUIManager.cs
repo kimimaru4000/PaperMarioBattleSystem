@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Manages UI during battle
     /// <para>This is a Singleton</para>
     /// </summary>
-    public class BattleUIManager
+    public class BattleUIManager : IUpdateable, IDrawable
     {
         #region Singleton Fields
 

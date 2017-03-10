@@ -44,7 +44,7 @@ namespace PaperMarioBattleSystem
             MarioStats marioStats = User.BattleStats as MarioStats;
             if (marioStats != null) baseDamage = (int)marioStats.BootLevel;
 
-            DamageInfo = new InteractionParamHolder(null, null, baseDamage, Elements.Normal, false, ContactTypes.JumpContact, null);
+            DamageInfo = new InteractionParamHolder(null, null, baseDamage, Elements.Normal, false, ContactTypes.Direct, null);
 
             //NOTE: The aerial damage hits anything flying even if it has a HeightState that's not Airborne; this includes Embers!
             AerialDamage = new InteractionParamHolder(null, null, 2, Elements.Normal, true, ContactTypes.None, null);

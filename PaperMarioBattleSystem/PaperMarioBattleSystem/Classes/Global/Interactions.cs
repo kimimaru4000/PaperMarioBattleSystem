@@ -56,33 +56,21 @@ namespace PaperMarioBattleSystem
         {
             ContactTable = new Dictionary<ContactTypes, Dictionary<PhysicalAttributes, ContactResultInfo>>();
 
-            InitializeNoneContactTable();
-            InitializeJumpContactTable();
-            InitializeHammerContactTable();
-        }
-
-        private static void InitializeNoneContactTable()
-        {
-
+            InitializeDirectContactTable();
         }
 
         //NOTE: In the actual games, if you have the Payback status, it takes priority over any PhysicalAttributes when being dealt damage
         //For example, if you have both Return Postage and Zap Tap equipped, sucking enemies like Fuzzies will be able to touch you
         //However, normal properties apply when attacking enemies (you'll be able to jump on Electrified enemies)
 
-        private static void InitializeJumpContactTable()
+        private static void InitializeDirectContactTable()
         {
-            ContactTable.Add(ContactTypes.JumpContact, new Dictionary<PhysicalAttributes, ContactResultInfo>()
+            ContactTable.Add(ContactTypes.Direct, new Dictionary<PhysicalAttributes, ContactResultInfo>()
             {
                 { PhysicalAttributes.Spiked, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Sharp, 1), ContactResult.Failure, false) },
                 { PhysicalAttributes.Electrified, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Electric, 1), ContactResult.PartialSuccess, true) },
                 { PhysicalAttributes.Fiery, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Fire, 1), ContactResult.Failure, false) }
             });
-        }
-
-        private static void InitializeHammerContactTable()
-        {
-
         }
 
         #endregion
@@ -230,7 +218,7 @@ namespace PaperMarioBattleSystem
                 statuses = victimDefenseData.Value.Statuses;
                 //If the Defensive action dealt damage and the contact was direct
                 //the Defensive action has caused a Failure for the Attacker (Ex. Superguarding)
-                if (contactType == ContactTypes.JumpContact && victimDefenseData.Value.ElementHolder.HasValue == true)
+                if (contactType == ContactTypes.Direct && victimDefenseData.Value.ElementHolder.HasValue == true)
                 {
                     contactResult = ContactResult.Failure;
                 }
@@ -260,8 +248,11 @@ namespace PaperMarioBattleSystem
                 scaledVictimDamage = (int)Math.Ceiling(scaledVictimDamage / (float)lastStandDivider);
             }
 
-            //NOTE: If the Attacker is Invincible, ignore all Payback damage and effects, including Electrified
-            //If the Victim is Invincible, ignore all damage and Status Effects
+            /*If the Victim is Invincible, ignore all damage and Status Effects
+             If the Attacker is Invincible, ignore all Payback damage and Status Effects
+
+             It won't ignore the Payback's effects automatically; that has to be done manually by adding
+             contact exceptions or something else*/
 
             //Clamp Victim damage
             scaledVictimDamage = UtilityGlobals.Clamp(scaledVictimDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);

@@ -760,12 +760,10 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// The type of contact actions will make on entities.
-        /// JumpContact and HammerContact means the action attacks from the top and side, respectively
         /// </summary>
-        //NOTE: Rename these; JumpContact should be renamed Direct, and HammerContact probably isn't necessary, as it's indirect
         public enum ContactTypes
         {
-            None, JumpContact, HammerContact
+            None, Direct
         }
 
         /// <summary>

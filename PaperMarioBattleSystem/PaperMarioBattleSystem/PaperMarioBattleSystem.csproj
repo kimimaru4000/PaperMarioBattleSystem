@@ -182,6 +182,7 @@
     <Compile Include="Classes\Collectibles\Collectible.cs" />
     <Compile Include="Classes\Global\Utility\Line.cs" />
     <Compile Include="Classes\Global\Utility\UtilityGlobals.cs" />
+    <Compile Include="Classes\Interfaces\ICopyable.cs" />
     <Compile Include="Classes\Interfaces\IDrawable.cs" />
     <Compile Include="Classes\Interfaces\INameable.cs" />
     <Compile Include="Classes\Interfaces\ITransformable.cs" />

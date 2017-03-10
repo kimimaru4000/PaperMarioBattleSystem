@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            EntityEquipped.EntityProperties.AddContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
+            EntityEquipped.EntityProperties.AddContactException(Enumerations.ContactTypes.Direct, Enumerations.PhysicalAttributes.Fiery);
 
             EntityEquipped.EntityProperties.AddResistance(Enumerations.Elements.Fire, FireResistance);
             EntityEquipped.EntityProperties.AddElementOverride(Enumerations.PhysicalAttributes.Fiery, IceElementOverride);
@@ -39,7 +39,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnUnequip()
         {
-            EntityEquipped.EntityProperties.RemoveContactException(Enumerations.ContactTypes.JumpContact, Enumerations.PhysicalAttributes.Fiery);
+            EntityEquipped.EntityProperties.RemoveContactException(Enumerations.ContactTypes.Direct, Enumerations.PhysicalAttributes.Fiery);
 
             EntityEquipped.EntityProperties.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
             EntityEquipped.EntityProperties.RemoveElementOverride(Enumerations.PhysicalAttributes.Fiery);

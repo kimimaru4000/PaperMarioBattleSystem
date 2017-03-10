@@ -16,7 +16,7 @@ namespace PaperMarioBattleSystem
     /// <para>Status Effects increment a turn at the start of each phase cycle.
     /// Status Effects that take effect each turn also occur at the start of each phase cycle</para>
     /// </summary>
-    public abstract class StatusEffect
+    public abstract class StatusEffect : ICopyable<StatusEffect>
     {
         /// <summary>
         /// Alignments for StatusEffects indicating how they affect the afflicted BattleEntity

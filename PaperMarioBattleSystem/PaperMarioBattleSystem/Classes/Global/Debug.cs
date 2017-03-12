@@ -166,6 +166,12 @@ namespace PaperMarioBattleSystem
                 DebugBattle();
             }
 
+            //Unit Tests
+            if (Input.GetKey(Keys.U) == true)
+            {
+                DebugUnitTests();
+            }
+
             FPSCounter.Update();
         }
 
@@ -271,6 +277,54 @@ namespace PaperMarioBattleSystem
                 entities[i].EntityProperties.AfflictStatus(status);
             }
         }
+
+        #region Debug Unit Tests
+
+        private static void DebugUnitTests()
+        {
+            if (Input.GetKeyDown(Keys.D1))
+            {
+                UnitTests.InteractionUnitTests.NewInteractionUT1();
+            }
+            else if (Input.GetKeyDown(Keys.D2))
+            {
+                UnitTests.InteractionUnitTests.NewInteractionUT2();
+            }
+            else if (Input.GetKeyDown(Keys.D3))
+            {
+                UnitTests.InteractionUnitTests.NewInteractionUT3();
+            }
+            else if (Input.GetKeyDown(Keys.D4))
+            {
+                UnitTests.InteractionUnitTests.NewInteractionUT4();
+            }
+            else if (Input.GetKeyDown(Keys.D5))
+            {
+                UnitTests.InteractionUnitTests.NewInteractionUT5();
+            }
+            else if (Input.GetKeyDown(Keys.D6))
+            {
+                UnitTests.InteractionUnitTests.NewInteractionUT6();
+            }
+            else if (Input.GetKeyDown(Keys.D7))
+            {
+                UnitTests.InteractionUnitTests.NewInteractionUT7();
+            }
+            else if (Input.GetKeyDown(Keys.D8))
+            {
+                UnitTests.InteractionUnitTests.NewInteractionUT8();
+            }
+            else if (Input.GetKeyDown(Keys.D9))
+            {
+                UnitTests.InteractionUnitTests.NewInteractionUT9();
+            }
+            else if (Input.GetKeyDown(Keys.D0))
+            {
+                UnitTests.InteractionUnitTests.NewInteractionUT10();
+            }
+        }
+
+        #endregion
 
         public static void DebugDraw()
         {

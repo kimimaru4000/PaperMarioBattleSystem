@@ -454,6 +454,7 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < DamageCalculationSteps.Count; i++)
             {
                 finalInteraction = DamageCalculationSteps[i].Calculate(interactionParam, finalInteraction, contactResultInfo);
+                contactResultInfo = DamageCalculationSteps[i].StepContactResultInfo;
             }
 
             return finalInteraction;
@@ -475,7 +476,7 @@ namespace PaperMarioBattleSystem
             /// </summary>
             protected InteractionResult StepResult = null;
 
-            protected ContactResultInfo StepContactResultInfo = new ContactResultInfo();
+            public ContactResultInfo StepContactResultInfo = new ContactResultInfo();
 
             public InteractionResult Calculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
             {
@@ -583,7 +584,7 @@ namespace PaperMarioBattleSystem
                 BattleGlobals.DefensiveActionHolder? victimDefenseData = null;
                 if (StepResult.VictimResult.Hit == true)
                 {
-                    StepResult.VictimResult.Entity.GetDefensiveActionResult(StepResult.VictimResult.TotalDamage,
+                    victimDefenseData = StepResult.VictimResult.Entity.GetDefensiveActionResult(StepResult.VictimResult.TotalDamage,
                         StepResult.VictimResult.StatusesInflicted);
                 }
 

@@ -63,5 +63,10 @@ namespace PaperMarioBattleSystem
 
             return 0;
         }
+
+        public void SetHeldCollectible(Collectible heldCollectible)
+        {
+            HeldCollectible = heldCollectible;
+        }
     }
 }

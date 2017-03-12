@@ -180,6 +180,7 @@
     <Compile Include="Classes\Global\FPSCounter.cs" />
     <Compile Include="Classes\Global\Interactions.cs" />
     <Compile Include="Classes\Collectibles\Collectible.cs" />
+    <Compile Include="Classes\Global\UnitTests.cs" />
     <Compile Include="Classes\Global\Utility\Line.cs" />
     <Compile Include="Classes\Global\Utility\UtilityGlobals.cs" />
     <Compile Include="Classes\Interfaces\ICopyable.cs" />

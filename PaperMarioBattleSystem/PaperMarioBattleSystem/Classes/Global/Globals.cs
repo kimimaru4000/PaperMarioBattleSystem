@@ -287,14 +287,14 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public struct InteractionHolder
     {
-        public BattleEntity Entity { get; private set; }
-        public int TotalDamage { get; private set; }
-        public Enumerations.Elements DamageElement { get; private set; }
-        public ElementInteractionResult ElementResult { get; private set; }
-        public Enumerations.ContactTypes ContactType { get; private set; }
-        public bool Piercing { get; private set; }
-        public StatusEffect[] StatusesInflicted { get; private set; }
-        public bool Hit { get; private set; }
+        public BattleEntity Entity;// { get; private set; }
+        public int TotalDamage;// { get; private set; }
+        public Enumerations.Elements DamageElement;// { get; private set; }
+        public ElementInteractionResult ElementResult;// { get; private set; }
+        public Enumerations.ContactTypes ContactType;// { get; private set; }
+        public bool Piercing;// { get; private set; }
+        public StatusEffect[] StatusesInflicted;// { get; private set; }
+        public bool Hit;// { get; private set; }
 
         /// <summary>
         /// Tells if the InteractionHolder has a usable value
@@ -653,6 +653,12 @@ namespace PaperMarioBattleSystem
         public InteractionResult()
         {
             
+        }
+
+        public InteractionResult(InteractionResult copy)
+        {
+            AttackerResult = copy.AttackerResult;
+            VictimResult = copy.VictimResult;
         }
 
         public InteractionResult(InteractionHolder attackerResult, InteractionHolder victimResult)

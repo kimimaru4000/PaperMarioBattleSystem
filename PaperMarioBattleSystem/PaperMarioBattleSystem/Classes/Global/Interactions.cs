@@ -43,11 +43,17 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private static Dictionary<ContactTypes, Dictionary<PhysicalAttributes, ContactResultInfo>> ContactTable = null;
 
+        /// <summary>
+        /// The list of steps for the Damage Calculation formula.
+        /// </summary>
+        private static List<DamageCalcStep> DamageCalculationSteps = null;
+
         #endregion
 
         static Interactions()
         {
             InitalizeContactTable();
+            InitializeDamageFormulaSteps();
         }
 
         #region Contact Table Initialization Methods
@@ -119,6 +125,37 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Damage Calculation Initialization
+
+        private static void InitializeDamageFormulaSteps()
+        {
+            DamageCalculationSteps = new List<DamageCalcStep>();
+
+            //Victim steps
+            DamageCalculationSteps.Add(new InitStep());
+            DamageCalculationSteps.Add(new ContactResultStep());
+            DamageCalculationSteps.Add(new ElementOverrideStep());
+            DamageCalculationSteps.Add(new VictimElementDamageStep());
+            DamageCalculationSteps.Add(new VictimDamageReductionStep());
+            DamageCalculationSteps.Add(new VictimCheckHitStep());
+            DamageCalculationSteps.Add(new VictimDefensiveStep());
+            DamageCalculationSteps.Add(new VictimDoublePainStep());
+            DamageCalculationSteps.Add(new VictimLastStandStep());
+            DamageCalculationSteps.Add(new ClampVictimDamageStep());
+            DamageCalculationSteps.Add(new VictimFilteredStatusStep());
+            DamageCalculationSteps.Add(new VictimCheckInvincibleStep());
+            DamageCalculationSteps.Add(new VictimCheckContactResultStep());
+
+            //Attacker steps
+            DamageCalculationSteps.Add(new AttackerPaybackDamageStep());
+            DamageCalculationSteps.Add(new ClampAttackerDamageStep());
+            DamageCalculationSteps.Add(new AttackerFilteredStatusStep());
+            DamageCalculationSteps.Add(new AttackerCheckInvincibleStep());
+            DamageCalculationSteps.Add(new AttackerCheckContactResultStep());
+        }
+
+        #endregion
+
         #region Interaction Methods
 
         /* Damage Calculation Order:
@@ -138,7 +175,7 @@ namespace PaperMarioBattleSystem
          * 
          * Attacker:
          * ---------
-         * 1. Start with the total damage dealt to the Victim
+         * 1. Start with the total unscaled damage dealt to the Victim - Double Pain and Last stand are not factored in
          * 2. Get the Payback from the Contact Result
          * 3. If the Victim performed a Superguard, override the Payback with the the Superguard's Payback
          * 4. Calculate the Attacker's Weaknesses/Resistances to the Payback Element
@@ -157,9 +194,6 @@ namespace PaperMarioBattleSystem
         /// <returns>An InteractionResult containing InteractionHolders for both the victim and the attacker</returns>
         public static InteractionResult GetDamageInteraction(InteractionParamHolder interactionParam)
         {
-            //NOTE: Instant kills also seem to be Status Effects, as indicated by Showstopper
-            //Look more into this
-
             InteractionResult finalInteractionResult = new InteractionResult();
 
             BattleEntity attacker = interactionParam.Attacker;
@@ -210,7 +244,7 @@ namespace PaperMarioBattleSystem
 
             //Defensive actions take priority. If the attack didn't hit, don't check for defensive actions
             BattleGlobals.DefensiveActionHolder? victimDefenseData = null;
-            if (attackHit == true) victimDefenseData = victim.GetDefensiveActionResult(victimElementDamage.Damage, statuses);
+            if (attackHit == true) victimDefenseData = victim.GetDefensiveActionResult(unscaledVictimDamage, statuses);
 
             if (victimDefenseData.HasValue == true)
             {
@@ -407,6 +441,361 @@ namespace PaperMarioBattleSystem
             }
 
             return filteredStatuses.ToArray();
+        }
+
+        //NOTE: This is the new more flexible Damage Calculation method using the DamageCalculationSteps list
+        //It is currently being tested. Do not use it for primary purposes until it has been confirmed to be 100% accurate
+        //with the old one (minus bug fixes)
+        public static InteractionResult GetDamageInteractionNew(InteractionParamHolder interactionParam)
+        {
+            InteractionResult finalInteraction = new InteractionResult();
+            ContactResultInfo contactResultInfo = new ContactResultInfo();
+
+            for (int i = 0; i < DamageCalculationSteps.Count; i++)
+            {
+                finalInteraction = DamageCalculationSteps[i].Calculate(interactionParam, finalInteraction, contactResultInfo);
+            }
+
+            return finalInteraction;
+        }
+
+        #endregion
+
+        #region Damage Formula Step Classes
+
+        /// <summary>
+        /// The base class for steps in the total damage calculation.
+        /// </summary>
+        private abstract class DamageCalcStep
+        {
+            /// <summary>
+            /// The current InteractionResult at each step.
+            /// This is copied and modified each step, so all the values after each calculation are preserved.
+            /// <para>This also allows us to preserve the last interaction performed.</para>
+            /// </summary>
+            protected InteractionResult StepResult = null;
+
+            protected ContactResultInfo StepContactResultInfo = new ContactResultInfo();
+
+            public InteractionResult Calculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                StepResult = new InteractionResult(curResult);
+                StepContactResultInfo = curContactResult;
+                OnCalculate(damageInfo, curResult, curContactResult);
+                return StepResult;
+            }
+        
+            protected abstract void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult);
+        }
+
+        private sealed class InitStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                StepResult.AttackerResult.Entity = damageInfo.Attacker;
+                StepResult.VictimResult.Entity = damageInfo.Victim;
+                StepResult.VictimResult.ContactType = damageInfo.ContactType;
+                StepResult.VictimResult.DamageElement = damageInfo.DamagingElement;
+                StepResult.VictimResult.StatusesInflicted = damageInfo.Statuses;
+                StepResult.VictimResult.TotalDamage = damageInfo.Damage;
+                StepResult.VictimResult.Piercing = damageInfo.Piercing;
+            }
+        }
+
+        private sealed class ContactResultStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                BattleEntity victim = StepResult.VictimResult.Entity;
+                BattleEntity attacker = StepResult.AttackerResult.Entity;
+
+                //Get contact results
+                StepContactResultInfo = victim.EntityProperties.GetContactResult(attacker, StepResult.VictimResult.ContactType);
+            }
+        }
+
+        private sealed class ElementOverrideStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                Elements element = StepResult.VictimResult.DamageElement;
+                BattleEntity victim = StepResult.VictimResult.Entity;
+
+                //Retrieve an overridden type of Elemental damage to inflict based on the Victim's PhysicalAttributes
+                //(Ex. The Ice Power Badge only deals Ice damage to Fiery entities)
+                Elements newElement = StepResult.AttackerResult.Entity.EntityProperties.GetTotalElementOverride(victim);
+                if (newElement != Elements.Invalid)
+                {
+                    //Add 1 to the damage if the element used already exists as an override and the victim has a Weakness to the Element.
+                    //This allows Badges such as Ice Power to deal more damage if used in conjunction with attacks
+                    //that deal the same type of damage (Ex. Ice Power and Ice Smash deal 2 additional damage total rather than 1).
+                    //If any new knowledge is discovered to improve this, this will be changed. At the moment, it seems unlikely because
+                    //Ice Power is the only Badge of its kind across the first two PM games that does anything like this
+                    if (element == newElement && victim.EntityProperties.HasWeakness(element) == true)
+                    {
+                        StepResult.VictimResult.TotalDamage += 1;
+                    }
+
+                    StepResult.VictimResult.DamageElement = newElement;
+                }
+            }
+        }
+
+        private sealed class VictimElementDamageStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                ElementDamageResultHolder victimElementDamage = GetElementalDamage(StepResult.VictimResult.Entity,
+                    StepResult.VictimResult.DamageElement, StepResult.VictimResult.TotalDamage);
+
+                StepResult.VictimResult.ElementResult = victimElementDamage.InteractionResult;
+                StepResult.VictimResult.TotalDamage = victimElementDamage.Damage;
+            }
+        }
+
+        private sealed class VictimDamageReductionStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                StepResult.VictimResult.TotalDamage -= StepResult.VictimResult.Entity.BattleStats.DamageReduction;
+            }
+        }
+
+        private sealed class VictimCheckHitStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                StepResult.VictimResult.Hit = StepResult.AttackerResult.Entity.AttemptHitEntity(StepResult.VictimResult.Entity);
+            }
+        }
+
+        /// <summary>
+        /// The Victim's final UNSCALED damage is calculated in this step.
+        /// </summary>
+        private sealed class VictimDefensiveStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                //Defense added from Damage Dodge Badges upon a successful Guard
+                int damageDodgeDefense = 0;
+
+                //Defensive actions take priority. If the attack didn't hit, don't check for defensive actions
+                BattleGlobals.DefensiveActionHolder? victimDefenseData = null;
+                if (StepResult.VictimResult.Hit == true)
+                {
+                    StepResult.VictimResult.Entity.GetDefensiveActionResult(StepResult.VictimResult.TotalDamage,
+                        StepResult.VictimResult.StatusesInflicted);
+                }
+
+                //A Defensive Action has been performed
+                if (victimDefenseData.HasValue == true)
+                {
+                    StepResult.VictimResult.TotalDamage = victimDefenseData.Value.Damage;
+                    StepResult.VictimResult.StatusesInflicted = victimDefenseData.Value.Statuses;
+
+                    //Store the damage dealt to the attacker, if any
+                    if (victimDefenseData.Value.ElementHolder.HasValue == true)
+                    {
+                        ElementDamageHolder elementHolder = victimDefenseData.Value.ElementHolder.Value;
+
+                        //If the Defensive action dealt damage and the contact was direct
+                        //the Defensive action has caused a Failure for the Attacker (Ex. Superguarding)
+                        if (StepResult.VictimResult.ContactType == ContactTypes.Direct)
+                        {
+                            StepContactResultInfo.ContactResult = ContactResult.Failure;
+
+                            //Use the damage from the Defensive Action
+                            StepResult.AttackerResult.TotalDamage = elementHolder.Damage;
+
+                            //Update the Paybackholder to use the Payback data from the Defensive Action
+                            StepContactResultInfo.Paybackholder = new PaybackHolder(PaybackTypes.Constant, elementHolder.Element, elementHolder.Damage);
+                        }
+
+                        StepResult.AttackerResult.DamageElement = victimDefenseData.Value.ElementHolder.Value.Element;
+                    }
+
+                    //Factor in the additional Guard defense for all DefensiveActions (for now, at least)
+                    //If it's not Piercing, this will be subtracted, in addition to the Victim's Defense, from the damage dealt to the Victim
+                    damageDodgeDefense = StepResult.VictimResult.Entity.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DamageDodge);
+                }
+
+                //Subtract Defense on non-piercing damage
+                if (StepResult.VictimResult.Piercing == false)
+                {
+                    int totalDefense = StepResult.VictimResult.Entity.BattleStats.TotalDefense + damageDodgeDefense;
+                    StepResult.VictimResult.TotalDamage -= totalDefense;
+                }
+
+                //Store the final unscaled damage in the Attacker's result if there was no Defensive Action payback, as it will use it later
+                if (victimDefenseData.HasValue == false || victimDefenseData.Value.ElementHolder.HasValue == false)
+                {
+                    StepResult.AttackerResult.TotalDamage = StepResult.VictimResult.TotalDamage;
+                }
+            }
+        }
+
+        private sealed class VictimDoublePainStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                //Factor in Double Pain for the Victim
+                int doublePainCount = StepResult.VictimResult.Entity.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DoublePain);
+
+                StepResult.VictimResult.TotalDamage *= (1 + doublePainCount);
+            }
+        }
+
+        private sealed class VictimLastStandStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                //Factor in Last Stand for the Victim, if the Victim is in Danger or Peril
+                if (StepResult.VictimResult.Entity.IsInDanger == true)
+                {
+                    //PM rounds down, whereas TTYD rounds up. We're going with the latter
+                    //TTYD always ceilings the value (Ex. 3.2 turns to 4)
+                    int lastStandCount = StepResult.VictimResult.Entity.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.LastStand);
+                    
+                    int lastStandDivider = (1 + lastStandCount);
+                    StepResult.VictimResult.TotalDamage = (int)Math.Ceiling(StepResult.VictimResult.TotalDamage / (float)lastStandDivider);
+                }
+            }
+        }
+
+        private sealed class ClampVictimDamageStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                //Clamp Victim damage
+                StepResult.VictimResult.TotalDamage =
+                    UtilityGlobals.Clamp(StepResult.VictimResult.TotalDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            }
+        }
+
+        private sealed class VictimFilteredStatusStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                StepResult.VictimResult.StatusesInflicted =
+                    GetFilteredInflictedStatuses(StepResult.VictimResult.Entity, StepResult.VictimResult.StatusesInflicted);
+            }
+        }
+
+        private sealed class VictimCheckInvincibleStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                //Check if the Victim is Invincible. If so, ignore all damage and Status Effects
+                if (StepResult.VictimResult.Entity.EntityProperties.GetAdditionalProperty<bool>(AdditionalProperty.Invincible) == true)
+                {
+                    StepResult.VictimResult.TotalDamage = 0;
+                    StepResult.VictimResult.ElementResult = ElementInteractionResult.Damage;
+                    StepResult.VictimResult.StatusesInflicted = null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Final Victim step - ALL Victim damage information is known after this.
+        /// </summary>
+        private sealed class VictimCheckContactResultStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                if (StepContactResultInfo.ContactResult == ContactResult.Failure)
+                {
+                    //If the Attacker failed to attack, set the Victim to null to mark it as not having a value
+                    //This prevents the code afterwards from dealing damage to the Victim
+                    StepResult.VictimResult.Entity = null;
+                }
+            }
+        }
+
+        private sealed class AttackerPaybackDamageStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                //The unscaled damage the Attacker dealt to the Victim
+                //This will be the Payback damage dealt from a Defensive Action if one that deals damage has been performed
+                int unscaledAttackerDamage = StepResult.AttackerResult.TotalDamage;
+
+                int damageDealt = unscaledAttackerDamage;
+                PaybackHolder paybackHolder = StepContactResultInfo.Paybackholder;
+
+                //Get the damage done to the Attacker, factoring in Weaknesses/Resistances
+                ElementDamageResultHolder attackerElementDamage = GetElementalDamage(StepResult.AttackerResult.Entity,
+                    paybackHolder.Element, damageDealt);
+
+                //Get Payback damage - Payback damage is calculated after everything else
+                //However, it does NOT factor in Double Pain or Last Stand, hence why we use the unscaled Victim damage
+                int paybackDamage = paybackHolder.GetPaybackDamage(attackerElementDamage.Damage);
+
+                //If Constant Payback, the constant damage value will be returned as the Payback damage
+                //Therefore, update the final Payback damage value to factor in Weaknesses/Resistances using the constant Payback damage
+                //Ex. This causes an enemy with a +1 Weakness to Fire to be dealt 2 damage instead of 1 for a Constant 1 Fire Payback
+                if (paybackHolder.PaybackType == PaybackTypes.Constant)
+                {
+                    paybackDamage = GetElementalDamage(StepResult.AttackerResult.Entity, paybackHolder.Element, paybackDamage).Damage;
+                }
+
+                //Fill out the rest of the Attacker information since we have it
+                //Payback damage is always direct, piercing, and guaranteed to hit
+                StepResult.AttackerResult.TotalDamage = paybackDamage;
+                StepResult.AttackerResult.DamageElement = paybackHolder.Element;
+                StepResult.AttackerResult.ElementResult = attackerElementDamage.InteractionResult;
+                StepResult.AttackerResult.ContactType = ContactTypes.Direct;
+                StepResult.AttackerResult.Piercing = true;
+                StepResult.AttackerResult.StatusesInflicted = paybackHolder.StatusesInflicted;
+                StepResult.AttackerResult.Hit = true;
+            }
+        }
+
+        private class ClampAttackerDamageStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                StepResult.AttackerResult.TotalDamage = 
+                    UtilityGlobals.Clamp(StepResult.AttackerResult.TotalDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            }
+        }
+
+        private class AttackerFilteredStatusStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                StepResult.AttackerResult.StatusesInflicted =
+                    GetFilteredInflictedStatuses(StepResult.AttackerResult.Entity, StepResult.AttackerResult.StatusesInflicted);
+            }
+        }
+
+        private class AttackerCheckInvincibleStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                //Check if the Attacker is Invincible. If so, ignore all damage and Status Effects
+                if (StepResult.AttackerResult.Entity.EntityProperties.GetAdditionalProperty<bool>(AdditionalProperty.Invincible) == true)
+                {
+                    StepResult.AttackerResult.TotalDamage = 0;
+                    StepResult.AttackerResult.ElementResult = ElementInteractionResult.Damage;
+                    StepResult.AttackerResult.StatusesInflicted = null;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Final Attacker step - ALL Attacker damage information is known after this.
+        /// </summary>
+        private sealed class AttackerCheckContactResultStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                if (StepContactResultInfo.ContactResult == ContactResult.Success)
+                {
+                    //If the Attacker succeeded to attack, set the Attacker to null to mark it as not having a value
+                    //This prevents the code afterwards from dealing damage to the Attacker
+                    StepResult.AttackerResult.Entity = null;
+                }
+            }
         }
 
         #endregion

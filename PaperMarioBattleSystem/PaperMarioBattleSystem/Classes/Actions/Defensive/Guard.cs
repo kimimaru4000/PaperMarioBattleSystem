@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
 
         public override BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusEffect[] statusEffects)
         {
-            int newDamage = UtilityGlobals.Clamp(damage - 1, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+            int newDamage = damage - 1;
             StatusEffect[] newStatuses = FilterStatuses(statusEffects);
 
             BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage,

@@ -166,7 +166,7 @@ namespace PaperMarioBattleSystem
         /// <returns>A ContactResultInfo containing the result of the interaction</returns>
         public ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType)
         {
-            ContactResultInfo contactResultInfo =  Interactions.GetContactResult(attacker, contactType, GetAllPhysAttributes(), attacker.EntityProperties.GetContactExceptions(contactType));
+            ContactResultInfo contactResultInfo = Interactions.GetContactResult(attacker, contactType, GetAllPhysAttributes(), attacker.EntityProperties.GetContactExceptions(contactType));
 
             //On a Success, check if this Entity has any Payback and add it if so
             if ((contactResultInfo.ContactResult == ContactResult.Success || contactResultInfo.ContactResult == ContactResult.PartialSuccess) && HasPayback() == true)

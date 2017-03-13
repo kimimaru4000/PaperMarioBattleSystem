@@ -58,3 +58,10 @@ Poison
     -Confused Poison Puffs' Poison Blast hurt other Poison Puffs whether they're charged with Poison or not
 2. Contact with Poisoned entities is a PartialSuccess, much like Electrified entities. This means you'll deal damage to them, but you'll
 take Payback damage in the process and get Poisoned
+
+Update (3/13/17)
+----------------
+Icy
+---
+I confirmed that Icy entities can make contact with other Icy entities. A Confused Ice Puff attacked a charged Ice Puff ally with its ram attack.
+It did not heal since the attack wasn't Icy.

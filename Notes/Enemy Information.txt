@@ -1,0 +1,12 @@
+Enemy Information (3/13/17)
+---------------------------
+
+Ice Puffs
+---------
+-Have a Heal Resistance to Ice
+-Have a contact exception to Ice
+
+Frost Piranha
+-------------
+-Have a Heal Resistance to Ice
+-No contact exception to Ice

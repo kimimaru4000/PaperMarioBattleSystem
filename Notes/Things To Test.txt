@@ -47,4 +47,4 @@ Healing Resistances and Invincibility
 Do invincible enemies with a healing resistance still heal when you attack them with an element that heals them?
 Test on Ice Puffs in TTYD with the Invincible attribute modifier code applied to them.
 
-Result: 
+Result: No, since you deal no damage

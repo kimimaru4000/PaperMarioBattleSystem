@@ -7,6 +7,8 @@ Pokey Parts
 Which moves remove a Pokey part, and which other enemies have properties that act similar?
 Stilt Guys might be worth looking into.
 
+Results: 
+
 Payback and Invincibility
 --------------------------
 How does Payback work with true invincibility? The Shadow Queen doesn't have any contact moves, so test on Bowser in PM.
@@ -48,3 +50,7 @@ Do invincible enemies with a healing resistance still heal when you attack them 
 Test on Ice Puffs in TTYD with the Invincible attribute modifier code applied to them.
 
 Result: No, since you deal no damage
+
+Can Ms. Mowz steal stolen Coins, Items, or Badges from Bandits and Badge Bandits?
+---------------------------------------------------------------------------------
+Result: Yes, she can steal Coins, Items, and Badges back!

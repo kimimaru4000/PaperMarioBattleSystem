@@ -17,6 +17,9 @@ A list of what we need in battle for each move:
 -HeightStates affected
 -Uses Charge
   -This is in here so any move can potentially utilize the Charge instead of just damaging moves
+-Item Steal (None, Coin, Item, Badge, Any)
+  -Coin for Bandits, Coin/Item for Big Bandits, Badge for Badge Bandits, and Any for Ms. Mowz' Kiss Thief move
+  -This is in here because Kiss Thief can steal but doesn't do damage
 -Healing Info
 -Damage Info
 

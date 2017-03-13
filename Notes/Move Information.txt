@@ -51,6 +51,25 @@ Bowser
 Shockwave Drain (Star Rod wave attack) - Removes all positive Status Effects on Mario (and presumably his Partner if this were in TTYD)
 Power Up - Removes all negative Status Effects on Bowser, makes him Invincible, and doubles the power of all attacks except Shockwave Drain
 
+Bandits/Big Bandits/Badge Bandits
+---------------------------------
+Their ram attack has a chance at stealing:
+
+-Bandits: Coins
+-Big Bandits: Coins or an Item
+-Badge Bandits: Badges
+
+Stolen Message: "Your (thing) was\n stolen!"
+
+Examples: "Your Coin was\n stolen!", "Your Lucky Day was\n stolen!"
+
+Ms. Mowz
+--------
+Kiss Thief - Can steal any held collectible, including ones stolen from Bandits.
+
+Steal Message: "You stole\n a (thing)!";
+
+Examples: "You stole\n a Power Plus!", "You stole\n a Tasty Tonic!"
 
 General
 -------

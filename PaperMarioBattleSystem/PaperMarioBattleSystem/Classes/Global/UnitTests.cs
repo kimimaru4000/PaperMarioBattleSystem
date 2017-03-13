@@ -111,9 +111,9 @@ namespace PaperMarioBattleSystem
                 goomba.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
                 goomba.EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Half, Enumerations.Elements.Poison, new PoisonStatus(5)));
 
-                Badge dd1 = Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DamageDodge, BadgeGlobals.BadgeFilterType.UnEquipped);
+                Badge dd1 = new DamageDodgeBadge();
                 dd1?.Equip(mario);
-                Badge dd2 = Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DamageDodge, BadgeGlobals.BadgeFilterType.UnEquipped);
+                Badge dd2 = new DamageDodgeBadge();
                 dd2?.Equip(mario);
 
                 //For defensive actions; add flags in their code to make them always succeed
@@ -147,7 +147,7 @@ namespace PaperMarioBattleSystem
                 goomba.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Fiery);
                 goomba.EntityProperties.AddWeakness(Enumerations.Elements.Ice, new WeaknessHolder(WeaknessTypes.PlusDamage, 2));
 
-                Badge badge = Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.IcePower, BadgeGlobals.BadgeFilterType.UnEquipped);
+                Badge badge = new IcePowerBadge();
                 badge?.Equip(mario);
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 3, Enumerations.Elements.Normal, false,
@@ -171,7 +171,7 @@ namespace PaperMarioBattleSystem
                 mario.EntityProperties.AddWeakness(Enumerations.Elements.Normal, new WeaknessHolder(WeaknessTypes.KO, 4));
                 goomba.EntityProperties.AfflictStatus(new PaybackStatus(5));
 
-                Badge badge = Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoublePain, BadgeGlobals.BadgeFilterType.UnEquipped);
+                Badge badge = new DoublePainBadge();
                 goomba.SetHeldCollectible(badge);
                 goomba.OnBattleStart();
 
@@ -198,7 +198,7 @@ namespace PaperMarioBattleSystem
                 //Update HealthState for Last Stand to kick in on Danger
                 mario.TakeDamage(Enumerations.Elements.Normal, 0, false);
 
-                Badge badge = Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LastStand, BadgeGlobals.BadgeFilterType.UnEquipped);
+                Badge badge = new LastStandBadge();
                 badge?.Equip(mario);
 
                 InteractionParamHolder param = new InteractionParamHolder(goomba, mario, 80, Enumerations.Elements.Water, false,

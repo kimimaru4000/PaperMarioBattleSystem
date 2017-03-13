@@ -15,6 +15,8 @@ A list of what we need in battle for each move:
   -None, Self, and Ally will be new. None skips selection and directly performs the move, Self only allows targeting user of the move,
    and Ally allows targeting all entities of the EntityType except the user of the move.
 -HeightStates affected
+-Uses Charge
+  -This is in here so any move can potentially utilize the Charge instead of just damaging moves
 -Healing Info
 -Damage Info
 
@@ -31,7 +33,7 @@ public StatusEffect[] Statuses;
 The first two are unnecessary because they are filled out later, so they should be removed. The rest are needed, but A LOT is still missing.
 We'll need to use an entirely different struct which has more information.
 
-For one, the ContactTypes enum should be changed to just have None or Contact. HammerContact isn't used and doesn't make sense since
+For one, the ContactTypes enum should be changed to just have None or Direct. HammerContact isn't used and doesn't make sense since
 Hammer moves don't make contact. The idea behind adding it was to indicate moves attacking from the side, but there are better ways to do that
 and we'll get to it another time.
 
@@ -39,7 +41,6 @@ We need the following additional fields, some of which aren't implemented in the
 so when these are implemented, it's only a matter of putting them in.
 
 -Affected by All or Nothing
--Uses Charge
 -Guaranteed to hit
   -This will be used for Crystal Star Special Moves, which can hit Invisible entities
 -Penetrates Defensive Actions (None, Guard, Superguard, All)

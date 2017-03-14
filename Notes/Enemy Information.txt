@@ -10,3 +10,24 @@ Frost Piranha
 -------------
 -Have a Heal Resistance to Ice
 -No contact exception to Ice
+
+Stilt Guys
+----------
+-Fall off when being inflicted with any type of Immobilized status, such as Paralyzed or Dizzy (in PM)
+-Fall off when jumped on, turning into normal Shy Guys
+
+Shy Squad
+---------
+-Counts as a single enemy
+-Has 15 HP, with each Shy Guy representing 1 HP
+  -When damaged, the number of Shy Guys correlating to the amount of damage are removed from the squad (Ex. 4 damage means 4 Shy Guys are removed)
+-Number of times they attack correlates to how many there are in the Squad (Max = 15, Min = 1)
+
+Shy Stack
+---------
+-Counts as a single enemy
+-All Shy Guys share and use the same animations simultaneously
+-Battle position is the topmost Shy Guy
+-Attack power correlates to how many there are on the stack (Max Attack = 4, Min Attack = 1)
+-Can knock off the bottom-most Shy Guy with Spin Smash. If successful, will knock off the one it hits into as well
+-Can also knock off the bottom-most Shy Guy with Kooper's Shell moves

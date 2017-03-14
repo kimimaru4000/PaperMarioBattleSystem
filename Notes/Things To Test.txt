@@ -7,7 +7,8 @@ Pokey Parts
 Which moves remove a Pokey part, and which other enemies have properties that act similar?
 Stilt Guys might be worth looking into.
 
-Results: 
+Results: Shy Stacks act very similar and can have Shy Guys knocked off using Spin Smash or Kooper's Shell moves.
+Super and Ultra Hammer also may remove these parts (TEST TO CONFIRM).
 
 Payback and Invincibility
 --------------------------

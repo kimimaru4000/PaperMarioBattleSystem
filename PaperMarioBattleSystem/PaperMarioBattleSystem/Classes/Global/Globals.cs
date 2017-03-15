@@ -262,6 +262,7 @@ namespace PaperMarioBattleSystem
     {
         public BattleEntity Attacker;
         public BattleEntity Victim;
+        //public DamageData damageData;
         public int Damage;
         public Enumerations.Elements DamagingElement;
         public bool Piercing;
@@ -380,6 +381,36 @@ namespace PaperMarioBattleSystem
         }
     }
 
+    public struct MoveActionDataNew : INameable
+    {
+        public Texture2D Icon;
+        public string Name { get; set; }
+        public string Description;
+        public Enumerations.MoveResourceTypes ResourceType;
+        public int ResourceCost;
+        public Enumerations.CostDisplayTypes CostDisplayType;
+        public Enumerations.MoveAffectionTypes MoveAffectionType;
+        public Enumerations.EntityTypes EntityType;
+        public Enumerations.HeightStates[] HeightsAffected;
+        public bool UsesCharge;
+
+        public MoveActionDataNew(Texture2D icon, string name, string description, Enumerations.MoveResourceTypes resourceType,
+            int resourceCost, Enumerations.CostDisplayTypes costDisplayType, Enumerations.MoveAffectionTypes moveAffectionType,
+            Enumerations.EntityTypes entityType, Enumerations.HeightStates[] heightsAffected, bool usesCharge)
+        {
+            Icon = icon;
+            Name = name;
+            Description = description;
+            ResourceType = resourceType;
+            ResourceCost = resourceCost;
+            CostDisplayType = costDisplayType;
+            MoveAffectionType = moveAffectionType;
+            EntityType = entityType;
+            HeightsAffected = heightsAffected;
+            UsesCharge = usesCharge;
+        }
+    }
+
     /// <summary>
     /// Holds data regarding healing, including HP, FP, and Status Effects.
     /// </summary>
@@ -407,6 +438,37 @@ namespace PaperMarioBattleSystem
             HPHealed = hpHealed;
             FPHealed = fpHealed;
             StatusEffectsHealed = statusesHealed;
+        }
+    }
+
+    /// <summary>
+    /// Holds data regarding damage.
+    /// </summary>
+    public struct DamageData
+    {
+        public int Damage;
+        public Enumerations.Elements DamagingElement;
+        public bool Piercing;
+        public Enumerations.ContactTypes ContactType;
+        public StatusEffect[] Statuses;
+        public bool CantMiss;
+        public bool AllOrNothingAffected;
+        public Enumerations.DefensiveMoveOverrides DefensiveOverride;
+        public Enumerations.DamageEffects DamageEffect;
+
+        public DamageData(int damage, Enumerations.Elements damagingElement, bool piercing, Enumerations.ContactTypes contactType,
+            StatusEffect[] statuses, bool cantMiss, bool allOrNothingAffected, Enumerations.DefensiveMoveOverrides defensiveOverride,
+            Enumerations.DamageEffects damageEffect)
+        {
+            Damage = damage;
+            DamagingElement = damagingElement;
+            Piercing = piercing;
+            ContactType = contactType;
+            Statuses = statuses;
+            CantMiss = cantMiss;
+            AllOrNothingAffected = allOrNothingAffected;
+            DefensiveOverride = defensiveOverride;
+            DamageEffect = damageEffect;
         }
     }
 
@@ -718,6 +780,67 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// The types of entities a MoveAction affects.
+        /// <para>None causes the MoveAction to occur immediately.
+        /// Self targets the user of the MoveAction.
+        /// Ally targets all entities that are allies of the user.
+        /// Enemy targets all entities that are enemies of the user.</para>
+        /// </summary>
+        public enum MoveAffectionTypes
+        {
+            None, Self, Ally, Enemy
+        }
+
+        /// <summary>
+        /// The types of resources that MoveActions can require.
+        /// </summary>
+        public enum MoveResourceTypes
+        {
+            FP, SP
+        }
+        
+        /// <summary>
+        /// The display types of MoveAction resources.
+        /// </summary>
+        public enum CostDisplayTypes
+        {
+            Shown, Hidden, Special
+        }
+
+        /// <summary>
+        /// The types of DefensiveActions that damage-dealing moves can override.
+        /// </summary>
+        public enum DefensiveMoveOverrides
+        {
+            None, Guard, Superguard, All
+        }
+        
+        /// <summary>
+        /// The effects a damage-dealing move can have on a BattleEntity.
+        /// This enum is a bit field, so handle it with bitwise operations.
+        /// </summary>
+        [Flags]
+        public enum DamageEffects
+        {
+            None = 0,
+            FlipsShelled = 1 << 0,
+            RemovesWings = 1 << 1,
+            RemovesPart = 1 << 2
+        }
+
+        // <summary>
+        // The types of Items that can be stolen via moves.
+        // This enum is a bit field, so handle it with bitwise operations.
+        // </summary>
+        //public enum ItemStealingTypes
+        //{
+        //    None,
+        //    Coin = 1 << 0,
+        //    Item = 1 << 1,
+        //    Badge = 1 << 2
+        //}
+
+        /// <summary>
         /// The types of damage elements
         /// </summary>
         public enum Elements
@@ -731,7 +854,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum HeightStates
         {
-            Grounded, /*Elevated, */Airborne, Ceiling
+            Grounded, Airborne, Ceiling
         }
 
         /// <summary>

@@ -192,7 +192,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="interactionParam">An InteractionParamHolder containing the BattleEntities interacting and data about their interaction</param>
         /// <returns>An InteractionResult containing InteractionHolders for both the victim and the attacker</returns>
-        public static InteractionResult GetDamageInteraction(InteractionParamHolder interactionParam)
+        [Obsolete("This is the old method. Use the newer, cleaner, and more flexible one called GetDamageInteraction.")]
+        public static InteractionResult GetDamageInteractionOld(InteractionParamHolder interactionParam)
         {
             InteractionResult finalInteractionResult = new InteractionResult();
 
@@ -443,10 +444,14 @@ namespace PaperMarioBattleSystem
             return filteredStatuses.ToArray();
         }
 
-        //NOTE: This is the new more flexible Damage Calculation method using the DamageCalculationSteps list
-        //It is currently being tested. Do not use it for primary purposes until it has been confirmed to be 100% accurate
-        //with the old one (minus bug fixes)
-        public static InteractionResult GetDamageInteractionNew(InteractionParamHolder interactionParam)
+        /// <summary>
+        /// Calculates and returns the entire damage interaction between two BattleEntities.
+        /// <para>This returns all the necessary information for both BattleEntities, including the total amount of damage dealt,
+        /// the type of Elemental damage to deal, the Status Effects to inflict, and whether the attack successfully hit or not.</para>
+        /// </summary>
+        /// <param name="interactionParam">An InteractionParamHolder containing the BattleEntities interacting and data about their interaction.</param>
+        /// <returns>An InteractionResult containing InteractionHolders for both the victim and the attacker.</returns>
+        public static InteractionResult GetDamageInteraction(InteractionParamHolder interactionParam)
         {
             InteractionResult finalInteraction = new InteractionResult();
             ContactResultInfo contactResultInfo = new ContactResultInfo();

@@ -21,8 +21,8 @@ namespace PaperMarioBattleSystem
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 5, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
-                InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
-                InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
+                InteractionResult oldInteraction = Interactions.GetDamageInteractionOld(param);
+                InteractionResult newInteraction = Interactions.GetDamageInteraction(param);
 
                 Debug.Log("Old: ");
                 PrintInteractionResult(oldInteraction);
@@ -38,8 +38,8 @@ namespace PaperMarioBattleSystem
                 InteractionParamHolder param = new InteractionParamHolder(mario, spikedGoomba, 5, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
-                InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
-                InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
+                InteractionResult oldInteraction = Interactions.GetDamageInteractionOld(param);
+                InteractionResult newInteraction = Interactions.GetDamageInteraction(param);
 
                 Debug.Log("Old: ");
                 PrintInteractionResult(oldInteraction);
@@ -56,8 +56,8 @@ namespace PaperMarioBattleSystem
                 InteractionParamHolder param = new InteractionParamHolder(mario, spikedGoomba, 5, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
-                InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
-                InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
+                InteractionResult oldInteraction = Interactions.GetDamageInteractionOld(param);
+                InteractionResult newInteraction = Interactions.GetDamageInteraction(param);
 
                 Debug.Log("Old: ");
                 PrintInteractionResult(oldInteraction);
@@ -75,8 +75,8 @@ namespace PaperMarioBattleSystem
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 5, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
-                InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
-                InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
+                InteractionResult oldInteraction = Interactions.GetDamageInteractionOld(param);
+                InteractionResult newInteraction = Interactions.GetDamageInteraction(param);
 
                 Debug.Log("Old: ");
                 PrintInteractionResult(oldInteraction);
@@ -94,8 +94,8 @@ namespace PaperMarioBattleSystem
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 10, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
-                InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
-                InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
+                InteractionResult oldInteraction = Interactions.GetDamageInteractionOld(param);
+                InteractionResult newInteraction = Interactions.GetDamageInteraction(param);
 
                 Debug.Log("Old: ");
                 PrintInteractionResult(oldInteraction);
@@ -125,8 +125,8 @@ namespace PaperMarioBattleSystem
                 InteractionParamHolder param = new InteractionParamHolder(goomba, mario, 10, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
-                InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
-                InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
+                InteractionResult oldInteraction = Interactions.GetDamageInteractionOld(param);
+                InteractionResult newInteraction = Interactions.GetDamageInteraction(param);
 
                 Debug.Log("Old: ");
                 PrintInteractionResult(oldInteraction);
@@ -153,8 +153,8 @@ namespace PaperMarioBattleSystem
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 3, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
-                InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
-                InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
+                InteractionResult oldInteraction = Interactions.GetDamageInteractionOld(param);
+                InteractionResult newInteraction = Interactions.GetDamageInteraction(param);
 
                 Debug.Log("Old: ");
                 PrintInteractionResult(oldInteraction);
@@ -178,8 +178,8 @@ namespace PaperMarioBattleSystem
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 4, Enumerations.Elements.Water, false,
                     Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
-                InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
-                InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
+                InteractionResult oldInteraction = Interactions.GetDamageInteractionOld(param);
+                InteractionResult newInteraction = Interactions.GetDamageInteraction(param);
 
                 Debug.Log("Old: ");
                 PrintInteractionResult(oldInteraction);
@@ -204,8 +204,8 @@ namespace PaperMarioBattleSystem
                 InteractionParamHolder param = new InteractionParamHolder(goomba, mario, 80, Enumerations.Elements.Water, false,
                     Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
-                InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
-                InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
+                InteractionResult oldInteraction = Interactions.GetDamageInteractionOld(param);
+                InteractionResult newInteraction = Interactions.GetDamageInteraction(param);
 
                 Debug.Log("Old: ");
                 PrintInteractionResult(oldInteraction);
@@ -228,8 +228,8 @@ namespace PaperMarioBattleSystem
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 90, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
-                InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
-                InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
+                InteractionResult oldInteraction = Interactions.GetDamageInteractionOld(param);
+                InteractionResult newInteraction = Interactions.GetDamageInteraction(param);
 
                 Debug.Log("Old: ");
                 PrintInteractionResult(oldInteraction);

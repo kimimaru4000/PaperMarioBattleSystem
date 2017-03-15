@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
         public HeadRattle()
         {
             Name = "Head Rattle";
-            MoveInfo.FPCost = 2;
+            MoveInfo.ResourceCost = 2;
             MoveInfo.Description = "Wear this to use Head Rattle. " +
                            "2 FP are required to use this attack, which can confuse enemies if executed superbly. " +
                            "Wearing two or more of these badges requires more FP for the move, but enemies stay confused longer.";

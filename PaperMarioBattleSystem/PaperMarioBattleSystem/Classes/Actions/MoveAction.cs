@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The properties of the MoveAction. Includes FP cost and more.
         /// </summary>
-        protected MoveActionData MoveInfo = MoveActionData.Default;
+        protected MoveActionData MoveInfo;
 
         /// <summary>
         /// The Sequence this MoveAction has the BattleEntity perform.
@@ -77,7 +77,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Tells if the MoveAction costs FP or not.
         /// </summary>
-        public bool CostsFP => (MoveProperties.FPCost > 0);
+        public bool CostsFP => (MoveProperties.ResourceType == MoveResourceTypes.FP && MoveProperties.ResourceCost > 0);
 
         /// <summary>
         /// Tells if the MoveAction heals in some capacity or not.
@@ -190,13 +190,14 @@ namespace PaperMarioBattleSystem
             {
                 //Check for the number of Flower Saver Badges on the entity and reduce the FP cost by that amount; minimum of 1
                 int flowerSaverCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.FlowerSaver);
-                MoveInfo.FPCost = UtilityGlobals.Clamp(MoveInfo.FPCost - flowerSaverCount, 1, 99);
+                MoveInfo.ResourceCost = UtilityGlobals.Clamp(MoveInfo.ResourceCost - flowerSaverCount, 1, 99);
 
                 //If there is at least one Flower Saver Badge equipped, display the FP count in a bluish-gray color
-                if (flowerSaverCount > 0)
-                    LoweredFPCost = true;
+                if (flowerSaverCount > 0 && MoveInfo.CostDisplayType != CostDisplayTypes.Hidden)
+                    MoveInfo.CostDisplayType = CostDisplayTypes.Special;
 
-                if (MoveProperties.FPCost > User.CurFP)
+                //Disable the move if you don't have enough FP to use it
+                if (MoveProperties.ResourceCost > User.CurFP)
                 {
                     Disabled = true;
                     DisabledString = "Not enough FP.";
@@ -205,9 +206,9 @@ namespace PaperMarioBattleSystem
             }
 
             //If the move targets entities, check if any entities can be targeted
-            if (MoveProperties.TargetsEntity == true)
+            if (MoveProperties.MoveAffectionType != MoveAffectionTypes.None)
             {
-                BattleEntity[] entities = BattleManager.Instance.GetEntities(MoveProperties.EntityType, MoveProperties.HeightsAffected);
+                BattleEntity[] entities = GetEntitiesMoveAffects();//BattleManager.Instance.GetEntities(MoveProperties.EntityType, MoveProperties.HeightsAffected);
 
                 //There are no entities this move can target
                 if (entities.Length == 0)
@@ -231,10 +232,21 @@ namespace PaperMarioBattleSystem
         public virtual void OnMenuSelected()
         {
             //If this action targets an entity, bring up the target selection menu
-            if (MoveProperties.TargetsEntity == true)
-                BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, BattleManager.Instance.GetEntities(MoveProperties.EntityType, MoveProperties.HeightsAffected));
+            if (MoveProperties.MoveAffectionType != MoveAffectionTypes.None)
+            {
+                BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, GetEntitiesMoveAffects());
+            }
             //Otherwise, simply start the action
-            else ActionStart(null);
+            else
+            {
+                ActionStart(null);
+            }
+
+            //If this action targets an entity, bring up the target selection menu
+            //if (MoveProperties.TargetsEntity == true)
+            //    BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, BattleManager.Instance.GetEntities(MoveProperties.EntityType, MoveProperties.HeightsAffected));
+            ////Otherwise, simply start the action
+            //else ActionStart(null);
         }
 
         /// <summary>
@@ -257,7 +269,7 @@ namespace PaperMarioBattleSystem
             //at this point, as the action is not selectable from the menu if it doesn't have enough
             if (CostsFP == true)
             {
-                User.LoseFP(MoveProperties.FPCost);
+                User.LoseFP(MoveProperties.ResourceCost);
             }
 
             //If it's not an item move, remove the dip item turns property
@@ -337,13 +349,13 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Name, position, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
 
             //Show FP count if the move costs FP
-            if (CostsFP == true && MoveProperties.HideCost == false)
+            if (CostsFP == true && MoveProperties.CostDisplayType != CostDisplayTypes.Hidden)
             {
                 Color fpColor = color;
 
                 //If the FP cost was lowered, show it a bluish-gray color (This feature is from PM)
                 //Keep it gray if the move is disabled for any reason
-                if (Disabled == false && LoweredFPCost)
+                if (Disabled == false && MoveProperties.CostDisplayType == CostDisplayTypes.Special)
                 {
                     Color blueGray = SpecialCaseColor;
                     fpColor = blueGray;
@@ -359,7 +371,31 @@ namespace PaperMarioBattleSystem
         /// <returns>A string of the cost to use the action.</returns>
         public virtual string GetCostString()
         {
-            return $"{MoveProperties.FPCost} FP";
+            return $"{MoveProperties.ResourceCost} {MoveProperties.ResourceType.ToString()}";
+        }
+
+        /// <summary>
+        /// Gets the set of BattleEntities that this move affects.
+        /// </summary>
+        /// <returns>The BattleEntities the move affects based on its MoveAffectionType and the HeightStates it can target.</returns>
+        protected BattleEntity[] GetEntitiesMoveAffects()
+        {
+            if (MoveProperties.MoveAffectionType == MoveAffectionTypes.Self)
+            {
+                return new BattleEntity[] { User };
+            }
+            else if (MoveProperties.MoveAffectionType == MoveAffectionTypes.Ally)
+            {
+                return BattleManager.Instance.GetEntities(User.EntityType, MoveProperties.HeightsAffected);
+            }
+            else if (MoveProperties.MoveAffectionType == MoveAffectionTypes.Enemy)
+            {
+                EntityTypes otherType = User.EntityType == EntityTypes.Player ? EntityTypes.Enemy : EntityTypes.Player;
+
+                return BattleManager.Instance.GetEntities(otherType, MoveProperties.HeightsAffected);
+            }
+
+            return new BattleEntity[0];
         }
     }
 }

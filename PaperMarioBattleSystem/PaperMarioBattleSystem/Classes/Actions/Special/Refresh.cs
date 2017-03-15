@@ -17,15 +17,10 @@ namespace PaperMarioBattleSystem
 
             SPCost = 100;
 
-            MoveInfo = new MoveActionData(null, 0, "Recover HP & FP by 5. Also cures poisoning and Shrink.",
-                TargetSelectionMenu.EntitySelectionType.First, Enumerations.EntityTypes.Player, null);
+            MoveInfo = new MoveActionData(null, "Recover HP & FP by 5. Also cures poisoning and Shrink.",
+                Enumerations.MoveResourceTypes.SP, 100, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Self,
+                TargetSelectionMenu.EntitySelectionType.First, false, null);
             SetMoveSequence(new RefreshSequence(this));
-        }
-
-        public override void OnMenuSelected()
-        {
-            //Refresh only targets the user
-            BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, User);
         }
     }
 }

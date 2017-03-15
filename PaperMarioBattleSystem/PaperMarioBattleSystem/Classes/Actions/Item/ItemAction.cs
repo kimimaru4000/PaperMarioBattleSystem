@@ -44,7 +44,11 @@ namespace PaperMarioBattleSystem
             IStatusHealingItem statusHealing = item as IStatusHealingItem;
             IStatusInflictingItem statusInflicting = item as IStatusInflictingItem;
 
-            MoveInfo = new MoveActionData(null, 0, item.Description, item.SelectionType, item.EntityType, item.HeightsAffected);
+            MoveAffectionTypes moveAffectionType = item.EntityType == User.EntityType ? MoveAffectionTypes.Ally : MoveAffectionTypes.Enemy;
+            if (item.TargetsSelf == true) moveAffectionType = MoveAffectionTypes.Self;
+
+            MoveInfo = new MoveActionData(null, item.Description, MoveResourceTypes.FP, 0, CostDisplayTypes.Hidden,
+                moveAffectionType, item.SelectionType, false, item.HeightsAffected);
 
             //Set the damage
             if (damageItem != null || statusInflicting != null)
@@ -72,19 +76,19 @@ namespace PaperMarioBattleSystem
 
         public sealed override void OnMenuSelected()
         {
-            BattleEntity[] entities = null;
+            BattleEntity[] entities = GetEntitiesMoveAffects();
 
             int startIndex = 0;
 
             //If the item targets the user, only choose the user as the target
-            if (ItemUsed.TargetsSelf == true)
-            {
-                entities = new BattleEntity[] { User };
-            }
-            else
-            {
-                entities = BattleManager.Instance.GetEntities(MoveProperties.EntityType, MoveProperties.HeightsAffected);
-            }
+            //if (ItemUsed.TargetsSelf == true)
+            //{
+            //    entities = new BattleEntity[] { User };
+            //}
+            //else
+            //{
+            //    entities = BattleManager.Instance.GetEntities(MoveProperties.EntityType, MoveProperties.HeightsAffected);
+            //}
 
             //Bring up the target selection menu
             BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, startIndex, entities);
@@ -119,8 +123,8 @@ namespace PaperMarioBattleSystem
         /// <param name="fp"></param>
         public void SetDipFPCost(int fp)
         {
-            MoveInfo.FPCost = fp;
-            MoveInfo.HideCost = true;
+            MoveInfo.ResourceCost = fp;
+            MoveInfo.CostDisplayType = CostDisplayTypes.Hidden;
         }
 
         /// <summary>

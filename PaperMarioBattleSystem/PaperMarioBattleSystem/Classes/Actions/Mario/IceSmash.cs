@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
         public IceSmash()
         {
             Name = "Ice Smash";
-            MoveInfo.FPCost = 3;
+            MoveInfo.ResourceCost = 3;
             MoveInfo.Description = "Wear this to use Ice Smash. " +
                            "3 FP are required to use this attack, which can freeze and immobilize an enemy if executed superbly. " +
                            "Wearing two or more of these badges requires more FP for the move, but enemies stay frozen longer.";

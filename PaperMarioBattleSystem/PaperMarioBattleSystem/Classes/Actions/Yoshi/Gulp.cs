@@ -18,8 +18,9 @@ namespace PaperMarioBattleSystem
         {
             Name = "Gulp";
 
-            MoveInfo = new MoveActionData(null, 4, true, string.Empty, TargetSelectionMenu.EntitySelectionType.First,
-                Enumerations.EntityTypes.Enemy, new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded });
+            MoveInfo = new MoveActionData(null, string.Empty, Enumerations.MoveResourceTypes.FP, 4, Enumerations.CostDisplayTypes.Shown,
+                Enumerations.MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.First, true,
+                new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded });
 
             DamageInfo = new DamageData(4, Enumerations.Elements.Normal, true, Enumerations.ContactTypes.None, null,
                 Enumerations.DamageEffects.None);

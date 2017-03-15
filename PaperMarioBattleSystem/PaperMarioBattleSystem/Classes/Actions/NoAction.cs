@@ -16,8 +16,9 @@ namespace PaperMarioBattleSystem
         public NoAction()
         {
             Name = "Do Nothing";
-            MoveInfo = new MoveActionData(null, 0, "Do nothing this turn.", TargetSelectionMenu.EntitySelectionType.Single,
-                Enumerations.EntityTypes.Player, false, null);
+            MoveInfo = new MoveActionData(null, "Do nothing this turn.", Enumerations.MoveResourceTypes.FP, 0,
+                Enumerations.CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.Single,
+                false, null);
 
             SetMoveSequence(new NoSequence(this));
         }

@@ -31,8 +31,9 @@ namespace PaperMarioBattleSystem
         {
             Name = "Tornado Jump";
 
-            MoveInfo = new MoveActionData(null, 3, "Execute superbly to damage\nall midair enemies.",
-                TargetSelectionMenu.EntitySelectionType.Single, EntityTypes.Enemy,
+            MoveInfo = new MoveActionData(null, "Execute superbly to damage\nall midair enemies.", MoveResourceTypes.FP, 3,
+                CostDisplayTypes.Shown, MoveAffectionTypes.Enemy,
+                TargetSelectionMenu.EntitySelectionType.Single, false,
                 new HeightStates[] { HeightStates.Grounded, HeightStates.Airborne });
 
             //The second part's damage is Piercing, starts as 2, and cannot be increased with Power Plus, All Or Nothing, or P-Up, D-Down

@@ -331,89 +331,26 @@ namespace PaperMarioBattleSystem
     public struct MoveActionData
     {
         public Texture2D Icon;
-        public int FPCost;
-        public bool UsesCharge;
-        public string Description;
-        public TargetSelectionMenu.EntitySelectionType SelectionType;
-        public Enumerations.EntityTypes EntityType;
-        public bool TargetsEntity;
-        public Enumerations.HeightStates[] HeightsAffected;
-        public bool HideCost;
-        public bool AllOrNothingAffected;
-
-        public static MoveActionData Default => new MoveActionData(null, 0, "Error", TargetSelectionMenu.EntitySelectionType.Single,
-            Enumerations.EntityTypes.Enemy, true, null);
-
-        public MoveActionData(Texture2D icon, int fpCost, string description, TargetSelectionMenu.EntitySelectionType selectionType,
-            Enumerations.EntityTypes entityType, Enumerations.HeightStates[] heightsAffected)
-        {
-            Icon = icon;
-            FPCost = fpCost;
-            UsesCharge = false;
-            Description = description;
-            SelectionType = selectionType;
-            EntityType = entityType;
-            TargetsEntity = true;
-            HeightsAffected = heightsAffected;
-            HideCost = false;
-            AllOrNothingAffected = true;
-        }
-
-        public MoveActionData(Texture2D icon, int fpCost, bool usesCharge, string description, TargetSelectionMenu.EntitySelectionType selectionType,
-            Enumerations.EntityTypes entityType, Enumerations.HeightStates[] heightsAffected)
-        {
-            Icon = icon;
-            FPCost = fpCost;
-            UsesCharge = usesCharge;
-            Description = description;
-            SelectionType = selectionType;
-            EntityType = entityType;
-            TargetsEntity = true;
-            HeightsAffected = heightsAffected;
-            HideCost = false;
-            AllOrNothingAffected = true;
-        }
-
-        public MoveActionData(Texture2D icon, int fpCost, string description, TargetSelectionMenu.EntitySelectionType selectionType,
-            Enumerations.EntityTypes entityType, bool targetsEntity, Enumerations.HeightStates[] heightsAffected) : this(icon, fpCost,
-                description, selectionType, entityType, heightsAffected)
-        {
-            TargetsEntity = targetsEntity;
-        }
-
-        public MoveActionData(Texture2D icon, int fpCost, string description, bool allOrNothingAffected,
-            TargetSelectionMenu.EntitySelectionType selectionType, Enumerations.EntityTypes entityType, Enumerations.HeightStates[] heightsAffected)
-            : this(icon, fpCost, description, selectionType, entityType, heightsAffected)
-        {
-            AllOrNothingAffected = allOrNothingAffected;
-        }
-    }
-
-    public struct MoveActionDataNew : INameable
-    {
-        public Texture2D Icon;
-        public string Name { get; set; }
         public string Description;
         public Enumerations.MoveResourceTypes ResourceType;
         public int ResourceCost;
         public Enumerations.CostDisplayTypes CostDisplayType;
         public Enumerations.MoveAffectionTypes MoveAffectionType;
-        public Enumerations.EntityTypes EntityType;
-        public Enumerations.HeightStates[] HeightsAffected;
+        public TargetSelectionMenu.EntitySelectionType SelectionType;
         public bool UsesCharge;
+        public Enumerations.HeightStates[] HeightsAffected;
 
-        public MoveActionDataNew(Texture2D icon, string name, string description, Enumerations.MoveResourceTypes resourceType,
+        public MoveActionData(Texture2D icon, string description, Enumerations.MoveResourceTypes resourceType,
             int resourceCost, Enumerations.CostDisplayTypes costDisplayType, Enumerations.MoveAffectionTypes moveAffectionType,
-            Enumerations.EntityTypes entityType, Enumerations.HeightStates[] heightsAffected, bool usesCharge)
+            TargetSelectionMenu.EntitySelectionType selectionType, bool usesCharge, Enumerations.HeightStates[] heightsAffected)
         {
             Icon = icon;
-            Name = name;
             Description = description;
             ResourceType = resourceType;
             ResourceCost = resourceCost;
             CostDisplayType = costDisplayType;
             MoveAffectionType = moveAffectionType;
-            EntityType = entityType;
+            SelectionType = selectionType;
             HeightsAffected = heightsAffected;
             UsesCharge = usesCharge;
         }

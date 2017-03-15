@@ -17,8 +17,9 @@ namespace PaperMarioBattleSystem
         {
             Name = "Shell Toss";
 
-            MoveInfo = new MoveActionData(null, 0, true, "Shoot yourself at an enemy.", TargetSelectionMenu.EntitySelectionType.First,
-                EntityTypes.Enemy, new HeightStates[] { HeightStates.Grounded });
+            MoveInfo = new MoveActionData(null, "Shoot yourself at an enemy.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
+                MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.First, true,
+                new HeightStates[] { HeightStates.Grounded });
 
             DamageInfo = new DamageData(1, Elements.Normal, false, ContactTypes.None, null, DamageEffects.RemovesPart);
 

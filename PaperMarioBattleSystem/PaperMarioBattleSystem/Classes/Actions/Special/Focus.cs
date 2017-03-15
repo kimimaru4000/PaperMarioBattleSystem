@@ -17,7 +17,9 @@ namespace PaperMarioBattleSystem
         {
             Name = "Focus";
 
-            MoveInfo = new MoveActionData(null, 0, "Charge Star Energy.", TargetSelectionMenu.EntitySelectionType.First, Enumerations.EntityTypes.Player, false, null);
+            MoveInfo = new MoveActionData(null, "Charge Star Energy.", Enumerations.MoveResourceTypes.SP, 0,
+                Enumerations.CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.First,
+                false, null);
             SetMoveSequence(new FocusSequence(this));
         }
     }

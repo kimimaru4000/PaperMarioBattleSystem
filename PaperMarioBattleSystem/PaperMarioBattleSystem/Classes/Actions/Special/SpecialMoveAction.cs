@@ -110,7 +110,7 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Name, position, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
 
             //Show SP count if the Special Move costs SP
-            if (CostsSP == true && MoveProperties.HideCost == false)
+            if (CostsSP == true && MoveProperties.CostDisplayType != Enumerations.CostDisplayTypes.Hidden)
             {
                 Color spColor = color;
 

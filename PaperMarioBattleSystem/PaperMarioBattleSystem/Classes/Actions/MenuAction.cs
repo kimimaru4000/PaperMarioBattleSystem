@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -22,8 +23,8 @@ namespace PaperMarioBattleSystem
         public MenuAction(string name, Texture2D icon, string description, ActionSubMenu subMenu)
         {
             Name = name;
-            MoveInfo = new MoveActionData(icon, 0, description, TargetSelectionMenu.EntitySelectionType.Single,
-                Enumerations.EntityTypes.Player, false, null);
+            MoveInfo = new MoveActionData(icon, description, MoveResourceTypes.FP, 0, CostDisplayTypes.Shown, MoveAffectionTypes.None,
+                TargetSelectionMenu.EntitySelectionType.Single, false, null);
 
             SubMenu = subMenu;
         }
@@ -38,7 +39,7 @@ namespace PaperMarioBattleSystem
         /// <param name="subMenu"></param>
         public MenuAction(string name, Texture2D icon, string description, int fpCost, ActionSubMenu subMenu) : this(name, icon, description, subMenu)
         {
-            MoveInfo.FPCost = fpCost;
+            MoveInfo.ResourceCost = fpCost;
         }
 
         public override void SetMoveCategory(Enumerations.MoveCategories moveCategory)
@@ -59,7 +60,7 @@ namespace PaperMarioBattleSystem
             }
             else
             {
-                Debug.LogError($"{nameof(SubMenu)} is null for {Name} so no actions further can be taken in this menu option. Fix this");
+                Debug.LogError($"{nameof(SubMenu)} is null for {Name} so no further actions can be taken in this menu option. Fix this");
             }
         }
     }

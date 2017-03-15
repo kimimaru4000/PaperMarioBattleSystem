@@ -22,8 +22,9 @@ namespace PaperMarioBattleSystem
 
             Name = NewPartner.Name;
 
-            MoveInfo = new MoveActionData(null, 0, NewPartner.PartnerDescription, TargetSelectionMenu.EntitySelectionType.Single,
-                Enumerations.EntityTypes.Player, false, null);
+            MoveInfo = new MoveActionData(null, NewPartner.PartnerDescription, Enumerations.MoveResourceTypes.FP, 0,
+                Enumerations.CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.Single,
+                false, null);
 
             SetMoveSequence(new ChangePartnerSequence(this, NewPartner));
         }

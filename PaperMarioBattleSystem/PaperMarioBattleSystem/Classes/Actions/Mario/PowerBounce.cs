@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Power Bounce";
             MoveInfo.Description = "Bounce multiple times on an enemy";
-            MoveInfo.FPCost = 3;
+            MoveInfo.ResourceCost = 3;
             
             SetMoveSequence(new PowerBounceSequence(this));
         }

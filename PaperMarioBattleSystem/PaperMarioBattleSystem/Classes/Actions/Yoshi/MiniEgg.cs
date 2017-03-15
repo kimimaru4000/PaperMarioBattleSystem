@@ -14,8 +14,9 @@ namespace PaperMarioBattleSystem
         public MiniEgg()
         {
             Name = "Mini-Egg";
-            MoveInfo = new MoveActionData(null, 3, false, "Throws Yoshi eggs at all enemies and shrinks them.",
-                TargetSelectionMenu.EntitySelectionType.All, Enumerations.EntityTypes.Enemy, null);
+            MoveInfo = new MoveActionData(null, "Throws Yoshi eggs at all enemies and shrinks them.", Enumerations.MoveResourceTypes.FP,
+                3, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.All,
+                false, null);
             DamageInfo = new DamageData(1, Enumerations.Elements.Normal, false, Enumerations.ContactTypes.None,
                 new StatusEffect[] { new TinyStatus(3) }, Enumerations.DamageEffects.None);
 

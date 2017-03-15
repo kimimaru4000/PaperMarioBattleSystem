@@ -10,10 +10,14 @@ A list of what we need in battle for each move:
 -Resource (FP, SP), Cost (Ex. 3 FP, 1 SP), and CostDisplayType (Shown, Hidden, Special)
   -Hidden would be used for all the items after choosing Double or Triple Dip. Special is used to indicate reduced FP costs and such.
 -Icon
--EntityType selected (Player, Enemy)
--Selection type (None, Self, Ally, Front, Single, All)
-  -None, Self, and Ally will be new. None skips selection and directly performs the move, Self only allows targeting user of the move,
-   and Ally allows targeting all entities of the EntityType except the user of the move.
+-Selection type (Front, Single, All)
+-Move affection type (None, Self, Ally, Enemy)
+  -This would help cover any case we need:
+    -None would simply perform the action, bypassing target selection. Used for moves like Focus
+	-Self would target only the user of the move
+	-Ally would target the allies of the user, including the user. This adapts to the type of entity using it
+	-Enemy would target all enemies of the user. This adapts to the type of entity using it
+  -This prevents always having to override OnMenuSelected() for None or Self, and Ally and Enemy's adaptability makes things clearer 
 -HeightStates affected
 -Uses Charge
   -This is in here so any move can potentially utilize the Charge instead of just damaging moves

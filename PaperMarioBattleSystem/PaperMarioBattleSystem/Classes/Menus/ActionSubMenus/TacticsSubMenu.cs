@@ -16,13 +16,18 @@ namespace PaperMarioBattleSystem
         {
             Position = new Vector2(230, 150);
 
-            BattleActions.Add(new MenuAction("Change Partner", null, "Change your current partner.", new ChangePartnerSubMenu()));
+            BattleEntity entity = BattleManager.Instance.EntityTurn;
+
+            //int quickChangeCount = entity.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.QuickChange);
+            //Enumerations.CostDisplayTypes costDisplayType = Enumerations.CostDisplayTypes.Shown;
+            //if (quickChangeCount > 0) costDisplayType = Enumerations.CostDisplayTypes.Special;
+
+            BattleActions.Add(new MenuAction("Change Partner", null, "Change your current partner.", //costDisplayType, 
+                new ChangePartnerSubMenu()));
 
             #region Charge Menu
 
             BadgeGlobals.BadgeTypes chargeBadgeType = BadgeGlobals.BadgeTypes.Charge;
-
-            BattleEntity entity = BattleManager.Instance.EntityTurn;
 
             //Check for a Player; if the Player is a Partner, check the number of Charge P's instead
             if (entity.EntityType == Enumerations.EntityTypes.Player)
@@ -41,8 +46,9 @@ namespace PaperMarioBattleSystem
                 //Charge starts out at 2 then increases by 1 for each additional Badge
                 int chargeAmount = 2 + (chargeCount - 1);
 
-                BattleActions.Add(new MoveAction("Charge", new MoveActionData(null, chargeCount, "Save up strength to power up your next attack",
-                    TargetSelectionMenu.EntitySelectionType.Single, entity.EntityType, false, null), new ChargeSequence(null, chargeAmount)));
+                BattleActions.Add(new MoveAction("Charge", new MoveActionData(null, "Save up strength to power up your next attack",
+                    Enumerations.MoveResourceTypes.FP, chargeCount, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None,
+                    TargetSelectionMenu.EntitySelectionType.Single, false, null), new ChargeSequence(null, chargeAmount)));
             }
 
             #endregion

@@ -9,6 +9,7 @@ of Immobilized that does the same thing.
 
 Watt
 ----
+Electro Dash - Doesn't deal contact damage (can hit Pokeys and spiked enemies)
 Power Shock - Inflict Paralyzed, which is a subset of Immobilized.
 Mega Shock - Inflicts Paralyzed, which is a subset of Immobilized.
 
@@ -70,6 +71,11 @@ Kiss Thief - Can steal any held collectible, including ones stolen from Bandits.
 Steal Message: "You stole\n a (thing)!";
 
 Examples: "You stole\n a Power Plus!", "You stole\n a Tasty Tonic!"
+
+Bow
+---
+Smack - Deals contact damage (can't hit Pokeys)
+Fan Smack - Doesn't deal contact damage (can hit Pokeys)
 
 General
 -------

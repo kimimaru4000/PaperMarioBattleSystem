@@ -7,9 +7,23 @@ Pokey Parts
 Which moves remove a Pokey part, and which other enemies have properties that act similar?
 Stilt Guys might be worth looking into.
 
-Results: Shy Stacks act very similar and can have Shy Guys knocked off using Spin Smash or Kooper's Shell moves.
-Super and Ultra Hammer also may remove these parts (TEST TO CONFIRM).
-
+Results: 
+-Shy Stacks act very similar and can have Shy Guys knocked off using Spin Smash or Kooper's Shell moves
+-Super and Ultra Hammer also removes these parts
+  -Knocking another enemy with one of these moves Pokey also removes a part. The same occurs with Spin Smash and Shy Stacks
+-Kooper:
+  -Shell Toss removes these parts
+  -Power Shell removes these parts
+  -Dizzy Shell doesn't remove any parts
+  -Fire Shell removes these parts
+-Koops:
+  -Shell Toss removes these parts
+  -Power Shell removes these parts
+  -Shell Slam does NOT remove these parts
+-If a Spike Top is Confused and attacks a Pokey, it WON'T remove a part
+-Parakarry's Shell Shot doesn't remove a part
+-A failed Spin Smash doesn't remove a part. A failed Super and Ultra Hammer also doesn't remove a part
+  
 Payback and Invincibility
 --------------------------
 How does Payback work with true invincibility? The Shadow Queen doesn't have any contact moves, so test on Bowser in PM.

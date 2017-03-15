@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
                 Goomba goomba = new Goomba();
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 5, Enumerations.Elements.Normal, false,
-                    Enumerations.ContactTypes.Direct, null);
+                    Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
                 InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
                 InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
@@ -36,7 +36,7 @@ namespace PaperMarioBattleSystem
                 SpikedGoomba spikedGoomba = new SpikedGoomba();
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, spikedGoomba, 5, Enumerations.Elements.Normal, false,
-                    Enumerations.ContactTypes.Direct, null);
+                    Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
                 InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
                 InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
                 spikedGoomba.EntityProperties.AfflictStatus(new ElectrifiedStatus(5));
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, spikedGoomba, 5, Enumerations.Elements.Normal, false,
-                    Enumerations.ContactTypes.Direct, null);
+                    Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
                 InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
                 InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
@@ -73,7 +73,7 @@ namespace PaperMarioBattleSystem
                 goomba.EntityProperties.AfflictStatus(new ElectrifiedStatus(5));
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 5, Enumerations.Elements.Normal, false,
-                    Enumerations.ContactTypes.Direct, null);
+                    Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
                 InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
                 InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
@@ -92,7 +92,7 @@ namespace PaperMarioBattleSystem
                 goomba.EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Half, Enumerations.Elements.Poison, new PoisonStatus(5)));
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 10, Enumerations.Elements.Normal, false,
-                    Enumerations.ContactTypes.Direct, null);
+                    Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
                 InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
                 InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
@@ -123,7 +123,7 @@ namespace PaperMarioBattleSystem
                 mario.Update();
 
                 InteractionParamHolder param = new InteractionParamHolder(goomba, mario, 10, Enumerations.Elements.Normal, false,
-                    Enumerations.ContactTypes.Direct, null);
+                    Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
                 InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
                 InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
@@ -151,7 +151,7 @@ namespace PaperMarioBattleSystem
                 badge?.Equip(mario);
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 3, Enumerations.Elements.Normal, false,
-                    Enumerations.ContactTypes.Direct, null);
+                    Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
                 InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
                 InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
@@ -176,7 +176,7 @@ namespace PaperMarioBattleSystem
                 goomba.OnBattleStart();
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 4, Enumerations.Elements.Water, false,
-                    Enumerations.ContactTypes.Direct, null);
+                    Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
                 InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
                 InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
@@ -202,7 +202,7 @@ namespace PaperMarioBattleSystem
                 badge?.Equip(mario);
 
                 InteractionParamHolder param = new InteractionParamHolder(goomba, mario, 80, Enumerations.Elements.Water, false,
-                    Enumerations.ContactTypes.Direct, null);
+                    Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
                 InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
                 InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
@@ -226,7 +226,7 @@ namespace PaperMarioBattleSystem
                 goomba.EntityProperties.AfflictStatus(new ElectrifiedStatus(5));
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 90, Enumerations.Elements.Normal, false,
-                    Enumerations.ContactTypes.Direct, null);
+                    Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
 
                 InteractionResult oldInteraction = Interactions.GetDamageInteraction(param);
                 InteractionResult newInteraction = Interactions.GetDamageInteractionNew(param);
@@ -263,7 +263,8 @@ namespace PaperMarioBattleSystem
                           $"{startString} Element Result: {interactionHolder.ElementResult}\n" +
                           $"{startString} Piercing: {interactionHolder.Piercing}\n" +
                           $"{startString} Statuses: {statuses}\n" +
-                          $"{startString} Hit: {interactionHolder.Hit}");
+                          $"{startString} Hit: {interactionHolder.Hit}\n" +
+                          $"{startString} Damage Effect(s): {interactionHolder.DamageEffect}");
             }
         }
     }

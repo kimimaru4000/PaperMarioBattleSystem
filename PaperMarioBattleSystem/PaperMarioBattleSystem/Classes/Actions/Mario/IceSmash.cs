@@ -20,11 +20,8 @@ namespace PaperMarioBattleSystem
                            "3 FP are required to use this attack, which can freeze and immobilize an enemy if executed superbly. " +
                            "Wearing two or more of these badges requires more FP for the move, but enemies stay frozen longer.";
 
-            //NOTE: May want to rethink this to make it easier to make a few changes, but for now it works
-            InteractionParamHolder damageInfo = (InteractionParamHolder)DamageInfo;
-            damageInfo.DamagingElement = Enumerations.Elements.Ice;
-            damageInfo.Statuses = new StatusEffect[] { new FrozenStatus(3) };
-            DamageInfo = damageInfo;
+            DamageInfo.DamagingElement = Enumerations.Elements.Ice;
+            DamageInfo.Statuses = new StatusEffect[] { new FrozenStatus(3) };
 
             SetMoveSequence(new IceSmashSequence(this));
             actionCommand = new HammerCommand(MoveSequence, 4, 1000d);

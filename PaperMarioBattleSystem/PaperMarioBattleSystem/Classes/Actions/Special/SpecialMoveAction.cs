@@ -53,13 +53,13 @@ namespace PaperMarioBattleSystem
             SPCost = spCost;
         }
 
-        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, InteractionParamHolder damageInfo, StarPowerTypes spType, float spCost) : base(name, moveProperties, moveSequence, damageInfo)
+        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, DamageData damageInfo, StarPowerTypes spType, float spCost) : base(name, moveProperties, moveSequence, damageInfo)
         {
             SPType = spType;
             SPCost = spCost;
         }
 
-        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actionCommand, InteractionParamHolder damageInfo, StarPowerTypes spType, float spCost) : base(name, moveProperties, moveSequence, actionCommand, damageInfo)
+        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actionCommand, DamageData damageInfo, StarPowerTypes spType, float spCost) : base(name, moveProperties, moveSequence, actionCommand, damageInfo)
         {
             SPType = spType;
             SPCost = spCost;

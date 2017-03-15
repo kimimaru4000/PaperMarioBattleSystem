@@ -16,8 +16,8 @@ namespace PaperMarioBattleSystem
             Name = "Mini-Egg";
             MoveInfo = new MoveActionData(null, 3, false, "Throws Yoshi eggs at all enemies and shrinks them.",
                 TargetSelectionMenu.EntitySelectionType.All, Enumerations.EntityTypes.Enemy, null);
-            DamageInfo = new InteractionParamHolder(null, null, 1, Enumerations.Elements.Normal, false, Enumerations.ContactTypes.None,
-                new StatusEffect[] { new TinyStatus(3) });
+            DamageInfo = new DamageData(1, Enumerations.Elements.Normal, false, Enumerations.ContactTypes.None,
+                new StatusEffect[] { new TinyStatus(3) }, Enumerations.DamageEffects.None);
 
             SetMoveSequence(new MiniEggSequence(this));
             actionCommand = new TimedLightCommand(MoveSequence, 4000d, 3, 500d, 1d, TimedLightCommand.LightDistributions.LastLightAtEnd);

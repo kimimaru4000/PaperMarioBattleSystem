@@ -237,7 +237,7 @@ namespace PaperMarioBattleSystem
             unscaledVictimDamage -= victim.BattleStats.DamageReduction;
 
             //Check if the attack hit. If not, then don't consider defensive actions
-            bool attackHit = attacker.AttemptHitEntity(victim);
+            bool attackHit = interactionParam.CantMiss == true ? true : attacker.AttemptHitEntity(victim);
 
             //Defense added from Damage Dodge Badges upon a successful Guard
             int damageDodgeDefense = 0;
@@ -308,7 +308,7 @@ namespace PaperMarioBattleSystem
                 }
 
                 finalInteractionResult.VictimResult = new InteractionHolder(victim, scaledVictimDamage, element, 
-                    victimElementDamage.InteractionResult, contactType, piercing, victimInflictedStatuses, attackHit);
+                    victimElementDamage.InteractionResult, contactType, piercing, victimInflictedStatuses, attackHit, DamageEffects.None);
             }
 
             #endregion
@@ -357,7 +357,7 @@ namespace PaperMarioBattleSystem
                 }
 
                 finalInteractionResult.AttackerResult = new InteractionHolder(attacker, attackerElementDamage.Damage, paybackHolder.Element,
-                    attackerElementDamage.InteractionResult, ContactTypes.None, true, attackerInflictedStatuses, true);
+                    attackerElementDamage.InteractionResult, ContactTypes.None, true, attackerInflictedStatuses, true, DamageEffects.None);
             }
 
             #endregion
@@ -566,7 +566,9 @@ namespace PaperMarioBattleSystem
         {
             protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
             {
-                StepResult.VictimResult.Hit = StepResult.AttackerResult.Entity.AttemptHitEntity(StepResult.VictimResult.Entity);
+                //If the move cannot miss, hit is set to true
+                if (damageInfo.CantMiss == true) StepResult.VictimResult.Hit = true;
+                else StepResult.VictimResult.Hit = StepResult.AttackerResult.Entity.AttemptHitEntity(StepResult.VictimResult.Entity);
             }
         }
 

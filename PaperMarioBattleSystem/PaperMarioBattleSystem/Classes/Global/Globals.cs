@@ -262,15 +262,18 @@ namespace PaperMarioBattleSystem
     {
         public BattleEntity Attacker;
         public BattleEntity Victim;
-        //public DamageData damageData;
         public int Damage;
         public Enumerations.Elements DamagingElement;
         public bool Piercing;
         public Enumerations.ContactTypes ContactType;
         public StatusEffect[] Statuses;
+        public Enumerations.DamageEffects DamageEffect;
+        public bool CantMiss;
+        public Enumerations.DefensiveMoveOverrides DefensiveOverride;
 
         public InteractionParamHolder(BattleEntity attacker, BattleEntity victim, int damage, Enumerations.Elements element,
-            bool piercing, Enumerations.ContactTypes contactType, StatusEffect[] statuses)
+            bool piercing, Enumerations.ContactTypes contactType, StatusEffect[] statuses, Enumerations.DamageEffects damageEffect,
+            bool cantMiss, Enumerations.DefensiveMoveOverrides defensiveOverride)
         {
             Attacker = attacker;
             Victim = victim;
@@ -279,23 +282,27 @@ namespace PaperMarioBattleSystem
             Piercing = piercing;
             ContactType = contactType;
             Statuses = statuses;
+            DamageEffect = damageEffect;
+            CantMiss = cantMiss;
+            DefensiveOverride = defensiveOverride;
         }
     }
 
     /// <summary>
-    /// Holds immutable data for the result of a damage interaction.
+    /// Holds data for the result of a damage interaction.
     /// It includes the BattleEntity that got damaged, the amount and type of damage dealt, the Status Effects inflicted, and more.
     /// </summary>
     public struct InteractionHolder
     {
-        public BattleEntity Entity;// { get; private set; }
-        public int TotalDamage;// { get; private set; }
-        public Enumerations.Elements DamageElement;// { get; private set; }
-        public ElementInteractionResult ElementResult;// { get; private set; }
-        public Enumerations.ContactTypes ContactType;// { get; private set; }
-        public bool Piercing;// { get; private set; }
-        public StatusEffect[] StatusesInflicted;// { get; private set; }
-        public bool Hit;// { get; private set; }
+        public BattleEntity Entity;
+        public int TotalDamage;
+        public Enumerations.Elements DamageElement;
+        public ElementInteractionResult ElementResult;
+        public Enumerations.ContactTypes ContactType;
+        public bool Piercing;
+        public StatusEffect[] StatusesInflicted;
+        public bool Hit;
+        public Enumerations.DamageEffects DamageEffect;
 
         /// <summary>
         /// Tells if the InteractionHolder has a usable value
@@ -304,7 +311,7 @@ namespace PaperMarioBattleSystem
         public static InteractionHolder Default => new InteractionHolder();
 
         public InteractionHolder(BattleEntity entity, int totalDamage, Enumerations.Elements damageElement, ElementInteractionResult elementResult,
-            Enumerations.ContactTypes contactType, bool piercing, StatusEffect[] statusesInflicted, bool hit)
+            Enumerations.ContactTypes contactType, bool piercing, StatusEffect[] statusesInflicted, bool hit, Enumerations.DamageEffects damageEffect)
         {
             Entity = entity;
             TotalDamage = totalDamage;
@@ -314,6 +321,7 @@ namespace PaperMarioBattleSystem
             Piercing = piercing;
             StatusesInflicted = statusesInflicted;
             Hit = hit;
+            DamageEffect = damageEffect;
         }
     }
 
@@ -469,6 +477,13 @@ namespace PaperMarioBattleSystem
             AllOrNothingAffected = allOrNothingAffected;
             DefensiveOverride = defensiveOverride;
             DamageEffect = damageEffect;
+        }
+
+        public DamageData(int damage, Enumerations.Elements damagingElement, bool piercing, Enumerations.ContactTypes contactType,
+            StatusEffect[] statuses, Enumerations.DamageEffects damageEffect) : this(damage, damagingElement, piercing, contactType,
+                statuses, false, true, Enumerations.DefensiveMoveOverrides.None, damageEffect)
+        {
+
         }
     }
 

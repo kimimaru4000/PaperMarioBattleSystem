@@ -46,7 +46,7 @@ namespace PaperMarioBattleSystem
 
         protected bool CommandEnabled => Action.CommandEnabled;
 
-        protected int BaseDamage => Action.DealsDamage ? Action.DamageInfo.Value.Damage : 0;
+        protected int BaseDamage => Action.DealsDamage ? Action.DamageProperties.Damage : 0;
 
         /// <summary>
         /// The BattleEntities the move associated with the Sequence can affect.
@@ -520,7 +520,7 @@ namespace PaperMarioBattleSystem
         /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
         /// If false, the total damage will be calculated</param>
         /// <returns>An int array containing the damage dealt to each BattleEntity targeted, in order</returns>
-        protected int[] AttemptDamage(int damage, BattleEntity[] entities, InteractionParamHolder damageInfo, bool isTotalDamage)
+        protected int[] AttemptDamage(int damage, BattleEntity[] entities, DamageData damageInfo, bool isTotalDamage)
         {
             if (entities == null || entities.Length == 0)
             {
@@ -531,7 +531,7 @@ namespace PaperMarioBattleSystem
             //Ensure the MoveAction associated with this sequence supports damage
             if (Action.DealsDamage == false)
             {
-                Debug.LogError($"Attempting to deal damage when {Action.Name} does not support it, as {nameof(Action.DamageInfo)} is null");
+                Debug.LogError($"Attempting to deal damage when {Action.Name} does not support it, as {nameof(Action.DamageProperties)} is null");
                 return new int[0];
             }
 
@@ -539,7 +539,7 @@ namespace PaperMarioBattleSystem
 
             //Check for the All or Nothing Badge if the move is affected by it
             //We check for it here since the CommandResult is fully determined by this point
-            if (Action.MoveProperties.AllOrNothingAffected == true)
+            if (damageInfo.AllOrNothingAffected == true)
             {
                 //If it's equipped, add the number to the damage if the Action Command succeeded, otherwise set the damage to the minimum value
                 int allOrNothingCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.AllOrNothing);
@@ -564,7 +564,9 @@ namespace PaperMarioBattleSystem
             {
                 BattleEntity victim = entities[i];
 
-                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage, damageInfo.DamagingElement, damageInfo.Piercing, damageInfo.ContactType, damageInfo.Statuses));
+                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage,
+                    damageInfo.DamagingElement, damageInfo.Piercing, damageInfo.ContactType, damageInfo.Statuses, damageInfo.DamageEffect,
+                    damageInfo.CantMiss, damageInfo.DefensiveOverride));
 
                 //Set the total damage dealt to the victim
                 damageValues[i] = finalResult.VictimResult.TotalDamage;
@@ -605,7 +607,7 @@ namespace PaperMarioBattleSystem
         /// <param name="damageInfo">The damage information to use.</param>
         /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
         /// If false, the total damage will be calculated</param>
-        protected int[] AttemptDamage(int damage, BattleEntity entity, InteractionParamHolder damageInfo, bool isTotalDamage)
+        protected int[] AttemptDamage(int damage, BattleEntity entity, DamageData damageInfo, bool isTotalDamage)
         {
             return AttemptDamage(damage, new BattleEntity[] { entity }, damageInfo, isTotalDamage);
         }

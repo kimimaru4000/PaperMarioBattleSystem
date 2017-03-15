@@ -19,7 +19,8 @@ namespace PaperMarioBattleSystem
             MoveInfo = new MoveActionData(null, 6, true, "A surge of water hits all enemies", TargetSelectionMenu.EntitySelectionType.All,
                 Enumerations.EntityTypes.Enemy, new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded, Enumerations.HeightStates.Airborne, Enumerations.HeightStates.Ceiling });
 
-            DamageInfo = new InteractionParamHolder(null, null, 0, Enumerations.Elements.Water, false, Enumerations.ContactTypes.None, null);
+            DamageInfo = new DamageData(0, Enumerations.Elements.Water, false, Enumerations.ContactTypes.None, null, 
+                Enumerations.DamageEffects.None);
 
             SetMoveSequence(new TidalWaveSequence(this));
             actionCommand = new TidalWaveCommand(MoveSequence);

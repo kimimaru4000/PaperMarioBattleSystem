@@ -61,7 +61,7 @@ namespace PaperMarioBattleSystem
                 case 0:
         
                     //Check the damage dealt
-                    int[] damageValues = AttemptDamage(DamageDealt, EntitiesAffected, Action.DamageInfo.Value, true);
+                    int[] damageValues = AttemptDamage(DamageDealt, EntitiesAffected, Action.DamageProperties, true);
         
                     //If the total damage dealt was 1, stop decreasing the damage to keep it doing 1
                     if (StopDecreasing == false && damageValues[0] == 1)
@@ -94,7 +94,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    AttemptDamage(DamageDealt, CurTarget, Action.DamageInfo.Value, true);
+                    AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, true);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

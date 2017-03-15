@@ -17,14 +17,11 @@ namespace PaperMarioBattleSystem
             Name = "Bonk";
             MoveInfo.Description = "Headbonk an enemy.";
 
-            InteractionParamHolder damageInfo = (InteractionParamHolder)DamageInfo;
-            damageInfo.Damage = 1;
+            DamageInfo.Damage = 1;
 
             //If a partner (Goombario or Goombella) is using this move, the base damage is the Partner rank
             PartnerStats partnerStats = User.BattleStats as PartnerStats;
-            if (partnerStats != null) damageInfo.Damage = (int)partnerStats.PartnerRank;
-
-            DamageInfo = damageInfo;
+            if (partnerStats != null) DamageInfo.Damage = (int)partnerStats.PartnerRank;
         }
     }
 }

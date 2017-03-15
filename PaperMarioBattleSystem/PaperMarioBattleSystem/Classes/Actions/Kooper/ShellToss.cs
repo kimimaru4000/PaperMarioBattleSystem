@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
             MoveInfo = new MoveActionData(null, 0, true, "Shoot yourself at an enemy.", TargetSelectionMenu.EntitySelectionType.First,
                 EntityTypes.Enemy, new HeightStates[] { HeightStates.Grounded });
 
-            DamageInfo = new InteractionParamHolder(null, null, 1, Elements.Normal, false, ContactTypes.None, null);
+            DamageInfo = new DamageData(1, Elements.Normal, false, ContactTypes.None, null, DamageEffects.RemovesPart);
 
             SetMoveSequence(new ShellTossSequence(this));
             actionCommand = new HammerCommand(MoveSequence, 4, 500d);

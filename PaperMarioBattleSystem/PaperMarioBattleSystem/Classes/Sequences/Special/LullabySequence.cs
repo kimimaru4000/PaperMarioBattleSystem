@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     //Lullaby deals 0 damage; we need to try to deal damage to inflict Sleep
-                    AttemptDamage(0, EntitiesAffected, Action.DamageInfo.Value, true);
+                    AttemptDamage(0, EntitiesAffected, Action.DamageProperties, true);
 
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;

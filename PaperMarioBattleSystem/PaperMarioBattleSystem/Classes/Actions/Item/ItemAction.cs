@@ -53,7 +53,8 @@ namespace PaperMarioBattleSystem
                 Enumerations.Elements element = damageItem != null ? damageItem.Element : Enumerations.Elements.Normal;
                 StatusEffect[] statuses = statusInflicting != null ? statusInflicting.StatusesInflicted : null;
 
-                DamageInfo = new InteractionParamHolder(null, null, damage, element, true, Enumerations.ContactTypes.None, statuses);
+                //NOTE: Will need a way to specify DamageEffects for items
+                DamageInfo = new DamageData(damage, element, true, ContactTypes.None, statuses, DamageEffects.None);
             }
 
             //Set the healing data

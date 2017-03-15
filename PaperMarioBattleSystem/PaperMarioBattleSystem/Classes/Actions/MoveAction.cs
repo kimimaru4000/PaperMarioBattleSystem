@@ -33,7 +33,9 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The damage information of this MoveAction.
         /// </summary>
-        public InteractionParamHolder? DamageInfo { get; protected set; } = null;
+        protected DamageData DamageInfo;
+
+        public DamageData DamageProperties => DamageInfo;
 
         /// <summary>
         /// The healing information of this MoveAction.
@@ -70,7 +72,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Tells if the MoveAction deals damage.
         /// </summary>
-        public bool DealsDamage => (DamageInfo != null);
+        public bool DealsDamage => (DamageInfo.DamagingElement != Elements.Invalid);
 
         /// <summary>
         /// Tells if the MoveAction costs FP or not.
@@ -145,12 +147,12 @@ namespace PaperMarioBattleSystem
             actionCommand.SetHandler(MoveSequence);
         }
 
-        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, InteractionParamHolder damageInfo) : this(name, moveProperties, moveSequence)
+        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, DamageData damageInfo) : this(name, moveProperties, moveSequence)
         {
             DamageInfo = damageInfo;
         }
 
-        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actioncommand, InteractionParamHolder damageInfo) : this(name, moveProperties, moveSequence, actioncommand)
+        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actioncommand, DamageData damageInfo) : this(name, moveProperties, moveSequence, actioncommand)
         {
             DamageInfo = damageInfo;
         }

@@ -21,7 +21,8 @@ namespace PaperMarioBattleSystem
             MoveInfo = new MoveActionData(null, 4, true, string.Empty, TargetSelectionMenu.EntitySelectionType.First,
                 Enumerations.EntityTypes.Enemy, new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded });
 
-            DamageInfo = new InteractionParamHolder(null, null, 4, Enumerations.Elements.Normal, true, Enumerations.ContactTypes.None, null);
+            DamageInfo = new DamageData(4, Enumerations.Elements.Normal, true, Enumerations.ContactTypes.None, null,
+                Enumerations.DamageEffects.None);
 
             GulpSequence gulpSequence = new GulpSequence(this);
             SetMoveSequence(gulpSequence);

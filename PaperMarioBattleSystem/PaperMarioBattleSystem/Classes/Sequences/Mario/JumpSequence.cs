@@ -79,14 +79,14 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    AttemptDamage(DamageDealt, CurTarget, Action.DamageInfo.Value, false);
+                    AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration);
                     break;
                 case 1:
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration);
                     break;
                 case 2:
-                    AttemptDamage(DamageDealt, CurTarget, Action.DamageInfo.Value, false);
+                    AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -100,7 +100,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    AttemptDamage(DamageDealt, CurTarget, Action.DamageInfo.Value, false);
+                    AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

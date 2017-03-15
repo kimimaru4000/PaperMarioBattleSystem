@@ -102,7 +102,7 @@ namespace PaperMarioBattleSystem
                 case 1:
                     int aerialDamage = BaseDamage;
                     BattleEntity[] aerialTargets = EntitiesAffected;
-                    InteractionParamHolder aerialDamageInfo = Action.DamageInfo.Value;
+                    DamageData aerialDamageInfo = Action.DamageProperties;
 
                     //Make sure the action used for this sequence is Tornado Jump
                     //If not, default to base damage and base targets

@@ -20,9 +20,7 @@ namespace PaperMarioBattleSystem
                            "2 FP are required to use this attack, which can confuse enemies if executed superbly. " +
                            "Wearing two or more of these badges requires more FP for the move, but enemies stay confused longer.";
 
-            InteractionParamHolder damageInfo = (InteractionParamHolder)DamageInfo;
-            damageInfo.Statuses = new StatusEffect[] { new ConfusedStatus(2) };
-            DamageInfo = damageInfo;
+            DamageInfo.Statuses = new StatusEffect[] { new ConfusedStatus(2) };
 
             SetMoveSequence(new HammerSequence(this));
             actionCommand = new HammerCommand(MoveSequence, 4, 1000d);

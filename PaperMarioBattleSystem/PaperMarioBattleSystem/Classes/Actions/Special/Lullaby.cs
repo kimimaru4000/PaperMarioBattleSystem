@@ -19,8 +19,9 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(null, 0, "Lull enemies to sleep with\na tender lullaby.",
                 false, TargetSelectionMenu.EntitySelectionType.All, Enumerations.EntityTypes.Enemy, null);
-            DamageInfo = new InteractionParamHolder(null, null, 0, Enumerations.Elements.Star, true, Enumerations.ContactTypes.None,
-                new StatusEffect[] { new SleepStatus(3) });
+            DamageInfo = new DamageData(0, Enumerations.Elements.Star, true, Enumerations.ContactTypes.None,
+                new StatusEffect[] { new SleepStatus(3) }, Enumerations.DamageEffects.None);
+
             SetMoveSequence(new LullabySequence(this));
         }
     }

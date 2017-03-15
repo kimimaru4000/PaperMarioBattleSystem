@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
     {
         //NOTE: Keep it like this for now and cast to get this value for the second part
         //If more actions are like this, we'll need to create a system to handle actions with more parts that are completely different
-        public InteractionParamHolder AerialDamage { get; private set; }
+        public DamageData AerialDamage { get; private set; }
 
         public BattleEntity[] GetAerialTargets
         {
@@ -44,10 +44,11 @@ namespace PaperMarioBattleSystem
             MarioStats marioStats = User.BattleStats as MarioStats;
             if (marioStats != null) baseDamage = (int)marioStats.BootLevel;
 
-            DamageInfo = new InteractionParamHolder(null, null, baseDamage, Elements.Normal, false, ContactTypes.Direct, null);
+            DamageInfo = new DamageData(baseDamage, Elements.Normal, false, ContactTypes.Direct, null,
+                DamageEffects.FlipsShelled | DamageEffects.RemovesWings);
 
             //NOTE: The aerial damage hits anything flying even if it has a HeightState that's not Airborne; this includes Embers!
-            AerialDamage = new InteractionParamHolder(null, null, 2, Elements.Normal, true, ContactTypes.None, null);
+            AerialDamage = new DamageData(2, Elements.Normal, true, ContactTypes.None, null, DamageEffects.None);
 
             TornadoJumpSequence tornadoJumpSequence = new TornadoJumpSequence(this);
             SetMoveSequence(tornadoJumpSequence);

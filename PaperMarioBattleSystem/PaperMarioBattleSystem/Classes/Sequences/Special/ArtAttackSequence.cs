@@ -103,7 +103,7 @@ namespace PaperMarioBattleSystem
                 //At least 1 damage is dealt
                 if (boundingBox.Contains(entityPos) == true)
                 {
-                    AttemptDamage(BaseDamage + damageMod, entity, Action.DamageInfo.Value, true);
+                    AttemptDamage(BaseDamage + damageMod, entity, Action.DamageProperties, true);
                 }
             }
         }

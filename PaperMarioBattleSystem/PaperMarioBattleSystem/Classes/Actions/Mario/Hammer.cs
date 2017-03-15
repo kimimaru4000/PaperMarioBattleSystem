@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
             MarioStats marioStats = User.BattleStats as MarioStats;
             if (marioStats != null) baseDamage = (int)marioStats.HammerLevel;
 
-            DamageInfo = new InteractionParamHolder(null, null, baseDamage, Elements.Normal, false, ContactTypes.None, null);
+            DamageInfo = new DamageData(baseDamage, Elements.Normal, false, ContactTypes.None, null, DamageEffects.None);
 
             SetMoveSequence(new HammerSequence(this));
             actionCommand = new HammerCommand(MoveSequence, 4, 500d);

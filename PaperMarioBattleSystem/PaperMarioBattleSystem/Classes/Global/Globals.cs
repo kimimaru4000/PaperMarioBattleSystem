@@ -255,6 +255,28 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
+    /// Holds immutable data regarding a chance at inflicting a particular StatusEffect.
+    /// </summary>
+    public struct StatusChanceHolder
+    {
+        /// <summary>
+        /// The percentage of inflicting the StatusEffect.
+        /// </summary>
+        public double Percentage { get; private set; }
+
+        /// <summary>
+        /// The StatusEffect to inflict.
+        /// </summary>
+        public StatusEffect Status { get; private set; }
+
+        public StatusChanceHolder(double percentage, StatusEffect status)
+        {
+            Percentage = percentage;
+            Status = status;
+        }
+    }
+
+    /// <summary>
     /// Holds the required data for initiating a damage interaction.
     /// This is passed to methods that involve calculating damage interactions.
     /// </summary>
@@ -777,13 +799,15 @@ namespace PaperMarioBattleSystem
             None = 0,
             FlipsShelled = 1 << 0,
             RemovesWings = 1 << 1,
-            RemovesPart = 1 << 2
+            RemovesPart = 1 << 2,
+            SpinsOut = 1 << 3
         }
 
         // <summary>
         // The types of Items that can be stolen via moves.
         // This enum is a bit field, so handle it with bitwise operations.
         // </summary>
+        //[Flags]
         //public enum ItemStealingTypes
         //{
         //    None,

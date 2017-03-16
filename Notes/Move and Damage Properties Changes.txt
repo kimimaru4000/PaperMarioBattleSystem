@@ -52,8 +52,10 @@ so when these are implemented, it's only a matter of putting them in.
   -This will be used for Crystal Star Special Moves, which can hit Invisible entities
 -Overrides Defensive Actions (None, Guard, Superguard, All)
   -None indicates that the move can be Guarded or Superguarded. All means the move can't be Guarded or Superguarded.
--Damage Effects (Flips Shelled, Removes Wings, Removes Part) - can have multiple at a time
+-Damage Effects (Flips Shelled, Removes Wings, Removes Part, Spins Out) - can have multiple at a time
   -Flips Shelled flips any shelled enemies over when hit, provided they can be flipped
   -Removes Wings knocks any flying enemies to the ground and removes their ability to fly, provided they have wings or can be hit to the ground
     -The same is true with Stilt Guys, who act very similar to flying enemies
-  -Removes Part would be used for Kooper and Koops' shell moves and the Super/Ultra/Spin Hammer moves against Pokeys and Shy Stacks
+  -Removes Part would be used for Kooper and Koops' shell moves, Super/Ultra Hammer, and Spin Smash against Pokeys and Shy Stacks
+  -Spins Out would be used for Spin Smash and Super/Ultra Hammer against Kent C. Koopa, who drops coins when hit with Spin Smash. I don't know
+   of any other situations this would be used.

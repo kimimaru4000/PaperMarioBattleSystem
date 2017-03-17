@@ -579,11 +579,12 @@ namespace PaperMarioBattleSystem
         #region Status Effect Methods
 
         /// <summary>
-        /// Attempts to afflict the entity with a StatusEffect, based on its properties and status percentage for the StatusEffect
+        /// Attempts to afflict the entity with a StatusEffect based on its properties and status percentage for the StatusEffect.
         /// </summary>
-        /// <param name="status">The StatusEffect to afflict the entity with</param>
-        /// <returns>true if the StatusEffect was successfully afflicted, false otherwise</returns>
-        public bool TryAfflictStatus(StatusEffect status)
+        /// <param name="inflictionChance">The chance of inflicting the StatusEffect.</param>
+        /// <param name="status">The StatusEffect to afflict the entity with.</param>
+        /// <returns>true if the StatusEffect was successfully afflicted, false otherwise.</returns>
+        public bool TryAfflictStatus(double inflictionChance, StatusEffect status)
         {
             //Test for StatusEffect immunity - if the entity is immune to a particular alignment, don't allow the StatusEffect to be inflicted
             bool positiveStatusImmune = GetAdditionalProperty<bool>(AdditionalProperty.PositiveStatusImmune);
@@ -605,9 +606,8 @@ namespace PaperMarioBattleSystem
             }
 
             //Test the percentage
-            //NOTE: Factor in the the move/item's chance of inflicting the StatusEffect
-            int percentage = statusProperty.StatusPercentage;
-            return UtilityGlobals.TestRandomCondition(percentage);
+            double percentage = statusProperty.StatusPercentage;
+            return UtilityGlobals.TestRandomCondition(inflictionChance, percentage);
         }
 
         /// <summary>
@@ -809,7 +809,7 @@ namespace PaperMarioBattleSystem
             PaybackTypes totalType = PaybackTypes.Constant;
             Elements totalElement = Elements.Normal;
             int totalDamage = 0;
-            List<StatusEffect> totalStatuses = new List<StatusEffect>();
+            List<StatusChanceHolder> totalStatuses = new List<StatusChanceHolder>();
 
             //Go through all the Paybacks and add them up
             for (int i = 0; i < allPaybacks.Count; i++)

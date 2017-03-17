@@ -11,6 +11,6 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public interface IStatusInflictingItem
     {
-        StatusEffect[] StatusesInflicted { get; }
+        StatusChanceHolder[] StatusesInflicted { get; }
     }
 }

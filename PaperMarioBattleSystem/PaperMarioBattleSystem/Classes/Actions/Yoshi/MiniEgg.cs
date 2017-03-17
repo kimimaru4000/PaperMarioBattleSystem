@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
                 3, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.All,
                 false, null);
             DamageInfo = new DamageData(1, Enumerations.Elements.Normal, false, Enumerations.ContactTypes.None,
-                new StatusEffect[] { new TinyStatus(3) }, Enumerations.DamageEffects.None);
+                new StatusChanceHolder[] { new StatusChanceHolder(100d, new TinyStatus(3)) }, Enumerations.DamageEffects.None);
 
             SetMoveSequence(new MiniEggSequence(this));
             actionCommand = new TimedLightCommand(MoveSequence, 4000d, 3, 500d, 1d, TimedLightCommand.LightDistributions.LastLightAtEnd);

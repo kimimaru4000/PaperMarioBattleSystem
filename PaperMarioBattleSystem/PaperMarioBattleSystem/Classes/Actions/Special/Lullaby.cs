@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
                 TargetSelectionMenu.EntitySelectionType.All, false, null);
                 
             DamageInfo = new DamageData(0, Enumerations.Elements.Star, true, Enumerations.ContactTypes.None,
-                new StatusEffect[] { new SleepStatus(3) }, Enumerations.DamageEffects.None);
+                new StatusChanceHolder[] { new StatusChanceHolder(100d, new SleepStatus(3)) }, Enumerations.DamageEffects.None);
 
             SetMoveSequence(new LullabySequence(this));
         }

@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class VoltShroom : BattleItem, IStatusInflictingItem
     {
-        public StatusEffect[] StatusesInflicted { get; private set; }
+        public StatusChanceHolder[] StatusesInflicted { get; private set; }
         private const int ElectrifiedTurns = 5;
 
         public VoltShroom()
@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
 
             ItemType = ItemTypes.Damage;
 
-            StatusesInflicted = new StatusEffect[] { new ElectrifiedStatus(ElectrifiedTurns) };
+            StatusesInflicted = new StatusChanceHolder[] { new StatusChanceHolder(100d, new ElectrifiedStatus(ElectrifiedTurns)) };
 
             SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
             EntityType = Enumerations.EntityTypes.Player;

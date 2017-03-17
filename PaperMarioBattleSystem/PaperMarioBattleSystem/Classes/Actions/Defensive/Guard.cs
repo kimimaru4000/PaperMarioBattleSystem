@@ -24,10 +24,10 @@ namespace PaperMarioBattleSystem
             AllowedStatuses = null;
         }
 
-        public override BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusEffect[] statusEffects)
+        public override BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusChanceHolder[] statusEffects)
         {
             int newDamage = damage - 1;
-            StatusEffect[] newStatuses = FilterStatuses(statusEffects);
+            StatusChanceHolder[] newStatuses = FilterStatuses(statusEffects);
 
             BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn },

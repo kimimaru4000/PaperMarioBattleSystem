@@ -89,7 +89,7 @@ namespace PaperMarioBattleSystem
                 BattleMario mario = new BattleMario(new MarioStats(1, 50, 50, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
                 Goomba goomba = new Goomba();
                 goomba.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
-                goomba.EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Half, Enumerations.Elements.Poison, new PoisonStatus(5)));
+                goomba.EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Half, Enumerations.Elements.Poison, new StatusChanceHolder(100d, new PoisonStatus(5))));
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 10, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.Direct, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
@@ -109,7 +109,7 @@ namespace PaperMarioBattleSystem
                 Goomba goomba = new Goomba();
                 mario.EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Full, Enumerations.Elements.Star));
                 goomba.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
-                goomba.EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Half, Enumerations.Elements.Poison, new PoisonStatus(5)));
+                goomba.EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Half, Enumerations.Elements.Poison, new StatusChanceHolder(100d, new PoisonStatus(5))));
 
                 Badge dd1 = new DamageDodgeBadge();
                 dd1?.Equip(mario);
@@ -254,7 +254,10 @@ namespace PaperMarioBattleSystem
                 if (interactionHolder.StatusesInflicted != null)
                 {
                     for (int i = 0; i < interactionHolder.StatusesInflicted.Length; i++)
-                        statuses += interactionHolder.StatusesInflicted[i].StatusType.ToString() + " ";
+                    {
+                        StatusChanceHolder statusHolder = interactionHolder.StatusesInflicted[i];
+                        statuses += $"({statusHolder.Percentage}%){statusHolder.Status.StatusType.ToString()} ";
+                    }
                 }
 
                 Debug.Log($"{startString}: {interactionHolder.Entity?.Name}\n" +

@@ -55,7 +55,7 @@ namespace PaperMarioBattleSystem
             {
                 int damage = damageItem != null ? damageItem.Damage : 0;
                 Enumerations.Elements element = damageItem != null ? damageItem.Element : Enumerations.Elements.Normal;
-                StatusEffect[] statuses = statusInflicting != null ? statusInflicting.StatusesInflicted : null;
+                StatusChanceHolder[] statuses = statusInflicting != null ? statusInflicting.StatusesInflicted : null;
 
                 //NOTE: Will need a way to specify DamageEffects for items
                 DamageInfo = new DamageData(damage, element, true, ContactTypes.None, statuses, DamageEffects.None);

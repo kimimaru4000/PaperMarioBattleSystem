@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class SleepySheep : BattleItem, IStatusInflictingItem
     {
-        public StatusEffect[] StatusesInflicted { get; private set; }
+        public StatusChanceHolder[] StatusesInflicted { get; private set; }
 
         public SleepySheep()
         {
@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
 
             ItemType = ItemTypes.Damage;
 
-            StatusesInflicted = new StatusEffect[] { new SleepStatus(2) };
+            StatusesInflicted = new StatusChanceHolder[] { new StatusChanceHolder(100d, new SleepStatus(2)) };
 
             SelectionType = TargetSelectionMenu.EntitySelectionType.All;
             EntityType = Enumerations.EntityTypes.Enemy;

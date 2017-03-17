@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
                            "Wearing two or more of these badges requires more FP for the move, but enemies stay frozen longer.";
 
             DamageInfo.DamagingElement = Enumerations.Elements.Ice;
-            DamageInfo.Statuses = new StatusEffect[] { new FrozenStatus(3) };
+            DamageInfo.Statuses = new StatusChanceHolder[] { new StatusChanceHolder(100d, new FrozenStatus(3)) };
 
             SetMoveSequence(new IceSmashSequence(this));
             actionCommand = new HammerCommand(MoveSequence, 4, 1000d);

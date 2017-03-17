@@ -136,7 +136,7 @@ namespace PaperMarioBattleSystem
             Elements element = damageResult.DamageElement;
             int damage = damageResult.TotalDamage;
             bool piercing = damageResult.Piercing;
-            StatusEffect[] statusesInflicted = damageResult.StatusesInflicted;
+            StatusChanceHolder[] statusesInflicted = damageResult.StatusesInflicted;
 
             //Handle the elemental interaction results
             ElementInteractionResult elementResult = damageResult.ElementResult;
@@ -192,7 +192,7 @@ namespace PaperMarioBattleSystem
             {
                 for (int i = 0; i < statusesInflicted.Length; i++)
                 {
-                    EntityProperties.AfflictStatus(statusesInflicted[i]);
+                    EntityProperties.AfflictStatus(statusesInflicted[i].Status);
                 }
             }
 
@@ -422,7 +422,7 @@ namespace PaperMarioBattleSystem
         /// <param name="damage">The original damage of the attack.</param>
         /// <param name="statusesInflicted">The original set of StatusEffects inflicted.</param>
         /// <returns>A nullable DefensiveActionHolder? with a DefensiveAction's result if successful, otherwise null.</returns>
-        public BattleGlobals.DefensiveActionHolder? GetDefensiveActionResult(int damage, StatusEffect[] statusesInflicted)
+        public BattleGlobals.DefensiveActionHolder? GetDefensiveActionResult(int damage, StatusChanceHolder[] statusesInflicted)
         {
             //Handle Defensive Actions
             for (int i = 0; i < DefensiveActions.Count; i++)

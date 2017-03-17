@@ -201,7 +201,7 @@ namespace PaperMarioBattleSystem
             BattleEntity victim = interactionParam.Victim;
             ContactTypes contactType = interactionParam.ContactType;
             Elements element = interactionParam.DamagingElement;
-            StatusEffect[] statuses = interactionParam.Statuses;
+            StatusChanceHolder[] statuses = interactionParam.Statuses;
             int damage = interactionParam.Damage;
             bool piercing = interactionParam.Piercing;
 
@@ -298,7 +298,7 @@ namespace PaperMarioBattleSystem
             if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
             {
                 //Get the Status Effects to inflict on the Victim
-                StatusEffect[] victimInflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
+                StatusChanceHolder[] victimInflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
 
                 //Check if the Victim is Invincible. If so, ignore all damage and Status Effects
                 if (victim.EntityProperties.GetAdditionalProperty<bool>(AdditionalProperty.Invincible) == true)
@@ -347,7 +347,7 @@ namespace PaperMarioBattleSystem
                 attackerElementDamage.Damage = UtilityGlobals.Clamp(paybackDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
 
                 //Get the Status Effects to inflict
-                StatusEffect[] attackerInflictedStatuses = GetFilteredInflictedStatuses(attacker, paybackHolder.StatusesInflicted);
+                StatusChanceHolder[] attackerInflictedStatuses = GetFilteredInflictedStatuses(attacker, paybackHolder.StatusesInflicted);
 
                 //Check if the Attacker is Invincible. If so, ignore all damage and Status Effects
                 if (attacker.EntityProperties.GetAdditionalProperty<bool>(AdditionalProperty.Invincible) == true)
@@ -416,26 +416,26 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Filters an array of StatusEffects depending on whether they will be inflicted on a BattleEntity
-        /// depending on the entity's status percentages
+        /// depending on the entity's status percentages and the chance of inflicting the StatusEffect.
         /// </summary>
         /// <param name="entity">The BattleEntity to attempt to afflict the StatusEffects with</param>
-        /// <param name="statusesToInflict">The original array of StatusEffects</param>
+        /// <param name="statusesToInflict">The original array of StatusChanceHolders.</param>
         /// <returns>An array of StatusEffects that has succeeded in being inflicted on the entity</returns>
-        private static StatusEffect[] GetFilteredInflictedStatuses(BattleEntity entity, StatusEffect[] statusesToInflict)
+        private static StatusChanceHolder[] GetFilteredInflictedStatuses(BattleEntity entity, StatusChanceHolder[] statusesToInflict)
         {
             //Handle null
-            if (statusesToInflict == null) return statusesToInflict;
+            if (statusesToInflict == null) return null;
 
-            //Construct a list with the original elements
-            List<StatusEffect> filteredStatuses = new List<StatusEffect>(statusesToInflict);
+            //Construct a new list
+            List<StatusChanceHolder> filteredStatuses = new List<StatusChanceHolder>(statusesToInflict);
 
             //Look through the list and remove any StatusEffects that fail to be afflicted onto the entity
             for (int i = 0; i < filteredStatuses.Count; i++)
             {
-                StatusEffect status = filteredStatuses[i];
-                if (entity.EntityProperties.TryAfflictStatus(status) == false)
+                StatusChanceHolder statusChance = filteredStatuses[i];
+                if (entity.EntityProperties.TryAfflictStatus(statusChance.Percentage, statusChance.Status) == false)
                 {
-                    Debug.Log($"Failed to inflict {status.StatusType} on {entity.Name}");
+                    Debug.Log($"Failed to inflict {statusChance.Status.StatusType} on {entity.Name}");
                     filteredStatuses.RemoveAt(i);
                     i--;
                 }

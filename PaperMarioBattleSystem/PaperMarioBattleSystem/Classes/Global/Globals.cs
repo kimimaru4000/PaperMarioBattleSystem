@@ -203,7 +203,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The likelihood of being afflicted by a StatusEffect-inducing move. This value cannot be lower than 0.
         /// </summary>
-        public int StatusPercentage { get; private set; }
+        public double StatusPercentage { get; private set; }
 
         /// <summary>
         /// The number of turns to add onto the StatusEffect's base duration. This can be negative to reduce the duration.
@@ -215,16 +215,16 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool Immune { get; private set; }
 
-        public static StatusPropertyHolder Default => new StatusPropertyHolder(100, 0);
+        public static StatusPropertyHolder Default => new StatusPropertyHolder(100d, 0);
 
-        public StatusPropertyHolder(int statusPercentage, int additionalTurns)
+        public StatusPropertyHolder(double statusPercentage, int additionalTurns)
         {
-            StatusPercentage = UtilityGlobals.Clamp(statusPercentage, 0, int.MaxValue);
+            StatusPercentage = UtilityGlobals.Clamp(statusPercentage, 0, double.MaxValue);
             AdditionalTurns = additionalTurns;
             Immune = false;
         }
 
-        public StatusPropertyHolder(int statusPercentage, int additionalTurns, bool immune) : this (statusPercentage, additionalTurns)
+        public StatusPropertyHolder(double statusPercentage, int additionalTurns, bool immune) : this (statusPercentage, additionalTurns)
         {
             Immune = immune;
         }
@@ -282,19 +282,19 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public struct InteractionParamHolder
     {
-        public BattleEntity Attacker;
-        public BattleEntity Victim;
-        public int Damage;
-        public Enumerations.Elements DamagingElement;
-        public bool Piercing;
-        public Enumerations.ContactTypes ContactType;
-        public StatusEffect[] Statuses;
-        public Enumerations.DamageEffects DamageEffect;
-        public bool CantMiss;
-        public Enumerations.DefensiveMoveOverrides DefensiveOverride;
+        public BattleEntity Attacker { get; private set; }
+        public BattleEntity Victim { get; private set; }
+        public int Damage { get; private set; }
+        public Enumerations.Elements DamagingElement { get; private set; }
+        public bool Piercing { get; private set; }
+        public Enumerations.ContactTypes ContactType { get; private set; }
+        public StatusChanceHolder[] Statuses { get; private set;}
+        public Enumerations.DamageEffects DamageEffect { get; private set; }
+        public bool CantMiss { get; private set; }
+        public Enumerations.DefensiveMoveOverrides DefensiveOverride { get; private set; }
 
         public InteractionParamHolder(BattleEntity attacker, BattleEntity victim, int damage, Enumerations.Elements element,
-            bool piercing, Enumerations.ContactTypes contactType, StatusEffect[] statuses, Enumerations.DamageEffects damageEffect,
+            bool piercing, Enumerations.ContactTypes contactType, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect,
             bool cantMiss, Enumerations.DefensiveMoveOverrides defensiveOverride)
         {
             Attacker = attacker;
@@ -322,7 +322,9 @@ namespace PaperMarioBattleSystem
         public ElementInteractionResult ElementResult;
         public Enumerations.ContactTypes ContactType;
         public bool Piercing;
-        public StatusEffect[] StatusesInflicted;
+        //NOTE: This had to be changed to a StatusChanceHolder since you can now specify the chance of inflicting one
+        //I wanted to keep it a StatusEffect array, but I'll keep this since knowing the chance of it being inflicted is useful
+        public StatusChanceHolder[] StatusesInflicted;
         public bool Hit;
         public Enumerations.DamageEffects DamageEffect;
 
@@ -333,7 +335,7 @@ namespace PaperMarioBattleSystem
         public static InteractionHolder Default => new InteractionHolder();
 
         public InteractionHolder(BattleEntity entity, int totalDamage, Enumerations.Elements damageElement, ElementInteractionResult elementResult,
-            Enumerations.ContactTypes contactType, bool piercing, StatusEffect[] statusesInflicted, bool hit, Enumerations.DamageEffects damageEffect)
+            Enumerations.ContactTypes contactType, bool piercing, StatusChanceHolder[] statusesInflicted, bool hit, Enumerations.DamageEffects damageEffect)
         {
             Entity = entity;
             TotalDamage = totalDamage;
@@ -417,14 +419,14 @@ namespace PaperMarioBattleSystem
         public Enumerations.Elements DamagingElement;
         public bool Piercing;
         public Enumerations.ContactTypes ContactType;
-        public StatusEffect[] Statuses;
+        public StatusChanceHolder[] Statuses;
         public bool CantMiss;
         public bool AllOrNothingAffected;
         public Enumerations.DefensiveMoveOverrides DefensiveOverride;
         public Enumerations.DamageEffects DamageEffect;
 
         public DamageData(int damage, Enumerations.Elements damagingElement, bool piercing, Enumerations.ContactTypes contactType,
-            StatusEffect[] statuses, bool cantMiss, bool allOrNothingAffected, Enumerations.DefensiveMoveOverrides defensiveOverride,
+            StatusChanceHolder[] statuses, bool cantMiss, bool allOrNothingAffected, Enumerations.DefensiveMoveOverrides defensiveOverride,
             Enumerations.DamageEffects damageEffect)
         {
             Damage = damage;
@@ -439,7 +441,7 @@ namespace PaperMarioBattleSystem
         }
 
         public DamageData(int damage, Enumerations.Elements damagingElement, bool piercing, Enumerations.ContactTypes contactType,
-            StatusEffect[] statuses, Enumerations.DamageEffects damageEffect) : this(damage, damagingElement, piercing, contactType,
+            StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect) : this(damage, damagingElement, piercing, contactType,
                 statuses, false, true, Enumerations.DefensiveMoveOverrides.None, damageEffect)
         {
 
@@ -1076,7 +1078,7 @@ namespace PaperMarioBattleSystem
             /// <summary>
             /// A filtered set of StatusEffects, influenced by the Defensive Action
             /// </summary>
-            public StatusEffect[] Statuses { get; private set; }
+            public StatusChanceHolder[] Statuses { get; private set; }
 
             /// <summary>
             /// The type and amount of damage dealt to the attacker.
@@ -1084,11 +1086,11 @@ namespace PaperMarioBattleSystem
             /// </summary>
             public ElementDamageHolder? ElementHolder { get; private set; }
 
-            public DefensiveActionHolder(int damage, StatusEffect[] statuses) : this(damage, statuses, null)
+            public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses) : this(damage, statuses, null)
             {
             }
 
-            public DefensiveActionHolder(int damage, StatusEffect[] statuses, ElementDamageHolder? elementHolder)
+            public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses, ElementDamageHolder? elementHolder)
             {
                 Damage = damage;
                 Statuses = statuses;
@@ -1348,13 +1350,13 @@ namespace PaperMarioBattleSystem
             public int Damage { get; private set; }
 
             /// <summary>
-            /// The Status Effects to inflict
+            /// The Status Effects to inflict and their chances of being inflicted.
             /// </summary>
-            public StatusEffect[] StatusesInflicted { get; private set; }
+            public StatusChanceHolder[] StatusesInflicted { get; private set; }
 
             public static PaybackHolder Default => new PaybackHolder(PaybackTypes.Constant, Enumerations.Elements.Normal, 1, null);
 
-            public PaybackHolder(PaybackTypes paybackType, Enumerations.Elements element, params StatusEffect[] statusesInflicted)
+            public PaybackHolder(PaybackTypes paybackType, Enumerations.Elements element, params StatusChanceHolder[] statusesInflicted)
             {
                 PaybackType = paybackType;
                 Element = element;
@@ -1362,7 +1364,7 @@ namespace PaperMarioBattleSystem
                 StatusesInflicted = statusesInflicted;
             }
 
-            public PaybackHolder(PaybackTypes paybackType, Enumerations.Elements element, int constantDamage, params StatusEffect[] statusesInflicted)
+            public PaybackHolder(PaybackTypes paybackType, Enumerations.Elements element, int constantDamage, params StatusChanceHolder[] statusesInflicted)
                 : this(paybackType, element, statusesInflicted)
             {
                 Damage = constantDamage;

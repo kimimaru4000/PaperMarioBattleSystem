@@ -31,3 +31,27 @@ Shy Stack
 -Attack power correlates to how many there are on the stack (Max Attack = 4, Min Attack = 1)
 -Can knock off the bottom-most Shy Guy with Spin Smash. If successful, will knock off the one it hits into as well
 -Can also knock off the bottom-most Shy Guy with Kooper's Shell moves
+
+Cleft
+-----
+-Flipped over with an explosion (TTYD) for 2 turns. When flipped, Defense goes to 0. After the turns are up, it gets back up
+  -Its base Defense likely stays the same and its Defense modifier is subtracted by its base Defense to equal 0. Defense-boosting
+   and Defense-lowering effects still apply while it's flipped
+-Explosive Payback with Hold Fast does not cause them to flip over
+
+Bristle
+-------
+-Pops its spikes out when approached with a move. Moves include Hammer, Gulp, or anything that gets near.
+-Having Spike Shield equipped allows Mario to approach them with Hammer
+-Flipped over with an explosion. Spikes on the bottom still protect it from jumps, and spikes on the side still prevent it from being approached
+  -Also flipped over with Quake Hammer and a POW Block
+  -However, an Earth Quake does NOT flip them over
+-Not flipped with Explosive Payback via Hold Fast
+-When Immobilized, spikes don't pop out, allowing them to be approached
+  -Same with Frozen and Sleep
+  -Interestingly, same with Confusion and Dizzy!
+-When their spikes don't pop out due to immobilization or similar status effects, they're still spiky, as Ms. Mowz' Kiss Thief won't work but
+ Mario's Hammer and Yoshi's Gulp do
+-Asleep for 5 turns
+-Like jumping on spiked enemies, their side spikes will still damage you if you're Invisible
+-Koops can attack them without their spikes interrupting him with his shell moves

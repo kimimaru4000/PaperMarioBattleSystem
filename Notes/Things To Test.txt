@@ -69,3 +69,9 @@ Result: No, since you deal no damage
 Can Ms. Mowz steal stolen Coins, Items, or Badges from Bandits and Badge Bandits?
 ---------------------------------------------------------------------------------
 Result: Yes, she can steal Coins, Items, and Badges back!
+
+Allergic and KO Statuses
+------------------------
+Does an enemy with Allergic prevent it from being KOed with Showstopper?
+
+Result: 

@@ -38,8 +38,10 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// The table that determines the result of a particular ContactType and a particular PhysicalAttribute.
-        /// <para>The default value is a Success, meaning the ContactType will deal damage. A Failure indicates a backfire (Ex. Mario
-        /// jumping on a spiked enemy)</para>
+        /// <para>The default value is a Success, meaning the ContactType will deal damage.
+        /// A Failure indicates a backfire (Ex. Mario jumping on a spiked enemy).
+        /// A PartialSuccess indicates that the ContactType will both deal damage and backfire (Ex. Mario jumping on an Electrified enemy).
+        /// </para>
         /// </summary>
         private static Dictionary<ContactTypes, Dictionary<PhysicalAttributes, ContactResultInfo>> ContactTable = null;
 
@@ -62,18 +64,29 @@ namespace PaperMarioBattleSystem
         {
             ContactTable = new Dictionary<ContactTypes, Dictionary<PhysicalAttributes, ContactResultInfo>>();
 
-            InitializeDirectContactTable();
+            InitializeTopDirectContactTable();
+            InitializeSideDirectContactTable();
         }
 
         //NOTE: In the actual games, if you have the Payback status, it takes priority over any PhysicalAttributes when being dealt damage
         //For example, if you have both Return Postage and Zap Tap equipped, sucking enemies like Fuzzies will be able to touch you
         //However, normal properties apply when attacking enemies (you'll be able to jump on Electrified enemies)
 
-        private static void InitializeDirectContactTable()
+        private static void InitializeTopDirectContactTable()
         {
-            ContactTable.Add(ContactTypes.Direct, new Dictionary<PhysicalAttributes, ContactResultInfo>()
+            ContactTable.Add(ContactTypes.TopDirect, new Dictionary<PhysicalAttributes, ContactResultInfo>()
             {
-                { PhysicalAttributes.Spiked, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Sharp, 1), ContactResult.Failure, false) },
+                { PhysicalAttributes.TopSpiked, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Sharp, 1), ContactResult.Failure, false) },
+                { PhysicalAttributes.Electrified, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Electric, 1), ContactResult.PartialSuccess, true) },
+                { PhysicalAttributes.Fiery, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Fire, 1), ContactResult.Failure, false) }
+            });
+        }
+
+        private static void InitializeSideDirectContactTable()
+        {
+            ContactTable.Add(ContactTypes.SideDirect, new Dictionary<PhysicalAttributes, ContactResultInfo>()
+            {
+                { PhysicalAttributes.SideSpiked, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Sharp, 1), ContactResult.Failure, false) },
                 { PhysicalAttributes.Electrified, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Electric, 1), ContactResult.PartialSuccess, true) },
                 { PhysicalAttributes.Fiery, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Fire, 1), ContactResult.Failure, false) }
             });
@@ -253,7 +266,7 @@ namespace PaperMarioBattleSystem
                 statuses = victimDefenseData.Value.Statuses;
                 //If the Defensive action dealt damage and the contact was direct
                 //the Defensive action has caused a Failure for the Attacker (Ex. Superguarding)
-                if (contactType == ContactTypes.Direct && victimDefenseData.Value.ElementHolder.HasValue == true)
+                if ((contactType == ContactTypes.TopDirect || contactType == ContactTypes.SideDirect) && victimDefenseData.Value.ElementHolder.HasValue == true)
                 {
                     contactResult = ContactResult.Failure;
                 }
@@ -608,7 +621,8 @@ namespace PaperMarioBattleSystem
 
                         //If the Defensive action dealt damage and the contact was direct
                         //the Defensive action has caused a Failure for the Attacker (Ex. Superguarding)
-                        if (StepResult.VictimResult.ContactType == ContactTypes.Direct)
+                        if (StepResult.VictimResult.ContactType == ContactTypes.TopDirect
+                            || StepResult.VictimResult.ContactType == ContactTypes.SideDirect)
                         {
                             StepContactResultInfo.ContactResult = ContactResult.Failure;
 
@@ -751,7 +765,7 @@ namespace PaperMarioBattleSystem
                 StepResult.AttackerResult.TotalDamage = paybackDamage;
                 StepResult.AttackerResult.DamageElement = paybackHolder.Element;
                 StepResult.AttackerResult.ElementResult = attackerElementDamage.InteractionResult;
-                StepResult.AttackerResult.ContactType = ContactTypes.Direct;
+                StepResult.AttackerResult.ContactType = ContactTypes.TopDirect;
                 StepResult.AttackerResult.Piercing = true;
                 StepResult.AttackerResult.StatusesInflicted = paybackHolder.StatusesInflicted;
                 StepResult.AttackerResult.Hit = true;

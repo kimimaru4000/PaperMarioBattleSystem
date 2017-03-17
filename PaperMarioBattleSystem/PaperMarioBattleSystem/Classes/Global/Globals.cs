@@ -850,7 +850,7 @@ namespace PaperMarioBattleSystem
           Confirmed - Spiked enemies get hurt when jumping on other Spiked enemies*/
         public enum PhysicalAttributes
         {
-            None, Flying, Electrified, Poisonous, Spiked, Icy, Fiery, Explosive, Starry
+            None, Flying, Electrified, Poisonous, TopSpiked, SideSpiked, Icy, Fiery, Explosive, Starry
         }
 
         /// <summary>
@@ -867,10 +867,13 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// The type of contact actions will make on entities.
+        /// <para>None is no contact at all (Ex. Hammer Throw, Star Storm).
+        /// Approach is not direct contact, but the entity gets near (Ex. Hammer, Gulp).
+        /// Direct is direct contact (Ex. Jump, Kiss Thief).</para>
         /// </summary>
         public enum ContactTypes
         {
-            None, Direct
+            None, Approach, TopDirect, SideDirect
         }
 
         /// <summary>

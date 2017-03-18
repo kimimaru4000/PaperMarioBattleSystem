@@ -74,4 +74,5 @@ Allergic and KO Statuses
 ------------------------
 Does an enemy with Allergic prevent it from being KOed with Showstopper?
 
-Result: 
+Result: Yes! Allergic prevents all Status Effects, including the ones inflicted by Fright Masks, Gale Force, and Showstopper.
+All of these moves were tested numerous times on a Spiked Goomba afflicted with Allergic, and it wasn't affected by any of those statuses.

@@ -77,6 +77,19 @@ Bow
 Smack - Deals contact damage (can't hit Pokeys)
 Fan Smack - Doesn't deal contact damage (can hit Pokeys)
 
+Clock Out
+---------
+-Has a 1x multiplier if the bar is filled at all and a 1.27x multiplier if the bar is full
+-Can target the Audience (the only move to do so outside bosses)
+-If the Audience is hit with it, they go to sleep like when a Crazee Dayzee in the Audience puts everyone to sleep
+  -The Audience wakes up on the next phase cycle (so after the enemy's turn on the current phase cycle)
+
+Showstopper
+-----------
+-Has a .5x base multiplier
+-The multiplier is increased by .1x for each successful button set, totaling a 1x multiplier since there are 5 button sets
+-Available buttons: A, B, X, Y
+
 General
 -------
 For the Cloud Nine, Water Block, and Turbo Charge Status Effects, it shows the order

@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
         {
             get
             {
-                return BattleManager.Instance.GetEntities(EntityTypes.Enemy, HeightStates.Airborne);
+                return BattleManager.Instance.GetEntities(EntityTypes.Enemy, HeightStates.Hovering, HeightStates.Airborne);
             }
         }
 
@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
             MoveInfo = new MoveActionData(null, "Execute superbly to damage\nall midair enemies.", MoveResourceTypes.FP, 3,
                 CostDisplayTypes.Shown, MoveAffectionTypes.Enemy,
                 TargetSelectionMenu.EntitySelectionType.Single, false,
-                new HeightStates[] { HeightStates.Grounded, HeightStates.Airborne });
+                new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne });
 
             //The second part's damage is Piercing, starts as 2, and cannot be increased with Power Plus, All Or Nothing, or P-Up, D-Down
             //Equipping a 2nd badge increases the FP cost from 3 to 6 and increases the damage of the Jump by 1 and the air attack by 2
@@ -48,7 +48,6 @@ namespace PaperMarioBattleSystem
             DamageInfo = new DamageData(baseDamage, Elements.Normal, false, ContactTypes.TopDirect, null,
                 DamageEffects.FlipsShelled | DamageEffects.RemovesWings);
 
-            //NOTE: The aerial damage hits anything flying even if it has a HeightState that's not Airborne; this includes Embers!
             AerialDamage = new DamageData(2, Elements.Normal, true, ContactTypes.None, null, DamageEffects.None);
 
             TornadoJumpSequence tornadoJumpSequence = new TornadoJumpSequence(this);

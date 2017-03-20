@@ -801,8 +801,9 @@ namespace PaperMarioBattleSystem
             None = 0,
             FlipsShelled = 1 << 0,
             RemovesWings = 1 << 1,
-            RemovesPart = 1 << 2,
-            SpinsOut = 1 << 3
+            RemovesSegment = 1 << 2,
+            FlipsClefts = 1 << 3,
+            SpinsOut = 1 << 4
         }
 
         // <summary>
@@ -829,10 +830,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The main height states an entity can be in.
         /// Some moves may or may not be able to hit entities in certain height states.
+        /// <para>Hovering means that the entity is right above the ground and can be hit by most, but not all, ground moves.
+        /// Quake Hammer cannot hit Hovering entities. Tornado Jump's secondary attack will hit Hovering entities.</para>
         /// </summary>
         public enum HeightStates
         {
-            Grounded, Airborne, Ceiling
+            Grounded, Hovering, Airborne, Ceiling
         }
 
         /// <summary>
@@ -840,7 +843,7 @@ namespace PaperMarioBattleSystem
         /// These determine if an attack can target a particular entity, or whether there is an advantage
         /// or disadvantage to using a particular attack on an entity with a particular physical attribute.
         /// 
-        /// <para>Flying does not mean that the entity is Airborne. Flying entities, such as Ruff Puffs,
+        /// <para>Winged does not mean that the entity is Airborne. Flying entities, such as Ruff Puffs,
         /// can still be damaged by ground moves if they hover at ground level.</para>
         /// </summary>
         /*NOTE: The case of Explosive on contact in the actual games are with enraged Bob-Ombs and when Bobbery uses Hold Fast.

@@ -76,3 +76,21 @@ Does an enemy with Allergic prevent it from being KOed with Showstopper?
 
 Result: Yes! Allergic prevents all Status Effects, including the ones inflicted by Fright Masks, Gale Force, and Showstopper.
 All of these moves were tested numerous times on a Spiked Goomba afflicted with Allergic, and it wasn't affected by any of those statuses.
+
+Bobbery's Bomb Squad
+--------------------
+Is Bomb Squad an Explosive or Fire move? Test if it does more damage to Ice enemies and if it flips Clefts and Bristles.
+
+Results:
+
+
+Flipping
+--------
+
+1. MarioWiki says that a Hyper Cleft in PM has 1 Defense when flipped, if that's true, then flipping decreases Defense by a certain amount,
+not all of it.
+
+2. In TTYD if Koops or an enemy that's flipped is inflicted with Fast, do they get up faster?
+
+Results:
+

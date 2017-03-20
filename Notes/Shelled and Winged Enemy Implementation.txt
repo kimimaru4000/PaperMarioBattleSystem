@@ -9,7 +9,7 @@ such as Jump or Sky Dive. After a few turns, these enemies will get back up. If 
 them getting back up.
 
 Enemies like Clefts and Bristles can also be flipped, but that only occurs when they're hit with anything that deals Explosive damage,
-not with a particular type of contact.
+not with a particular type of contact. They act the same; the only difference is the condition to flip them.
 
 Additionally, Winged enemies like Paragoombas and Parakoopas fall to the ground when attacked from above and take on the appearance and
 information (tattle, stats, etc.) of their grounded versions, Goombas and Koopas respectively. All moves in the PM games that flip a Shelled
@@ -26,5 +26,76 @@ So what we need is the following:
 1. A way to tell a BattleEntity to flip over when hit with a specific ContactType or Element.
 2. A way to have the BattleEntity unflip after a designated turn count.
 3. A way to tell a BattleEntity to lose its wings when hit with a specific ContactType.
-4. A way to tell the BattleEntity which information to use when Grounded. For Kammy Koopa, we can just use the same information.
+4. A way to tell a Winged BattleEntity which information to use when Grounded. For Kammy Koopa, we can just use the same information.
 5. A way to have the BattleEntity go back to flying after a designated turn count. This applies to Kammy Koopa.
+6. A way to tell a BattleEntity to lose a segment.
+
+
+Update (3/20/17)
+----------------
+There are a few corrections to make.
+
+To start, we already have a DamageEffects enum that looks like this:
+
+public enum DamageEffects
+{
+    None = 0,
+    FlipsShelled = 1 << 0,
+    RemovesWings = 1 << 1,
+    RemovesSegment = 1 << 2,
+	FlipsClefts = 1 << 3,
+    SpinsOut = 1 << 4
+}
+
+This is in the damage information of each move. For example, Jump specifies that it FlipsShelled and RemovesWings.
+This removes some of our Needs.
+
+Now the question is: How do we tell a BattleEntity to react based off the Damage Effect it's hit with?
+
+To start, we need an interface for each type. We can define the following interfaces:
+
+-IFlippableEntity
+-IWingedEntity
+-ISegmentEntity
+-ISpinnableEntity
+
+They will each have their own properties and methods. Let's outline them below.
+
+IFlippableEntity
+----------------
+-bool for whether it's flipped or not
+-int for how long it stays flipped
+-int for how long it's been flipped
+-DamageEffects enum value for the flip conditions, or in other words which DamageEffects flip it
+-Handler for the flip; what happens when flipped, like the animation to play, Defense reduction, and such
+
+IWingedEntity
+-------------
+-bool for whether it's winged or not
+-int for how long it stays grounded when grounded (only used by Kammy Koopa)
+-int for how long it's been grounded (only used by Kammy Koopa)
+-Information to use when grounded; which entity to essentially become
+-Handler for being grounded; what happens when grounded, like the animation to play and such
+
+ISegmentEntity
+--------------
+-int for how many total segments there are
+-int for how many segments there currently are
+-Handler for when a segment is removed
+-Handler for when a segment is added (I don't think this ever happens in the PM games, but it would be nice to have)
+
+ISpinnableEntity
+----------------
+-int for how many times the entity has been spun
+-Handler for when the entity is spun
+
+
+We check for these DamageEffects in the damage calculation and try to cast the BattleEntity as that type. If that cast is valid
+then we can add that DamageEffect to the results so we know what happened. For example, say the victim is a Cleft, an IFlippableEntity.
+If the Cleft was hit with a FlipsShelled or FlipsClefts DamageEffect, we'd then cast and check to see if it gets flipped by either of those effects.
+If it gets flipped by FlipsClefts, then we add that DamageEffect to the Victim's InteractionHolder so when it's returned it says that
+it got flipped.
+
+The actual handling for each thing may have to occur in each entity's overridden TakeDamage method.
+
+I'll get a feel for how this all comes together. I'm hoping to find a better way of doing this than casting.

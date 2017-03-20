@@ -122,6 +122,22 @@ namespace PaperMarioBattleSystem
             return (T[])Enum.GetValues(typeof(T));
         }
 
+        //public static Enum EnumUnsetFlag(Enum enumVal, Enum flagToUnset)
+        //{
+        //    enumVal &= flagToUnset;
+        //}
+
+        /// <summary>
+        /// Tells if an Enum value has a particular bit field set.
+        /// </summary>
+        /// <param name="enumVal">The Enum value.</param>
+        /// <param name="flag">The bit field to check for the Enum value.</param>
+        /// <returns>true if the bit field is set in the Enum value, otherwise false.</returns>
+        public static bool EnumHasFlag(Enum enumVal, Enum flag)
+        {
+            return enumVal.HasFlag(flag);   
+        }
+
         #region Line Intersection
 
         /// <summary>

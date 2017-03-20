@@ -22,3 +22,7 @@ two Status Effects are different than the priorities of their actual Statuses, o
 at the same time.
 
 -Another thing to check is to see if Allergic prevents KO from being inflicted.
+
+Update (3/18/17)
+----------------
+Allergic prevents all of these (minus Air Lift, which can't be tested since it's in PM), confirming they are indeed Status Effects.

@@ -105,4 +105,13 @@ Flipping and Immobilized
 ------------------------
 Does the counter increase for getting up the same turn Immobilized wears off on a Flipped character or the turn after?
 
-Result: 
+Result: It increases on the same turn, just like how it's currently implemented.
+
+For reference, I tested on a Spiked Goomba encounter and made sure only 1 Spiked Goomba was left. I had the Spiked Goomba flip Koops.
+On Mario's turn I used a cheat to inflict Sleep on the Spiked Goomba and Immobilized Mario and Koops with Clock Out. After Immobilized
+wore off, Koops got up, totaling 2 turns he was Flipped.
+
+Additionally, if a Spiked Goomba attacks Koops when he is Immobilized, it resets his flipped turn count. This is great since this,
+along with the above information, confirms that the current system is accurate.
+
+Lastly, I noticed that Koops goes into his hurt animation instead of his flipped animation when Immobilized.

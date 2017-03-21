@@ -115,3 +115,9 @@ Additionally, if a Spiked Goomba attacks Koops when he is Immobilized, it resets
 along with the above information, confirms that the current system is accurate.
 
 Lastly, I noticed that Koops goes into his hurt animation instead of his flipped animation when Immobilized.
+
+Flipping and Slow
+-----------------
+Does this work similarly to Immobilized, meaning only when Koops gets a chance to move does it progress the flipped counter?
+
+Result: Yes

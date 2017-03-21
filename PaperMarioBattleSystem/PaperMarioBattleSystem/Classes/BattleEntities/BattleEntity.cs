@@ -421,15 +421,16 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="damage">The original damage of the attack.</param>
         /// <param name="statusesInflicted">The original set of StatusEffects inflicted.</param>
+        /// <param name="damageEffects">The original DamageEffects that would affect the BattleEntity.</param>
         /// <returns>A nullable DefensiveActionHolder? with a DefensiveAction's result if successful, otherwise null.</returns>
-        public BattleGlobals.DefensiveActionHolder? GetDefensiveActionResult(int damage, StatusChanceHolder[] statusesInflicted)
+        public BattleGlobals.DefensiveActionHolder? GetDefensiveActionResult(int damage, StatusChanceHolder[] statusesInflicted, DamageEffects damageEffects)
         {
             //Handle Defensive Actions
             for (int i = 0; i < DefensiveActions.Count; i++)
             {
                 if (DefensiveActions[i].IsSuccessful == true)
                 {
-                    BattleGlobals.DefensiveActionHolder holder = DefensiveActions[i].HandleSuccess(damage, statusesInflicted);
+                    BattleGlobals.DefensiveActionHolder holder = DefensiveActions[i].HandleSuccess(damage, statusesInflicted, damageEffects);
                     return holder;
                 }
             }

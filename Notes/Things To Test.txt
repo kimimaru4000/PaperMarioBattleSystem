@@ -81,16 +81,22 @@ Bobbery's Bomb Squad
 --------------------
 Is Bomb Squad an Explosive or Fire move? Test if it does more damage to Ice enemies and if it flips Clefts and Bristles.
 
-Results:
-
+Results: Bomb Squad is an Explosive move. It deals more damage to Fiery enemies, but it does not flip Clefts and Bristles.
 
 Flipping
 --------
 
 1. MarioWiki says that a Hyper Cleft in PM has 1 Defense when flipped, if that's true, then flipping decreases Defense by a certain amount,
-not all of it.
+not all of it. Confirm this.
 
 2. In TTYD if Koops or an enemy that's flipped is inflicted with Fast, do they get up faster?
 
+3. If Koops guards, does he prevent getting flipped?
+
 Results:
 
+1. Hyper Clefts have a Defense of 3. In TTYD, flipping Hyper Clefts sets their Defense to 0, and in PM it sets their Defense to 1.
+
+2. Yes. Attempting to get up takes a single turn, and Fast allows them to get up in a single phase cycle since they have two turns.
+
+3. Yes. Koops does not get flipped if he Guards or Superguards an attack that would flip him.

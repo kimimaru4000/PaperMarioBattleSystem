@@ -185,9 +185,13 @@
     <Compile Include="Classes\Global\Utility\UtilityGlobals.cs" />
     <Compile Include="Classes\Interfaces\ICopyable.cs" />
     <Compile Include="Classes\Interfaces\IDrawable.cs" />
+    <Compile Include="Classes\Interfaces\IFlippableEntity.cs" />
     <Compile Include="Classes\Interfaces\INameable.cs" />
+    <Compile Include="Classes\Interfaces\ISegmentEntity.cs" />
+    <Compile Include="Classes\Interfaces\ISpinnableEntity.cs" />
     <Compile Include="Classes\Interfaces\ITransformable.cs" />
     <Compile Include="Classes\Interfaces\IUpdateable.cs" />
+    <Compile Include="Classes\Interfaces\IWingedEntity.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ActionSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ChangePartnerSubMenu.cs" />

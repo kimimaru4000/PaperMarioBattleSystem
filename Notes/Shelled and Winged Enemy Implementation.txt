@@ -99,3 +99,35 @@ it got flipped.
 The actual handling for each thing may have to occur in each entity's overridden TakeDamage method.
 
 I'll get a feel for how this all comes together. I'm hoping to find a better way of doing this than casting.
+
+Update 2 (3/20/17)
+------------------
+I had to make a few adjustments and will propose a couple ideas for improving this.
+
+Guarding or Superguarding an attack can prevent DamageEffects from occurring in the PM games. Most notably, if Koops Guards or Superguards
+an attack from a Goomba, he won't get flipped. Therefore, I had to change the DefensiveActionHolder to include a filtered DamageEffect enum value.
+I also made DefensiveActions support this, and it works fine.
+
+Now onto the ideas. At the moment it's very tedious and not scalable to have to write a bunch of "if" conditionals for each DamageEffect.
+
+Idea 1 - Dictionary
+-------------------
+1. Define a dictionary where each DamageEffects correlates to a type (Ex. FlipsShelled = Key, IFlippableEntity = Value)
+2. Then it goes through all the DamageEffects enum values and looks up the type in the Dictionary and tries an 'as' cast
+3. If the cast fails, unset that DamageEffect value
+
+The advantage is this makes it easy to look for the correct thing. The downside is as we add more DamageEffects, it'll add more casts which can
+significantly impact performance.
+
+Idea 2 - Entity-defined DamageEffects
+-------------------------------------
+1. Have a DamageEffects enum value in each BattleEntity. This value would tell which DamageEffects the entity is affected by
+2. When determining the DamageEffects that go through, check the move's DamageEffects, and if it's there, check the entity's. If the entity
+has that DamageEffect, then keep it in and assume that the entity is affected by it. This lets us the entity is affected by DamageEffects
+without having to cast
+3. When doing all the logic to handle the DamageEffects, perform the casts explicitly. An InvalidCastException tells us that an entity was
+wrongly marked as being affected by a DamageEffect but not implementing any behavior regarding it.
+
+We might still need to use a Dictionary to define the DamageEffects and their types for handling. We'll get to that once this is done.
+
+I think Idea 2 is preferable for both readability and performance.

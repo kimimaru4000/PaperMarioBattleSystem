@@ -1087,19 +1087,28 @@ namespace PaperMarioBattleSystem
             public StatusChanceHolder[] Statuses { get; private set; }
 
             /// <summary>
+            /// The filtered DamageEffects, influenced by the Defensive Action.
+            /// <para>For example, Koops won't get flipped if he Guards or Superguards a Goomba's bonk.</para>
+            /// </summary>
+            public Enumerations.DamageEffects DamageEffect { get; private set; }
+
+            /// <summary>
             /// The type and amount of damage dealt to the attacker.
             /// If none, set to null.
             /// </summary>
             public ElementDamageHolder? ElementHolder { get; private set; }
 
-            public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses) : this(damage, statuses, null)
+            public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect)
+                : this(damage, statuses, damageEffect, null)
             {
             }
 
-            public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses, ElementDamageHolder? elementHolder)
+            public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect,
+                ElementDamageHolder? elementHolder)
             {
                 Damage = damage;
                 Statuses = statuses;
+                DamageEffect = damageEffect;
                 ElementHolder = elementHolder;
             }
         }

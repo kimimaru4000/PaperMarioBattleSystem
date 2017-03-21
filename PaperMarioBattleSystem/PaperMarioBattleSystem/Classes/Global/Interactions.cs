@@ -258,7 +258,7 @@ namespace PaperMarioBattleSystem
 
             //Defensive actions take priority. If the attack didn't hit, don't check for defensive actions
             BattleGlobals.DefensiveActionHolder? victimDefenseData = null;
-            if (attackHit == true) victimDefenseData = victim.GetDefensiveActionResult(unscaledVictimDamage, statuses);
+            if (attackHit == true) victimDefenseData = victim.GetDefensiveActionResult(unscaledVictimDamage, statuses, interactionParam.DamageEffect);
 
             if (victimDefenseData.HasValue == true)
             {
@@ -518,6 +518,7 @@ namespace PaperMarioBattleSystem
                 StepResult.VictimResult.StatusesInflicted = damageInfo.Statuses;
                 StepResult.VictimResult.TotalDamage = damageInfo.Damage;
                 StepResult.VictimResult.Piercing = damageInfo.Piercing;
+                StepResult.VictimResult.DamageEffect = damageInfo.DamageEffect;
             }
         }
 
@@ -605,7 +606,7 @@ namespace PaperMarioBattleSystem
                 if (StepResult.VictimResult.Hit == true)
                 {
                     victimDefenseData = StepResult.VictimResult.Entity.GetDefensiveActionResult(StepResult.VictimResult.TotalDamage,
-                        StepResult.VictimResult.StatusesInflicted);
+                        StepResult.VictimResult.StatusesInflicted, StepResult.VictimResult.DamageEffect);
                 }
 
                 //A Defensive Action has been performed
@@ -613,6 +614,7 @@ namespace PaperMarioBattleSystem
                 {
                     StepResult.VictimResult.TotalDamage = victimDefenseData.Value.Damage;
                     StepResult.VictimResult.StatusesInflicted = victimDefenseData.Value.Statuses;
+                    StepResult.VictimResult.DamageEffect = victimDefenseData.Value.DamageEffect;
 
                     //Store the damage dealt to the attacker, if any
                     if (victimDefenseData.Value.ElementHolder.HasValue == true)
@@ -655,6 +657,61 @@ namespace PaperMarioBattleSystem
                 }
             }
         }
+
+        //private sealed class VictimDamageEffectStep : DamageCalcStep
+        //{
+        //    protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+        //    {
+        //        //If the attack didn't hit, don't factor in DamageEffects
+        //        if (StepResult.VictimResult.Hit == false)
+        //        {
+        //            StepResult.VictimResult.DamageEffect = DamageEffects.None;
+        //            return;
+        //        }
+        //
+        //        DamageEffects damageEffects = StepResult.VictimResult.DamageEffect;
+        //
+        //        //Check for each DamageEffect
+        //        //If the Entity isn't affected by the DamageEffect, remove it from the output
+        //        /*NOTE: This can be done better.
+        //          My first thoughts:
+        //          1. Define a dictionary where each DamageEffects correlates to a type (Ex. FlipsShelled = Key, IFlippableEntity = Value)
+        //          2. Then it goes through all the DamageEffects enum values and looks up the type in the Dictionary and tries an 'as' cast
+        //          3. If the cast fails, unset that DamageEffect value*/
+        //        if (HasDamageEffect(damageEffects, DamageEffects.FlipsShelled) == true
+        //            || HasDamageEffect(damageEffects, DamageEffects.FlipsClefts) == true)
+        //        {
+        //            IFlippableEntity flippable = StepResult.VictimResult.Entity as IFlippableEntity;
+        //            if (flippable == null)
+        //            {
+        //                damageEffects = ClearDamageEffect(damageEffects, DamageEffects.FlipsShelled);
+        //                damageEffects = ClearDamageEffect(damageEffects, DamageEffects.FlipsClefts);
+        //            }
+        //        }
+        //        if (HasDamageEffect(damageEffects, DamageEffects.RemovesWings) == true)
+        //        {
+        //            IWingedEntity winged = StepResult.VictimResult.Entity as IWingedEntity;
+        //            if (winged == null)
+        //            {
+        //                damageEffects = ClearDamageEffect(damageEffects, DamageEffects.RemovesWings);
+        //            }
+        //        }
+        //
+        //        //
+        //        StepResult.VictimResult.DamageEffect = damageEffects;
+        //    }
+        //
+        //    private bool HasDamageEffect(DamageEffects damageEffect, DamageEffects flag)
+        //    {
+        //        return ((damageEffect & flag) == flag);
+        //    }
+        //
+        //    private DamageEffects ClearDamageEffect(DamageEffects damageEffect, DamageEffects flag)
+        //    {
+        //        DamageEffects clearedEffect = (damageEffect & ~flag);
+        //        return clearedEffect;
+        //    }
+        //}
 
         private sealed class VictimDoublePainStep : DamageCalcStep
         {

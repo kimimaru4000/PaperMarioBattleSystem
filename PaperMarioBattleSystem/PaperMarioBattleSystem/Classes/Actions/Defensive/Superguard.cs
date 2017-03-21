@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -19,7 +20,7 @@ namespace PaperMarioBattleSystem
             AllowedStatuses = null;
         }
 
-        public override BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusChanceHolder[] statusEffects)
+        public override BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusChanceHolder[] statusEffects, DamageEffects damageEffects)
         {
             int newDamage = 0;
             StatusChanceHolder[] newStatuses = FilterStatuses(statusEffects);
@@ -28,7 +29,8 @@ namespace PaperMarioBattleSystem
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
                 new WaitForAnimBattleEvent(User, AnimationGlobals.PlayerBattleAnimations.SuperguardName, true));
 
-            return new BattleGlobals.DefensiveActionHolder(newDamage, newStatuses, new ElementDamageHolder(1, Enumerations.Elements.Normal));
+            return new BattleGlobals.DefensiveActionHolder(newDamage, newStatuses, Enumerations.DamageEffects.None,
+                new ElementDamageHolder(1, Enumerations.Elements.Normal));
         }
     }
 }

@@ -77,8 +77,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="damage">The original damage that would be dealt to the BattleEntity</param>
         /// <param name="statusEffects">The original StatusEffects that would be inflicted on the BattleEntity</param>
+        /// <param name="damageEffects">The original DamageEffects that would affect the BattleEntity.</param>
         /// <returns>A DefensiveActionHolder containing the modified damage dealt and a filtered set of StatusEffects inflicted</returns>
-        public abstract BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusChanceHolder[] statusEffects);
+        public abstract BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusChanceHolder[] statusEffects, DamageEffects damageEffects);
 
         /// <summary>
         /// Filters out StatusEffects that the DefensiveAction defends against

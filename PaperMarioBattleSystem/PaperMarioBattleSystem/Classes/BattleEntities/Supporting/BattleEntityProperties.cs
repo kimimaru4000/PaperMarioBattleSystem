@@ -66,6 +66,11 @@ namespace PaperMarioBattleSystem
         protected readonly Dictionary<StatusTypes, StatusPropertyHolder> StatusProperties = new Dictionary<StatusTypes, StatusPropertyHolder>();
 
         /// <summary>
+        /// The DamageEffects the BattleEntity is vulnerable to.
+        /// </summary>
+        protected DamageEffects VulnerableDamageEffects = DamageEffects.None;
+
+        /// <summary>
         /// Additional properties of the entity
         /// </summary>
         protected readonly Dictionary<AdditionalProperty, object> AdditionalProperties = new Dictionary<AdditionalProperty, object>();
@@ -759,6 +764,46 @@ namespace PaperMarioBattleSystem
 
             return StatusProperties[statusType];
         }
+
+        #endregion
+
+        #region Damage Effects Methods
+
+        /// <summary>
+        /// Sets the BattleEntity's vulnerability to DamageEffects.
+        /// <para>IMPORTANT: Make sure the BattleEntity implements the interfaces associated with each effect it's vulnerable to.</para>
+        /// </summary>
+        /// <param name="damageEffects">The DamageEffects value to set. This is a bit field.</param>
+        public void SetVulnerableDamageEffects(DamageEffects damageEffects)
+        {
+            VulnerableDamageEffects = damageEffects;
+        }
+
+        /// <summary>
+        /// Returns the BattleEntity's vulnerability to DamageEffects.
+        /// </summary>
+        /// <returns>A DamageEffects value.</returns>
+        public DamageEffects GetVulnerableDamageEffects()
+        {
+            return VulnerableDamageEffects;
+        }
+
+        /// <summary>
+        /// Tells whether the BattleEntity is vulnerable to a particular DamageEffect.
+        /// </summary>
+        /// <param name="damageEffect">The DamageEffect to check vulnerability to. There should be only one value set in the bit field.</param>
+        /// <returns>true if the BattleEntity is vulnerable to the DamageEffect, otherwise false.</returns>
+        public bool IsVulnerableToDamageEffect(DamageEffects damageEffect)
+        {
+            DamageEffects vulnerableTest = (VulnerableDamageEffects & damageEffect);
+            return (vulnerableTest == damageEffect);
+        }
+
+        /// <summary>
+        /// Tells if the BattleEntity is vulnerable to any DamageEffects.
+        /// </summary>
+        /// <returns>true if the BattleEntity is vulnerable to any DamageEffect, otherwise false.</returns>
+        public bool HasDamageEffectVulnerabilities() => (VulnerableDamageEffects != DamageEffects.None);
 
         #endregion
 

@@ -152,6 +152,7 @@ namespace PaperMarioBattleSystem
             DamageCalculationSteps.Add(new VictimDamageReductionStep());
             DamageCalculationSteps.Add(new VictimCheckHitStep());
             DamageCalculationSteps.Add(new VictimDefensiveStep());
+            DamageCalculationSteps.Add(new VictimDamageEffectStep());
             DamageCalculationSteps.Add(new VictimDoublePainStep());
             DamageCalculationSteps.Add(new VictimLastStandStep());
             DamageCalculationSteps.Add(new ClampVictimDamageStep());
@@ -658,60 +659,48 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        //private sealed class VictimDamageEffectStep : DamageCalcStep
-        //{
-        //    protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
-        //    {
-        //        //If the attack didn't hit, don't factor in DamageEffects
-        //        if (StepResult.VictimResult.Hit == false)
-        //        {
-        //            StepResult.VictimResult.DamageEffect = DamageEffects.None;
-        //            return;
-        //        }
-        //
-        //        DamageEffects damageEffects = StepResult.VictimResult.DamageEffect;
-        //
-        //        //Check for each DamageEffect
-        //        //If the Entity isn't affected by the DamageEffect, remove it from the output
-        //        /*NOTE: This can be done better.
-        //          My first thoughts:
-        //          1. Define a dictionary where each DamageEffects correlates to a type (Ex. FlipsShelled = Key, IFlippableEntity = Value)
-        //          2. Then it goes through all the DamageEffects enum values and looks up the type in the Dictionary and tries an 'as' cast
-        //          3. If the cast fails, unset that DamageEffect value*/
-        //        if (HasDamageEffect(damageEffects, DamageEffects.FlipsShelled) == true
-        //            || HasDamageEffect(damageEffects, DamageEffects.FlipsClefts) == true)
-        //        {
-        //            IFlippableEntity flippable = StepResult.VictimResult.Entity as IFlippableEntity;
-        //            if (flippable == null)
-        //            {
-        //                damageEffects = ClearDamageEffect(damageEffects, DamageEffects.FlipsShelled);
-        //                damageEffects = ClearDamageEffect(damageEffects, DamageEffects.FlipsClefts);
-        //            }
-        //        }
-        //        if (HasDamageEffect(damageEffects, DamageEffects.RemovesWings) == true)
-        //        {
-        //            IWingedEntity winged = StepResult.VictimResult.Entity as IWingedEntity;
-        //            if (winged == null)
-        //            {
-        //                damageEffects = ClearDamageEffect(damageEffects, DamageEffects.RemovesWings);
-        //            }
-        //        }
-        //
-        //        //
-        //        StepResult.VictimResult.DamageEffect = damageEffects;
-        //    }
-        //
-        //    private bool HasDamageEffect(DamageEffects damageEffect, DamageEffects flag)
-        //    {
-        //        return ((damageEffect & flag) == flag);
-        //    }
-        //
-        //    private DamageEffects ClearDamageEffect(DamageEffects damageEffect, DamageEffects flag)
-        //    {
-        //        DamageEffects clearedEffect = (damageEffect & ~flag);
-        //        return clearedEffect;
-        //    }
-        //}
+        private sealed class VictimDamageEffectStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                //If the attack didn't hit, don't factor in DamageEffects
+                if (StepResult.VictimResult.Hit == false)
+                {
+                    StepResult.VictimResult.DamageEffect = DamageEffects.None;
+                }
+        
+                //If the current result has no DamageEffects (whether the move didn't have any or a Defensive Action removed them)
+                //or if the BattleEntity isn't vulnerable to any DamageEffects, then don't bother doing anything else
+                if (StepResult.VictimResult.DamageEffect == DamageEffects.None
+                    || StepResult.VictimResult.Entity.EntityProperties.HasDamageEffectVulnerabilities() == false)
+                {
+                    return;
+                }
+
+                //The DamageEffects stored in the result
+                DamageEffects resultEffects = DamageEffects.None;
+
+                //Get all the DamageEffects
+                DamageEffects[] damageEffects = UtilityGlobals.GetEnumValues<DamageEffects>();
+
+                //Start at index 1, as 0 is the value of None indicating no DamageEffects
+                for (int i = 1; i < damageEffects.Length; i++)
+                {
+                    DamageEffects curEffect = damageEffects[i];
+
+                    //If the move has the DamageEffect and the entity is affected by it, add it to the result
+                    //This approach is easier and more readable than removing effects
+                    if (UtilityGlobals.EnumHasFlag(StepResult.VictimResult.DamageEffect, curEffect) == true
+                        && StepResult.VictimResult.Entity.EntityProperties.IsVulnerableToDamageEffect(curEffect) == true)
+                    {
+                        resultEffects |= curEffect;
+                    }
+                }
+
+                //Set the result
+                StepResult.VictimResult.DamageEffect = resultEffects;
+            }
+        }
 
         private sealed class VictimDoublePainStep : DamageCalcStep
         {

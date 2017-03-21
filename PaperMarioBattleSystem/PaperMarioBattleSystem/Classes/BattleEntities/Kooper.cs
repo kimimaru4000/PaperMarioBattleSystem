@@ -15,7 +15,10 @@ namespace PaperMarioBattleSystem
             Name = "Kooper";
             PartnerDescription = "He can throw his shell at enemies!";
             PartnerType = Enumerations.PartnerTypes.Kooper;
-            
+
+            //As Kooper is a Koopa, he can be flipped
+            EntityProperties.SetVulnerableDamageEffects(Enumerations.DamageEffects.FlipsShelled | Enumerations.DamageEffects.FlipsClefts);
+
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Kooper");
             AnimManager.SetSpriteSheet(spriteSheet);
 

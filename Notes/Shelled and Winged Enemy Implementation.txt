@@ -121,7 +121,7 @@ significantly impact performance.
 
 Idea 2 - Entity-defined DamageEffects
 -------------------------------------
-1. Have a DamageEffects enum value in each BattleEntity. This value would tell which DamageEffects the entity is affected by
+1. Have a DamageEffects enum value in each BattleEntity's EntityProperties. This value would tell which DamageEffects the entity is affected by
 2. When determining the DamageEffects that go through, check the move's DamageEffects, and if it's there, check the entity's. If the entity
 has that DamageEffect, then keep it in and assume that the entity is affected by it. This lets us the entity is affected by DamageEffects
 without having to cast

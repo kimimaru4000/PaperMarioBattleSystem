@@ -141,18 +141,6 @@ namespace PaperMarioBattleSystem
             //Handle the elemental interaction results
             ElementInteractionResult elementResult = damageResult.ElementResult;
 
-            //NOTE: Move this when it's relevant (Ex. implementing Bowser's Star Rod power)
-            //Check for Invincibility
-            //bool invincible = EntityProperties.GetMiscProperty(MiscProperty.Invincible).BoolValue;
-            ////If the entity is invincible, don't deal any damage and negate all weaknesses and resistances
-            ////The entity wouldn't heal if it should because invincibility means it can't get hit
-            //if (invincible == true)
-            //{
-            //    damage = 0;
-            //    elementResult = ElementInteractionResult.Damage;
-            //    statusesInflicted = null;
-            //}
-
             if (elementResult == ElementInteractionResult.Damage || elementResult == ElementInteractionResult.KO)
             {
                 if (elementResult == ElementInteractionResult.Damage)
@@ -195,6 +183,9 @@ namespace PaperMarioBattleSystem
                     EntityProperties.AfflictStatus(statusesInflicted[i].Status);
                 }
             }
+
+            //Handle DamageEffects
+            HandleDamageEffects(damageResult.DamageEffect);
 
             //If this entity received damage during its action sequence, it has been interrupted
             //The null check is necessary in the event that a StatusEffect that deals damage at the start of the phase, such as Poison,
@@ -391,6 +382,15 @@ namespace PaperMarioBattleSystem
 
         }
 
+        /// <summary>
+        /// Entity-specific logic for handling DamageEffects.
+        /// </summary>
+        /// <param name="damageEffects">The bit field of DamageEffects.</param>
+        protected virtual void HandleDamageEffects(DamageEffects damageEffects)
+        {
+
+        }
+
         #endregion
 
         /// <summary>
@@ -521,7 +521,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What happens during the entity's turn (choosing action commmands, etc.)
+        /// What happens during the entity's turn (choosing action commands, etc.)
         /// </summary>
         public virtual void TurnUpdate()
         {

@@ -191,7 +191,9 @@ namespace PaperMarioBattleSystem
             BattlePlayer otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.GetFrontPlayer()
                     ? BattleManager.Instance.GetBackPlayer() : BattleManager.Instance.GetFrontPlayer();
 
-            return (otherPlayer.UsedTurn == false && otherPlayer.IsDead == false);
+            int immobile = otherPlayer.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.Immobile);
+
+            return (otherPlayer.UsedTurn == false && otherPlayer.IsDead == false && immobile <= 0);
         }
     }
 }

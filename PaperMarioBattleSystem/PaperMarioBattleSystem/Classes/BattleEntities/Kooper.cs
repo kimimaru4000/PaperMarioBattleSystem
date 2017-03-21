@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
-    public sealed class Kooper : BattlePartner
+    public sealed class Kooper : BattlePartner, IFlippableEntity
     {
         public Kooper() : base(new PartnerStats(PartnerGlobals.PartnerRanks.Normal, 50, 0, 1))
         {
@@ -38,6 +38,9 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(194, 222, 28, 25), 250d),
                 new Animation.Frame(new Rectangle(225, 222, 30, 25), 250d),
                 new Animation.Frame(new Rectangle(258, 222, 28, 25), 250d)));
+            AnimManager.AddAnimation(AnimationGlobals.DamageEffectBattleAnimations.FlippedName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(69, 221, 53, 26), 350d),
+                new Animation.Frame(new Rectangle(5, 218, 54, 28), 350d)));
         }
 
         protected sealed override BattleMenu GetMainBattleMenu()
@@ -45,10 +48,96 @@ namespace PaperMarioBattleSystem
             return new PartnerBattleMenu(new KooperSubMenu());
         }
 
+        public override void OnTurnStart()
+        {
+            base.OnTurnStart();
+
+            if (Flipped == true)
+            {
+                ManageFlippedTurn();
+            }
+        }
+
         public override void OnTurnEnd()
         {
             base.OnTurnEnd();
             BattleUIManager.Instance.ClearMenuStack();
+        }
+
+        public override string GetIdleAnim()
+        {
+            //If Flipped, return the Flipped animation
+            if (Flipped == true) return AnimationGlobals.DamageEffectBattleAnimations.FlippedName;
+
+            return base.GetIdleAnim();
+        }
+
+        protected override void HandleDamageEffects(Enumerations.DamageEffects damageEffects)
+        {
+            base.HandleDamageEffects(damageEffects);
+
+            //Check whether any of the flags to flip are here
+            if (UtilityGlobals.DamageEffectHasFlag(FlippedOnEffects, damageEffects) == true)
+            {
+                HandleFlipped();
+            }
+        }
+
+        #region Interface Implementations
+
+        public bool Flipped { get; private set; } = false;
+
+        public int FlippedTurns { get; private set; } = 2;
+
+        public int ElapsedFlippedTurns { get; private set; } = 0;
+
+        public Enumerations.DamageEffects FlippedOnEffects => 
+            (Enumerations.DamageEffects.FlipsShelled | Enumerations.DamageEffects.FlipsClefts);
+
+        public void HandleFlipped()
+        {
+            if (Flipped == false)
+            {
+                int immobile = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.Immobile) + 1;
+                EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Immobile, immobile);
+            }
+
+            Flipped = true;
+
+            AnimManager.PlayAnimation(AnimationGlobals.DamageEffectBattleAnimations.FlippedName);
+
+            //Getting hit again while flipped refreshes the flip timer
+            ElapsedFlippedTurns = 0;
+        }
+
+        #endregion
+
+        private void ManageFlippedTurn()
+        {
+            ElapsedFlippedTurns++;
+
+            if (ElapsedFlippedTurns >= FlippedTurns)
+            {
+                //Get up; this still uses up a turn
+                UnFlip();
+            }
+
+            EndTurn();
+        }
+
+        private void UnFlip()
+        {
+            Flipped = false;
+            AnimManager.PlayAnimation(GetIdleAnim(), true);
+
+            int immobile = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.Immobile) - 1;
+            EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Immobile);
+            if (immobile > 0)
+            {
+                EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Immobile, immobile);
+            }
+
+            ElapsedFlippedTurns = 0;
         }
     }
 }

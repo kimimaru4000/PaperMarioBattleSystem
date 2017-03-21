@@ -789,14 +789,15 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells whether the BattleEntity is vulnerable to a particular DamageEffect.
+        /// Tells whether the BattleEntity is vulnerable to any DamageEffect in a set of DamageEffects.
         /// </summary>
-        /// <param name="damageEffect">The DamageEffect to check vulnerability to. There should be only one value set in the bit field.</param>
-        /// <returns>true if the BattleEntity is vulnerable to the DamageEffect, otherwise false.</returns>
-        public bool IsVulnerableToDamageEffect(DamageEffects damageEffect)
+        /// <param name="damageEffects">The DamageEffects to check vulnerability to.</param>
+        /// <returns>true if the BattleEntity is vulnerable to any of the DamageEffects, otherwise false.</returns>
+        public bool IsVulnerableToDamageEffect(DamageEffects damageEffects)
         {
-            DamageEffects vulnerableTest = (VulnerableDamageEffects & damageEffect);
-            return (vulnerableTest == damageEffect);
+            DamageEffects vulnerableTest = (VulnerableDamageEffects & damageEffects);
+
+            return (vulnerableTest != 0);
         }
 
         /// <summary>

@@ -1011,6 +1011,14 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Damage Effect-related animations in battle.
+        /// </summary>
+        public static class DamageEffectBattleAnimations
+        {
+            public const string FlippedName = "Flipped";
+        }
+
+        /// <summary>
         /// Status Effect-related animations in battle
         /// </summary>
         public static class StatusBattleAnimations

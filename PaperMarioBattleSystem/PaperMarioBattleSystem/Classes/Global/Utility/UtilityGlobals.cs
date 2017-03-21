@@ -122,10 +122,18 @@ namespace PaperMarioBattleSystem
             return (T[])Enum.GetValues(typeof(T));
         }
 
-        //public static Enum EnumUnsetFlag(Enum enumVal, Enum flagToUnset)
-        //{
-        //    enumVal &= flagToUnset;
-        //}
+        /// <summary>
+        /// Tells whether a set of DamageEffects has any of the flags in another DamageEffects set.
+        /// </summary>
+        /// <param name="damageEffects">The DamageEffects value.</param>
+        /// <param name="damageEffectFlags">The flags to test.</param>
+        /// <returns>true if any of the flags in damageEffectFlags are in damageEffects, otherwise false.</returns>
+        public static bool DamageEffectHasFlag(Enumerations.DamageEffects damageEffects, Enumerations.DamageEffects damageEffectFlags)
+        {
+            Enumerations.DamageEffects flags = (damageEffects & damageEffectFlags);
+
+            return (flags != 0);
+        }
 
         /// <summary>
         /// Tells if an Enum value has a particular bit field set.

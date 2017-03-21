@@ -77,6 +77,10 @@ Bow
 Smack - Deals contact damage (can't hit Pokeys)
 Fan Smack - Doesn't deal contact damage (can hit Pokeys)
 
+Yoshi
+-----
+Stampede - Attacks enemies on the ground, in the air, and on the ceiling despite the description stating only ground enemies
+
 Clock Out
 ---------
 -Has a 1x multiplier if the bar is filled at all and a 1.27x multiplier if the bar is full
@@ -89,6 +93,12 @@ Showstopper
 -Has a .5x base multiplier
 -The multiplier is increased by .1x for each successful button set, totaling a 1x multiplier since there are 5 button sets
 -Available buttons: A, B, X, Y
+
+Earth Quake (item)
+------------------
+-Deals 5 damage
+-Does not flip over any enemies
+-Can attack both ground and ceiling enemies despite the description stating only ground-based enemies
 
 General
 -------

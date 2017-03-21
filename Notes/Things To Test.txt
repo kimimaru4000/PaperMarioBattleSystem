@@ -100,3 +100,9 @@ Results:
 2. Yes. Attempting to get up takes a single turn, and Fast allows them to get up in a single phase cycle since they have two turns.
 
 3. Yes. Koops does not get flipped if he Guards or Superguards an attack that would flip him.
+
+Flipping and Immobilized
+------------------------
+Does the counter increase for getting up the same turn Immobilized wears off on a Flipped character or the turn after?
+
+Result: 

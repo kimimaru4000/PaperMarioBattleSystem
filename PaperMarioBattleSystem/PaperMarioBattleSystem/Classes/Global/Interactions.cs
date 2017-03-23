@@ -659,6 +659,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Filters out DamageEffects caused by the move depending on whether the BattleEntity is vulnerable to them or not.
+        /// </summary>
         private sealed class VictimDamageEffectStep : DamageCalcStep
         {
             protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)

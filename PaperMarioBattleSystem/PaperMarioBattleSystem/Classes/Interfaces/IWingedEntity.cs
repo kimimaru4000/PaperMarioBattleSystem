@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
         int ElapsedGroundedTurns { get; }
 
         /// <summary>
-        /// The BattleEntity to become when grounded.
+        /// The BattleEntity to become when grounded. It should not have a vulnerability to losing wings.
         /// Winged BattleEntities should use only the information from this and clear it after falling, unless they go airborne again.
         /// </summary>
         BattleEntity GroundedEntity { get; }

@@ -103,15 +103,16 @@
     <Compile Include="Classes\Animations\LoopAnimation.cs" />
     <Compile Include="Classes\Animations\ObjAnimManager.cs" />
     <Compile Include="Classes\Animations\ReverseAnimation.cs" />
-    <Compile Include="Classes\BattleEntities\BattleEnemy.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\BattleEnemy.cs" />
     <Compile Include="Classes\BattleEntities\BattleEntity.cs" />
-    <Compile Include="Classes\BattleEntities\BattleMario.cs" />
-    <Compile Include="Classes\BattleEntities\BattlePartner.cs" />
-    <Compile Include="Classes\BattleEntities\BattlePlayer.cs" />
-    <Compile Include="Classes\BattleEntities\Goomba.cs" />
-    <Compile Include="Classes\BattleEntities\Goombario.cs" />
-    <Compile Include="Classes\BattleEntities\Kooper.cs" />
-    <Compile Include="Classes\BattleEntities\SpikedGoomba.cs" />
+    <Compile Include="Classes\BattleEntities\Players\BattleMario.cs" />
+    <Compile Include="Classes\BattleEntities\Players\BattlePartner.cs" />
+    <Compile Include="Classes\BattleEntities\Players\BattlePlayer.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\Goomba.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\Paragoomba.cs" />
+    <Compile Include="Classes\BattleEntities\Players\Goombario.cs" />
+    <Compile Include="Classes\BattleEntities\Players\Kooper.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\SpikedGoomba.cs" />
     <Compile Include="Classes\BattleEntities\Supporting\BattleEntityProperties.cs" />
     <Compile Include="Classes\BattleEvents\BattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DamagedBattleEvent.cs" />
@@ -329,6 +330,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Characters\Kooper.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Enemies\Paragoomba.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Enemies\Goomba.png">

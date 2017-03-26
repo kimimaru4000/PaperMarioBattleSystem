@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The HeightState of the entity
         /// </summary>
-        public HeightStates HeightState { get; protected set; } = HeightStates.Grounded;
+        public HeightStates HeightState { get; private set; } = HeightStates.Grounded;
 
         /// <summary>
         /// The HealthState of the entity.
@@ -380,6 +380,15 @@ namespace PaperMarioBattleSystem
         protected virtual void OnHealthStateChange(HealthStates newHealthState)
         {
 
+        }
+
+        /// <summary>
+        /// Changes the HeightState of the BattleEntity.
+        /// </summary>
+        /// <param name="newHeightState">The new HeightState.</param>
+        public void ChangeHeightState(HeightStates newHeightState)
+        {
+            HeightState = newHeightState;
         }
 
         /// <summary>

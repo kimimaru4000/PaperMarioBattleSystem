@@ -55,3 +55,7 @@ Bristle
 -Asleep for 5 turns
 -Like jumping on spiked enemies, their side spikes will still damage you if you're Invisible
 -Koops can attack them without their spikes interrupting him with his shell moves
+
+Paragoomba
+----------
+-In PM, loses wings when hit with the Hammer from a First Strike

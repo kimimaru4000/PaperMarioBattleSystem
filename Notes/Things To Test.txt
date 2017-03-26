@@ -34,7 +34,7 @@ instead of getting damaged and playing their hurt animation like other Clefts.
 Since there's no Superguarding in PM, it looks like the only instance of Superguarding an invincible enemy is the Iron Clefts. Look for more
 invincible enemies to make sure.
 
-Results:
+Results: (down below)
 
 Without Star Rod
 ----------------
@@ -51,7 +51,6 @@ Invincibility and Debuffs
 Does debuffing Bowser in PM with Chill Out cause him to have -3 attack when he reactivates his Star Rod powers again?
 
 Result: No. Bowser's Star Rod powers immediately remove all Status Effects he's afflicted with.
-
 
 Life Shrooms and NoSkills
 -------------------------
@@ -121,3 +120,13 @@ Flipping and Slow
 Does this work similarly to Immobilized, meaning only when Koops gets a chance to move does it progress the flipped counter?
 
 Result: Yes
+
+Winged enemies and Hammer
+-------------------------
+In PM, hitting a Paragoomba with a Hammer from a First Strike makes it lose its wings. Test the following cases:
+
+1. Does this also happen in TTYD?
+2. Do any normal Hammer moves cause it to lose its wings?
+3. Does any damage at all cause it to lose its wings?
+
+Results: 

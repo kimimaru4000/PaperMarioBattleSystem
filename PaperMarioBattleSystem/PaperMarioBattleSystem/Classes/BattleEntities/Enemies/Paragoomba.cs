@@ -8,6 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
+    /// <summary>
+    /// A Paragoomba - A Goomba with wings.
+    /// </summary>
     public sealed class Paragoomba : Goomba, IWingedEntity
     {
         public Paragoomba()
@@ -16,10 +19,27 @@ namespace PaperMarioBattleSystem
 
             EntityProperties.SetVulnerableDamageEffects(Enumerations.DamageEffects.RemovesWings);
 
-            HeightState = Enumerations.HeightStates.Airborne;
+            ChangeHeightState(Enumerations.HeightStates.Airborne);
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Paragoomba");
             AnimManager.SetSpriteSheet(spriteSheet);
+
+            AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(129, 45, 27, 28), 500d),
+                new Animation.Frame(new Rectangle(2, 7, 26, 30), 500d)));
+            AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(97, 48, 29, 27), 500d),
+                new Animation.Frame(new Rectangle(65, 88, 29, 27), 500d),
+                new Animation.Frame(new Rectangle(98, 89, 27, 26), 500d)));
+            AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(98, 89, 27, 26), 1000d)));
+
+            AnimManager.AddAnimation(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(33, 89, 27, 30), 1000d)));
+
+            //Wings (for the first idle frame, at least) are offset (-7, -1 (or left 7, up 1)) from the Paragoomba's body
+            //Both Wings for each frame are in a single cropped texture
+            //The wings are rendered underneath the Paragoomba's body
+            //CroppedTexture2D idleOneWings = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
         }
 
         protected override void HandleDamageEffects(Enumerations.DamageEffects damageEffects)
@@ -73,7 +93,7 @@ namespace PaperMarioBattleSystem
             //Set the vulnerability to the same as the grounded entity. The grounded entity shouldn't have a winged vulnerabilty
             EntityProperties.SetVulnerableDamageEffects(GroundedEntity.EntityProperties.GetVulnerableDamageEffects());
 
-            HeightState = Enumerations.HeightStates.Grounded;
+            ChangeHeightState(Enumerations.HeightStates.Grounded);
         }
     }
 }

@@ -53,6 +53,12 @@ namespace PaperMarioBattleSystem
         private readonly Vector2 PartnerPos = new Vector2(-190, 120);
         private readonly Vector2 EnemyStartPos = new Vector2(150, 125);
         private readonly int PositionXDiff = 30;
+        
+        //These are general values used by most entities in the air or on the ceiling
+        //The entity can still configure how high it goes on its own if needed
+        //In that case, make sure to update the entity's BattlePosition as well
+        private readonly int AirborneY = 40;
+        private readonly int CeilingY = 100;
 
         /// <summary>
         /// How many phase cycles (Player and Enemy turns) passed
@@ -554,6 +560,9 @@ namespace PaperMarioBattleSystem
                 Enemies[index] = enemy;
 
                 Vector2 battlepos = EnemyStartPos + new Vector2(PositionXDiff * index, 0);
+                if (enemy.HeightState == HeightStates.Airborne) battlepos.Y -= AirborneY;
+                else if (enemy.HeightState == HeightStates.Ceiling) battlepos.Y -= CeilingY;
+
                 enemy.Position = battlepos;
                 enemy.SetBattlePosition(battlepos);
                 enemy.SetBattleIndex(index);

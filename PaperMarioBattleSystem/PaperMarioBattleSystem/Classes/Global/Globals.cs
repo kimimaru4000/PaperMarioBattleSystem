@@ -1010,6 +1010,11 @@ namespace PaperMarioBattleSystem
             public const string EggThrowName = "EggThrow";
         }
 
+        public static class ParagoombaBattleAnimations
+        {
+            public const string DiveKickName = "DiveKick";
+        }
+
         /// <summary>
         /// Damage Effect-related animations in battle.
         /// </summary>
@@ -1024,6 +1029,9 @@ namespace PaperMarioBattleSystem
         public static class StatusBattleAnimations
         {
             public const string StoneName = "StoneName";
+            public const string DizzyName = "Dizzy";
+            public const string ConfusedName = "Confused";
+            public const string PoisonName = "Poison";
         }
     }
 

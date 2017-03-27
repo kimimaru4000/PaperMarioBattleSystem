@@ -14,43 +14,18 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class MoveAmountSeqAction : MoveToSeqAction
     {
-        private Vector2 AmountMoved = Vector2.Zero;
-        private Vector2 OrigPos = Vector2.Zero;
+        private Vector2 MoveAmount = Vector2.Zero;
 
         public MoveAmountSeqAction(Vector2 amount, double duration) : base(duration)
         {
-            MoveDest = amount;
+            MoveAmount = amount;
         }
 
         protected override void OnStart()
         {
-            OrigPos = Entity.Position;
+            base.OnStart();
 
-            //Set direction directly
-            MoveDir.X = MoveDest.X < 0f ? -1f : MoveDest.X > 0f ? 1f : 0f;
-            MoveDir.Y = MoveDest.Y < 0f ? -1f : MoveDest.Y > 0f ? 1f : 0f;
-
-            MoveTotal.X = Math.Abs(MoveDest.X) / (float)Duration;
-            MoveTotal.Y = Math.Abs(MoveDest.Y) / (float)Duration;
-        }
-
-        protected override void OnEnd()
-        {
-            AmountMoved = MoveDest;
-            Entity.Position = OrigPos + AmountMoved;
-        }
-
-        protected override void OnUpdate()
-        {
-            AmountMoved += MoveDir * MoveAmt;
-            Entity.Position = OrigPos + AmountMoved;
-
-            //Check if the amount moved in the X and Y are at or beyond the amount that should've been moved
-            if (((MoveDir.X < 0f && AmountMoved.X <= MoveDest.X) || (MoveDir.X >= 0f && AmountMoved.X >= MoveDest.X))
-                && ((MoveDir.Y < 0f && AmountMoved.Y <= MoveDest.Y) || (MoveDir.Y >= 0f && AmountMoved.Y >= MoveDest.Y)))
-            {
-                End();
-            }
+            MoveEnd = MoveStart + MoveAmount;
         }
     }
 }

@@ -123,7 +123,7 @@ Idea 2 - Entity-defined DamageEffects
 -------------------------------------
 1. Have a DamageEffects enum value in each BattleEntity's EntityProperties. This value would tell which DamageEffects the entity is affected by
 2. When determining the DamageEffects that go through, check the move's DamageEffects, and if it's there, check the entity's. If the entity
-has that DamageEffect, then keep it in and assume that the entity is affected by it. This lets us the entity is affected by DamageEffects
+has that DamageEffect, then keep it in and assume that the entity is affected by it. This lets us know the entity is affected by DamageEffects
 without having to cast
 3. When doing all the logic to handle the DamageEffects, perform the casts explicitly. An InvalidCastException tells us that an entity was
 wrongly marked as being affected by a DamageEffect but not implementing any behavior regarding it.
@@ -131,3 +131,18 @@ wrongly marked as being affected by a DamageEffect but not implementing any beha
 We might still need to use a Dictionary to define the DamageEffects and their types for handling. We'll get to that once this is done.
 
 I think Idea 2 is preferable for both readability and performance.
+
+Update (3/27/17)
+----------------
+The implementation has been working well and is currently implemented for Kooper. No casting has been required so far, as all the logic
+is implemented in the entity's class.
+
+However, I'm currently implementing a Paragoomba as a Winged entity, and I think the best way to handle rendering the wings is have a
+separate ObjAnimManager for them. In the PM games, the wings are rendered behind the enemy and are not part of the same sprite, as the wings
+are stored as separate textures and fall off when being removed.
+
+We can have an event in ObjAnimManager that fires when changing animations. We can subscribe to that event and play the same animation, but
+for the wings. This would keep the wings in sync with the enemy.
+
+Also another note: When flipped, Koopa Troopas, Clefts, and other flippable enemies are immune to fright since they can't run away!
+Find a way to implement this.

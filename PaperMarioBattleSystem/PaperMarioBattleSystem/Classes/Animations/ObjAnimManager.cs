@@ -83,6 +83,12 @@ namespace PaperMarioBattleSystem
             }
 
             anim.SetKey(animName);
+
+            //Set the Animation's SpriteSheet to this one if it's not defined
+            //If an Animation needs to use a different SpriteSheet for its animations, this won't stop it
+            if (anim.SpriteSheet == null)
+                anim.SpriteSheet = SpriteSheet;
+
             Animations.Add(animName, anim);
 
             //Play the first animation that gets added by default

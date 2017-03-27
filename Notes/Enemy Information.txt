@@ -59,3 +59,7 @@ Bristle
 Paragoomba
 ----------
 -In PM, loses wings when hit with the Hammer from a First Strike
+
+Flipped Enemies (Koopa Troopas, Clefts, Bristles)
+-------------------------------------------------
+-They are immune to Fright when flipped, as they can't run away

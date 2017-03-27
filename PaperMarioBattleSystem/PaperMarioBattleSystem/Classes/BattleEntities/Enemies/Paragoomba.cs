@@ -15,6 +15,8 @@ namespace PaperMarioBattleSystem
     {
         protected override MoveAction ActionUsed => Grounded == false ? new DiveKick() : base.ActionUsed;
 
+        private CroppedTexture2D idleOneWings = null;// new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
+
         public Paragoomba()
         {
             Name = "Paragoomba";
@@ -38,12 +40,11 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(33, 89, 27, 30), 1000d)));
 
-            AnimManager.PlayAnimation(AnimationGlobals.IdleName);
-
             //Wings (for the first idle frame, at least) are offset (-7, -1 (or left 7, up 1)) from the Paragoomba's body
             //Both Wings for each frame are in a single cropped texture
             //The wings are rendered underneath the Paragoomba's body
             //CroppedTexture2D idleOneWings = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
+            idleOneWings = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
         }
 
         protected override void HandleDamageEffects(Enumerations.DamageEffects damageEffects)
@@ -65,6 +66,7 @@ namespace PaperMarioBattleSystem
             if (Grounded == false)
             {
                 //Draw wings
+                SpriteRenderer.Instance.Draw(idleOneWings.Tex, Position + new Vector2(-7, -1), idleOneWings.SourceRect, Color.White, false, .09f, false);
             }
         }
 

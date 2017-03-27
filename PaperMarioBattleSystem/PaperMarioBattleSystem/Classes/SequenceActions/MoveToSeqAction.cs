@@ -13,59 +13,67 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class MoveToSeqAction : SequenceAction
     {
-        protected Vector2 MoveDest = Vector2.Zero;
-        protected Vector2 MoveDir = Vector2.Zero;
-        protected Vector2 MoveTotal = Vector2.Zero;
+        /// <summary>
+        /// The start position of the BattleEntity.
+        /// </summary>
+        protected Vector2 MoveStart = Vector2.Zero;
 
-        protected Vector2 MoveAmt
-        {
-            get
-            {
-                float elapsedTime = (float)Time.ElapsedMilliseconds;
-                return new Vector2(MoveTotal.X * elapsedTime, MoveTotal.Y * elapsedTime);
-            }
-        }
+        /// <summary>
+        /// The end position of the BattleEntity.
+        /// </summary>
+        protected Vector2 MoveEnd = Vector2.Zero;
+
+        /// <summary>
+        /// The elapsed time.
+        /// </summary>
+        protected float ElapsedTime = 0f;
 
         public MoveToSeqAction(Vector2 destination, double duration) : base(duration)
         {
-            MoveDest = destination;
+            MoveEnd = destination;
         }
 
         public MoveToSeqAction(BattleEntity entity, Vector2 destination, double duration) : base(entity, duration)
         {
-            MoveDest = destination;
+            MoveEnd = destination;
         }
 
         protected MoveToSeqAction(double duration) : base(duration)
         {
-
+            
         }
 
         protected override void OnStart()
         {
-            Vector2 entityPos = Entity.Position;
+            MoveStart = Entity.Position;
 
-            MoveDir.X = MoveDest.X < entityPos.X ? -1f : 1f;
-            MoveDir.Y = MoveDest.Y < entityPos.Y ? -1f : 1f;
-
-            Vector2 movePerFrame = entityPos - MoveDest;
-
-            MoveTotal.X = Math.Abs(movePerFrame.X) / (float)Duration;
-            MoveTotal.Y = Math.Abs(movePerFrame.Y) / (float)Duration;
+            ElapsedTime = 0f;
         }
 
         protected override void OnEnd()
         {
-            Entity.Position = MoveDest;
+            Entity.Position = MoveEnd;
+
+            ElapsedTime = 0f;
         }
 
         protected override void OnUpdate()
         {
-            Entity.Position += MoveDir * MoveAmt;
+            //End immediately if the duration is 0 or less
+            if (Duration <= 0d)
+            {
+                End();
+                return;
+            }
 
-            //Check if the X and Y are at or beyond the destination
-            if (((MoveDir.X < 0f && Entity.Position.X <= MoveDest.X) || (MoveDir.X >= 0 && Entity.Position.X >= MoveDest.X))
-                && ((MoveDir.Y < 0f && Entity.Position.Y <= MoveDest.Y) || (MoveDir.Y >= 0 && Entity.Position.Y >= MoveDest.Y)))
+            //Get current time
+            ElapsedTime += (float)Time.ElapsedMilliseconds;
+
+            //Lerp to get the position and scale by the total duration
+            Entity.Position = Vector2.Lerp(MoveStart, MoveEnd, ElapsedTime / (float)Duration);
+
+            //End after the designated amount of time has passed
+            if (ElapsedTime >= Duration)
             {
                 End();
             }

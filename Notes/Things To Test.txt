@@ -130,3 +130,9 @@ In PM, hitting a Paragoomba with a Hammer from a First Strike makes it lose its 
 3. Does any damage at all cause it to lose its wings?
 
 Results: 
+
+Winged enemies and Immobilized
+------------------------------
+Do Paragoomba and Paratroopa wings stop moving when Immobilized? Test in both PM and TTYD, and check similar statuses like Sleep.
+
+Results:

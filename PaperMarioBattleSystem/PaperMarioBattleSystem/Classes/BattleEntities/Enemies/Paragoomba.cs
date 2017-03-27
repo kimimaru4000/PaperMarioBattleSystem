@@ -13,6 +13,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class Paragoomba : Goomba, IWingedEntity
     {
+        protected override MoveAction ActionUsed => Grounded == false ? new DiveKick() : base.ActionUsed;
+
         public Paragoomba()
         {
             Name = "Paragoomba";
@@ -24,9 +26,9 @@ namespace PaperMarioBattleSystem
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Paragoomba");
             AnimManager.SetSpriteSheet(spriteSheet);
 
-            AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(129, 45, 27, 28), 500d),
-                new Animation.Frame(new Rectangle(2, 7, 26, 30), 500d)));
+            AnimManager.AddAnimation(AnimationGlobals.IdleName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(129, 45, 27, 28), 250d),
+                new Animation.Frame(new Rectangle(2, 7, 26, 30), 250d)));
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(97, 48, 29, 27), 500d),
                 new Animation.Frame(new Rectangle(65, 88, 29, 27), 500d),
@@ -35,6 +37,8 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(33, 89, 27, 30), 1000d)));
+
+            AnimManager.PlayAnimation(AnimationGlobals.IdleName);
 
             //Wings (for the first idle frame, at least) are offset (-7, -1 (or left 7, up 1)) from the Paragoomba's body
             //Both Wings for each frame are in a single cropped texture
@@ -93,6 +97,7 @@ namespace PaperMarioBattleSystem
             //Set the vulnerability to the same as the grounded entity. The grounded entity shouldn't have a winged vulnerabilty
             EntityProperties.SetVulnerableDamageEffects(GroundedEntity.EntityProperties.GetVulnerableDamageEffects());
 
+            //Change HeightState and battle position
             ChangeHeightState(Enumerations.HeightStates.Grounded);
         }
     }

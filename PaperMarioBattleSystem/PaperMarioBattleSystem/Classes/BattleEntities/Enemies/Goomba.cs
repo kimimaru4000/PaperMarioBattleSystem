@@ -13,6 +13,9 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class Goomba : BattleEnemy
     {
+        //NOTE: Temporary until we get a simple enemy AI system in
+        protected virtual MoveAction ActionUsed => new Jump();
+        
         public Goomba() : base(new Stats(1, 2, 0, 0, 0))
         {
             Name = "Goomba";
@@ -38,7 +41,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
-            StartAction(new Jump(), BattleManager.Instance.GetFrontPlayer());
+            StartAction(ActionUsed, BattleManager.Instance.GetFrontPlayer());
         }
 
         public override void TurnUpdate()

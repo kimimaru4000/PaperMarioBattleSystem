@@ -90,6 +90,7 @@
     <Compile Include="Classes\Actions\MessageAction.cs" />
     <Compile Include="Classes\Actions\MoveAction.cs" />
     <Compile Include="Classes\Actions\NoAction.cs" />
+    <Compile Include="Classes\Actions\Paragoomba\DiveKick.cs" />
     <Compile Include="Classes\Actions\Player\ChangePartner.cs" />
     <Compile Include="Classes\Actions\Special\ArtAttack.cs" />
     <Compile Include="Classes\Actions\Special\Focus.cs" />
@@ -228,6 +229,7 @@
     <Compile Include="Classes\Sequences\Mario\PowerBounceSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\TornadoJumpSequence.cs" />
     <Compile Include="Classes\Sequences\NoSequence.cs" />
+    <Compile Include="Classes\Sequences\Paragoomba\DiveKickSequence.cs" />
     <Compile Include="Classes\Sequences\Sequence.cs" />
     <Compile Include="Classes\Sequences\Special\ArtAttackSequence.cs" />
     <Compile Include="Classes\Sequences\Special\CrystalStarMoveSequence.cs" />

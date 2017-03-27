@@ -122,7 +122,10 @@ namespace PaperMarioBattleSystem
                 UnFlip();
             }
 
-            EndTurn();
+            //Make Kooper do a NoAction instead of directly ending his turn
+            BattleUIManager.Instance.ClearMenuStack();
+            StartAction(new NoAction(), null);
+            //EndTurn();
         }
 
         private void UnFlip()

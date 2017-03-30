@@ -63,3 +63,8 @@ Paragoomba
 Flipped Enemies (Koopa Troopas, Clefts, Bristles)
 -------------------------------------------------
 -They are immune to Fright when flipped, as they can't run away
+
+Electro Blooper
+---------------
+-When it electrifies itself, it doesn't gain the Electrified status
+-Hammer Throw gets rid of its Electrified physical attribute when it electrifies himself

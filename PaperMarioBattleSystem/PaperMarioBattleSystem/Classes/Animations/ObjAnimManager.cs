@@ -38,6 +38,13 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public Animation CurrentAnim { get; private set; } = null;
 
+        protected virtual string GetName => (NamedObj == null) ? "N/A" : NamedObj.Name;
+
+        protected ObjAnimManager()
+        {
+
+        }
+
         public ObjAnimManager(INameable nameableObj)
         {
             NamedObj = nameableObj;
@@ -64,13 +71,13 @@ namespace PaperMarioBattleSystem
             //Return if trying to add null animation
             if (anim == null)
             {
-                Debug.LogError($"Trying to add null animation called \"{animName}\" to {NamedObj.Name}, so it won't be added");
+                Debug.LogError($"Trying to add null animation called \"{animName}\" to {GetName}, so it won't be added");
                 return;
             }
 
             if (Animations.ContainsKey(animName) == true)
             {
-                Debug.LogWarning($"{NamedObj.Name} already has an animation called \"{animName}\" and will be replaced");
+                Debug.LogWarning($"{GetName} already has an animation called \"{animName}\" and will be replaced");
 
                 //Clear the current animation reference if it is the animation being removed
                 Animation prevAnim = Animations[animName];
@@ -104,11 +111,26 @@ namespace PaperMarioBattleSystem
             //If animation cannot be found
             if (Animations.ContainsKey(animName) == false)
             {
-                Debug.LogError($"Cannot find animation called \"{animName}\" for {NamedObj.Name} to play");
+                Debug.LogError($"Cannot find animation called \"{animName}\" for {GetName} to play");
                 return null;
             }
 
             return Animations[animName];
+        }
+
+        /// <summary>
+        /// Sets the child frames for an animation to render.
+        /// </summary>
+        /// <param name="animName">The name of the animation.</param>
+        /// <param name="frames">The Frames to set as the Animation's child frames.</param>
+        public void AddAnimationChildFrames(string animName, params Animation.Frame[] frames)
+        {
+            Animation anim = GetAnimation(animName);
+
+            //The error message is in the previous method so simply return
+            if (anim == null) return;
+
+            anim.SetChildFrames(frames);
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     {
         protected override MoveAction ActionUsed => Grounded == false ? new DiveKick() : base.ActionUsed;
 
-        private CroppedTexture2D idleOneWings = null;// new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
+        //private CroppedTexture2D idleOneWings = null;// new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
 
         public Paragoomba()
         {
@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.IdleName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(129, 45, 27, 28), 250d),
-                new Animation.Frame(new Rectangle(2, 7, 26, 30), 250d)));
+                new Animation.Frame(new Rectangle(1, 7, 27, 30), 250d)));
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(97, 48, 29, 27), 500d),
                 new Animation.Frame(new Rectangle(65, 88, 29, 27), 500d),
@@ -44,7 +44,11 @@ namespace PaperMarioBattleSystem
             //Both Wings for each frame are in a single cropped texture
             //The wings are rendered underneath the Paragoomba's body
             //CroppedTexture2D idleOneWings = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
-            idleOneWings = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
+            //idleOneWings = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
+
+            AnimManager.AddAnimationChildFrames(AnimationGlobals.IdleName,
+                new Animation.Frame(new Rectangle(3, 166, 41, 18), 250d, new Vector2(-7, -1), -.01f),
+                new Animation.Frame(new Rectangle(50, 161, 41, 14), 250d, new Vector2(-7, -1), -.01f));
         }
 
         protected override void HandleDamageEffects(Enumerations.DamageEffects damageEffects)
@@ -55,18 +59,6 @@ namespace PaperMarioBattleSystem
                 && EntityProperties.IsVulnerableToDamageEffect(Enumerations.DamageEffects.RemovesWings) == true)
             {
                 HandleGrounded();
-            }
-        }
-
-        public override void Draw()
-        {
-            base.Draw();
-
-            //Draw wings if winged
-            if (Grounded == false)
-            {
-                //Draw wings
-                SpriteRenderer.Instance.Draw(idleOneWings.Tex, Position + new Vector2(-7, -1), idleOneWings.SourceRect, Color.White, false, .09f, false);
             }
         }
 

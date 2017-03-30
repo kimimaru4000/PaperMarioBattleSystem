@@ -31,6 +31,13 @@ namespace PaperMarioBattleSystem
         protected Frame[] Frames = null;
 
         /// <summary>
+        /// Additional frames to be rendered at the same time as the normal frames. This cannot exceed the number of 
+        /// frames in the normal frames array.
+        /// <para>This is commonly used for BattleEntities implementing <see cref="IWingedEntity"/>.</para>
+        /// </summary>
+        protected Frame[] ChildFrames = null;
+
+        /// <summary>
         /// The max number of frames in the animation
         /// </summary>
         protected int MaxFrames = 1;
@@ -73,6 +80,9 @@ namespace PaperMarioBattleSystem
         protected int MaxFrameIndex => MaxFrames - 1;
         protected Frame CurFrame => Frames[CurFrameNum];
 
+        protected double ElapsedFrameTime => (Time.ActiveMilliseconds - PrevFrameTimer);
+        protected double TrueCurFrameDuration => (CurFrame.Duration * (Speed <= 0f ? 0f : (1f / Speed)));
+
         public Animation(Texture2D spriteSheet, params Frame[] frames)
         {
             SpriteSheet = spriteSheet;
@@ -88,11 +98,8 @@ namespace PaperMarioBattleSystem
 
         public Animation(Texture2D spriteSheet, float speed, bool isUIAnim, params Frame[] frames) : this(spriteSheet, isUIAnim, frames)
         {
-            
+            SetSpeed(speed);
         }
-
-        protected double ElapsedFrameTime => (Time.ActiveMilliseconds - PrevFrameTimer);
-        protected double TrueCurFrameDuration => (CurFrame.Duration * (Speed <= 0f ? 0f : (1f/Speed)));
 
         /// <summary>
         /// Sets the animation's key
@@ -241,6 +248,17 @@ namespace PaperMarioBattleSystem
         public void Draw(Vector2 position, Color color, bool flipped, float layer)
         {
             CurFrame.Draw(SpriteSheet, position, color, flipped, layer, IsUIAnim);
+
+            //Draw child frames
+            if (ChildFrames != null && CurFrameNum < ChildFrames.Length)
+            {
+                ChildFrames[CurFrameNum].Draw(SpriteSheet, position, color, flipped, layer, IsUIAnim);
+            }
+        }
+
+        public void SetChildFrames(params Frame[] childFrames)
+        {
+            ChildFrames = childFrames;
         }
 
         /// <summary>
@@ -258,15 +276,40 @@ namespace PaperMarioBattleSystem
             /// </summary>
             public double Duration;
 
+            /// <summary>
+            /// The position offset of the frame.
+            /// </summary>
+            public Vector2 PosOffset;
+
+            /// <summary>
+            /// The depth offset of the frame.
+            /// </summary>
+            public float DepthOffset;
+
             public Frame(Rectangle drawRegion, double duration)
             {
                 DrawRegion = drawRegion;
                 Duration = duration;
+                PosOffset = Vector2.Zero;
+                DepthOffset = 0f;
+            }
+
+            public Frame(Rectangle drawRegion, double duration, Vector2 posOffset) : this(drawRegion, duration)
+            {
+                PosOffset = posOffset;
+            }
+
+            public Frame (Rectangle drawRegion, double duration, Vector2 posOffset, float depthOffset) : this(drawRegion, duration, posOffset)
+            {
+                DepthOffset = depthOffset;
             }
 
             public void Draw(Texture2D spriteSheet, Vector2 position, Color color, bool flipped, float layer, bool uibatch)
             {
-                SpriteRenderer.Instance.Draw(spriteSheet, position, DrawRegion, color, flipped, layer, uibatch);
+                Vector2 realPos = position + PosOffset;
+                float realLayer = layer + DepthOffset;
+
+                SpriteRenderer.Instance.Draw(spriteSheet, realPos, DrawRegion, color, flipped, realLayer, uibatch);
             }
         }
     }

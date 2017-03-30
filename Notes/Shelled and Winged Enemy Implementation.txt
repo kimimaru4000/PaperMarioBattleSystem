@@ -145,4 +145,20 @@ We can have an event in ObjAnimManager that fires when changing animations. We c
 for the wings. This would keep the wings in sync with the enemy.
 
 Also another note: When flipped, Koopa Troopas, Clefts, and other flippable enemies are immune to fright since they can't run away!
-Find a way to implement this.
+Implement this by adding immunities.
+
+Update 2 (3/27/17)
+------------------
+It looks like it's better to handle the wings by allowing child animation frames. Considering the wings themselves are just animation frames,
+this should work.
+
+-Add a Frame[] ChildFrames field in the base Animation class
+-Add an SetChildFrames(params Frame[]) method
+-Add AddAnimationChildFrames(string, params Frame[]) to ObjAnimManager, which calls SetChildFrames on the animation if it was found
+-Draw child frames in Animation
+
+-Add a Vector2 offset to each animation frame which can be specified in another constructor
+-Add a float depth offset to each animation frame which can be specified in another constructor
+
+It may be tricky to get the wings to stay in place and disappear when the entity transitions to grounded with this system, but we'll
+see how it works for now.

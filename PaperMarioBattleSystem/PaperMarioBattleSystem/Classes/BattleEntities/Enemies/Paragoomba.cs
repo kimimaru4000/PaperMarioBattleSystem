@@ -15,8 +15,6 @@ namespace PaperMarioBattleSystem
     {
         protected override MoveAction ActionUsed => Grounded == false ? new DiveKick() : base.ActionUsed;
 
-        //private CroppedTexture2D idleOneWings = null;// new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
-
         public Paragoomba()
         {
             Name = "Paragoomba";
@@ -29,8 +27,11 @@ namespace PaperMarioBattleSystem
             AnimManager.SetSpriteSheet(spriteSheet);
 
             AnimManager.AddAnimation(AnimationGlobals.IdleName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(129, 45, 27, 28), 250d),
-                new Animation.Frame(new Rectangle(1, 7, 27, 30), 250d)));
+                new Animation.Frame(new Rectangle(129, 45, 27, 28), 200d),
+                new Animation.Frame(new Rectangle(1, 7, 27, 30), 200d)));
+            AnimManager.AddAnimation(AnimationGlobals.RunningName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(129, 45, 27, 28), 100d),
+                new Animation.Frame(new Rectangle(1, 7, 27, 30), 100d)));
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(97, 48, 29, 27), 500d),
                 new Animation.Frame(new Rectangle(65, 88, 29, 27), 500d),
@@ -47,8 +48,14 @@ namespace PaperMarioBattleSystem
             //idleOneWings = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
 
             AnimManager.AddAnimationChildFrames(AnimationGlobals.IdleName,
-                new Animation.Frame(new Rectangle(3, 166, 41, 18), 250d, new Vector2(-7, -1), -.01f),
-                new Animation.Frame(new Rectangle(50, 161, 41, 14), 250d, new Vector2(-7, -1), -.01f));
+                new Animation.Frame(new Rectangle(3, 166, 41, 18), 200d, new Vector2(-7, -1), -.01f),
+                new Animation.Frame(new Rectangle(50, 161, 41, 14), 200d, new Vector2(-7, 13), -.01f));
+            AnimManager.AddAnimationChildFrames(AnimationGlobals.RunningName,
+                new Animation.Frame(new Rectangle(3, 166, 41, 18), 100d, new Vector2(-7, -1), -.01f),
+                new Animation.Frame(new Rectangle(50, 161, 41, 14), 100d, new Vector2(-7, 13), -.01f));
+
+            AnimManager.AddAnimationChildFrames(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName,
+                new Animation.Frame(new Rectangle(120, 121, 31, 21), 1000d, new Vector2(-1, -9), -.01f));
         }
 
         protected override void HandleDamageEffects(Enumerations.DamageEffects damageEffects)

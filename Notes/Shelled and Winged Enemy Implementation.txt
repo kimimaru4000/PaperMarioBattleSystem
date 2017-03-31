@@ -162,3 +162,12 @@ this should work.
 
 It may be tricky to get the wings to stay in place and disappear when the entity transitions to grounded with this system, but we'll
 see how it works for now.
+
+Update (3/30/17)
+----------------
+I think I know how to get the wings to stay in place. We'll remove the child animations when the wings should be removed, then have
+a BattleEvent for winged entities falling. This will show the entity being grounded and show the wings disappearing. If the entity is dead,
+then don't do this and let the death animation play instead.
+
+However, for this to work correctly we need the targeting system in place, which means telling an entity that it's being attacked so it doesn't
+do things it should until it stops being targeted.

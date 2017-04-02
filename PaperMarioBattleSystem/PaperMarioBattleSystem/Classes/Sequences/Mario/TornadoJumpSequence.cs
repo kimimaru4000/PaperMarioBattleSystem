@@ -22,6 +22,9 @@ namespace PaperMarioBattleSystem
 
         private int SuccessfulButtons = 0;
 
+        private BattleEntity[] CurTargets = null;
+        private TornadoJump TJAction = null;
+
         public TornadoJumpSequence(MoveAction moveAction) : base(moveAction)
         {
 
@@ -31,6 +34,9 @@ namespace PaperMarioBattleSystem
         {
             base.OnStart();
 
+            CurTargets = EntitiesAffected;
+            TJAction = Action as TornadoJump;
+
             DamageMod = 1;
             SecondPart = false;
         }
@@ -38,6 +44,19 @@ namespace PaperMarioBattleSystem
         protected override void OnEnd()
         {
             base.OnEnd();
+
+            if (CurTargets != null)
+            {
+                //Stop targeting
+                for (int i = 0; i < CurTargets.Length; i++)
+                {
+                    CurTargets[i].StopTarget();
+                }
+            }
+
+            //Clear the current targets
+            CurTargets = null;
+            TJAction = null;
 
             DamageMod = 1;
             SecondPart = false;
@@ -66,6 +85,22 @@ namespace PaperMarioBattleSystem
                     }
                     else
                     {
+                        //Update the current targets on the second part
+                        if (TJAction != null)
+                        {
+                            CurTargets = TJAction.GetAerialTargets;
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"{Action.Name} is not of type {nameof(TornadoJump)} in {nameof(TornadoJumpSequence)}!");
+                        }
+
+                        //Target the entities here
+                        for (int i = 0; i < CurTargets.Length; i++)
+                        {
+                            CurTargets[i].TargetForMove(User);
+                        }
+
                         StartActionCommandInput();
                         CurSequenceAction = new WaitForCommandSeqAction(2000d, actionCommand, CommandEnabled);
                     }
@@ -91,6 +126,13 @@ namespace PaperMarioBattleSystem
                     {
                         base.SequenceSuccessBranch();
 
+                        //Stop targeting the current targets. If it's a Winged entity, it won't be airborne anymore and thus
+                        //won't take damage from the second part of the attack
+                        for (int i = 0; i < CurTargets.Length; i++)
+                        {
+                            CurTargets[i].StopTarget();
+                        }
+
                         SecondPart = true;
                         ChangeSequenceBranch(SequenceBranch.Main);
                     }
@@ -101,24 +143,24 @@ namespace PaperMarioBattleSystem
                     break;
                 case 1:
                     int aerialDamage = BaseDamage;
-                    BattleEntity[] aerialTargets = EntitiesAffected;
                     DamageData aerialDamageInfo = Action.DamageProperties;
 
                     //Make sure the action used for this sequence is Tornado Jump
                     //If not, default to base damage and base targets
-                    TornadoJump tornadoJump = Action as TornadoJump;
-                    if (tornadoJump != null)
+                    if (TJAction != null)
                     {
-                        aerialDamage = tornadoJump.AerialDamage.Damage;
-                        aerialTargets = tornadoJump.GetAerialTargets;
-                        aerialDamageInfo = tornadoJump.AerialDamage;
+                        aerialDamage = TJAction.AerialDamage.Damage;
+                        aerialDamageInfo = TJAction.AerialDamage;
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"{Action.Name} is not of type {nameof(TornadoJump)} in {nameof(TornadoJumpSequence)}!");
                     }
 
-                    AttemptDamage(aerialDamage, aerialTargets, aerialDamageInfo, true);
+                    AttemptDamage(aerialDamage, CurTargets, aerialDamageInfo, true);
 
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration);
                     ChangeSequenceBranch(SequenceBranch.End);
-
                     break;
                 default:
                     PrintInvalidSequence();

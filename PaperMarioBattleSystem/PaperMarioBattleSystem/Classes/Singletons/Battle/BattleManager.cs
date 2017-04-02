@@ -399,14 +399,6 @@ namespace PaperMarioBattleSystem
 
             EntityTurn.OnTurnEnd();
 
-            //Handle all dead entities
-            /*NOTE: If an entity dies from something that happens at the start of the turn, such as Frozen, then it will stay alive until
-              the next turn when this is called. Find a fix for this*/
-            //CheckDeadEntities();
-
-            //Update the battle state
-            //UpdateBattleState();
-
             //The battle is finished
             if (State == BattleState.Done)
             {
@@ -419,6 +411,10 @@ namespace PaperMarioBattleSystem
             FindNextEntityTurn();
         }
 
+        /// <summary>
+        /// Called when an entity dies to update the battle state and remove dead entities.
+        /// Called in <see cref="DeathBattleEvent"/>.
+        /// </summary>
         public void HandleEntityDeaths()
         {
             CheckDeadEntities();

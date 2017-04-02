@@ -40,12 +40,12 @@ namespace PaperMarioBattleSystem
 
             if (Anim.Finished == true)
             {
-                //NOTE: Check if the entity is being targeted here and replay the animation if so.
+                //Check if the entity is being targeted here and replay the animation if so.
                 //This prevents the death event from occurring until the entity is completely done being attacked
-                //if (Entity.IsTargeted == true)
-                    //HurtAnim.Play();
-                //else
-                End();
+                if (Entity.IsTargeted == true)
+                    Anim.Play();
+                else
+                    End();
             }
         }
     }

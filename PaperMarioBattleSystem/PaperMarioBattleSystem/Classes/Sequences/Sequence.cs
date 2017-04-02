@@ -143,7 +143,13 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void OnStart()
         {
-
+            if (EntitiesAffected != null)
+            {
+                for (int i = 0; i < EntitiesAffected.Length; i++)
+                {
+                    EntitiesAffected[i].TargetForMove(User);
+                }
+            }
         }
 
         /// <summary>
@@ -159,15 +165,19 @@ namespace PaperMarioBattleSystem
 
             ChangeJumpBranch(SequenceBranch.None);
 
-            EntitiesAffected = null;
-
             InterruptionHandler = BaseInterruptionHandler;
 
             OnEnd();
 
+            EntitiesAffected = null;
+
             if (User == BattleManager.Instance.EntityTurn)
             {
                 User.EndTurn();
+            }
+            else
+            {
+                Debug.LogError($"{User.Name} is not {BattleManager.Instance.EntityTurn.Name}, whose turn it currently is");
             }
         }
 
@@ -176,7 +186,13 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void OnEnd()
         {
-
+            if (EntitiesAffected != null)
+            {
+                for (int i = 0; i < EntitiesAffected.Length; i++)
+                {
+                    EntitiesAffected[i].StopTarget();
+                }
+            }
         }
 
         /// <summary>

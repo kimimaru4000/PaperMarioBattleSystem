@@ -33,9 +33,8 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(129, 45, 27, 28), 100d),
                 new Animation.Frame(new Rectangle(1, 7, 27, 30), 100d)));
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(97, 48, 29, 27), 500d),
-                new Animation.Frame(new Rectangle(65, 88, 29, 27), 500d),
-                new Animation.Frame(new Rectangle(98, 89, 27, 26), 500d)));
+                new Animation.Frame(new Rectangle(97, 48, 29, 27), 80d),
+                new Animation.Frame(new Rectangle(98, 89, 27, 26), 80d)));
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(98, 89, 27, 26), 1000d)));
 
             AnimManager.AddAnimation(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName, new Animation(spriteSheet,
@@ -53,6 +52,11 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimationChildFrames(AnimationGlobals.RunningName,
                 new Animation.Frame(new Rectangle(3, 166, 41, 18), 100d, new Vector2(-7, -1), -.01f),
                 new Animation.Frame(new Rectangle(50, 161, 41, 14), 100d, new Vector2(-7, 13), -.01f));
+            AnimManager.AddAnimationChildFrames(AnimationGlobals.HurtName,
+                new Animation.Frame(new Rectangle(3, 166, 41, 18), 80d, new Vector2(-4, -1), -.01f),
+                new Animation.Frame(new Rectangle(3, 166, 41, 18), 80d, new Vector2(-4, -1), -.01f));
+            AnimManager.AddAnimationChildFrames(AnimationGlobals.DeathName,
+                new Animation.Frame(new Rectangle(3, 166, 41, 18), 1000d, new Vector2(-4, -1), -.01f));
 
             AnimManager.AddAnimationChildFrames(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName,
                 new Animation.Frame(new Rectangle(120, 121, 31, 21), 1000d, new Vector2(-1, -9), -.01f));

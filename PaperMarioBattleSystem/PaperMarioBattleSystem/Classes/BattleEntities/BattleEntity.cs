@@ -71,7 +71,7 @@ namespace PaperMarioBattleSystem
         public int MaxTurns { get; protected set; } = BattleGlobals.DefaultTurnCount;
 
         public string Name { get; protected set; } = "Entity";
-        
+
         /// <summary>
         /// The entity's current position
         /// </summary>
@@ -91,6 +91,16 @@ namespace PaperMarioBattleSystem
         /// The previous BattleAction the entity used
         /// </summary>
         public MoveAction PreviousAction { get; protected set; } = null;
+
+        /// <summary>
+        /// The BattleEntity targeting this one.
+        /// </summary>
+        public BattleEntity Targeter { get; private set; } = null;
+
+        /// <summary>
+        /// Tells whether the BattleEntity is being targeted.
+        /// </summary>
+        public bool IsTargeted => (Targeter != null);
 
         /// <summary>
         /// Tells whether the BattleEntity is in Danger or Peril
@@ -245,7 +255,7 @@ namespace PaperMarioBattleSystem
         {
             BattleStats.Attack += attack;
         }
-        
+
         public void RaiseDefense(int defense)
         {
             BattleStats.Defense += defense;
@@ -322,7 +332,7 @@ namespace PaperMarioBattleSystem
             //I'm not sure about bosses yet, so that'll need to be tested
 
             BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Death,
-                new BattleManager.BattleState[] { /*BattleManager.BattleState.Turn,*/ BattleManager.BattleState.TurnEnd },
+                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                 new DeathBattleEvent(this));
 
             //Remove all StatusEffects on the entity
@@ -407,7 +417,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public virtual void OnBattleStart()
         {
-            
+
         }
 
         #region Damage Related
@@ -718,6 +728,24 @@ namespace PaperMarioBattleSystem
         public abstract int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType);
 
         #endregion
+
+        /// <summary>
+        /// Targets this BattleEntity for a move.
+        /// This prevents it from doing certain things, like playing the death animation, until it is no longer targeted.
+        /// </summary>
+        /// <param name="attacker">The BattleEntity targeting this one for an attack.</param>
+        public void TargetForMove(BattleEntity attacker)
+        {
+            Targeter = attacker;
+        }
+
+        /// <summary>
+        /// Tells the BattleEntity that it is no longer being targeted.
+        /// </summary>
+        public void StopTarget()
+        {
+            Targeter = null;
+        }
 
         /// <summary>
         /// Used for update logic that applies to the entity regardless of whether it is its turn or not

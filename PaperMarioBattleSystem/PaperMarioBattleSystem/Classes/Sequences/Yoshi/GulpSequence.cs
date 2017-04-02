@@ -12,10 +12,34 @@ namespace PaperMarioBattleSystem
     public sealed class GulpSequence : Sequence
     {
         public double WalkDuration = 4000f;
+        private BattleEntity BehindEntity = null;
 
         public GulpSequence(MoveAction moveAction) : base(moveAction)
         {
             
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            //Check if there is a BattleEntity behind the one eaten and if it can be hit by this move
+            BattleEntity[] behindEntities = BattleManager.Instance.GetEntitiesBehind(EntitiesAffected[0]);
+            behindEntities = BattleManager.Instance.FilterEntitiesByHeights(behindEntities, Action.MoveProperties.HeightsAffected);
+
+            //Store the reference to the behind entity and tell it it's being targeted
+            if (behindEntities.Length > 0)
+            {
+                BehindEntity = behindEntities[0];
+                BehindEntity.TargetForMove(User);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            BehindEntity?.StopTarget();
         }
 
         protected override void CommandSuccess()
@@ -69,18 +93,13 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.GulpEatName, true);
 
-                    //The entity spit out
-                    BattleEntity eatenEntity = EntitiesAffected[0];
+                    //Deal damage to the entity spit out
+                    AttemptDamage(BaseDamage, EntitiesAffected[0], Action.DamageProperties, false);
 
-                    //Get the entity behind the one spit out
-                    //If it can be hit by this move, make that entity take damage as well
-                    BattleEntity[] behindEntities = BattleManager.Instance.GetEntitiesBehind(eatenEntity);
-                    behindEntities = BattleManager.Instance.FilterEntitiesByHeights(behindEntities, Action.MoveProperties.HeightsAffected);
-
-                    AttemptDamage(BaseDamage, eatenEntity, Action.DamageProperties, false);
-                    if (behindEntities.Length > 0)
+                    //Deal damage to the entity behind, if one exists
+                    if (BehindEntity != null)
                     {
-                        AttemptDamage(BaseDamage, behindEntities[0], Action.DamageProperties, false);
+                        AttemptDamage(BaseDamage, BehindEntity, Action.DamageProperties, false);
                     }
 
                     ChangeSequenceBranch(SequenceBranch.End);

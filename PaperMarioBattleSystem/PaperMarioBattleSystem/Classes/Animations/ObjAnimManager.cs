@@ -106,6 +106,11 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Gets an animation by name.
+        /// </summary>
+        /// <param name="animName">The name of the animation.</param>
+        /// <returns>An animation if found, otherwise null.</returns>
         public Animation GetAnimation(string animName)
         {
             //If animation cannot be found
@@ -116,6 +121,15 @@ namespace PaperMarioBattleSystem
             }
 
             return Animations[animName];
+        }
+
+        /// <summary>
+        /// Gets all animations.
+        /// </summary>
+        /// <returns>An array of all the animations.</returns>
+        public Animation[] GetAllAnimations()
+        {
+            return Animations.Values.ToArray();
         }
 
         /// <summary>

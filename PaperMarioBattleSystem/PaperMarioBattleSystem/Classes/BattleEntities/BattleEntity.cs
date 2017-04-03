@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Any fighter that takes part in battle
     /// </summary>
-    public abstract class BattleEntity : INameable, IUpdateable, IDrawable
+    public abstract class BattleEntity : INameable, IUpdateable, IDrawable, ITintable
     {
         #region Delegates and Events
 
@@ -71,6 +71,8 @@ namespace PaperMarioBattleSystem
         public int MaxTurns { get; protected set; } = BattleGlobals.DefaultTurnCount;
 
         public string Name { get; protected set; } = "Entity";
+
+        public Color TintColor { get; } = Color.White;
 
         /// <summary>
         /// The entity's current position
@@ -763,7 +765,7 @@ namespace PaperMarioBattleSystem
 
         public virtual void Draw()
         {
-            AnimManager.CurrentAnim?.Draw(Position, Color.White, EntityType != EntityTypes.Enemy, .1f);
+            AnimManager.CurrentAnim?.Draw(Position, TintColor, EntityType != EntityTypes.Enemy, .1f);
             PreviousAction?.Draw();
 
             //Draw Status Effect icons on the BattleEntity

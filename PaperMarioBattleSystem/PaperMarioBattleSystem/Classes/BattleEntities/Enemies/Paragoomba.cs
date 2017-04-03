@@ -89,6 +89,11 @@ namespace PaperMarioBattleSystem
 
             ChangeToGroundedEntity();
 
+            //Queue the BattleEvent to move the entity down
+            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage - 1,
+                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                new GroundedBattleEvent(this, new Vector2(BattlePosition.X, BattleManager.Instance.EnemyStartPos.Y)));
+
             //After all this set the GroundedEntity to null, as we don't need its information anymore
             GroundedEntity = null;
         }
@@ -102,7 +107,7 @@ namespace PaperMarioBattleSystem
             //Set the vulnerability to the same as the grounded entity. The grounded entity shouldn't have a winged vulnerabilty
             EntityProperties.SetVulnerableDamageEffects(GroundedEntity.EntityProperties.GetVulnerableDamageEffects());
 
-            //Change HeightState and battle position
+            //Change HeightState
             ChangeHeightState(Enumerations.HeightStates.Grounded);
         }
     }

@@ -94,12 +94,17 @@ namespace PaperMarioBattleSystem
         public Enumerations.DamageEffects FlippedOnEffects => 
             (Enumerations.DamageEffects.FlipsShelled | Enumerations.DamageEffects.FlipsClefts);
 
+        public int DefenseLoss => BattleStats.BaseDefense;
+
         public void HandleFlipped()
         {
             if (Flipped == false)
             {
                 int immobile = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.Immobile) + 1;
                 EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Immobile, immobile);
+
+                //Lower defense by an amount when flipped
+                LowerDefense(DefenseLoss);
             }
 
             Flipped = true;
@@ -139,6 +144,9 @@ namespace PaperMarioBattleSystem
             {
                 EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Immobile, immobile);
             }
+
+            //Raise defense again after unflipping
+            RaiseDefense(DefenseLoss);
 
             ElapsedFlippedTurns = 0;
         }

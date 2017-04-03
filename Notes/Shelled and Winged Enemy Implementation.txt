@@ -67,6 +67,7 @@ IFlippableEntity
 -int for how long it stays flipped
 -int for how long it's been flipped
 -DamageEffects enum value for the flip conditions, or in other words which DamageEffects flip it
+-int for how much its Defense goes down when flipped
 -Handler for the flip; what happens when flipped, like the animation to play, Defense reduction, and such
 
 IWingedEntity

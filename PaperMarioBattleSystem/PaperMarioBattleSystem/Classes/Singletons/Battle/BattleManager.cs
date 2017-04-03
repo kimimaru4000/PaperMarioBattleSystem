@@ -51,14 +51,14 @@ namespace PaperMarioBattleSystem
         //Starting positions
         private readonly Vector2 MarioPos = new Vector2(-150, 100);
         private readonly Vector2 PartnerPos = new Vector2(-190, 120);
-        private readonly Vector2 EnemyStartPos = new Vector2(150, 125);
-        private readonly int PositionXDiff = 30;
+        public readonly Vector2 EnemyStartPos = new Vector2(150, 125);
+        public readonly int PositionXDiff = 30;
         
         //These are general values used by most entities in the air or on the ceiling
         //The entity can still configure how high it goes on its own if needed
         //In that case, make sure to update the entity's BattlePosition as well
-        private readonly int AirborneY = 40;
-        private readonly int CeilingY = 100;
+        public readonly int AirborneY = 40;
+        public readonly int CeilingY = 100;
 
         /// <summary>
         /// How many phase cycles (Player and Enemy turns) passed

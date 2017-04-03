@@ -118,6 +118,7 @@
     <Compile Include="Classes\BattleEvents\BattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DamagedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DeathBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\GroundedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\MessageBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\SwapPositionBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitBattleEvent.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Classes\Interfaces\INameable.cs" />
     <Compile Include="Classes\Interfaces\ISegmentEntity.cs" />
     <Compile Include="Classes\Interfaces\ISpinnableEntity.cs" />
+    <Compile Include="Classes\Interfaces\ITintable.cs" />
     <Compile Include="Classes\Interfaces\ITransformable.cs" />
     <Compile Include="Classes\Interfaces\IUpdateable.cs" />
     <Compile Include="Classes\Interfaces\IWingedEntity.cs" />

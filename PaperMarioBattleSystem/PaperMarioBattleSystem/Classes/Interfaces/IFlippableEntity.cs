@@ -35,6 +35,12 @@ namespace PaperMarioBattleSystem
         DamageEffects FlippedOnEffects { get; }
 
         /// <summary>
+        /// The amount of Defense lost by the BattleEntity when flipped.
+        /// In many cases this will be the BattleEntity's BaseDefense.
+        /// </summary>
+        int DefenseLoss { get; }
+
+        /// <summary>
         /// What happens when the BattleEntity is flipped.
         /// </summary>
         void HandleFlipped();

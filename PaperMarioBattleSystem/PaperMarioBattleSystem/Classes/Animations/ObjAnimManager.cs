@@ -124,12 +124,30 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Gets a set of animations by their names.
+        /// </summary>
+        /// <param name="animNames">The names of the animations.</param>
+        /// <returns>An array of animations. If none were found, an empty array.</returns>
+        public Animation[] GetAnimations(params string[] animNames)
+        {
+            List<Animation> animations = new List<Animation>();
+
+            for (int i = 0; i < animNames.Length; i++)
+            {
+                Animation anim = GetAnimation(animNames[i]);
+                if (anim != null) animations.Add(anim);
+            }
+
+            return animations.ToArray();
+        }
+
+        /// <summary>
         /// Gets all animations.
         /// </summary>
         /// <returns>An array of all the animations.</returns>
         public Animation[] GetAllAnimations()
         {
-            return Animations.Values.ToArray();
+            return GetAnimations(Animations.Keys.ToArray());
         }
 
         /// <summary>

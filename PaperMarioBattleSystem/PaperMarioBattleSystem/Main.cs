@@ -138,6 +138,7 @@ namespace PaperMarioBattleSystem
             SoundManager.Instance.Dispose();
             SpriteRenderer.Instance.Dispose();
             BattleUIManager.Instance.Dispose();
+            BattleVFXManager.Instance.Dispose();
         }
 
         /// <summary>
@@ -158,6 +159,7 @@ namespace PaperMarioBattleSystem
         {
             BattleManager.Instance.Update();
             BattleUIManager.Instance.Update();
+            BattleVFXManager.Instance.Update();
         }
 
         /// <summary>
@@ -216,6 +218,7 @@ namespace PaperMarioBattleSystem
         {
             BattleManager.Instance.Draw();
             BattleUIManager.Instance.Draw();
+            BattleVFXManager.Instance.Draw();
         }
 
         /// <summary>

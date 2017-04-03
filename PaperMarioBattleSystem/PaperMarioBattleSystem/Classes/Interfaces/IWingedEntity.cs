@@ -38,6 +38,11 @@ namespace PaperMarioBattleSystem
         BattleEntity GroundedEntity { get; }
 
         /// <summary>
+        /// Removes the Winged BattleEntity's wings.
+        /// </summary>
+        void RemoveWings();
+
+        /// <summary>
         /// What happens when the BattleEntity is Grounded.
         /// </summary>
         void HandleGrounded();

@@ -43,8 +43,6 @@ namespace PaperMarioBattleSystem
             //Wings (for the first idle frame, at least) are offset (-7, -1 (or left 7, up 1)) from the Paragoomba's body
             //Both Wings for each frame are in a single cropped texture
             //The wings are rendered underneath the Paragoomba's body
-            //CroppedTexture2D idleOneWings = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
-            //idleOneWings = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
 
             AnimManager.AddAnimationChildFrames(AnimationGlobals.IdleName,
                 new Animation.Frame(new Rectangle(3, 166, 41, 18), 200d, new Vector2(-7, -1), -.01f),
@@ -83,6 +81,28 @@ namespace PaperMarioBattleSystem
 
         public int ElapsedGroundedTurns { get; private set; }
 
+        public void RemoveWings()
+        {
+            Animation[] animations = AnimManager.GetAnimations(AnimationGlobals.IdleName, AnimationGlobals.RunningName,
+                AnimationGlobals.HurtName, AnimationGlobals.DeathName);
+
+            //Clear all child frames with wings
+            for (int i = 0; i < animations.Length; i++)
+            {
+                animations[i].SetChildFrames(null);
+            }
+
+            //Add VFX for the wings disappearing
+            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Paragoomba");
+            CroppedTexture2D wingSprite = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
+
+            //Put the wings in the same spot as they were in the Paragoomba's last animation
+            WingsDisappearVFX wingsDisappear = new WingsDisappearVFX(wingSprite, BattlePosition + new Vector2(-4, -1),
+                EntityType != Enumerations.EntityTypes.Enemy, .1f - .01f, 500d, 500d, (1d / 30d) * Time.MsPerS);
+
+            BattleVFXManager.Instance.AddVFXElement(wingsDisappear);
+        }
+
         public void HandleGrounded()
         {
             Grounded = true;
@@ -93,6 +113,11 @@ namespace PaperMarioBattleSystem
             BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage - 1,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                 new GroundedBattleEvent(this, new Vector2(BattlePosition.X, BattleManager.Instance.EnemyStartPos.Y)));
+
+            //Queue the BattleEvent to remove the wings
+            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage - 1,
+                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                new RemoveWingsBattleEvent(this));
 
             //After all this set the GroundedEntity to null, as we don't need its information anymore
             GroundedEntity = null;

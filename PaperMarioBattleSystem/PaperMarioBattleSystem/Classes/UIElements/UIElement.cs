@@ -8,7 +8,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The base class for all types of UI Elements.
-    /// UI Elements are handled in the BattleUIManager.
+    /// UI Elements are handled in the <see cref="BattleUIManager"/>.
     /// </summary>
     public abstract class UIElement : IUpdateable, IDrawable
     {

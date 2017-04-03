@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
         private Vector2 GroundedPos = Vector2.Zero;
 
         private float ElapsedTime = 0f;
-        private const float Duration = 500f;
+        private float MoveDuration = 500f;
 
         //NOTE: See if we can get this to work with the DamagedBattleEvent
         private Animation HurtAnim = null;
@@ -36,7 +36,7 @@ namespace PaperMarioBattleSystem
 
             HurtAnim = Entity.AnimManager.GetAnimation(AnimationGlobals.HurtName);
             Entity.AnimManager.PlayAnimation(AnimationGlobals.HurtName);
-
+            
             StartPos = Entity.BattlePosition;
 
             ElapsedTime = 0f;
@@ -46,13 +46,11 @@ namespace PaperMarioBattleSystem
         {
             base.OnEnd();
 
-            if (Entity.IsDead == false)
-            {
-                Entity.SetBattlePosition(GroundedPos);
-                Entity.Position = GroundedPos;
+            Entity.SetBattlePosition(GroundedPos);
+            Entity.Position = GroundedPos;
 
+            if (Entity.IsDead == false)
                 Entity.AnimManager.PlayAnimation(Entity.GetIdleAnim());
-            }
 
             ElapsedTime = 0f;
             StartPos = GroundedPos = Vector2.Zero;
@@ -62,7 +60,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnUpdate()
         {
-            if (Entity.IsDead == true || Duration <=0d)
+            if (MoveDuration <= 0d)
             {
                 End();
                 return;
@@ -81,10 +79,10 @@ namespace PaperMarioBattleSystem
             ElapsedTime += (float)Time.ElapsedMilliseconds;
 
             //Lerp to get the position and scale by the duration
-            Entity.Position = Vector2.Lerp(StartPos, GroundedPos, ElapsedTime / Duration);
+            Entity.Position = Vector2.Lerp(StartPos, GroundedPos, ElapsedTime / MoveDuration);
 
             //End after the designated amount of time has passed
-            if (ElapsedTime >= Duration)
+            if (ElapsedTime >= MoveDuration)
             {
                 End();
             }

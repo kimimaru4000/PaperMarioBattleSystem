@@ -76,6 +76,7 @@ IWingedEntity
 -int for how long it stays grounded when grounded (only used by Kammy Koopa)
 -int for how long it's been grounded (only used by Kammy Koopa)
 -Information to use when grounded; which entity to essentially become
+-Handler for removing its wings; which animations to remove them from and any VFX that need to show
 -Handler for being grounded; what happens when grounded, like the animation to play and such
 
 ISegmentEntity
@@ -172,3 +173,14 @@ then don't do this and let the death animation play instead.
 
 However, for this to work correctly we need the targeting system in place, which means telling an entity that it's being attacked so it doesn't
 do things it should until it stops being targeted.
+
+Update (4/3/17)
+---------------
+I added the targeting system as well as a BattleVFXManager that handles any sort of VFX that needs to show.
+
+Along with that, I added VFX for wings disappearing. I also added a new RemoveWings() method in IWingedEntity that is called through
+a new RemoveWingsBattleEvent with the same priority as the one that causes them to fall down. I took the TTYD approach and made
+Winged entities fall regardless if they died from the attack or not since it made handling everything much easier.
+
+Winged entities can now fall and show their wings disappearing quite easily. We'll see later how this works for other, more complex enemies like
+Kammy Koopa.

@@ -120,6 +120,7 @@
     <Compile Include="Classes\BattleEvents\DeathBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\GroundedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\MessageBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\RemoveWingsBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\SwapPositionBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitForAnimBattleEvent.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="Classes\Singletons\Battle\BattleEventManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleUIManager.cs" />
+    <Compile Include="Classes\Singletons\Battle\BattleVFXManager.cs" />
     <Compile Include="Classes\Singletons\General\AssetManager.cs" />
     <Compile Include="Classes\Singletons\General\Camera.cs" />
     <Compile Include="Classes\Global\Globals.cs" />
@@ -299,6 +301,8 @@
     <Compile Include="Classes\UIElements\IDisableable.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />
     <Compile Include="Classes\UIElements\UIElement.cs" />
+    <Compile Include="Classes\VFXElements\VFXElement.cs" />
+    <Compile Include="Classes\VFXElements\WingsDisappearVFX.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

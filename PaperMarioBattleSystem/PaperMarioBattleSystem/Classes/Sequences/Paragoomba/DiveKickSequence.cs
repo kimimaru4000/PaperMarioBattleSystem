@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName);
                     CurSequenceAction = new MoveToSeqAction(new Vector2(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]).X, User.BattlePosition.Y), 700d);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
             {
                 //Go back to your battle position
                 case 0:
-                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName);
                     CurSequenceAction = new MoveToSeqAction(new Vector2(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]).X, User.BattlePosition.Y), 500d);
                     break;
                 case 1:

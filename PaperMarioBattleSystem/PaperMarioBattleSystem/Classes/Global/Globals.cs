@@ -1016,6 +1016,15 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Animations for Winged BattleEntities.
+        /// </summary>
+        public static class WingedBattleAnimations
+        {
+            public const string WingedIdleName = "WingedIdle";
+            public const string FlyingName = "Flying";
+        }
+
+        /// <summary>
         /// Damage Effect-related animations in battle.
         /// </summary>
         public static class DamageEffectBattleAnimations

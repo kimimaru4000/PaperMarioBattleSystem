@@ -26,10 +26,10 @@ namespace PaperMarioBattleSystem
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Paragoomba");
             AnimManager.SetSpriteSheet(spriteSheet);
 
-            AnimManager.AddAnimation(AnimationGlobals.IdleName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.WingedIdleName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(129, 45, 27, 28), 200d),
                 new Animation.Frame(new Rectangle(1, 7, 27, 30), 200d)));
-            AnimManager.AddAnimation(AnimationGlobals.RunningName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(129, 45, 27, 28), 100d),
                 new Animation.Frame(new Rectangle(1, 7, 27, 30), 100d)));
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
@@ -44,10 +44,10 @@ namespace PaperMarioBattleSystem
             //Both Wings for each frame are in a single cropped texture
             //The wings are rendered underneath the Paragoomba's body
 
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.IdleName,
+            AnimManager.AddAnimationChildFrames(AnimationGlobals.WingedBattleAnimations.WingedIdleName,
                 new Animation.Frame(new Rectangle(3, 166, 41, 18), 200d, new Vector2(-7, -1), -.01f),
                 new Animation.Frame(new Rectangle(50, 161, 41, 14), 200d, new Vector2(-7, 13), -.01f));
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.RunningName,
+            AnimManager.AddAnimationChildFrames(AnimationGlobals.WingedBattleAnimations.FlyingName,
                 new Animation.Frame(new Rectangle(3, 166, 41, 18), 100d, new Vector2(-7, -1), -.01f),
                 new Animation.Frame(new Rectangle(50, 161, 41, 14), 100d, new Vector2(-7, 13), -.01f));
             AnimManager.AddAnimationChildFrames(AnimationGlobals.HurtName,
@@ -60,6 +60,13 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(120, 121, 31, 21), 1000d, new Vector2(-1, -9), -.01f));
         }
 
+        public override void OnBattleStart()
+        {
+            base.OnBattleStart();
+
+            AnimManager.PlayAnimation(GetIdleAnim());
+        }
+
         protected override void HandleDamageEffects(Enumerations.DamageEffects damageEffects)
         {
             base.HandleDamageEffects(damageEffects);
@@ -69,6 +76,13 @@ namespace PaperMarioBattleSystem
             {
                 HandleGrounded();
             }
+        }
+
+        public override string GetIdleAnim()
+        {
+            if (Grounded == false) return AnimationGlobals.WingedBattleAnimations.WingedIdleName;
+
+            return base.GetIdleAnim();
         }
 
         #region Interface Implementation
@@ -83,8 +97,8 @@ namespace PaperMarioBattleSystem
 
         public void RemoveWings()
         {
-            Animation[] animations = AnimManager.GetAnimations(AnimationGlobals.IdleName, AnimationGlobals.RunningName,
-                AnimationGlobals.HurtName, AnimationGlobals.DeathName);
+            //Remove the wings from the hurt and death animations
+            Animation[] animations = AnimManager.GetAnimations(AnimationGlobals.HurtName, AnimationGlobals.DeathName);
 
             //Clear all child frames with wings
             for (int i = 0; i < animations.Length; i++)

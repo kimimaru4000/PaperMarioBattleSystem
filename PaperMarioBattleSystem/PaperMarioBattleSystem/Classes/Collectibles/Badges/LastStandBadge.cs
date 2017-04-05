@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PaperMarioBattleSystem
 {
+    /// <summary>
+    /// Last Stand - Cuts the damage Mario takes in half (rounded up) when in Danger or Peril.
+    /// </summary>
     public class LastStandBadge : Badge
     {
         public LastStandBadge()
@@ -21,18 +24,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            //int divider = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.AdditionalProperty.DangerDamageDivider).IntValue + 1;
-            //EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.AdditionalProperty.DangerDamageDivider, new MiscValueHolder(divider));
+            ///Functionality currently handled in the damage calculation itself <see cref="Interactions.VictimLastStandStep"/>
         }
 
         protected override void OnUnequip()
         {
-            //int divider = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.AdditionalProperty.DangerDamageDivider).IntValue - 1;
-            //EntityEquipped.EntityProperties.RemoveMiscProperty(Enumerations.AdditionalProperty.DangerDamageDivider);
-            //if (divider > 0)
-            //{
-            //    EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.AdditionalProperty.DangerDamageDivider, new MiscValueHolder(divider));
-            //}
+            
         }
     }
 }

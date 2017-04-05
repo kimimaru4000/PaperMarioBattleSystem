@@ -26,18 +26,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            //int multiplier = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.AdditionalProperty.DamageTakenMultiplier).IntValue + 1;
-            //EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.AdditionalProperty.DamageTakenMultiplier, new MiscValueHolder(multiplier));
+            ///Functionality currently handled in the damage calculation itself <see cref="Interactions.VictimDoublePainStep"/>
         }
 
         protected override void OnUnequip()
         {
-            //int multiplier = EntityEquipped.EntityProperties.GetMiscProperty(Enumerations.AdditionalProperty.DamageTakenMultiplier).IntValue - 1;
-            //EntityEquipped.EntityProperties.RemoveMiscProperty(Enumerations.AdditionalProperty.DamageTakenMultiplier);
-            //if (multiplier > 0)
-            //{
-            //    EntityEquipped.EntityProperties.AddMiscProperty(Enumerations.AdditionalProperty.DamageTakenMultiplier, new MiscValueHolder(multiplier));
-            //}
+            
         }
     }
 }

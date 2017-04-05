@@ -25,22 +25,12 @@ namespace PaperMarioBattleSystem
 
         protected sealed override void OnEquip()
         {
-            //Add 1 to AdditionalGuardDefense
-            //int additional = EntityEquipped.EntityProperties.GetMiscProperty(AdditionalProperty.AdditionalGuardDefense).IntValue + 1;
-
-            //EntityEquipped.EntityProperties.AddMiscProperty(AdditionalProperty.AdditionalGuardDefense, new MiscValueHolder(additional));
+            ///Functionality currently handled in the damage calculation itself <see cref="Interactions.VictimDefensiveStep"/>
         }
 
         protected sealed override void OnUnequip()
         {
-            //Subtract 1 from AdditionalGuardDefense
-            //int subtracted = EntityEquipped.EntityProperties.GetMiscProperty(AdditionalProperty.AdditionalGuardDefense).IntValue - 1;
-            //EntityEquipped.EntityProperties.RemoveMiscProperty(AdditionalProperty.AdditionalGuardDefense);
-
-            //if (subtracted > 0)
-            //{
-            //    EntityEquipped.EntityProperties.AddMiscProperty(AdditionalProperty.AdditionalGuardDefense, new MiscValueHolder(subtracted));
-            //}
+            
         }
     }
 }

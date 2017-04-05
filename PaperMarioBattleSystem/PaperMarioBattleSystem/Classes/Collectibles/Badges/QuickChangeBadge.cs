@@ -24,25 +24,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            //Quick Change on Enemies shouldn't affect Players
-            if (EntityEquipped.EntityType != Enumerations.EntityTypes.Player) return;
-
-            //int count = BattlePlayer.PlayerProperties.GetProperty<int>(BattlePlayerGlobals.PlayerProperties.QuickChangeCount);
-            //BattlePlayer.PlayerProperties.AddProperty(BattlePlayerGlobals.PlayerProperties.QuickChangeCount, count + 1);
+            ///Functionality currently handled in the <see cref="ChangePartner"/> action
         }
 
         protected override void OnUnequip()
         {
-            //Quick Change on Enemies shouldn't affect Players
-            if (EntityEquipped.EntityType != Enumerations.EntityTypes.Player) return;
-
-            //int count = BattlePlayer.PlayerProperties.GetProperty<int>(BattlePlayerGlobals.PlayerProperties.QuickChangeCount) - 1;
-            //BattlePlayer.PlayerProperties.RemoveProperty(BattlePlayerGlobals.PlayerProperties.QuickChangeCount);
-            //
-            //if (count > 0)
-            //{
-            //    BattlePlayer.PlayerProperties.AddProperty(BattlePlayerGlobals.PlayerProperties.QuickChangeCount, count);
-            //}
+            
         }
     }
 }

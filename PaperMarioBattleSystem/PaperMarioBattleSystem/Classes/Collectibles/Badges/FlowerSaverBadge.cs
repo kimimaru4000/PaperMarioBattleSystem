@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            
+            ///Functionality currently handled in <see cref="MoveAction"/>
         }
 
         protected override void OnUnequip()

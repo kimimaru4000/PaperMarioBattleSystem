@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            
+            ///Functionality currently handled in the <see cref="PartnerBattleMenu"/>
         }
 
         protected override void OnUnequip()

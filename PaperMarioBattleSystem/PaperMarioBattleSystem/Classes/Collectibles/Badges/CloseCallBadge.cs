@@ -9,14 +9,11 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Close Call Badge - Increases Mario's Evasion by 33% (30% in PM) when he's in Danger or Peril.
     /// </summary>
-    public class CloseCallBadge : Badge
+    public class CloseCallBadge : HealthStateBadge
     {
         protected const double EvasionValue = .66d;
 
-        /// <summary>
-        /// Tells whether the Evasion bonus was granted or not.
-        /// </summary>
-        private bool GaveBonus = false;
+        protected override bool CanActivate => EntityEquipped.IsInDanger;
 
         public CloseCallBadge()
         {
@@ -30,57 +27,14 @@ namespace PaperMarioBattleSystem
             AffectedType = BadgeGlobals.AffectedTypes.Self;
         }
 
-        protected sealed override void OnEquip()
+        protected override void ApplyEffects()
         {
-            EntityEquipped.HealthStateChangedEvent -= OnEntityHealthStateChange;
-            EntityEquipped.HealthStateChangedEvent += OnEntityHealthStateChange;
-
-            //Add the Evasion bonus on equip if the BattleEntity is in Danger or Peril
-            if (EntityEquipped.IsInDanger == true)
-                AddEvasionBonus();
+            EntityEquipped.AddEvasionMod(EvasionValue);
         }
 
-        protected sealed override void OnUnequip()
+        protected override void RemoveEffects()
         {
-            EntityEquipped.HealthStateChangedEvent -= OnEntityHealthStateChange;
-
-            RemoveEvasionBonus();
-        }
-
-        private void OnEntityHealthStateChange(Enumerations.HealthStates newHealthState)
-        {
-            if (EntityEquipped.IsInDanger == true)
-            {
-                AddEvasionBonus();
-            }
-            else
-            {
-                RemoveEvasionBonus();
-            }
-        }
-
-        /// <summary>
-        /// Adds Close Call's Evasion value if it wasn't already added.
-        /// </summary>
-        private void AddEvasionBonus()
-        {
-            if (GaveBonus == false)
-            {
-                EntityEquipped.AddEvasionMod(EvasionValue);
-                GaveBonus = true;
-            }
-        }
-
-        /// <summary>
-        /// Removes Close Call's Evasion value if it was added.
-        /// </summary>
-        private void RemoveEvasionBonus()
-        {
-            if (GaveBonus == true)
-            {
-                EntityEquipped.RemoveEvasionMod(EvasionValue);
-                GaveBonus = false;
-            }
+            EntityEquipped.RemoveEvasionMod(EvasionValue);
         }
     }
 }

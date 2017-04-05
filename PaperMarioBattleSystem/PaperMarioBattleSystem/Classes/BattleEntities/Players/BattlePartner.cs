@@ -40,8 +40,7 @@ namespace PaperMarioBattleSystem
         public override void HealFP(int fp)
         {
             BattleMario mario = BattleManager.Instance.GetMario();
-            mario.BattleStats.FP = UtilityGlobals.Clamp(mario.BattleStats.FP + fp, 0, mario.BattleStats.MaxFP);
-            Debug.Log($"{mario.Name} healed {fp} FP!");
+            mario.HealFP(fp);
         }
 
         /// <summary>
@@ -50,8 +49,19 @@ namespace PaperMarioBattleSystem
         public override void LoseFP(int fp)
         {
             BattleMario mario = BattleManager.Instance.GetMario();
-            mario.BattleStats.FP = UtilityGlobals.Clamp(mario.BattleStats.FP - fp, 0, mario.BattleStats.MaxFP);
-            Debug.Log($"{mario.Name} lost {fp} FP!");
+            mario.LoseFP(fp);
+        }
+
+        public override void RaiseMaxFP(int fp)
+        {
+            BattleMario mario = BattleManager.Instance.GetMario();
+            mario.RaiseMaxFP(fp);
+        }
+
+        public override void LowerMaxFP(int fp)
+        {
+            BattleMario mario = BattleManager.Instance.GetMario();
+            mario.LowerMaxFP(fp);
         }
 
         public override void OnBattleStart()
@@ -64,6 +74,7 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDipP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.GroupFocus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFineP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlusP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
         }
 
         public override void OnPhaseCycleStart()

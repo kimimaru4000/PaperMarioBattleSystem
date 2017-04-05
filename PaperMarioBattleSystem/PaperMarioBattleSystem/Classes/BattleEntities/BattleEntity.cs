@@ -253,6 +253,30 @@ namespace PaperMarioBattleSystem
             Debug.Log($"{Name} lost {fp} FP!");
         }
 
+        public void RaiseMaxHP(int hp)
+        {
+            BattleStats.MaxHP += hp;
+            HealHP(0);
+        }
+
+        public void LowerMaxHP(int hp)
+        {
+            BattleStats.MaxHP -= hp;
+            HealHP(0);
+        }
+
+        public virtual void RaiseMaxFP(int fp)
+        {
+            BattleStats.MaxFP += fp;
+            HealFP(0);
+        }
+
+        public virtual void LowerMaxFP(int fp)
+        {
+            BattleStats.MaxFP -= fp;
+            HealFP(0);
+        }
+
         public void RaiseAttack(int attack)
         {
             BattleStats.Attack += attack;

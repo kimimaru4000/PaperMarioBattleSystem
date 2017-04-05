@@ -108,6 +108,10 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new ZapTapBadge());
             Inventory.Instance.AddBadge(new ReturnPostageBadge());
 
+            Inventory.Instance.AddBadge(new HPPlusBadge());
+            Inventory.Instance.AddBadge(new HPPlusPBadge());
+            Inventory.Instance.AddBadge(new FPPlusBadge());
+
             //Items
             Inventory.Instance.AddItem(new Mushroom());
             Inventory.Instance.AddItem(new HoneySyrup());

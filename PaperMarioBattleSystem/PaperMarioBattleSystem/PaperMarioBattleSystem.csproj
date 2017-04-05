@@ -146,8 +146,11 @@
     <Compile Include="Classes\Collectibles\Badges\FirstAttackBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FlowerSaverBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FlowerSaverPBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\FPPlusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\GroupFocusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\HeadRattleBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\HPPlusBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\HPPlusPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\IcePowerBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\IceSmashBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LastStandBadge.cs" />

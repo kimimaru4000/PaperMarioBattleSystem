@@ -184,3 +184,16 @@ Winged entities fall regardless if they died from the attack or not since it mad
 
 Winged entities can now fall and show their wings disappearing quite easily. We'll see later how this works for other, more complex enemies like
 Kammy Koopa.
+
+Update (4/9/17) - Segmented Entities
+------------------------------------
+Now onto segmented enemies like Pokeys. Pokeys have multiple segments that determine their height and what moves they can do. These can be handled
+in the individual entity classes. However, Pokey segments appear to be different child objects. We currently have support for only one set
+of child animations, but the segments seem to be more than just visuals.
+
+The bottom-most segment acts as the pivot of the Pokey and determines how it rotates for its animations. Segments can also be used as an attack
+and thrown at Mario or his Partner. In TTYD, if a segment is Superguarded, it gets reflected back at the Pokey, dealing the same damage of the
+attack back at it. Segments can be removed from the top via attack or the bottom via an attack with a RemovesSegment property.
+
+It may be worth looking into making segments a different type of BattleEntity, namely a supporting one. Segmented entities will have a list of these
+and handle them as they see fit.

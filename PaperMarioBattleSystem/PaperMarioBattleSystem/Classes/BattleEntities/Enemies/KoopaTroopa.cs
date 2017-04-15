@@ -43,6 +43,13 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(248, 61, 34, 49), 200d),
                 new Animation.Frame(new Rectangle(201, 62, 33, 49), 200d)));
 
+            AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(102, 115, 39, 44), 250d),
+                new Animation.Frame(new Rectangle(244, 117, 40, 42), 250d),
+                new Animation.Frame(new Rectangle(200, 115, 36, 43), 250d)));
+            AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(244, 117, 40, 42), 1000d)));
+
             AnimManager.AddAnimation(AnimationGlobals.ShelledBattleAnimations.EnterShellName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(193, 245, 27, 26), 70d),
                 new Animation.Frame(new Rectangle(34, 278, 26, 24), 70d)));
@@ -56,6 +63,9 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.ShelledBattleAnimations.ExitShellName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(34, 278, 26, 24), 70d),
                 new Animation.Frame(new Rectangle(193, 245, 27, 26), 70d)));
+            AnimManager.AddAnimation(AnimationGlobals.ShelledBattleAnimations.FlippedName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(5, 216, 53, 23), 300d),
+                new Animation.Frame(new Rectangle(68, 209, 54, 30), 300d)));
         }
 
         public override void OnTurnStart()
@@ -117,7 +127,9 @@ namespace PaperMarioBattleSystem
 
             Flipped = true;
 
-            AnimManager.PlayAnimation(AnimationGlobals.ShelledBattleAnimations.FlippedName);
+            //NOTE: Handle this better, temp fix
+            if (AnimManager.CurrentAnim?.Key != AnimationGlobals.DeathName)
+                AnimManager.PlayAnimation(AnimationGlobals.ShelledBattleAnimations.FlippedName);
 
             //Getting hit again while flipped refreshes the flip timer
             ElapsedFlippedTurns = 0;

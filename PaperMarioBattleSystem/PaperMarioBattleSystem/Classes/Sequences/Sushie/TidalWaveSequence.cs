@@ -21,6 +21,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEnd()
         {
+            base.OnEnd();
             AdditionalDamage = 0;
         }
 

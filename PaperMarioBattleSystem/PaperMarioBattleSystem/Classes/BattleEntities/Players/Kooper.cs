@@ -33,12 +33,17 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(97, 117, 30, 50), 100d),
                 new Animation.Frame(new Rectangle(89, 3, 34, 48), 100d)));
 
-            AnimManager.AddAnimation(AnimationGlobals.KooperBattleAnimations.ShellSpinName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(233, 60, 34, 51), 700d)));
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarWishName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(193, 62, 30, 49), 700d)));
+
+            AnimManager.AddAnimation(AnimationGlobals.ShelledBattleAnimations.ShellSpinName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(162, 222, 28, 25), 250d),
                 new Animation.Frame(new Rectangle(194, 222, 28, 25), 250d),
                 new Animation.Frame(new Rectangle(225, 222, 30, 25), 250d),
                 new Animation.Frame(new Rectangle(258, 222, 28, 25), 250d)));
-            AnimManager.AddAnimation(AnimationGlobals.DamageEffectBattleAnimations.FlippedName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+            AnimManager.AddAnimation(AnimationGlobals.ShelledBattleAnimations.FlippedName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(69, 221, 53, 26), 350d),
                 new Animation.Frame(new Rectangle(5, 218, 54, 28), 350d)));
         }
@@ -67,7 +72,7 @@ namespace PaperMarioBattleSystem
         public override string GetIdleAnim()
         {
             //If Flipped, return the Flipped animation
-            if (Flipped == true) return AnimationGlobals.DamageEffectBattleAnimations.FlippedName;
+            if (Flipped == true) return AnimationGlobals.ShelledBattleAnimations.FlippedName;
 
             return base.GetIdleAnim();
         }
@@ -109,7 +114,7 @@ namespace PaperMarioBattleSystem
 
             Flipped = true;
 
-            AnimManager.PlayAnimation(AnimationGlobals.DamageEffectBattleAnimations.FlippedName);
+            AnimManager.PlayAnimation(AnimationGlobals.ShelledBattleAnimations.FlippedName);
 
             //Getting hit again while flipped refreshes the flip timer
             ElapsedFlippedTurns = 0;
@@ -130,7 +135,6 @@ namespace PaperMarioBattleSystem
             //Make Kooper do a NoAction instead of directly ending his turn
             BattleUIManager.Instance.ClearMenuStack();
             StartAction(new NoAction(), null);
-            //EndTurn();
         }
 
         private void UnFlip()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -43,8 +44,12 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetMario()), WalkDuration);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.ShelledBattleAnimations.EnterShellName);
+
+                    //Kooper, Koops, Koopa Troopas, Buzzy Beetles, and etc. always use Shell Toss in place
+                    Vector2 front = User.BattlePosition;
+
+                    CurSequenceAction = new MoveToSeqAction(front, WalkDuration);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -58,7 +63,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.AnimManager.PlayAnimation(AnimationGlobals.KooperBattleAnimations.ShellSpinName, true);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.ShelledBattleAnimations.ShellSpinName, true);
                     StartActionCommandInput();
                     CurSequenceAction = new WaitForCommandSeqAction(1500d, actionCommand, CommandEnabled);
                     break;
@@ -73,7 +78,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.AnimManager.GetAnimation(AnimationGlobals.KooperBattleAnimations.ShellSpinName).SetSpeed(3f);
+                    User.AnimManager.GetAnimation(AnimationGlobals.ShelledBattleAnimations.ShellSpinName)?.SetSpeed(3f);
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), SpinMoveDuration);
                     break;
                 case 1:
@@ -91,7 +96,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.AnimManager.GetAnimation(AnimationGlobals.KooperBattleAnimations.ShellSpinName).SetSpeed(2f);
+                    User.AnimManager.GetAnimation(AnimationGlobals.ShelledBattleAnimations.ShellSpinName)?.SetSpeed(2f);
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), SpinMoveDuration);
                     break;
                 case 1:
@@ -109,10 +114,14 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    User.AnimManager.PlayAnimation(AnimationGlobals.ShelledBattleAnimations.ExitShellName, true);
+                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.ShelledBattleAnimations.ExitShellName);
+                    break;
+                case 1:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName, true);
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
-                case 1:
+                case 2:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim(), true);
                     EndSequence();
                     break;

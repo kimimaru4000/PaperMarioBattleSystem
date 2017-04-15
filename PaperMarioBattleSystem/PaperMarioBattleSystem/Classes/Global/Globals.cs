@@ -997,7 +997,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public static class KooperBattleAnimations
         {
-            public const string ShellSpinName = "ShellSpin";
+            
         }
 
         /// <summary>
@@ -1016,20 +1016,24 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Animations for Shelled BattleEntities.
+        /// </summary>
+        public static class ShelledBattleAnimations
+        {
+            public const string EnterShellName = "EnterShell";
+            public const string ExitShellName = "ExitShell";
+            public const string ShellSpinName = "ShellSpin";
+
+            public const string FlippedName = "Flipped";
+        }
+
+        /// <summary>
         /// Animations for Winged BattleEntities.
         /// </summary>
         public static class WingedBattleAnimations
         {
             public const string WingedIdleName = "WingedIdle";
             public const string FlyingName = "Flying";
-        }
-
-        /// <summary>
-        /// Damage Effect-related animations in battle.
-        /// </summary>
-        public static class DamageEffectBattleAnimations
-        {
-            public const string FlippedName = "Flipped";
         }
 
         /// <summary>

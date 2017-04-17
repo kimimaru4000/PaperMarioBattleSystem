@@ -1015,6 +1015,11 @@ namespace PaperMarioBattleSystem
             public const string DiveKickName = "DiveKick";
         }
 
+        public static class ParatroopaBattleAnimations
+        {
+            public const string ShellShotName = "ShellShot";
+        }
+
         /// <summary>
         /// Animations for Shelled BattleEntities.
         /// </summary>

@@ -166,6 +166,19 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Gets the length of all frames in an animation.
+        /// </summary>
+        /// <param name="animName">The name of the animation.</param>
+        /// <returns>A double with the total length of all frames in the animation. 0 if the animation doesn't exist.</returns>
+        public double GetAnimationFrameLength(string animName)
+        {
+            Animation anim = GetAnimation(animName);
+            if (anim == null) return 0d;
+
+            return anim.GetTotalFrameLength();
+        }
+
+        /// <summary>
         /// Plays an animation, specified by name. If the animation does not have the specified animation, nothing happens.
         /// </summary>
         /// <param name="animName">The name of the animation to play</param>

@@ -262,6 +262,21 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Gets the total length of all frames in the Animation.
+        /// </summary>
+        /// <returns></returns>
+        public double GetTotalFrameLength()
+        {
+            double length = 0d;
+            for (int i = 0; i < Frames.Length; i++)
+            {
+                length += Frames[i].Duration;
+            }
+
+            return length;
+        }
+
+        /// <summary>
         /// An animation frame
         /// </summary>
         public struct Frame

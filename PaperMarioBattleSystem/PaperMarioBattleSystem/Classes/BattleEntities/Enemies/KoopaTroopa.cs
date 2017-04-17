@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
             EntityProperties.SetVulnerableDamageEffects(Enumerations.DamageEffects.FlipsShelled | Enumerations.DamageEffects.FlipsClefts);
 
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Sleep, new StatusPropertyHolder(95d, 0));
-            EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Dizzy, new StatusPropertyHolder(100d, 0));
+            EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Dizzy, new StatusPropertyHolder(90d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Confused, new StatusPropertyHolder(90d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Tiny, new StatusPropertyHolder(95d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Immobilized, new StatusPropertyHolder(100d, 0));
@@ -127,8 +127,8 @@ namespace PaperMarioBattleSystem
 
             Flipped = true;
 
-            //NOTE: Handle this better, temp fix
-            if (AnimManager.CurrentAnim?.Key != AnimationGlobals.DeathName)
+            //Don't play the animation if dead, as the death animation should play
+            if (IsDead == false)
                 AnimManager.PlayAnimation(AnimationGlobals.ShelledBattleAnimations.FlippedName);
 
             //Getting hit again while flipped refreshes the flip timer

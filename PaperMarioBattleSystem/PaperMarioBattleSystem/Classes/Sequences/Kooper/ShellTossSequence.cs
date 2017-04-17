@@ -64,8 +64,11 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.ShelledBattleAnimations.ShellSpinName, true);
+
+                    double animLength = User.AnimManager.GetAnimationFrameLength(AnimationGlobals.ShelledBattleAnimations.ShellSpinName);
+
                     StartActionCommandInput();
-                    CurSequenceAction = new WaitForCommandSeqAction(1500d, actionCommand, CommandEnabled);
+                    CurSequenceAction = new WaitForCommandSeqAction(animLength, actionCommand, CommandEnabled);
                     break;
                 default:
                     PrintInvalidSequence();

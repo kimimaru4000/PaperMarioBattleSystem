@@ -107,6 +107,7 @@
     <Compile Include="Classes\BattleEntities\Enemies\BattleEnemy.cs" />
     <Compile Include="Classes\BattleEntities\BattleEntity.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\KoopaTroopa.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\Paratroopa.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Pokey.cs" />
     <Compile Include="Classes\BattleEntities\Players\BattleMario.cs" />
     <Compile Include="Classes\BattleEntities\Players\BattlePartner.cs" />

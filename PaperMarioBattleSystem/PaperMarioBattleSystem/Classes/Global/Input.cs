@@ -18,17 +18,32 @@ namespace PaperMarioBattleSystem
 
         public static bool GetKey(Keys key)
         {
-            return KBState.IsKeyDown(key);
+            return GetKey(key, KBState);
+        }
+
+        public static bool GetKey(Keys key, KeyboardState keyboardState)
+        {
+            return keyboardState.IsKeyDown(key);
         }
 
         public static bool GetKeyUp(Keys key)
         {
-            return (InputKeyboard.IsKeyDown(key) == true && KBState.IsKeyUp(key) == true);
+            return GetKeyUp(key, InputKeyboard);
+        }
+
+        public static bool GetKeyUp(Keys key, KeyboardState keyboardState)
+        {
+            return (keyboardState.IsKeyDown(key) == true && KBState.IsKeyUp(key) == true);
         }
 
         public static bool GetKeyDown(Keys key)
         {
-            return (InputKeyboard.IsKeyUp(key) == true && KBState.IsKeyDown(key) == true);
+            return GetKeyDown(key, InputKeyboard);
+        }
+
+        public static bool GetKeyDown(Keys key, KeyboardState keyboardState)
+        {
+            return (keyboardState.IsKeyUp(key) == true && KBState.IsKeyDown(key) == true);
         }
 
         public static void ClearInputState(params Keys[] keys)
@@ -38,7 +53,12 @@ namespace PaperMarioBattleSystem
 
         public static void UpdateInputState()
         {
-            InputKeyboard = KBState;
+            UpdateInputState(ref InputKeyboard);
+        }
+
+        public static void UpdateInputState(ref KeyboardState keyboardState)
+        {
+            keyboardState = KBState;
         }
     }
 }

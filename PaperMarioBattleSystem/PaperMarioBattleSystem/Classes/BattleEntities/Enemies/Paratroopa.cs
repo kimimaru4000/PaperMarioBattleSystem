@@ -19,21 +19,27 @@ namespace PaperMarioBattleSystem
 
             BattleStats.Level = 9;
 
+            EntityProperties.SetVulnerableDamageEffects(EntityProperties.GetVulnerableDamageEffects() | Enumerations.DamageEffects.RemovesWings);
+
+            ChangeHeightState(Enumerations.HeightStates.Airborne);
+
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Dizzy, new StatusPropertyHolder(120d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Blown, new StatusPropertyHolder(110d, 0));
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Paratroopa");
             AnimManager.SetSpriteSheet(spriteSheet);
 
+            //The Paratroopa uses the same in shell animation as a Koopa Troopa for Shell Shot, but rotates itself differently
+            AnimManager.AddAnimation(AnimationGlobals.ParatroopaBattleAnimations.ShellShotName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(2, 222, 28, 25), 1000d)));
+
             //This animation uses the same rectangle for every frame. However, the wings are different on those frames and the
             //Paratroopa has varying heights on each frame
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.WingedBattleAnimations.WingedIdleName,
-                new Animation.Frame(new Rectangle(56, 4, 32, 48), 200d));
+            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.WingedIdleName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(56, 4, 32, 48), 200d)));
             //Same story with this one
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.WingedBattleAnimations.FlyingName,
-                new Animation.Frame(new Rectangle(103, 4, 33, 51), 200d));
-
-            //The Paratroopa uses the same in shell animation as a Koopa Troopa for Shell Shot, but rotates itself differently
+            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(103, 4, 33, 51), 200d)));
         }
 
         public override string GetIdleAnim()
@@ -41,6 +47,21 @@ namespace PaperMarioBattleSystem
             if (Grounded == false) return AnimationGlobals.WingedBattleAnimations.WingedIdleName;
 
             return base.GetIdleAnim();
+        }
+
+        protected override void HandleDamageEffects(Enumerations.DamageEffects damageEffects)
+        {
+            //Prioritize winged first
+            //This allows the Paratroopa to be flipped after landing if hit with two Jump-like moves in one turn
+            if (UtilityGlobals.DamageEffectHasFlag(damageEffects, Enumerations.DamageEffects.RemovesWings) == true
+                && EntityProperties.IsVulnerableToDamageEffect(Enumerations.DamageEffects.RemovesWings) == true)
+            {
+                HandleGrounded();
+            }
+            else
+            {
+                base.HandleDamageEffects(damageEffects);
+            }
         }
 
         #region Winged Implementation
@@ -75,7 +96,15 @@ namespace PaperMarioBattleSystem
 
         public void RemoveWings()
         {
-            
+            //Add VFX for the wings disappearing
+            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Paratroopa");
+            CroppedTexture2D wingSprite = new CroppedTexture2D(spriteSheet, new Rectangle(66, 190, 45, 26));
+
+            //Put the wings in the same spot as they were in the Paratroopa's last animation
+            WingsDisappearVFX wingsDisappear = new WingsDisappearVFX(wingSprite, BattlePosition + new Vector2(-4, -1),
+                EntityType != Enumerations.EntityTypes.Enemy, .1f - .01f, 500d, 500d, (1d / 30d) * Time.MsPerS);
+
+            BattleVFXManager.Instance.AddVFXElement(wingsDisappear);
         }
 
         #endregion

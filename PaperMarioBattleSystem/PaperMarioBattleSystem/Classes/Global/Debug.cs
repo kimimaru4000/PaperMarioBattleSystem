@@ -101,7 +101,12 @@ namespace PaperMarioBattleSystem
             #endif
 
             //Return if debug isn't enabled
-            if (DebugEnabled == false) return;
+            if (DebugEnabled == false)
+            {
+                if (Time.TimeEnabled == false)
+                    Time.EnableTime();
+                return;
+            }
 
             //Reset frame advance
             AdvanceNextFrame = false;
@@ -173,6 +178,9 @@ namespace PaperMarioBattleSystem
             {
                 DebugUnitTests();
             }
+
+            if (DebugPaused == false || AdvanceNextFrame == true) Time.EnableTime();
+            else Time.DisableTime();
 
             FPSCounter.Update();
             Input.UpdateInputState(ref DebugKeyboard);

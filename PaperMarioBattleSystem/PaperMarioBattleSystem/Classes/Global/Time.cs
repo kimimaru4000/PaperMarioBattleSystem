@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Whether in-game time is enabled or not. If set to false, ActiveMilliseconds won't be updated
         /// </summary>
-        public static bool TimeEnabled { get; private set; } = true;
+        public static bool InGameTimeEnabled { get; private set; } = true;
 
         /// <summary>
         /// The total amount of time, in milliseconds, since the game booted up
@@ -57,19 +57,12 @@ namespace PaperMarioBattleSystem
         public static bool RunningSlowly { get; private set; } = false;
 
         /// <summary>
-        /// Enables time
+        /// Enables or disables in-game time. If false, <see cref="ActiveMilliseconds"/> will not be updated.
         /// </summary>
-        public static void EnableTime()
+        /// <param name="ingameTimeEnabled"></param>
+        public static void ToggleInGameTime(bool ingameTimeEnabled)
         {
-            TimeEnabled = true;
-        }
-
-        /// <summary>
-        /// Disables time
-        /// </summary>
-        public static void DisableTime()
-        {
-            TimeEnabled = false;
+            InGameTimeEnabled = ingameTimeEnabled;
         }
 
         /// <summary>
@@ -91,7 +84,7 @@ namespace PaperMarioBattleSystem
             ElapsedTime = gameTime.ElapsedGameTime;
             RunningSlowly = gameTime.IsRunningSlowly;
 
-            if (TimeEnabled == true)
+            if (InGameTimeEnabled == true)
                 ActiveElapsedTime += ElapsedTime.TotalMilliseconds;
         }
     }

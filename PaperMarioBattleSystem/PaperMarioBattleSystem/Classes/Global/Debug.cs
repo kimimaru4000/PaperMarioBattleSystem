@@ -103,8 +103,8 @@ namespace PaperMarioBattleSystem
             //Return if debug isn't enabled
             if (DebugEnabled == false)
             {
-                if (Time.TimeEnabled == false)
-                    Time.EnableTime();
+                if (Time.InGameTimeEnabled == false)
+                    Time.ToggleInGameTime(true);
                 return;
             }
 
@@ -179,8 +179,9 @@ namespace PaperMarioBattleSystem
                 DebugUnitTests();
             }
 
-            if (DebugPaused == false || AdvanceNextFrame == true) Time.EnableTime();
-            else Time.DisableTime();
+            //If a pause is eventually added that can be performed normally, put a check for it in here to
+            //prevent the in-game timer from turning on when it shouldn't
+            Time.ToggleInGameTime(DebugPaused == false || AdvanceNextFrame == true);
 
             FPSCounter.Update();
             Input.UpdateInputState(ref DebugKeyboard);

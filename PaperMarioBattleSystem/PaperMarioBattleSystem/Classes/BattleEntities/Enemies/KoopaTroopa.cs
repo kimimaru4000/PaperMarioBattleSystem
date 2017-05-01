@@ -45,7 +45,6 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(102, 115, 39, 44), 250d),
-                new Animation.Frame(new Rectangle(244, 117, 40, 42), 250d),
                 new Animation.Frame(new Rectangle(200, 115, 36, 43), 250d)));
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(244, 117, 40, 42), 1000d)));

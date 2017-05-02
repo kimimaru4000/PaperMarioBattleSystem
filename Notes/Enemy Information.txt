@@ -70,3 +70,7 @@ Electro Blooper
 ---------------
 -When it electrifies itself, it doesn't gain the Electrified status but directly applies the Electrified physical attribute instead
 -Hammer Throw gets rid of its Electrified physical attribute when it electrifies itself
+
+Lakitu
+------
+-When inflicted with Dizzy in TTYD, they drop any Spiny Eggs they're holding

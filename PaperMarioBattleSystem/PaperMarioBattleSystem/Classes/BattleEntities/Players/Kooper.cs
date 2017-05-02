@@ -115,8 +115,8 @@ namespace PaperMarioBattleSystem
             Flipped = true;
 
             //Don't play the animation if dead, as the death animation should play
-            if (IsDead == false)
-                AnimManager.PlayAnimation(AnimationGlobals.ShelledBattleAnimations.FlippedName);
+            //if (IsDead == false)
+            //    AnimManager.PlayAnimation(AnimationGlobals.ShelledBattleAnimations.FlippedName);
 
             //Getting hit again while flipped refreshes the flip timer
             ElapsedFlippedTurns = 0;

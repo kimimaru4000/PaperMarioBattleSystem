@@ -1,0 +1,18 @@
+Audience Information (5/3/17)
+-----------------------------
+Here's where we'll document information about the Audience.
+
+The Audience is rather complex and hasn't been completely figured out yet to my knowledge. I will do some testing, specifically in regards to Audience growth,
+behavior, and events around them.
+
+List of known Audience events:
+-Crazee Dayzees putting the Audience to sleep
+-Bulky Bob-ombs blowing up and taking out a portion of the Audience around them
+-Koopa Troopas in the audience hide into their shells, staying but giving no SP
+-Boos turning a character invisible for 1 turn
+-Shy Guys jumping onstage and triggering random stage events
+-Punies fleeing when hearing certain loud noises
+-Piranha plants eating nearby audience members
+-X-Nauts teaming up with other X-Nauts to throw rocks (these rocks deal 3 damage)
+
+I'll eventually look into what conditions cause these events to occur via Dolphin's debugger.

@@ -81,6 +81,16 @@ Yoshi
 -----
 Stampede - Attacks enemies on the ground, in the air, and on the ceiling despite the description stating only ground enemies
 
+Flurrie
+-------
+Gale Force (courtesy of Jdaster64) - Effectiveness is based off the following formula:
+
+(Bar fullness) * (Enemy Susceptibility)% + (Player Level - Enemy Level)%
+
+For example, a Level 30 Mario that got a full bar in Gale Force against a Hyper Goomba:
+1.00 * 80% + (30 - 15)% = 95%
+
+
 Clock Out
 ---------
 -Has a 1x multiplier if the bar is filled at all and a 1.27x multiplier if the bar is full

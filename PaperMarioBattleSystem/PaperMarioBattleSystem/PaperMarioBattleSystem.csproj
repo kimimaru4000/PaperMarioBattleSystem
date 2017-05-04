@@ -123,6 +123,7 @@
     <Compile Include="Classes\BattleEvents\DeathBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\GroundedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\MessageBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\PlayAnimBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\RemoveWingsBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\SwapPositionBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitBattleEvent.cs" />

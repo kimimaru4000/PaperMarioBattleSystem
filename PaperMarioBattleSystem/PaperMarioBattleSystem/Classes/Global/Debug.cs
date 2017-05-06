@@ -332,7 +332,14 @@ namespace PaperMarioBattleSystem
             }
             else if (Input.GetKeyDown(Keys.D0, DebugKeyboard))
             {
-                UnitTests.InteractionUnitTests.NewInteractionUT10();
+                if (Input.GetKey(Keys.LeftShift))
+                {
+                    UnitTests.InteractionUnitTests.StrengthInteractionUT1();
+                }
+                else
+                {
+                    UnitTests.InteractionUnitTests.NewInteractionUT10();
+                }
             }
         }
 

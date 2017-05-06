@@ -237,6 +237,29 @@ namespace PaperMarioBattleSystem
                 PrintInteractionResult(newInteraction);
             }
 
+            public static void StrengthInteractionUT1()
+            {
+                BattleMario mario = new BattleMario(new MarioStats(1, 5, 50, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
+                Goomba goomba = new Goomba();
+
+                IcePowerBadge icePower = new IcePowerBadge();
+                icePower.Equip(mario);
+                IcePowerBadge icePower2 = new IcePowerBadge();
+                icePower2.Equip(mario);
+
+                goomba.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Fiery);
+                goomba.EntityProperties.AddWeakness(Enumerations.Elements.Ice, new WeaknessHolder(WeaknessTypes.PlusDamage, 1));
+
+                InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 1, Enumerations.Elements.Ice, true,
+                    Enumerations.ContactTypes.TopDirect, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
+                InteractionResult interaction = Interactions.GetDamageInteraction(param);
+
+                PrintInteractionResult(interaction);
+
+                icePower.UnEquip();
+                icePower2.UnEquip();
+            }
+
             private static void PrintInteractionResult(InteractionResult interactionResult)
             {
                 InteractionHolder attackResult = interactionResult.AttackerResult;

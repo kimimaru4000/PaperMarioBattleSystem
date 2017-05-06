@@ -41,16 +41,18 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected readonly Dictionary<Elements, List<ResistanceHolder>> Resistances = new Dictionary<Elements, List<ResistanceHolder>>();
 
-        ///// <summary>
-        ///// The Strengths the entity has against entities with PhysicalAttributes.
-        ///// </summary>
-        //protected readonly Dictionary<PhysicalAttributes, List<StrengthHolder>> Strengths = new Dictionary<PhysicalAttributes, List<StrengthHolder>>();
+        /// <summary>
+        /// The Strengths the entity has against entities with PhysicalAttributes.
+        /// </summary>
+        protected readonly Dictionary<PhysicalAttributes, List<StrengthHolder>> Strengths = new Dictionary<PhysicalAttributes, List<StrengthHolder>>();
 
         /// <summary>
         /// The types of Elemental damage to use when dealing damage to BattleEntities with particular PhysicalAttributes
         /// </summary>
+        //NOTE: This is NOT going to work as is. If you equip multiple Ice Power Badges and remove just one, then you no longer have the Element Override!
+        //This CANNOT be remedied inside the IcePowerBadge class itself, as it will NOT work if multiple sources are adding Element Overrides
         protected readonly Dictionary<PhysicalAttributes, Elements> ElementOverrides = new Dictionary<PhysicalAttributes, Elements>();
-
+        
         /// <summary>
         /// The StatusEffects the entity is afflicted with. When added, they are sorted by their priorities in the StatusOrder table.
         /// <para></para>
@@ -493,7 +495,7 @@ namespace PaperMarioBattleSystem
         ///</summary>
         ///<param name="physAttribute">The PhysicalAttribute the BattleEntity is strong against.</param>
         ///<param name="strengthHolder">The data for the Strength.</param>
-        /*public void AddStrength(PhysicalAttributes physAttribute, StrengthHolder strengthHolder)
+        public void AddStrength(PhysicalAttributes physAttribute, StrengthHolder strengthHolder)
         {
             if (HasStrength(physAttribute) == false)
             {
@@ -541,7 +543,7 @@ namespace PaperMarioBattleSystem
 
             StrengthHolder strengthHolder = default(StrengthHolder);
 
-            //Get the total resistance
+            //Get the total strength
             Strengths[physAttribute].ForEach((strength) =>
             {
                 strengthHolder.Value += strength.Value;
@@ -577,7 +579,7 @@ namespace PaperMarioBattleSystem
             }
 
             return totalStrength;
-        }*/
+        }
 
         #endregion
 

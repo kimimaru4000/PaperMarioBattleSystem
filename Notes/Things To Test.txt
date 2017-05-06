@@ -142,3 +142,18 @@ Results: (down below)
 PM
 --
 Yes, they stop moving from Immobilized, however, they keep moving during Sleep as Paragoombas have their own Sleep animation.
+
+
+Multiple Ice Smashes and Fire Enemies
+-------------------------------------
+Stacking Ice Smash adds 2 to the Frozen duration per badge equipped, but does it also increase the damage done to fire enemies?
+
+Result: No
+
+
+Strengths and Payback
+---------------------
+Does having Ice Power equipped increase the amount of Payback damage you take on Fiery enemies with Full or Half payback?
+
+Result: Yes, meaning strengths are taken into account.
+

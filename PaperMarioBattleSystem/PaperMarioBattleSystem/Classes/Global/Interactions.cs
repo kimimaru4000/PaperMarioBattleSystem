@@ -148,6 +148,7 @@ namespace PaperMarioBattleSystem
             DamageCalculationSteps.Add(new InitStep());
             DamageCalculationSteps.Add(new ContactResultStep());
             DamageCalculationSteps.Add(new ElementOverrideStep());
+            DamageCalculationSteps.Add(new VictimAttackerStrengthStep());
             DamageCalculationSteps.Add(new VictimElementDamageStep());
             DamageCalculationSteps.Add(new VictimDamageReductionStep());
             DamageCalculationSteps.Add(new VictimCheckHitStep());
@@ -559,6 +560,20 @@ namespace PaperMarioBattleSystem
 
                     StepResult.VictimResult.DamageElement = newElement;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Factors in the Attacker's total <see cref="StrengthHolder"/> on the Victim.
+        /// <para>This is done outside <see cref="GetElementalDamage"/> because it is adds directly to the damage and
+        /// should not be applied again during the <see cref="AttackerPaybackDamageStep"/>.</para>
+        /// </summary>
+        private sealed class VictimAttackerStrengthStep : DamageCalcStep
+        {
+            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            {
+                StrengthHolder totalStrength = StepResult.AttackerResult.Entity.EntityProperties.GetTotalStrength(StepResult.VictimResult.Entity);
+                StepResult.VictimResult.TotalDamage += totalStrength.Value;
             }
         }
 

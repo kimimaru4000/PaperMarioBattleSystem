@@ -37,6 +37,9 @@ namespace PaperMarioBattleSystem
 
             TotalChargeDamage += charged.TotalChargeDamage;
 
+            //Charge damage is capped at the max damage that can be dealt
+            TotalChargeDamage = UtilityGlobals.Clamp(TotalChargeDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+
             EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage, TotalChargeDamage);
         }
 

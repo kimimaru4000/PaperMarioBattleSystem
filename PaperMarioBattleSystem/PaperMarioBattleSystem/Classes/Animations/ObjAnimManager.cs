@@ -14,6 +14,19 @@ namespace PaperMarioBattleSystem
     public class ObjAnimManager
     {
         /// <summary>
+        /// Options when setting the <see cref="ObjAnimManager"/>'s SpriteSheet.
+        /// <para>
+        /// None does not replace any Animation SpriteSheets.
+        /// ReplaceSame replaces all Animation SpriteSheets with the current SpriteSheet reference to the new one.
+        /// ReplaceAll replaces all Animation SpriteSheets with the new one.
+        /// </para>
+        /// </summary>
+        public enum SetSpriteSheetOptions
+        {
+            None, ReplaceSame, ReplaceAll
+        }
+
+        /// <summary>
         /// The SpriteSheet to use for the animations.
         /// </summary>
         public Texture2D SpriteSheet { get; private set; } = null;
@@ -55,9 +68,65 @@ namespace PaperMarioBattleSystem
             SetSpriteSheet(spriteSheet);
         }
 
+        /// <summary>
+        /// Set the SpriteSheet of the animation manager.
+        /// </summary>
+        /// <param name="spriteSheet">The new SpriteSheet.</param>
         public void SetSpriteSheet(Texture2D spriteSheet)
         {
-            SpriteSheet = spriteSheet;
+            SetSpriteSheet(spriteSheet, SetSpriteSheetOptions.None);
+        }
+
+        /// <summary>
+        /// Set the SpriteSheet and optionally change the SpriteSheet the animations reference.
+        /// </summary>
+        /// <param name="newSheet">The new SpriteSheet.</param>
+        /// <param name="setSpriteSheetOptions">The option for replacing the SpriteSheet the animations reference.</param>
+        public void SetSpriteSheet(Texture2D newSheet, SetSpriteSheetOptions setSpriteSheetOptions)
+        {
+            //Store the current SpriteSheet
+            Texture2D previousSheet = SpriteSheet;
+
+            if (newSheet == null)
+            {
+                Debug.LogError($"{nameof(newSheet)} is being set to null for {GetName}'s {nameof(ObjAnimManager)}. Not setting spriteSheet as this will cause errors.");
+                return;
+            }
+
+            //Set the new SpriteSheet
+            SpriteSheet = newSheet;
+
+            //Don't replace any Animation SpriteSheets
+            if (setSpriteSheetOptions == SetSpriteSheetOptions.None)
+            {
+                return;
+            }
+            //Replace some
+            else if (setSpriteSheetOptions == SetSpriteSheetOptions.ReplaceSame)
+            {
+                //Get all animations
+                Animation[] animations = GetAllAnimations();
+                for (int i = 0; i < animations.Length; i++)
+                {
+                    //Replace all Animation SpriteSheets with the new one if they're the same as the previous
+                    if (animations[i].SpriteSheet == previousSheet)
+                    {
+                        animations[i].SpriteSheet = SpriteSheet;
+                    }
+                }
+            }
+            //Replace all
+            else if (setSpriteSheetOptions == SetSpriteSheetOptions.ReplaceAll)
+            {
+                //Get all animations
+                Animation[] animations = GetAllAnimations();
+
+                //Replace all Animation SpriteSheets with the new one
+                for (int i = 0; i < animations.Length; i++)
+                {
+                    animations[i].SpriteSheet = newSheet;
+                }
+            }
         }
 
         /// <summary>

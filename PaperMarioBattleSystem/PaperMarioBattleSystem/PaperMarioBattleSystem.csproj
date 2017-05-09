@@ -159,6 +159,7 @@
     <Compile Include="Classes\Collectibles\Badges\IcePowerBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\IceSmashBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LastStandBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\LEmblemBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LuckyDayBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MegaRushBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MegaRushPBadge.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Classes\Collectibles\Badges\TornadoJumpBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\TripleDipBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\UnsimplifierBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\WEmblemBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ZapTapBadge.cs" />
     <Compile Include="Classes\Collectibles\Items\BattleItem.cs" />
     <Compile Include="Classes\Collectibles\Items\HoneySyrup.cs" />
@@ -351,6 +353,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Characters\Kooper.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Characters\MarioLEmblem.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Characters\MarioWEmblem.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Characters\MarioWLEmblem.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Enemies\Paratroopa.png">

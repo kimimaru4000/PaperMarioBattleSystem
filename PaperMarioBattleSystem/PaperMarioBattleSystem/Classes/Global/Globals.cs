@@ -1592,6 +1592,14 @@ namespace PaperMarioBattleSystem
         {
             Normal = 1, Super = 2, Ultra = 3
         }
+        
+        /// <summary>
+        /// The colors Yoshi can be.
+        /// </summary>
+        public enum YoshiColors
+        {
+            Green, Red, Blue, Orange, Pink, Black, White
+        }
 
         #endregion
     }

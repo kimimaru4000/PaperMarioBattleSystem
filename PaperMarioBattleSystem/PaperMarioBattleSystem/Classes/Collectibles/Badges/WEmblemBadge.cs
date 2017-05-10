@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
             BattleMario mario = EntityEquipped as BattleMario;
             if (mario == null)
             {
-                Debug.LogWarning($"L Emblem will not work on {EntityEquipped.Name}; it currently works only for Mario");
+                Debug.LogWarning($"W Emblem will not work on {EntityEquipped.Name}; it currently works only for Mario");
                 return;
             }
 
@@ -43,13 +43,12 @@ namespace PaperMarioBattleSystem
             //Check if L Emblem is equipped and change to Waluigi's clothes
             if (EntityEquipped.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.LEmblem) > 0)
             {
-                //NOTE: Move this to a variable, don't keep it hardcoded
-                sheetPath += "WLEmblem";
+                sheetPath += ContentGlobals.WaluigiPaletteExtension;
             }
             //Otherwise change to Wario's clothes
             else
             {
-                sheetPath += "WEmblem";
+                sheetPath += ContentGlobals.WarioPaletteExtension;
             }
 
             EntityEquipped.AnimManager.SetSpriteSheet(AssetManager.Instance.LoadAsset<Texture2D>(sheetPath), ObjAnimManager.SetSpriteSheetOptions.ReplaceSame);
@@ -69,8 +68,7 @@ namespace PaperMarioBattleSystem
             //Check if L Emblem is equipped and change to Luigi's clothes
             if (EntityEquipped.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.LEmblem) > 0)
             {
-                //NOTE: Move this to a variable, don't keep it hardcoded
-                sheetPath += "LEmblem";
+                sheetPath += ContentGlobals.LuigiPaletteExtension;
             }
 
             EntityEquipped.AnimManager.SetSpriteSheet(AssetManager.Instance.LoadAsset<Texture2D>(sheetPath), ObjAnimManager.SetSpriteSheetOptions.ReplaceSame);

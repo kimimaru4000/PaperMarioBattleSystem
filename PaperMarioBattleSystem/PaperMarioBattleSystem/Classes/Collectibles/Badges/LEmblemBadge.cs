@@ -43,13 +43,12 @@ namespace PaperMarioBattleSystem
             //Check if W Emblem is equipped and change to Waluigi's clothes
             if (EntityEquipped.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.WEmblem) > 0)
             {
-                //NOTE: Move this to a variable, don't keep it hardcoded
-                sheetPath += "WLEmblem";
+                sheetPath += ContentGlobals.WaluigiPaletteExtension;
             }
             //Otherwise change to Luigi's clothes
             else
             {
-                sheetPath += "LEmblem";
+                sheetPath += ContentGlobals.LuigiPaletteExtension;
             }
 
             EntityEquipped.AnimManager.SetSpriteSheet(AssetManager.Instance.LoadAsset<Texture2D>(sheetPath), ObjAnimManager.SetSpriteSheetOptions.ReplaceSame);
@@ -69,8 +68,7 @@ namespace PaperMarioBattleSystem
             //Check if W Emblem is equipped and change to Wario's clothes
             if (EntityEquipped.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.WEmblem) > 0)
             {
-                //NOTE: Move this to a variable, don't keep it hardcoded
-                sheetPath += "WEmblem";
+                sheetPath += ContentGlobals.WarioPaletteExtension;
             }
 
             EntityEquipped.AnimManager.SetSpriteSheet(AssetManager.Instance.LoadAsset<Texture2D>(sheetPath), ObjAnimManager.SetSpriteSheetOptions.ReplaceSame);

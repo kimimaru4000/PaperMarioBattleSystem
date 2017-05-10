@@ -182,6 +182,7 @@
     <Compile Include="Classes\Collectibles\Badges\ZapTapBadge.cs" />
     <Compile Include="Classes\Collectibles\Items\BattleItem.cs" />
     <Compile Include="Classes\Collectibles\Items\HoneySyrup.cs" />
+    <Compile Include="Classes\Collectibles\Items\IDamageEffectItem.cs" />
     <Compile Include="Classes\Collectibles\Items\IDamagingItem.cs" />
     <Compile Include="Classes\Collectibles\Items\IFPHealingItem.cs" />
     <Compile Include="Classes\Collectibles\Items\IHPHealingItem.cs" />

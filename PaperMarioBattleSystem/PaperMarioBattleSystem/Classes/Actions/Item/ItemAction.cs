@@ -38,11 +38,14 @@ namespace PaperMarioBattleSystem
 
             Name = item.Name;
 
+            //NOTE: Refactor and make cleaner in some way
+            //At the very least, get all this information in another method
             IHPHealingItem hpHealing = item as IHPHealingItem;
             IFPHealingItem fpHealing = item as IFPHealingItem;
             IDamagingItem damageItem = item as IDamagingItem;
             IStatusHealingItem statusHealing = item as IStatusHealingItem;
             IStatusInflictingItem statusInflicting = item as IStatusInflictingItem;
+            IDamageEffectItem damageEffectItem = item as IDamageEffectItem;
 
             MoveAffectionTypes moveAffectionType = item.EntityType == User.EntityType ? MoveAffectionTypes.Ally : MoveAffectionTypes.Enemy;
             if (item.TargetsSelf == true) moveAffectionType = MoveAffectionTypes.Self;
@@ -50,15 +53,15 @@ namespace PaperMarioBattleSystem
             MoveInfo = new MoveActionData(null, item.Description, MoveResourceTypes.FP, 0, CostDisplayTypes.Hidden,
                 moveAffectionType, item.SelectionType, false, item.HeightsAffected);
 
-            //Set the damage
+            //Set the damage data
             if (damageItem != null || statusInflicting != null)
             {
                 int damage = damageItem != null ? damageItem.Damage : 0;
-                Enumerations.Elements element = damageItem != null ? damageItem.Element : Enumerations.Elements.Normal;
+                Elements element = damageItem != null ? damageItem.Element : Elements.Normal;
                 StatusChanceHolder[] statuses = statusInflicting != null ? statusInflicting.StatusesInflicted : null;
+                DamageEffects damageEffects = damageEffectItem != null ? damageEffectItem.InducedDamageEffects : DamageEffects.None;
 
-                //NOTE: Will need a way to specify DamageEffects for items
-                DamageInfo = new DamageData(damage, element, true, ContactTypes.None, statuses, DamageEffects.None);
+                DamageInfo = new DamageData(damage, element, true, ContactTypes.None, statuses, damageEffects);
             }
 
             //Set the healing data
@@ -66,7 +69,7 @@ namespace PaperMarioBattleSystem
             {
                 int hpHealed = hpHealing != null ? hpHealing.HPRestored : 0;
                 int fpHealed = fpHealing != null ? fpHealing.FPRestored : 0;
-                Enumerations.StatusTypes[] statusesHealed = statusHealing != null ? statusHealing.StatusesHealed : null;
+                StatusTypes[] statusesHealed = statusHealing != null ? statusHealing.StatusesHealed : null;
 
                 HealingInfo = new HealingData(hpHealed, fpHealed, statusesHealed);
             }

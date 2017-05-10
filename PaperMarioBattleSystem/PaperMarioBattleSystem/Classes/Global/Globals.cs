@@ -1798,5 +1798,9 @@ namespace PaperMarioBattleSystem
         public const string MusicRoot = "Audio/Music/";
         public const string SpriteRoot = "Sprites";
         public const string UIRoot = "UI";
+
+        public const string LuigiPaletteExtension = "LEmblem";
+        public const string WarioPaletteExtension = "WEmblem";
+        public const string WaluigiPaletteExtension = "WLEmblem";
     }
 }

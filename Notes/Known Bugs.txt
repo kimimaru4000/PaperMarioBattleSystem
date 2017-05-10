@@ -1,0 +1,7 @@
+Known Bugs (5/10/17)
+--------------------
+This is a document for known bugs that need fixing. Be specific.
+
+------------------------------------------------------------------------------------------
+When inflicted with Electrified via Zap Tap, it shows the Battle Message when it shouldn't
+------------------------------------------------------------------------------------------

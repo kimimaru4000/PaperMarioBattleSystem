@@ -36,43 +36,7 @@ namespace PaperMarioBattleSystem
                 Debug.LogError($"Invalid item with {nameof(Item.ItemType)} of {ItemUsed.ItemType} passed into the ItemAction!");
             }
 
-            Name = item.Name;
-
-            //NOTE: Refactor and make cleaner in some way
-            //At the very least, get all this information in another method
-            IHPHealingItem hpHealing = item as IHPHealingItem;
-            IFPHealingItem fpHealing = item as IFPHealingItem;
-            IDamagingItem damageItem = item as IDamagingItem;
-            IStatusHealingItem statusHealing = item as IStatusHealingItem;
-            IStatusInflictingItem statusInflicting = item as IStatusInflictingItem;
-            IDamageEffectItem damageEffectItem = item as IDamageEffectItem;
-
-            MoveAffectionTypes moveAffectionType = item.EntityType == User.EntityType ? MoveAffectionTypes.Ally : MoveAffectionTypes.Enemy;
-            if (item.TargetsSelf == true) moveAffectionType = MoveAffectionTypes.Self;
-
-            MoveInfo = new MoveActionData(null, item.Description, MoveResourceTypes.FP, 0, CostDisplayTypes.Hidden,
-                moveAffectionType, item.SelectionType, false, item.HeightsAffected);
-
-            //Set the damage data
-            if (damageItem != null || statusInflicting != null)
-            {
-                int damage = damageItem != null ? damageItem.Damage : 0;
-                Elements element = damageItem != null ? damageItem.Element : Elements.Normal;
-                StatusChanceHolder[] statuses = statusInflicting != null ? statusInflicting.StatusesInflicted : null;
-                DamageEffects damageEffects = damageEffectItem != null ? damageEffectItem.InducedDamageEffects : DamageEffects.None;
-
-                DamageInfo = new DamageData(damage, element, true, ContactTypes.None, statuses, damageEffects);
-            }
-
-            //Set the healing data
-            if (hpHealing != null || fpHealing != null || statusHealing != null)
-            {
-                int hpHealed = hpHealing != null ? hpHealing.HPRestored : 0;
-                int fpHealed = fpHealing != null ? fpHealing.FPRestored : 0;
-                StatusTypes[] statusesHealed = statusHealing != null ? statusHealing.StatusesHealed : null;
-
-                HealingInfo = new HealingData(hpHealed, fpHealed, statusesHealed);
-            }
+            SetActionProperties();
 
             SetMoveSequence(new ItemSequence(this));
         }
@@ -127,6 +91,50 @@ namespace PaperMarioBattleSystem
         public void SetOnItemUsed(ItemUsedDelegate onItemUsed)
         {
             OnItemUsed = onItemUsed;
+        }
+
+        /// <summary>
+        /// Sets the ItemAction's properties based on the item it has.
+        /// </summary>
+        protected void SetActionProperties()
+        {
+            Name = ItemUsed.Name;
+
+            //NOTE: Refactor and make cleaner in some way
+
+            IHPHealingItem hpHealing = ItemUsed as IHPHealingItem;
+            IFPHealingItem fpHealing = ItemUsed as IFPHealingItem;
+            IDamagingItem damageItem = ItemUsed as IDamagingItem;
+            IStatusHealingItem statusHealing = ItemUsed as IStatusHealingItem;
+            IStatusInflictingItem statusInflicting = ItemUsed as IStatusInflictingItem;
+            IDamageEffectItem damageEffectItem = ItemUsed as IDamageEffectItem;
+
+            MoveAffectionTypes moveAffectionType = ItemUsed.EntityType == User.EntityType ? MoveAffectionTypes.Ally : MoveAffectionTypes.Enemy;
+            if (ItemUsed.TargetsSelf == true) moveAffectionType = MoveAffectionTypes.Self;
+
+            MoveInfo = new MoveActionData(null, ItemUsed.Description, MoveResourceTypes.FP, 0, CostDisplayTypes.Hidden,
+                moveAffectionType, ItemUsed.SelectionType, false, ItemUsed.HeightsAffected);
+
+            //Set the damage data
+            if (damageItem != null || statusInflicting != null)
+            {
+                int damage = damageItem != null ? damageItem.Damage : 0;
+                Elements element = damageItem != null ? damageItem.Element : Elements.Normal;
+                StatusChanceHolder[] statuses = statusInflicting != null ? statusInflicting.StatusesInflicted : null;
+                DamageEffects damageEffects = damageEffectItem != null ? damageEffectItem.InducedDamageEffects : DamageEffects.None;
+
+                DamageInfo = new DamageData(damage, element, true, ContactTypes.None, statuses, damageEffects);
+            }
+
+            //Set the healing data
+            if (hpHealing != null || fpHealing != null || statusHealing != null)
+            {
+                int hpHealed = hpHealing != null ? hpHealing.HPRestored : 0;
+                int fpHealed = fpHealing != null ? fpHealing.FPRestored : 0;
+                StatusTypes[] statusesHealed = statusHealing != null ? statusHealing.StatusesHealed : null;
+
+                HealingInfo = new HealingData(hpHealed, fpHealed, statusesHealed);
+            }
         }
     }
 }

@@ -49,7 +49,7 @@ namespace PaperMarioBattleSystem
         {
             if (EntityEquipped.EntityProperties.HasStatus(Enumerations.StatusTypes.Electrified) == false)
             {
-                EntityEquipped.EntityProperties.AfflictStatus(new ElectrifiedStatus(StatusGlobals.InfiniteDuration));
+                EntityEquipped.EntityProperties.AfflictStatus(new ElectrifiedStatus(StatusGlobals.InfiniteDuration), false);
             }
         }
 
@@ -60,7 +60,7 @@ namespace PaperMarioBattleSystem
         {
             if (EntityEquipped.EntityProperties.HasStatus(Enumerations.StatusTypes.Electrified) == true)
             {
-                EntityEquipped.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Electrified);
+                EntityEquipped.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Electrified, false);
             }
         }
     }

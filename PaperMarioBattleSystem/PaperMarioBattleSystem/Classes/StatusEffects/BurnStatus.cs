@@ -35,10 +35,10 @@ namespace PaperMarioBattleSystem
             if (EntityAfflicted.EntityProperties.HasStatus(Enumerations.StatusTypes.Frozen) == true)
             {
                 Debug.Log($"{StatusType} was inflicted on an entity afflicted with {Enumerations.StatusTypes.Frozen}, negating both effects!");
-                EntityAfflicted.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Frozen);
+                EntityAfflicted.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Frozen, true);
 
                 //Also remove Burn, as these two statuses negate each other
-                EntityAfflicted.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Burn);
+                EntityAfflicted.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Burn, true);
             }
         }
 

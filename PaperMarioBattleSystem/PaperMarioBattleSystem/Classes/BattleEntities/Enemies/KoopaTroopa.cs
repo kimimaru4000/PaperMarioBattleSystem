@@ -16,7 +16,7 @@ namespace PaperMarioBattleSystem
         //NOTE: Temporary until we get a simple enemy AI system in
         protected virtual MoveAction ActionUsed => new ShellToss();
 
-        public KoopaTroopa() : base(new Stats(8, 4, 0, 2, 1))
+        public KoopaTroopa() : base(new Stats(8, 4, 0, 1, 1))
         {
             Name = "Koopa Troopa";
 

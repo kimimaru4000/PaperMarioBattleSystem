@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
             {
                 BattleMario mario = new BattleMario(new MarioStats(1, 50, 50, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
                 SpikedGoomba spikedGoomba = new SpikedGoomba();
-                spikedGoomba.EntityProperties.AfflictStatus(new ElectrifiedStatus(5));
+                spikedGoomba.EntityProperties.AfflictStatus(new ElectrifiedStatus(5), true);
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, spikedGoomba, 5, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.TopDirect, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
@@ -70,7 +70,7 @@ namespace PaperMarioBattleSystem
                 BattleMario mario = new BattleMario(new MarioStats(1, 50, 50, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
                 Goomba goomba = new Goomba();
                 goomba.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
-                goomba.EntityProperties.AfflictStatus(new ElectrifiedStatus(5));
+                goomba.EntityProperties.AfflictStatus(new ElectrifiedStatus(5), true);
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 5, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.TopDirect, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
@@ -169,7 +169,7 @@ namespace PaperMarioBattleSystem
                 BattleMario mario = new BattleMario(new MarioStats(1, 5, 50, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
                 Goomba goomba = new Goomba();
                 mario.EntityProperties.AddWeakness(Enumerations.Elements.Normal, new WeaknessHolder(WeaknessTypes.KO, 4));
-                goomba.EntityProperties.AfflictStatus(new PaybackStatus(5));
+                goomba.EntityProperties.AfflictStatus(new PaybackStatus(5), true);
 
                 Badge badge = new DoublePainBadge();
                 goomba.SetHeldCollectible(badge);
@@ -223,7 +223,7 @@ namespace PaperMarioBattleSystem
                 mario.EntityProperties.AddResistance(Enumerations.Elements.Electric, new ResistanceHolder(ResistanceTypes.Heal, 0));
 
                 goomba.EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Half, Enumerations.Elements.Electric));
-                goomba.EntityProperties.AfflictStatus(new ElectrifiedStatus(5));
+                goomba.EntityProperties.AfflictStatus(new ElectrifiedStatus(5), true);
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 90, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.TopDirect, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);

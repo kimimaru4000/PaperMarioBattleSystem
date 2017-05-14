@@ -56,7 +56,7 @@ namespace PaperMarioBattleSystem
         /// The priority of the StatusEffect.
         /// StatusEffects with higher priorities have higher Priority values and affect the BattleEntity sooner
         /// </summary>
-        protected int Priority => StatusGlobals.GetStatusPriority(StatusType);
+        public int Priority => StatusGlobals.GetStatusPriority(StatusType);
 
         /// <summary>
         /// The BattleEntity afflicted with the StatusEffect
@@ -181,7 +181,7 @@ namespace PaperMarioBattleSystem
             //When the StatusEffect is finished, remove it
             if (IsFinished == true)
             {
-                EntityAfflicted.EntityProperties.RemoveStatus(StatusType);
+                EntityAfflicted.EntityProperties.RemoveStatus(StatusType, true);
             }
         }
 
@@ -190,13 +190,6 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void Afflict()
         {
-            //Show a battle message when the status is afflicted, provided the message isn't empty
-            if (string.IsNullOrEmpty(AfflictedMessage) == false)
-            {
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Message + Priority,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(AfflictedMessage, 2000d));
-            }
-
             OnAfflict();
         }
 

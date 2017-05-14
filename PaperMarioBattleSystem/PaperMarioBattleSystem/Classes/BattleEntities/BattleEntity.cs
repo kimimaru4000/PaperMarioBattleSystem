@@ -192,7 +192,7 @@ namespace PaperMarioBattleSystem
             {
                 for (int i = 0; i < statusesInflicted.Length; i++)
                 {
-                    EntityProperties.AfflictStatus(statusesInflicted[i].Status);
+                    EntityProperties.AfflictStatus(statusesInflicted[i].Status, true);
                 }
             }
 
@@ -362,7 +362,7 @@ namespace PaperMarioBattleSystem
                 new DeathBattleEvent(this));
 
             //Remove all StatusEffects on the entity
-            EntityProperties.RemoveAllStatuses();
+            EntityProperties.RemoveAllStatuses(false);
 
             OnDeath();
         }

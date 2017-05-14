@@ -291,7 +291,7 @@ namespace PaperMarioBattleSystem
             if (MoveProperties.UsesCharge == true && User.EntityProperties.HasStatus(StatusTypes.Charged) == true
                 && User.EntityProperties.HasAdditionalProperty(AdditionalProperty.ChargedDamage) == true)
             {
-                User.EntityProperties.RemoveStatus(StatusTypes.Charged);
+                User.EntityProperties.RemoveStatus(StatusTypes.Charged, true);
             }
         }
 

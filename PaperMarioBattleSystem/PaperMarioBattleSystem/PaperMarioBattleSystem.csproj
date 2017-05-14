@@ -164,6 +164,7 @@
     <Compile Include="Classes\Collectibles\Badges\MegaRushBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MegaRushPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MultibounceBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\PeekabooBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PowerBounceBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PowerPlusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PowerRushBadge.cs" />

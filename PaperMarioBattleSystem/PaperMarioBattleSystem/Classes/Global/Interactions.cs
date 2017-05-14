@@ -548,6 +548,21 @@ namespace PaperMarioBattleSystem
                 Elements newElement = StepResult.AttackerResult.Entity.EntityProperties.GetTotalElementOverride(victim);
                 if (newElement != Elements.Invalid)
                 {
+                    /*NOTE: Add stacking weaknesses
+                      (Ex. 1 Ice Power is 1 weakness, Ice Power + Ice Smash = 2 weaknesses)
+                      
+                      Ex. damage = 2
+                      player inflicts ice 2 times: ice power & ice smash
+
+                      ice_inflicted_times = 2
+                      if (enemy weak to ice)
+                        damage += ice_inflicted_times
+                      end
+
+                      #damage = 4
+                    */
+                    
+
                     //Add 1 to the damage if the element used already exists as an override and the victim has a Weakness to the Element.
                     //This allows Badges such as Ice Power to deal more damage if used in conjunction with attacks
                     //that deal the same type of damage (Ex. Ice Power and Ice Smash deal 2 additional damage total rather than 1).

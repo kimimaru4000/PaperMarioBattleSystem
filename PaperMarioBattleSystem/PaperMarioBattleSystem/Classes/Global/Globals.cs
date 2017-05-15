@@ -81,12 +81,12 @@ namespace PaperMarioBattleSystem
 
         public static bool operator>(WeaknessHolder holder1, WeaknessHolder holder2)
         {
-            return (holder1.WeaknessType > holder2.WeaknessType || holder1.Value > holder2.Value);
+            return (holder1.WeaknessType > holder2.WeaknessType || (holder1.WeaknessType == holder2.WeaknessType && holder1.Value > holder2.Value));
         }
 
         public static bool operator<(WeaknessHolder holder1, WeaknessHolder holder2)
         {
-            return (holder1.WeaknessType < holder2.WeaknessType || holder1.Value < holder2.Value);
+            return (holder1.WeaknessType < holder2.WeaknessType || (holder1.WeaknessType == holder2.WeaknessType && holder1.Value < holder2.Value));
         }
 
         public static bool operator>=(WeaknessHolder holder1, WeaknessHolder holder2)
@@ -145,12 +145,12 @@ namespace PaperMarioBattleSystem
 
         public static bool operator>(ResistanceHolder holder1, ResistanceHolder holder2)
         {
-            return (holder1.ResistanceType > holder2.ResistanceType || holder1.Value > holder2.Value);
+            return (holder1.ResistanceType > holder2.ResistanceType || (holder1.ResistanceType == holder2.ResistanceType && holder1.Value > holder2.Value));
         }
 
         public static bool operator<(ResistanceHolder holder1, ResistanceHolder holder2)
         {
-            return (holder1.ResistanceType < holder2.ResistanceType || holder1.Value < holder2.Value);
+            return (holder1.ResistanceType < holder2.ResistanceType || (holder1.ResistanceType == holder2.ResistanceType && holder1.Value < holder2.Value));
         }
 
         public static bool operator>=(ResistanceHolder holder1, ResistanceHolder holder2)
@@ -921,7 +921,12 @@ namespace PaperMarioBattleSystem
             /// <summary>
             /// Whether a BattleEntity is immobile or not. The BattleEntity's defensive actions are disabled and it cannot move.
             /// </summary>
-            Immobile
+            Immobile,
+
+            /// <summary>
+            /// Used for enemies who are tattled or if Peekaboo is active. This tells them to show their HP underneath them.
+            /// </summary>
+            ShowHP
         }
     }
 

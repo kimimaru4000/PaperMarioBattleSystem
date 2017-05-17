@@ -226,20 +226,20 @@ namespace PaperMarioBattleSystem
 
             //Retrieve an overridden type of Elemental damage to inflict based on the Victim's PhysicalAttributes
             //(Ex. The Ice Power Badge only deals Ice damage to Fiery entities)
-            Elements newElement = attacker.EntityProperties.GetTotalElementOverride(victim);
-            if (newElement != Elements.Invalid)
+            ElementOverrideHolder newElement = attacker.EntityProperties.GetTotalElementOverride(victim);
+            if (newElement.Element != Elements.Invalid)
             {
-                //Add 1 to the damage if the element used already exists as an override and the victim has a Weakness to the Element.
-                //This allows Badges such as Ice Power to deal more damage if used in conjunction with attacks
+                //Add the number of element overrides to the damage if the element used already exists as an override and the victim has a Weakness
+                //to the Element. This allows Badges such as Ice Power to deal more damage if used in conjunction with attacks
                 //that deal the same type of damage (Ex. Ice Power and Ice Smash deal 2 additional damage total rather than 1).
-                //If any new knowledge is discovered to improve this, this will be changed. At the moment, it seems unlikely because
+                //If any new knowledge is discovered to improve this, this will be changed
                 //Ice Power is the only Badge of its kind across the first two PM games that does anything like this
-                if (element == newElement && victim.EntityProperties.HasWeakness(element) == true)
+                if (element == newElement.Element && victim.EntityProperties.HasWeakness(element) == true)
                 {
-                    damage += 1;
+                    damage += newElement.OverrideCount;
                 }
 
-                element = newElement;
+                element = newElement.Element;
             }
 
             /*Get the total damage dealt to the Victim. The amount of Full or Half Payback damage dealt to the Attacker
@@ -545,10 +545,10 @@ namespace PaperMarioBattleSystem
 
                 //Retrieve an overridden type of Elemental damage to inflict based on the Victim's PhysicalAttributes
                 //(Ex. The Ice Power Badge only deals Ice damage to Fiery entities)
-                Elements newElement = StepResult.AttackerResult.Entity.EntityProperties.GetTotalElementOverride(victim);
-                if (newElement != Elements.Invalid)
+                ElementOverrideHolder newElement = StepResult.AttackerResult.Entity.EntityProperties.GetTotalElementOverride(victim);
+                if (newElement.Element != Elements.Invalid)
                 {
-                    /*NOTE: Add stacking weaknesses
+                    /*NOTE: Idea for stacking weaknesses
                       (Ex. 1 Ice Power is 1 weakness, Ice Power + Ice Smash = 2 weaknesses)
                       
                       Ex. damage = 2
@@ -561,19 +561,18 @@ namespace PaperMarioBattleSystem
 
                       #damage = 4
                     */
-                    
 
-                    //Add 1 to the damage if the element used already exists as an override and the victim has a Weakness to the Element.
-                    //This allows Badges such as Ice Power to deal more damage if used in conjunction with attacks
+                    //Add the number of element overrides to the damage if the element used already exists as an override and the victim has a Weakness
+                    //to the Element. This allows Badges such as Ice Power to deal more damage if used in conjunction with attacks
                     //that deal the same type of damage (Ex. Ice Power and Ice Smash deal 2 additional damage total rather than 1).
-                    //If any new knowledge is discovered to improve this, this will be changed. At the moment, it seems unlikely because
+                    //If any new knowledge is discovered to improve this, this will be changed
                     //Ice Power is the only Badge of its kind across the first two PM games that does anything like this
-                    if (element == newElement && victim.EntityProperties.HasWeakness(element) == true)
+                    if (element == newElement.Element && victim.EntityProperties.HasWeakness(element) == true)
                     {
-                        StepResult.VictimResult.TotalDamage += 1;
+                        StepResult.VictimResult.TotalDamage += newElement.OverrideCount;
                     }
 
-                    StepResult.VictimResult.DamageElement = newElement;
+                    StepResult.VictimResult.DamageElement = newElement.Element;
                 }
             }
         }

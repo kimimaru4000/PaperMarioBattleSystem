@@ -196,6 +196,30 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
+    /// Holds immutable data for an Element Override.
+    /// </summary>
+    public struct ElementOverrideHolder
+    {
+        /// <summary>
+        /// The type of elemental damage dealt.
+        /// </summary>
+        public Enumerations.Elements Element { get; private set; }
+
+        /// <summary>
+        /// How many overrides of this Element exist.
+        /// </summary>
+        public int OverrideCount { get; private set; }
+
+        public static ElementOverrideHolder Default => new ElementOverrideHolder(Enumerations.Elements.Invalid, 0);
+
+        public ElementOverrideHolder(Enumerations.Elements element, int overrideCount)
+        {
+            Element = element;
+            OverrideCount = overrideCount;
+        }
+    }
+
+    /// <summary>
     /// Holds immutable data for a StatusProperty.
     /// </summary>
     public struct StatusPropertyHolder
@@ -1573,11 +1597,78 @@ namespace PaperMarioBattleSystem
             /// </summary>
             /// <param name="physAttr1">The first PhysicalAttribute to compare.</param>
             /// <param name="physAttr2">The second PhysicalAttribute to compare.</param>
-            /// <returns>-1 if status1 has a higher priority, 1 if physAttribute2 has a higher priority, 0 if they have the same priorities.</returns>
+            /// <returns>-1 if status1 has a higher value, 1 if physAttribute2 has a higher value, 0 if they have the same values.</returns>
             public int Compare(Enumerations.PhysicalAttributes physAttr1, Enumerations.PhysicalAttributes physAttr2)
             {
-                return BattleEntityProperties.SortPhysicalAttributes(physAttr1, physAttr2);
+                return SortPhysicalAttributes(physAttr1, physAttr2);
             }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// A Comparison sort method for PhysicalAttributes, putting higher valued attributes first for consistency with contact results
+        /// </summary>
+        /// <param name="physAttr1"></param>
+        /// <param name="physAttr2"></param>
+        /// <returns></returns>
+        public static int SortPhysicalAttributes(Enumerations.PhysicalAttributes physAttr1, Enumerations.PhysicalAttributes physAttr2)
+        {
+            if (physAttr1 > physAttr2)
+                return -1;
+            else if (physAttr1 < physAttr2)
+                return 1;
+
+            return 0;
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Class for global values dealing with Elements.
+    /// </summary>
+    public static class ElementGlobals
+    {
+        #region Classes
+
+        /// <summary>
+        /// Compares Elements by their values.
+        /// </summary>
+        public class ElementComparer : IComparer<Enumerations.Elements>
+        {
+            /// <summary>
+            /// An IComparer method used to sort Elements by their Priorities.
+            /// </summary>
+            /// <param name="element1">The first Element to compare.</param>
+            /// <param name="element2">The second Element to compare.</param>
+            /// <returns>-1 if status1 has a higher value, 1 if physAttribute2 has a higher value, 0 if they have the same value.</returns>
+            public int Compare(Enumerations.Elements element1, Enumerations.Elements element2)
+            {
+                return SortElements(element1, element2);
+            }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// A Comparison sort method for Elements, putting higher valued elements first.
+        /// </summary>
+        /// <param name="element1"></param>
+        /// <param name="element2"></param>
+        /// <returns></returns>
+        public static int SortElements(Enumerations.Elements element1, Enumerations.Elements element2)
+        {
+            if (element1 > element2)
+                return -1;
+            else if (element1 < element2)
+                return 1;
+
+            return 0;
         }
 
         #endregion

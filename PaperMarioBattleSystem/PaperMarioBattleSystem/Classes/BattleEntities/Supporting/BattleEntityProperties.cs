@@ -49,9 +49,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The types of Elemental damage to use when dealing damage to BattleEntities with particular PhysicalAttributes
         /// </summary>
-        //NOTE: This is NOT going to work as is. If you equip multiple Ice Power Badges and remove just one, then you no longer have the Element Override!
-        //This CANNOT be remedied inside the IcePowerBadge class itself, as it will NOT work if multiple sources are adding Element Overrides
-        protected readonly Dictionary<PhysicalAttributes, Elements> ElementOverrides = new Dictionary<PhysicalAttributes, Elements>();
+        protected readonly Dictionary<PhysicalAttributes, SortedDictionary<Elements, int>> ElementOverrides = new Dictionary<PhysicalAttributes, SortedDictionary<Elements, int>>();
         
         /// <summary>
         /// The StatusEffects the entity is afflicted with. When added, they are sorted by their priorities in the StatusOrder table.
@@ -208,36 +206,60 @@ namespace PaperMarioBattleSystem
         #region Element Override Methods
 
         /// <summary>
-        /// Adds an Element Override for this BattleEntity for a PhysicalAttribute
+        /// Adds an Element Override of an Element to this BattleEntity for a PhysicalAttribute
         /// </summary>
         /// <param name="attribute">The PhysicalAttribute associated with the Element Override</param>
         /// <param name="element">The Element to add for this PhysicalAttribute</param>
         public void AddElementOverride(PhysicalAttributes attribute, Elements element)
         {
-            if (HasElementOverride(attribute) == true)
+            //Add a new entry if one doesn't exist
+            if (HasElementOverride(attribute) == false)
             {
-                Debug.LogWarning($"{Entity.Name} already has an element override for the {attribute} PhysicalAttribute!");
-                return;
+                ElementOverrides.Add(attribute, new SortedDictionary<Elements, int>(new ElementGlobals.ElementComparer()));
             }
 
-            ElementOverrides.Add(attribute, element);
+            //If we don't have an override for this PhysicalAttribute with this Element, add one
+            if (ElementOverrides[attribute].ContainsKey(element) == false)
+            {
+                ElementOverrides[attribute].Add(element, 1);
+            }
+            //Increment the count otherwise
+            else
+            {
+                ElementOverrides[attribute][element] += 1;
+            }
+
             Debug.Log($"Added a(n) {element} override to {Entity.Name} for the {attribute} PhysicalAttribute!");
         }
 
         /// <summary>
-        /// Removes an Element Override this BattleEntity has for a PhysicalAttribute
+        /// Removes an Element Override of an Element this BattleEntity has for a PhysicalAttribute
         /// </summary>
         /// <param name="attribute">The PhysicalAttribute associated with the Element Override</param>
-        public void RemoveElementOverride(PhysicalAttributes attribute)
+        /// <param name="element">The Element to remove for the Element Override</param>
+        public void RemoveElementOverride(PhysicalAttributes attribute, Elements element)
         {
-            if (HasElementOverride(attribute) == false)
+            if (HasElementOverride(attribute) == false || ElementOverrides[attribute].ContainsKey(element) == false)
             {
                 Debug.LogWarning($"{Entity.Name} does not contain an element override for the {attribute} PhysicalAttribute and thus cannot remove one!");
                 return;
             }
 
-            ElementOverrides.Remove(attribute);
-            Debug.Log($"Removed element override for the {attribute} PhysicalAttribute on {Entity.Name}");
+            //Decrement the count for the Element on this PhysicalAttribute
+            ElementOverrides[attribute][element]--;
+            Debug.Log($"Decremented a(n) {element} override from {Entity.Name} for the {attribute} PhysicalAttribute!");
+            if (ElementOverrides[attribute][element] <= 0)
+            {
+                ElementOverrides[attribute].Remove(element);
+                Debug.Log($"Removed the element {element} for the {attribute} PhysicalAttribute from {Entity.Name}'s Element Overrides!");
+
+                //If no Elements are remaining for this PhysicalAttribute, remove the Element Override
+                if (ElementOverrides[attribute].Count <= 0)
+                {
+                    ElementOverrides.Remove(attribute);
+                    Debug.Log($"Removed element override for the {attribute} PhysicalAttribute on {Entity.Name}");
+                }
+            }
         }
 
         /// <summary>
@@ -251,21 +273,57 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Tells if the BattleEntity has an Element Override of a particular Element for a particular PhysicalAttribute.
+        /// </summary>
+        /// <param name="attribute">The PhysicalAttribute associated with the Element Override.</param>
+        /// <param name="element">The Element of the Element Override.</param>
+        /// <returns>true if an Element Override of the Element exists for the PhysicalAttribute, otherwise false.</returns>
+        public bool HasElementOverride(PhysicalAttributes attribute, Elements element)
+        {
+            return (HasElementOverride(attribute) == true && ElementOverrides[attribute].ContainsKey(element));
+        }
+
+        /// <summary>
         /// Retrieves the Element Override this BattleEntity has for the first PhysicalAttribute found on a victim
         /// </summary>
         /// <param name="attacker">The BattleEntity this one is attacking</param>
-        /// <returns>The type of Element damage this BattleEntity will do to the victim</returns>
-        public Elements GetTotalElementOverride(BattleEntity victim)
+        /// <returns>An ElementOverrideHolder with the type of Element damage this BattleEntity will do and how many overrides of that Element exist.</returns>
+        public ElementOverrideHolder GetTotalElementOverride(BattleEntity victim)
         {
             PhysicalAttributes[] victimAttributes = victim.EntityProperties.GetAllPhysAttributes();
 
             for (int i = 0; i < victimAttributes.Length; i++)
             {
-                if (HasElementOverride(victimAttributes[i]) == true)
-                    return ElementOverrides[victimAttributes[i]];
+                PhysicalAttributes physAttribute = victimAttributes[i];
+
+                if (HasElementOverride(physAttribute) == true)
+                {
+                    //NOTE: I'm not happy with the overall performance of this, but it's definitely better than
+                    //not allowing more Elements or their counts for each override
+
+                    //Return the first one since they're sorted
+                    Elements[] elementsForOverride = GetElementsForOverride(physAttribute);
+                    Elements element = elementsForOverride[0];
+
+                    return new ElementOverrideHolder(element, ElementOverrides[physAttribute][element]);
+                }
             }
 
-            return Elements.Invalid;
+            return ElementOverrideHolder.Default;
+        }
+
+        /// <summary>
+        /// Returns all Elements of an Element Override the BattleEntity has for a particular PhysicalAttribute.
+        /// </summary>
+        /// <returns>An array of all Elements of the Element Override the BattleEntity has for the PhysicalAttribute, with higher Element values first.</returns>
+        protected Elements[] GetElementsForOverride(PhysicalAttributes physAttribute)
+        {
+            if (HasElementOverride(physAttribute) == false)
+            {
+                return new Elements[0];
+            }
+
+            return ElementOverrides[physAttribute].Keys.ToArray();
         }
 
         #endregion
@@ -1040,26 +1098,6 @@ namespace PaperMarioBattleSystem
         public MoveCategories[] GetDisabledMoveCategories()
         {
             return DisabledMoveCategories.Keys.ToArray();
-        }
-
-        #endregion
-
-        #region Physical Attribute Sort Methods
-
-        /// <summary>
-        /// A Comparison sort method for PhysicalAttributes, putting higher valued attributes first for consistency with contact results
-        /// </summary>
-        /// <param name="physAttr1"></param>
-        /// <param name="physAttr2"></param>
-        /// <returns></returns>
-        public static int SortPhysicalAttributes(PhysicalAttributes physAttr1, PhysicalAttributes physAttr2)
-        {
-            if (physAttr1 > physAttr2)
-                return -1;
-            else if (physAttr1 < physAttr2)
-                return 1;
-
-            return 0;
         }
 
         #endregion

@@ -334,7 +334,7 @@ namespace PaperMarioBattleSystem
             {
                 if (Input.GetKey(Keys.LeftShift))
                 {
-                    UnitTests.InteractionUnitTests.StrengthInteractionUT1();
+                    UnitTests.InteractionUnitTests.ElementOverrideInteractionUT1();
                 }
                 else
                 {

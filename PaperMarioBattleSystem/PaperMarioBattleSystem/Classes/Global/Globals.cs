@@ -949,6 +949,7 @@ namespace PaperMarioBattleSystem
 
             /// <summary>
             /// Used for enemies who are tattled or if Peekaboo is active. This tells them to show their HP underneath them.
+            /// <para>Use an integer for the value so removing Peekaboo doesn't remove this property from enemies if they have been tattled.</para>
             /// </summary>
             ShowHP
         }

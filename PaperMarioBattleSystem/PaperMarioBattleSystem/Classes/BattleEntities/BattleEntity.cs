@@ -18,6 +18,10 @@ namespace PaperMarioBattleSystem
         #region Delegates and Events
 
         public delegate void HealthStateChanged(HealthStates newHealthState);
+        /// <summary>
+        /// The event invoked when the BattleEntity's HealthState is changed. This occurs immediately before actually changing the HealthState.
+        /// <para>This event won't be invoked if the BattleEntity's HealthState is set to the same one it currently has.</para>
+        /// </summary>
         public event HealthStateChanged HealthStateChangedEvent = null;
 
         public delegate void PhaseCycleStarted();
@@ -794,8 +798,7 @@ namespace PaperMarioBattleSystem
 
             //Draw Status Effect icons on the BattleEntity
             //You can't see the icons unless it's Mario or his Partner's turn and they're not in a Sequence
-            if (BattleManager.Instance.EntityTurn.EntityType == EntityTypes.Player
-                && BattleManager.Instance.EntityTurn.PreviousAction?.MoveSequence.InSequence != true)
+            if (BattleManager.Instance.ShouldShowPlayerTurnUI == true)
             {
                 Vector2 statusIconPos = new Vector2(Position.X + 10, Position.Y - 40);
                 StatusEffect[] statuses = EntityProperties.GetStatuses();

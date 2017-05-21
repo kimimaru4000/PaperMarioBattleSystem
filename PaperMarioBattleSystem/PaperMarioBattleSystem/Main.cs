@@ -112,6 +112,8 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new HPPlusPBadge());
             Inventory.Instance.AddBadge(new FPPlusBadge());
 
+            Inventory.Instance.AddBadge(new PeekabooBadge());
+
             Inventory.Instance.AddBadge(new LEmblemBadge());
             Inventory.Instance.AddBadge(new WEmblemBadge());
 
@@ -144,6 +146,7 @@ namespace PaperMarioBattleSystem
             AssetManager.Instance.Dispose();
             SoundManager.Instance.Dispose();
             SpriteRenderer.Instance.Dispose();
+            BattleManager.Instance.Dispose();
             BattleUIManager.Instance.Dispose();
             BattleVFXManager.Instance.Dispose();
         }

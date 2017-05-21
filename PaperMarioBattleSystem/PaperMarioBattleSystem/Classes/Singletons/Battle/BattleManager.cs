@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Handles turns in battle
     /// <para>This is a Singleton</para>
     /// </summary>
-    public class BattleManager : IUpdateable, IDrawable
+    public class BattleManager : IUpdateable, IDrawable, IDisposable
     {
         #region Singleton Fields
 
@@ -31,6 +31,17 @@ namespace PaperMarioBattleSystem
         }
 
         private static BattleManager instance = null;
+
+        #endregion
+
+        #region Events
+
+        public delegate void OnEnemyAdded(BattleEnemy battleEnemy);
+        /// <summary>
+        /// The event invoked after a <see cref="BattleEnemy"/> has been added to battle.
+        /// <para>This is invoked after the enemy has been added to battle and the enemy count has been incremented.</para>
+        /// </summary>
+        public event OnEnemyAdded EnemyAddedEvent = null;
 
         #endregion
 
@@ -64,6 +75,12 @@ namespace PaperMarioBattleSystem
         /// How many phase cycles (Player and Enemy turns) passed
         /// </summary>
         public int PhaseCycleCount { get; private set; } = 0;
+
+        /// <summary>
+        /// Whether certain UI, such as Status Effect icons and enemy HP, should show up or not.
+        /// This UI shows up only when the Player is choosing an action.
+        /// </summary>
+        public bool ShouldShowPlayerTurnUI => (EntityTurn.EntityType == EntityTypes.Player && EntityTurn.PreviousAction?.MoveSequence.InSequence != true);
 
         /// <summary>
         /// The BattlePhase the battle starts on.
@@ -135,6 +152,11 @@ namespace PaperMarioBattleSystem
             {
                 Enemies.Add(null);
             }
+        }
+
+        public void Dispose()
+        {
+            EnemyAddedEvent = null;
         }
 
         /// <summary>
@@ -567,6 +589,9 @@ namespace PaperMarioBattleSystem
                 enemy.OnBattleStart();
 
                 IncrementEnemiesAlive();
+
+                //Call the enemy added event
+                EnemyAddedEvent?.Invoke(enemy);
             }
         }
 

@@ -25,12 +25,49 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            
+            BattleManager.Instance.EnemyAddedEvent -= OnEnemyAdded;
+            BattleManager.Instance.EnemyAddedEvent += OnEnemyAdded;
+
+            //For all current enemies, show their HP
+            BattleEntity[] enemies = BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Enemy, null);
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                AddShowHPProperty((BattleEnemy)enemies[i]);
+            }
         }
 
         protected override void OnUnequip()
         {
-            
+            BattleManager.Instance.EnemyAddedEvent -= OnEnemyAdded;
+
+            //For all current enemies, remove showing their HP (unless tattled, which will handle itself)
+            BattleEntity[] enemies = BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Enemy, null);
+            for (int i = 0; i < enemies.Length; i++)
+            {
+                RemoveShowHPProperty((BattleEnemy)enemies[i]);
+            }
+        }
+
+        private void OnEnemyAdded(BattleEnemy enemy)
+        {
+            //Tell the enemy to show its HP. Note that we have an integer in case they have been tattled
+            AddShowHPProperty(enemy);
+        }
+
+        private void AddShowHPProperty(BattleEnemy enemy)
+        {
+            int showHP = enemy.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) + 1;
+            enemy.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ShowHP, showHP);
+        }
+
+        private void RemoveShowHPProperty(BattleEnemy enemy)
+        {
+            int showHP = enemy.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) - 1;
+            enemy.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.ShowHP);
+            if (showHP > 0)
+            {
+                AddShowHPProperty(enemy);
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The standard Goomba enemy
     /// </summary>
-    public class Goomba : BattleEnemy
+    public class Goomba : BattleEnemy, ITattleableEntity
     {
         //NOTE: Temporary until we get a simple enemy AI system in
         protected virtual MoveAction ActionUsed => new Jump();
@@ -56,5 +56,28 @@ namespace PaperMarioBattleSystem
             //Rectangle rect = new Rectangle(67, 107, 26, 28);
             //SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), false, .1f);
         }
+
+        #region Tattle Info
+
+        public string[] GetTattleLogEntry()
+        {
+            return new string[]
+            {
+                $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
+                $"The underling of underlings. No other distinguishing characteristics."
+            };
+        }
+
+        public string[] GetTattleDescription()
+        {
+            return new string[]
+            {
+                "That's a Goomba. Umm... Yeah, I'm one of those, in case you hadn't noticed.",
+                "Ahem... It says here: \"Goombas are underlings of underlings.\" ...That is totally rude!",
+                $"Their maximum HP is {BattleStats.MaxHP}. They have an Attack power of {BattleStats.BaseAttack} and a Defense of {BattleStats.BaseDefense}."
+            };
+        }
+
+        #endregion
     }
 }

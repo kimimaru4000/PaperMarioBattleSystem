@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Pokey enemy. It has 3 segments.
     /// </summary>
-    public class Pokey : BattleEnemy, ISegmentEntity
+    public class Pokey : BattleEnemy, ISegmentEntity, ITattleableEntity
     {
         public Pokey(Stats stats) : base(new Stats(11, 4, 0, 2, 0))
         {
@@ -59,6 +59,32 @@ namespace PaperMarioBattleSystem
         public void HandleSegmentAdded(uint segmentsAdded)
         {
             
+        }
+
+        #endregion
+
+        #region Tattle Info
+
+        public string[] GetTattleLogEntry()
+        {
+            return new string[]
+            {
+                $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
+                $"A cactus ghoul covered from head to base in nasty spines.",
+                "It attacks by lobbing sections of itself at you, and can even call other Pokeys to fight alongside it."
+            };
+        }
+
+        public string[] GetTattleDescription()
+        {
+            return new string[]
+            {
+                "That's a Pokey. It's a cactus ghoul that's got nasty spines all over its body.",
+                $"Max HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.",
+                "Look at those spines... Those would TOTALLY hurt. If you stomp on it, you'll regret it.",
+                "Pokeys attack by lobbing parts of their bodies and by charging at you...",
+                "They can even call friends in for help, so be quick about taking them out."
+            };
         }
 
         #endregion

@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Paratroopa - A Koopa Troopa with wings.
     /// </summary>
-    public sealed class Paratroopa : KoopaTroopa, IWingedEntity
+    public sealed class Paratroopa : KoopaTroopa, IWingedEntity, ITattleableEntity
     {
         public Paratroopa()
         {
@@ -160,5 +160,30 @@ namespace PaperMarioBattleSystem
             //Change HeightState
             ChangeHeightState(Enumerations.HeightStates.Grounded);
         }
+
+        #region Tattle Information
+
+        public new string[] GetTattleLogEntry()
+        {
+            return new string[]
+            {
+                $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
+                $"A Koopa Troopa with wings that stays airborne until you stomp on it and send it plunging to the ground."
+            };
+        }
+
+        public new string[] GetTattleDescription()
+        {
+            return new string[]
+            {
+                "That's a Koopa Paratroopa. Well, umm... It's basically a Koopa Troopa with wings.",
+                $"Max HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.",
+                "I kinda hate that this guy gets to fly. Of course, you can stomp on him and he'll plunge down and be a plain Koopa Troopa.",
+                "Yeah, do that, and he's ours! Stomp again to flip him, and his arms and legs are useless!",
+                "Oops! Sorry, that's not true. It looks like he can still wiggle them around a bit..."
+            };
+        }
+
+        #endregion
     }
 }

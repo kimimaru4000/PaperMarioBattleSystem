@@ -250,19 +250,19 @@ namespace PaperMarioBattleSystem
                 goomba.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Fiery);
                 goomba.EntityProperties.AddWeakness(Enumerations.Elements.Ice, new WeaknessHolder(WeaknessTypes.PlusDamage, 1));
 
-                System.Diagnostics.Debug.Assert(goomba.EntityProperties.HasPhysAttributes(true, Enumerations.PhysicalAttributes.Fiery));
-                System.Diagnostics.Debug.Assert(goomba.EntityProperties.HasWeakness(Enumerations.Elements.Ice));
+                Debug.Assert(goomba.EntityProperties.HasPhysAttributes(true, Enumerations.PhysicalAttributes.Fiery));
+                Debug.Assert(goomba.EntityProperties.HasWeakness(Enumerations.Elements.Ice));
 
                 ElementOverrideHolder overrideHolder = mario.EntityProperties.GetTotalElementOverride(goomba);
 
-                System.Diagnostics.Debug.Assert(overrideHolder.Element == Enumerations.Elements.Ice);
-                System.Diagnostics.Debug.Assert(overrideHolder.OverrideCount == 2);
+                Debug.Assert(overrideHolder.Element == Enumerations.Elements.Ice);
+                Debug.Assert(overrideHolder.OverrideCount == 2);
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 1, Enumerations.Elements.Ice, true,
                     Enumerations.ContactTypes.TopDirect, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveMoveOverrides.None);
                 InteractionResult interaction = Interactions.GetDamageInteraction(param);
 
-                System.Diagnostics.Debug.Assert(interaction.VictimResult.TotalDamage == 4);
+                Debug.Assert(interaction.VictimResult.TotalDamage == 4);
 
                 PrintInteractionResult(interaction);
 
@@ -270,7 +270,7 @@ namespace PaperMarioBattleSystem
                 icePower2.UnEquip();
 
                 ElementOverrideHolder overrideHolder2 = mario.EntityProperties.GetTotalElementOverride(goomba);
-                System.Diagnostics.Debug.Assert(overrideHolder2.Element == Enumerations.Elements.Invalid);
+                Debug.Assert(overrideHolder2.Element == Enumerations.Elements.Invalid);
             }
 
             private static void PrintInteractionResult(InteractionResult interactionResult)

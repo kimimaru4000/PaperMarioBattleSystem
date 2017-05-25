@@ -49,9 +49,9 @@ namespace PaperMarioBattleSystem
             LogsEnabled = !LogsEnabled;
         }
 
-        private static string GetStackInfo()
+        private static string GetStackInfo(int skipFrames)
         {
-            StackFrame trace = new StackFrame(2, true);
+            StackFrame trace = new StackFrame(skipFrames, true);
             int line = 0;
             string method = "";
 
@@ -72,6 +72,11 @@ namespace PaperMarioBattleSystem
             return $"{fileName}->{method}({line}):";
         }
 
+        private static string GetStackInfo()
+        {
+            return GetStackInfo(2);
+        }
+
         public static void Log(object value)
         {
             if (LogsEnabled == false) return;
@@ -88,6 +93,21 @@ namespace PaperMarioBattleSystem
         {
             if (LogsEnabled == false) return;
             WriteLine($"Error: {GetStackInfo()} {value}");
+        }
+
+        private static void LogAssert()
+        {
+            if (LogsEnabled == false) return;
+            string stackInfo = GetStackInfo(3);
+            stackInfo = stackInfo.Remove(stackInfo.Length - 1);
+
+            WriteLine($"ASSERT FAILURE AT: {stackInfo}");
+        }
+
+        public static void Assert(bool condition)
+        {
+            if (condition == false)
+                LogAssert();
         }
 
         public static void DebugUpdate()

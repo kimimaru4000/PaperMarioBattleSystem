@@ -69,8 +69,16 @@ Flipped Enemies (Koopa Troopas, Clefts, Bristles)
 Electro Blooper
 ---------------
 -When it electrifies itself, it doesn't gain the Electrified status but directly applies the Electrified physical attribute instead
--Hammer Throw gets rid of its Electrified physical attribute when it electrifies itself
+-Any move that damages it gets rid of its Electrified physical attribute when it electrifies itself
 
 Lakitu
 ------
 -When inflicted with Dizzy in TTYD, they drop any Spiny Eggs they're holding
+
+Lava Piranha
+------------
+When it misses with its main fireball move, the fireball doesn't show up and little fire particles show up instead.
+
+Huff N' Puff
+------------
+When he misses with his damaging air move where he blows at you, you're not required to perform the Action Command involving mashing A.

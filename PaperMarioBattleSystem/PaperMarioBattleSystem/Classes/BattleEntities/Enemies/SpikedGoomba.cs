@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
-    public class SpikedGoomba : Goomba
+    public class SpikedGoomba : Goomba, ITattleableEntity
     {
         public SpikedGoomba()
         {
@@ -26,5 +26,29 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(128, 108, 31, 36), 500d)));
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(128, 108, 31, 36), 1000d)));
         }
+
+        #region Tattle Information
+
+        public new string[] GetTattleLogEntry()
+        {
+            return new string[]
+            {
+                $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
+                $"A Goomba that wears a spiked helmet. Slightly higher attack power than a typical Goomba."
+            };
+        }
+
+        public new string[] GetTattleDescription()
+        {
+            return new string[]
+            {
+                "That's a Spiky Goomba. ...A spiky-headed Goomba. What a creative name.",
+                "That spike is super-pointy, so it's better to hit it with a hammer than jump on it.",
+                $"Maximum HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.",
+                "The addition of the spike means you'll hurt your feet if you jump on it. Duh!"
+            };
+        }
+
+        #endregion
     }
 }

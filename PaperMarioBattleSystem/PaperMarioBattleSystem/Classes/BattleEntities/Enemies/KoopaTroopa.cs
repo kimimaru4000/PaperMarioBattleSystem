@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Koopa Troopa
     /// </summary>
-    public class KoopaTroopa : BattleEnemy, IFlippableEntity
+    public class KoopaTroopa : BattleEnemy, IFlippableEntity, ITattleableEntity
     {
         //NOTE: Temporary until we get a simple enemy AI system in
         protected virtual MoveAction ActionUsed => new ShellToss();
@@ -171,5 +171,28 @@ namespace PaperMarioBattleSystem
 
             ElapsedFlippedTurns = 0;
         }
+
+        #region Tattle Information
+
+        public string[] GetTattleLogEntry()
+        {
+            return new string[]
+            {
+                $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
+                $"Koopa Troopas have been around forever. Jump on them to flip them over and drop their Defense to 0."
+            };
+        }
+
+        public string[] GetTattleDescription()
+        {
+            return new string[]
+            {
+                "That's a Koopa Troopa. They've been around forever! Gotta respect the longevity!",
+                "Their shells are hard, but flip them over and their Defense drops to zero.",
+                "And you know how to flip them over, right? Just jump on their heads!"
+            };
+        }
+
+        #endregion
     }
 }

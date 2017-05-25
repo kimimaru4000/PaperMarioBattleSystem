@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Paragoomba - A Goomba with wings.
     /// </summary>
-    public sealed class Paragoomba : Goomba, IWingedEntity
+    public sealed class Paragoomba : Goomba, IWingedEntity, ITattleableEntity
     {
         protected override MoveAction ActionUsed => Grounded == false ? new DiveKick() : base.ActionUsed;
 
@@ -149,5 +149,29 @@ namespace PaperMarioBattleSystem
             //Change HeightState
             ChangeHeightState(Enumerations.HeightStates.Grounded);
         }
+
+        #region Tattle Information
+
+        public new string[] GetTattleLogEntry()
+        {
+            return new string[]
+            {
+                $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
+                $"A Goomba with wings. Can't reach it with a hammer while it's in the air,",
+                $"but once it's damaged, its wings get clipped. It's kind of sad really."
+            };
+        }
+
+        public new string[] GetTattleDescription()
+        {
+            return new string[]
+            {
+                "That's a Paragoomba. Basically a Goomba with wings. I'm jealous!",
+                $"Maximum HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.",
+                "You can't hammer it while it's flying, but rough it up and it'll totally plummet!"
+            };
+        }
+
+        #endregion
     }
 }

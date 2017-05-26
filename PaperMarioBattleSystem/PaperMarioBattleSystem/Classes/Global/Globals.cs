@@ -1023,6 +1023,23 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Goombario-specific battle animations.
+        /// </summary>
+        public static class GoombarioBattleAnimations
+        {
+            public const string TattleName = "Tattle";
+        }
+
+        /// <summary>
+        /// Goombella-specific battle animations.
+        /// </summary>
+        public static class GoombellaBattleAnimations
+        {
+            public const string TattleStartName = "TattleStart";
+            public const string TattleFailName = "TattleFail";
+        }
+
+        /// <summary>
         /// Kooper-specific battle animations
         /// </summary>
         public static class KooperBattleAnimations

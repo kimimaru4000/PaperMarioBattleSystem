@@ -85,7 +85,7 @@ namespace PaperMarioBattleSystem
             Vector2 hpPos = iconPos + new Vector2((int)(hpOrigin.X / 2) - 6, (int)(hpOrigin.Y / 2) + 1);
             float hpDepth = depth + .00001f;
 
-            SpriteRenderer.Instance.Draw(HPIcon.Tex, hpPos, HPIcon.SourceRect, lerpedColor, false, hpDepth, true);
+            SpriteRenderer.Instance.Draw(HPIcon.Tex, hpPos, HPIcon.SourceRect, lerpedColor, false, false, hpDepth, true);
         }
     }
 }

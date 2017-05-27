@@ -49,9 +49,9 @@ namespace PaperMarioBattleSystem
             CircleImage = AssetManager.Instance.LoadAsset<Texture2D>($"UI/Circle");
         }
 
-        public override void StartInput()
+        public override void StartInput(params object[] values)
         {
-            base.StartInput();
+            base.StartInput(values);
 
             SuccessStartValue = MaxBarValue - SuccessRange;
 
@@ -119,7 +119,7 @@ namespace PaperMarioBattleSystem
 
             DrawBar(barStartPos, barScale, SuccessStartValue);
             
-            SpriteRenderer.Instance.Draw(CircleImage, new Vector2(startPos.X + 100f, startPos.Y), null, circleColor, 0f, CircleImage.GetOrigin(0f, .5f), 2f, false, .8f, true);
+            SpriteRenderer.Instance.Draw(CircleImage, new Vector2(startPos.X + 100f, startPos.Y), null, circleColor, 0f, CircleImage.GetOrigin(0f, .5f), 2f, false, false, .8f, true);
         }
     }
 }

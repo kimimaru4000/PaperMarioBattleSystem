@@ -27,9 +27,9 @@ namespace PaperMarioBattleSystem
             
         }
 
-        public override void StartInput()
+        public override void StartInput(params object[] values)
         {
-            base.StartInput();
+            base.StartInput(values);
 
             PrevGuardInputTime = 0f;
             PrevGuardCooldown = 0f;

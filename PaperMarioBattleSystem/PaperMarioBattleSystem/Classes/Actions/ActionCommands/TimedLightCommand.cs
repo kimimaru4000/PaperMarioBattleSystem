@@ -215,7 +215,7 @@ namespace PaperMarioBattleSystem
                 Vector2 lightPos = new Vector2(startPos.X + lightPosX, startPos.Y);
                 Vector2 lightScale = new Vector2(.5f, .5f);//new Vector2((float)(LightRange / MaxBarValue));
 
-                SpriteRenderer.Instance.Draw(CircleImage, lightPos, null, circleColor, 0f, CircleImage.GetCenterOrigin(), lightScale, false, .8f, true);
+                SpriteRenderer.Instance.Draw(CircleImage, lightPos, null, circleColor, 0f, CircleImage.GetCenterOrigin(), lightScale, false, false, .8f, true);
             }
         }
 

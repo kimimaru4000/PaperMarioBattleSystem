@@ -29,9 +29,9 @@ namespace PaperMarioBattleSystem
             InputLimit = inputLimit;
         }
 
-        public override void StartInput()
+        public override void StartInput(params object[] values)
         {
-            base.StartInput();
+            base.StartInput(values);
 
             ButtonsPressed = new List<Keys>();
 

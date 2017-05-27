@@ -37,9 +37,9 @@ namespace PaperMarioBattleSystem
             TornadoTime = tornadoTime;
         }
 
-        public override void StartInput()
+        public override void StartInput(params object[] values)
         {
-            base.StartInput();
+            base.StartInput(values);
 
             TornadoEndTime = Time.ActiveMilliseconds + TornadoTime;
             ButtonIndex = 0;

@@ -26,9 +26,9 @@ namespace PaperMarioBattleSystem
 
         }
 
-        public override void StartInput()
+        public override void StartInput(params object[] values)
         {
-            base.StartInput();
+            base.StartInput(values);
 
             LightsFilled = 0;
             PrevLightTime = (float)Time.ActiveMilliseconds + TimeBetweenLights;

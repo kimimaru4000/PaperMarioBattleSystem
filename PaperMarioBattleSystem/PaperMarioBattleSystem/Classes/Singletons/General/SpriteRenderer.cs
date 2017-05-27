@@ -96,29 +96,32 @@ namespace PaperMarioBattleSystem
             uiBatch.End();
         }
 
-        public void Draw(Texture2D texture, Vector2 position, Color color, bool flip, float layer, bool uibatch = false)
+        public void Draw(Texture2D texture, Vector2 position, Color color, bool flipX, bool flipY, float layer, bool uibatch = false)
         {
-            Draw(texture, position, null, color, flip, layer, uibatch);
+            Draw(texture, position, null, color, flipX, flipY, layer, uibatch);
         }
 
-        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, bool flip, float layer, bool uibatch = false)
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, bool flipX, bool flipY, float layer, bool uibatch = false)
         {
-            Draw(texture, position, sourceRect, color, Vector2.Zero, flip, layer, uibatch);
+            Draw(texture, position, sourceRect, color, Vector2.Zero, flipX, flipY, layer, uibatch);
         }
 
-        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, Vector2 origin, bool flip, float layer, bool uibatch = false)
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, Vector2 origin, bool flipX, bool flipY, float layer, bool uibatch = false)
         {
-            Draw(texture, position, sourceRect, color, 0f, origin, 1f, flip, layer, uibatch);
+            Draw(texture, position, sourceRect, color, 0f, origin, 1f, flipX, flipY, layer, uibatch);
         }
 
-        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, float scale, bool flip, float layer, bool uibatch = false)
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, float scale, bool flipX, bool flipY, float layer, bool uibatch = false)
         {
-            Draw(texture, position, sourceRect, color, rotation, origin, new Vector2(scale, scale), flip, layer, uibatch);
+            Draw(texture, position, sourceRect, color, rotation, origin, new Vector2(scale, scale), flipX, flipY, layer, uibatch);
         }
 
-        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flip, float layer, bool uibatch = false)
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool uibatch = false)
         {
-            SpriteEffects se = flip ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+            SpriteEffects se = SpriteEffects.None;
+            if (flipX == true) se |= SpriteEffects.FlipHorizontally;
+            if (flipY == true) se |= SpriteEffects.FlipVertically;
+            
             Vector2 realOrigin = sourceRect.HasValue ? sourceRect.Value.GetOrigin(origin.X, origin.Y) : origin;
             if (uibatch == false)
                 spriteBatch.Draw(texture, position, sourceRect, color, rotation, realOrigin, scale, se, layer);

@@ -133,9 +133,9 @@ namespace PaperMarioBattleSystem
             LineTexture = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
         }
 
-        public override void StartInput()
+        public override void StartInput(params object[] values)
         {
-            base.StartInput();
+            base.StartInput(values);
 
             AddedLine = false;
 
@@ -340,7 +340,7 @@ namespace PaperMarioBattleSystem
                 //These offsets allow the lines to match up one-to-one with their actual positions
                 AdjustLineOffset(line, ref scale, ref position);
 
-                SpriteRenderer.Instance.Draw(LineTexture, position, null, LineColor, angle, origin, scale, false, .8f, true);
+                SpriteRenderer.Instance.Draw(LineTexture, position, null, LineColor, angle, origin, scale, false, false, .8f, true);
             }
         }
 

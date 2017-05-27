@@ -88,6 +88,24 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public Vector2 BattlePosition { get; protected set; } = Vector2.Zero;
 
+        /// <summary>
+        /// The position the entity is rendered at.
+        /// </summary>
+        public Vector2 DrawnPosition
+        {
+            get
+            {
+                //NOTE: This has a chance at being inaccurate if the entity is drawn with a different origin (this doesn't happen as of this comment)
+                Vector2 pos = Position;
+                if (AnimManager.CurrentAnim != null)
+                {
+                    pos += (AnimManager.CurrentAnim.CurFrame.DrawRegion.GetCenterOrigin() + AnimManager.CurrentAnim.CurFrame.PosOffset);
+                }
+
+                return pos;
+            }
+        }
+
         public float Rotation { get; set; } = 0f;
         public float Scale { get; set; } = 1f;
 

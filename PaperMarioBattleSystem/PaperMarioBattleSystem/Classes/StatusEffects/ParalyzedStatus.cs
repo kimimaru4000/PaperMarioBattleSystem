@@ -132,7 +132,7 @@ namespace PaperMarioBattleSystem
             Vector2 sparkPos = iconPos + new Vector2(sparkOrigin.X, 2) + offsetPos;
             float sparkDepth = depth + .00001f;
 
-            SpriteRenderer.Instance.Draw(SparkIcon.Tex, sparkPos, SparkIcon.SourceRect, Color.White, 0f, Vector2.Zero, 1f, false, sparkDepth, true);
+            SpriteRenderer.Instance.Draw(SparkIcon.Tex, sparkPos, SparkIcon.SourceRect, Color.White, 0f, Vector2.Zero, 1f, false, false, sparkDepth, true);
         }
     }
 }

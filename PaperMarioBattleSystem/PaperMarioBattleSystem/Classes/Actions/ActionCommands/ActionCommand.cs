@@ -44,7 +44,9 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Performs any initialization to start reading input for the action command
         /// </summary>
-        public virtual void StartInput()
+        /// <param name="values">Any values passed to the ActionCommand just as it starts.
+        /// An example includes the BattleEntity's position for the Tattle cursor.</param>
+        public virtual void StartInput(params object[] values)
         {
             AcceptingInput = true;
         }

@@ -121,7 +121,7 @@ namespace PaperMarioBattleSystem
         public override void Draw()
         {
             Vector2 drawPos = Position - Size.HalveInt();
-            SpriteRenderer.Instance.Draw(Image, drawPos, null, BoxColor, 0f, Vector2.Zero, Size, false, Layer, true);
+            SpriteRenderer.Instance.Draw(Image, drawPos, null, BoxColor, 0f, Vector2.Zero, Size, false, false, Layer, true);
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Text, Position, TextColor, 0f, new Vector2(.5f, .5f), 1f, Layer + .0001f);
         }
     }

@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
         public void Draw()
         {
             //Vector2 hudPivot = HUDTex.GetCenterOrigin();
-            SpriteRenderer.Instance.Draw(HUDTex, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 2f, false, .1f, true);
+            SpriteRenderer.Instance.Draw(HUDTex, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, 2f, false, false, .1f, true);
 
             BattleMario mario = BattleManager.Instance.GetMario();
             BattlePartner partner = BattleManager.Instance.GetPartner();

@@ -154,7 +154,7 @@ namespace PaperMarioBattleSystem
                 if (SwitchIcon != null && SwitchIcon.Tex != null)
                 {
                     Vector2 pos = Camera.Instance.SpriteToUIPos(new Vector2(Position.X - 40f, Position.Y + 70f));
-                    SpriteRenderer.Instance.Draw(SwitchIcon.Tex, pos, SwitchIcon.SourceRect, Color.White, false, .2f, true);
+                    SpriteRenderer.Instance.Draw(SwitchIcon.Tex, pos, SwitchIcon.SourceRect, Color.White, false, false, .2f, true);
                 }
             }
         }

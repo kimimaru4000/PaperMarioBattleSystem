@@ -78,7 +78,7 @@ namespace PaperMarioBattleSystem
         public bool IsPlaying => (Finished == false && Paused == false);
 
         protected int MaxFrameIndex => MaxFrames - 1;
-        protected Frame CurFrame => Frames[CurFrameNum];
+        public Frame CurFrame => Frames[CurFrameNum];
 
         protected double ElapsedFrameTime => (Time.ActiveMilliseconds - PrevFrameTimer);
         protected double TrueCurFrameDuration => (CurFrame.Duration * (Speed <= 0f ? 0f : (1f / Speed)));
@@ -324,7 +324,7 @@ namespace PaperMarioBattleSystem
                 Vector2 realPos = position + PosOffset;
                 float realLayer = layer + DepthOffset;
 
-                SpriteRenderer.Instance.Draw(spriteSheet, realPos, DrawRegion, color, flipped, realLayer, uibatch);
+                SpriteRenderer.Instance.Draw(spriteSheet, realPos, DrawRegion, color, flipped, false, realLayer, uibatch);
             }
         }
     }

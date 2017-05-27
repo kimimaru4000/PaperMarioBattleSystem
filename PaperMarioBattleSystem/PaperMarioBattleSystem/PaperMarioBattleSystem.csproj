@@ -66,6 +66,7 @@
     <Compile Include="Classes\Actions\ActionCommands\GulpCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\HammerCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\JumpCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\TattleCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\TimedLightCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\SuperguardCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\TidalWaveCommand.cs" />

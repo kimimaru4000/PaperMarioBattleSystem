@@ -20,15 +20,15 @@ namespace PaperMarioBattleSystem
                 CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.Single, false,
                 null);
 
+            SetMoveSequence(new TattleSequence(this));
+            
             //Default to no Action Command
             //If this is Goombella, then set the Action Command
             actionCommand = null;
             if (isGoombella == true)
             {
-                //actionCommand = new TattleCommand();
+                actionCommand = new TattleCommand(MoveSequence, 2f);
             }
-
-            SetMoveSequence(new TattleSequence(this));
         }
 
         public override void Initialize()
@@ -41,6 +41,12 @@ namespace PaperMarioBattleSystem
                 Disabled = true;
                 DisabledString = "There's no one that can be tattled!";
             }
+        }
+
+        public override void OnMenuSelected()
+        {
+            //Select only entities that can be tattled
+            BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, GetTattleableEntities());
         }
 
         /// <summary>

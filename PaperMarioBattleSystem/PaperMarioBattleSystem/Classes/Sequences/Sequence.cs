@@ -458,9 +458,10 @@ namespace PaperMarioBattleSystem
         /// Starts the Action Command's input.
         /// If the Action Command is not enabled, it will call OnCommandFailed().
         /// </summary>
-        protected void StartActionCommandInput()
+        /// <param name="values">Any values passed to the ActionCommand just as it starts.</param>
+        protected void StartActionCommandInput(params object[] values)
         {
-            if (CommandEnabled == true) actionCommand.StartInput();
+            if (CommandEnabled == true) actionCommand.StartInput(values);
             else OnCommandFailed();
         }
 

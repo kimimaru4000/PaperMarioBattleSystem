@@ -64,7 +64,7 @@ namespace PaperMarioBattleSystem
                 }
                 Color circleColor = i >= LightsFilled ? Color.Black : Color.White;
 
-                SpriteRenderer.Instance.Draw(CircleImage, newpos, null, circleColor, 0f, CircleImage.GetCenterOrigin(), scale, false, .7f, true);
+                SpriteRenderer.Instance.Draw(CircleImage, newpos, null, circleColor, 0f, CircleImage.GetCenterOrigin(), scale, false, false, .7f, true);
             }
         }
     }

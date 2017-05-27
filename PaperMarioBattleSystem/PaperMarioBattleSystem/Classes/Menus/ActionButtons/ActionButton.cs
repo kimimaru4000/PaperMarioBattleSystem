@@ -111,7 +111,7 @@ namespace PaperMarioBattleSystem
 
             Vector2 uiPos = Camera.Instance.SpriteToUIPos(Position);
 
-            SpriteRenderer.Instance.Draw(ButtonImage, uiPos, iconColor, false, .4f, true);
+            SpriteRenderer.Instance.Draw(ButtonImage, uiPos, iconColor, false, false, .4f, true);
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Name, uiPos - new Vector2(0, 30), iconColor, .45f);
         }
     }

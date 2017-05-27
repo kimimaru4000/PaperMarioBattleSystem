@@ -80,7 +80,8 @@ namespace PaperMarioBattleSystem
                     //Goombario's Tattle doesn't have an Action Command while Goombella's does
                     if (CommandEnabled == true)
                     {
-                        actionCommand.StartInput();
+                        //Send in their actual draw position
+                        actionCommand.StartInput(EntitiesAffected[0].DrawnPosition);
                     }
                     else
                     {

@@ -35,9 +35,9 @@ namespace PaperMarioBattleSystem
             BarImage = AssetManager.Instance.LoadAsset<Texture2D>("UI/Box");
         }
 
-        public override void StartInput()
+        public override void StartInput(params object[] values)
         {
-            base.StartInput();
+            base.StartInput(values);
 
             CurBarValue = 0d;
         }
@@ -61,8 +61,8 @@ namespace PaperMarioBattleSystem
             double progressScale = CurBarValue / maxValue;
             float progressDisplay = (float)progressScale * barSize.X;
 
-            SpriteRenderer.Instance.Draw(BarImage, startPos, null, Color.Black, 0f, BarImage.GetCenterOrigin(), barSize, false, .7f, true);
-            SpriteRenderer.Instance.Draw(BarImage, startPos, null, Color.White, 0f, BarImage.GetCenterOrigin(), new Vector2(Math.Min(progressDisplay, barSize.X), barSize.Y), false, .71f, true);
+            SpriteRenderer.Instance.Draw(BarImage, startPos, null, Color.Black, 0f, BarImage.GetCenterOrigin(), barSize, false, false, .7f, true);
+            SpriteRenderer.Instance.Draw(BarImage, startPos, null, Color.White, 0f, BarImage.GetCenterOrigin(), new Vector2(Math.Min(progressDisplay, barSize.X), barSize.Y), false, false, .71f, true);
         }
     }
 }

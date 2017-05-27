@@ -266,7 +266,7 @@ namespace PaperMarioBattleSystem
             if (IsInfinite == true) turnCountString = string.Empty;
 
             //Draw icon
-            SpriteRenderer.Instance.Draw(StatusIcon.Tex, iconPos, StatusIcon.SourceRect, Color.White, false, depth, true);
+            SpriteRenderer.Instance.Draw(StatusIcon.Tex, iconPos, StatusIcon.SourceRect, Color.White, false, false, depth, true);
 
             //Draw turn count if it's not infinite
             if (string.IsNullOrEmpty(turnCountString) == false)

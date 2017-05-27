@@ -35,9 +35,9 @@ namespace PaperMarioBattleSystem
             Leniency = leniency;
         }
 
-        public override void StartInput()
+        public override void StartInput(params object[] values)
         {
-            base.StartInput();
+            base.StartInput(values);
 
             StartRange = (float)Time.ActiveMilliseconds + Leniency;
             EndRange = (float)Time.ActiveMilliseconds + TotalRange;

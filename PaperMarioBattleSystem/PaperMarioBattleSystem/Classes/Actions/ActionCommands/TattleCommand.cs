@@ -120,8 +120,17 @@ namespace PaperMarioBattleSystem
             //Handle rotation
             float rotation = -ElapsedTime * UtilityGlobals.ToRadians(.1f);
 
+            DrawBigCursor(rotation);
+            DrawSmallCursor(rotation);
+
+            //Show success rectangle (comment out if not debugging)
+            //SpriteRenderer.Instance.Draw(DebugBoxTex, new Vector2(SuccessRect.X, SuccessRect.Y), null, Color.Red, 0f, Vector2.Zero, 
+            //    new Vector2(SuccessRect.Width, SuccessRect.Height), false, false, .21f, true);
+        }
+
+        private void DrawBigCursor(float rotation)
+        {
             Vector2 bigOrigin = new Vector2((float)BigCursor.SourceRect.Value.Width, (float)BigCursor.SourceRect.Value.Height);
-            Vector2 bigOriginHalf = bigOrigin / 2f;
 
             //origins are offset instead of position so each piece rotates from the center of the overall big circle they create
             //May need adjusting
@@ -130,17 +139,34 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(bigOrigin.X, 0), 1f, false, true, .2f, true);
             SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, -bigOrigin, 1f, true, true, .2f, true);
 
+            //Draw the middle cursor indicating the small cursor is near
+            //It gets smaller the closer the small cursor is to the center
+            if (WithinRange == true)
+            {
+                //Cap the scale so it can be seen clearly at all times
+                const float maxScale = .8f;
+
+                //Get the absolute value of the distance from the cursor to the center
+                //Divide by half the SuccessRect's width since we're scaling based on how close it is to the center
+                float diff = Math.Abs(SmallCursorPos.X - SuccessRect.Center.X) / (SuccessRect.Width / 2f);
+                float scale = UtilityGlobals.Clamp(diff, 0f, maxScale);
+
+                //Draw the middle cursor
+                SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, bigOrigin, scale, false, false, .2f, true);
+                SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(-bigOrigin.X, bigOrigin.Y), scale, true, false, .2f, true);
+                SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(bigOrigin.X, 0), scale, false, true, .2f, true);
+                SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, -bigOrigin, scale, true, true, .2f, true);
+            }
+        }
+
+        private void DrawSmallCursor(float rotation)
+        {
             Vector2 smallOrigin = new Vector2(SmallCursor.SourceRect.Value.Width, SmallCursor.SourceRect.Value.Height);
-            Vector2 smallOriginHalf = smallOrigin / 2f;
 
             SpriteRenderer.Instance.Draw(SmallCursor.Tex, SmallCursorPos, SmallCursor.SourceRect, Color.White, smallOrigin, false, false, .25f, true);
             SpriteRenderer.Instance.Draw(SmallCursor.Tex, SmallCursorPos + new Vector2(smallOrigin.X, 0), SmallCursor.SourceRect, Color.White, smallOrigin, true, false, .25f, true);
             SpriteRenderer.Instance.Draw(SmallCursor.Tex, SmallCursorPos + new Vector2(0, smallOrigin.Y), SmallCursor.SourceRect, Color.White, smallOrigin, false, true, .25f, true);
             SpriteRenderer.Instance.Draw(SmallCursor.Tex, SmallCursorPos + new Vector2(smallOrigin.X, smallOrigin.Y), SmallCursor.SourceRect, Color.White, smallOrigin, true, true, .25f, true);
-
-            //Show success rectangle (comment out if not debugging)
-            //SpriteRenderer.Instance.Draw(DebugBoxTex, new Vector2(SuccessRect.X, SuccessRect.Y), null, Color.Red, 0f, Vector2.Zero, 
-            //    new Vector2(SuccessRect.Width, SuccessRect.Height), false, false, .21f, true);
         }
     }
 }

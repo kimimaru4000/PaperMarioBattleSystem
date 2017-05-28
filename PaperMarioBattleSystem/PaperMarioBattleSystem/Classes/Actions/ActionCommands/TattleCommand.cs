@@ -41,7 +41,6 @@ namespace PaperMarioBattleSystem
         {
             Texture2D battleGFX = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX");
             
-            //NOTE: Handle rotation by combining them at runtime, possibly...
             BigCursor = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
             SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));
 
@@ -118,13 +117,18 @@ namespace PaperMarioBattleSystem
 
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 100), color, .7f);
 
-            Vector2 bigOrigin = new Vector2(BigCursor.SourceRect.Value.Width, BigCursor.SourceRect.Value.Height);
+            //Handle rotation
+            float rotation = -ElapsedTime * UtilityGlobals.ToRadians(.1f);
+
+            Vector2 bigOrigin = new Vector2((float)BigCursor.SourceRect.Value.Width, (float)BigCursor.SourceRect.Value.Height);
             Vector2 bigOriginHalf = bigOrigin / 2f;
 
-            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, bigOrigin, false, false, .2f, true);
-            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos + new Vector2(bigOrigin.X, 0), BigCursor.SourceRect, Color.White, bigOrigin, true, false, .2f, true);
-            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos + new Vector2(0, bigOrigin.Y), BigCursor.SourceRect, Color.White, bigOrigin, false, true, .2f, true);
-            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos + new Vector2(bigOrigin.X, bigOrigin.Y), BigCursor.SourceRect, Color.White, bigOrigin, true, true, .2f, true);
+            //origins are offset instead of position so each piece rotates from the center of the overall big circle they create
+            //May need adjusting
+            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, bigOrigin, 1f, false, false, .2f, true);
+            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(-bigOrigin.X, bigOrigin.Y), 1f, true, false, .2f, true);
+            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(bigOrigin.X, 0), 1f, false, true, .2f, true);
+            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, -bigOrigin, 1f, true, true, .2f, true);
 
             Vector2 smallOrigin = new Vector2(SmallCursor.SourceRect.Value.Width, SmallCursor.SourceRect.Value.Height);
             Vector2 smallOriginHalf = smallOrigin / 2f;

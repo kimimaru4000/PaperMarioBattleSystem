@@ -47,6 +47,14 @@ namespace PaperMarioBattleSystem
                     heldBadge.Equip(this);
                 }
             }
+
+            //Check if the enemy has an entry in the Tattle table
+            //If so, mark it to show its HP
+            if (TattleDatabase.HasTattleDescription(Name) == true)
+            {
+                int showHP = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) + 1;
+                EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ShowHP, showHP);
+            }
         }
 
         public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)

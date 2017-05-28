@@ -100,7 +100,30 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    //NOTE: Show dialogue bubble coming from Goombario/Goombella along with the enemy's tattle log entry (with image and stats)
+                    string entityName = EntitiesAffected[0].Name;
+
+                    //Check if the enemy is in the Tattle database
+                    bool inDatabase = TattleDatabase.HasTattleDescription(entityName);
+
+                    //Add the Tattle information to the player's Tattles if the enemy isn't in the database
+                    if (inDatabase == false)
+                    {
+                        TattleDatabase.AddTattleLogEntry(entityName, TattledEntity.GetTattleLogEntry());
+                        TattleDatabase.AddTattleDescriptionEntry(entityName, TattledEntity.GetTattleDescription());
+
+                        //Mark the enemies to show their HP
+                        BattleEntity[] entities = BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Enemy, null);
+                        for (int i = 0; i < entities.Length; i++)
+                        {
+                            if (entities[i].Name == entityName)
+                            {
+                                int showHP = entities[i].EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) + 1;
+                                entities[i].EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ShowHP, showHP);
+                            }
+                        }
+                    }
+
+                    //NOTE: Show dialogue bubble coming from Goombario/Goombella along with the enemy's Tattle log entry (with image and stats)
                     string[] tattleDescriptions = TattledEntity.GetTattleDescription();
 
                     string tattle = "Tattle Description:";

@@ -117,8 +117,7 @@ namespace PaperMarioBattleSystem
                         {
                             if (entities[i].Name == entityName)
                             {
-                                int showHP = entities[i].EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) + 1;
-                                entities[i].EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ShowHP, showHP);
+                                entities[i].AddShowHPProperty();
                             }
                         }
                     }

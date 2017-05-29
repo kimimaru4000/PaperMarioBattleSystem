@@ -56,18 +56,12 @@ namespace PaperMarioBattleSystem
 
         private void AddShowHPProperty(BattleEnemy enemy)
         {
-            int showHP = enemy.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) + 1;
-            enemy.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ShowHP, showHP);
+            enemy.AddShowHPProperty();
         }
 
         private void RemoveShowHPProperty(BattleEnemy enemy)
         {
-            int showHP = enemy.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) - 1;
-            enemy.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.ShowHP);
-            if (showHP > 0)
-            {
-                AddShowHPProperty(enemy);
-            }
+            enemy.SubtractShowHPProperty();
         }
     }
 }

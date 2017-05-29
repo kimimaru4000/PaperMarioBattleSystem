@@ -52,8 +52,7 @@ namespace PaperMarioBattleSystem
             //If so, mark it to show its HP
             if (TattleDatabase.HasTattleDescription(Name) == true)
             {
-                int showHP = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) + 1;
-                EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ShowHP, showHP);
+                this.AddShowHPProperty();                
             }
         }
 

@@ -141,6 +141,21 @@ namespace PaperMarioBattleSystem
 
         private void ChangeToGroundedEntity()
         {
+            //Check if the winged entity and its grounded version have entries in the Tattle database
+            bool wingedInTattle = TattleDatabase.HasTattleDescription(Name);
+            bool groundedInTattle = TattleDatabase.HasTattleDescription(GroundedEntity.Name);
+
+            //If the winged entity has an entry and the grounded version doesn't, remove its ShowHP property
+            if (wingedInTattle == true && groundedInTattle == false)
+            {
+                this.SubtractShowHPProperty();
+            }
+            //If the winged entity doesn't have an entry and the grounded version does, add its ShowHP property
+            else if (wingedInTattle == false && groundedInTattle == true)
+            {
+                this.AddShowHPProperty();
+            }
+
             Name = GroundedEntity.Name;
 
             //Set the vulnerability to the same as the grounded entity. The grounded entity shouldn't have a winged vulnerabilty

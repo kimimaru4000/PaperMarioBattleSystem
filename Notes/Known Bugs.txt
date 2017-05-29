@@ -2,9 +2,17 @@ Known Bugs (5/10/17)
 --------------------
 This is a document for known bugs that need fixing. Be specific.
 
-------------------------------------------------------------------------------------------
+
 When inflicted with Electrified via Zap Tap, it shows the Battle Message when it shouldn't
 ------------------------------------------------------------------------------------------
 * Fixed
 
 
+When Tattling a Winged BattleEntity, its HP will stay shown even if its grounded variation isn't in the Tattle database
+-----------------------------------------------------------------------------------------------------------------------
+* Fixed
+
+
+When a Winged BattleEntity isn't Tattled, its HP will not show if it's grounded variation is in the Tattle database
+-------------------------------------------------------------------------------------------------------------------
+* Fixed

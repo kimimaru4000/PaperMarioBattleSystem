@@ -175,6 +175,30 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Adds a ShowHP AdditionalProperty to the BattleEntity.
+        /// </summary>
+        /// <param name="entity">The BattleEntity.</param>
+        public static void AddShowHPProperty(this BattleEntity entity)
+        {
+            int showHP = entity.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.ShowHP) + 1;
+            entity.EntityProperties.AddAdditionalProperty(AdditionalProperty.ShowHP, showHP);
+        }
+
+        /// <summary>
+        /// Subtracts a ShowHP AdditionalProperty from the BattleEntity.
+        /// </summary>
+        /// <param name="entity">The BattleEntity.</param>
+        public static void SubtractShowHPProperty(this BattleEntity entity)
+        {
+            int showHP = entity.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.ShowHP) - 1;
+            entity.EntityProperties.RemoveAdditionalProperty(AdditionalProperty.ShowHP);
+            if (showHP > 0)
+            {
+                entity.EntityProperties.AddAdditionalProperty(AdditionalProperty.ShowHP, showHP);
+            }
+        }
+
         #endregion
 
         #region Dictionary Extensions

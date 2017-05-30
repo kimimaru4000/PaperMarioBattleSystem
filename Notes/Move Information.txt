@@ -90,7 +90,6 @@ Gale Force (courtesy of Jdaster64) - Effectiveness is based off the following fo
 For example, a Level 30 Mario that got a full bar in Gale Force against a Hyper Goomba:
 1.00 * 80% + (30 - 15)% = 95%
 
-
 Clock Out
 ---------
 -Has a 1x multiplier if the bar is filled at all and a 1.27x multiplier if the bar is full
@@ -98,6 +97,11 @@ Clock Out
 -If the Audience is hit with it, they go to sleep like when a Crazee Dayzee in the Audience puts everyone to sleep
   -The Audience wakes up on the next phase cycle (so after the enemy's turn on the current phase cycle)
 
+Power Lift
+----------
+-It takes hitting 5 icons of a stat to boost it up by one. This is constant regardless of how much the stat is boosted
+-Hitting Poison Mushrooms slows the cursor down to roughly 1/4 its speed. You can still hit stat icons to boost them
+  
 Showstopper
 -----------
 -Has a .5x base multiplier

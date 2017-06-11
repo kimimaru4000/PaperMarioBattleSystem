@@ -66,6 +66,7 @@
     <Compile Include="Classes\Actions\ActionCommands\GulpCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\HammerCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\JumpCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\PowerLiftCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\TattleCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\TimedLightCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\SuperguardCommand.cs" />
@@ -97,6 +98,7 @@
     <Compile Include="Classes\Actions\Special\ArtAttack.cs" />
     <Compile Include="Classes\Actions\Special\Focus.cs" />
     <Compile Include="Classes\Actions\Special\Lullaby.cs" />
+    <Compile Include="Classes\Actions\Special\PowerLift.cs" />
     <Compile Include="Classes\Actions\Special\Refresh.cs" />
     <Compile Include="Classes\Actions\Special\SpecialMoveAction.cs" />
     <Compile Include="Classes\Actions\Sushie\TidalWave.cs" />
@@ -260,6 +262,7 @@
     <Compile Include="Classes\Sequences\Special\CrystalStarMoveSequence.cs" />
     <Compile Include="Classes\Sequences\Special\FocusSequence.cs" />
     <Compile Include="Classes\Sequences\Special\LullabySequence.cs" />
+    <Compile Include="Classes\Sequences\Special\PowerLiftSequence.cs" />
     <Compile Include="Classes\Sequences\Special\RefreshSequence.cs" />
     <Compile Include="Classes\Sequences\Special\SpecialMoveSequence.cs" />
     <Compile Include="Classes\Sequences\Special\StarSpiritMoveSequence.cs" />
@@ -323,6 +326,7 @@
     <Compile Include="Classes\UIElements\IDisableable.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />
     <Compile Include="Classes\UIElements\UIElement.cs" />
+    <Compile Include="Classes\UIElements\UIGrid.cs" />
     <Compile Include="Classes\VFXElements\VFXElement.cs" />
     <Compile Include="Classes\VFXElements\WingsDisappearVFX.cs" />
     <Compile Include="Main.cs" />

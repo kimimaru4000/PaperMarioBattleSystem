@@ -9,7 +9,8 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The base Sequence for all Special Moves.
     /// <para>The starts of Star Spirit and Crystal Star Special Moves are different, 
-    /// so they will need done in separate derived classes.</para>
+    /// so they will need to be done in separate derived classes.</para>
+    /// <para>Special Move Sequences do not have any Stylish moves.</para>
     /// </summary>
     public abstract class SpecialMoveSequence : Sequence
     {

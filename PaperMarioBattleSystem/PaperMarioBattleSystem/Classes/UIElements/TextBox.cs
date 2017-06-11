@@ -11,17 +11,12 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A textbox that shows text
     /// </summary>
-    public class TextBox : UIElement
+    public class TextBox : PosUIElement
     {
         /// <summary>
         /// The default buffer room used when fitting the TextBox to text.
         /// </summary>
         public static readonly Vector2 DefaultBufferRoom = new Vector2(10, 10);
-
-        /// <summary>
-        /// The position of the center of the textbox
-        /// </summary>
-        public Vector2 Position = Vector2.Zero;
 
         /// <summary>
         /// The size of the textbox

@@ -324,6 +324,7 @@
     <Compile Include="Classes\UIElements\BattleHUD.cs" />
     <Compile Include="Classes\ExtendedTypes\CroppedTexture2D.cs" />
     <Compile Include="Classes\UIElements\IDisableable.cs" />
+    <Compile Include="Classes\UIElements\PosUIElement.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />
     <Compile Include="Classes\UIElements\UIElement.cs" />
     <Compile Include="Classes\UIElements\UIGrid.cs" />

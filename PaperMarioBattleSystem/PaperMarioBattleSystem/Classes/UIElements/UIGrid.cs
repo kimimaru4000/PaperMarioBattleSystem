@@ -8,63 +8,162 @@ using Microsoft.Xna.Framework;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// A grid that draws CroppedTexture2Ds.
+    /// A grid holding <see cref="PosUIElement"/>s.
+    /// <para>The grid adjusts the elements whenever it is changed in some way.</para>
     /// </summary>
-    public class UIGrid : UIElement
+    public class UIGrid : PosUIElement
     {
+        //NOTE: Elements are rendered starting from the top-left at the moment
+
+        public override Vector2 Position
+        {
+            set
+            {
+                //Set position
+                base.Position = value;
+
+                //Reposition the grid after changing the position
+                RepositionGridElements();
+            }
+        }
+
         /// <summary>
-        /// The position of the grid. Elements are rendered in the top-left.
+        /// A property for the size of each cell in the grid.
         /// </summary>
-        public Vector2 Position = Vector2.Zero;
+        public Vector2 CellSize
+        {
+            get => GridCellSize;
+            set
+            {
+                Vector2 prevCellSize = GridCellSize;
+                GridCellSize = value;
+
+                //Reposition the grid if the value is different
+                if (prevCellSize != GridCellSize)
+                {
+                    RepositionGridElements();
+                }
+            }
+        }
+
+        /// <summary>
+        /// A property for the number of columns in the grid.
+        /// </summary>
+        public int Columns
+        {
+            get => GridColumns;
+            set
+            {
+                int prevCols = GridColumns;
+                GridColumns = value;
+
+                //Reposition the grid if the value is different
+                if (prevCols != GridColumns)
+                {
+                    RepositionGridElements();
+                }
+            }
+        }
+
+        /// <summary>
+        /// A property for the number of rows in the grid.
+        /// </summary>
+        public int Rows
+        {
+            get => GridRows;
+            set
+            {
+                int prevRows = GridRows;
+                GridRows = value;
+
+                //Reposition the grid if the value is different
+                if (prevRows != GridRows)
+                {
+                    RepositionGridElements();
+                }
+            }
+        }
 
         /// <summary>
         /// The size of each cell in the grid.
         /// </summary>
-        public Vector2 CellSize = new Vector2(32, 32);
+        protected Vector2 GridCellSize = new Vector2(32, 32);
 
         /// <summary>
         /// The number of columns in the grid.
         /// </summary>
-        public int Columns = 2;
+        protected int GridColumns = 2;
 
         /// <summary>
         /// The number of rows in the grid.
         /// </summary>
-        public int Rows = 2;
+        protected int GridRows = 2;
 
         /// <summary>
-        /// The CroppedTexture2Ds in the grid.
+        /// The PosUIElements in the grid.
         /// </summary>
-        protected List<CroppedTexture2D> GridElements = null;
+        protected List<PosUIElement> GridElements = null;
 
         public UIGrid(int columns, int rows, Vector2 cellSize)
         {
-            AdjustSize(columns, rows, cellSize);
+            //Set the values directly instead of going through the properties
+            //At this point there cannot be any elements in the grid, so bypass repositioning since it's unnecessary
+            GridColumns = columns;
+            GridRows = rows;
+            GridCellSize = cellSize;
 
-            GridElements = new List<CroppedTexture2D>(Columns * Rows);
+            GridElements = new List<PosUIElement>(Columns * Rows);
         }
 
-        public void AddGridElement(CroppedTexture2D croppedTex)
+        public void AddGridElement(PosUIElement posUIElement)
         {
-            if (croppedTex == null)
+            if (posUIElement == null)
             {
-                Debug.LogError($"Attempting to add null {nameof(CroppedTexture2D)} to the {nameof(UIGrid)}!");
+                Debug.LogError($"Attempting to add null {nameof(PosUIElement)} to the {nameof(UIGrid)}!");
                 return;
             }
 
-            GridElements.Add(croppedTex);
+            GridElements.Add(posUIElement);
+            RepositionGridElements();
         }
 
-        public void RemoveGridElement(CroppedTexture2D croppedTex)
+        public void RemoveGridElement(PosUIElement posUIElement)
         {
-            GridElements.Remove(croppedTex);
+            bool removed = GridElements.Remove(posUIElement);
+            if (removed == true)
+            {
+                RepositionGridElements();
+            }
         }
 
-        public void AdjustSize(int columns, int rows, Vector2 cellSize)
+        /// <summary>
+        /// Repositions the elements in the grid.
+        /// </summary>
+        protected void RepositionGridElements()
         {
-            Columns = columns;
-            Rows = rows;
-            CellSize = cellSize;
+            //Check for null - this should only be possible in the constructor
+            if (GridElements == null)
+                return;
+
+            for (int i = 0; i < GridElements.Count; i++)
+            {
+                GridElements[i].Position = GetPositionAtIndex(i);
+            }
+        }
+
+        /// <summary>
+        /// Gets the position a grid element would be at a particular index.
+        /// </summary>
+        /// <param name="index">The index of the grid element.</param>
+        /// <returns>The position of the grid at the element.</returns>
+        protected Vector2 GetPositionAtIndex(int index)
+        {
+            int xIndex = index % Columns;
+            int yIndex = index / Rows;
+
+            Vector2 posToDraw = Position + new Vector2(xIndex * CellSize.X, yIndex * CellSize.Y);
+
+            return posToDraw;
         }
 
         public override void Update()
@@ -76,12 +175,7 @@ namespace PaperMarioBattleSystem
         {
             for (int i = 0; i < GridElements.Count; i++)
             {
-                int xIndex = i % Columns;
-                int yIndex = i / Rows;
-
-                Vector2 posToDraw = Position + new Vector2(xIndex * CellSize.X, yIndex * CellSize.Y);
-
-                SpriteRenderer.Instance.Draw(GridElements[i].Tex, posToDraw, GridElements[i].SourceRect, Color.White, false, false, .4f, true);
+                GridElements[i].Draw();
             }
         }
     }

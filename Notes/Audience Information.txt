@@ -16,3 +16,9 @@ List of known Audience events:
 -X-Nauts teaming up with other X-Nauts to throw rocks (these rocks deal 3 damage)
 
 I'll eventually look into what conditions cause these events to occur via Dolphin's debugger.
+
+Additional Info
+---------------
+-When testing to see if Allergic prevents you from using Power Lift, I afflicted a Hyper Spiky Goomba with Allergic. Interestingly, when it charged and failed to
+inflict itself with the status, some members of the Audience left. This happened two times in a row so it wasn't a one-off thing. Considering this had literally nothing
+to do with any player action, it gives a bit more insight into how this system works.

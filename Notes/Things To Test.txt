@@ -131,6 +131,8 @@ In PM, hitting a Paragoomba with a Hammer from a First Strike makes it lose its 
 
 Results: (down below)
 
+1. No
+2. No
 3. No; Bow's Smack didn't cause a Paragoomba to lose its wings.
 
 Winged enemies and Immobilized
@@ -156,4 +158,14 @@ Strengths and Payback
 Does having Ice Power equipped increase the amount of Payback damage you take on Fiery enemies with Full or Half payback?
 
 Result: Yes, meaning strengths are taken into account.
+
+
+Allergic and Power Lift
+-----------------------
+Does being afflicted with Allergic prevent you from using Power Lift?
+
+Result: No, and it doesn't prevent you if your Partner has it too.
+
+I afflicted a Hyper Spiky Goomba with Allergic and, interestingly, when it charged and failed to inflict itself with the status, some members of the Audience left.
+Considering this had literally nothing to do with any player action, it gives some more insight into how the Audience system works.
 

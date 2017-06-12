@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Texture2D with a rectangle designating the portion of the Texture2D to render.
     /// </summary>
-    public sealed class CroppedTexture2D
+    public sealed class CroppedTexture2D : ICopyable<CroppedTexture2D>
     {
         /// <summary>
         /// The Texture2D to render.
@@ -37,6 +37,11 @@ namespace PaperMarioBattleSystem
         public void SetRect(Rectangle? sourceRect)
         {
             SourceRect = sourceRect;
+        }
+
+        public CroppedTexture2D Copy()
+        {
+            return new CroppedTexture2D(Tex, SourceRect);
         }
     }
 }

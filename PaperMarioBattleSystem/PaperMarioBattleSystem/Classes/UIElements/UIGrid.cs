@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// A grid holding <see cref="PosUIElement"/>s.
-    /// <para>The grid adjusts the elements whenever it is changed in some way.</para>
+    /// <para>The grid repositions the elements when it is modified in some way (Ex. Rows, Columns, CellSize).</para>
     /// </summary>
     public class UIGrid : PosUIElement
     {
@@ -100,7 +100,7 @@ namespace PaperMarioBattleSystem
         protected int GridRows = 2;
 
         /// <summary>
-        /// The PosUIElements in the grid.
+        /// The PosUIElements in the grid. This is a list for performance reasons, as we can easily position a list in a grid-like manner.
         /// </summary>
         protected List<PosUIElement> GridElements = null;
 
@@ -115,6 +115,10 @@ namespace PaperMarioBattleSystem
             GridElements = new List<PosUIElement>(Columns * Rows);
         }
 
+        /// <summary>
+        /// Adds an element to the grid.
+        /// </summary>
+        /// <param name="posUIElement">The PosUIElement to add to the grid.</param>
         public void AddGridElement(PosUIElement posUIElement)
         {
             if (posUIElement == null)
@@ -127,6 +131,10 @@ namespace PaperMarioBattleSystem
             RepositionGridElements();
         }
 
+        /// <summary>
+        /// Removes an element from the grid.
+        /// </summary>
+        /// <param name="posUIElement">The PosUIElement to remove from the grid.</param>
         public void RemoveGridElement(PosUIElement posUIElement)
         {
             bool removed = GridElements.Remove(posUIElement);
@@ -134,6 +142,25 @@ namespace PaperMarioBattleSystem
             {
                 RepositionGridElements();
             }
+        }
+
+        /// <summary>
+        /// Removes an element from the grid.
+        /// </summary>
+        /// <param name="index">The index of the element to remove from the grid.</param>
+        public void RemoveGridElement(int index)
+        {
+            RemoveGridElement(GetGridElement(index));
+        }
+
+        /// <summary>
+        /// Removes an element from the grid.
+        /// </summary>
+        /// <param name="column">The zero-based column number of the element.</param>
+        /// <param name="row">The zero-based row number of the element.</param>
+        public void RemoveGridElement(int column, int row)
+        {
+            RemoveGridElement(GetGridElement(column, row));
         }
 
         /// <summary>
@@ -152,14 +179,81 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Returns an index in the grid from column and row numbers.
+        /// </summary>
+        /// <param name="column">The zero-based column of the grid.</param>
+        /// <param name="row">The zero-based row of the grid.</param>
+        /// <returns>-1 if the column or row is out of the grid's range, otherwise an index</returns>
+        public int GetIndex(int column, int row)
+        {
+            if (column < 0 || column >= Columns || row < 0 || row >= Rows)
+            {
+                Debug.LogWarning($"Column {column} or Row {row} is out of the grid's range!");
+                return -1;
+            }
+
+            //Return the row times the total number of Columns and offset by the supplied column
+            int index = (row * Columns) + column;
+            return index;
+        }
+
+        /// <summary>
+        /// Returns zero-based column and row numbers from an index in the grid.
+        /// </summary>
+        /// <param name="index">The index to retrieve the zero-based column and row numbers for.</param>
+        /// <param name="column">An out integer that will be the zero-based column number. -1 if the grid has 0 or fewer Columns.</param>
+        /// <param name="row">An out integer that will be the zero-based row number. -1 if the grid has 0 or fewer Columns.</param>
+        public void GetColumnRowFromIndex(int index, out int column, out int row)
+        {
+            if (Columns <= 0)
+            {
+                Debug.LogWarning($"Max grid columns is {Columns} which is less than or equal to 0!");
+
+                column = -1;
+                row = -1;
+                return;
+            }
+
+            //Perform Modulo to obtain the column number and division to obtain the row number
+            column = index % Columns;
+            row = index / Columns;
+        }
+
+        /// <summary>
+        /// Returns the grid element at an index.
+        /// </summary>
+        /// <param name="index">The index to retrieve the element for.</param>
+        /// <returns>null if the index is out of the grid's range, otherwise the element at the index.</returns>
+        public PosUIElement GetGridElement(int index)
+        {
+            if (index < 0 || index >= GridElements.Count)
+            {
+                Debug.LogWarning($"index {index} is out of the grid's range!");
+                return null;
+            }
+
+            return GridElements[index];
+        }
+
+        /// <summary>
+        /// Returns the grid element at a particular column and row number.
+        /// </summary>
+        /// <param name="column">The zero-based column number.</param>
+        /// <param name="row">The zero-based row number.</param>
+        /// <returns>null if the column or index are out of the grid's range, otherwise the element at the index.</returns>
+        public PosUIElement GetGridElement(int column, int row)
+        {
+            return GetGridElement(GetIndex(column, row));
+        }
+
+        /// <summary>
         /// Gets the position a grid element would be at a particular index.
         /// </summary>
-        /// <param name="index">The index of the grid element.</param>
+        /// <param name="index">The index of the grid element. This can be outside of the grid's range.</param>
         /// <returns>The position of the grid at the element.</returns>
-        protected Vector2 GetPositionAtIndex(int index)
+        public Vector2 GetPositionAtIndex(int index)
         {
-            int xIndex = index % Columns;
-            int yIndex = index / Rows;
+            GetColumnRowFromIndex(index, out int xIndex, out int yIndex);
 
             Vector2 posToDraw = Position + new Vector2(xIndex * CellSize.X, yIndex * CellSize.Y);
 

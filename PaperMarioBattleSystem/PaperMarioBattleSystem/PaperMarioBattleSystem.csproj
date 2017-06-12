@@ -326,6 +326,7 @@
     <Compile Include="Classes\UIElements\IDisableable.cs" />
     <Compile Include="Classes\UIElements\PosUIElement.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />
+    <Compile Include="Classes\UIElements\UICroppedTexture2D.cs" />
     <Compile Include="Classes\UIElements\UIElement.cs" />
     <Compile Include="Classes\UIElements\UIGrid.cs" />
     <Compile Include="Classes\VFXElements\VFXElement.cs" />

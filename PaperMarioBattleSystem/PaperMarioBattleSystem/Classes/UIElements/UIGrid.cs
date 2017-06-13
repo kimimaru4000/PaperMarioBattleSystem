@@ -9,11 +9,32 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// A grid holding <see cref="PosUIElement"/>s.
-    /// <para>The grid repositions the elements when it is modified in some way (Ex. Rows, Columns, CellSize).</para>
+    /// <para>By default the grid repositions the elements when it is modified in some way (Ex. Rows, Columns, CellSize).
+    /// To change this behavior, set <see cref="AutomaticReposition"/> to false.
+    /// In this case, the grid will need to be manually repositioned with <see cref="RepositionGridElements"/> after changes have been made.</para>
     /// </summary>
     public class UIGrid : PosUIElement
     {
-        //NOTE: Elements are rendered starting from the top-left at the moment
+        /// <summary>
+        /// The types of pivots for the grid.
+        /// </summary>
+        public enum GridPivots
+        {
+            UpperLeft,
+            UpperCenter,
+            UpperRight,
+            CenterLeft,
+            Center,
+            CenterRight,
+            BottomLeft,
+            BottomCenter,
+            BottomRight
+        }
+
+        /// <summary>
+        /// Whether to automatically reposition the elements after any changes or not
+        /// </summary>
+        public bool AutomaticReposition = true;
 
         public override Vector2 Position
         {
@@ -23,7 +44,8 @@ namespace PaperMarioBattleSystem
                 base.Position = value;
 
                 //Reposition the grid after changing the position
-                RepositionGridElements();
+                if (AutomaticReposition == true)
+                    RepositionGridElements();
             }
         }
 
@@ -39,7 +61,7 @@ namespace PaperMarioBattleSystem
                 GridCellSize = value;
 
                 //Reposition the grid if the value is different
-                if (prevCellSize != GridCellSize)
+                if (AutomaticReposition == true && prevCellSize != GridCellSize)
                 {
                     RepositionGridElements();
                 }
@@ -58,7 +80,7 @@ namespace PaperMarioBattleSystem
                 GridColumns = value;
 
                 //Reposition the grid if the value is different
-                if (prevCols != GridColumns)
+                if (AutomaticReposition == true && prevCols != GridColumns)
                 {
                     RepositionGridElements();
                 }
@@ -77,12 +99,22 @@ namespace PaperMarioBattleSystem
                 GridRows = value;
 
                 //Reposition the grid if the value is different
-                if (prevRows != GridRows)
+                if (AutomaticReposition == true && prevRows != GridRows)
                 {
                     RepositionGridElements();
                 }
             }
         }
+
+        /// <summary>
+        /// The max number of elements that can be in the grid based on its size.
+        /// </summary>
+        public int MaxElementsInGrid => (Columns * Rows);
+
+        /// <summary>
+        /// The number of elements in the grid.
+        /// </summary>
+        public int NumElementsInGrid => (GridElements == null) ? 0 : GridElements.Count;
 
         /// <summary>
         /// The size of each cell in the grid.
@@ -98,6 +130,22 @@ namespace PaperMarioBattleSystem
         /// The number of rows in the grid.
         /// </summary>
         protected int GridRows = 2;
+
+        /// <summary>
+        /// The offset to render the grid at.
+        /// This is set when changing the GridPivot.
+        /// </summary>
+        protected Vector2 PivotOffset = Vector2.Zero;
+
+        /// <summary>
+        /// The grid pivot.
+        /// </summary>
+        protected GridPivots GridPivot = GridPivots.UpperLeft;
+
+        ///// <summary>
+        ///// The pivot for the grid elements.
+        ///// </summary>
+        //protected GridPivots ElementPivot = GridPivots.UpperLeft;
 
         /// <summary>
         /// The PosUIElements in the grid. This is a list for performance reasons, as we can easily position a list in a grid-like manner.
@@ -128,7 +176,18 @@ namespace PaperMarioBattleSystem
             }
 
             GridElements.Add(posUIElement);
-            RepositionGridElements();
+
+            //Issue a warning saying to expand the grid if the number of elements is going over
+            if (NumElementsInGrid > MaxElementsInGrid)
+            {
+                Debug.LogWarning($"The {nameof(UIGrid)} has {NumElementsInGrid} elements which exceeds the max of {MaxElementsInGrid}. "
+                    + $"Please adjust the number of {nameof(Columns)} and {nameof(Rows)} when expanding the grid.");
+            }
+
+            if (AutomaticReposition == true)
+            {
+                RepositionGridElements();
+            }
         }
 
         /// <summary>
@@ -138,7 +197,7 @@ namespace PaperMarioBattleSystem
         public void RemoveGridElement(PosUIElement posUIElement)
         {
             bool removed = GridElements.Remove(posUIElement);
-            if (removed == true)
+            if (AutomaticReposition == true && removed == true)
             {
                 RepositionGridElements();
             }
@@ -174,7 +233,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Repositions the elements in the grid.
         /// </summary>
-        protected void RepositionGridElements()
+        public void RepositionGridElements()
         {
             //Check for null - this should only be possible in the constructor
             if (GridElements == null)
@@ -255,18 +314,129 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets the position a grid element would be at a particular index.
+        /// Gets the position of a grid element at a particular index relative to the grid's position.
+        /// This overload is used for convenience.
         /// </summary>
         /// <param name="index">The index of the grid element. This can be outside of the grid's range.</param>
-        /// <returns>The position of the grid at the element.</returns>
-        public Vector2 GetPositionAtIndex(int index)
+        /// <returns>The relative position of the grid element.</returns>
+        protected Vector2 GetRelativePositionAtIndex(int index)
         {
             GetColumnRowFromIndex(index, out int xIndex, out int yIndex);
 
-            Vector2 posToDraw = Position + new Vector2(xIndex * CellSize.X, yIndex * CellSize.Y);
+            Vector2 relativePos = new Vector2(xIndex * CellSize.X, yIndex * CellSize.Y);
+            return relativePos;
+        }
+
+        /*/// <summary>
+        /// Gets the position of a grid element at a particular index relative to the grid's position.
+        /// </summary>
+        /// <param name="index">The index of the grid element. This can be outside of the grid's range.</param>
+        /// <param name="pivot">The pivot used to offset the elements in the grid.</param>
+        /// <returns>The relative position of the grid element.</returns>
+        protected Vector2 GetRelativePositionAtIndex(int index, GridPivots pivot)
+        {
+            GetColumnRowFromIndex(index, out int xIndex, out int yIndex);
+
+            Vector2 elementPivotPos = GetElementOffsetForPivot(pivot);
+
+            Vector2 relativePos = new Vector2(xIndex * CellSize.X, yIndex * CellSize.Y) - elementPivotPos;
+            return relativePos;
+        }*/
+
+        /// <summary>
+        /// Gets the position a grid element would be at a particular index.
+        /// </summary>
+        /// <param name="index">The index of the grid element. This can be outside of the grid's range.</param>
+        /// <returns>The position of the grid element.</returns>
+        public Vector2 GetPositionAtIndex(int index)
+        {
+            //Add the grid's Position with the relative position of the element at the index
+            //Then subtract from the pivot offset
+            Vector2 posToDraw = (Position + GetRelativePositionAtIndex(index)) - PivotOffset;
 
             return posToDraw;
         }
+
+        /// <summary>
+        /// Changes the GridPivot of the grid.
+        /// </summary>
+        /// <param name="pivot">The GridPivot to change to.</param>
+        public void ChangeGridPivot(GridPivots pivot)
+        {
+            GridPivot = pivot;
+
+            //Update the offset
+            PivotOffset = GetOffsetFromPivot(GridPivot);
+            if (AutomaticReposition == true)
+            {
+                RepositionGridElements();
+            }
+        }
+
+        /*/// <summary>
+        /// Changes the ElementPivot of the grid.
+        /// </summary>
+        /// <param name="pivot">The GridPivot to change to.</param>
+        public void ChangeElementPivot(GridPivots pivot)
+        {
+            ElementPivot = pivot;
+            if (AutomaticReposition == true)
+            {
+                RepositionGridElements();
+            }
+        }*/
+
+        /// <summary>
+        /// Gets the offset at a particular pivot.
+        /// </summary>
+        /// <param name="pivot">The pivot to get the offset for.</param>
+        /// <returns>A Vector2 of the offset for the pivot.</returns>
+        protected Vector2 GetOffsetFromPivot(GridPivots pivot)
+        {
+            //Store these quick-access values, as this makes it more readable and easier to modify
+            //The indices are convereted to be zero-based
+            int colRight = (Columns - 1);
+            int colCenter = colRight / 2;
+            int rowBottom = (Rows - 1);
+            int rowCenter = rowBottom / 2;
+
+            switch(pivot)
+            {
+                case GridPivots.UpperCenter: return GetRelativePositionAtIndex(GetIndex(colCenter, 0));
+                case GridPivots.UpperRight: return GetRelativePositionAtIndex(GetIndex(colRight, 0));
+                case GridPivots.CenterLeft: return GetRelativePositionAtIndex(GetIndex(0, rowCenter));
+                case GridPivots.Center: return GetRelativePositionAtIndex(GetIndex(colCenter, rowCenter));
+                case GridPivots.CenterRight: return GetRelativePositionAtIndex(GetIndex(colRight, rowCenter));
+                case GridPivots.BottomLeft: return GetRelativePositionAtIndex(GetIndex(0, rowBottom));
+                case GridPivots.BottomCenter: return GetRelativePositionAtIndex(GetIndex(colCenter, rowBottom));
+                case GridPivots.BottomRight: return GetRelativePositionAtIndex(GetIndex(colRight, rowBottom));
+                case GridPivots.UpperLeft:
+                default: return GetRelativePositionAtIndex(GetIndex(0, 0));
+            }
+        }
+
+        /*protected Vector2 GetElementOffsetForPivot(GridPivots pivot)
+        {
+            //Store these quick-access values, as this makes it more readable and easier to modify
+            float xRight = CellSize.X;
+            float xMid = xRight / 2f;
+            float yBottom = CellSize.Y;
+            float yMid = yBottom / 2f;
+
+            switch(pivot)
+            {
+                case GridPivots.UpperCenter: return new Vector2(xMid, 0f);
+                case GridPivots.UpperRight: return new Vector2(xRight, 0f);
+                case GridPivots.CenterLeft: return new Vector2(0f, yMid);
+                case GridPivots.Center: return new Vector2(xMid, yMid);
+                case GridPivots.CenterRight: return new Vector2(xRight, yMid);
+                case GridPivots.BottomLeft: return new Vector2(0f, yBottom);
+                case GridPivots.BottomCenter: return new Vector2(xMid, yBottom);
+                case GridPivots.BottomRight: return new Vector2(xRight, yBottom);
+                case GridPivots.UpperLeft:
+                default: return new Vector2(0f, 0f);
+            }
+        }*/
 
         public override void Update()
         {

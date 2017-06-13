@@ -16,7 +16,7 @@ namespace PaperMarioBattleSystem
     {
         private int NumColumns = 3;
         private int NumRows = 3;
-        private Vector2 LiftGridCellSize = new Vector2(64, 64);
+        private Vector2 LiftGridCellSize = new Vector2(52, 52);
 
         private double CommandTime = 30000d;
         private int CursorSpeed = 3;
@@ -69,15 +69,16 @@ namespace PaperMarioBattleSystem
             PowerLiftGrid = new UIGrid(NumColumns, NumRows, LiftGridCellSize);
 
             //Populate the grid based on how many columns and rows it has
-            int totalSize = NumColumns * NumRows;
+            int totalSize = PowerLiftGrid.MaxElementsInGrid;
             for (int i = 0; i < totalSize; i++)
             {
                 //Small cursors are on the grid
                 PowerLiftGrid.AddGridElement(new UICroppedTexture2D(SmallCursor.Copy(), .5f, Color.White));
             }
 
-            //Although the grid is drawn on the UI layer, we center it on the sprite layer so it's in the center of the screen
+            //Although the grid is drawn on the UI layer, we center it using the sprite layer's (0, 0) position for ease
             PowerLiftGrid.Position = Camera.Instance.SpriteToUIPos(Vector2.Zero);
+            PowerLiftGrid.ChangeGridPivot(UIGrid.GridPivots.Center);
         }
 
         protected override void ReadInput()

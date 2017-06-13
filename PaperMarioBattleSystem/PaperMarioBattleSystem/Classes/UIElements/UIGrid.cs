@@ -164,6 +164,14 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Clears the grid by removing all elements from it.
+        /// </summary>
+        public void ClearGrid()
+        {
+            GridElements.Clear();
+        }
+
+        /// <summary>
         /// Repositions the elements in the grid.
         /// </summary>
         protected void RepositionGridElements()

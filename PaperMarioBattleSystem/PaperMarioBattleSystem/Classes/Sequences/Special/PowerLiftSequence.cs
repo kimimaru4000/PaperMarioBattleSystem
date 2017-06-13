@@ -19,6 +19,10 @@ namespace PaperMarioBattleSystem
         {
             switch(SequenceStep)
             {
+                case 0:
+                    StartActionCommandInput();
+                    CurSequenceAction = new WaitForCommandSeqAction(0d, actionCommand, CommandEnabled);
+                    break;
                 default:
                     PrintInvalidSequence();
                     break;

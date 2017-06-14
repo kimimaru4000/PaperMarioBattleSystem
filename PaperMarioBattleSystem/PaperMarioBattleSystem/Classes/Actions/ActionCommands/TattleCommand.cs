@@ -32,7 +32,6 @@ namespace PaperMarioBattleSystem
         private Keys InputButton = Keys.Z;
 
         private Rectangle SuccessRect = new Rectangle(0, 0, BigCursorSize, BigCursorSize);
-        private Texture2D DebugBoxTex = null;
 
         private bool WithinRange => (SuccessRect.Contains(SmallCursorPos));
         private bool PastRange => (SmallCursorPos.X > (SuccessRect.Right + SuccessRect.Width));
@@ -45,8 +44,6 @@ namespace PaperMarioBattleSystem
             SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));
 
             SmallCursorSpeed = smallCursorSpeed;
-
-            DebugBoxTex = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
 
             //Description = "Line up the small cursor with\n the center of the big cursor!"
         }
@@ -124,6 +121,7 @@ namespace PaperMarioBattleSystem
             DrawSmallCursor(rotation);
 
             //Show success rectangle (comment out if not debugging)
+            //Texture2D DebugBoxTex = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
             //SpriteRenderer.Instance.Draw(DebugBoxTex, new Vector2(SuccessRect.X, SuccessRect.Y), null, Color.Red, 0f, Vector2.Zero, 
             //    new Vector2(SuccessRect.Width, SuccessRect.Height), false, false, .21f, true);
         }

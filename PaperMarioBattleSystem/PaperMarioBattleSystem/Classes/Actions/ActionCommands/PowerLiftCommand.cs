@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace PaperMarioBattleSystem
 {
@@ -16,7 +17,7 @@ namespace PaperMarioBattleSystem
     {
         private int NumColumns = 3;
         private int NumRows = 3;
-        private Vector2 LiftGridCellSize = new Vector2(52, 52);
+        private Vector2 LiftGridCellSize = new Vector2(26, 24);
 
         private double CommandTime = 30000d;
         private int CursorSpeed = 3;

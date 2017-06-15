@@ -74,7 +74,7 @@ namespace PaperMarioBattleSystem
 
         private static string GetStackInfo()
         {
-            return GetStackInfo(2);
+            return GetStackInfo(3);
         }
 
         public static void Log(object value)

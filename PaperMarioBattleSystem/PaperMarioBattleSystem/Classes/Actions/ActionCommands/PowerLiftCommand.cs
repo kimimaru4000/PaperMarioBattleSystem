@@ -18,6 +18,7 @@ namespace PaperMarioBattleSystem
         private int NumColumns = 3;
         private int NumRows = 3;
         private Vector2 LiftGridCellSize = new Vector2(26, 24);
+        private Vector2 LiftGridSpacing = new Vector2(52, 48);
 
         private double CommandTime = 30000d;
         private int CursorSpeed = 3;
@@ -43,7 +44,7 @@ namespace PaperMarioBattleSystem
             Texture2D battleGFX = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX");
 
             BigCursor = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
-            SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));
+            SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));//new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Debug/BoxOutline2"), null);
 
             CommandTime = commandTime;
         }
@@ -54,11 +55,15 @@ namespace PaperMarioBattleSystem
 
             //Set up the grid
             SetUpGrid();
+
+            BattleUIManager.Instance.AddUIElement(PowerLiftGrid);
         }
 
         public override void EndInput()
         {
             base.EndInput();
+
+            BattleUIManager.Instance.RemoveUIElement(PowerLiftGrid);
 
             PowerLiftGrid.ClearGrid();
             PowerLiftGrid = null;
@@ -80,6 +85,8 @@ namespace PaperMarioBattleSystem
             //Although the grid is drawn on the UI layer, we center it using the sprite layer's (0, 0) position for ease
             PowerLiftGrid.Position = Camera.Instance.SpriteToUIPos(Vector2.Zero);
             PowerLiftGrid.ChangeGridPivot(UIGrid.GridPivots.Center);
+
+            PowerLiftGrid.Spacing = LiftGridSpacing;
         }
 
         protected override void ReadInput()
@@ -89,7 +96,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            PowerLiftGrid.Draw();
+            
         }
     }
 }

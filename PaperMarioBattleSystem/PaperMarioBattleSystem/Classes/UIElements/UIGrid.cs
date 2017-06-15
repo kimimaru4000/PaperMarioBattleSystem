@@ -1,10 +1,16 @@
-﻿using System;
+﻿//Comment this out to disable debug inputs and drawing for the grid in Debug builds
+#if DEBUG
+    //#define GRID_DEBUG
+#endif
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace PaperMarioBattleSystem
 {
@@ -41,11 +47,12 @@ namespace PaperMarioBattleSystem
         {
             set
             {
+                Vector2 prevPos = Position;
                 //Set position
                 base.Position = value;
 
                 //Reposition the grid after changing the position
-                if (AutomaticReposition == true)
+                if (AutomaticReposition == true && prevPos != Position)
                     RepositionGridElements();
             }
         }
@@ -108,6 +115,24 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// The spacing of the grid elements.
+        /// </summary>
+        public Vector2 Spacing
+        {
+            get => GridElementSpacing;
+            set
+            {
+                Vector2 prevSpacing = GridElementSpacing;
+                GridElementSpacing = value;
+
+                if (AutomaticReposition == true && prevSpacing != GridElementSpacing)
+                {
+                    RepositionGridElements();
+                }
+            }
+        }
+
+        /// <summary>
         /// The max number of elements that can be in the grid based on its size.
         /// </summary>
         public int MaxElementsInGrid => (Columns * Rows);
@@ -160,6 +185,11 @@ namespace PaperMarioBattleSystem
         /// The pivot for the grid elements.
         /// </summary>
         protected GridPivots ElementPivot = GridPivots.UpperLeft;
+
+        /// <summary>
+        /// The amount to space the grid elements away from each other.
+        /// </summary>
+        protected Vector2 GridElementSpacing = Vector2.Zero;
 
         /// <summary>
         /// The PosUIElements in the grid. This is a list for performance reasons, as we can easily position a list in a grid-like manner.
@@ -336,10 +366,6 @@ namespace PaperMarioBattleSystem
         protected Vector2 GetRelativePositionAtIndex(int index)
         {
             return GetRelativePositionAtIndex(index, GridPivots.UpperLeft);
-            //GetColumnRowFromIndex(index, out int xIndex, out int yIndex);
-            //
-            //Vector2 relativePos = new Vector2(xIndex * CellSize.X, yIndex * CellSize.Y);
-            //return relativePos;
         }
 
         /// <summary>
@@ -354,7 +380,10 @@ namespace PaperMarioBattleSystem
 
             Vector2 elementPivotPos = GetElementOffsetForPivot(pivot);
 
-            Vector2 relativePos = new Vector2(xIndex * CellSize.X, yIndex * CellSize.Y) - elementPivotPos;
+            //Use the GridPivot for the Spacing since elements 
+            Vector2 spacingOffset = GetSpacingAtColumnRow(xIndex, yIndex, GridPivot);
+
+            Vector2 relativePos = new Vector2(xIndex * CellSize.X, yIndex * CellSize.Y) - elementPivotPos + spacingOffset;
             return relativePos;
         }
 
@@ -378,9 +407,10 @@ namespace PaperMarioBattleSystem
         /// <param name="pivot">The GridPivot to change to.</param>
         public void ChangeGridPivot(GridPivots pivot)
         {
+            GridPivots prevGridPivot = GridPivot;
             GridPivot = pivot;
 
-            if (AutomaticReposition == true)
+            if (AutomaticReposition == true && prevGridPivot != GridPivot)
             {
                 RepositionGridElements();
             }
@@ -392,8 +422,10 @@ namespace PaperMarioBattleSystem
         /// <param name="pivot">The GridPivot to change to.</param>
         public void ChangeElementPivot(GridPivots pivot)
         {
+            GridPivots prevElementPivot = ElementPivot;
             ElementPivot = pivot;
-            if (AutomaticReposition == true)
+
+            if (AutomaticReposition == true && prevElementPivot != ElementPivot)
             {
                 RepositionGridElements();
             }
@@ -456,9 +488,128 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Gets the spacing of a grid element at a column and row number for a pivot.
+        /// </summary>
+        /// <param name="column">The zero-based column number.</param>
+        /// <param name="row">The zero-based row number.</param>
+        /// <param name="pivot">The pivot to get the spacing for.</param>
+        /// <returns>A Vector2 of the spacing of the grid element for the pivot.</returns>
+        protected Vector2 GetSpacingAtColumnRow(int column, int row, GridPivots pivot)
+        {
+            //Return on invalid input
+            if (Columns <= 0 || Rows <= 0)
+            {
+                Debug.LogWarning($"{nameof(Columns)}:{Columns} or {nameof(Rows)}:{Rows} is less than or equal to 0!");
+                return Vector2.Zero;
+            }
+            else if (column < 0 || row < 0)
+            {
+                Debug.LogWarning($"{nameof(column)}:{column} or {nameof(row)}:{row} is less than 0!");
+                return Vector2.Zero;
+            }
+
+            Vector2 finalSpacing = Vector2.Zero;
+
+            //The pivot column and pivot row
+            //We offset the column and row by these to get the spacing
+            //The further an element is from the pivot, the greater it will multiply the spacing value by
+            float pivotCol = 0;
+            float pivotRow = 0;
+            
+            //The column pivot for the left grid pivots is the leftmost element
+            if (pivot == GridPivots.UpperLeft || pivot == GridPivots.CenterLeft || pivot == GridPivots.BottomLeft)
+            {
+                pivotCol = 0;
+            }
+            //The row pivot for the upper grid pivots is the uppermost element
+            if (pivot == GridPivots.UpperLeft || pivot == GridPivots.UpperCenter || pivot == GridPivots.UpperRight)
+            {
+                pivotRow = 0;
+            }
+
+            //The column pivot for the right grid pivots is the rightmost element
+            if (pivot == GridPivots.UpperRight || pivot == GridPivots.CenterRight || pivot == GridPivots.BottomRight)
+            {
+                pivotCol = (Columns - 1);
+            }
+            //The row pivot for the bottom grid pivots is the bottommost element
+            if (pivot == GridPivots.BottomLeft || pivot == GridPivots.BottomCenter || pivot == GridPivots.BottomRight)
+            {
+                pivotRow = (Rows - 1);
+            }
+
+            //The column pivot for the center grid pivots is the centered element
+            //In the event of an even number of columns, this will be halfway between the two middle columns (Ex: .5 for 4 columns)
+            if (pivot == GridPivots.UpperCenter || pivot == GridPivots.Center || pivot == GridPivots.BottomCenter)
+            {
+                pivotCol = ((Columns - 1) / 2f);
+            }
+            //The row pivot for the center grid pivots is the centered element
+            //In the event of an even number of rows, this will be halfway between the two middle rows (Ex: .5 for 4 rows)
+            if (pivot == GridPivots.CenterLeft || pivot == GridPivots.Center || pivot == GridPivots.CenterRight)
+            {
+                pivotRow = ((Rows - 1) / 2f);
+            }
+
+            //Subtract from the pivot
+            //The center two elements for even numbers of columns/rows will be separated from each other by half for centered pivots
+            float pivotColDiff = (column - pivotCol);
+            float pivotRowDiff = (row - pivotRow);
+
+            finalSpacing.X = pivotColDiff * Spacing.X;
+            finalSpacing.Y = pivotRowDiff * Spacing.Y;
+
+            return finalSpacing;
+        }
+
         public override void Update()
         {
+            //Debug commands for testing
 
+            #if GRID_DEBUG
+            
+                //Grid pivots
+                if (Input.GetKeyDown(Keys.Q)) ChangeGridPivot(GridPivots.UpperLeft);
+                else if (Input.GetKeyDown(Keys.W)) ChangeGridPivot(GridPivots.UpperCenter);
+                else if (Input.GetKeyDown(Keys.E)) ChangeGridPivot(GridPivots.UpperRight);
+                else if (Input.GetKeyDown(Keys.A)) ChangeGridPivot(GridPivots.CenterLeft);
+                else if (Input.GetKeyDown(Keys.S)) ChangeGridPivot(GridPivots.Center);
+                else if (Input.GetKeyDown(Keys.D)) ChangeGridPivot(GridPivots.CenterRight);
+                else if (Input.GetKeyDown(Keys.Z)) ChangeGridPivot(GridPivots.BottomLeft);
+                else if (Input.GetKeyDown(Keys.X)) ChangeGridPivot(GridPivots.BottomCenter);
+                else if (Input.GetKeyDown(Keys.C)) ChangeGridPivot(GridPivots.BottomRight);
+
+                //Element pivots
+                if (Input.GetKeyDown(Keys.R)) ChangeElementPivot(GridPivots.UpperLeft);
+                else if (Input.GetKeyDown(Keys.T)) ChangeElementPivot(GridPivots.UpperCenter);
+                else if (Input.GetKeyDown(Keys.Y)) ChangeElementPivot(GridPivots.UpperRight);
+                else if (Input.GetKeyDown(Keys.F)) ChangeElementPivot(GridPivots.CenterLeft);
+                else if (Input.GetKeyDown(Keys.G)) ChangeElementPivot(GridPivots.Center);
+                else if (Input.GetKeyDown(Keys.H)) ChangeElementPivot(GridPivots.CenterRight);
+                else if (Input.GetKeyDown(Keys.V)) ChangeElementPivot(GridPivots.BottomLeft);
+                else if (Input.GetKeyDown(Keys.B)) ChangeElementPivot(GridPivots.BottomCenter);
+                else if (Input.GetKeyDown(Keys.N)) ChangeElementPivot(GridPivots.BottomRight);
+
+                float spacingVal = 10f;
+
+                //Spacing
+                //if (Input.GetKeyDown(Keys.U)) Spacing = new Vector2(-spacingVal, -spacingVal);
+                if (Input.GetKeyDown(Keys.I)) Spacing = new Vector2(Spacing.X, -spacingVal);
+                //else if (Input.GetKeyDown(Keys.O)) Spacing = new Vector2(spacingVal, -spacingVal);
+                else if (Input.GetKeyDown(Keys.J)) Spacing = new Vector2(-spacingVal, Spacing.Y);
+                else if (Input.GetKeyDown(Keys.K)) Spacing = new Vector2(0f, 0f);
+                else if (Input.GetKeyDown(Keys.L)) Spacing = new Vector2(spacingVal, Spacing.Y);
+                else if (Input.GetKeyDown(Keys.M)) Spacing = new Vector2(Spacing.X, spacingVal);
+                //else if (Input.GetKeyDown(Keys.OemComma)) Spacing = new Vector2(0f, spacingVal);
+                //else if (Input.GetKeyDown(Keys.OemPeriod)) Spacing = new Vector2(spacingVal, spacingVal);
+
+                if (AutomaticReposition == false)
+                {
+                    RepositionGridElements();
+                }
+
+            #endif
         }
 
         public override void Draw()
@@ -468,7 +619,9 @@ namespace PaperMarioBattleSystem
                 GridElements[i].Draw();
             }
 
-            //DrawGridBounds();
+            #if GRID_DEBUG
+                DrawGridBounds();
+            #endif
         }
 
         //NOTE: Use for debugging only

@@ -595,12 +595,12 @@ namespace PaperMarioBattleSystem
 
                 //Spacing
                 //if (Input.GetKeyDown(Keys.U)) Spacing = new Vector2(-spacingVal, -spacingVal);
-                if (Input.GetKeyDown(Keys.I)) Spacing = new Vector2(Spacing.X, -spacingVal);
+                if (Input.GetKeyDown(Keys.I)) Spacing += new Vector2(0f, -spacingVal);
                 //else if (Input.GetKeyDown(Keys.O)) Spacing = new Vector2(spacingVal, -spacingVal);
-                else if (Input.GetKeyDown(Keys.J)) Spacing = new Vector2(-spacingVal, Spacing.Y);
+                else if (Input.GetKeyDown(Keys.J)) Spacing += new Vector2(-spacingVal, 0f);
                 else if (Input.GetKeyDown(Keys.K)) Spacing = new Vector2(0f, 0f);
-                else if (Input.GetKeyDown(Keys.L)) Spacing = new Vector2(spacingVal, Spacing.Y);
-                else if (Input.GetKeyDown(Keys.M)) Spacing = new Vector2(Spacing.X, spacingVal);
+                else if (Input.GetKeyDown(Keys.L)) Spacing += new Vector2(spacingVal, 0f);
+                else if (Input.GetKeyDown(Keys.M)) Spacing += new Vector2(0f, spacingVal);
                 //else if (Input.GetKeyDown(Keys.OemComma)) Spacing = new Vector2(0f, spacingVal);
                 //else if (Input.GetKeyDown(Keys.OemPeriod)) Spacing = new Vector2(spacingVal, spacingVal);
 

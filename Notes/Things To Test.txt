@@ -169,3 +169,16 @@ Result: No, and it doesn't prevent you if your Partner has it too.
 I afflicted a Hyper Spiky Goomba with Allergic and, interestingly, when it charged and failed to inflict itself with the status, some members of the Audience left.
 Considering this had literally nothing to do with any player action, it gives some more insight into how the Audience system works.
 
+
+Attack FX Badge Order
+---------------------
+On the field, the Attack FX Badges cycle or are randomized when Mario hammers. Find out:
+
+1. If they actually cycle or if there is a pattern
+2. If they're randomized or not 
+3. If they do cycle, does the cycle reset when changing maps, going into battles, or restarting the game?
+4. Do the badges work the same way in battle?
+5. If they do cycle, do they cycle in a set order based on the TypeNumber of the ones you have equipped or do they cycle based on the ones you equipped first?
+
+Results:
+

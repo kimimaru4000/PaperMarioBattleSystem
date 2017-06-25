@@ -39,6 +39,23 @@ namespace PaperMarioBattleSystem
             SourceRect = sourceRect;
         }
 
+        /// <summary>
+        /// Returns the Width and Height of SourceRect as the X and Y, respectively, in a Vector2.
+        /// </summary>
+        /// <returns>The Width and Height of the SourceRect as the X and Y, respectively, in a Vector2. If SourceRect is null, Vector2.Zero.</returns>
+        public Vector2 WidthHeightToVector2()
+        {
+            Vector2 widthheight = Vector2.Zero;
+
+            if (SourceRect.HasValue == true)
+            {
+                widthheight.X = SourceRect.Value.Width;
+                widthheight.Y = SourceRect.Value.Height;
+            }
+
+            return widthheight;
+        }
+
         public CroppedTexture2D Copy()
         {
             return new CroppedTexture2D(Tex, SourceRect);

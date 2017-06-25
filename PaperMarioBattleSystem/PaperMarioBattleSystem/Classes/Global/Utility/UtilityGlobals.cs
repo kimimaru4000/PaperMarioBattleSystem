@@ -146,6 +146,23 @@ namespace PaperMarioBattleSystem
             return enumVal.HasFlag(flag);   
         }
 
+        /// <summary>
+        /// Initializes a jagged array with default values.
+        /// <para>This should be used on null jagged arrays to easily initialize them.</para>
+        /// </summary>
+        /// <typeparam name="T">The type of the jagged array.</typeparam>
+        /// <param name="jaggedArray">The jagged array of type T to initialize.</param>
+        /// <param name="columns">The number of columns (first bracket) in the jagged array.</param>
+        /// <param name="rows">The number of rows (second bracket) in the jagged array.</param>
+        public static void InitializeJaggedArray<T>(T[][] jaggedArray, int columns, int rows)
+        {
+            jaggedArray = new T[columns][];
+            for (int i = 0; i < jaggedArray.Length; i++)
+            {
+                jaggedArray[i] = new T[rows];
+            }
+        }
+
         #region Line Intersection
 
         /// <summary>

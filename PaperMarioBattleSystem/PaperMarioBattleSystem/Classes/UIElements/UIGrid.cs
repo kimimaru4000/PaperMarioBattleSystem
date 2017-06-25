@@ -192,7 +192,8 @@ namespace PaperMarioBattleSystem
         protected Vector2 GridElementSpacing = Vector2.Zero;
 
         /// <summary>
-        /// The PosUIElements in the grid. This is a list for performance reasons, as we can easily position a list in a grid-like manner.
+        /// The PosUIElements in the grid.
+        /// This is a list for performance/usability reasons, as we can easily position a list in a grid-like manner.
         /// </summary>
         protected List<PosUIElement> GridElements = null;
 
@@ -396,7 +397,9 @@ namespace PaperMarioBattleSystem
         {
             //Add the grid's Position with the relative position of the element at the index
             //Then subtract from the pivot offset
-            Vector2 posToDraw = (Position + GetRelativePositionAtIndex(index, ElementPivot)) - GetOffsetFromPivot(GridPivot);
+            Vector2 relativePos = GetRelativePositionAtIndex(index, ElementPivot);
+            Vector2 offsetPos = GetOffsetFromPivot(GridPivot);
+            Vector2 posToDraw = (Position + relativePos) - offsetPos;
 
             return posToDraw;
         }

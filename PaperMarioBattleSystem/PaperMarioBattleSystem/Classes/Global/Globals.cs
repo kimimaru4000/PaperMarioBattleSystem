@@ -1235,6 +1235,21 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// A struct holding information Power Lift's Action Command sends.
+        /// </summary>
+        public struct PowerLiftResponse
+        {
+            public int AttackBoosted;
+            public int DefenseBoosted;
+
+            public PowerLiftResponse(int attackBoosted, int defenseBoosted)
+            {
+                AttackBoosted = attackBoosted;
+                DefenseBoosted = defenseBoosted;
+            }
+        }
+
         #endregion
     }
 

@@ -33,19 +33,30 @@ namespace PaperMarioBattleSystem
         private Vector2 LiftGridSpacing = new Vector2(52, 48);
 
         private double CommandTime = 30000d;
-        private int CursorSpeed = 3;
+        private double ElapsedCommandTime = 0d;
+
+        private double CursorSpeedDur = 150d;
+        private Vector2 PrevCursorPos = Vector2.Zero;
         private Vector2 CurrentCursorPos { get => Cursor.Position; set => Cursor.Position = value; }
         private Vector2 DestinationCursorPos = Vector2.Zero;
         private Color CursorColor = Color.White;
         private Color MovingColor = Color.Blue;
+        private Color SelectedColor = Color.Red;
+        private double ElapsedMoveTime = 0d;
 
-        private float PoisonFactor = .5f;
+        private double PoisonSpeedDur = 500d;
         private double PoisonDur = 2000d;
+        private double ElapsedPoisonTime = 0d;
+        private bool IsPoisoned = false;
 
         private CroppedTexture2D BigCursor = null;
         private CroppedTexture2D SmallCursor = null;
 
         private UIFourPiecedTex Cursor = null;
+        private int CurColumn = 0;
+        private int CurRow = 0;
+
+        private bool SelectedIcon = false;
 
         /// <summary>
         /// The grid used for laying out the objects.
@@ -79,6 +90,10 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput(values);
 
+            ElapsedCommandTime = ElapsedPoisonTime = 0d;
+            SelectedIcon = false;
+            IsPoisoned = false;
+
             //Set up the grid
             SetUpGrid();
 
@@ -86,13 +101,20 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.AddUIElement(Cursor);
 
             //Center the cursor in the middle
-            int centerIndex = PowerLiftGrid.GetIndex(PowerLiftGrid.Columns / 2, PowerLiftGrid.Rows / 2);
-            CurrentCursorPos = DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(centerIndex);
+            CurColumn = PowerLiftGrid.Columns / 2;
+            CurRow = PowerLiftGrid.Rows / 2;
+
+            int centerIndex = PowerLiftGrid.GetIndex(CurColumn, CurRow);
+            PrevCursorPos = CurrentCursorPos = DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(centerIndex);
         }
 
         public override void EndInput()
         {
             base.EndInput();
+
+            ElapsedCommandTime = ElapsedPoisonTime = 0d;
+            SelectedIcon = true;
+            IsPoisoned = false;
 
             BattleUIManager.Instance.RemoveUIElement(PowerLiftGrid);
             BattleUIManager.Instance.RemoveUIElement(Cursor);
@@ -122,12 +144,159 @@ namespace PaperMarioBattleSystem
             PowerLiftGrid.Spacing = LiftGridSpacing;
 
             //Initialize the icon grid
-            UtilityGlobals.InitializeJaggedArray(IconGrid, PowerLiftGrid.Columns, PowerLiftGrid.Rows);
+            UtilityGlobals.InitializeJaggedArray(ref IconGrid, PowerLiftGrid.Columns, PowerLiftGrid.Rows);
         }
 
         protected override void ReadInput()
         {
-            
+            //if (ElapsedCommandTime >= CommandTime)
+            //{
+            //    OnComplete(CommandResults.Success);
+            //    return;
+            //}
+
+            ElapsedCommandTime += Time.ElapsedMilliseconds;
+
+            HandlePoisoned();
+            HandleCursorInput();
+        }
+
+        private void HandleCursorInput()
+        {
+            if (CanSelect == true)
+            {
+                //Wait a frame after having just selected an icon (this matches the behavior in the game)
+                if (SelectedIcon == true)
+                {
+                    Cursor.TintColor = CursorColor;
+                    SelectedIcon = false;
+                    return;
+                }
+
+                //Check for selecting the icon
+                if (Input.GetKeyDown(Keys.Z) == true)
+                {
+                    HandleIconSelection(IconGrid[CurColumn][CurRow]);
+                }
+
+                //Don't allow cursor movement if an icon was just selected
+                if (SelectedIcon == false)
+                {
+                    HandleCursorMovement();
+                }
+            }
+            //Handle moving the cursor
+            else
+            {
+                //Progress the amount of time spent moving
+                ElapsedMoveTime += Time.ElapsedMilliseconds;
+
+                //Choose the speed; if the player hit a Poison Mushroom, use the slower speed until it expires
+                double speed = CursorSpeedDur;
+                if (IsPoisoned == true)
+                {
+                    speed = PoisonSpeedDur;
+                }
+
+                //Lerp to the destination
+                CurrentCursorPos = Vector2.Lerp(PrevCursorPos, DestinationCursorPos, (float)(ElapsedMoveTime / speed));
+
+                //We're done moving to our destination
+                if (ElapsedMoveTime >= speed)
+                {
+                    Cursor.TintColor = CursorColor;
+                    CurrentCursorPos = DestinationCursorPos;
+                }
+            }
+        }
+
+        private void HandleCursorMovement()
+        {
+            int newCol = CurColumn;
+            int newRow = CurRow;
+
+            if (Input.GetKeyDown(Keys.Up) == true)
+            {
+                newRow -= 1;
+            }
+            else if (Input.GetKeyDown(Keys.Down) == true)
+            {
+                newRow += 1;
+            }
+            else if (Input.GetKeyDown(Keys.Left) == true)
+            {
+                newCol -= 1;
+            }
+            else if (Input.GetKeyDown(Keys.Right) == true)
+            {
+                newCol += 1;
+            }
+
+            //Check if we moved at all and make sure we're in bounds
+            if (newCol != CurColumn && newCol >= 0 && newCol < PowerLiftGrid.Columns)
+            {
+                CurColumn = newCol;
+
+                PrevCursorPos = CurrentCursorPos;
+                DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(PowerLiftGrid.GetIndex(CurColumn, CurRow));
+                Cursor.TintColor = MovingColor;
+
+                ElapsedMoveTime = 0d;
+            }
+            else if (newRow != CurRow && newRow >= 0 && newRow < PowerLiftGrid.Rows)
+            {
+                CurRow = newRow;
+
+                PrevCursorPos = CurrentCursorPos;
+                DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(PowerLiftGrid.GetIndex(CurColumn, CurRow));
+                Cursor.TintColor = MovingColor;
+
+                ElapsedMoveTime = 0d;
+            }
+        }
+
+        private void HandleIconSelection(PowerLiftIcons iconSelected)
+        {
+            switch (iconSelected)
+            {
+                case PowerLiftIcons.Poison:
+                    IsPoisoned = true;
+                    ElapsedPoisonTime = 0d;
+                    break;
+                case PowerLiftIcons.Attack:
+                    break;
+                case PowerLiftIcons.Defense:
+
+                    break;
+                default:
+                    IsPoisoned = true;
+                    ElapsedPoisonTime = 0d;
+                    break;
+            }
+
+            //Pressing A to select causes the cursor to turn red for 1 frame even if you don't hit an icon
+            Cursor.TintColor = SelectedColor;
+            SelectedIcon = true;
+        }
+
+        private void HandlePoisoned()
+        {
+            //Check if the player is poisoned, which occurs after hitting a Poison Mushroom
+            if (IsPoisoned == true)
+            {
+                //Check if the poisoned timer is done and remove the poison if the player isn't currently moving the cursor
+                //The latter check prevents issues with the cursor snapping since the timing changed during the movement
+                if (ElapsedPoisonTime >= PoisonDur && CanSelect == true)
+                {
+                    IsPoisoned = false;
+                    ElapsedPoisonTime = 0d;
+                }
+                //Otherwise progress the timer
+                else
+                {
+                    ElapsedPoisonTime += Time.ElapsedMilliseconds;
+                }
+            }
         }
 
         protected override void OnDraw()

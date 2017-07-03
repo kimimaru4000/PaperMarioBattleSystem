@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
     {
         #region Enums
 
-        private enum PowerLiftIcons
+        public enum PowerLiftIcons
         {
             None = 0,
             Poison = 1,
@@ -66,7 +66,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The internal grid used for tracking the icons.
         /// </summary>
-        private PowerLiftIcons[][] IconGrid = null;
+        private PowerLiftIconElement[][] IconGrid = null;
 
         /// <summary>
         /// Tells whether the player can select an arrow with the cursor.
@@ -159,6 +159,8 @@ namespace PaperMarioBattleSystem
 
             HandlePoisoned();
             HandleCursorInput();
+
+            UpdateIconGrid();
         }
 
         private void HandleCursorInput()
@@ -255,23 +257,25 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private void HandleIconSelection(PowerLiftIcons iconSelected)
+        private void HandleIconSelection(PowerLiftIconElement iconSelected)
         {
-            switch (iconSelected)
+            if (iconSelected != null)
             {
-                case PowerLiftIcons.Poison:
-                    IsPoisoned = true;
-                    ElapsedPoisonTime = 0d;
-                    break;
-                case PowerLiftIcons.Attack:
-                    break;
-                case PowerLiftIcons.Defense:
+                switch (iconSelected.PowerliftIcon)
+                {
+                    case PowerLiftIcons.Poison:
+                        IsPoisoned = true;
+                        ElapsedPoisonTime = 0d;
+                        break;
+                    case PowerLiftIcons.Attack:
+                        break;
+                    case PowerLiftIcons.Defense:
 
-                    break;
-                default:
-                    IsPoisoned = true;
-                    ElapsedPoisonTime = 0d;
-                    break;
+                        break;
+                    default:
+
+                        break;
+                }
             }
 
             //Pressing A to select causes the cursor to turn red for 1 frame even if you don't hit an icon
@@ -299,9 +303,59 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Updates the icon grid.
+        /// </summary>
+        private void UpdateIconGrid()
+        {
+            for (int i = 0; i < IconGrid.Length; i++)
+            {
+                for (int j = 0; j < IconGrid[i].Length; j++)
+                {
+                    //Get the icon element
+                    PowerLiftIconElement iconElement = IconGrid[i][j];
+                    
+                    //If there's no icon element here, continue
+                    if (iconElement == null)
+                    {
+                        continue;
+                    }
+
+                    //Update the icon element
+                    iconElement.Update();
+
+                    //If the icon is completely done, clear it
+                    if (iconElement.IsDone == true)
+                    {
+                        IconGrid[i][j] = null;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Chooses an icon to create at a particular grid spot.
+        /// </summary>
+        private void CreateNextIcon(int gridCol, int gridRow)
+        {
+            //PowerLiftIconElement element = new PowerLiftIconElement(, )
+        }
+
         protected override void OnDraw()
         {
-            
+            for (int i = 0; i < IconGrid.Length; i++)
+            {
+                for (int j = 0; j < IconGrid[i].Length; j++)
+                {
+                    PowerLiftIconElement iconElement = IconGrid[i][j];
+
+                    //Draw the icon elements
+                    if (iconElement != null)
+                    {
+                        iconElement.Draw();
+                    }
+                }
+            }
         }
     }
 }

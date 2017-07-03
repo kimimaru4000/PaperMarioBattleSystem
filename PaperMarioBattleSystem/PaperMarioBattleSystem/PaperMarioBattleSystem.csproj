@@ -59,6 +59,7 @@
   <PropertyGroup />
   <ItemGroup>
     <Compile Include="Classes\Actions\ActionCommands\ActionCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\PowerLiftIconElement.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ArtAttackCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\FillBarCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\FillLightsCommand.cs" />
@@ -330,6 +331,7 @@
     <Compile Include="Classes\UIElements\UIElement.cs" />
     <Compile Include="Classes\UIElements\UIFourPiecedTex.cs" />
     <Compile Include="Classes\UIElements\UIGrid.cs" />
+    <Compile Include="Classes\UIElements\UIStackedTex.cs" />
     <Compile Include="Classes\VFXElements\VFXElement.cs" />
     <Compile Include="Classes\VFXElements\WingsDisappearVFX.cs" />
     <Compile Include="Main.cs" />

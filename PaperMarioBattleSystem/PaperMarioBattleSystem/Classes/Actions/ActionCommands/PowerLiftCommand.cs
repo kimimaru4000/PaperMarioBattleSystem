@@ -27,6 +27,36 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        /// <summary>
+        /// The number of Attack selections required to boost your Attack by 1.
+        /// </summary>
+        private const int AttackBoostReq = 5;
+
+        /// <summary>
+        /// The number of Defense selections required to boost your Defense by 1.
+        /// </summary>
+        private const int DefenseBoostReq = 5;
+
+        /// <summary>
+        /// The number of Attack boosts obtained.
+        /// </summary>
+        private int AttackBoosts = 0;
+
+        /// <summary>
+        /// The number of Defense boosts obtained.
+        /// </summary>
+        private int DefenseBoosts = 0;
+
+        /// <summary>
+        /// The number of Attack icons selected.
+        /// </summary>
+        private int AttackSelections = 0;
+
+        /// <summary>
+        /// The numbber of Defense icons selected.
+        /// </summary>
+        private int DefenseSelections = 0;
+
         private int NumColumns = 3;
         private int NumRows = 3;
         private Vector2 LiftGridCellSize = new Vector2(26, 24);
@@ -55,6 +85,12 @@ namespace PaperMarioBattleSystem
         private UIFourPiecedTex Cursor = null;
         private int CurColumn = 0;
         private int CurRow = 0;
+
+        private double IconFadeTime = 500d;
+        private double IconStayTime = 2300d;
+
+        private readonly double[] IconCreationTimes = new double[] { 300d, 400d, 500d, 750d, 1200d };
+        private double PrevCreationTime = 0d;
 
         private bool SelectedIcon = false;
 
@@ -161,6 +197,8 @@ namespace PaperMarioBattleSystem
             HandleCursorInput();
 
             UpdateIconGrid();
+
+            HandleIconCreation();
         }
 
         private void HandleCursorInput()
@@ -266,11 +304,34 @@ namespace PaperMarioBattleSystem
                     case PowerLiftIcons.Poison:
                         IsPoisoned = true;
                         ElapsedPoisonTime = 0d;
+
+                        IconGrid[CurColumn][CurRow] = null;
                         break;
                     case PowerLiftIcons.Attack:
+                        AttackSelections++;
+                        if (AttackSelections >= AttackBoostReq)
+                        {
+                            AttackBoosts++;
+                            AttackSelections = 0;
+
+                            //Send the response with the new number of boosts
+                            SendResponse(new ActionCommandGlobals.PowerLiftResponse(AttackBoosts, DefenseBoosts));
+                        }
+                        
+                        IconGrid[CurColumn][CurRow] = null;
                         break;
                     case PowerLiftIcons.Defense:
+                        DefenseSelections++;
+                        if (DefenseSelections >= DefenseBoostReq)
+                        {
+                            DefenseBoosts++;
+                            DefenseSelections = 0;
 
+                            //Send the response with the new number of boosts
+                            SendResponse(new ActionCommandGlobals.PowerLiftResponse(AttackBoosts, DefenseBoosts));
+                        }
+
+                        IconGrid[CurColumn][CurRow] = null;
                         break;
                     default:
 
@@ -333,12 +394,68 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        /// <summary>
-        /// Chooses an icon to create at a particular grid spot.
-        /// </summary>
-        private void CreateNextIcon(int gridCol, int gridRow)
+        private void HandleIconCreation()
         {
-            //PowerLiftIconElement element = new PowerLiftIconElement(, )
+            if (Time.ActiveMilliseconds >= PrevCreationTime)
+            {
+                GridIndexHolder nextIndex = FindRandomAvailableGridIndex();
+                if (nextIndex.Column >= 0 && nextIndex.Row >= 0)
+                {
+                    CreateNextIconElement(nextIndex.Column, nextIndex.Row);
+                }
+
+                PrevCreationTime = Time.ActiveMilliseconds + IconCreationTimes[GeneralGlobals.Randomizer.Next(0, IconCreationTimes.Length)];
+            }
+        }
+
+        /// <summary>
+        /// Finds the next available index on the grid to place a <see cref="PowerLiftIconElement"/>.
+        /// </summary>
+        /// <returns>A <see cref="GridIndexHolder"/> with the available column and row indices.
+        /// If none are available, the column and row indices will be -1.</returns>
+        private GridIndexHolder FindRandomAvailableGridIndex()
+        {
+            List <GridIndexHolder> availableSpots = new List<GridIndexHolder>();
+
+            for (int i = 0; i < IconGrid.Length; i++)
+            {
+                for (int j = 0; j < IconGrid[i].Length; j++)
+                {
+                    //We found an available spot
+                    if (IconGrid[i][j] == null)
+                    {
+                        availableSpots.Add(new GridIndexHolder(i, j));
+                    }
+                }
+            }
+
+            //There are no available spots on the grid, so return invalid data
+            if (availableSpots.Count == 0)
+            {
+                return new GridIndexHolder(-1, -1);
+            }
+            //Choose a random spot on the grid
+            else
+            {
+                //Get a random value and return it
+                int randSpot = GeneralGlobals.Randomizer.Next(0, availableSpots.Count);
+
+                return availableSpots[randSpot];
+            }
+        }
+
+        /// <summary>
+        /// Chooses an icon and creates an element at a particular grid index.
+        /// </summary>
+        private void CreateNextIconElement(int gridCol, int gridRow)
+        {
+            //Choose a random icon among Poison Mushrooms, Attack, and Defense
+            int randIcon = GeneralGlobals.Randomizer.Next((int)PowerLiftIcons.Poison, (int)PowerLiftIcons.Defense + 1);
+            Vector2 position = PowerLiftGrid.GetPositionAtIndex(PowerLiftGrid.GetIndex(gridCol, gridRow));
+
+            //Create the icon element
+            PowerLiftIconElement element = new PowerLiftIconElement((PowerLiftIcons)randIcon, position, IconFadeTime, IconStayTime, .45f);
+            IconGrid[gridCol][gridRow] = element;
         }
 
         protected override void OnDraw()
@@ -355,6 +472,21 @@ namespace PaperMarioBattleSystem
                         iconElement.Draw();
                     }
                 }
+            }
+        }
+
+        /// <summary>
+        /// Holds zero-based column and row values corresponding to a grid index.
+        /// </summary>
+        private struct GridIndexHolder
+        {
+            public int Column;
+            public int Row;
+
+            public GridIndexHolder(int column, int row)
+            {
+                Column = column;
+                Row = row;
             }
         }
     }

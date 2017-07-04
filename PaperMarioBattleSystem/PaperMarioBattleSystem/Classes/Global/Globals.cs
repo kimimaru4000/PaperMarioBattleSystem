@@ -1248,6 +1248,11 @@ namespace PaperMarioBattleSystem
                 AttackBoosted = attackBoosted;
                 DefenseBoosted = defenseBoosted;
             }
+
+            public override string ToString()
+            {
+                return $"{nameof(PowerLiftResponse)} - Attack: {AttackBoosted}, Defense: {DefenseBoosted}";
+            }
         }
 
         #endregion

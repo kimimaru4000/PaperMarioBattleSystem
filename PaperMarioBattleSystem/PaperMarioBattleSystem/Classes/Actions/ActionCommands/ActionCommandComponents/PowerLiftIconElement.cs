@@ -49,27 +49,15 @@ namespace PaperMarioBattleSystem
 
         private Color OrigColor = Color.White;
 
-        /// <summary>
-        /// The column the icon is on the grid.
-        /// </summary>
-        public int Column { get; private set; } = 0;
-
-        /// <summary>
-        /// The row the icon is on the grid.
-        /// </summary>
-        public int Row { get; private set; } = 0;
-
         public Color TintColor { get; set; } = Color.White;
 
         public bool IsDone => (IconElementState == IconElementStates.Done);
 
-        public PowerLiftIconElement(PowerLiftCommand.PowerLiftIcons powerLiftIcon, Vector2 position, int column, int row, double iconFadeTime, double iconStayTime, float depth)
+        public PowerLiftIconElement(PowerLiftCommand.PowerLiftIcons powerLiftIcon, Vector2 position, double iconFadeTime, double iconStayTime, float depth)
         {
             PowerliftIcon = powerLiftIcon;
 
             Position = position;
-            Column = column;
-            Row = row;
 
             IconFadeTime = iconFadeTime;
             IconStayTime = iconStayTime;
@@ -175,7 +163,7 @@ namespace PaperMarioBattleSystem
 
         public void Draw()
         {
-            SpriteRenderer.Instance.Draw(CroppedTex.Tex, Position, CroppedTex.SourceRect, TintColor, new Vector2(.5f, .5f), false, false, Depth, false);
+            SpriteRenderer.Instance.Draw(CroppedTex.Tex, Position, CroppedTex.SourceRect, TintColor, new Vector2(.5f, .5f), false, false, Depth, true);
         }
     }
 }

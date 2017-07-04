@@ -117,7 +117,7 @@ namespace PaperMarioBattleSystem
             BigCursor = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
             SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));//new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Debug/BoxOutline2"), null);
 
-            Cursor = new UIFourPiecedTex(BigCursor, LiftGridCellSize / 2, .6f, CursorColor);
+            Cursor = new UIFourPiecedTex(BigCursor, BigCursor.WidthHeightToVector2(), .6f, CursorColor);
 
             CommandTime = commandTime;
         }
@@ -169,13 +169,13 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < totalSize; i++)
             {
                 //Small cursors are on the grid
-                //Offset their position since they're being drawn in 4 pieces centered about an origin
-                PowerLiftGrid.AddGridElement(new UIFourPiecedTex(SmallCursor.Copy(), LiftGridCellSize / 2, .5f, Color.White));
+                PowerLiftGrid.AddGridElement(new UIFourPiecedTex(SmallCursor.Copy(), SmallCursor.WidthHeightToVector2(), .5f, Color.White));
             }
 
             //Although the grid is drawn on the UI layer, we center it using the sprite layer's (0, 0) position for ease
             PowerLiftGrid.Position = Camera.Instance.SpriteToUIPos(Vector2.Zero);
             PowerLiftGrid.ChangeGridPivot(UIGrid.GridPivots.Center);
+            //PowerLiftGrid.ChangeElementPivot(UIGrid.GridPivots.Center);
 
             PowerLiftGrid.Spacing = LiftGridSpacing;
 

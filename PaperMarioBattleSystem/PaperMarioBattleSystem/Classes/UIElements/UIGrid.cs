@@ -179,12 +179,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The grid pivot.
         /// </summary>
-        protected GridPivots GridPivot = GridPivots.UpperLeft;
+        public GridPivots GridPivot { get; protected set; } = GridPivots.UpperLeft;
 
         /// <summary>
         /// The pivot for the grid elements.
         /// </summary>
-        protected GridPivots ElementPivot = GridPivots.UpperLeft;
+        public GridPivots ElementPivot { get; protected set; } = GridPivots.UpperLeft;
 
         /// <summary>
         /// The amount to space the grid elements away from each other.
@@ -395,10 +395,22 @@ namespace PaperMarioBattleSystem
         /// <returns>The position of the grid element.</returns>
         public Vector2 GetPositionAtIndex(int index)
         {
+            return GetPositionAtIndex(index, GridPivot, ElementPivot);
+        }
+
+        /// <summary>
+        /// Gets the position a grid element would be at a particular index with a particular element and grid pivot.
+        /// </summary>
+        /// <param name="index">The index of the grid element. This can be outside of the grid's range.</param>
+        /// <param name="elementPivot">The pivot used to offset the elements in the grid.</param>
+        /// <param name="gridPivot">The pivot used to offset the grid.</param>
+        /// <returns>The position of the grid element with the designated element and grid pivots.</returns>
+        public Vector2 GetPositionAtIndex(int index, GridPivots gridPivot, GridPivots elementPivot)
+        {
             //Add the grid's Position with the relative position of the element at the index
             //Then subtract from the pivot offset
-            Vector2 relativePos = GetRelativePositionAtIndex(index, ElementPivot);
-            Vector2 offsetPos = GetOffsetFromPivot(GridPivot);
+            Vector2 relativePos = GetRelativePositionAtIndex(index, elementPivot);
+            Vector2 offsetPos = GetOffsetFromPivot(gridPivot);
             Vector2 posToDraw = (Position + relativePos) - offsetPos;
 
             return posToDraw;

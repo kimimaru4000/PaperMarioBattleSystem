@@ -11,34 +11,33 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A UIElement that holds a <see cref="CroppedTexture2D"/>, which is drawn in 4 pieces.
     /// <para>This is for graphics that constitute 1/4 of a whole.
-    /// This class assumes the graphic is the upper-left piece and rotates the other pieces according to draw them combined (Ex. top-left of "+" sign).</para>
-    /// <para>The result is the four pieces have their pivots in the center, allowing them to be rotated as one.</para>
+    /// This class assumes the graphic is the upper-left piece and rotates the other pieces according to draw them combined (Ex. top-left of "+" sign image).</para>
+    /// <para>Place their pivots in the center to allow them to be rotated as one.</para>
     /// </summary>
     public sealed class UIFourPiecedTex : UICroppedTexture2D
     {
         /// <summary>
-        /// The position offset. The pieces have their pivots in the center, thus affecting how they're drawn.
-        /// This allows for adjustment that works well with container UIElements like a <see cref="UIGrid"/>.
+        /// The origin offset. This affects all the pieces.
         /// </summary>
-        public Vector2 PositionOffset = Vector2.Zero;
+        public Vector2 OriginOffset = Vector2.Zero;
 
         public UIFourPiecedTex(CroppedTexture2D croppedtex2D): base(croppedtex2D)
         {
 
         }
 
-        public UIFourPiecedTex(CroppedTexture2D croppedtex2D, Vector2 positionOffset) : this(croppedtex2D)
+        public UIFourPiecedTex(CroppedTexture2D croppedtex2D, Vector2 originOffset) : this(croppedtex2D)
         {
-            PositionOffset = positionOffset;
+            OriginOffset = originOffset;
         }
 
         public UIFourPiecedTex(CroppedTexture2D croppedtex2D, float depth, Color tintColor) : base(croppedtex2D, depth, tintColor)
         {
         }
 
-        public UIFourPiecedTex(CroppedTexture2D croppedtex2D, Vector2 positionOffset, float depth, Color tintColor) : base(croppedtex2D, depth, tintColor)
+        public UIFourPiecedTex(CroppedTexture2D croppedtex2D, Vector2 originOffset, float depth, Color tintColor) : base(croppedtex2D, depth, tintColor)
         {
-            PositionOffset = positionOffset;
+            OriginOffset = originOffset;
         }
 
         public override void Draw()
@@ -48,16 +47,20 @@ namespace PaperMarioBattleSystem
 
         private void DrawPieces()
         {
-            Vector2 origin = CroppedTex2D.WidthHeightToVector2();
+            Vector2 widthHeight = CroppedTex2D.WidthHeightToVector2();
             Texture2D tex = CroppedTex2D.Tex;
             Rectangle? sourcerect = CroppedTex2D.SourceRect;
 
-            Vector2 position = Position + PositionOffset;
+            bool absOrigin = true;
 
-            SpriteRenderer.Instance.Draw(tex, position, sourcerect, TintColor, Rotation, origin, 1f, false, false, Depth, true);
-            SpriteRenderer.Instance.Draw(tex, position, sourcerect, TintColor, Rotation, new Vector2(-origin.X, origin.Y), 1f, true, false, Depth, true);
-            SpriteRenderer.Instance.Draw(tex, position, sourcerect, TintColor, Rotation, new Vector2(origin.X, 0), 1f, false, true, Depth, true);
-            SpriteRenderer.Instance.Draw(tex, position, sourcerect, TintColor, Rotation, -origin, 1f, true, true, Depth, true);
+            //Upper-left
+            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset, 1f, false, false, Depth, true, absOrigin);
+            //Upper-right
+            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset + new Vector2(-widthHeight.X, 0f), 1f, true, false, Depth, true, absOrigin);
+            //Lower-left
+            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset + new Vector2(0f, -widthHeight.Y), 1f, false, true, Depth, true, absOrigin);
+            //Lower-right
+            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset + new Vector2(-widthHeight.X, -widthHeight.Y), 1f, true, true, Depth, true, absOrigin);
         }
     }
 }

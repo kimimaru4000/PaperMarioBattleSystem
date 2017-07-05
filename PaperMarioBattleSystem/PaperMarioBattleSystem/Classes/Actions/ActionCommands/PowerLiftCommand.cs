@@ -81,6 +81,10 @@ namespace PaperMarioBattleSystem
 
         private CroppedTexture2D BigCursor = null;
         private CroppedTexture2D SmallCursor = null;
+        private CroppedTexture2D ArrowIcon = null;
+        private CroppedTexture2D BarEdge = null;
+        private CroppedTexture2D Bar = null;
+        private CroppedTexture2D BarFill = null;
 
         private UIFourPiecedTex Cursor = null;
         private int CurColumn = 0;
@@ -116,6 +120,10 @@ namespace PaperMarioBattleSystem
 
             BigCursor = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
             SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));//new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Debug/BoxOutline2"), null);
+            ArrowIcon = new CroppedTexture2D(battleGFX, new Rectangle(5, 353, 50, 61));
+            BarEdge = new CroppedTexture2D(battleGFX, new Rectangle(514, 245, 7, 28));
+            Bar = new CroppedTexture2D(battleGFX, new Rectangle(530, 245, 1, 28));
+            BarFill = new CroppedTexture2D(battleGFX, new Rectangle(541, 255, 1, 1));
 
             Cursor = new UIFourPiecedTex(BigCursor, BigCursor.WidthHeightToVector2(), .6f, CursorColor);
 
@@ -464,6 +472,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
+            //Draw the grid
             for (int i = 0; i < IconGrid.Length; i++)
             {
                 for (int j = 0; j < IconGrid[i].Length; j++)
@@ -477,6 +486,56 @@ namespace PaperMarioBattleSystem
                     }
                 }
             }
+
+            //Draw the boosts
+            DrawBoosts();
+        }
+
+        private void DrawBoosts()
+        {
+            //Set up variables
+            int cellSize = (int)(PowerLiftGrid.CellSize.Y);
+            Vector2 arrowScale = new Vector2(.75f, .65f);
+            Vector2 barScale = new Vector2(80, 1);
+
+            //Depth values
+            float arrowDepth = .4f;
+            float barDepth = .41f;
+            float barFillDepth = .42f;
+            float boostTextDepth = .43f;
+
+            float attackArrowY = PowerLiftGrid.Position.Y - cellSize;
+            float defenseArrowY = PowerLiftGrid.Position.Y + cellSize;
+
+            Vector2 fillScaleOffset = new Vector2(4, 18);
+
+            //Draw the stat arrows - Attack is on top while Defense is on the bottom
+            SpriteRenderer.Instance.Draw(ArrowIcon.Tex, new Vector2(50, attackArrowY), ArrowIcon.SourceRect, Color.Red, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth, true);
+            SpriteRenderer.Instance.Draw(ArrowIcon.Tex, new Vector2(50, defenseArrowY), ArrowIcon.SourceRect, Color.Blue, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth, true);
+
+            //Draw the bars - one for each stat arrow
+            //Attack bar
+            Vector2 attackBarPos = new Vector2(110, attackArrowY + 5);
+            float attackFillScale = AttackSelections / (float)AttackBoostReq;
+
+            SpriteRenderer.Instance.Draw(BarEdge.Tex, attackBarPos, BarEdge.SourceRect, Color.White, false, false, barDepth, true);
+            SpriteRenderer.Instance.Draw(Bar.Tex, attackBarPos + new Vector2(BarEdge.SourceRect.Value.Width, 0f), Bar.SourceRect, Color.White, 0f, Vector2.Zero, barScale, false, false, barDepth, true);
+            SpriteRenderer.Instance.Draw(BarEdge.Tex, attackBarPos + new Vector2(barScale.X + BarEdge.SourceRect.Value.Width, 0f), BarEdge.SourceRect, Color.White, true, false, barDepth, true);
+            SpriteRenderer.Instance.Draw(BarFill.Tex, attackBarPos + new Vector2(5f, 5f), BarFill.SourceRect, Color.Pink, 0f, Vector2.Zero, new Vector2(attackFillScale * (barScale.X + fillScaleOffset.X), fillScaleOffset.Y), false, false, barFillDepth, true);
+
+            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"+{AttackBoosts}", new Vector2(50, attackArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth, true);
+
+            //Defense bar
+            Vector2 defenseBarPos = new Vector2(110, defenseArrowY + 5);
+            float defenseFillScale = DefenseSelections / (float)DefenseBoostReq;
+            Color defenseFillColor = new Color(50, 170, 255);
+
+            SpriteRenderer.Instance.Draw(BarEdge.Tex, defenseBarPos, BarEdge.SourceRect, Color.White, false, false, barDepth, true);
+            SpriteRenderer.Instance.Draw(Bar.Tex, defenseBarPos + new Vector2(BarEdge.SourceRect.Value.Width, 0f), Bar.SourceRect, Color.White, 0f, Vector2.Zero, barScale, false, false, barDepth, true);
+            SpriteRenderer.Instance.Draw(BarEdge.Tex, defenseBarPos + new Vector2(barScale.X + BarEdge.SourceRect.Value.Width, 0f), BarEdge.SourceRect, Color.White, true, false, barDepth, true);
+            SpriteRenderer.Instance.Draw(BarFill.Tex, defenseBarPos + new Vector2(5f, 5f), BarFill.SourceRect, defenseFillColor, 0f, Vector2.Zero, new Vector2(defenseFillScale * (barScale.X + fillScaleOffset.X), fillScaleOffset.Y), false, false, barFillDepth, true);
+
+            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"+{DefenseBoosts}", new Vector2(50, defenseArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth, true);
         }
 
         /// <summary>

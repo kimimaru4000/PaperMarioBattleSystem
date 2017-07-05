@@ -87,7 +87,7 @@ namespace PaperMarioBattleSystem
         public void BeginDrawing()
         {
             spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, null, null, null, null, /*null*/Camera.Instance.CalculateTransformation());
-            uiBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend);
+            uiBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
         }
 
         public void EndDrawing()

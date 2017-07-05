@@ -177,6 +177,10 @@ namespace PaperMarioBattleSystem
             PowerLiftGrid.ChangeGridPivot(UIGrid.GridPivots.Center);
             //PowerLiftGrid.ChangeElementPivot(UIGrid.GridPivots.Center);
 
+            Vector2 paddingSize = LiftGridCellSize / 2;
+
+            PowerLiftGrid.ChangeGridPadding(0, (int)paddingSize.X, 0, (int)paddingSize.Y);
+
             PowerLiftGrid.Spacing = LiftGridSpacing;
 
             //Initialize the icon grid

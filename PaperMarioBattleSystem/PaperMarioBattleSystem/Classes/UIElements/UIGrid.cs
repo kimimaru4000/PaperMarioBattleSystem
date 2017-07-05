@@ -192,6 +192,11 @@ namespace PaperMarioBattleSystem
         protected Vector2 GridElementSpacing = Vector2.Zero;
 
         /// <summary>
+        /// The padding of the grid.
+        /// </summary>
+        protected Padding GridPadding = new Padding();
+
+        /// <summary>
         /// The PosUIElements in the grid.
         /// This is a list for performance/usability reasons, as we can easily position a list in a grid-like manner.
         /// </summary>
@@ -381,10 +386,13 @@ namespace PaperMarioBattleSystem
 
             Vector2 elementPivotPos = GetElementOffsetForPivot(pivot);
 
-            //Use the GridPivot for the Spacing since elements 
+            //Use the GridPivot for the Spacing since it applies to the entire grid
             Vector2 spacingOffset = GetSpacingAtColumnRow(xIndex, yIndex, GridPivot);
 
-            Vector2 relativePos = new Vector2(xIndex * CellSize.X, yIndex * CellSize.Y) - elementPivotPos + spacingOffset;
+            //Apply the padding
+            Vector2 paddingOffset = GridPadding.TotalPadding;
+
+            Vector2 relativePos = new Vector2(xIndex * CellSize.X, yIndex * CellSize.Y) - elementPivotPos + spacingOffset + paddingOffset;
             return relativePos;
         }
 
@@ -444,6 +452,38 @@ namespace PaperMarioBattleSystem
             {
                 RepositionGridElements();
             }
+        }
+
+        /// <summary>
+        /// Changes the padding of the grid.
+        /// </summary>
+        /// <param name="left">The left padding.</param>
+        /// <param name="right">The right padding.</param>
+        /// <param name="top">The top padding.</param>
+        /// <param name="bottom">The bottom padding.</param>
+        public void ChangeGridPadding(int left, int right, int top, int bottom)
+        {
+            GridPadding.Left = left;
+            GridPadding.Right = right;
+            GridPadding.Top = top;
+            GridPadding.Bottom = bottom;
+
+            if (AutomaticReposition == true)
+            {
+                RepositionGridElements();
+            }
+        }
+
+        /// <summary>
+        /// Changes the padding of the grid relative to its original padding.
+        /// </summary>
+        /// <param name="left">The left padding.</param>
+        /// <param name="right">The right padding.</param>
+        /// <param name="top">The top padding.</param>
+        /// <param name="bottom">The bottom padding.</param>
+        public void ChangeGridPaddingRelative(int left, int right, int top, int bottom)
+        {
+            ChangeGridPadding(GridPadding.Left + left, GridPadding.Right + right, GridPadding.Top + top, GridPadding.Bottom + bottom);
         }
 
         /// <summary>
@@ -646,6 +686,30 @@ namespace PaperMarioBattleSystem
             Rectangle rect = GridBounds;
 
             SpriteRenderer.Instance.Draw(tex, new Vector2(rect.X, rect.Y), null, Color.Blue, 0f,Vector2.Zero, new Vector2(rect.Width, rect.Height), false, false, .3f, true);
+        }
+
+        /// <summary>
+        /// Padding used for the grid.
+        /// </summary>
+        public struct Padding
+        {
+            public int Left;
+            public int Right;
+            public int Top;
+            public int Bottom;
+
+            /// <summary>
+            /// The total padding as a Vector2.
+            /// </summary>
+            public Vector2 TotalPadding => new Vector2(Right - Left, Bottom - Top);
+
+            public Padding(int left, int right, int top, int bottom)
+            {
+                Left = left;
+                Right = right;
+                Top = top;
+                Bottom = bottom;
+            }
         }
     }
 }

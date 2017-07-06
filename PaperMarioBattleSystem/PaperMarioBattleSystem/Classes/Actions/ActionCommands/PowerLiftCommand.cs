@@ -13,6 +13,7 @@ namespace PaperMarioBattleSystem
     /// Move the cursor across the 3x3 grid and select the red and blue arrows to boost your stats.
     /// Hitting a Poison Mushroom halves the cursor's speed for a short time.
     /// </summary>
+    //NOTE: Clean this up - the code is pretty good performance-wise, but it can be more readable after trimming and commenting it
     public sealed class PowerLiftCommand : ActionCommand
     {
         #region Enums
@@ -57,12 +58,35 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private int DefenseSelections = 0;
 
+        /// <summary>
+        /// The total time the Attack/Defense boost display arrows spend in the blinking interval after gaining a boost.
+        /// </summary>
+        private const double ArrowBlinkTotalTime = 1000d;
+
+        /// <summary>
+        /// The interval at which the Attack/Defense boost display arrows blink after gaining a boost.
+        /// </summary>
+        private const double ArrowBlinkInterval = ArrowBlinkTotalTime / 10d;
+
+        /// <summary>
+        /// The last time an Attack boost was obtained.
+        /// </summary>
+        private double LastAttackBoost = 0d;
+
+        /// <summary>
+        /// The last time a Defense boost was obtained.
+        /// </summary>
+        private double LastDefenseBoost = 0d;
+
         private int NumColumns = 3;
         private int NumRows = 3;
         private Vector2 LiftGridCellSize = new Vector2(26, 24);
         private Vector2 LiftGridSpacing = new Vector2(52, 48);
 
-        private double CommandTime = 30000d;
+        /// <summary>
+        /// How long Power Lift lasts.
+        /// </summary>
+        private double CommandTime = 15000d;
         private double ElapsedCommandTime = 0d;
 
         private double CursorSpeedDur = 150d;
@@ -93,7 +117,7 @@ namespace PaperMarioBattleSystem
         private double IconFadeTime = 500d;
         private double IconStayTime = 2300d;
 
-        private readonly double[] IconCreationTimes = new double[] { 300d, 400d, 500d, 750d, 1200d };
+        private readonly double[] IconCreationTimes = new double[] { 100d, 250d, 350d, 500d, 800d };
         private double PrevCreationTime = 0d;
 
         private bool SelectedIcon = false;
@@ -163,6 +187,15 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.RemoveUIElement(PowerLiftGrid);
             BattleUIManager.Instance.RemoveUIElement(Cursor);
 
+            CurColumn = CurRow = 0;
+
+            AttackBoosts = DefenseBoosts = 0;
+            LastAttackBoost = LastDefenseBoost = 0d;
+            PrevCreationTime = 0d;
+
+            UtilityGlobals.ClearJaggedArray(ref IconGrid);
+            IconGrid = null;
+
             PowerLiftGrid.ClearGrid();
             PowerLiftGrid = null;
         }
@@ -197,17 +230,25 @@ namespace PaperMarioBattleSystem
 
         protected override void ReadInput()
         {
-            //if (ElapsedCommandTime >= CommandTime)
-            //{
-            //    OnComplete(CommandResults.Success);
-            //    return;
-            //}
+            if (ElapsedCommandTime >= CommandTime)
+            {
+                //If any stat was boosted by at least 1, it's a Success
+                if (AttackBoosts > 0 || DefenseBoosts > 0)
+                {
+                    OnComplete(CommandResults.Success);
+                }
+                else
+                {
+                    OnComplete(CommandResults.Failure);
+                }
+                return;
+            }
 
             ElapsedCommandTime += Time.ElapsedMilliseconds;
 
             HandlePoisoned();
             HandleCursorInput();
-
+            
             UpdateIconGrid();
 
             HandleIconCreation();
@@ -325,6 +366,7 @@ namespace PaperMarioBattleSystem
                         {
                             AttackBoosts++;
                             AttackSelections = 0;
+                            LastAttackBoost = Time.ActiveMilliseconds;
 
                             //Send the response with the new number of boosts
                             SendResponse(new ActionCommandGlobals.PowerLiftResponse(AttackBoosts, DefenseBoosts));
@@ -338,6 +380,7 @@ namespace PaperMarioBattleSystem
                         {
                             DefenseBoosts++;
                             DefenseSelections = 0;
+                            LastDefenseBoost = Time.ActiveMilliseconds;
 
                             //Send the response with the new number of boosts
                             SendResponse(new ActionCommandGlobals.PowerLiftResponse(AttackBoosts, DefenseBoosts));
@@ -489,6 +532,9 @@ namespace PaperMarioBattleSystem
 
             //Draw the boosts
             DrawBoosts();
+
+            //Draw time remaining (debug)
+            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Math.Round(CommandTime - ElapsedCommandTime, 0).ToString(), new Vector2(250, 130), Color.White, .7f);
         }
 
         private void DrawBoosts()
@@ -509,9 +555,59 @@ namespace PaperMarioBattleSystem
 
             Vector2 fillScaleOffset = new Vector2(4, 18);
 
+            bool drawAttackArrow = true;
+            bool drawDefenseArrow = true;
+
+            #region Arrow Blinking Interval Logic
+
+            //See if the arrows should blink
+            //First check if we recently obtained an Attack and/or Defense boost
+            const double blinkTimesTwo = ArrowBlinkInterval * 2d;
+            double attackBlink = LastAttackBoost + ArrowBlinkTotalTime;
+            double defenseBlink = LastDefenseBoost + ArrowBlinkTotalTime;
+
+            //We recently obtained an Attack boost
+            if (attackBlink > Time.ActiveMilliseconds)
+            {
+                //Get the difference in time, then mod it with 2 times the interval (first half is the blinking, second half is visible)
+                double timeDiff = Time.ActiveMilliseconds - LastAttackBoost;
+                double attackBlinkMod = timeDiff % blinkTimesTwo;
+
+                //We're at the blinking part of the interval, so don't draw the arrow
+                if (attackBlinkMod < ArrowBlinkInterval)
+                {
+                    drawAttackArrow = false;
+                }
+            }
+
+            //We recently obtained a Defense boost
+            if (defenseBlink > Time.ActiveMilliseconds)
+            {
+                //Get the difference in time, then mod it with 2 times the interval (first half is the blinking, second half is visible)
+                double timeDiff = Time.ActiveMilliseconds - LastDefenseBoost;
+                double defenseBlinkMod = timeDiff % blinkTimesTwo;
+
+                //We're at the blinking part of the interval, so don't draw the arrow
+                if (defenseBlinkMod < ArrowBlinkInterval)
+                {
+                    drawDefenseArrow = false;
+                }
+            }
+
+            #endregion
+
             //Draw the stat arrows - Attack is on top while Defense is on the bottom
-            SpriteRenderer.Instance.Draw(ArrowIcon.Tex, new Vector2(50, attackArrowY), ArrowIcon.SourceRect, Color.Red, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth, true);
-            SpriteRenderer.Instance.Draw(ArrowIcon.Tex, new Vector2(50, defenseArrowY), ArrowIcon.SourceRect, Color.Blue, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth, true);
+            if (drawAttackArrow == true)
+            {
+                SpriteRenderer.Instance.Draw(ArrowIcon.Tex, new Vector2(50, attackArrowY), ArrowIcon.SourceRect, Color.Red, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth, true);
+                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"+{AttackBoosts}", new Vector2(50, attackArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth, true);
+            }
+
+            if (drawDefenseArrow == true)
+            {
+                SpriteRenderer.Instance.Draw(ArrowIcon.Tex, new Vector2(50, defenseArrowY), ArrowIcon.SourceRect, Color.Blue, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth, true);
+                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"+{DefenseBoosts}", new Vector2(50, defenseArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth, true);
+            }
 
             //Draw the bars - one for each stat arrow
             //Attack bar
@@ -523,8 +619,6 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.Draw(BarEdge.Tex, attackBarPos + new Vector2(barScale.X + BarEdge.SourceRect.Value.Width, 0f), BarEdge.SourceRect, Color.White, true, false, barDepth, true);
             SpriteRenderer.Instance.Draw(BarFill.Tex, attackBarPos + new Vector2(5f, 5f), BarFill.SourceRect, Color.Pink, 0f, Vector2.Zero, new Vector2(attackFillScale * (barScale.X + fillScaleOffset.X), fillScaleOffset.Y), false, false, barFillDepth, true);
 
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"+{AttackBoosts}", new Vector2(50, attackArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth, true);
-
             //Defense bar
             Vector2 defenseBarPos = new Vector2(110, defenseArrowY + 5);
             float defenseFillScale = DefenseSelections / (float)DefenseBoostReq;
@@ -534,8 +628,6 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.Draw(Bar.Tex, defenseBarPos + new Vector2(BarEdge.SourceRect.Value.Width, 0f), Bar.SourceRect, Color.White, 0f, Vector2.Zero, barScale, false, false, barDepth, true);
             SpriteRenderer.Instance.Draw(BarEdge.Tex, defenseBarPos + new Vector2(barScale.X + BarEdge.SourceRect.Value.Width, 0f), BarEdge.SourceRect, Color.White, true, false, barDepth, true);
             SpriteRenderer.Instance.Draw(BarFill.Tex, defenseBarPos + new Vector2(5f, 5f), BarFill.SourceRect, defenseFillColor, 0f, Vector2.Zero, new Vector2(defenseFillScale * (barScale.X + fillScaleOffset.X), fillScaleOffset.Y), false, false, barFillDepth, true);
-
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"+{DefenseBoosts}", new Vector2(50, defenseArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth, true);
         }
 
         /// <summary>

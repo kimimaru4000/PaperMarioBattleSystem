@@ -163,6 +163,22 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Clears a jagged array by nulling out its outer arrays.
+        /// </summary>
+        /// <typeparam name="T">The type of the jagged array.</typeparam>
+        /// <param name="jaggedArray">The jagged array of type T to clear.</param>
+        public static void ClearJaggedArray<T>(ref T[][] jaggedArray)
+        {
+            if (jaggedArray != null)
+            {
+                for (int i = 0; i < jaggedArray.Length; i++)
+                {
+                    jaggedArray[i] = null;
+                }
+            }
+        }
+
         #region Line Intersection
 
         /// <summary>

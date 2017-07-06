@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class PowerLift : SpecialMoveAction
     {
-        private const double ActionCommandTime = 30000d;
+        private const double ActionCommandTime = 15000d;
         
         public PowerLift()
         {

@@ -145,3 +145,6 @@ which is done through hitting an enemy on the overworld with a battle modifier c
 
 -When an attack inflicts multiple Status Effects (via cheats), the last one inflicted's sound and splash effect is played, but all Battle Messages
 still go in order of status priority.
+
+-For the Status Effects ending events, they also occur in the same status priority. For example, if Mario and Ms. Mowz both are inflicted with Electrified
+and Ms. Mowz is also inflicted with Burn, Ms. Mowz will play the BattleEvent to clear Burn, then both Mario and Ms. Mowz will play the event to clear Electrified.

@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
             DamageInfo.DamagingElement = Enumerations.Elements.Ice;
             DamageInfo.Statuses = new StatusChanceHolder[] { new StatusChanceHolder(100d, new FrozenStatus(3)) };
 
-            SetMoveSequence(new IceSmashSequence(this));
+            SetMoveSequence(new HammerSequence(this));
             actionCommand = new HammerCommand(MoveSequence, 4, 1000d);
         }
     }

@@ -251,7 +251,6 @@
     <Compile Include="Classes\Sequences\Item\ItemSequence.cs" />
     <Compile Include="Classes\Sequences\Kooper\ShellTossSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\HammerSequence.cs" />
-    <Compile Include="Classes\Sequences\Mario\IceSmashSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\JumpSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\MultibounceSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\PowerBounceSequence.cs" />

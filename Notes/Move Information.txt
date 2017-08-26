@@ -77,6 +77,12 @@ Bow
 Smack - Deals contact damage (can't hit Pokeys)
 Fan Smack - Doesn't deal contact damage (can hit Pokeys)
 
+Outta Sight - Makes both Mario and Bow Invisible and use up their turns. Also uses up Bow's next turn.
+
+Interestingly, if used with Repel Gel, Mario is standing instead of in his Guard pose.
+Mario is also even more transparent, which indicates the move adds transparency instead of setting it.
+If Hustle Drink is in effect, it will remove it regardless of when it was used.
+
 Yoshi
 -----
 Stampede - Attacks enemies on the ground, in the air, and on the ceiling despite the description stating only ground enemies
@@ -113,6 +119,21 @@ Earth Quake (item)
 -Deals 5 damage
 -Does not flip over any enemies
 -Can attack both ground and ceiling enemies despite the description stating only ground-based enemies
+
+Vivian
+------
+Veil - If used when Mario has a turn, he'll have a turn when Vivian and Mario come back up.
+
+If used when Mario doesn't have a turn, neither Mario nor Vivian will have a turn when coming back up.
+
+Since you can't switch partners on your second turn with Fast, it's on not possible to use Veil after Mario's first turn.
+Considering he has two turns after using Veil when Mario is inflicted with Fast, it's safe to presume that he'd have
+1 turn remaining if Veil was used on his 2nd turn.
+
+If Vivian has Fast and uses Veil on her first turn, she'll come up immediately and Mario will have 1 or turns if he
+didn't move (based on whether he has Fast or not).
+
+If a Status Effect ends when Mario or Vivian is in Veil, it just ends without playing the status effect ending BattleEvent even after Mario and Vivian come back up.
 
 General
 -------

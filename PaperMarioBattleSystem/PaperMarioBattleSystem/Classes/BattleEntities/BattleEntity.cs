@@ -76,7 +76,7 @@ namespace PaperMarioBattleSystem
 
         public string Name { get; protected set; } = "Entity";
 
-        public Color TintColor { get; } = Color.White;
+        public Color TintColor { get; set;  } = Color.White;
 
         /// <summary>
         /// The entity's current position

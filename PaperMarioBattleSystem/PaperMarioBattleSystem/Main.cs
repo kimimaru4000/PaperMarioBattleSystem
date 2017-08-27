@@ -56,6 +56,7 @@ namespace PaperMarioBattleSystem
         {
             Inventory.Instance.partnerInventory.AddPartner(new Goombario());
             Inventory.Instance.partnerInventory.AddPartner(new Kooper());
+            Inventory.Instance.partnerInventory.AddPartner(new Bow());
 
             Inventory.Instance.AddBadge(new DefendPlusBadge());
             Inventory.Instance.AddBadge(new PowerPlusBadge());

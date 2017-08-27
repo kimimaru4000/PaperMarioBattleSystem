@@ -74,6 +74,7 @@
     <Compile Include="Classes\Actions\ActionCommands\TidalWaveCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\TornadoJumpCommand.cs" />
     <Compile Include="Classes\Actions\BattleAction.cs" />
+    <Compile Include="Classes\Actions\Bow\OuttaSight.cs" />
     <Compile Include="Classes\Actions\Defensive\DefensiveAction.cs" />
     <Compile Include="Classes\Actions\Defensive\Superguard.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
@@ -119,6 +120,7 @@
     <Compile Include="Classes\BattleEntities\Players\BattlePlayer.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Goomba.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Paragoomba.cs" />
+    <Compile Include="Classes\BattleEntities\Players\Bow.cs" />
     <Compile Include="Classes\BattleEntities\Players\Goombario.cs" />
     <Compile Include="Classes\BattleEntities\Players\Kooper.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\SpikedGoomba.cs" />
@@ -223,6 +225,7 @@
     <Compile Include="Classes\Interfaces\IWingedEntity.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ActionSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\BowSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ChangePartnerSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\GoombarioSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\HammerSubMenu.cs" />
@@ -244,6 +247,7 @@
     <Compile Include="Classes\SequenceActions\WaitSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForAnimationSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForCommandSeqAction.cs" />
+    <Compile Include="Classes\Sequences\Bow\OuttaSightSequence.cs" />
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />
     <Compile Include="Classes\Sequences\ChargeSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
@@ -360,6 +364,9 @@
     <EmbeddedResource Include="Icon.ico" />
     <Content Include="Content\Audio\SFX\Switch Partner.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Characters\Bow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Characters\Mario.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -79,7 +79,7 @@ namespace PaperMarioBattleSystem
 
             #endregion
         }
-
+        
         public sealed override void OnBattleStart()
         {
             base.OnBattleStart();

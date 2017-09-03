@@ -97,6 +97,7 @@
     <Compile Include="Classes\Actions\NoAction.cs" />
     <Compile Include="Classes\Actions\Paragoomba\DiveKick.cs" />
     <Compile Include="Classes\Actions\Player\ChangePartner.cs" />
+    <Compile Include="Classes\Actions\Player\Defend.cs" />
     <Compile Include="Classes\Actions\Special\ArtAttack.cs" />
     <Compile Include="Classes\Actions\Special\Focus.cs" />
     <Compile Include="Classes\Actions\Special\Lullaby.cs" />
@@ -250,6 +251,7 @@
     <Compile Include="Classes\Sequences\Bow\OuttaSightSequence.cs" />
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />
     <Compile Include="Classes\Sequences\ChargeSequence.cs" />
+    <Compile Include="Classes\Sequences\DefendSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\TattleSequence.cs" />
     <Compile Include="Classes\Sequences\Item\ItemSequence.cs" />

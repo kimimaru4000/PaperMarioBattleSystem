@@ -39,8 +39,9 @@ Confirmed thanks to Jdaster64: Cloud Nine grants a 50% chance of evasion
 Message: "Chances of being attacked will decrease!"
 Remove message: "The effect of Cloud Nine have worn off!"
 
-Notes: If Mario is inflicted with Stone, Lakilester will come down and scoop him up
-instead of Mario jumping onto the cloud.
+Notes: If Mario is inflicted with Stone, Dizzy, Frozen, or Sleep, Lakilester will come down and scoop him up
+instead of Mario jumping onto the cloud. It's safe to presume this behavior is the same for any Status Effect
+that causes Mario to be immobile (unable to move, Guard, or Superguard). Dizzy makes characters immobile in PM.
 
 Spin Smash
 ----------
@@ -126,11 +127,11 @@ Veil - If used when Mario has a turn, he'll have a turn when Vivian and Mario co
 
 If used when Mario doesn't have a turn, neither Mario nor Vivian will have a turn when coming back up.
 
-Since you can't switch partners on your second turn with Fast, it's on not possible to use Veil after Mario's first turn.
+Since you can't switch partners on your second turn with Fast, it's not possible to use Veil after Mario's first turn.
 Considering he has two turns after using Veil when Mario is inflicted with Fast, it's safe to presume that he'd have
 1 turn remaining if Veil was used on his 2nd turn.
 
-If Vivian has Fast and uses Veil on her first turn, she'll come up immediately and Mario will have 1 or turns if he
+If Vivian has Fast and uses Veil on her first turn, she'll come up immediately and Mario will have 1 or more turns if he
 didn't move (based on whether he has Fast or not).
 
 If a Status Effect ends when Mario or Vivian is in Veil, it just ends without playing the status effect ending BattleEvent even after Mario and Vivian come back up.

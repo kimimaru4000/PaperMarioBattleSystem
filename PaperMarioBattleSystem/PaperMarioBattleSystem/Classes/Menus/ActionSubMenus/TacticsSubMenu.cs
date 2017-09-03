@@ -25,6 +25,7 @@ namespace PaperMarioBattleSystem
             BattleActions.Add(new MenuAction("Change Partner", null, "Change your current partner.", //costDisplayType, 
                 new ChangePartnerSubMenu()));
 
+
             #region Charge Menu
 
             BadgeGlobals.BadgeTypes chargeBadgeType = BadgeGlobals.BadgeTypes.Charge;
@@ -52,6 +53,9 @@ namespace PaperMarioBattleSystem
             }
 
             #endregion
+
+            //Defend action
+            BattleActions.Add(new Defend());
 
             //Do nothing action
             BattleActions.Add(new NoAction());

@@ -52,7 +52,11 @@ namespace PaperMarioBattleSystem
                 case HealthStates.Peril:
                     return AnimationGlobals.PlayerBattleAnimations.DangerName;
             }
-            
+
+            //This is hacky for now - fix this once we have priorities for idle animations
+            if (PreviousAction?.Name == "Defend")
+                return AnimationGlobals.PlayerBattleAnimations.GuardName;
+
             return base.GetIdleAnim();
         }
 

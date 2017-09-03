@@ -32,6 +32,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public event PhaseCycleStarted PhaseCycleStartEvent = null;
 
+        public delegate void TurnStarted();
+        /// <summary>
+        /// The event invoked at the start of the BattleEntity's turn. This occurs immediately after ending input for DefensiveActions.
+        /// </summary>
+        public event TurnStarted TurnStartEvent = null;
+
         #endregion
 
         /// <summary>
@@ -555,6 +561,9 @@ namespace PaperMarioBattleSystem
             {
                 DefensiveActions[i].actionCommand.EndInput();
             }
+
+            //Invoke the event
+            TurnStartEvent?.Invoke();
         }
 
         /// <summary>

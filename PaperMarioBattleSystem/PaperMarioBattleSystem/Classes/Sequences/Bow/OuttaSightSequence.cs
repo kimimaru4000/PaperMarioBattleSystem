@@ -25,8 +25,8 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    //Move behind Mario
-                    Vector2 movePosition = BattleManager.Instance.GetMario().BattlePosition;
+                    //Move behind the ally
+                    Vector2 movePosition = EntitiesAffected[0].BattlePosition;
 
                     //NOTE: Approximately up and behind
                     movePosition.X -= 15;
@@ -47,22 +47,22 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    //Use up all of Mario and Bow's turns
-                    BattleMario mario = BattleManager.Instance.GetMario();
+                    //Use up all of the ally and Bow's turns
+                    BattleEntity allyAffected = EntitiesAffected[0];
 
                     User.SetTurnsUsed(User.MaxTurns - 1);
-                    mario.SetTurnsUsed(mario.MaxTurns);
+                    allyAffected.SetTurnsUsed(allyAffected.MaxTurns);
 
                     //Add evasion
                     User.AddEvasionMod(0d);
-                    mario.AddEvasionMod(0d);
+                    allyAffected.AddEvasionMod(0d);
 
                     //Turn them both transparent
                     User.TintColor *= .3f;
-                    mario.TintColor *= .3f;
+                    allyAffected.TintColor *= .3f;
 
-                    //Mario assumes the Guard position
-                    mario.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName);
+                    //The ally assumes the Guard position
+                    allyAffected.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName);
 
                     //NOTE: This sequence remains until the next phase cycle
                     //Figure out a way to have Sequences do this (would be very useful as Defend also works this way!)

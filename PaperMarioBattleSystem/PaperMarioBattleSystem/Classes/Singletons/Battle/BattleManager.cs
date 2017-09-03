@@ -408,7 +408,7 @@ namespace PaperMarioBattleSystem
 
             ChangeBattleState(BattleState.Turn);
 
-            EntityTurn.OnTurnStart();
+            EntityTurn.StartTurn();
         }
 
         public void TurnEnd()
@@ -996,6 +996,76 @@ namespace PaperMarioBattleSystem
                 return 1;
 
             return 0;
+        }
+
+        /// <summary>
+        /// Tells whether one BattleEntity is in front of another.
+        /// </summary>
+        /// <param name="behindEntity">The BattleEntity that is supposedly behind <paramref name="frontEntity"/>.</param>
+        /// <param name="frontEntity">The BattleEntity that is supposedly in front of <paramref name="behindEntity"/>.</param>
+        /// <returns></returns>
+        public bool IsEntityInFrontOf(BattleEntity behindEntity, BattleEntity frontEntity)
+        {
+            //If the entities aren't the same type of BattleEntity or if they're the same BattleEntity, then ignore
+            if (behindEntity.EntityType != frontEntity.EntityType || behindEntity == frontEntity)
+                return false;
+            
+            //For players, check if the front entity is the front player
+            if (behindEntity.EntityType == EntityTypes.Player)
+            {
+                if (frontEntity == FrontPlayer)
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                //For enemies, compare the front entity's BattleIndex with the one behind
+                //If the front entity's BattleIndex is lower, then it's in front
+                BattleEnemy behindEnemy = (BattleEnemy)behindEntity;
+                BattleEnemy frontEnemy = (BattleEnemy)frontEntity;
+
+                return (frontEnemy.BattleIndex < behindEnemy.BattleIndex);
+            }
+
+            //For all other cases, return false
+            return false;
+        }
+
+        /// <summary>
+        /// Returns the closest BattleEntity in front of a specified one.
+        /// <para>For players this would return whoever is in front if the entity specified is in the back.
+        /// For enemies this would return the closest enemy in front of the specified one.</para>
+        /// </summary>
+        /// <param name="battleEntity">The BattleEntity to find the entity in front of.</param>
+        /// <returns>The closest BattleEntity in front of the specified one. null if no BattleEntity is in front of the specified one.</returns>
+        public BattleEntity GetEntityInFrontOf(BattleEntity battleEntity)
+        {
+            //Players
+            if (battleEntity.EntityType == EntityTypes.Player)
+            {
+                //If this player is in the back, return the player in the front
+                if (battleEntity == BackPlayer)
+                {
+                    return FrontPlayer;
+                }
+            }
+            //Enemies
+            else if (battleEntity.EntityType == EntityTypes.Enemy)
+            {
+                //Check for an enemy with a lower BattleIndex than this one
+                BattleEnemy enemy = (BattleEnemy)battleEntity;
+                int inFrontEnemy = FindOccupiedEnemyIndex(enemy.BattleIndex - 1, true);
+
+                //We found the enemy in front of this one; return it
+                if (inFrontEnemy >= 0)
+                {
+                    return Enemies[inFrontEnemy];
+                }
+            }
+
+            //There is no BattleEntity in front of this one, so return null
+            return null;
         }
 
         #endregion

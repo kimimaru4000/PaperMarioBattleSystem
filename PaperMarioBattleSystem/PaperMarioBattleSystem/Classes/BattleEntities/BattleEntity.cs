@@ -550,6 +550,17 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Officially starts the BattleEntity's turn.
+        /// </summary>
+        public void StartTurn()
+        {
+            OnTurnStart();
+
+            //Invoke the event
+            TurnStartEvent?.Invoke();
+        }
+
+        /// <summary>
         /// What happens when the entity's turn starts
         /// </summary>
         public virtual void OnTurnStart()
@@ -561,9 +572,6 @@ namespace PaperMarioBattleSystem
             {
                 DefensiveActions[i].actionCommand.EndInput();
             }
-
-            //Invoke the event
-            TurnStartEvent?.Invoke();
         }
 
         /// <summary>

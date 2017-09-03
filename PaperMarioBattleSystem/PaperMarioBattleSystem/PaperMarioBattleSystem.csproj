@@ -248,6 +248,7 @@
     <Compile Include="Classes\SequenceActions\WaitSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForAnimationSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForCommandSeqAction.cs" />
+    <Compile Include="Classes\Sequences\Bow\OuttaSightSecondHalfSequence.cs" />
     <Compile Include="Classes\Sequences\Bow\OuttaSightSequence.cs" />
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />
     <Compile Include="Classes\Sequences\ChargeSequence.cs" />

@@ -17,13 +17,17 @@ namespace PaperMarioBattleSystem
             Name = "Outta Sight";
 
             MoveInfo = new MoveActionData(null, "Hide Mario.", MoveResourceTypes.FP, 2, CostDisplayTypes.Shown,
-                MoveAffectionTypes.Ally, TargetSelectionMenu.EntitySelectionType.First, true,
-                new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering });
+                MoveAffectionTypes.Ally, TargetSelectionMenu.EntitySelectionType.Single, true, null);
 
             SetMoveSequence(new OuttaSightSequence(this));
 
             //Outta Sight does not have an Action Command
             actionCommand = null;
+        }
+
+        public override void OnMenuSelected()
+        {
+            BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, BattleManager.Instance.GetEntityAllies(User, MoveProperties.HeightsAffected));
         }
     }
 }

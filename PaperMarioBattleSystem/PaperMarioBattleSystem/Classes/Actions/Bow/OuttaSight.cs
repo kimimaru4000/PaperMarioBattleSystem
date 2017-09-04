@@ -16,7 +16,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Outta Sight";
 
-            MoveInfo = new MoveActionData(null, "Hide Mario.", MoveResourceTypes.FP, 2, CostDisplayTypes.Shown,
+            MoveInfo = new MoveActionData(null, "Make Mario transparent so he\ncan avoid enemy attacks.", MoveResourceTypes.FP, 2, CostDisplayTypes.Shown,
                 MoveAffectionTypes.Ally, TargetSelectionMenu.EntitySelectionType.Single, true, null);
 
             SetMoveSequence(new OuttaSightSequence(this));

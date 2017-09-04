@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
         public Bow() : base(new PartnerStats(PartnerGlobals.PartnerRanks.Normal, 50, 0, 0))
         {
             Name = "Bow";
-            PartnerDescription = "She can smack enemies!";
+            PartnerDescription = "She can become transparent,\nand her specialty is slapping.";
             PartnerType = Enumerations.PartnerTypes.Bow;
 
             ChangeHeightState(Enumerations.HeightStates.Airborne);

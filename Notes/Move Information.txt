@@ -142,6 +142,8 @@ even after they come back up.
 Negative Status Effects seem to be supressed in effects but not turn count. For example, Poison doesn't hurt Vivian or Mario when they're in Veil at the start of the phase cycle,
 but it progresses Poison's turn count.
 
+After looking more into it, all that happens is that status effects that normally deal damage won't deal damage. For Frozen, the ice block disappears but Mario takes no damage.
+
 General
 -------
 For the Cloud Nine, Water Block, and Turbo Charge Status Effects, it shows the order

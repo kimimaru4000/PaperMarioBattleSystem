@@ -30,6 +30,21 @@ namespace PaperMarioBattleSystem
             AfflictedMessage = "Frozen! Movement will be\nimpossible for a while!";
         }
 
+        protected override void OnAfflict()
+        {
+            base.OnAfflict();
+
+            //Remove the Burn status if the entity was afflicted with Frozen
+            if (EntityAfflicted.EntityProperties.HasStatus(Enumerations.StatusTypes.Burn) == true)
+            {
+                Debug.Log($"{StatusType} was inflicted on an entity afflicted with {Enumerations.StatusTypes.Burn}, negating both effects!");
+                EntityAfflicted.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Burn, true);
+
+                //Also remove Frozen, as these two statuses negate each other
+                EntityAfflicted.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Frozen, true);
+            }
+        }
+
         protected sealed override void OnEnd()
         {
             base.OnEnd();

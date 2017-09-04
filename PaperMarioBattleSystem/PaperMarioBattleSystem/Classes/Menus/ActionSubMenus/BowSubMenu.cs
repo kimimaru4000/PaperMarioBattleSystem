@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
         public BowSubMenu()
         {
             Position = new Vector2(210, 150);
-            BattleActions = new List<MoveAction>() { new OuttaSight() };
+            BattleActions = new List<MoveAction>() { new OuttaSight(), new Veil() };
         }
     }
 }

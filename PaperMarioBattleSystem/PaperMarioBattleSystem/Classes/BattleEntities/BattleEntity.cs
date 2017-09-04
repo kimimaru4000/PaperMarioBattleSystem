@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
 
         public delegate void TurnStarted();
         /// <summary>
-        /// The event invoked at the start of the BattleEntity's turn. This occurs immediately after ending input for DefensiveActions.
+        /// The event invoked at the start of the BattleEntity's turn. This is invoked after all other logic when the turn starts.
         /// </summary>
         public event TurnStarted TurnStartEvent = null;
 

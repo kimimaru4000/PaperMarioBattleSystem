@@ -8,15 +8,15 @@ using Microsoft.Xna.Framework;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The second half of Bow's Outta Sight Sequence.
-    /// <para>This occurs at the start of Bow's next turn through an event in Outta Sight.
+    /// The second half of Vivian's Veil Sequence.
+    /// <para>This occurs at the start of Vivian's next turn through an event in Veil.
     /// It should not be assigned to an action added to a menu.</para>
     /// </summary>
-    public sealed class OuttaSightSecondHalfSequence : Sequence
+    public sealed class VeilSecondHalfSequence : Sequence
     {
         private const double MoveTime = 500d;
 
-        public OuttaSightSecondHalfSequence(MoveAction moveAction) : base(moveAction)
+        public VeilSecondHalfSequence(MoveAction moveAction) : base(moveAction)
         {
 
         }
@@ -26,18 +26,19 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    //Remove the evasion mod and turn transparency back to normal
-                    //NOTE: Find a way to get the original transparency (Ex. Invisible causes additional transparency)
+                    //Remove evasion and other properties
                     BattleEntity allyAffected = EntitiesAffected[0];
+
                     User.RemoveEvasionMod(0d);
                     allyAffected.RemoveEvasionMod(0d);
 
-                    //Turn transparency back
+                    //Remove Invincibility
+                    User.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Invincible);
+                    allyAffected.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Invincible);
+
+                    //Make them visible
                     User.TintColor = Color.White;
                     allyAffected.TintColor = Color.White;
-
-                    //Make the ally play its idle animation
-                    allyAffected.AnimManager.PlayAnimation(EntitiesAffected[0].GetIdleAnim());
 
                     CurSequenceAction = new WaitSeqAction(0d);
 
@@ -54,6 +55,12 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    //Move back up
+                    //NOTE: Move the ally as well - this needs to be added in
+                    CurSequenceAction = new MoveToSeqAction(User.Position - new Vector2(0f, 25f), MoveTime);
+
+                    break;
+                case 1:
                     //Make the user move back to its battle position
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, MoveTime);
 

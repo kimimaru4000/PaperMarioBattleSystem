@@ -82,3 +82,12 @@ When it misses with its main fireball move, the fireball doesn't show up and lit
 Huff N' Puff
 ------------
 When he misses with his damaging air move where he blows at you, you're not required to perform the Action Command involving mashing A.
+
+Yux, Z-Yux, X-Yux
+----------------- 
+They can still take damage from Status Effects such as Poison, Burn, and Frozen if they have a shield up.
+
+Creating a Mini is a BattleEvent that occurs after all Status Effect-related BattleEvents at the start of the phase cycle.
+
+If they don't move for a turn (via Immobilized, Slow, or another Status Effect that prevents movement), they will not create a Mini at the start of the phase cycle.
+This means that performing a move on their turn causes the BattleEvent to occur.

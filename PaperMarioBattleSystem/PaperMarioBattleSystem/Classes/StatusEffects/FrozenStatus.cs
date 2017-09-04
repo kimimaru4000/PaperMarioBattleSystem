@@ -50,7 +50,12 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             //The entity takes 1 Ice damage when Frozen ends
-            EntityAfflicted.TakeDamage(Enumerations.Elements.Ice, IceDamage, true);
+            //Don't damage the BattleEntity if it's Invincible
+            //NOTE: Find a way to route this damage through the damage calculation
+            if (EntityAfflicted.EntityProperties.GetAdditionalProperty<bool>(Enumerations.AdditionalProperty.Invincible) == false)
+            {
+                EntityAfflicted.TakeDamage(Enumerations.Elements.Ice, IceDamage, true);
+            }
         }
 
         public sealed override StatusEffect Copy()

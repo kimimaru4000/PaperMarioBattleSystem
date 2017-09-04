@@ -78,7 +78,7 @@ Bow
 Smack - Deals contact damage (can't hit Pokeys)
 Fan Smack - Doesn't deal contact damage (can hit Pokeys)
 
-Outta Sight - Makes both Mario and Bow Invisible and use up their turns. Also uses up Bow's next turn.
+Outta Sight - Makes both Mario and Bow invisible and use up their turns. Also uses up Bow's next turn.
 
 This behavior occurs because of how partners work in PM. At the end of the player phase, the partner always gets moved to the back since
 only Mario has HP.
@@ -86,6 +86,9 @@ only Mario has HP.
 Interestingly, if used with Repel Gel, Mario is standing instead of in his Guard pose.
 Mario is also even more transparent, which indicates the move adds transparency instead of setting it.
 If Hustle Drink is in effect, it will remove it regardless of when it was used.
+
+Since Status Effects take effect at the start of a character's turn instead of at the start of the phase cycle in PM, Mario takes damage from Poison
+and Status Effects play their status effect ending BattleEvents.
 
 Yoshi
 -----
@@ -143,6 +146,10 @@ Negative Status Effects seem to be supressed in effects but not turn count. For 
 but it progresses Poison's turn count.
 
 After looking more into it, all that happens is that status effects that normally deal damage won't deal damage. For Frozen, the ice block disappears but Mario takes no damage.
+
+Koopatrol
+---------
+Hide - Still takes damage from Status Effects that deal damage, such as Poison and Burn
 
 General
 -------

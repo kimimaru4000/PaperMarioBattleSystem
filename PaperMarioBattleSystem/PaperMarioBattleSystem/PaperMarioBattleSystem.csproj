@@ -461,6 +461,9 @@
     <Content Include="Content\Fonts\TTYD Font.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Fonts\Real TTYD Font.xnb">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Content\PMContent.mgcb" />
   </ItemGroup>
   <ItemGroup>

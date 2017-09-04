@@ -34,6 +34,10 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        /* Credit for the Hey Gorgeous font:
+         * http://www.kevinandamanda.com/fonts/freescrapbookfonts/hey-gorgeous/
+         */
+
         private ContentManager Content { get; set; } = null;
 
         public SpriteFont Font = null;
@@ -44,10 +48,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public SpriteFont PMFont = null;
 
-        /// <summary>
-        /// The font used in Paper Mario The Thousand Year Door (Hey Gorgeous).
-        /// <para>Credit: http://www.kevinandamanda.com/fonts/freescrapbookfonts/hey-gorgeous/ </para>
-        /// </summary>
+        // <summary>
+        // The font used in Paper Mario The Thousand Year Door (Popjoy).
+        // </summary>
         public SpriteFont TTYDFont = null;
 
         private AssetManager()
@@ -62,7 +65,7 @@ namespace PaperMarioBattleSystem
 
             Font = LoadAsset<SpriteFont>("Fonts/Font");
             PMFont = LoadAsset<SpriteFont>("Fonts/PM Font");
-            TTYDFont = LoadAsset<SpriteFont>("Fonts/TTYD Font");
+            TTYDFont = LoadAsset<SpriteFont>("Fonts/Real TTYD Font");
         }
 
         public void Dispose()

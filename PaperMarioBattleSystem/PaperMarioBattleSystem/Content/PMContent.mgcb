@@ -43,3 +43,9 @@
 /processorParam:TextureFormat=Compressed
 /build:SpriteFonts/PM Font.spritefont
 
+#begin SpriteFonts/Real TTYD Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:SpriteFonts/Real TTYD Font.spritefont
+

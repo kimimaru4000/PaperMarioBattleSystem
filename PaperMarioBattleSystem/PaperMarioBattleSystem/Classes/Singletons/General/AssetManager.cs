@@ -48,9 +48,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public SpriteFont PMFont = null;
 
-        // <summary>
-        // The font used in Paper Mario The Thousand Year Door (Popjoy).
-        // </summary>
+        /// <summary>
+        /// The font used in Paper Mario The Thousand Year Door (PopJoyStd-B).
+        /// <para>Credit: https://en.fontke.com/font/10390387/ (Copyright 2003 - Fontworks Japan, Inc.)</para>
+        /// </summary>
         public SpriteFont TTYDFont = null;
 
         private AssetManager()

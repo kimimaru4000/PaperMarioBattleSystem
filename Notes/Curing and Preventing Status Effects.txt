@@ -1,0 +1,52 @@
+Curing and Preventing Status Effects (2/24/17)
+----------------------------------------------
+There are a few ways to cure Status Effects in the Paper Mario games.
+
+TTYD
+----
+-Tasty Tonic
+-Sweet Treat
+-Sweet Feast
+
+These three can cure Status Effects and cure different ones. Sweet Treat and Sweet Feast presumably cure the same Status Effects.
+
+== Tasty Tonic ==
+-Poison
+-Allergic
+-Defense Down
+-Dizzy
+-Confusion
+
+== Sweet Treat/Feast ==
+-Poison
+-Slow
+-Attack Down
+-Defense Down
+-Dizzy
+-Confusion
+
+
+
+Update (9/9/17)
+---------------
+I changed the name of this document to add status prevention as well.
+
+Feeling Fine (TTYD)
+-------------------
+Feeling Fine and Feeling Fine P prevent the following Stauts Effects from being inflicted:
+
+-Electrified
+-Poison
+-Dizzy
+-Confused
+-Immobilized
+-Sleep
+-Soft
+-DEFDown
+-POWDown
+
+Feeling Fine (PM)
+-----------------
+Untested Status Effects due to no enemies with moves that prevent them. Until these are tested, I think it's safe to presume that Feeling Fine prevents them:
+-Paralyzed
+-Injured

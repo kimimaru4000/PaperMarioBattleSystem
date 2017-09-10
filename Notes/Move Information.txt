@@ -106,6 +106,8 @@ For example, a Level 30 Mario that got a full bar in Gale Force against a Hyper 
 Sweet Treat/Sweet Feast
 -----------------------
 -Cures statuses (detailed in the "Curing and Preventing Status Effects" document) regardless of whether you hit anything or not
+-Sweet Treat and Sweet Feast cure the same Status Effects
+-Every big icon for Sweet Feast restores 3 of the stat corresponding to the icon (Mario health, Partner health, or FP)
 
 Clock Out
 ---------

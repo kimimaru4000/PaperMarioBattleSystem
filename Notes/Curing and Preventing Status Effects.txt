@@ -7,15 +7,19 @@ TTYD
 -Tasty Tonic
 -Sweet Treat
 -Sweet Feast
+-Falling water from the stage
 
-These three can cure Status Effects and cure different ones. Sweet Treat and Sweet Feast presumably cure the same Status Effects.
+The first three can cure Status Effects and cure different ones. Sweet Treat and Sweet Feast cure the same Status Effects.
+
+The falling water is extremely hard to test due to a lack of knowledge in triggering it or how to hack it to force it to trigger. As a result,
+it will not be covered until there's a way to reliably test it.
 
 == Tasty Tonic ==
 -Poison
 -Allergic
 -DEFDown
 -Dizzy
--Confusion
+-Confused
 -Frozen
 -Burn
 -Slow
@@ -23,11 +27,11 @@ These three can cure Status Effects and cure different ones. Sweet Treat and Swe
 -Tiny
 -Immobilized
 
-== Sweet Treat/Feast ==
+== Sweet Treat/Sweet Feast ==
 -Poison
 -DEFDown
 -Dizzy
--Confusion
+-Confused
 -Frozen
 -Burn
 -Slow
@@ -42,6 +46,21 @@ PM
 --
 -Tasty Tonic
 -Refresh
+
+Partners cannot use items or Special Moves, so it's not possible to test if these cure Dizzy, Sleep, Frozen, and Stone.
+
+Items and Special Moves cannot be used on partners, so it's not possible to test if these cure Injured.
+
+Enemies have no moves that inflict Immobilized or Paralyzed so there's no way to test curing these statuses. Even if they did,
+it wouldn't be possible to test as mentioned above.
+
+== Tasty Tonic ==
+-Poison
+-Tiny
+
+== Refresh ==
+-Poison
+-Tiny
 
 
 Update (9/9/17)
@@ -66,11 +85,14 @@ Feeling Fine and Feeling Fine P prevent the following Status Effects from being 
 Feeling Fine (PM)
 -----------------
 Feeling Fine prevents the following Status Effects from being inflicted:
--Electrified
 -Poison
 -Dizzy
 -Sleep
+-Tiny
 
+Enemies have no moves that inflict Electrified, Invisible, Fast, and Stone; however, they're not prevented if you use items to inflict them.
+Moreover, when inflicted they always go away on the next turn, which may indicate that they would be prevented otherwise.
+This includes Fast: if a Hustle Drink is used with Feeling Fine on, Mario will have only one turn on his next turn.
 
 Untested Status Effects due to no enemies with moves that inflict them. Until these are tested, it's unknown if Feeling Fine prevents them:
 -Immobilized
@@ -79,3 +101,27 @@ Untested Status Effects due to no enemies with moves that inflict them. Until th
 -KO (from Up & Away)
 -Lifted
 -POWDown
+
+
+Update (9/10/17)
+----------------
+I figured this is the best place to put this.
+
+Stone suppresses the following Status Effects in some way.
+
+"Effect Suppress" means that they don't take effect and/or lose a current lasting effect.
+"Turn Suppress" means that they keep any lasting effects but their turn counts don't increment.
+
+Some statuses are suppressed in both ways.
+
+Effect Suppressed
+-Electrified (loses icon and Mario doesn't have static electricity around him any longer)
+-Poison (Color remains, but no damage each turn)
+
+Turn Suppressed
+-Electrified
+-Poison
+-Invisible
+-Tiny
+
+For the same reasons with Tasty Tonic, we can't test if Stone suppresses Status Effects such as Dizzy, Frozen, Immobilized, Sleep, Paralyzed, and Injured.

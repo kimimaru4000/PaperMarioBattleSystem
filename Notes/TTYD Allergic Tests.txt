@@ -142,3 +142,8 @@ Update 2 (7/28/16)
 -After testing the unused "Fear" Status Effect more, it turns out that it causes the entity to always do 0 damage. Exceptions include
 Special Moves, Items, and Weaknesses. So for example, Mario can use Ice Smash on an Ember and deal 1 damage, even if he has the unused
 "Fear" Status Effect
+
+Update 3 (9/10/17)
+------------------
+I thought I'd update this to fix the inaccurate information. Since the previous update, I have discovered it is a normal Attack Down status that functions as expected.
+It has its own unique splash color, sound, and icon.

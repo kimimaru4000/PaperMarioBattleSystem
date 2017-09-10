@@ -103,6 +103,10 @@ Gale Force (courtesy of Jdaster64) - Effectiveness is based off the following fo
 For example, a Level 30 Mario that got a full bar in Gale Force against a Hyper Goomba:
 1.00 * 80% + (30 - 15)% = 95%
 
+Sweet Treat/Sweet Feast
+-----------------------
+-Cures statuses (detailed in the "Curing and Preventing Status Effects" document) regardless of whether you hit anything or not
+
 Clock Out
 ---------
 -Has a 1x multiplier if the bar is filled at all and a 1.27x multiplier if the bar is full

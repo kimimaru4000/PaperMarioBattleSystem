@@ -13,18 +13,35 @@ These three can cure Status Effects and cure different ones. Sweet Treat and Swe
 == Tasty Tonic ==
 -Poison
 -Allergic
--Defense Down
+-DEFDown
 -Dizzy
 -Confusion
+-Frozen
+-Burn
+-Slow
+-Sleep
+-Tiny
+-Immobilized
 
 == Sweet Treat/Feast ==
 -Poison
--Slow
--Attack Down
--Defense Down
+-DEFDown
 -Dizzy
 -Confusion
+-Frozen
+-Burn
+-Slow
+-Sleep
+-Tiny
+-Immobilized
+-POWDown
+-NoSkills
 
+
+PM
+--
+-Tasty Tonic
+-Refresh
 
 
 Update (9/9/17)
@@ -33,7 +50,7 @@ I changed the name of this document to add status prevention as well.
 
 Feeling Fine (TTYD)
 -------------------
-Feeling Fine and Feeling Fine P prevent the following Stauts Effects from being inflicted:
+Feeling Fine and Feeling Fine P prevent the following Status Effects from being inflicted:
 
 -Electrified
 -Poison
@@ -41,12 +58,24 @@ Feeling Fine and Feeling Fine P prevent the following Stauts Effects from being 
 -Confused
 -Immobilized
 -Sleep
--Soft
 -DEFDown
 -POWDown
+-Tiny
+-KO (from Showstopper, not anything else that KOs like Fright or Gale Force)
 
 Feeling Fine (PM)
 -----------------
-Untested Status Effects due to no enemies with moves that prevent them. Until these are tested, I think it's safe to presume that Feeling Fine prevents them:
+Feeling Fine prevents the following Status Effects from being inflicted:
+-Electrified
+-Poison
+-Dizzy
+-Sleep
+
+
+Untested Status Effects due to no enemies with moves that inflict them. Until these are tested, it's unknown if Feeling Fine prevents them:
+-Immobilized
 -Paralyzed
--Injured
+-Injured (Partners only when taking any damage)
+-KO (from Up & Away)
+-Lifted
+-POWDown

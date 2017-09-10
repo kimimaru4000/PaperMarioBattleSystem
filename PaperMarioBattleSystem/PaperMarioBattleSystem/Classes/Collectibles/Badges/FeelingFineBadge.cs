@@ -31,7 +31,6 @@ namespace PaperMarioBattleSystem
             AddRemoveImmunity(Enumerations.StatusTypes.Confused, true);
             AddRemoveImmunity(Enumerations.StatusTypes.Immobilized, true);
             AddRemoveImmunity(Enumerations.StatusTypes.Sleep, true);
-            AddRemoveImmunity(Enumerations.StatusTypes.Soft, true);
             AddRemoveImmunity(Enumerations.StatusTypes.DEFDown, true);
             AddRemoveImmunity(Enumerations.StatusTypes.POWDown, true);
             AddRemoveImmunity(Enumerations.StatusTypes.Tiny, true);
@@ -46,7 +45,6 @@ namespace PaperMarioBattleSystem
             AddRemoveImmunity(Enumerations.StatusTypes.Confused, false);
             AddRemoveImmunity(Enumerations.StatusTypes.Immobilized, false);
             AddRemoveImmunity(Enumerations.StatusTypes.Sleep, false);
-            AddRemoveImmunity(Enumerations.StatusTypes.Soft, false);
             AddRemoveImmunity(Enumerations.StatusTypes.DEFDown, false);
             AddRemoveImmunity(Enumerations.StatusTypes.POWDown, false);
             AddRemoveImmunity(Enumerations.StatusTypes.Tiny, true);

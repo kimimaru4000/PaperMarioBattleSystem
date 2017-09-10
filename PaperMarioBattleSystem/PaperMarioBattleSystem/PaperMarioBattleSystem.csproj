@@ -326,7 +326,6 @@
     <Compile Include="Classes\StatusEffects\POWUpStatus.cs" />
     <Compile Include="Classes\StatusEffects\SleepStatus.cs" />
     <Compile Include="Classes\StatusEffects\SlowStatus.cs" />
-    <Compile Include="Classes\StatusEffects\SoftStatus.cs" />
     <Compile Include="Classes\StatusEffects\StatusEffect.cs" />
     <Compile Include="Classes\StatusEffects\StoneStatus.cs" />
     <Compile Include="Classes\StatusEffects\TinyStatus.cs" />

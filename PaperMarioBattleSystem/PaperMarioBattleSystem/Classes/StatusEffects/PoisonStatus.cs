@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
         {
             //Don't damage the BattleEntity if it's Invincible
             //NOTE: Find a way to route this damage through the damage calculation
-            if (EntityAfflicted.EntityProperties.GetAdditionalProperty<bool>(Enumerations.AdditionalProperty.Invincible) == false)
+            if (EntityAfflicted.IsInvincible() == false)
             {
                 EntityAfflicted.TakeDamage(Enumerations.Elements.Poison, PoisonDamage, true);
             }

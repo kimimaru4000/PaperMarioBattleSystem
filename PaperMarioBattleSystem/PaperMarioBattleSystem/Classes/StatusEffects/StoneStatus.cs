@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
 
             //Add the NegativeStatusImmune and Invincible MiscProperties
             EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Invincible, true);
+            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
             EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
 
@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
 
             //Remove the NegativeStatusImmune and Invincible MiscProperties
             EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune);
-            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Invincible);
+            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
             //Resume all of the entity's Negative StatusEffects
             EntityAfflicted.SuspendOrResumeAlignmentStatuses(false, StatusAlignments.Negative, StatusType);
@@ -62,7 +62,7 @@ namespace PaperMarioBattleSystem
             base.OnSuspend();
 
             //Remove Invincibility and don't do anything else to avoid Suspending/Resuming conflicts with other StatusEffects
-            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Invincible);
+            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
             EntityAfflicted.AnimManager.PlayAnimation(EntityAfflicted.GetIdleAnim());
         }
@@ -76,7 +76,7 @@ namespace PaperMarioBattleSystem
 
             //Add back the NegativeStatusImmune and Invincible MiscProperties
             EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Invincible, true);
+            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
             EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
         }

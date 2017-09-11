@@ -176,13 +176,40 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// A helper method for adding an integer AdditionalProperty to the BattleEntity.
+        /// </summary>
+        /// <param name="entity">The BattleEntity.</param>
+        /// <param name="additionalProperty">The AdditionalProperty to add. If the BattleEntity already has it, it must have an integer value.</param>
+        /// <param name="addVal">The amount to add to the value of this AdditionalProperty.</param>
+        public static void AddIntAdditionalProperty(this BattleEntity entity, AdditionalProperty additionalProperty, int addVal)
+        {
+            int value = entity.EntityProperties.GetAdditionalProperty<int>(additionalProperty) + addVal;
+            entity.EntityProperties.AddAdditionalProperty(additionalProperty, value);
+        }
+
+        /// <summary>
+        /// A helper method for subtracting an integer AdditionalProperty from a BattleEntity.
+        /// </summary>
+        /// <param name="entity">The BattleEntity.</param>
+        /// <param name="additionalProperty">The AdditionalProperty to subtract from. If the BattleEntity already has it, it must have an integer value.</param>
+        /// <param name="subtractVal">The amount to subtract from the value of this AdditionalProperty.</param>
+        public static void SubtractIntAdditionalProperty(this BattleEntity entity, AdditionalProperty additionalProperty, int subtractVal)
+        {
+            int value = entity.EntityProperties.GetAdditionalProperty<int>(additionalProperty) - subtractVal;
+            entity.EntityProperties.RemoveAdditionalProperty(additionalProperty);
+            if (value > 0)
+            {
+                entity.EntityProperties.AddAdditionalProperty(additionalProperty, value);
+            }
+        }
+
+        /// <summary>
         /// Adds a ShowHP AdditionalProperty to the BattleEntity.
         /// </summary>
         /// <param name="entity">The BattleEntity.</param>
         public static void AddShowHPProperty(this BattleEntity entity)
         {
-            int showHP = entity.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.ShowHP) + 1;
-            entity.EntityProperties.AddAdditionalProperty(AdditionalProperty.ShowHP, showHP);
+            AddIntAdditionalProperty(entity, AdditionalProperty.ShowHP, 1);
         }
 
         /// <summary>
@@ -191,12 +218,17 @@ namespace PaperMarioBattleSystem
         /// <param name="entity">The BattleEntity.</param>
         public static void SubtractShowHPProperty(this BattleEntity entity)
         {
-            int showHP = entity.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.ShowHP) - 1;
-            entity.EntityProperties.RemoveAdditionalProperty(AdditionalProperty.ShowHP);
-            if (showHP > 0)
-            {
-                entity.EntityProperties.AddAdditionalProperty(AdditionalProperty.ShowHP, showHP);
-            }
+            SubtractIntAdditionalProperty(entity, AdditionalProperty.ShowHP, 1);
+        }
+
+        /// <summary>
+        /// Tells if the BattleEntity is Invincible or not.
+        /// </summary>
+        /// <param name="entity">The BattleEntity to check for being Invincible.</param>
+        /// <returns>true if the BattleEntity has the Invincible AdditionalProperty, otherwise false.</returns>
+        public static bool IsInvincible(this BattleEntity entity)
+        {
+            return (entity.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.Invincible) > 0);
         }
 
         #endregion

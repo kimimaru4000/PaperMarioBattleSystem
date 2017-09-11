@@ -33,8 +33,8 @@ namespace PaperMarioBattleSystem
                     allyAffected.RemoveEvasionMod(0d);
 
                     //Remove Invincibility
-                    User.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Invincible);
-                    allyAffected.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Invincible);
+                    User.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
+                    allyAffected.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
                     //Make them visible
                     User.TintColor = Color.White;

@@ -316,7 +316,7 @@ namespace PaperMarioBattleSystem
                 StatusChanceHolder[] victimInflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
 
                 //Check if the Victim is Invincible. If so, ignore all damage and Status Effects
-                if (victim.EntityProperties.GetAdditionalProperty<bool>(AdditionalProperty.Invincible) == true)
+                if (victim.IsInvincible() == true)
                 {
                     scaledVictimDamage = 0;
                     victimElementDamage.InteractionResult = ElementInteractionResult.Damage;
@@ -365,7 +365,7 @@ namespace PaperMarioBattleSystem
                 StatusChanceHolder[] attackerInflictedStatuses = GetFilteredInflictedStatuses(attacker, paybackHolder.StatusesInflicted);
 
                 //Check if the Attacker is Invincible. If so, ignore all damage and Status Effects
-                if (attacker.EntityProperties.GetAdditionalProperty<bool>(AdditionalProperty.Invincible) == true)
+                if (attacker.IsInvincible() == true)
                 {
                     attackerElementDamage.Damage = 0;
                     attackerElementDamage.InteractionResult = ElementInteractionResult.Damage;
@@ -786,7 +786,7 @@ namespace PaperMarioBattleSystem
             protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
             {
                 //Check if the Victim is Invincible. If so, ignore all damage and Status Effects
-                if (StepResult.VictimResult.Entity.EntityProperties.GetAdditionalProperty<bool>(AdditionalProperty.Invincible) == true)
+                if (StepResult.VictimResult.Entity.IsInvincible() == true)
                 {
                     StepResult.VictimResult.TotalDamage = 0;
                     StepResult.VictimResult.ElementResult = ElementInteractionResult.Damage;
@@ -873,7 +873,7 @@ namespace PaperMarioBattleSystem
             protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
             {
                 //Check if the Attacker is Invincible. If so, ignore all damage and Status Effects
-                if (StepResult.AttackerResult.Entity.EntityProperties.GetAdditionalProperty<bool>(AdditionalProperty.Invincible) == true)
+                if (StepResult.AttackerResult.Entity.IsInvincible() == true)
                 {
                     StepResult.AttackerResult.TotalDamage = 0;
                     StepResult.AttackerResult.ElementResult = ElementInteractionResult.Damage;

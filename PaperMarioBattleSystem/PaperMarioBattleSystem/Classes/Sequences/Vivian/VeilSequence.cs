@@ -102,8 +102,8 @@ namespace PaperMarioBattleSystem
 
                     //NOTE: Add Invincibility to prevent both from taking damage from Status Effects
                     //This doesn't seem ideal, but it's the only way we can do this right now
-                    EntityUsing.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Invincible, true);
-                    AllyAffected.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Invincible, true);
+                    EntityUsing.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
+                    AllyAffected.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
                     CurSequenceAction = new WaitSeqAction(0d);
                     break;

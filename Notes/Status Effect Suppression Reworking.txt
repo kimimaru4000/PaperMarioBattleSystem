@@ -1,0 +1,40 @@
+Status Effect Suppression Reworking (9/11/17)
+---------------------------------------------
+The current implementation of suppressing Status Effects causes all statuses to both have their turn counts and effects not affect the entity.
+Furthermore, the helper methods are only for suppressing Status Effects with certain alignments.
+
+Since working on this system, I've learned that in the Paper Mario games there is, far more often than not, an exception to some rule, and many
+rules are handled on a case-by-case basis, so the current approach fails both in accuracy and robustness.
+
+I did some more testing with Stone suppressing Status Effects in PM, and I made the following observations:
+
+"Effect Suppress" means that they don't take effect and/or lose a current lasting effect.
+"Turn Suppress" means that they keep any lasting effects but their turn counts don't increment.
+
+Some statuses are suppressed in both ways.
+
+Effect Suppressed
+-Electrified (loses icon and Mario doesn't have static electricity around him any longer)
+-Poison (Color remains, but no damage each turn)
+
+Turn Suppressed
+-Electrified
+-Poison
+-Invisible
+-Tiny
+
+
+Based on how some of these statuses work when suppressed, we need the ability for any or all of the following to happen while being able to
+keep the Status Effect on the BattleEntity:
+
+-A way to turn off the status icon from displaying
+-A way to turn off visual effects for the status (Ex. static electricity from Electrified)
+-A way to turn off the status' effects (Ex. Poison not dealing damage)
+-A way to stop the status' turn count from incrementing each phase cycle
+
+Currently, the Stone status is the only thing I have found in both Paper Mario games that suppresses Status Effect turn counts.
+Veil suppresses damage from Burn, Poison, and Frozen, but turn counts still progress.
+
+The next focus is how to determine what happens to a status when it gets suppressed. For example, how would we tell Poison
+to only suppress its effects when it's suppressed by Veil and how would we tell it to suppress both effects and turn count
+when suppressed by Stone? What if Mario is inflicted with Stone already and Veil is used on him?

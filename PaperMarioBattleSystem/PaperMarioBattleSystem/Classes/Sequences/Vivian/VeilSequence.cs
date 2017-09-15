@@ -184,7 +184,7 @@ namespace PaperMarioBattleSystem
                 false, null), new VeilSecondHalfSequence(null));
 
             //Start the second half of the sequence
-            EntityUsing.StartAction(veilSecondHalf, AllyAffected);
+            EntityUsing.StartAction(veilSecondHalf, true, AllyAffected);
         }
 
         //Event handler when the ally who is in Veil starts their next turn
@@ -199,7 +199,7 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.ClearMenuStack();
 
             //Make the ally do nothing on each of its turns
-            AllyAffected.StartAction(new NoAction(), null);
+            AllyAffected.StartAction(new NoAction(), true, null);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
-            StartAction(ActionUsed, BattleManager.Instance.GetFrontPlayer());
+            StartAction(ActionUsed, false, BattleManager.Instance.GetFrontPlayer());
         }
 
         public override void TurnUpdate()

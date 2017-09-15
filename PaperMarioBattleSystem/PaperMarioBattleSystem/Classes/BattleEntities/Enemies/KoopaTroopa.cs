@@ -77,7 +77,7 @@ namespace PaperMarioBattleSystem
             }
             else
             {
-                StartAction(ActionUsed, BattleManager.Instance.GetFrontPlayer());
+                StartAction(ActionUsed, false, BattleManager.Instance.GetFrontPlayer());
             }
         }
 
@@ -151,7 +151,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Make the Koopa Troopa do a NoAction instead of directly ending its turn
-            StartAction(new NoAction(), null);
+            StartAction(new NoAction(), true, null);
         }
 
         private void UnFlip()

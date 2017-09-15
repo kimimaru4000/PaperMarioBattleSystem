@@ -38,3 +38,50 @@ Veil suppresses damage from Burn, Poison, and Frozen, but turn counts still prog
 The next focus is how to determine what happens to a status when it gets suppressed. For example, how would we tell Poison
 to only suppress its effects when it's suppressed by Veil and how would we tell it to suppress both effects and turn count
 when suppressed by Stone? What if Mario is inflicted with Stone already and Veil is used on him?
+
+1. For handling Confusion with Veil, we can add a bool parameter to StartAction() in BattleEntity. The resulting signature would be like this:
+
+public void StartAction(MoveAction action, bool ignoreConfusion, params BattleEntity[] targets);
+
+This would enable us to always ignore Confusion when performing the second part of Veil or Outta Sight and when ignoring the hidden/invisible entity's turn.
+
+2. For handling suppressing, we should have the types of suppression in an enum as follows:
+
+public enum StatusSuppressionTypes
+{
+    TurnCount,
+    Effects,
+    VFX,
+    Icon
+}
+
+We'll have two new methods in EntityProperties with the following signatures:
+
+* public void SuppressStatuses(StatusSuppressionTypes, params StatusTypes[]);
+* public void UnsuppressStatuses(StatusSuppressionTypes, params StatusTypes[]);
+
+For convenience we can also have methods for suppressing all but the supplied StatusTypes.
+
+These should be stored in a Dictionary for each StatusEffect as follows:
+
+* Dictionary<StatusSuppressionTypes, int> SuppressionStates;
+
+The reason for a Dictionary as opposed to a bit field or another data type is there can be many sources of suppression. Look at the following example:
+
+-Say Mario is inflicted with Poison for 5 turns. On his next turn, he uses a Stone Cap which causes an Effects and TurnCount suppression on Poison. Say Stone lasts for 5 turns.
+Vivian then uses Veil on Mario, which causes an Effects suppression on Poison. When Vivian comes back up, Mario is still inflicted with Stone and Poison, but coming back up
+removes the Effects suppression on Poison. Now Mario is still inflicted with Stone but can still take damage from Poison.
+
+The Dictionary prevents this by adding and removing a value of 1 when the Status Effect is suppressed and unsuppressed, respectively. If a Dictionary was used in the example
+instead, Mario would still have Effects suppression applied to Poison after coming back up from Veil.
+
+3. When something suppresses Status Effects, I feel the most flexible approach is to just have that thing specify which Status Effects get suppressed and how.
+
+For example, Stone would do something like the following when being inflicted:
+
+EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusType.Invisible, StatusTypes.Tiny);
+EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Effects, Statustypes.Electrified, StatusTypes.Poison);
+EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.VFX, Statustypes.Electrified);
+EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, Statustypes.Electrified);
+
+

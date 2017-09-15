@@ -193,11 +193,12 @@ namespace PaperMarioBattleSystem
         /// <param name="entity">The BattleEntity.</param>
         /// <param name="additionalProperty">The AdditionalProperty to subtract from. If the BattleEntity already has it, it must have an integer value.</param>
         /// <param name="subtractVal">The amount to subtract from the value of this AdditionalProperty.</param>
-        public static void SubtractIntAdditionalProperty(this BattleEntity entity, AdditionalProperty additionalProperty, int subtractVal)
+        /// <param name="removeWhenZeroOrLess">Whether to keep the property removed if the value afterwards is less than or equal to 0.</param>
+        public static void SubtractIntAdditionalProperty(this BattleEntity entity, AdditionalProperty additionalProperty, int subtractVal, bool removeWhenZeroOrLess = true)
         {
             int value = entity.EntityProperties.GetAdditionalProperty<int>(additionalProperty) - subtractVal;
             entity.EntityProperties.RemoveAdditionalProperty(additionalProperty);
-            if (value > 0)
+            if (removeWhenZeroOrLess == false || value > 0)
             {
                 entity.EntityProperties.AddAdditionalProperty(additionalProperty, value);
             }

@@ -9,7 +9,7 @@ using static PaperMarioBattleSystem.StatusGlobals;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Handles numerous BattleEntity properties like weaknesses/resistances to certain Element, and more
+    /// Handles numerous BattleEntity properties like weaknesses/resistances to certain Elements, and more.
     /// </summary>
     public class BattleEntityProperties
     {

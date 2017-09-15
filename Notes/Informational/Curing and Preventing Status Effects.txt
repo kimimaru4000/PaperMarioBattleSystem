@@ -125,3 +125,14 @@ Turn Suppressed
 -Tiny
 
 For the same reasons with Tasty Tonic, we can't test if Stone suppresses Status Effects such as Dizzy, Frozen, Immobilized, Sleep, Paralyzed, and Injured.
+
+Update (9/12/17)
+----------------
+Veil also suppresses Status Effects in different ways:
+
+Effect Suppressed
+-Poison (no damage each turn)
+-Burn (The animation plays, but no damage each turn)
+-Frozen (The animation plays, but no damage when it wears off)
+-Confused (Vivian always comes back up on her next turn, and Mario never does anything on his turn)
+

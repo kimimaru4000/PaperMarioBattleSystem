@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
 
             //Make the entity perform the NoAction
             //It does this instead of directly ending the entity's turn since choosing not to use an item is affected by Confusion
-            BattleManager.Instance.EntityTurn.StartAction(new NoAction(), null);
+            BattleManager.Instance.EntityTurn.StartAction(new NoAction(), false, null);
         }
 
         private void OnChooseNo()

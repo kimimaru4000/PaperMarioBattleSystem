@@ -749,14 +749,17 @@ namespace PaperMarioBattleSystem
         /// The actual action performed may not be the one passed in if the BattleEntity is affected by Confusion.
         /// </summary>
         /// <param name="action">The MoveAction to perform.</param>
+        /// <param name="ignoreConfusion">Whether to ignore the effects of Confusion for this action or not.
+        /// This is often true when a certain action must be performed at a certain time (Ex. Koopas doing nothing when flipped, 
+        /// Veil's second part).</param>
         /// <param name="targets">The BattleEntities the MoveAction targets.</param>
-        public void StartAction(MoveAction action, params BattleEntity[] targets)
+        public void StartAction(MoveAction action, bool ignoreConfusion, params BattleEntity[] targets)
         {
             MoveAction actualAction = action;
             BattleEntity[] actualTargets = targets;
 
             //Check for Confused and handle it appropriately
-            if (EntityProperties.HasAdditionalProperty(AdditionalProperty.ConfusionPercent) == true)
+            if (ignoreConfusion == false && EntityProperties.HasAdditionalProperty(AdditionalProperty.ConfusionPercent) == true)
             {
                 BattleGlobals.ActionHolder holder = HandleConfusion(action, targets);
                 actualAction = holder.Action;

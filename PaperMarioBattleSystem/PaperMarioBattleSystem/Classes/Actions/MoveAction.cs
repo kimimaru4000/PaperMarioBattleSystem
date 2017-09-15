@@ -256,7 +256,7 @@ namespace PaperMarioBattleSystem
         protected void ActionStart(BattleEntity[] targets)
         {
             BattleUIManager.Instance.ClearMenuStack();
-            User.StartAction(this, targets);
+            User.StartAction(this, false, targets);
         }
 
         /// <summary>

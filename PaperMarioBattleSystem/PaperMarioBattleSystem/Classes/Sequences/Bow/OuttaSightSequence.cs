@@ -156,7 +156,7 @@ namespace PaperMarioBattleSystem
                 false, null), new OuttaSightSecondHalfSequence(null));
 
             //Start the second half of the sequence
-            EntityUsing.StartAction(outtaSightSecondHalf, AllyAffected);
+            EntityUsing.StartAction(outtaSightSecondHalf, true, AllyAffected);
         }
 
         //Event handler when the ally who is hidden starts their next turn
@@ -171,7 +171,7 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.ClearMenuStack();
 
             //Make the ally do nothing on each of its turns
-            AllyAffected.StartAction(new NoAction(), null);
+            AllyAffected.StartAction(new NoAction(), true, null);
             AllyAffected.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName);
         }
     }

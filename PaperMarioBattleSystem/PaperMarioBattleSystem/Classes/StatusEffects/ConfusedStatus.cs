@@ -43,12 +43,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent);
+            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent);
         }
 
         protected override void OnEnd()
         {
-            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent);
+            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent, false);
         }
 
         protected override void OnPhaseCycleStart()
@@ -58,12 +58,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnSuspend()
         {
-            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent);
+            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent, false);
         }
 
         protected override void OnResume()
         {
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent);
+            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent);
         }
 
         public override StatusEffect Copy()

@@ -803,6 +803,64 @@ namespace PaperMarioBattleSystem
             return Statuses.Values.ToArray();
         }
 
+        /// <summary>
+        /// Suppresses a set of Status Effects in a particular way.
+        /// </summary>
+        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the Status Effects should be suppressed.</param>
+        /// <param name="statusTypes">The StatusTypes of the Status Effects to suppress.</param>
+        public void SuppressStatuses(StatusSuppressionTypes statusSuppressionType, params StatusTypes[] statusTypes)
+        {
+            //Return if there are no statuses to suppress
+            if (statusTypes == null || statusTypes.Length == 0)
+            {
+                Debug.LogError($"{nameof(statusTypes)} is null or empty!");
+                return;
+            }
+
+            //Go through all the statuses and suppress them
+            for (int i = 0; i < statusTypes.Length; i++)
+            {
+                StatusEffect statusEffect = GetStatus(statusTypes[i]);
+                if (statusEffect != null)
+                {
+                    statusEffect.Suppress(statusSuppressionType);
+                }
+                else
+                {
+                    Debug.LogWarning($"Could not find Status {statusTypes[i]} on {Entity.Name} to suppress!");
+                }
+            }
+        }
+
+        /// <summary>
+        /// Unsuppresses a set of Status Effects in a particular way.
+        /// </summary>
+        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the Status Effects should be unsuppressed.</param>
+        /// <param name="statusTypes">The StatusTypes of the Status Effects to unsuppress.</param>
+        public void UnsuppressStatuses(StatusSuppressionTypes statusSuppressionType, params StatusTypes[] statusTypes)
+        {
+            //Return if there are no statuses to unsuppress
+            if (statusTypes == null || statusTypes.Length == 0)
+            {
+                Debug.LogError($"{nameof(statusTypes)} is null or empty!");
+                return;
+            }
+
+            //Go through all the statuses and unsuppress them
+            for (int i = 0; i < statusTypes.Length; i++)
+            {
+                StatusEffect statusEffect = GetStatus(statusTypes[i]);
+                if (statusEffect != null)
+                {
+                    statusEffect.Unsuppress(statusSuppressionType);
+                }
+                else
+                {
+                    Debug.LogWarning($"Could not find Status {statusTypes[i]} on {Entity.Name} to unsuppress!");
+                }
+            }
+        }
+
         #endregion
 
         #region Status Property Methods

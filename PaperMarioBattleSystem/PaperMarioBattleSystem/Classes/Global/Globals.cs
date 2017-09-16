@@ -928,6 +928,14 @@ namespace PaperMarioBattleSystem
             KO, Fright, Blown, Lifted
         }
 
+        /// <summary>
+        /// The types of ways Status Effects can be suppressed.
+        /// </summary>
+        public enum StatusSuppressionTypes
+        {
+            TurnCount, Effects, VFX, Icon
+        }
+
         public enum AdditionalProperty
         {
             PositiveStatusImmune,

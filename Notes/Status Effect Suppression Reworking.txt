@@ -75,6 +75,11 @@ removes the Effects suppression on Poison. Now Mario is still inflicted with Sto
 The Dictionary prevents this by adding and removing a value of 1 when the Status Effect is suppressed and unsuppressed, respectively. If a Dictionary was used in the example
 instead, Mario would still have Effects suppression applied to Poison after coming back up from Veil.
 
+Finally, the base StatusEffect will have the following new methods:
+
+* public void Suppress(StatusSuppressionTypes);
+* public void Unsuppress(StatusSuppressionTypes);
+
 3. When something suppresses Status Effects, I feel the most flexible approach is to just have that thing specify which Status Effects get suppressed and how.
 
 For example, Stone would do something like the following when being inflicted:
@@ -83,5 +88,3 @@ EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.TurnCou
 EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Effects, Statustypes.Electrified, StatusTypes.Poison);
 EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.VFX, Statustypes.Electrified);
 EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, Statustypes.Electrified);
-
-

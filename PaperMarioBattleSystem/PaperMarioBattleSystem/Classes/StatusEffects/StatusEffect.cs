@@ -64,6 +64,11 @@ namespace PaperMarioBattleSystem
         public BattleEntity EntityAfflicted { get; private set; } = null;
 
         /// <summary>
+        /// The ways the StatusEffect is suppressed.
+        /// </summary>
+        private readonly Dictionary<StatusSuppressionTypes, int> SuppressionStates = new Dictionary<StatusSuppressionTypes, int>();
+
+        /// <summary>
         /// Tells whether the StatusEffect is Suspended or not
         /// </summary>
         public bool Suspended
@@ -252,6 +257,68 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <returns>A deep copy of this StatusEffect</returns>
         public abstract StatusEffect Copy();
+
+        /// <summary>
+        /// Suppresses the Status Effect in a particular way.
+        /// </summary>
+        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the Status Effect should be suppressed.</param>
+        public void Suppress(StatusSuppressionTypes statusSuppressionType)
+        {
+            //If this Status Effect isn't suppressed this way, add a new entry
+            if (IsSuppressed(statusSuppressionType) == false)
+            {
+                SuppressionStates.Add(statusSuppressionType, 0);
+
+                //Tell this Status Effect to suppress itself in this way the first time
+
+            }
+
+            //Add to the number of times this Status Effect is suppressed in this way
+            SuppressionStates[statusSuppressionType]++;
+
+            int value = SuppressionStates[statusSuppressionType];
+            Debug.Log($"Status {StatusType} was suppressed by {statusSuppressionType} on {EntityAfflicted.Name} {value} time(s)!");
+        }
+
+        /// <summary>
+        /// Unsuppresses the Status Effect in a particular way.
+        /// </summary>
+        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the Status Effect should be unsuppressed.</param>
+        public void Unsuppress(StatusSuppressionTypes statusSuppressionType)
+        {
+            //If this Status Effect isn't suppressed in this way, there's nothing to unsuppress, so return
+            if (IsSuppressed(statusSuppressionType) == false)
+            {
+                Debug.LogWarning($"{StatusType} on {EntityAfflicted.Name} is not {statusSuppressionType} suppressed, so it cannot be unsuppressed!");
+                return;
+            }
+
+            //Subtract from the number of times this Status Effect is suppressed in this way
+            SuppressionStates[statusSuppressionType]--;
+
+            int value = SuppressionStates[statusSuppressionType];
+
+            //Check if this Status Effect should no longer be suppressed in this way
+            if (SuppressionStates[statusSuppressionType] <= 0)
+            {
+                SuppressionStates.Remove(statusSuppressionType);
+
+                //Tell this Status Effect to unsuppress itself in this way
+
+            }
+
+            Debug.Log($"Status {StatusType} was unsuppressed by {statusSuppressionType} on {EntityAfflicted.Name}. {value} suppressions of this type remain!");
+        }
+
+        /// <summary>
+        /// Tells whether the Status Effect is suppressed in a certain way or not.
+        /// </summary>
+        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the Status Effect is suppressed.</param>
+        /// <returns>true if the Status Effect is suppressed in this way, otherwise false.</returns>
+        protected bool IsSuppressed(StatusSuppressionTypes statusSuppressionType)
+        {
+            return SuppressionStates.ContainsKey(statusSuppressionType);
+        }
 
         /// <summary>
         /// Draws information about the Status Effect, including its icon and turn count.

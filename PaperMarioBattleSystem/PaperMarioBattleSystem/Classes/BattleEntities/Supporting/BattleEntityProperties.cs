@@ -753,7 +753,7 @@ namespace PaperMarioBattleSystem
 
             string turnMessage = status.TotalDuration.ToString();
             if (status.IsInfinite == true) turnMessage = "Infinite";
-            Debug.LogWarning($"Removed the {statusType} Status on {Entity.Name} after being inflicted for {turnMessage} turns!");
+            Debug.LogWarning($"Removed the {statusType} Status on {Entity.Name} which was inflicted for {turnMessage} turns!");
         }
 
         /// <summary>

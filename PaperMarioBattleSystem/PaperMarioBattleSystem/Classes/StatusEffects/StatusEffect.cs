@@ -140,6 +140,20 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void IncrementTurns()
         {
+            //Handle problems with this method occurring after the status has ended
+            if (Ended == true)
+            {
+                string entityName = EntityAfflicted?.Name ?? "N/A";
+
+                Debug.LogError($"Attempting to increment turns for {StatusType} on {entityName} after it has ended!");
+
+                //If the entity has already been cleared, return since there's no way to remove the status without the reference
+                if (EntityAfflicted == null)
+                {
+                    return;
+                }
+            }
+
             //Print this message if we somehow reached this method when the StatusEffect was already done
             //Don't return because we still want to remove it
             if (IsFinished == true)

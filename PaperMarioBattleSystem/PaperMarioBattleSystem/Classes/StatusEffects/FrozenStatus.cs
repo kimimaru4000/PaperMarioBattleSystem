@@ -30,6 +30,28 @@ namespace PaperMarioBattleSystem
             AfflictedMessage = "Frozen! Movement will be\nimpossible for a while!";
         }
 
+        protected override void OnPhaseCycleStart()
+        {
+            //The entity takes 1 Ice damage when Frozen ends due to turn count
+            //Check if it's Effects suppressed first
+            if (IsSuppressed(Enumerations.StatusSuppressionTypes.Effects) == false)
+            {
+                //If it's not infinite and not suppressed by turn count, we must be incrementing the turns
+                if (IsInfinite == false && IsSuppressed(Enumerations.StatusSuppressionTypes.TurnCount) == false)
+                {
+                    int lastTurn = TurnsPassed + 1;
+
+                    //If we're about to end the status, damage the entity
+                    if (lastTurn >= TotalDuration)
+                    {
+                        EntityAfflicted.TakeDamage(Enumerations.Elements.Ice, IceDamage, true);
+                    }
+                }
+            }
+
+            base.OnPhaseCycleStart();
+        }
+
         protected override void OnAfflict()
         {
             base.OnAfflict();
@@ -48,14 +70,6 @@ namespace PaperMarioBattleSystem
         protected sealed override void OnEnd()
         {
             base.OnEnd();
-
-            //The entity takes 1 Ice damage when Frozen ends
-            //NOTE: Make this occur in OnPhaseCycleStart() on Frozen's last turn right before progressing the final turn
-            //This way if Frozen is cured, via Tasty Tonic, Sweet Treat, or other means, it won't deal damage
-            if (IsSuppressed(Enumerations.StatusSuppressionTypes.Effects) == false)
-            {
-                EntityAfflicted.TakeDamage(Enumerations.Elements.Ice, IceDamage, true);
-            }
         }
 
         public sealed override StatusEffect Copy()

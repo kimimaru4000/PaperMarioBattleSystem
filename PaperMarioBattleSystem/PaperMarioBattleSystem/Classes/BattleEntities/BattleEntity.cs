@@ -847,8 +847,8 @@ namespace PaperMarioBattleSystem
                     StatusEffect status = statuses[i];
                     CroppedTexture2D texture = status.StatusIcon;
 
-                    //Don't draw the status if it doesn't have an icon
-                    if (texture == null || texture.Tex == null)
+                    //Don't draw the status if it doesn't have an icon or if it's Icon suppressed
+                    if (texture == null || texture.Tex == null || status.IsSuppressed(StatusSuppressionTypes.Icon) == true)
                     {
                         continue;
                     }

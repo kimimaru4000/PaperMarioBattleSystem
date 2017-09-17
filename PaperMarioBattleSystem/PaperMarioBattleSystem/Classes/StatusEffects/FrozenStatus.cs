@@ -50,9 +50,9 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             //The entity takes 1 Ice damage when Frozen ends
-            //Don't damage the BattleEntity if it's Invincible
-            //NOTE: Find a way to route this damage through the damage calculation
-            if (EntityAfflicted.IsInvincible() == false)
+            //NOTE: Make this occur in OnPhaseCycleStart() on Frozen's last turn right before progressing the final turn
+            //This way if Frozen is cured, via Tasty Tonic, Sweet Treat, or other means, it won't deal damage
+            if (IsSuppressed(Enumerations.StatusSuppressionTypes.Effects) == false)
             {
                 EntityAfflicted.TakeDamage(Enumerations.Elements.Ice, IceDamage, true);
             }

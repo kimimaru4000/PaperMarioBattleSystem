@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
 
         protected sealed override void OnPhaseCycleStart()
         {
-            IncrementTurns();
+            ProgressTurnCount();
         }
 
         protected sealed override void OnSuppress(StatusSuppressionTypes statusSuppressionType)

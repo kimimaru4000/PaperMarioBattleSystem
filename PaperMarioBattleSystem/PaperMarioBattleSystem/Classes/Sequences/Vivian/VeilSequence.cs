@@ -100,10 +100,9 @@ namespace PaperMarioBattleSystem
                     EntityUsing.AddEvasionMod(0d);
                     AllyAffected.AddEvasionMod(0d);
 
-                    //NOTE: Add Invincibility to prevent both from taking damage from Status Effects
-                    //This doesn't seem ideal, but it's the only way we can do this right now
-                    EntityUsing.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
-                    AllyAffected.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
+                    //Add Effects suppression to the Poison, Burn, and Frozen Status Effects
+                    EntityUsing.EntityProperties.SuppressStatuses(Enumerations.StatusSuppressionTypes.Effects, Enumerations.StatusTypes.Poison, Enumerations.StatusTypes.Burn, Enumerations.StatusTypes.Frozen);
+                    AllyAffected.EntityProperties.SuppressStatuses(Enumerations.StatusSuppressionTypes.Effects, Enumerations.StatusTypes.Poison, Enumerations.StatusTypes.Burn, Enumerations.StatusTypes.Frozen);
 
                     CurSequenceAction = new WaitSeqAction(0d);
                     break;

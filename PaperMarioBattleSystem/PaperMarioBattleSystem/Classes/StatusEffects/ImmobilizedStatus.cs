@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
 
             AfflictedMessage = "Immobilized! Movement will\nbe impossible for a while!";
         }
-
+        
         protected override void OnAfflict()
         {
             //Prevent the entity from moving on affliction and mark it as using up all of its turns
@@ -54,11 +54,14 @@ namespace PaperMarioBattleSystem
 
         protected override void OnPhaseCycleStart()
         {
-            IncrementTurns();
-            if (IsFinished == false)
+            ProgressTurnCount();
+            if (IsSuppressed(Enumerations.StatusSuppressionTypes.Effects) == false)
             {
-                EntityAfflicted.SetMaxTurns(0);
-                Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");
+                if (IsFinished == false)
+                {
+                    EntityAfflicted.SetMaxTurns(0);
+                    Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");
+                }
             }
         }
 

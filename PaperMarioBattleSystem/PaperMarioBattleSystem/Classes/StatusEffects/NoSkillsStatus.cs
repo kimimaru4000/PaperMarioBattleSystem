@@ -76,7 +76,7 @@ namespace PaperMarioBattleSystem
             else
             {
                 Debug.LogError($"{noSkills.CategoryDisabled} moves are somehow ENABLED for {EntityAfflicted.Name} but " +
-                    $"ALREADY in the {nameof(CategoryDisabled)} dictionary?! This must mean that this status was somehow Refreshed while Suspended. FIX IT!");
+                    $"ALREADY in the {nameof(CategoryDisabled)} dictionary?! This must mean that this status was somehow Refreshed while suppressed. FIX IT!");
             }
         }
 
@@ -108,32 +108,35 @@ namespace PaperMarioBattleSystem
 
         protected override void OnPhaseCycleStart()
         {
-            //Go through each disabled move category and progress their turn counts
-            KeyValuePair<MoveCategories, int>[] moveCategories = CategoriesDisabled.ToArray();
-            for (int i = 0; i < moveCategories.Length; i++)
+            if (IsSuppressed(StatusSuppressionTypes.TurnCount) == false)
             {
-                MoveCategories category = moveCategories[i].Key;
-                CategoriesDisabled[category]--;
-
-                //Get the number of turns remaining for this disabled category
-                int turnsRemaining = CategoriesDisabled[category];
-
-                //If there are no turns left for this category, re-enable it
-                if (turnsRemaining <= 0)
+                //Go through each disabled move category and progress their turn counts
+                KeyValuePair<MoveCategories, int>[] moveCategories = CategoriesDisabled.ToArray();
+                for (int i = 0; i < moveCategories.Length; i++)
                 {
-                    CategoriesDisabled.Remove(category);
-                    EntityAfflicted.EntityProperties.EnableMoveCategory(category);
+                    MoveCategories category = moveCategories[i].Key;
+                    CategoriesDisabled[category]--;
+
+                    //Get the number of turns remaining for this disabled category
+                    int turnsRemaining = CategoriesDisabled[category];
+
+                    //If there are no turns left for this category, re-enable it
+                    if (turnsRemaining <= 0)
+                    {
+                        CategoriesDisabled.Remove(category);
+                        EntityAfflicted.EntityProperties.EnableMoveCategory(category);
+                    }
                 }
             }
 
-            IncrementTurns();
+            ProgressTurnCount();
         }
 
         protected override void OnSuppress(StatusSuppressionTypes statusSuppressionType)
         {
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                //Immediately re-enable all categories on suspend
+                //Immediately re-enable all categories when suppressed
                 foreach (KeyValuePair<MoveCategories, int> moveCategory in CategoriesDisabled)
                 {
                     EntityAfflicted.EntityProperties.EnableMoveCategory(moveCategory.Key);
@@ -145,7 +148,7 @@ namespace PaperMarioBattleSystem
         {
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                //Immediately re-disable all categories on resume
+                //Immediately re-disable all categories when unsuppressed
                 foreach (KeyValuePair<MoveCategories, int> moveCategory in CategoriesDisabled)
                 {
                     EntityAfflicted.EntityProperties.DisableMoveCategory(moveCategory.Key);

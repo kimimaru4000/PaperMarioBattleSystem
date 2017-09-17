@@ -54,8 +54,11 @@ namespace PaperMarioBattleSystem
 
         protected override void OnPhaseCycleStart()
         {
-            EntityAfflicted.HealHP(AmountHealed);
-            IncrementTurns();
+            if (IsSuppressed(Enumerations.StatusSuppressionTypes.Effects) == false)
+            {
+                EntityAfflicted.HealHP(AmountHealed);
+            }
+            ProgressTurnCount();
         }
 
         protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)

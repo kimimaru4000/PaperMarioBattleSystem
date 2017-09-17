@@ -90,12 +90,6 @@ This way, we call the wrapper method and if the Status Effect is suppressed in t
 to act uniform for all Status Effects.
 
 * protected void ProgressTurnCount(); - Wrapper of IncrementTurns(). Won't call IncrementTurns() if TurnCount suppressed
-* protected abstract void HandleEffects(); - Actually performs the effects of the Status Effect (Ex. dealing damage for Poison, decreasing Attack for Tiny)
-* protected abstract void HandleVFX(); - Handles applying any VFX of the effect (Ex. Transparency for Invisible)
-* public void DrawStatus(Vector2, float, float); - Wrapper of DrawStatusInfo(Vector2, float, float). Won't call DrawStatusInfo() if Icon suppressed
-
-* protected void PerformEffects(); - Wrapper of HandleEffects(). Won't call HandleEffects() if Effects suppressed
-* protected void ShowVFX(); - Wrapper of HandleVFX(). Won't call HandleVFX() if VFX suppressed
 
 The old suspended methods, fields, and properties will be removed:
 
@@ -103,6 +97,9 @@ The old suspended methods, fields, and properties will be removed:
 * private bool IsSuspended;
 * protected abstract void OnSuspend();
 * protected abstract void OnResume();
+
+Each Status Effect should handle when its effects or VFX are applied by individually checking for suppression of the appropriate type.
+This is what I feel is the best approach, as the Status Effects are all so different.
 
 3. When something suppresses Status Effects, I feel the most flexible approach is to just have that thing specify which Status Effects get suppressed and how.
 

@@ -49,19 +49,22 @@ namespace PaperMarioBattleSystem
 
         protected override void OnPhaseCycleStart()
         {
-            IncrementTurns();
+            ProgressTurnCount();
 
-            if (IsFinished == false)
+            if (IsSuppressed(Enumerations.StatusSuppressionTypes.Effects) == false)
             {
-                //If the entity shouldn't move this turn, set its max turns to 0
-                if (PreventMovement == true)
+                if (IsFinished == false)
                 {
-                    EntityAfflicted.SetMaxTurns(0);
-                    Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");
-                }
+                    //If the entity shouldn't move this turn, set its max turns to 0
+                    if (PreventMovement == true)
+                    {
+                        EntityAfflicted.SetMaxTurns(0);
+                        Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");
+                    }
 
-                //Flip the flag telling whether the entity can move next turn or not
-                PreventMovement = !PreventMovement;
+                    //Flip the flag telling whether the entity can move next turn or not
+                    PreventMovement = !PreventMovement;
+                }
             }
         }
 

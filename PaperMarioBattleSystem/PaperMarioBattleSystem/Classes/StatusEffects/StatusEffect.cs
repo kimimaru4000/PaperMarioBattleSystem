@@ -138,7 +138,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Increments the number of turns the StatusEffect has been active and removes it from the entity afflicted when finished
         /// </summary>
-        protected void IncrementTurns()
+        private void IncrementTurns()
         {
             //Print this message if we somehow reached this method when the StatusEffect was already done
             //Don't return because we still want to remove it
@@ -187,25 +187,6 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Fully unsuppresses the Status Effect.
-        /// <para>This is called when the Status Effect is ended.</para>
-        /// </summary>
-        private void FullyUnsuppress()
-        {
-            StatusSuppressionTypes[] suppressionTypes = SuppressionStates.Keys.ToArray();
-            for (int i = 0; i < suppressionTypes.Length; i++)
-            {
-                //Unsuppress it the number of times indicated so it goes through the same code as it would normally
-                int suppressionTimes = SuppressionStates[suppressionTypes[i]];
-
-                for (int j = 0; j < suppressionTimes; j++)
-                {
-                    Unsuppress(suppressionTypes[i]);
-                }
-            }
-        }
-
-        /// <summary>
         /// Applies the StatusEffect's effects to the entity at the start of the phase cycle
         /// </summary>
         public void PhaseCycleStart()
@@ -214,12 +195,27 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What the StatusEffect does to the entity when it's applied or resumed
+        /// Progresses the StatusEffect's turn count.
+        /// <para>If the StatusEffect is TurnCount suppressed, its turn count won't be incremented.</para>
+        /// </summary>
+        protected void ProgressTurnCount()
+        {
+            if (IsSuppressed(StatusSuppressionTypes.TurnCount) == true)
+            {
+                Debug.Log($"{StatusType} on {EntityAfflicted.Name} is suppressed by TurnCount, so it won't increment turns");
+                return;
+            }
+
+            IncrementTurns();
+        }
+
+        /// <summary>
+        /// What the StatusEffect does to the entity when it's applied
         /// </summary>
         protected abstract void OnAfflict();
 
         /// <summary>
-        /// What the StatusEffect does to the entity when it wears off or suspended
+        /// What the StatusEffect does to the entity when it wears off
         /// </summary>
         protected abstract void OnEnd();
 
@@ -303,14 +299,36 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the Status Effect is suppressed.</param>
         /// <returns>true if the Status Effect is suppressed in this way, otherwise false.</returns>
-        protected bool IsSuppressed(StatusSuppressionTypes statusSuppressionType)
+        public bool IsSuppressed(StatusSuppressionTypes statusSuppressionType)
         {
             return SuppressionStates.ContainsKey(statusSuppressionType);
         }
 
         /// <summary>
+        /// Fully unsuppresses the Status Effect.
+        /// <para>This is called when the Status Effect is ended to ensure it ends properly.</para>
+        /// </summary>
+        private void FullyUnsuppress()
+        {
+            StatusSuppressionTypes[] suppressionTypes = SuppressionStates.Keys.ToArray();
+            for (int i = 0; i < suppressionTypes.Length; i++)
+            {
+                //Unsuppress it the number of times indicated so it goes through the same code as it would normally
+                int suppressionTimes = SuppressionStates[suppressionTypes[i]];
+
+                for (int j = 0; j < suppressionTimes; j++)
+                {
+                    Unsuppress(suppressionTypes[i]);
+                }
+            }
+        }
+
+        /// <summary>
         /// Draws information about the Status Effect, including its icon and turn count.
         /// </summary>
+        /// <param name="iconPos">The position to draw the StatusEffect's information.</param>
+        /// <param name="depth">The rendering depth to draw the StatusEffect's information at.</param>
+        /// <param name="turnStringDepth">The rendering depth to draw the StatusEffect's remaining turn count at.</param>
         public virtual void DrawStatusInfo(Vector2 iconPos, float depth, float turnStringDepth)
         {
             //Don't draw the status if it doesn't have an icon

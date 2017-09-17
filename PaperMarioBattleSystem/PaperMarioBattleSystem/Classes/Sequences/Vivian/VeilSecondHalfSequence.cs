@@ -32,9 +32,9 @@ namespace PaperMarioBattleSystem
                     User.RemoveEvasionMod(0d);
                     allyAffected.RemoveEvasionMod(0d);
 
-                    //Remove Invincibility
-                    User.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
-                    allyAffected.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
+                    //Remove Effects suppression from the Poison, Burn, and Frozen Status Effects
+                    User.EntityProperties.UnsuppressStatuses(Enumerations.StatusSuppressionTypes.Effects, Enumerations.StatusTypes.Poison, Enumerations.StatusTypes.Burn, Enumerations.StatusTypes.Frozen);
+                    allyAffected.EntityProperties.UnsuppressStatuses(Enumerations.StatusSuppressionTypes.Effects, Enumerations.StatusTypes.Poison, Enumerations.StatusTypes.Burn, Enumerations.StatusTypes.Frozen);
 
                     //Make them visible
                     User.TintColor = Color.White;

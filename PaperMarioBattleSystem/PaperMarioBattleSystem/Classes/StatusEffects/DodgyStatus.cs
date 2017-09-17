@@ -44,7 +44,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnPhaseCycleStart()
         {
-            IncrementTurns();
+            ProgressTurnCount();
         }
 
         protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)

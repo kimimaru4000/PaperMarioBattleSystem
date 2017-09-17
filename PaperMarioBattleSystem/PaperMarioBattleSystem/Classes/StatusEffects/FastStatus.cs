@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
         {
             EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
             Debug.Log($"{StatusType} set MaxTurns to {EntityAfflicted.BaseTurns + AdditionalTurns} for {EntityAfflicted.Name}");
-            IncrementTurns();
+            ProgressTurnCount();
         }
 
         protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)

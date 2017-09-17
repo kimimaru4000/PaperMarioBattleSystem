@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Stone Status Effect.
     /// The entity afflicted with it is immobilized and immune to damage and negative StatusEffects.
-    /// The entity also has its negative StatusEffects suppressed until it ends.
+    /// The entity also has several StatusEffects suppressed in several ways until it ends.
     /// <para>This has a Positive Alignment because entities that attack an entity afflicted with this basically waste their turns.</para>
     /// </summary>
     public sealed class StoneStatus : ImmobilizedStatus
@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified);
 
             //Add the NegativeStatusImmune and Invincible MiscProperties
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
+            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
             EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
             EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             //Remove the NegativeStatusImmune and Invincible MiscProperties
-            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune);
+            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
             EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
             //Unsuppress the statuses it suppressed in this way
@@ -72,7 +72,7 @@ namespace PaperMarioBattleSystem
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
                 //Remove the NegativeStatusImmune and Invincible MiscProperties
-                EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune);
+                EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
                 EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
                 //Unsuppress the statuses it suppressed in this way
@@ -100,7 +100,7 @@ namespace PaperMarioBattleSystem
                 EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified);
 
                 //Add the NegativeStatusImmune and Invincible MiscProperties
-                EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
+                EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
                 EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
                 EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);

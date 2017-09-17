@@ -35,31 +35,31 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             //Make the entity immune to all StatusEffects
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, true);
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, true);
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
+            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, 1);
+            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, 1);
+            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
         }
 
         protected override void OnEnd()
         {
             //Remove the StatusEffect immunities
-            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune);
-            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune);
-            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune);
+            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, 1);
+            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, 1);
+            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
         }
 
         protected override void OnPhaseCycleStart()
         {
-            IncrementTurns();
+            ProgressTurnCount();
         }
 
         protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune);
-                EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune);
-                EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune);
+                EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, 1);
+                EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, 1);
+                EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
             }
         }
 
@@ -67,9 +67,9 @@ namespace PaperMarioBattleSystem
         {
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, true);
-                EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, true);
-                EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
+                EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, 1);
+                EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, 1);
+                EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
             }
         }
 

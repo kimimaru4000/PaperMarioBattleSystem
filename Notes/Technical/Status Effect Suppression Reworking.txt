@@ -109,3 +109,7 @@ EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.TurnCou
 EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
 EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
 EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified);
+
+Update (9/17/17)
+----------------
+This has been implemented and works as intended.

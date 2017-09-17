@@ -37,3 +37,14 @@ Description: Reduces the SP that Special Moves use by 1.
 Notes: The high BP cost correlates to how good the Badge is. This Badge would actually reduce the SP Special Moves use by 100,
 so the "1" in the description represents one bar/circle of Star Power.
 A Special Move cannot go below the minimum 100 SP requirement.
+
+
+Item Charge
+-----------
+BP: 6
+Description: Allows Mario's Charge to increase the effectiveness of his items.
+
+Notes: Healing items have their healing increased by the Charge amount. Damage items have their damage increased by the Charge amount,
+and Status items increase their turn counts by the Charge amount. Status curing items such as Tasty Tonic act the same, unless they
+also have one of the above effects.
+

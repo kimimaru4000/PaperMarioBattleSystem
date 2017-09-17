@@ -65,17 +65,23 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        protected override void OnSuspend()
+        protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+            }
         }
 
-        protected override void OnResume()
+        protected override void OnUnsuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            if (PreventMovement == true)
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                EntityAfflicted.SetMaxTurns(0);
-                EntityAfflicted.SetTurnsUsed(EntityAfflicted.MaxTurns);
+                if (PreventMovement == true)
+                {
+                    EntityAfflicted.SetMaxTurns(0);
+                    EntityAfflicted.SetTurnsUsed(EntityAfflicted.MaxTurns);
+                }
             }
         }
 

@@ -136,46 +136,6 @@ namespace PaperMarioBattleSystem
         #region BattleEntity Extensions
 
         /// <summary>
-        /// Suspends or Resumes all StatusEffects on the BattleEntity
-        /// </summary>
-        /// <param name="entity">The BattleEntity</param>
-        /// <param name="suspended">true to Suspend the StatusEffects, false to Resume them</param>
-        /// <param name="exclusion">A StatusType to exclude.
-        /// This is often the StatusType of the StatusEffect that suspended or resumed the other StatusEffects</param>
-        public static void SuspendOrResumeStatuses(this BattleEntity entity, bool suspended, StatusTypes exclusion)
-        {
-            StatusEffect[] statuses = entity.EntityProperties.GetStatuses();
-            for (int i = 0; i < statuses.Length; i++)
-            {
-                if (statuses[i].StatusType != exclusion)
-                {
-                    statuses[i].Suspended = suspended;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Suspends or Resumes all StatusEffects with a particular StatusAlignment on the BattleEntity
-        /// </summary>
-        /// <param name="entity">The BattleEntity</param>
-        /// <param name="suspended">true to Suspend the StatusEffects, false to Resume them</param>
-        /// <param name="alignment">The StatusAlignment to Suspend or Resume</param>
-        /// <param name="exclusion">A StatusType to exclude.
-        /// This is often the StatusType of the StatusEffect that suspended or resumed the other StatusEffects</param>
-        public static void SuspendOrResumeAlignmentStatuses(this BattleEntity entity, bool suspended, StatusEffect.StatusAlignments alignment,
-            StatusTypes exclusion)
-        {
-            StatusEffect[] statuses = entity.EntityProperties.GetStatuses();
-            for (int i = 0; i < statuses.Length; i++)
-            {
-                if (statuses[i].Alignment == alignment && statuses[i].StatusType != exclusion)
-                {
-                    statuses[i].Suspended = suspended;
-                }
-            }
-        }
-
-        /// <summary>
         /// A helper method for adding an integer AdditionalProperty to the BattleEntity.
         /// </summary>
         /// <param name="entity">The BattleEntity.</param>

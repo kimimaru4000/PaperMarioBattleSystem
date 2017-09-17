@@ -50,12 +50,12 @@ namespace PaperMarioBattleSystem
             IncrementTurns();
         }
 
-        protected override void OnSuspend()
+        protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
 
         }
 
-        protected override void OnResume()
+        protected override void OnUnsuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
 
         }

@@ -41,12 +41,12 @@ namespace PaperMarioBattleSystem
         }
 
         //KO cannot be suspended, as it instantly kills any entity afflicted with it
-        protected sealed override void OnSuspend()
+        protected sealed override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
             
         }
 
-        protected sealed override void OnResume()
+        protected sealed override void OnUnsuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
             
         }

@@ -50,16 +50,24 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.EntityProperties.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
         }
 
-        protected override void OnSuspend()
+        protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            base.OnSuspend();
-            EntityAfflicted.EntityProperties.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
+            base.OnSuppress(statusSuppressionType);
+
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                EntityAfflicted.EntityProperties.RemoveResistance(Enumerations.Elements.Fire, FireResistance);
+            }
         }
 
-        protected override void OnResume()
+        protected override void OnUnsuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            base.OnResume();
-            EntityAfflicted.EntityProperties.AddResistance(Enumerations.Elements.Fire, FireResistance);
+            base.OnUnsuppress(statusSuppressionType);
+
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                EntityAfflicted.EntityProperties.AddResistance(Enumerations.Elements.Fire, FireResistance);
+            }
         }
 
         public override StatusEffect Copy()

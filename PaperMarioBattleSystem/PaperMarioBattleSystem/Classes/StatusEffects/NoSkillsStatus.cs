@@ -129,21 +129,27 @@ namespace PaperMarioBattleSystem
             IncrementTurns();
         }
 
-        protected override void OnSuspend()
+        protected override void OnSuppress(StatusSuppressionTypes statusSuppressionType)
         {
-            //Immediately re-enable all categories on suspend
-            foreach(KeyValuePair<MoveCategories, int> moveCategory in CategoriesDisabled)
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                EntityAfflicted.EntityProperties.EnableMoveCategory(moveCategory.Key);
+                //Immediately re-enable all categories on suspend
+                foreach (KeyValuePair<MoveCategories, int> moveCategory in CategoriesDisabled)
+                {
+                    EntityAfflicted.EntityProperties.EnableMoveCategory(moveCategory.Key);
+                }
             }
         }
 
-        protected override void OnResume()
+        protected override void OnUnsuppress(StatusSuppressionTypes statusSuppressionType)
         {
-            //Immediately re-disable all categories on resume
-            foreach (KeyValuePair<MoveCategories, int> moveCategory in CategoriesDisabled)
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                EntityAfflicted.EntityProperties.DisableMoveCategory(moveCategory.Key);
+                //Immediately re-disable all categories on resume
+                foreach (KeyValuePair<MoveCategories, int> moveCategory in CategoriesDisabled)
+                {
+                    EntityAfflicted.EntityProperties.DisableMoveCategory(moveCategory.Key);
+                }
             }
         }
 

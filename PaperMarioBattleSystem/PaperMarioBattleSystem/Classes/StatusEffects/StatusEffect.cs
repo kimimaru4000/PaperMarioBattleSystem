@@ -69,34 +69,6 @@ namespace PaperMarioBattleSystem
         private readonly Dictionary<StatusSuppressionTypes, int> SuppressionStates = new Dictionary<StatusSuppressionTypes, int>();
 
         /// <summary>
-        /// Tells whether the StatusEffect is Suspended or not
-        /// </summary>
-        public bool Suspended
-        {
-            get { return IsSuspended; }
-            set
-            {
-                bool prevSuspended = IsSuspended;
-                IsSuspended = value;
-
-                //Only do something if the suspended value is different
-                if (prevSuspended != IsSuspended)
-                {
-                    //If it's no longer suspended, perform the StatusEffect's resume logic
-                    if (IsSuspended == false)
-                    {
-                        OnResume();
-                    }
-                    //If it's now suspended, perform the StatusEffect's suspend logic
-                    else
-                    {
-                        OnSuspend();
-                    }
-                }
-            }
-        }
-
-        /// <summary>
         /// The total duration of the StatusEffect, which is the sum of both the base Duration and the AdditionalDuration
         /// </summary>
         public int TotalDuration
@@ -107,8 +79,6 @@ namespace PaperMarioBattleSystem
                 return (totalDur < 0) ? 0 : totalDur;
             }
         }
-
-        private bool IsSuspended = false;
 
         /// <summary>
         /// Tells whether the StatusEffect already ended or not.
@@ -207,8 +177,8 @@ namespace PaperMarioBattleSystem
             //If the StatusEffect already ended, don't end it again
             if (Ended == true) return;
 
-            //Resume to end the StatusEffect properly
-            Suspended = false;
+            //Fully unsuppress to end the StatusEffect properly
+            FullyUnsuppress();
             Ended = true;
 
             TurnsPassed = TotalDuration;
@@ -217,13 +187,29 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Fully unsuppresses the Status Effect.
+        /// <para>This is called when the Status Effect is ended.</para>
+        /// </summary>
+        private void FullyUnsuppress()
+        {
+            StatusSuppressionTypes[] suppressionTypes = SuppressionStates.Keys.ToArray();
+            for (int i = 0; i < suppressionTypes.Length; i++)
+            {
+                //Unsuppress it the number of times indicated so it goes through the same code as it would normally
+                int suppressionTimes = SuppressionStates[suppressionTypes[i]];
+
+                for (int j = 0; j < suppressionTimes; j++)
+                {
+                    Unsuppress(suppressionTypes[i]);
+                }
+            }
+        }
+
+        /// <summary>
         /// Applies the StatusEffect's effects to the entity at the start of the phase cycle
         /// </summary>
         public void PhaseCycleStart()
         {
-            //Don't do anything if the StatusEffect is suspended
-            if (Suspended == true) return;
-
             OnPhaseCycleStart();
         }
 
@@ -243,14 +229,16 @@ namespace PaperMarioBattleSystem
         protected abstract void OnPhaseCycleStart();
 
         /// <summary>
-        /// What the StatusEffect does to the entity when it is suspended
+        /// What the StatusEffect does to the entity when it's suppressed in a particular way.
         /// </summary>
-        protected abstract void OnSuspend();
+        /// <param name="statusSuppressionType">The type of suppression.</param>
+        protected abstract void OnSuppress(StatusSuppressionTypes statusSuppressionType);
 
         /// <summary>
-        /// What the StatusEffect does to the entity when it is resumed
+        /// What the StatusEffect does to the entity when it's unsuppressed in a particular way.
         /// </summary>
-        protected abstract void OnResume();
+        /// <param name="statusSuppressionType">The type of suppression.</param>
+        protected abstract void OnUnsuppress(StatusSuppressionTypes statusSuppressionType);
 
         /// <summary>
         /// Returns a new instance of this StatusEffect with the same properties
@@ -270,7 +258,7 @@ namespace PaperMarioBattleSystem
                 SuppressionStates.Add(statusSuppressionType, 0);
 
                 //Tell this Status Effect to suppress itself in this way the first time
-
+                OnSuppress(statusSuppressionType);
             }
 
             //Add to the number of times this Status Effect is suppressed in this way
@@ -304,7 +292,7 @@ namespace PaperMarioBattleSystem
                 SuppressionStates.Remove(statusSuppressionType);
 
                 //Tell this Status Effect to unsuppress itself in this way
-
+                OnUnsuppress(statusSuppressionType);
             }
 
             Debug.Log($"Status {StatusType} was unsuppressed by {statusSuppressionType} on {EntityAfflicted.Name}. {value} suppressions of this type remain!");

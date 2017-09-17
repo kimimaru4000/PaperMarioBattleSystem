@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -29,8 +30,12 @@ namespace PaperMarioBattleSystem
         {
             base.OnAfflict();
 
-            //Suspend all entity's Negative StatusEffects
-            EntityAfflicted.SuspendOrResumeAlignmentStatuses(true, StatusAlignments.Negative, StatusType);
+            //Stone suppresses Electrified, Poison, Invisible, and Tiny's turn counts
+            //It suppresses the effects of Electrified and Poison, it and suppresses the VFX and Icon of Electrified
+            EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Invisible, StatusTypes.Tiny);
+            EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
+            EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
+            EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified);
 
             //Add the NegativeStatusImmune and Invincible MiscProperties
             EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
@@ -38,7 +43,7 @@ namespace PaperMarioBattleSystem
 
             EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
 
-            Debug.Log($"{StatusType} has been inflicted and Suspended all negative StatusEffects on {EntityAfflicted.Name}!");
+            Debug.Log($"{StatusType} has been inflicted on {EntityAfflicted.Name}!");
         }
 
         protected sealed override void OnEnd()
@@ -49,36 +54,59 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune);
             EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
-            //Resume all of the entity's Negative StatusEffects
-            EntityAfflicted.SuspendOrResumeAlignmentStatuses(false, StatusAlignments.Negative, StatusType);
+            //Unsuppress the statuses it suppressed in this way
+            EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Invisible, StatusTypes.Tiny);
+            EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
+            EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
+            EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified);
 
             EntityAfflicted.AnimManager.PlayAnimation(EntityAfflicted.GetIdleAnim());
 
-            Debug.Log($"{StatusType} has ended and Resumed all negative StatusEffects on {EntityAfflicted.Name}!");
+            Debug.Log($"{StatusType} has ended on {EntityAfflicted.Name}!");
         }
 
-        protected sealed override void OnSuspend()
+        protected sealed override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            base.OnSuspend();
+            base.OnSuppress(statusSuppressionType);
 
-            //Remove Invincibility and don't do anything else to avoid Suspending/Resuming conflicts with other StatusEffects
-            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                //Remove the NegativeStatusImmune and Invincible MiscProperties
+                EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune);
+                EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
-            EntityAfflicted.AnimManager.PlayAnimation(EntityAfflicted.GetIdleAnim());
+                //Unsuppress the statuses it suppressed in this way
+                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Invisible, StatusTypes.Tiny);
+                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
+                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
+                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified);
+
+                EntityAfflicted.AnimManager.PlayAnimation(EntityAfflicted.GetIdleAnim());
+
+                Debug.Log($"{StatusType} has ended on {EntityAfflicted.Name}!");
+            }
         }
 
-        protected sealed override void OnResume()
+        protected sealed override void OnUnsuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            base.OnResume();
+            base.OnUnsuppress(statusSuppressionType);
 
-            //Suspend all entity's Negative StatusEffects once again
-            EntityAfflicted.SuspendOrResumeAlignmentStatuses(true, StatusAlignments.Negative, StatusType);
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                //Resume suppressing the statuses again
+                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Invisible, StatusTypes.Tiny);
+                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
+                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
+                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified);
 
-            //Add back the NegativeStatusImmune and Invincible MiscProperties
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
-            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
+                //Add the NegativeStatusImmune and Invincible MiscProperties
+                EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
+                EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
-            EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
+                EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
+
+                Debug.Log($"{StatusType} has been inflicted on {EntityAfflicted.Name}!");
+            }
         }
 
         public sealed override StatusEffect Copy()

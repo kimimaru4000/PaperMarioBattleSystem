@@ -56,14 +56,20 @@ namespace PaperMarioBattleSystem
             IncrementTurns();
         }
 
-        protected override void OnSuspend()
+        protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent, false);
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent, false);
+            }
         }
 
-        protected override void OnResume()
+        protected override void OnUnsuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent);
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent);
+            }
         }
 
         public override StatusEffect Copy()

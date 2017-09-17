@@ -53,14 +53,24 @@ namespace PaperMarioBattleSystem
             IncrementTurns();
         }
 
-        protected override void OnSuspend()
+        protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune);
+                EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune);
+                EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune);
+            }
         }
 
-        protected override void OnResume()
+        protected override void OnUnsuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, true);
+                EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, true);
+                EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, true);
+            }
         }
 
         public override StatusEffect Copy()

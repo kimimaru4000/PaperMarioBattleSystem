@@ -2,6 +2,14 @@ Move Information (1/17/17)
 --------------------------
 Here's where detailed information about specific moves and features will be documented.
 
+Jump Charge/Super Jump Charge
+------------------------------
+If a Hammer Charge is stored, it will be replaced by the Jump Charge.
+
+Hammer Charge/Super Hammer Charge
+---------------------------------
+If a Jump Charge is stored, it will be replaced by the Hammer Charge.
+
 Partner General
 ---------------
 In PM, if a partner takes damage they'll be inflicted with Injured, which is a subset
@@ -89,6 +97,8 @@ If Hustle Drink is in effect, it will remove it regardless of when it was used.
 
 Since Status Effects take effect at the start of a character's turn instead of at the start of the phase cycle in PM, Mario takes damage from Poison
 and Status Effects play their status effect ending BattleEvents.
+
+If Mario is inflicted with Dizzy, Sleep, or Frozen, he will remain in the animation for those Status Effects.
 
 Yoshi
 -----

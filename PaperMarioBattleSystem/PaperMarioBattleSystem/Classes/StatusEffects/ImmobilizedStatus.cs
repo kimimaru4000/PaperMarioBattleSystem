@@ -35,8 +35,7 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.SetTurnsUsed(EntityAfflicted.MaxTurns);
 
             //Specify that this status makes the entity Immobile
-            int immobile = EntityAfflicted.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.Immobile) + 1;
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Immobile, immobile);
+            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Immobile, 1);
 
             Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");
         }
@@ -50,13 +49,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Remove the Immobile property after getting its count
-            int immobile = EntityAfflicted.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.Immobile) - 1;
-            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Immobile);
-
-            if (immobile > 0)
-            {
-                EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Immobile, immobile);
-            }
+            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Immobile, 1);
         }
 
         protected override void OnPhaseCycleStart()
@@ -69,27 +62,26 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        protected override void OnSuspend()
+        protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
-
-            //Remove the Immobile property
-            int immobile = EntityAfflicted.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.Immobile) - 1;
-            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Immobile);
-
-            if (immobile > 0)
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Immobile, immobile);
+                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
+
+                //Remove the Immobile property
+                EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Immobile, 1);
             }
         }
 
-        protected override void OnResume()
+        protected override void OnUnsuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            EntityAfflicted.SetMaxTurns(0);
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                EntityAfflicted.SetMaxTurns(0);
 
-            //Re-add the Immobile property
-            int immobile = EntityAfflicted.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.Immobile) + 1;
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Immobile, immobile);
+                //Re-add the Immobile property
+                EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Immobile, 1);
+            }
         }
 
         public override StatusEffect Copy()

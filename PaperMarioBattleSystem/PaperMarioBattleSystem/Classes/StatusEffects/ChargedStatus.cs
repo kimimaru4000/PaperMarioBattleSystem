@@ -59,15 +59,21 @@ namespace PaperMarioBattleSystem
             
         }
 
-        protected override void OnSuspend()
+        protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage);
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                EntityAfflicted.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage);
+            }
         }
 
-        protected override void OnResume()
+        protected override void OnUnsuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
-            //Add the property back with the previous charged damage
-            EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage, TotalChargeDamage);
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                //Add the property back with the previous charged damage
+                EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage, TotalChargeDamage);
+            }
         }
 
         public override StatusEffect Copy()

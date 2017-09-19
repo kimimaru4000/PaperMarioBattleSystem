@@ -23,6 +23,19 @@ namespace PaperMarioBattleSystem
             itemAction = moveAction;
         }
 
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            //Ensure that we have a usable ItemAction
+            //This can be null at this point if the Sequence's MoveAction
+            //was passed in as null in the constructor and set later on
+            if (itemAction == null)
+            {
+                itemAction = (ItemAction)Action;
+            }
+        }
+
         protected override void SequenceStartBranch()
         {
             switch (SequenceStep)

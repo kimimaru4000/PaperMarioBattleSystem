@@ -34,6 +34,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool TargetsSelf { get; protected set; } = false;
 
+        /// <summary>
+        /// The Sequence that this Item performs when used in battle.
+        /// By default, it uses the base ItemSequence.
+        /// </summary>
+        public virtual Sequence SequencePerformed { get; protected set; } = new ItemSequence(null);
+
         public BattleItem()
         {
             

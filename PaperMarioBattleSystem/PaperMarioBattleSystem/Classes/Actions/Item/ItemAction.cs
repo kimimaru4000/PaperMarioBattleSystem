@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
 
             SetActionProperties();
 
-            SetMoveSequence(new ItemSequence(this));
+            SetMoveSequence(item.SequencePerformed);
         }
 
         public sealed override void OnMenuSelected()

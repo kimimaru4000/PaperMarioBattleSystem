@@ -785,12 +785,12 @@ namespace PaperMarioBattleSystem
         {
             protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
             {
-                //Check if the Victim is Invincible. If so, ignore all damage and Status Effects
+                //Check if the Victim is Invincible. If so, ignore all damage
+                //If Invincible entities want to be immune to Status Effects, they should add immunities when turning Invincible
                 if (StepResult.VictimResult.Entity.IsInvincible() == true)
                 {
                     StepResult.VictimResult.TotalDamage = 0;
                     StepResult.VictimResult.ElementResult = ElementInteractionResult.Damage;
-                    StepResult.VictimResult.StatusesInflicted = null;
                 }
             }
         }
@@ -872,12 +872,12 @@ namespace PaperMarioBattleSystem
         {
             protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
             {
-                //Check if the Attacker is Invincible. If so, ignore all damage and Status Effects
+                //Check if the Attacker is Invincible. If so, ignore all damage
+                //If Invincible entities want to be immune to Status Effects, they should add immunities when turning Invincible
                 if (StepResult.AttackerResult.Entity.IsInvincible() == true)
                 {
                     StepResult.AttackerResult.TotalDamage = 0;
                     StepResult.AttackerResult.ElementResult = ElementInteractionResult.Damage;
-                    StepResult.AttackerResult.StatusesInflicted = null;
                 }
             }
         }

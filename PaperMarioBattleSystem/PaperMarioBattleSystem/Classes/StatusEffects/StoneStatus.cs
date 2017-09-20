@@ -35,7 +35,7 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Invisible, StatusTypes.Tiny);
             EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
             EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
-            EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified);
+            EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Tiny);
 
             //Add the NegativeStatusImmune and Invincible MiscProperties
             EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);

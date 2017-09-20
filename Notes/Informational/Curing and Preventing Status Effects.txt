@@ -46,6 +46,7 @@ PM
 --
 -Tasty Tonic
 -Refresh
+-Hustle Drink
 
 Partners cannot use items or Special Moves, so it's not possible to test if these cure Dizzy, Sleep, Frozen, and Stone.
 
@@ -62,6 +63,12 @@ it wouldn't be possible to test as mentioned above.
 -Poison
 -Tiny
 
+
+== Hustle Drink == (9/20/17)
+-Electrified
+-Poison
+-Tiny
+-Invisible
 
 Update (9/9/17)
 ---------------
@@ -87,6 +94,7 @@ Feeling Fine (PM)
 Feeling Fine prevents the following Status Effects from being inflicted:
 -Poison
 -Dizzy
+-Frozen
 -Sleep
 -Tiny
 
@@ -102,6 +110,14 @@ Untested Status Effects due to no enemies with moves that inflict them. Until th
 -Lifted
 -POWDown
 
+Hustle Drink (9/20/17)
+----------------------
+Hustle Drink prevents the following Status Effects from being inflicted:
+-Poison
+-Dizzy
+-Frozen
+-Sleep
+-Tiny
 
 Update (9/10/17)
 ----------------

@@ -186,3 +186,15 @@ Cloud Nine happens before Poison, Electrified, and Invisible.
 Turbo Charge happens before Poison, Electrified, and Invisible.
 
 Poison happens before Electrified and Invisible.
+
+
+-In TTYD you can guard Status-only inducing moves, such as Beldam inflicting Slow. It shows the tiny star indicating no damage,
+but the "no damage" sound doesn't play. This likely means that these types of moves still deal damage, but the damage is 0
+-Frozen can't be removed via Burn if the character is immune to Burn
+
+Interesting Info (Glitches)
+---------------------------
+If inflicted with Poison, Tiny, or some other status with a visible turn count and using Hustle Drink, Mario can no longer move. It appears that the Status Effect is not
+properly cleared.
+
+

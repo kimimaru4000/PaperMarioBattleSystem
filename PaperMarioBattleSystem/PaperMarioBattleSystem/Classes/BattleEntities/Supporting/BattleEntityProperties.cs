@@ -664,7 +664,7 @@ namespace PaperMarioBattleSystem
 
             StatusPropertyHolder statusProperty = GetStatusProperty(status.StatusType);
             //If the entity is immune to this particular StatusEffect, don't allow it to be inflicted
-            if (statusProperty.Immune == true)
+            if (statusProperty.IsImmune == true)
             {
                 Debug.Log($"{Entity.Name} is immune to {status.StatusType}!");
                 return false;

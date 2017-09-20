@@ -62,10 +62,21 @@ namespace PaperMarioBattleSystem
             //Get the StatusProperty
             StatusPropertyHolder statusProperty = EntityEquipped.EntityProperties.GetStatusProperty(statusType);
 
+            //Increase the immunity value by 1 if set to be immune, and decrease it by 1 when clearing immunity
+            int immunity = statusProperty.Immunity;
+            if (immune == true)
+            {
+                immunity += 1;
+            }
+            else
+            {
+                immunity -= 1;
+            }
+
             //Fill in all of the existing StatusProperty's information to preserve it
             //The only difference is the immunity value
             EntityEquipped.EntityProperties.AddStatusProperty(statusType,
-                new StatusPropertyHolder(statusProperty.StatusPercentage, statusProperty.AdditionalTurns, immune));
+                new StatusPropertyHolder(statusProperty.StatusPercentage, statusProperty.AdditionalTurns, immunity));
         }
     }
 }

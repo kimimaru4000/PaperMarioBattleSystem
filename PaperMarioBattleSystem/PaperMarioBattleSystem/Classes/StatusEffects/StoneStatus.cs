@@ -43,6 +43,8 @@ namespace PaperMarioBattleSystem
 
             EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
 
+            HandleStatusImmunities(true);
+
             Debug.Log($"{StatusType} has been inflicted on {EntityAfflicted.Name}!");
         }
 
@@ -61,6 +63,8 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified);
 
             EntityAfflicted.AnimManager.PlayAnimation(EntityAfflicted.GetIdleAnim());
+
+            HandleStatusImmunities(false);
 
             Debug.Log($"{StatusType} has ended on {EntityAfflicted.Name}!");
         }
@@ -82,6 +86,8 @@ namespace PaperMarioBattleSystem
                 EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified);
 
                 EntityAfflicted.AnimManager.PlayAnimation(EntityAfflicted.GetIdleAnim());
+
+                HandleStatusImmunities(false);
 
                 Debug.Log($"{StatusType} has ended on {EntityAfflicted.Name}!");
             }
@@ -105,6 +111,8 @@ namespace PaperMarioBattleSystem
 
                 EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
 
+                HandleStatusImmunities(true);
+
                 Debug.Log($"{StatusType} has been inflicted on {EntityAfflicted.Name}!");
             }
         }
@@ -112,6 +120,20 @@ namespace PaperMarioBattleSystem
         public sealed override StatusEffect Copy()
         {
             return new StoneStatus(Duration);
+        }
+
+        /// <summary>
+        /// Handles adding/removing Stone's Status Effect immunities.
+        /// </summary>
+        /// <param name="immune">Whether to add or remove the immunity.</param>
+        private void HandleStatusImmunities(bool immune)
+        {
+            EntityAfflicted.AddRemoveStatusImmunity(StatusTypes.Poison, immune);
+            EntityAfflicted.AddRemoveStatusImmunity(StatusTypes.Dizzy, immune);
+            EntityAfflicted.AddRemoveStatusImmunity(StatusTypes.Sleep, immune);
+            EntityAfflicted.AddRemoveStatusImmunity(StatusTypes.Tiny, immune);
+            EntityAfflicted.AddRemoveStatusImmunity(StatusTypes.Frozen, immune);
+            EntityAfflicted.AddRemoveStatusImmunity(StatusTypes.NoSkills, immune);
         }
     }
 }

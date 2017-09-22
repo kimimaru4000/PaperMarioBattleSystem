@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
                 BattleItem item = (BattleItem)usableItems[i];
 
                 //Set item properties
-                ItemAction newItemAction = new ItemAction(item);
+                ItemAction newItemAction = item.ActionAssociated;
                 newItemAction.SetDipFPCost(FPCost);
                 //Set the item turn count
                 if (dipTurnCount > 1)

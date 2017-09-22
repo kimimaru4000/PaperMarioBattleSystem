@@ -84,6 +84,7 @@
     <Compile Include="Classes\Actions\Defensive\Guard.cs" />
     <Compile Include="Classes\Actions\IActionCommandHandler.cs" />
     <Compile Include="Classes\Actions\Item\ItemAction.cs" />
+    <Compile Include="Classes\Actions\Item\Mystery.cs" />
     <Compile Include="Classes\Actions\Kooper\ShellToss.cs" />
     <Compile Include="Classes\Actions\Mario\Hammer.cs" />
     <Compile Include="Classes\Actions\Mario\HeadRattle.cs" />

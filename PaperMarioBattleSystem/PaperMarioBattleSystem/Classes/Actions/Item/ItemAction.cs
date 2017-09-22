@@ -95,8 +95,9 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Sets the ItemAction's properties based on the item it has.
+        /// <para>The default behavior is to check the item's properties and set its MoveInfo, DamageInfo, and HealingInfo accordingly.</para>
         /// </summary>
-        protected void SetActionProperties()
+        protected virtual void SetActionProperties()
         {
             Name = ItemUsed.Name;
 

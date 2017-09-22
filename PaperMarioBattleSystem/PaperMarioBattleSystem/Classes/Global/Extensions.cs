@@ -192,6 +192,35 @@ namespace PaperMarioBattleSystem
             return (entity.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.Invincible) > 0);
         }
 
+        /// <summary>
+        /// A helper method for adding and removing Status Effect immunities.
+        /// All other fields on the BattleEntity's StatusProperties are preserved.
+        /// </summary>
+        /// <param name="entity">The BattleEntity.</param>
+        /// <param name="statusType">The StatusType to add or remove an immunity for.</param>
+        /// <param name="immune">Whether the BattleEntity is immune to the StatusType or not.</param>
+        public static void AddRemoveStatusImmunity(this BattleEntity entity, StatusTypes statusType, bool immune)
+        {
+            //Get the StatusProperty
+            StatusPropertyHolder statusProperty = entity.EntityProperties.GetStatusProperty(statusType);
+
+            //Increase the immunity value by 1 if set to be immune, and decrease it by 1 when clearing immunity
+            int immunity = statusProperty.Immunity;
+            if (immune == true)
+            {
+                immunity += 1;
+            }
+            else
+            {
+                immunity -= 1;
+            }
+
+            //Fill in all of the existing StatusProperty's information to preserve it
+            //The only difference is the immunity value
+            entity.EntityProperties.AddStatusProperty(statusType,
+                new StatusPropertyHolder(statusProperty.StatusPercentage, statusProperty.AdditionalTurns, immunity));
+        }
+
         #endregion
 
         #region Dictionary Extensions

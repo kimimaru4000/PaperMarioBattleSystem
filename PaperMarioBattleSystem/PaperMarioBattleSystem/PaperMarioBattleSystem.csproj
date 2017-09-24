@@ -84,7 +84,7 @@
     <Compile Include="Classes\Actions\Defensive\Guard.cs" />
     <Compile Include="Classes\Actions\IActionCommandHandler.cs" />
     <Compile Include="Classes\Actions\Item\ItemAction.cs" />
-    <Compile Include="Classes\Actions\Item\Mystery.cs" />
+    <Compile Include="Classes\Actions\Item\MysteryAction.cs" />
     <Compile Include="Classes\Actions\Kooper\ShellToss.cs" />
     <Compile Include="Classes\Actions\Mario\Hammer.cs" />
     <Compile Include="Classes\Actions\Mario\HeadRattle.cs" />
@@ -202,6 +202,7 @@
     <Compile Include="Classes\Collectibles\Items\IStatusInflictingItem.cs" />
     <Compile Include="Classes\Collectibles\Items\Item.cs" />
     <Compile Include="Classes\Collectibles\Items\Mushroom.cs" />
+    <Compile Include="Classes\Collectibles\Items\Mystery.cs" />
     <Compile Include="Classes\Collectibles\Items\ShootingStar.cs" />
     <Compile Include="Classes\Collectibles\Items\SleepySheep.cs" />
     <Compile Include="Classes\Collectibles\Items\TastyTonic.cs" />
@@ -259,6 +260,7 @@
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\TattleSequence.cs" />
     <Compile Include="Classes\Sequences\Item\ItemSequence.cs" />
+    <Compile Include="Classes\Sequences\Item\MysterySequence.cs" />
     <Compile Include="Classes\Sequences\Kooper\ShellTossSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\HammerSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\JumpSequence.cs" />

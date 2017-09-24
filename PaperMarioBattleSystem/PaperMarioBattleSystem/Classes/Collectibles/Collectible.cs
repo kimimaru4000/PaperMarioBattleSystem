@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The icon for the Collectible
         /// </summary>
-        public Texture2D Icon { get; protected set; } = null;
+        public CroppedTexture2D Icon { get; protected set; } = null;
 
         /// <summary>
         /// The type of Collectible this is

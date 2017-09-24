@@ -127,6 +127,7 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddItem(new TastyTonic());
             Inventory.Instance.AddItem(new TastyTonic());
             Inventory.Instance.AddItem(new VoltShroom());
+            Inventory.Instance.AddItem(new Mystery());
         }
 
         /// <summary>

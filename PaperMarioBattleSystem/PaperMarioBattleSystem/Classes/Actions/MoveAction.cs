@@ -379,7 +379,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <returns>The BattleEntities the move affects based on its MoveAffectionType and the HeightStates it can target.
         /// If None, an empty array is returned.</returns>
-        protected BattleEntity[] GetEntitiesMoveAffects()
+        public BattleEntity[] GetEntitiesMoveAffects()
         {
             if (MoveProperties.MoveAffectionType == MoveAffectionTypes.Self)
             {

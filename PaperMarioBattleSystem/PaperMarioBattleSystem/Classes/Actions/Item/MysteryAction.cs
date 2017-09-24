@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The MoveAction for the Mystery Item.
     /// </summary>
-    public class Mystery : ItemAction
+    public class MysteryAction : ItemAction
     {
-        public Mystery(BattleItem item) : base(item)
+        public MysteryAction(BattleItem item) : base(item)
         {
             
         }
@@ -19,6 +20,9 @@ namespace PaperMarioBattleSystem
         protected override void SetActionProperties()
         {
             Name = ItemUsed.Name;
+
+            MoveInfo = new MoveActionData(null, ItemUsed.Description, MoveResourceTypes.FP, 0, CostDisplayTypes.Hidden,
+                MoveAffectionTypes.Self, ItemUsed.SelectionType, false, ItemUsed.HeightsAffected);
         }
     }
 }

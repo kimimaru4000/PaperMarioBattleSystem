@@ -779,6 +779,10 @@ namespace PaperMarioBattleSystem
         /// <returns>A string with the idle animation name the BattleEntity has.</returns>
         public virtual string GetIdleAnim()
         {
+            //Quick fix until there's a more concrete way of defining the current idle animation to play
+            if (EntityProperties.HasStatus(StatusTypes.Stone) == true)
+                return AnimationGlobals.StatusBattleAnimations.StoneName;
+
             switch (HealthState)
             {
                 case HealthStates.Dead: return AnimationGlobals.DeathName;

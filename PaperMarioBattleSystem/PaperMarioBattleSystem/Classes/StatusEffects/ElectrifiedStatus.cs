@@ -19,8 +19,10 @@ namespace PaperMarioBattleSystem
         public ElectrifiedStatus(int duration)
         {
             StatusType = Enumerations.StatusTypes.Electrified;
-            //Despite having positive effects, Electrified is classified as a Negative StatusEffect.
-            //Stone Caps suppress Electrified
+            //Despite having positive effects, Electrified seems to be considered a Negative StatusEffect in the PM games
+            //Several examples: 
+            //-The lights that fall down from the stage in TTYD afflict it. No damaging move in either PM game afflicts a positive status
+            //-Feeling Fine and Feeling Fine P prevent it from being afflicted (TTYD) or cause it to wear off early (PM)
             Alignment = StatusAlignments.Negative;
 
             StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),

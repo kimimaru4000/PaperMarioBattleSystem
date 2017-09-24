@@ -8,7 +8,7 @@ using static PaperMarioBattleSystem.Enumerations;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// A Tasty Tonic item. It removes Poison and Shrinking on Mario.
+    /// The Tasty Tonic item. It removes a lot of statuses such as Poison and Tiny on Mario.
     /// </summary>
     public sealed class TastyTonic : BattleItem, IStatusHealingItem
     {
@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         public TastyTonic()
         {
             Name = "Tasty Tonic";
-            Description = "Removes all negative status effects from Mario.";
+            Description = "A very tasty tonic. Cures\npoisoning and shrinking.";
 
             ItemType = ItemTypes.Healing;
 

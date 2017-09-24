@@ -205,6 +205,7 @@
     <Compile Include="Classes\Collectibles\Items\Mystery.cs" />
     <Compile Include="Classes\Collectibles\Items\ShootingStar.cs" />
     <Compile Include="Classes\Collectibles\Items\SleepySheep.cs" />
+    <Compile Include="Classes\Collectibles\Items\StoneCap.cs" />
     <Compile Include="Classes\Collectibles\Items\TastyTonic.cs" />
     <Compile Include="Classes\Collectibles\Items\VoltShroom.cs" />
     <Compile Include="Classes\General\Transform.cs" />

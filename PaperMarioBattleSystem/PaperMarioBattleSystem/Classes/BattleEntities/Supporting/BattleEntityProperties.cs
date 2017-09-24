@@ -651,17 +651,6 @@ namespace PaperMarioBattleSystem
         /// <returns>true if the StatusEffect was successfully afflicted, false otherwise.</returns>
         public bool TryAfflictStatus(double inflictionChance, StatusEffect status)
         {
-            //Test for StatusEffect immunity - if the entity is immune to a particular alignment, don't allow the StatusEffect to be inflicted
-            int positiveStatusImmune = GetAdditionalProperty<int>(AdditionalProperty.PositiveStatusImmune);
-            int negativeStatusImmune = GetAdditionalProperty<int>(AdditionalProperty.NegativeStatusImmune);
-            int neutralStatusImmune = GetAdditionalProperty<int>(AdditionalProperty.NeutralStatusImmune);
-            if ((status.Alignment == StatusEffect.StatusAlignments.Positive && positiveStatusImmune > 0)
-                || (status.Alignment == StatusEffect.StatusAlignments.Negative && negativeStatusImmune > 0)
-                || (status.Alignment == StatusEffect.StatusAlignments.Neutral && neutralStatusImmune > 0))
-            {
-                return false;
-            }
-
             StatusPropertyHolder statusProperty = GetStatusProperty(status.StatusType);
             //If the entity is immune to this particular StatusEffect, don't allow it to be inflicted
             if (statusProperty.IsImmune == true)

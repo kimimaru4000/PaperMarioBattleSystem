@@ -37,8 +37,7 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
             EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Tiny);
 
-            //Add the NegativeStatusImmune and Invincible MiscProperties
-            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
+            //Add the Invincible AdditionalProperty
             EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
             EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);
@@ -52,8 +51,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnEnd();
 
-            //Remove the NegativeStatusImmune and Invincible MiscProperties
-            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
+            //Remove the Invincible AdditionalProperty
             EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
             //Unsuppress the statuses it suppressed in this way
@@ -75,8 +73,7 @@ namespace PaperMarioBattleSystem
 
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                //Remove the NegativeStatusImmune and Invincible MiscProperties
-                EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
+                //Remove the Invincible AdditionalProperty
                 EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
                 //Unsuppress the statuses it suppressed in this way
@@ -105,8 +102,7 @@ namespace PaperMarioBattleSystem
                 EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
                 EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified);
 
-                //Add the NegativeStatusImmune and Invincible MiscProperties
-                EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
+                //Add the Invincible AdditionalProperty
                 EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
                 EntityAfflicted.AnimManager.PlayAnimation(AnimationGlobals.StatusBattleAnimations.StoneName);

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -35,17 +36,13 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             //Make the entity immune to all StatusEffects
-            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, 1);
-            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, 1);
-            EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
+            HandleStatusImmunities(true);
         }
 
         protected override void OnEnd()
         {
             //Remove the StatusEffect immunities
-            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, 1);
-            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, 1);
-            EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
+            HandleStatusImmunities(false);
         }
 
         protected override void OnPhaseCycleStart()
@@ -57,9 +54,7 @@ namespace PaperMarioBattleSystem
         {
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, 1);
-                EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, 1);
-                EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
+                HandleStatusImmunities(false);
             }
         }
 
@@ -67,9 +62,7 @@ namespace PaperMarioBattleSystem
         {
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.PositiveStatusImmune, 1);
-                EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NeutralStatusImmune, 1);
-                EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NegativeStatusImmune, 1);
+                HandleStatusImmunities(true);
             }
         }
 
@@ -100,6 +93,22 @@ namespace PaperMarioBattleSystem
             float allergicDepth = depth + .00001f;
 
             SpriteRenderer.Instance.Draw(AllergicIcon.Tex, allergicPos, AllergicIcon.SourceRect, Color.White, 0f, new Vector2(.25f, .25f), 1f, false, false, allergicDepth, true);
+        }
+
+        /// <summary>
+        /// Handles adding/removing Allergic's Status Effect immunities.
+        /// Allergic makes the entity immune to every Status Effect.
+        /// </summary>
+        /// <param name="immune">Whether to add or remove the immunity.</param>
+        private void HandleStatusImmunities(bool immune)
+        {
+            //Get all statuses and add or remove the immunity
+            StatusTypes[] allStatusTypes = UtilityGlobals.GetEnumValues<StatusTypes>();
+
+            for (int i = 0; i < allStatusTypes.Length; i++)
+            {
+                EntityAfflicted.AddRemoveStatusImmunity(allStatusTypes[i], immune);
+            }
         }
     }
 }

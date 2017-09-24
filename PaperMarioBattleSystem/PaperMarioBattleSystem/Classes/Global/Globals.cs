@@ -945,9 +945,6 @@ namespace PaperMarioBattleSystem
 
         public enum AdditionalProperty
         {
-            PositiveStatusImmune,
-            NeutralStatusImmune,
-            NegativeStatusImmune,
             Invincible,
             ConfusionPercent,
             ChargedDamage,

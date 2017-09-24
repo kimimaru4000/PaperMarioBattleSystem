@@ -450,7 +450,7 @@ namespace PaperMarioBattleSystem
                 StatusChanceHolder statusChance = filteredStatuses[i];
                 if (entity.EntityProperties.TryAfflictStatus(statusChance.Percentage, statusChance.Status) == false)
                 {
-                    Debug.Log($"Failed to inflict {statusChance.Status.StatusType} on {entity.Name}");
+                    Debug.Log($"Failed to inflict {statusChance.Status.StatusType} on {entity.Name} with a {statusChance.Percentage}% chance");
                     filteredStatuses.RemoveAt(i);
                     i--;
                 }

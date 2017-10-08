@@ -19,12 +19,6 @@ namespace PaperMarioBattleSystem
     {
         public override bool CommandEnabled => (HasActionCommand == true && DisableActionCommand == false);
 
-        /// <summary>
-        /// The number of attacks to perform. If <see cref="InfiniteAttacks"/> or less, performs infinite attacks until the 
-        /// Action Command is successfully performed.
-        /// </summary>
-        private int NumAttacks = 1;
-
         public KissyKissyAction(bool hasActionCommand, int numAttacks, int damagePerAttack, Elements damageElement,
             bool piercing, bool sideDirect, HeightStates[] heightsAffected)
         {
@@ -40,12 +34,14 @@ namespace PaperMarioBattleSystem
             DamageInfo = new DamageData(damagePerAttack, damageElement, piercing, contactType, null, false, false,
                 DefensiveMoveOverrides.None, DamageEffects.None);
 
+            SetMoveSequence(new KissyKissySequence(this, numAttacks));
+
             if (hasActionCommand == true)
             {
                 //If Kissy-Kissy has an Action Command, it can't be Guarded or Superguarded
                 DamageInfo.DefensiveOverride = DefensiveMoveOverrides.All;
 
-                //actionCommand = new 
+                actionCommand = new MashButtonCommand(MoveSequence, 100d, 10d, MashButtonCommand.InfiniteTime, Microsoft.Xna.Framework.Input.Keys.A);
             }
         }
     }

@@ -29,11 +29,20 @@ namespace PaperMarioBattleSystem
             MaxAttacks = NumAttacks = numAttacks;
         }
 
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            Missed = false;
+            Interrupted = false;
+        }
+
         protected override void OnMiss()
         {
             base.OnMiss();
 
             Missed = true;
+            ChangeJumpBranch(SequenceBranch.Miss);
         }
 
         protected override void OnInterruption(Enumerations.Elements element)
@@ -50,7 +59,6 @@ namespace PaperMarioBattleSystem
                 case 0:
                     //Move to the opponent
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), MoveTime);
-                    ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 case 1:
                     //Jump up to their height
@@ -94,6 +102,8 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new WaitSeqAction(0d);
                     break;
                 case 1:
+
+                    SequenceStep = 1;
                     //NOTE: Play an animation here and wait for it to finish
                     CurSequenceAction = new WaitSeqAction(1100d);
                     break;
@@ -143,6 +153,20 @@ namespace PaperMarioBattleSystem
         {
             switch (SequenceStep)
             {
+                case 0:
+                    //End the action command's input if it's currently going on
+                    if (CommandEnabled == true && actionCommand.AcceptingInput == true)
+                    {
+                        actionCommand.EndInput();
+                    }
+
+                    //The entity goes back to its battle position
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, MoveTime);
+                    break;
+                case 1:
+                    EndSequence();
+                    break;
                 default:
                     PrintInvalidSequence();
                     break;
@@ -153,6 +177,9 @@ namespace PaperMarioBattleSystem
         {
             switch (SequenceStep)
             {
+                case 0:
+                    ChangeSequenceBranch(SequenceBranch.End);
+                    break;
                 default:
                     PrintInvalidSequence();
                     break;
@@ -163,6 +190,9 @@ namespace PaperMarioBattleSystem
         {
             switch (SequenceStep)
             {
+                case 0:
+                    ChangeSequenceBranch(SequenceBranch.End);
+                    break;
                 default:
                     PrintInvalidSequence();
                     break;
@@ -173,7 +203,9 @@ namespace PaperMarioBattleSystem
         {
             switch (SequenceStep)
             {
-
+                case 0:
+                    ChangeSequenceBranch(SequenceBranch.End);
+                    break;
                 default:
                     PrintInvalidSequence();
                     break;

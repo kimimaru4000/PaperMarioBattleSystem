@@ -67,6 +67,7 @@
     <Compile Include="Classes\Actions\ActionCommands\GulpCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\HammerCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\JumpCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\MashButtonCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\MultiButtonCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\PowerLiftCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\TattleCommand.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Classes\Actions\Bow\OuttaSight.cs" />
     <Compile Include="Classes\Actions\Defensive\DefensiveAction.cs" />
     <Compile Include="Classes\Actions\Defensive\Superguard.cs" />
+    <Compile Include="Classes\Actions\Fuzzy\KissyKissyAction.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\Goombario\Tattle.cs" />
     <Compile Include="Classes\Actions\IActionCommand.cs" />
@@ -258,6 +260,7 @@
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />
     <Compile Include="Classes\Sequences\ChargeSequence.cs" />
     <Compile Include="Classes\Sequences\DefendSequence.cs" />
+    <Compile Include="Classes\Sequences\Fuzzy\KissyKissySequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\TattleSequence.cs" />
     <Compile Include="Classes\Sequences\Item\ItemSequence.cs" />

@@ -1141,6 +1141,12 @@ namespace PaperMarioBattleSystem
         public const int PerilHP = 1;
         public const int DeathHP = 0;
 
+        /// <summary>
+        /// Values less than or equal to this for succession attacks, such as a Fuzzy's Kissy-Kissy move, indicate that this attack
+        /// won't end until the Action Command is successfully performed.
+        /// </summary>
+        public const int InfiniteSuccessionAttacks = 0;
+
         #endregion
 
         #region Structs

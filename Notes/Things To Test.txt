@@ -182,3 +182,11 @@ On the field, the Attack FX Badges cycle or are randomized when Mario hammers. F
 
 Results:
 
+
+Effects when damaging and being damaged (Pity Flower, HP Drain)
+---------------------------------------------------------------
+1. How does HP Drain work with when attacking enemies with partial interruptions (Poison or Electrified Physical Attributes)? Do you still heal, or is it cancelled?
+2. Likewise, how does Pity Flower work in the same situation. Does it still add FP, or does it not do anything?
+
+Results:
+

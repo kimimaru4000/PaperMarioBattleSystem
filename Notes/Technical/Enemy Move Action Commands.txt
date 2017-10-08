@@ -1,0 +1,21 @@
+Enemy Move Action Commands (9/30/17)
+------------------------------------
+In PM, several enemies perform moves that require you to do an Action Command.
+
+The moves are as follows:
+Jungle Fuzzy: Kissy-Kissy (2x5 damage, restores health) - Mash A to fill the bar to stop it
+Swoopula: Kissy-Kiss (2x5, restores health) - Mash A to fill the bar to stop it
+Blooper Baby: Kissy-Kiss (2x5, restores health) - Mash A to fill the bar to stop it
+
+Huff N. Puff - Wind Breath (2-7 damage) - Mash A to fill the bar and reduce the damage
+Tuff Puff - Puff Squeeze (2 x INFINITY) - Mash A to fill the bar to stop it
+Buzzar - Wind Blast (1-3 damage) - Mash A to fill the bar and reduce the damage
+
+Implementation
+--------------
+In all of these cases, we can simply have an Action Command start when the enemy uses the move.
+Similar to how Tattle is right now, there can be a bool parameter in their constructors that assigns 
+an Action Command if it's true. Enemies would pass in true, and players would pass in false. 
+This allows flexibility over when we want the Action Command to be available or not.
+
+For the sequences, the moves would stop after a certain number of times or when the Action Command is successfully performed.

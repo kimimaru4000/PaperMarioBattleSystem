@@ -455,7 +455,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Starts the Action Command's input.
+        /// Helper method for starting the Action Command's input.
         /// If the Action Command is not enabled, it will call OnCommandFailed().
         /// </summary>
         /// <param name="values">Any values passed to the ActionCommand just as it starts.</param>

@@ -54,9 +54,9 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Tells whether the action command is enabled or not.
-        /// Action commands are always disabled for enemies
+        /// Action commands are by default disabled for enemies
         /// </summary>
-        public bool CommandEnabled => (HasActionCommand == true && User.EntityType != EntityTypes.Enemy && DisableActionCommand == false);
+        public virtual bool CommandEnabled => (HasActionCommand == true && User.EntityType != EntityTypes.Enemy && DisableActionCommand == false);
 
         /// <summary>
         /// Whether Action Commands are disabled on this action.

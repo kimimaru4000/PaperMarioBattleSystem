@@ -182,6 +182,12 @@ On the field, the Attack FX Badges cycle or are randomized when Mario hammers. F
 
 Results:
 
+1. In PM there isn't a pattern.
+2. In PM they are completely randomized.
+3. N/A for PM.
+4. Yes for PM. They also work when jumping in battle.
+5. N/A for PM.
+
 
 Effects when damaging and being damaged (Pity Flower, HP Drain)
 ---------------------------------------------------------------

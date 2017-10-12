@@ -182,11 +182,11 @@ On the field, the Attack FX Badges cycle or are randomized when Mario hammers. F
 
 Results:
 
-1. In PM there isn't a pattern.
-2. In PM they are completely randomized.
-3. N/A for PM.
-4. Yes for PM. They also work when jumping in battle.
-5. N/A for PM.
+1. In PM there isn't a pattern. In TTYD the cycle is: R, B, G, Y, P.
+2. In PM they are completely randomized. In TTYD it's random only in battle.
+3. N/A for PM. In TTYD it resets when changing maps and restarting the game. In battle, it's random, so there's no cycle.
+4. Yes for PM. No for TTYD, as they're random in battle but not on the field. They also work when jumping in battle in both games. 
+5. N/A for PM. TTYD's cycle seems to be determined completely randomly, as it's not in order of TypeNumber, equipped first, nor alphabetical.
 
 
 Effects when damaging and being damaged (Pity Flower, HP Drain)

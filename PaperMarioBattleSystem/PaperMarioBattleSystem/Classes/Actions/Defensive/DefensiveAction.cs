@@ -26,6 +26,12 @@ namespace PaperMarioBattleSystem
         public ActionCommand.CommandResults CommandResult { get; set; } = ActionCommand.CommandResults.Failure;
 
         /// <summary>
+        /// The type of DefensiveAction this is.
+        /// This is used to help moves determine whether they can override this or not.
+        /// </summary>
+        public DefensiveActionTypes DefensiveActionType { get; protected set; } = DefensiveActionTypes.None;
+
+        /// <summary>
         /// Tells if the user of the DefensiveAction is Immobile.
         /// </summary>
         protected bool UserImmobile => (User != null && User.EntityProperties.HasAdditionalProperty(AdditionalProperty.Immobile) == true);

@@ -17,6 +17,7 @@ namespace PaperMarioBattleSystem
         public Guard(BattleEntity user) : base(user)
         {
             Name = "Guard";
+            DefensiveActionType = DefensiveActionTypes.Guard;
 
             actionCommand = new GuardCommand(this);
 

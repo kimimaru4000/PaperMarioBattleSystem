@@ -926,9 +926,7 @@ namespace PaperMarioBattleSystem
         /// <returns>true if the BattleEntity is vulnerable to any of the DamageEffects, otherwise false.</returns>
         public bool IsVulnerableToDamageEffect(DamageEffects damageEffects)
         {
-            DamageEffects vulnerableTest = (VulnerableDamageEffects & damageEffects);
-
-            return (vulnerableTest != 0);
+            return UtilityGlobals.DamageEffectHasFlag(VulnerableDamageEffects, damageEffects);
         }
 
         /// <summary>

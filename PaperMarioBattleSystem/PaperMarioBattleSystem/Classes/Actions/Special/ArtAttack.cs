@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
                 0, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.All,
                 false, null);
             DamageInfo = new DamageData(1, Enumerations.Elements.Star, true, Enumerations.ContactTypes.None, null, true, false,
-                Enumerations.DefensiveMoveOverrides.None, Enumerations.DamageEffects.None);
+                Enumerations.DefensiveActionTypes.None, Enumerations.DamageEffects.None);
 
             StartingDrawLoc = SpriteRenderer.Instance.WindowCenter;
 

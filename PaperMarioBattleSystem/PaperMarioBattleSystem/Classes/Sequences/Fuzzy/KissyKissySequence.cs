@@ -72,7 +72,7 @@ namespace PaperMarioBattleSystem
                     //Override defensive actions as the latching shouldn't be guardable
                     DamageData damageData = Action.DamageProperties;
                     damageData.Damage = 0;
-                    damageData.DefensiveOverride = Enumerations.DefensiveMoveOverrides.All;
+                    damageData.DefensiveOverride = Enumerations.DefensiveActionTypes.Guard | Enumerations.DefensiveActionTypes.Superguard;
 
                     //Deal 0 damage
                     //If we go to the Main branch, then we can start the action command

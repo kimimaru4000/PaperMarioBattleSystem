@@ -32,14 +32,14 @@ namespace PaperMarioBattleSystem
             if (sideDirect == false) contactType = ContactTypes.TopDirect;
 
             DamageInfo = new DamageData(damagePerAttack, damageElement, piercing, contactType, null, false, false,
-                DefensiveMoveOverrides.None, DamageEffects.None);
+                DefensiveActionTypes.None, DamageEffects.None);
 
             SetMoveSequence(new KissyKissySequence(this, numAttacks));
 
             if (hasActionCommand == true)
             {
                 //If Kissy-Kissy has an Action Command, it can't be Guarded or Superguarded
-                DamageInfo.DefensiveOverride = DefensiveMoveOverrides.All;
+                DamageInfo.DefensiveOverride = DefensiveActionTypes.Guard | DefensiveActionTypes.Superguard;
 
                 actionCommand = new MashButtonCommand(MoveSequence, 100d, 10d, MashButtonCommand.InfiniteTime, Microsoft.Xna.Framework.Input.Keys.A);
             }

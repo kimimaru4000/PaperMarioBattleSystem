@@ -140,6 +140,33 @@ namespace PaperMarioBattleSystem
 
         #region Damage Calculation Initialization
 
+        /* Damage Calculation Order:
+         * Victim:
+         * -------
+         * 1. Base damage
+         * 2. Get the contact result (Success, PartialSuccess, Failure)
+         * 3. Check Element Overrides to change the attacker's Element damage based on the PhysicalAttributes of the victim (Ex. Ice Power Badge)
+         * 4. Calculate the Victim's Weaknesses/Resistances to the Element
+         * 5. Subtract or add to the damage based on the # of P-Up, D-Down and P-Down, D-Up Badges equipped
+         * 6. If Guarded, subtract 1 from the damage and add the # of Damage Dodge Badges to the victim's Defense. If Superguarded, damage = 0
+         * 7. If the damage dealt is not Piercing, subtract the victim's Defense from the damage
+         * 8. Multiply by: (number of Double Pains equipped + 1)
+         * 9. If in Danger or Peril, divide by: (number of Last Stands equipped + 1) (ceiling the damage if it's > 0)
+         * 
+         * 10. Clamp the damage: Min = 0, Max = 99
+         * 
+         * Attacker:
+         * ---------
+         * 1. Start with the total unscaled damage dealt to the Victim - Double Pain and Last Stand are not factored in
+         * 2. Get the Payback from the Contact Result
+         * 3. If the Victim performed a Superguard, override the Payback with the the Superguard's Payback
+         * 4. Calculate the Attacker's Weaknesses/Resistances to the Payback Element
+         * 5. Calculate the Payback damage based off the PaybackType
+         * 6. If the PaybackType is Constant, set the damage dealt to the Payback's damage
+         * 
+         * 7. Clamp the damage: Min = 0, Max = 99
+         */
+
         private static void InitializeDamageFormulaSteps()
         {
             DamageCalculationSteps = new List<DamageCalcStep>();
@@ -172,214 +199,6 @@ namespace PaperMarioBattleSystem
         #endregion
 
         #region Interaction Methods
-
-        /* Damage Calculation Order:
-         * Victim:
-         * -------
-         * 1. Base damage
-         * 2. Get the contact result (Success, PartialSuccess, Failure)
-         * 3. Check Element Overrides to change the attacker's Element damage based on the PhysicalAttributes of the victim (Ex. Ice Power Badge)
-         * 4. Calculate the Victim's Weaknesses/Resistances to the Element
-         * 5. Subtract or add to the damage based on the # of P-Up, D-Down and P-Down, D-Up Badges equipped
-         * 6. If Guarded, subtract 1 from the damage and add the # of Damage Dodge Badges to the victim's Defense. If Superguarded, damage = 0
-         * 7. If the damage dealt is not Piercing, subtract the victim's Defense from the damage
-         * 8. Multiply by: (number of Double Pains equipped + 1)
-         * 9. If in Danger or Peril, divide by: (number of Last Stands equipped + 1) (ceiling the damage if it's > 0)
-         * 
-         * 10. Clamp the damage: Min = 0, Max = 99
-         * 
-         * Attacker:
-         * ---------
-         * 1. Start with the total unscaled damage dealt to the Victim - Double Pain and Last stand are not factored in
-         * 2. Get the Payback from the Contact Result
-         * 3. If the Victim performed a Superguard, override the Payback with the the Superguard's Payback
-         * 4. Calculate the Attacker's Weaknesses/Resistances to the Payback Element
-         * 5. Calculate the Payback damage based off the PaybackType
-         * 6. If the PaybackType is Constant, set the damage dealt to the Payback's damage
-         * 
-         * 7. Clamp the damage: Min = 0, Max = 99
-         */
-
-        /// <summary>
-        /// Calculates and returns the entire damage interaction between two BattleEntities.
-        /// <para>This returns all the necessary information for both BattleEntities, including the total amount of damage dealt,
-        /// the type of Elemental damage to deal, the Status Effects to inflict, and whether the attack successfully hit or not.</para>
-        /// </summary>
-        /// <param name="interactionParam">An InteractionParamHolder containing the BattleEntities interacting and data about their interaction</param>
-        /// <returns>An InteractionResult containing InteractionHolders for both the victim and the attacker</returns>
-        [Obsolete("This is the old method. Use the newer, cleaner, and more flexible one called GetDamageInteraction.")]
-        public static InteractionResult GetDamageInteractionOld(InteractionParamHolder interactionParam)
-        {
-            InteractionResult finalInteractionResult = new InteractionResult();
-
-            BattleEntity attacker = interactionParam.Attacker;
-            BattleEntity victim = interactionParam.Victim;
-            ContactTypes contactType = interactionParam.ContactType;
-            Elements element = interactionParam.DamagingElement;
-            StatusChanceHolder[] statuses = interactionParam.Statuses;
-            int damage = interactionParam.Damage;
-            bool piercing = interactionParam.Piercing;
-
-            //Get contact results
-            ContactResultInfo contactResultInfo = victim.EntityProperties.GetContactResult(attacker, contactType);
-            ContactResult contactResult = contactResultInfo.ContactResult;
-
-            //Retrieve an overridden type of Elemental damage to inflict based on the Victim's PhysicalAttributes
-            //(Ex. The Ice Power Badge only deals Ice damage to Fiery entities)
-            ElementOverrideHolder newElement = attacker.EntityProperties.GetTotalElementOverride(victim);
-            if (newElement.Element != Elements.Invalid)
-            {
-                //Add the number of element overrides to the damage if the element used already exists as an override and the victim has a Weakness
-                //to the Element. This allows Badges such as Ice Power to deal more damage if used in conjunction with attacks
-                //that deal the same type of damage (Ex. Ice Power and Ice Smash deal 2 additional damage total rather than 1).
-                //If any new knowledge is discovered to improve this, this will be changed
-                //Ice Power is the only Badge of its kind across the first two PM games that does anything like this
-                if (element == newElement.Element && victim.EntityProperties.HasWeakness(element) == true)
-                {
-                    damage += newElement.OverrideCount;
-                }
-
-                element = newElement.Element;
-            }
-
-            /*Get the total damage dealt to the Victim. The amount of Full or Half Payback damage dealt to the Attacker
-              uses the resulting damage value from this because Payback uses the total damage that would be dealt to the Victim.
-              This occurs before factoring in elemental resistances/weaknesses from the Attacker*/
-            ElementDamageResultHolder victimElementDamage = GetElementalDamage(victim, element, damage);
-
-            int unscaledVictimDamage = victimElementDamage.Damage;
-
-            //Subtract damage reduction (P-Up, D-Down and P-Down, D-Up Badges)
-            unscaledVictimDamage -= victim.BattleStats.DamageReduction;
-
-            //Check if the attack hit. If not, then don't consider defensive actions
-            bool attackHit = interactionParam.CantMiss == true ? true : attacker.AttemptHitEntity(victim);
-
-            //Defense added from Damage Dodge Badges upon a successful Guard
-            int damageDodgeDefense = 0;
-
-            //Defensive actions take priority. If the attack didn't hit, don't check for defensive actions
-            BattleGlobals.DefensiveActionHolder? victimDefenseData = null;
-            if (attackHit == true) victimDefenseData = victim.GetDefensiveActionResult(unscaledVictimDamage, statuses, interactionParam.DamageEffect);
-
-            if (victimDefenseData.HasValue == true)
-            {
-                unscaledVictimDamage = victimDefenseData.Value.Damage;
-                statuses = victimDefenseData.Value.Statuses;
-                //If the Defensive action dealt damage and the contact was direct
-                //the Defensive action has caused a Failure for the Attacker (Ex. Superguarding)
-                if ((contactType == ContactTypes.TopDirect || contactType == ContactTypes.SideDirect) && victimDefenseData.Value.ElementHolder.HasValue == true)
-                {
-                    contactResult = ContactResult.Failure;
-                }
-
-                //Factor in the additional Guard defense for all DefensiveActions (for now, at least)
-                damageDodgeDefense = victim.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DamageDodge);
-            }
-
-            //Subtract Defense on non-piercing damage
-            if (piercing == false)
-            {
-                int totalDefense = victim.BattleStats.TotalDefense + damageDodgeDefense;
-                unscaledVictimDamage -= totalDefense;
-            }
-
-            int scaledVictimDamage = unscaledVictimDamage;
-
-            //Factor in Double Pain for the Victim
-            scaledVictimDamage *= (1 + victim.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DoublePain));
-
-            //Factor in Last Stand for the Victim, if the Victim is in Danger or Peril
-            if (victim.IsInDanger == true)
-            {
-                //PM rounds down, whereas TTYD rounds up. We're going with the latter
-                //TTYD always ceilings the value (Ex. 3.2 turns to 4)
-                int lastStandDivider = (1 + victim.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.LastStand));
-                scaledVictimDamage = (int)Math.Ceiling(scaledVictimDamage / (float)lastStandDivider);
-            }
-
-            /*If the Victim is Invincible, ignore all damage and Status Effects
-             If the Attacker is Invincible, ignore all Payback damage and Status Effects
-
-             It won't ignore the Payback's effects automatically; that has to be done manually by adding
-             contact exceptions or something else*/
-
-            //Clamp Victim damage
-            scaledVictimDamage = UtilityGlobals.Clamp(scaledVictimDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
-
-            #region Victim Damage Dealt
-
-            //Calculating damage dealt to the Victim
-            if (contactResult == ContactResult.Success || contactResult == ContactResult.PartialSuccess)
-            {
-                //Get the Status Effects to inflict on the Victim
-                StatusChanceHolder[] victimInflictedStatuses = GetFilteredInflictedStatuses(victim, statuses);
-
-                //Check if the Victim is Invincible. If so, ignore all damage and Status Effects
-                if (victim.IsInvincible() == true)
-                {
-                    scaledVictimDamage = 0;
-                    victimElementDamage.InteractionResult = ElementInteractionResult.Damage;
-                    victimInflictedStatuses = null;
-                }
-
-                finalInteractionResult.VictimResult = new InteractionHolder(victim, scaledVictimDamage, element, 
-                    victimElementDamage.InteractionResult, contactType, piercing, victimInflictedStatuses, attackHit, DamageEffects.None);
-            }
-
-            #endregion
-
-            #region Attacker Damage Dealt
-
-            //Calculating damage dealt to the Attacker
-            if (contactResult == ContactResult.Failure || contactResult == ContactResult.PartialSuccess)
-            {
-                //The damage the Attacker dealt to the Victim
-                int damageDealt = unscaledVictimDamage;
-                PaybackHolder paybackHolder = contactResultInfo.Paybackholder;
-                
-                //Override the PaybackHolder with a Defensive Action's results, if any
-                if (victimDefenseData.HasValue == true && victimDefenseData.Value.ElementHolder.HasValue == true)
-                {
-                    damageDealt = victimDefenseData.Value.ElementHolder.Value.Damage;
-                    paybackHolder = new PaybackHolder(PaybackTypes.Constant, victimDefenseData.Value.ElementHolder.Value.Element, damageDealt);
-                }
-
-                //Get the damage done to the Attacker, factoring in Weaknesses/Resistances
-                ElementDamageResultHolder attackerElementDamage = GetElementalDamage(attacker, paybackHolder.Element, damageDealt);
-
-                //Get Payback damage - Payback damage is calculated after everything else, including Constant Payback.
-                //However, it does NOT factor in Double Pain or any sort of Defense modifiers.
-                int paybackDamage = paybackHolder.GetPaybackDamage(attackerElementDamage.Damage);
-
-                //If Constant Payback, update the damage value to use the element
-                if (paybackHolder.PaybackType == PaybackTypes.Constant)
-                {
-                    paybackDamage = GetElementalDamage(attacker, paybackHolder.Element, paybackDamage).Damage;
-                }
-
-                //Clamp Attacker damage
-                attackerElementDamage.Damage = UtilityGlobals.Clamp(paybackDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
-
-                //Get the Status Effects to inflict
-                StatusChanceHolder[] attackerInflictedStatuses = GetFilteredInflictedStatuses(attacker, paybackHolder.StatusesInflicted);
-
-                //Check if the Attacker is Invincible. If so, ignore all damage and Status Effects
-                if (attacker.IsInvincible() == true)
-                {
-                    attackerElementDamage.Damage = 0;
-                    attackerElementDamage.InteractionResult = ElementInteractionResult.Damage;
-                    attackerInflictedStatuses = null;
-                }
-
-                finalInteractionResult.AttackerResult = new InteractionHolder(attacker, attackerElementDamage.Damage, paybackHolder.Element,
-                    attackerElementDamage.InteractionResult, ContactTypes.None, true, attackerInflictedStatuses, true, DamageEffects.None);
-            }
-
-            #endregion
-
-            return finalInteractionResult;
-        }
 
         /// <summary>
         /// Calculates the result of elemental damage on a BattleEntity, based on its weaknesses and resistances to that Element.
@@ -636,7 +455,7 @@ namespace PaperMarioBattleSystem
                 if (StepResult.VictimResult.Hit == true)
                 {
                     victimDefenseData = StepResult.VictimResult.Entity.GetDefensiveActionResult(StepResult.VictimResult.TotalDamage,
-                        StepResult.VictimResult.StatusesInflicted, StepResult.VictimResult.DamageEffect);
+                        StepResult.VictimResult.StatusesInflicted, StepResult.VictimResult.DamageEffect, damageInfo.DefensiveOverride);
                 }
 
                 //A Defensive Action has been performed
@@ -722,7 +541,7 @@ namespace PaperMarioBattleSystem
 
                     //If the move has the DamageEffect and the entity is affected by it, add it to the result
                     //This approach is easier and more readable than removing effects
-                    if (UtilityGlobals.EnumHasFlag(StepResult.VictimResult.DamageEffect, curEffect) == true
+                    if (UtilityGlobals.DamageEffectHasFlag(StepResult.VictimResult.DamageEffect, curEffect) == true
                         && StepResult.VictimResult.Entity.EntityProperties.IsVulnerableToDamageEffect(curEffect) == true)
                     {
                         resultEffects |= curEffect;

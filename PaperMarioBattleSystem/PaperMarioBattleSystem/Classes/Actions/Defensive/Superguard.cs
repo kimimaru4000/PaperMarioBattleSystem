@@ -12,6 +12,7 @@ namespace PaperMarioBattleSystem
         public Superguard(BattleEntity user) : base(user)
         {
             Name = "Superguard";
+            DefensiveActionType = DefensiveActionTypes.Superguard;
 
             actionCommand = new SuperguardCommand(this);
 

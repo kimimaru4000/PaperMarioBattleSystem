@@ -128,6 +128,11 @@ namespace PaperMarioBattleSystem
             return (T[])Enum.GetValues(typeof(T));
         }
 
+        /* Adding flags: flag1 |= flag2            ; 10 | 01 = 11
+         * Checking flags: (flag1 & flag2) != 0    ; 11 & 10 = 10
+         * Removing flags: (flag1 & (~flag2))      ; 1111 & (~0010) = 1111 & 1101 = 1101
+         * */
+        
         /// <summary>
         /// Tells whether a set of DamageEffects has any of the flags in another DamageEffects set.
         /// </summary>
@@ -142,14 +147,17 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells if an Enum value has a particular bit field set.
+        /// Tells whether a set of DefensiveActionTypes has any of the flags in another DefensiveActionTypes set.
         /// </summary>
-        /// <param name="enumVal">The Enum value.</param>
-        /// <param name="flag">The bit field to check for the Enum value.</param>
-        /// <returns>true if the bit field is set in the Enum value, otherwise false.</returns>
-        public static bool EnumHasFlag(Enum enumVal, Enum flag)
+        /// <param name="defensiveOverrides">The DefensiveActionTypes value.</param>
+        /// <param name="defensiveOverrideFlags">The flags to test.</param>
+        /// <returns>true if any of the flags in defensiveOverrides are in defensiveOverrideFlags, otherwise false.</returns>
+        public static bool DefensiveActionTypesHasFlag(Enumerations.DefensiveActionTypes defensiveOverrides,
+            Enumerations.DefensiveActionTypes defensiveOverrideFlags)
         {
-            return enumVal.HasFlag(flag);   
+            Enumerations.DefensiveActionTypes flags = (defensiveOverrides & defensiveOverrideFlags);
+
+            return (flags != 0);
         }
 
         /// <summary>

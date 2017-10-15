@@ -322,11 +322,11 @@ namespace PaperMarioBattleSystem
         public StatusChanceHolder[] Statuses { get; private set;}
         public Enumerations.DamageEffects DamageEffect { get; private set; }
         public bool CantMiss { get; private set; }
-        public Enumerations.DefensiveMoveOverrides DefensiveOverride { get; private set; }
+        public Enumerations.DefensiveActionTypes DefensiveOverride { get; private set; }
 
         public InteractionParamHolder(BattleEntity attacker, BattleEntity victim, int damage, Enumerations.Elements element,
             bool piercing, Enumerations.ContactTypes contactType, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect,
-            bool cantMiss, Enumerations.DefensiveMoveOverrides defensiveOverride)
+            bool cantMiss, Enumerations.DefensiveActionTypes defensiveOverride)
         {
             Attacker = attacker;
             Victim = victim;
@@ -453,11 +453,11 @@ namespace PaperMarioBattleSystem
         public StatusChanceHolder[] Statuses;
         public bool CantMiss;
         public bool AllOrNothingAffected;
-        public Enumerations.DefensiveMoveOverrides DefensiveOverride;
+        public Enumerations.DefensiveActionTypes DefensiveOverride;
         public Enumerations.DamageEffects DamageEffect;
 
         public DamageData(int damage, Enumerations.Elements damagingElement, bool piercing, Enumerations.ContactTypes contactType,
-            StatusChanceHolder[] statuses, bool cantMiss, bool allOrNothingAffected, Enumerations.DefensiveMoveOverrides defensiveOverride,
+            StatusChanceHolder[] statuses, bool cantMiss, bool allOrNothingAffected, Enumerations.DefensiveActionTypes defensiveOverride,
             Enumerations.DamageEffects damageEffect)
         {
             Damage = damage;
@@ -473,7 +473,7 @@ namespace PaperMarioBattleSystem
 
         public DamageData(int damage, Enumerations.Elements damagingElement, bool piercing, Enumerations.ContactTypes contactType,
             StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect) : this(damage, damagingElement, piercing, contactType,
-                statuses, false, true, Enumerations.DefensiveMoveOverrides.None, damageEffect)
+                statuses, false, true, Enumerations.DefensiveActionTypes.None, damageEffect)
         {
 
         }
@@ -815,11 +815,15 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// The types of DefensiveActions that damage-dealing moves can override.
+        /// The types of DefensiveActions that exist.
+        /// This enum is a bit field, so handle it with bitwise operations.
         /// </summary>
-        public enum DefensiveMoveOverrides
+        [Flags]
+        public enum DefensiveActionTypes
         {
-            None, Guard, Superguard, All
+            None = 0,
+            Guard = 1 << 0,
+            Superguard = 1 << 1
         }
         
         /// <summary>

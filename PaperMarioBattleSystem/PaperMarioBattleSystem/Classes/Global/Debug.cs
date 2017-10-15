@@ -314,52 +314,9 @@ namespace PaperMarioBattleSystem
 
         private static void DebugUnitTests()
         {
-            if (Input.GetKeyDown(Keys.D1, DebugKeyboard))
+            if (Input.GetKeyDown(Keys.D0, DebugKeyboard))
             {
-                UnitTests.InteractionUnitTests.NewInteractionUT1();
-            }
-            else if (Input.GetKeyDown(Keys.D2, DebugKeyboard))
-            {
-                UnitTests.InteractionUnitTests.NewInteractionUT2();
-            }
-            else if (Input.GetKeyDown(Keys.D3, DebugKeyboard))
-            {
-                UnitTests.InteractionUnitTests.NewInteractionUT3();
-            }
-            else if (Input.GetKeyDown(Keys.D4, DebugKeyboard))
-            {
-                UnitTests.InteractionUnitTests.NewInteractionUT4();
-            }
-            else if (Input.GetKeyDown(Keys.D5, DebugKeyboard))
-            {
-                UnitTests.InteractionUnitTests.NewInteractionUT5();
-            }
-            else if (Input.GetKeyDown(Keys.D6, DebugKeyboard))
-            {
-                UnitTests.InteractionUnitTests.NewInteractionUT6();
-            }
-            else if (Input.GetKeyDown(Keys.D7, DebugKeyboard))
-            {
-                UnitTests.InteractionUnitTests.NewInteractionUT7();
-            }
-            else if (Input.GetKeyDown(Keys.D8, DebugKeyboard))
-            {
-                UnitTests.InteractionUnitTests.NewInteractionUT8();
-            }
-            else if (Input.GetKeyDown(Keys.D9, DebugKeyboard))
-            {
-                UnitTests.InteractionUnitTests.NewInteractionUT9();
-            }
-            else if (Input.GetKeyDown(Keys.D0, DebugKeyboard))
-            {
-                if (Input.GetKey(Keys.LeftShift))
-                {
-                    UnitTests.InteractionUnitTests.ElementOverrideInteractionUT1();
-                }
-                else
-                {
-                    UnitTests.InteractionUnitTests.NewInteractionUT10();
-                }
+                UnitTests.InteractionUnitTests.ElementOverrideInteractionUT1();
             }
         }
 

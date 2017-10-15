@@ -495,12 +495,22 @@ namespace PaperMarioBattleSystem
         /// <param name="damage">The original damage of the attack.</param>
         /// <param name="statusesInflicted">The original set of StatusEffects inflicted.</param>
         /// <param name="damageEffects">The original DamageEffects that would affect the BattleEntity.</param>
+        /// <param name="defensiveOverrides">The types of Defensive Actions to override.</param>
         /// <returns>A nullable DefensiveActionHolder? with a DefensiveAction's result if successful, otherwise null.</returns>
-        public BattleGlobals.DefensiveActionHolder? GetDefensiveActionResult(int damage, StatusChanceHolder[] statusesInflicted, DamageEffects damageEffects)
+        public BattleGlobals.DefensiveActionHolder? GetDefensiveActionResult(int damage, StatusChanceHolder[] statusesInflicted, DamageEffects damageEffects,
+            DefensiveActionTypes defensiveOverrides)
         {
             //Handle Defensive Actions
             for (int i = 0; i < DefensiveActions.Count; i++)
             {
+                //Check if there are any overrides for this type of Defensive Action
+                if (defensiveOverrides != DefensiveActionTypes.None
+                    && UtilityGlobals.DefensiveActionTypesHasFlag(defensiveOverrides, DefensiveActions[i].DefensiveActionType))
+                {
+                    Debug.Log($"{defensiveOverrides} overrode {DefensiveActions[i].DefensiveActionType}!");
+                    continue;
+                }
+
                 if (DefensiveActions[i].IsSuccessful == true)
                 {
                     BattleGlobals.DefensiveActionHolder holder = DefensiveActions[i].HandleSuccess(damage, statusesInflicted, damageEffects);

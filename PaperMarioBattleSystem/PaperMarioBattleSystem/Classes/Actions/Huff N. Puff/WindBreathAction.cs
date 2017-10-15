@@ -25,7 +25,7 @@ namespace PaperMarioBattleSystem
                 MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.Single, true, null);
 
             DamageInfo = new DamageData(0, Elements.Normal, false, ContactTypes.None, null, false, false,
-                DefensiveMoveOverrides.All, DamageEffects.None);
+                DefensiveActionTypes.Guard | DefensiveActionTypes.Superguard, DamageEffects.None);
 
             SetMoveSequence(new WindBreathSequence(this));
             actionCommand = new MashButtonRangeCommand(MoveSequence, 100d, 10d, 7000d, Keys.Z, .3d, maxDamage, minDamage);

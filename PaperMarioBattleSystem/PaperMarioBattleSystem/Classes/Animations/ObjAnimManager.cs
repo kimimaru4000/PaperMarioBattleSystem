@@ -248,11 +248,11 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Plays an animation, specified by name. If the animation does not have the specified animation, nothing happens.
+        /// Plays an animation, specified by name. If an animation cannot be found with the name, nothing happens.
         /// </summary>
-        /// <param name="animName">The name of the animation to play</param>
+        /// <param name="animName">The name of the animation to play.</param>
         /// <param name="resetPrevious">If true, resets the previous animation that was playing, if any.
-        /// This will also reset its speed</param>
+        /// This will also reset its speed.</param>
         public void PlayAnimation(string animName, bool resetPrevious = false, Animation.AnimFinish onFinish = null)
         {
             Animation animToPlay = GetAnimation(animName);

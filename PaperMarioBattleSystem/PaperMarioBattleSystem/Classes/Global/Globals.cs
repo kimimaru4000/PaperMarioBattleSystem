@@ -1079,6 +1079,12 @@ namespace PaperMarioBattleSystem
             public const string ShellShotName = "ShellShot";
         }
 
+        public static class HuffNPuffBattleAnimations
+        {
+            public const string InhaleName = "Inhale";
+            public const string ExhaleName = "Exhale";
+        }
+
         /// <summary>
         /// Animations for Shelled BattleEntities.
         /// </summary>

@@ -44,7 +44,18 @@ namespace PaperMarioBattleSystem
 
         protected void FillBar(double amount)
         {
+            FillBar(amount, false);
+        }
+
+        protected void FillBar(double amount, bool clamp)
+        {
             CurBarValue += amount;
+            
+            //Clamp the bar
+            if (clamp == true)
+            {
+                CurBarValue = UtilityGlobals.Clamp(CurBarValue, 0d, MaxBarValue);
+            }
         }
 
         /// <summary>

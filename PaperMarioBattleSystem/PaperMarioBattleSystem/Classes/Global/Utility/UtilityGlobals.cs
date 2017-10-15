@@ -30,6 +30,12 @@ namespace PaperMarioBattleSystem
         public static double ToDegrees(double radians) => (radians * (180d / Math.PI));
         public static double ToRadians(double degrees) => (degrees * (Math.PI / 180d));
 
+        public static int Lerp(int value1, int value2, float amount) => value1 + (int)((value2 - value1) * amount);
+        public static double Lerp(double value1, double value2, float amount) => value1 + ((value2 - value1) * amount);
+
+        public static double LerpPrecise(double value1, double value2, float amount) => ((1 - amount) * value1) + (value2 * amount);
+        public static int LerpPrecise(int value1, int value2, float amount) => (int)(((1 - amount) * value1) + (value2 * amount));
+
         //NOTE: (Leaving this here for now)
         //TTYD checks rand(100) < enemy susceptibility for a given value, such as chance of being inflicted with Dizzy
         //Clock Out and Showstopper are a bit different:

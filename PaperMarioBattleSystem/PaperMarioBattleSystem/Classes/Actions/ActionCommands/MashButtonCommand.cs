@@ -22,19 +22,19 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The amount the bar fills up per press.
         /// </summary>
-        private double AmountPerPress = 1f;
+        protected double AmountPerPress = 1f;
 
         /// <summary>
         /// How much time the player has to fill the bar.
         /// </summary>
-        private double TimeToFill = 10f;
+        protected double TimeToFill = 10f;
 
         /// <summary>
         /// The button to press to fill the bar.
         /// </summary>
-        private Keys ButtonToPress = Keys.A;
+        protected Keys ButtonToPress = Keys.A;
 
-        private double ElapsedTime = 0f;
+        protected double ElapsedTime = 0f;
 
         public MashButtonCommand(IActionCommandHandler commandAction, double maxBarValue, double amountPerPress, double timeToFill, Keys buttonToPress)
             : base(commandAction, maxBarValue)

@@ -68,6 +68,7 @@
     <Compile Include="Classes\Actions\ActionCommands\HammerCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\JumpCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\MashButtonCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\MashButtonRangeCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\MultiButtonCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\PowerLiftCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\TattleCommand.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Classes\Actions\Fuzzy\KissyKissyAction.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\Goombario\Tattle.cs" />
+    <Compile Include="Classes\Actions\Huff N. Puff\WindBreathAction.cs" />
     <Compile Include="Classes\Actions\IActionCommand.cs" />
     <Compile Include="Classes\Actions\Defensive\Guard.cs" />
     <Compile Include="Classes\Actions\IActionCommandHandler.cs" />
@@ -263,6 +265,7 @@
     <Compile Include="Classes\Sequences\Fuzzy\KissyKissySequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\TattleSequence.cs" />
+    <Compile Include="Classes\Sequences\Huff N. Puff\WindBreathSequence.cs" />
     <Compile Include="Classes\Sequences\Item\ItemSequence.cs" />
     <Compile Include="Classes\Sequences\Item\MysterySequence.cs" />
     <Compile Include="Classes\Sequences\Kooper\ShellTossSequence.cs" />

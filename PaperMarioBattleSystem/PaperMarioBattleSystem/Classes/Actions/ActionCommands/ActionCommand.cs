@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// Inputs the player must register at specific times during a BattleAction in battle.
-    /// ActionCommands can be attached to any BattleAction, but enemies cannot use them
+    /// ActionCommands can be attached to any BattleAction.
     /// </summary>
     public abstract class ActionCommand
     {

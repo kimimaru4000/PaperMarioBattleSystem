@@ -189,10 +189,17 @@ Results:
 5. N/A for PM. TTYD's cycle seems to be determined completely randomly, as it's not in order of TypeNumber, equipped first, nor alphabetical.
 
 
-Effects when damaging and being damaged (Pity Flower, HP Drain)
----------------------------------------------------------------
-1. How does HP Drain work with when attacking enemies with partial interruptions (Poison or Electrified Physical Attributes)? Do you still heal, or is it cancelled?
-2. Likewise, how does Pity Flower work in the same situation. Does it still add FP, or does it not do anything?
+Effects when damaging and being damaged (Pity Flower, HP Drain, FP Drain)
+-------------------------------------------------------------------------
+1. How does HP Drain and FP Drain work with when attacking enemies with partial interruptions (Poison or Electrified Physical Attributes)? Do you still heal, or is it cancelled?
+2. Likewise, how does Pity Flower work in the same situation? Does it still restore FP, or does it not do anything?
 
 Results:
 
+1. You still heal when attacking enemies with partial interruptions in both PM and TTYD.
+In PM, Mario heals an amount equal to the number of attacks that hit, capping at 5. This means hitting 3 enemies with Multibounce or hitting 3 times with Power Bounce will heal 3 HP.
+In TTYD, it always heals an amount equal to the number of HP Drain Badges equipped. The same applies to FP Drain for FP.
+
+2. If you take 0 damage, Pity Flower doesn't restore FP. If you have Payback, it will restore FP as long as you take more than 0 damage.
+If Mario attacks an enemy with partial or full Payback, he still restores FP.
+If Mario takes damage from the Poison, Burn, or Frozen Status Effects, he still restores FP.

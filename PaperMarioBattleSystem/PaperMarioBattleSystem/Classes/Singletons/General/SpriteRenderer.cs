@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// Handles all rendering
     /// <para>This is a Singleton</para>
     /// </summary>
-    public class SpriteRenderer : IDisposable
+    public class SpriteRenderer : ICleanup
     {
         #region Singleton Fields
 
@@ -52,7 +52,7 @@ namespace PaperMarioBattleSystem
             
         }
 
-        public void Dispose()
+        public void CleanUp()
         {
             spriteBatch.Dispose();
             uiBatch.Dispose();

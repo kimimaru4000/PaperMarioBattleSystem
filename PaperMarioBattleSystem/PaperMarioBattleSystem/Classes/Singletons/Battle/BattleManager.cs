@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Handles turns in battle
     /// <para>This is a Singleton</para>
     /// </summary>
-    public class BattleManager : IUpdateable, IDrawable, IDisposable
+    public class BattleManager : IUpdateable, IDrawable, ICleanup
     {
         #region Singleton Fields
 
@@ -154,9 +154,18 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public void Dispose()
+        public void CleanUp()
         {
             EnemyAddedEvent = null;
+
+            //Call clean up on all BattleEntities in battle
+            Mario?.CleanUp();
+            Partner?.CleanUp();
+
+            for (int i = 0; i < MaxEnemies; i++)
+            {
+                Enemies[i]?.CleanUp();
+            }
         }
 
         /// <summary>

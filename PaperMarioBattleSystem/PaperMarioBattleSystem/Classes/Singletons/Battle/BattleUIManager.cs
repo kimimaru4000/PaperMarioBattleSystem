@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Manages UI during battle
     /// <para>This is a Singleton</para>
     /// </summary>
-    public class BattleUIManager : IUpdateable, IDrawable
+    public class BattleUIManager : IUpdateable, IDrawable, ICleanup
     {
         #region Singleton Fields
 
@@ -67,7 +67,7 @@ namespace PaperMarioBattleSystem
             battleHUD = new BattleHUD();
         }
 
-        public void Dispose()
+        public void CleanUp()
         {
             SelectionMenu = null;
 

@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Helps manage content
     /// <para>This is a Singleton</para>
     /// </summary>
-    public class AssetManager : IDisposable
+    public class AssetManager : ICleanup
     {
         #region Singleton Fields
 
@@ -69,7 +69,7 @@ namespace PaperMarioBattleSystem
             TTYDFont = LoadAsset<SpriteFont>("Fonts/Real TTYD Font");
         }
 
-        public void Dispose()
+        public void CleanUp()
         {
             Content.Unload();
 

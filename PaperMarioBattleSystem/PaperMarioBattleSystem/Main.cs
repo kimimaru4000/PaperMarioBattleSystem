@@ -118,6 +118,8 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new LEmblemBadge());
             Inventory.Instance.AddBadge(new WEmblemBadge());
 
+            Inventory.Instance.AddBadge(new PityFlowerBadge());
+
             //Items
             Inventory.Instance.AddItem(new Mushroom());
             Inventory.Instance.AddItem(new HoneySyrup());
@@ -146,12 +148,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected override void UnloadContent()
         {
-            AssetManager.Instance.Dispose();
-            SoundManager.Instance.Dispose();
-            SpriteRenderer.Instance.Dispose();
-            BattleManager.Instance.Dispose();
-            BattleUIManager.Instance.Dispose();
-            BattleVFXManager.Instance.Dispose();
+            AssetManager.Instance.CleanUp();
+            SoundManager.Instance.CleanUp();
+            SpriteRenderer.Instance.CleanUp();
+            BattleManager.Instance.CleanUp();
+            BattleUIManager.Instance.CleanUp();
+            BattleVFXManager.Instance.CleanUp();
         }
 
         /// <summary>

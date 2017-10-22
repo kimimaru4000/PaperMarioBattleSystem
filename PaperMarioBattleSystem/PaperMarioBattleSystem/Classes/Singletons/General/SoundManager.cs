@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Handles all audio playback
     /// <para>This is a Singleton</para>
     /// </summary>
-    public class SoundManager : IDisposable, IUpdateable
+    public class SoundManager : ICleanup, IUpdateable
     {
         #region Singleton Fields
 
@@ -99,11 +99,11 @@ namespace PaperMarioBattleSystem
             Sounds = new List<SoundHolder>();
         }
 
-        public void Dispose()
+        public void CleanUp()
         {
             for (int i = 0; i < Sounds.Count; i++)
             {
-                Sounds[i].Dispose();
+                Sounds[i].CleanUp();
             }
 
             Sounds.Clear();
@@ -174,7 +174,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private class SoundHolder : IDisposable
+        private class SoundHolder : ICleanup
         {
             /// <summary>
             /// Tells if the sound instance is playing or not
@@ -206,7 +206,7 @@ namespace PaperMarioBattleSystem
                 
             }
 
-            public void Dispose()
+            public void CleanUp()
             {
                 Stop(true);
 

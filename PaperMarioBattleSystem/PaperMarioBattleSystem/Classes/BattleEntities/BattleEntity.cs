@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Any fighter that takes part in battle
     /// </summary>
-    public abstract class BattleEntity : INameable, IUpdateable, IDrawable, ITintable
+    public abstract class BattleEntity : INameable, IUpdateable, IDrawable, ITintable, ICleanup
     {
         #region Delegates and Events
 
@@ -37,6 +37,12 @@ namespace PaperMarioBattleSystem
         /// The event invoked at the start of the BattleEntity's turn. This is invoked after all other logic when the turn starts.
         /// </summary>
         public event TurnStarted TurnStartEvent = null;
+
+        public delegate void DamageTaken(InteractionHolder damageInfo);
+        /// <summary>
+        /// The event invoked when the BattleEntity takes damage. This is invoked after all other logic when taking damage.
+        /// </summary>
+        public event DamageTaken DamageTakenEvent = null;
 
         #endregion
 
@@ -154,6 +160,14 @@ namespace PaperMarioBattleSystem
             BattleStats = stats;
         }
 
+        public virtual void CleanUp()
+        {
+            HealthStateChangedEvent = null;
+            PhaseCycleStartEvent = null;
+            TurnStartEvent = null;
+            DamageTakenEvent = null;
+        }
+
         #region Stat Manipulations
 
         /// <summary>
@@ -234,6 +248,9 @@ namespace PaperMarioBattleSystem
             {
                 PreviousAction.MoveSequence.StartInterruption(element);
             }
+
+            //Invoke the damage taken event
+            DamageTakenEvent?.Invoke(damageResult);
         }
 
         /// <summary>

@@ -199,6 +199,15 @@ namespace PaperMarioBattleSystem
                 DebugUnitTests();
             }
 
+            //Damage Mario
+            if (Input.GetKey(Keys.Tab, DebugKeyboard) == true)
+            {
+                if (Input.GetKeyDown(Keys.H) == true)
+                {
+                    BattleManager.Instance.GetMario().TakeDamage(Enumerations.Elements.Normal, 1, true);
+                }
+            }
+
             //If a pause is eventually added that can be performed normally, put a check for it in here to
             //prevent the in-game timer from turning on when it shouldn't
             Time.ToggleInGameTime(DebugPaused == false || AdvanceNextFrame == true);

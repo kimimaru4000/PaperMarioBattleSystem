@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// Handles VFX in battle. This be used for any type of visual that needs to be rendered.
     /// <para>This is a Singleton.</para>
     /// </summary>
-    public class BattleVFXManager : IUpdateable, IDrawable
+    public class BattleVFXManager : IUpdateable, IDrawable, ICleanup
     {
         #region Singleton Fields
 
@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
 
         }
 
-        public void Dispose()
+        public void CleanUp()
         {
             ClearAllVFX();
 

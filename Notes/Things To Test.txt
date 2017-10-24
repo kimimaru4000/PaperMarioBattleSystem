@@ -194,6 +194,10 @@ Effects when damaging and being damaged (Pity Flower, HP Drain, FP Drain)
 1. How does HP Drain and FP Drain work with when attacking enemies with partial interruptions (Poison or Electrified Physical Attributes)? Do you still heal, or is it cancelled?
 2. Likewise, how does Pity Flower work in the same situation? Does it still restore FP, or does it not do anything?
 
+3. How does HP Drain and FP Drain work with damaging enemies via interruptions (Ex. Zap Tap)? Do you heal when they get damaged from attacking you?
+4. How does HP Drain P work with certain Partner moves, such as Bomb Squad; does it heal even though it doesn't deal damage on your turn?
+5. Do First Strikes heal HP or FP for HP Drain and FP Drain, respectively?
+
 Results:
 
 1. You still heal when attacking enemies with partial interruptions in both PM and TTYD.
@@ -203,3 +207,18 @@ In TTYD, it always heals an amount equal to the number of HP Drain Badges equipp
 2. If you take 0 damage, Pity Flower doesn't restore FP. If you have Payback, it will restore FP as long as you take more than 0 damage.
 If Mario attacks an enemy with partial or full Payback, he still restores FP.
 If Mario takes damage from the Poison, Burn, or Frozen Status Effects, he still restores FP.
+
+3. No, you don't get healed.
+
+4. No, Bomb Squad doesn't heal Bobbery at all!
+
+5. Yes, they do!
+
+
+Veil and Shell Shield
+---------------------
+1. When hiding with Veil, does Shell Shield still take damage?
+
+Results:
+
+1. Yes, it does.

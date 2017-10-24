@@ -165,7 +165,7 @@ After looking more into it, all that happens is that status effects that normall
 
 Koopatrol
 ---------
-Hide - Still takes damage from Status Effects that deal damage, such as Poison and Burn
+Hide - Still takes damage from Status Effects that deal damage, such as Poison and Burn. It can still be blown away with Gale Force.
 
 General
 -------

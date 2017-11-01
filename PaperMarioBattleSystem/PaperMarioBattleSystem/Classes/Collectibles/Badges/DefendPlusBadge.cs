@@ -11,6 +11,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class DefendPlusBadge : Badge
     {
+        private const int DefenseBonus = 1;
+
         public DefendPlusBadge()
         {
             Name = "Defend Plus";
@@ -24,12 +26,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            EntityEquipped.RaiseDefense(1);
+            EntityEquipped.RaiseDefense(DefenseBonus);
         }
 
         protected override void OnUnequip()
         {
-            EntityEquipped.LowerDefense(1);
+            EntityEquipped.LowerDefense(DefenseBonus);
         }
     }
 }

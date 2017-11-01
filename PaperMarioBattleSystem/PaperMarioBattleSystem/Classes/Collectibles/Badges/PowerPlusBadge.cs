@@ -26,12 +26,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            EntityEquipped.RaiseAttack(1);
+            EntityEquipped.RaiseAttack(AttackBonus);
         }
 
         protected override void OnUnequip()
         {
-            EntityEquipped.LowerAttack(1);
+            EntityEquipped.LowerAttack(AttackBonus);
         }
     }
 }

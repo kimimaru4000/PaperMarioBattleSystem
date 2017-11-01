@@ -360,9 +360,15 @@ namespace PaperMarioBattleSystem
         public Enumerations.DamageEffects DamageEffect;
 
         /// <summary>
-        /// Tells if the InteractionHolder has a usable value
+        /// Indicates if the damage to be dealt is from Payback.
         /// </summary>
-        public bool HasValue => (Entity != null);
+        public bool IsPaybackDamage;
+
+        /// <summary>
+        /// Tells whether the BattleEntity in this data should take damage at the end of the interaction.
+        /// </summary>
+        public bool ShouldDamageEntity;
+
         public static InteractionHolder Default => new InteractionHolder();
 
         public InteractionHolder(BattleEntity entity, int totalDamage, Enumerations.Elements damageElement, ElementInteractionResult elementResult,
@@ -377,6 +383,10 @@ namespace PaperMarioBattleSystem
             StatusesInflicted = statusesInflicted;
             Hit = hit;
             DamageEffect = damageEffect;
+
+            IsPaybackDamage = false;
+
+            ShouldDamageEntity = true;
         }
     }
 

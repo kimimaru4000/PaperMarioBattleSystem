@@ -44,6 +44,13 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public event DamageTaken DamageTakenEvent = null;
 
+        public delegate void DealtDamage(InteractionHolder damageInfo);
+        /// <summary>
+        /// The event invoked when the BattleEntity damages another BattleEntity.
+        /// This is invoked after all other logic when damaging the BattleEntity.
+        /// </summary>
+        public event DealtDamage DealtDamageEvent = null;
+
         #endregion
 
         /// <summary>
@@ -166,9 +173,25 @@ namespace PaperMarioBattleSystem
             PhaseCycleStartEvent = null;
             TurnStartEvent = null;
             DamageTakenEvent = null;
+            DealtDamageEvent = null;
         }
 
         #region Stat Manipulations
+
+        /// <summary>
+        /// Tells this BattleEntity to damage another one.
+        /// This method is a wrapper that calls the <see cref="DealtDamageEvent"/> for this BattleEntity.
+        /// This should only be called if damage actually hits.
+        /// <para>This also is called when dealing Payback damage.</para>
+        /// </summary>
+        /// <param name="damageInfo">The InteractionHolder containing the entity to damage and all other interaction data.</param>
+        public void DamageEntity(InteractionHolder damageInfo)
+        {
+            damageInfo.Entity.TakeDamage(damageInfo);
+
+            //Invoke the event
+            DealtDamageEvent?.Invoke(damageInfo);
+        }
 
         /// <summary>
         /// Makes the entity take damage from an attack, factoring in stats such as defense, weaknesses, and resistances

@@ -589,12 +589,13 @@ namespace PaperMarioBattleSystem
                 damageValues[i] = finalResult.VictimResult.TotalDamage;
 
                 //Make the victim take damage upon a PartialSuccess or a Success
-                if (finalResult.VictimResult.HasValue == true)
+                if (finalResult.VictimResult.ShouldDamageEntity == true)
                 {
                     //Check if the attacker hit
                     if (finalResult.VictimResult.Hit == true)
                     {
-                        finalResult.VictimResult.Entity.TakeDamage(finalResult.VictimResult);
+                        finalResult.AttackerResult.Entity.DamageEntity(finalResult.VictimResult);
+                        //finalResult.VictimResult.Entity.TakeDamage(finalResult.VictimResult);
                     }
                     //Handle a miss otherwise
                     else
@@ -605,9 +606,10 @@ namespace PaperMarioBattleSystem
 
                 //Make the attacker take damage upon a PartialSuccess or a Failure
                 //Break out of the loop when the attacker takes damage
-                if (finalResult.AttackerResult.HasValue == true)
+                if (finalResult.AttackerResult.ShouldDamageEntity == true)
                 {
-                    finalResult.AttackerResult.Entity.TakeDamage(finalResult.AttackerResult);
+                    finalResult.VictimResult.Entity.DamageEntity(finalResult.AttackerResult);
+                    //finalResult.AttackerResult.Entity.TakeDamage(finalResult.AttackerResult);
 
                     break;
                 }

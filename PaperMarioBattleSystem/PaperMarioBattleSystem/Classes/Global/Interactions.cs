@@ -623,9 +623,9 @@ namespace PaperMarioBattleSystem
             {
                 if (StepContactResultInfo.ContactResult == ContactResult.Failure)
                 {
-                    //If the Attacker failed to attack, set the Victim to null to mark it as not having a value
+                    //If the Attacker failed to attack, mark that the Victim shouldn't take damage
                     //This prevents the code afterwards from dealing damage to the Victim
-                    StepResult.VictimResult.Entity = null;
+                    StepResult.VictimResult.ShouldDamageEntity = false;
                 }
             }
         }
@@ -666,6 +666,7 @@ namespace PaperMarioBattleSystem
                 StepResult.AttackerResult.Piercing = true;
                 StepResult.AttackerResult.StatusesInflicted = paybackHolder.StatusesInflicted;
                 StepResult.AttackerResult.Hit = true;
+                StepResult.AttackerResult.IsPaybackDamage = true;
             }
         }
 
@@ -710,9 +711,9 @@ namespace PaperMarioBattleSystem
             {
                 if (StepContactResultInfo.ContactResult == ContactResult.Success)
                 {
-                    //If the Attacker succeeded to attack, set the Attacker to null to mark it as not having a value
+                    //If the Attacker succeeded to attack, mark that the Attacker shouldn't take damage
                     //This prevents the code afterwards from dealing damage to the Attacker
-                    StepResult.AttackerResult.Entity = null;
+                    StepResult.AttackerResult.ShouldDamageEntity = false;
                 }
             }
         }

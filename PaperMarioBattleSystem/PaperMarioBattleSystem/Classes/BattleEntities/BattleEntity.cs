@@ -38,6 +38,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public event TurnStarted TurnStartEvent = null;
 
+        public delegate void TurnEnded();
+        /// <summary>
+        /// The event invoked at the end of the BattleEntity's turn.
+        /// </summary>
+        public event TurnEnded TurnEndEvent = null;
+
         public delegate void DamageTaken(InteractionHolder damageInfo);
         /// <summary>
         /// The event invoked when the BattleEntity takes damage. This is invoked after all other logic when taking damage.
@@ -172,6 +178,7 @@ namespace PaperMarioBattleSystem
             HealthStateChangedEvent = null;
             PhaseCycleStartEvent = null;
             TurnStartEvent = null;
+            TurnEndEvent = null;
             DamageTakenEvent = null;
             DealtDamageEvent = null;
         }
@@ -637,7 +644,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Notifies the BattleManager to officially end the BattleEntity's turn
+        /// Officially ends the BattleEntity's turn.
         /// </summary>
         public void EndTurn()
         {
@@ -650,8 +657,13 @@ namespace PaperMarioBattleSystem
             //End the action
             PreviousAction?.OnActionEnded();
 
+            OnTurnEnd();
+
+            //Invoke the event
+            TurnEndEvent?.Invoke();
+
+            //Increment the number of turns
             TurnsUsed++;
-            BattleManager.Instance.TurnEnd();
         }
 
         /// <summary>

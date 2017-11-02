@@ -625,7 +625,7 @@ namespace PaperMarioBattleSystem
                 {
                     //If the Attacker failed to attack, mark that the Victim shouldn't take damage
                     //This prevents the code afterwards from dealing damage to the Victim
-                    StepResult.VictimResult.ShouldDamageEntity = false;
+                    StepResult.VictimResult.DontDamageEntity = true;
                 }
             }
         }
@@ -713,7 +713,7 @@ namespace PaperMarioBattleSystem
                 {
                     //If the Attacker succeeded to attack, mark that the Attacker shouldn't take damage
                     //This prevents the code afterwards from dealing damage to the Attacker
-                    StepResult.AttackerResult.ShouldDamageEntity = false;
+                    StepResult.AttackerResult.DontDamageEntity = true;
                 }
             }
         }

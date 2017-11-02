@@ -367,9 +367,10 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Tells whether the BattleEntity in this data should take damage at the end of the interaction.
         /// </summary>
-        public bool ShouldDamageEntity;
+        public bool DontDamageEntity;
 
-        public static InteractionHolder Default => new InteractionHolder();
+        public static InteractionHolder Default => new InteractionHolder(null, 0, Enumerations.Elements.Normal,
+            ElementInteractionResult.Damage, Enumerations.ContactTypes.None, false, null, false, Enumerations.DamageEffects.None);
 
         public InteractionHolder(BattleEntity entity, int totalDamage, Enumerations.Elements damageElement, ElementInteractionResult elementResult,
             Enumerations.ContactTypes contactType, bool piercing, StatusChanceHolder[] statusesInflicted, bool hit, Enumerations.DamageEffects damageEffect)
@@ -386,7 +387,7 @@ namespace PaperMarioBattleSystem
 
             IsPaybackDamage = false;
 
-            ShouldDamageEntity = true;
+            DontDamageEntity = false;
         }
     }
 
@@ -726,8 +727,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class InteractionResult
     {
-        public InteractionHolder AttackerResult;
-        public InteractionHolder VictimResult;
+        public InteractionHolder AttackerResult = InteractionHolder.Default;
+        public InteractionHolder VictimResult = InteractionHolder.Default;
 
         public InteractionResult()
         {

@@ -428,7 +428,7 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            EntityTurn.OnTurnEnd();
+            EntityTurn.EndTurn();
 
             //The battle is finished
             if (State == BattleState.Done)

@@ -137,6 +137,8 @@
     <Compile Include="Classes\BattleEvents\DamagedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DeathBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\GroundedBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\HealFPBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\HealHPBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\MessageBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\PlayAnimBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\RemoveWingsBattleEvent.cs" />
@@ -169,6 +171,8 @@
     <Compile Include="Classes\Collectibles\Badges\GroupFocusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\HeadRattleBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\HealthStateBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\HPDrainBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\HPDrainPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\HPPlusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\HPPlusPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\IcePowerBadge.cs" />

@@ -117,8 +117,8 @@ namespace PaperMarioBattleSystem
                     //This updates the front and back player references and their battle positions
                     BattleManager.Instance.SwitchToTurn(PlayerType == PlayerTypes.Partner ? PlayerTypes.Mario : PlayerTypes.Partner);
 
-                    //End the current player's turn. This won't affect the number of turns the
-                    //players have, as that is handled in the entity's own EndTurn() method
+                    //Decrement the current entity's turns used and end its turn. This keeps that entity's number of turns the same
+                    BattleManager.Instance.EntityTurn.SetTurnsUsed(BattleManager.Instance.EntityTurn.TurnsUsed - 1);
                     BattleManager.Instance.TurnEnd();
 
                     //Queue a Battle Event to swap the current positions of Mario and his Partner

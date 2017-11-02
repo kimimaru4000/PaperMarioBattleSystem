@@ -119,6 +119,11 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new WEmblemBadge());
 
             Inventory.Instance.AddBadge(new PityFlowerBadge());
+            Inventory.Instance.AddBadge(new HPDrainBadge());
+            Inventory.Instance.AddBadge(new HPDrainBadge());
+            Inventory.Instance.AddBadge(new HPDrainBadge());
+            Inventory.Instance.AddBadge(new FPDrainBadge());
+            Inventory.Instance.AddBadge(new FPDrainBadge());
 
             //Items
             Inventory.Instance.AddItem(new Mushroom());

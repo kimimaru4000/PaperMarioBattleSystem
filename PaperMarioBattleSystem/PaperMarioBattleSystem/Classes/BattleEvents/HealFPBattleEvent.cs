@@ -18,9 +18,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected BattleEntity EntityHealed = null;
 
-        public HealFPBattleEvent(BattleEntity entityHealed)
+        public HealFPBattleEvent(BattleEntity entityHealed, int fpHeal)
         {
             EntityHealed = entityHealed;
+            FPHeal = fpHeal;
+
+            IsCombineable = true;
         }
 
         protected override void OnUpdate()
@@ -29,6 +32,16 @@ namespace PaperMarioBattleSystem
             EntityHealed.HealFP(FPHeal);
 
             End();
+        }
+
+        public override void Combine(BattleEvent other)
+        {
+            HealFPBattleEvent fpEvent = other as HealFPBattleEvent;
+            if (fpEvent != null)
+            {
+                //Add the fp heal amount onto this one
+                FPHeal += fpEvent.FPHeal;
+            }
         }
     }
 }

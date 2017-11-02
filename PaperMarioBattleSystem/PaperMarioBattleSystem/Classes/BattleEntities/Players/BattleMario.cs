@@ -121,6 +121,14 @@ namespace PaperMarioBattleSystem
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.WEmblem, BadgeGlobals.BadgeFilterType.Equipped)?.UnEquip();
 
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PityFlower, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+
+            //MStats.HammerLevel = EquipmentGlobals.HammerLevels.Ultra;
+            //MStats.BootLevel = EquipmentGlobals.BootLevels.Ultra;
         }
 
         protected sealed override BattleMenu GetMainBattleMenu()

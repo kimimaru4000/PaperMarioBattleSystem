@@ -122,8 +122,29 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
+            //If the battle event is combineable, find one of the same type
+            if (battleEvent.IsCombineable == true)
+            {
+                if (BattleEvents.ContainsKey(priority) == true)
+                {
+                    //NOTE: Checking for same type isn't ideal; find a better way to do this sort of thing
+                    //and allow possibilities of combining values with other types of Battle Events as well
+                    BattleEvent combinedEvent = BattleEvents[priority].Find((evt) => (evt.GetType() == battleEvent.GetType()));
+
+                    //If we found it, combine the newly event's contents into the existing one
+                    if (combinedEvent != null)
+                    {
+                        Debug.Log($"Combined BattleEvent {battleEvent} with Priority {priority} as one it can combine with was found in the queue!");
+
+                        combinedEvent.Combine(battleEvent);
+
+                        //Return since we already combined the data from the battle event
+                        return;
+                    }
+                }
+            }
             //If the battle event is unique, check if one with the same contents exist
-            if (battleEvent.IsUnique == true)
+            else if (battleEvent.IsUnique == true)
             {
                 if (BattleEvents.ContainsKey(priority) == true)
                 {

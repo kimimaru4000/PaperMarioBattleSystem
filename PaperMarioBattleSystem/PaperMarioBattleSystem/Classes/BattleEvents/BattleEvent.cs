@@ -32,6 +32,13 @@ namespace PaperMarioBattleSystem
         public bool IsUnique { get; protected set; } = false;
 
         /// <summary>
+        /// Tells if the Battle Event is combineable. If it's combineable, it's also unique.
+        /// <para>If combineable, its contents will be combined with other Battle Events of the same type with the same priority
+        /// when added to take effect.</para>
+        /// </summary>
+        public bool IsCombineable { get; protected set; } = false;
+
+        /// <summary>
         /// Whether the Battle Event is done or not.
         /// </summary>
         protected bool Done { get; private set; } = false;
@@ -117,6 +124,15 @@ namespace PaperMarioBattleSystem
         public virtual bool AreContentsEqual(BattleEvent other)
         {
             return (this == other);
+        }
+
+        /// <summary>
+        /// Combines the contents of this Battle Event with the contents of another Battle Event instance of the same type.
+        /// </summary>
+        /// <param name="other">The Battle Event to combine into this one.</param>
+        public virtual void Combine(BattleEvent other)
+        {
+
         }
     }
 }

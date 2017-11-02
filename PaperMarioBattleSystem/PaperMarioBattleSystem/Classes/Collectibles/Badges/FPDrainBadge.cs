@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The HP Drain Badge - Reduces Mario's Attack by 1 and recovers 1 HP after damaging one or more enemies.
+    /// The FP Drain Badge - Reduces Mario's Attack by 1 and recovers 1 FP after damaging one or more enemies.
     /// </summary>
-    public class HPDrainBadge : Badge
+    public sealed class FPDrainBadge : Badge
     {
         private const int AttackReduction = 1;
 
@@ -19,15 +19,15 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private bool QueuedHeal = false;
 
-        public HPDrainBadge()
+        public FPDrainBadge()
         {
             Name = "HP Drain";
-            Description = "Drops Mario's Attack power by 1 but regain 1 HP per attack.";
+            Description = "Drop Mario's Attack power by 1 but regain 1 FP per attack.";
 
             BPCost = 1;
             PriceValue = 50;
-            
-            BadgeType = BadgeGlobals.BadgeTypes.HPDrain;
+
+            BadgeType = BadgeGlobals.BadgeTypes.FPDrain;
             AffectedType = BadgeGlobals.AffectedTypes.Self;
         }
 
@@ -57,16 +57,16 @@ namespace PaperMarioBattleSystem
 
         private void OnDamagedEntity(InteractionHolder damageInfo)
         {
-            //HP Drain doesn't take effect if damaging with Payback or if the damage dealt is 0
+            //FP Drain doesn't take effect if damaging with Payback or if the damage dealt is 0
             if (damageInfo.IsPaybackDamage == true || damageInfo.TotalDamage == 0 || QueuedHeal == true)
             {
                 return;
             }
 
-            //Queue a Battle Event to heal HP after your turn is over
-            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.HealHP,
+            //Queue a Battle Event to heal FP after your turn is over
+            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.HealFP,
                 new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
-                new HealHPBattleEvent(EntityEquipped, 1));
+                new HealFPBattleEvent(EntityEquipped, 1));
 
             //Mark that the heal is queued
             QueuedHeal = true;

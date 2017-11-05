@@ -1,0 +1,42 @@
+Refactoring for New Battle Entities (11/4/17)
+---------------------------------------------
+The main issue with the current BattleManager is it's quite a task to add a new type of Battle Entity.
+
+In the PM series, there are various types of Battle Entities, which are listed in the "Types of Battle Entities in the PM Games" document, so let's just list the main types:
+-Players
+-Main Enemies
+-Helper Enemies
+-Audience
+-Neutral
+
+Right now we have support for Players and Enemies, but even then it's not refined enough: there's no easy access to all the Battle Entities in battle, and most
+methods check only for players or enemies (and perform casts which will cause exceptions for other types). The goal is to allow the BattleManager to support more types
+of Battle Entities while still being as easy to use as, or even easier than, it currently is.
+
+Step 1
+------
+First, provide access to all types of Battle Entities in battle and provide a means to filter them.
+
+Solution 1
+----------
+-We can have:
+
+Dictionary<EntityTypes, List<BattleEntity>>
+
+The Dictionary allows us to keep separate lists for each type of BattleEntity while simultaneously having access to every one of them. This provides easy access and a means of filtering. A List<BattleEntity> is used as the value because it can be freely resized, which is what we want, since Battle Entities can call allies into battle.
+
+For Mario and his Partner: we can still keep their helper properties to reference them, so they will just need to be added to this Dictionary.
+
+We can also add helper properties for any other Battle Entities if appropriate; just make sure they're in this Dictionary as well.
+
+Step 2
+------
+Refactor how enemies and their battle indices are stored and handled. They still use the old array system with 5 slots but with a List instead. We should support any number of enemies
+in battle. These changes will help lead the way for adding more entity types.
+
+Solution 2
+----------
+-No longer have null entries in the Enemies list. This will break methods involving finding enemy indices, so we'll need to fix them.
+
+
+Once these two steps are in place, we'll see how to move forward with the rest.

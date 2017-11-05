@@ -1,0 +1,56 @@
+Types of Battle Entities in the PM Games (11/4/17)
+--------------------------------------------------
+This document details the types of Battle Entities in both Paper Mario games.
+
+-Players; only one of each at any given time, but the Partner can be absent in some situations (Ex. Prologue, start of 2nd half of TTYDs's Chapter 4)
+  -Mario
+  -Partners
+    -Goombario
+    -Kooper
+    -Bombette
+    -Parakarry
+    -Bow
+    -Watt
+    -Sushie
+    -Lakilester
+    -Goombella
+    -Koops
+    -Yoshi
+    -Flurrie
+    -Vivian
+    -Bobbery
+    -Ms. Mowz
+-Main Enemies; often 5-6 max with any number available between 0 and the max
+  -Goombas
+  -Koopa Troopas
+  -Gulpits
+  -Spinies
+  -MANY more
+-Helper Enemies; the number of them possible depends on the main enemy
+  -Mini-Yux (for Yux)
+  -Mini-Z-Yux (for Z-Yux)
+  -Mini-X-Yux (for X-Yux)
+  -Grodus X (for Grodus)
+  -Petit Piranhas (for Lava Piranha)
+  -Crystal Bits (for Crystal King)
+  -Tuff Puff (for Huff N' Puff)
+-Audience; there's only one Audience as a whole, but the Audience is made up of various members with a max count. The Audience is completely absent in TTYD until you get Star Power. Some bosses make use of the Audience to heal or use in an attack. Clock Out can target it to put the Audience to sleep.
+  -Luigi
+  -X-Naut
+  -Boo
+  -Hammer Bros.
+  -Dull Bones
+  -Shy Guy
+  -Crazee Dayzee
+  -Puni
+  -Bulky Bob-Omb
+  -Goomba
+  -Piranha Plant
+  -Red Toad
+  -Blue Toad
+  -Green Toad
+  -Koopa Troopa
+-Neutral; very few instances of these. They don't take turns but can be attacked or used by other BattleEntities for some purpose
+  -Gulpit's Rock; can be attacked by Players but aren't first in the selection (you have to move left from the leftmost enemy) and aren't targeted in multi-hit moves. Used by Gulpits to be thrown at Mario and show up ONLY in battles with Gulpits. Around 6 max.
+    -Small rock (still called Gulpit's Rock); adds 3 damage to Gulpit attack
+    -Large rock (still called Gulpit's Rock); adds 5 damage to Gulpit attack

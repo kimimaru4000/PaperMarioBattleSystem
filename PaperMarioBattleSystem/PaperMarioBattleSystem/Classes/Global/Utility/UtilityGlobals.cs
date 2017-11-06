@@ -36,6 +36,36 @@ namespace PaperMarioBattleSystem
         public static double LerpPrecise(double value1, double value2, float amount) => ((1 - amount) * value1) + (value2 * amount);
         public static int LerpPrecise(int value1, int value2, float amount) => (int)(((1 - amount) * value1) + (value2 * amount));
 
+        /// <summary>
+        /// Gets the angle between two Vector2s in radians.
+        /// </summary>
+        /// <param name="vec1">The first vector.</param>
+        /// <param name="vec2">The second vector.</param>
+        /// <returns>A float representing the angle between the two vectors, in radians.</returns>
+        public static float Angle(Vector2 vec1, Vector2 vec2)
+        {
+            //a · b = (a.X * b.X) + (a.Y * b.Y) = ||a|| * ||b|| * cos(θ)
+            double dotProduct = Vector2.Dot(vec1, vec2);
+            double mag1 = vec1.Length();
+            double mag2 = vec2.Length();
+
+            double magMult = mag1 * mag2;
+
+            double div = dotProduct / magMult;
+
+            double angleRadians = Math.Acos(div);
+
+            return (float)angleRadians;
+        }
+
+        /// <summary>
+        /// Gets the angle between two Vector2s in degrees.
+        /// </summary>
+        /// <param name="vec1">The first vector.</param>
+        /// <param name="vec2">The second vector.</param>
+        /// <returns>A float representing the angle between the two vectors, in degrees.</returns>
+        public static float AngleDegrees(Vector2 vec1, Vector2 vec2) => ToDegrees(Angle(vec1, vec2));
+
         //NOTE: (Leaving this here for now)
         //TTYD checks rand(100) < enemy susceptibility for a given value, such as chance of being inflicted with Dizzy
         //Clock Out and Showstopper are a bit different:

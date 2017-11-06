@@ -22,10 +22,11 @@ Feel free to submit a pull request with details on your changes. Make sure your 
 
 ## Author(s)
 * **Thomas Deeb (aka Kimimaru)**
+
 Contact: thomasdeeb1@gmail.com
 
 ## License
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+This project is licensed under the MIT License - see the LICENSE.md file for details.
 
 ## Acknowledgements
 * Jdaster64 (evasion Badge stacking, many other in-depth mechanics on the Paper Mario games) - https://supermariofiles.wordpress.com/

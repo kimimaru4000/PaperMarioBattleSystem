@@ -104,6 +104,12 @@ namespace PaperMarioBattleSystem
         private int EnemyTurn = 0;
 
         /// <summary>
+        /// All the BattleEntities taking part in the battle.
+        /// <para>The key is the EntityType and the value is the list of BattleEntities.</para>
+        /// </summary>
+        private readonly Dictionary<EntityTypes, List<BattleEntity>> AllEntities = new Dictionary<EntityTypes, List<BattleEntity>>();
+
+        /// <summary>
         /// The BattlePlayer in the Front
         /// </summary>
         private BattlePlayer FrontPlayer = null;
@@ -126,7 +132,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Enemy list. Enemies are displayed in order
         /// </summary>
-        private List<BattleEnemy> Enemies = new List<BattleEnemy>(BattleGlobals.MaxEnemies);
+        private List<BattleEnemy> Enemies = new List<BattleEnemy>(BattleGlobals.MaxEnemies);//> AllEntities.ContainsKey(EntityTypes.Enemy) ? AllEntities[EntityTypes.Enemy] : null;
 
         /// <summary>
         /// The number of enemies alive
@@ -564,6 +570,51 @@ namespace PaperMarioBattleSystem
         }
 
         #region Helper Methods
+
+        /*public void AddEntities(EntityTypes entityType, IList<BattleEntity> battleEntities)
+        {
+            //Don't add a null list
+            if (battleEntities == null)
+            {
+                Debug.LogError($"Not adding null BattleEntities of type {entityType}!");
+                return;
+            }
+
+            //If no entry exists for this EntityType, add one
+            if (AllEntities.ContainsKey(entityType) == false)
+            {
+                AllEntities.Add(entityType, new List<BattleEntity>());
+            }
+
+            //Add the BattleEntities
+            AllEntities[entityType].AddRange(battleEntities);
+        }
+
+        public void RemoveEntities(EntityTypes entityType, IList<BattleEntity> battleEntities)
+        {
+            //Don't remove a null list
+            if (battleEntities == null)
+            {
+                Debug.LogError($"Not removing null BattleEntities of type {entityType}!");
+                return;
+            }
+
+            //If no entities of this type are present, there's nothing to remove
+            if (AllEntities.ContainsKey(entityType) == false)
+            {
+                Debug.LogError($"Can't remove BattleEntities of type {entityType} since they're not in battle!");
+                return;
+            }
+
+            //Remove all specified entities from the list
+            AllEntities[entityType].RemoveFromList(battleEntities);
+
+            //If there are no more entities left for this EntityType, remove the entry
+            if (AllEntities[entityType].Count == 0)
+            {
+                AllEntities.Remove(entityType);
+            }
+        }*/
 
         /// <summary>
         /// Adds enemies to battle

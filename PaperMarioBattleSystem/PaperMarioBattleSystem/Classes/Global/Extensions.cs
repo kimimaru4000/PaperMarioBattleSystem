@@ -262,5 +262,23 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        #region List Extensions
+
+        /// <summary>
+        /// Removes an <see cref="IList{T}"/> of elements from the <see cref="List{T}"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the List and IList.</typeparam>
+        /// <param name="list">The <see cref="List{T}"/> to remove elements from.</param>
+        /// <param name="elements">The elements to remove from the <see cref="List{T}"/>.</param>
+        public static void RemoveFromList<T>(this List<T> list, IList<T> elements)
+        {
+            for (int i = 0; i < elements.Count; i++)
+            {
+                list.Remove(elements[i]);
+            }
+        }
+
+        #endregion
     }
 }

@@ -167,6 +167,16 @@ Koopatrol
 ---------
 Hide - Still takes damage from Status Effects that deal damage, such as Poison and Burn. It can still be blown away with Gale Force.
 
+Koops
+-----
+Shell Shield - Creates a giant shell that takes damage for Mario until it reaches 0 HP.
+
+It has 2 to 8 HP based on how well the Action Command is performed.
+
+It can take damage for Mario even if he can't be hit. For example, if Mario is in Vivian's Veil, attacks targeted at him will still hit the shell.
+
+The only way to see the shell's HP is with the Peekaboo Badge, as it cannot be tattled.
+
 General
 -------
 For the Cloud Nine, Water Block, and Turbo Charge Status Effects, it shows the order

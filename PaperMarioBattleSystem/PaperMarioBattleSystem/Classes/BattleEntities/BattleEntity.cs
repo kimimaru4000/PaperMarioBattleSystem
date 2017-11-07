@@ -104,6 +104,14 @@ namespace PaperMarioBattleSystem
         public Color TintColor { get; set;  } = Color.White;
 
         /// <summary>
+        /// The entity's battle index.
+        /// <para>This indicates its relation to BattleEntities of the same EntityType.
+        /// In most cases, it corresponds to its position from the left side of the stage and
+        /// its reference index in its entity list.</para>
+        /// </summary>
+        public int BattleIndex { get; private set; } = -1;
+
+        /// <summary>
         /// The entity's current position
         /// </summary>
         public Vector2 Position { get; set; } = Vector2.Zero;
@@ -515,6 +523,7 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// What occurs when the battle is started for the entity.
+        /// <para>This is called when the entity is first added to the battle.</para>
         /// </summary>
         public virtual void OnBattleStart()
         {
@@ -694,6 +703,11 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        public void SetBattleIndex(int battleIndex)
+        {
+            BattleIndex = battleIndex;
+        }
 
         public void SetBattlePosition(Vector2 battlePos)
         {

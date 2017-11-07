@@ -164,7 +164,10 @@ namespace PaperMarioBattleSystem
         {
             EnemyAddedEvent = null;
 
-            //Call clean up on all BattleEntities in battle
+            //Remove and cleanup all BattleEntities in battle
+            //RemoveEntities(EntityTypes.Player, GetEntitiesList(EntityTypes.Player, null));
+            //RemoveEntities(EntityTypes.Player, GetEntitiesList(EntityTypes.Enemy, null));
+
             Mario?.CleanUp();
             Partner?.CleanUp();
 
@@ -574,9 +577,9 @@ namespace PaperMarioBattleSystem
         /*public void AddEntities(EntityTypes entityType, IList<BattleEntity> battleEntities)
         {
             //Don't add a null list
-            if (battleEntities == null)
+            if (battleEntities == null || battleEntities.Count == 0)
             {
-                Debug.LogError($"Not adding null BattleEntities of type {entityType}!");
+                Debug.LogError($"Not adding null or empty BattleEntities IList of type {entityType}!");
                 return;
             }
 
@@ -587,15 +590,34 @@ namespace PaperMarioBattleSystem
             }
 
             //Add the BattleEntities
-            AllEntities[entityType].AddRange(battleEntities);
-        }
+            for (int i = 0; i < battleEntities.Count; i++)
+            {
+                BattleEntity entity = battleEntities[i];
 
+                //Don't add null BattleEntities
+                if (entity == null)
+                {
+                    Debug.LogError($"Not adding null BattleEntity of type {entityType} at index {i}");
+                    continue;
+                }
+
+                AllEntities[entityType].Add(entity);
+                //Set battle index, initialize, and start battle for the entity
+
+
+                entity.OnBattleStart();
+            }
+
+            //Sort by BattleIndex
+            AllEntities[entityType].Sort(BattleGlobals.EntityBattleIndexSort);
+        }
+        
         public void RemoveEntities(EntityTypes entityType, IList<BattleEntity> battleEntities)
         {
-            //Don't remove a null list
-            if (battleEntities == null)
+            //Don't remove a null or empty list
+            if (battleEntities == null || battleEntities.Count == 0)
             {
-                Debug.LogError($"Not removing null BattleEntities of type {entityType}!");
+                Debug.LogError($"Not removing null or empty BattleEntities of type {entityType}!");
                 return;
             }
 
@@ -607,12 +629,32 @@ namespace PaperMarioBattleSystem
             }
 
             //Remove all specified entities from the list
-            AllEntities[entityType].RemoveFromList(battleEntities);
+            for (int i = 0; i < battleEntities.Count; i++)
+            {
+                BattleEntity entity = battleEntities[i];
+
+                //Check for null entries
+                if (entity == null)
+                {
+                    Debug.LogError($"Not removings null BattleEntity of type {entityType} at index {i}");
+                    continue;
+                }
+
+                AllEntities[entityType].Remove(entity);
+
+                //Clean up the entity
+                entity.CleanUp();
+            }
 
             //If there are no more entities left for this EntityType, remove the entry
             if (AllEntities[entityType].Count == 0)
             {
                 AllEntities.Remove(entityType);
+            }
+            //Otherwise, sort the remaining list by battle index
+            else
+            {
+                AllEntities[entityType].Sort(BattleGlobals.EntityBattleIndexSort);
             }
         }*/
 

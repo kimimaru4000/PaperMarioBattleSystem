@@ -40,3 +40,25 @@ Solution 2
 
 
 Once these two steps are in place, we'll see how to move forward with the rest.
+
+Update (11/6/17)
+----------------
+Every type of BattleEntity, not just enemies, can benefit from having a BattleIndex, so it makes sense to give every type one even if not all use it for the same purpose.
+
+Right now, enemy battle indices go from left to right, but the "first" player is considered the one in the front, which is on the right.
+
+Let's set a few things in place:
+
+-The BattleIndex should, in general, represent where to expect the BattleEntity in relation to all the others of its type from the left side of the stage.
+  -Exceptions include Bomb Squad bombs, which can be anywhere. However, the lower indices will detonate first.
+-As a result, BattleEntities on the left will have lower BattleIndices. If two BattleEntities are on the same X position (Ex. Mini-Yux), the one with a higher Y position should
+have a lower Battleindex.
+  -This means the Partner initially has a BattleIndex of 0 and Mario has a BattleIndex of 1. When switching places, they will also swap BattleIndices.
+  
+-In most cases, a BattleIndex will also correspond to the index in the list referencing that BattleEntity (Ex. Enemies[1] will have a BattleIndex of 1).
+  -Here's a case where this is not true: take 2 enemies, with indices 0 and 1. If the enemy with index 0 is killed, only 1 will be left. So Enemies[0] will have a BattleIndex of 1.
+-When BattleEntities are added or removed from a BattleEntity list, sort by BattleIndex.
+-The types of BattleEntities should determine for themselves where their BattlePositions are based on the BattleIndex. This keeps that code out of the BattleManager, makes it easier to modify, and makes it easier to add new types of BattleEntities.
+
+  
+

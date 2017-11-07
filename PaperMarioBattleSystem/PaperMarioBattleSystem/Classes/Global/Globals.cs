@@ -490,22 +490,6 @@ namespace PaperMarioBattleSystem
         }
     }
 
-    /// <summary>
-    /// Holds information about the result of TryGetValue from a Dictionary, including the value and whether the value was found.
-    /// </summary>
-    /// <typeparam name="V">The type of the value.</typeparam>
-    public struct DictionaryVal<V>
-    {
-        public bool Found { get; private set; }
-        public V Value { get; private set; }
-
-        public DictionaryVal(bool found, V value)
-        {
-            Found = found;
-            Value = value;
-        }
-    }
-
     #endregion
 
     #region Classes
@@ -1249,6 +1233,33 @@ namespace PaperMarioBattleSystem
                 States = battleStates;
                 PendingBattleEvent = battleEvent;
             }
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// A Comparison method used to sort BattleEntities by their BattleIndex.
+        /// </summary>
+        /// <param name="entity1">The first BattleEntity whose BattleIndex to compare.</param>
+        /// <param name="entity2">The second BattleEntity whose BattleIndex to compare.</param>
+        /// <returns>-1 if entity1 has a lower BattleIndex, 1 if entity2 has a lower BattleIndex, and 0 if they have the same BattleIndex.</returns>
+        public static int EntityBattleIndexSort(BattleEntity entity1, BattleEntity entity2)
+        {
+            //Check for null
+            if (entity1 == null)
+                return 1;
+            if (entity2 == null)
+                return -1;
+
+            //Compare BattleIndex; lower ones are favored
+            if (entity1.BattleIndex < entity2.BattleIndex)
+                return -1;
+            else if (entity1.BattleIndex > entity2.BattleIndex)
+                return 1;
+
+            return 0;
         }
 
         #endregion

@@ -223,46 +223,6 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        #region Dictionary Extensions
-
-        /// <summary>
-        /// A convenient wrapper around Dictionary.TryGetValue().
-        /// </summary>
-        /// <typeparam name="K">The type of the key.</typeparam>
-        /// <typeparam name="V">The type of the value.</typeparam>
-        /// <param name="dict">The Dictionary to get the value from.</param>
-        /// <param name="key">The key to get the value of.</param>
-        /// <returns>A DictionaryVal with a bool indicating if the value was found and the associated value.</returns>
-        public static DictionaryVal<V> GetValueOrDefault<K, V>(this Dictionary<K, V> dict, K key)
-        {
-            V val;
-            bool found = dict.TryGetValue(key, out val);
-
-            return new DictionaryVal<V>(found, val);
-        }
-
-        #endregion
-
-        #region SortedDictionary Extensions
-
-        /// <summary>
-        /// A convenient wrapper around SortedDictionary.TryGetValue().
-        /// </summary>
-        /// <typeparam name="K">The type of the key.</typeparam>
-        /// <typeparam name="V">The type of the value.</typeparam>
-        /// <param name="dict">The SortedDictionary to get the value from.</param>
-        /// <param name="key">The key to get the value of.</param>
-        /// <returns>A DictionaryVal with a bool indicating if the value was found and the associated value.</returns>
-        public static DictionaryVal<V> GetValueOrDefault<K, V>(this SortedDictionary<K, V> dict, K key)
-        {
-            V val;
-            bool found = dict.TryGetValue(key, out val);
-
-            return new DictionaryVal<V>(found, val);
-        }
-
-        #endregion
-
         #region List Extensions
 
         /// <summary>

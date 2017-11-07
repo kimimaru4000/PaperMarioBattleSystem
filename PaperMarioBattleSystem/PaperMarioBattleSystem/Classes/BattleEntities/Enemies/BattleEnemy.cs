@@ -13,11 +13,6 @@ namespace PaperMarioBattleSystem
     public abstract class BattleEnemy : BattleEntity
     {
         /// <summary>
-        /// The spot index of the Enemy in battle
-        /// </summary>
-        public int BattleIndex { get; private set; } = -1;
-
-        /// <summary>
         /// The Collectible the Enemy is holding
         /// </summary>
         public Collectible HeldCollectible { get; protected set; } = null;
@@ -27,11 +22,6 @@ namespace PaperMarioBattleSystem
             Name = "Partner";
 
             EntityType = Enumerations.EntityTypes.Enemy;
-        }
-
-        public void SetBattleIndex(int battleIndex)
-        {
-            BattleIndex = battleIndex;
         }
 
         public override void OnBattleStart()

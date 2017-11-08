@@ -107,14 +107,14 @@ namespace PaperMarioBattleSystem
             else if (Input.GetKeyDown(Keys.Z)) OnConfirm();
             else if (Input.GetKeyDown(Keys.C))
             {
-                BattlePlayer otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.GetFrontPlayer()
+                BattleEntity otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.GetFrontPlayer()
                     ? BattleManager.Instance.GetBackPlayer() : BattleManager.Instance.GetFrontPlayer();
 
                 //Don't switch if the back player is dead
                 if (CanSwitch() == true)
                 {
                     //Switch turns with Mario or the Partner
-                    //This updates the front and back player references and their battle positions
+                    //This updates the front and back player battle indices and their battle positions
                     BattleManager.Instance.SwitchToTurn(PlayerType == PlayerTypes.Partner ? PlayerTypes.Mario : PlayerTypes.Partner);
 
                     //Decrement the current entity's turns used and end its turn. This keeps that entity's number of turns the same
@@ -188,7 +188,7 @@ namespace PaperMarioBattleSystem
         /// <returns>true if Mario or his Partner hasn't used up all of his or her turns and isn't dead, otherwise false.</returns>
         private bool CanSwitch()
         {
-            BattlePlayer otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.GetFrontPlayer()
+            BattleEntity otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.GetFrontPlayer()
                     ? BattleManager.Instance.GetBackPlayer() : BattleManager.Instance.GetFrontPlayer();
 
             int immobile = otherPlayer.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.Immobile);

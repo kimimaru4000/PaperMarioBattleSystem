@@ -28,6 +28,14 @@ namespace PaperMarioBattleSystem
         {
             base.OnBattleStart();
 
+            //Set battle position
+            Vector2 battlepos = BattleManager.Instance.EnemyStartPos + new Vector2(BattleManager.Instance.PositionXDiff * BattleIndex, 0);
+            if (HeightState == Enumerations.HeightStates.Airborne) battlepos.Y -= BattleManager.Instance.AirborneY;
+            else if (HeightState == Enumerations.HeightStates.Ceiling) battlepos.Y -= BattleManager.Instance.CeilingY;
+
+            SetBattlePosition(battlepos);
+            Position = BattlePosition;
+
             //Equip the held Badge, if one is held
             if (HeldCollectible?.CollectibleType == Enumerations.CollectibleTypes.Badge)
             {

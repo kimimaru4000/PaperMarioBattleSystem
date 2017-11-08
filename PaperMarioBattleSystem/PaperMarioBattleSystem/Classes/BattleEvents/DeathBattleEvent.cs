@@ -51,6 +51,12 @@ namespace PaperMarioBattleSystem
 
             if (DeathAnim.Finished == true)
             {
+                //Play death sound if it's an enemy
+                if (Entity.EntityType == Enumerations.EntityTypes.Enemy)
+                {
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyDeath);
+                }
+
                 End();
             }
         }

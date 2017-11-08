@@ -31,8 +31,7 @@ We can also add helper properties for any other Battle Entities if appropriate; 
 
 Step 2
 ------
-Refactor how enemies and their battle indices are stored and handled. They still use the old array system with 5 slots but with a List instead. We should support any number of enemies
-in battle. These changes will help lead the way for adding more entity types.
+Refactor how enemies and their battle indices are stored and handled. They still use the old array system with 5 slots but with a List instead. We can still limit the max number of enemies in battle, but this will allow for any number of enemies in battle. These changes will help lead the way for adding more entity types.
 
 Solution 2
 ----------
@@ -51,14 +50,13 @@ Let's set a few things in place:
 
 -The BattleIndex should, in general, represent where to expect the BattleEntity in relation to all the others of its type from the left side of the stage.
   -Exceptions include Bomb Squad bombs, which can be anywhere. However, the lower indices will detonate first.
+  -Another exception includes players: the players further to the right go first despite having a lower BattleIndex
 -As a result, BattleEntities on the left will have lower BattleIndices. If two BattleEntities are on the same X position (Ex. Mini-Yux), the one with a higher Y position should
 have a lower Battleindex.
-  -This means the Partner initially has a BattleIndex of 0 and Mario has a BattleIndex of 1. When switching places, they will also swap BattleIndices.
-  
 -In most cases, a BattleIndex will also correspond to the index in the list referencing that BattleEntity (Ex. Enemies[1] will have a BattleIndex of 1).
   -Here's a case where this is not true: take 2 enemies, with indices 0 and 1. If the enemy with index 0 is killed, only 1 will be left. So Enemies[0] will have a BattleIndex of 1.
--When BattleEntities are added or removed from a BattleEntity list, sort by BattleIndex.
+-When BattleEntities are added to a BattleEntity list, sort by BattleIndex.
 -The types of BattleEntities should determine for themselves where their BattlePositions are based on the BattleIndex. This keeps that code out of the BattleManager, makes it easier to modify, and makes it easier to add new types of BattleEntities.
 
-  
+
 

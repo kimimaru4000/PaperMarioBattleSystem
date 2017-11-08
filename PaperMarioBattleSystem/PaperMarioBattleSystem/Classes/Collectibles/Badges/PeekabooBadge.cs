@@ -25,20 +25,20 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            BattleManager.Instance.EnemyAddedEvent -= OnEnemyAdded;
-            BattleManager.Instance.EnemyAddedEvent += OnEnemyAdded;
+            BattleManager.Instance.EntityAddedEvent -= OnEntityAdded;
+            BattleManager.Instance.EntityAddedEvent += OnEntityAdded;
 
             //For all current enemies, show their HP
             BattleEntity[] enemies = BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Enemy, null);
             for (int i = 0; i < enemies.Length; i++)
             {
-                AddShowHPProperty((BattleEnemy)enemies[i]);
+                AddShowHPProperty(enemies[i]);
             }
         }
 
         protected override void OnUnequip()
         {
-            BattleManager.Instance.EnemyAddedEvent -= OnEnemyAdded;
+            BattleManager.Instance.EntityAddedEvent -= OnEntityAdded;
 
             //For all current enemies, remove showing their HP (unless tattled, which will handle itself)
             BattleEntity[] enemies = BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Enemy, null);
@@ -48,20 +48,23 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private void OnEnemyAdded(BattleEnemy enemy)
+        private void OnEntityAdded(BattleEntity entity)
         {
-            //Tell the enemy to show its HP. Note that we have an integer in case they have been tattled
-            AddShowHPProperty(enemy);
+            if (entity.EntityType == Enumerations.EntityTypes.Enemy)
+            {
+                //Tell the enemy to show its HP. Note that we have an integer in case they have been tattled
+                AddShowHPProperty(entity);
+            }
         }
 
-        private void AddShowHPProperty(BattleEnemy enemy)
+        private void AddShowHPProperty(BattleEntity entity)
         {
-            enemy.AddShowHPProperty();
+            entity.AddShowHPProperty();
         }
 
-        private void RemoveShowHPProperty(BattleEnemy enemy)
+        private void RemoveShowHPProperty(BattleEntity entity)
         {
-            enemy.SubtractShowHPProperty();
+            entity.SubtractShowHPProperty();
         }
     }
 }

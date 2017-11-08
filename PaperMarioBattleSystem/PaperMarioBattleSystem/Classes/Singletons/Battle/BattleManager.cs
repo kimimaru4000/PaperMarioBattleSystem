@@ -36,12 +36,19 @@ namespace PaperMarioBattleSystem
 
         #region Events
 
-        public delegate void OnEnemyAdded(BattleEnemy battleEnemy);
+        public delegate void OnEntityAdded(BattleEntity battleEntity);
         /// <summary>
-        /// The event invoked after a <see cref="BattleEnemy"/> has been added to battle.
-        /// <para>This is invoked after the enemy has been added to battle and the enemy count has been incremented.</para>
+        /// The event invoked after a <see cref="BattleEntity"/> has been added to battle.
+        /// <para>This is invoked after the entity has been added to battle and initialized.</para>
         /// </summary>
-        public event OnEnemyAdded EnemyAddedEvent = null;
+        public event OnEntityAdded EntityAddedEvent = null;
+
+        public delegate void OnEntityRemoved(BattleEntity battleEntity);
+        /// <summary>
+        /// The event invoked after a <see cref="BattleEntity"/> has been removed from battle.
+        /// <para>This is invoked after the entity has been entirely removed from battle.</para>
+        /// </summary>
+        public event OnEntityRemoved EntityRemovedEvent = null;
 
         #endregion
 
@@ -60,8 +67,8 @@ namespace PaperMarioBattleSystem
         #endregion
 
         //Starting positions
-        private readonly Vector2 MarioPos = new Vector2(-150, 100);
-        private readonly Vector2 PartnerPos = new Vector2(-190, 120);
+        public readonly Vector2 MarioPos = new Vector2(-150, 100);
+        public readonly Vector2 PartnerPos = new Vector2(-190, 120);
         public readonly Vector2 EnemyStartPos = new Vector2(150, 125);
         public readonly int PositionXDiff = 30;
         
@@ -101,7 +108,6 @@ namespace PaperMarioBattleSystem
         /// The current entity going
         /// </summary>
         public BattleEntity EntityTurn { get; private set; } = null;
-        private int EnemyTurn = 0;
 
         /// <summary>
         /// All the BattleEntities taking part in the battle.
@@ -110,14 +116,14 @@ namespace PaperMarioBattleSystem
         private readonly Dictionary<EntityTypes, List<BattleEntity>> AllEntities = new Dictionary<EntityTypes, List<BattleEntity>>();
 
         /// <summary>
-        /// The BattlePlayer in the Front
+        /// The player in the Front.
         /// </summary>
-        private BattlePlayer FrontPlayer = null;
+        private BattleEntity FrontPlayer => FindEntityFromBattleIndex(EntityTypes.Player, 0, true);
 
         /// <summary>
-        /// The BattlePlayer in the Back
+        /// The player in the Back.
         /// </summary>
-        private BattlePlayer BackPlayer = null;
+        private BattleEntity BackPlayer => FindEntityFromBattleIndex(EntityTypes.Player, 1, false);
 
         /// <summary>
         /// Mario reference
@@ -130,51 +136,52 @@ namespace PaperMarioBattleSystem
         private BattlePartner Partner = null;
 
         /// <summary>
-        /// Enemy list. Enemies are displayed in order
-        /// </summary>
-        private List<BattleEnemy> Enemies = new List<BattleEnemy>(BattleGlobals.MaxEnemies);//> AllEntities.ContainsKey(EntityTypes.Enemy) ? AllEntities[EntityTypes.Enemy] : null;
-
-        /// <summary>
         /// The number of enemies alive
         /// </summary>
-        private int EnemiesAlive = 0;
+        private int EnemiesAlive
+        {
+            get
+            {
+                List<BattleEntity> enemies = GetEntitiesList(EntityTypes.Enemy);
+                if (enemies != null)
+                    return enemies.Count;
+
+                return 0;
+            }
+        }
 
         /// <summary>
         /// Helper property showing the max number of enemies
         /// </summary>
-        private int MaxEnemies => Enemies.Capacity;
+        private int MaxEnemies => 5;//Enemies.Capacity;
 
         /// <summary>
         /// Helper property telling whether enemy spots are available or not
         /// </summary>
-        private bool EnemySpotsAvailable => (EnemiesAlive < MaxEnemies);
+        public bool EnemySpotsAvailable => (EnemiesAlive < MaxEnemies);
 
         private BattleManager()
         {
             SoundManager.Instance.SoundVolume = 0f;
 
             //TEMPORARY: For compatibility with the old array system until we migrate over completely
-            for (int i = 0; i < MaxEnemies; i++)
-            {
-                Enemies.Add(null);
-            }
+            //for (int i = 0; i < MaxEnemies; i++)
+            //{
+            //    Enemies.Add(null);
+            //}
         }
 
         public void CleanUp()
         {
-            EnemyAddedEvent = null;
+            EntityAddedEvent = null;
+            EntityRemovedEvent = null;
 
             //Remove and cleanup all BattleEntities in battle
-            //RemoveEntities(EntityTypes.Player, GetEntitiesList(EntityTypes.Player, null));
-            //RemoveEntities(EntityTypes.Player, GetEntitiesList(EntityTypes.Enemy, null));
+            RemoveEntities(EntityTypes.Player, GetEntitiesList(EntityTypes.Player));
+            RemoveEntities(EntityTypes.Enemy, GetEntitiesList(EntityTypes.Enemy));
 
-            Mario?.CleanUp();
-            Partner?.CleanUp();
-
-            for (int i = 0; i < MaxEnemies; i++)
-            {
-                Enemies[i]?.CleanUp();
-            }
+            Mario = null;
+            Partner = null;
         }
 
         /// <summary>
@@ -183,32 +190,17 @@ namespace PaperMarioBattleSystem
         /// <param name="mario">Mario</param>
         /// <param name="partner">Mario's partner</param>
         /// <param name="enemies">The enemies, in order</param>
-        public void Initialize(BattleMario mario, BattlePartner partner, List<BattleEnemy> enemies)
+        public void Initialize(BattleMario mario, BattlePartner partner, List<BattleEntity> enemies)
         {
+            //Mario always starts out in the front, and the Partner always starts out in the back
             Mario = mario;
             Partner = partner;
 
-            //Mario always starts out in the front, and the Partner always starts out in the back
-            FrontPlayer = Mario;
-            BackPlayer = Partner;
-
-            Mario.Position = MarioPos;
-            Mario.SetBattlePosition(MarioPos);
-
-            //Start battle for Mario
-            Mario.OnBattleStart();
-
-            if (Partner != null)
-            {
-                Partner.Position = PartnerPos;
-                Partner.SetBattlePosition(PartnerPos);
-
-                //Start battle for the Partner
-                Partner.OnBattleStart();
-            }
+            //Add Mario first so his Battle Index is set to 0
+            AddEntities(EntityTypes.Player, new BattleEntity[] { mario, partner });
 
             //Add and initialize enemies
-            AddEnemies(enemies);
+            AddEntities(EntityTypes.Enemy, enemies);
 
             StartBattle();
         }
@@ -236,26 +228,40 @@ namespace PaperMarioBattleSystem
                 EntityTurn.TurnUpdate();
             }
 
-            Mario.Update();
-            Partner?.Update();
-
-            for (int i = 0; i < MaxEnemies; i++)
-            {
-                Enemies[i]?.Update();
-            }
+            //Update all BattleEntities
+            UpdateEntities();
         }
 
         public void Draw()
         {
-            Mario.Draw();
-            Partner?.Draw();
-
-            for (int i = 0; i < MaxEnemies; i++)
-            {
-                Enemies[i]?.Draw();
-            }
+            //Draw all BattleEntities
+            DrawEntities();
 
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"Current turn: {EntityTurn.Name}", new Vector2(250, 10), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
+        }
+
+        private void UpdateEntities()
+        {
+            foreach (KeyValuePair<EntityTypes, List<BattleEntity>> entityPairs in AllEntities)
+            {
+                List<BattleEntity> entityList = entityPairs.Value;
+                for (int i = 0; i < entityList.Count; i++)
+                {
+                    entityList[i].Update();
+                }
+            }
+        }
+
+        private void DrawEntities()
+        {
+            foreach (KeyValuePair<EntityTypes, List<BattleEntity>> entityPairs in AllEntities)
+            {
+                List<BattleEntity> entityList = entityPairs.Value;
+                for (int i = 0; i < entityList.Count; i++)
+                {
+                    entityList[i].Draw();
+                }
+            }
         }
 
         /// <summary>
@@ -298,33 +304,37 @@ namespace PaperMarioBattleSystem
 
                 Debug.Log($"Started new phase cycle. Current cycle count: {PhaseCycleCount}");
 
-                Mario.OnPhaseCycleStart();
-                Partner.OnPhaseCycleStart();
-
-                Mario.OnPhaseStart();
-                Partner.OnPhaseStart();
-
-                for (int i = 0; i < MaxEnemies; i++)
+                //A new phase cycle started for everyone, but players just started their phase
+                List<BattleEntity> players = GetEntitiesList(EntityTypes.Player);
+                for (int i = 0; i < players.Count; i++)
                 {
-                    Enemies[i]?.OnPhaseEnd();
-                    Enemies[i]?.OnPhaseCycleStart();
+                    players[i].OnPhaseCycleStart();
+                    players[i].OnPhaseStart();
                 }
 
-                //Reset the enemy that should go next
-                EnemyTurn = 0;
+                //Enemies ended their phase
+                List<BattleEntity> enemies = GetEntitiesList(EntityTypes.Enemy);
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    enemies[i].OnPhaseEnd();
+                    enemies[i].OnPhaseCycleStart();
+                }
             }
             else if (Phase == BattlePhase.Enemy)
-            {                
-                Mario.OnPhaseEnd();
-                Partner.OnPhaseEnd();
-
-                for (int i = 0; i < MaxEnemies; i++)
+            {
+                //Players ended their phase
+                List<BattleEntity> players = GetEntitiesList(EntityTypes.Player);
+                for (int i = 0; i < players.Count; i++)
                 {
-                    Enemies[i]?.OnPhaseStart();
+                    players[i].OnPhaseEnd();
                 }
 
-                //Reset the enemy that should go next
-                EnemyTurn = 0;
+                //Enemies started their phase
+                List<BattleEntity> enemies = GetEntitiesList(EntityTypes.Enemy);
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    enemies[i].OnPhaseStart();
+                }
             }
 
             //NOTE: There's a bug: if all players and enemies have no turns, all BattleEvents will be delayed until one of them
@@ -336,22 +346,33 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Switches Mario and his Partner's battle positions and updates the Front and Back player references.
-        /// <para>The actual players' positions are not changed here but in a Battle Event.</para>
-        /// <see cref="SwapPositionBattleEvent"/>
+        /// Switches Mario and his Partner's battle positions and battle indices.
+        /// <para>The actual players' positions are not changed here but in a Battle Event.
+        /// See <see cref="SwapPositionBattleEvent"/>.</para>
         /// </summary>
         /// <param name="frontPlayer"></param>
         /// <param name="backPlayer"></param>
         private void SwitchPlayers(BattlePlayer frontPlayer, BattlePlayer backPlayer)
         {
-            Vector2 frontBattlePosition = FrontPlayer.BattlePosition;
-            Vector2 backBattlePosition = BackPlayer.BattlePosition;
+            BattleEntity curFront = FrontPlayer;
+            BattleEntity curBack = BackPlayer;
 
-            FrontPlayer.SetBattlePosition(backBattlePosition);
-            BackPlayer.SetBattlePosition(frontBattlePosition);
+            Vector2 frontBattlePosition = curFront.BattlePosition;
+            Vector2 backBattlePosition = curBack.BattlePosition;
 
-            FrontPlayer = frontPlayer;
-            BackPlayer = backPlayer;
+            int frontBattleIndex = curFront.BattleIndex;
+            int backBattleIndex = curBack.BattleIndex;
+
+            //Swap positions
+            curFront.SetBattlePosition(backBattlePosition);
+            curBack.SetBattlePosition(frontBattlePosition);
+
+            //Swap BattleIndex
+            curFront.SetBattleIndex(backBattleIndex);
+            curBack.SetBattleIndex(frontBattleIndex);
+
+            //Sort the list again since the Battle Indices changed
+            AllEntities[EntityTypes.Player].Sort(BattleGlobals.EntityBattleIndexSort);
         }
 
         /// <summary>
@@ -383,7 +404,14 @@ namespace PaperMarioBattleSystem
             BattlePartner oldPartner = Partner;
 
             Partner = newPartner;
+
+            //Remove the old partner from the entity dictionary and add the new one
+            RemoveEntities(EntityTypes.Player, new BattleEntity[] { oldPartner });
+            AddEntities(EntityTypes.Player, new BattleEntity[] { Partner });
+
+            //Set positions to the old ones
             Partner.Position = oldPartner.Position;
+            Partner.SetBattleIndex(oldPartner.BattleIndex);
             Partner.SetBattlePosition(oldPartner.BattlePosition);
 
             //Set the new Partner to use the same max number of turns all Partners have this phase cycle
@@ -404,16 +432,6 @@ namespace PaperMarioBattleSystem
 
             //Swap Partner badges with the new Partner
             BattlePartner.SwapPartnerBadges(oldPartner, Partner);
-
-            //Check if the Partner is in the front or back and set the correct reference
-            if (oldPartner == FrontPlayer)
-            {
-                FrontPlayer = Partner;
-            }
-            else if (oldPartner == BackPlayer)
-            {
-                BackPlayer = Partner;
-            }
         }
 
         public void TurnStart()
@@ -507,18 +525,19 @@ namespace PaperMarioBattleSystem
                 //Partner.PlayAnimation(AnimationGlobals.DeathName);
             }
 
-            List<BattleEnemy> deadEnemies = new List<BattleEnemy>();
+            List<BattleEntity> deadEnemies = GetEntitiesList(EntityTypes.Enemy, null);
 
-            for (int i = 0; i < MaxEnemies; i++)
+            for (int i = 0; i < deadEnemies.Count; i++)
             {
-                if (Enemies[i] != null && Enemies[i].IsDead == true)
+                if (deadEnemies[i].IsDead == false)
                 {
-                    deadEnemies.Add(Enemies[i]);
+                    deadEnemies.RemoveAt(i);
+                    i--;
                 }
             }
 
             //Remove enemies from battle here
-            RemoveEnemies(deadEnemies, true);
+            RemoveEntities(EntityTypes.Enemy, deadEnemies);
         }
 
         /// <summary>
@@ -529,54 +548,51 @@ namespace PaperMarioBattleSystem
             //Enemy phase
             if (Phase == BattlePhase.Enemy)
             {
-                //Look through all enemies, starting from the current
-                //Find the first one that has turns remaining
-                int nextEnemy = -1;
-                for (int i = EnemyTurn; i < Enemies.Count; i++)
+                List<BattleEntity> entities = GetEntitiesList(EntityTypes.Enemy);
+
+                for (int i = 0; i < entities.Count; i++)
                 {
-                    if (Enemies[i] != null && Enemies[i].UsedTurn == false && Enemies[i].IsDead == false)
+                    if (entities[i].UsedTurn == false && entities[i].IsDead == false)
                     {
-                        nextEnemy = EnemyTurn = i;
-                        EntityTurn = Enemies[nextEnemy];
-                        break;
+                        EntityTurn = entities[i];
+                        return;
                     }
                 }
 
                 //If all enemies are done with their turns, go to the player phase
-                if (nextEnemy < 0)
-                {
-                    SwitchPhase(BattlePhase.Player);
-                }
+                SwitchPhase(BattlePhase.Player);
             }
             //Player phase
             else
             {
-                //If the front player has turns remaining, it goes up next
-                if (FrontPlayer.UsedTurn == false)
+                List<BattleEntity> entities = GetEntitiesList(EntityTypes.Player);
+
+                for (int i = 0; i < entities.Count; i++)
                 {
-                    EntityTurn = FrontPlayer;
+                    if (entities[i].UsedTurn == false && entities[i].IsDead == false)
+                    {
+                        EntityTurn = entities[i];
+                        return;
+                    }
                 }
-                //Next check the back player - if it has turns remaining, it goes up
-                //The dead check is only for the BackPlayer because any dead Partners
-                //get moved to the back. If Mario dies, it shouldn't get here because
-                //the battle would be over
-                else if (BackPlayer.UsedTurn == false && BackPlayer.IsDead == false)
-                {
-                    EntityTurn = BackPlayer;
-                }
+
                 //Neither player has turns remaining, so go to the enemy phase
-                else
-                {
-                    SwitchPhase(BattlePhase.Enemy);
-                }
+                SwitchPhase(BattlePhase.Enemy);
             }
         }
 
         #region Helper Methods
 
-        /*public void AddEntities(EntityTypes entityType, IList<BattleEntity> battleEntities)
+        /*NOTE: When adding enemies or other entities in-battle, make sure to check for certain conditions (Ex. max number of enemies) first*/
+
+        /// <summary>
+        /// Adds a set of BattleEntities to battle and initializes them.
+        /// </summary>
+        /// <param name="entityType">The type of BattleEntities to add.</param>
+        /// <param name="battleEntities">An <see cref="IList{T}"/> of BattleEntities to add.</param>
+        public void AddEntities(EntityTypes entityType, IList<BattleEntity> battleEntities)
         {
-            //Don't add a null list
+            //Don't add a null or empty list
             if (battleEntities == null || battleEntities.Count == 0)
             {
                 Debug.LogError($"Not adding null or empty BattleEntities IList of type {entityType}!");
@@ -602,16 +618,25 @@ namespace PaperMarioBattleSystem
                 }
 
                 AllEntities[entityType].Add(entity);
+
                 //Set battle index, initialize, and start battle for the entity
-
-
+                entity.SetBattleIndex(FindLowestAvailableBattleIndex(entityType));
                 entity.OnBattleStart();
-            }
 
-            //Sort by BattleIndex
-            AllEntities[entityType].Sort(BattleGlobals.EntityBattleIndexSort);
+                //Sort by BattleIndex
+                //Do this each time a BattleEntity is added in case there's a gap in the battle indices
+                AllEntities[entityType].Sort(BattleGlobals.EntityBattleIndexSort);
+
+                //Invoke the entity added event
+                EntityAddedEvent?.Invoke(entity);
+            }
         }
-        
+
+        /// <summary>
+        /// Removes a set of BattleEntities from battle.
+        /// </summary>
+        /// <param name="entityType">The type of BattleEntities to remove.</param>
+        /// <param name="battleEntities">An <see cref="IList{T}"/> of BattleEntities to remove.</param>
         public void RemoveEntities(EntityTypes entityType, IList<BattleEntity> battleEntities)
         {
             //Don't remove a null or empty list
@@ -644,6 +669,9 @@ namespace PaperMarioBattleSystem
 
                 //Clean up the entity
                 entity.CleanUp();
+                
+                //Invoke the entity removed event
+                EntityRemovedEvent?.Invoke(entity);
             }
 
             //If there are no more entities left for this EntityType, remove the entry
@@ -651,107 +679,48 @@ namespace PaperMarioBattleSystem
             {
                 AllEntities.Remove(entityType);
             }
-            //Otherwise, sort the remaining list by battle index
-            else
-            {
-                AllEntities[entityType].Sort(BattleGlobals.EntityBattleIndexSort);
-            }
-        }*/
-
-        /// <summary>
-        /// Adds enemies to battle
-        /// </summary>
-        /// <param name="enemies">A list containing the enemies to add to battle</param>
-        public void AddEnemies(List<BattleEnemy> enemies)
-        {
-            //Look through all enemies and add one to the specified position
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if (EnemySpotsAvailable == false)
-                {
-                    Debug.LogError($"Cannot add enemy {enemies[i].Name} because there are no available spots left in battle! Exiting loop!");
-                    break;
-                }
-                int index = FindAvailableEnemyIndex(0);
-
-                BattleEnemy enemy = enemies[i];
-
-                //Set reference and position, then increment the number alive
-                Enemies[index] = enemy;
-
-                Vector2 battlepos = EnemyStartPos + new Vector2(PositionXDiff * index, 0);
-                if (enemy.HeightState == HeightStates.Airborne) battlepos.Y -= AirborneY;
-                else if (enemy.HeightState == HeightStates.Ceiling) battlepos.Y -= CeilingY;
-
-                enemy.Position = battlepos;
-                enemy.SetBattlePosition(battlepos);
-                enemy.SetBattleIndex(index);
-
-                //Start battle for the enemy
-                enemy.OnBattleStart();
-
-                IncrementEnemiesAlive();
-
-                //Call the enemy added event
-                EnemyAddedEvent?.Invoke(enemy);
-            }
-        }
-
-        /// <summary>
-        /// Removes enemies from battle
-        /// </summary>
-        /// <param name="enemies">A list containing the enemies to remove from battle</param>
-        /// <param name="removedFromDeath">Whether the enemies are removed because they died in battle. If true, will play the death sound.</param>
-        public void RemoveEnemies(List<BattleEnemy> enemies, bool removedFromDeath)
-        {
-            //Go through all the enemies and remove them from battle
-            for (int i = 0; i < enemies.Count; i++)
-            {
-                if (EnemiesAlive == 0)
-                {
-                    Debug.LogError($"No enemies currently alive in battle so removing is impossible!");
-                    return;
-                }
-
-                int enemyIndex = enemies[i].BattleIndex;
-                if (enemyIndex < 0)
-                {
-                    Debug.LogError($"Enemy {enemies[i].Name} cannot be removed from battle because it isn't in battle!");
-                    continue;
-                }
-
-                //Set to null and decrease number alive
-                Enemies[enemyIndex] = null;
-                DecrementEnemiesAlive();
-
-                if (removedFromDeath)
-                {
-                    SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyDeath);
-                }
-            }
         }
 
         /// <summary>
         /// Returns all entities of a specified type in a list.
+        /// The returned list is the same reference found in the <see cref="AllEntities"/> dictionary.
+        /// This method is used internally in the BattleManager.
+        /// <para>Be very careful with this list; modifying it outside of the appropriate methods may result in mismatched data.</para>
+        /// </summary>
+        /// <param name="entityType">The type of entities to return.</param>
+        /// <returns>Entities matching the type specified. If none exist, null is returned.</returns>
+        private List<BattleEntity> GetEntitiesList(EntityTypes entityType)
+        {
+            List<BattleEntity> entities = null;
+
+            //Check if we have any BattleEntities of this type available
+            if (AllEntities.ContainsKey(entityType) == true)
+            {
+                //Get the current list
+                entities = AllEntities[entityType];
+            }
+
+            return entities;
+        }
+
+        /// <summary>
+        /// Returns all entities of a specified type in a new list.
         /// This method is used internally in the BattleManager to allow for easy manipulation of the returned list.
         /// </summary>
-        /// <param name="entityType">The type of entities to return</param>
+        /// <param name="entityType">The type of entities to return.</param>
         /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null, will include entities of all height states</param>
-        /// <returns>Entities matching the type and height states specified</returns>
+        /// If null, will include entities of all height states.</param>
+        /// <returns>Entities matching the type and height states specified. If none are found, an empty list.</returns>
         private List<BattleEntity> GetEntitiesList(EntityTypes entityType, params HeightStates[] heightStates)
         {
+            //Get the internal list
             List<BattleEntity> entities = new List<BattleEntity>();
+            List<BattleEntity> entitiesOfType = GetEntitiesList(entityType);
 
-            if (entityType == EntityTypes.Enemy)
+            //Add the BattleEntities in the internal list into the new list
+            if (entitiesOfType != null)
             {
-                entities.AddRange(GetAliveEnemies());
-            }
-            else if (entityType == EntityTypes.Player)
-            {
-                //To be consistent, go from left to right
-                entities.Add(BackPlayer);
-                entities.Add(FrontPlayer);
+                entities.AddRange(entitiesOfType);
             }
 
             //Filter by height states
@@ -788,25 +757,6 @@ namespace PaperMarioBattleSystem
             return entities.ToArray();
         }
 
-        /// <summary>
-        /// Returns all alive enemies in an array
-        /// </summary>
-        /// <returns>An array of all alive enemies. An empty array is returned if no enemies are alive</returns>
-        private BattleEnemy[] GetAliveEnemies()
-        {
-            List<BattleEnemy> aliveEnemies = new List<BattleEnemy>();
-
-            for (int i = 0; i < MaxEnemies; i++)
-            {
-                if (Enemies[i] != null)
-                {
-                    aliveEnemies.Add(Enemies[i]);
-                }
-            }
-
-            return aliveEnemies.ToArray();
-        }
-
         public BattleMario GetMario()
         {
             return Mario;
@@ -817,12 +767,12 @@ namespace PaperMarioBattleSystem
             return Partner;
         }
 
-        public BattlePlayer GetFrontPlayer()
+        public BattleEntity GetFrontPlayer()
         {
             return FrontPlayer;
         }
 
-        public BattlePlayer GetBackPlayer()
+        public BattleEntity GetBackPlayer()
         {
             return BackPlayer;
         }
@@ -921,19 +871,17 @@ namespace PaperMarioBattleSystem
             //If the entity is an enemy, it can either be two Enemies or the front Player and another Enemy
             if (entity.EntityType == EntityTypes.Enemy)
             {
-                BattleEnemy enemy = entity as BattleEnemy;
-
-                int enemyIndex = enemy.BattleIndex;
-                int prevEnemyIndex = FindOccupiedEnemyIndex(enemyIndex - 1, true);
-                int nextEnemyIndex = FindOccupiedEnemyIndex(enemyIndex + 1);
+                int enemyIndex = entity.BattleIndex;
+                BattleEntity prevEnemy = FindEntityFromBattleIndex(EntityTypes.Enemy, enemyIndex - 1, true);
+                BattleEntity nextEnemy = FindEntityFromBattleIndex(EntityTypes.Enemy, enemyIndex + 1, false);
 
                 //Check if there's an Enemy before this one
-                if (prevEnemyIndex >= 0) adjacentEntities.Add(Enemies[prevEnemyIndex]);
+                if (prevEnemy != null) adjacentEntities.Add(prevEnemy);
                 //There's no Enemy, so target the Front Player
                 else adjacentEntities.Add(FrontPlayer);
 
                 //Check if there's an Enemy after this one
-                if (nextEnemyIndex >= 0) adjacentEntities.Add(Enemies[nextEnemyIndex]);
+                if (nextEnemy != null) adjacentEntities.Add(nextEnemy);
             }
             //If it's a Player, it will be either Mario/Partner and the first enemy
             else if (entity.EntityType == EntityTypes.Player)
@@ -953,8 +901,8 @@ namespace PaperMarioBattleSystem
                     //}
 
                     //Add the next enemy
-                    int nextEnemy = FindOccupiedEnemyIndex(0);
-                    if (nextEnemy >= 0) adjacentEntities.Add(Enemies[nextEnemy]);
+                    BattleEntity nextEnemy = FindEntityFromBattleIndex(EntityTypes.Enemy, 0);
+                    if (nextEnemy != null) adjacentEntities.Add(nextEnemy);
                 }
             }
 
@@ -968,30 +916,18 @@ namespace PaperMarioBattleSystem
         /// <returns>An array of BattleEntities behind the given one. If none are behind, an empty array.</returns>
         public BattleEntity[] GetEntitiesBehind(BattleEntity entity)
         {
-            List<BattleEntity> behindEntities = new List<BattleEntity>();
+            List<BattleEntity> behindEntities = GetEntitiesList(entity.EntityType, null);
+            behindEntities.Remove(entity);
 
-            //If it's a Player, check if the entity is in the front or the back
-            if (entity.EntityType == EntityTypes.Player)
+            //Compare Battle Index
+            //BattleEntities behind have higher Battle Indices
+            int battleIndex = entity.BattleIndex;
+            for (int i = 0; i < behindEntities.Count; i++)
             {
-                //If the entity is in the front, return the Back player
-                if (entity == FrontPlayer)
-                    behindEntities.Add(BackPlayer);
-            }
-            else
-            {
-                BattleEnemy battleEnemy = entity as BattleEnemy;
-
-                //Get this enemy's BattleIndex
-                int enemyIndex = battleEnemy.BattleIndex;
-
-                //Look for all enemies with a BattleIndex greater than this one, which indicates it's behind
-                for (int i = 0; i < Enemies.Count; i++)
+                if (behindEntities[i].BattleIndex <= battleIndex)
                 {
-                    BattleEnemy enemy = Enemies[i];
-                    if (enemy != null && enemy.BattleIndex > enemyIndex)
-                    {
-                        behindEntities.Add(enemy);
-                    }
+                    behindEntities.RemoveAt(i);
+                    i--;
                 }
             }
 
@@ -999,73 +935,130 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Finds the next available enemy index
+        /// Finds all BattleIndex gaps for a particular type of BattleEntity.
         /// </summary>
-        /// <param name="start">The index to start searching from</param>
-        /// <param name="backwards">Whether to search backwards or not</param>
-        /// <returns>The next available enemy index if found, otherwise -1</returns>
-        private int FindAvailableEnemyIndex(int start, bool backwards = false)
+        /// <param name="entityType">The type of BattleEntity to find the gaps for.</param>
+        /// <returns>An int array containing the Battle Indices that have been skipped over. If none are found, an empty array.</returns>
+        private int[] FindBattleIndexGaps(EntityTypes entityType)
         {
-            //More code, but more readable too
-            if (backwards == false)
+            //No BattleEntities are in this list, so nothing can be returned
+            if (AllEntities.ContainsKey(entityType) == false)
             {
-                for (int i = start; i < MaxEnemies; i++)
-                {
-                    if (Enemies[i] == null)
-                        return i;
-                }
-            }
-            else
-            {
-                for (int i = start; i >= 0; i--)
-                {
-                    if (Enemies[i] == null)
-                        return i;
-                }
+                return new int[0];
             }
 
-            return -1;
+            List<int> gaps = new List<int>();
+            int prevIndex = -1;
+
+            List<BattleEntity> entities = AllEntities[entityType];
+            for (int i = 0; i < entities.Count; i++)
+            {
+                int battleIndex = entities[i].BattleIndex;
+
+                //Look for gaps in the index; if the difference is 2 or greater, then
+                //the values in between prevIndex and battleIndex are gaps
+                int diffIndex = battleIndex - prevIndex;
+
+                for (int j = 1; j < diffIndex; j++)
+                {
+                    gaps.Add(prevIndex + j);
+                }
+
+                //Set previous index for comparison with the next BattleEntity
+                prevIndex = battleIndex;
+            }
+
+            return gaps.ToArray();
         }
 
         /// <summary>
-        /// Finds the next occupied enemy index
+        /// Finds the lowest available Battle Index for a given EntityType.
         /// </summary>
-        /// <param name="start">The index to start searching from</param>
-        /// <param name="backwards">Whether to search backwards or not</param>
-        /// <returns>The next occupied enemy index if found, otherwise -1</returns>
-        private int FindOccupiedEnemyIndex(int start, bool backwards = false)
+        /// <param name="entityType">The type of BattleEntities to find a Battle Index for.</param>
+        /// <returns>An integer representing the next available Battle Index.
+        /// If no BattleEntities of the specified type are in battle, -1 will be returned.</returns>
+        private int FindLowestAvailableBattleIndex(EntityTypes entityType)
         {
-            //More code, but more readable too
+            //No BattleEntities are in this list, so nothing can be returned
+            if (AllEntities.ContainsKey(entityType) == false)
+            {
+                return -1;
+            }
+
+            int prevIndex = -1;
+            int highestIndex = -1;
+
+            List<BattleEntity> entities = AllEntities[entityType];
+            for (int i = 0; i < entities.Count; i++)
+            {
+                int battleIndex = entities[i].BattleIndex;
+
+                //Store the highest index available
+                if (battleIndex > highestIndex)
+                    highestIndex = battleIndex;
+
+                //Look for gaps in the index; if the difference is 2 or greater, then the index (1 + prevIndex) would
+                //be the lowest available one, since the entities are sorted by BattleIndex
+                int diffIndex = battleIndex - prevIndex;
+                if (diffIndex > 1)
+                {
+                    return prevIndex + 1;
+                }
+
+                //Set previous index for comparison with the next BattleEntity
+                prevIndex = battleIndex;
+            }
+
+            //The highest index plus one is the next available index if we exhausted the list and didn't find one in between
+            //For example, if no BattleEntities were in the list, 0 would be the next available index
+            return (highestIndex + 1);
+        }
+
+        /// <summary>
+        /// Finds a BattleEntity with a BattleIndex greater than or equal to <paramref name="startIndex"/>.
+        /// If searching backwards, will find one less than or equal to <paramref name="startIndex"/> instead.
+        /// </summary>
+        /// <param name="entityType">The type of BattleEntity.</param>
+        /// <param name="startIndex">The BattleIndex to start searching from.</param>
+        /// <param name="backwards">Whether to search backwards or not.
+        /// If true, will find a BattleEntity with a BattleIndex less than or equal to <paramref name="startIndex"/>.</param>
+        /// <returns></returns>
+        private BattleEntity FindEntityFromBattleIndex(EntityTypes entityType, int startIndex, bool backwards = false)
+        {
+            //No BattleEntities are in this list, so nothing can be returned
+            if (AllEntities.ContainsKey(entityType) == false)
+            {
+                return null;
+            }
+
+            List<BattleEntity> entities = GetEntitiesList(entityType);
+
+            //Search forwards
             if (backwards == false)
             {
-                for (int i = start; i < MaxEnemies; i++)
+                for (int i = 0; i < entities.Count; i++)
                 {
-                    if (Enemies[i] != null)
-                        return i;
+                    int battleIndex = entities[i].BattleIndex;
+                    if (battleIndex >= startIndex)
+                    {
+                        return entities[i];
+                    }
                 }
             }
+            //Search backwards
             else
             {
-                for (int i = start; i >= 0; i--)
+                for (int i = entities.Count - 1; i >= 0; i--)
                 {
-                    if (Enemies[i] != null)
-                        return i;
+                    int battleindex = entities[i].BattleIndex;
+                    if (battleindex <= startIndex)
+                    {
+                        return entities[i];
+                    }
                 }
             }
 
-            return -1;
-        }
-
-        private void IncrementEnemiesAlive()
-        {
-            EnemiesAlive++;
-            if (EnemiesAlive > MaxEnemies) EnemiesAlive = MaxEnemies;
-        }
-
-        private void DecrementEnemiesAlive()
-        {
-            EnemiesAlive--;
-            if (EnemiesAlive < 0) EnemiesAlive = 0;
+            return null;
         }
 
         /// <summary>
@@ -1136,38 +1129,13 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Returns the closest BattleEntity in front of a specified one.
-        /// <para>For players this would return whoever is in front if the entity specified is in the back.
-        /// For enemies this would return the closest enemy in front of the specified one.</para>
         /// </summary>
         /// <param name="battleEntity">The BattleEntity to find the entity in front of.</param>
         /// <returns>The closest BattleEntity in front of the specified one. null if no BattleEntity is in front of the specified one.</returns>
         public BattleEntity GetEntityInFrontOf(BattleEntity battleEntity)
         {
-            //Players
-            if (battleEntity.EntityType == EntityTypes.Player)
-            {
-                //If this player is in the back, return the player in the front
-                if (battleEntity == BackPlayer)
-                {
-                    return FrontPlayer;
-                }
-            }
-            //Enemies
-            else if (battleEntity.EntityType == EntityTypes.Enemy)
-            {
-                //Check for an enemy with a lower BattleIndex than this one
-                BattleEnemy enemy = (BattleEnemy)battleEntity;
-                int inFrontEnemy = FindOccupiedEnemyIndex(enemy.BattleIndex - 1, true);
-
-                //We found the enemy in front of this one; return it
-                if (inFrontEnemy >= 0)
-                {
-                    return Enemies[inFrontEnemy];
-                }
-            }
-
-            //There is no BattleEntity in front of this one, so return null
-            return null;
+            //Find an entity of the same EntityType with a lower BattleIndex
+            return FindEntityFromBattleIndex(battleEntity.EntityType, battleEntity.BattleIndex - 1, true);
         }
 
         #endregion

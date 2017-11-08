@@ -104,9 +104,10 @@ namespace PaperMarioBattleSystem
         public Color TintColor { get; set;  } = Color.White;
 
         /// <summary>
-        /// The entity's battle index.
+        /// The entity's battle index, assigned from the BattleManager.
         /// <para>This indicates its relation to BattleEntities of the same EntityType.
-        /// In most cases, it corresponds to its position from the left side of the stage and
+        /// BattleEntities with higher battle indices are behind ones with lower battle indices.</para>
+        /// <para>In most cases, it also corresponds to its position from the left side of the stage and
         /// its reference index in its entity list.</para>
         /// </summary>
         public int BattleIndex { get; private set; } = -1;

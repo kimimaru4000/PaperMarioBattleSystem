@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
@@ -18,6 +19,30 @@ namespace PaperMarioBattleSystem
         {
             DefensiveActions.Add(new Guard(this));
             DefensiveActions.Add(new Superguard(this));
+        }
+
+        public override void OnBattleStart()
+        {
+            base.OnBattleStart();
+
+            //Set battle position
+            //Players follow the same BattleIndex rules, but their positions are from right to left instead of left to right
+            Vector2 battlepos = Vector2.Zero;
+
+            if (PlayerType == PlayerTypes.Mario)
+            {
+                battlepos = BattleManager.Instance.MarioPos;
+            }
+            else if (PlayerType == PlayerTypes.Partner)
+            {
+                battlepos = BattleManager.Instance.PartnerPos;
+            }
+
+            if (HeightState == HeightStates.Airborne) battlepos.Y -= BattleManager.Instance.AirborneY;
+            else if (HeightState == HeightStates.Ceiling) battlepos.Y -= BattleManager.Instance.CeilingY;
+
+            SetBattlePosition(battlepos);
+            Position = BattlePosition;
         }
 
         public override void OnTurnStart()

@@ -44,7 +44,7 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.Initialize(
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEnemy>() { new Goomba(), new SpikedGoomba() /*new KoopaTroopa(), new Paratroopa()*/ });
+                new List<BattleEntity>() { new Goomba(), new SpikedGoomba() /*new KoopaTroopa(), new Paratroopa()*/ });
 
             base.Initialize();
         }

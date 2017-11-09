@@ -92,7 +92,7 @@ namespace PaperMarioBattleSystem
         protected abstract BattleMenu GetMainBattleMenu();
 
         /// <summary>
-        /// Getse the BattlePlayer's Star Power.
+        /// Gets the BattlePlayer's Star Power.
         /// Mario returns his own, while Partners use Mario's.
         /// </summary>
         /// <returns>A StarPowerBase with the StarPower the BattlePlayer uses.</returns>

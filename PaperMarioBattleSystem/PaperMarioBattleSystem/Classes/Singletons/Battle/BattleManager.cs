@@ -177,8 +177,8 @@ namespace PaperMarioBattleSystem
             EntityRemovedEvent = null;
 
             //Remove and cleanup all BattleEntities in battle
-            RemoveEntities(EntityTypes.Player, GetEntitiesList(EntityTypes.Player));
-            RemoveEntities(EntityTypes.Enemy, GetEntitiesList(EntityTypes.Enemy));
+            RemoveEntities(EntityTypes.Player, GetEntitiesList(EntityTypes.Player), true);
+            RemoveEntities(EntityTypes.Enemy, GetEntitiesList(EntityTypes.Enemy), true);
 
             Mario = null;
             Partner = null;
@@ -197,10 +197,10 @@ namespace PaperMarioBattleSystem
             Partner = partner;
 
             //Add Mario first so his Battle Index is set to 0
-            AddEntities(EntityTypes.Player, new BattleEntity[] { mario, partner });
+            AddEntities(EntityTypes.Player, new BattleEntity[] { mario, partner }, true);
 
             //Add and initialize enemies
-            AddEntities(EntityTypes.Enemy, enemies);
+            AddEntities(EntityTypes.Enemy, enemies, true);
 
             StartBattle();
         }
@@ -367,12 +367,9 @@ namespace PaperMarioBattleSystem
             curFront.SetBattlePosition(backBattlePosition);
             curBack.SetBattlePosition(frontBattlePosition);
 
-            //Swap BattleIndex
+            //Swap BattleIndex; the lists will be automatically sorted
             curFront.SetBattleIndex(backBattleIndex);
             curBack.SetBattleIndex(frontBattleIndex);
-
-            //Sort the list again since the Battle Indices changed
-            AllEntities[EntityTypes.Player].Sort(BattleGlobals.EntityBattleIndexSort);
         }
 
         /// <summary>
@@ -406,8 +403,8 @@ namespace PaperMarioBattleSystem
             Partner = newPartner;
 
             //Remove the old partner from the entity dictionary and add the new one
-            RemoveEntities(EntityTypes.Player, new BattleEntity[] { oldPartner });
-            AddEntities(EntityTypes.Player, new BattleEntity[] { Partner });
+            RemoveEntities(EntityTypes.Player, new BattleEntity[] { oldPartner }, false);
+            AddEntities(EntityTypes.Player, new BattleEntity[] { Partner }, false);
 
             //Set positions to the old ones
             Partner.Position = oldPartner.Position;
@@ -537,7 +534,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Remove enemies from battle here
-            RemoveEntities(EntityTypes.Enemy, deadEnemies);
+            RemoveEntities(EntityTypes.Enemy, deadEnemies, true);
         }
 
         /// <summary>
@@ -583,14 +580,31 @@ namespace PaperMarioBattleSystem
 
         #region Helper Methods
 
-        /*NOTE: When adding enemies or other entities in-battle, make sure to check for certain conditions (Ex. max number of enemies) first*/
+        /// <summary>
+        /// Sorts a list of BattleEntities of a specific type based on BattleIndex.
+        /// </summary>
+        /// <param name="entityType">The type of BattleEntities to sort.</param>
+        public void SortEntityList(EntityTypes entityType)
+        {
+            List<BattleEntity> entityList = GetEntitiesList(entityType);
+            if (entityList != null && entityList.Count > 0)
+            {
+                entityList.Sort(BattleGlobals.EntityBattleIndexSort);
+            }
+        }
+
+        /*NOTE: When adding enemies or other entities in-battle,
+         * make sure to check for certain conditions (Ex. max number of enemies) first*/
 
         /// <summary>
-        /// Adds a set of BattleEntities to battle and initializes them.
+        /// Adds a set of BattleEntities to battle.
         /// </summary>
         /// <param name="entityType">The type of BattleEntities to add.</param>
         /// <param name="battleEntities">An <see cref="IList{T}"/> of BattleEntities to add.</param>
-        public void AddEntities(EntityTypes entityType, IList<BattleEntity> battleEntities)
+        /// <param name="initialize">Whether to initialize the entities or not. Regardless of the value, it assigns a BattleIndex.
+        /// If the entities have first joined battle, this should be true.
+        /// This should be false in cases where entities have been removed and re-added to battle, such as switching Partners.</param>
+        public void AddEntities(EntityTypes entityType, IList<BattleEntity> battleEntities, bool initialize)
         {
             //Don't add a null or empty list
             if (battleEntities == null || battleEntities.Count == 0)
@@ -619,17 +633,20 @@ namespace PaperMarioBattleSystem
 
                 AllEntities[entityType].Add(entity);
 
-                //Set battle index, initialize, and start battle for the entity
+                //Set battle index and start battle for the entity if it should
                 entity.SetBattleIndex(FindLowestAvailableBattleIndex(entityType));
-                entity.OnBattleStart();
 
-                //Sort by BattleIndex
-                //Do this each time a BattleEntity is added in case there's a gap in the battle indices
-                AllEntities[entityType].Sort(BattleGlobals.EntityBattleIndexSort);
+                if (initialize == true)
+                {
+                    entity.OnBattleStart();
+                }
 
                 //Invoke the entity added event
                 EntityAddedEvent?.Invoke(entity);
             }
+
+            //Sort the list
+            SortEntityList(entityType);
         }
 
         /// <summary>
@@ -637,7 +654,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="entityType">The type of BattleEntities to remove.</param>
         /// <param name="battleEntities">An <see cref="IList{T}"/> of BattleEntities to remove.</param>
-        public void RemoveEntities(EntityTypes entityType, IList<BattleEntity> battleEntities)
+        /// <param name="cleanUp">Whether to clean up the entities or not when removed from battle.
+        /// This should be true if the entities are permanently removed from battle.
+        /// In temporary cases, such as switching Partners, it would be preferable to set this to false.</param>
+        public void RemoveEntities(EntityTypes entityType, IList<BattleEntity> battleEntities, bool cleanUp)
         {
             //Don't remove a null or empty list
             if (battleEntities == null || battleEntities.Count == 0)
@@ -667,8 +687,11 @@ namespace PaperMarioBattleSystem
 
                 AllEntities[entityType].Remove(entity);
 
-                //Clean up the entity
-                entity.CleanUp();
+                //Clean up the entity if it should be cleaned up
+                if (cleanUp == true)
+                {
+                    entity.CleanUp();
+                }
                 
                 //Invoke the entity removed event
                 EntityRemovedEvent?.Invoke(entity);
@@ -1075,25 +1098,6 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Sorts enemies by battle indices, with lower indices appearing first
-        /// </summary>
-        private int SortEnemiesByBattleIndex(BattleEnemy enemy1, BattleEnemy enemy2)
-        {
-            if (enemy1 == null)
-                return 1;
-            else if (enemy2 == null)
-                return -1;
-
-            //Compare battle indices
-            if (enemy1.BattleIndex < enemy2.BattleIndex)
-                return -1;
-            else if (enemy1.BattleIndex > enemy2.BattleIndex)
-                return 1;
-
-            return 0;
-        }
-
-        /// <summary>
         /// Tells whether one BattleEntity is in front of another.
         /// </summary>
         /// <param name="behindEntity">The BattleEntity that is supposedly behind <paramref name="frontEntity"/>.</param>
@@ -1101,30 +1105,8 @@ namespace PaperMarioBattleSystem
         /// <returns></returns>
         public bool IsEntityInFrontOf(BattleEntity behindEntity, BattleEntity frontEntity)
         {
-            //If the entities aren't the same type of BattleEntity or if they're the same BattleEntity, then ignore
-            if (behindEntity.EntityType != frontEntity.EntityType || behindEntity == frontEntity)
-                return false;
-            
-            //For players, check if the front entity is the front player
-            if (behindEntity.EntityType == EntityTypes.Player)
-            {
-                if (frontEntity == FrontPlayer)
-                {
-                    return true;
-                }
-            }
-            else
-            {
-                //For enemies, compare the front entity's BattleIndex with the one behind
-                //If the front entity's BattleIndex is lower, then it's in front
-                BattleEnemy behindEnemy = (BattleEnemy)behindEntity;
-                BattleEnemy frontEnemy = (BattleEnemy)frontEntity;
-
-                return (frontEnemy.BattleIndex < behindEnemy.BattleIndex);
-            }
-
-            //For all other cases, return false
-            return false;
+            //Compare BattleIndex - the entity behind will have a higher BattleIndex
+            return (behindEntity.BattleIndex > frontEntity.BattleIndex);
         }
 
         /// <summary>

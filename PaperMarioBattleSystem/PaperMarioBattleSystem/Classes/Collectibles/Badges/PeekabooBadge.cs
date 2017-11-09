@@ -44,7 +44,7 @@ namespace PaperMarioBattleSystem
             BattleEntity[] enemies = BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Enemy, null);
             for (int i = 0; i < enemies.Length; i++)
             {
-                RemoveShowHPProperty((BattleEnemy)enemies[i]);
+                RemoveShowHPProperty(enemies[i]);
             }
         }
 

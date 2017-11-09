@@ -60,3 +60,33 @@ have a lower Battleindex.
 
 
 
+Update (11/8/17)
+----------------
+A BattleIndex for each type of BattleEntity has been implemented, the old enemy array system has been removed, and the appropriate methods have been updated.
+
+Step 3
+------
+The next step is to make the turn order more flexible. This will allow other types of BattleEntities to take turns in battle.
+
+This will also allow for more battle customization.
+
+Solution 3
+----------
+Instead of the BattlePhase enum, it would be easier to use the EntityTypes enum. Have the following:
+
+-private readonly EntityTypes[] TurnOrder
+-Change the Phase field's type from a BattlePhase to an EntityTypes
+
+The turn order can be set in stone or defined somewhere. For now we can hardcode it, but the array structure will make it flexible to change.
+
+When determining who should go and when switching phases, we have the following logic:
+
+1. Look through the list of BattleEntities associated with the current phase, and find out who should go
+2. If no turns are available for those entities, move up one value in the TurnOrder array, calling OnPhaseEnd() for those entities right before
+3. If we're out of range, then we have completed a phase cycle and should wrap around to the start. Call OnPhaseCycleStart() for every entity in battle
+4. Call OnPhaseStart() for all the entities associated with the current phase. Repeat steps 1-4
+
+Try this flow and we'll see how it works. An additional plus of this is that you can prevent certain types of entities from taking turns in battle if you wish.
+
+It may also be desirable to specify the phase the phase cycle ends after, so you can adjust the turn order but make it end whenever you want.
+

@@ -705,9 +705,21 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        public void SetBattleIndex(int battleIndex)
+        /// <summary>
+        /// Sets the BattleIndex for the BattleEntity.
+        /// </summary>
+        /// <param name="battleIndex">The new BattleIndex of the BattleEntity.</param>
+        /// <param name="autoSort">If true, will tell the BattleManager to sort all BattleEntities of this type by BattleIndex.
+        /// If false, make sure to sort manually to prevent mismatched data.</param>
+        public void SetBattleIndex(int battleIndex, bool autoSort = true)
         {
             BattleIndex = battleIndex;
+
+            //Tell the BattleManager to sort the list for this type of BattleEntity
+            if (autoSort == true)
+            {
+                BattleManager.Instance.SortEntityList(EntityType);
+            }
         }
 
         public void SetBattlePosition(Vector2 battlePos)

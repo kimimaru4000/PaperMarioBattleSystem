@@ -91,3 +91,21 @@ Creating a Mini is a BattleEvent that occurs after all Status Effect-related Bat
 
 If they don't move for a turn (via Immobilized, Slow, or another Status Effect that prevents movement), they will not create a Mini at the start of the phase cycle.
 This means that performing a move on their turn causes the BattleEvent to occur.
+
+Gulpits' Rocks
+--------------
+-Have 1 HP; dealing 0 damage on them doesn't have any effect
+
+-Can't be targeted by multi-hit moves and items, and they aren't hit/affected by them either
+-Can't be targeted by any single-hit item (Ex. Egg Missile)
+
+-Can't be targeted by Air Lift
+-Can't be targeted by Smack or Fan Smack
+-Can't be targeted by Electro Dash or Power Shock
+-Can't be targeted by Squirt
+-Can't be targeted by Spiny Flip
+-Can't be targeted by Hammer Throw
+
+-Spin Smash can't destroy the rocks with the Action Command, and the rocks don't get knocked into each other like enemies do.
+Hitting a rock with a failed Spin Smash causes it to spin and get destroyed.
+

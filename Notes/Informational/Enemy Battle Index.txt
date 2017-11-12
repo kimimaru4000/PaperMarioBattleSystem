@@ -43,3 +43,9 @@ I killed that one, and he summoned another. This time I tried every index to no 
 put it on him instead. Very weird...
 
 This means the above is NOT true. I'll need to do way more testing to figure this out, since it seems pretty bizarre...
+
+Update (11/12/17)
+-----------------
+The system for battle indices has been overhauled in commit ecddf9bcebe35d84dce88e6cada32955b58938b2 (11/8/2017 12:01:34 AM)
+
+This document is no longer relevant. The current system finds the lowest available battle index and sorts the enemy list by battle index.

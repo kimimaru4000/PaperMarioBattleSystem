@@ -51,7 +51,7 @@ This document details the types of Battle Entities in both Paper Mario games.
   -Green Toad
   -Koopa Troopa
 -Neutral; very few instances of these. They don't take turns but sometimes can be attacked or used by other BattleEntities for some purpose
-  -Gulpit's Rock; can be attacked by Players but aren't first in the selection (you have to move left from the leftmost enemy) and aren't targeted in multi-hit moves. Used by Gulpits to be thrown at Mario and show up ONLY in battles with Gulpits. Around 6 max.
+  -Gulpits' Rocks; can be attacked by Players but aren't first in the selection (you have to move left from the leftmost enemy) and aren't targeted in multi-hit moves. Used by Gulpits to be thrown at Mario and show up ONLY in battles with Gulpits. Around 6 max.
     -Small rock (still called Gulpit's Rock); adds 3 damage to Gulpit attack
     -Large rock (still called Gulpit's Rock); adds 5 damage to Gulpit attack
   -Bobbery's Bomb Squad Bombs; thrown by Bobbery in his Bomb Squad move. They don't move and can't be targeted. They detonate a turn later and deal 3 damage to anyone in their explosion radius.

@@ -1,0 +1,6 @@
+Badge Information (11/12/17)
+----------------------------
+
+HP Drain
+--------
+-In PM, hitting with a First Strike doesn't heal HP after the move is complete. It will add 1 to the amount of HP you should heal at the end of your turn.

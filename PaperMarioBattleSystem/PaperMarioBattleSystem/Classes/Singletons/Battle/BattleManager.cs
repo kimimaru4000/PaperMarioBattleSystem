@@ -54,11 +54,6 @@ namespace PaperMarioBattleSystem
 
         #region Enumerations
 
-        public enum BattlePhase
-        {
-            Player, Enemy
-        }
-
         public enum BattleState
         {
             Init, Turn, TurnEnd, Done
@@ -79,7 +74,7 @@ namespace PaperMarioBattleSystem
         public readonly int CeilingY = 100;
 
         /// <summary>
-        /// How many phase cycles (Player and Enemy turns) passed
+        /// How many phase cycles (finished the phase order) passed.
         /// </summary>
         public int PhaseCycleCount { get; private set; } = 0;
 
@@ -90,14 +85,26 @@ namespace PaperMarioBattleSystem
         public bool ShouldShowPlayerTurnUI => (EntityTurn.EntityType == EntityTypes.Player && EntityTurn.PreviousAction?.MoveSequence.InSequence != true);
 
         /// <summary>
-        /// The BattlePhase the battle starts on.
+        /// The phase order in battle.
+        /// BattleEntities of these types go in this order.
         /// </summary>
-        //private const BattlePhase StartingPhase = BattlePhase.Player;
+        private readonly EntityTypes[] PhaseOrder = new EntityTypes[] { EntityTypes.Player, EntityTypes.Enemy };
 
         /// <summary>
-        /// Unless scripted, the battle always starts on the player phase, with Mario always going first
+        /// The phase the battle starts on.
         /// </summary>
-        private BattlePhase Phase = BattlePhase.Player;
+        private int StartingPhase => 0;
+
+        /// <summary>
+        /// The current phase, represented as an integer. The battle starts on the first phase in <see cref="PhaseOrder"/>.
+        /// </summary>
+        private int Phase = 0;
+
+        /// <summary>
+        /// The current phase, represented as an <see cref="EntityTypes"/>.
+        /// This is a property that references the <see cref="PhaseOrder"/>.
+        /// </summary>
+        private EntityTypes CurEntityPhase => PhaseOrder[Phase];
 
         /// <summary>
         /// The current state of the battle
@@ -202,6 +209,8 @@ namespace PaperMarioBattleSystem
             //Add and initialize enemies
             AddEntities(EntityTypes.Enemy, enemies, true);
 
+            Phase = StartingPhase;
+
             StartBattle();
         }
 
@@ -270,7 +279,7 @@ namespace PaperMarioBattleSystem
         public void StartBattle()
         {
             ChangeBattleState(BattleState.TurnEnd);
-            SwitchPhase(BattlePhase.Player);
+            SwitchPhase(Phase);
         }
 
         /// <summary>
@@ -292,49 +301,42 @@ namespace PaperMarioBattleSystem
             BattleEventManager.Instance.AddPendingEvents();
         }
 
-        private void SwitchPhase(BattlePhase phase)
+        private void SwitchPhase(int phase)
         {
+            EntityTypes prevPhase = PhaseOrder[Phase];
             Phase = phase;
 
-            if (Phase == BattlePhase.Player)
+            //Call OnPhaseEnd() for the previous entities
+            List<BattleEntity> entities = GetEntitiesList(prevPhase);
+            for (int i = 0; i < entities.Count; i++)
             {
-                //Increment the phase cycles when switching to the Player phase
-                //This is because the cycle always starts with the Player phase in the Paper Mario games
+                entities[i].OnPhaseEnd();
+            }
+
+            //Check if we wrapped around to the starting phase
+            if (Phase == StartingPhase)
+            {
+                //Increment the phase cycles when switching to the starting phase
                 PhaseCycleCount++;
 
                 Debug.Log($"Started new phase cycle. Current cycle count: {PhaseCycleCount}");
 
-                //A new phase cycle started for everyone, but players just started their phase
-                List<BattleEntity> players = GetEntitiesList(EntityTypes.Player);
-                for (int i = 0; i < players.Count; i++)
+                //Call OnPhaseCycleStart() for every entity
+                foreach (KeyValuePair<EntityTypes, List<BattleEntity>> entityDict in AllEntities)
                 {
-                    players[i].OnPhaseCycleStart();
-                    players[i].OnPhaseStart();
-                }
-
-                //Enemies ended their phase
-                List<BattleEntity> enemies = GetEntitiesList(EntityTypes.Enemy);
-                for (int i = 0; i < enemies.Count; i++)
-                {
-                    enemies[i].OnPhaseEnd();
-                    enemies[i].OnPhaseCycleStart();
+                    List<BattleEntity> entityList = entityDict.Value;
+                    for (int i = 0; i < entityList.Count; i++)
+                    {
+                        entityList[i].OnPhaseCycleStart();
+                    }
                 }
             }
-            else if (Phase == BattlePhase.Enemy)
-            {
-                //Players ended their phase
-                List<BattleEntity> players = GetEntitiesList(EntityTypes.Player);
-                for (int i = 0; i < players.Count; i++)
-                {
-                    players[i].OnPhaseEnd();
-                }
 
-                //Enemies started their phase
-                List<BattleEntity> enemies = GetEntitiesList(EntityTypes.Enemy);
-                for (int i = 0; i < enemies.Count; i++)
-                {
-                    enemies[i].OnPhaseStart();
-                }
+            //Call OnPhaseStart() for the new entities going
+            entities = GetEntitiesList(CurEntityPhase);
+            for (int i = 0; i < entities.Count; i++)
+            {
+                entities[i].OnPhaseStart();
             }
 
             //NOTE: There's a bug: if all players and enemies have no turns, all BattleEvents will be delayed until one of them
@@ -342,6 +344,7 @@ namespace PaperMarioBattleSystem
             //for a turn again, switches phases again, and repeats.
             //This is easiest to replicate by inflicting everyone with Immobilized or a derived status (Ex. Frozen)
 
+            //Find out who should go now
             FindNextEntityTurn();
         }
 
@@ -542,40 +545,21 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void FindNextEntityTurn()
         {
-            //Enemy phase
-            if (Phase == BattlePhase.Enemy)
+            //Get the list of entities going on the current phase
+            List<BattleEntity> entities = GetEntitiesList(CurEntityPhase);
+            for (int i = 0; i < entities.Count; i++)
             {
-                List<BattleEntity> entities = GetEntitiesList(EntityTypes.Enemy);
-
-                for (int i = 0; i < entities.Count; i++)
+                //If the entity isn't dead and has turns left, it should go next
+                if (entities[i].UsedTurn == false && entities[i].IsDead == false)
                 {
-                    if (entities[i].UsedTurn == false && entities[i].IsDead == false)
-                    {
-                        EntityTurn = entities[i];
-                        return;
-                    }
+                    EntityTurn = entities[i];
+                    return;
                 }
-
-                //If all enemies are done with their turns, go to the player phase
-                SwitchPhase(BattlePhase.Player);
             }
-            //Player phase
-            else
-            {
-                List<BattleEntity> entities = GetEntitiesList(EntityTypes.Player);
 
-                for (int i = 0; i < entities.Count; i++)
-                {
-                    if (entities[i].UsedTurn == false && entities[i].IsDead == false)
-                    {
-                        EntityTurn = entities[i];
-                        return;
-                    }
-                }
-
-                //Neither player has turns remaining, so go to the enemy phase
-                SwitchPhase(BattlePhase.Enemy);
-            }
+            //All of the entities on this phase are done with their turns, so go to the next phase
+            int nextPhase = UtilityGlobals.Wrap(Phase + 1, 0, PhaseOrder.Length - 1);
+            SwitchPhase(nextPhase);
         }
 
         #region Helper Methods

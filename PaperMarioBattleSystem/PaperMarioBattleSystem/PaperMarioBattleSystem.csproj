@@ -120,9 +120,11 @@
     <Compile Include="Classes\Animations\ReverseAnimation.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\BattleEnemy.cs" />
     <Compile Include="Classes\BattleEntities\BattleEntity.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\Gulpit.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\KoopaTroopa.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Paratroopa.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Pokey.cs" />
+    <Compile Include="Classes\BattleEntities\Neutral\GulpitsRock.cs" />
     <Compile Include="Classes\BattleEntities\Players\BattleMario.cs" />
     <Compile Include="Classes\BattleEntities\Players\BattlePartner.cs" />
     <Compile Include="Classes\BattleEntities\Players\BattlePlayer.cs" />
@@ -407,6 +409,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Characters\MarioWLEmblem.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Enemies\Gulpit.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Enemies\Paratroopa.png">

@@ -90,3 +90,26 @@ Try this flow and we'll see how it works. An additional plus of this is that you
 
 It may also be desirable to specify the phase the phase cycle ends after, so you can adjust the turn order but make it end whenever you want.
 
+
+Update (11/15/17)
+-----------------
+The flexible turn order has been implemented and works very well for players and enemies. The next step is to test it with Neutral BattleEntities.
+
+Step 4
+------
+Implement Gulpits and Gulpits' Rocks. There will need to be several changes, notably involving the target selection menu and obtaining specific types of BattleEntities.
+
+
+Solution 4
+----------
+1. Add Gulpit and Gulpits' Rocks entities. Gulpits' Rocks will derive directly from BattleEntity.
+
+2. We need support for Neutral BattleEntities:
+
+-Add Neutral to the EntityTypes enum
+
+3. Gulpits don't look for anything other than a Gulpits' Rocks, so we need a way to find only them. Taking the whole Neutral entity list won't work since, unlike in PM, we can have other types of Neutral BattleEntities in battle, such as Bobbery's Bomb Squad bombs.
+
+
+
+

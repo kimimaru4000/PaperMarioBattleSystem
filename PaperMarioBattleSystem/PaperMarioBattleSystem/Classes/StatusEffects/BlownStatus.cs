@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Blown Status Effect.
     /// Entities afflicted with it are blown out of battle, essentially dying.
-    /// <para>This Status Effect is inflicted with Flurrie's Gale Force move.</para>
+    /// <para>This Status Effect is inflicted with Flurrie's Gale Force move and Lakilester's Hurricane move.</para>
     /// </summary>
     public sealed class BlownStatus : KOStatus
     {

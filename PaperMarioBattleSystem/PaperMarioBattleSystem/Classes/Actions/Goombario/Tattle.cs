@@ -59,7 +59,7 @@ namespace PaperMarioBattleSystem
             List<BattleEntity> tattleableEntities = new List<BattleEntity>();
 
             //Get all BattleEntities of the opposing EntityType
-            BattleEntity[] entities = BattleManager.Instance.GetEntities(User.EntityType == EntityTypes.Player ? EntityTypes.Enemy : EntityTypes.Player);
+            BattleEntity[] entities = BattleManager.Instance.GetEntities(User.GetOpposingEntityType());
 
             for (int i = 0; i < entities.Length; i++)
             {

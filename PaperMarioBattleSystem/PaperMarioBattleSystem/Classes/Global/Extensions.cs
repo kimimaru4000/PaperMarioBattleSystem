@@ -221,6 +221,27 @@ namespace PaperMarioBattleSystem
                 new StatusPropertyHolder(statusProperty.StatusPercentage, statusProperty.AdditionalTurns, immunity));
         }
 
+        /// <summary>
+        /// Gets the opposing EntityType of this BattleEntity.
+        /// <para>This applies only to Players and Enemies.
+        /// Neutral and other types of BattleEntities will simply return their own EntityTypes.</para>
+        /// </summary>
+        /// <param name="battleEntity"></param>
+        /// <returns></returns>
+        public static EntityTypes GetOpposingEntityType(this BattleEntity battleEntity)
+        {
+            //If this is a Player, return Enemy
+            if (battleEntity.EntityType == EntityTypes.Player)
+                return EntityTypes.Enemy;
+
+            //If this is an Enemy, return Player
+            if (battleEntity.EntityType == EntityTypes.Enemy)
+                return EntityTypes.Player;
+
+            //Otherwise return the default
+            return battleEntity.EntityType;
+        }
+
         #endregion
 
         #region List Extensions

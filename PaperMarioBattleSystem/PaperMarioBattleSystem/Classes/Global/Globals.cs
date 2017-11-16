@@ -738,7 +738,7 @@ namespace PaperMarioBattleSystem
     {
         public enum EntityTypes
         {
-            Player, Enemy
+            Player, Enemy, Neutral
         }
         
         /// <summary>

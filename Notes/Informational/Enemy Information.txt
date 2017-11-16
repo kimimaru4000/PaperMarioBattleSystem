@@ -95,6 +95,7 @@ This means that performing a move on their turn causes the BattleEvent to occur.
 Gulpits' Rocks
 --------------
 -Have 1 HP; dealing 0 damage on them doesn't have any effect
+-They don't display their HP even after being Tattled or if the Peekaboo Badge is equipped
 
 -Can't be targeted by multi-hit moves and items, and they aren't hit/affected by them either
 -Can't be targeted by any single-hit item (Ex. Egg Missile)

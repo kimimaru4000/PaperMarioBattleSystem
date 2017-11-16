@@ -525,19 +525,42 @@ namespace PaperMarioBattleSystem
                 //Partner.PlayAnimation(AnimationGlobals.DeathName);
             }
 
-            List<BattleEntity> deadEnemies = GetEntitiesList(EntityTypes.Enemy, null);
+            //NOTE: Find the best way to iterate through the dictionary while allowing modification
+            //For now, get all the EntityTypes enum values, find all dead entities of that type, then remove them
+            EntityTypes[] entityTypes = UtilityGlobals.GetEnumValues<EntityTypes>();
 
-            for (int i = 0; i < deadEnemies.Count; i++)
+            for (int i = 0; i < entityTypes.Length; i++)
             {
-                if (deadEnemies[i].IsDead == false)
+                //Players don't get removed from battle through normal death
+                //Partners can be removed via a Status Effect that forces them out of battle, such as Fright or Gale Force
+                //Mario's death results in a Game Over, which is checked when updating the battle state
+                if (entityTypes[i] == EntityTypes.Player)
                 {
-                    deadEnemies.RemoveAt(i);
-                    i--;
+                    continue;
+                }
+
+                //Get a new list so we can simply remove from this one instead of adding into a new list
+                List<BattleEntity> deadEntities = GetEntitiesList(entityTypes[i], null);
+                if (deadEntities != null)
+                {
+                    //Remove all alive entities from this list
+                    for (int j = 0; j < deadEntities.Count; j++)
+                    {
+                        if (deadEntities[j].IsDead == false)
+                        {
+                            deadEntities.RemoveAt(j);
+                            j--;
+                        }
+                    }
+
+                    //We should remove these dead entities
+                    if (deadEntities.Count > 0)
+                    {
+                        //Remove entities from battle
+                        RemoveEntities(entityTypes[i], deadEntities, true);
+                    }
                 }
             }
-
-            //Remove enemies from battle here
-            RemoveEntities(EntityTypes.Enemy, deadEnemies, true);
         }
 
         /// <summary>
@@ -1076,7 +1099,7 @@ namespace PaperMarioBattleSystem
         public Vector2 GetPositionInFront(BattleEntity entity)
         {
             Vector2 xdiff = new Vector2(PositionXDiff, 0f);
-            if (entity.EntityType == EntityTypes.Enemy) xdiff.X = -xdiff.X;
+            if (entity.EntityType != EntityTypes.Player) xdiff.X = -xdiff.X;
 
             return (entity.BattlePosition + xdiff);
         }

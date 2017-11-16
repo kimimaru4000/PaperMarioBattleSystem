@@ -110,6 +110,9 @@ Solution 4
 
 3. Gulpits don't look for anything other than a Gulpits' Rocks, so we need a way to find only them. Taking the whole Neutral entity list won't work since, unlike in PM, we can have other types of Neutral BattleEntities in battle, such as Bobbery's Bomb Squad bombs.
 
+-Add an IUsableEntity interface with a UsableValue int property and have Gulpits' Rocks implement it.
+-Gulpits will look for all Grounded Neutral entities that are implementing this interface and choose one.
 
+This implementation allows Gulpits to spit out other entities as well. It would even be possible for Gulpits to spit Bobbery's Bomb Squad bombs back at the players if the bombs implemented that interface!
 
 

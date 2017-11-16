@@ -56,7 +56,7 @@ namespace PaperMarioBattleSystem
         /// Tells whether the action command is enabled or not.
         /// Action commands are by default disabled for enemies
         /// </summary>
-        public virtual bool CommandEnabled => (HasActionCommand == true && User.EntityType != EntityTypes.Enemy && DisableActionCommand == false);
+        public virtual bool CommandEnabled => (HasActionCommand == true && User.EntityType == EntityTypes.Player && DisableActionCommand == false);
 
         /// <summary>
         /// Whether Action Commands are disabled on this action.
@@ -391,7 +391,7 @@ namespace PaperMarioBattleSystem
             }
             else if (MoveProperties.MoveAffectionType == MoveAffectionTypes.Enemy)
             {
-                EntityTypes otherType = User.EntityType == EntityTypes.Player ? EntityTypes.Enemy : EntityTypes.Player;
+                EntityTypes otherType = User.GetOpposingEntityType();
 
                 return BattleManager.Instance.GetEntities(otherType, MoveProperties.HeightsAffected);
             }

@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Gulpit's Rock. It is a neutral entity that is used by Gulpit in its Rock Spit move.
     /// </summary>
-    public sealed class GulpitsRock : BattleEntity, ITattleableEntity
+    public sealed class GulpitsRock : BattleEntity, ITattleableEntity, IUsableEntity
     {
         /// <summary>
         /// The amount of additional damage a small Gulpit's Rock adds to a Gulpit's Rock Spit move.
@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The amount of damage the Gulpit's Rock adds to a Gulpit's Rock Spit move.
         /// </summary>
-        public int AdditionalDamage = 3;
+        public int UsableValue { get; private set; } = 3;
 
         public GulpitsRock(bool bigRock) : base(new Stats(1, 1, 0, 0, 0))
         {
@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
             BaseTurns = 0;
 
             //If the rock is big, make it deal more damage than the small one
-            AdditionalDamage = (bigRock == true) ? BigRockAdditionalDamage : SmallRockAdditionalDamage;
+            UsableValue = (bigRock == true) ? BigRockAdditionalDamage : SmallRockAdditionalDamage;
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Gulpit");
             AnimManager.SetSpriteSheet(spriteSheet);
@@ -66,6 +66,11 @@ namespace PaperMarioBattleSystem
                     new Animation.Frame(new Rectangle(340, 299, 42, 32), 80d),
                     new Animation.Frame(new Rectangle(392, 299, 32, 30), 80d)));
             }
+        }
+
+        public override void OnBattleStart()
+        {
+            base.OnBattleStart();
         }
 
         public override void OnTurnStart()

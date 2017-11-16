@@ -924,7 +924,7 @@ namespace PaperMarioBattleSystem
 
         public virtual void Draw()
         {
-            AnimManager.CurrentAnim?.Draw(Position, TintColor, EntityType != EntityTypes.Enemy, .1f);
+            AnimManager.CurrentAnim?.Draw(Position, TintColor, EntityType == EntityTypes.Player, .1f);
             PreviousAction?.Draw();
 
             //Draw Status Effect icons on the BattleEntity

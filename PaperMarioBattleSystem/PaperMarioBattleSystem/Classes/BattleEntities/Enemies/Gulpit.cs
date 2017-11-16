@@ -51,10 +51,38 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
-            //If any Gulpits' Rocks are available, perform Rock Spit with a random rock (preferring larger ones)
+            //If any IUsableEntities are found in the Neutral BattleEntity list, perform Rock Spit with it
             //Otherwise, perform Lick
+            List<IUsableEntity> usableEntities = new List<IUsableEntity>();
 
-            StartAction(new Jump(), false, BattleManager.Instance.GetFrontPlayer());
+            int chosenIndex = -1;
+
+            //Get all Neutral entities
+            BattleEntity[] neutralEntities = BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Neutral, Enumerations.HeightStates.Grounded);
+            for (int i = 0; i < neutralEntities.Length; i++)
+            {
+                IUsableEntity usableEntity = neutralEntities[i] as IUsableEntity;
+                //Add to the list if this entity is usable
+                if (usableEntity != null)
+                {
+                    usableEntities.Add(usableEntity);
+                }
+            }
+
+            //Choose a random entity out of the ones we found
+            if (usableEntities.Count > 0)
+            {
+                chosenIndex = GeneralGlobals.Randomizer.Next(0, usableEntities.Count);
+            }
+
+            //If we found and chose a usable entity, use Rock Spit with the entity
+            //Otherwise, use Lick
+            MoveAction action = null;
+            if (chosenIndex >= 0)
+                action = new Hammer();//new RockSpitAction(usableEntities[chosenIndex]);
+            else action = new Jump();//new LickAction();
+
+            StartAction(action, false, BattleManager.Instance.GetFrontPlayer());
         }
 
         #region Tattle Information

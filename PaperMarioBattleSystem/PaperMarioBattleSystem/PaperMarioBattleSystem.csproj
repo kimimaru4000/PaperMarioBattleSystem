@@ -241,6 +241,7 @@
     <Compile Include="Classes\Interfaces\ITintable.cs" />
     <Compile Include="Classes\Interfaces\ITransformable.cs" />
     <Compile Include="Classes\Interfaces\IUpdateable.cs" />
+    <Compile Include="Classes\Interfaces\IUsableEntity.cs" />
     <Compile Include="Classes\Interfaces\IWingedEntity.cs" />
     <Compile Include="Classes\Menus\ActionButtons\ActionButton.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\ActionSubMenu.cs" />

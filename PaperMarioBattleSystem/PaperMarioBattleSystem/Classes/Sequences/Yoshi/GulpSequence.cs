@@ -63,7 +63,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), WalkDuration / 4f);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer(), User.EntityType != Enumerations.EntityTypes.Player), WalkDuration / 4f);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -78,7 +78,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     StartActionCommandInput();
-                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), WalkDuration);
                     break;
                 default:
                     PrintInvalidSequence();

@@ -70,17 +70,17 @@ namespace PaperMarioBattleSystem
             }
 
             //Choose a random entity out of the ones we found
-            if (usableEntities.Count > 0)
-            {
-                chosenIndex = GeneralGlobals.Randomizer.Next(0, usableEntities.Count);
-            }
+            //if (usableEntities.Count > 0)
+            //{
+            //    chosenIndex = GeneralGlobals.Randomizer.Next(0, usableEntities.Count);
+            //}
 
             //If we found and chose a usable entity, use Rock Spit with the entity
             //Otherwise, use Lick
             MoveAction action = null;
             if (chosenIndex >= 0)
                 action = new Hammer();//new RockSpitAction(usableEntities[chosenIndex]);
-            else action = new Jump();//new LickAction();
+            else action = new LickAction();
 
             StartAction(action, false, BattleManager.Instance.GetFrontPlayer());
         }

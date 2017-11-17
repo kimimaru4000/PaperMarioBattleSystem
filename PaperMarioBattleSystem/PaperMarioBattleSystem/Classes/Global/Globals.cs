@@ -1084,6 +1084,12 @@ namespace PaperMarioBattleSystem
             public const string ExhaleName = "Exhale";
         }
 
+        public static class GulpitBattleAnimations
+        {
+            public const string LickName = "Lick";
+            public const string SpitRockName = "SpitRock";
+        }
+
         /// <summary>
         /// Animations for Shelled BattleEntities.
         /// </summary>

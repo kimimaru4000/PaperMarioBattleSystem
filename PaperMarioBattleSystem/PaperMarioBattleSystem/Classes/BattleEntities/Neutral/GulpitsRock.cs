@@ -29,26 +29,33 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public int UsableValue { get; private set; } = 3;
 
+        /// <summary>
+        /// Whether the Gulpit's Rock is a big or small one.
+        /// </summary>
+        public bool BigRock = false;
+
         public GulpitsRock(bool bigRock) : base(new Stats(1, 1, 0, 0, 0))
         {
             Name = "Gulpits' Rock";
 
-            //EntityType = Enumerations.EntityTypes.Neutral;
+            EntityType = Enumerations.EntityTypes.Neutral;
 
             SetStatusProperties();
 
             //Gulpits' Rocks do not move at all, so their base turns are 0
             BaseTurns = 0;
 
+            BigRock = bigRock;
+
             //If the rock is big, make it deal more damage than the small one
-            UsableValue = (bigRock == true) ? BigRockAdditionalDamage : SmallRockAdditionalDamage;
+            UsableValue = (BigRock == true) ? BigRockAdditionalDamage : SmallRockAdditionalDamage;
 
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Gulpit");
             AnimManager.SetSpriteSheet(spriteSheet);
 
             //The animations differ between the different sizes of rocks
             //They have only idle and death animations
-            if (bigRock == false)
+            if (BigRock == false)
             {
                 AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(59, 378, 26, 21), 1500d)));
                 AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet,
@@ -71,6 +78,18 @@ namespace PaperMarioBattleSystem
         public override void OnBattleStart()
         {
             base.OnBattleStart();
+
+            Vector2 startPos = new Vector2(-20, 85);
+
+            //Small rocks are slightly in front
+            if (BigRock == false)
+                startPos.Y += 15f;
+
+            //Set battle position
+            Vector2 battlepos = startPos + new Vector2((BattleManager.Instance.PositionXDiff / 2) * BattleIndex, 0);
+
+            SetBattlePosition(battlepos);
+            Position = BattlePosition;
         }
 
         public override void OnTurnStart()

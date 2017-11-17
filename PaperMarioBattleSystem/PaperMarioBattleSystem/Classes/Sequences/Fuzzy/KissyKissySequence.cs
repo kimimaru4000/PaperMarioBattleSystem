@@ -58,7 +58,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     //Move to the opponent
-                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0]), MoveTime);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), MoveTime);
                     break;
                 case 1:
                     //Jump up to their height

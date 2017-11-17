@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
-    /// <summary>
-    /// The Sequence for a Paragoomba's Dive Kick move.
-    /// </summary>
-    public class DiveKickSequence : Sequence
+    public sealed class LickSequence : Sequence
     {
-        public DiveKickSequence(MoveAction moveAction) : base(moveAction)
+        private double WalkDur = 1000d;
+
+        public LickSequence(MoveAction moveAction) : base(moveAction)
         {
 
         }
@@ -22,8 +22,8 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.AnimManager.PlayAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName);
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy).X, User.BattlePosition.Y), 700d);
+                    //Move to the entity
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], EntitiesAffected[0].EntityType != Enumerations.EntityTypes.Player), WalkDur);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -36,16 +36,11 @@ namespace PaperMarioBattleSystem
         {
             switch (SequenceStep)
             {
-                //Go back to your battle position
                 case 0:
-                    User.AnimManager.PlayAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName);
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy).X, User.BattlePosition.Y), 500d);
+                    //Go back to your battle position
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDur);
                     break;
                 case 1:
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, 400d);
-                    break;
-                case 2:
-                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     EndSequence();
                     break;
                 default:
@@ -58,27 +53,13 @@ namespace PaperMarioBattleSystem
         {
             switch (SequenceStep)
             {
-                //Perform the dive kick movement
                 case 0:
-                    User.AnimManager.PlayAnimation(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName);
-
-                    //Move up a bit before swooping down
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -25f), 350d);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.GulpitBattleAnimations.LickName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.GulpitBattleAnimations.LickName);
                     break;
                 case 1:
-                    //Move back down
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, 25f), 350d);
-                    break;
-                case 2:
-                    //Swoop in
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(EntitiesAffected[0].Position.X, User.Position.Y - 10), 500d);
-
-                    //Here's likely where you'd check for an action command's input if this were to have one - it'd be like Jump
-                    break;
-                case 3:
-                    //Damage
-                    AttemptDamage(BaseDamage, EntitiesAffected, Action.DamageProperties, false);
-
+                    //Deal damage and end
+                    AttemptDamage(BaseDamage, EntitiesAffected[0], Action.DamageProperties, false);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -92,6 +73,8 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    CurSequenceAction = new WaitSeqAction(0d);
+
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -105,6 +88,8 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    CurSequenceAction = new WaitSeqAction(0d);
+
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -118,6 +103,8 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    CurSequenceAction = new WaitSeqAction(0d);
+
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

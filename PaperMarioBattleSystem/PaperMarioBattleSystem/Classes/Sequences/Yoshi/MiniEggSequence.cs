@@ -52,7 +52,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer()), MoveDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer(), false), MoveDuration);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());

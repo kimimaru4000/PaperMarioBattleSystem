@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(CurTarget), WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType != Enumerations.EntityTypes.Enemy), WalkDuration);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -149,7 +149,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.SpikedTipHurtName, true);
 
-                    Vector2 pos = BattleManager.Instance.GetPositionInFront(CurTarget) + new Vector2(-50, -JumpHeight);
+                    Vector2 pos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType != Enumerations.EntityTypes.Player) + new Vector2(-50, -JumpHeight);
                     CurSequenceAction = new MoveToSeqAction(pos, WalkDuration / 4d);
                     break;
                 case 1:

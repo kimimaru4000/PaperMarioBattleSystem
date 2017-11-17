@@ -38,6 +38,21 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
             BattleUIManager.Instance.UnsuppressMenus();
 
+            //Handle the entity dying on its turn
+            if (Entity.IsTurn == true)
+            {
+                //If in the middle of a sequence, end it
+                if (Entity.PreviousAction != null && Entity.PreviousAction.MoveSequence.InSequence == true)
+                {
+                    Entity.PreviousAction.MoveSequence.EndSequence();
+                }
+                //Otherwise end its turn
+                else
+                {
+                    BattleManager.Instance.TurnEnd();
+                }
+            }
+
             BattleManager.Instance.HandleEntityDeaths();
         }
 

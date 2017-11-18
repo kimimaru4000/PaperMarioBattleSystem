@@ -1115,7 +1115,7 @@ namespace PaperMarioBattleSystem
         /// Gets the position in front of an entity's battle position
         /// </summary>
         /// <param name="entity">The entity to get the position in front of</param>
-        /// <param name="fromLeftSide">Whether in front refers to from the left side of the BattleEntity.</param>
+        /// <param name="fromLeftSide">Whether the front refers to the left side of the BattleEntity.</param>
         /// <returns>A Vector2 with the position in front of the entity</returns>
         public Vector2 GetPositionInFront(BattleEntity entity, bool fromLeftSide)
         {

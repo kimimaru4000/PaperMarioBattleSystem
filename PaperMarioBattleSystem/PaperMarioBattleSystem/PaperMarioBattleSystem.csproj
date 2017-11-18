@@ -84,6 +84,7 @@
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\Goombario\Tattle.cs" />
     <Compile Include="Classes\Actions\Gulpit\LickAction.cs" />
+    <Compile Include="Classes\Actions\Gulpit\RockSpitAction.cs" />
     <Compile Include="Classes\Actions\Huff N. Puff\WindBreathAction.cs" />
     <Compile Include="Classes\Actions\IActionCommand.cs" />
     <Compile Include="Classes\Actions\Defensive\Guard.cs" />
@@ -277,6 +278,7 @@
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\TattleSequence.cs" />
     <Compile Include="Classes\Sequences\Gulpit\LickSequence.cs" />
+    <Compile Include="Classes\Sequences\Gulpit\RockSpitSequence.cs" />
     <Compile Include="Classes\Sequences\Huff N. Puff\WindBreathSequence.cs" />
     <Compile Include="Classes\Sequences\Item\ItemSequence.cs" />
     <Compile Include="Classes\Sequences\Item\MysterySequence.cs" />

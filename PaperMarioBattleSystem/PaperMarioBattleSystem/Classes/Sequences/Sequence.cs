@@ -535,7 +535,7 @@ namespace PaperMarioBattleSystem
         /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
         /// <param name="damageInfo">The damage information to use.</param>
         /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
-        /// If false, the total damage will be calculated</param>
+        /// If false, the total damage will be calculated using surface-level stats (such as adding the user's Attack)</param>
         /// <returns>An int array containing the damage dealt to each BattleEntity targeted, in order</returns>
         protected int[] AttemptDamage(int damage, BattleEntity[] entities, DamageData damageInfo, bool isTotalDamage)
         {
@@ -625,7 +625,7 @@ namespace PaperMarioBattleSystem
         /// <param name="entity">The BattleEntity to attempt to inflict damage on</param>
         /// <param name="damageInfo">The damage information to use.</param>
         /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
-        /// If false, the total damage will be calculated</param>
+        /// If false, the total damage will be calculated using surface-level stats (such as adding the user's Attack)</param>
         protected int[] AttemptDamage(int damage, BattleEntity entity, DamageData damageInfo, bool isTotalDamage)
         {
             return AttemptDamage(damage, new BattleEntity[] { entity }, damageInfo, isTotalDamage);
@@ -633,7 +633,7 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Gets the total raw damage a BattleEntity can deal using this BattleAction.
-        /// This factors in a BattleEntity's Attack stat and anything else that may influence the damage dealt.
+        /// This factors in a BattleEntity's Attack stat, Charge, and anything else on the surface level that may influence the damage dealt.
         /// </summary>
         /// <param name="actionDamage">The damage the BattleAction deals</param>
         /// <returns>An int with the total raw damage the BattleEntity can deal when using this BattleAction</returns>

@@ -34,8 +34,9 @@ namespace PaperMarioBattleSystem
             Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Gulpit");
             AnimManager.SetSpriteSheet(spriteSheet);
 
-            AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(376, 2, 64, 69), 1500d)));
+            AnimManager.AddAnimation(AnimationGlobals.IdleName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(152, 225, 64, 70), 600d),
+                new Animation.Frame(new Rectangle(376, 2, 64, 69), 600d, new Vector2(0, 1))));
             AnimManager.AddAnimation(AnimationGlobals.RunningName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(372, 225, 69, 68), 250d),
                 new Animation.Frame(new Rectangle(376, 2, 64, 69), 250d),
@@ -45,6 +46,18 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(480, 7, 70, 64), 200d)));
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(480, 7, 70, 64), 1000d)));
+
+            AnimManager.AddAnimation(AnimationGlobals.GulpitBattleAnimations.LickName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(370, 155, 70, 68), 300d),
+                new Animation.Frame(new Rectangle(247, 229, 84, 66), 300d),
+                new Animation.Frame(new Rectangle(449, 226, 105, 69), 300d),
+                new Animation.Frame(new Rectangle(37, 1, 68, 78), 300d)));
+            AnimManager.AddAnimation(AnimationGlobals.GulpitBattleAnimations.SpitRockName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(246, 305, 83, 62), 200d),
+                new Animation.Frame(new Rectangle(8, 298, 96, 69), 200d),
+                new Animation.Frame(new Rectangle(151, 297, 65, 70), 200d),
+                new Animation.Frame(new Rectangle(41, 224, 63, 71), 1000d),
+                new Animation.Frame(new Rectangle(148, 4, 69, 67), 300d)));
         }
 
         public override void OnTurnStart()
@@ -53,7 +66,7 @@ namespace PaperMarioBattleSystem
 
             //If any IUsableEntities are found in the Neutral BattleEntity list, perform Rock Spit with it
             //Otherwise, perform Lick
-            List<IUsableEntity> usableEntities = new List<IUsableEntity>();
+            List<BattleEntity> usableEntities = new List<BattleEntity>();
 
             int chosenIndex = -1;
 
@@ -65,21 +78,21 @@ namespace PaperMarioBattleSystem
                 //Add to the list if this entity is usable
                 if (usableEntity != null)
                 {
-                    usableEntities.Add(usableEntity);
+                    usableEntities.Add(neutralEntities[i]);
                 }
             }
 
             //Choose a random entity out of the ones we found
-            //if (usableEntities.Count > 0)
-            //{
-            //    chosenIndex = GeneralGlobals.Randomizer.Next(0, usableEntities.Count);
-            //}
+            if (usableEntities.Count > 0)
+            {
+                chosenIndex = GeneralGlobals.Randomizer.Next(0, usableEntities.Count);
+            }
 
             //If we found and chose a usable entity, use Rock Spit with the entity
             //Otherwise, use Lick
             MoveAction action = null;
             if (chosenIndex >= 0)
-                action = new Hammer();//new RockSpitAction(usableEntities[chosenIndex]);
+                action = new RockSpitAction(usableEntities[chosenIndex]);
             else action = new LickAction();
 
             StartAction(action, false, BattleManager.Instance.GetFrontPlayer());

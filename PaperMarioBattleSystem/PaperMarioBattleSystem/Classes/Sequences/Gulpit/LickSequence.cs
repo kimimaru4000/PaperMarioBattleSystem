@@ -37,10 +37,14 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
+
                     //Go back to your battle position
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDur);
                     break;
                 case 1:
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
+
                     EndSequence();
                     break;
                 default:

@@ -23,7 +23,8 @@ namespace PaperMarioBattleSystem
             StatusesInflicted = new StatusChanceHolder[] { new StatusChanceHolder(100d, new SleepStatus(2)) };
 
             SelectionType = TargetSelectionMenu.EntitySelectionType.All;
-            EntityType = Enumerations.EntityTypes.Enemy;
+            MoveAffectionType = Enumerations.MoveAffectionTypes.Other;
+            OtherEntTypes = new Enumerations.EntityTypes[] { Enumerations.EntityTypes.Enemy };
         }
     }
 }

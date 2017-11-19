@@ -17,8 +17,8 @@ namespace PaperMarioBattleSystem
             Name = "Tattle";
 
             MoveInfo = new MoveActionData(null, "View enemies' descriptions\nand see their HP in battle.", MoveResourceTypes.FP, 0,
-                CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.Single, false,
-                null);
+                CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single, false,
+                null, User.GetOpposingEntityType(), EntityTypes.Neutral);
 
             SetMoveSequence(new TattleSequence(this));
             

@@ -115,4 +115,20 @@ Solution 4
 
 This implementation allows Gulpits to spit out other entities as well. It would even be possible for Gulpits to spit Bobbery's Bomb Squad bombs back at the players if the bombs implemented that interface!
 
+Update (11/18/17)
+-----------------
+1, 2, and 3 have been implemented and work wonderfully. The only thing left is the following:
+
+4. Modify the MoveAffectionTypes enum to allow for targeting different types of BattleEntities. Right now we have None, Self, Ally, and Enemy.
+While None, Self, and Ally have the same meaning across all MoveActions, we need a way to specify what other kinds of BattleEntities the move targets.
+
+Enemy suffices only for Players and Enemies: that is, they add a list of the opposing type to the target selection. However, for a Neutral, or other type of, BattleEntity,
+this is meaningless since they don't technically have any enemies.
+
+-Change "Enemy" into "Other"
+-Change the MoveAffectionTypes enum into a bit field
+-Add an EntityTypes[] array called OtherEntTypes to MoveActionData. If the MoveAffectionType is "Other," it will target this array of EntityTypes (in order)
+
+The bit field change allows everything to be more flexible. Ally can refer to only the BattleEntity's allies; combined with Self, it will target all entities of that type.
+It also allows for moves that can target anyone and for combinations not previously possible without overriding methods (Ex. Self and enemies).
 

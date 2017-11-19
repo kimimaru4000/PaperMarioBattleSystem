@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
             Name = "Wind Breath";
 
             MoveInfo = new MoveActionData(null, "Blow wind at Mario to deal damage.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
-                MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.Single, true, null);
+                MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single, true, null, User.GetOpposingEntityType());
 
             DamageInfo = new DamageData(0, Elements.Normal, false, ContactTypes.None, null, false, false,
                 DefensiveActionTypes.Guard | DefensiveActionTypes.Superguard, DamageEffects.None);

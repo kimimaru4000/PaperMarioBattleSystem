@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
                                                  StatusTypes.Slow, StatusTypes.Sleep, StatusTypes.Immobilized };
 
             SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
-            EntityType = EntityTypes.Player;
+            MoveAffectionType = Enumerations.MoveAffectionTypes.Self | Enumerations.MoveAffectionTypes.Ally;
         }
     }
 }

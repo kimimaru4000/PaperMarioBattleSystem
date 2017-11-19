@@ -110,11 +110,31 @@ namespace PaperMarioBattleSystem
             IStatusInflictingItem statusInflicting = ItemUsed as IStatusInflictingItem;
             IDamageEffectItem damageEffectItem = ItemUsed as IDamageEffectItem;
 
-            MoveAffectionTypes moveAffectionType = ItemUsed.EntityType == User.EntityType ? MoveAffectionTypes.Ally : MoveAffectionTypes.Enemy;
-            if (ItemUsed.TargetsSelf == true) moveAffectionType = MoveAffectionTypes.Self;
+            EntityTypes[] otherEntityTypes = ItemUsed.OtherEntTypes;
+
+            //Check if we should replace all instances of Enemy EntityTypes with opposing ones
+            if (ItemUsed.GetOpposingIfEnemy == true && otherEntityTypes != null && otherEntityTypes.Length > 0)
+            {
+                //Create a new array so we don't modify the item's information
+                otherEntityTypes = new EntityTypes[ItemUsed.OtherEntTypes.Length];
+
+                for (int i = 0; i < ItemUsed.OtherEntTypes.Length; i++)
+                {
+                    EntityTypes entitytype = ItemUsed.OtherEntTypes[i];
+
+                    //If we found Enemy, change it
+                    if (entitytype == EntityTypes.Enemy)
+                    {
+                        entitytype = User.GetOpposingEntityType();
+                    }
+
+                    //Set the value
+                    otherEntityTypes[i] = entitytype;
+                }
+            }
 
             MoveInfo = new MoveActionData(null, ItemUsed.Description, MoveResourceTypes.FP, 0, CostDisplayTypes.Hidden,
-                moveAffectionType, ItemUsed.SelectionType, false, ItemUsed.HeightsAffected);
+                ItemUsed.MoveAffectionType, ItemUsed.SelectionType, false, ItemUsed.HeightsAffected, otherEntityTypes);
 
             //Set the damage data
             if (damageItem != null || statusInflicting != null)

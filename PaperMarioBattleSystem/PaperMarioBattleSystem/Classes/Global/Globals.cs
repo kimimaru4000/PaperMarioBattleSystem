@@ -406,9 +406,16 @@ namespace PaperMarioBattleSystem
         public bool UsesCharge;
         public Enumerations.HeightStates[] HeightsAffected;
 
+        /// <summary>
+        /// Adds these types of BattleEntities to the target list if MoveAffectionType has Other.
+        /// The types of BattleEntities are added in the order they appear in the array.
+        /// </summary>
+        public Enumerations.EntityTypes[] OtherEntTypes;
+
         public MoveActionData(Texture2D icon, string description, Enumerations.MoveResourceTypes resourceType,
             int resourceCost, Enumerations.CostDisplayTypes costDisplayType, Enumerations.MoveAffectionTypes moveAffectionType,
-            TargetSelectionMenu.EntitySelectionType selectionType, bool usesCharge, Enumerations.HeightStates[] heightsAffected)
+            TargetSelectionMenu.EntitySelectionType selectionType, bool usesCharge, Enumerations.HeightStates[] heightsAffected,
+            params Enumerations.EntityTypes[] otherEntTypes)
         {
             Icon = icon;
             Description = description;
@@ -419,6 +426,7 @@ namespace PaperMarioBattleSystem
             SelectionType = selectionType;
             HeightsAffected = heightsAffected;
             UsesCharge = usesCharge;
+            OtherEntTypes = otherEntTypes;
         }
     }
 
@@ -787,10 +795,15 @@ namespace PaperMarioBattleSystem
         /// Self targets the user of the MoveAction.
         /// Ally targets all entities that are allies of the user.
         /// Enemy targets all entities that are enemies of the user.</para>
+        /// <para>This is a bit field.</para>
         /// </summary>
+        [Flags]
         public enum MoveAffectionTypes
         {
-            None, Self, Ally, Enemy
+            None = 0,
+            Self = 1 << 0,
+            Ally = 1 << 1,
+            Other = 1 << 2
         }
 
         /// <summary>

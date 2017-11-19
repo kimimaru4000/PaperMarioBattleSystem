@@ -241,12 +241,6 @@ namespace PaperMarioBattleSystem
             {
                 ActionStart(null);
             }
-
-            //If this action targets an entity, bring up the target selection menu
-            //if (MoveProperties.TargetsEntity == true)
-            //    BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, BattleManager.Instance.GetEntities(MoveProperties.EntityType, MoveProperties.HeightsAffected));
-            ////Otherwise, simply start the action
-            //else ActionStart(null);
         }
 
         /// <summary>
@@ -376,27 +370,59 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Gets the set of BattleEntities that this move affects.
+        /// <para>The default behavior is to get the entities based on the MoveAction's <see cref="MoveAffectionTypes"/>.</para>
         /// </summary>
         /// <returns>The BattleEntities the move affects based on its MoveAffectionType and the HeightStates it can target.
         /// If None, an empty array is returned.</returns>
-        public BattleEntity[] GetEntitiesMoveAffects()
+        public virtual BattleEntity[] GetEntitiesMoveAffects()
         {
-            if (MoveProperties.MoveAffectionType == MoveAffectionTypes.Self)
-            {
-                return new BattleEntity[] { User };
-            }
-            else if (MoveProperties.MoveAffectionType == MoveAffectionTypes.Ally)
-            {
-                return BattleManager.Instance.GetEntities(User.EntityType, MoveProperties.HeightsAffected);
-            }
-            else if (MoveProperties.MoveAffectionType == MoveAffectionTypes.Enemy)
-            {
-                EntityTypes otherType = User.GetOpposingEntityType();
+            List<BattleEntity> entities = new List<BattleEntity>();
 
-                return BattleManager.Instance.GetEntities(otherType, MoveProperties.HeightsAffected);
+            bool addedAllies = false;
+
+            //Check for adding allies
+            if (UtilityGlobals.MoveAffectionTypesHasFlag(MoveProperties.MoveAffectionType, MoveAffectionTypes.Ally) == true)
+            {
+                entities.AddRange(BattleManager.Instance.GetEntities(User.EntityType, MoveProperties.HeightsAffected));
+                addedAllies = true;
+            }
+            
+            //Check if the user of the move should be added
+            if (UtilityGlobals.MoveAffectionTypesHasFlag(MoveProperties.MoveAffectionType, MoveAffectionTypes.Self) == true)
+            {
+                //If we didn't add allies, add the user of the move
+                if (addedAllies == false)
+                {
+                    entities.Add(User);
+                }
+            }
+            else
+            {
+                //Otherwise if we're not adding the user of the move and we did add allies, remove the user so we end up with only allies
+                if (addedAllies == true)
+                {
+                    entities.Remove(User);
+                }
             }
 
-            return new BattleEntity[0];
+            //If this move targets other types of BattleEntities, add all of the ones it targets in order
+            if (UtilityGlobals.MoveAffectionTypesHasFlag(MoveProperties.MoveAffectionType, MoveAffectionTypes.Other) == true)
+            {
+                if (MoveProperties.OtherEntTypes != null && MoveProperties.OtherEntTypes.Length > 0)
+                {
+                    for (int i = 0; i < MoveProperties.OtherEntTypes.Length; i++)
+                    {
+                        EntityTypes otherType = MoveProperties.OtherEntTypes[i];
+                        entities.AddRange(BattleManager.Instance.GetEntities(otherType, MoveProperties.HeightsAffected));
+                    }
+                }
+                else
+                {
+                    Debug.LogWarning($"{Name} targets {nameof(MoveAffectionTypes.Other)}, but {nameof(MoveProperties.OtherEntTypes)} is null or empty.");
+                }
+            }
+
+            return entities.ToArray();
         }
     }
 }

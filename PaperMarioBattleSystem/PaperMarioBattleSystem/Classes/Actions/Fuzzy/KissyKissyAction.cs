@@ -25,8 +25,8 @@ namespace PaperMarioBattleSystem
             Name = "Kissy-Kissy";
 
             //None of the enemies that use this move ever perform a charge; it makes sense to me to make it use up a charge
-            MoveInfo = new MoveActionData(null, "Absorb health from your opponent.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown, MoveAffectionTypes.Enemy,
-                TargetSelectionMenu.EntitySelectionType.Single, true, heightsAffected);
+            MoveInfo = new MoveActionData(null, "Absorb health from your opponent.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown, MoveAffectionTypes.Other,
+                TargetSelectionMenu.EntitySelectionType.Single, true, heightsAffected, User.GetOpposingEntityType());
 
             ContactTypes contactType = ContactTypes.SideDirect;
             if (sideDirect == false) contactType = ContactTypes.TopDirect;

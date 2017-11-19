@@ -40,6 +40,9 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(49, 5, 20, 20), 110d),
                 new Animation.Frame(new Rectangle(75, 5, 22, 16), 110d),
                 new Animation.Frame(new Rectangle(105, 5, 21, 16), 110d));
+
+            //Both games wrap the cursor
+            WrapCursor = true;
         }
 
         public void StartSelection(OnSelection onSelection, EntitySelectionType selectionType, params BattleEntity[] targets)

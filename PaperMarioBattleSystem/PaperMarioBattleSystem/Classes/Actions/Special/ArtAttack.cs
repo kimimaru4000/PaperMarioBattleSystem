@@ -24,8 +24,8 @@ namespace PaperMarioBattleSystem
             SPCost = 400;
 
             MoveInfo = new MoveActionData(null, "Draw around the enemy as many times as you can!", Enumerations.MoveResourceTypes.SP,
-                0, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.All,
-                false, null);
+                0, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.All,
+                false, null, Enumerations.EntityTypes.Enemy);
             DamageInfo = new DamageData(1, Enumerations.Elements.Star, true, Enumerations.ContactTypes.None, null, true, false,
                 Enumerations.DefensiveActionTypes.None, Enumerations.DamageEffects.None);
 

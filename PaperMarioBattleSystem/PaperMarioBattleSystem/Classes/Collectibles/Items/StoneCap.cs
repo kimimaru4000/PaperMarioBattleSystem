@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
             StatusesInflicted = new StatusChanceHolder[] { new StatusChanceHolder(100d, new StoneStatus(StoneTurns)) };
 
             SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
-            EntityType = Enumerations.EntityTypes.Player;
+            MoveAffectionType = Enumerations.MoveAffectionTypes.Self | Enumerations.MoveAffectionTypes.Ally;
         }
     }
 }

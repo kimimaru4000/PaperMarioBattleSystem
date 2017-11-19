@@ -18,8 +18,8 @@ namespace PaperMarioBattleSystem
             Name = "Jump";
 
             MoveInfo = new MoveActionData(null, "Jump and stomp on an enemy.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
-                MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.Single, true,
-                new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne });
+                MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single, true,
+                new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne }, User.GetOpposingEntityType(), EntityTypes.Neutral);
 
             //The base damage for Jump is Mario's current Boot level
             //If Mario isn't the one using this move, it defaults to 1

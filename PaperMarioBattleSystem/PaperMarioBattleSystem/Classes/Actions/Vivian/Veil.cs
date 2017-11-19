@@ -28,10 +28,5 @@ namespace PaperMarioBattleSystem
             SetMoveSequence(new VeilSequence(this));
             actionCommand = new MultiButtonCommand(MoveSequence, NumCommandButtons, NumCommandButtons, ActionCommandTime, ValidCommandButtons);
         }
-
-        public override void OnMenuSelected()
-        {
-            BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, BattleManager.Instance.GetEntityAllies(User, MoveProperties.HeightsAffected));
-        }
     }
 }

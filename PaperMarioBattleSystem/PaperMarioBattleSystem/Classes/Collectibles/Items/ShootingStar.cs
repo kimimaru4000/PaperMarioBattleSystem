@@ -27,7 +27,8 @@ namespace PaperMarioBattleSystem
             Element = Elements.Star;
 
             SelectionType = TargetSelectionMenu.EntitySelectionType.All;
-            EntityType = EntityTypes.Enemy;
+            MoveAffectionType = MoveAffectionTypes.Other;
+            OtherEntTypes = new EntityTypes[] { EntityTypes.Enemy };
         }
     }
 }

@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
             HPRestored = 5;
 
             SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
-            EntityType = Enumerations.EntityTypes.Player;
+            MoveAffectionType = Enumerations.MoveAffectionTypes.Self | Enumerations.MoveAffectionTypes.Ally;
         }
     }
 }

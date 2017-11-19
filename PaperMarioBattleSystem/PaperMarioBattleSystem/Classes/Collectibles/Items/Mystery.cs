@@ -48,8 +48,7 @@ namespace PaperMarioBattleSystem
             ItemType = ItemTypes.Damage;
             
             SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
-            EntityType = Enumerations.EntityTypes.Player;
-            TargetsSelf = true;
+            MoveAffectionType = Enumerations.MoveAffectionTypes.Self;
         }
     }
 }

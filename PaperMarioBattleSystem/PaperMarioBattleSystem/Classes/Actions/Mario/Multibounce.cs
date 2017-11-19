@@ -17,6 +17,7 @@ namespace PaperMarioBattleSystem
             MoveInfo.Description = "Lets you do a Multibounce. Uses 2 FP. Jumps on all enemies in a row if action command is timed right.";
             MoveInfo.ResourceCost = 2;
             MoveInfo.SelectionType = TargetSelectionMenu.EntitySelectionType.All;
+            MoveInfo.OtherEntTypes = new Enumerations.EntityTypes[] { User.GetOpposingEntityType() };
 
             SetMoveSequence(new MultibounceSequence(this));
         }

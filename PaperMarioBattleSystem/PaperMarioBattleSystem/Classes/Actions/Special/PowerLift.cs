@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
 
             SPCost = 300;
             MoveInfo = new MoveActionData(null, "Briefly increases your party's\nAttack and Defense power.", Enumerations.MoveResourceTypes.SP,
-                300, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Ally, TargetSelectionMenu.EntitySelectionType.All, false, null);
+                300, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Self | Enumerations.MoveAffectionTypes.Ally, TargetSelectionMenu.EntitySelectionType.All, false, null);
 
             SetMoveSequence(new PowerLiftSequence(this));
             actionCommand = new PowerLiftCommand(MoveSequence, ActionCommandTime);

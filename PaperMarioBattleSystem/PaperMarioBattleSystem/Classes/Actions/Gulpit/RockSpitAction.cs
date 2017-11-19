@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
 
             //NOTE: As an idea, this can perhaps add the charge of the usable entity to the damage; something to consider
             MoveInfo = new MoveActionData(null, "Spit a rock at an enemy.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
-                MoveAffectionTypes.Enemy, TargetSelectionMenu.EntitySelectionType.Single, true, null);
+                MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single, true, null, User.GetOpposingEntityType());
             DamageInfo = new DamageData(usableEntity.UsableValue, Elements.Normal, false, ContactTypes.None, null, false, false, DefensiveActionTypes.None, DamageEffects.None);
 
             SetMoveSequence(new RockSpitSequence(this, entityUsed));

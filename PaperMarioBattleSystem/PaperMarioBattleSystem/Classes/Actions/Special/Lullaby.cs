@@ -18,8 +18,8 @@ namespace PaperMarioBattleSystem
             SPCost = 100;
 
             MoveInfo = new MoveActionData(null, "Lull enemies to sleep with\na tender lullaby.", Enumerations.MoveResourceTypes.SP,
-                100, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Enemy,
-                TargetSelectionMenu.EntitySelectionType.All, false, null);
+                100, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other,
+                TargetSelectionMenu.EntitySelectionType.All, false, null, Enumerations.EntityTypes.Enemy);
                 
             DamageInfo = new DamageData(0, Enumerations.Elements.Star, true, Enumerations.ContactTypes.None,
                 new StatusChanceHolder[] { new StatusChanceHolder(100d, new SleepStatus(3)) }, Enumerations.DamageEffects.None);

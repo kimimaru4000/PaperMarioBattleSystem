@@ -191,6 +191,20 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Tells whether a set of MoveAffectionTypes has any of the flags in another MoveAffectionTypes set.
+        /// </summary>
+        /// <param name="moveAffectionTypes">The MoveAffectionTypes value.</param>
+        /// <param name="moveAffectionTypesFlags">The flags to test.</param>
+        /// <returns>true if any of the flags in moveAffectionTypes are in moveAffectionTypesFlags, otherwise false.</returns>
+        public static bool MoveAffectionTypesHasFlag(Enumerations.MoveAffectionTypes moveAffectionTypes,
+            Enumerations.MoveAffectionTypes moveAffectionTypesFlags)
+        {
+            Enumerations.MoveAffectionTypes flags = (moveAffectionTypes & moveAffectionTypesFlags);
+
+            return (flags != 0);
+        }
+
+        /// <summary>
         /// Initializes a jagged array with default values.
         /// <para>This should be used on null jagged arrays to easily initialize them.</para>
         /// </summary>

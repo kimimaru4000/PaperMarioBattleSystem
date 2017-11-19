@@ -20,19 +20,24 @@ namespace PaperMarioBattleSystem
         public EntitySelectionType SelectionType { get; protected set; } = EntitySelectionType.Single;
 
         /// <summary>
-        /// The types of BattleEntities to target.
+        /// Which BattleEntities the Item affects.
         /// </summary>
-        public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
+        public MoveAffectionTypes MoveAffectionType { get; protected set; } = MoveAffectionTypes.None;
+
+        /// <summary>
+        /// The types of BattleEntities to target if MoveAffectionType has Other.
+        /// </summary>
+        public EntityTypes[] OtherEntTypes {get; protected set; } = null;
+
+        /// <summary>
+        /// Whether to replace <see cref="EntityTypes.Enemy"/> with the opposing EntityType if it is found in <see cref="OtherEntTypes"/> or not.
+        /// </summary>
+        public bool GetOpposingIfEnemy { get; protected set; } = true;
 
         /// <summary>
         /// The HeightStates of the BattleEntities the Item can affect.
         /// </summary>
         public HeightStates[] HeightsAffected { get; protected set; } = null;
-
-        /// <summary>
-        /// Whether the Item can only be used on the BattleEntity using it.
-        /// </summary>
-        public bool TargetsSelf { get; protected set; } = false;
 
         /// <summary>
         /// The ItemAction associated with the item.

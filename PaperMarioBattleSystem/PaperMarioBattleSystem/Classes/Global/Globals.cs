@@ -803,7 +803,8 @@ namespace PaperMarioBattleSystem
             None = 0,
             Self = 1 << 0,
             Ally = 1 << 1,
-            Other = 1 << 2
+            Other = 1 << 2,
+            Custom = 1 << 3
         }
 
         /// <summary>

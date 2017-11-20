@@ -180,7 +180,7 @@ namespace PaperMarioBattleSystem
             DamageCalculationSteps.Add(new VictimDamageReductionStep());
             DamageCalculationSteps.Add(new VictimCheckHitStep());
             DamageCalculationSteps.Add(new VictimDefensiveStep());
-            DamageCalculationSteps.Add(new VictimDamageEffectStep());
+            //DamageCalculationSteps.Add(new VictimDamageEffectStep());
             DamageCalculationSteps.Add(new VictimDoublePainStep());
             DamageCalculationSteps.Add(new VictimLastStandStep());
             DamageCalculationSteps.Add(new ClampVictimDamageStep());
@@ -507,10 +507,13 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        /// <summary>
-        /// Filters out DamageEffects caused by the move depending on whether the BattleEntity is vulnerable to them or not.
-        /// </summary>
-        private sealed class VictimDamageEffectStep : DamageCalcStep
+        /*NOTE: This has been commented out because it is redundant. Entities currently handle DamageEffects their own way,
+         and if a move misses, HandleDamageEffects() won't even be called to begin with. If this needs to be reintroduced,
+         chances are it will need to be rewritten*/
+        // <summary>
+        // Filters out DamageEffects caused by the move depending on whether the BattleEntity is vulnerable to them or not.
+        // </summary>
+        /*private sealed class VictimDamageEffectStep : DamageCalcStep
         {
             protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
             {
@@ -527,7 +530,7 @@ namespace PaperMarioBattleSystem
                 {
                     return;
                 }
-
+                
                 //The DamageEffects stored in the result
                 DamageEffects resultEffects = DamageEffects.None;
 
@@ -551,7 +554,7 @@ namespace PaperMarioBattleSystem
                 //Set the result
                 StepResult.VictimResult.DamageEffect = resultEffects;
             }
-        }
+        }*/
 
         private sealed class VictimDoublePainStep : DamageCalcStep
         {

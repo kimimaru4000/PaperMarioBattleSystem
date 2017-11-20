@@ -132,3 +132,13 @@ this is meaningless since they don't technically have any enemies.
 The bit field change allows everything to be more flexible. Ally can refer to only the BattleEntity's allies; combined with Self, it will target all entities of that type.
 It also allows for moves that can target anyone and for combinations not previously possible without overriding methods (Ex. Self and enemies).
 
+Update (11/18/17)
+-----------------
+This was implemented and works well so far. However, there are several MoveActions with custom logic in regards to who they target (Ex. Tattle) and there's no indication since they ignore what their MoveAffectionTypes say.
+To improve clarity, let's make these changes:
+
+-Change GetEntitiesMoveAffects() back to non-virtual
+-Add a Custom value to MoveAffectionTypes
+-Add a protected virtual method with the following signature: BattleEntity[] GetCustomAffectedEntities()
+
+If the move has the Custom flag, it will call GetCustomAffectedEntities(). This allows objects from the outside to see that those MoveActions do indeed have their own custom target selection logic and should expect different results from standard moves.

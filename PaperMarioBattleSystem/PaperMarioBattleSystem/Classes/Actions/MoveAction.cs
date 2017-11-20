@@ -374,7 +374,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <returns>The BattleEntities the move affects based on its MoveAffectionType and the HeightStates it can target.
         /// If None, an empty array is returned.</returns>
-        public virtual BattleEntity[] GetEntitiesMoveAffects()
+        public BattleEntity[] GetEntitiesMoveAffects()
         {
             List<BattleEntity> entities = new List<BattleEntity>();
 
@@ -422,7 +422,23 @@ namespace PaperMarioBattleSystem
                 }
             }
 
+            //If this move has custom entity targeting logic, add the entities to the list
+            if (UtilityGlobals.MoveAffectionTypesHasFlag(MoveProperties.MoveAffectionType, MoveAffectionTypes.Custom) == true)
+            {
+                BattleEntity[] customAffected = GetCustomAffectedEntities();
+
+                if (customAffected != null && customAffected.Length > 0)
+                {
+                    entities.AddRange(customAffected);
+                }
+            }
+
             return entities.ToArray();
+        }
+
+        protected virtual BattleEntity[] GetCustomAffectedEntities()
+        {
+            return null;
         }
     }
 }

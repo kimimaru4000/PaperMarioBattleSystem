@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
             Name = "Tattle";
 
             MoveInfo = new MoveActionData(null, "View enemies' descriptions\nand see their HP in battle.", MoveResourceTypes.FP, 0,
-                CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single, false,
+                CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.Custom, TargetSelectionMenu.EntitySelectionType.Single, false,
                 null, User.GetOpposingEntityType(), EntityTypes.Neutral);
 
             SetMoveSequence(new TattleSequence(this));
@@ -43,10 +43,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public override void OnMenuSelected()
+        protected override BattleEntity[] GetCustomAffectedEntities()
         {
-            //Select only entities that can be tattled
-            BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, GetTattleableEntities());
+            return GetTattleableEntities();
         }
 
         /// <summary>
@@ -58,16 +57,22 @@ namespace PaperMarioBattleSystem
         {
             List<BattleEntity> tattleableEntities = new List<BattleEntity>();
 
-            //Get all BattleEntities of the opposing EntityType
-            BattleEntity[] entities = BattleManager.Instance.GetEntities(User.GetOpposingEntityType());
-
-            for (int i = 0; i < entities.Length; i++)
+            //Get all BattleEntities of the types specified in the move information
+            if (MoveProperties.OtherEntTypes != null)
             {
-                //Safely cast to see if the BattleEntity can be tattled and add it if so
-                ITattleableEntity tattleableEntity = entities[i] as ITattleableEntity;
-                if (tattleableEntity != null)
+                for (int i = 0; i < MoveProperties.OtherEntTypes.Length; i++)
                 {
-                    tattleableEntities.Add(entities[i]);
+                    BattleEntity[] entities = BattleManager.Instance.GetEntities(MoveProperties.OtherEntTypes[i], null);
+
+                    for (int j = 0; j < entities.Length; j++)
+                    {
+                        //Safely cast to see if the BattleEntity can be tattled and add it if so
+                        ITattleableEntity tattleableEntity = entities[j] as ITattleableEntity;
+                        if (tattleableEntity != null)
+                        {
+                            tattleableEntities.Add(entities[j]);
+                        }
+                    }
                 }
             }
 

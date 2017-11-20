@@ -24,10 +24,5 @@ namespace PaperMarioBattleSystem
             //Outta Sight does not have an Action Command
             actionCommand = null;
         }
-
-        public override void OnMenuSelected()
-        {
-            BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, BattleManager.Instance.GetEntityAllies(User, MoveProperties.HeightsAffected));
-        }
     }
 }

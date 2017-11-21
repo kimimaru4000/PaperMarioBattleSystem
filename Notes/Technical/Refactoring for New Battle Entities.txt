@@ -142,3 +142,18 @@ To improve clarity, let's make these changes:
 -Add a protected virtual method with the following signature: BattleEntity[] GetCustomAffectedEntities()
 
 If the move has the Custom flag, it will call GetCustomAffectedEntities(). This allows objects from the outside to see that those MoveActions do indeed have their own custom target selection logic and should expect different results from standard moves.
+
+Update (11/20/17)
+-----------------
+Now that this is done, let's move onto the next step.
+
+Step 5
+------
+Implement Bobbery's Bomb Squad move and the bombs that it produces. The bombs are Neutral BattleEntities that cannot be targeted.
+
+Solution 5
+----------
+-Add Bomb Squad's action, Sequence, and Action Command
+-Add a new class for the bombs, called BobberyBomb
+
+

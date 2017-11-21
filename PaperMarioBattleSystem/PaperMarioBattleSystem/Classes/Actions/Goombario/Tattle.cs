@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
         {
             return GetTattleableEntities();
         }
-
+        
         /// <summary>
         /// Gets all BattleEntities that can be tattled.
         /// They all implement the <see cref="ITattleableEntity"/> interface.

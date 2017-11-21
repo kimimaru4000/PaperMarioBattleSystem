@@ -269,7 +269,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Inflict Statuses if the entity isn't dead
-            if (HealthState != HealthStates.Dead && statusesInflicted != null)
+            if (IsDead == false && statusesInflicted != null)
             {
                 for (int i = 0; i < statusesInflicted.Length; i++)
                 {
@@ -283,10 +283,15 @@ namespace PaperMarioBattleSystem
             //If this entity received damage during its action sequence, it has been interrupted
             //The null check is necessary in the event that a StatusEffect that deals damage at the start of the phase, such as Poison,
             //is inflicted at the start of the battle before any entity has moved
+
+            //NOTE: This should be moved inside the damage check, as it will still happen if the BattleEntity heals
             if (damage > 0 && IsTurn == true && PreviousAction?.MoveSequence.InSequence == true)
             {
                 PreviousAction.MoveSequence.StartInterruption(element);
             }
+
+            //Perform entity-specific logic to react to taking damage
+            OnTakeDamage(damageResult);
 
             //Invoke the damage taken event
             DamageTakenEvent?.Invoke(damageResult);
@@ -302,6 +307,16 @@ namespace PaperMarioBattleSystem
         public void TakeDamage(Elements element, int damage, bool piercing)
         {
             TakeDamage(new InteractionHolder(null, damage, element, ElementInteractionResult.Damage, ContactTypes.None, piercing, null, true, DamageEffects.None));
+        }
+
+        /// <summary>
+        /// Performs entity-specific logic when taking damage.
+        /// This is called after damage has been dealt but before the damage taken event.
+        /// </summary>
+        /// <param name="damageInfo"></param>
+        protected virtual void OnTakeDamage(InteractionHolder damageInfo)
+        {
+
         }
 
         public void HealHP(int hp)
@@ -454,7 +469,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Performs entity-specific logic on death
         /// </summary>
-        public virtual void OnDeath()
+        protected virtual void OnDeath()
         {
             Debug.Log($"{Name} has been defeated!");
         }

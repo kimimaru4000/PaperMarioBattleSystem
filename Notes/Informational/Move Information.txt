@@ -177,6 +177,28 @@ It can take damage for Mario even if he can't be hit. For example, if Mario is i
 
 The only way to see the shell's HP is with the Peekaboo Badge, as it cannot be tattled.
 
+Bobbery
+-------
+Bomb Squad - Creates up to 3 bombs that detonate in 2 phase cycles and deal 3 explosive damage to enemies in their range.
+
+The explosive damage doesn't flip enemies such as Clefts or Bristles.
+
+The damage is associated with the bombs themselves, not Bobbery. As a result, the damage they deal can't be increased with badges and won't heal Bobbery if HP Drain P is equipped.
+
+If positioned near Bobbery (Ex. shot straight up or close to it), they can hurt Bobbery and Mario!
+
+If they detonate and hit other bombs, those bombs will explode before any other bombs that should detonate. For example:
+
+1. One bomb is placed on the left, one in the middle, and one on the right
+2. Next turn, 3 bombs are placed in the middle.
+3. Next turn, the bomb on the left detonates and hits nothing.
+4. The bomb in the middle detonates and hits the other bombs there.
+5. The other bombs hit by the explosion detonate in the order they were placed.
+6. The bomb on the right, which was placed earlier, detonates
+
+-The bombs detonate after Status Effects such as Burn
+-If the player doesn't press A during the Action Command, it will automatically throw a bomb after 6 seconds
+
 General
 -------
 For the Cloud Nine, Water Block, and Turbo Charge Status Effects, it shows the order

@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// This class assumes the graphic is the upper-left piece and rotates the other pieces according to draw them combined (Ex. top-left of "+" sign image).</para>
     /// <para>Place their pivots in the center to allow them to be rotated as one.</para>
     /// </summary>
-    public sealed class UIFourPiecedTex : UICroppedTexture2D
+    public sealed class UIFourPiecedTex : UICroppedTexture2D, ICopyable<UIFourPiecedTex>
     {
         /// <summary>
         /// The origin offset. This affects all the pieces.
@@ -61,6 +61,19 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset + new Vector2(0f, -widthHeight.Y), 1f, false, true, Depth, true, absOrigin);
             //Lower-right
             SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset + new Vector2(-widthHeight.X, -widthHeight.Y), 1f, true, true, Depth, true, absOrigin);
+        }
+
+        public UIFourPiecedTex Copy()
+        {
+            UIFourPiecedTex fourPieceTex = new UIFourPiecedTex(CroppedTex2D.Copy(), OriginOffset, Depth, TintColor);
+
+            fourPieceTex.Position = Position;
+
+            fourPieceTex.Rotation = Rotation;
+            fourPieceTex.FlipX = FlipX;
+            fourPieceTex.FlipY = FlipY;
+
+            return fourPieceTex;
         }
     }
 }

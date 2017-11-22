@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
         /// <param name="vec2">The second vector.</param>
         /// <returns>A float representing the angle between the two vectors, in radians.</returns>
         public static float Angle(Vector2 vec1, Vector2 vec2)
-        {
+        {            
             //a · b = (a.X * b.X) + (a.Y * b.Y) = ||a|| * ||b|| * cos(θ)
             double dotProduct = Vector2.Dot(vec1, vec2);
             double mag1 = vec1.Length();
@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
             double div = dotProduct / magMult;
 
             double angleRadians = Math.Acos(div);
-
+            
             return (float)angleRadians;
         }
 
@@ -65,6 +65,28 @@ namespace PaperMarioBattleSystem
         /// <param name="vec2">The second vector.</param>
         /// <returns>A float representing the angle between the two vectors, in degrees.</returns>
         public static float AngleDegrees(Vector2 vec1, Vector2 vec2) => ToDegrees(Angle(vec1, vec2));
+
+        /// <summary>
+        /// Finds a point around a circle at a particular angle.
+        /// </summary>
+        /// <param name="center">The center of the circle.</param>
+        /// <param name="radius">The radius of the circle.</param>
+        /// <param name="angle">The angle of the point.</param>
+        /// <param name="angleInDegrees">Whether the angle passed in is in degrees or not.</param>
+        /// <returns>A Vector2 with the X and Y components at the location around the circle.</returns>
+        public static Vector2 GetPointAroundCircle(Vector2 center, double radius, double angle, bool angleInDegrees)
+        {
+            //If the angle is in degrees, convert it to radians
+            if (angleInDegrees == true)
+            {
+                angle = ToRadians(angle);
+            }
+
+            float x = (float)(Math.Cos(angle) * radius) + center.X;
+            float y = (float)(Math.Sin(angle) * radius) + center.Y;
+
+            return new Vector2(x, y);
+        }
 
         //NOTE: (Leaving this here for now)
         //TTYD checks rand(100) < enemy susceptibility for a given value, such as chance of being inflicted with Dizzy

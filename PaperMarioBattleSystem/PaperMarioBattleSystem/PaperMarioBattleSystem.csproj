@@ -61,6 +61,7 @@
     <Compile Include="Classes\Actions\ActionCommands\ActionCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\PowerLiftIconElement.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ArtAttackCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\BombSquadCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\FillBarCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\FillLightsCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\GuardCommand.cs" />
@@ -78,6 +79,7 @@
     <Compile Include="Classes\Actions\ActionCommands\TornadoJumpCommand.cs" />
     <Compile Include="Classes\Actions\BattleAction.cs" />
     <Compile Include="Classes\Actions\Bobbery Bomb\BlinkFasterAction.cs" />
+    <Compile Include="Classes\Actions\Bobbery\BombSquadAction.cs" />
     <Compile Include="Classes\Actions\Bow\OuttaSight.cs" />
     <Compile Include="Classes\Actions\Defensive\DefensiveAction.cs" />
     <Compile Include="Classes\Actions\Defensive\Superguard.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Classes\BattleEvents\MessageBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\PlayAnimBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\RemoveWingsBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\ShootBobberyBombBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\SwapPositionBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitForAnimBattleEvent.cs" />
@@ -272,6 +275,7 @@
     <Compile Include="Classes\SequenceActions\WaitForAnimationSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForCommandSeqAction.cs" />
     <Compile Include="Classes\Sequences\Bobbery Bomb\BlinkFasterSequence.cs" />
+    <Compile Include="Classes\Sequences\Bobbery\BombSquadSequence.cs" />
     <Compile Include="Classes\Sequences\Bow\OuttaSightSecondHalfSequence.cs" />
     <Compile Include="Classes\Sequences\Bow\OuttaSightSequence.cs" />
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />

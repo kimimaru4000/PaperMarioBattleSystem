@@ -15,11 +15,6 @@ namespace PaperMarioBattleSystem
     public abstract class BattleEvent : IUpdateable
     {
         /// <summary>
-        /// The Priority of the Battle Event.
-        /// </summary>
-        //public int Priority { get; protected set; } = 0;
-
-        /// <summary>
         /// Whether the Battle Event started or not.
         /// </summary>
         protected bool Started { get; private set; } = false;
@@ -58,9 +53,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public BattleEntity[] Entities { get; protected set; } = null;
 
-        protected BattleEvent()//int priority)
+        protected BattleEvent()
         {
-            //Priority = priority;
+            
         }
 
         /// <summary>

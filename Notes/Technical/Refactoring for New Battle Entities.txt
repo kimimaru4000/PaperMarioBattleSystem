@@ -156,4 +156,8 @@ Solution 5
 -Add Bomb Squad's action, Sequence, and Action Command
 -Add a new class for the bombs, called BobberyBomb
 
+When the bombs take Explosive damage or end their second turns, they should die and explode; as a result, give them have a KO weakness to Explosive damage.
+
+The damage from the explosions should be dealt in a Battle Event, since bombs hit by explosions will detonate before other bombs set to detonate on the end of that turn, and explosions occur after Battle Events for Status Effects, such as Burn.
+
 

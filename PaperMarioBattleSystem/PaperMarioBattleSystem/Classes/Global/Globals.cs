@@ -1146,7 +1146,8 @@ namespace PaperMarioBattleSystem
 
         public enum StartEventPriorities
         {
-            Message = 0, Stage = 500, Status = 1000, HealHP = 1250, HealFP = 1251, Dialogue = 1500, Death = 2000, Damage = 2500
+            Message = 0, Stage = 500, BobberyBomb = 750, Status = 1000,
+            HealHP = 1250, HealFP = 1251, Dialogue = 1500, Death = 2000, Damage = 2500
         }
 
         #endregion
@@ -1322,6 +1323,21 @@ namespace PaperMarioBattleSystem
             public override string ToString()
             {
                 return $"{nameof(PowerLiftResponse)} - Attack: {AttackBoosted}, Defense: {DefenseBoosted}";
+            }
+        }
+
+        /// <summary>
+        /// A struct holding information Bomb Squad's Action Command sends.
+        /// </summary>
+        public struct BombSquadResponse
+        {
+            public Vector2 ThrowVelocity;
+            public float Gravity;
+
+            public BombSquadResponse(Vector2 throwVelocity, float gravity)
+            {
+                ThrowVelocity = throwVelocity;
+                Gravity = gravity;
             }
         }
 

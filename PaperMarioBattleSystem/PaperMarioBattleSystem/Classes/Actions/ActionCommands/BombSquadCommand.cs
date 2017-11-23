@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
         private double CircleRadius = 60d;
         private double CursorAngle = 90d;
 
-        private Vector2 BaseThrowVelocity = new Vector2(2f, 2f);
+        private Vector2 BaseThrowVelocity = new Vector2(5f, 5f);
 
         private UIFourPiecedTex Cursor = null;
         private UIFourPiecedTex ThrownCursor = null;
@@ -129,7 +129,11 @@ namespace PaperMarioBattleSystem
 
         private void ThrowBomb()
         {
-            Vector2 throwVelocity = new Vector2((float)Math.Cos(CursorAngle) * BaseThrowVelocity.X, (float)Math.Sin(CursorAngle) * BaseThrowVelocity.Y);
+            double angleRadians = UtilityGlobals.ToRadians(CursorAngle);
+
+            Vector2 throwVelocity = new Vector2((float)Math.Cos(angleRadians) * BaseThrowVelocity.X, (float)Math.Sin(angleRadians) * BaseThrowVelocity.Y);
+
+            //Debug.Log($"CursorAngle: {angleRadians}, ThrowVelocity: {throwVelocity}, Cos: {Math.Cos(angleRadians)}, Sin: {Math.Sin(angleRadians)}");
 
             NumBombsThrown++;
 

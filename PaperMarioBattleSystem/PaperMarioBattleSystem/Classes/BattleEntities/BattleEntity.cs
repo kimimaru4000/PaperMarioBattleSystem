@@ -926,7 +926,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Used for update logic that applies to the entity regardless of whether it is its turn or not
         /// </summary>
-        public void Update()
+        public virtual void Update()
         {
             AnimManager.CurrentAnim?.Update();
 

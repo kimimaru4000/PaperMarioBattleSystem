@@ -88,7 +88,7 @@ namespace PaperMarioBattleSystem
         /// The phase order in battle.
         /// BattleEntities of these types go in this order.
         /// </summary>
-        private readonly EntityTypes[] PhaseOrder = new EntityTypes[] { EntityTypes.Player, EntityTypes.Enemy };
+        private readonly EntityTypes[] PhaseOrder = new EntityTypes[] { EntityTypes.Player, EntityTypes.Enemy, EntityTypes.Neutral };
 
         /// <summary>
         /// The phase the battle starts on.

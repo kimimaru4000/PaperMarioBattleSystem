@@ -45,7 +45,7 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(62, 72, 65, 68), bombFrameRate)));
 
             //Offset the spark animation so we can play it in the same position as the bombs
-            Vector2 sparkOffset = new Vector2(0, 68 / 2);
+            Vector2 sparkOffset = new Vector2(16, -68 / 4);
 
             SparkAnimation = new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(0, 0, 32, 24), sparkFrameRate, sparkOffset),
@@ -56,14 +56,9 @@ namespace PaperMarioBattleSystem
             SparkAnimation.Pause();
         }
 
-        //Bobbery's Bombs are added to battle after they finish moving during Bomb Squad
         public override void OnBattleStart()
         {
             base.OnBattleStart();
-
-            SetBattlePosition(Position);
-
-            SparkAnimation.Play();
         }
 
         //protected override void OnTakeDamage(InteractionHolder damageInfo)
@@ -71,7 +66,7 @@ namespace PaperMarioBattleSystem
         //    base.OnTakeDamage(damageInfo);
         //
         //    //When taking explosive damage, the bombs explode
-        //    //If they're already in the process of exploding
+        //    //If they're already in the process of exploding, don't do anything
         //    if (damageInfo.DamageElement == Elements.Explosion)
         //    {
         //        
@@ -80,6 +75,8 @@ namespace PaperMarioBattleSystem
 
         public override void OnTurnStart()
         {
+            base.OnTurnStart();
+
             //This is handled for turns instead of Phase Cycles in the event that the bomb's turn count is modified
             //This way, if it is somehow inflicted with Fast, it will blow up in one turn instead of two
             TurnsTaken++;
@@ -100,6 +97,25 @@ namespace PaperMarioBattleSystem
         {
             //Bomb Squad Bombs don't have any held items or badges
             return 0;
+        }
+
+        /// <summary>
+        /// Initializes the Bobbery Bomb when it comes to rest after being thrown.
+        /// It sets its BattlePosition to its current position and starts playing the spark animation.
+        /// </summary>
+        public void InitializeBomb()
+        {
+            SetBattlePosition(Position);
+
+            //Play the spark animation
+            SparkAnimation.Play();
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            SparkAnimation.Update();
         }
 
         public override void Draw()

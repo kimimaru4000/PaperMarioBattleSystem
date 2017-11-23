@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// A Battle Event that shoots a Bobbery Bomb with a velocity.
-    /// The bomb stops when it hits the ground, after which it's added to battle.
+    /// The bomb stops when it hits the ground.
     /// <para>This is used in Bobbery's Bomb Squad sequence.</para>
     /// </summary>
     public sealed class ShootBobberyBombBattleEvent : BattleEvent
@@ -42,8 +42,8 @@ namespace PaperMarioBattleSystem
         {
             base.OnEnd();
 
-            //Add the bomb to battle
-            BattleManager.Instance.AddEntities(new BattleEntity[] { bobberyBomb }, true);
+            //Initialize the bomb
+            bobberyBomb.InitializeBomb();
 
             //Reset values and clear reference
             bobberyBomb = null;

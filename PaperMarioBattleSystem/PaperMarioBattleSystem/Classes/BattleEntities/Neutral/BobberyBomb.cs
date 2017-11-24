@@ -22,6 +22,8 @@ namespace PaperMarioBattleSystem
 
         private LoopAnimation SparkAnimation = null;
 
+        private Rectangle GetHitbox => new Rectangle((int)Position.X - 15, (int)Position.Y - 60, 80, 140);
+
         public BobberyBomb(int damage) : base(new Stats(0, 1, 0, damage, 0))
         {
             Name = "Bobbery Bomb";
@@ -73,6 +75,11 @@ namespace PaperMarioBattleSystem
         //    }
         //}
 
+        private DamageData GetDamageData()
+        {
+            return new DamageData(BattleStats.TotalAttack, Elements.Explosion, false, ContactTypes.None, null, DamageEffects.None);
+        }
+
         public override void OnTurnStart()
         {
             base.OnTurnStart();
@@ -89,7 +96,16 @@ namespace PaperMarioBattleSystem
             //Explode on the second turn
             else
             {
-                
+                //Explode with a battle event and do nothing on this turn
+                DetonateBobberyBombBattleEvent detonateEvent = new DetonateBobberyBombBattleEvent(this, GetDamageData(),
+                    GetHitbox, HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne);
+
+                //Queue the event
+                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.BobberyBomb,
+                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
+                    detonateEvent);
+
+                StartAction(new NoAction(), true, null);
             }
         }
 
@@ -125,6 +141,18 @@ namespace PaperMarioBattleSystem
             //Draw the spark animation if it's playing
             if (SparkAnimation.IsPlaying == true)
                 SparkAnimation.Draw(Position, Color.White, false, .11f);
+
+            //DrawHitbox();
+        }
+
+        private void DrawHitbox()
+        {
+            Rectangle hitRect = GetHitbox;
+            Vector2 hitrectpos = Camera.Instance.SpriteToUIPos(new Vector2(hitRect.X, hitRect.Y));
+            hitRect.X = (int)hitrectpos.X;
+            hitRect.Y = (int)hitrectpos.Y;
+
+            Debug.DebugDrawHollowRect(hitRect, Color.White, .7f, 2);
         }
     }
 }

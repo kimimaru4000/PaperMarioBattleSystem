@@ -166,7 +166,10 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < ActionButtons.Count; i++)
             {
                 double rotation = (spacing * i) + RotationOffset + GlobalRotOffset;
-                ActionButtons[i].Position = Position + new Vector2((int)(WheelRadius * (float)Math.Cos(rotation)), (int)(WheelRadius * (float)Math.Sin(rotation)));
+                Vector2 pos = UtilityGlobals.GetPointAroundCircle(Position, WheelRadius, rotation, false);
+                pos.X = (int)pos.X;
+                pos.Y = (int)pos.Y;
+                ActionButtons[i].Position = pos;
             }
         }
 

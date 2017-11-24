@@ -331,6 +331,33 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        /// <summary>
+        /// Draws a hollow rectangle.
+        /// </summary>
+        /// <param name="rect">The Rectangle to draw.</param>
+        /// <param name="color">The color of the hollow rectangle.</param>
+        /// <param name="layer">The layer of the rectangle.</param>
+        /// <param name="thickness">The thickness of the hollow rectangle.</param>
+        public static void DebugDrawHollowRect(Rectangle rect, Color color, float layer, int thickness)
+        {
+            if (DebugEnabled == false) return;
+
+            Rectangle[] rects = new Rectangle[4]
+            {
+                new Rectangle(rect.X, rect.Y, rect.Width, thickness),
+                new Rectangle(rect.Right - thickness, rect.Y, thickness, rect.Height),
+                new Rectangle(rect.X, rect.Y, thickness, rect.Height),
+                new Rectangle(rect.X, rect.Bottom - thickness, rect.Width, thickness)
+            };
+
+            Texture2D box = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
+
+            for (int i = 0; i < rects.Length; i++)
+            {
+                SpriteRenderer.Instance.Draw(box, new Vector2(rects[i].X, rects[i].Y), null, color, 0f, Vector2.Zero, new Vector2(rects[i].Width, rects[i].Height), false, false, layer, true);
+            }
+        }
+
         public static void DebugDraw()
         {
             if (DebugEnabled == false) return;

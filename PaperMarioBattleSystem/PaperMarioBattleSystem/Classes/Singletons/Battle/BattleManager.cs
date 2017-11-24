@@ -732,6 +732,29 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Returns all BattleEntities in battle in a new list.
+        /// This method is used internally in the BattleManager.
+        /// </summary>
+        /// <returns>A list of all BattleEntities in battle. An empty list if none are in battle.</returns>
+        private List<BattleEntity> GetAllEntitiesList()
+        {
+            List<BattleEntity> allEntities = new List<BattleEntity>();
+
+            //Add all BattleEntities
+            EntityTypes[] entityTypes = UtilityGlobals.GetEnumValues<EntityTypes>();
+            for (int i = 0; i < entityTypes.Length; i++)
+            {
+                List<BattleEntity> existingList = GetEntitiesList(entityTypes[i]);
+                if (existingList != null)
+                {
+                    allEntities.AddRange(existingList);
+                }
+            }
+
+            return allEntities;
+        }
+
+        /// <summary>
         /// Returns all entities of a specified EntityType in a list.
         /// The returned list is the same reference found in the <see cref="AllEntities"/> dictionary.
         /// This method is used internally in the BattleManager.
@@ -777,6 +800,22 @@ namespace PaperMarioBattleSystem
             FilterEntitiesByHeights(entities, heightStates);
 
             return entities;
+        }
+
+        /// <summary>
+        /// Returns all BattleEntities taking part in battle in an array.
+        /// </summary>
+        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
+        /// If null, will include entities of all height states.</param>
+        /// <returns>All BattleEntities in battle matching the height states specified.</returns>
+        public BattleEntity[] GetAllEntities(params HeightStates[] heightStates)
+        {
+            List<BattleEntity> allentities = GetAllEntitiesList();
+
+            //Filter by height states
+            FilterEntitiesByHeights(allentities, heightStates);
+
+            return allentities.ToArray();
         }
 
         /// <summary>

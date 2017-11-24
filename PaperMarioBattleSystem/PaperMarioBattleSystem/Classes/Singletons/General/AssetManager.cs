@@ -72,6 +72,7 @@ namespace PaperMarioBattleSystem
         public void CleanUp()
         {
             Content.Unload();
+            Content = null;
 
             instance = null;
         }

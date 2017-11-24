@@ -15,8 +15,14 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class Interactions
     {
+        //#region Delegates
+        //
+        //public delegate void VictimMissInteraction();
+        //
+        //#endregion
+
         #region Structs
-        
+
         /// <summary>
         /// Holds the result and damage value of an damage interaction involving an Element
         /// </summary>
@@ -199,6 +205,65 @@ namespace PaperMarioBattleSystem
         #endregion
 
         #region Interaction Methods
+
+        // <summary>
+        // Have an attacker attempt to deal damage to a set of victims.
+        // <para>Based on the ContactType of this BattleAction, this can fail, resulting in an interruption.
+        // In the event of an interruption, no further entities are tested.</para>
+        // </summary>
+        // <param name="attacker"></param>
+        // <param name="victims"></param>
+        // <param name="damageInfo"></param>
+        // <param name="onVictimMiss"></param>
+        // <returns></returns>
+        /*public static InteractionResult[] AttemptDamage(BattleEntity attacker, BattleEntity[] victims, DamageData damageInfo,
+            VictimMissInteraction onVictimMiss)
+        {
+            if (attacker == null || victims == null)
+            {
+                Debug.LogError($"{nameof(attacker)} and/or {nameof(victims)} is/are null in {nameof(AttemptDamage)}, so no damage can be dealt!");
+                return null;
+            }
+
+            //The final interactions between entities
+            InteractionResult[] finalInteractions = new InteractionResult[victims.Length];
+
+            //Go through all the entities and attempt damage
+            for (int i = 0; i < victims.Length; i++)
+            {
+                InteractionResult finalResult = GetDamageInteraction(new InteractionParamHolder(attacker, victims[i], damageInfo.Damage,
+                    damageInfo.DamagingElement, damageInfo.Piercing, damageInfo.ContactType, damageInfo.Statuses, damageInfo.DamageEffect,
+                    damageInfo.CantMiss, damageInfo.DefensiveOverride));
+
+                finalInteractions[i] = finalResult;
+
+                //Make the victim take damage upon a PartialSuccess or a Success
+                if (finalResult.VictimResult.DontDamageEntity == false)
+                {
+                    //Check if the attacker hit
+                    if (finalResult.VictimResult.Hit == true)
+                    {
+                        finalResult.AttackerResult.Entity.DamageEntity(finalResult.VictimResult);
+                    }
+                    //Handle a miss otherwise
+                    else
+                    {
+                        onVictimMiss?.Invoke();
+                    }
+                }
+
+                //Make the attacker take damage upon a PartialSuccess or a Failure
+                //Break out of the loop when the attacker takes damage
+                if (finalResult.AttackerResult.DontDamageEntity == false)
+                {
+                    finalResult.VictimResult.Entity.DamageEntity(finalResult.AttackerResult);
+                    
+                    break;
+                }
+            }
+
+            return finalInteractions;
+        }*/
 
         /// <summary>
         /// Calculates the result of elemental damage on a BattleEntity, based on its weaknesses and resistances to that Element.

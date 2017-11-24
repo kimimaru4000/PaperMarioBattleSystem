@@ -96,6 +96,22 @@ namespace PaperMarioBattleSystem
             return new Vector2(x, y);
         }
 
+        /// <summary>
+        /// Tells if two circles intersect.
+        /// </summary>
+        /// <param name="circle1">The point of the first circle.</param>
+        /// <param name="radius1">The radius of the first circle.</param>
+        /// <param name="circle2">The point of the second circle.</param>
+        /// <param name="radius2">The radius of the second circle.</param>
+        /// <returns>true if the sum of the radii squared is less than or equal to the distance between the circles squared.</returns>
+        public static bool CircleCircleIntersection(Vector2 circle1, float radius1, Vector2 circle2, float radius2)
+        {
+            float radiusSquared = (float)Math.Pow(radius1 + radius2, 2);
+            float distance = Vector2.DistanceSquared(circle1, circle2);
+
+            return (distance <= radiusSquared);
+        }
+
         //NOTE: (Leaving this here for now)
         //TTYD checks rand(100) < enemy susceptibility for a given value, such as chance of being inflicted with Dizzy
         //Clock Out and Showstopper are a bit different:

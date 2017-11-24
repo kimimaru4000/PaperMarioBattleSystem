@@ -44,24 +44,37 @@ namespace PaperMarioBattleSystem
 
             for (int i = 0; i < entities.Count; i++)
             {
-                //If the entity is in the explosion area, damage it
-                if (ExplosionArea.Contains(entities[i].Position) == true)
+                //If the entity is not in the explosion area, remove it from the list
+                if (ExplosionArea.Contains(entities[i].Position) == false)
                 {
-                    InteractionResult interaction = Interactions.GetDamageInteraction(new InteractionParamHolder(Bomb, entities[i],
-                        DamageInfo.Damage, DamageInfo.DamagingElement, DamageInfo.Piercing, DamageInfo.ContactType, DamageInfo.Statuses,
-                        DamageInfo.DamageEffect, DamageInfo.CantMiss, DamageInfo.DefensiveOverride));
-
-                    //Damage the entity if we should
-                    if (interaction.VictimResult.DontDamageEntity == false)
-                    {
-                        //Check if the bomb hit
-                        if (interaction.VictimResult.Hit == true)
-                        {
-                            interaction.AttackerResult.Entity.DamageEntity(interaction.VictimResult);
-                        }
-                    }
+                    entities.RemoveAt(i);
+                    i--;
                 }
             }
+
+            //Attempt to damage them
+            Interactions.AttemptDamageEntities(Bomb, entities, DamageInfo, null);
+
+            //for (int i = 0; i < entities.Count; i++)
+            //{
+            //    //If the entity is in the explosion area, damage it
+            //    if (ExplosionArea.Contains(entities[i].Position) == true)
+            //    {
+            //        InteractionResult interaction = Interactions.GetDamageInteraction(new InteractionParamHolder(Bomb, entities[i],
+            //            DamageInfo.Damage, DamageInfo.DamagingElement, DamageInfo.Piercing, DamageInfo.ContactType, DamageInfo.Statuses,
+            //            DamageInfo.DamageEffect, DamageInfo.CantMiss, DamageInfo.DefensiveOverride));
+            //
+            //        //Damage the entity if we should
+            //        if (interaction.VictimResult.DontDamageEntity == false)
+            //        {
+            //            //Check if the bomb hit
+            //            if (interaction.VictimResult.Hit == true)
+            //            {
+            //                interaction.AttackerResult.Entity.DamageEntity(interaction.VictimResult);
+            //            }
+            //        }
+            //    }
+            //}
 
             ElapsedTime = 0d;
         }

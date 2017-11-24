@@ -372,10 +372,15 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// How the action handles a miss.
         /// The base implementation is to do nothing, but actions such as Jump may go to the Miss branch
+        /// <para>The return value indicates whether missing continues testing for hitting the remaining BattleEntities or not.
+        /// true means to continue, and false means to stop. The base implementation returns true.</para>
         /// </summary>
-        protected virtual void OnMiss()
+        /// <returns>A bool indicating whether to continue attempting to hit remaining BattleEntities or not.</returns>
+        protected virtual bool OnMiss()
         {
             Debug.Log($"{User.Name} has missed with the {Name} Action and will act accordingly");
+
+            return true;
         }
 
         /// <summary>
@@ -576,44 +581,56 @@ namespace PaperMarioBattleSystem
             //The damage dealt to each BattleEntity
             int[] damageValues = new int[entities.Length];
 
-            //Go through all the entities and attempt damage
-            for (int i = 0; i < entities.Length; i++)
+            InteractionResult[] interactionResults = Interactions.AttemptDamageEntities(User, entities, new DamageData(totalDamage, damageInfo.DamagingElement, damageInfo.Piercing,
+                damageInfo.ContactType, damageInfo.Statuses, damageInfo.CantMiss, damageInfo.AllOrNothingAffected, damageInfo.DefensiveOverride,
+                damageInfo.DamageEffect), OnMiss);
+
+            for (int i = 0; i < interactionResults.Length; i++)
             {
-                BattleEntity victim = entities[i];
-
-                InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage,
-                    damageInfo.DamagingElement, damageInfo.Piercing, damageInfo.ContactType, damageInfo.Statuses, damageInfo.DamageEffect,
-                    damageInfo.CantMiss, damageInfo.DefensiveOverride));
-
-                //Set the total damage dealt to the victim
-                damageValues[i] = finalResult.VictimResult.TotalDamage;
-
-                //Make the victim take damage upon a PartialSuccess or a Success
-                if (finalResult.VictimResult.DontDamageEntity == false)
+                if (interactionResults[i] != null)
                 {
-                    //Check if the attacker hit
-                    if (finalResult.VictimResult.Hit == true)
-                    {
-                        finalResult.AttackerResult.Entity.DamageEntity(finalResult.VictimResult);
-                        //finalResult.VictimResult.Entity.TakeDamage(finalResult.VictimResult);
-                    }
-                    //Handle a miss otherwise
-                    else
-                    {
-                        OnMiss();
-                    }
-                }
-
-                //Make the attacker take damage upon a PartialSuccess or a Failure
-                //Break out of the loop when the attacker takes damage
-                if (finalResult.AttackerResult.DontDamageEntity == false)
-                {
-                    finalResult.VictimResult.Entity.DamageEntity(finalResult.AttackerResult);
-                    //finalResult.AttackerResult.Entity.TakeDamage(finalResult.AttackerResult);
-
-                    break;
+                    damageValues[i] = interactionResults[i].VictimResult.TotalDamage;
                 }
             }
+
+            //Go through all the entities and attempt damage
+            //for (int i = 0; i < entities.Length; i++)
+            //{
+            //    BattleEntity victim = entities[i];
+            //
+            //    InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage,
+            //        damageInfo.DamagingElement, damageInfo.Piercing, damageInfo.ContactType, damageInfo.Statuses, damageInfo.DamageEffect,
+            //        damageInfo.CantMiss, damageInfo.DefensiveOverride));
+            //
+            //    //Set the total damage dealt to the victim
+            //    damageValues[i] = finalResult.VictimResult.TotalDamage;
+            //
+            //    //Make the victim take damage upon a PartialSuccess or a Success
+            //    if (finalResult.VictimResult.DontDamageEntity == false)
+            //    {
+            //        //Check if the attacker hit
+            //        if (finalResult.VictimResult.Hit == true)
+            //        {
+            //            finalResult.AttackerResult.Entity.DamageEntity(finalResult.VictimResult);
+            //            //finalResult.VictimResult.Entity.TakeDamage(finalResult.VictimResult);
+            //        }
+            //        //Handle a miss otherwise
+            //        else
+            //        {
+            //            OnMiss();
+            //        }
+            //    }
+            //
+            //    //Make the attacker take damage upon a PartialSuccess or a Failure
+            //    //Break out of the loop when the attacker takes damage
+            //    if (finalResult.AttackerResult.DontDamageEntity == false)
+            //    {
+            //        finalResult.VictimResult.Entity.DamageEntity(finalResult.AttackerResult);
+            //        //finalResult.AttackerResult.Entity.TakeDamage(finalResult.AttackerResult);
+            //
+            //        break;
+            //    }
+            //}
 
             return damageValues;
         }

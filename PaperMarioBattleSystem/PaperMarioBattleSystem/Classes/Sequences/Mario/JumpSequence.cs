@@ -127,10 +127,12 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        protected override void OnMiss()
+        protected override bool OnMiss()
         {
             base.OnMiss();
             ChangeJumpBranch(SequenceBranch.Miss);
+
+            return false;
         }
 
         protected override void OnInterruption(Elements element)

@@ -37,12 +37,14 @@ namespace PaperMarioBattleSystem
             Interrupted = false;
         }
 
-        protected override void OnMiss()
+        protected override bool OnMiss()
         {
             base.OnMiss();
 
             Missed = true;
             ChangeJumpBranch(SequenceBranch.Miss);
+
+            return false;
         }
 
         protected override void OnInterruption(Enumerations.Elements element)

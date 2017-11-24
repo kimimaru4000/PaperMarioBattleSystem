@@ -171,7 +171,7 @@ namespace PaperMarioBattleSystem
         {
             Rectangle hitRect = GetHitbox;
 
-            //Debug.DebugDrawHollowRect(hitRect, Color.White, .7f, 2, false);
+            Debug.DebugDrawHollowRect(hitRect, Color.White, .7f, 2, false);
         }
     }
 }

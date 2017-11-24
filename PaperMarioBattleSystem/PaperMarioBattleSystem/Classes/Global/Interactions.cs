@@ -15,11 +15,11 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class Interactions
     {
-        //#region Delegates
-        //
-        //public delegate void VictimMissInteraction();
-        //
-        //#endregion
+        #region Delegates
+        
+        public delegate bool VictimMissInteraction();
+        
+        #endregion
 
         #region Structs
 
@@ -206,35 +206,38 @@ namespace PaperMarioBattleSystem
 
         #region Interaction Methods
 
-        // <summary>
-        // Have an attacker attempt to deal damage to a set of victims.
-        // <para>Based on the ContactType of this BattleAction, this can fail, resulting in an interruption.
-        // In the event of an interruption, no further entities are tested.</para>
-        // </summary>
-        // <param name="attacker"></param>
-        // <param name="victims"></param>
-        // <param name="damageInfo"></param>
-        // <param name="onVictimMiss"></param>
-        // <returns></returns>
-        /*public static InteractionResult[] AttemptDamage(BattleEntity attacker, BattleEntity[] victims, DamageData damageInfo,
+        ///<summary>
+        ///Have an attacker attempt to deal damage to a set of victims.
+        ///<para>Based on the ContactType of this BattleAction, this can fail, resulting in an interruption.
+        ///In the event of an interruption, no further entities are tested.</para>
+        ///</summary>
+        ///<param name="attacker">The BattleEntity dealing the damage.</param>
+        ///<param name="victims">The BattleEntities to attempt to inflict damage on.</param>
+        ///<param name="damageInfo">The damage information to use.</param>
+        ///<param name="onVictimMiss">A delegate invoked when the attacker misses a victim.</param>
+        ///<returns>An array of InteractionResults containing all the interactions.
+        ///Some entries of the array will have null values if the attacker misses or is interrupted.</returns>
+        public static InteractionResult[] AttemptDamageEntities(BattleEntity attacker, IList<BattleEntity> victims, DamageData damageInfo,
             VictimMissInteraction onVictimMiss)
         {
+            //No damage can be dealt if either of these are null, so return
             if (attacker == null || victims == null)
             {
-                Debug.LogError($"{nameof(attacker)} and/or {nameof(victims)} is/are null in {nameof(AttemptDamage)}, so no damage can be dealt!");
-                return null;
+                Debug.LogError($"{nameof(attacker)} and/or {nameof(victims)} is/are null in {nameof(AttemptDamageEntities)}, so no damage can be dealt!");
+                return new InteractionResult[0];
             }
 
             //The final interactions between entities
-            InteractionResult[] finalInteractions = new InteractionResult[victims.Length];
+            InteractionResult[] finalInteractions = new InteractionResult[victims.Count];
 
             //Go through all the entities and attempt damage
-            for (int i = 0; i < victims.Length; i++)
+            for (int i = 0; i < victims.Count; i++)
             {
                 InteractionResult finalResult = GetDamageInteraction(new InteractionParamHolder(attacker, victims[i], damageInfo.Damage,
                     damageInfo.DamagingElement, damageInfo.Piercing, damageInfo.ContactType, damageInfo.Statuses, damageInfo.DamageEffect,
                     damageInfo.CantMiss, damageInfo.DefensiveOverride));
 
+                //Store the interaction result
                 finalInteractions[i] = finalResult;
 
                 //Make the victim take damage upon a PartialSuccess or a Success
@@ -248,7 +251,15 @@ namespace PaperMarioBattleSystem
                     //Handle a miss otherwise
                     else
                     {
-                        onVictimMiss?.Invoke();
+                        if (onVictimMiss != null)
+                        {
+                            //Break if the method returns false
+                            bool continueVal = onVictimMiss();
+                            if (continueVal == false)
+                            {
+                                break;
+                            }
+                        }
                     }
                 }
 
@@ -263,7 +274,7 @@ namespace PaperMarioBattleSystem
             }
 
             return finalInteractions;
-        }*/
+        }
 
         /// <summary>
         /// Calculates the result of elemental damage on a BattleEntity, based on its weaknesses and resistances to that Element.

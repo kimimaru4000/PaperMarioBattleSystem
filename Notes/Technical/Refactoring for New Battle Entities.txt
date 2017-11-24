@@ -160,4 +160,6 @@ When the bombs take Explosive damage or end their second turns, they should die 
 
 The damage from the explosions should be dealt in a Battle Event, since bombs hit by explosions will detonate before other bombs set to detonate on the end of that turn, and explosions occur after Battle Events for Status Effects, such as Burn.
 
-
+Update (11/24/17)
+-----------------
+These steps have been implemented and work well. We can now easily add and manage new types of BattleEntities.

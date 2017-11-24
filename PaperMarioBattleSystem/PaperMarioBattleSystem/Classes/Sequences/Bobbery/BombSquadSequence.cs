@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
             BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.BobberyBomb - 1,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                 new ShootBobberyBombBattleEvent(bobberyBomb, bombSquadResponse.ThrowVelocity,
-                bombSquadResponse.Gravity, BattleManager.Instance.PartnerPos.Y));
+                bombSquadResponse.Gravity, BattleManager.Instance.PartnerPos.Y + 1));
         }
 
         protected override void SequenceStartBranch()

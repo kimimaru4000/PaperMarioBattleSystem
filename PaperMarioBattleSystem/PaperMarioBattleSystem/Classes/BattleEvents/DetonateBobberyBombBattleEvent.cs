@@ -16,10 +16,14 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class DetonateBobberyBombBattleEvent : BattleEvent
     {
+        private const double WaitTime = 1000d;
+
         private BobberyBomb Bomb = null;
         private DamageData DamageInfo = default(DamageData);
         private HeightStates[] AffectedHeightStates = null;
         private Rectangle ExplosionArea = Rectangle.Empty;
+
+        private double ElapsedTime = 0d;
 
         public DetonateBobberyBombBattleEvent(BobberyBomb bobberyBomb, DamageData damageInfo, Rectangle explosionArea,
             params HeightStates[] heightStates)
@@ -30,20 +34,11 @@ namespace PaperMarioBattleSystem
             ExplosionArea = explosionArea;
         }
 
-        protected override void OnEnd()
+        protected override void OnStart()
         {
-            base.OnEnd();
+            base.OnStart();
 
-            //The bomb dies after exploding
-            if (Bomb.IsDead == false)
-                Bomb.Die();
-
-            Bomb = null;
-            AffectedHeightStates = null;
-        }
-
-        protected override void OnUpdate()
-        {
+            //Damage everyone
             List<BattleEntity> entities = new List<BattleEntity>(BattleManager.Instance.GetAllEntities(AffectedHeightStates));
             entities.Remove(Bomb);
 
@@ -68,8 +63,32 @@ namespace PaperMarioBattleSystem
                 }
             }
 
-            //End after we damage everyone
-            End();
+            ElapsedTime = 0d;
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            //The bomb dies after exploding
+            if (Bomb.IsDead == false)
+                Bomb.Die();
+
+            Bomb = null;
+            AffectedHeightStates = null;
+            ElapsedTime = 0d;
+        }
+
+        protected override void OnUpdate()
+        {
+            //Wait some time
+            ElapsedTime += Time.ElapsedMilliseconds;
+
+            //End when over the wait time
+            if (ElapsedTime >= WaitTime)
+            {
+                End();
+            }
         }
     }
 }

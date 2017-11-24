@@ -22,6 +22,11 @@ namespace PaperMarioBattleSystem
 
         private LoopAnimation SparkAnimation = null;
 
+        /// <summary>
+        /// Whether the Bobbery Bomb detonated or not.
+        /// </summary>
+        private bool Detonated = false;
+
         private Rectangle GetHitbox => new Rectangle((int)Position.X - 15, (int)Position.Y - 60, 80, 140);
 
         public BobberyBomb(int damage) : base(new Stats(0, 1, 0, damage, 0))
@@ -63,17 +68,32 @@ namespace PaperMarioBattleSystem
             base.OnBattleStart();
         }
 
-        //protected override void OnTakeDamage(InteractionHolder damageInfo)
-        //{
-        //    base.OnTakeDamage(damageInfo);
-        //
-        //    //When taking explosive damage, the bombs explode
-        //    //If they're already in the process of exploding, don't do anything
-        //    if (damageInfo.DamageElement == Elements.Explosion)
-        //    {
-        //        
-        //    }
-        //}
+        protected override void OnTakeDamage(InteractionHolder damageInfo)
+        {
+            base.OnTakeDamage(damageInfo);
+        
+            //When taking explosive damage, the bombs explode
+            //If they're already in the process of exploding, don't do anything
+            if (damageInfo.DamageElement == Elements.Explosion)
+            {
+                TintColor = Color.Black;
+
+                //Detonate if the bomb hasn't upon taking explosive damage
+                if (Detonated == false)
+                {
+                    //Explode with a battle event and do nothing on this turn
+                    DetonateBobberyBombBattleEvent detonateEvent = new DetonateBobberyBombBattleEvent(this, GetDamageData(),
+                        GetHitbox, HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne);
+
+                    //Queue the event
+                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.BobberyBomb,
+                        new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                        detonateEvent);
+
+                    Detonated = true;
+                }
+            }
+        }
 
         private DamageData GetDamageData()
         {
@@ -104,6 +124,8 @@ namespace PaperMarioBattleSystem
                 BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.BobberyBomb,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
                     detonateEvent);
+
+                Detonated = true;
 
                 StartAction(new NoAction(), true, null);
             }
@@ -140,7 +162,7 @@ namespace PaperMarioBattleSystem
 
             //Draw the spark animation if it's playing
             if (SparkAnimation.IsPlaying == true)
-                SparkAnimation.Draw(Position, Color.White, false, .11f);
+                SparkAnimation.Draw(Position, TintColor, false, .11f);
 
             //DrawHitbox();
         }
@@ -148,11 +170,8 @@ namespace PaperMarioBattleSystem
         private void DrawHitbox()
         {
             Rectangle hitRect = GetHitbox;
-            Vector2 hitrectpos = Camera.Instance.SpriteToUIPos(new Vector2(hitRect.X, hitRect.Y));
-            hitRect.X = (int)hitrectpos.X;
-            hitRect.Y = (int)hitrectpos.Y;
 
-            Debug.DebugDrawHollowRect(hitRect, Color.White, .7f, 2);
+            //Debug.DebugDrawHollowRect(hitRect, Color.White, .7f, 2, false);
         }
     }
 }

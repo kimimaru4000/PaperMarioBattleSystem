@@ -37,6 +37,14 @@ namespace PaperMarioBattleSystem
         public static int LerpPrecise(int value1, int value2, float amount) => (int)(((1 - amount) * value1) + (value2 * amount));
 
         /// <summary>
+        /// Gets the angle between two Vector2s in radians. This value is between -π and π. 
+        /// </summary>
+        /// <param name="vec1">The first vector2.</param>
+        /// <param name="vec2">The second vector.</param>
+        /// <returns>A double representing the angle between the two vectors, in radians.</returns>
+        public static double Angle360(Vector2 vec1, Vector2 vec2) => Math.Atan2(vec2.Y - vec1.Y, vec2.X - vec1.X);
+
+        /// <summary>
         /// Gets the angle between two Vector2s in radians.
         /// </summary>
         /// <param name="vec1">The first vector.</param>

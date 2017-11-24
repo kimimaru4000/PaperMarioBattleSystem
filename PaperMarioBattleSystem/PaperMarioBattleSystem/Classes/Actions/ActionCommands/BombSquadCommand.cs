@@ -102,16 +102,6 @@ namespace PaperMarioBattleSystem
         {
             ElapsedTime += Time.ElapsedMilliseconds;
 
-            //Throw a bomb if the player either pressed the button or didn't press it in a certain amount of time
-            if (Input.GetKeyDown(ButtonToPress) == true || ElapsedTime >= LastBombThrowTime)
-            {
-                ThrowBomb();
-            }
-
-            //Update the cursor information
-            if (AllBombsThrown == false)
-                UpdateCursor();
-
             //Remove the thrown cursor if enough time passed
             if (ThrownCursor != null && ElapsedTime >= ThrownCursorTime)
             {
@@ -119,11 +109,25 @@ namespace PaperMarioBattleSystem
                 ThrownCursorTime = 0d;
             }
 
-            //If we threw all the bombs, end the command with a success once the thrown cursor disappears
-            if (AllBombsThrown == true && ThrownCursor == null)
+            //Throw a bomb if the player either pressed the button or didn't press it in a certain amount of time
+            if (AllBombsThrown == false)
             {
-                OnComplete(CommandResults.Success);
-                return;
+                if (Input.GetKeyDown(ButtonToPress) == true || ElapsedTime >= LastBombThrowTime)
+                {
+                    ThrowBomb();
+                }
+
+                //Update the cursor information
+                UpdateCursor();
+            }
+            else
+            {
+                //If we threw all the bombs, end the command with a success once the thrown cursor disappears
+                if (AllBombsThrown == true && ThrownCursor == null)
+                {
+                    OnComplete(CommandResults.Success);
+                    return;
+                }
             }
         }
 
@@ -169,6 +173,8 @@ namespace PaperMarioBattleSystem
             {
                 Cursor.Draw();
             }
+
+            //Debug.DebugDrawLine(StartPosition, Cursor.Position, Color.Red, .8f, 2, true);
 
             ThrownCursor?.Draw();
         }

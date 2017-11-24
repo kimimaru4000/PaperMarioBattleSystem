@@ -331,14 +331,58 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Debug Drawing Methods
+
+        /// <summary>
+        /// Draws a line.
+        /// </summary>
+        /// <param name="start">The start point.</param>
+        /// <param name="end">The end point.</param>
+        /// <param name="color">The color of the line.</param>
+        /// <param name="layer">The layer of the line.</param>
+        /// <param name="thickness">The thickness of the line.</param>
+        /// <param name="uiBatch">Whether to draw the line in the UI layer or not.</param>
+        public static void DebugDrawLine(Vector2 start, Vector2 end, Color color, float layer, int thickness, bool uiBatch)
+        {
+            if (DebugEnabled == false) return;
+
+            Texture2D box = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
+
+            //Get rotation with the angle between the start and end vectors
+            float lineRotation = (float)UtilityGlobals.Angle360(start, end);
+
+            //Get the scale; use the X as the length and the Y as the width
+            Vector2 diff = end - start;
+            Vector2 lineScale = new Vector2(diff.Length(), thickness);
+            
+            SpriteRenderer.Instance.Draw(box, start, null, color, lineRotation, new Vector2(0f, 0f), lineScale, false, false, layer, uiBatch);
+        }
+
+        /// <summary>
+        /// Draws a rectangle.
+        /// </summary>
+        /// <param name="rect">The Rectangle to draw.</param>
+        /// <param name="color">The color of the rectangle.</param>
+        /// <param name="layer">The layer of the rectangle.</param>
+        /// <param name="uiBatch">Whether to draw the rectangle in the UI layer or not.</param>
+        public static void DebugDrawRect(Rectangle rect, Color color, float layer, bool uiBatch)
+        {
+            if (DebugEnabled == false) return;
+
+            Texture2D box = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
+
+            SpriteRenderer.Instance.Draw(box, new Vector2(rect.X, rect.Y), null, color, 0f, Vector2.Zero, new Vector2(rect.Width, rect.Height), false, false, layer, uiBatch);
+        }
+
         /// <summary>
         /// Draws a hollow rectangle.
         /// </summary>
         /// <param name="rect">The Rectangle to draw.</param>
         /// <param name="color">The color of the hollow rectangle.</param>
-        /// <param name="layer">The layer of the rectangle.</param>
+        /// <param name="layer">The layer of the hollow rectangle.</param>
         /// <param name="thickness">The thickness of the hollow rectangle.</param>
-        public static void DebugDrawHollowRect(Rectangle rect, Color color, float layer, int thickness)
+        /// <param name="uiBatch">Whether to draw the hollow rectangle in the UI layer or not.</param>
+        public static void DebugDrawHollowRect(Rectangle rect, Color color, float layer, int thickness, bool uiBatch)
         {
             if (DebugEnabled == false) return;
 
@@ -354,9 +398,11 @@ namespace PaperMarioBattleSystem
 
             for (int i = 0; i < rects.Length; i++)
             {
-                SpriteRenderer.Instance.Draw(box, new Vector2(rects[i].X, rects[i].Y), null, color, 0f, Vector2.Zero, new Vector2(rects[i].Width, rects[i].Height), false, false, layer, true);
+                SpriteRenderer.Instance.Draw(box, new Vector2(rects[i].X, rects[i].Y), null, color, 0f, Vector2.Zero, new Vector2(rects[i].Width, rects[i].Height), false, false, layer, uiBatch);
             }
         }
+
+        #endregion
 
         public static void DebugDraw()
         {

@@ -326,9 +326,12 @@ namespace PaperMarioBattleSystem
 
             //Call OnPhaseEnd() for the previous entities
             List<BattleEntity> entities = GetEntitiesList(prevPhase);
-            for (int i = 0; i < entities.Count; i++)
+            if (entities != null)
             {
-                entities[i].OnPhaseEnd();
+                for (int i = 0; i < entities.Count; i++)
+                {
+                    entities[i].OnPhaseEnd();
+                }
             }
 
             //Check if we wrapped around to the starting phase
@@ -352,9 +355,12 @@ namespace PaperMarioBattleSystem
 
             //Call OnPhaseStart() for the new entities going
             entities = GetEntitiesList(CurEntityPhase);
-            for (int i = 0; i < entities.Count; i++)
+            if (entities != null)
             {
-                entities[i].OnPhaseStart();
+                for (int i = 0; i < entities.Count; i++)
+                {
+                    entities[i].OnPhaseStart();
+                }
             }
 
             //NOTE: There's a bug: if all players and enemies have no turns, all BattleEvents will be delayed until one of them
@@ -588,13 +594,16 @@ namespace PaperMarioBattleSystem
         {
             //Get the list of entities going on the current phase
             List<BattleEntity> entities = GetEntitiesList(CurEntityPhase);
-            for (int i = 0; i < entities.Count; i++)
+            if (entities != null)
             {
-                //If the entity isn't dead and has turns left, it should go next
-                if (entities[i].UsedTurn == false && entities[i].IsDead == false)
+                for (int i = 0; i < entities.Count; i++)
                 {
-                    EntityTurn = entities[i];
-                    return;
+                    //If the entity isn't dead and has turns left, it should go next
+                    if (entities[i].UsedTurn == false && entities[i].IsDead == false)
+                    {
+                        EntityTurn = entities[i];
+                        return;
+                    }
                 }
             }
 

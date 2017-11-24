@@ -104,7 +104,7 @@ namespace PaperMarioBattleSystem
         public Color TintColor { get; set;  } = Color.White;
 
         /// <summary>
-        /// The entity's battle index, assigned from the BattleManager.
+        /// The entity's battle index, assigned from the BattleManager. If it's less than 0, the BattleEntity is not in battle.
         /// <para>This indicates its relation to BattleEntities of the same EntityType.
         /// BattleEntities with higher battle indices are behind ones with lower battle indices.</para>
         /// <para>In most cases, it also corresponds to its position from the left side of the stage and
@@ -169,6 +169,11 @@ namespace PaperMarioBattleSystem
 
         public bool UsedTurn => (TurnsUsed >= MaxTurns || IsDead == true);
 
+        /// <summary>
+        /// Tells if the BattleEntity is currently in battle.
+        /// </summary>
+        public bool IsInBattle => (BattleIndex >= 0);
+
         protected readonly List<DefensiveAction> DefensiveActions = new List<DefensiveAction>();
 
         protected BattleEntity()
@@ -190,6 +195,8 @@ namespace PaperMarioBattleSystem
             TurnEndEvent = null;
             DamageTakenEvent = null;
             DealtDamageEvent = null;
+
+            BattleIndex = -1;
         }
 
         #region Stat Manipulations

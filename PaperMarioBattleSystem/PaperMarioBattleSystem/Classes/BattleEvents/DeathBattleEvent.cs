@@ -58,7 +58,10 @@ namespace PaperMarioBattleSystem
 
         protected override void OnUpdate()
         {
-            if (DeathAnim == null)
+            //This can lead to a softlock if the event is added after the entity is removed from battle
+            //The event system needs to be less error-prone
+            //Add the in-battle check since the entity won't update its death animation if it's not in battle
+            if (DeathAnim == null || Entity.IsInBattle == false)
             {
                 End();
                 return;

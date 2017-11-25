@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -24,6 +25,29 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// A crash handler for unhandled exceptions.
+        /// </summary>
+        /// <param name="sender">The source of the unhandled exception event.</param>
+        /// <param name="e">An UnhandledExceptionEventArgs that contains the event data.</param>
+        private void HandleCrash(object sender, UnhandledExceptionEventArgs e)
+        {
+            //Get the exception object
+            Exception exc = e.ExceptionObject as Exception;
+            if (exc != null)
+            {
+                //Dump the message, stack trace, and logs to a file
+                using (StreamWriter writer = File.CreateText(GeneralGlobals.GetCrashLogPath()))
+                {
+                    writer.Write($"Message: {exc.Message}\n\nStack Trace:\n");
+                    writer.Write($"{exc.StackTrace}\n\n");
+                    writer.Write($"Log Dump:\n{Debug.LogDump.ToString()}");
+
+                    writer.Flush();
+                }
+            }
+        }
+
+        /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
         /// related content.  Calling base.Initialize will enumerate through any components
@@ -31,6 +55,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected override void Initialize()
         {
+            AppDomain.CurrentDomain.UnhandledException -= HandleCrash;
+            AppDomain.CurrentDomain.UnhandledException += HandleCrash;
+            
             graphics.PreferMultiSampling = true;
             graphics.PreferredBackBufferWidth = RenderingGlobals.WindowWidth;
             graphics.PreferredBackBufferHeight = RenderingGlobals.WindowHeight;
@@ -160,6 +187,8 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.CleanUp();
             BattleUIManager.Instance.CleanUp();
             BattleVFXManager.Instance.CleanUp();
+
+            AppDomain.CurrentDomain.UnhandledException -= HandleCrash;
         }
 
         /// <summary>

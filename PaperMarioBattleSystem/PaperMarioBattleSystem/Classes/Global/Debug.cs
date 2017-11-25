@@ -22,6 +22,8 @@ namespace PaperMarioBattleSystem
         public static bool DebugPaused { get; private set; } = false;
         public static bool AdvanceNextFrame { get; private set; } = false;
 
+        public static StringBuilder LogDump { get; private set; } = new StringBuilder();
+
         private static KeyboardState DebugKeyboard = default(KeyboardState);
 
         static Debug()
@@ -77,22 +79,31 @@ namespace PaperMarioBattleSystem
             return GetStackInfo(3);
         }
 
+        private static void DebugWriteLine(string value)
+        {
+            //Write to the log dump
+            LogDump.Append(value);
+            LogDump.Append("\n");
+
+            WriteLine(value);
+        }
+
         public static void Log(object value)
         {
             if (LogsEnabled == false) return;
-            WriteLine($"Information: {GetStackInfo()} {value}");
+            DebugWriteLine($"Information: {GetStackInfo()} {value}");
         }
 
         public static void LogWarning(object value)
         {
             if (LogsEnabled == false) return;
-            WriteLine($"Warning: {GetStackInfo()} {value}");
+            DebugWriteLine($"Warning: {GetStackInfo()} {value}");
         }
 
         public static void LogError(object value)
         {
             if (LogsEnabled == false) return;
-            WriteLine($"Error: {GetStackInfo()} {value}");
+            DebugWriteLine($"Error: {GetStackInfo()} {value}");
         }
 
         private static void LogAssert()
@@ -101,7 +112,7 @@ namespace PaperMarioBattleSystem
             string stackInfo = GetStackInfo(3);
             stackInfo = stackInfo.Remove(stackInfo.Length - 1);
 
-            WriteLine($"ASSERT FAILURE AT: {stackInfo}");
+            DebugWriteLine($"ASSERT FAILURE AT: {stackInfo}");
         }
 
         public static void Assert(bool condition)

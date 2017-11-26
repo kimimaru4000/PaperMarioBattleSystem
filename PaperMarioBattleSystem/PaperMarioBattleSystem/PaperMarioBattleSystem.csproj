@@ -229,6 +229,7 @@
     <Compile Include="Classes\Collectibles\Items\TastyTonic.cs" />
     <Compile Include="Classes\Collectibles\Items\VoltShroom.cs" />
     <Compile Include="Classes\General\Transform.cs" />
+    <Compile Include="Classes\Global\CrashHandler.cs" />
     <Compile Include="Classes\Global\Debug.cs" />
     <Compile Include="Classes\Global\Extensions.cs" />
     <Compile Include="Classes\Global\FPSCounter.cs" />

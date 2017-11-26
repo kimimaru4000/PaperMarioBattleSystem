@@ -15,36 +15,16 @@ namespace PaperMarioBattleSystem
     public class Main : Game
     {
         private GraphicsDeviceManager graphics;
+        private CrashHandler crashHandler = null;
 
         public Main()
         {
             graphics = new GraphicsDeviceManager(this);
 
+            crashHandler = new CrashHandler();
+
             //false for variable timestep, true for fixed
             IsFixedTimeStep = true;
-        }
-
-        /// <summary>
-        /// A crash handler for unhandled exceptions.
-        /// </summary>
-        /// <param name="sender">The source of the unhandled exception event.</param>
-        /// <param name="e">An UnhandledExceptionEventArgs that contains the event data.</param>
-        private void HandleCrash(object sender, UnhandledExceptionEventArgs e)
-        {
-            //Get the exception object
-            Exception exc = e.ExceptionObject as Exception;
-            if (exc != null)
-            {
-                //Dump the message, stack trace, and logs to a file
-                using (StreamWriter writer = File.CreateText(GeneralGlobals.GetCrashLogPath()))
-                {
-                    writer.Write($"Message: {exc.Message}\n\nStack Trace:\n");
-                    writer.Write($"{exc.StackTrace}\n\n");
-                    writer.Write($"Log Dump:\n{Debug.LogDump.ToString()}");
-
-                    writer.Flush();
-                }
-            }
         }
 
         /// <summary>
@@ -55,9 +35,6 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected override void Initialize()
         {
-            AppDomain.CurrentDomain.UnhandledException -= HandleCrash;
-            AppDomain.CurrentDomain.UnhandledException += HandleCrash;
-            
             graphics.PreferMultiSampling = true;
             graphics.PreferredBackBufferWidth = RenderingGlobals.WindowWidth;
             graphics.PreferredBackBufferHeight = RenderingGlobals.WindowHeight;
@@ -188,7 +165,7 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.CleanUp();
             BattleVFXManager.Instance.CleanUp();
 
-            AppDomain.CurrentDomain.UnhandledException -= HandleCrash;
+            crashHandler.CleanUp();
         }
 
         /// <summary>

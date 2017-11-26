@@ -986,21 +986,6 @@ namespace PaperMarioBattleSystem
     public static class GeneralGlobals
     {
         /// <summary>
-        /// Gets the path for crash log files.
-        /// </summary>
-        /// <returns>A string with the full name of the crash log file.</returns>
-        public static string GetCrashLogPath()
-        {
-            string time = DateTime.Now.ToUniversalTime().ToString();
-            time = time.Replace(':', '-');
-            time = time.Replace('/', '-');
-
-            string path = $"{System.IO.Directory.GetCurrentDirectory()}\\PMBattleSystem Crash Log - {time}.txt";
-
-            return path;
-        }
-
-        /// <summary>
         /// The value that is used in random conditions. If this is less than the result, it returns true.
         /// </summary>
         public const int RandomConditionVal = 100;

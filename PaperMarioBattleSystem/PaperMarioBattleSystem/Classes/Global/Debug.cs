@@ -24,6 +24,8 @@ namespace PaperMarioBattleSystem
 
         public static StringBuilder LogDump { get; private set; } = new StringBuilder();
 
+        public static bool DebuggerAttached => Debugger.IsAttached;
+
         private static KeyboardState DebugKeyboard = default(KeyboardState);
 
         static Debug()
@@ -429,5 +431,30 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"Rot: {Camera.Instance.Rotation}", cameraBasePos + new Vector2(0, 40), Color.White, 0f, Vector2.Zero, 1.2f, .1f);
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"Zoom: {Camera.Instance.Scale}", cameraBasePos + new Vector2(0, 60), Color.White, 0f, Vector2.Zero, 1.2f, .1f);
         }
+
+        #region Classes
+
+        /// <summary>
+        /// Global values regarding debugging.
+        /// </summary>
+        public static class DebugGlobals
+        {
+            /// <summary>
+            /// Gets the path for crash log files.
+            /// </summary>
+            /// <returns>A string with the full name of the crash log file.</returns>
+            public static string GetCrashLogPath()
+            {
+                string time = DateTime.Now.ToUniversalTime().ToString();
+                time = time.Replace(':', '-');
+                time = time.Replace('/', '-');
+
+                string path = $"{System.IO.Directory.GetCurrentDirectory()}\\PMBattleSystem Crash Log - {time}.txt";
+
+                return path;
+            }
+        }
+
+        #endregion
     }
 }

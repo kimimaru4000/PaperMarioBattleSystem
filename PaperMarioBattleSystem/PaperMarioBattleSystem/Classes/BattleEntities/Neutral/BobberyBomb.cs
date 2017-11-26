@@ -38,6 +38,9 @@ namespace PaperMarioBattleSystem
             //Explosions cause the bombs to detonate (only possible from other Bobbery Bombs in the actual games)
             EntityProperties.AddWeakness(Elements.Explosion, new WeaknessHolder(WeaknessTypes.KO, 0));
 
+            //Add the Untargetable property so the bombs cannot be targeted
+            this.AddIntAdditionalProperty(AdditionalProperty.Untargetable, 1);
+
             //15 frame color change normal, 6 frame color change faster
             //2 frame spark change for normal and faster
             //Bomb starts brown, turns red 1 frame after fully stopping, then starts the spark

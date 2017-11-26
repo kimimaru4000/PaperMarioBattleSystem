@@ -917,6 +917,47 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Filters out BattleEntities marked as Untargetable from a set of BattleEntities.
+        /// This method is called internally by the BattleManager.
+        /// </summary>
+        /// <param name="entities">The list of BattleEntities to filter. The list is modified directly.</param>
+        private void FilterEntitiesByTargetable(List<BattleEntity> entities)
+        {
+            //Return if the list is null
+            if (entities == null) return;
+
+            for (int i = 0; i < entities.Count; i++)
+            {
+                BattleEntity entity = entities[i];
+
+                //Check if the entity has the Untargetable additional property
+                bool untargetable = entity.EntityProperties.HasAdditionalProperty(AdditionalProperty.Untargetable);
+
+                //If it's untargetable, remove it
+                if (untargetable == true)
+                {
+                    entities.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Filters out BattleEntities marked as Untargetable from a set of BattleEntities.
+        /// </summary>
+        /// <param name="entities">The array of BattleEntities to filter.</param>
+        /// <returns>An array of BattleEntities filtered by untargetable.</returns>
+        public BattleEntity[] FilterEntitiesByTargetable(BattleEntity[] entities)
+        {
+            if (entities == null || entities.Length == 0) return entities;
+
+            List<BattleEntity> filteredEntities = new List<BattleEntity>(entities);
+            FilterEntitiesByTargetable(filteredEntities);
+
+            return filteredEntities.ToArray();
+        }
+
+        /// <summary>
         /// Filters out dead BattleEntities from a set
         /// </summary>
         /// <param name="entities">The BattleEntities to filter</param>

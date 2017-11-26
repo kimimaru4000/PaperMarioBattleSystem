@@ -208,7 +208,7 @@ namespace PaperMarioBattleSystem
             //If the move targets entities, check if any entities can be targeted
             if (MoveProperties.MoveAffectionType != MoveAffectionTypes.None)
             {
-                BattleEntity[] entities = GetEntitiesMoveAffects();//BattleManager.Instance.GetEntities(MoveProperties.EntityType, MoveProperties.HeightsAffected);
+                BattleEntity[] entities = GetEntitiesMoveAffects();
 
                 //There are no entities this move can target
                 if (entities.Length == 0)
@@ -433,7 +433,10 @@ namespace PaperMarioBattleSystem
                 }
             }
 
-            return entities.ToArray();
+            //Filter out untargetable BattleEntities
+            BattleEntity[] finalEntities = BattleManager.Instance.FilterEntitiesByTargetable(entities.ToArray());
+
+            return finalEntities;
         }
 
         protected virtual BattleEntity[] GetCustomAffectedEntities()

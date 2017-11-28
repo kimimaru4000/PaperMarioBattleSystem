@@ -996,6 +996,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public const int RandomConditionVal = 100;
 
+        /// <summary>
+        /// Random reference for generating pseudo-random numbers.
+        /// </summary>
         public static readonly Random Randomizer = new Random();
 
         public static double GenerateRandomDouble() => (Randomizer.NextDouble() * RandomConditionVal);

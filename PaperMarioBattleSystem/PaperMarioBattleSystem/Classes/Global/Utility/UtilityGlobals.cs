@@ -37,21 +37,21 @@ namespace PaperMarioBattleSystem
         public static int LerpPrecise(int value1, int value2, float amount) => (int)(((1 - amount) * value1) + (value2 * amount));
 
         /// <summary>
-        /// Gets the angle between two Vector2s in radians. This value is between -π and π. 
+        /// Gets the tangent angle between two Vector2s in radians. This value is between -π and π. 
         /// </summary>
         /// <param name="vec1">The first vector2.</param>
         /// <param name="vec2">The second vector.</param>
-        /// <returns>A double representing the angle between the two vectors, in radians.</returns>
-        public static double Angle360(Vector2 vec1, Vector2 vec2) => Math.Atan2(vec2.Y - vec1.Y, vec2.X - vec1.X);
+        /// <returns>A double representing the tangent angle between the two vectors, in radians.</returns>
+        public static double TangentAngle(Vector2 vec1, Vector2 vec2) => Math.Atan2(vec2.Y - vec1.Y, vec2.X - vec1.X);
 
         /// <summary>
-        /// Gets the angle between two Vector2s in radians.
+        /// Gets the cosign angle between two Vector2s in radians.
         /// </summary>
         /// <param name="vec1">The first vector.</param>
         /// <param name="vec2">The second vector.</param>
-        /// <returns>A float representing the angle between the two vectors, in radians.</returns>
-        public static float Angle(Vector2 vec1, Vector2 vec2)
-        {            
+        /// <returns>A double representing the cosign angle between the two vectors, in radians.</returns>
+        public static double CosignAngle(Vector2 vec1, Vector2 vec2)
+        {
             //a · b = (a.X * b.X) + (a.Y * b.Y) = ||a|| * ||b|| * cos(θ)
             double dotProduct = Vector2.Dot(vec1, vec2);
             double mag1 = vec1.Length();
@@ -63,16 +63,52 @@ namespace PaperMarioBattleSystem
 
             double angleRadians = Math.Acos(div);
             
-            return (float)angleRadians;
+            return angleRadians;
         }
 
         /// <summary>
-        /// Gets the angle between two Vector2s in degrees.
+        /// Gets the cosign angle between two Vector2s in degrees.
         /// </summary>
         /// <param name="vec1">The first vector.</param>
         /// <param name="vec2">The second vector.</param>
-        /// <returns>A float representing the angle between the two vectors, in degrees.</returns>
-        public static float AngleDegrees(Vector2 vec1, Vector2 vec2) => ToDegrees(Angle(vec1, vec2));
+        /// <returns>A double representing the cosign angle between the two vectors, in degrees.</returns>
+        public static double CosignAngleDegrees(Vector2 vec1, Vector2 vec2) => ToDegrees(CosignAngle(vec1, vec2));
+
+        /// <summary>
+        /// Obtains the 2D cross product result of two Vector2s.
+        /// </summary>
+        /// <param name="vector1">The first vector.</param>
+        /// <param name="vector2">The second vector.</param>
+        /// <returns>A float representing the 2D cross product result between the two Vectors.</returns>
+        public static double Cross(Vector2 vector1, Vector2 vector2)
+        {
+            //a x b = ((a.y * b.z) - (a.z * b.y), (a.z * b.x) - (a.x * b.z), (a.x * b.y) - (a.y * b.x))
+            //The Z component is the only one that remains since we're dealing with Vector2s
+            return (vector1.X * vector2.Y) - (vector1.Y * vector2.X);
+        }
+
+        /// <summary>
+        /// Gets the sine angle between two Vector2s in radians.
+        /// </summary>
+        /// <param name="vec1">The first vector.</param>
+        /// <param name="vec2">The second vector.</param>
+        /// <returns>A double representing the sine angle between the two vectors, in radians.</returns>
+        public static double SineAngle(Vector2 vec1, Vector2 vec2)
+        {
+            //||a x b|| = ||a|| * ||b|| * sin(θ)
+            double crossMag = Cross(vec1, vec2);
+
+            double mag1 = vec1.Length();
+            double mag2 = vec2.Length();
+
+            double magMult = mag1 * mag2;
+
+            double div = crossMag / magMult;
+
+            double angleRadians = Math.Asin(div);
+
+            return angleRadians;
+        }
 
         /// <summary>
         /// Finds a point around a circle at a particular angle.

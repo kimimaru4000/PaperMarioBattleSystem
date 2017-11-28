@@ -71,7 +71,7 @@ namespace PaperMarioBattleSystem
                         statuses += $"({statusHolder.Percentage}%){statusHolder.Status.StatusType.ToString()} ";
                     }
                 }
-
+                
                 Debug.Log($"{startString}: {interactionHolder.Entity?.Name}\n" +
                           $"{startString} Damage: {interactionHolder.TotalDamage}\n" +
                           $"{startString} Element: {interactionHolder.DamageElement}\n" +
@@ -79,7 +79,9 @@ namespace PaperMarioBattleSystem
                           $"{startString} Piercing: {interactionHolder.Piercing}\n" +
                           $"{startString} Statuses: {statuses}\n" +
                           $"{startString} Hit: {interactionHolder.Hit}\n" +
-                          $"{startString} Damage Effect(s): {interactionHolder.DamageEffect}");
+                          $"{startString} Damage Effect(s): {interactionHolder.DamageEffect}\n" +
+                          $"{startString} IsPaybackDamage: {interactionHolder.IsPaybackDamage}\n" +
+                          $"{startString} Don't Damage: {interactionHolder.DontDamageEntity}\n");
             }
         }
     }

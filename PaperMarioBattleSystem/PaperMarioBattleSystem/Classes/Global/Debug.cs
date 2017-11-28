@@ -362,7 +362,7 @@ namespace PaperMarioBattleSystem
             Texture2D box = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
 
             //Get rotation with the angle between the start and end vectors
-            float lineRotation = (float)UtilityGlobals.Angle360(start, end);
+            float lineRotation = (float)UtilityGlobals.TangentAngle(start, end);
 
             //Get the scale; use the X as the length and the Y as the width
             Vector2 diff = end - start;

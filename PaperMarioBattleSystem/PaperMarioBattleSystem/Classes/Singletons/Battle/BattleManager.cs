@@ -178,15 +178,7 @@ namespace PaperMarioBattleSystem
             EntityRemovedEvent = null;
 
             //Remove and cleanup all BattleEntities in battle
-            List<BattleEntity> removedEntities = new List<BattleEntity>();
-            removedEntities.AddRange(GetEntitiesList(EntityTypes.Player));
-            removedEntities.AddRange(GetEntitiesList(EntityTypes.Enemy));
-
-            List<BattleEntity> neutral = GetEntitiesList(EntityTypes.Neutral);
-            if (neutral != null)
-            {
-                removedEntities.AddRange(neutral);
-            }
+            List<BattleEntity> removedEntities = GetAllEntitiesList();
 
             //Remove all entities
             RemoveEntities(removedEntities, true);

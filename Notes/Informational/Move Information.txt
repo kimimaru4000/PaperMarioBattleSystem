@@ -177,6 +177,10 @@ It can take damage for Mario even if he can't be hit. For example, if Mario is i
 
 The only way to see the shell's HP is with the Peekaboo Badge, as it cannot be tattled.
 
+-Mario cannot Guard or Superguard attacks that damage the shell
+-Status Effects such as Burn and Poison will still damage Mario directly
+-Creating a new shell removes the previous one
+
 Bobbery
 -------
 Bomb Squad - Creates up to 3 bombs that detonate in 2 phase cycles and deal 3 explosive damage to enemies in their range.
@@ -198,6 +202,15 @@ If they detonate and hit other bombs, those bombs will explode before any other 
 
 -The bombs detonate after Status Effects such as Burn
 -If the player doesn't press A during the Action Command, it will automatically throw a bomb after 6 seconds
+
+Run Away
+--------
+-In TTYD, if Tactics is selected when Mario is immobile, Run Away is greyed out; selecting it brings up a message saying that you don't have enough FP to use the move. This is only possible through cheats - for example, inflicting Frozen on Mario during his turn
+
+Star Beam
+---------
+-Removes charge for Hyper Goombas, Hyper Paragoombas, Hyper Clefts, Koopatrols, 
+
 
 General
 -------

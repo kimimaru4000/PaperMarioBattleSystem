@@ -34,7 +34,8 @@ namespace PaperMarioBattleSystem
             return new string[]
             {
                 $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
-                $"A Goomba that wears a spiked helmet. Slightly higher attack power than a typical Goomba."
+                $"A Goomba that wears a\nspiked helmet. Slightly",
+                "higher attack power than\n a typical Goomba."
             };
         }
 

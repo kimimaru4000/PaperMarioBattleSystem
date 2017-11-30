@@ -49,7 +49,7 @@ namespace PaperMarioBattleSystem
                     //Kooper, Koops, Koopa Troopas, Buzzy Beetles, and etc. always use Shell Toss in place
                     Vector2 front = User.BattlePosition;
 
-                    CurSequenceAction = new MoveToSeqAction(front, WalkDuration);
+                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.ShelledBattleAnimations.EnterShellName);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:

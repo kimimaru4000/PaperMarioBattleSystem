@@ -70,8 +70,9 @@ namespace PaperMarioBattleSystem
             return new string[]
             {
                 $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
-                $"A cactus ghoul covered from head to base in nasty spines.",
-                "It attacks by lobbing sections of itself at you, and can even call other Pokeys to fight alongside it."
+                $"A cactus ghoul covered from\nhead to base in nasty spines.",
+                "It attacks by lobbing sections\nof itself at you, and can even",
+                "call other Pokeys to come\nfight alongside it."
             };
         }
 

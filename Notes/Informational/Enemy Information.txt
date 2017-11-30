@@ -92,6 +92,19 @@ Creating a Mini is a BattleEvent that occurs after all Status Effect-related Bat
 If they don't move for a turn (via Immobilized, Slow, or another Status Effect that prevents movement), they will not create a Mini at the start of the phase cycle.
 This means that performing a move on their turn causes the BattleEvent to occur.
 
+-Minis don't take turns
+
+Mini Counts:
+-Yux: 2 (+1 per turn)
+-Z-Yux: 4 (+1 per turn)
+-X-Yux: 4 (+2 per turn)
+
+Grodus X
+--------
+-Add +1 Defense to Grodus (+1 per turn; max of 4)
+-With a max of 4, they make Grodus invincible
+-They attack with Zap, which does 4 damage
+
 Gulpits' Rocks
 --------------
 -Have 1 HP; dealing 0 damage on them doesn't have any effect

@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
                 //Charge starts out at 2 then increases by 1 for each additional Badge
                 int chargeAmount = 2 + (chargeCount - 1);
 
-                BattleActions.Add(new MoveAction("Charge", new MoveActionData(null, "Save up strength to power up your next attack",
+                BattleActions.Add(new MoveAction("Charge", new MoveActionData(null, "Save up strength to power up\nyour next attack",
                     Enumerations.MoveResourceTypes.FP, chargeCount, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None,
                     TargetSelectionMenu.EntitySelectionType.Single, false, null), new ChargeSequence(null, chargeAmount)));
             }

@@ -183,7 +183,8 @@ namespace PaperMarioBattleSystem
             return new string[]
             {
                 $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
-                $"A Koopa Troopa with wings that stays airborne until you stomp on it and send it plunging to the ground."
+                $"A Koopa Troopa with wings\nthat stays airborne until",
+                "you stomp on it and send\nit plunging to the ground."
             };
         }
 

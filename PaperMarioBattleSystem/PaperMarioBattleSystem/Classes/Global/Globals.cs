@@ -1113,6 +1113,11 @@ namespace PaperMarioBattleSystem
             public const string SpitRockName = "SpitRock";
         }
 
+        public static class KoopatrolBattleAnimations
+        {
+            public const string SummonKoopatrolName = "SummonKoopatrol";
+        }
+
         /// <summary>
         /// Animations for Shelled BattleEntities.
         /// </summary>

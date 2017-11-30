@@ -179,7 +179,8 @@ namespace PaperMarioBattleSystem
             return new string[]
             {
                 $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
-                $"Koopa Troopas have been around forever. Jump on them to flip them over and drop their Defense to 0."
+                $"Koopa Troopas have been\naround forever. Jump on",
+                $"them to flip them over and\ndrop their Defense to 0."
             };
         }
 

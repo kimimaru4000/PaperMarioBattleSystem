@@ -94,6 +94,7 @@
     <Compile Include="Classes\Actions\IActionCommandHandler.cs" />
     <Compile Include="Classes\Actions\Item\ItemAction.cs" />
     <Compile Include="Classes\Actions\Item\MysteryAction.cs" />
+    <Compile Include="Classes\Actions\Koopatrol\SummonKoopatrolAction.cs" />
     <Compile Include="Classes\Actions\Kooper\ShellToss.cs" />
     <Compile Include="Classes\Actions\Mario\Hammer.cs" />
     <Compile Include="Classes\Actions\Mario\HeadRattle.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Classes\BattleEntities\Enemies\BattleEnemy.cs" />
     <Compile Include="Classes\BattleEntities\BattleEntity.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Gulpit.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\Koopatrol.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\KoopaTroopa.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Paratroopa.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Pokey.cs" />
@@ -291,6 +293,7 @@
     <Compile Include="Classes\Sequences\Huff N. Puff\WindBreathSequence.cs" />
     <Compile Include="Classes\Sequences\Item\ItemSequence.cs" />
     <Compile Include="Classes\Sequences\Item\MysterySequence.cs" />
+    <Compile Include="Classes\Sequences\Koopatrol\SummonKoopatrolSequence.cs" />
     <Compile Include="Classes\Sequences\Kooper\ShellTossSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\HammerSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\JumpSequence.cs" />
@@ -423,6 +426,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Characters\MarioWLEmblem.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Enemies\Koopatrol.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Enemies\Gulpit.png">

@@ -64,7 +64,8 @@ namespace PaperMarioBattleSystem
             return new string[]
             {
                 $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
-                $"The underling of underlings. No other distinguishing characteristics."
+                $"The underling of underlings.\nNo other distinguishing",
+                "characteristics."
             };
         }
 

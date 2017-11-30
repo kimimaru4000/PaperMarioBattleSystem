@@ -172,8 +172,9 @@ namespace PaperMarioBattleSystem
             return new string[]
             {
                 $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
-                $"A Goomba with wings. Can't reach it with a hammer while it's in the air,",
-                $"but once it's damaged, its wings get clipped. It's kind of sad really."
+                $"A Goomba with wings. Can't\nreach it with a hammer while",
+                "it's in the air, but once\n it's damaged, its wings get",
+                $"clipped. It's kind of sad,\nreally."
             };
         }
 

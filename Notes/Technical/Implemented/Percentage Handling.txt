@@ -1,0 +1,20 @@
+Percentage Handling (2/6/17)
+----------------------------
+Here's how the PM games handle percentages.
+
+The games multiply two numbers out of 100, divides that result by 100, then compares a random number in [0, 100) to the result.
+The number is inclusive of 0 and exclusive of 100 and returns true if it's less than the result.
+
+For example, say Ice Smash has a 70% chance of inflicting Frozen on a Goomba that has a 40% chance of being afflicted with Frozen.
+
+The formula goes as follows:
+Percentage = ((value1 * value2) / 100)
+
+In our example above:
+Percentage = ((70 * 40) / 100)
+		   = (2800 / 100)
+		   = 28
+
+It would roll a pseudo-random number, n, in the range of 0 >= n < 100 and return true if n was less than the result (28 in our example). 
+
+The same thing holds true for percentages greater than 100.

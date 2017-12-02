@@ -1,0 +1,35 @@
+Damage Calculation Refactoring (3/10/17)
+----------------------------------------
+Right now both following and changing the damage formula is cumbersome. Changing one thing can lead to an inaccuracy
+not present before unless the change is looked over very carefully.
+
+So the aim of this is the following:
+
+1. Split the damage calculation into parts to allow for flexibility with regards to swapping parts
+   and the mathematical operations - no having to look up 20+ lines for the value of something referenced way later
+2. Preserve the values of each part after their calculations are done for easy reference
+3. A flexible data structure to store the parts in that defines their order
+4. Make adding new parts extremely easy
+
+None of this should be exposed outside of the Interactions class, at least not yet. Interactions handles the damage calculation
+and there's no reason for anything else to call just one or two parts of the damage calculation.
+
+Here's all the information we currently need in the interaction, for both the Attacker and Victim:
+
+Victim
+------
+1. Contact Result
+2. Elemental damage
+3. Element Damage Result Holder
+4. Subtract damage by the DamageReduction stat
+5. Defensive Action Holder - goes with adding the # of Damage Dodge badges to your Defense
+6. Subtract from Defense if not Piercing
+7. Factor in Double Pains
+8. Factor in Last Stands
+Attacker
+--------
+9. Payback from contact result
+10. Override Payback with Superguards' Payback if performed
+11. Calculate Attacker's weakness/resistance to the Payback element
+12. Calculate Payback damage based off PaybackType
+13. Clamp damage

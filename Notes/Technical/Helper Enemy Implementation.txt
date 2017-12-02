@@ -1,0 +1,80 @@
+Helper Enemy Implementation (12/1/17)
+-------------------------------------
+Helper enemies, such as Mini-Yuxes, pose a problem in the current implementation. They need to have valid BattleIndices so targeting and the turn order is correct, as the lists are sorted by BattleIndex. However, since there can be many of them, especially for Mini-Yuxes, it can cause later enemies' BattleIndices to be too high, which won't look right. For example, take the following formation:
+
+m = Mini-Z-Yux
+y = Z-Yux
+k = Koopatrol
+
+m m
+ y k
+m m
+
+If we were to assign BattleIndices to the enemies here so targeting and turn order acts like the games:
+
+012345
+mmymmk
+
+What this means is the next enemy joining battle will have a BattleIndex of 6 and will be placed way behind the Koopatrol instead of right behind it! If the Mini-Yuxes weren't there, the Koopatrol would have a BattleIndex of 2 and would be right behind the other Koopatrol as normal.
+
+Before delving in, it's worth noting that there is at least one exception with the turn order in the games: Grodus goes before his Grodus Xs despite having the same formation as a full set of Mini-Z-Yuxes. In a full set, 2 Grodus Xs are before Grodus in the target selection.
+
+There are several problems right now:
+1. We can't make an enemy with a higher BattleIndex go before one with a lower BattleIndex
+2. This consists of several parts:
+
+-Have to shift the BattleIndices of enemies before and after the helpers
+-Need to be able to add BattleEntities at specific BattleIndices
+-Simultaneously needs to be able to access the previous or next "main" enemy slot
+
+First:
+y k
+
+012345
+yk
+
+After:
+m m
+ y k
+m m
+
+012345
+mmymmk
+
+Need to add 2 to y and k's BattleIndices, then add 2 to k's. If we were to get either y or k's BattlePosition from its BattleIndex, it's now different.
+
+If Mario kills the first one...
+
+  m
+ y k
+m m
+
+012345
+ mymmk
+ 
+Now BattleIndex 0 is available, but that slot was used by a Helper. Do we now subtract 1 from everyone's BattleIndex?
+
+There needs to be an easier and better way to do this.
+
+All Helper enemies in the PM games are used or commanded by the main enemy, so why don't we let the main enemies do just that?
+
+Let's say that's in place. We've now got the Helper positions set and enemy BattleIndices are fine, but there are a couple of problems remaining:
+
+1. How do we put the Helpers in the turn order when the main enemy wants them to go?
+2. How do we get the Helpers in the targeting system?
+
+
+Possible Solutions
+------------------
+1. Since this seems to happen only with helper BattleEntities, we can work around this in the existing implementation with the following:
+-Set the helper enemy turn counts to 0 at the start of their phase
+-When the main BattleEntity they're part of goes, it can set the helpers' turn counts to their appropriate number
+
+While this covers almost all cases, there's still a problem. If the main BattleEntity cannot move due to Slow, Immobilized, or some other reason, the helper BattleEntities won't be able to move. In TTYD, if you immobilize Grodus in some way, the Grodus Xs still move. Therefore, we need to find the right time to set the helpers' turn counts.
+
+We can deal with this case by having the main BattleEntity check if it has any turns in OnPhaseStart(). If not, then give the helpers their turns. This way, it covers both cases and allows the main BattleEntity to control when its helpers go.
+
+/*****2. We can tag helper BattleEntities with unique position layouts with a Helper AdditionalProperty. Other BattleEntities can then search for all helpers with this property and figure out how much to offset their own BattleIndices by to get the correct position. Their BattleIndices themselves shouldn't be touched.
+
+When a Yux creates its Minis, we'll need to actually adjust the BattleIndices of everyone starting from the Yux. For example, if a Z-Yux creates four Mini-Z-Yuxes, its BattleIndex will need to increased by 2. All BattleEntities behind the Z-Yux will have theirs increased by 2 as well. Then, any BattleEntities after the two Mini-Z-Yuxes behind the Z-Yux will need to increase their BattleIndices by another 2.*****/
+

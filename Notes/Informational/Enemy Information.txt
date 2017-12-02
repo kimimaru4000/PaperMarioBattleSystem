@@ -123,3 +123,16 @@ Gulpits' Rocks
 -Spin Smash can't destroy the rocks with the Action Command, and the rocks don't get knocked into each other like enemies do.
 Hitting a rock with a failed Spin Smash causes it to spin and get destroyed.
 
+Crystal King
+------------
+-If you use Mega Shock and paralyze him, his Crystal Bits will go away even though they're not affected by it. This will need more testing to be confirmed.
+-The same happens if you use Time Out to immobilize him and it doesn't affect the Crystal Bits.
+
+Crystal Bits
+------------
+-All have a 0% chance of being inflicted by any Status Effect. This includes: 
+
+-Spook and Hurricane (their percentages are the same in the battle scripts)
+-Up & Away (not possible normally, since beating the Crystal King gives you this move)
+-Air Lift
+

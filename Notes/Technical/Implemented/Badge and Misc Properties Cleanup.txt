@@ -1,0 +1,14 @@
+Badge and Misc Properties Cleanup (12/22/16)
+--------------------------------------------
+The original goal of tying in Badges and MiscProperties was so these values can be
+manipulated through other means, making them more flexible. However, we never change
+these values through other means and I feel they've been making things more messy overall.
+
+Solutions
+---------
+1. Rename MiscProperties to AdditionalProperties
+    -Considering how many MiscProperties are used regularly, this a better name
+2. Check for Badge counts for Badge-specific properties
+    -All the properties involving Badges right now rely on the Badge count
+3. Remove GlobalPlayerProperties
+    -These are redundant and further add to the mess, considering they also use Badge counts

@@ -1,0 +1,59 @@
+Badge System Design (7/18/16)
+-----------------------------
+Badges and BP are stored in the Inventory singleton. The fields are as follows:
+
+public int BP { get; private set; }
+public int MaxBP { get; private set; }
+
+private readonly List<Badge> AllBadges;
+private readonly Dictionary<BadgeTypes, int> AllBadgeCounts;
+private readonly List<Badge> ActiveBadges;
+private readonly Dictionary<BadgeTypes, int> ActiveBadgeCounts;
+
+The dictionaries allow us to check if a Badge is in the inventory in O(1) time, as well as
+O(1) time for fetching the number of a particular Badge in the inventory.
+
+The lists contain the individual instances of each Badge. Every single owned Badge will always be in the AllBadges list,
+and active ones will be added to the ActiveBadges list. There are methods included for sorting a Badge list by BadgeType,
+Alphabetical order, and BP required (increasing order).
+
+Badge Effects
+-------------
+For an effect like HP Drain (heal 1 HP per attack), add a MiscProperty that performs what it does and
+add the MiscProperty to the BattleEntity when the Badge is applied. This allows us to reuse the effect
+for Items and moves, which is preferable to checking for particular active Badges.
+
+If it starts getting messy (too many MiscProperties, or something else unexpected) there will need to be
+a separate concept of BadgeProperties. This will essentially do the same thing as MiscProperties, except it serves to
+separate properties granted by Badges and will still allow Items, moves, or anything else to give them to BattleEntities.
+
+Applying Badges
+---------------
+There needs to be a way to apply Badges. In the Paper Mario games, 3 different types of BattleEntities can use Badges:
+
+1. Mario
+2. Partners
+3. Enemies
+
+Any Badge equipped automatically applies to Mario, unless it's designated with a "P" after, in which it applies
+to ALL Partners. In code this is represented as AffectableType, which can be Self (Mario or Enemy) or Partner (no effect on Enemies).
+
+Enemies can have only one Badge active at a time, and that only occurs when they're holding it. Nothing in the Badge Inventory
+affects an enemy directly in any way.
+
+So in other words, anything in the Badge Inventory can only affect Mario or his Partner.
+
+Currently Badges have Equip() and UnEquip() methods. We will want to have a reference to the BattleEntity that we are equipping the Badge to.
+
+Equip will need a new prototype: Equip(BattleEntity entity)
+
+Here we will set the BattleEntity reference, and disallow the reference from being changed until UnEquip() is called, which will clear it
+and mark the Badge as no longer Equipped. Equip() will also add the Badge to the active Badge list if equipped to Mario or a Partner,
+and UnEquip() will remove it from the active Badge list if the same conditions are met. For switching Partners, we can unequip all active
+Partner Badges on the current Partner and reapply them onto the new Partner sent out. This will allow us to effectively preserve all Badge
+effects among Partners while still allowing Badges to target specific BattleEntities.
+
+Notes
+-----
+Note that this design document is for Badges in-battle. The Badge selection menu outside of battle will still use the Inventory but may
+have different equip/unequip logic.

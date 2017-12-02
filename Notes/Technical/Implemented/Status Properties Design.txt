@@ -1,0 +1,28 @@
+Status Properties Design (7/7/16)
+---------------------------------
+The current implemention of Status Percentages doesn't suit our needs for two reasons:
+
+1. Entities can be affected for different numbers of turns for different StatusEffects.
+The current implemention doesn't allow us to influence the duration of the StatusEffect.
+2. If it needs to change later, it'll be a pain
+
+It'll be best if we do a similar approach to what we did with MiscProperties.
+
+Implementation
+--------------
+Rename the current StatusPercentages dictionary to "StatusProperties."
+
+Define a new immutable struct called StatusPropertyHolder:
+
+struct StatusPropertyHolder
+{
+    public int StatusPercentage { get; private set; }
+    public int AdditionalTurns { get; private set; }
+}
+
+Now we can hold both the percentage and the duration. The duration will be relative to the StatusEffect's base
+Duration. For example, say a Sleepy Sheep inflicts Sleep for 3 turns. Enemies more susceptible to Sleep like Bowser
+can have AdditionalTurns be 4 for Sleep, thus making Sleep last for 7 turns total on him. Negative values will also be
+supported so entities can be less susceptible to certain StatusEffects.
+
+If we need to add anything else later, we can easily put them in the struct and be able to access them right away.

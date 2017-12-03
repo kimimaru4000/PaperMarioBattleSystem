@@ -166,7 +166,28 @@ After looking more into it, all that happens is that status effects that normall
 Koopatrol
 ---------
 Hide - Still takes damage from Status Effects that deal damage, such as Poison and Burn. It can still be blown away with Gale Force.
-Whistle - Summons another Koopatrol in front of it. If the new Koopatrol cannot be placed in front, it will go behind.
+
+In PM:
+Summon Dance - Summons another Koopatrol and puts it in the frontmost available enemy slot. If the Koopatrol that summons is in the very front, the new one will be behind it.
+
+Ex. Result of move used by Koopatrol in slot 3
+
+k = Koopatrol
+Numbers = Enemy slots
+
+01234
+k  k 
+
+In TTYD:
+Whistle - Summons another Koopatrol directly in front of the one using this move. If the new Koopatrol cannot be placed in front of the one summoning it, it will go behind it.
+
+Ex. Result of move used by Koopatrol in slot 3
+
+k = Koopatrol
+Numbers = Enemy slots
+
+01234
+  kk
 
 Koops
 -----

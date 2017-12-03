@@ -146,6 +146,18 @@ namespace PaperMarioBattleSystem
             base.TurnUpdate();
         }
 
+        public override void OnPhaseCycleStart()
+        {
+            base.OnPhaseCycleStart();
+
+            //Gain Star Spirit Star Power every phase cycle
+            //Exclude the phase cycle that starts the battle
+            if (BattleManager.Instance.PhaseCycleCount > 0)
+            {
+                MStats.SSStarPower.GainStarPower(StarPowerGlobals.StarSpiritSPUPerTurn);
+            }
+        }
+
         public override void OnTurnEnd()
         {
             base.OnTurnEnd();

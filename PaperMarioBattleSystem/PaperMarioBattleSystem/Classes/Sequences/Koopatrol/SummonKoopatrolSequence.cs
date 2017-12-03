@@ -8,6 +8,8 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The sequence for summoning a Koopatrol.
+    /// <para>NOTE: The PM version puts the new Koopatrol in the lowest available index.
+    /// The TTYD version puts the new Koopatrol directly in front of the one that summoned it; if the front isn't possible, it's put behind.</para>
     /// </summary>
     public class SummonKoopatrolSequence : Sequence
     {

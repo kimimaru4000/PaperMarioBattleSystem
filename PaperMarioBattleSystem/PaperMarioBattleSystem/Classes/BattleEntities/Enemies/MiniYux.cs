@@ -23,6 +23,8 @@ namespace PaperMarioBattleSystem
 
             Scale = new Vector2(.5f, .5f);
 
+            ChangeHeightState(HeightStates.Airborne);
+
             //The Helper AdditionalProperty is added when the Yux creates the Mini-Yux
             //This helps allow Mini-Yuxes to be standalone enemies if desired
 

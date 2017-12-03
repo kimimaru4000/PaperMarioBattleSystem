@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -18,6 +21,8 @@ namespace PaperMarioBattleSystem
             //All types of Mini-Yuxes don't take turns
             BaseTurns = 0;
 
+            Scale = new Vector2(.5f, .5f);
+
             //The Helper AdditionalProperty is added when the Yux creates the Mini-Yux
             //This helps allow Mini-Yuxes to be standalone enemies if desired
 
@@ -32,6 +37,42 @@ namespace PaperMarioBattleSystem
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Fright, new StatusPropertyHolder(0, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Blown, new StatusPropertyHolder(100, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.KO, new StatusPropertyHolder(100, 0));
+
+            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Yux");
+            AnimManager.SetSpriteSheet(spriteSheet);
+
+            AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(300, 14, 52, 48), 1000d)));
+        }
+
+        public override void OnBattleStart()
+        {
+            //The Mini-Yux's BattlePosition is set by the Yux, so do everything aside from that
+
+            //Equip the held Badge, if one is held
+            if (HeldCollectible?.CollectibleType == Enumerations.CollectibleTypes.Badge)
+            {
+                Badge heldBadge = (Badge)HeldCollectible;
+                if (heldBadge.AffectedType == BadgeGlobals.AffectedTypes.Self || heldBadge.AffectedType == BadgeGlobals.AffectedTypes.Both)
+                {
+                    heldBadge.Equip(this);
+                }
+            }
+
+            //Check if the enemy has an entry in the Tattle table
+            //If so, mark it to show its HP
+            if (TattleDatabase.HasTattleDescription(Name) == true)
+            {
+                this.AddShowHPProperty();
+            }
+        }
+
+        public override void OnTurnStart()
+        {
+            base.OnTurnStart();
+
+            //Mini-Yuxes don't move, but if they somehow do, make them do nothing
+            StartAction(new NoAction(), true, null);
         }
 
         #region Tattle Information

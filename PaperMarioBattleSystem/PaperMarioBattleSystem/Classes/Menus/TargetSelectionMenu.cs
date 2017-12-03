@@ -135,14 +135,14 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < Targets.Length; i++)
             {
                 Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[i].Position + new Vector2(0, -20));
-                Cursor.Draw(pos, Color.White, false, .3f);
+                Cursor.Draw(pos, Color.White, Vector2.Zero, Vector2.One, false, .3f);
             }
         }
 
         private void DrawSingle()
         {
             Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[CurSelection].Position + new Vector2(0, -20));
-            Cursor.Draw(pos, Color.White, false, .3f);
+            Cursor.Draw(pos, Color.White, Vector2.Zero, Vector2.One, false, .3f);
         }
     }
 }

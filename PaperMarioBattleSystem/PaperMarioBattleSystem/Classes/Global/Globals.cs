@@ -347,6 +347,9 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public struct InteractionHolder
     {
+        /// <summary>
+        /// The BattleEntity that got damaged.
+        /// </summary>
         public BattleEntity Entity;
         public int TotalDamage;
         public Enumerations.Elements DamageElement;
@@ -1337,9 +1340,9 @@ namespace PaperMarioBattleSystem
                 }
 
                 //Compare X position; favor the lower for enemies and the higher for players
-                if (leftEntity.BattlePosition.X < leftEntity.BattlePosition.X)
+                if (leftEntity.BattlePosition.X < rightEntity.BattlePosition.X)
                     return -1;
-                else if (leftEntity.BattlePosition.X > leftEntity.BattlePosition.X)
+                else if (leftEntity.BattlePosition.X > rightEntity.BattlePosition.X)
                     return 1;
             }
 

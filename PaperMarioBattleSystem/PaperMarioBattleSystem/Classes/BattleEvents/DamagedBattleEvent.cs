@@ -31,19 +31,15 @@ namespace PaperMarioBattleSystem
 
         protected override void OnUpdate()
         {
-            //If the hurt animation doesn't exist, end immediately
-            if (Anim == null)
-            {
-                End();
-                return;
-            }
+            //Even if the animation is null, still wait
+            bool animFinished = (Anim == null || Anim.Finished == true);
 
-            if (Anim.Finished == true)
+            if (animFinished)
             {
                 //Check if the entity is being targeted here and replay the animation if so.
                 //This prevents the death event from occurring until the entity is completely done being attacked
                 if (Entity.IsTargeted == true)
-                    Anim.Play();
+                    Anim?.Play();
                 else
                     End();
             }

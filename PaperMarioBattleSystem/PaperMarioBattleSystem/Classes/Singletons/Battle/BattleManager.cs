@@ -76,7 +76,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// How many phase cycles (finished the phase order) passed.
         /// </summary>
-        public int PhaseCycleCount { get; private set; } = 0;
+        public int PhaseCycleCount { get; private set; } = -1;
 
         /// <summary>
         /// Whether certain UI, such as Status Effect icons and enemy HP, should show up or not.
@@ -317,7 +317,8 @@ namespace PaperMarioBattleSystem
             Phase = phase;
 
             //Call OnPhaseEnd() for the previous entities
-            List<BattleEntity> entities = GetEntitiesList(prevPhase);
+            //Use a new list in case it's modified
+            List<BattleEntity> entities = GetEntitiesList(prevPhase, null);
             if (entities != null)
             {
                 for (int i = 0; i < entities.Count; i++)
@@ -346,7 +347,8 @@ namespace PaperMarioBattleSystem
             }
 
             //Call OnPhaseStart() for the new entities going
-            entities = GetEntitiesList(CurEntityPhase);
+            //Use a new list in case it's modified
+            entities = GetEntitiesList(CurEntityPhase, null);
             if (entities != null)
             {
                 for (int i = 0; i < entities.Count; i++)

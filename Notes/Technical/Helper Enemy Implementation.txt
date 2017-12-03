@@ -134,7 +134,7 @@ What this does is:
 -Doesn't require changing BattleIndices
 -Is possible in the existing system (only minor changes required)
 
-Another potential option would be to make BattleIndex a float instead of an int, but that doesn't sound like the right way to go, for me, at least. The problem I have with it is if we need to change back to ints for some reason, this feature would be broken.
+Another potential option would be to make BattleIndex a float instead of an int, but that doesn't sound like the right way to go, for me, at least. The problem I have with it is if we need to change back to ints for some reason, this feature would break.
 
 In any case, try the above out and see if it works!
 
@@ -148,3 +148,6 @@ While this covers almost all cases, there's still a problem. If the main BattleE
 
 We can deal with this case by having the main BattleEntity check if it has any turns in OnPhaseStart(). If not, then give the helpers their turns. This way, it covers both cases and allows the main BattleEntity to control when its helpers go.
 
+Update (12/2/17; 7:48 PM)
+-------------------------
+Yux and Mini-Yux have successfully been implemented! Everything seems to work just as intended. This document will be updated further if necessary.

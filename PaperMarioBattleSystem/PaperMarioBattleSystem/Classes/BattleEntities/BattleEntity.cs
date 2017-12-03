@@ -141,7 +141,7 @@ namespace PaperMarioBattleSystem
         }
 
         public float Rotation { get; set; } = 0f;
-        public float Scale { get; set; } = 1f;
+        public Vector2 Scale { get; set; } = Vector2.One;
 
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
@@ -313,7 +313,7 @@ namespace PaperMarioBattleSystem
         /// <param name="piercing">Whether the attack penetrates Defense or not</param>
         public void TakeDamage(Elements element, int damage, bool piercing)
         {
-            TakeDamage(new InteractionHolder(null, damage, element, ElementInteractionResult.Damage, ContactTypes.None, piercing, null, true, DamageEffects.None));
+            TakeDamage(new InteractionHolder(this, damage, element, ElementInteractionResult.Damage, ContactTypes.None, piercing, null, true, DamageEffects.None));
         }
 
         /// <summary>
@@ -946,7 +946,7 @@ namespace PaperMarioBattleSystem
 
         public virtual void Draw()
         {
-            AnimManager.CurrentAnim?.Draw(Position, TintColor, EntityType == EntityTypes.Player, .1f);
+            AnimManager.CurrentAnim?.Draw(Position, TintColor, Vector2.Zero, Scale, EntityType == EntityTypes.Player, .1f);
             PreviousAction?.Draw();
 
             //Draw Status Effect icons on the BattleEntity

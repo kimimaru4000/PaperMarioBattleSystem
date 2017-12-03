@@ -982,7 +982,14 @@ namespace PaperMarioBattleSystem
             /// Tells that this BattleEntity is, in general, not targetable.
             /// Certain moves may still be able to target BattleEntities with this property.
             /// </summary>
-            Untargetable
+            Untargetable,
+
+            /// <summary>
+            /// Tells that this BattleEntity is a helper or part of another BattleEntity.
+            /// <para>This should have a BattleEntity as the value.
+            /// The BattleEntity will be the BattleEntity that this one supports.</para>
+            /// </summary>
+            HelperEntity
         }
     }
 
@@ -1294,8 +1301,57 @@ namespace PaperMarioBattleSystem
             else if (entity1.BattleIndex > entity2.BattleIndex)
                 return 1;
 
+            return ResolveSameBattleIndex(entity1, entity2);
+        }
+
+        /// <summary>
+        /// Handles resolving the sorting of BattleEntities if their BattleIndices are the same.
+        /// </summary>
+        /// <param name="entity1"></param>
+        /// <param name="entity2"></param>
+        /// <returns>-1 if entity1 has a lower X position, 1 if entity2 has a lower X position. If players, higher X positions are favored instead.
+        /// If X positions are equal, -1 if entity1 has a lower Y position and 1 if entity2 has a lower Y position.
+        /// If X and Y positions are equal, 0.</returns>
+        private static int ResolveSameBattleIndex(BattleEntity entity1, BattleEntity entity2)
+        {
+            //Check if they have the same X position
+            //If so, compare the Y - lower Y values are favored
+            if (entity1.BattlePosition.X == entity2.BattlePosition.X)
+            {
+                if (entity1.BattlePosition.Y < entity2.BattlePosition.Y)
+                    return -1;
+                else if (entity1.BattlePosition.Y < entity2.BattlePosition.Y)
+                    return 1;
+            }
+            //If not, compare X positions
+            else
+            {
+                //Sorting occurs between same BattleEntities with the same EntityType
+                BattleEntity leftEntity = entity1;
+                BattleEntity rightEntity = entity2;
+
+                //Swap if they're players, as Players go from right to left
+                if (entity1.EntityType == Enumerations.EntityTypes.Player)
+                {
+                    UtilityGlobals.Swap(ref leftEntity, ref rightEntity);
+                }
+
+                //Compare X position; favor the lower for enemies and the higher for players
+                if (leftEntity.BattlePosition.X < leftEntity.BattlePosition.X)
+                    return -1;
+                else if (leftEntity.BattlePosition.X > leftEntity.BattlePosition.X)
+                    return 1;
+            }
+
             return 0;
         }
+
+        /// <summary>
+        /// Tells if a BattleIndex is valid.
+        /// </summary>
+        /// <param name="battleIndex">The BattleIndex to test for validity.</param>
+        /// <returns>true if <paramref name="battleIndex"/> is greater than or equal to 0, otherwise false.</returns>
+        public static bool IsValidBattleIndex(int battleIndex) => (battleIndex >= 0);
 
         #endregion
     }

@@ -34,6 +34,7 @@ This document details the types of Battle Entities in both Paper Mario games.
   -Petit Piranhas (for Lava Piranha)
   -Crystal Bits (for Crystal King)
   -Tuff Puff (for Huff N' Puff)
+  -Blooper Baby (for Super Blooper)
 -Audience; there's only one Audience as a whole, but the Audience is made up of various members with a max count. The Audience is completely absent in TTYD until you get Star Power. Some bosses make use of the Audience to heal or use in an attack. Clock Out can target it to put the Audience to sleep.
   -Luigi
   -X-Naut
@@ -54,5 +55,6 @@ This document details the types of Battle Entities in both Paper Mario games.
   -Gulpits' Rocks; can be attacked by Players but aren't first in the selection (you have to move left from the leftmost enemy) and aren't targeted in multi-hit moves. Used by Gulpits to be thrown at Mario and show up ONLY in battles with Gulpits. Around 6 max.
     -Small rock (still called Gulpit's Rock); adds 3 damage to Gulpit attack
     -Large rock (still called Gulpit's Rock); adds 5 damage to Gulpit attack
+  -Goomnut Tree; can be used by the Goomba King's Ground Stomp move to hurt Mario. If Mario or his Partner hits it, it deals 3 damage to the Goomba King and his cohorts and prevents its use for the rest of the battle.
   -Bobbery's Bomb Squad Bombs; thrown by Bobbery in his Bomb Squad move. They don't move and can't be targeted. They detonate a turn later and deal 3 damage to anyone in their explosion radius.
   -Koops' Shell Shield Shell; put on a player by Koops' Shell Shield move. It doesn't move and can't be targeted, but if an attack tries to hit the character it's placed on, it hits the shell instead. This holds true even if the character is obscured by a move such as Veil.

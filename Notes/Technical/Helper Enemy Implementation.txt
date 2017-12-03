@@ -43,6 +43,8 @@ mmymmk
 
 Need to add 2 to y and k's BattleIndices, then add 2 to k's. If we were to get either y or k's BattlePosition from its BattleIndex, it's now different.
 
+Approach 2
+----------
 If Mario kills the first one...
 
   m
@@ -63,18 +65,86 @@ Let's say that's in place. We've now got the Helper positions set and enemy Batt
 1. How do we put the Helpers in the turn order when the main enemy wants them to go?
 2. How do we get the Helpers in the targeting system?
 
+Approach 3
+----------
+Grodus is index 0 in the battle, so that explains why he goes before the Grodus Xs. There are no other enemies in the battle, so this works perfectly fine.
+
+However, anything can happen in this battle system, so we'll need to adjust. The first step is to gather more information, so first check the indices of battles containing multiple
+Yuxes and enemies (the Moon is good for this). An easy way to check indices is to inflict status effects via cheats starting from the address of enemy 0, then work your way up and see which enemies get affected.
+
+No Yuxes start out with Minis, so I came out empty-handed with the test. All the indices were as expected.
+
+However, I found another unique instance: Blooper Babies from Super Blooper in PM. Despite being created by Super Blooper, the Blooper Babies move before it.
+
+This leads to another idea:
+1. Instead of putting the Helpers in the turn order, how can we make the main enemy make the helpers move?
+
+Update (12/2/17)
+----------------
+There are currently a few options for implementing this, so let's list them all and weigh the pros and cons of each.
+
+Option 1: Put Helpers into the turn order and targeting system
+---------
+
+Pros:
+-Allows Helpers to be their own EntityType that is out of the way
+-Allows Helpers to be controlled by their main BattleEntity
+
+Cons:
+-Not currently possible in the existing system
+-Requires reworking the turn order to allow modification and not being fully dependent on BattleIndex
+-Requires somehow mixing Helpers into the targeting system and placing them in the correct order
+-Requires updating many moves to target Helpers as well
+
+Option 2: Shift BattleIndices to add helpers
+---------
+
+Pros:
+-Currently possible in the existing system
+-Helpers act like normal enemies, thus work in the targeting system
+
+Cons:
+-Can get messy very quickly due to the delicate-nature of BattleIndices
+-Causes an incorrect correlation between a BattleEntity's BattlePosition and BattleIndex
+-Can cause new BattleEntities' positions to be further than intended
+
+Option Conclusion
+-----------------
+Based on this, it looks like the ideal system would be the following:
+-Allows Helpers to be controlled by their main BattleEntity
+-Allows Helpers to work in the targeting system by being normal enemies
+-Doesn't require changing BattleIndices
+-Is possible in the existing system
+
+
+Update (12/2/17; 3:34 PM)
+-------------------------
+Let's look at this approach:
+
+1. Helpers have the same BattleIndex as the main BattleEntity
+2. Helpers are assigned a Helper AdditionalProperty
+3. If BattleIndices are the same when sorting the list, we prioritize the BattleEntity with a lower (higher if Players) X position
+   3a. If X positions are the same, a lower (higher on the screen) Y position is chosen
+   3b. If both are the same, it doesn't favor either
+
+What this does is:
+-Allows Helpers to be controlled by the main BattleEntity and/or act as normal enemies if desired
+-Lets Helpers work in the targeting system
+-Allows checking if the BattleEntity is a Helper or not
+-Doesn't require changing BattleIndices
+-Is possible in the existing system (only minor changes required)
+
+Another potential option would be to make BattleIndex a float instead of an int, but that doesn't sound like the right way to go, for me, at least. The problem I have with it is if we need to change back to ints for some reason, this feature would be broken.
+
+In any case, try the above out and see if it works!
 
 Possible Solutions
 ------------------
-1. Since this seems to happen only with helper BattleEntities, we can work around this in the existing implementation with the following:
+We can't currently make an enemy with a higher BattleIndex go before one with lower BattleIndex, but since this seems to happen only with helper BattleEntities, we can work around this in the existing implementation with the following:
 -Set the helper enemy turn counts to 0 at the start of their phase
 -When the main BattleEntity they're part of goes, it can set the helpers' turn counts to their appropriate number
 
 While this covers almost all cases, there's still a problem. If the main BattleEntity cannot move due to Slow, Immobilized, or some other reason, the helper BattleEntities won't be able to move. In TTYD, if you immobilize Grodus in some way, the Grodus Xs still move. Therefore, we need to find the right time to set the helpers' turn counts.
 
 We can deal with this case by having the main BattleEntity check if it has any turns in OnPhaseStart(). If not, then give the helpers their turns. This way, it covers both cases and allows the main BattleEntity to control when its helpers go.
-
-/*****2. We can tag helper BattleEntities with unique position layouts with a Helper AdditionalProperty. Other BattleEntities can then search for all helpers with this property and figure out how much to offset their own BattleIndices by to get the correct position. Their BattleIndices themselves shouldn't be touched.
-
-When a Yux creates its Minis, we'll need to actually adjust the BattleIndices of everyone starting from the Yux. For example, if a Z-Yux creates four Mini-Z-Yuxes, its BattleIndex will need to increased by 2. All BattleEntities behind the Z-Yux will have theirs increased by 2 as well. Then, any BattleEntities after the two Mini-Z-Yuxes behind the Z-Yux will need to increase their BattleIndices by another 2.*****/
 

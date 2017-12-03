@@ -71,6 +71,10 @@ Electro Blooper
 -When it electrifies itself, it doesn't gain the Electrified status but directly applies the Electrified physical attribute instead
 -Any move that damages it gets rid of its Electrified physical attribute when it electrifies itself
 
+Blooper Baby
+------------
+-Despite being spawned by Super Blooper, they both go before him
+
 Lakitu
 ------
 -When inflicted with Dizzy in TTYD, they drop any Spiny Eggs they're holding
@@ -98,6 +102,16 @@ Mini Counts:
 -Yux: 2 (+1 per turn)
 -Z-Yux: 4 (+1 per turn)
 -X-Yux: 4 (+2 per turn)
+
+Grodus
+------
+-You can attack his staff with many single-hit moves that attack various heights, such as Jump
+  -It cannot be targeted or hit by most multi-hit moves, Art Attack or most moves with secondary targets (Ex. Tornado Jump)
+-Can be targeted and hit by Fire Drive
+-His staff does not have HP. When it's attacked, it causes his next spell to fail.
+
+-If you use Bomb Squad and a Bobbery Bomb kills a Grodus X, it will adjust the formation or add more Grodus Xs before the next Bobbery Bomb goes
+  -This does not apply if the Bobbery Bomb blew another one up. The other Bobbery Bombs that got hit by the explosion will detonate before carrying out the Grodus X events
 
 Grodus X
 --------

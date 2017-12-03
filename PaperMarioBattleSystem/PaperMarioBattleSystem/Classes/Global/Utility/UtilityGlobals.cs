@@ -37,6 +37,19 @@ namespace PaperMarioBattleSystem
         public static int LerpPrecise(int value1, int value2, float amount) => (int)(((1 - amount) * value1) + (value2 * amount));
 
         /// <summary>
+        /// Swaps two references of the same Type.
+        /// </summary>
+        /// <typeparam name="T">The Type of the objects to swap.</typeparam>
+        /// <param name="obj1">The first object to swap.</param>
+        /// <param name="obj2">The second object to swap.</param>
+        public static void Swap<T>(ref T obj1, ref T obj2)
+        {
+            T temp = obj1;
+            obj1 = obj2;
+            obj2 = temp;
+        }
+
+        /// <summary>
         /// Gets the tangent angle between two Vector2s in radians. This value is between -π and π. 
         /// </summary>
         /// <param name="vec1">The first vector2.</param>

@@ -129,8 +129,10 @@
     <Compile Include="Classes\BattleEntities\Enemies\Gulpit.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Koopatrol.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\KoopaTroopa.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\MiniYux.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Paratroopa.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Pokey.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\Yux.cs" />
     <Compile Include="Classes\BattleEntities\Neutral\BobberyBomb.cs" />
     <Compile Include="Classes\BattleEntities\Neutral\GulpitsRock.cs" />
     <Compile Include="Classes\BattleEntities\Players\BattleMario.cs" />

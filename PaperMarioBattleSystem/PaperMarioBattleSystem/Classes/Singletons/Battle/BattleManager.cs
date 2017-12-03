@@ -216,8 +216,8 @@ namespace PaperMarioBattleSystem
                 addedEntities.AddRange(others);
             }
 
-            //Add and initialize all entiites
-            AddEntities(addedEntities, true);
+            //Add and initialize all entities
+            AddEntities(addedEntities, null, true);
 
             Phase = StartingPhase;
 
@@ -423,7 +423,7 @@ namespace PaperMarioBattleSystem
 
             //Remove the old partner from the entity dictionary and add the new one
             RemoveEntities(new BattleEntity[] { oldPartner }, false);
-            AddEntities(new BattleEntity[] { Partner }, false);
+            AddEntities(new BattleEntity[] { Partner }, null, false);
 
             //Set positions to the old ones
             Partner.Position = oldPartner.Position;
@@ -626,10 +626,13 @@ namespace PaperMarioBattleSystem
         /// Adds a set of BattleEntities to battle.
         /// </summary>
         /// <param name="battleEntities">An <see cref="IList{T}"/> of BattleEntities to add.</param>
+        /// <param name="battleIndices">An <see cref="IList{T}"/> of ints containing the BattleIndex to add each BattleEntity at.
+        /// <para>If the IList is null, the value at the IList index is less than 0, or the IList index is out of the <paramref name="battleEntities"/>
+        /// IList range, the BattleManager will assign the lowest available BattleIndex.</para></param>
         /// <param name="initialize">Whether to initialize the entities or not. Regardless of the value, it assigns a BattleIndex.
         /// If the entities have first joined battle, this should be true.
         /// This should be false in cases where entities have been removed and re-added to battle, such as switching Partners.</param>
-        public void AddEntities(IList<BattleEntity> battleEntities, bool initialize)
+        public void AddEntities(IList<BattleEntity> battleEntities, IList<int> battleIndices, bool initialize)
         {
             //Don't add a null or empty list
             if (battleEntities == null || battleEntities.Count == 0)
@@ -660,8 +663,20 @@ namespace PaperMarioBattleSystem
 
                 AllEntities[entityType].Add(entity);
 
+                //Check to assign the BattleIndex from the list passed in
+                int battleIndex = -1;
+                if (battleIndices != null && i < battleIndices.Count)
+                {
+                    battleIndex = battleIndices[i];
+                }
+                //If the BattleIndex isn't valid, find the lowest available one for this EntityType
+                if (BattleGlobals.IsValidBattleIndex(battleIndex) == false)
+                {
+                    battleIndex = FindLowestAvailableBattleIndex(entityType);
+                }
+
                 //Set battle index and start battle for the entity if it should
-                entity.SetBattleIndex(FindLowestAvailableBattleIndex(entityType));
+                entity.SetBattleIndex(battleIndex);
 
                 if (initialize == true)
                 {

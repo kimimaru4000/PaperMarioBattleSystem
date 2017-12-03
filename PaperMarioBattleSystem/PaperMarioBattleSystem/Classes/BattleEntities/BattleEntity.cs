@@ -172,7 +172,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Tells if the BattleEntity is currently in battle.
         /// </summary>
-        public bool IsInBattle => (BattleIndex >= 0);
+        public bool IsInBattle => BattleGlobals.IsValidBattleIndex(BattleIndex);
 
         protected readonly List<DefensiveAction> DefensiveActions = new List<DefensiveAction>();
 

@@ -199,7 +199,14 @@ namespace PaperMarioBattleSystem
             BattleIndex = -1;
         }
 
-        #region Stat Manipulations
+        #region Damage Handling
+
+        /*
+         * Damage handling methods:
+         * -The virtual methods are called in order in TakeDamage()
+         * -BattleEntities can override any steps of receiving damage on their end
+         * -The base behavior should work just fine for the large majority of BattleEntities
+         */
 
         /// <summary>
         /// Tells this BattleEntity to damage another one.
@@ -217,23 +224,90 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Makes the entity take damage from an attack, factoring in stats such as defense, weaknesses, and resistances
+        /// Handles the <see cref="ElementInteractionResult"/> received from being damaged.
+        /// <para>The base behavior deals damage for <see cref="ElementInteractionResult.Damage"/>,
+        /// KOs for <see cref="ElementInteractionResult.KO"/>,
+        /// and heals for <see cref="ElementInteractionResult.Heal"/>.</para>
         /// </summary>
-        /// <param name="damageResult">The InteractionHolder containing the result of a damage interaction</param>
-        /*This is how Paper Mario: The Thousand Year Door calculates damage:
-        1. Start with base attack
-        2. Subtract damage from Defend Plus, Defend Command, and any additional Defense
-        3. Subtract or Add from P-Down D-up and P-Up D-Down
-        4. Reduce damage to 0 if superguarded. Reduce by 1 + each Damage Dodge if guarded
-        5. Multiply by the number of Double Pains + 1
-        6. Divide by the number of Last Stands + 1 (if in danger)
-        
-        Therefore, two Double Pains = Triple Pain.
-        Max Damage is 99.*/
-
-        public void TakeDamage(InteractionHolder damageResult)
+        /// <param name="damageResult">The InteractionHolder containing the result of a damage interaction.</param>
+        protected virtual void HandleDamageResult(InteractionHolder damageResult)
         {
             Elements element = damageResult.DamageElement;
+            int damage = damageResult.TotalDamage;
+            bool piercing = damageResult.Piercing;
+
+            //Handle the elemental interaction results
+            ElementInteractionResult elementResult = damageResult.ElementResult;
+
+            if (elementResult == ElementInteractionResult.Damage || elementResult == ElementInteractionResult.KO)
+            {
+                if (elementResult == ElementInteractionResult.Damage)
+                {
+                    Debug.Log($"{Name} was hit with {damage} {element} " + (piercing ? "piercing" : "non-piercing") + " damage!");
+
+                    //If the entity took damage during their sequence, it's an interruption, and this event should not occur
+                    if (damage > 0 && (IsTurn == false || PreviousAction?.MoveSequence.InSequence == false))
+                    {
+                        BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage,
+                            new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                            new DamagedBattleEvent(this));
+                    }
+
+                    //Lose HP
+                    LoseHP(damage);
+                }
+                //Kill the entity now on an instant KO
+                else if (elementResult == ElementInteractionResult.KO)
+                {
+                    Debug.Log($"{Name} was instantly KO'd from {element} because it has a {nameof(WeaknessTypes.KO)} weakness");
+
+                    Die();
+                }
+            }
+            //Heal the entity
+            else if (elementResult == ElementInteractionResult.Heal)
+            {
+                Debug.Log($"{Name} was healed for {damage} HP because it has a {nameof(ResistanceTypes.Heal)} resistance to Element {element}");
+
+                //Heal the damage
+                HealHP(damage);
+            }
+        }
+
+        /// <summary>
+        /// Handles inflicting Status Effects on the BattleEntity after receiving damage.
+        /// </summary>
+        /// <param name="damageResult">The InteractionHolder containing the result of a damage interaction.</param>
+        protected virtual void HandleStatusAffliction(InteractionHolder damageResult)
+        {
+            StatusChanceHolder[] statusesInflicted = damageResult.StatusesInflicted;
+
+            //Inflict Statuses if the entity isn't dead
+            if (IsDead == false && statusesInflicted != null)
+            {
+                for (int i = 0; i < statusesInflicted.Length; i++)
+                {
+                    EntityProperties.AfflictStatus(statusesInflicted[i].Status, true);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Entity-specific logic for handling DamageEffects.
+        /// </summary>
+        /// <param name="damageEffects">The bit field of DamageEffects.</param>
+        protected virtual void HandleDamageEffects(DamageEffects damageEffects)
+        {
+
+        }
+
+        /// <summary>
+        /// Makes the entity take damage from an attack, factoring in stats such as defense, weaknesses, and resistances.
+        /// </summary>
+        /// <param name="damageResult">The InteractionHolder containing the result of a damage interaction.</param>
+        public void TakeDamage(InteractionHolder damageResult)
+        {
+            /*Elements element = damageResult.DamageElement;
             int damage = damageResult.TotalDamage;
             bool piercing = damageResult.Piercing;
             StatusChanceHolder[] statusesInflicted = damageResult.StatusesInflicted;
@@ -282,7 +356,16 @@ namespace PaperMarioBattleSystem
                 {
                     EntityProperties.AfflictStatus(statusesInflicted[i].Status, true);
                 }
-            }
+            }*/
+
+            int damage = damageResult.TotalDamage;
+            Elements element = damageResult.DamageElement;
+
+            //Handle being damaged
+            HandleDamageResult(damageResult);
+
+            //Handle afflicting statuses
+            HandleStatusAffliction(damageResult);
 
             //Handle DamageEffects
             HandleDamageEffects(damageResult.DamageEffect);
@@ -290,8 +373,6 @@ namespace PaperMarioBattleSystem
             //If this entity received damage during its action sequence, it has been interrupted
             //The null check is necessary in the event that a StatusEffect that deals damage at the start of the phase, such as Poison,
             //is inflicted at the start of the battle before any entity has moved
-
-            //NOTE: This should be moved inside the damage check, as it will still happen if the BattleEntity heals
             if (damage > 0 && IsTurn == true && PreviousAction?.MoveSequence.InSequence == true)
             {
                 PreviousAction.MoveSequence.StartInterruption(element);
@@ -325,6 +406,10 @@ namespace PaperMarioBattleSystem
         {
 
         }
+
+        #endregion
+
+        #region Stat Manipulations
 
         public void HealHP(int hp)
         {
@@ -531,15 +616,6 @@ namespace PaperMarioBattleSystem
         public void ChangeHeightState(HeightStates newHeightState)
         {
             HeightState = newHeightState;
-        }
-
-        /// <summary>
-        /// Entity-specific logic for handling DamageEffects.
-        /// </summary>
-        /// <param name="damageEffects">The bit field of DamageEffects.</param>
-        protected virtual void HandleDamageEffects(DamageEffects damageEffects)
-        {
-
         }
 
         #endregion

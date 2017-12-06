@@ -129,6 +129,8 @@ namespace PaperMarioBattleSystem
 
             //MStats.HammerLevel = EquipmentGlobals.HammerLevels.Ultra;
             //MStats.BootLevel = EquipmentGlobals.BootLevels.Ultra;
+
+            //BattleVFXManager.Instance.AddVFXElement(new AfterImageVFX(this, 4, 4, .2f));
         }
 
         protected sealed override BattleMenu GetMainBattleMenu()

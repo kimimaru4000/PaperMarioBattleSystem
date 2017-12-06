@@ -380,6 +380,7 @@
     <Compile Include="Classes\UIElements\UIFourPiecedTex.cs" />
     <Compile Include="Classes\UIElements\UIGrid.cs" />
     <Compile Include="Classes\UIElements\UIStackedTex.cs" />
+    <Compile Include="Classes\VFXElements\AfterImageVFX.cs" />
     <Compile Include="Classes\VFXElements\VFXElement.cs" />
     <Compile Include="Classes\VFXElements\WingsDisappearVFX.cs" />
     <Compile Include="Main.cs" />

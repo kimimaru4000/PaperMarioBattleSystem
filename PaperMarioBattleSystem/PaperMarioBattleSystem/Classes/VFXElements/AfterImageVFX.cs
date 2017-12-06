@@ -13,49 +13,84 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class AfterImageVFX : VFXElement
     {
-        /* TO FINISH:
-         * -Make a struct to hold the time and animation frame.
-         *   -This way, we can have after-images disappear after some time and show previous animation frames; right now if the animation changes, so do the after-images
-         * -Add duration feature; how long after-image effects should go on for
-         */
+        /// <summary>
+        /// Types of alpha settings for after-images.
+        /// </summary>
+        public enum AfterImageAlphaSetting
+        {
+            /// <summary>
+            /// After-images are more transparent the further they are from the current position.
+            /// </summary>
+            FadeOff,
+            /// <summary>
+            /// All after-images have the same alpha value.
+            /// </summary>
+            Constant
+        }
 
         /// <summary>
         /// The BattleEntity.
         /// </summary>
-        private BattleEntity Entity = null;
+        public BattleEntity Entity = null;
 
         /// <summary>
         /// The max number of after-images to have.
         /// </summary>
-        private int MaxAfterImages = 3;
+        public int MaxAfterImages = 3;
 
         /// <summary>
-        /// How many frames to wait poll the BattleEntity's position. Lower values result in after-images closer to the BattleEntity.
+        /// How many frames behind the BattleEntity's position each successive after-image is.
+        /// Lower values result in after-images closer to the BattleEntity.
+        /// <para>For example, if 2, the closest after-image would be 2 frames behind the BattleEntity's current position.
+        /// The next closest after-image would be 4 frames behind, and so on.</para>
         /// </summary>
-        private int FrameSampleRate = 1;
+        public int FramesBehind = 1;
 
         /// <summary>
         /// The amount to modify the alpha of each after-image by.
-        /// Recent after-image positions are rendered more opaque than older ones.
+        /// <para>If <see cref="AfterImageAlphaSetting.FadeOff"/>, closer after-images are rendered more opaque than further ones.
+        /// If <see cref="AfterImageAlphaSetting.Constant"/>, all after-images have the same alpha value.</para>
         /// </summary>
-        private float AlphaFadeoff = .3f;
+        public float AlphaValue = .3f;
 
         /// <summary>
-        /// The positions to render the after-images.
+        /// The alpha setting of the after-images.
         /// </summary>
-        private readonly List<Vector2> AfterImagePositions = new List<Vector2>();
+        public AfterImageAlphaSetting AlphaSetting = AfterImageAlphaSetting.FadeOff;
 
         /// <summary>
-        /// The number of frames elapsed since the last after-image position was recorded.
+        /// The total duration to display after-images.
+        /// If less than 0, it will display after-images until stopped manually.
         /// </summary>
-        private int CurFrames = 0;
+        public double TotalDuration = -1;
 
-        public AfterImageVFX(BattleEntity entity, int maxAfterImages, int frameSampleRate, float alphaFadeoff)
+        /// <summary>
+        /// The previous positions of the BattleEntity. After-images are rendered at certain points of these positions.
+        /// </summary>
+        private readonly List<Vector2> PrevEntityPositions = null;
+
+        /// <summary>
+        /// The amount of time elapsed to track when the after-images should end if TotalDuration is 0 or greater.
+        /// </summary>
+        private double ElapsedTime = 0d;
+
+        public AfterImageVFX(BattleEntity entity, int maxAfterImages, int framesBehind, float alphaValue, AfterImageAlphaSetting alphaSetting)
         {
             Entity = entity;
             MaxAfterImages = maxAfterImages;
-            FrameSampleRate = frameSampleRate;
-            AlphaFadeoff = alphaFadeoff;
+            FramesBehind = framesBehind;
+            AlphaValue = alphaValue;
+            AlphaSetting = alphaSetting;
+
+            //Set the capacity of the list
+            PrevEntityPositions = new List<Vector2>(MaxAfterImages * FramesBehind);
+        }
+
+        public AfterImageVFX(BattleEntity entity, int maxAfterImages, int framesBehind, float alphaValue, AfterImageAlphaSetting alphaSetting,
+            double totalDuration)
+            : this(entity, maxAfterImages, framesBehind, alphaValue, alphaSetting)
+        {
+            TotalDuration = totalDuration;
         }
 
         public override void Update()
@@ -63,22 +98,24 @@ namespace PaperMarioBattleSystem
             if (Entity == null)
                 return;
 
-            //Increment frames
-            CurFrames++;
-
-            //If we're at or past the number of frames to get the position, get it
-            if (CurFrames >= FrameSampleRate)
+            //If we're past the position capacity, remove the last one
+            if (PrevEntityPositions.Count >= PrevEntityPositions.Capacity)
             {
-                //If we're past the last 
-                if (AfterImagePositions.Count >= MaxAfterImages)
-                {
-                    AfterImagePositions.RemoveAt(AfterImagePositions.Count - 1);
-                }
-                
-                //Add the most recent position to the front of the list
-                AfterImagePositions.Insert(0, Entity.Position);
+                PrevEntityPositions.RemoveAt(PrevEntityPositions.Count - 1);
+            }
 
-                CurFrames = 0;
+            //Add the most recent position at the front of the list
+            PrevEntityPositions.Insert(0, Entity.Position);
+
+            if (TotalDuration >= 0)
+            {
+                //If after-images last a certain amount of time, increment the elapsed time and check if they should end
+                ElapsedTime += Time.ActiveMilliseconds;
+
+                if (ElapsedTime >= TotalDuration)
+                {
+                    ShouldRemove = true;
+                }
             }
         }
 
@@ -87,15 +124,40 @@ namespace PaperMarioBattleSystem
             if (Entity == null)
                 return;
 
-            for (int i = 0; i < AfterImagePositions.Count; i++)
+            //Go through all after-images
+            for (int i = 0; i < MaxAfterImages; i++)
             {
-                //Modify the alpha of the Entity's TintColor by the AlphaFadeoff
-                //More recent positions are rendered more opaque than older ones
-                Color color = Entity.TintColor * (1 - ((i + 1) * AlphaFadeoff));
+                //Find the index of the position list to render this after-image
+                int posIndex = ((i + 1) * FramesBehind) - 1;
 
-                Entity.AnimManager.CurrentAnim.Draw(AfterImagePositions[i], color, Vector2.Zero, Entity.Scale,
+                //If we don't have the position available yet, don't render this one or the rest
+                if (posIndex >= PrevEntityPositions.Count)
+                {
+                    break;
+                }
+
+                //Get the color
+                Color color = GetAfterImageColor(i);
+
+                Entity.AnimManager.CurrentAnim.Draw(PrevEntityPositions[posIndex], color, Vector2.Zero, Entity.Scale,
                     Entity.EntityType == Enumerations.EntityTypes.Player, .09f);
             }
+        }
+
+        private Color GetAfterImageColor(int index)
+        {
+            //Modify the alpha of the Entity's TintColor by the AlphaValue based on the alpha setting
+            Color color = Entity.TintColor;// * (1 - ((i + 1) * AlphaValue));
+            if (AlphaSetting == AfterImageAlphaSetting.FadeOff)
+            {
+                color *= (1 - ((index + 1) * AlphaValue));
+            }
+            else if (AlphaSetting == AfterImageAlphaSetting.Constant)
+            {
+                color *= AlphaValue;
+            }
+
+            return color;
         }
     }
 }

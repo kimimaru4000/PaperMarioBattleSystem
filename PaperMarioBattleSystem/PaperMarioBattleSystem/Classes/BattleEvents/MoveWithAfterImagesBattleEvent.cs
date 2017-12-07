@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
                 {
                     //Add after-images for a duration
                     BattleVFXManager.Instance.AddVFXElement(new AfterImageVFX(Entities[i], AfterImageData.MaxAfterImages,
-                        AfterImageData.FramesBehind, AfterImageData.AlphaValue, AfterImageData.AlphaSetting, duration));
+                        AfterImageData.FramesBehind, AfterImageData.AlphaValue, AfterImageData.AlphaSetting, AfterImageData.AnimSetting, duration));
                 }
             }
 

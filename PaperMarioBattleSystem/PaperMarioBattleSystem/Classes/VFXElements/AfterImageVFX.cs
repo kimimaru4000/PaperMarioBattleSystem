@@ -14,6 +14,21 @@ namespace PaperMarioBattleSystem
     public class AfterImageVFX : VFXElement
     {
         /// <summary>
+        /// Types of animation settings for after-images.
+        /// </summary>
+        public enum AfterImageAnimSetting
+        {
+            /// <summary>
+            /// After-images render the current animation state of the BattleEntity.
+            /// </summary>
+            Current,
+            /// <summary>
+            /// After-images render the previous animation state of the BattleEntity recorded at the time.
+            /// </summary>
+            Previous
+        }
+
+        /// <summary>
         /// Types of alpha settings for after-images.
         /// </summary>
         public enum AfterImageAlphaSetting
@@ -59,36 +74,43 @@ namespace PaperMarioBattleSystem
         public AfterImageAlphaSetting AlphaSetting = AfterImageAlphaSetting.FadeOff;
 
         /// <summary>
+        /// The animation setting of the after-images.
+        /// </summary>
+        public AfterImageAnimSetting AnimSetting = AfterImageAnimSetting.Current;
+
+        /// <summary>
         /// The total duration to display after-images.
         /// If less than 0, it will display after-images until stopped manually.
         /// </summary>
         public double TotalDuration = -1;
 
         /// <summary>
-        /// The previous positions of the BattleEntity. After-images are rendered at certain points of these positions.
+        /// The previous positions and animation frames of the BattleEntity. After-images are rendered at certain points of these states.
         /// </summary>
-        private readonly List<Vector2> PrevEntityPositions = null;
+        private readonly List<AfterImageState> PrevEntityStates = null;
 
         /// <summary>
         /// The amount of time elapsed to track when the after-images should end if TotalDuration is 0 or greater.
         /// </summary>
         private double ElapsedTime = 0d;
 
-        public AfterImageVFX(BattleEntity entity, int maxAfterImages, int framesBehind, float alphaValue, AfterImageAlphaSetting alphaSetting)
+        public AfterImageVFX(BattleEntity entity, int maxAfterImages, int framesBehind, float alphaValue, AfterImageAlphaSetting alphaSetting,
+            AfterImageAnimSetting animSetting)
         {
             Entity = entity;
             MaxAfterImages = maxAfterImages;
             FramesBehind = framesBehind;
             AlphaValue = alphaValue;
             AlphaSetting = alphaSetting;
+            AnimSetting = animSetting;
 
             //Set the capacity of the list
-            PrevEntityPositions = new List<Vector2>(MaxAfterImages * FramesBehind);
+            PrevEntityStates = new List<AfterImageState>(MaxAfterImages * FramesBehind);
         }
 
         public AfterImageVFX(BattleEntity entity, int maxAfterImages, int framesBehind, float alphaValue, AfterImageAlphaSetting alphaSetting,
-            double totalDuration)
-            : this(entity, maxAfterImages, framesBehind, alphaValue, alphaSetting)
+            AfterImageAnimSetting animSetting, double totalDuration)
+            : this(entity, maxAfterImages, framesBehind, alphaValue, alphaSetting, animSetting)
         {
             TotalDuration = totalDuration;
         }
@@ -99,13 +121,13 @@ namespace PaperMarioBattleSystem
                 return;
 
             //If we're past the position capacity, remove the last one
-            if (PrevEntityPositions.Count >= PrevEntityPositions.Capacity)
+            if (PrevEntityStates.Count >= PrevEntityStates.Capacity)
             {
-                PrevEntityPositions.RemoveAt(PrevEntityPositions.Count - 1);
+                PrevEntityStates.RemoveAt(PrevEntityStates.Count - 1);
             }
 
-            //Add the most recent position at the front of the list
-            PrevEntityPositions.Insert(0, Entity.Position);
+            //Add the most recent position and animation frame at the front of the list
+            PrevEntityStates.Insert(0, new AfterImageState(Entity.Position, Entity.AnimManager.CurrentAnim.CurFrame));
 
             if (TotalDuration >= 0)
             {
@@ -127,26 +149,38 @@ namespace PaperMarioBattleSystem
             //Go through all after-images
             for (int i = 0; i < MaxAfterImages; i++)
             {
-                //Find the index of the position list to render this after-image
+                //Find the index of the state list to render this after-image
                 int posIndex = ((i + 1) * FramesBehind) - 1;
 
-                //If we don't have the position available yet, don't render this one or the rest
-                if (posIndex >= PrevEntityPositions.Count)
+                //If we don't have the state available yet, don't render this one or the rest
+                if (posIndex >= PrevEntityStates.Count)
                 {
                     break;
                 }
 
                 //If the after-image's position is the same as the entity's position, don't render it
-                if (PrevEntityPositions[posIndex] == Entity.Position)
+                //If the anim setting is Previous, don't render if the draw region also is the same (indicating it's the same animation frame)
+                if (PrevEntityStates[posIndex].Position == Entity.Position &&
+                    (AnimSetting == AfterImageAnimSetting.Current || (AnimSetting == AfterImageAnimSetting.Previous
+                    && PrevEntityStates[posIndex].AnimFrame.DrawRegion == Entity.AnimManager.CurrentAnim.CurFrame.DrawRegion)))
                 {
-                    continue;
+                     continue;
                 }
 
                 //Get the color
                 Color color = GetAfterImageColor(i);
 
-                Entity.AnimManager.CurrentAnim.Draw(PrevEntityPositions[posIndex], color, Vector2.Zero, Entity.Scale,
-                    Entity.EntityType == Enumerations.EntityTypes.Player, .09f);
+                //Render based on the animation setting
+                if (AnimSetting == AfterImageAnimSetting.Current)
+                {
+                    Entity.AnimManager.CurrentAnim.Draw(PrevEntityStates[posIndex].Position, color, Vector2.Zero, Entity.Scale,
+                        Entity.EntityType == Enumerations.EntityTypes.Player, .09f);
+                }
+                else if (AnimSetting == AfterImageAnimSetting.Previous)
+                {
+                    PrevEntityStates[posIndex].AnimFrame.Draw(Entity.AnimManager.SpriteSheet, PrevEntityStates[posIndex].Position,
+                        color, Vector2.Zero, Entity.Scale, Entity.EntityType == Enumerations.EntityTypes.Player, .09f, false);
+                }
             }
         }
 
@@ -164,6 +198,18 @@ namespace PaperMarioBattleSystem
             }
 
             return color;
+        }
+
+        private struct AfterImageState
+        {
+            public Vector2 Position;
+            public Animation.Frame AnimFrame;
+
+            public AfterImageState(Vector2 position, Animation.Frame animFrame)
+            {
+                Position = position;
+                AnimFrame = animFrame;
+            }
         }
     }
 }

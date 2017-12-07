@@ -48,7 +48,7 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.Initialize(
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEntity>() { new Yux(), new Koopatrol() },
+                new List<BattleEntity>() { new Yux() },
                 new GulpitsRock(true), new GulpitsRock(false), new GulpitsRock(true), new GulpitsRock(false), new GulpitsRock(true));
 
             base.Initialize();

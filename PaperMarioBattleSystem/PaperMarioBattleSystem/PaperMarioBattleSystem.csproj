@@ -153,6 +153,8 @@
     <Compile Include="Classes\BattleEvents\HealFPBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\HealHPBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\MessageBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\MoveToBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\MoveWithAfterImagesBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\PlayAnimBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\RemoveWingsBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\ShootBobberyBombBattleEvent.cs" />

@@ -91,10 +91,9 @@ Yux, Z-Yux, X-Yux
 ----------------- 
 They can still take damage from Status Effects such as Poison, Burn, and Frozen if they have a shield up.
 
-Creating a Mini is a BattleEvent that occurs after all Status Effect-related BattleEvents at the start of the phase cycle.
+Creating a Mini happens at the end of the enemy phase and happens before Bobbery's Bombs go off.
 
-If they don't move for a turn (via Immobilized, Slow, or another Status Effect that prevents movement), they will not create a Mini at the start of the phase cycle.
-This means that performing a move on their turn causes the BattleEvent to occur.
+If they don't move for a turn (via Immobilized, Slow, or another Status Effect that prevents movement), they will not create a Mini at the end of their phases.
 
 -Minis don't take turns
 

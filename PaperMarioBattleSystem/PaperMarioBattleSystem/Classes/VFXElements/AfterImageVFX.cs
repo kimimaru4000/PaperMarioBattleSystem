@@ -110,7 +110,7 @@ namespace PaperMarioBattleSystem
             if (TotalDuration >= 0)
             {
                 //If after-images last a certain amount of time, increment the elapsed time and check if they should end
-                ElapsedTime += Time.ActiveMilliseconds;
+                ElapsedTime += Time.ElapsedMilliseconds;
 
                 if (ElapsedTime >= TotalDuration)
                 {
@@ -134,6 +134,12 @@ namespace PaperMarioBattleSystem
                 if (posIndex >= PrevEntityPositions.Count)
                 {
                     break;
+                }
+
+                //If the after-image's position is the same as the entity's position, don't render it
+                if (PrevEntityPositions[posIndex] == Entity.Position)
+                {
+                    continue;
                 }
 
                 //Get the color

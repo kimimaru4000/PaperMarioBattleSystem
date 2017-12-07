@@ -1170,7 +1170,7 @@ namespace PaperMarioBattleSystem
 
         public enum StartEventPriorities
         {
-            Message = 0, Stage = 500, BobberyBomb = 750, Status = 1000,
+            Message = 0, Stage = 500, YuxArrange = 600, BobberyBomb = 750, Status = 1000,
             HealHP = 1250, HealFP = 1251, Dialogue = 1500, Death = 2000, Damage = 2500
         }
 

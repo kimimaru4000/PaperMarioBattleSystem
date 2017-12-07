@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
             Name = "Volt Shroom";
             Description = "Electrifies you to damage\ndirect-attackers.";
 
-            ItemType = ItemTypes.Damage;
+            ItemType = ItemTypes.Damage | ItemTypes.Status;
 
             StatusesInflicted = new StatusChanceHolder[] { new StatusChanceHolder(100d, new ElectrifiedStatus(ElectrifiedTurns)) };
 

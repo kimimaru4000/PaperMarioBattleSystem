@@ -100,6 +100,11 @@ namespace PaperMarioBattleSystem
             StartAction(new NoAction(), false, null);
         }
 
+        public override Item GetItemOfType(Item.ItemTypes itemTypes)
+        {
+            return null;
+        }
+
         public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
         {
             //Gulpits' Rocks don't have any held items or badges

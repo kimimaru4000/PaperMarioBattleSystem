@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
         {
             ItemUsed = item;
 
-            if (ItemUsed == null || ItemUsed.ItemType == Item.ItemTypes.None || ItemUsed.ItemType == Item.ItemTypes.KeyItem)
+            if (ItemUsed == null || ItemUsed.ItemType == Item.ItemTypes.None)
             {
                 Debug.LogError($"Invalid item with {nameof(Item.ItemType)} of {ItemUsed.ItemType} passed into the ItemAction!");
             }

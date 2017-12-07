@@ -85,6 +85,11 @@ namespace PaperMarioBattleSystem
             return base.GetIdleAnim();
         }
 
+        public override Item GetItemOfType(Item.ItemTypes itemTypes)
+        {
+            return Inventory.Instance.FindItem(Item.ItemCategories.Standard, itemTypes);
+        }
+
         /// <summary>
         /// Gets the BattleMenu the BattlePlayer uses at the start of its turn.
         /// </summary>

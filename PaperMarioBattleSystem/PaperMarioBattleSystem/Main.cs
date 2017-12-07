@@ -136,7 +136,7 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddItem(new Mushroom());
             Inventory.Instance.AddItem(new ShootingStar());
             Inventory.Instance.AddItem(new SleepySheep());
-            Inventory.Instance.AddItem(new TastyTonic());
+            Inventory.Instance.AddItem(new LifeShroom());
             Inventory.Instance.AddItem(new TastyTonic());
             Inventory.Instance.AddItem(new VoltShroom());
             Inventory.Instance.AddItem(new Mystery());

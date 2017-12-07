@@ -14,12 +14,28 @@ namespace PaperMarioBattleSystem
     public abstract class Item : Collectible
     {
         /// <summary>
-        /// The types of items available
+        /// The categories of items available.
         /// </summary>
+        public enum ItemCategories
+        {
+            Standard, KeyItem
+        }
+
+        /// <summary>
+        /// The types of items available.
+        /// This enum is a bit field, so handle it with bitwise operations.
+        /// </summary>
+        [Flags]
         public enum ItemTypes
         {
-            None, Healing, Damage, KeyItem
+            None = 0,
+            Healing = 1 << 0,
+            Damage = 1 << 1,
+            Status = 1 << 2,
+            Revival = 1 << 3
         }
+
+        public ItemCategories ItemCategory { get; protected set; } = ItemCategories.Standard;
 
         /// <summary>
         /// The type of Item this is

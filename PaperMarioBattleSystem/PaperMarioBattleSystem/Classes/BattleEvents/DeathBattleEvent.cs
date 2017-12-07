@@ -8,7 +8,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// A BattleEvent that plays the entity's death animation.
-    /// After the animation, if the entity has a Life Shroom it will then queue a revive event.
+    /// After the animation, if the entity has a Life Shroom, it will then queue a revive event.
     /// <para>If it's an Enemy, it'll give Star Points and be removed from battle.
     /// If it's Mario, the battle ends.</para>
     /// </summary>
@@ -53,7 +53,25 @@ namespace PaperMarioBattleSystem
                 }
             }
 
-            BattleManager.Instance.HandleEntityDeaths();
+            //If this BattleEntity is being revived, add the revival event and don't check for deaths
+            Item revivalItem = Entity.GetItemOfType(Item.ItemTypes.Revival);
+            if (revivalItem != null)
+            {
+                //NOTE: In TTYD if both Mario and his Partner die at the same time, it'll use up only one Life Shroom
+                //The current behavior performs that; however, if an entity dies before another's revival event is finished,
+                //the one being revived will still be removed from battle since it's still dead.
+                //This will have to be revised in some way to work properly
+
+                //Queue the revival event with the same priority as death so it occurs immediately
+                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Death,
+                    new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                    new RevivedBattleEvent(1000d, Entity, revivalItem));
+            }
+            else
+            {
+                //Check for deaths
+                BattleManager.Instance.HandleEntityDeaths();
+            }
         }
 
         protected override void OnUpdate()

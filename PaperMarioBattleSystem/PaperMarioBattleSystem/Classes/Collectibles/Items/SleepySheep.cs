@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
             Name = "Sleepy Sheep";
             Description = "Targets all enemies and may cause them to fall asleep.";
 
-            ItemType = ItemTypes.Damage;
+            ItemType = ItemTypes.Damage | ItemTypes.Status;
 
             StatusesInflicted = new StatusChanceHolder[] { new StatusChanceHolder(100d, new SleepStatus(2)) };
 

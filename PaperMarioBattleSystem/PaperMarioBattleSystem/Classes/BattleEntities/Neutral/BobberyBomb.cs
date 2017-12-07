@@ -134,6 +134,11 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        public override Item GetItemOfType(Item.ItemTypes itemTypes)
+        {
+            return null;
+        }
+
         public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
         {
             //Bomb Squad Bombs don't have any held items or badges

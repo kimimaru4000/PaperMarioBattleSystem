@@ -157,6 +157,7 @@
     <Compile Include="Classes\BattleEvents\MoveWithAfterImagesBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\PlayAnimBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\RemoveWingsBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\RevivedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\ShootBobberyBombBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\SortEntityListBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\SwapPositionBattleEvent.cs" />
@@ -225,9 +226,11 @@
     <Compile Include="Classes\Collectibles\Items\IDamagingItem.cs" />
     <Compile Include="Classes\Collectibles\Items\IFPHealingItem.cs" />
     <Compile Include="Classes\Collectibles\Items\IHPHealingItem.cs" />
+    <Compile Include="Classes\Collectibles\Items\IRevivalItem.cs" />
     <Compile Include="Classes\Collectibles\Items\IStatusHealingItem.cs" />
     <Compile Include="Classes\Collectibles\Items\IStatusInflictingItem.cs" />
     <Compile Include="Classes\Collectibles\Items\Item.cs" />
+    <Compile Include="Classes\Collectibles\Items\LifeShroom.cs" />
     <Compile Include="Classes\Collectibles\Items\Mushroom.cs" />
     <Compile Include="Classes\Collectibles\Items\Mystery.cs" />
     <Compile Include="Classes\Collectibles\Items\ShootingStar.cs" />

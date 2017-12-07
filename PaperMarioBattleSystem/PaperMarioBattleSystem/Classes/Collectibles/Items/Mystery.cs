@@ -45,7 +45,7 @@ namespace PaperMarioBattleSystem
             Icon = new CroppedTexture2D(icon, new Rectangle(639, 83, 25, 25));
 
             //Classify Mystery as any type of battle item so it shows up in the item menu
-            ItemType = ItemTypes.Damage;
+            ItemType = ItemTypes.Damage | ItemTypes.Healing;
             
             SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
             MoveAffectionType = Enumerations.MoveAffectionTypes.Self;

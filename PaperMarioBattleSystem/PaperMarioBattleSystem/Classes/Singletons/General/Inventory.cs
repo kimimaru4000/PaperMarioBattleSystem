@@ -147,7 +147,7 @@ namespace PaperMarioBattleSystem
         /// <param name="item">The Item to add</param>
         public void AddItem(Item item)
         {
-            if (item.ItemType == Item.ItemTypes.KeyItem)
+            if (item.ItemCategory == Item.ItemCategories.KeyItem)
             {
                 if (KeyItems.Count < KeyItems.Capacity)
                 {
@@ -177,7 +177,7 @@ namespace PaperMarioBattleSystem
         /// <param name="item">The Item to remove</param>
         public void RemoveItem(Item item)
         {
-            if (item.ItemType == Item.ItemTypes.KeyItem)
+            if (item.ItemCategory == Item.ItemCategories.KeyItem)
             {
                 KeyItems.Remove(item);
             }
@@ -206,29 +206,33 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Finds and returns all instances of Items in the Inventory with the designated ItemTypes.
+        /// Finds and returns the first Item in the Inventory with any of the designated ItemTypes.
         /// </summary>
-        /// <param name="itemTypes">The array of ItemTypes to look for. If null, will not include any items.</param>
-        /// <returns>An array of all items with the designated ItemTypes. If none are found, an empty array.</returns>
-        public Item[] FindItems(params Item.ItemTypes[] itemTypes)
+        /// <param name="itemTypes">The ItemTypes enum values to look for.</param>
+        /// <returns>An item with any of the designated ItemTypes. If not found, null.</returns>
+        public Item FindItem(Item.ItemCategories itemCategory, Item.ItemTypes itemTypes)
+        {
+            return Items.Find((item) => UtilityGlobals.ItemTypesHasFlag(item.ItemType, itemTypes) == true);
+        }
+
+        /// <summary>
+        /// Finds and returns all instances of Items in the Inventory with any of the designated ItemTypes.
+        /// </summary>
+        /// <param name="itemTypes">The ItemTypes enum values to look for.</param>
+        /// <returns>An array of all items with any of the designated ItemTypes. If none are found, an empty array.</returns>
+        public Item[] FindItems(Item.ItemCategories itemCategory, Item.ItemTypes itemTypes)
         {
             List<Item> itemsToFind = new List<Item>();
 
-            if (itemTypes != null)
+            //If searching for Key Items, add all Key Items to the list
+            if (itemCategory == Item.ItemCategories.KeyItem)
             {
-                for (int i = 0; i < itemTypes.Length; i++)
-                {
-                    //If searching for Key Items, add all Key Items to the list
-                    if (itemTypes[i] == Item.ItemTypes.KeyItem)
-                    {
-                        itemsToFind.AddRange(KeyItems);
-                    }
-                    //Otherwise look in the normal Item list for all Items with this ItemTypes and add them
-                    else
-                    {
-                        itemsToFind.AddRange(Items.FindAll((item) => item.ItemType == itemTypes[i]));
-                    }
-                }
+                itemsToFind.AddRange(KeyItems);
+            }
+            else
+            {
+                //Look in the Item list for all Items with these ItemTypes and add them
+                itemsToFind.AddRange(Items.FindAll((item) => UtilityGlobals.ItemTypesHasFlag(item.ItemType, itemTypes) == true));
             }
 
             return itemsToFind.ToArray();

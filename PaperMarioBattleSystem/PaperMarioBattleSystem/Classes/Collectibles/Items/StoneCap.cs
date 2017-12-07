@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
             Name = "Stone Cap";
             Description = "Turns Mario to stone and makes\nhim unable to move for a while.";
 
-            ItemType = ItemTypes.Damage;
+            ItemType = ItemTypes.Damage | ItemTypes.Status;
 
             StatusesInflicted = new StatusChanceHolder[] { new StatusChanceHolder(100d, new StoneStatus(StoneTurns)) };
 

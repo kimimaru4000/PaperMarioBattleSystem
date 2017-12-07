@@ -253,11 +253,13 @@ namespace PaperMarioBattleSystem
             return (T[])Enum.GetValues(typeof(T));
         }
 
+        #region Flag Check Utilities
+
         /* Adding flags: flag1 |= flag2            ; 10 | 01 = 11
          * Checking flags: (flag1 & flag2) != 0    ; 11 & 10 = 10
          * Removing flags: (flag1 & (~flag2))      ; 1111 & (~0010) = 1111 & 1101 = 1101
          * */
-        
+
         /// <summary>
         /// Tells whether a set of DamageEffects has any of the flags in another DamageEffects set.
         /// </summary>
@@ -298,6 +300,15 @@ namespace PaperMarioBattleSystem
 
             return (flags != 0);
         }
+
+        public static bool ItemTypesHasFlag(Item.ItemTypes itemTypes, Item.ItemTypes itemTypesFlags)
+        {
+            Item.ItemTypes flags = (itemTypes & itemTypesFlags);
+
+            return (flags != 0);
+        }
+
+        #endregion
 
         /// <summary>
         /// Initializes a jagged array with default values.

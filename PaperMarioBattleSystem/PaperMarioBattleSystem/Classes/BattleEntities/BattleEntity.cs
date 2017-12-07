@@ -980,6 +980,13 @@ namespace PaperMarioBattleSystem
         #region Equipment Methods
 
         /// <summary>
+        /// Gets the first item of a particular ItemType that the BattleEntity has.
+        /// </summary>
+        /// <param name="itemTypes">The ItemType enum value. If an item has any of these values, it will be returned.</param>
+        /// <returns></returns>
+        public abstract Item GetItemOfType(Item.ItemTypes itemTypes);
+
+        /// <summary>
         /// Gets the number of Badges of a particular BadgeType that the BattleEntity has equipped.
         /// </summary>
         /// <param name="badgeType">The BadgeType to check for.</param>

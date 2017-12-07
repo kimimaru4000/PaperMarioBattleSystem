@@ -46,7 +46,8 @@ namespace PaperMarioBattleSystem
             FPCost = fpCost;
             IsRootMenu = isRootMenu;
 
-            Item[] usableItems = Inventory.Instance.FindItems(Item.ItemTypes.Healing, Item.ItemTypes.Damage);
+            Item[] usableItems = Inventory.Instance.FindItems(Item.ItemCategories.Standard, 
+                Item.ItemTypes.Healing | Item.ItemTypes.Damage | Item.ItemTypes.Status | Item.ItemTypes.Revival);
             for (int i = 0; i < usableItems.Length; i++)
             {
                 //This cast fails if the Item doesn't derive from BattleItem

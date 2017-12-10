@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,8 @@ namespace PaperMarioBattleSystem
 
         public static bool DebugPaused { get; private set; } = false;
         public static bool AdvanceNextFrame { get; private set; } = false;
+
+        public static bool ShouldTakeScreenshot { get; private set; } = false;
 
         public static StringBuilder LogDump { get; private set; } = new StringBuilder();
 
@@ -161,6 +164,11 @@ namespace PaperMarioBattleSystem
                 else if (Input.GetKeyDown(Keys.L, DebugKeyboard))
                 {
                     ToggleLogs();
+                }
+                //Take screenshot
+                else if (Input.GetKeyDown(Keys.S, DebugKeyboard))
+                {
+                    ShouldTakeScreenshot = true;
                 }
             }
 
@@ -330,6 +338,61 @@ namespace PaperMarioBattleSystem
             {
                 entities[i].EntityProperties.AfflictStatus(status, true);
             }
+        }
+
+        /// <summary>
+        /// Takes a screenshot of the screen.
+        /// </summary>
+        public static void TakeScreenshot()
+        {
+            //Wrap the Texture2D in the using so it's guaranteed to get disposed
+            using (Texture2D screenshotTex = GetScreenshot())
+            {
+                //Open the file dialogue so you can name the file and place it wherever you want
+                System.Windows.Forms.SaveFileDialog dialogue = new System.Windows.Forms.SaveFileDialog();
+                dialogue.FileName = string.Empty;
+                dialogue.Filter = "PNG (*.png)|*.png";
+
+                if (dialogue.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    using (FileStream fstream = new FileStream(dialogue.FileName, FileMode.Create))
+                    {
+                        Vector2 size = SpriteRenderer.Instance.WindowSize;
+                        screenshotTex.SaveAsPng(fstream, (int)size.X, (int)size.Y);
+                    }
+                }
+            }
+
+            //Reset screenshot flag
+            ShouldTakeScreenshot = false;
+        }
+
+        /// <summary>
+        /// Gets what is currently rendered on the backbuffer and returns it in a Texture2D.
+        /// <para>IMPORTANT: Dispose the Texture2D when you're done with it.</para>
+        /// </summary>
+        /// <returns>A Texture2D of what's currently rendered on the screen.</returns>
+        private static Texture2D GetScreenshot()
+        {
+            GraphicsDevice graphicsDevice = SpriteRenderer.Instance.graphicsDeviceManager.GraphicsDevice;
+
+            int width = graphicsDevice.PresentationParameters.BackBufferWidth;
+            int height = graphicsDevice.PresentationParameters.BackBufferHeight;
+
+            //Present what's drawn
+            graphicsDevice.Present();
+
+            //Fill an array with the back buffer data that's the same size as the screen
+            int[] backbuffer = new int[width * height];
+
+            //NOTE: We need to update MonoGame to use this; uncomment this as soon as that happens
+            //graphicsDevice.GetBackBufferData(backbuffer);
+
+            //Create a new Texture2D and set the data
+            Texture2D screenshot = new Texture2D(graphicsDevice, width, height, false, graphicsDevice.PresentationParameters.BackBufferFormat);
+            screenshot.SetData(backbuffer);
+
+            return screenshot;
         }
 
         #region Debug Unit Tests

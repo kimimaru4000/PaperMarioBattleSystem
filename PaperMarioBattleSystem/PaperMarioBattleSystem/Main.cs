@@ -237,7 +237,7 @@ namespace PaperMarioBattleSystem
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             SpriteRenderer.Instance.BeginDrawing();
-            Debug.DebugDraw();
+            
         }
 
         /// <summary>
@@ -261,6 +261,12 @@ namespace PaperMarioBattleSystem
 
             MainDraw(gameTime);
 
+            //Take a screenshot if we should after drawing the main game screen
+            if (Debug.ShouldTakeScreenshot == true)
+            {
+                Debug.TakeScreenshot();
+            }
+
             PostDraw(gameTime);
         }
 
@@ -270,6 +276,7 @@ namespace PaperMarioBattleSystem
         /// <param name="gameTime">Provides a snapshot of timing values</param>
         private void PostDraw(GameTime gameTime)
         {
+            Debug.DebugDraw();
             SpriteRenderer.Instance.EndDrawing();
 
             base.Draw(gameTime);

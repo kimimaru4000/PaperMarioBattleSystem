@@ -33,6 +33,12 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        public delegate void OnWindowSizeChanged(Vector2 newWindowSize);
+        /// <summary>
+        /// An event invoked when the window size has changed.
+        /// </summary>
+        public event OnWindowSizeChanged WindowSizeChangedEvent = null;
+
         /// <summary>
         /// The SpriteBatch used for drawing non-UI elements
         /// </summary>
@@ -42,7 +48,7 @@ namespace PaperMarioBattleSystem
         /// The SpriteBatch used for drawing UI elements. UI is always drawn on top of non-UI elements
         /// </summary>
         private SpriteBatch uiBatch { get; set; } = null;
-        private GraphicsDeviceManager graphicsDeviceManager { get; set; } = null;
+        public GraphicsDeviceManager graphicsDeviceManager { get; private set; } = null;
 
         public Vector2 WindowSize => new Vector2(graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
         public Vector2 WindowCenter => WindowSize.HalveInt();
@@ -57,6 +63,8 @@ namespace PaperMarioBattleSystem
             spriteBatch.Dispose();
             uiBatch.Dispose();
             graphicsDeviceManager.Dispose();
+
+            WindowSizeChangedEvent = null;
 
             instance = null;
         }
@@ -82,6 +90,9 @@ namespace PaperMarioBattleSystem
             graphicsDeviceManager.PreferredBackBufferHeight = (int)newWindowSize.Y;
 
             graphicsDeviceManager.ApplyChanges();
+
+            //Invoke the window size changed event
+            WindowSizeChangedEvent?.Invoke(newWindowSize);
         }
 
         public void BeginDrawing()

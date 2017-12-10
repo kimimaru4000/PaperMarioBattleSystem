@@ -212,6 +212,7 @@
     <Compile Include="Classes\Collectibles\Badges\PrettyLuckyPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\QuickChangeBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ReturnPostageBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\RunawayPayBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SimplifierBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SlowGoBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SpikeShieldBadge.cs" />

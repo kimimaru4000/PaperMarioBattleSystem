@@ -143,7 +143,7 @@ namespace PaperMarioBattleSystem
             Texture2D battleGFX = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX");
 
             BigCursor = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
-            SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));//new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Debug/BoxOutline2"), null);
+            SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));//new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/DebugAssets/BoxOutline2"), null);
             ArrowIcon = new CroppedTexture2D(battleGFX, new Rectangle(5, 353, 50, 61));
             BarEdge = new CroppedTexture2D(battleGFX, new Rectangle(514, 245, 7, 28));
             Bar = new CroppedTexture2D(battleGFX, new Rectangle(530, 245, 1, 28));

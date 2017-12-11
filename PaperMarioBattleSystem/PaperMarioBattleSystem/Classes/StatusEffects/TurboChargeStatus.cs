@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
         {
             StatusType = Enumerations.StatusTypes.TurboCharge;
 
-            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(461, 423, 29, 29));
 
             //ArrowRect = new Rectangle(506, 422, 30, 30);

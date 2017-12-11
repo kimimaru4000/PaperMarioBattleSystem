@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
             StatusType = Enumerations.StatusTypes.DEFUp;
             Alignment = StatusAlignments.Positive;
 
-            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(604, 156, 38, 46));
 
             DefenseValue = defenseValue;

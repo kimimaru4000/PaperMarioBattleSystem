@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
         {
             MaxBarValue = maxBarValue;
 
-            BarImage = AssetManager.Instance.LoadAsset<Texture2D>("UI/Box");
+            BarImage = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
         }
 
         public override void StartInput(params object[] values)

@@ -39,7 +39,7 @@ namespace PaperMarioBattleSystem
             MaxLights = maxLights;
             TimeBetweenLights = timeBetweenLights;
 
-            CircleImage = AssetManager.Instance.LoadAsset<Texture2D>($"UI/Circle");
+            CircleImage = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Circle.png");
         }
 
         public void FillNextLight()

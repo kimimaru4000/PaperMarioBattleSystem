@@ -25,14 +25,14 @@ namespace PaperMarioBattleSystem
             //-Feeling Fine and Feeling Fine P prevent it from being afflicted (TTYD) or cause it to wear off early (PM)
             Alignment = StatusAlignments.Negative;
 
-            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(658, 106, 38, 46));
 
             Duration = duration;
 
             AfflictedMessage = "Electrified! Enemies that\nmake contact will get hurt!";
 
-            SparkIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            SparkIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(458, 103, 26, 30));
         }
 

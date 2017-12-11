@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
             StatusType = Enumerations.StatusTypes.Fast;
             Alignment = StatusAlignments.Positive;
 
-            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(555, 205, 38, 46));
 
             Duration = duration;

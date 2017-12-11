@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
                 sheetPath += ContentGlobals.WarioPaletteExtension;
             }
 
-            EntityEquipped.AnimManager.SetSpriteSheet(AssetManager.Instance.LoadAsset<Texture2D>(sheetPath), ObjAnimManager.SetSpriteSheetOptions.ReplaceSame);
+            EntityEquipped.AnimManager.SetSpriteSheet(AssetManager.Instance.LoadRawTexture2D(sheetPath + ".png"), ObjAnimManager.SetSpriteSheetOptions.ReplaceSame);
         }
 
         protected override void OnUnequip()
@@ -71,7 +71,7 @@ namespace PaperMarioBattleSystem
                 sheetPath += ContentGlobals.LuigiPaletteExtension;
             }
 
-            EntityEquipped.AnimManager.SetSpriteSheet(AssetManager.Instance.LoadAsset<Texture2D>(sheetPath), ObjAnimManager.SetSpriteSheetOptions.ReplaceSame);
+            EntityEquipped.AnimManager.SetSpriteSheet(AssetManager.Instance.LoadRawTexture2D(sheetPath + ".png"), ObjAnimManager.SetSpriteSheetOptions.ReplaceSame);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -54,6 +55,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public SpriteFont TTYDFont = null;
 
+        /// <summary>
+        /// Holds loaded raw Texture2Ds. These are disposed on cleanup.
+        /// </summary>
+        private Dictionary<string, Texture2D> RawTextures = null;
+
         private AssetManager()
         {
             
@@ -64,6 +70,8 @@ namespace PaperMarioBattleSystem
             Content = content;
             Content.RootDirectory = ContentGlobals.ContentRoot;
 
+            RawTextures = new Dictionary<string, Texture2D>();
+
             Font = LoadAsset<SpriteFont>("Fonts/Font");
             PMFont = LoadAsset<SpriteFont>("Fonts/PM Font");
             TTYDFont = LoadAsset<SpriteFont>("Fonts/Real TTYD Font");
@@ -71,10 +79,63 @@ namespace PaperMarioBattleSystem
 
         public void CleanUp()
         {
+            //Unload all content
             Content.Unload();
             Content = null;
 
+            //Dispose each raw texture
+            foreach (KeyValuePair<string, Texture2D> texPair in RawTextures)
+            {
+                texPair.Value.Dispose();
+            }
+
+            //Clear the dictionary
+            RawTextures.Clear();
+
             instance = null;
+        }
+
+        /// <summary>
+        /// Loads a raw Texture2D. They're cached for quick fetching.
+        /// </summary>
+        /// <param name="texturePath">The path to load the Texture2D from.
+        /// The content root directory is appended to the start of this.</param>
+        /// <returns>A Texture2D found at <paramref name="texturePath"/>, otherwise null.</returns>
+        public Texture2D LoadRawTexture2D(string texturePath)
+        {
+            Texture2D tex = null;
+
+            //Insert content at the start
+            string realTexPath = texturePath.Insert(0, Content.RootDirectory + "/");
+
+            //Return the cached texture if we have it
+            if (RawTextures.ContainsKey(realTexPath) == true)
+            {
+                tex = RawTextures[realTexPath];
+            }
+            else
+            {
+                //Load the raw texture
+                try
+                {
+                    using (FileStream fileStream = new FileStream(realTexPath, FileMode.Open))
+                    {
+                        tex = Texture2D.FromStream(SpriteRenderer.Instance.graphicsDeviceManager.GraphicsDevice, fileStream);
+
+                        //Cache the texture for faster loading next time
+                        if (tex != null)
+                        {
+                            RawTextures.Add(realTexPath, tex);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Error loading raw Texture2D {realTexPath}: {e.Message}");
+                }
+            }
+
+            return tex;
         }
 
         /// <summary>

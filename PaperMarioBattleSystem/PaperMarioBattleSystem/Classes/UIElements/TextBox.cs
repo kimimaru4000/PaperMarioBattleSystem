@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
 
         protected TextBox()
         {
-            Image = AssetManager.Instance.LoadAsset<Texture2D>("UI/Box");
+            Image = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
         }
 
         public TextBox(Vector2 position, Vector2 size, string text) : this()

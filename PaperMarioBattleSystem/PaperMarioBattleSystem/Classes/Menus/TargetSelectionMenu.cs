@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
 
         public TargetSelectionMenu() : base(MenuTypes.Horizontal)
         {
-            Texture2D cursorSheet = AssetManager.Instance.LoadAsset<Texture2D>("UI/Cursor");
+            Texture2D cursorSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Cursor.png");
 
             Cursor = new ReverseAnimation(cursorSheet, AnimationGlobals.InfiniteLoop, true,
                 new Animation.Frame(new Rectangle(4, 5, 14, 20), 110d),

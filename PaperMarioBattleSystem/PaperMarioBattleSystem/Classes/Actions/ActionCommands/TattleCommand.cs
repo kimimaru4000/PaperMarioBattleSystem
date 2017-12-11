@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
 
         public TattleCommand(IActionCommandHandler commandHandler, float smallCursorSpeed) : base(commandHandler)
         {
-            Texture2D battleGFX = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX");
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
             
             BigCursor = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
             SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));
@@ -121,7 +121,7 @@ namespace PaperMarioBattleSystem
             DrawSmallCursor(rotation);
 
             //Show success rectangle (comment out if not debugging)
-            //Texture2D DebugBoxTex = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
+            //Texture2D DebugBoxTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
             //SpriteRenderer.Instance.Draw(DebugBoxTex, new Vector2(SuccessRect.X, SuccessRect.Y), null, Color.Red, 0f, Vector2.Zero, 
             //    new Vector2(SuccessRect.Width, SuccessRect.Height), false, false, .21f, true);
         }

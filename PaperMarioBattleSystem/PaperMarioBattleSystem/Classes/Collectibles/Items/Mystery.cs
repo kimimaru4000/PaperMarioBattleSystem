@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
             Name = "Mystery";
             Description = "Who knows what it does... Take a\nchance to find out!";
 
-            Texture2D icon = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Items");
+            Texture2D icon = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Items.png");
             Icon = new CroppedTexture2D(icon, new Rectangle(639, 83, 25, 25));
 
             //Classify Mystery as any type of battle item so it shows up in the item menu

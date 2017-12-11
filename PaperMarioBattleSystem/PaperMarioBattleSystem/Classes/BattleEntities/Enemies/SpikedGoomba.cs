@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
 
             EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.TopSpiked);
 
-            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/SpikedGoomba");
+            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/SpikedGoomba.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
             AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(34, 153, 28, 39), 1000d)));

@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
             StatusType = Enumerations.StatusTypes.HPRegen;
             Alignment = StatusAlignments.Positive;
 
-            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(658, 106, 38, 46));
 
             AmountHealed = amountHealed;
@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
 
             AfflictedMessage = "HP will briefly recover!";
 
-            HPIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            HPIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(503, 60, 35, 24));
         }
 

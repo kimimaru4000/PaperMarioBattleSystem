@@ -17,6 +17,18 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class Debug
     {
+        /// <summary>
+        /// The types of Debug logs.
+        /// </summary>
+        public enum DebugLogTypes
+        {
+            None = 0,
+            Information = 1 << 0,
+            Warning = 1 << 1,
+            Error = 1 << 2,
+            Assert = 1 << 3
+        }
+
         public static bool DebugEnabled { get; private set; } = false;
         public static bool LogsEnabled { get; private set; } = false;
 
@@ -24,6 +36,11 @@ namespace PaperMarioBattleSystem
         public static bool AdvanceNextFrame { get; private set; } = false;
 
         public static bool ShouldTakeScreenshot { get; private set; } = false;
+
+        /// <summary>
+        /// The level of logs to output. By default, it logs all types of logs.
+        /// </summary>
+        public static DebugLogTypes LogLevels = DebugLogTypes.Information | DebugLogTypes.Warning | DebugLogTypes.Error | DebugLogTypes.Assert;
 
         public static StringBuilder LogDump { get; private set; } = new StringBuilder();
 
@@ -95,25 +112,25 @@ namespace PaperMarioBattleSystem
 
         public static void Log(object value)
         {
-            if (LogsEnabled == false) return;
+            if (LogsEnabled == false || DebugLogTypesHasFlag(LogLevels, DebugLogTypes.Information) == false) return;
             DebugWriteLine($"Information: {GetStackInfo()} {value}");
         }
 
         public static void LogWarning(object value)
         {
-            if (LogsEnabled == false) return;
+            if (LogsEnabled == false || DebugLogTypesHasFlag(LogLevels, DebugLogTypes.Warning) == false) return;
             DebugWriteLine($"Warning: {GetStackInfo()} {value}");
         }
 
         public static void LogError(object value)
         {
-            if (LogsEnabled == false) return;
+            if (LogsEnabled == false || DebugLogTypesHasFlag(LogLevels, DebugLogTypes.Error) == false) return;
             DebugWriteLine($"Error: {GetStackInfo()} {value}");
         }
 
         private static void LogAssert()
         {
-            if (LogsEnabled == false) return;
+            if (LogsEnabled == false || DebugLogTypesHasFlag(LogLevels, DebugLogTypes.Assert) == false) return;
             string stackInfo = GetStackInfo(3);
             stackInfo = stackInfo.Remove(stackInfo.Length - 1);
 
@@ -395,6 +412,19 @@ namespace PaperMarioBattleSystem
             return screenshot;
         }
 
+        /// <summary>
+        /// Tells whether a set of DebugLogTypes has any of the flags in another DebugLogTypes set.
+        /// </summary>
+        /// <param name="debugLogTypes">The DebugLogTypes value.</param>
+        /// <param name="debugLogTypesFlags">The flags to test.</param>
+        /// <returns>true if any of the flags in debugLogTypes are in debugLogTypesFlags, otherwise false.</returns>
+        public static bool DebugLogTypesHasFlag(Debug.DebugLogTypes debugLogTypes, Debug.DebugLogTypes debugLogTypesFlags)
+        {
+            Debug.DebugLogTypes flags = (debugLogTypes & debugLogTypesFlags);
+
+            return (flags != 0);
+        }
+
         #region Debug Unit Tests
 
         private static void DebugUnitTests()
@@ -422,7 +452,7 @@ namespace PaperMarioBattleSystem
         {
             if (DebugEnabled == false) return;
 
-            Texture2D box = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
+            Texture2D box = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
 
             //Get rotation with the angle between the start and end vectors
             float lineRotation = (float)UtilityGlobals.TangentAngle(start, end);
@@ -445,7 +475,7 @@ namespace PaperMarioBattleSystem
         {
             if (DebugEnabled == false) return;
 
-            Texture2D box = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
+            Texture2D box = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
 
             SpriteRenderer.Instance.Draw(box, new Vector2(rect.X, rect.Y), null, color, 0f, Vector2.Zero, new Vector2(rect.Width, rect.Height), false, false, layer, uiBatch);
         }
@@ -470,7 +500,7 @@ namespace PaperMarioBattleSystem
                 new Rectangle(rect.X, rect.Bottom - thickness, rect.Width, thickness)
             };
 
-            Texture2D box = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
+            Texture2D box = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
 
             for (int i = 0; i < rects.Length; i++)
             {

@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
 
         public BattleHUD()
         {
-            HUDTex = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleHUD");
+            HUDTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleHUD.png");
         }
 
         public void Update()

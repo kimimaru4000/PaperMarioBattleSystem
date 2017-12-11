@@ -62,12 +62,12 @@ namespace PaperMarioBattleSystem
 
         protected PlayerBattleMenu(PlayerTypes playerType) : base(MenuTypes.Horizontal)
         {
-            SwitchIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            SwitchIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(651, 13, 78, 30));
 
             PlayerType = playerType;
             
-            ActionButtons.Add(new ActionButton("Tactics", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
+            ActionButtons.Add(new ActionButton("Tactics", AssetManager.Instance.LoadRawTexture2D("UI/Battle/JumpButton.png"),
                 MoveCategories.Tactics, new TacticsSubMenu()));
 
             ActionSubMenu itemMenu = null;
@@ -75,7 +75,7 @@ namespace PaperMarioBattleSystem
                 itemMenu = new ItemSubMenu(1, 0);
             else itemMenu = new ItemDipSubMenu();
 
-            ActionButtons.Add(new ActionButton("Items", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
+            ActionButtons.Add(new ActionButton("Items", AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/JumpButton.png"),
                 MoveCategories.Item, itemMenu));
         }
 

@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
             //If the rock is big, make it deal more damage than the small one
             UsableValue = (BigRock == true) ? BigRockAdditionalDamage : SmallRockAdditionalDamage;
 
-            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Gulpit");
+            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Gulpit.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
             //The animations differ between the different sizes of rocks

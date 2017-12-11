@@ -64,7 +64,7 @@ namespace PaperMarioBattleSystem
             EntityProperties.AddStatusProperty(StatusTypes.Blown, new StatusPropertyHolder(90, 0));
             EntityProperties.AddStatusProperty(StatusTypes.KO, new StatusPropertyHolder(95, 0));
 
-            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Yux");
+            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Yux.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
             AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet,

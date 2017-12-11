@@ -130,7 +130,7 @@ namespace PaperMarioBattleSystem
             StarPos = startPos;
             DrawTime = drawTime;
 
-            LineTexture = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
+            LineTexture = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
         }
 
         public override void StartInput(params object[] values)

@@ -301,6 +301,12 @@ namespace PaperMarioBattleSystem
             return (flags != 0);
         }
 
+        /// <summary>
+        /// Tells whether a set of ItemTypes has any of the flags in another ItemTypes set.
+        /// </summary>
+        /// <param name="itemTypes">The ItemTypes value.</param>
+        /// <param name="itemTypesFlags">The flags to test.</param>
+        /// <returns>true if any of the flags in itemTypes are in itemTypesFlags, otherwise false.</returns>
         public static bool ItemTypesHasFlag(Item.ItemTypes itemTypes, Item.ItemTypes itemTypesFlags)
         {
             Item.ItemTypes flags = (itemTypes & itemTypesFlags);

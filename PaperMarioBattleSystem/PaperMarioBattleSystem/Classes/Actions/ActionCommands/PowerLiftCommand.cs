@@ -140,10 +140,10 @@ namespace PaperMarioBattleSystem
 
         public PowerLiftCommand(IActionCommandHandler commandHandler, double commandTime) : base(commandHandler)
         {
-            Texture2D battleGFX = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX");
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
 
             BigCursor = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
-            SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));//new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/DebugAssets/BoxOutline2"), null);
+            SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));//new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/DebugAssets/BoxOutline2.png"), null);
             ArrowIcon = new CroppedTexture2D(battleGFX, new Rectangle(5, 353, 50, 61));
             BarEdge = new CroppedTexture2D(battleGFX, new Rectangle(514, 245, 7, 28));
             Bar = new CroppedTexture2D(battleGFX, new Rectangle(530, 245, 1, 28));

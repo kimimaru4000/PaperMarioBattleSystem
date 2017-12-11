@@ -83,7 +83,7 @@ namespace PaperMarioBattleSystem
             SpeedScale = speedScale;
             LightDistribution = lightDistribution;
 
-            CircleImage = AssetManager.Instance.LoadAsset<Texture2D>($"UI/Circle");
+            CircleImage = AssetManager.Instance.LoadRawTexture2D($"UI/Circle.png");
 
             //Space out the lights based on their LightDistribution
             if (LightDistribution == LightDistributions.Even)

@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
 
             ChangeHeightState(Enumerations.HeightStates.Airborne);
 
-            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Paragoomba");
+            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Paragoomba.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
             AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.WingedIdleName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
@@ -107,7 +107,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Add VFX for the wings disappearing
-            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Enemies/Paragoomba");
+            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Paragoomba.png");
             CroppedTexture2D wingSprite = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
 
             //Put the wings in the same spot as they were in the Paragoomba's last animation

@@ -682,7 +682,7 @@ namespace PaperMarioBattleSystem
         //NOTE: Use for debugging only
         private void DrawGridBounds()
         {
-            Texture2D tex = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Box");
+            Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
             Rectangle rect = GridBounds;
 
             SpriteRenderer.Instance.Draw(tex, new Vector2(rect.X, rect.Y), null, Color.Blue, 0f,Vector2.Zero, new Vector2(rect.Width, rect.Height), false, false, .3f, true);

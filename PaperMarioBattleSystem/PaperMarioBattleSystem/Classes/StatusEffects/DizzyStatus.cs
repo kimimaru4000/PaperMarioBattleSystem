@@ -22,14 +22,14 @@ namespace PaperMarioBattleSystem
             StatusType = Enumerations.StatusTypes.Dizzy;
             Alignment = StatusAlignments.Negative;
 
-            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(658, 106, 38, 46));
 
             Duration = duration;
 
             AfflictedMessage = "Dizzy! Attacks might miss!";
 
-            DizzyIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            DizzyIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(404, 102, 32, 34));
         }
 

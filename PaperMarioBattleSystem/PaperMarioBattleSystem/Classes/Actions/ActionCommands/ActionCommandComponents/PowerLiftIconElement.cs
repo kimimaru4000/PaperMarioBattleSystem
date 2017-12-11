@@ -69,7 +69,7 @@ namespace PaperMarioBattleSystem
 
         private void Initialize()
         {
-            Texture2D battleGFX = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX");
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
 
             switch (PowerliftIcon)
             {

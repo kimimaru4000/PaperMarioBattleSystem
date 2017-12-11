@@ -16,11 +16,13 @@ namespace PaperMarioBattleSystem
     {
         public MarioBattleMenu() : base(Enumerations.PlayerTypes.Mario)
         {
-            ActionButtons.Add(new ActionButton("Jump", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
+            Texture2D tex = AssetManager.Instance.LoadRawTexture2D("UI/Battle/JumpButton.png");
+
+            ActionButtons.Add(new ActionButton("Jump", tex,
                 Enumerations.MoveCategories.Jump, new JumpSubMenu()));
-            ActionButtons.Add(new ActionButton("Hammer", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
+            ActionButtons.Add(new ActionButton("Hammer", tex,
                 Enumerations.MoveCategories.Hammer, new HammerSubMenu()));
-            ActionButtons.Add(new ActionButton("Special", AssetManager.Instance.LoadAsset<Texture2D>("UI/Battle/JumpButton"),
+            ActionButtons.Add(new ActionButton("Special", tex,
                 Enumerations.MoveCategories.Special, new SpecialSubMenu()));
 
             Initialize(2);

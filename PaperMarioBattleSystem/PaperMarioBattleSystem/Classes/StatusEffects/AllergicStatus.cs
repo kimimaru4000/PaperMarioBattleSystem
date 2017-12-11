@@ -22,14 +22,14 @@ namespace PaperMarioBattleSystem
             StatusType = Enumerations.StatusTypes.Allergic;
             Alignment = StatusAlignments.Neutral;
 
-            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(658, 106, 38, 46));
 
             Duration = duration;
 
             AfflictedMessage = "Status hasn't changed!";
 
-            AllergicIcon = new CroppedTexture2D(AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.UIRoot}/Battle/BattleGFX"),
+            AllergicIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
                 new Rectangle(350, 355, 25, 25));
         }
 

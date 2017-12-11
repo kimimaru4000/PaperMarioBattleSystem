@@ -46,7 +46,7 @@ namespace PaperMarioBattleSystem
             SuccessRange = successRange;
             SpeedScale = speedScale;
 
-            CircleImage = AssetManager.Instance.LoadAsset<Texture2D>($"UI/Circle");
+            CircleImage = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Circle.png");
         }
 
         public override void StartInput(params object[] values)

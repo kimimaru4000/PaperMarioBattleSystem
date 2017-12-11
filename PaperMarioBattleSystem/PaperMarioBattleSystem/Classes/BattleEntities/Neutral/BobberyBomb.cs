@@ -45,7 +45,7 @@ namespace PaperMarioBattleSystem
             //2 frame spark change for normal and faster
             //Bomb starts brown, turns red 1 frame after fully stopping, then starts the spark
             //Spark order is red, orange, grey. It cycles back to red after grey
-            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Neutral/BobberyBomb");
+            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Neutral/BobberyBomb.png");
 
             double bombFrameRate = (1d / 15d) * 1000d;
             double sparkFrameRate = (1d / 30d) * 1000d;

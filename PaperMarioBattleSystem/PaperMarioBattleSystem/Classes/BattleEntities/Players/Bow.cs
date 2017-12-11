@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
 
             ChangeHeightState(Enumerations.HeightStates.Airborne);
 
-            Texture2D spriteSheet = AssetManager.Instance.LoadAsset<Texture2D>($"{ContentGlobals.SpriteRoot}/Characters/Bow");
+            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Characters/Bow.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
             AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(null, new Animation.Frame(new Rectangle(151, 4, 39, 33), 1000d)));

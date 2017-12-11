@@ -36,11 +36,11 @@ namespace PaperMarioBattleSystem
         protected override void Initialize()
         {
             graphics.PreferMultiSampling = true;
-            graphics.PreferredBackBufferWidth = RenderingGlobals.WindowWidth;
-            graphics.PreferredBackBufferHeight = RenderingGlobals.WindowHeight;
-
+            
             AssetManager.Instance.Initialize(Content);
             SpriteRenderer.Instance.Initialize(graphics);
+
+            SpriteRenderer.Instance.AdjustWindowSize(new Vector2(RenderingGlobals.WindowWidth, RenderingGlobals.WindowHeight));
 
             //FOR TESTING
             InitializeInventory();

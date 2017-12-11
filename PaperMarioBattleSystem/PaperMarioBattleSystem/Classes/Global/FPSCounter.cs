@@ -25,7 +25,16 @@ namespace PaperMarioBattleSystem
             if (Time.TotalMilliseconds >= PrevUpdateVal)
             {
                 PrevUpdateVal = (float)Time.TotalMilliseconds + UpdateInterval;
-                FPSValue = Math.Round(1000d / Time.ElapsedMilliseconds, 2);
+
+                //Handle division by 0
+                if (Time.ElapsedMilliseconds == 0d)
+                {
+                    FPSValue = 0d;
+                }
+                else
+                {
+                    FPSValue = Math.Round(1000d / Time.ElapsedMilliseconds, 2);
+                }
             }
         }
 

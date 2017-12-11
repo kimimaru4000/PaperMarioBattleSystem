@@ -13,17 +13,13 @@ An open source recreation of the turn-based battle system from the first two Pap
 Note that visual features (smoothness of movement, UI, etc.) are not being fully developed at the moment. The current focus is implementing the core systems found in the Paper Mario games in a flexible and extensible manner.
 
 ## Getting Started
-You will need MonoGame 3.5.1 and Visual Studio 2017, but earlier versions of Visual Studio should work just fine.
-
-There are plans to upgrade to newer versions of MonoGame eventually.
+You will need MonoGame 3.7 and Visual Studio 2017, but earlier versions of Visual Studio should work just fine.
 
 ## Contributing
 Feel free to submit a pull request with details on your changes. Make sure your code has been tested and is well-commented.
 
 ## Author(s)
 * **Thomas Deeb (aka Kimimaru)**
-
-Contact: thomasdeeb1@gmail.com
 
 ## License
 This project is licensed under the MIT License - see the LICENSE.md file for details.

@@ -401,9 +401,7 @@ namespace PaperMarioBattleSystem
 
             //Fill an array with the back buffer data that's the same size as the screen
             int[] backbuffer = new int[width * height];
-
-            //NOTE: We need to update MonoGame to use this; uncomment this as soon as that happens
-            //graphicsDevice.GetBackBufferData(backbuffer);
+            graphicsDevice.GetBackBufferData(backbuffer);
 
             //Create a new Texture2D and set the data
             Texture2D screenshot = new Texture2D(graphicsDevice, width, height, false, graphicsDevice.PresentationParameters.BackBufferFormat);

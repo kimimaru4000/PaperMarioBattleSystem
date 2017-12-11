@@ -9,8 +9,8 @@
     <ProjectGuid>{16FA8C8B-52AA-4FEA-A396-6B6D2F799B14}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Game1</RootNamespace>
-    <AssemblyName>Game1</AssemblyName>
+    <RootNamespace>PaperMarioBattleSystem</RootNamespace>
+    <AssemblyName>PaperMarioBattleSystem</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>DesktopGL</MonoGamePlatform>
     <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
@@ -181,6 +181,7 @@
     <Compile Include="Classes\Collectibles\Badges\HPPlusPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\IcePowerBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\IceSmashBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\ISpyBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LastStandBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LEmblemBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LuckyDayBadge.cs" />
@@ -469,7 +470,6 @@
     <Content Include="Content\UI\DebugAssets\BoxOutline2.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <MonoGameContentReference Include="Content\Content.mgcb" />
     <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
       <Link>x86\SDL2.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -536,7 +536,7 @@
     <Content Include="Content\Fonts\TTYD Font.xnb">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Content\PMContent.mgcb" />
+    <MonoGameContentReference Include="Content\PMContent.mgcb" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Audio\Music\" />

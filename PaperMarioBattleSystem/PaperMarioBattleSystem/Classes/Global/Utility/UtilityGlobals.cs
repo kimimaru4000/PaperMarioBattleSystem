@@ -37,6 +37,85 @@ namespace PaperMarioBattleSystem
         public static int LerpPrecise(int value1, int value2, float amount) => (int)(((1 - amount) * value1) + (value2 * amount));
 
         /// <summary>
+        /// Performs a Hermite spline interpolation.
+        /// </summary>
+        /// <remarks>This is a more verbose but readable version of MonoGame's Hermite.
+        /// It returns a double rather than a float.</remarks>
+        /// <param name="value1">The startpoint of the curve.</param>
+        /// <param name="tangent1">Initial tangent; the direction and speed to how the curve leaves the startpoint.</param>
+        /// <param name="value2">The endpoint of the curve.</param>
+        /// <param name="tangent2">End tangent; the direction and speed to how the curve leaves the endpoint.</param>
+        /// <param name="amount">Weighting factor; between 0 and 1.</param>
+        /// <returns>A double representing the result of the Hermite spline interpolation.</returns>
+        public static double Hermite(float value1, float tangent1, float value2, float tangent2, float amount)
+        {
+            /*Hermite basis functions:
+             * s = amount (or time)
+             * h1 = 2s^3 - 3s^2 + 1
+             * h2 = -2s^3 + 3s^2
+             * h3 = s^3 - 2s^2 + s
+             * h4 = s^3 - s^2
+             * 
+             * The values are multiplied by the basis functions and added together like so:
+             * result = (h1 * val1) + (h2 * val2) + (h3 * tan1) + (h4 * tan2);
+            */
+
+            double val1 = value1;
+            double val2 = value2;
+            double tan1 = tangent1;
+            double tan2 = tangent2;
+            double amt = amount;
+            double result = 0d;
+
+            //Define cube and squares
+            double amtCubed = amt * amt * amt;
+            double amtSquared = amt * amt;
+
+            //If 0, return the initial value
+            if (amount == 0f)
+            {
+                result = value1;
+            }
+            //If 1, return the 
+            else if (amount == 1f)
+            {
+                result = value2;
+            }
+            else
+            {
+                //Define hermite functions
+                //double h1 = (2 * amtCubed) - (3 * amtSquared) + 1;
+                //double h2 = (-2 * amtCubed) + (3 * amtSquared);
+                //double h3 = amtCubed - (2 * amtSquared) + amt;
+                //double h4 = amtCubed - amtSquared;
+
+                //Multiply the results
+                //result = (h1 * val1) + (h2 * val2) + (h3 * tan1) + (h4 * tan2);
+
+                //Condensed
+                result =
+                    (((2 * val1) - (2 * val2) + tan2 + tan1) * amtCubed) +
+                    (((3 * val2) - (3 * val1) - (2 * tan1) - tan2) * amtSquared) +
+                    (tan1 * amt) + val1;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Interpolates a value by weighted average.
+        /// The closer the value gets to the target, the slower it moves.
+        /// </summary>
+        /// <param name="curVal">The current value.</param>
+        /// <param name="targetVal">The target value.</param>
+        /// <param name="slowdownFactor">The slowdown factor. The higher this is, the slower <paramref name="curVal"/> will approach <paramref name="targetVal"/>.</param>
+        /// <returns>A double representing the weighted average interpolation.</returns>
+        public static double WeightedAverageInterpolation(double curVal, double targetVal, double slowdownFactor)
+        {
+            return ((curVal * (slowdownFactor - 1)) + targetVal) / slowdownFactor;
+        }
+
+        /// <summary>
         /// Swaps two references of the same Type.
         /// </summary>
         /// <typeparam name="T">The Type of the objects to swap.</typeparam>
@@ -161,12 +240,6 @@ namespace PaperMarioBattleSystem
             return (distance <= radiusSquared);
         }
 
-        //NOTE: (Leaving this here for now)
-        //TTYD checks rand(100) < enemy susceptibility for a given value, such as chance of being inflicted with Dizzy
-        //Clock Out and Showstopper are a bit different:
-        //Clock Out has a 1x multiplier if the bar is filled at all and a 1.27x multiplier if the bar is full
-        //Showstopper has a .5x multiplier that's increased by .1x for each successful button set, totaling a 1x multiplier
-        //These multipliers are multiplied by the random value to increase or decrease the chances of the condition evaluating to true
         /// <summary>
         /// Tests a random condition with two values.
         /// This is commonly used when calculating a total percentage of something happening.

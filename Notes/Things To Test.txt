@@ -243,3 +243,10 @@ Results:
 
 1. No.
 
+Shell Shield and Status Moves
+-----------------------------
+How does Shell Shield work against moves that inflict Statuses? Also moves that directly inflict Statuses, like Beldam's magic.
+
+Results: 
+
+

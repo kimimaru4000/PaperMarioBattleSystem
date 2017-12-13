@@ -150,3 +150,6 @@ Crystal Bits
 -Up & Away (not possible normally, since beating the Crystal King gives you this move)
 -Air Lift
 
+X-Nauts (the ones with Lord Crump in Chapter 5; aka X-Naut Platoon
+------------------------------------------------------------------
+-Can hold Fire Flowers

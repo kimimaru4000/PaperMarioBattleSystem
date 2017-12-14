@@ -37,7 +37,7 @@ In this case, the movement toward the enemy in the X is linear, but in the Y isn
 
 It might be best to split the movement into two parts: going up, then going down.
 
-Research the various spline interpolation equations, add them as utilities, and decide on might be the best.
+Research the various spline interpolation equations, add them as utilities, and decide on which might be the best for Jump.
 
 Action Commands
 ---------------

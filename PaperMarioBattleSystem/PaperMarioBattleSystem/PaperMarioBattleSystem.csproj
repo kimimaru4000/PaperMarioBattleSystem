@@ -238,6 +238,7 @@
     <Compile Include="Classes\Global\TattleDatabase.cs" />
     <Compile Include="Classes\Global\Time.cs" />
     <Compile Include="Classes\Global\UnitTests.cs" />
+    <Compile Include="Classes\Global\Utility\Interpolation.cs" />
     <Compile Include="Classes\Global\Utility\Line.cs" />
     <Compile Include="Classes\Global\Utility\UtilityGlobals.cs" />
     <Compile Include="Classes\Interfaces\ICleanup.cs" />

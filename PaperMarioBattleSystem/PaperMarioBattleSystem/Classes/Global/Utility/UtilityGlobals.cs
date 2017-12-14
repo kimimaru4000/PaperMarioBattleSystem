@@ -112,6 +112,12 @@ namespace PaperMarioBattleSystem
         /// <returns>A double representing the weighted average interpolation.</returns>
         public static double WeightedAverageInterpolation(double curVal, double targetVal, double slowdownFactor)
         {
+            //Avoid division by 0
+            if (slowdownFactor == 0)
+            {
+                return targetVal;
+            }
+
             return ((curVal * (slowdownFactor - 1)) + targetVal) / slowdownFactor;
         }
 

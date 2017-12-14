@@ -153,3 +153,9 @@ Crystal Bits
 X-Nauts (the ones with Lord Crump in Chapter 5; aka X-Naut Platoon
 ------------------------------------------------------------------
 -Can hold Fire Flowers
+
+Dark Puff
+---------
+-When charged with Electricity, contact is a Failure instead of a Partial Success. Look into this
+
+

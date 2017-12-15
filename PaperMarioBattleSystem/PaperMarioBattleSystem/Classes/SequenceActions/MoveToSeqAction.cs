@@ -28,14 +28,28 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected float ElapsedTime = 0f;
 
-        public MoveToSeqAction(Vector2 destination, double duration) : base(duration)
+        protected Interpolation.InterpolationTypes XInterpolation = Interpolation.InterpolationTypes.Linear;
+
+        protected Interpolation.InterpolationTypes YInterpolation = Interpolation.InterpolationTypes.Linear;
+
+        public MoveToSeqAction(Vector2 destination, double duration,
+            Interpolation.InterpolationTypes xInterpolation = Interpolation.InterpolationTypes.Linear,
+            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear) : base(duration)
         {
             MoveEnd = destination;
+
+            XInterpolation = xInterpolation;
+            YInterpolation = yInterpolation;
         }
 
-        public MoveToSeqAction(BattleEntity entity, Vector2 destination, double duration) : base(entity, duration)
+        public MoveToSeqAction(BattleEntity entity, Vector2 destination, double duration,
+            Interpolation.InterpolationTypes xInterpolation = Interpolation.InterpolationTypes.Linear,
+            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear) : base(entity, duration)
         {
             MoveEnd = destination;
+
+            XInterpolation = xInterpolation;
+            YInterpolation = yInterpolation;
         }
 
         protected MoveToSeqAction(double duration) : base(duration)
@@ -69,8 +83,8 @@ namespace PaperMarioBattleSystem
             //Get current time
             ElapsedTime += (float)Time.ElapsedMilliseconds;
 
-            //Lerp to get the position and scale by the total duration
-            Entity.Position = Vector2.Lerp(MoveStart, MoveEnd, ElapsedTime / (float)Duration);
+            //Interpolate to get the position and scale by the total duration
+            Entity.Position = Interpolation.Interpolate(MoveStart, MoveEnd, ElapsedTime / (float)Duration, XInterpolation, YInterpolation);
 
             //End after the designated amount of time has passed
             if (ElapsedTime >= Duration)

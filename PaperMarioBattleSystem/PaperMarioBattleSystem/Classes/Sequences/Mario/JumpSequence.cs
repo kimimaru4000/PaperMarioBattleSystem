@@ -14,11 +14,13 @@ namespace PaperMarioBattleSystem
     public class JumpSequence : Sequence
     {
         public float WalkDuration = 1000f;
-        public float JumpDuration = 1000f;
+        public float JumpDuration = 800f;
         public float JumpHeight = 100f;
 
         public virtual int DamageDealt => BaseDamage;
         public virtual BattleEntity CurTarget => EntitiesAffected[0];
+
+        protected float XDiffOverTwo => (CurTarget.Position.X - User.Position.X) / 2f;
 
         public JumpSequence(MoveAction moveAction) : base(moveAction)
         {
@@ -46,8 +48,10 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    Vector2 frontPos = BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontmostBattleEntity(CurTarget.EntityType, null), User.EntityType != EntityTypes.Enemy);
+
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType != Enumerations.EntityTypes.Enemy), WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(frontPos, WalkDuration);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -61,12 +65,16 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    Vector2 posTo = User.Position + new Vector2(XDiffOverTwo, -JumpHeight);
+
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration);
+                    CurSequenceAction = new MoveToSeqAction(posTo, JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 1:
+                    Vector2 posTo2 = User.Position + new Vector2(XDiffOverTwo, JumpHeight);
+
                     StartActionCommandInput();
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration);
+                    CurSequenceAction = new MoveToSeqAction(posTo2, JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -80,10 +88,10 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 1:
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     break;
                 case 2:
                     AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);

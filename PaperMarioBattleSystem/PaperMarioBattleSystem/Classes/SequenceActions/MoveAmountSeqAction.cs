@@ -16,9 +16,14 @@ namespace PaperMarioBattleSystem
     {
         private Vector2 MoveAmount = Vector2.Zero;
 
-        public MoveAmountSeqAction(Vector2 amount, double duration) : base(duration)
+        public MoveAmountSeqAction(Vector2 amount, double duration, 
+            Interpolation.InterpolationTypes xInterpolation = Interpolation.InterpolationTypes.Linear,
+            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear) : base(duration)
         {
             MoveAmount = amount;
+
+            XInterpolation = xInterpolation;
+            YInterpolation = yInterpolation;
         }
 
         protected override void OnStart()

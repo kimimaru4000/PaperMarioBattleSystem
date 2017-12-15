@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -157,5 +158,68 @@ namespace PaperMarioBattleSystem
             double interpolateVal = interpolateMethod(time);
             return startVal + (interpolateVal * diff);
         }
+
+        #region Overloads
+
+        /// <summary>
+        /// Performs interpolation based on the InterpolationType.
+        /// </summary>
+        /// <param name="startVal">The starting value.</param>
+        /// <param name="endVal">The ending value.</param>
+        /// <param name="time">The time, between 0 and 1.</param>
+        /// <param name="interpolationType">The type of interpolation.</param>
+        /// <returns>An int in the range of <paramref name="startVal"/> and <paramref name="endVal"/> based on the interpolation type.</returns>
+        public static int Interpolate(int startVal, int endVal, double time, InterpolationTypes interpolationType)
+        {
+            return (int)CustomInterpolate(startVal, endVal, time, GetInterpolationFromType(interpolationType));
+        }
+
+        /// <summary>
+        /// Performs interpolation based on the InterpolationType.
+        /// </summary>
+        /// <param name="startVal">The starting value.</param>
+        /// <param name="endVal">The ending value.</param>
+        /// <param name="time">The time, between 0 and 1.</param>
+        /// <param name="interpolationType">The type of interpolation.</param>
+        /// <returns>A float in the range of <paramref name="startVal"/> and <paramref name="endVal"/> based on the interpolation type.</returns>
+        public static float Interpolate(float startVal, float endVal, double time, InterpolationTypes interpolationType)
+        {
+            return (float)CustomInterpolate(startVal, endVal, time, GetInterpolationFromType(interpolationType));
+        }
+
+        /// <summary>
+        /// Performs interpolation based on the InterpolationType.
+        /// </summary>
+        /// <param name="startVal">The starting Vector2 value.</param>
+        /// <param name="endVal">The ending Vector2 value.</param>
+        /// <param name="time">The time, between 0 and 1.</param>
+        /// <param name="interpolationType">The type of interpolation.</param>
+        /// <returns>A Vector2 in the range of <paramref name="startVal"/> and <paramref name="endVal"/> based on the interpolation type.</returns>
+        public static Vector2 Interpolate(Vector2 startVal, Vector2 endVal, double time, InterpolationTypes interpolationType)
+        {
+            float x = Interpolate(startVal.X, endVal.X, time, interpolationType);
+            float y = Interpolate(startVal.Y, endVal.Y, time, interpolationType);
+
+            return new Vector2(x, y);
+        }
+
+        /// <summary>
+        /// Performs interpolation between Vector2s based on the InterpolationTypes.
+        /// </summary>
+        /// <param name="startVal">The starting Vector2 value.</param>
+        /// <param name="endVal">The ending Vector2 value.</param>
+        /// <param name="time">The time, between 0 and 1.</param>
+        /// <param name="xInterpolationType">The type of interpolation for the X value.</param>
+        /// <param name="yInterpolationType">The type of interpolation for the Y value.</param>
+        /// <returns>A Vector2 in the range of <paramref name="startVal"/> and <paramref name="endVal"/> based on the X and Y interpolation types.</returns>
+        public static Vector2 Interpolate(Vector2 startVal, Vector2 endVal, double time, InterpolationTypes xInterpolationType, InterpolationTypes yInterpolationType)
+        {
+            float x = Interpolate(startVal.X, endVal.X, time, xInterpolationType);
+            float y = Interpolate(startVal.Y, endVal.Y, time, yInterpolationType);
+
+            return new Vector2(x, y);
+        }
+
+        #endregion
     }
 }

@@ -1246,6 +1246,29 @@ namespace PaperMarioBattleSystem
             return FindEntityFromBattleIndex(battleEntity.EntityType, battleEntity.BattleIndex - 1, true);
         }
 
+        /// <summary>
+        /// Gets the frontmost BattleEntity for a specified EntityType.
+        /// </summary>
+        /// <param name="entityType">The EntityType.</param>
+        /// <param name="heightStates">The height states to filter the BattleEntities by.
+        /// The frontmost BattleEntity with any of the state will be included.
+        /// If null or empty, will consider all height states.</param>
+        /// <returns>The frontmost BattleEntity for the EntityType.
+        /// If none exist that match the height states specified, then null.</returns>
+        public BattleEntity GetFrontmostBattleEntity(EntityTypes entityType, params HeightStates[] heightStates)
+        {
+            List<BattleEntity> entities = GetEntitiesList(entityType, heightStates);
+
+            //The BattleEntity in front is the first in the list, as they're sorted by BattleIndex
+            if (entities.Count > 0)
+            {
+                return entities[0];
+            }
+
+            //There's nothing to return
+            return null;
+        }
+
         #endregion
     }
 }

@@ -159,8 +159,11 @@ namespace PaperMarioBattleSystem
 
                     AttemptDamage(aerialDamage, CurTargets, aerialDamageInfo, true);
 
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration);
                     ChangeSequenceBranch(SequenceBranch.End);
+
+                    SequenceStep = 1;
                     break;
                 default:
                     PrintInvalidSequence();
@@ -184,8 +187,11 @@ namespace PaperMarioBattleSystem
                     }
                     break;
                 case 1:
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration);
                     ChangeSequenceBranch(SequenceBranch.End);
+
+                    SequenceStep = 1;
                     break;
                 default:
                     PrintInvalidSequence();

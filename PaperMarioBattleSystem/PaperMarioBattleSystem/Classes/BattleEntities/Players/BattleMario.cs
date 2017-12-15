@@ -40,6 +40,13 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(596, 554, 42, 44), 1000d)));
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(57, 1022, 53, 26), 1000d)));
 
+            AnimManager.AddAnimation(AnimationGlobals.JumpStartName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(442, 65, 38, 45), 250d)));
+            AnimManager.AddAnimation(AnimationGlobals.JumpRisingName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(394, 803, 31, 49), 100d)));
+            AnimManager.AddAnimation(AnimationGlobals.JumpFallingName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(394, 859, 31, 49), 100d),
+                new Animation.Frame(new Rectangle(394, 916, 31, 48), 100d)));
 
             AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerPickupName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(173, 664, 30, 49), 100d),
@@ -130,7 +137,7 @@ namespace PaperMarioBattleSystem
             //MStats.HammerLevel = EquipmentGlobals.HammerLevels.Ultra;
             //MStats.BootLevel = EquipmentGlobals.BootLevels.Ultra;
 
-            BattleVFXManager.Instance.AddVFXElement(new AfterImageVFX(this, 4, 4, .2f, AfterImageVFX.AfterImageAlphaSetting.FadeOff, AfterImageVFX.AfterImageAnimSetting.Current));
+            //BattleVFXManager.Instance.AddVFXElement(new AfterImageVFX(this, 4, 4, .2f, AfterImageVFX.AfterImageAlphaSetting.FadeOff, AfterImageVFX.AfterImageAnimSetting.Current));
         }
 
         protected sealed override BattleMenu GetMainBattleMenu()

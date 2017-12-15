@@ -428,6 +428,28 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Subtracts a float from another float and divides the result by a dividing factor.
+        /// </summary>
+        /// <param name="value1">The float value which has its value subtracted by <paramref name="value2"/>.</param>
+        /// <param name="value2">The float value used in the subtraction.</param>
+        /// <returns>The difference between <paramref name="value2"/> and <paramref name="value1"/> divided by the
+        /// <paramref name="dividingFactor"/>.
+        /// If <paramref name="dividingFactor"/> is 0, then 0.
+        /// </returns>
+        public static float DifferenceDivided(float value1, float value2, float dividingFactor)
+        {
+            //Return 0 if we're trying to divide by 0
+            if (dividingFactor == 0f)
+            {
+                return 0f;
+            }
+
+            //Return the difference over the division
+            float diff = (value1 - value2);
+            return diff / dividingFactor;
+        }
+
         #region Line Intersection
 
         /// <summary>

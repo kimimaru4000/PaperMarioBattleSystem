@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnUpdate()
         {
-            //If the animation doesn't exist end immediately
+            //If the animation doesn't exist, end immediately
             if (Anim == null)
             {
                 End();

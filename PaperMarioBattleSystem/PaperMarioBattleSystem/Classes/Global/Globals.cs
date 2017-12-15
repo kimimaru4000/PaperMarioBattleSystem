@@ -1028,7 +1028,9 @@ namespace PaperMarioBattleSystem
 
         //Shared animations
         public const string IdleName = "Idle";
-        public const string JumpName = "Jump";
+        public const string JumpStartName = "JumpStart";
+        public const string JumpRisingName = "JumpRising";
+        public const string JumpFallingName = "JumpFalling";
         public const string JumpMissName = "JumpMiss";
         public const string RunningName = "Run";
         public const string HurtName = "Hurt";

@@ -53,7 +53,7 @@ namespace PaperMarioBattleSystem
                     if (NextTargetIndex < EntitiesAffected.Length)
                     {
                         CurrentTargetIndex = NextTargetIndex;
-                        ChangeSequenceBranch(SequenceBranch.Start);
+                        ChangeSequenceBranch(SequenceBranch.Main);
                     }
                     //Otherwise end it since we're on the last target
                     else

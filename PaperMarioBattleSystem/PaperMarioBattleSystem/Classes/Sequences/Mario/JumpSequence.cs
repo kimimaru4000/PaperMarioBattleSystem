@@ -14,13 +14,13 @@ namespace PaperMarioBattleSystem
     public class JumpSequence : Sequence
     {
         public float WalkDuration = 1000f;
-        public float JumpDuration = 800f;
+        public float JumpDuration = 600f;
         public float JumpHeight = 100f;
 
         public virtual int DamageDealt => BaseDamage;
         public virtual BattleEntity CurTarget => EntitiesAffected[0];
 
-        protected float XDiffOverTwo => (CurTarget.Position.X - User.Position.X) / 2f;
+        protected float XDiffOverTwo => UtilityGlobals.DifferenceDivided(CurTarget.Position.X, User.Position.X, 2f);
 
         public JumpSequence(MoveAction moveAction) : base(moveAction)
         {
@@ -52,6 +52,12 @@ namespace PaperMarioBattleSystem
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(frontPos, WalkDuration);
+                    
+                    break;
+                case 1:
+
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpStartName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.JumpStartName);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -67,12 +73,13 @@ namespace PaperMarioBattleSystem
                 case 0:
                     Vector2 posTo = User.Position + new Vector2(XDiffOverTwo, -JumpHeight);
 
-                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpRisingName);
                     CurSequenceAction = new MoveToSeqAction(posTo, JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 1:
                     Vector2 posTo2 = User.Position + new Vector2(XDiffOverTwo, JumpHeight);
 
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
                     StartActionCommandInput();
                     CurSequenceAction = new MoveToSeqAction(posTo2, JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     break;
@@ -87,10 +94,12 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpRisingName);
                     AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 1:
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     break;
                 case 2:
@@ -122,10 +131,25 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    Vector2 endPos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
+                    Vector2 moveAmt = new Vector2(UtilityGlobals.DifferenceDivided(endPos.X, User.Position.X, 2f), -(JumpHeight / 2f));
+
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpRisingName);
+                    CurSequenceAction = new MoveAmountSeqAction(moveAmt, JumpDuration / 2f, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
+                    break;
+                case 1:
+                    endPos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
+
+                    moveAmt = new Vector2(UtilityGlobals.DifferenceDivided(endPos.X, User.Position.X, 2f), (JumpHeight / 2f));
+
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
+                    CurSequenceAction = new MoveAmountSeqAction(moveAmt, JumpDuration / 2f, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+                    break;
+                case 2:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
                     break;
-                case 1:
+                case 3:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     EndSequence();
                     break;
@@ -159,7 +183,11 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.SpikedTipHurtName, true);
 
-                    Vector2 pos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType != Enumerations.EntityTypes.Player) + new Vector2(-50, -JumpHeight);
+                    Vector2 offset = new Vector2(-50, -JumpHeight);
+                    if (User.EntityType != EntityTypes.Player)
+                        offset.X = -offset.X;
+
+                    Vector2 pos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType != EntityTypes.Player) + offset;
                     CurSequenceAction = new MoveToSeqAction(pos, WalkDuration / 4d);
                     break;
                 case 1:
@@ -183,6 +211,9 @@ namespace PaperMarioBattleSystem
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpMissName, true);
                     CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.JumpMissName);
                     ChangeSequenceBranch(SequenceBranch.End);
+
+                    //Set the sequence step so it doesn't perform the jump back part of the end sequence
+                    SequenceStep = 1;
                     break;
                 default:
                     PrintInvalidSequence();

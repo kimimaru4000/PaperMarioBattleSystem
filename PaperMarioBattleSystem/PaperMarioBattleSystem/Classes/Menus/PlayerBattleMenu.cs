@@ -62,21 +62,23 @@ namespace PaperMarioBattleSystem
 
         protected PlayerBattleMenu(PlayerTypes playerType) : base(MenuTypes.Horizontal)
         {
-            SwitchIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
-                new Rectangle(651, 13, 78, 30));
-
             PlayerType = playerType;
-            
-            ActionButtons.Add(new ActionButton("Tactics", AssetManager.Instance.LoadRawTexture2D("UI/Battle/JumpButton.png"),
-                MoveCategories.Tactics, new TacticsSubMenu()));
+
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
+
+            SwitchIcon = new CroppedTexture2D(battleGFX, new Rectangle(651, 13, 78, 30));
+
+            CroppedTexture2D tacticsButton = new CroppedTexture2D(battleGFX, new Rectangle(146, 844, 24, 24));
+            CroppedTexture2D itemsButton = new CroppedTexture2D(battleGFX, new Rectangle(146, 812, 24, 24));
+
+            ActionButtons.Add(new ActionButton("Tactics", tacticsButton, MoveCategories.Tactics, new TacticsSubMenu()));
 
             ActionSubMenu itemMenu = null;
             if (CheckUseDipMenu() == false)
                 itemMenu = new ItemSubMenu(1, 0);
             else itemMenu = new ItemDipSubMenu();
 
-            ActionButtons.Add(new ActionButton("Items", AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/JumpButton.png"),
-                MoveCategories.Item, itemMenu));
+            ActionButtons.Add(new ActionButton("Items", itemsButton, MoveCategories.Item, itemMenu));
         }
 
         /// <summary>

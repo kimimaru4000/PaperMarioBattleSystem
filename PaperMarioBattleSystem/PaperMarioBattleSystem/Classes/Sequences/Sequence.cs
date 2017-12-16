@@ -341,6 +341,9 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.HurtName, true);
 
+                    if (User.EntityType != EntityTypes.Player)
+                        moveX = -moveX;
+
                     Vector2 pos = User.Position + new Vector2(moveX, -moveY);
                     CurSequenceAction = new MoveToSeqAction(pos, time / 2d);
                     break;
@@ -348,7 +351,7 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.HurtName);
                     break;
                 case 2:
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, moveY), time);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, moveY), time, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

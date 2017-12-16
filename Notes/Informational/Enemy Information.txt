@@ -156,6 +156,8 @@ X-Nauts (the ones with Lord Crump in Chapter 5; aka X-Naut Platoon
 
 Dark Puff
 ---------
--When charged with Electricity, contact is a Failure instead of a Partial Success. Look into this
+-When charged with Electricity, contact is a Failure instead of a Partial Success
+  -If inflicted with Electrified (via cheats), however, contact is a Partial Success. But if both charged and Electrified, it's a Failure
+  -Regardless if it has Electrified or is charged with electricity, being Electrified yourself (via Zap Tap or a Volt Shroom) will be a Successful contact
 
 

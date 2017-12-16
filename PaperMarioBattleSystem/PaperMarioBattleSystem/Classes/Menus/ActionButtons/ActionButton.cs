@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The image to use for the button.
         /// </summary>
-        private Texture2D ButtonImage = null;
+        private CroppedTexture2D ButtonImage = null;
 
         /// <summary>
         /// The move category of the button. All moves accessed through the button have the same category.
@@ -46,7 +46,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool Disabled { get; set; } = false;
 
-        public ActionButton(string name, Texture2D buttonImage, MoveCategories moveCategory, ActionSubMenu subMenu)
+        public ActionButton(string name, CroppedTexture2D buttonImage, MoveCategories moveCategory, ActionSubMenu subMenu)
         {
             Name = name;
             ButtonImage = buttonImage;
@@ -111,7 +111,10 @@ namespace PaperMarioBattleSystem
 
             Vector2 uiPos = Camera.Instance.SpriteToUIPos(Position);
 
-            SpriteRenderer.Instance.Draw(ButtonImage, uiPos, iconColor, false, false, .4f, true);
+            if (ButtonImage != null && ButtonImage.Tex != null)
+            {
+                SpriteRenderer.Instance.Draw(ButtonImage.Tex, uiPos, ButtonImage.SourceRect, iconColor, false, false, .4f, true);
+            }
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Name, uiPos - new Vector2(0, 30), iconColor, .45f);
         }
     }

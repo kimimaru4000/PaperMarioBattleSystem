@@ -17,7 +17,9 @@ namespace PaperMarioBattleSystem
         {
             PartnerSubMenu = partnerSubMenu;
 
-            ActionButtons.Add(new ActionButton("Abilities", AssetManager.Instance.LoadRawTexture2D("UI/Battle/JumpButton.png"),
+            Texture2D abilityTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/JumpButton.png");
+
+            ActionButtons.Add(new ActionButton("Abilities", new CroppedTexture2D(abilityTex, null),
                 Enumerations.MoveCategories.Partner, PartnerSubMenu));
 
             //Add Focus to the Partner battle menu if the Group Focus badge is equipped
@@ -26,7 +28,9 @@ namespace PaperMarioBattleSystem
             {
                 ActionSubMenu focusMenu = new ActionSubMenu(new Focus());
                 focusMenu.AutoSelectSingle = true;
-                ActionButtons.Add(new ActionButton("Focus", AssetManager.Instance.LoadRawTexture2D("UI/Battle/JumpButton.png"),
+
+                CroppedTexture2D starPower = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"), new Rectangle(182, 812, 24, 24));
+                ActionButtons.Add(new ActionButton("Focus", starPower,
                     Enumerations.MoveCategories.Special, focusMenu));
             }
 

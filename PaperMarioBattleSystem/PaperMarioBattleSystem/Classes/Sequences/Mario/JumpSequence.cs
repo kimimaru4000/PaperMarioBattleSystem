@@ -131,6 +131,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    //Do a little bounce at the end
                     Vector2 endPos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
                     Vector2 moveAmt = new Vector2(UtilityGlobals.DifferenceDivided(endPos.X, User.Position.X, 2f), -(JumpHeight / 2f));
 
@@ -194,8 +195,25 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.SpikedTipHurtName);
                     break;
                 case 2:
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration / 2f);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration / 2f, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+                    break;
+                case 3:
+                    //Do the same bounce as the end sequence, except keep playing the same animation
+                    Vector2 endPos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
+                    Vector2 moveAmt = new Vector2(UtilityGlobals.DifferenceDivided(endPos.X, User.Position.X, 2f), -(JumpHeight / 2f));
+
+                    CurSequenceAction = new MoveAmountSeqAction(moveAmt, JumpDuration / 2f, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
+                    break;
+                case 4:
+                    endPos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
+
+                    moveAmt = new Vector2(UtilityGlobals.DifferenceDivided(endPos.X, User.Position.X, 2f), (JumpHeight / 2f));
+
+                    CurSequenceAction = new MoveAmountSeqAction(moveAmt, JumpDuration / 2f, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+
                     ChangeSequenceBranch(SequenceBranch.End);
+
+                    SequenceStep = 1;
                     break;
                 default:
                     PrintInvalidSequence();

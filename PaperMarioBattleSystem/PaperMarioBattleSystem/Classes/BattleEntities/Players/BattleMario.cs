@@ -91,7 +91,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnBattleStart();
 
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.SpikeShield, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.SpikeShield, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.IcePower, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ZapTap, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerPlus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
@@ -134,8 +134,8 @@ namespace PaperMarioBattleSystem
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
 
-            //MStats.HammerLevel = EquipmentGlobals.HammerLevels.Ultra;
-            //MStats.BootLevel = EquipmentGlobals.BootLevels.Ultra;
+            //MStats.HammerLevel = EquipmentGlobals.HammerLevels.Super;
+            //MStats.BootLevel = EquipmentGlobals.BootLevels.Super;
 
             //BattleVFXManager.Instance.AddVFXElement(new AfterImageVFX(this, 4, 4, .2f, AfterImageVFX.AfterImageAlphaSetting.FadeOff, AfterImageVFX.AfterImageAnimSetting.Current));
         }

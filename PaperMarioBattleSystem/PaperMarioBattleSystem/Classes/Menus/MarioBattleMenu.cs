@@ -16,16 +16,44 @@ namespace PaperMarioBattleSystem
     {
         public MarioBattleMenu() : base(Enumerations.PlayerTypes.Mario)
         {
-            Texture2D tex = AssetManager.Instance.LoadRawTexture2D("UI/Battle/JumpButton.png");
+            Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
 
-            ActionButtons.Add(new ActionButton("Jump", tex,
+            //Get Jump and Hammer battle textures based on Mario's equipment
+            CroppedTexture2D jump = new CroppedTexture2D(tex, GetTexRectForBootLevel(BattleManager.Instance.GetMario().MStats.BootLevel));
+            CroppedTexture2D hammer = new CroppedTexture2D(tex, GetTexRectForHammerLevel(BattleManager.Instance.GetMario().MStats.HammerLevel));
+
+            CroppedTexture2D starPower = new CroppedTexture2D(tex, new Rectangle(182, 812, 24, 24));
+
+            ActionButtons.Add(new ActionButton("Jump", jump,
                 Enumerations.MoveCategories.Jump, new JumpSubMenu()));
-            ActionButtons.Add(new ActionButton("Hammer", tex,
+            ActionButtons.Add(new ActionButton("Hammer", hammer,
                 Enumerations.MoveCategories.Hammer, new HammerSubMenu()));
-            ActionButtons.Add(new ActionButton("Special", tex,
+            ActionButtons.Add(new ActionButton("Special", starPower,
                 Enumerations.MoveCategories.Special, new SpecialSubMenu()));
 
             Initialize(2);
+        }
+
+        private Rectangle GetTexRectForBootLevel(EquipmentGlobals.BootLevels bootLevel)
+        {
+            switch (bootLevel)
+            {
+                case EquipmentGlobals.BootLevels.Super: return new Rectangle(72, 812, 24, 24);
+                case EquipmentGlobals.BootLevels.Ultra: return new Rectangle(107, 812, 26, 24);
+                case EquipmentGlobals.BootLevels.Normal:
+                default: return new Rectangle(36, 812, 24, 24);
+            }
+        }
+
+        private Rectangle GetTexRectForHammerLevel(EquipmentGlobals.HammerLevels hammerLevel)
+        {
+            switch (hammerLevel)
+            {
+                case EquipmentGlobals.HammerLevels.Super: return new Rectangle(72, 844, 24, 24);
+                case EquipmentGlobals.HammerLevels.Ultra: return new Rectangle(107, 844, 24, 24);
+                case EquipmentGlobals.HammerLevels.Normal:
+                default: return new Rectangle(36, 844, 24, 24);
+            }
         }
     }
 }

@@ -35,7 +35,7 @@ namespace PaperMarioBattleSystem
         public static bool DebugPaused { get; private set; } = false;
         public static bool AdvanceNextFrame { get; private set; } = false;
 
-        public static bool ShouldTakeScreenshot { get; private set; } = false;
+        //public static bool ShouldTakeScreenshot { get; private set; } = false;
 
         /// <summary>
         /// The level of logs to output. By default, it logs all types of logs.
@@ -185,7 +185,8 @@ namespace PaperMarioBattleSystem
                 //Take screenshot
                 else if (Input.GetKeyDown(Keys.S, DebugKeyboard))
                 {
-                    ShouldTakeScreenshot = true;
+                    //ShouldTakeScreenshot = true;
+                    TakeScreenshot();
                 }
             }
 
@@ -337,6 +338,8 @@ namespace PaperMarioBattleSystem
                 StatusEffect status = new HugeStatus(turnCount);
                 //Inflict HPRegen
                 if (Input.GetKey(Keys.P, DebugKeyboard) == true) status = new HPRegenStatus(2, turnCount);
+                //Inflict Hold Fast
+                else if (Input.GetKey(Keys.O, DebugKeyboard) == true) status = new HoldFastStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Allergic
@@ -381,7 +384,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Reset screenshot flag
-            ShouldTakeScreenshot = false;
+            //ShouldTakeScreenshot = false;
         }
 
         /// <summary>

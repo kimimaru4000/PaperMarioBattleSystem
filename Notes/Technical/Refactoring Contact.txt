@@ -1,0 +1,195 @@
+Refactoring Contact (12/16/17)
+------------------------------
+Here are reasons we need to refactor how contact works right now:
+
+1. Dark Puffs can charge themselves with electricity that is different from the Electrified status. Instead of direct contact being a Partial Success, it's a Failure.
+If the Dark Puff has both Electrified and its own electricity, the contact result is still a Failure.
+   1a. The current damage table says that damage with Electrified BattleEntities is always a Partial Success. This makes this behavior impossible  to implement in the current system.
+  
+2. There is no way to override Payback. Take the Dark Puff example: if we implemented it by inflicted Payback that dealt 1 Electric damage and the Dark Puff didn't have the Electrified PhysicalAttribute, you would take damage even if were also Electrified because it would register as a PartialSuccess.
+
+3. Fuzzies can't latch on if you have any type of Payback. In TTYD, they can latch on if you have Return Postage but not if you're Electrified.
+
+4. Superguarding Koopa Troopas and Hammer moves doesn't cause any damage to be dealt to the attacker. In TTYD, if these moves are superguarded, the attackers are damaged.
+
+So then we need a way for the following:
+
+-Allow BattleEntities to define their own contact result when being hit with a move when they have a certain PhysicalAttribute.
+-Determine if a type of contact will take damage from a Superguard or not.
+
+
+I'm proposing the following solutions:
+
+-Remove the contact table entirely. We found an exception to an assumed global rule, so we can no longer have global rules for this.
+-Increase the features of PaybackHolders:
+ -Give them a set of ContactTypes, which they take effect on. This allows for new behavior such as countering moves that don't make contact at all.
+ -Give them a PhysicalAttribute that tells which PhysicalAttribute the attacker needs have to ignore the Payback (Ex. Mario with Zap Tap attacking an electric-charged Dark Puff)
+ -Give them a ContactResult that happens when the attacker hits the victim with the Payback (Ex. Is it a PartialSuccess or a Failure?)
+ 
+Flow
+---- 
+Currently it goes like this:
+-Attacker attacks
+-A contact result is determined by the following:
+  1. Look up the PhysicalAttributes the victim has in the Contact Table
+  2. If it would result in a Success if the attacker has the same PhysicalAttribute as the one tested, it's a Success
+  3. If it's a Success or PartialSuccess, check for the victim's Payback
+  4. If it's a PartialSuccess, also factor in the Payback from the Contact Table
+  5. If there's Payback, it's now automatically a PartialSuccess
+  
+The new system would be like this:
+-Attacker attacks
+-Combine the victim's Payback, then:
+  1. Check if the ContactType matches any of the Payback's ContactTypes
+  2. If so, check if the attacker has all of the PhysicalAttributes that the Payback is for
+  3. If not, return the combined ContactResult (Success, PartialSuccess, or Failure; Failure is the highest priority)
+  4. If so, it's a Success
+  
+  
+Let's use examples and see if this makes sense:
+
+Example 1
+---------
+A Dark Puff is inflicted with Electrified, which gives it the following PaybackHolder:
+
+PaybackType: Constant
+Damage: 1
+ContactTypes: TopDirect & SideDirect
+PhysicalAttribute: Electrified
+ContactResult: PartialSuccess
+
+Mario doesn't have Zap Tap and attacks it with a jump. Both he and the Dark Puff take damage since it's a PartialSuccess, and Mario takes 1 damage since it's a TopDirect contact and he isn't Electrified.
+
+Mario has Zap Tap on and attacks it with a jump. Only the Dark Puff takes damage since, although Mario attacked it with a TopDirect contact, he's Electrified.
+
+Example 2
+---------
+A Dark Puff is inflicted with Electrified and did its electric charge move. It has the following PaybackHolders:
+
+PaybackType: Constant
+Damage: 1
+ContactTypes: TopDirect & SideDirect
+PhysicalAttribute: Electrified
+ContactResult: PartialSuccess
+
+PaybackType: Constant
+Damage: 1
+ContactTypes: TopDirect & SideDirect
+PhysicalAttribute: Electrified
+ContactResult: Failure
+
+
+Combined, they turn into this:
+
+PaybackType: Constant
+Damage: 2
+ContactTypes: TopDirect & SideDirect
+PhysicalAttribute: Electrified
+ContactResult: Failure
+
+Mario doesn't have Zap Tap and attacks it with a jump. Only he takes damage since he attacked with a TopDirect contact without being Electrified and it's a Failure; Mario takes 2 damage.
+
+Mario has Zap Tap on and attacks it with a jump. Only the Dark Puff takes damage since, although Mario attacked it with a TopDirect contact, he's Electrified.
+
+The combined damage isn't faithful to the games, as Mario would take 1 damage rather than 2. However, the actual games have some nuances regarding Payback, such as Return Postage and Zap Tap still allowing Fuzzies to latch onto you, so I consider some of those bugs or oversights. As a result, I think this is fine since it's consistent and makes sense (Ex. if it has double the electricity, it'll do double the damage).
+
+Example 3
+---------
+A Poison Puff is inflicted with Electrified and did its poison charge move. It has the following PaybackHolders:
+
+PaybackType: Constant
+Damage: 1
+ContactTypes: TopDirect & SideDirect
+PhysicalAttribute: Electrified
+ContactResult: PartialSuccess
+
+PaybackType: Half
+Damage: 0
+ContactTypes: TopDirect & SideDirect
+PhysicalAttribute: Poison
+ContactResult: PartialSuccess
+Statuses: Poison
+
+Combined, they turn into this:
+
+PaybackType: Half
+Damage: 1
+ContactTypes: TopDirect & SideDirect
+PhysicalAttribute: Electrified & Poison
+ContactResult: PartialSuccess
+
+Mario jumps on the Poison Puff with Zap Tap. Both he and the Poison Puff take damage, but Mario takes (half of the damage he dealt + 1) and is inflicted with Poison.
+
+This is wrong because Mario has Zap Tap, so the Electrified Payback shouldn't apply. In this case, Having Zap Tap off would yield the same result as having it on. We need to reconsider how Payback is combined, then.
+
+Combining Payback
+-----------------
+The aforementioned example means we need to change how Payback is combined. So let's recap:
+
+-Attacker attacks
+-Combine the victim's Payback, then:
+  1. Check if the ContactType matches any of the Payback's ContactTypes
+  2. If so, check if the attacker has all of the PhysicalAttributes that the Payback is for
+  3. If not, return the combined ContactResult (Success, PartialSuccess, or Failure; Failure is the highest priority)
+  4. If so, it's a Success
+
+We need to replace the second step:
+
+-Attacker attacks
+-Initialize a Dictionary<PhysicalAttributes, List<PaybackHolder>> called PaybackDict
+-Go through all of the victim's PaybackHolders:
+  1. Check if the ContactType matches any of the Payback's ContactTypes
+    -If so, check if the attacker has the PhysicalAttribute that the Payback is for
+      -If so, ignore it and continue
+      -If not, add that PaybackHolder to PaybackDict
+    -If not, ignore it and continue
+  2. Combine all PaybackHolders in PaybackDict (PaybackDict will be populated with all PaybackHolders with the PhysicalAttributes that the attacker doesn't have)
+  3. Return the combined ContactResult (Success, PartialSuccess, or Failure)
+  
+Let's test this in the previous example, then:
+
+Example 3 (with new Payback combining system)
+---------------------------------------------
+A Poison Puff is inflicted with Electrified and did its poison charge move. It has the following PaybackHolders:
+
+***PaybackHolder 1***
+PaybackType: Constant
+Damage: 1
+ContactTypes: TopDirect & SideDirect
+PhysicalAttribute: Electrified
+ContactResult: PartialSuccess
+
+***PaybackHolder 2***
+PaybackType: Half
+Damage: 0
+ContactTypes: TopDirect & SideDirect
+PhysicalAttribute: Poison
+ContactResult: PartialSuccess
+Statuses: Poison
+
+Mario jumps on the Poison Puff without Zap Tap. PaybackDict looks like this:
+
+{ Electrified, { PaybackHolder1 } }
+{ Poison, { PaybackHolder2 } }
+
+Mario takes (half + 1) damage and gets poisoned, and the Poison Puff takes the damage Mario dealt to it.
+
+Now Mario jumps on the Poison Puff with Zap Tap. PaybackDict looks like this:
+
+{ Poison, { PaybackHolder2 } }
+
+Both he and the Poison Puff take damage, but Mario takes half of the damage he dealt and is inflicted with Poison. Since he's Electrified via Zap Tap, PaybackHolder1 was not factored into the total Payback.
+
+Summary Thus Far
+----------------
+So this solution fixes problems 1 and 2:
+
+1. BattleEntities can apply different types of Payback with different ContactResults individually. There is no longer a Contact Table.
+2. Payback can be overridden
+
+However, we didn't address 3 and 4.
+
+
+
+
+

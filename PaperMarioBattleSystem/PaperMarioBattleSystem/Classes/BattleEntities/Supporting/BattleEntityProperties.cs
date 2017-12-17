@@ -980,7 +980,9 @@ namespace PaperMarioBattleSystem
                 allPaybacks.AddRange(additionalPaybacks);
             }
 
-            //Initialize default values
+            return PaybackHolder.CombinePaybacks(allPaybacks);
+
+            /*//Initialize default values
             PaybackTypes totalType = PaybackTypes.Constant;
             Elements totalElement = Elements.Normal;
             int totalDamage = 0;
@@ -1017,7 +1019,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Return the final Payback
-            return new PaybackHolder(totalType, totalElement, totalDamage, totalStatuses.ToArray());
+            return new PaybackHolder(totalType, totalElement, totalDamage, totalStatuses.ToArray());*/
         }
 
         /// <summary>

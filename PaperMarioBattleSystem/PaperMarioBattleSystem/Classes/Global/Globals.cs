@@ -905,7 +905,6 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// The state of health an entity can be in.
-        /// 
         /// <para>Danger occurs when the entity has 2-5 HP remaining.
         /// Peril occurs when the entity has exactly 1 HP remaining.
         /// Dead occurs when the entity has 0 HP remaining.</para>
@@ -1660,6 +1659,53 @@ namespace PaperMarioBattleSystem
                     case PaybackTypes.Half: return (int)Math.Ceiling(damageDealt / 2f) + Damage;
                     default: return Damage;
                 }
+            }
+
+            /// <summary>
+            /// Combines a set of Paybacks into one.
+            /// </summary>
+            /// <param name="paybackHolders">The set of PaybackHolders to combine.</param>
+            /// <returns>A combined PaybackHolder. If the set is null or empty, then a PaybackHolder with default values.</returns>
+            public static PaybackHolder CombinePaybacks(IList<PaybackHolder> paybackHolders)
+            {
+                //Initialize default values
+                PaybackTypes totalType = PaybackTypes.Constant;
+                Enumerations.Elements totalElement = Enumerations.Elements.Normal;
+                int totalDamage = 0;
+                List<StatusChanceHolder> totalStatuses = new List<StatusChanceHolder>();
+
+                //Go through all the Paybacks and add them up
+                for (int i = 0; i < paybackHolders.Count; i++)
+                {
+                    PaybackHolder paybackHolder = paybackHolders[i];
+
+                    //If there's a Half or Full Payback, upgrade the current one from Half to Full if it's currently Half
+                    if (paybackHolder.PaybackType != PaybackTypes.Constant)
+                    {
+                        //If there are at least two Half Paybacks, upgrade it to Full
+                        if (totalType == PaybackTypes.Half && paybackHolder.PaybackType == PaybackTypes.Half)
+                            totalType = PaybackTypes.Full;
+                        else if (totalType != PaybackTypes.Full)
+                            totalType = paybackHolder.PaybackType;
+                    }
+
+                    //Check for a higher priority Element
+                    if (paybackHolder.Element > totalElement)
+                        totalElement = paybackHolder.Element;
+
+                    //Add up all the damage
+                    totalDamage += paybackHolder.Damage;
+
+                    //Add in all the StatusEffects - note that StatusEffects with the same StatusType will increase the chance of
+                    //that StatusEffect being inflicted, as the first one may not succeed in being inflicted depending on the BattleEntity
+                    if (paybackHolder.StatusesInflicted != null && paybackHolder.StatusesInflicted.Length > 0)
+                    {
+                        totalStatuses.AddRange(paybackHolder.StatusesInflicted);
+                    }
+                }
+
+                //Return the final Payback
+                return new PaybackHolder(totalType, totalElement, totalDamage, totalStatuses.Count == 0 ? null : totalStatuses.ToArray());
             }
         }
 

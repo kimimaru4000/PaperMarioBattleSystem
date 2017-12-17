@@ -231,8 +231,8 @@ Run Away
 
 Star Beam
 ---------
--Removes charge for Hyper Goombas, Hyper Paragoombas, Hyper Clefts, Koopatrols, 
-
+-Removes charge for Hyper Goombas, Hyper Paragoombas, Hyper Clefts, Koopatrols
+-Removes Electrified granted by Yellow Magikoopas
 
 General
 -------

@@ -160,4 +160,7 @@ Dark Puff
   -If inflicted with Electrified (via cheats), however, contact is a Partial Success. But if both charged and Electrified, it's a Failure
   -Regardless if it has Electrified or is charged with electricity, being Electrified yourself (via Zap Tap or a Volt Shroom) will be a Successful contact
 
-
+Poison Puff
+-----------
+-When charged with Poison and attacked directly, deals half the damage dealt to it and poisons the character that hit it
+  -If inflicted with Electrified, adds +1 to the damage dealt, like with normal Payback, but does not do this if the attacker is also Electrified

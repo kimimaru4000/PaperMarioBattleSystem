@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// Entities afflicted with this can't move until it ends.
     /// <para>This Status Effect is inflicted when Partners take damage in the original Paper Mario.</para>
     /// </summary>
-    public sealed class InjuredStatus : ImmobilizedStatus
+    public sealed class InjuredStatus : StopStatus
     {
         public InjuredStatus(int duration) : base(duration)
         {

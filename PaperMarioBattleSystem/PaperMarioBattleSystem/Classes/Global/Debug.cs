@@ -273,12 +273,11 @@ namespace PaperMarioBattleSystem
                 else if (Input.GetKey(Keys.Z, DebugKeyboard) == true) status = new ParalyzedStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
-            //Inflict Invisible or Immobilized
+            //Inflict Invisible
             else if (Input.GetKeyDown(Keys.I, DebugKeyboard) == true)
             {
                 StatusEffect status = new InvisibleStatus(turnCount);
-                //Inflict Immobilized
-                if (Input.GetKey(Keys.M, DebugKeyboard) == true) status = new ImmobilizedStatus(turnCount);
+                
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Electrified
@@ -304,7 +303,7 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKey(Keys.O, DebugKeyboard) == true) status = new DodgyStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
-            //Inflict Sleep, Stone, or Slow
+            //Inflict Sleep, Stone, Slow, or Stop
             else if (Input.GetKeyDown(Keys.S, DebugKeyboard) == true)
             {
                 StatusEffect status = new SleepStatus(turnCount);
@@ -312,6 +311,8 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKey(Keys.T, DebugKeyboard) == true) status = new StoneStatus(turnCount);
                 //Inflict Slow
                 else if (Input.GetKey(Keys.L, DebugKeyboard) == true) status = new SlowStatus(turnCount);
+                //Inflict Stop
+                else if (Input.GetKey(Keys.P, DebugKeyboard) == true) status = new StopStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Confused

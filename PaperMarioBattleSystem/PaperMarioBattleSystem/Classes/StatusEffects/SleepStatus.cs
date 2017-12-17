@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Entities afflicted with this cannot move until it ends.
     /// There is a chance that the entity will wake up and end this status when it is attacked
     /// </summary>
-    public sealed class SleepStatus : ImmobilizedStatus
+    public sealed class SleepStatus : StopStatus
     {
         public SleepStatus(int duration) : base(duration)
         {

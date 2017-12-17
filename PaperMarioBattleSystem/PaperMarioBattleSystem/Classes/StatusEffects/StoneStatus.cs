@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// The entity also has several StatusEffects suppressed in several ways until it ends.
     /// <para>This has a Positive Alignment because entities that attack an entity afflicted with this basically waste their turns.</para>
     /// </summary>
-    public sealed class StoneStatus : ImmobilizedStatus
+    public sealed class StoneStatus : StopStatus
     {
         public StoneStatus(int duration) : base(duration)
         {

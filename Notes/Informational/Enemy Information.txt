@@ -164,3 +164,10 @@ Poison Puff
 -----------
 -When charged with Poison and attacked directly, deals half the damage dealt to it and poisons the character that hit it
   -If inflicted with Electrified, adds +1 to the damage dealt, like with normal Payback, but does not do this if the attacker is also Electrified
+
+Lava Bubble
+-----------
+-When Electrified, with Payback and Hold Fast, it will deal only 1 damage if Mario attacks it without Zap Tap or Ice Power
+  -If Mario attacks it with Ice Power, it deals Full payback damage + 1 from Electrified
+
+

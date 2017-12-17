@@ -946,7 +946,7 @@ namespace PaperMarioBattleSystem
             Charged, DEFUp, Dodgy, Electrified, Fast, Huge, Invisible, Payback, POWUp, HoldFast, HPRegen, FPRegen, Stone,
             TurboCharge, WaterBlock, CloudNine,
             //Negative
-            Burn, Confused, DEFDown, Dizzy, Frozen, Immobilized, NoSkills, Poison, POWDown, Sleep, Slow, Tiny, Injured, Paralyzed,
+            Burn, Confused, DEFDown, Dizzy, Frozen, Stop, NoSkills, Poison, POWDown, Sleep, Slow, Tiny, Injured, Paralyzed,
             KO, Fright, Blown, Lifted
         }
 
@@ -1774,7 +1774,7 @@ namespace PaperMarioBattleSystem
             { Enumerations.StatusTypes.WaterBlock, 250 }, { Enumerations.StatusTypes.CloudNine, 249 }, { Enumerations.StatusTypes.TurboCharge, 248 },
             { Enumerations.StatusTypes.Poison, 200 }, { Enumerations.StatusTypes.Burn, 199 },
             { Enumerations.StatusTypes.Fast, 150 }, { Enumerations.StatusTypes.Slow, 149 },
-            { Enumerations.StatusTypes.Stone, 2 }, { Enumerations.StatusTypes.Sleep, 147 }, { Enumerations.StatusTypes.Immobilized, 146 }, { Enumerations.StatusTypes.Frozen, 145 }, { Enumerations.StatusTypes.Injured, 144 }, { Enumerations.StatusTypes.Paralyzed, 143 },
+            { Enumerations.StatusTypes.Stone, 2 }, { Enumerations.StatusTypes.Sleep, 147 }, { Enumerations.StatusTypes.Stop, 146 }, { Enumerations.StatusTypes.Frozen, 145 }, { Enumerations.StatusTypes.Injured, 144 }, { Enumerations.StatusTypes.Paralyzed, 143 },
             { Enumerations.StatusTypes.POWDown, 130 }, { Enumerations.StatusTypes.POWUp, 129 }, { Enumerations.StatusTypes.DEFDown, 128 }, { Enumerations.StatusTypes.DEFUp, 127 },
             { Enumerations.StatusTypes.Tiny, 109 }, { Enumerations.StatusTypes.Huge, 108 },
             { Enumerations.StatusTypes.HPRegen, 90 }, { Enumerations.StatusTypes.FPRegen, 89 },

@@ -56,7 +56,7 @@ namespace PaperMarioBattleSystem
             EntityProperties.AddStatusProperty(StatusTypes.Dizzy, new StatusPropertyHolder(100, 0));
             EntityProperties.AddStatusProperty(StatusTypes.Confused, new StatusPropertyHolder(70, 0));
             EntityProperties.AddStatusProperty(StatusTypes.Tiny, new StatusPropertyHolder(90, 0));
-            EntityProperties.AddStatusProperty(StatusTypes.Immobilized, new StatusPropertyHolder(80, 0));
+            EntityProperties.AddStatusProperty(StatusTypes.Stop, new StatusPropertyHolder(80, 0));
             EntityProperties.AddStatusProperty(StatusTypes.DEFDown, new StatusPropertyHolder(95, 0));
             EntityProperties.AddStatusProperty(StatusTypes.Burn, new StatusPropertyHolder(0, 0));
             EntityProperties.AddStatusProperty(StatusTypes.Frozen, new StatusPropertyHolder(0, 0));

@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// The Paralyzed Status Effect.
     /// Entities afflicted with this cannot move until it ends.
     /// </summary>
-    public sealed class ParalyzedStatus : ImmobilizedStatus
+    public sealed class ParalyzedStatus : StopStatus
     {
         private CroppedTexture2D SparkIcon = null;
 

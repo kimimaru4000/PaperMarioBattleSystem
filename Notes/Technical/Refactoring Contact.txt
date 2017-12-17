@@ -189,6 +189,41 @@ So this solution fixes problems 1 and 2:
 
 However, we didn't address 3 and 4.
 
+I noticed that they act inversely in some way in the PM games:
+
+For 3:
+-Fuzzies and Swoopers CAN'T latch onto you if you have Zap Tap; if you have Return Postage, they can (but still take damage after damaging you)
+-Ms. Mowz's Kiss Thief is similar, except it doesn't deal damage so she can use it on enemies with Return Postage's Payback
+
+For 4:
+-Koopa Troopas CAN attack you in their shells if you have Zap Tap; if you have Return Postage, they take damage
+-Hammer acts the same way as Koopa shells except for one thing: they get hit by Bristles
+
+Hold Fast's Payback seems to work the same way as Return Postage's, except it also doesn't allow "latching" or "touching" moves (Ex. Kiss Thief, Fuzzies and Swoopers), just like Electrified.
+
+This means that, so far, we're on the right track with how 1 and 2 are being refactored to be more flexible.
+
+Right now, we have the following ContactTypes:
+
+None, Approach, TopDirect, SideDirect
+
+These don't suit our needs. In TTYD, there are the following types of contacts:
+
+Touch: Fuzzies/Swoopers/Kiss Thief/(many more)
+Top: Jump, Bonk, Headbonk, Body Slam
+Side: Shell Shot, Shade Fist, Hammer
+Protected: (All Shell moves)
+Ranged: Hammer Throw, Spear Throw, (anything not actually dealing contact)
+
+As shown above, some moves fit under more than one category. So, we should change ContactTypes to be a bit field to accurately be able to represent everything.
+
+If a Payback protects against any of the ContactTypes, it will damage the BattleEntity attacking.
+
+Try this approach and see if it works.
+
+Update (12/17/17)
+-----------------
+I tested Jumping on a Lava Bubble in TTYD when it was Electrified and had the Payback and Hold Fast status effects. I didn't have Ice Power active, and it did only 1 damage due to the Lava Bubble's fire. This means that Failure Paybacks are prioritized; however, like with the Zap Tap + Return Postage oddity, it may be a bug or oversight. For this battle system, it makes sense to take damage from everything (Ex. Mario got hit by a Firey, Electrified, Explosive enemy, so he should take damage from all of that). It may not be 100% accurate, but it's consistent and, to me at least, seems like what TTYD's Payback system would be if it was developed further.
 
 
 

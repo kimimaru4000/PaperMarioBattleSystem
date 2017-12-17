@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
 
             StatusesHealed = new StatusTypes[] { StatusTypes.Poison, StatusTypes.Tiny, StatusTypes.Allergic, StatusTypes.DEFDown,
                                                  StatusTypes.Dizzy, StatusTypes.Confused, StatusTypes.Frozen, StatusTypes.Burn,
-                                                 StatusTypes.Slow, StatusTypes.Sleep, StatusTypes.Immobilized };
+                                                 StatusTypes.Slow, StatusTypes.Sleep, StatusTypes.Stop };
 
             SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
             MoveAffectionType = Enumerations.MoveAffectionTypes.Self | Enumerations.MoveAffectionTypes.Ally;

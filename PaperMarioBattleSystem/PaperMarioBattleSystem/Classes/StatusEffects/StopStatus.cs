@@ -9,15 +9,15 @@ using Microsoft.Xna.Framework.Graphics;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The Immobilized Status Effect.
+    /// The Stop Status Effect.
     /// Entities afflicted with this cannot move until it wears off.
     /// <para>Mario and his Partner cannot Guard or Superguard when afflicted with this Status Effect.</para>
     /// </summary>
-    public class ImmobilizedStatus : StatusEffect
+    public class StopStatus : StatusEffect
     {
-        public ImmobilizedStatus(int duration)
+        public StopStatus(int duration)
         {
-            StatusType = Enumerations.StatusTypes.Immobilized;
+            StatusType = Enumerations.StatusTypes.Stop;
             Alignment = StatusAlignments.Negative;
 
             StatusIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
@@ -89,7 +89,7 @@ namespace PaperMarioBattleSystem
 
         public override StatusEffect Copy()
         {
-            return new ImmobilizedStatus(Duration);
+            return new StopStatus(Duration);
         }
     }
 }

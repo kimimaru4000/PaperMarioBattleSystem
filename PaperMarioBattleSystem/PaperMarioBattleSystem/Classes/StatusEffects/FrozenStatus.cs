@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Entities afflicted with this cannot move until it ends, in which the entity will take 1 Ice damage.
     /// If the entity is afflicted with Burn while it is Frozen, both effects will negate each other.
     /// </summary>
-    public sealed class FrozenStatus : ImmobilizedStatus
+    public sealed class FrozenStatus : StopStatus
     {
         /// <summary>
         /// The amount of Ice damage the entity takes when the status ends.

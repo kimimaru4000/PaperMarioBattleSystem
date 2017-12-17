@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
             EntityEquipped.AddRemoveStatusImmunity(Enumerations.StatusTypes.Poison, immune);
             EntityEquipped.AddRemoveStatusImmunity(Enumerations.StatusTypes.Dizzy, immune);
             EntityEquipped.AddRemoveStatusImmunity(Enumerations.StatusTypes.Confused, immune);
-            EntityEquipped.AddRemoveStatusImmunity(Enumerations.StatusTypes.Immobilized, immune);
+            EntityEquipped.AddRemoveStatusImmunity(Enumerations.StatusTypes.Stop, immune);
             EntityEquipped.AddRemoveStatusImmunity(Enumerations.StatusTypes.Sleep, immune);
             EntityEquipped.AddRemoveStatusImmunity(Enumerations.StatusTypes.DEFDown, immune);
             EntityEquipped.AddRemoveStatusImmunity(Enumerations.StatusTypes.POWDown, immune);

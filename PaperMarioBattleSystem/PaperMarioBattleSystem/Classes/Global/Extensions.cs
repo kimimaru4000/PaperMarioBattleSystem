@@ -261,5 +261,29 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        #region Dictionary Extensions
+
+        /// <summary>
+        /// Copies the keys and values from this <see cref="Dictionary{TKey, TValue}"/> into a new <see cref="Dictionary{TKey, TValue}"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the key.</typeparam>
+        /// <typeparam name="U">The type of the value.</typeparam>
+        /// <param name="dictionary">The Dictionary to copy from.</param>
+        /// <returns>A new <see cref="Dictionary{TKey, TValue}"/> with the same key-value pairs as <paramref name="dictionary"/>.</returns>
+        public static Dictionary<T, U> CopyDictionary<T,U>(this Dictionary<T, U> dictionary)
+        {
+            Dictionary<T, U > newDict = new Dictionary<T, U>();
+            
+            //Copy all elements into the new Dictionary
+            foreach (KeyValuePair<T, U> kvPair in dictionary)
+            {
+                newDict.Add(kvPair.Key, kvPair.Value);
+            }
+
+            return newDict;
+        }
+
+        #endregion
     }
 }

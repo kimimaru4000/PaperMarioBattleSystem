@@ -1,0 +1,51 @@
+Refactoring Contact (Take 2; 12/17/17)
+--------------------------------------
+Let's start from scratch:
+
+1. We cannot do the Dark Puff electric charge behavior in the current system.
+2. We can't have Koopa Troopas take damage from a Superguard.
+
+For 1:
+
+There needs to be a way to define this on a per-BattleEntity basis:
+-Remove the Contact Table
+-Add the following fields to PaybackHolder:
+  -PhysAttributes PhysAttribute; the Physical Attribute that the Payback is associated with (Ex. Fiery enemies would have this as Fiery)
+  -ContactTypes PaybackContact; tells the ContactType that the Payback affects
+  -ContactResult PaybackContactResult; tells the ContactResult of the Payback
+  -ContactResult SamePhysAttrResult; tells the adjusted ContactResult if the attacker has the same Physical Attribute as PhysAttribute (Ex. This would be Success for Electrified). This also allows for more possibilities not possible in the normal games (Ex. a "Dark" PhysAttribute that is normally a Success but turns into a Failure when attacked by another "Dark" PhysAttribute)
+  
+Furthermore:
+-Merge the TopSpiked and SideSpiked PhysAttributes into Spiked since this system is now something each BattleEntity can define for itself
+
+What this accomplishes
+----------------------
+Can Dark Puffs do their electric charge behavior?
+
+Yes. Add a Payback with the Electrified PhysAttribute, Failure PaybackContactResult, and Success SamePhysAttrResult. Add one for both TopDirect and SideDirect contact.
+
+Are Spiked Goombas still not able to jump on other Spiked Goombas?
+
+Yes. Add a Payback with the Spiked PhysAttribute, Failure PaybackContactResult, and Failure SamePhysAttrResult. Add one for TopDirect contact.
+
+
+Implementation
+--------------
+Next we need to change how a contact result is determined:
+  0. Initialize a list of Paybacks, called PaybackList
+  1. Go through all of the Victim's Paybacks
+     2. Check if the Payback's PaybackContact matches the ContactType of the attack
+        3a. If so, check if the Attacker has any ContactExceptions for the Payback's PhysAttribute
+           4a. If so, ignore it and continue
+           4a. If not, check if the Attacker has the same PhysAttribute as the Payback's
+              5a. If so, examine the SamePhysAttrResult and go to 6a
+              5b. If not, examine the PaybackContactResult and go to 6a
+                 6a. If the ContactResult is a Failure, return that Payback value
+                 6b. If the ContactResult is a Success, ignore it and continue
+                 6c. If the ContactResult is a PartialSuccess, add it to PaybackList and continue
+        3b. If not, continue      
+
+After going through all Paybacks, combine all Paybacks in PaybackList and use that as the Payback value in the returned ContactResultInfo. The default value is a Success, so if no Paybacks are in the list, contact will be successful.
+
+
+Try this out and see how it goes. If it's satisfactory, move onto 2!

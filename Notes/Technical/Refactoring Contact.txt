@@ -225,6 +225,54 @@ Update (12/17/17)
 -----------------
 I tested Jumping on a Lava Bubble in TTYD when it was Electrified and had the Payback and Hold Fast status effects. I didn't have Ice Power active, and it did only 1 damage due to the Lava Bubble's fire. This means that Failure Paybacks are prioritized; however, like with the Zap Tap + Return Postage oddity, it may be a bug or oversight. For this battle system, it makes sense to take damage from everything (Ex. Mario got hit by a Firey, Electrified, Explosive enemy, so he should take damage from all of that). It may not be 100% accurate, but it's consistent and, to me at least, seems like what TTYD's Payback system would be if it was developed further.
 
+Update 2 (12/17/17)
+-------------------
+The new set of ContactTypes don't work for our needs. We can make Return Postage grant Payback that protects against Top and Side, but Mario's Hammer won't work because it's Side. We need a way to tell whether a type of contact is protected or ranged in some way.
+
+There are several types:
+
+None: No protection - They take damage from any type of Payback and take damage from Superguards.
+Protected: Koopa Shells - They take Payback from Return Postage, but not from Electrified, Fiery enemies, or charged Puff enemies. They take damage from Superguards.
+Held: Hammer - These attacks involve a weapon that's used directly by the attacker. They don't take damage from anything except Superguards.
+Ranged: Any move not involving contact - These attacks involve a projectile or magic spell
+
+Say these are in place, called ContactProtectionTypes. Now we can change the ContactTypes:
+
+-None
+-Touch
+-Top
+-Side
+
+With this, let's define Return Postage's Payback:
+
+ContactTypes: Top & Side
+ContactExclusions: Held & Ranged
+
+So, Return Postage won't damage the users of Hammer or ranged attacks, but it will damage Koopa Shells and direct hits.
+
+Now let's take a look at Electrified:
+
+ContactTypes: Touch & Top & Side
+ContactExclusions: Protected & Held & Ranged
+
+With this, Electrified won't damage Koopa Shells or users of Hammer or ranged attacks, but it will damage direct contact moves.
+
+
+Last one: Superguards
+
+ContactTypes: Touch & Top & Side
+ContactExclusions: Ranged
+
+This means Superguards will damage Koopa Shells, Hammer, or anything making direct contact, but won't damage users of Ranged attacks like a Hammer Throw or Spear Throw.
+
+Try this out.
+
+Update 3 (12/17/17)
+-------------------
+Another oversight: upon trying to add Payback to a SpikedGoomba, the PhysAttribute for the PaybackHolder had to be None. However, this means that there's no way to override it, and the Contact Exceptions can't protect against it because it has no additional data. It has to be None since Spiked enemies can hurt other Spiked enemies. This means Spike Shield can't work against Spiked enemies, which is a serious regression. Things were also getting rather messy and I wasn't liking the additional code required to define attacks, interactions, and etc.
+
+Think about this more later: I'm scrapping all my current code changes because this won't work as is.
+
 
 
 

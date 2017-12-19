@@ -19,7 +19,8 @@ namespace PaperMarioBattleSystem
     {
         protected PaybackHolder Paybackholder = PaybackHolder.Default;
 
-        public PaybackStatus(int duration) : this(duration, new PaybackHolder(PaybackTypes.Half, Elements.Normal, null))
+        public PaybackStatus(int duration) : this(duration,
+            new PaybackHolder(PaybackTypes.Half, PhysicalAttributes.None, Elements.Normal, new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect }, ContactResult.PartialSuccess, ContactResult.PartialSuccess, null))
         {
 
         }

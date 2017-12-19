@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -14,7 +15,8 @@ namespace PaperMarioBattleSystem
     public sealed class HoldFastStatus : PaybackStatus
     {
         public HoldFastStatus(int duration) : base(duration,
-            new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Half, Enumerations.Elements.Explosion, null))
+            new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Half, PhysicalAttributes.Explosive, Elements.Explosion,
+                new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect }, ContactResult.PartialSuccess, ContactResult.PartialSuccess, null))
         {
             StatusType = Enumerations.StatusTypes.HoldFast;
 

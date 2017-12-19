@@ -182,16 +182,14 @@ namespace PaperMarioBattleSystem
     {
         public StatusGlobals.PaybackHolder Paybackholder;
         public Enumerations.ContactResult ContactResult;
-        public bool SuccessIfSameAttr;
 
         public static ContactResultInfo Default => 
-            new ContactResultInfo(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Constant, Enumerations.Elements.Normal, 1, null), Enumerations.ContactResult.Success, false);
+            new ContactResultInfo(StatusGlobals.PaybackHolder.Default, Enumerations.ContactResult.Success);
 
-        public ContactResultInfo(StatusGlobals.PaybackHolder paybackHolder, Enumerations.ContactResult contactResult, bool successIfSameAttr)
+        public ContactResultInfo(StatusGlobals.PaybackHolder paybackHolder, Enumerations.ContactResult contactResult)
         {
             Paybackholder = paybackHolder;
             ContactResult = contactResult;
-            SuccessIfSameAttr = successIfSameAttr;
         }
     }
 
@@ -900,7 +898,7 @@ namespace PaperMarioBattleSystem
           Confirmed - Spiked enemies get hurt when jumping on other Spiked enemies*/
         public enum PhysicalAttributes
         {
-            None, Flying, Electrified, Poisonous, TopSpiked, SideSpiked, Icy, Fiery, Explosive, Starry
+            None, Flying, Electrified, Poisonous, Spiked, Icy, Fiery, Explosive, Starry
         }
 
         /// <summary>
@@ -932,7 +930,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum ContactResult
         {
-            Success, Failure, PartialSuccess
+            Success, PartialSuccess, Failure 
         }
 
         /// <summary>
@@ -1615,9 +1613,30 @@ namespace PaperMarioBattleSystem
             public PaybackTypes PaybackType { get; private set; }
 
             /// <summary>
+            /// The Physical Attribute that the Payback is associated with (Ex. Fiery for Fiery enemies).
+            /// </summary>
+            public Enumerations.PhysicalAttributes PhysAttribute { get; private set; }
+
+            /// <summary>
             /// The Elemental damage dealt
             /// </summary>
             public Enumerations.Elements Element { get; private set; }
+
+            /// <summary>
+            /// The ContactTypes that the Payback affects.
+            /// </summary>
+            public Enumerations.ContactTypes[] PaybackContacts { get; private set; }
+
+            /// <summary>
+            /// Tells the ContactResult of the Payback.
+            /// </summary>
+            public Enumerations.ContactResult PaybackContactResult { get; private set; }
+
+            /// <summary>
+            /// The adjusted ContactResult if the Attacker has the same PhysicalAttribute as <see cref="PhysAttribute"/>.
+            /// <para>Ex. This would be Success for Electrified.</para>
+            /// </summary>
+            public Enumerations.ContactResult SamePhysAttrResult { get; private set; }
 
             /// <summary>
             /// The amount of damage to deal.
@@ -1630,18 +1649,33 @@ namespace PaperMarioBattleSystem
             /// </summary>
             public StatusChanceHolder[] StatusesInflicted { get; private set; }
 
-            public static PaybackHolder Default => new PaybackHolder(PaybackTypes.Constant, Enumerations.Elements.Normal, 1, null);
+            public static PaybackHolder Default => 
+            new PaybackHolder(PaybackTypes.Constant, Enumerations.PhysicalAttributes.None, Enumerations.Elements.Normal,
+                new Enumerations.ContactTypes[] { Enumerations.ContactTypes.SideDirect, Enumerations.ContactTypes.TopDirect },
+                Enumerations.ContactResult.Success, Enumerations.ContactResult.Success, 0, null);
 
-            public PaybackHolder(PaybackTypes paybackType, Enumerations.Elements element, params StatusChanceHolder[] statusesInflicted)
+            public PaybackHolder(PaybackTypes paybackType, Enumerations.PhysicalAttributes physAttribute, Enumerations.Elements element,
+                Enumerations.ContactTypes[] paybackContacts, Enumerations.ContactResult contactResult,
+                Enumerations.ContactResult samePhysAttrResult, params StatusChanceHolder[] statusesInflicted)
             {
                 PaybackType = paybackType;
+                PhysAttribute = physAttribute;
                 Element = element;
+                PaybackContacts = paybackContacts;
+                PaybackContactResult = contactResult;
+                SamePhysAttrResult = samePhysAttrResult;
                 Damage = 0;
                 StatusesInflicted = statusesInflicted;
+
+                //Ensure this isn't null
+                if (PaybackContacts == null)
+                    PaybackContacts = new Enumerations.ContactTypes[0];
             }
 
-            public PaybackHolder(PaybackTypes paybackType, Enumerations.Elements element, int constantDamage, params StatusChanceHolder[] statusesInflicted)
-                : this(paybackType, element, statusesInflicted)
+            public PaybackHolder(PaybackTypes paybackType, Enumerations.PhysicalAttributes physAttribute, Enumerations.Elements element,
+                Enumerations.ContactTypes[] paybackContacts, Enumerations.ContactResult contactResult,
+                Enumerations.ContactResult samePhysAttrResult, int constantDamage, params StatusChanceHolder[] statusesInflicted)
+                : this(paybackType, physAttribute, element, paybackContacts, contactResult, samePhysAttrResult, statusesInflicted)
             {
                 Damage = constantDamage;
             }
@@ -1670,9 +1704,14 @@ namespace PaperMarioBattleSystem
             {
                 //Initialize default values
                 PaybackTypes totalType = PaybackTypes.Constant;
+                Enumerations.PhysicalAttributes totalPhysAttribute = Enumerations.PhysicalAttributes.None;
                 Enumerations.Elements totalElement = Enumerations.Elements.Normal;
+                Enumerations.ContactResult totalContactResult = Enumerations.ContactResult.Success;
+                Enumerations.ContactResult totalAttrContactResult = Enumerations.ContactResult.Success;
                 int totalDamage = 0;
                 List<StatusChanceHolder> totalStatuses = new List<StatusChanceHolder>();
+
+                List<Enumerations.ContactTypes> totalContactTypes = new List<Enumerations.ContactTypes>();
 
                 //Go through all the Paybacks and add them up
                 for (int i = 0; i < paybackHolders.Count; i++)
@@ -1693,6 +1732,16 @@ namespace PaperMarioBattleSystem
                     if (paybackHolder.Element > totalElement)
                         totalElement = paybackHolder.Element;
 
+                    //Check for a higher priority PhysicalAttribute
+                    if (paybackHolder.PhysAttribute > totalPhysAttribute)
+                        totalPhysAttribute = paybackHolder.PhysAttribute;
+
+                    //Check for higher priority ContactResults
+                    if (paybackHolder.PaybackContactResult > totalContactResult)
+                        totalContactResult = paybackHolder.PaybackContactResult;
+                    if (paybackHolder.SamePhysAttrResult > totalAttrContactResult)
+                        totalAttrContactResult = paybackHolder.SamePhysAttrResult;
+
                     //Add up all the damage
                     totalDamage += paybackHolder.Damage;
 
@@ -1702,10 +1751,20 @@ namespace PaperMarioBattleSystem
                     {
                         totalStatuses.AddRange(paybackHolder.StatusesInflicted);
                     }
+
+                    //Check for affected ContactTypes and add ones that the combined payback doesn't have
+                    for (int j = 0; j < paybackHolder.PaybackContacts.Length; j++)
+                    {
+                        Enumerations.ContactTypes contactType = paybackHolder.PaybackContacts[j];
+                        if (totalContactTypes.Contains(contactType) == false)
+                        {
+                            totalContactTypes.Add(contactType);
+                        }
+                    }
                 }
 
                 //Return the final Payback
-                return new PaybackHolder(totalType, totalElement, totalDamage, totalStatuses.Count == 0 ? null : totalStatuses.ToArray());
+                return new PaybackHolder(totalType, totalPhysAttribute, totalElement, totalContactTypes.ToArray(), totalContactResult, totalAttrContactResult, totalDamage, totalStatuses.Count == 0 ? null : totalStatuses.ToArray());
             }
         }
 

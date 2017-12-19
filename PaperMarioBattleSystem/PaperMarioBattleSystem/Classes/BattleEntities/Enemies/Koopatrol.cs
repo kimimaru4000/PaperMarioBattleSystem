@@ -20,6 +20,9 @@ namespace PaperMarioBattleSystem
             //Using their TTYD stats
             BattleStats = new Stats(26, 6, 0, 4, 2);
 
+            EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Constant, Enumerations.PhysicalAttributes.Spiked,
+                Enumerations.Elements.Sharp, new Enumerations.ContactTypes[] { Enumerations.ContactTypes.TopDirect }, Enumerations.ContactResult.Failure, Enumerations.ContactResult.Failure, 1, null));
+
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Sleep, new StatusPropertyHolder(70d, -1));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Dizzy, new StatusPropertyHolder(105d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Confused, new StatusPropertyHolder(75d, 0));

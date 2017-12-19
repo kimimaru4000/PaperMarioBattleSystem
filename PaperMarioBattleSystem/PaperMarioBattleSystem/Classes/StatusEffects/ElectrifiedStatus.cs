@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static PaperMarioBattleSystem.StatusGlobals;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -14,6 +16,10 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class ElectrifiedStatus : StatusEffect
     {
+        private readonly PaybackHolder ElectrifiedPayback = new PaybackHolder(PaybackTypes.Constant, PhysicalAttributes.Electrified,
+            Elements.Electric, new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect }, ContactResult.PartialSuccess,
+            ContactResult.Success, 1, null);
+
         private CroppedTexture2D SparkIcon = null;
 
         public ElectrifiedStatus(int duration)
@@ -39,11 +45,13 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             EntityAfflicted.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
+            EntityAfflicted.EntityProperties.AddPayback(ElectrifiedPayback);
         }
 
         protected override void OnEnd()
         {
             EntityAfflicted.EntityProperties.RemovePhysAttribute(Enumerations.PhysicalAttributes.Electrified);
+            EntityAfflicted.EntityProperties.RemovePayback(ElectrifiedPayback);
         }
 
         protected override void OnPhaseCycleStart()
@@ -56,6 +64,7 @@ namespace PaperMarioBattleSystem
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
                 EntityAfflicted.EntityProperties.RemovePhysAttribute(Enumerations.PhysicalAttributes.Electrified);
+                EntityAfflicted.EntityProperties.RemovePayback(ElectrifiedPayback);
             }
         }
 
@@ -64,6 +73,7 @@ namespace PaperMarioBattleSystem
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
                 EntityAfflicted.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
+                EntityAfflicted.EntityProperties.AddPayback(ElectrifiedPayback);
             }
         }
 

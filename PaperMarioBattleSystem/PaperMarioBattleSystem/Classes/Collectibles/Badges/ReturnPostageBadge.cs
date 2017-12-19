@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PaperMarioBattleSystem.Enumerations;
 using static PaperMarioBattleSystem.StatusGlobals;
 
 namespace PaperMarioBattleSystem
@@ -16,7 +17,9 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The Payback granted.
         /// </summary>
-        private readonly PaybackHolder PaybackGranted = new PaybackHolder(PaybackTypes.Half, Enumerations.Elements.Normal, 0, null);
+        private readonly PaybackHolder PaybackGranted = new PaybackHolder(PaybackTypes.Half, PhysicalAttributes.None,
+            Elements.Normal, new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect }, ContactResult.PartialSuccess,
+            ContactResult.PartialSuccess, 0, null);
 
         public ReturnPostageBadge()
         {

@@ -24,14 +24,14 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            EntityEquipped.EntityProperties.AddContactException(Enumerations.ContactTypes.TopDirect, Enumerations.PhysicalAttributes.TopSpiked);
-            EntityEquipped.EntityProperties.AddContactException(Enumerations.ContactTypes.SideDirect, Enumerations.PhysicalAttributes.SideSpiked);
+            EntityEquipped.EntityProperties.AddContactException(Enumerations.ContactTypes.TopDirect, Enumerations.PhysicalAttributes.Spiked);
+            EntityEquipped.EntityProperties.AddContactException(Enumerations.ContactTypes.SideDirect, Enumerations.PhysicalAttributes.Spiked);
         }
 
         protected override void OnUnequip()
         {
-            EntityEquipped.EntityProperties.RemoveContactException(Enumerations.ContactTypes.TopDirect, Enumerations.PhysicalAttributes.TopSpiked);
-            EntityEquipped.EntityProperties.RemoveContactException(Enumerations.ContactTypes.SideDirect, Enumerations.PhysicalAttributes.SideSpiked);
+            EntityEquipped.EntityProperties.RemoveContactException(Enumerations.ContactTypes.TopDirect, Enumerations.PhysicalAttributes.Spiked);
+            EntityEquipped.EntityProperties.RemoveContactException(Enumerations.ContactTypes.SideDirect, Enumerations.PhysicalAttributes.Spiked);
         }
     }
 }

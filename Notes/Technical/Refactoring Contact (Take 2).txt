@@ -49,3 +49,7 @@ After going through all Paybacks, combine all Paybacks in PaybackList and use th
 
 
 Try this out and see how it goes. If it's satisfactory, move onto 2!
+
+Update (12/18/17)
+-----------------
+Change ContactTypes to an array to make it easier to handle multiple (instead of adding more Paybacks).

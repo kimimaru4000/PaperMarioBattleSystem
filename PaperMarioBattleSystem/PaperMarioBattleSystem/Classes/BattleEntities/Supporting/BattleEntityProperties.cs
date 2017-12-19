@@ -171,23 +171,7 @@ namespace PaperMarioBattleSystem
         /// <returns>A ContactResultInfo containing the result of the interaction</returns>
         public ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType)
         {
-            ContactResultInfo contactResultInfo = Interactions.GetContactResult(attacker, contactType, GetAllPhysAttributes(), attacker.EntityProperties.GetContactExceptions(contactType));
-
-            //On a Success, check if this Entity has any Payback and add it if so
-            if ((contactResultInfo.ContactResult == ContactResult.Success || contactResultInfo.ContactResult == ContactResult.PartialSuccess) && HasPayback() == true)
-            {
-                PaybackHolder paybackholder;
-
-                //Factor in the contact's Payback on a PartialSuccess
-                if (contactResultInfo.ContactResult == ContactResult.PartialSuccess)
-                    paybackholder = GetPayback(contactResultInfo.Paybackholder);
-                //Get only the BattleEntity's Payback on a Success
-                else paybackholder = GetPayback();
-
-                //Since there's Payback, the result is now a PartialSuccess
-                contactResultInfo.ContactResult = ContactResult.PartialSuccess;
-                contactResultInfo.Paybackholder = paybackholder;
-            }
+            ContactResultInfo contactResultInfo = Interactions.GetContactResult(attacker.EntityProperties.GetAllPhysAttributes(), contactType, GetAllPaybacks(), attacker.EntityProperties.GetContactExceptions(contactType));
 
             return contactResultInfo;
         }
@@ -965,9 +949,18 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Gets all of the BattleEntity's individual Paybacks.
+        /// </summary>
+        /// <returns>An array of PaybackHolders with the Paybacks the BattleEntity has.</returns>
+        public PaybackHolder[] GetAllPaybacks()
+        {
+            return Paybacks.ToArray();
+        }
+
+        /// <summary>
         /// Gets the total Payback a BattleEntity has by combining all of the current Paybacks affecting the BattleEntity.
         /// </summary>
-        /// <param name="additionalPaybacks">Any additional PaybackHolders to factor in. This is used when determining the total contact result.</param>
+        /// <param name="additionalPaybacks">Any additional PaybackHolders to factor in.</param>
         /// <returns>A PaybackHolder with the combined properties of all the Paybacks the BattleEntity has</returns>
         public PaybackHolder GetPayback(params PaybackHolder[] additionalPaybacks)
         {

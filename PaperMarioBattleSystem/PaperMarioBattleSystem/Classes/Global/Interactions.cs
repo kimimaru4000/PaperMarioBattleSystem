@@ -43,15 +43,6 @@ namespace PaperMarioBattleSystem
         #region Fields    
 
         /// <summary>
-        /// The table that determines the result of a particular ContactType and a particular PhysicalAttribute.
-        /// <para>The default value is a Success, meaning the ContactType will deal damage.
-        /// A Failure indicates a backfire (Ex. Mario jumping on a spiked enemy).
-        /// A PartialSuccess indicates that the ContactType will both deal damage and backfire (Ex. Mario jumping on an Electrified enemy).
-        /// </para>
-        /// </summary>
-        private static Dictionary<ContactTypes, Dictionary<PhysicalAttributes, ContactResultInfo>> ContactTable = null;
-
-        /// <summary>
         /// The list of steps for the Damage Calculation formula.
         /// </summary>
         private static List<DamageCalcStep> DamageCalculationSteps = null;
@@ -60,86 +51,79 @@ namespace PaperMarioBattleSystem
 
         static Interactions()
         {
-            InitalizeContactTable();
             InitializeDamageFormulaSteps();
         }
 
-        #region Contact Table Initialization Methods
-
-        private static void InitalizeContactTable()
-        {
-            ContactTable = new Dictionary<ContactTypes, Dictionary<PhysicalAttributes, ContactResultInfo>>();
-
-            InitializeTopDirectContactTable();
-            InitializeSideDirectContactTable();
-        }
-
-        //NOTE: In the actual games, if you have the Payback status, it takes priority over any PhysicalAttributes when being dealt damage
-        //For example, if you have both Return Postage and Zap Tap equipped, sucking enemies like Fuzzies will be able to touch you
-        //However, normal properties apply when attacking enemies (you'll be able to jump on Electrified enemies)
-
-        private static void InitializeTopDirectContactTable()
-        {
-            ContactTable.Add(ContactTypes.TopDirect, new Dictionary<PhysicalAttributes, ContactResultInfo>()
-            {
-                { PhysicalAttributes.TopSpiked, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Sharp, 1), ContactResult.Failure, false) },
-                { PhysicalAttributes.Electrified, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Electric, 1), ContactResult.PartialSuccess, true) },
-                { PhysicalAttributes.Fiery, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Fire, 1), ContactResult.Failure, false) }
-            });
-        }
-
-        private static void InitializeSideDirectContactTable()
-        {
-            ContactTable.Add(ContactTypes.SideDirect, new Dictionary<PhysicalAttributes, ContactResultInfo>()
-            {
-                { PhysicalAttributes.SideSpiked, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Sharp, 1), ContactResult.Failure, false) },
-                { PhysicalAttributes.Electrified, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Electric, 1), ContactResult.PartialSuccess, true) },
-                { PhysicalAttributes.Fiery, new ContactResultInfo(new PaybackHolder(PaybackTypes.Constant, Elements.Fire, 1), ContactResult.Failure, false) }
-            });
-        }
-
-        #endregion
-
-        #region Contact Table Methods
+        #region Contact Methods
 
         /// <summary>
         /// Gets the result of a ContactType on a set of PhysicalAttributes
         /// </summary>
-        /// <param name="attacker">The BattleEntity performing the attack</param>
-        /// <param name="contactType">The ContactType performed</param>
-        /// <param name="physAttributes">The set of PhysicalAttributes to test against</param>
-        /// <param name="attributesToIgnore">A set of PhysicalAttributes to ignore</param>
-        /// <returns>A ContactResultInfo of the interaction</returns>
-        public static ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType, PhysicalAttributes[] physAttributes, params PhysicalAttributes[] attributesToIgnore)
+        /// <param name="attackerPhysAttributes">The attacker's set of PhysicalAttributes.</param>
+        /// <param name="contactType">The ContactType performed.</param>
+        /// <param name="victimPaybacks">The victim's set of Paybacks to test against.</param>
+        /// <param name="attackerContactExceptions">The attacker's contact exceptions; the set PhysicalAttributes to ignore.</param>
+        /// <returns>A ContactResultInfo of the interaction.</returns>
+        public static ContactResultInfo GetContactResult(IList<PhysicalAttributes> attackerPhysAttributes, ContactTypes contactType, IList<PaybackHolder> victimPaybacks, params PhysicalAttributes[] attackerContactExceptions)
         {
             //Return the default value
-            if (ContactTable.ContainsKey(contactType) == false || physAttributes == null)
+            if (victimPaybacks == null || victimPaybacks.Count == 0)
             {
-                Debug.LogWarning($"{nameof(physAttributes)} array is null or {nameof(ContactTable)} does not contain the ContactType {contactType}!");
                 return ContactResultInfo.Default;
             }
 
-            //Look through the attributes and find the first match
-            for (int i = 0; i < physAttributes.Length; i++)
+            /*0. Initialize a list of Paybacks, called PaybackList
+              1. Go through all of the Victim's Paybacks
+                 2. Check if the Payback's PaybackContacts contains the ContactType of the attack
+                    3a. If so, check if the Attacker has any ContactExceptions for the Payback's PhysAttribute
+                       4a. If so, ignore it and continue
+                       4a. If not, check if the Attacker has the same PhysAttribute as the Payback's
+                          5a. If so, examine the SamePhysAttrResult and go to 6a
+                          5b. If not, examine the PaybackContactResult and go to 6a
+                             6a. If the ContactResult is a Failure, return that Payback value
+                             6b. If the ContactResult is a Success, ignore it and continue
+                             6c. If the ContactResult is a PartialSuccess, add it to PaybackList and continue
+                    3b. If not, continue */
+
+            //The Paybacks that will be combined
+            List<PaybackHolder> combinedPaybacks = new List<PaybackHolder>();
+
+            //Look through the Paybacks
+            for (int i = 0; i < victimPaybacks.Count; i++)
             {
-                Dictionary<PhysicalAttributes, ContactResultInfo> tableForContact = ContactTable[contactType];
-                PhysicalAttributes attribute = physAttributes[i];
+                PaybackHolder payback = victimPaybacks[i];
 
-                //If this attribute is ignored, move onto the next
-                if (attributesToIgnore?.Contains(attribute) == true)
-                    continue;
-
-                if (tableForContact.ContainsKey(attribute) == true)
+                //Check if the Payback covers this ContactType
+                if (payback.PaybackContacts.Contains(contactType))
                 {
-                    ContactResultInfo contactResult = tableForContact[attribute];
-                    //If the ContactResult is a Success if the entity has the same PhysicalAttribute as the one tested, set its result to Success
-                    if (contactResult.SuccessIfSameAttr == true && attacker.EntityProperties.HasPhysAttributes(true, attribute) == true)
-                        contactResult.ContactResult = ContactResult.Success;
-                    return contactResult;
+                    //If there are contact exceptions for this PhysicalAttribute, ignore this Payback
+                    if (attackerContactExceptions.Contains(payback.PhysAttribute) == true)
+                        continue;
+
+                    ContactResult contactResult = payback.PaybackContactResult;
+
+                    //Check if the Attacker has the PhysicalAttribute the Payback is associated with, and adjust the ContactResult if so
+                    if (attackerPhysAttributes.Contains(payback.PhysAttribute) == true)
+                        contactResult = payback.SamePhysAttrResult;
+
+                    //If a Failure, use this Payback
+                    if (contactResult == ContactResult.Failure)
+                    {
+                        return new ContactResultInfo(payback, contactResult);
+                    }
+                    //If a PartialSuccess, add it to the list
+                    else if (contactResult == ContactResult.PartialSuccess)
+                    {
+                        combinedPaybacks.Add(payback);
+                    }
                 }
             }
 
-            return ContactResultInfo.Default;
+            //Combine all the Paybacks in the list
+            PaybackHolder finalPayback = PaybackHolder.CombinePaybacks(combinedPaybacks);
+
+            //Return the normal PaybackContactResult since it's a PartialSuccess anyway
+            return new ContactResultInfo(finalPayback, finalPayback.PaybackContactResult);
         }
 
         #endregion
@@ -557,7 +541,10 @@ namespace PaperMarioBattleSystem
                             StepResult.AttackerResult.TotalDamage = elementHolder.Damage;
 
                             //Update the Paybackholder to use the Payback data from the Defensive Action
-                            StepContactResultInfo.Paybackholder = new PaybackHolder(PaybackTypes.Constant, elementHolder.Element, elementHolder.Damage);
+                            //NOTE: Use temp extra data for now; FIX ASAP!!!!
+                            StepContactResultInfo.Paybackholder = new PaybackHolder(PaybackTypes.Constant, PhysicalAttributes.None,
+                                elementHolder.Element, new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect },
+                                ContactResult.Failure, ContactResult.Failure, elementHolder.Damage);
                         }
 
                         StepResult.AttackerResult.DamageElement = victimDefenseData.Value.ElementHolder.Value.Element;

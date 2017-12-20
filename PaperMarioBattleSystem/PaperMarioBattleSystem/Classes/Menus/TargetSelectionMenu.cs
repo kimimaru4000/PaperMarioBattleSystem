@@ -77,8 +77,16 @@ namespace PaperMarioBattleSystem
             base.HandleCursorInput();
         }
 
+        protected override void OnSelectionChanged(int newSelection)
+        {
+            base.OnSelectionChanged(newSelection);
+
+            SoundManager.Instance.PlaySound(SoundManager.Sound.CursorMove);
+        }
+
         protected override void OnBackOut()
         {
+            SoundManager.Instance.PlaySound(SoundManager.Sound.MenuBackOut);
             EndSelection();
         }
 

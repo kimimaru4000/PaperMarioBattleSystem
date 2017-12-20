@@ -101,6 +101,8 @@ namespace PaperMarioBattleSystem
         {
             double spacing = Math.PI / MaxWheelActions;
             RotationOffset = newSelection * -spacing;
+
+            SoundManager.Instance.PlaySound(SoundManager.Sound.CommandCursorMove);
         }
 
         protected override void HandleSelectionInput()

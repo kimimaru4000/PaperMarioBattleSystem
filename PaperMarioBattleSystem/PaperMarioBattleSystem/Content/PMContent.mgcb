@@ -13,11 +13,29 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Audio/SFX/Switch Partner.wav
+#begin Audio/SFX/Command Cursor Move.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Audio/SFX/Switch Partner.wav
+/build:Audio/SFX/Command Cursor Move.wav
+
+#begin Audio/SFX/Cursor Move.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Cursor Move.wav
+
+#begin Audio/SFX/Damaged.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Damaged.wav
+
+#begin Audio/SFX/Danger.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Danger.wav
 
 #begin Audio/SFX/Enemy Death.wav
 /importer:WavImporter
@@ -25,27 +43,114 @@
 /processorParam:Quality=Best
 /build:Audio/SFX/Enemy Death.wav
 
+#begin Audio/SFX/Fright Mask.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Fright Mask.wav
+
+#begin Audio/SFX/Immune.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Immune.wav
+
+#begin Audio/SFX/Lucky.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Lucky.wav
+
+#begin Audio/SFX/Lullaby.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Lullaby.wav
+
+#begin Audio/SFX/Mario Jump.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Mario Jump.wav
+
+#begin Audio/SFX/Menu Back Out.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Menu Back Out.wav
+
+#begin Audio/SFX/Nice.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Nice.wav
+
 #begin Audio/SFX/Partner Away.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Audio/SFX/Partner Away.wav
 
-#begin SpriteFonts/TTYD Font.spritefont
-/importer:FontDescriptionImporter
-/processor:FontDescriptionProcessor
-/processorParam:TextureFormat=Compressed
-/build:SpriteFonts/TTYD Font.spritefont
+#begin Audio/SFX/Peril.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Peril.wav
+
+#begin Audio/SFX/PM Sleep Afflict.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/PM Sleep Afflict.wav
+
+#begin Audio/SFX/PM Star Power Increase.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/PM Star Power Increase.wav
+
+#begin Audio/SFX/PM Status Afflict.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/PM Status Afflict.wav
+
+#begin Audio/SFX/Star Spirit Appear.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Star Spirit Appear.wav
+
+#begin Audio/SFX/Star Spirit Summon.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Star Spirit Summon.wav
+
+#begin Audio/SFX/Switch Partner.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Switch Partner.wav
 
 #begin SpriteFonts/PM Font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:SpriteFonts/PM Font.spritefont
 
 #begin SpriteFonts/Real TTYD Font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:SpriteFonts/Real TTYD Font.spritefont
+
+#begin SpriteFonts/TTYD Font.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:SpriteFonts/TTYD Font.spritefont
 

@@ -41,16 +41,37 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum Sound
         {
-            SwitchPartner, EnemyDeath, PartnerAway
+            MarioJump,
+            SwitchPartner, EnemyDeath, PartnerAway,
+            Danger, Peril, Damaged, Immune, Lucky,
+            CursorMove, CommandCursorMove, MenuBackOut,
+            ActionCommandSuccess,
+            StarSpiritAppear, StarSpiritSummon, PMStarPowerIncrease,
+            Lullaby, FrightMask
         }
 
         #endregion
 
-        private static Dictionary<Sound, string> SoundMap = new Dictionary<Sound, string>()
+        private static readonly Dictionary<Sound, string> SoundMap = new Dictionary<Sound, string>()
         {
+            { Sound.MarioJump, $"{ContentGlobals.SoundRoot}Mario Jump" },
             { Sound.SwitchPartner, $"{ContentGlobals.SoundRoot}Switch Partner" },
             { Sound.EnemyDeath, $"{ContentGlobals.SoundRoot}Enemy Death" },
-            { Sound.PartnerAway, $"{ContentGlobals.SoundRoot}Partner Away" }
+            { Sound.PartnerAway, $"{ContentGlobals.SoundRoot}Partner Away" },
+            { Sound.Danger, $"{ContentGlobals.SoundRoot}Danger" },
+            { Sound.Peril, $"{ContentGlobals.SoundRoot}Peril" },
+            { Sound.Damaged, $"{ContentGlobals.SoundRoot}Damaged" },
+            { Sound.Immune, $"{ContentGlobals.SoundRoot}Immune" },
+            { Sound.Lucky, $"{ContentGlobals.SoundRoot}Lucky" },
+            { Sound.CursorMove, $"{ContentGlobals.SoundRoot}Cursor Move" },
+            { Sound.CommandCursorMove, $"{ContentGlobals.SoundRoot}Command Cursor Move" },
+            { Sound.MenuBackOut, $"{ContentGlobals.SoundRoot}Menu Back Out" },
+            { Sound.ActionCommandSuccess, $"{ContentGlobals.SoundRoot}Nice" },
+            { Sound.StarSpiritAppear, $"{ContentGlobals.SoundRoot}Star Spirit Appear" },
+            { Sound.StarSpiritSummon, $"{ContentGlobals.SoundRoot}Star Spirit Summon" },
+            { Sound.PMStarPowerIncrease, $"{ContentGlobals.SoundRoot}PM Star Power Increase" },
+            { Sound.Lullaby, $"{ContentGlobals.SoundRoot}Lullaby" },
+            { Sound.FrightMask, $"{ContentGlobals.SoundRoot}Fright Mask" },
         };
 
         /// <summary>

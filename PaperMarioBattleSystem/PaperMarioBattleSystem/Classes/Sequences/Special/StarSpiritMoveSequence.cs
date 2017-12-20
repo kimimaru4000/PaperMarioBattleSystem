@@ -30,10 +30,14 @@ namespace PaperMarioBattleSystem
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName);
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.StarSpiritAppear);
+
                     CurSequenceAction = new WaitSeqAction(WaitTime);
                     break;
                 case 2:
                     User.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarWishName);
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.StarSpiritSummon);
+
                     //NOTE: Show Star Spirit appearing and VFX and such
                     CurSequenceAction = new WaitSeqAction(WaitTime);
                     break;

@@ -71,12 +71,15 @@ namespace PaperMarioBattleSystem
 
         protected override void OnSelectionChanged(int newSelection)
         {
+            SoundManager.Instance.PlaySound(SoundManager.Sound.CursorMove);
             BoxMenu.SetText(BattleActions[CurSelection].MoveProperties.Description);
         }
 
         protected override void OnBackOut()
         {
             base.OnBackOut();
+
+            SoundManager.Instance.PlaySound(SoundManager.Sound.MenuBackOut);
             BattleUIManager.Instance.PopMenu();
         }
 

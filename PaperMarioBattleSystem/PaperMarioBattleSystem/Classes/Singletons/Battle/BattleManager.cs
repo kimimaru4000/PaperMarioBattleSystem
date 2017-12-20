@@ -169,7 +169,7 @@ namespace PaperMarioBattleSystem
 
         private BattleManager()
         {
-            SoundManager.Instance.SoundVolume = 0f;
+            //SoundManager.Instance.SoundVolume = 0f;
         }
 
         public void CleanUp()

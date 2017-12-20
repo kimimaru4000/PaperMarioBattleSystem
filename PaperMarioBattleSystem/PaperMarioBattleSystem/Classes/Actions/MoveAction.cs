@@ -340,6 +340,13 @@ namespace PaperMarioBattleSystem
         /// <param name="alphaMod">The alpha value of the color. This is less than 1 if this MoveAction isn't currently selected on the menu.</param>
         public virtual void DrawMenuInfo(Vector2 position, Color color, float alphaMod)
         {
+            //Draw icon
+            if (MoveInfo.Icon != null && MoveInfo.Icon.Tex != null)
+            {
+                SpriteRenderer.Instance.Draw(MoveInfo.Icon.Tex, position - new Vector2(64, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f, true);
+            }
+
+            //Draw name
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Name, position, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
 
             //Show FP count if the move costs FP

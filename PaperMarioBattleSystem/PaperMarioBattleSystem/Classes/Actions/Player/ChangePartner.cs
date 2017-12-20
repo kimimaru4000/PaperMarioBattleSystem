@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
@@ -22,7 +24,18 @@ namespace PaperMarioBattleSystem
 
             Name = NewPartner.Name;
 
-            MoveInfo = new MoveActionData(null, NewPartner.PartnerDescription, Enumerations.MoveResourceTypes.FP, 0,
+            Rectangle sourceRect = new Rectangle(30 + (((int)NewPartner.PartnerType - 1) * 32), 886, 32, 32);
+
+            //Pretty hackish for now; show the disabled icon instead if the Partner is the current one out
+            if (NewPartner == BattleManager.Instance.GetPartner())
+            {
+                sourceRect.Y += 32;
+            }
+
+            CroppedTexture2D partnerIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
+                sourceRect);
+
+            MoveInfo = new MoveActionData(partnerIcon, NewPartner.PartnerDescription, Enumerations.MoveResourceTypes.FP, 0,
                 Enumerations.CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.Single,
                 false, null);
 

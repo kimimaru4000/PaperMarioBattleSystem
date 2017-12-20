@@ -17,6 +17,8 @@ namespace PaperMarioBattleSystem
         {
             Position = new Vector2(230, 150);
 
+            YSpacing = 25;
+
             BattlePartner[] partners = Inventory.Instance.partnerInventory.GetAllPartners();
 
             for (int i = 0; i < partners.Length; i++)

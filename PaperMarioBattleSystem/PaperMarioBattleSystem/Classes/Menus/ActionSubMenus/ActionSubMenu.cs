@@ -38,6 +38,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected Vector2 Position = Vector2.Zero;
 
+        /// <summary>
+        /// The Y spacing of the action list.
+        /// </summary>
+        protected float YSpacing = 20f;
+
         protected TextBox BoxMenu = null;
 
         protected override int LastSelection => BattleActions.Count - 1;
@@ -105,7 +110,7 @@ namespace PaperMarioBattleSystem
 
                 float alphaMod = 1f;
 
-                Vector2 pos = Position + new Vector2(0, i * 20);
+                Vector2 pos = Position + new Vector2(0, i * YSpacing);
                 Color color = moveAction.Disabled == false ? MoveAction.EnabledColor : MoveAction.DisabledColor;
                 if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) alphaMod = MoveAction.UnselectedAlpha;
                 //SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, moveAction.Name, pos, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);

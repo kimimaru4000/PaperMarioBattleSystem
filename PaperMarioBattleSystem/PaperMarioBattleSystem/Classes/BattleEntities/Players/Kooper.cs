@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
 
         protected sealed override BattleMenu GetMainBattleMenu()
         {
-            return new PartnerBattleMenu(new KooperSubMenu());
+            return new PartnerBattleMenu(new KooperSubMenu(), Enumerations.PartnerTypes.Kooper);
         }
 
         public override void OnTurnStart()

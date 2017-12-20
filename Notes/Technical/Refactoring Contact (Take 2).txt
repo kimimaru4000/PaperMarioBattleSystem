@@ -53,3 +53,7 @@ Try this out and see how it goes. If it's satisfactory, move onto 2!
 Update (12/18/17)
 -----------------
 Change ContactTypes to an array to make it easier to handle multiple (instead of adding more Paybacks).
+
+Update (12/19/17)
+-----------------
+#1 has been implemented and works very well!

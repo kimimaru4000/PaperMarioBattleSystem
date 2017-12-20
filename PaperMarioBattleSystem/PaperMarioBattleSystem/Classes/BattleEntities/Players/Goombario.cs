@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
 
         protected sealed override BattleMenu GetMainBattleMenu()
         {
-            return new PartnerBattleMenu(new GoombarioSubMenu());
+            return new PartnerBattleMenu(new GoombarioSubMenu(), Enumerations.PartnerTypes.Goombario);
         }
 
         public override void TurnUpdate()

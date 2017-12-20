@@ -397,7 +397,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public struct MoveActionData
     {
-        public Texture2D Icon;
+        public CroppedTexture2D Icon;
         public string Description;
         public Enumerations.MoveResourceTypes ResourceType;
         public int ResourceCost;
@@ -413,7 +413,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public Enumerations.EntityTypes[] OtherEntTypes;
 
-        public MoveActionData(Texture2D icon, string description, Enumerations.MoveResourceTypes resourceType,
+        public MoveActionData(CroppedTexture2D icon, string description, Enumerations.MoveResourceTypes resourceType,
             int resourceCost, Enumerations.CostDisplayTypes costDisplayType, Enumerations.MoveAffectionTypes moveAffectionType,
             TargetSelectionMenu.EntitySelectionType selectionType, bool usesCharge, Enumerations.HeightStates[] heightsAffected,
             params Enumerations.EntityTypes[] otherEntTypes)

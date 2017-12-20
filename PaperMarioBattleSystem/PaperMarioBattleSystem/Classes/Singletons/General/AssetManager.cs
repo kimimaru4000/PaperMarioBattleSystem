@@ -60,6 +60,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private Dictionary<string, Texture2D> RawTextures = null;
 
+        /// <summary>
+        /// Holds loaded raw SoundEffects. These are disposed on cleanup.
+        /// </summary>
+        private Dictionary<string, SoundEffect> RawSounds = null;
+
         private AssetManager()
         {
             
@@ -71,6 +76,7 @@ namespace PaperMarioBattleSystem
             Content.RootDirectory = ContentGlobals.ContentRoot;
 
             RawTextures = new Dictionary<string, Texture2D>();
+            RawSounds = new Dictionary<string, SoundEffect>();
 
             Font = LoadAsset<SpriteFont>("Fonts/Font");
             PMFont = LoadAsset<SpriteFont>("Fonts/PM Font");
@@ -89,8 +95,15 @@ namespace PaperMarioBattleSystem
                 texPair.Value.Dispose();
             }
 
-            //Clear the dictionary
+            //Dispose each raw sound
+            foreach (KeyValuePair<string, SoundEffect> soundPair in RawSounds)
+            {
+                soundPair.Value.Dispose();
+            }
+
+            //Clear the dictionaries
             RawTextures.Clear();
+            RawSounds.Clear();
 
             instance = null;
         }
@@ -131,11 +144,48 @@ namespace PaperMarioBattleSystem
                 }
                 catch (Exception e)
                 {
-                    Debug.LogError($"Error loading raw Texture2D {realTexPath}: {e.Message}");
+                    Debug.LogError($"Error loading raw {nameof(Texture2D)} {realTexPath}: {e.Message}");
                 }
             }
 
             return tex;
+        }
+
+        public SoundEffect LoadRawSound(string soundPath)
+        {
+            SoundEffect sound = null;
+            
+            //Insert content at the start
+            string realSoundPath = soundPath.Insert(0, Content.RootDirectory + "/");
+
+            //Return the cached sound if we have it
+            if (RawSounds.ContainsKey(realSoundPath) == true)
+            {
+                sound = RawSounds[realSoundPath];
+            }
+            else
+            {
+                //Load the raw sound
+                try
+                {
+                    using (FileStream fileStream = new FileStream(realSoundPath, FileMode.Open))
+                    {
+                        sound = SoundEffect.FromStream(fileStream);
+
+                        //Cache the sound for faster loading next time
+                        if (sound != null)
+                        {
+                            RawSounds.Add(realSoundPath, sound);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Error loading raw {nameof(SoundEffect)} {realSoundPath}: {e.Message}");
+                }
+            }
+
+            return sound;
         }
 
         /// <summary>

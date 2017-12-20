@@ -1,0 +1,14 @@
+Confusion Information (12/19/17)
+--------------------------------
+Possible Confusion conditions (some list items from MarioWiki and edited with my own test results):
+
+-Mario or his partner may attack each other with a basic attack which is not Action Commanded (such as a jump, hammer, or no-FP move); cannot be Guarded or Superguarded
+-Mario or his partner may use the Defend, Appeal, or Run Away actions
+-Mario or his partner may switch to a random partner. This move ignores the Quick Change badge if Mario has it equipped, so in effect, ending their turn
+-Enemies may attack each other, or use healing moves or items on Mario and/or his partner. If an enemy is alone and attempts to attack an ally in confusion (or it cannot reach its ally), it simply does nothing
+-Bosses won't attack each other and will simply do nothing instead; this hasn't been tested with enemy components yet (Ex. Cortez' Weapons)
+
+TTYD's Confusion has some oddities that seem to disregard certain character states:
+-If Koops is flipped and Confused, he can still Defend
+  -When he Defends like this, it doesn't actually increase his Defense, and it doesn't count as him trying to get back up, so he'll stay flipped until he actually tries to get up (which is represented by doing nothing)
+

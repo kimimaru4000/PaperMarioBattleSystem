@@ -85,6 +85,8 @@ namespace PaperMarioBattleSystem
                     {
                         BattleUIManager.Instance.PushMenu(SubMenu);
                     }
+
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.MenuSelect);
                 }
                 else
                 {

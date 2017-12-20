@@ -101,6 +101,8 @@ namespace PaperMarioBattleSystem
                 Selection?.Invoke(Targets);
             }
 
+            SoundManager.Instance.PlaySound(SoundManager.Sound.MenuSelect);
+
             EndSelection();
         }
 

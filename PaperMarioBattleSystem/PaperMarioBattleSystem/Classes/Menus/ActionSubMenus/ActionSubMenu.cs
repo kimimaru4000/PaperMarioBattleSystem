@@ -90,6 +90,8 @@ namespace PaperMarioBattleSystem
             if (BattleActions[CurSelection].Disabled == false)
             {
                 BattleActions[CurSelection].OnMenuSelected();
+
+                SoundManager.Instance.PlaySound(SoundManager.Sound.MenuSelect);
             }
             else
             {

@@ -60,6 +60,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private double RotationOffset = 0d;
 
+        private bool Initialized = false;
+
         protected PlayerBattleMenu(PlayerTypes playerType) : base(MenuTypes.Horizontal)
         {
             PlayerType = playerType;
@@ -95,6 +97,8 @@ namespace PaperMarioBattleSystem
             {
                 ActionButtons[i].Initialize();
             }
+
+            Initialized = true;
         }
 
         protected override void OnSelectionChanged(int newSelection)
@@ -102,7 +106,8 @@ namespace PaperMarioBattleSystem
             double spacing = Math.PI / MaxWheelActions;
             RotationOffset = newSelection * -spacing;
 
-            SoundManager.Instance.PlaySound(SoundManager.Sound.CommandCursorMove);
+            if (Initialized == true)
+                SoundManager.Instance.PlaySound(SoundManager.Sound.CommandCursorMove);
         }
 
         protected override void HandleSelectionInput()

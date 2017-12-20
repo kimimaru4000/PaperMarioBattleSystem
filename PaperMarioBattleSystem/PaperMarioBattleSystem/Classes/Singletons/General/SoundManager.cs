@@ -44,7 +44,7 @@ namespace PaperMarioBattleSystem
             MarioJump,
             SwitchPartner, EnemyDeath, PartnerAway,
             Danger, Peril, Damaged, Immune, Lucky,
-            CursorMove, CommandCursorMove, MenuBackOut,
+            CursorMove, CommandCursorMove, MenuBackOut, MenuSelect,
             ActionCommandSuccess,
             StarSpiritAppear, StarSpiritSummon, PMStarPowerIncrease,
             Lullaby, FrightMask
@@ -66,6 +66,7 @@ namespace PaperMarioBattleSystem
             { Sound.CursorMove, $"{ContentGlobals.SoundRoot}Cursor Move" },
             { Sound.CommandCursorMove, $"{ContentGlobals.SoundRoot}Command Cursor Move" },
             { Sound.MenuBackOut, $"{ContentGlobals.SoundRoot}Menu Back Out" },
+            { Sound.MenuSelect, $"{ContentGlobals.SoundRoot}Menu Select" },
             { Sound.ActionCommandSuccess, $"{ContentGlobals.SoundRoot}Nice" },
             { Sound.StarSpiritAppear, $"{ContentGlobals.SoundRoot}Star Spirit Appear" },
             { Sound.StarSpiritSummon, $"{ContentGlobals.SoundRoot}Star Spirit Summon" },

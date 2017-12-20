@@ -251,6 +251,14 @@ namespace PaperMarioBattleSystem
                         BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage,
                             new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                             new DamagedBattleEvent(this));
+
+                        //Play the damaged sound
+                        SoundManager.Instance.PlaySound(SoundManager.Sound.Damaged);
+                    }
+                    else if (damage <= 0)
+                    {
+                        //Play the immune sound
+                        SoundManager.Instance.PlaySound(SoundManager.Sound.Immune);
                     }
 
                     //Lose HP

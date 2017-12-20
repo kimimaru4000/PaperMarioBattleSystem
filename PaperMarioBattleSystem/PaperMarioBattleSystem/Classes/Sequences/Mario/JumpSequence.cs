@@ -75,6 +75,8 @@ namespace PaperMarioBattleSystem
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpRisingName);
                     CurSequenceAction = new MoveToSeqAction(posTo, JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
+
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.MarioJump);
                     break;
                 case 1:
                     Vector2 posTo2 = User.Position + new Vector2(XDiffOverTwo, JumpHeight);

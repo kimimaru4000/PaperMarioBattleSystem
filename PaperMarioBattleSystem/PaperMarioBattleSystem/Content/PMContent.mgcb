@@ -79,6 +79,12 @@
 /processorParam:Quality=Best
 /build:Audio/SFX/Menu Back Out.wav
 
+#begin Audio/SFX/Menu Select.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Menu Select.wav
+
 #begin Audio/SFX/Nice.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

@@ -57,3 +57,116 @@ Change ContactTypes to an array to make it easier to handle multiple (instead of
 Update (12/19/17)
 -----------------
 #1 has been implemented and works very well!
+
+Update (12/20/17)
+-----------------
+Time for #2:
+
+Why can't Koopa Troopas be hit from a Superguard? Well, currently we avoid making them take any sort of Payback damage by saying that Shell Toss deals no contact at all. However, things are different in the actual Paper Mario games:
+
+-Koopa Troopas don't take damage if you have Zap Tap on
+-Koopa Troopas WILL take Payback damage, either from Return Postage, a Spite Pouch, or Hold Fast
+
+This means that there's something protecting them from Zap Tap but not Return Postage.
+                        -------------------------
+Fuzzies are almost the reverse:
+
+-Fuzzies won't latch onto you and will take damage if you have Zap Tap on
+-Fuzzies will latch onto you and won't take Payback damage until they actually attack if you have Return Postage, a Spite Pouch, or Hold Fast active
+
+This means that Zap Tap protects against something that Return Postage doesn't.
+                        --------------------------
+
+Additionally, Hammer doesn't take damage from either Zap Tap nor Return Postage, but still takes damage from Superguards.
+
+So, there are a few things going on:
+
+-For Koopa Troopas, they're protected by their shell, so Zap Tap has no effect. They still deal direct damage, so they get hit by Payback
+-Fuzzies touch you, so Zap Tap prevents them from latching on. They deal direct damage with their attack, so they get hit by Payback
+-Hammer doesn't touch, so it doesn't take damage from Zap Tap or Payback. Gus' Spear Charge is the same way, but like Hammer, takes damage from Superguards
+
+We can conclude the following:
+1. Direct attacks take Payback damage
+2. Zap Tap protects against "touching" moves, but not ones where the attacker is protected by something, such as a Koopa Shell
+3. Superguards damage all direct moves, including ones involving something "attached" to the BattleEntity; that is, a Hammer or Spear that a character is holding
+  -Exception: Iron Clefts, as they're immune to all damage except from Gulp
+
+Implementation
+--------------
+Now onto implementing this. We have these ContactTypes in the engine right now:
+
+None, Approach, TopDirect, SideDirect
+
+These seem self-explanatory aside from Approach, which is not an actual type of contact. Approach is currently used for Hammer and Gulp. What we want is a better way to represent a non-direct attack that is attached (Ex. Hammer or other weapon, or Yoshi's tongue). We can rename it to IndirectClose, which better tells that the contact happens closeby but isn't direct.
+
+Even with that, it's not enough. There's still no way to differentiate a SideDirect contact with a Koopa Shell from a SideDirect contact with, say, a punch. In both cases, attacking characters would take damage from Zap Tap.
+
+This means we need to abstract out further. Brainstorming:
+
+-You either make contact or you don't; there's no in between
+-There needs to be more detail in how the contact occurs. Is the attacker protected, attacking from range, using a spell, or something else?
+-What was the victim hit by? A shell, weapon, or something else?
+-We can break it down:
+  -"Mario hit Koopa Troopa with Hammer"
+  -"Koops hit Bob-Omb with his shell and didn't take damage from the explosion since he was protected"
+  -"Fuzzy latched onto Mario by jumping on him and took damage from Zap Tap since it touched with its body"
+  -"Ms. Mowz touched the Bristle by kissing it but got hurt by the Bristle's spikes"
+  -"Doopliss, transformed into Mario, hit the real Mario with Hammer but took damage since his attack was Superguarded and he wasn't protected"
+
+It's clear that we need to specify how the contact was carried out. We can have an enum called ContactProperties with the following values:
+
+None, Ranged, WeaponDirect, Protected
+
+None would mean no additional properties. Ranged would mean the attack is completely ranged. WeaponDirect would mean the attack was directly handled by a weapon, such as a Hammer. Protected would mean that the attack was performed in some safety, such as a Koopa Shell.
+
+With these, we can remove the Approach ContactType and reduce the ContactTypes enum to this:
+
+None, TopDirect, SideDirect
+
+Does this cover everything? Let's see:
+-Zap Tap would handle TopDirect and SideDirect contact with the None ContactProperty
+  -Fuzzies try to latch onto Mario and get damaged
+-Return Postage would handle TopDirect and SideDirect contact with the None and Protected ContactProperties
+  -Fuzzies try to latch onto Mario and get damaged
+  
+We ran into a problem. While Fuzzies can't latch onto Mario with Zap Tap, they're not able to latch onto him when he doesn't have Zap Tap but has Return Postage. Fuzzies should take damage only after they actually attacked if Mario has Return Postage, not when they latch on.
+
+Okay, what if we add a Latch ContactType?
+
+Let's check again and see any pitfalls:
+-Zap Tap would handle Latch, TopDirect, and SideDirect contact with the None ContactProperty
+  -Fuzzies try to latch onto Mario and get damaged
+-Return Postage would handle TopDirect and SideDirect contact with the None and Protected ContactProperties
+  -Fuzzies aren't protected, but they try to latch onto Mario and are successful. They get damaged when their TopDirect or SideDirect attack kicks in
+  
+So far, so good. Let's continue:
+-Zap Tap handles Latch, TopDirect, and SideDirect contact with the None ContactProperty
+  -A Koopa Troopa attacks Mario but is Protected, so only Mario takes damage
+-Bobbery uses Hold Fast, which handles Latch, TopDirect, and SideDirect contact with the None and Protected ContactProperties
+  -A Swooper tries to latch onto Bobbery and gets damaged
+  -A Koopa Troopa attacks Bobbery and gets damaged
+  -Gus uses Spear Throw and doesn't get damaged since Hold Fast doesn't cover Ranged
+-A Koopa Troopa attacks Mario, who then Superguards, which handles TopDirect and SideDirect contact with the None, WeaponDirect, and Protected ContactProperties 
+  -The Koopa Troopa takes damage
+  -Doopliss, transformed into Mario, attacks the real Mario with Hammer, which has SideDirect contact with the WeaponDirect ContactProperty and takes damage from the Superguard
+-Mario uses Earth Tremor, which has None contact and the Ranged ContactProperty
+  -Grodus has Payback on himself, which covers TopDirect and SideDirect contact with the None and Protected ContactProperties, so Mario does not take damage
+  
+Ranged seems redundant, but keep it for now in case we need it.
+
+Implementation Summary
+----------------------
+-Add a Latch ContactType
+-Add a ContactProperties enum with:
+  -None
+  -Ranged
+  -WeaponDirect
+  -Protected
+-Add a ContactProperty field to MoveActionData
+-Each Payback takes in an array of ContactProperties, similar to how it handles ContactTypes
+  -If it handles the move's ContactProperty, in addition to its ContactType, then it takes effect
+  
+Try this out and note any problems.
+  
+  
+  

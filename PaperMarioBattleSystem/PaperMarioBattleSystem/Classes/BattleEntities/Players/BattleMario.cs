@@ -83,6 +83,8 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(449, 222, 40, 53), 700d)));
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarWishName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(398, 516, 29, 48), 1300d)));
 
             #endregion
         }

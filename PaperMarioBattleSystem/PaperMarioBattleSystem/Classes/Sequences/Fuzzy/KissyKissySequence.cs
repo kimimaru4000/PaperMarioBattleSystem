@@ -73,6 +73,7 @@ namespace PaperMarioBattleSystem
                 case 3:
                     //Override defensive actions as the latching shouldn't be guardable
                     DamageData damageData = Action.DamageProperties;
+                    damageData.ContactType = Enumerations.ContactTypes.Latch;
                     damageData.Damage = 0;
                     damageData.DefensiveOverride = Enumerations.DefensiveActionTypes.Guard | Enumerations.DefensiveActionTypes.Superguard;
 

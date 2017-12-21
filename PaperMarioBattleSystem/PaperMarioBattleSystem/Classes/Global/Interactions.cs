@@ -61,10 +61,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="attackerPhysAttributes">The attacker's set of PhysicalAttributes.</param>
         /// <param name="contactType">The ContactType performed.</param>
+        /// <param name="contactProperty">The ContactProperty of the contact.</param>
         /// <param name="victimPaybacks">The victim's set of Paybacks to test against.</param>
         /// <param name="attackerContactExceptions">The attacker's contact exceptions; the set PhysicalAttributes to ignore.</param>
         /// <returns>A ContactResultInfo of the interaction.</returns>
-        public static ContactResultInfo GetContactResult(IList<PhysicalAttributes> attackerPhysAttributes, ContactTypes contactType, IList<PaybackHolder> victimPaybacks, params PhysicalAttributes[] attackerContactExceptions)
+        public static ContactResultInfo GetContactResult(IList<PhysicalAttributes> attackerPhysAttributes, ContactTypes contactType, ContactProperties contactProperty, IList<PaybackHolder> victimPaybacks, params PhysicalAttributes[] attackerContactExceptions)
         {
             //Return the default value
             if (victimPaybacks == null || victimPaybacks.Count == 0)
@@ -77,12 +78,14 @@ namespace PaperMarioBattleSystem
                  2. Check if the Payback's PaybackContacts contains the ContactType of the attack
                     3a. If so, check if the Attacker has any ContactExceptions for the Payback's PhysAttribute
                        4a. If so, ignore it and continue
-                       4a. If not, check if the Attacker has the same PhysAttribute as the Payback's
-                          5a. If so, examine the SamePhysAttrResult and go to 6a
-                          5b. If not, examine the PaybackContactResult and go to 6a
-                             6a. If the ContactResult is a Failure, return that Payback value
-                             6b. If the ContactResult is a Success, ignore it and continue
-                             6c. If the ContactResult is a PartialSuccess, add it to PaybackList and continue
+                       4b. If not, check if the Payback covers any of the attack's ContactProperties
+                          5a. If so, check if the Attacker has the same PhysAttribute as the Payback's
+                             6a. If so, examine the SamePhysAttrResult and go to 7a
+                             6b. If not, examine the PaybackContactResult and go to 7a
+                                7a. If the ContactResult is a Failure, return that Payback value
+                                7b. If the ContactResult is a Success, ignore it and continue
+                                7c. If the ContactResult is a PartialSuccess, add it to PaybackList and continue
+                       4c. If not, ignore it and continue
                     3b. If not, continue */
 
             //The Paybacks that will be combined
@@ -94,10 +97,14 @@ namespace PaperMarioBattleSystem
                 PaybackHolder payback = victimPaybacks[i];
 
                 //Check if the Payback covers this ContactType
-                if (payback.PaybackContacts.Contains(contactType))
+                if (payback.PaybackContacts != null && payback.PaybackContacts.Contains(contactType) == true)
                 {
                     //If there are contact exceptions for this PhysicalAttribute, ignore this Payback
                     if (attackerContactExceptions.Contains(payback.PhysAttribute) == true)
+                        continue;
+
+                    //Check if the Payback covers the ContactProperty
+                    if (payback.ContactProperties != null && payback.ContactProperties.Contains(contactProperty) == false)
                         continue;
 
                     ContactResult contactResult = payback.PaybackContactResult;
@@ -218,8 +225,8 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < victims.Count; i++)
             {
                 InteractionResult finalResult = GetDamageInteraction(new InteractionParamHolder(attacker, victims[i], damageInfo.Damage,
-                    damageInfo.DamagingElement, damageInfo.Piercing, damageInfo.ContactType, damageInfo.Statuses, damageInfo.DamageEffect,
-                    damageInfo.CantMiss, damageInfo.DefensiveOverride));
+                    damageInfo.DamagingElement, damageInfo.Piercing, damageInfo.ContactType, damageInfo.ContactProperty,
+                    damageInfo.Statuses, damageInfo.DamageEffect, damageInfo.CantMiss, damageInfo.DefensiveOverride));
 
                 //Store the interaction result
                 finalInteractions[i] = finalResult;
@@ -395,6 +402,7 @@ namespace PaperMarioBattleSystem
                 StepResult.AttackerResult.Entity = damageInfo.Attacker;
                 StepResult.VictimResult.Entity = damageInfo.Victim;
                 StepResult.VictimResult.ContactType = damageInfo.ContactType;
+                StepResult.VictimResult.ContactProperty = damageInfo.ContactProperty;
                 StepResult.VictimResult.DamageElement = damageInfo.DamagingElement;
                 StepResult.VictimResult.StatusesInflicted = damageInfo.Statuses;
                 StepResult.VictimResult.TotalDamage = damageInfo.Damage;
@@ -411,7 +419,7 @@ namespace PaperMarioBattleSystem
                 BattleEntity attacker = StepResult.AttackerResult.Entity;
 
                 //Get contact results
-                StepContactResultInfo = victim.EntityProperties.GetContactResult(attacker, StepResult.VictimResult.ContactType);
+                StepContactResultInfo = victim.EntityProperties.GetContactResult(attacker, StepResult.VictimResult.ContactType, StepResult.VictimResult.ContactProperty);
             }
         }
 
@@ -532,7 +540,8 @@ namespace PaperMarioBattleSystem
 
                         //If the Defensive action dealt damage and the contact was direct
                         //the Defensive action has caused a Failure for the Attacker (Ex. Superguarding)
-                        if (StepResult.VictimResult.ContactType == ContactTypes.TopDirect
+                        if (StepResult.VictimResult.ContactType == ContactTypes.Latch
+                            || StepResult.VictimResult.ContactType == ContactTypes.TopDirect
                             || StepResult.VictimResult.ContactType == ContactTypes.SideDirect)
                         {
                             StepContactResultInfo.ContactResult = ContactResult.Failure;
@@ -544,6 +553,7 @@ namespace PaperMarioBattleSystem
                             //NOTE: Use temp extra data for now; FIX ASAP!!!!
                             StepContactResultInfo.Paybackholder = new PaybackHolder(PaybackTypes.Constant, PhysicalAttributes.None,
                                 elementHolder.Element, new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect },
+                                new ContactProperties[] { ContactProperties.None, ContactProperties.Protected, ContactProperties.WeaponDirect },
                                 ContactResult.Failure, ContactResult.Failure, elementHolder.Damage);
                         }
 

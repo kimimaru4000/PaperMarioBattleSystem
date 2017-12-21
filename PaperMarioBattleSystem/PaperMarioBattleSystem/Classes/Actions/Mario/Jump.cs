@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
             MarioStats marioStats = User.BattleStats as MarioStats;
             if (marioStats != null) baseDamage = (int)marioStats.BootLevel;
 
-            DamageInfo = new DamageData(baseDamage, Elements.Normal, false, ContactTypes.TopDirect, null,
+            DamageInfo = new DamageData(baseDamage, Elements.Normal, false, ContactTypes.TopDirect, ContactProperties.None, null,
                 DamageEffects.FlipsShelled | DamageEffects.RemovesWings);
 
             JumpSequence jumpSequence = new JumpSequence(this);

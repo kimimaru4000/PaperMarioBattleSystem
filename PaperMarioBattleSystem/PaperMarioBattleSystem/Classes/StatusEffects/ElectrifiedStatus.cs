@@ -17,8 +17,9 @@ namespace PaperMarioBattleSystem
     public sealed class ElectrifiedStatus : StatusEffect
     {
         private readonly PaybackHolder ElectrifiedPayback = new PaybackHolder(PaybackTypes.Constant, PhysicalAttributes.Electrified,
-            Elements.Electric, new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect }, ContactResult.PartialSuccess,
-            ContactResult.Success, 1, null);
+            Elements.Electric, new ContactTypes[] { ContactTypes.Latch, ContactTypes.SideDirect, ContactTypes.TopDirect }, 
+            new ContactProperties[] { ContactProperties.None },
+            ContactResult.PartialSuccess, ContactResult.Success, 1, null);
 
         private CroppedTexture2D SparkIcon = null;
 

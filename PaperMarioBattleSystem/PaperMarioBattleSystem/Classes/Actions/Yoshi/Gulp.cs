@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
                 Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.First, true,
                 new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded, Enumerations.HeightStates.Hovering }, User.GetOpposingEntityType());
 
-            DamageInfo = new DamageData(4, Enumerations.Elements.Normal, true, Enumerations.ContactTypes.Approach, null,
+            DamageInfo = new DamageData(4, Enumerations.Elements.Normal, true, Enumerations.ContactTypes.SideDirect, Enumerations.ContactProperties.WeaponDirect, null,
                 Enumerations.DamageEffects.None);
 
             GulpSequence gulpSequence = new GulpSequence(this);

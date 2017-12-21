@@ -100,7 +100,7 @@ namespace PaperMarioBattleSystem
 
         private DamageData GetDamageData()
         {
-            return new DamageData(BattleStats.TotalAttack, Elements.Explosion, false, ContactTypes.None, null, DamageEffects.None);
+            return new DamageData(BattleStats.TotalAttack, Elements.Explosion, false, ContactTypes.None, ContactProperties.Ranged, null, DamageEffects.None);
         }
 
         public override void OnTurnStart()

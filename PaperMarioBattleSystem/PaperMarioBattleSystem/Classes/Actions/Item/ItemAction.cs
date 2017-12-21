@@ -144,7 +144,7 @@ namespace PaperMarioBattleSystem
                 StatusChanceHolder[] statuses = statusInflicting != null ? statusInflicting.StatusesInflicted : null;
                 DamageEffects damageEffects = damageEffectItem != null ? damageEffectItem.InducedDamageEffects : DamageEffects.None;
 
-                DamageInfo = new DamageData(damage, element, true, ContactTypes.None, statuses, damageEffects);
+                DamageInfo = new DamageData(damage, element, true, ContactTypes.None, ContactProperties.Ranged, statuses, damageEffects);
             }
 
             //Set the healing data

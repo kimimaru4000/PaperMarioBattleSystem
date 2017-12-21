@@ -435,6 +435,14 @@ namespace PaperMarioBattleSystem
             {
                 UnitTests.InteractionUnitTests.ElementOverrideInteractionUT1();
             }
+            else if (Input.GetKeyDown(Keys.D1, DebugKeyboard))
+            {
+                UnitTests.InteractionUnitTests.PaybackInteractionUT1();
+            }
+            else if (Input.GetKeyDown(Keys.D2, DebugKeyboard))
+            {
+                UnitTests.InteractionUnitTests.PaybackInteractionUT2();
+            }
         }
 
         #endregion

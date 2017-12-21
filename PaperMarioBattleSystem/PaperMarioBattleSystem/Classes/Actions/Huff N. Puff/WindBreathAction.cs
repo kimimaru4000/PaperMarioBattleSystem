@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
             MoveInfo = new MoveActionData(null, "Blow wind at Mario to deal damage.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
                 MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single, true, null, User.GetOpposingEntityType());
 
-            DamageInfo = new DamageData(0, Elements.Normal, false, ContactTypes.None, null, false, false,
+            DamageInfo = new DamageData(0, Elements.Normal, false, ContactTypes.None, ContactProperties.Ranged, null, false, false,
                 DefensiveActionTypes.Guard | DefensiveActionTypes.Superguard, DamageEffects.None);
 
             SetMoveSequence(new WindBreathSequence(this));

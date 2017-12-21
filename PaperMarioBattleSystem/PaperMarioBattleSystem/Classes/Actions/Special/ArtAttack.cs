@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
             MoveInfo = new MoveActionData(null, "Draw around the enemy as many times as you can!", Enumerations.MoveResourceTypes.SP,
                 0, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.All,
                 false, null, Enumerations.EntityTypes.Enemy);
-            DamageInfo = new DamageData(1, Enumerations.Elements.Star, true, Enumerations.ContactTypes.None, null, true, false,
+            DamageInfo = new DamageData(1, Enumerations.Elements.Star, true, Enumerations.ContactTypes.None, Enumerations.ContactProperties.Ranged, null, true, false,
                 Enumerations.DefensiveActionTypes.None, Enumerations.DamageEffects.None);
 
             StartingDrawLoc = SpriteRenderer.Instance.WindowCenter;

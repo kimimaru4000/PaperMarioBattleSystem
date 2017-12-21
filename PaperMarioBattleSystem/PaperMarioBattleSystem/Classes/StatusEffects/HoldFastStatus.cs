@@ -16,7 +16,8 @@ namespace PaperMarioBattleSystem
     {
         public HoldFastStatus(int duration) : base(duration,
             new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Half, PhysicalAttributes.Explosive, Elements.Explosion,
-                new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect }, ContactResult.PartialSuccess, ContactResult.PartialSuccess, null))
+                new ContactTypes[] { ContactTypes.Latch, ContactTypes.SideDirect, ContactTypes.TopDirect }, new ContactProperties[] { ContactProperties.None, ContactProperties.Protected },
+                ContactResult.PartialSuccess, ContactResult.PartialSuccess, null))
         {
             StatusType = Enumerations.StatusTypes.HoldFast;
 

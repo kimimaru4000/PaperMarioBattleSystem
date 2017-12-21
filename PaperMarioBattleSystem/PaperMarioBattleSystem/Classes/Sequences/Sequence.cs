@@ -585,7 +585,7 @@ namespace PaperMarioBattleSystem
             int[] damageValues = new int[entities.Length];
 
             InteractionResult[] interactionResults = Interactions.AttemptDamageEntities(User, entities, new DamageData(totalDamage, damageInfo.DamagingElement, damageInfo.Piercing,
-                damageInfo.ContactType, damageInfo.Statuses, damageInfo.CantMiss, damageInfo.AllOrNothingAffected, damageInfo.DefensiveOverride,
+                damageInfo.ContactType, damageInfo.ContactProperty, damageInfo.Statuses, damageInfo.CantMiss, damageInfo.AllOrNothingAffected, damageInfo.DefensiveOverride,
                 damageInfo.DamageEffect), OnMiss);
 
             for (int i = 0; i < interactionResults.Length; i++)

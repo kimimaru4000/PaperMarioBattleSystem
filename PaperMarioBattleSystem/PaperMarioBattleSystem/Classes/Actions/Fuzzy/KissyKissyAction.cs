@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
             ContactTypes contactType = ContactTypes.SideDirect;
             if (sideDirect == false) contactType = ContactTypes.TopDirect;
 
-            DamageInfo = new DamageData(damagePerAttack, damageElement, piercing, contactType, null, false, false,
+            DamageInfo = new DamageData(damagePerAttack, damageElement, piercing, contactType, ContactProperties.None, null, false, false,
                 DefensiveActionTypes.None, DamageEffects.None);
 
             SetMoveSequence(new KissyKissySequence(this, numAttacks));

@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
                 100, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other,
                 TargetSelectionMenu.EntitySelectionType.All, false, null, Enumerations.EntityTypes.Enemy);
                 
-            DamageInfo = new DamageData(0, Enumerations.Elements.Star, true, Enumerations.ContactTypes.None,
+            DamageInfo = new DamageData(0, Enumerations.Elements.Star, true, Enumerations.ContactTypes.None, Enumerations.ContactProperties.Ranged,
                 new StatusChanceHolder[] { new StatusChanceHolder(100d, new SleepStatus(3)) }, Enumerations.DamageEffects.None);
 
             SetMoveSequence(new LullabySequence(this));

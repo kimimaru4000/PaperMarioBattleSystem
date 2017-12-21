@@ -45,10 +45,10 @@ namespace PaperMarioBattleSystem
             MarioStats marioStats = User.BattleStats as MarioStats;
             if (marioStats != null) baseDamage = (int)marioStats.BootLevel;
 
-            DamageInfo = new DamageData(baseDamage, Elements.Normal, false, ContactTypes.TopDirect, null,
+            DamageInfo = new DamageData(baseDamage, Elements.Normal, false, ContactTypes.TopDirect, ContactProperties.None, null,
                 DamageEffects.FlipsShelled | DamageEffects.RemovesWings);
 
-            AerialDamage = new DamageData(2, Elements.Normal, true, ContactTypes.None, null, DamageEffects.None);
+            AerialDamage = new DamageData(2, Elements.Normal, true, ContactTypes.None, ContactProperties.Ranged, null, DamageEffects.None);
 
             TornadoJumpSequence tornadoJumpSequence = new TornadoJumpSequence(this);
             SetMoveSequence(tornadoJumpSequence);

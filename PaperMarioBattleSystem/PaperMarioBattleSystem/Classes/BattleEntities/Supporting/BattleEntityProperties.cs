@@ -168,10 +168,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="attacker">The entity attacking this one</param>
         /// <param name="contactType">The type of contact made with this entity</param>
+        /// <param name="contactProperty">The ContactProperty of the contact.</param>
         /// <returns>A ContactResultInfo containing the result of the interaction</returns>
-        public ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType)
+        public ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType, ContactProperties contactProperty)
         {
-            ContactResultInfo contactResultInfo = Interactions.GetContactResult(attacker.EntityProperties.GetAllPhysAttributes(), contactType, GetAllPaybacks(), attacker.EntityProperties.GetContactExceptions(contactType));
+            ContactResultInfo contactResultInfo = Interactions.GetContactResult(attacker.EntityProperties.GetAllPhysAttributes(), contactType, contactProperty, GetAllPaybacks(), attacker.EntityProperties.GetContactExceptions(contactType));
 
             return contactResultInfo;
         }

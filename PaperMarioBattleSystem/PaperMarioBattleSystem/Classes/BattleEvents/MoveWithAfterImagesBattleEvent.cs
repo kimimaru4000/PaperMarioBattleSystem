@@ -18,14 +18,18 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private AfterImageVFX AfterImageData = null;
 
-        public MoveWithAfterImagesBattleEvent(BattleEntity[] entities, Vector2[] finalPositions, double duration, AfterImageVFX afterImageData)
-            : base(entities, finalPositions, duration)
+        public MoveWithAfterImagesBattleEvent(BattleEntity[] entities, Vector2[] finalPositions, double duration, AfterImageVFX afterImageData,
+            Interpolation.InterpolationTypes xInterpolation = Interpolation.InterpolationTypes.Linear,
+            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear)
+            : base(entities, finalPositions, duration, xInterpolation, yInterpolation)
         {
             AfterImageData = afterImageData;
         }
 
-        public MoveWithAfterImagesBattleEvent(BattleEntity entity, Vector2 finalPosition, double duration, AfterImageVFX afterImageData)
-            : base(entity, finalPosition, duration)
+        public MoveWithAfterImagesBattleEvent(BattleEntity entity, Vector2 finalPosition, double duration, AfterImageVFX afterImageData,
+            Interpolation.InterpolationTypes xInterpolation = Interpolation.InterpolationTypes.Linear,
+            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear)
+            : base(entity, finalPosition, duration, xInterpolation, yInterpolation)
         {
             AfterImageData = afterImageData;
         }

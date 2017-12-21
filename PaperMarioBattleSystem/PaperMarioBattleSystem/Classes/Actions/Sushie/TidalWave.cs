@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
                 Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.All,
                 true, null, User.GetOpposingEntityType());
 
-            DamageInfo = new DamageData(0, Enumerations.Elements.Water, false, Enumerations.ContactTypes.None, null, 
+            DamageInfo = new DamageData(0, Enumerations.Elements.Water, false, Enumerations.ContactTypes.None, Enumerations.ContactProperties.Ranged, null, 
                 Enumerations.DamageEffects.None);
 
             SetMoveSequence(new TidalWaveSequence(this));

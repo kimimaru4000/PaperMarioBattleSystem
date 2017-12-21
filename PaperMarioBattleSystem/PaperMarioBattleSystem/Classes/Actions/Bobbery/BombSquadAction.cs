@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
                 CostDisplayTypes.Shown, MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.All, false,
                 new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne }, User.GetOpposingEntityType());
 
-            DamageInfo = new DamageData(BombDamage, Elements.Explosion, false, ContactTypes.None, null, DamageEffects.None);
+            DamageInfo = new DamageData(BombDamage, Elements.Explosion, false, ContactTypes.None, ContactProperties.Ranged, null, DamageEffects.None);
 
             SetMoveSequence(new BombSquadSequence(this, BombCount));
 

@@ -33,7 +33,9 @@ namespace PaperMarioBattleSystem
 
             EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Spiked);
             EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Constant, Enumerations.PhysicalAttributes.Spiked,
-                Enumerations.Elements.Sharp, new Enumerations.ContactTypes[] { Enumerations.ContactTypes.TopDirect, Enumerations.ContactTypes.SideDirect }, Enumerations.ContactResult.Failure, Enumerations.ContactResult.Failure, 1, null));
+                Enumerations.Elements.Sharp, new Enumerations.ContactTypes[] { Enumerations.ContactTypes.Latch, Enumerations.ContactTypes.TopDirect, Enumerations.ContactTypes.SideDirect },
+                new Enumerations.ContactProperties[] { Enumerations.ContactProperties.None },
+                Enumerations.ContactResult.Failure, Enumerations.ContactResult.Failure, 1, null));
 
             EntityProperties.SetVulnerableDamageEffects(Enumerations.DamageEffects.RemovesSegment);
 

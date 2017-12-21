@@ -18,8 +18,8 @@ namespace PaperMarioBattleSystem
         /// The Payback granted.
         /// </summary>
         private readonly PaybackHolder PaybackGranted = new PaybackHolder(PaybackTypes.Half, PhysicalAttributes.None,
-            Elements.Normal, new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect }, ContactResult.PartialSuccess,
-            ContactResult.PartialSuccess, 0, null);
+            Elements.Normal, new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect }, new ContactProperties[] { ContactProperties.None, ContactProperties.Protected },
+            ContactResult.PartialSuccess, ContactResult.PartialSuccess, 0, null);
 
         public ReturnPostageBadge()
         {

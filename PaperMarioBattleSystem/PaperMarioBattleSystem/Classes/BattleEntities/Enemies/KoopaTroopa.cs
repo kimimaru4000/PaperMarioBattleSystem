@@ -113,7 +113,7 @@ namespace PaperMarioBattleSystem
 
         public int DefenseLoss => BattleStats.BaseDefense;
 
-        public void HandleFlipped()
+        public virtual void HandleFlipped()
         {
             if (Flipped == false)
             {
@@ -154,7 +154,7 @@ namespace PaperMarioBattleSystem
             StartAction(new NoAction(), true, null);
         }
 
-        private void UnFlip()
+        protected virtual void UnFlip()
         {
             Flipped = false;
             AnimManager.PlayAnimation(GetIdleAnim(), true);

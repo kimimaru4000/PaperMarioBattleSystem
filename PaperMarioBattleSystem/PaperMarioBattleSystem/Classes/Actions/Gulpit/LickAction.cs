@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
                 Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single, true,
                 new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded }, User.GetOpposingEntityType());
 
-            DamageInfo = new DamageData(0, Enumerations.Elements.Normal, false, Enumerations.ContactTypes.SideDirect, null, false, true,
+            DamageInfo = new DamageData(0, Enumerations.Elements.Normal, false, Enumerations.ContactTypes.SideDirect, Enumerations.ContactProperties.None, null, false, true,
                 Enumerations.DefensiveActionTypes.None, Enumerations.DamageEffects.None);
 
             SetMoveSequence(new LickSequence(this));

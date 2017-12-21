@@ -170,4 +170,12 @@ Lava Bubble
 -When Electrified, with Payback and Hold Fast, it will deal only 1 damage if Mario attacks it without Zap Tap or Ice Power
   -If Mario attacks it with Ice Power, it deals Full payback damage + 1 from Electrified
 
+Fuzzy
+-----
+-If hit by Payback (via Return Postage or other means) when attacking, it will drain HP but won't heal it
+
+Flower Fuzzy
+------------
+-If hit by Payback (via Return Postage or other means) when attacking, it will drain FP but won't restore it
+
 

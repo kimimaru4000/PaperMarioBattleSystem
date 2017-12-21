@@ -309,6 +309,8 @@ namespace PaperMarioBattleSystem
     /// Holds the required data for initiating a damage interaction.
     /// This is passed to methods that involve calculating damage interactions.
     /// </summary>
+    
+    //NOTE: Consider putting a DamageData in here so new fields added there don't need to be added here as well
     public struct InteractionParamHolder
     {
         public BattleEntity Attacker { get; private set; }
@@ -317,14 +319,16 @@ namespace PaperMarioBattleSystem
         public Enumerations.Elements DamagingElement { get; private set; }
         public bool Piercing { get; private set; }
         public Enumerations.ContactTypes ContactType { get; private set; }
+        public Enumerations.ContactProperties ContactProperty { get; private set; }
         public StatusChanceHolder[] Statuses { get; private set;}
         public Enumerations.DamageEffects DamageEffect { get; private set; }
         public bool CantMiss { get; private set; }
         public Enumerations.DefensiveActionTypes DefensiveOverride { get; private set; }
 
         public InteractionParamHolder(BattleEntity attacker, BattleEntity victim, int damage, Enumerations.Elements element,
-            bool piercing, Enumerations.ContactTypes contactType, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect,
-            bool cantMiss, Enumerations.DefensiveActionTypes defensiveOverride)
+            bool piercing, Enumerations.ContactTypes contactType, Enumerations.ContactProperties contactProperty,
+            StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect, bool cantMiss,
+            Enumerations.DefensiveActionTypes defensiveOverride)
         {
             Attacker = attacker;
             Victim = victim;
@@ -332,6 +336,7 @@ namespace PaperMarioBattleSystem
             DamagingElement = element;
             Piercing = piercing;
             ContactType = contactType;
+            ContactProperty = contactProperty;
             Statuses = statuses;
             DamageEffect = damageEffect;
             CantMiss = cantMiss;
@@ -353,6 +358,7 @@ namespace PaperMarioBattleSystem
         public Enumerations.Elements DamageElement;
         public ElementInteractionResult ElementResult;
         public Enumerations.ContactTypes ContactType;
+        public Enumerations.ContactProperties ContactProperty;
         public bool Piercing;
         //NOTE: This had to be changed to a StatusChanceHolder since you can now specify the chance of inflicting one
         //I wanted to keep it a StatusEffect array, but I'll keep this since knowing the chance of it being inflicted is useful
@@ -371,16 +377,17 @@ namespace PaperMarioBattleSystem
         public bool DontDamageEntity;
 
         public static InteractionHolder Default => new InteractionHolder(null, 0, Enumerations.Elements.Normal,
-            ElementInteractionResult.Damage, Enumerations.ContactTypes.None, false, null, false, Enumerations.DamageEffects.None);
+            ElementInteractionResult.Damage, Enumerations.ContactTypes.None, Enumerations.ContactProperties.None, false, null, false, Enumerations.DamageEffects.None);
 
         public InteractionHolder(BattleEntity entity, int totalDamage, Enumerations.Elements damageElement, ElementInteractionResult elementResult,
-            Enumerations.ContactTypes contactType, bool piercing, StatusChanceHolder[] statusesInflicted, bool hit, Enumerations.DamageEffects damageEffect)
+            Enumerations.ContactTypes contactType, Enumerations.ContactProperties contactProperty, bool piercing, StatusChanceHolder[] statusesInflicted, bool hit, Enumerations.DamageEffects damageEffect)
         {
             Entity = entity;
             TotalDamage = totalDamage;
             DamageElement = damageElement;
             ElementResult = elementResult;
             ContactType = contactType;
+            ContactProperty = contactProperty;
             Piercing = piercing;
             StatusesInflicted = statusesInflicted;
             Hit = hit;
@@ -470,6 +477,7 @@ namespace PaperMarioBattleSystem
         public Enumerations.Elements DamagingElement;
         public bool Piercing;
         public Enumerations.ContactTypes ContactType;
+        public Enumerations.ContactProperties ContactProperty;
         public StatusChanceHolder[] Statuses;
         public bool CantMiss;
         public bool AllOrNothingAffected;
@@ -477,13 +485,14 @@ namespace PaperMarioBattleSystem
         public Enumerations.DamageEffects DamageEffect;
 
         public DamageData(int damage, Enumerations.Elements damagingElement, bool piercing, Enumerations.ContactTypes contactType,
-            StatusChanceHolder[] statuses, bool cantMiss, bool allOrNothingAffected, Enumerations.DefensiveActionTypes defensiveOverride,
-            Enumerations.DamageEffects damageEffect)
+            Enumerations.ContactProperties contactProperty, StatusChanceHolder[] statuses, bool cantMiss, bool allOrNothingAffected,
+            Enumerations.DefensiveActionTypes defensiveOverride, Enumerations.DamageEffects damageEffect)
         {
             Damage = damage;
             DamagingElement = damagingElement;
             Piercing = piercing;
             ContactType = contactType;
+            ContactProperty = contactProperty;
             Statuses = statuses;
             CantMiss = cantMiss;
             AllOrNothingAffected = allOrNothingAffected;
@@ -492,8 +501,9 @@ namespace PaperMarioBattleSystem
         }
 
         public DamageData(int damage, Enumerations.Elements damagingElement, bool piercing, Enumerations.ContactTypes contactType,
-            StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect) : this(damage, damagingElement, piercing, contactType,
-                statuses, false, true, Enumerations.DefensiveActionTypes.None, damageEffect)
+            Enumerations.ContactProperties contactProperty, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect)
+            : this(damage, damagingElement, piercing, contactType, contactProperty, statuses, false, true, 
+                  Enumerations.DefensiveActionTypes.None, damageEffect)
         {
 
         }
@@ -915,12 +925,26 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The type of contact actions will make on entities.
         /// <para>None is no contact at all (Ex. Hammer Throw, Star Storm).
-        /// Approach is not direct contact, but the entity gets near (Ex. Hammer, Gulp).
-        /// Direct is direct contact (Ex. Jump, Kiss Thief).</para>
+        /// Latch is direct contact used to start an attack (Ex. Fuzzy's Kissy-Kissy, first part of Kiss Thief).
+        /// TopDirect is direct contact from the top (Ex. Jump).
+        /// SideDirect is direct contact from the side (Ex. Hammer).</para>
         /// </summary>
         public enum ContactTypes
         {
-            None, Approach, TopDirect, SideDirect
+            None, Latch, TopDirect, SideDirect
+        }
+
+        /// <summary>
+        /// Properties complementing ContactTypes. They tell more information about the contact that occurred.
+        /// <para>None means no special properties or protection.
+        /// Ranged means the attack is ranged (Ex. Gus' Spear Throw, Earth Tremor).
+        /// WeaponDirect means the attack is performed directly with something attached to or held by the attacker, but not the attacker itself (Ex. Hammer, Gulp, Gus' Spear Charge).
+        /// Protected means the attacker is protected in some form (Ex. Koopa Shell; Shell Toss).
+        /// </para>
+        /// </summary>
+        public enum ContactProperties
+        {
+            None, Ranged, WeaponDirect, Protected
         }
 
         /// <summary>
@@ -1628,6 +1652,11 @@ namespace PaperMarioBattleSystem
             public Enumerations.ContactTypes[] PaybackContacts { get; private set; }
 
             /// <summary>
+            /// The ContactProperties that the Payback affects.
+            /// </summary>
+            public Enumerations.ContactProperties[] ContactProperties { get; private set; }
+
+            /// <summary>
             /// Tells the ContactResult of the Payback.
             /// </summary>
             public Enumerations.ContactResult PaybackContactResult { get; private set; }
@@ -1652,46 +1681,49 @@ namespace PaperMarioBattleSystem
             public static PaybackHolder Default => 
             new PaybackHolder(PaybackTypes.Constant, Enumerations.PhysicalAttributes.None, Enumerations.Elements.Normal,
                 new Enumerations.ContactTypes[] { Enumerations.ContactTypes.SideDirect, Enumerations.ContactTypes.TopDirect },
+                new Enumerations.ContactProperties[] { Enumerations.ContactProperties.None },
                 Enumerations.ContactResult.Success, Enumerations.ContactResult.Success, 0, null);
 
             public PaybackHolder(PaybackTypes paybackType, Enumerations.PhysicalAttributes physAttribute, Enumerations.Elements element,
-                Enumerations.ContactTypes[] paybackContacts, Enumerations.ContactResult contactResult,
-                Enumerations.ContactResult samePhysAttrResult, params StatusChanceHolder[] statusesInflicted)
+                Enumerations.ContactTypes[] paybackContacts, Enumerations.ContactProperties[] contactProperties,
+                Enumerations.ContactResult contactResult, Enumerations.ContactResult samePhysAttrResult,
+                params StatusChanceHolder[] statusesInflicted)
             {
                 PaybackType = paybackType;
                 PhysAttribute = physAttribute;
                 Element = element;
                 PaybackContacts = paybackContacts;
+                ContactProperties = contactProperties;
                 PaybackContactResult = contactResult;
                 SamePhysAttrResult = samePhysAttrResult;
                 Damage = 0;
                 StatusesInflicted = statusesInflicted;
 
-                //Ensure this isn't null
-                if (PaybackContacts == null)
-                    PaybackContacts = new Enumerations.ContactTypes[0];
             }
 
             public PaybackHolder(PaybackTypes paybackType, Enumerations.PhysicalAttributes physAttribute, Enumerations.Elements element,
-                Enumerations.ContactTypes[] paybackContacts, Enumerations.ContactResult contactResult,
-                Enumerations.ContactResult samePhysAttrResult, int constantDamage, params StatusChanceHolder[] statusesInflicted)
-                : this(paybackType, physAttribute, element, paybackContacts, contactResult, samePhysAttrResult, statusesInflicted)
+                Enumerations.ContactTypes[] paybackContacts, Enumerations.ContactProperties[] contactProperties,
+                Enumerations.ContactResult contactResult, Enumerations.ContactResult samePhysAttrResult, int constantDamage,
+                params StatusChanceHolder[] statusesInflicted)
+                : this(paybackType, physAttribute, element, paybackContacts, contactProperties, contactResult, samePhysAttrResult, statusesInflicted)
             {
                 Damage = constantDamage;
             }
 
             /// <summary>
-            /// Gets the Payback damage that this PaybackHolder deals
+            /// Gets the Payback damage that this PaybackHolder deals.
+            /// <para>The minimum damage Payback can deal is 1.</para>
             /// </summary>
-            /// <param name="damageDealt">The amount of damage to deal</param>
-            /// <returns>All the damage dealt, half of it, or a constant amount of damage based on the PaybackType</returns>
+            /// <param name="damageDealt">The amount of damage to deal.</param>
+            /// <returns>All the damage dealt, half of it, or a constant amount of damage based on the PaybackType.
+            /// 1 if the Payback damage is 0 or less.</returns>
             public int GetPaybackDamage(int damageDealt)
             {
                 switch (PaybackType)
                 {
-                    case PaybackTypes.Full: return damageDealt + Damage;
-                    case PaybackTypes.Half: return (int)Math.Ceiling(damageDealt / 2f) + Damage;
-                    default: return Damage;
+                    case PaybackTypes.Full: return Math.Max(damageDealt + Damage, 1);
+                    case PaybackTypes.Half: return Math.Max((int)Math.Ceiling(damageDealt / 2f) + Damage, 1);
+                    default: return Math.Max(Damage, 1);
                 }
             }
 
@@ -1712,6 +1744,7 @@ namespace PaperMarioBattleSystem
                 List<StatusChanceHolder> totalStatuses = new List<StatusChanceHolder>();
 
                 List<Enumerations.ContactTypes> totalContactTypes = new List<Enumerations.ContactTypes>();
+                List<Enumerations.ContactProperties> totalContactProperties = new List<Enumerations.ContactProperties>();
 
                 //Go through all the Paybacks and add them up
                 for (int i = 0; i < paybackHolders.Count; i++)
@@ -1753,18 +1786,34 @@ namespace PaperMarioBattleSystem
                     }
 
                     //Check for affected ContactTypes and add ones that the combined payback doesn't have
-                    for (int j = 0; j < paybackHolder.PaybackContacts.Length; j++)
+                    if (paybackHolder.PaybackContacts != null)
                     {
-                        Enumerations.ContactTypes contactType = paybackHolder.PaybackContacts[j];
-                        if (totalContactTypes.Contains(contactType) == false)
+                        for (int j = 0; j < paybackHolder.PaybackContacts.Length; j++)
                         {
-                            totalContactTypes.Add(contactType);
+                            Enumerations.ContactTypes contactType = paybackHolder.PaybackContacts[j];
+                            if (totalContactTypes.Contains(contactType) == false)
+                            {
+                                totalContactTypes.Add(contactType);
+                            }
+                        }
+                    }
+
+                    //Check for affected ContactProperties and combine them
+                    if (paybackHolder.ContactProperties != null)
+                    {
+                        for (int j = 0; j < paybackHolder.ContactProperties.Length; j++)
+                        {
+                            Enumerations.ContactProperties contactProperty = paybackHolder.ContactProperties[j];
+                            if (totalContactProperties.Contains(contactProperty) == false)
+                            {
+                                totalContactProperties.Add(contactProperty);
+                            }
                         }
                     }
                 }
 
                 //Return the final Payback
-                return new PaybackHolder(totalType, totalPhysAttribute, totalElement, totalContactTypes.ToArray(), totalContactResult, totalAttrContactResult, totalDamage, totalStatuses.Count == 0 ? null : totalStatuses.ToArray());
+                return new PaybackHolder(totalType, totalPhysAttribute, totalElement, totalContactTypes.ToArray(), totalContactProperties.ToArray(), totalContactResult, totalAttrContactResult, totalDamage, totalStatuses.Count == 0 ? null : totalStatuses.ToArray());
             }
         }
 

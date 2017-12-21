@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
                 MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.First, true,
                 new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering }, User.GetOpposingEntityType(), EntityTypes.Neutral);
 
-            DamageInfo = new DamageData(1, Elements.Normal, false, ContactTypes.None, null, DamageEffects.RemovesSegment);
+            DamageInfo = new DamageData(1, Elements.Normal, false, ContactTypes.SideDirect, ContactProperties.Protected, null, DamageEffects.RemovesSegment);
 
             SetMoveSequence(new ShellTossSequence(this));
             actionCommand = new HammerCommand(MoveSequence, 4, 500d);

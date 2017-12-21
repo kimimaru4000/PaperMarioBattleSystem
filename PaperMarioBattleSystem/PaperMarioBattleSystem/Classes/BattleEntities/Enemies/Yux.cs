@@ -192,7 +192,8 @@ namespace PaperMarioBattleSystem
                     BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.YuxArrange + 1,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                         new MoveWithAfterImagesBattleEvent(existingMinis, posArray, moveTime, new AfterImageVFX(null, 4, 3, .5f,
-                        AfterImageVFX.AfterImageAlphaSetting.Constant, AfterImageVFX.AfterImageAnimSetting.Current)));
+                        AfterImageVFX.AfterImageAlphaSetting.Constant, AfterImageVFX.AfterImageAnimSetting.Current),
+                        Interpolation.InterpolationTypes.QuadInOut, Interpolation.InterpolationTypes.QuadInOut));
                 }
 
                 //Get the end position array set up for arranging all Mini-Yuxes into their new positions
@@ -218,7 +219,8 @@ namespace PaperMarioBattleSystem
                 BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.YuxArrange,
                     new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                     new MoveWithAfterImagesBattleEvent(MiniYuxes.ToArray(), battlePosArray, moveTime, new AfterImageVFX(null, 4, 3, .5f,
-                    AfterImageVFX.AfterImageAlphaSetting.Constant, AfterImageVFX.AfterImageAnimSetting.Current)));
+                    AfterImageVFX.AfterImageAlphaSetting.Constant, AfterImageVFX.AfterImageAnimSetting.Current),
+                    Interpolation.InterpolationTypes.QuadInOut, Interpolation.InterpolationTypes.QuadInOut));
             }
         }
 

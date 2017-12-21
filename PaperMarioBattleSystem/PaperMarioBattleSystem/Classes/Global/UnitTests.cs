@@ -35,7 +35,7 @@ namespace PaperMarioBattleSystem
                 Debug.Assert(overrideHolder.OverrideCount == 2);
 
                 InteractionParamHolder param = new InteractionParamHolder(mario, goomba, 1, Enumerations.Elements.Ice, true,
-                    Enumerations.ContactTypes.TopDirect, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveActionTypes.None);
+                    Enumerations.ContactTypes.TopDirect, Enumerations.ContactProperties.None, null, Enumerations.DamageEffects.None, false, Enumerations.DefensiveActionTypes.None);
                 InteractionResult interaction = Interactions.GetDamageInteraction(param);
 
                 Debug.Assert(interaction.VictimResult.TotalDamage == 4);
@@ -47,6 +47,58 @@ namespace PaperMarioBattleSystem
 
                 ElementOverrideHolder overrideHolder2 = mario.EntityProperties.GetTotalElementOverride(goomba);
                 Debug.Assert(overrideHolder2.Element == Enumerations.Elements.Invalid);
+            }
+
+            public static void PaybackInteractionUT1()
+            {
+                BattleMario mario = new BattleMario(new MarioStats(1, 5, 50, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
+                Goomba goomba = new Goomba();
+                
+                mario.EntityProperties.AfflictStatus(new HoldFastStatus(3), false);
+
+                Debug.Assert(mario.EntityProperties.HasPayback());
+
+                InteractionParamHolder paramHolder = new InteractionParamHolder(goomba, mario, 0, Enumerations.Elements.Normal, true,
+                    Enumerations.ContactTypes.Latch, Enumerations.ContactProperties.None, null, Enumerations.DamageEffects.None, false,
+                    Enumerations.DefensiveActionTypes.Guard | Enumerations.DefensiveActionTypes.Superguard);
+
+                InteractionResult interaction = Interactions.GetDamageInteraction(paramHolder);
+
+                PrintInteractionResult(interaction);
+
+                Debug.Assert(interaction.AttackerResult.TotalDamage == 1);
+                Debug.Assert(interaction.VictimResult.TotalDamage == 0);
+            }
+
+            public static void PaybackInteractionUT2()
+            {
+                BattleMario mario = new BattleMario(new MarioStats(1, 5, 50, 0, 0, EquipmentGlobals.BootLevels.Super, EquipmentGlobals.HammerLevels.Normal));
+                KoopaTroopa koopa = new KoopaTroopa();
+                koopa.RaiseAttack(2);
+
+                ReturnPostageBadge returnPostage = new ReturnPostageBadge();
+                ZapTapBadge zapTap = new ZapTapBadge();
+                returnPostage.Equip(mario);
+                zapTap.Equip(mario);
+
+                Debug.Assert(mario.EntityProperties.HasPayback());
+                Debug.Assert(mario.EntityProperties.HasPhysAttributes(true, Enumerations.PhysicalAttributes.Electrified));
+
+                int damage = new ShellToss().DamageProperties.Damage + koopa.BattleStats.TotalAttack;
+
+                InteractionParamHolder paramHolder = new InteractionParamHolder(koopa, mario, damage, Enumerations.Elements.Normal, false,
+                    Enumerations.ContactTypes.SideDirect, Enumerations.ContactProperties.Protected, null, Enumerations.DamageEffects.None, false,
+                    Enumerations.DefensiveActionTypes.None);
+
+                InteractionResult interaction = Interactions.GetDamageInteraction(paramHolder);
+
+                PrintInteractionResult(interaction);
+
+                returnPostage.UnEquip();
+                zapTap.UnEquip();
+
+                Debug.Assert(interaction.VictimResult.TotalDamage == 4);
+                Debug.Assert(interaction.AttackerResult.TotalDamage == 2);
             }
 
             private static void PrintInteractionResult(InteractionResult interactionResult)
@@ -76,6 +128,8 @@ namespace PaperMarioBattleSystem
                           $"{startString} Damage: {interactionHolder.TotalDamage}\n" +
                           $"{startString} Element: {interactionHolder.DamageElement}\n" +
                           $"{startString} Element Result: {interactionHolder.ElementResult}\n" +
+                          $"{startString} Contact Type: {interactionHolder.ContactType}\n" +
+                          $"{startString} Contact Property: {interactionHolder.ContactProperty}\n" +
                           $"{startString} Piercing: {interactionHolder.Piercing}\n" +
                           $"{startString} Statuses: {statuses}\n" +
                           $"{startString} Hit: {interactionHolder.Hit}\n" +

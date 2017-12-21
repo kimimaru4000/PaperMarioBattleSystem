@@ -20,13 +20,22 @@ namespace PaperMarioBattleSystem
         protected double Duration = 0d;
 
         protected Vector2[] StartingPositions = null;
+
+        protected Interpolation.InterpolationTypes XInterpolation = Interpolation.InterpolationTypes.Linear;
+        protected Interpolation.InterpolationTypes YInterpolation = Interpolation.InterpolationTypes.Linear;
+
         private double ElapsedTime = 0d;
 
-        public MoveToBattleEvent(BattleEntity[] entities, Vector2[] finalPositions, double duration)
+        public MoveToBattleEvent(BattleEntity[] entities, Vector2[] finalPositions, double duration,
+            Interpolation.InterpolationTypes xInterpolation = Interpolation.InterpolationTypes.Linear,
+            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear)
         {
             Entities = entities;
             FinalPositions = finalPositions;
             Duration = duration;
+
+            XInterpolation = xInterpolation;
+            YInterpolation = yInterpolation;
         }
 
         /// <summary>
@@ -35,8 +44,10 @@ namespace PaperMarioBattleSystem
         /// <param name="entity"></param>
         /// <param name="finalPosition"></param>
         /// <param name="duration"></param>
-        public MoveToBattleEvent(BattleEntity entity, Vector2 finalPosition, double duration)
-            : this(new BattleEntity[] { entity }, new Vector2[] { finalPosition }, duration)
+        public MoveToBattleEvent(BattleEntity entity, Vector2 finalPosition, double duration,
+            Interpolation.InterpolationTypes xInterpolation = Interpolation.InterpolationTypes.Linear,
+            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear)
+            : this(new BattleEntity[] { entity }, new Vector2[] { finalPosition }, duration, xInterpolation, yInterpolation)
         {
         }
 
@@ -89,7 +100,7 @@ namespace PaperMarioBattleSystem
                 if (i >= FinalPositions.Length)
                     break;
 
-                Entities[i].Position = Vector2.LerpPrecise(StartingPositions[i], FinalPositions[i], (float)(ElapsedTime / Duration));
+                Entities[i].Position = Interpolation.Interpolate(StartingPositions[i], FinalPositions[i], (float)(ElapsedTime / Duration), XInterpolation, YInterpolation);
             }
 
             //We're finished, so end

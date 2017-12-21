@@ -13,6 +13,11 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class Koopatrol : KoopaTroopa, ITattleableEntity
     {
+        private readonly StatusGlobals.PaybackHolder SpikedPayback = new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Constant, Enumerations.PhysicalAttributes.Spiked,
+                Enumerations.Elements.Sharp, new Enumerations.ContactTypes[] { Enumerations.ContactTypes.TopDirect },
+                new Enumerations.ContactProperties[] { Enumerations.ContactProperties.None, Enumerations.ContactProperties.Protected },
+                Enumerations.ContactResult.Failure, Enumerations.ContactResult.Failure, 1, null);
+
         public Koopatrol()
         {
             Name = "Koopatrol";
@@ -20,8 +25,8 @@ namespace PaperMarioBattleSystem
             //Using their TTYD stats
             BattleStats = new Stats(26, 6, 0, 4, 2);
 
-            EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Constant, Enumerations.PhysicalAttributes.Spiked,
-                Enumerations.Elements.Sharp, new Enumerations.ContactTypes[] { Enumerations.ContactTypes.TopDirect }, Enumerations.ContactResult.Failure, Enumerations.ContactResult.Failure, 1, null));
+            EntityProperties.AddPayback(SpikedPayback);
+            EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Spiked);
 
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Sleep, new StatusPropertyHolder(70d, -1));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Dizzy, new StatusPropertyHolder(105d, 0));
@@ -106,6 +111,22 @@ namespace PaperMarioBattleSystem
 
                 return base.ActionUsed;
             }
+        }
+
+        public override void HandleFlipped()
+        {
+            base.HandleFlipped();
+
+            EntityProperties.RemovePayback(SpikedPayback);
+            EntityProperties.RemovePhysAttribute(Enumerations.PhysicalAttributes.Spiked);
+        }
+
+        protected override void UnFlip()
+        {
+            base.UnFlip();
+
+            EntityProperties.AddPayback(SpikedPayback);
+            EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Spiked);
         }
 
         #region Tattle Information

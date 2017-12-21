@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// The base class for all types of VFXElements.
     /// VFXElements are handled in the <see cref="BattleVFXManager"/>.
     /// </summary>
-    public abstract class VFXElement : IUpdateable, IDrawable
+    public abstract class VFXElement : IUpdateable, IDrawable, ICleanup
     {
         /// <summary>
         /// Whether the VFXElement should be removed or not.
@@ -27,5 +27,10 @@ namespace PaperMarioBattleSystem
         /// Draws the VFXElement.
         /// </summary>
         public abstract void Draw();
+
+        public virtual void CleanUp()
+        {
+            
+        }
     }
 }

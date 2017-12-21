@@ -261,6 +261,9 @@ namespace PaperMarioBattleSystem
                         SoundManager.Instance.PlaySound(SoundManager.Sound.Immune);
                     }
 
+                    //Show the star indicating damage
+                    BattleVFXManager.Instance.AddVFXElement(new DamageStarVFX(damage, Position + (EntityType == EntityTypes.Player ? new Vector2(-40, -35) : new Vector2(50, -35))));
+
                     //Lose HP
                     LoseHP(damage);
                 }

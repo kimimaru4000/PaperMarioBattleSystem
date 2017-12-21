@@ -343,7 +343,7 @@ namespace PaperMarioBattleSystem
             //Draw icon
             if (MoveInfo.Icon != null && MoveInfo.Icon.Tex != null)
             {
-                SpriteRenderer.Instance.Draw(MoveInfo.Icon.Tex, position - new Vector2(64, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f, true);
+                SpriteRenderer.Instance.Draw(MoveInfo.Icon.Tex, position - new Vector2(32, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f, true);
             }
 
             //Draw name

@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// A menu for the MoveActions relating to a ActionMenu. For example, any Jump actions would be in the ActionSubMenu for Jump.
+    /// A menu for the MoveActions relating to an ActionMenu. For example, any Jump actions would be in the ActionSubMenu for Jump.
     /// ActionSubMenus can lead to more ActionSubMenus, as is the case with "Change Partner"
     /// This is only used by the player
     /// <para>All ActionSubMenus have the "SubMenu" suffix</para>
@@ -44,6 +44,7 @@ namespace PaperMarioBattleSystem
         protected float YSpacing = 20f;
 
         protected TextBox BoxMenu = null;
+        protected LoopAnimation SelectionCursor = null;
 
         protected override int LastSelection => BattleActions.Count - 1;
 
@@ -51,6 +52,12 @@ namespace PaperMarioBattleSystem
         {
             BoxMenu = new TextBox(new Vector2(SpriteRenderer.Instance.WindowCenter.X, SpriteRenderer.Instance.WindowCenter.Y + 220f), new Vector2(320f, 80f), null);
             BoxMenu.SetText(string.Empty);
+
+            Rectangle rect = new Rectangle(743, 59, 15, 12);
+            SelectionCursor = new LoopAnimation(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
+                AnimationGlobals.InfiniteLoop, true,
+                new Animation.Frame(rect, 200d),
+                new Animation.Frame(rect, 200d, new Vector2(1, 0)));
         }
 
         public ActionSubMenu(params MoveAction[] battleActions) : this()
@@ -106,6 +113,13 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        public override void Update()
+        {
+            base.Update();
+
+            SelectionCursor.Update();
+        }
+
         public override void Draw()
         {
             //List out actions with their name, icon, description, and FP cost
@@ -143,6 +157,9 @@ namespace PaperMarioBattleSystem
 
             //Show description window at the bottom
             BoxMenu.Draw();
+
+            //Draw the selection cursor
+            SelectionCursor.Draw(Position + new Vector2(-64, CurSelection * YSpacing), Color.White, Vector2.Zero, new Vector2(2f, 2f), false, .38f);
         }
     }
 }

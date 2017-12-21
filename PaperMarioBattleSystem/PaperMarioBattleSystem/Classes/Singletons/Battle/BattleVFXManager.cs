@@ -63,7 +63,11 @@ namespace PaperMarioBattleSystem
         /// <param name="vfxElement">The VFXElement to remove.</param>
         public void RemoveVFXElement(VFXElement vfxElement)
         {
-            VFXElements.Remove(vfxElement);
+            bool removed = VFXElements.Remove(vfxElement);
+            if (removed == true)
+            {
+                vfxElement.CleanUp();
+            }
         }
 
         /// <summary>
@@ -78,6 +82,7 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
+            VFXElements[index].CleanUp();
             VFXElements.RemoveAt(index);
         }
 
@@ -86,7 +91,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void ClearAllVFX()
         {
-            VFXElements.Clear();
+            for (int i = 0; i < VFXElements.Count; i++)
+            {
+                RemoveVFXElement(i);
+                i--;
+            }
         }
 
         public void Update()

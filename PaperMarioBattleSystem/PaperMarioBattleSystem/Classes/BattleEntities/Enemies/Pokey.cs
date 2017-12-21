@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class Pokey : BattleEnemy, ISegmentEntity, ITattleableEntity
     {
-        public Pokey(Stats stats) : base(new Stats(11, 4, 0, 2, 0))
+        public Pokey() : base(new Stats(11, 4, 0, 2, 0))
         {
             Name = "Pokey";
 

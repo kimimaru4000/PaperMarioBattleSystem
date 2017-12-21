@@ -101,6 +101,26 @@ namespace PaperMarioBattleSystem
                 Debug.Assert(interaction.AttackerResult.TotalDamage == 2);
             }
 
+            public static void PaybackInteractionUT3()
+            {
+                BattleMario mario = new BattleMario(new MarioStats(1, 5, 50, 0, 0, EquipmentGlobals.BootLevels.Super, EquipmentGlobals.HammerLevels.Normal));
+                Pokey pokey = new Pokey();
+
+                Debug.Assert(pokey.EntityProperties.HasPhysAttributes(true, Enumerations.PhysicalAttributes.Spiked));
+                Debug.Assert(pokey.EntityProperties.HasPayback());
+
+                InteractionParamHolder paramHolder = new InteractionParamHolder(mario, pokey, 3, Enumerations.Elements.Normal, false,
+                    Enumerations.ContactTypes.SideDirect, Enumerations.ContactProperties.None, null, Enumerations.DamageEffects.None, false,
+                    Enumerations.DefensiveActionTypes.None);
+
+                InteractionResult interaction = Interactions.GetDamageInteraction(paramHolder);
+
+                PrintInteractionResult(interaction);
+
+                Debug.Assert(interaction.VictimResult.DontDamageEntity == true);
+                Debug.Assert(interaction.AttackerResult.IsPaybackDamage == true);
+            }
+
             private static void PrintInteractionResult(InteractionResult interactionResult)
             {
                 InteractionHolder attackResult = interactionResult.AttackerResult;

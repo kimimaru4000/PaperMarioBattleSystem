@@ -19,7 +19,9 @@ namespace PaperMarioBattleSystem
     {
         /// <summary>
         /// The types of Debug logs.
+        /// <para>This is a bit field.</para>
         /// </summary>
+        [Flags]
         public enum DebugLogTypes
         {
             None = 0,
@@ -442,6 +444,10 @@ namespace PaperMarioBattleSystem
             else if (Input.GetKeyDown(Keys.D2, DebugKeyboard))
             {
                 UnitTests.InteractionUnitTests.PaybackInteractionUT2();
+            }
+            else if (Input.GetKeyDown(Keys.D3, DebugKeyboard))
+            {
+                UnitTests.InteractionUnitTests.PaybackInteractionUT3();
             }
         }
 

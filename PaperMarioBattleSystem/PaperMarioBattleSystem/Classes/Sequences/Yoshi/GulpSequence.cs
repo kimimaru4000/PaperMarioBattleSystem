@@ -96,7 +96,10 @@ namespace PaperMarioBattleSystem
                     //Deal damage to the entity spit out
                     AttemptDamage(BaseDamage, EntitiesAffected[0], Action.DamageProperties, false);
 
+                    ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
+
                     //Deal damage to the entity behind, if one exists
+                    //NOTE: Account for a miss or interruption here
                     if (BehindEntity != null)
                     {
                         AttemptDamage(BaseDamage, BehindEntity, Action.DamageProperties, false);

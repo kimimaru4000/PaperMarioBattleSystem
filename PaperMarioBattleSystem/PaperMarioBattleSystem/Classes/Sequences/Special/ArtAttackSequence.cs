@@ -104,6 +104,8 @@ namespace PaperMarioBattleSystem
                 if (boundingBox.Contains(entityPos) == true)
                 {
                     AttemptDamage(BaseDamage + damageMod, entity, Action.DamageProperties, true);
+
+                    ShowCommandRankVFX(HighestCommandRank, entity.Position);
                 }
             }
         }

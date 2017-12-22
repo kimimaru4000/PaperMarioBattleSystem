@@ -169,6 +169,7 @@ namespace PaperMarioBattleSystem
             //If all the buttons were pressed, end in a Success
             if (ButtonIndex >= TornadoButtonCount)
             {
+                SendCommandRank(CommandRank.Good);
                 OnComplete(CommandResults.Success);
             }
             //The wrong button was pressed; end in a Failure

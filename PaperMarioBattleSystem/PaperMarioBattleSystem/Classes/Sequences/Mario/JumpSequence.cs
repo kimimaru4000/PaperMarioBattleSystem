@@ -24,8 +24,6 @@ namespace PaperMarioBattleSystem
 
         protected ActionCommand.CommandRank SentRank = ActionCommand.CommandRank.Nice;
 
-        protected bool ShowCommandVFX = false;
-
         public JumpSequence(MoveAction moveAction) : base(moveAction)
         {
             
@@ -35,15 +33,11 @@ namespace PaperMarioBattleSystem
         {
             //Show "NICE" here or something
             ChangeSequenceBranch(SequenceBranch.Success);
-
-            ShowCommandVFX = true;
         }
 
         protected override void CommandFailed()
         {
             ChangeSequenceBranch(SequenceBranch.Failed);
-
-            ShowCommandVFX = false;
         }
 
         public override void OnCommandResponse(object response)
@@ -105,12 +99,12 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpRisingName);
-                    AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
+                    InteractionResult[] interactions = AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
 
                     //Show VFX for the highest command rank
-                    if (ShowCommandVFX == true)
+                    if (interactions[0] != null && interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
                     {
-                        ShowCommandRankVFX(HighestCommandRank, User.Position);
+                        ShowCommandRankVFX(HighestCommandRank, CurTarget.Position);
                     }
 
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
@@ -181,8 +175,6 @@ namespace PaperMarioBattleSystem
         {
             base.OnMiss();
 
-            ShowCommandVFX = false;
-
             ChangeJumpBranch(SequenceBranch.Miss);
 
             return false;
@@ -190,8 +182,6 @@ namespace PaperMarioBattleSystem
 
         protected override void OnInterruption(Elements element)
         {
-            ShowCommandVFX = false;
-
             if (element == Elements.Sharp) InterruptionHandler = SpikedEntityInterruption;
             else base.OnInterruption(element);
         }

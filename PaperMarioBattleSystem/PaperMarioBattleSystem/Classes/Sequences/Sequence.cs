@@ -479,7 +479,7 @@ namespace PaperMarioBattleSystem
         /// <param name="commandRank">The CommandRank result of the Action Command.</param>
         protected void ShowCommandRankVFX(ActionCommand.CommandRank commandRank, Vector2 position)
         {
-            BattleVFXManager.Instance.AddVFXElement(new ActionCommandVFX(commandRank, position));
+            BattleVFXManager.Instance.AddVFXElement(new ActionCommandVFX(commandRank, position, new Vector2(-15f, -15f)));
         }
 
         #endregion
@@ -553,20 +553,20 @@ namespace PaperMarioBattleSystem
         /// <param name="damageInfo">The damage information to use.</param>
         /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
         /// If false, the total damage will be calculated using surface-level stats (such as adding the user's Attack)</param>
-        /// <returns>An int array containing the damage dealt to each BattleEntity targeted, in order</returns>
-        protected int[] AttemptDamage(int damage, BattleEntity[] entities, DamageData damageInfo, bool isTotalDamage)
+        /// <returns>An InteractionResult array containing the InteractionResult with each BattleEntity targeted, in order</returns>
+        protected InteractionResult[] AttemptDamage(int damage, BattleEntity[] entities, DamageData damageInfo, bool isTotalDamage)
         {
             if (entities == null || entities.Length == 0)
             {
                 Debug.LogWarning($"{nameof(entities)} is null or empty in {nameof(AttemptDamage)} for Action {Name}!");
-                return new int[0];
+                return new InteractionResult[0];
             }
 
             //Ensure the MoveAction associated with this sequence supports damage
             if (Action.DealsDamage == false)
             {
                 Debug.LogError($"Attempting to deal damage when {Action.Name} does not support it, as {nameof(Action.DamageProperties)} is null");
-                return new int[0];
+                return new InteractionResult[0];
             }
 
             int totalDamage = isTotalDamage == true ? damage : GetTotalDamage(damage);
@@ -590,24 +590,12 @@ namespace PaperMarioBattleSystem
                 }
             }
 
-            //The damage dealt to each BattleEntity
-            int[] damageValues = new int[entities.Length];
-
             //Get the interactions between the BattleEntity performing the sequence and the ones targeted
             InteractionResult[] interactionResults = Interactions.AttemptDamageEntities(User, entities, new DamageData(totalDamage, damageInfo.DamagingElement, damageInfo.Piercing,
                 damageInfo.ContactType, damageInfo.ContactProperty, damageInfo.Statuses, damageInfo.CantMiss, damageInfo.AllOrNothingAffected, damageInfo.DefensiveOverride,
                 damageInfo.DamageEffect), OnMiss);
 
-            //Go through the interactions and store their total damage
-            for (int i = 0; i < interactionResults.Length; i++)
-            {
-                if (interactionResults[i] != null)
-                {
-                    damageValues[i] = interactionResults[i].VictimResult.TotalDamage;
-                }
-            }
-
-            return damageValues;
+            return interactionResults;
         }
 
         /// <summary>
@@ -618,7 +606,7 @@ namespace PaperMarioBattleSystem
         /// <param name="damageInfo">The damage information to use.</param>
         /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
         /// If false, the total damage will be calculated using surface-level stats (such as adding the user's Attack)</param>
-        protected int[] AttemptDamage(int damage, BattleEntity entity, DamageData damageInfo, bool isTotalDamage)
+        protected InteractionResult[] AttemptDamage(int damage, BattleEntity entity, DamageData damageInfo, bool isTotalDamage)
         {
             return AttemptDamage(damage, new BattleEntity[] { entity }, damageInfo, isTotalDamage);
         }

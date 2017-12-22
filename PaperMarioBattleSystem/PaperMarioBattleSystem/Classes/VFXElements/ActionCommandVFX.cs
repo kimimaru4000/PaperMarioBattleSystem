@@ -39,13 +39,13 @@ namespace PaperMarioBattleSystem
 
         private double ElapsedTime = 0d;
 
-        public ActionCommandVFX(ActionCommand.CommandRank successRank, Vector2 position)
+        public ActionCommandVFX(ActionCommand.CommandRank successRank, Vector2 position, Vector2 offsetPosition)
         {
             SuccessRank = successRank;
             Position = position;
 
             StartPosition = Position;
-            EndPosition = StartPosition + new Vector2(-15f, -15f);
+            EndPosition = StartPosition + offsetPosition;
 
             //Set scale
             if (RankVFXData.ContainsKey(SuccessRank) == true)

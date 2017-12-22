@@ -112,12 +112,16 @@ namespace PaperMarioBattleSystem
                     break;
                 case 2:
                     //Deal damage and heal for the amount of damage dealt
-                    int[] damageDealt = AttemptDamage(BaseDamage, EntitiesAffected[0], Action.DamageProperties, false);
+                    InteractionResult[] interactions = AttemptDamage(BaseDamage, EntitiesAffected[0], Action.DamageProperties, false);
+
+                    int damageDealt = 0;
+                    if (interactions[0] != null)
+                        damageDealt = interactions[0].VictimResult.TotalDamage;
 
                     //Don't heal if the damage was 0 or the attack missed or was interrupted somehow
-                    if (damageDealt[0] > 0 && Missed == false && Interrupted == false)
+                    if (damageDealt > 0 && Missed == false && Interrupted == false)
                     {
-                        PerformHeal(new HealingData(damageDealt[0], 0, null), User);
+                        PerformHeal(new HealingData(damageDealt, 0, null), User);
                     }
 
                     CurSequenceAction = new WaitSeqAction(0d);

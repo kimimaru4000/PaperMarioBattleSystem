@@ -85,9 +85,10 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), SpinMoveDuration);
                     break;
                 case 1:
-                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected[0], Action.DamageProperties, false);
+                    InteractionResult[] interactions = AttemptDamage(BaseDamage * DamageMod, EntitiesAffected[0], Action.DamageProperties, false);
 
-                    ShowCommandRankVFX(HighestCommandRank, User.Position);
+                    if (interactions[0] != null && interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
+                        ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
 
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;

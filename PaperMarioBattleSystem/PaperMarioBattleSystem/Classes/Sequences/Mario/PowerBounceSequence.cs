@@ -62,16 +62,20 @@ namespace PaperMarioBattleSystem
                 case 0:
         
                     //Check the damage dealt
-                    int[] damageValues = AttemptDamage(DamageDealt, EntitiesAffected, Action.DamageProperties, true);
+                    InteractionResult[] interactions = AttemptDamage(DamageDealt, EntitiesAffected, Action.DamageProperties, true);
+
+                    int damage = 0;
+                    if (interactions[0] != null)
+                        damage = interactions[0].VictimResult.TotalDamage;
 
                     //Show VFX for the highest command rank
-                    if (ShowCommandVFX == true)
+                    if (interactions[0] != null && interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
                     {
-                        ShowCommandRankVFX(HighestCommandRank, User.Position);
+                        ShowCommandRankVFX(HighestCommandRank, CurTarget.Position);
                     }
 
                     //If the total damage dealt was 1, stop decreasing the damage to keep it doing 1
-                    if (StopDecreasing == false && damageValues[0] == 1)
+                    if (StopDecreasing == false && damage == 1)
                         StopDecreasing = true;
         
                     //Only decrease the value if we're not at 1 damage

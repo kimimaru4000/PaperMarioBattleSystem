@@ -157,7 +157,16 @@ namespace PaperMarioBattleSystem
                         Debug.LogWarning($"{Action.Name} is not of type {nameof(TornadoJump)} in {nameof(TornadoJumpSequence)}!");
                     }
 
-                    AttemptDamage(aerialDamage, CurTargets, aerialDamageInfo, true);
+                    InteractionResult[] targetsHit = AttemptDamage(aerialDamage, CurTargets, aerialDamageInfo, true);
+
+                    for (int i = 0; i < targetsHit.Length; i++)
+                    {
+                        InteractionResult targetHit = targetsHit[i];
+
+                        if (targetHit == null || targetHit.WasAttackerHit == true || targetHit.WasVictimHit == false) continue;
+
+                        ShowCommandRankVFX(HighestCommandRank, targetsHit[i].VictimResult.Entity.Position);
+                    }
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration);
@@ -188,7 +197,7 @@ namespace PaperMarioBattleSystem
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     ChangeSequenceBranch(SequenceBranch.End);
 
                     SequenceStep = 1;

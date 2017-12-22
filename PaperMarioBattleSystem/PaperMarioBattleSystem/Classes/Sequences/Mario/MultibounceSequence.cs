@@ -48,12 +48,12 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
+                    InteractionResult[] interactions = AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
 
                     //Show VFX for the highest command rank
-                    if (ShowCommandVFX == true)
+                    if (interactions[0] != null && interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
                     {
-                        ShowCommandRankVFX(HighestCommandRank, User.Position);
+                        ShowCommandRankVFX(HighestCommandRank, CurTarget.Position);
                     }
 
                     //Restart with the next target

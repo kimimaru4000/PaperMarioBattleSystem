@@ -728,7 +728,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The final result of an interaction, containing InteractionHolders for both the attacker and victim
     /// </summary>
-    public class InteractionResult
+    public sealed class InteractionResult
     {
         public InteractionHolder AttackerResult = InteractionHolder.Default;
         public InteractionHolder VictimResult = InteractionHolder.Default;
@@ -749,6 +749,20 @@ namespace PaperMarioBattleSystem
             AttackerResult = attackerResult;
             VictimResult = victimResult;
         }
+
+        #region Helper Properties & Methods
+
+        /// <summary>
+        /// Tells if the Victim in the interaction was hit.
+        /// </summary>
+        public bool WasVictimHit => (VictimResult.DontDamageEntity == false && VictimResult.Hit == true);
+
+        /// <summary>
+        /// Tells if the Attacker in the interaction was hit.
+        /// </summary>
+        public bool WasAttackerHit => (AttackerResult.DontDamageEntity == false && AttackerResult.Hit == true);
+
+        #endregion
     }
 
     #endregion

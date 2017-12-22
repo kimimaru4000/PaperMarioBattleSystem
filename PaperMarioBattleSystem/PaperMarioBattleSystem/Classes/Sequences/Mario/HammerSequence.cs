@@ -89,9 +89,11 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(SlamAnimName, true);
-                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, Action.DamageProperties, false);
+                    InteractionResult[] interactions = AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, Action.DamageProperties, false);
 
-                    ShowCommandRankVFX(HighestCommandRank, User.Position);
+                    //Show the command result if you hit
+                    if (interactions[0] != null && interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
+                        ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
 
                     CurSequenceAction = new WaitForAnimationSeqAction(SlamAnimName);
                     ChangeSequenceBranch(SequenceBranch.End);

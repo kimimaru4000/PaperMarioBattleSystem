@@ -52,6 +52,7 @@ namespace PaperMarioBattleSystem
             base.CommandSuccess();
         
             Bounces++;
+            SentRank = (ActionCommand.CommandRank)UtilityGlobals.Clamp((int)HighestCommandRank + 1, (int)ActionCommand.CommandRank.NiceM2, (int)ActionCommand.CommandRank.Excellent);
         }
 
         protected override void SequenceSuccessBranch()
@@ -62,7 +63,13 @@ namespace PaperMarioBattleSystem
         
                     //Check the damage dealt
                     int[] damageValues = AttemptDamage(DamageDealt, EntitiesAffected, Action.DamageProperties, true);
-        
+
+                    //Show VFX for the highest command rank
+                    if (ShowCommandVFX == true)
+                    {
+                        ShowCommandRankVFX(HighestCommandRank, User.Position);
+                    }
+
                     //If the total damage dealt was 1, stop decreasing the damage to keep it doing 1
                     if (StopDecreasing == false && damageValues[0] == 1)
                         StopDecreasing = true;

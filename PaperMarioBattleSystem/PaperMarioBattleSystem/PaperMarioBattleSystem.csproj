@@ -373,6 +373,7 @@
     <Compile Include="Classes\UIElements\UIFourPiecedTex.cs" />
     <Compile Include="Classes\UIElements\UIGrid.cs" />
     <Compile Include="Classes\UIElements\UIStackedTex.cs" />
+    <Compile Include="Classes\VFXElements\ActionCommandVFX.cs" />
     <Compile Include="Classes\VFXElements\AfterImageVFX.cs" />
     <Compile Include="Classes\VFXElements\DamageStarVFX.cs" />
     <Compile Include="Classes\VFXElements\VFXElement.cs" />

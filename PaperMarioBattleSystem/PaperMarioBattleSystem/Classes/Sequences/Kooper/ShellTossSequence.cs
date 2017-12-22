@@ -86,6 +86,9 @@ namespace PaperMarioBattleSystem
                     break;
                 case 1:
                     AttemptDamage(BaseDamage * DamageMod, EntitiesAffected[0], Action.DamageProperties, false);
+
+                    ShowCommandRankVFX(HighestCommandRank, User.Position);
+
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

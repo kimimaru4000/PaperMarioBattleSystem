@@ -40,6 +40,7 @@ namespace PaperMarioBattleSystem
         {
             base.CommandSuccess();
             NextTargetIndex++;
+            SentRank = (ActionCommand.CommandRank)UtilityGlobals.Clamp((int)HighestCommandRank + 1, (int)ActionCommand.CommandRank.NiceM2, (int)ActionCommand.CommandRank.Excellent);
         }
 
         protected override void SequenceSuccessBranch()
@@ -48,6 +49,12 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
+
+                    //Show VFX for the highest command rank
+                    if (ShowCommandVFX == true)
+                    {
+                        ShowCommandRankVFX(HighestCommandRank, User.Position);
+                    }
 
                     //Restart with the next target
                     if (NextTargetIndex < EntitiesAffected.Length)

@@ -22,6 +22,10 @@ namespace PaperMarioBattleSystem
 
         protected float XDiffOverTwo => UtilityGlobals.DifferenceDivided(CurTarget.Position.X, User.Position.X, 2f);
 
+        protected ActionCommand.CommandRank SentRank = ActionCommand.CommandRank.Nice;
+
+        protected bool ShowCommandVFX = false;
+
         public JumpSequence(MoveAction moveAction) : base(moveAction)
         {
             
@@ -31,11 +35,15 @@ namespace PaperMarioBattleSystem
         {
             //Show "NICE" here or something
             ChangeSequenceBranch(SequenceBranch.Success);
+
+            ShowCommandVFX = true;
         }
 
         protected override void CommandFailed()
         {
             ChangeSequenceBranch(SequenceBranch.Failed);
+
+            ShowCommandVFX = false;
         }
 
         public override void OnCommandResponse(object response)
@@ -82,7 +90,7 @@ namespace PaperMarioBattleSystem
                     Vector2 posTo2 = User.Position + new Vector2(XDiffOverTwo, JumpHeight);
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
-                    StartActionCommandInput();
+                    StartActionCommandInput(SentRank);
                     CurSequenceAction = new MoveToSeqAction(posTo2, JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     break;
                 default:
@@ -98,6 +106,13 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpRisingName);
                     AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
+
+                    //Show VFX for the highest command rank
+                    if (ShowCommandVFX == true)
+                    {
+                        ShowCommandRankVFX(HighestCommandRank, User.Position);
+                    }
+
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 1:
@@ -165,6 +180,9 @@ namespace PaperMarioBattleSystem
         protected override bool OnMiss()
         {
             base.OnMiss();
+
+            ShowCommandVFX = false;
+
             ChangeJumpBranch(SequenceBranch.Miss);
 
             return false;
@@ -172,6 +190,8 @@ namespace PaperMarioBattleSystem
 
         protected override void OnInterruption(Elements element)
         {
+            ShowCommandVFX = false;
+
             if (element == Elements.Sharp) InterruptionHandler = SpikedEntityInterruption;
             else base.OnInterruption(element);
         }

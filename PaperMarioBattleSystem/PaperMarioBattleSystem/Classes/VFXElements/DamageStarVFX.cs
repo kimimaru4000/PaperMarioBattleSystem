@@ -15,6 +15,14 @@ namespace PaperMarioBattleSystem
     public class DamageStarVFX : VFXElement
     {
         /// <summary>
+        /// The types of StarStates for the damage star.
+        /// </summary>
+        protected enum StarState
+        {
+            Expanding, Waiting, Shrinking
+        }
+
+        /// <summary>
         /// How long the star stays displayed after it finishes scaling.
         /// </summary>
         protected const double DisplayTime = 800d;
@@ -22,7 +30,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The rate the star scales.
         /// </summary>
-        protected const float ScaleRate = .15f;
+        protected const float ScaleRate = .18f;
 
         /// <summary>
         /// The max scale of the star when it grows.
@@ -46,13 +54,13 @@ namespace PaperMarioBattleSystem
 
         protected CroppedTexture2D StarHalfLeft = null;
         protected CroppedTexture2D StarHalfRight = null;
+        
+        /// <summary>
+        /// The StarState of the damage star.
+        /// </summary>
+        protected StarState CurStarState = StarState.Expanding;
 
         private double ElapsedTime = 0d;
-
-        /// <summary>
-        /// Tells if the star is fully scaled or not.
-        /// </summary>
-        protected bool FullyScaled => (CurScale == MaxScale);
 
         public DamageStarVFX(int damageDisplayed, Vector2 position)
         {
@@ -71,16 +79,32 @@ namespace PaperMarioBattleSystem
 
         public override void Update()
         {
-            if (FullyScaled == false)
+            if (CurStarState == StarState.Expanding)
             {
                 CurScale.X = UtilityGlobals.Clamp(CurScale.X + ScaleRate, 0f, MaxScale.X);
                 CurScale.Y = UtilityGlobals.Clamp(CurScale.Y + ScaleRate, 0f, MaxScale.Y);
+
+                if (CurScale == MaxScale)
+                {
+                    CurStarState = StarState.Waiting;
+                }
+            }
+            else if (CurStarState == StarState.Waiting)
+            {
+                //Increment time and check if it should start shrinking
+                ElapsedTime += Time.ElapsedMilliseconds;
+                if (ElapsedTime >= DisplayTime)
+                {
+                    CurStarState = StarState.Shrinking;
+                }
             }
             else
             {
-                //Increment time and check if it should go away
-                ElapsedTime += Time.ElapsedMilliseconds;
-                if (ElapsedTime >= DisplayTime)
+                //Shrink the star
+                CurScale.X = UtilityGlobals.Clamp(CurScale.X - ScaleRate, 0f, MaxScale.X);
+                CurScale.Y = UtilityGlobals.Clamp(CurScale.Y - ScaleRate, 0f, MaxScale.Y);
+
+                if (CurScale == Vector2.Zero)
                 {
                     ShouldRemove = true;
                 }
@@ -101,11 +125,15 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.Draw(StarHalfRight.Tex, Position + new Vector2((width - 1) * CurScale.X, 0f), StarHalfRight.SourceRect, Color.Yellow, 0f, origin, CurScale, true, false, depth, false, true);
 
             //Show the damage text in the middle of the star
-            if (DamageDisplayed > 0 && FullyScaled == true)
+            if (DamageDisplayed > 0)
             {
-                //Center the text
                 string text = DamageDisplayed.ToString();
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, Position + new Vector2(0f, 0f), Color.Black, 0f, new Vector2(.5f, .85f), 1f, depth + .01f, false);
+
+                //Fade the text based on how much the star is scaled
+                float colorAlpha = (MaxScale.X) == 0 ? 0f : (CurScale.X / MaxScale.X);
+
+                //Center the text
+                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, Position + new Vector2(0f, 0f), Color.Black * colorAlpha, 0f, new Vector2(.5f, .85f), 1f, depth + .01f, false);
             }
         }
     }

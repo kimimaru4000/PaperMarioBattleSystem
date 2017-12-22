@@ -90,6 +90,9 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(SlamAnimName, true);
                     AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, Action.DamageProperties, false);
+
+                    ShowCommandRankVFX(HighestCommandRank, User.Position);
+
                     CurSequenceAction = new WaitForAnimationSeqAction(SlamAnimName);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
@@ -135,7 +138,12 @@ namespace PaperMarioBattleSystem
 
         protected override void SequenceMissBranch()
         {
-
+            switch (SequenceStep)
+            {
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
         }
     }
 }

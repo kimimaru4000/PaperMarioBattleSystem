@@ -418,7 +418,7 @@ namespace PaperMarioBattleSystem
         }
 
         //NOTE: For some moves, these only show up when you hit (Ex. Jump, Hammer, Power Shell).
-        //Other moves show them as you perform the command, even if they deal damage (Ex. Mini-Egg, Earth Tremor).
+        //Other moves show them as you perform the command, even if they deal damage later (Ex. Mini-Egg, Earth Tremor).
         //Find a way to define when to show them in each move
         public void OnCommandRankResult(ActionCommand.CommandRank commandRank)
         {
@@ -471,6 +471,15 @@ namespace PaperMarioBattleSystem
         {
             if (CommandEnabled == true) actionCommand.StartInput(values);
             else OnCommandFailed();
+        }
+
+        /// <summary>
+        /// Helper method for showing the Action Command result.
+        /// </summary>
+        /// <param name="commandRank">The CommandRank result of the Action Command.</param>
+        protected void ShowCommandRankVFX(ActionCommand.CommandRank commandRank, Vector2 position)
+        {
+            BattleVFXManager.Instance.AddVFXElement(new ActionCommandVFX(commandRank, position));
         }
 
         #endregion
@@ -584,10 +593,12 @@ namespace PaperMarioBattleSystem
             //The damage dealt to each BattleEntity
             int[] damageValues = new int[entities.Length];
 
+            //Get the interactions between the BattleEntity performing the sequence and the ones targeted
             InteractionResult[] interactionResults = Interactions.AttemptDamageEntities(User, entities, new DamageData(totalDamage, damageInfo.DamagingElement, damageInfo.Piercing,
                 damageInfo.ContactType, damageInfo.ContactProperty, damageInfo.Statuses, damageInfo.CantMiss, damageInfo.AllOrNothingAffected, damageInfo.DefensiveOverride,
                 damageInfo.DamageEffect), OnMiss);
 
+            //Go through the interactions and store their total damage
             for (int i = 0; i < interactionResults.Length; i++)
             {
                 if (interactionResults[i] != null)
@@ -595,45 +606,6 @@ namespace PaperMarioBattleSystem
                     damageValues[i] = interactionResults[i].VictimResult.TotalDamage;
                 }
             }
-
-            //Go through all the entities and attempt damage
-            //for (int i = 0; i < entities.Length; i++)
-            //{
-            //    BattleEntity victim = entities[i];
-            //
-            //    InteractionResult finalResult = Interactions.GetDamageInteraction(new InteractionParamHolder(User, victim, totalDamage,
-            //        damageInfo.DamagingElement, damageInfo.Piercing, damageInfo.ContactType, damageInfo.Statuses, damageInfo.DamageEffect,
-            //        damageInfo.CantMiss, damageInfo.DefensiveOverride));
-            //
-            //    //Set the total damage dealt to the victim
-            //    damageValues[i] = finalResult.VictimResult.TotalDamage;
-            //
-            //    //Make the victim take damage upon a PartialSuccess or a Success
-            //    if (finalResult.VictimResult.DontDamageEntity == false)
-            //    {
-            //        //Check if the attacker hit
-            //        if (finalResult.VictimResult.Hit == true)
-            //        {
-            //            finalResult.AttackerResult.Entity.DamageEntity(finalResult.VictimResult);
-            //            //finalResult.VictimResult.Entity.TakeDamage(finalResult.VictimResult);
-            //        }
-            //        //Handle a miss otherwise
-            //        else
-            //        {
-            //            OnMiss();
-            //        }
-            //    }
-            //
-            //    //Make the attacker take damage upon a PartialSuccess or a Failure
-            //    //Break out of the loop when the attacker takes damage
-            //    if (finalResult.AttackerResult.DontDamageEntity == false)
-            //    {
-            //        finalResult.VictimResult.Entity.DamageEntity(finalResult.AttackerResult);
-            //        //finalResult.AttackerResult.Entity.TakeDamage(finalResult.AttackerResult);
-            //
-            //        break;
-            //    }
-            //}
 
             return damageValues;
         }

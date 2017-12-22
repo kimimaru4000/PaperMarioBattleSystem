@@ -20,6 +20,8 @@ namespace PaperMarioBattleSystem
 
         protected Keys ButtonToPress = Keys.Z;
 
+        protected CommandRank RankToSend = CommandRank.Nice;
+
         protected bool WithinRange
         {
             get
@@ -39,6 +41,9 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput(values);
 
+            if (values != null && values.Length > 0)
+                RankToSend = (CommandRank)values[0];
+
             StartRange = (float)Time.ActiveMilliseconds + Leniency;
             EndRange = (float)Time.ActiveMilliseconds + TotalRange;
         }
@@ -57,7 +62,7 @@ namespace PaperMarioBattleSystem
                 //Success if within range
                 if (WithinRange == true)
                 {
-                    SendCommandRank(CommandRank.Nice);
+                    SendCommandRank(RankToSend);
                     OnComplete(CommandResults.Success);
                 }
                 //Otherwise failure

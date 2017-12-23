@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -17,6 +18,7 @@ namespace PaperMarioBattleSystem
         protected double WaitDuration = 1500d;
 
         protected ItemAction itemAction { get; private set; } = null;
+        protected UICroppedTexture2D ItemShown = null;
 
         public ItemSequence(ItemAction moveAction) : base(moveAction)
         {
@@ -34,6 +36,21 @@ namespace PaperMarioBattleSystem
             {
                 itemAction = (ItemAction)Action;
             }
+
+            if (itemAction.ItemUsed.Icon != null || itemAction.ItemUsed.Icon.Tex != null)
+            {
+                ItemShown = new UICroppedTexture2D(itemAction.ItemUsed.Icon.Copy());
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (ItemShown != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(ItemShown);
+            }
         }
 
         protected override void SequenceStartBranch()
@@ -45,10 +62,21 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer(), User.EntityType != Enumerations.EntityTypes.Player), WalkDuration);
                     break;
                 case 1:
+                    if (ItemShown != null)
+                    {
+                        ItemShown.Position = Camera.Instance.SpriteToUIPos(User.Position + new Vector2(0, -20));
+                        BattleUIManager.Instance.AddUIElement(ItemShown);
+                    }
+
                     User.AnimManager.PlayAnimation(AnimationGlobals.GetItemName, false);
                     CurSequenceAction = new WaitSeqAction(WaitDuration);
                     break;
                 case 2:
+                    if (ItemShown != null)
+                    {
+                        BattleUIManager.Instance.RemoveUIElement(ItemShown);
+                    }
+
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;

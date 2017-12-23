@@ -86,6 +86,10 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarWishName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(398, 516, 29, 48), 1300d)));
 
+            AnimManager.AddAnimation(AnimationGlobals.JumpLandName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(119, 667, 35, 44), 150d),
+                new Animation.Frame(new Rectangle(119, 716, 36, 43), 150d)));
+
             #endregion
         }
         

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -18,6 +19,8 @@ namespace PaperMarioBattleSystem
             Name = "Mushroom";
             Description = "Heals 5 HP.";
 
+            Icon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Items.png"),
+                new Rectangle(537, 7, 25, 23));
             ItemType = ItemTypes.Healing;
 
             HPRestored = 5;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -17,7 +18,8 @@ namespace PaperMarioBattleSystem
 
             SPCost = 100;
 
-            MoveInfo = new MoveActionData(null, "Lull enemies to sleep with\na tender lullaby.", Enumerations.MoveResourceTypes.SP,
+            MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(66, 961, 24, 24)),
+                "Lull enemies to sleep with\na tender lullaby.", Enumerations.MoveResourceTypes.SP,
                 100, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other,
                 TargetSelectionMenu.EntitySelectionType.All, false, null, Enumerations.EntityTypes.Enemy);
                 

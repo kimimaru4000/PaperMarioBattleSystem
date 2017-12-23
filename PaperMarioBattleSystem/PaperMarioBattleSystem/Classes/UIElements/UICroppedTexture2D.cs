@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         public bool FlipY = false;
         public float Rotation = 0f;
         public float Depth = 0f;
-        public Color TintColor { get; set; }
+        public Color TintColor { get; set; } = Color.White;
 
         public UICroppedTexture2D(CroppedTexture2D croppedtex2D)
         {

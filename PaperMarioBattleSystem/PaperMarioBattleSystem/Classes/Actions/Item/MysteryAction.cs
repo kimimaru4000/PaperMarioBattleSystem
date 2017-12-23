@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
         {
             Name = ItemUsed.Name;
 
-            MoveInfo = new MoveActionData(null, ItemUsed.Description, MoveResourceTypes.FP, 0, CostDisplayTypes.Hidden,
+            MoveInfo = new MoveActionData(ItemUsed.Icon, ItemUsed.Description, MoveResourceTypes.FP, 0, CostDisplayTypes.Hidden,
                 MoveAffectionTypes.Self, ItemUsed.SelectionType, false, ItemUsed.HeightsAffected);
         }
     }

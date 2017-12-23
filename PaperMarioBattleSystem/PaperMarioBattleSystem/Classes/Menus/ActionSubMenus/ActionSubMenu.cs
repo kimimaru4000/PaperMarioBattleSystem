@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The Y spacing of the action list.
         /// </summary>
-        protected float YSpacing = 20f;
+        protected float YSpacing = 25f;
 
         protected TextBox BoxMenu = null;
         protected LoopAnimation SelectionCursor = null;

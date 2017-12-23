@@ -168,5 +168,7 @@ Implementation Summary
   
 Try this out and note any problems.
   
-  
+Update (12/21/17)
+-----------------
+This has been implemented and looks great so far. This document will be updated if any problems arise.
   

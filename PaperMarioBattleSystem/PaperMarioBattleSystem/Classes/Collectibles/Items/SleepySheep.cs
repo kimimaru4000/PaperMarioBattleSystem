@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -18,6 +19,8 @@ namespace PaperMarioBattleSystem
             Name = "Sleepy Sheep";
             Description = "Targets all enemies and may cause them to fall asleep.";
 
+            Icon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Items.png"),
+                new Rectangle(329, 163, 25, 25));
             ItemType = ItemTypes.Damage | ItemTypes.Status;
 
             StatusesInflicted = new StatusChanceHolder[] { new StatusChanceHolder(100d, new SleepStatus(2)) };

@@ -1067,6 +1067,7 @@ namespace PaperMarioBattleSystem
         public const string JumpRisingName = "JumpRising";
         public const string JumpFallingName = "JumpFalling";
         public const string JumpMissName = "JumpMiss";
+        public const string JumpLandName = "JumpLand";
         public const string RunningName = "Run";
         public const string HurtName = "Hurt";
         public const string DeathName = "Death";
@@ -2261,6 +2262,7 @@ namespace PaperMarioBattleSystem
         public const string MusicRoot = "Audio/Music/";
         public const string SpriteRoot = "Sprites";
         public const string UIRoot = "UI";
+        public const string BattleGFX = UIRoot + "/Battle/BattleGFX";
 
         public const string LuigiPaletteExtension = "LEmblem";
         public const string WarioPaletteExtension = "WEmblem";

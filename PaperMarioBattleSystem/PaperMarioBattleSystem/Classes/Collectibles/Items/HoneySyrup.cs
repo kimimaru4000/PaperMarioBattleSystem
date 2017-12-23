@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -17,7 +18,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Honey Syrup";
             Description = "Restores 5 FP.";
-
+            Icon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Items.png"),
+                new Rectangle(373, 57, 25, 25));
             ItemType = ItemTypes.Healing;
 
             FPRestored = 5;

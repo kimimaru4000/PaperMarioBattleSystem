@@ -16,6 +16,7 @@ namespace PaperMarioBattleSystem
         public float WalkDuration = 1000f;
         public float JumpDuration = 600f;
         public float JumpHeight = 100f;
+        public float JumpLandDuration = 300f;
 
         public virtual int DamageDealt => BaseDamage;
         public virtual BattleEntity CurTarget => EntitiesAffected[0];
@@ -98,6 +99,10 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpLandName);
+                    CurSequenceAction = new WaitSeqAction(JumpLandDuration);
+                    break;
+                case 1:
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpRisingName);
                     InteractionResult[] interactions = AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
 
@@ -109,11 +114,11 @@ namespace PaperMarioBattleSystem
 
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
-                case 1:
+                case 2:
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     break;
-                case 2:
+                case 3:
                     AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
@@ -128,6 +133,10 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpLandName);
+                    CurSequenceAction = new WaitSeqAction(JumpLandDuration);
+                    break;
+                case 1:
                     AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;

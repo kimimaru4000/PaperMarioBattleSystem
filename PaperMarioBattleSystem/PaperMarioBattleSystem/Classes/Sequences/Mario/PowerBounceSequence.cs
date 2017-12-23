@@ -60,6 +60,9 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    base.SequenceSuccessBranch();
+                    break;
+                case 1:
         
                     //Check the damage dealt
                     InteractionResult[] interactions = AttemptDamage(DamageDealt, EntitiesAffected, Action.DamageProperties, true);
@@ -105,6 +108,9 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    base.SequenceFailedBranch();
+                    break;
+                case 1:
                     AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, true);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;

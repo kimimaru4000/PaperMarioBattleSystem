@@ -16,7 +16,7 @@ namespace PaperMarioBattleSystem
     {
         public MarioBattleMenu() : base(Enumerations.PlayerTypes.Mario)
         {
-            Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
+            Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
 
             //Get Jump and Hammer battle textures based on Mario's equipment
             CroppedTexture2D jump = new CroppedTexture2D(tex, GetTexRectForBootLevel(BattleManager.Instance.GetMario().MStats.BootLevel));

@@ -480,6 +480,7 @@ namespace PaperMarioBattleSystem
         protected void ShowCommandRankVFX(ActionCommand.CommandRank commandRank, Vector2 position)
         {
             BattleVFXManager.Instance.AddVFXElement(new ActionCommandVFX(commandRank, position, new Vector2(-15f, -15f)));
+            SoundManager.Instance.PlaySound(SoundManager.Sound.ActionCommandSuccess);
         }
 
         #endregion

@@ -132,8 +132,8 @@ namespace PaperMarioBattleSystem
                     otherEntityTypes[i] = entitytype;
                 }
             }
-
-            MoveInfo = new MoveActionData(null, ItemUsed.Description, MoveResourceTypes.FP, 0, CostDisplayTypes.Hidden,
+            
+            MoveInfo = new MoveActionData(ItemUsed.Icon, ItemUsed.Description, MoveResourceTypes.FP, 0, CostDisplayTypes.Hidden,
                 ItemUsed.MoveAffectionType, ItemUsed.SelectionType, false, ItemUsed.HeightsAffected, otherEntityTypes);
 
             //Set the damage data

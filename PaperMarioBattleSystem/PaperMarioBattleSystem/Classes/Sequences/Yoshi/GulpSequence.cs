@@ -94,15 +94,18 @@ namespace PaperMarioBattleSystem
                     User.AnimManager.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.GulpEatName, true);
 
                     //Deal damage to the entity spit out
-                    AttemptDamage(BaseDamage, EntitiesAffected[0], Action.DamageProperties, false);
+                    InteractionResult[] interactions = AttemptDamage(BaseDamage, EntitiesAffected[0], Action.DamageProperties, false);
 
-                    ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
-
-                    //Deal damage to the entity behind, if one exists
-                    //NOTE: Account for a miss or interruption here
-                    if (BehindEntity != null)
+                    //Account for a miss or interruption
+                    if (interactions[0] != null && interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
                     {
-                        AttemptDamage(BaseDamage, BehindEntity, Action.DamageProperties, false);
+                        ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
+
+                        //Deal damage to the entity behind, if one exists
+                        if (BehindEntity != null)
+                        {
+                            AttemptDamage(BaseDamage, BehindEntity, Action.DamageProperties, false);
+                        }
                     }
 
                     ChangeSequenceBranch(SequenceBranch.End);

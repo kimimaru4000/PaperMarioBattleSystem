@@ -48,6 +48,9 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    base.SequenceSuccessBranch();
+                    break;
+                case 1:
                     InteractionResult[] interactions = AttemptDamage(DamageDealt, CurTarget, Action.DamageProperties, false);
 
                     //Show VFX for the highest command rank

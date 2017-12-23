@@ -94,7 +94,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnActionStarted();
 
-            //Subtract Star Power if the Special Move costs SP (Focus, Star Beam, and Peach Beam are Special Moves that doesn't cost SP)
+            //Subtract Star Power if the Special Move costs SP (Focus, Star Beam, and Peach Beam are Special Moves that don't cost SP)
             //The BattleEntity must have SP, and enough of it, at this point, as the action is not selectable from the menu otherwise
             if (CostsSP == true)
             {
@@ -107,6 +107,12 @@ namespace PaperMarioBattleSystem
 
         public override void DrawMenuInfo(Vector2 position, Color color, float alphaMod)
         {
+            //Draw icon
+            if (MoveInfo.Icon != null && MoveInfo.Icon.Tex != null)
+            {
+                SpriteRenderer.Instance.Draw(MoveInfo.Icon.Tex, position - new Vector2(32, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f, true);
+            }
+
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Name, position, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
 
             //Show SP count if the Special Move costs SP

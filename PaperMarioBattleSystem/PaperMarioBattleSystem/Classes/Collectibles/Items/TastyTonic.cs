@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
@@ -19,6 +20,8 @@ namespace PaperMarioBattleSystem
             Name = "Tasty Tonic";
             Description = "A very tasty tonic. Cures\npoisoning and shrinking.";
 
+            Icon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Items.png"),
+                new Rectangle(325, 57, 21, 25));
             ItemType = ItemTypes.Healing;
 
             StatusesHealed = new StatusTypes[] { StatusTypes.Poison, StatusTypes.Tiny, StatusTypes.Allergic, StatusTypes.DEFDown,

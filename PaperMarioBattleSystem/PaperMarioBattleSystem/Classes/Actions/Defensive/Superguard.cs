@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
@@ -29,6 +30,9 @@ namespace PaperMarioBattleSystem
             BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
                 new WaitForAnimBattleEvent(User, AnimationGlobals.PlayerBattleAnimations.SuperguardName, true));
+
+            BattleVFXManager.Instance.AddVFXElement(new ActionCommandVFX(ActionCommand.CommandRank.Great, User.Position, new Vector2(-15, -15)));
+            SoundManager.Instance.PlaySound(SoundManager.Sound.ActionCommandSuccess);
 
             return new BattleGlobals.DefensiveActionHolder(newDamage, newStatuses, Enumerations.DamageEffects.None,
                 new ElementDamageHolder(1, Enumerations.Elements.Normal));

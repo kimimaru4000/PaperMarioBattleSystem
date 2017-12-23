@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
             PartnerSubMenu = partnerSubMenu;
             PartnerType = partnerType;
 
-            Texture2D abilityTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
+            Texture2D abilityTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
 
             CroppedTexture2D partnerIcon = new CroppedTexture2D(abilityTex,
                 new Rectangle(30 + (((int)PartnerType - 1) * 32), 886, 32, 32));

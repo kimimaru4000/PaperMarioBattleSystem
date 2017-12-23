@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -19,6 +20,8 @@ namespace PaperMarioBattleSystem
             Name = "Volt Shroom";
             Description = "Electrifies you to damage\ndirect-attackers.";
 
+            Icon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Items.png"),
+                new Rectangle(589, 7, 25, 23));
             ItemType = ItemTypes.Damage | ItemTypes.Status;
 
             StatusesInflicted = new StatusChanceHolder[] { new StatusChanceHolder(100d, new ElectrifiedStatus(ElectrifiedTurns)) };

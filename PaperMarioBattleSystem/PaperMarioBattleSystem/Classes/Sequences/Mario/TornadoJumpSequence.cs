@@ -125,6 +125,16 @@ namespace PaperMarioBattleSystem
                     if (SecondPart == false)
                     {
                         base.SequenceSuccessBranch();
+                    }
+                    else
+                    {
+                        CurSequenceAction = new WaitSeqAction(WaitTime);
+                    }
+                    break;
+                case 1:
+                    if (SecondPart == false)
+                    {
+                        base.SequenceSuccessBranch();
 
                         //Stop targeting the current targets. If it's a Winged entity, it won't be airborne anymore and thus
                         //won't take damage from the second part of the attack
@@ -138,41 +148,38 @@ namespace PaperMarioBattleSystem
                     }
                     else
                     {
-                        CurSequenceAction = new WaitSeqAction(WaitTime);
+                        int aerialDamage = BaseDamage;
+                        DamageData aerialDamageInfo = Action.DamageProperties;
+
+                        //Make sure the action used for this sequence is Tornado Jump
+                        //If not, default to base damage and base targets
+                        if (TJAction != null)
+                        {
+                            aerialDamage = TJAction.AerialDamage.Damage;
+                            aerialDamageInfo = TJAction.AerialDamage;
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"{Action.Name} is not of type {nameof(TornadoJump)} in {nameof(TornadoJumpSequence)}!");
+                        }
+
+                        InteractionResult[] targetsHit = AttemptDamage(aerialDamage, CurTargets, aerialDamageInfo, true);
+
+                        for (int i = 0; i < targetsHit.Length; i++)
+                        {
+                            InteractionResult targetHit = targetsHit[i];
+
+                            if (targetHit == null || targetHit.WasAttackerHit == true || targetHit.WasVictimHit == false) continue;
+
+                            ShowCommandRankVFX(HighestCommandRank, targetsHit[i].VictimResult.Entity.Position);
+                        }
+
+                        User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
+                        CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.Linear);
+                        ChangeSequenceBranch(SequenceBranch.End);
+
+                        SequenceStep = 1;
                     }
-                    break;
-                case 1:
-                    int aerialDamage = BaseDamage;
-                    DamageData aerialDamageInfo = Action.DamageProperties;
-
-                    //Make sure the action used for this sequence is Tornado Jump
-                    //If not, default to base damage and base targets
-                    if (TJAction != null)
-                    {
-                        aerialDamage = TJAction.AerialDamage.Damage;
-                        aerialDamageInfo = TJAction.AerialDamage;
-                    }
-                    else
-                    {
-                        Debug.LogWarning($"{Action.Name} is not of type {nameof(TornadoJump)} in {nameof(TornadoJumpSequence)}!");
-                    }
-
-                    InteractionResult[] targetsHit = AttemptDamage(aerialDamage, CurTargets, aerialDamageInfo, true);
-
-                    for (int i = 0; i < targetsHit.Length; i++)
-                    {
-                        InteractionResult targetHit = targetsHit[i];
-
-                        if (targetHit == null || targetHit.WasAttackerHit == true || targetHit.WasVictimHit == false) continue;
-
-                        ShowCommandRankVFX(HighestCommandRank, targetsHit[i].VictimResult.Entity.Position);
-                    }
-
-                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration);
-                    ChangeSequenceBranch(SequenceBranch.End);
-
-                    SequenceStep = 1;
                     break;
                 default:
                     PrintInvalidSequence();
@@ -196,11 +203,18 @@ namespace PaperMarioBattleSystem
                     }
                     break;
                 case 1:
-                    User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
-                    ChangeSequenceBranch(SequenceBranch.End);
+                    if (SecondPart == false)
+                    {
+                        base.SequenceFailedBranch();
+                    }
+                    else
+                    {
+                        User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
+                        CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+                        ChangeSequenceBranch(SequenceBranch.End);
 
-                    SequenceStep = 1;
+                        SequenceStep = 1;
+                    }
                     break;
                 default:
                     PrintInvalidSequence();

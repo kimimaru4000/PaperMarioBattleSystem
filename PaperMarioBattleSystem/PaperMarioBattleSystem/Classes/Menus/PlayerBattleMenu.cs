@@ -66,7 +66,7 @@ namespace PaperMarioBattleSystem
         {
             PlayerType = playerType;
 
-            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
 
             SwitchIcon = new CroppedTexture2D(battleGFX, new Rectangle(651, 13, 78, 30));
 

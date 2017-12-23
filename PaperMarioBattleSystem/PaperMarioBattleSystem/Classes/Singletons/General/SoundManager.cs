@@ -72,7 +72,7 @@ namespace PaperMarioBattleSystem
             { Sound.StarSpiritSummon, $"{ContentGlobals.SoundRoot}Star Spirit Summon" },
             { Sound.PMStarPowerIncrease, $"{ContentGlobals.SoundRoot}PM Star Power Increase" },
             { Sound.Lullaby, $"{ContentGlobals.SoundRoot}Lullaby" },
-            { Sound.FrightMask, $"{ContentGlobals.SoundRoot}Fright Mask" },
+            { Sound.FrightMask, $"{ContentGlobals.SoundRoot}Fright Mask" }
         };
 
         /// <summary>
@@ -168,6 +168,32 @@ namespace PaperMarioBattleSystem
             return newHolder;
         }
 
+        public void PlaySound(string soundPath, float volume = 1f)
+        {
+            //Retrieve next sound holder, then assign the sound ID to the holder
+            SoundHolder holder = NextAvailableSound();
+            holder.SetSound(soundPath, false);
+            holder.SetVolume(volume);
+
+            //Play the sound
+            holder.Play();
+
+            UpdateLastSoundTimer();
+        }
+
+        public void PlayRawSound(string soundPath, float volume = 1f)
+        {
+            //Retrieve next sound holder, then assign the sound ID to the holder
+            SoundHolder holder = NextAvailableSound();
+            holder.SetSound(soundPath, true);
+            holder.SetVolume(volume);
+
+            //Play the sound
+            holder.Play();
+
+            UpdateLastSoundTimer();
+        }
+
         public void PlaySound(Sound sound, float volume = 1f)
         {
             if (SoundMap.ContainsKey(sound) == false)
@@ -176,15 +202,7 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            //Retrieve next sound holder, then assign the sound ID to the holder
-            SoundHolder holder = NextAvailableSound();
-            holder.SetSound(sound);
-            holder.SetVolume(volume);
-
-            //Play the sound
-            holder.Play();
-
-            UpdateLastSoundTimer();
+            PlaySound(SoundMap[sound], volume);
         }
 
         public void Update()
@@ -219,9 +237,9 @@ namespace PaperMarioBattleSystem
             private SoundEffectInstance SoundInstance = null;
 
             /// <summary>
-            /// The ID of the Sound
+            /// The path of the Sound.
             /// </summary>
-            private Sound SoundID = 0;
+            private string SoundPath = string.Empty;
 
             public SoundHolder()
             {
@@ -239,20 +257,30 @@ namespace PaperMarioBattleSystem
                 }
             }
 
-            public void SetSound(Sound sound)
+            public void SetSound(string soundPath, bool raw)
             {
                 //If it's the same sound, then return
-                if (SoundInstance != null && SoundID == sound) return;
+                if (SoundInstance != null && SoundPath == soundPath) return;
 
-                SoundID = sound;
+                SoundPath = soundPath;
+
+                SoundEffect newSound = null;
 
                 //Load the sound asset and create an instance
-                SoundEffect newSound = AssetManager.Instance.LoadAsset<SoundEffect>(SoundMap[SoundID]);
+                if (raw == false)
+                {
+                    newSound = AssetManager.Instance.LoadAsset<SoundEffect>(SoundPath);
+                }
+                else
+                {
+                    newSound = AssetManager.Instance.LoadRawSound(SoundPath);
+                }
+
                 if (newSound != null)
                 {
                     if (newSound.Duration == TimeSpan.Zero)
                     {
-                        Debug.LogError($"Sound {SoundMap[SoundID]} has a duration of 0 and is invalid");
+                        Debug.LogError($"Sound {SoundPath} has a duration of 0 and is invalid");
                         return;
                     }
 

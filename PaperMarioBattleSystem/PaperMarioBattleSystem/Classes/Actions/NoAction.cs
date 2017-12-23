@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -18,7 +19,8 @@ namespace PaperMarioBattleSystem
         public NoAction()
         {
             Name = "Do Nothing";
-            MoveInfo = new MoveActionData(null, "Do nothing this turn.", Enumerations.MoveResourceTypes.FP, 0,
+            MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(182, 844, 24, 24)),
+                "Do nothing this turn.", Enumerations.MoveResourceTypes.FP, 0,
                 Enumerations.CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.Single,
                 false, null);
 

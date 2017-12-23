@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
@@ -31,7 +32,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Tornado Jump";
 
-            MoveInfo = new MoveActionData(null, "Execute superbly to damage\nall midair enemies.", MoveResourceTypes.FP, 3,
+            MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(939, 390, 38, 34)),
+                "Execute superbly to damage\nall midair enemies.", MoveResourceTypes.FP, 3,
                 CostDisplayTypes.Shown, MoveAffectionTypes.Other,
                 TargetSelectionMenu.EntitySelectionType.Single, false,
                 new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne }, User.GetOpposingEntityType(), EntityTypes.Neutral);

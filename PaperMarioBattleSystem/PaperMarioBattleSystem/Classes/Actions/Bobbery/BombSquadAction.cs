@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
@@ -29,7 +30,8 @@ namespace PaperMarioBattleSystem
             BombCount = bombCount;
             BombDamage = bombDamage;
 
-            MoveInfo = new MoveActionData(null, "Throw three bombs that\nwill explode one turn later.", MoveResourceTypes.FP, 3,
+            MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 14, 22, 22)),
+                "Throw three bombs that\nwill explode one turn later.", MoveResourceTypes.FP, 3,
                 CostDisplayTypes.Shown, MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.All, false,
                 new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne }, User.GetOpposingEntityType());
 

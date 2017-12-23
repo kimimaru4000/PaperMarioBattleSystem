@@ -22,7 +22,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Veil";
 
-            MoveInfo = new MoveActionData(null, "Hide in the shadows with\nMario to avoid attacks.", MoveResourceTypes.FP, 1, CostDisplayTypes.Shown,
+            MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 14, 22, 22)),
+                "Hide in the shadows with\nMario to avoid attacks.", MoveResourceTypes.FP, 1, CostDisplayTypes.Shown,
                 MoveAffectionTypes.Ally, TargetSelectionMenu.EntitySelectionType.Single, true, null);
 
             SetMoveSequence(new VeilSequence(this));

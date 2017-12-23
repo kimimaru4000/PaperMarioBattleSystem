@@ -17,7 +17,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Shell Toss";
 
-            MoveInfo = new MoveActionData(null, "Shoot yourself at an enemy.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
+            MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(216, 845, 22, 22)),
+                "Shoot yourself at an enemy.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
                 MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.First, true,
                 new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering }, User.GetOpposingEntityType(), EntityTypes.Neutral);
 

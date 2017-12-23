@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -14,7 +15,8 @@ namespace PaperMarioBattleSystem
         public MiniEgg()
         {
             Name = "Mini-Egg";
-            MoveInfo = new MoveActionData(null, "Throws Yoshi eggs at all enemies and shrinks them.", Enumerations.MoveResourceTypes.FP,
+            MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 46, 22, 22)),
+                "Throws Yoshi eggs at all enemies and shrinks them.", Enumerations.MoveResourceTypes.FP,
                 3, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.All,
                 false, null, User.GetOpposingEntityType());
             DamageInfo = new DamageData(1, Enumerations.Elements.Normal, false, Enumerations.ContactTypes.None, Enumerations.ContactProperties.Ranged,

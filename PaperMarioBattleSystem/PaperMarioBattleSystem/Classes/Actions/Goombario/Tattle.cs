@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
@@ -16,7 +17,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Tattle";
 
-            MoveInfo = new MoveActionData(null, "View enemies' descriptions\nand see their HP in battle.", MoveResourceTypes.FP, 0,
+            MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 14, 22, 22)),
+                "View enemies' descriptions\nand see their HP in battle.", MoveResourceTypes.FP, 0,
                 CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.Custom, TargetSelectionMenu.EntitySelectionType.Single, false,
                 null, User.GetOpposingEntityType(), EntityTypes.Neutral);
 

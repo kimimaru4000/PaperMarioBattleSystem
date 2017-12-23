@@ -13,6 +13,7 @@ namespace PaperMarioBattleSystem
         public PowerBounce()
         {
             Name = "Power Bounce";
+            MoveInfo.Icon.SetRect(new Rectangle(939, 136, 24, 21));
             MoveInfo.Description = "Bounce multiple times on an enemy";
             MoveInfo.ResourceCost = 3;
             

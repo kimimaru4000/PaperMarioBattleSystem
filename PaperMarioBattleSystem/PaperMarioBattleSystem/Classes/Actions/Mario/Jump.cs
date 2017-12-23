@@ -17,7 +17,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Jump";
 
-            MoveInfo = new MoveActionData(null, "Jump and stomp on an enemy.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
+            MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(216, 845, 22, 22)),
+                "Jump and stomp on an enemy.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
                 MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single, true,
                 new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne }, User.GetOpposingEntityType(), EntityTypes.Neutral);
 

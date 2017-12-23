@@ -18,7 +18,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Gulp";
 
-            MoveInfo = new MoveActionData(null, string.Empty, Enumerations.MoveResourceTypes.FP, 4, Enumerations.CostDisplayTypes.Shown,
+            MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 14, 22, 22)),
+                string.Empty, Enumerations.MoveResourceTypes.FP, 4, Enumerations.CostDisplayTypes.Shown,
                 Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.First, true,
                 new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded, Enumerations.HeightStates.Hovering }, User.GetOpposingEntityType());
 

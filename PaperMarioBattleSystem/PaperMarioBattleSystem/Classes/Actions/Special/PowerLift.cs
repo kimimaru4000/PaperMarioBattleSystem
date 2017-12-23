@@ -23,7 +23,8 @@ namespace PaperMarioBattleSystem
             //SPType = StarPowerGlobals.StarPowerTypes.CrystalStar;
 
             SPCost = 300;
-            MoveInfo = new MoveActionData(null, "Briefly increases your party's\nAttack and Defense power.", Enumerations.MoveResourceTypes.SP,
+            MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(158, 987, 40, 37)),
+                "Briefly increases your party's\nAttack and Defense power.", Enumerations.MoveResourceTypes.SP,
                 300, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Self | Enumerations.MoveAffectionTypes.Ally, TargetSelectionMenu.EntitySelectionType.All, false, null);
 
             SetMoveSequence(new PowerLiftSequence(this));

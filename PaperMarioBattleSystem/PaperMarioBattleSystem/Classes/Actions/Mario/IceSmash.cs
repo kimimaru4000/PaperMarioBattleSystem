@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -15,6 +16,7 @@ namespace PaperMarioBattleSystem
         public IceSmash()
         {
             Name = "Ice Smash";
+            MoveInfo.Icon.SetRect(new Rectangle(891, 430, 40, 40));
             MoveInfo.ResourceCost = 3;
             MoveInfo.Description = "Wear this to use Ice Smash. " +
                            "3 FP are required to use this attack, which can freeze and immobilize an enemy if executed superbly. " +

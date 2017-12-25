@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private ActionCommandGlobals.ArtAttackResponse Response = default(ActionCommandGlobals.ArtAttackResponse);
 
-        public ArtAttackSequence(SpecialMoveAction specialAction) : base(specialAction)
+        public ArtAttackSequence(MoveAction moveAction) : base(moveAction)
         {
 
         }

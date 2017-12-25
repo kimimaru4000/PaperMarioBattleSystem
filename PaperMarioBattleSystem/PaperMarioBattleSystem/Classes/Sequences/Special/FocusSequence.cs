@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class FocusSequence : StarSpiritMoveSequence
     {
-        public FocusSequence(SpecialMoveAction specialAction) : base(specialAction)
+        public FocusSequence(MoveAction moveAction) : base(moveAction)
         {
 
         }

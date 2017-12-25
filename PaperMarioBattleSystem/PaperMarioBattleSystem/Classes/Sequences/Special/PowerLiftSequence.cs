@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private ActionCommandGlobals.PowerLiftResponse Response = default(ActionCommandGlobals.PowerLiftResponse);
 
-        public PowerLiftSequence(SpecialMoveAction specialAction) : base(specialAction)
+        public PowerLiftSequence(MoveAction moveAction) : base(moveAction)
         {
         }
 

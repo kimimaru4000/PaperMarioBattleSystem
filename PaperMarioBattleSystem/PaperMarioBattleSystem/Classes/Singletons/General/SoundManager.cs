@@ -210,6 +210,11 @@ namespace PaperMarioBattleSystem
             //Clear all sounds after a set amount of time
             if (Sounds.Count > 0 && Time.TotalMilliseconds >= LastPlayedSound)
             {
+                for (int i = 0; i < Sounds.Count; i++)
+                {
+                    Sounds[i].CleanUp();
+                }
+
                 Sounds.Clear();
             }
         }

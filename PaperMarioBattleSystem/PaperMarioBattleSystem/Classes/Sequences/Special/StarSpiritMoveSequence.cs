@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     {
         protected double WaitTime = 700d;
 
-        public StarSpiritMoveSequence(SpecialMoveAction specialAction) : base(specialAction)
+        public StarSpiritMoveSequence(MoveAction moveAction) : base(moveAction)
         {
 
         }

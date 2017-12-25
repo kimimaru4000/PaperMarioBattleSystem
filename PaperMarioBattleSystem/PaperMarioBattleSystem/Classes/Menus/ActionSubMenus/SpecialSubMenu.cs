@@ -19,6 +19,7 @@ namespace PaperMarioBattleSystem
             Position = new Vector2(230, 150);
 
             BattleActions.Add(new Focus());
+            BattleActions.Add(new SweetTreatAction());
             BattleActions.Add(new Refresh());
             BattleActions.Add(new Lullaby());
             BattleActions.Add(new PowerLift());

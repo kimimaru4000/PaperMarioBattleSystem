@@ -19,6 +19,11 @@ namespace PaperMarioBattleSystem
         public float Depth = 0f;
         public Color TintColor { get; set; } = Color.White;
 
+        protected UICroppedTexture2D()
+        {
+
+        }
+
         public UICroppedTexture2D(CroppedTexture2D croppedtex2D)
         {
             CroppedTex2D = croppedtex2D;

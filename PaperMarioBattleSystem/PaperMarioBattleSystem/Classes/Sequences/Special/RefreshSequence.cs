@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class RefreshSequence : StarSpiritMoveSequence
     {
-        public RefreshSequence(SpecialMoveAction specialAction) : base(specialAction)
+        public RefreshSequence(MoveAction moveAction) : base(moveAction)
         {
 
         }

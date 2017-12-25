@@ -1102,6 +1102,8 @@ namespace PaperMarioBattleSystem
             public const string TornadoJumpFailName = "TornadoJumpFail";
 
             public const string MapLiftName = "MapLift";
+            public const string SweetTreatReadyThrowName = "SweetTreatReadyThrow";
+            public const string SweetTreatThrowName = "SweetTreatThrow";
         }
 
         /// <summary>
@@ -1403,7 +1405,7 @@ namespace PaperMarioBattleSystem
     public static class ActionCommandGlobals
     {
         #region Structs
-        
+
         /// <summary>
         /// A struct holding information Art Attack's Action Command sends.
         /// </summary>
@@ -1621,6 +1623,79 @@ namespace PaperMarioBattleSystem
         /// The amount of Star Spirit Star Power Mario gains each turn.
         /// </summary>
         public const float StarSpiritSPUPerTurn = SPUPerStarPower / 8f;
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Global values dealing with Sweet Treat.
+    /// </summary>
+    public static class SweetTreatGlobals
+    {
+        #region Enums
+
+        /// <summary>
+        /// The types of restoration used in Sweet Treat and Sweet Feast.
+        /// </summary>
+        public enum RestoreTypes
+        {
+            None,
+            MarioHP,
+            PartnerHP,
+            FP,
+            PoisonMushroom,
+            BigMarioHP,
+            BigPartnerHP,
+            BigFP
+        }
+
+        /// <summary>
+        /// The behaviors for the RestoreTypes.
+        /// </summary>
+        public enum RestoreBehavior
+        {
+            None,
+            HealMarioHP,
+            HealPartnerHP,
+            HealFP,
+            PreventInput
+        }
+
+        #endregion
+
+        #region RestorationTable
+
+        public static readonly Dictionary<RestoreTypes, RestoreBehaviorData> RestorationTable = new Dictionary<RestoreTypes, RestoreBehaviorData>()
+        {
+            { RestoreTypes.MarioHP, new RestoreBehaviorData(RestoreBehavior.HealMarioHP, 1) },
+            { RestoreTypes.PartnerHP, new RestoreBehaviorData(RestoreBehavior.HealPartnerHP, 1) },
+            { RestoreTypes.FP, new RestoreBehaviorData(RestoreBehavior.HealFP, 1) },
+            { RestoreTypes.BigMarioHP, new RestoreBehaviorData(RestoreBehavior.HealMarioHP, 3) },
+            { RestoreTypes.BigPartnerHP, new RestoreBehaviorData(RestoreBehavior.HealPartnerHP, 3) },
+            { RestoreTypes.BigFP, new RestoreBehaviorData(RestoreBehavior.HealFP, 3) },
+            { RestoreTypes.PoisonMushroom, new RestoreBehaviorData(RestoreBehavior.PreventInput, 800) }
+        };
+
+        #endregion
+
+        #region Structs
+
+        /// <summary>
+        /// Holds immutable data regarding a RestoreBehavior and a value.
+        /// </summary>
+        public struct RestoreBehaviorData
+        {
+            public RestoreBehavior Behavior { get; private set; }
+            public int Value { get; private set; }
+
+            public static RestoreBehaviorData Default => new RestoreBehaviorData(RestoreBehavior.None, 0);
+
+            public RestoreBehaviorData(RestoreBehavior behavior, int value)
+            {
+                Behavior = behavior;
+                Value = value;
+            }
+        }
 
         #endregion
     }

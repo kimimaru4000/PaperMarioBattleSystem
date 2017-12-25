@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Classes\Actions\ActionCommands\ActionCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\PowerLiftIconElement.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\SweetTreatElementSpawner.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\SweetTreatRestorationElement.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ArtAttackCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\BombSquadCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\FillBarCommand.cs" />
@@ -58,6 +60,7 @@
     <Compile Include="Classes\Actions\ActionCommands\MultiButtonCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\PowerLiftCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\SuperguardCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\SweetTreatCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\TattleCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\TidalWaveCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\TimedLightCommand.cs" />
@@ -101,6 +104,7 @@
     <Compile Include="Classes\Actions\Special\PowerLift.cs" />
     <Compile Include="Classes\Actions\Special\Refresh.cs" />
     <Compile Include="Classes\Actions\Special\SpecialMoveAction.cs" />
+    <Compile Include="Classes\Actions\Special\SweetTreatAction.cs" />
     <Compile Include="Classes\Actions\Sushie\TidalWave.cs" />
     <Compile Include="Classes\Actions\Vivian\Veil.cs" />
     <Compile Include="Classes\Actions\Yoshi\Gulp.cs" />
@@ -311,6 +315,7 @@
     <Compile Include="Classes\Sequences\Special\RefreshSequence.cs" />
     <Compile Include="Classes\Sequences\Special\SpecialMoveSequence.cs" />
     <Compile Include="Classes\Sequences\Special\StarSpiritMoveSequence.cs" />
+    <Compile Include="Classes\Sequences\Special\SweetTreatSequence.cs" />
     <Compile Include="Classes\Sequences\Sushie\TidalWaveSequence.cs" />
     <Compile Include="Classes\Sequences\Vivian\VeilSecondHalfSequence.cs" />
     <Compile Include="Classes\Sequences\Vivian\VeilSequence.cs" />

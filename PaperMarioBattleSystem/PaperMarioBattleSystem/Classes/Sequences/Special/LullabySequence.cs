@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class LullabySequence : StarSpiritMoveSequence
     {
-        public LullabySequence(SpecialMoveAction specialAction) : base(specialAction)
+        public LullabySequence(MoveAction moveAction) : base(moveAction)
         {
             
         }

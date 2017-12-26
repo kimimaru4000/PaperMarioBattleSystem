@@ -12,6 +12,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class UtilityGlobals
     {
+        public static readonly double TwoPI = (Math.PI * 2d);
+
         public static int Clamp(int value, int min, int max) => (value < min) ? min : (value > max) ? max : value;
         public static float Clamp(float value, float min, float max) => (value < min) ? min : (value > max) ? max : value;
         public static double Clamp(double value, double min, double max) => (value < min) ? min : (value > max) ? max : value;
@@ -211,12 +213,11 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Finds a point around a circle at a particular angle.
         /// </summary>
-        /// <param name="center">The center of the circle.</param>
-        /// <param name="radius">The radius of the circle.</param>
+        /// <param name="circle">The Circle.</param>
         /// <param name="angle">The angle of the point.</param>
         /// <param name="angleInDegrees">Whether the angle passed in is in degrees or not.</param>
         /// <returns>A Vector2 with the X and Y components at the location around the circle.</returns>
-        public static Vector2 GetPointAroundCircle(Vector2 center, double radius, double angle, bool angleInDegrees)
+        public static Vector2 GetPointAroundCircle(Circle circle, double angle, bool angleInDegrees)
         {
             //If the angle is in degrees, convert it to radians
             if (angleInDegrees == true)
@@ -224,26 +225,7 @@ namespace PaperMarioBattleSystem
                 angle = ToRadians(angle);
             }
 
-            float x = (float)(Math.Cos(angle) * radius) + center.X;
-            float y = (float)(Math.Sin(angle) * radius) + center.Y;
-
-            return new Vector2(x, y);
-        }
-
-        /// <summary>
-        /// Tells if two circles intersect.
-        /// </summary>
-        /// <param name="circle1">The point of the first circle.</param>
-        /// <param name="radius1">The radius of the first circle.</param>
-        /// <param name="circle2">The point of the second circle.</param>
-        /// <param name="radius2">The radius of the second circle.</param>
-        /// <returns>true if the sum of the radii squared is less than or equal to the distance between the circles squared.</returns>
-        public static bool CircleCircleIntersection(Vector2 circle1, float radius1, Vector2 circle2, float radius2)
-        {
-            float radiusSquared = (float)Math.Pow(radius1 + radius2, 2);
-            float distance = Vector2.DistanceSquared(circle1, circle2);
-
-            return (distance <= radiusSquared);
+            return circle.GetPointAround(angle);
         }
 
         /// <summary>

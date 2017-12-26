@@ -524,6 +524,43 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Draws a circle.
+        /// <para>NOTE: This method is extremely slow.</para>
+        /// </summary>
+        /// <param name="circle">The circle to draw.</param>
+        /// <param name="color">The color of the circle.</param>
+        /// <param name="layer">The layer of the circle.</param>
+        /// <param name="uiBatch">Whether to draw the circle in the UI layer or not.</param>
+        public static void DebugDrawCircle(Circle circle, Color color, float layer, bool uiBatch)
+        {
+            double radian = UtilityGlobals.ToRadians(1d / 360d);
+
+            for (double val = 0d; val < UtilityGlobals.TwoPI; val += radian)
+            {
+                DebugDrawLine(circle.Center, circle.GetPointAround(val), color, layer, 1, uiBatch);
+            }
+        }
+
+        /// <summary>
+        /// Draws a hollow circle.
+        /// </summary>
+        /// <param name="circle">The hollow circle to draw.</param>
+        /// <param name="color">The color of the hollow circle.</param>
+        /// <param name="layer">The layer of the hollow circle.</param>
+        /// <param name="uiBatch">Whether to draw the hollow circle in the UI layer or not.</param>
+        public static void DebugDrawHollowCircle(Circle circle, Color color, float layer, bool uiBatch)
+        {
+            double radian = UtilityGlobals.ToRadians(1d / 360d);
+
+            Texture2D box = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
+
+            for (double val = 0d; val < UtilityGlobals.TwoPI; val += radian)
+            {
+                SpriteRenderer.Instance.Draw(box, circle.GetPointAround(val), color, false, false, layer, uiBatch);
+            }
+        }
+
         #endregion
 
         public static void DebugDraw()

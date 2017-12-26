@@ -120,7 +120,7 @@ namespace PaperMarioBattleSystem
 
 
             //Set cursor position
-            Cursor.Position = UtilityGlobals.GetPointAroundCircle(StartPosition, CircleRadius, CursorAngle, true);
+            Cursor.Position = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
 
             //Define the spawner
             Vector2 startPos = new Vector2(500, 15);
@@ -251,7 +251,7 @@ namespace PaperMarioBattleSystem
                 CursorMoveSpeed = -CursorMoveSpeed;
             }
 
-            Cursor.Position = UtilityGlobals.GetPointAroundCircle(StartPosition, CircleRadius, CursorAngle, true);
+            Cursor.Position = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
             Cursor.Rotation = (float)(-ElapsedTime * UtilityGlobals.ToRadians(CursorRotSpeed));
         }
 

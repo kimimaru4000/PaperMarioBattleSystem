@@ -83,7 +83,7 @@ namespace PaperMarioBattleSystem
             LastBombThrowTime = ElapsedTime + AutomaticThrowTime;
             CursorAngle = MinCursorAngle;
             
-            Cursor.Position = UtilityGlobals.GetPointAroundCircle(StartPosition, CircleRadius, CursorAngle, true);
+            Cursor.Position = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
         }
 
         public override void EndInput()
@@ -163,7 +163,7 @@ namespace PaperMarioBattleSystem
                 CursorMoveSpeed = -CursorMoveSpeed;
             }
 
-            Cursor.Position = UtilityGlobals.GetPointAroundCircle(StartPosition, CircleRadius, CursorAngle, true);
+            Cursor.Position = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
             Cursor.Rotation = (float)(-ElapsedTime * UtilityGlobals.ToRadians(CursorRotSpeed));
         }
 

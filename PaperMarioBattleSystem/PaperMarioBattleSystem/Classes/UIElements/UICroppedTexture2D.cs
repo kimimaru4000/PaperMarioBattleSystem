@@ -17,6 +17,8 @@ namespace PaperMarioBattleSystem
         public bool FlipY = false;
         public float Rotation = 0f;
         public float Depth = 0f;
+        public Vector2 Origin = Vector2.Zero;
+        public Vector2 Scale = Vector2.One;
         public Color TintColor { get; set; } = Color.White;
 
         protected UICroppedTexture2D()
@@ -43,7 +45,7 @@ namespace PaperMarioBattleSystem
         public override void Draw()
         {
             //This is a UI element, so always render it on the UI layer
-            SpriteRenderer.Instance.Draw(CroppedTex2D.Tex, Position, CroppedTex2D.SourceRect, TintColor, FlipX, FlipY, Depth, true);
+            SpriteRenderer.Instance.Draw(CroppedTex2D.Tex, Position, CroppedTex2D.SourceRect, TintColor, Rotation, Origin, Scale, FlipX, FlipY, Depth, true);
         }
     }
 }

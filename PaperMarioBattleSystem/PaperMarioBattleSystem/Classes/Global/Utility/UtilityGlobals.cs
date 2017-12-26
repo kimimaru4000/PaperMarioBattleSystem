@@ -591,5 +591,34 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        #region Collision Utilities
+
+        /// <summary>
+        /// Checks if a collision object collides with any other object in a set of collision objects.
+        /// </summary>
+        /// <typeparam name="T">A type that implements <see cref="ICollisionHandler"/>.</typeparam>
+        /// <param name="collisionObj">The collision object to check collisions with.</param>
+        /// <param name="collisionObjects">The objects to check collisions with.</param>
+        /// <returns>A <see cref="CollisionResponseHolder"/> with the collision data if a collision was found, otherwise null.</returns>
+        public static CollisionResponseHolder? GetCollisionForSet<T>(ICollisionHandler collisionObj, IList<T> collisionObjects) where T : ICollisionHandler
+        {
+            //Collision can't be resolved with null references, so return
+            if (collisionObj == null || collisionObjects == null) return null;
+
+            //Check collisions with objects
+            for (int i = 0; i < collisionObjects.Count; i++)
+            {
+                //We found a collision, so return the response
+                if (collisionObj.collisionShape.CollidesWith(collisionObjects[i].collisionShape) == true)
+                {
+                    return collisionObjects[i].GetCollisionResponse(collisionObj);
+                }
+            }
+
+            return null;
+        }
+
+        #endregion
     }
 }

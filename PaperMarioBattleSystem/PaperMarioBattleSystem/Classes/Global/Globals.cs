@@ -34,9 +34,41 @@ namespace PaperMarioBattleSystem
         None, MinusDamage, NoDamage, Heal
     }
 
+    /// <summary>
+    /// The types of collision shapes.
+    /// </summary>
+    public enum CollisionShapeTypes
+    {
+        None,
+        Rectangle,
+        Circle
+    }
+
     #endregion
 
     #region Structs
+
+    /// <summary>
+    /// Holds immutable data about a collision.
+    /// </summary>
+    public struct CollisionResponseHolder
+    {
+        /// <summary>
+        /// The object that provided the collision data.
+        /// </summary>
+        public ICollisionHandler ResponseObj { get; private set; }
+
+        /// <summary>
+        /// The data for the collision.
+        /// </summary>
+        public object CollisionData { get; private set; }
+
+        public CollisionResponseHolder(ICollisionHandler responseObj, object collisionData)
+        {
+            ResponseObj = responseObj;
+            CollisionData = collisionData;
+        }
+    }
 
     public struct WeaknessHolder
     {
@@ -1436,6 +1468,23 @@ namespace PaperMarioBattleSystem
             public override string ToString()
             {
                 return $"{nameof(PowerLiftResponse)} - Attack: {AttackBoosted}, Defense: {DefenseBoosted}";
+            }
+        }
+
+        /// <summary>
+        /// A struct holding information Sweet Treat and Sweet Feast's Action Commands send.
+        /// </summary>
+        public struct SweetTreatResponse
+        {
+            public int MarioHPRestored;
+            public int PartnerHPRestored;
+            public int FPRestored;
+
+            public SweetTreatResponse(int marioHPRestored, int partnerHPRestored, int fpRestored)
+            {
+                MarioHPRestored = marioHPRestored;
+                PartnerHPRestored = partnerHPRestored;
+                FPRestored = fpRestored;
             }
         }
 

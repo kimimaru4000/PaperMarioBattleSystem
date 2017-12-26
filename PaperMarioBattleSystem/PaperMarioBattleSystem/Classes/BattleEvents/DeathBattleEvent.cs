@@ -85,6 +85,12 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
+            //Play the death animation if it isn't being played
+            if (Entity.AnimManager.CurrentAnim != DeathAnim)
+            {
+                DeathAnim.Play();
+            }
+
             if (DeathAnim.Finished == true)
             {
                 //Play death sound if it's an enemy

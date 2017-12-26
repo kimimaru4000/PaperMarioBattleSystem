@@ -31,32 +31,32 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The list of restoration elements currently active.
         /// </summary>
-        protected List<SweetTreatRestorationElement> RestorationElements = new List<SweetTreatRestorationElement>();
+        public List<SweetTreatRestorationElement> RestorationElements = new List<SweetTreatRestorationElement>();
 
         /// <summary>
         /// The number of columns or rows for the elements.
         /// </summary>
-        protected int ColumnRows = 0;
+        public int ColumnRows = 1;
 
         /// <summary>
         /// The X or Y difference position between each column or row.
         /// </summary>
-        protected float ColumnRowDiffVal = 35f;
+        public float ColumnRowDiffVal = 35f;
 
         /// <summary>
         /// How long it takes the elements to finish moving.
         /// </summary>
-        protected double MovementDur = 5000d;
+        public double MovementDur = 5000d;
 
         /// <summary>
         /// The start position the elements spawn.
         /// </summary>
-        protected Vector2 StartSpawnPos = Vector2.Zero;
+        public Vector2 StartSpawnPos = Vector2.Zero;
 
         /// <summary>
         /// The end position the elements spawn. The direction the elements move is related to the difference of this value and <see cref="StartSpawnPos"/>.
         /// </summary>
-        protected Vector2 EndSpawnPos = Vector2.Zero;
+        public Vector2 EndSpawnPos = Vector2.Zero;
 
         /// <summary>
         /// The amount of each restoration type to spawn.
@@ -71,7 +71,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The time to wait before spawning the next element.
         /// </summary>
-        protected double TimeBetweenElements = 750d;
+        public double TimeBetweenElements = 750d;
 
         private double ElapsedTime = 0d;
 
@@ -128,6 +128,14 @@ namespace PaperMarioBattleSystem
 
             RestorationTypeTracker.Clear();
             AllowedRestorationTypes.Clear();
+        }
+
+        public void RemoveElement(SweetTreatRestorationElement restorationElement)
+        {
+            if (restorationElement == null) return;
+
+            BattleUIManager.Instance.RemoveUIElement(restorationElement);
+            RestorationElements.Remove(restorationElement);
         }
 
         private void SetupRestorationDict(IList<int> restorationTypeCounts)

@@ -47,6 +47,7 @@
     <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\PowerLiftIconElement.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\SweetTreatElementSpawner.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\SweetTreatRestorationElement.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\SweetTreatThrownStar.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ArtAttackCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\BombSquadCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\FillBarCommand.cs" />
@@ -230,8 +231,10 @@
     <Compile Include="Classes\Collectibles\Items\StoneCap.cs" />
     <Compile Include="Classes\Collectibles\Items\TastyTonic.cs" />
     <Compile Include="Classes\Collectibles\Items\VoltShroom.cs" />
+    <Compile Include="Classes\CollisionShapes\CollisionRect.cs" />
     <Compile Include="Classes\ExtendedTypes\CroppedTexture2D.cs" />
     <Compile Include="Classes\General\Transform.cs" />
+    <Compile Include="Classes\Global\CollisionTracker.cs" />
     <Compile Include="Classes\Global\CrashHandler.cs" />
     <Compile Include="Classes\Global\Debug.cs" />
     <Compile Include="Classes\Global\Extensions.cs" />
@@ -246,6 +249,8 @@
     <Compile Include="Classes\Global\Utility\Line.cs" />
     <Compile Include="Classes\Global\Utility\UtilityGlobals.cs" />
     <Compile Include="Classes\Interfaces\ICleanup.cs" />
+    <Compile Include="Classes\Interfaces\ICollisionHandler.cs" />
+    <Compile Include="Classes\Interfaces\ICollisionShape.cs" />
     <Compile Include="Classes\Interfaces\ICopyable.cs" />
     <Compile Include="Classes\Interfaces\IDrawable.cs" />
     <Compile Include="Classes\Interfaces\IFlippableEntity.cs" />
@@ -378,6 +383,7 @@
     <Compile Include="Classes\UIElements\UIFourPiecedTex.cs" />
     <Compile Include="Classes\UIElements\UIGrid.cs" />
     <Compile Include="Classes\UIElements\UIStackedTex.cs" />
+    <Compile Include="Classes\UIElements\UIText.cs" />
     <Compile Include="Classes\VFXElements\ActionCommandVFX.cs" />
     <Compile Include="Classes\VFXElements\AfterImageVFX.cs" />
     <Compile Include="Classes\VFXElements\DamageStarVFX.cs" />

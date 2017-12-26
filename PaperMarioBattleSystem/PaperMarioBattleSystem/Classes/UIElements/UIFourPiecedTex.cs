@@ -54,13 +54,13 @@ namespace PaperMarioBattleSystem
             bool absOrigin = true;
 
             //Upper-left
-            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset, 1f, false, false, Depth, true, absOrigin);
+            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset, Scale, false, false, Depth, true, absOrigin);
             //Upper-right
-            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset + new Vector2(-widthHeight.X, 0f), 1f, true, false, Depth, true, absOrigin);
+            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset + new Vector2(-widthHeight.X, 0f), Scale, true, false, Depth, true, absOrigin);
             //Lower-left
-            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset + new Vector2(0f, -widthHeight.Y), 1f, false, true, Depth, true, absOrigin);
+            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset + new Vector2(0f, -widthHeight.Y), Scale, false, true, Depth, true, absOrigin);
             //Lower-right
-            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset + new Vector2(-widthHeight.X, -widthHeight.Y), 1f, true, true, Depth, true, absOrigin);
+            SpriteRenderer.Instance.Draw(tex, Position, sourcerect, TintColor, Rotation, OriginOffset + new Vector2(-widthHeight.X, -widthHeight.Y), Scale, true, true, Depth, true, absOrigin);
         }
 
         public UIFourPiecedTex Copy()

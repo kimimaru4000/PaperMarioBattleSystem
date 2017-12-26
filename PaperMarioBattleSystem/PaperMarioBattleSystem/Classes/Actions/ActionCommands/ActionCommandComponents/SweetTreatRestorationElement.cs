@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// <para>The icon moves down from the top of the screen and disappears when it hits the stage.
     /// If hit by the thrown star, it performs its effect and disappears.</para>
     /// </summary>
-    public class SweetTreatRestorationElement : UICroppedTexture2D
+    public class SweetTreatRestorationElement : UICroppedTexture2D, ICollisionHandler
     {
         public RestoreTypes RestorationType = RestoreTypes.None;
 
@@ -27,8 +27,6 @@ namespace PaperMarioBattleSystem
         /// The end position.
         /// </summary>
         protected Vector2 EndPosition = Vector2.Zero;
-
-        protected Vector2 Scale = Vector2.One;
 
         /// <summary>
         /// How long it takes the element to move to the bottom.
@@ -45,11 +43,11 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets the collision rectangle of the restoration element.
         /// </summary>
-        public Rectangle CollisionRect
+        public Rectangle IconRect
         {
             get
             {
-                Vector2 widthHeight = CroppedTex2D.WidthHeightToVector2();
+                Vector2 widthHeight = CroppedTex2D.WidthHeightToVector2() * Scale;
                 Vector2 pos = Position - (widthHeight.Halve());
 
                 return new Rectangle((int)pos.X, (int)pos.Y, (int)widthHeight.X, (int)widthHeight.Y);
@@ -144,7 +142,36 @@ namespace PaperMarioBattleSystem
             //This is a UI element, so always render it on the UI layer
             SpriteRenderer.Instance.Draw(CroppedTex2D.Tex, Position, CroppedTex2D.SourceRect, TintColor, Rotation, new Vector2(.5f, .5f), Scale, FlipX, FlipY, Depth, true);
 
-            Debug.DebugDrawHollowRect(CollisionRect, Color.Red, .9f, 1, true);
+            Debug.DebugDrawHollowRect(IconRect, Color.Red, .9f, 1, true);
         }
+
+        #region Interface Implementations
+
+        /// <summary>
+        /// The type of collision shape.
+        /// </summary>
+        public ICollisionShape collisionShape
+        {
+            get
+            {
+                return new CollisionRect(IconRect);
+            }
+        }
+
+        /// <summary>
+        /// Handles a collision with another object.
+        /// </summary>
+        /// <param name="collisionResponse">The collision data.</param>
+        public void HandleCollision(CollisionResponseHolder collisionResponse)
+        {
+
+        }
+
+        public CollisionResponseHolder GetCollisionResponse(ICollisionHandler collisionObject)
+        {
+            return new CollisionResponseHolder(this, GetBehaviorDataOnHit());
+        }
+
+        #endregion
     }
 }

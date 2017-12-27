@@ -90,6 +90,8 @@ namespace PaperMarioBattleSystem
                 //In range, so success
                 else
                 {
+                    SendCommandRank(CommandRank.Nice);
+
                     OnComplete(CommandResults.Success);
                     return;
                 }

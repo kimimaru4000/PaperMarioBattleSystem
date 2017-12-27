@@ -136,7 +136,7 @@ namespace PaperMarioBattleSystem
 
                 if (ElapsedTime >= TotalDuration)
                 {
-                    ShouldRemove = true;
+                    ReadyForRemoval = true;
                 }
             }
         }

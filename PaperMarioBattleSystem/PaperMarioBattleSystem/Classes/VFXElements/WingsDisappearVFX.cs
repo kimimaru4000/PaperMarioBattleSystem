@@ -84,7 +84,7 @@ namespace PaperMarioBattleSystem
         public override void Update()
         {
             //Don't update if this is done
-            if (ShouldRemove == true) return;
+            if (ReadyForRemoval == true) return;
 
             //Progress time
             ElapsedTime += Time.ElapsedMilliseconds;
@@ -122,7 +122,7 @@ namespace PaperMarioBattleSystem
                 //End and mark the effect for removal when the duration is up
                 if (ElapsedTime >= DisappearDur)
                 {
-                    ShouldRemove = true;
+                    ReadyForRemoval = true;
                     ElapsedTime = 0d;
                 }
             }

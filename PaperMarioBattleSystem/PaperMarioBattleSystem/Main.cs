@@ -162,7 +162,7 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.CleanUp();
             BattleManager.Instance.CleanUp();
             BattleUIManager.Instance.CleanUp();
-            BattleVFXManager.Instance.CleanUp();
+            BattleObjManager.Instance.CleanUp();
 
             crashHandler.CleanUp();
         }
@@ -185,7 +185,7 @@ namespace PaperMarioBattleSystem
         {
             BattleManager.Instance.Update();
             BattleUIManager.Instance.Update();
-            BattleVFXManager.Instance.Update();
+            BattleObjManager.Instance.Update();
         }
 
         /// <summary>
@@ -248,7 +248,7 @@ namespace PaperMarioBattleSystem
         {
             BattleManager.Instance.Draw();
             BattleUIManager.Instance.Draw();
-            BattleVFXManager.Instance.Draw();
+            BattleObjManager.Instance.Draw();
         }
 
         /// <summary>

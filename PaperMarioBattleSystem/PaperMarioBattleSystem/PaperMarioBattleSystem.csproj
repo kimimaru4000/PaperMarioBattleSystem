@@ -153,6 +153,7 @@
     <Compile Include="Classes\BattleEvents\SwapPositionBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitForAnimBattleEvent.cs" />
+    <Compile Include="Classes\BattleObjects\BattleObject.cs" />
     <Compile Include="Classes\Collectibles\Badges\AllOrNothingBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\Badge.cs" />
     <Compile Include="Classes\Collectibles\Badges\BumpAttackBadge.cs" />
@@ -329,8 +330,8 @@
     <Compile Include="Classes\Sequences\Yoshi\MiniEggSequence.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleEventManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleManager.cs" />
+    <Compile Include="Classes\Singletons\Battle\BattleObjManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleUIManager.cs" />
-    <Compile Include="Classes\Singletons\Battle\BattleVFXManager.cs" />
     <Compile Include="Classes\Singletons\General\AssetManager.cs" />
     <Compile Include="Classes\Singletons\General\Camera.cs" />
     <Compile Include="Classes\Singletons\General\Inventory.cs" />

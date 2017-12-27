@@ -262,7 +262,7 @@ namespace PaperMarioBattleSystem
                     }
 
                     //Show the star indicating damage
-                    BattleVFXManager.Instance.AddVFXElement(new DamageStarVFX(damage, Position + (EntityType == EntityTypes.Player ? new Vector2(-40, -35) : new Vector2(50, -35))));
+                    BattleObjManager.Instance.AddBattleObject(new DamageStarVFX(damage, Position + (EntityType == EntityTypes.Player ? new Vector2(-40, -35) : new Vector2(50, -35))));
 
                     //Lose HP
                     LoseHP(damage);

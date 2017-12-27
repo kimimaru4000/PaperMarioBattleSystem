@@ -100,6 +100,11 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    if (CommandEnabled == true)
+                    {
+                        ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
+                    }
+
                     string entityName = EntitiesAffected[0].Name;
 
                     //Check if the enemy is in the Tattle database

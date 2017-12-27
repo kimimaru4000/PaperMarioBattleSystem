@@ -61,7 +61,7 @@ namespace PaperMarioBattleSystem
 
             if (ElapsedTime >= TimeShown)
             {
-                ShouldRemove = true;
+                ReadyForRemoval = true;
             }
         }
 

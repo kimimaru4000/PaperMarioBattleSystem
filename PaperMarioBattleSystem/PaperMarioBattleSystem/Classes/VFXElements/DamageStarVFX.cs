@@ -106,7 +106,7 @@ namespace PaperMarioBattleSystem
 
                 if (CurScale == Vector2.Zero)
                 {
-                    ShouldRemove = true;
+                    ReadyForRemoval = true;
                 }
             }
         }

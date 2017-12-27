@@ -479,7 +479,7 @@ namespace PaperMarioBattleSystem
         /// <param name="commandRank">The CommandRank result of the Action Command.</param>
         protected void ShowCommandRankVFX(ActionCommand.CommandRank commandRank, Vector2 position)
         {
-            BattleVFXManager.Instance.AddVFXElement(new ActionCommandVFX(commandRank, position, new Vector2(-15f, -15f)));
+            BattleObjManager.Instance.AddBattleObject(new ActionCommandVFX(commandRank, position, new Vector2(-15f, -15f)));
             SoundManager.Instance.PlaySound(SoundManager.Sound.ActionCommandSuccess);
         }
 

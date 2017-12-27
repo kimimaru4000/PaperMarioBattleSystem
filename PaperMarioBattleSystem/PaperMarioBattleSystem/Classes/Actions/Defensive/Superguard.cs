@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
                 new WaitForAnimBattleEvent(User, AnimationGlobals.PlayerBattleAnimations.SuperguardName, true));
 
-            BattleVFXManager.Instance.AddVFXElement(new ActionCommandVFX(ActionCommand.CommandRank.Great, User.Position, new Vector2(-15, -15)));
+            BattleObjManager.Instance.AddBattleObject(new ActionCommandVFX(ActionCommand.CommandRank.Great, User.Position, new Vector2(-15, -15)));
             SoundManager.Instance.PlaySound(SoundManager.Sound.ActionCommandSuccess);
 
             return new BattleGlobals.DefensiveActionHolder(newDamage, newStatuses, Enumerations.DamageEffects.None,

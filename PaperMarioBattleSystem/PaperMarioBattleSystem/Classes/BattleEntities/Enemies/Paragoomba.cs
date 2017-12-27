@@ -114,7 +114,7 @@ namespace PaperMarioBattleSystem
             WingsDisappearVFX wingsDisappear = new WingsDisappearVFX(wingSprite, BattlePosition + new Vector2(-4, -1),
                 EntityType != Enumerations.EntityTypes.Enemy, .1f - .01f, 500d, 500d, (1d / 30d) * Time.MsPerS);
 
-            BattleVFXManager.Instance.AddVFXElement(wingsDisappear);
+            BattleObjManager.Instance.AddBattleObject(wingsDisappear);
         }
 
         public void HandleGrounded()

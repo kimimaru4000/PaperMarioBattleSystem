@@ -247,6 +247,6 @@ Shell Shield and Status Moves
 -----------------------------
 How does Shell Shield work against moves that inflict Statuses? Also moves that directly inflict Statuses, like Beldam's magic.
 
-Results: 
+Results: Since the attack targets the shell directly, Mario doesn't get inflicted with Statuses. Enemies that attack the shell directly are not affected by Mario's Payback.
 
 

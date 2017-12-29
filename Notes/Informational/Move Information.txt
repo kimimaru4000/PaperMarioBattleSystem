@@ -56,6 +56,8 @@ Spin Smash
 Using Spin Smash on Kent C. Koopa's Tail when he's flipped over causes him to drop 6 coins, which then are
 added to your total in battle shortly afterwards. This can be repeated.
 
+-Spin Smash cannot kill Gulpits' Rocks if you successfully perform the Action Command
+
 Bowser
 ------
 Shockwave Drain (Star Rod wave attack) - Removes all positive Status Effects on Mario (and presumably his Partner if this were in TTYD)
@@ -201,7 +203,13 @@ The only way to see the shell's HP is with the Peekaboo Badge, as it cannot be t
 
 -Mario cannot Guard or Superguard attacks that damage the shell
 -Status Effects such as Burn and Poison will still damage Mario directly
--Creating a new shell removes the previous one
+-Creating a new shell removes the previous one when the move is selected, right before the Action Command starts
+-Enemy moves hit the shell itself, so Mario cannot be inflicted with Status Effects from them
+  -For the same reason, Mario's Payback does not apply to enemies who directly hit the shell
+
+When under the shell, Mario isn't rendered at all. When he jumps when Status Effects wear off, you can't see him. This is most noticeable if you have Zap Tap equipped.
+
+The shell has two states: Inactive and Active. It is Inactive during the Player phase, which allows items and moves to affect Mario, including Confused Partner attacks. After the Player phase ends, the shell covers Mario, making it Active, which causes all attacks that target Mario to target the shell instead.
 
 Bobbery
 -------

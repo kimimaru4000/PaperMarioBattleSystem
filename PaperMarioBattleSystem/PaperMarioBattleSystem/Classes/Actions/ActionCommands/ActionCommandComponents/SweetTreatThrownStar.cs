@@ -49,7 +49,7 @@ namespace PaperMarioBattleSystem
 
         public void HandleCollision(CollisionResponseHolder collisionResponse)
         {
-            
+            BattleUIManager.Instance.RemoveUIElement(this);
         }
 
         public override void Update()

@@ -27,6 +27,14 @@ namespace PaperMarioBattleSystem
             {
                 BattleActions.Add(new HeadRattle());
             }
+            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DDownPound) > 0)
+            {
+                BattleActions.Add(new DDownPoundAction());
+            }
+            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PiercingBlow) > 0)
+            {
+                BattleActions.Add(new PiercingBlowAction());
+            }
         }
     }
 }

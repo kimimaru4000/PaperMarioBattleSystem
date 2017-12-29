@@ -1,0 +1,6 @@
+Status Effect Information (12/28/17)
+------------------------------------
+
+Injured
+-------
+In PM, disallows partners from being switched out.

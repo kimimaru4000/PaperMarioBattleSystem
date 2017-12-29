@@ -9,10 +9,16 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// An object that tracks collisions among a group of <see cref="ICollisionHandler"/> objects.
     /// </summary>
-    /// <typeparam name="T">A type that implements <see cref="ICollisionHandler"/>.</typeparam>
-    public class CollisionTracker<T> : ICleanup where T : ICollisionHandler
+    /// <typeparam name="T">A type for the main collision object that implements <see cref="ICollisionHandler"/>.</typeparam>
+    /// <typeparam name="U">A type for the group of collision objects that implements <see cref="ICollisionHandler"/>.</typeparam>
+    public class CollisionTracker<T, U> : ICleanup where T : ICollisionHandler where U : ICollisionHandler
     {
-        public delegate void CollisionHandler(CollisionResponseHolder collisionResponse);
+        /// <summary>
+        /// A delegate for handling collisions.
+        /// </summary>
+        /// <param name="collisionTracker">The <see cref="CollisionTracker{T, U}"/> that sent the event.</param>
+        /// <param name="collisionResponse">The <see cref="CollisionResponseHolder"/> that was sent.</param>
+        public delegate void CollisionHandler(CollisionTracker<T,U> collisionTracker, CollisionResponseHolder collisionResponse);
 
         /// <summary>
         /// An event for handling collisions with an object.
@@ -24,15 +30,15 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The list of objects that collision should be handled with.
         /// </summary>
-        public List<T> CollisionObjects = null;
+        public List<U> CollisionObjects = null;
 
-        public CollisionTracker(T handler, List<T> collisionObjects)
+        public CollisionTracker(T handler, List<U> collisionObjects)
         {
             CollisionObj = handler;
             SetCollisionData(collisionObjects);
         }
 
-        public void SetCollisionData(List<T> collisionObjects)
+        public void SetCollisionData(List<U> collisionObjects)
         {
             ClearTrackedObjects();
             CollisionObjects = collisionObjects;
@@ -40,12 +46,14 @@ namespace PaperMarioBattleSystem
 
         public void ClearTrackedObjects()
         {
-            CollisionObjects.Clear();
+            //Set to null, as this reference might be used elsewhere
+            CollisionObjects = null;
         }
 
         public void CleanUp()
         {
             ClearTrackedObjects();
+            CollisionObj = default(T);
 
             CollisionHandlerEvent = null;
         }
@@ -62,7 +70,7 @@ namespace PaperMarioBattleSystem
                 if (collisionObj.collisionShape.CollidesWith(CollisionObjects[i].collisionShape) == true)
                 {
                     //Invoke the collision event
-                    CollisionHandlerEvent?.Invoke(CollisionObjects[i].GetCollisionResponse(collisionObj));
+                    CollisionHandlerEvent?.Invoke(this, CollisionObjects[i].GetCollisionResponse(collisionObj));
                 }
             }
         }

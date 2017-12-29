@@ -980,6 +980,8 @@ namespace PaperMarioBattleSystem
             //Quick fix until there's a more concrete way of defining the current idle animation to play
             if (EntityProperties.HasStatus(StatusTypes.Stone) == true)
                 return AnimationGlobals.StatusBattleAnimations.StoneName;
+            else if (EntityProperties.HasStatus(StatusTypes.Injured) == true)
+                return AnimationGlobals.StatusBattleAnimations.InjuredName;
 
             switch (HealthState)
             {

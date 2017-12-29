@@ -30,11 +30,19 @@ namespace PaperMarioBattleSystem
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Goomba.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
-            AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(67, 107, 26, 28), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.IdleName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(67, 107, 26, 28), 1000d),
+                new Animation.Frame(new Rectangle(35, 104, 26, 31), 150d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(3, 5, 26, 34), 1000d, new Vector2(0, -2))));
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet, 
                 new Animation.Frame(new Rectangle(65, 76, 29, 27), 80d),
                 new Animation.Frame(new Rectangle(2, 109, 27, 26), 80d)));
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(2, 109, 27, 26), 1000d)));
+
+            AnimManager.AddAnimation(AnimationGlobals.RunningName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(129, 73, 28, 30), 150d),
+                new Animation.Frame(new Rectangle(67, 107, 26, 28), 100d),
+                new Animation.Frame(new Rectangle(99, 75, 28, 28), 150d)));
         }
 
         public override void OnTurnStart()

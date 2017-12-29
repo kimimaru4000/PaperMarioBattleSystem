@@ -275,11 +275,13 @@ namespace PaperMarioBattleSystem
                 else if (Input.GetKey(Keys.Z, DebugKeyboard) == true) status = new ParalyzedStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
-            //Inflict Invisible
+            //Inflict Invisible or Injured
             else if (Input.GetKeyDown(Keys.I, DebugKeyboard) == true)
             {
                 StatusEffect status = new InvisibleStatus(turnCount);
-                
+                //Inflict Injured
+                if (Input.GetKey(Keys.J, DebugKeyboard) == true) status = new InjuredStatus(turnCount);
+
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Electrified

@@ -85,11 +85,14 @@
     <Compile Include="Classes\Actions\Item\MysteryAction.cs" />
     <Compile Include="Classes\Actions\Koopatrol\SummonKoopatrolAction.cs" />
     <Compile Include="Classes\Actions\Kooper\ShellToss.cs" />
+    <Compile Include="Classes\Actions\Mario\DDownJumpAction.cs" />
+    <Compile Include="Classes\Actions\Mario\DDownPoundAction.cs" />
     <Compile Include="Classes\Actions\Mario\Hammer.cs" />
     <Compile Include="Classes\Actions\Mario\HeadRattle.cs" />
     <Compile Include="Classes\Actions\Mario\IceSmash.cs" />
     <Compile Include="Classes\Actions\Mario\Jump.cs" />
     <Compile Include="Classes\Actions\Mario\Multibounce.cs" />
+    <Compile Include="Classes\Actions\Mario\PiercingBlowAction.cs" />
     <Compile Include="Classes\Actions\Mario\PowerBounce.cs" />
     <Compile Include="Classes\Actions\Mario\TornadoJump.cs" />
     <Compile Include="Classes\Actions\MenuAction.cs" />
@@ -164,6 +167,8 @@
     <Compile Include="Classes\Collectibles\Badges\CloseCallPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DamageDodgeBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DamageDodgePBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\DDownJumpBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\DDownPoundBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DeepFocusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DefendPlusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\DizzyAttackBadge.cs" />
@@ -195,6 +200,7 @@
     <Compile Include="Classes\Collectibles\Badges\MegaRushPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MultibounceBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PeekabooBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\PiercingBlowBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PityFlowerBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PowerBounceBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PowerPlusBadge.cs" />

@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// The elements correspond to HP, FP, or Poison Mushrooms.
     /// <para>The spawner randomly chooses from the <see cref="AllowedRestorationTypes"/> list, but it will not go over the specified count for each.</para>
     /// </summary>
-    public class SweetTreatElementSpawner : IUpdateable, ICleanup
+    public class SweetTreatElementSpawner : BattleObject
     {
         #region Enums
 
@@ -117,7 +117,7 @@ namespace PaperMarioBattleSystem
             SetupRestorationDict(restorationTypeCounts);
         }
 
-        public void CleanUp()
+        public override void CleanUp()
         {
             for (int i = 0; i < RestorationElements.Count; i++)
             {
@@ -209,7 +209,7 @@ namespace PaperMarioBattleSystem
             return AllowedRestorationTypes[randVal];
         }
 
-        public void Update()
+        public override void Update()
         {
             //Keep spawning if we're not done yet
             if (DoneSpawning == false)

@@ -164,7 +164,7 @@ namespace PaperMarioBattleSystem
         /// <param name="collisionResponse">The collision data.</param>
         public void HandleCollision(CollisionResponseHolder collisionResponse)
         {
-
+            BattleUIManager.Instance.RemoveUIElement(this);
         }
 
         public CollisionResponseHolder GetCollisionResponse(ICollisionHandler collisionObject)

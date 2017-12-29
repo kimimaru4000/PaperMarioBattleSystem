@@ -1230,6 +1230,7 @@ namespace PaperMarioBattleSystem
             public const string DizzyName = "Dizzy";
             public const string ConfusedName = "Confused";
             public const string PoisonName = "Poison";
+            public const string InjuredName = "Injured";
         }
     }
 

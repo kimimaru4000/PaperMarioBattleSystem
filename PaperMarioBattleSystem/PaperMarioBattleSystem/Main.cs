@@ -48,7 +48,7 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.Initialize(
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEntity>() { new Goomba(), new Goomba(), new Paragoomba() });
+                new List<BattleEntity>() { new Goomba(), new SpikedGoomba(), new Paragoomba() });
 
             base.Initialize();
         }
@@ -128,6 +128,15 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new HPDrainBadge());
             Inventory.Instance.AddBadge(new FPDrainBadge());
             Inventory.Instance.AddBadge(new FPDrainBadge());
+
+            Inventory.Instance.AddBadge(new SimplifierBadge());
+            Inventory.Instance.AddBadge(new SimplifierBadge());
+            Inventory.Instance.AddBadge(new UnsimplifierBadge());
+            Inventory.Instance.AddBadge(new UnsimplifierBadge());
+
+            Inventory.Instance.AddBadge(new DDownPoundBadge());
+            Inventory.Instance.AddBadge(new PiercingBlowBadge());
+            Inventory.Instance.AddBadge(new DDownJumpBadge());
 
             //Items
             Inventory.Instance.AddItem(new Mushroom());

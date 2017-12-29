@@ -11,10 +11,6 @@ using static PaperMarioBattleSystem.SweetTreatGlobals;
 
 namespace PaperMarioBattleSystem
 {
-    /* NOTE: This could be cleaner.
-     * Ideally, we'd put each star into some object which can make it automatically update, then handle the collisions through an event
-     */
-
     /// <summary>
     /// Hold Left to ready a star and release to throw it. Hit the icons to heal HP and FP.
     /// Hitting a Poison Mushroom makes you unable to throw stars for a short time.

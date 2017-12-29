@@ -139,6 +139,12 @@ namespace PaperMarioBattleSystem
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Unsimplifier, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Unsimplifier, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DDownPound, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PiercingBlow, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DDownJump, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
 
             //MStats.HammerLevel = EquipmentGlobals.HammerLevels.Super;
             //MStats.BootLevel = EquipmentGlobals.BootLevels.Super;

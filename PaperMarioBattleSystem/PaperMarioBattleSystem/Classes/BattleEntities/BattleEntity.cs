@@ -189,14 +189,16 @@ namespace PaperMarioBattleSystem
 
         public virtual void CleanUp()
         {
+            BattleIndex = -1;
+
+            EntityProperties.CleanUp();
+
             HealthStateChangedEvent = null;
             PhaseCycleStartEvent = null;
             TurnStartEvent = null;
             TurnEndEvent = null;
             DamageTakenEvent = null;
             DealtDamageEvent = null;
-
-            BattleIndex = -1;
         }
 
         #region Damage Handling
@@ -556,17 +558,17 @@ namespace PaperMarioBattleSystem
             UpdateHealthState();
             //AnimManager.PlayAnimation(AnimationGlobals.DeathName, true);
 
+            //Remove all StatusEffects on the entity
+            EntityProperties.RemoveAllStatuses(false);
+
+            OnDeath();
+
             //NOTE: The death event occurs for standard enemies like Goombas during their sequence if it was interrupted
             //I'm not sure about bosses yet, so that'll need to be tested
 
             BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Death,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                 new DeathBattleEvent(this));
-
-            //Remove all StatusEffects on the entity
-            EntityProperties.RemoveAllStatuses(false);
-
-            OnDeath();
         }
 
         /// <summary>

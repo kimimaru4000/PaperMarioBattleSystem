@@ -85,6 +85,7 @@
     <Compile Include="Classes\Actions\Item\MysteryAction.cs" />
     <Compile Include="Classes\Actions\Koopatrol\SummonKoopatrolAction.cs" />
     <Compile Include="Classes\Actions\Kooper\ShellToss.cs" />
+    <Compile Include="Classes\Actions\Koops\ShellShieldAction.cs" />
     <Compile Include="Classes\Actions\Mario\DDownJumpAction.cs" />
     <Compile Include="Classes\Actions\Mario\DDownPoundAction.cs" />
     <Compile Include="Classes\Actions\Mario\Hammer.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="Classes\BattleEntities\Enemies\Yux.cs" />
     <Compile Include="Classes\BattleEntities\Neutral\BobberyBomb.cs" />
     <Compile Include="Classes\BattleEntities\Neutral\GulpitsRock.cs" />
+    <Compile Include="Classes\BattleEntities\Neutral\Shell.cs" />
     <Compile Include="Classes\BattleEntities\Players\BattleMario.cs" />
     <Compile Include="Classes\BattleEntities\Players\BattlePartner.cs" />
     <Compile Include="Classes\BattleEntities\Players\BattlePlayer.cs" />
@@ -151,6 +153,7 @@
     <Compile Include="Classes\BattleEvents\PlayAnimBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\RemoveWingsBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\RevivedBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\ShellBreakBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\ShootBobberyBombBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\SortEntityListBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\SwapPositionBattleEvent.cs" />
@@ -312,6 +315,7 @@
     <Compile Include="Classes\Sequences\Item\MysterySequence.cs" />
     <Compile Include="Classes\Sequences\Koopatrol\SummonKoopatrolSequence.cs" />
     <Compile Include="Classes\Sequences\Kooper\ShellTossSequence.cs" />
+    <Compile Include="Classes\Sequences\Koops\ShellShieldSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\HammerSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\JumpSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\MultibounceSequence.cs" />
@@ -468,6 +472,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Neutral\BobberyBomb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Neutral\ShellShieldShell.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\UI\Battle\BattleGFX.png">

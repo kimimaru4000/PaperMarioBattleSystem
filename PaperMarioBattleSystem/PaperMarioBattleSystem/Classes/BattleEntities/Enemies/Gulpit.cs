@@ -97,7 +97,7 @@ namespace PaperMarioBattleSystem
                 action = new RockSpitAction(usableEntities[chosenIndex]);
             else action = new LickAction();
 
-            StartAction(action, false, BattleManager.Instance.GetFrontPlayer());
+            StartAction(action, false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
         }
 
         #region Tattle Information

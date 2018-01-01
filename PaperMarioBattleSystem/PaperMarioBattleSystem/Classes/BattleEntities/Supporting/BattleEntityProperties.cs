@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Handles numerous BattleEntity properties like weaknesses/resistances to certain Elements, and more.
     /// </summary>
-    public class BattleEntityProperties
+    public class BattleEntityProperties : ICleanup
     {
         /// <summary>
         /// The BattleEntity these properties are for
@@ -93,6 +93,27 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        public void CleanUp()
+        {
+            RemoveAllStatuses(false);
+
+            AdditionalProperties.Clear();
+            PhysAttributes.Clear();
+            ContactExceptions.Clear();
+
+            Weaknesses.Clear();
+            Resistances.Clear();
+            Strengths.Clear();
+
+            ElementOverrides.Clear();
+            StatusProperties.Clear();
+
+            AdditionalProperties.Clear();
+
+            Paybacks.Clear();
+            DisabledMoveCategories.Clear();
+        }
 
         #region Physical Attribute Methods
 

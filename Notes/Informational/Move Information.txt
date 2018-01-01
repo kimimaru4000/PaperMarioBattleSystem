@@ -211,6 +211,16 @@ When under the shell, Mario isn't rendered at all. When he jumps when Status Eff
 
 The shell has two states: Inactive and Active. It is Inactive during the Player phase, which allows items and moves to affect Mario, including Confused Partner attacks. After the Player phase ends, the shell covers Mario, making it Active, which causes all attacks that target Mario to target the shell instead.
 
+If the shell runs out of HP, it will continue taking hits (Ex. multi-hit moves) until the attacker's turn ends.
+
+If Mario dies with the shell on him with a Life Shroom in his inventory, the revival sequence will still play and he will still have the shell after being revived.
+
+The shell has several damage states:
+-It's not cracked at all at 7-8 HP
+-It's slightly cracked at 4-6 HP
+-It's very cracked at 1-3 HP
+-It completely cracks at 0 HP and breaks
+
 Bobbery
 -------
 Bomb Squad - Creates up to 3 bombs that detonate in 2 phase cycles and deal 3 explosive damage to enemies in their range.

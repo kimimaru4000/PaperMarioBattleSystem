@@ -11,6 +11,8 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// A Sequence used in a MoveAction.
+    /// <para>Sequences define a series of step-by-step actions that are performed for a particular move.
+    /// For example, for Mario's Hammer, the Sequence would play Mario's run animation, move Mario up to the enemy, start the Action Command, then damage the enemy based on the result.</para>
     /// </summary>
     public abstract class Sequence : IActionCommandHandler, IUpdateable, IDrawable
     {

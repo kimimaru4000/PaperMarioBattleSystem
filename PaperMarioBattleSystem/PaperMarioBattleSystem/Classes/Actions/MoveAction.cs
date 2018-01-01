@@ -443,6 +443,12 @@ namespace PaperMarioBattleSystem
             //Filter out untargetable BattleEntities
             BattleEntity[] finalEntities = BattleManager.Instance.FilterEntitiesByTargetable(entities.ToArray());
 
+            //Set to the true targets in the event something is defending them
+            for (int i = 0; i < finalEntities.Length; i++)
+            {
+                finalEntities[i] = finalEntities[i].GetTrueTarget();
+            }
+
             return finalEntities;
         }
 

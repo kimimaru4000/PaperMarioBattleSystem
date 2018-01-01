@@ -49,7 +49,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
-            StartAction(ActionUsed, false, BattleManager.Instance.GetFrontPlayer());
+            StartAction(ActionUsed, false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
         }
 
         public override void TurnUpdate()

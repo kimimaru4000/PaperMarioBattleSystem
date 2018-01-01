@@ -1059,7 +1059,16 @@ namespace PaperMarioBattleSystem
             /// <para>This should have a BattleEntity as the value.
             /// The BattleEntity will be the BattleEntity that this one supports.</para>
             /// </summary>
-            HelperEntity
+            HelperEntity,
+
+            /// <summary>
+            /// Tells that there is a BattleEntity defending this one and taking the hits for it.
+            /// The only example in the PM games is the Shell from Koops' Shell Shield.
+            /// <para>This will take in the BattleEntity defending this one as the value.
+            /// This is inactive during this BattleEntity's phase to allow itself and allies to positively affect it, and active otherwise.
+            /// If active, the BattleEntity defending this one will be targeted by opponents instead.</para>
+            /// </summary>
+            DefendedByEntity
         }
     }
 
@@ -1156,11 +1165,19 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Kooper-specific battle animations
+        /// Kooper-specific battle animations.
         /// </summary>
         public static class KooperBattleAnimations
         {
             
+        }
+
+        /// <summary>
+        /// Koops-specific battle animations.
+        /// </summary>
+        public static class KoopsBattleAnimations
+        {
+            public const string ShellSummonName = "ShellSummon";
         }
 
         /// <summary>
@@ -1501,6 +1518,21 @@ namespace PaperMarioBattleSystem
             {
                 ThrowVelocity = throwVelocity;
                 Gravity = gravity;
+            }
+        }
+
+        /// <summary>
+        /// A struct holding information Shell Shield's Action Command sends.
+        /// </summary>
+        public struct ShellShieldResponse
+        {
+            public int HP;
+            public int MaxHP;
+
+            public ShellShieldResponse(int hp, int maxHP)
+            {
+                HP = hp;
+                MaxHP = maxHP;
             }
         }
 

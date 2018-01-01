@@ -104,7 +104,7 @@ namespace PaperMarioBattleSystem
         /// The current phase, represented as an <see cref="EntityTypes"/>.
         /// This is a property that references the <see cref="PhaseOrder"/>.
         /// </summary>
-        private EntityTypes CurEntityPhase => PhaseOrder[Phase];
+        public EntityTypes CurEntityPhase => PhaseOrder[Phase];
 
         /// <summary>
         /// The current state of the battle
@@ -174,9 +174,6 @@ namespace PaperMarioBattleSystem
 
         public void CleanUp()
         {
-            EntityAddedEvent = null;
-            EntityRemovedEvent = null;
-
             //Remove and cleanup all BattleEntities in battle
             List<BattleEntity> removedEntities = GetAllEntitiesList();
 
@@ -185,6 +182,9 @@ namespace PaperMarioBattleSystem
 
             Mario = null;
             Partner = null;
+
+            EntityAddedEvent = null;
+            EntityRemovedEvent = null;
         }
 
         /// <summary>

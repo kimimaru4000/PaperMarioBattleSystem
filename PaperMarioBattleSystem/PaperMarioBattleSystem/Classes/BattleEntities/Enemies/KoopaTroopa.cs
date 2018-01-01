@@ -77,7 +77,7 @@ namespace PaperMarioBattleSystem
             }
             else
             {
-                StartAction(ActionUsed, false, BattleManager.Instance.GetFrontPlayer());
+                StartAction(ActionUsed, false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
             }
         }
 

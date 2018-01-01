@@ -242,6 +242,30 @@ namespace PaperMarioBattleSystem
             return battleEntity.EntityType;
         }
 
+        /// <summary>
+        /// A helper method to get the true target of this BattleEntity.
+        /// If a BattleEntity is defending this one, thus taking its hits, and is active, then return that BattleEntity, otherwise return this one.
+        /// </summary>
+        /// <param name="battleEntity">The BattleEntity.</param>
+        /// <returns>This BattleEntity if there is none defending this one and/or the defender is not active.
+        /// Otherwise, the BattleEntity defending this one.</returns>
+        public static BattleEntity GetTrueTarget(this BattleEntity battleEntity)
+        {
+            //The BattleEntity defending is active only on phases other than the entity's phase
+            if (BattleManager.Instance.CurEntityPhase != battleEntity.EntityType)
+            {
+                //Check if we have a defender and return it if so
+                BattleEntity defendedByEntity = battleEntity.EntityProperties.GetAdditionalProperty<BattleEntity>(AdditionalProperty.DefendedByEntity);
+                if (defendedByEntity != null)
+                {
+                    return defendedByEntity;
+                }
+            }
+
+            //In all other cases, return this BattleEntity
+            return battleEntity;
+        }
+
         #endregion
 
         #region List Extensions

@@ -60,8 +60,8 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Called by derived classes to send a completion response to the Action associated with the Command.
-        /// This also ends input for the Command
+        /// Called by derived classes to send a completion response to the handler associated with the ActionCommand.
+        /// This also ends input for the ActionCommand.
         /// </summary>
         /// <param name="result">The final result of the ActionCommand</param>
         protected void OnComplete(CommandResults result)

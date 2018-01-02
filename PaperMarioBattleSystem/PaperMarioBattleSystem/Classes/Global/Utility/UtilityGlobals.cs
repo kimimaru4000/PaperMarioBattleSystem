@@ -314,6 +314,17 @@ namespace PaperMarioBattleSystem
             return (T[])Enum.GetValues(typeof(T));
         }
 
+        /// <summary>
+        /// Indicates whether an <see cref="IList{T}"/> is null or empty.
+        /// </summary>
+        /// <typeparam name="T">The Type of the elements in the IList.</typeparam>
+        /// <param name="iList">The IList.</param>
+        /// <returns>true if <paramref name="iList"/> is null or empty, otherwise false.</returns>
+        public static bool IListIsNullOrEmpty<T>(IList<T> iList)
+        {
+            return (iList == null || iList.Count == 0);
+        }
+
         #region Flag Check Utilities
 
         /* Adding flags: flag1 |= flag2            ; 10 | 01 = 11

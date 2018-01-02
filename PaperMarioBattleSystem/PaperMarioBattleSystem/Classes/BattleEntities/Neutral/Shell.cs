@@ -45,16 +45,30 @@ namespace PaperMarioBattleSystem
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Neutral/ShellShieldShell.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
-            AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet,
+            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.FullHealthStateName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(7, 3, 186, 130), 1000d)));
 
+            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.MildlyDamagedStateName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(7, 153, 186, 130), 1000d)));
+            AnimManager.AddAnimationChildFrames(AnimationGlobals.ShellBattleAnimations.MildlyDamagedStateName,
+                new Animation.Frame(new Rectangle(217, 4, 13, 47), 1000d, new Vector2(44, 1)));
+
+            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.SeverelyDamagedStateName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(7, 153, 186, 130), 1000d)));
+            AnimManager.AddAnimationChildFrames(AnimationGlobals.ShellBattleAnimations.SeverelyDamagedStateName,
+                new Animation.Frame(new Rectangle(242, 4, 42, 98), 1000d, new Vector2(36, 1)));
+
             Scale = new Vector2(.5f, .5f);
+
+            //Add this here for now to make it easier to debug
+            this.AddShowHPProperty();
 
             //Subscribe to the removed event so we can remove the protection and clear the entity reference if it's removed
             BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;
             BattleManager.Instance.EntityRemovedEvent += EntityRemoved;
 
-            this.AddShowHPProperty();
+            //Play the idle anim
+            AnimManager.PlayAnimation(GetIdleAnim());
         }
 
         public override void CleanUp()
@@ -64,6 +78,16 @@ namespace PaperMarioBattleSystem
             RemoveEntityDefending();
 
             base.CleanUp();
+        }
+
+        public override string GetIdleAnim()
+        {
+            //The animation of the Shell depends on how much it's damaged
+            float ratio = CurHP / (float)BattleStats.MaxHP;
+
+            if (ratio >= .875f) return AnimationGlobals.ShellBattleAnimations.FullHealthStateName;
+            else if (ratio >= .5f) return AnimationGlobals.ShellBattleAnimations.MildlyDamagedStateName;
+            else return AnimationGlobals.ShellBattleAnimations.SeverelyDamagedStateName;
         }
 
         /// <summary>

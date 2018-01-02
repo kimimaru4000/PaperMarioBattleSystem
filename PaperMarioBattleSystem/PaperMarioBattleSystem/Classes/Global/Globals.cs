@@ -1239,6 +1239,16 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Animations for the Shell Shield Shell.
+        /// </summary>
+        public static class ShellBattleAnimations
+        {
+            public const string FullHealthStateName = "FullHealthState";
+            public const string MildlyDamagedStateName = "MildlyDamagedState";
+            public const string SeverelyDamagedStateName = "SeverelyDamagedState";
+        }
+
+        /// <summary>
         /// Status Effect-related animations in battle
         /// </summary>
         public static class StatusBattleAnimations

@@ -140,6 +140,13 @@ namespace PaperMarioBattleSystem
 
         public PowerLiftCommand(IActionCommandHandler commandHandler, double commandTime) : base(commandHandler)
         {
+            CommandTime = commandTime;
+        }
+
+        public override void StartInput(params object[] values)
+        {
+            base.StartInput(values);
+
             Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
 
             BigCursor = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
@@ -150,13 +157,6 @@ namespace PaperMarioBattleSystem
             BarFill = new CroppedTexture2D(battleGFX, new Rectangle(541, 255, 1, 1));
 
             Cursor = new UIFourPiecedTex(BigCursor, BigCursor.WidthHeightToVector2(), .6f, CursorColor);
-
-            CommandTime = commandTime;
-        }
-
-        public override void StartInput(params object[] values)
-        {
-            base.StartInput(values);
 
             ElapsedCommandTime = ElapsedPoisonTime = 0d;
             SelectedIcon = false;

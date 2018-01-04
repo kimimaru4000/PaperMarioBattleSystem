@@ -17,12 +17,17 @@ namespace PaperMarioBattleSystem
         private GraphicsDeviceManager graphics;
         private CrashHandler crashHandler = null;
 
+        /// <summary>
+        /// The game window.
+        /// </summary>
+        public GameWindow GameWindow => Window;
+
         public Main()
         {
             graphics = new GraphicsDeviceManager(this);
-
+            
             crashHandler = new CrashHandler();
-
+            
             //false for variable timestep, true for fixed
             IsFixedTimeStep = true;
         }
@@ -47,7 +52,7 @@ namespace PaperMarioBattleSystem
 
             BattleManager.Instance.Initialize(
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
-                Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Kooper),
+                Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
                 new List<BattleEntity>() { new Goomba(), new SpikedGoomba(), new Paragoomba() });
 
             base.Initialize();

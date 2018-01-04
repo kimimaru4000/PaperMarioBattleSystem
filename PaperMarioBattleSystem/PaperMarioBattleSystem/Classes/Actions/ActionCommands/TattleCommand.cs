@@ -38,11 +38,6 @@ namespace PaperMarioBattleSystem
 
         public TattleCommand(IActionCommandHandler commandHandler, float smallCursorSpeed) : base(commandHandler)
         {
-            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
-            
-            BigCursor = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
-            SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));
-
             SmallCursorSpeed = smallCursorSpeed;
 
             //Description = "Line up the small cursor with\n the center of the big cursor!"
@@ -57,6 +52,11 @@ namespace PaperMarioBattleSystem
                 Debug.LogError($"{nameof(TattleCommand)} requires the position of the BattleEntity targeted to place the cursor in the correct spot!");
                 return;
             }
+
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
+
+            BigCursor = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
+            SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));
 
             BigCursorPos = Camera.Instance.SpriteToUIPos((Vector2)values[0]);
             SmallCursorPos = BigCursorPos - new Vector2(SmallCursorStartOffset, 0);

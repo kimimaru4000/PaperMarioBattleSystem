@@ -46,6 +46,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="values">Any values passed to the ActionCommand just as it starts.
         /// An example includes the BattleEntity's position for the Tattle cursor.</param>
+        /// <remarks>Load any textures for the Action Command here instead of in the constructor.
+        /// This prevents unnecessary loading, as the textures won't be used if the Action Command isn't started anyway.</remarks>
         public virtual void StartInput(params object[] values)
         {
             AcceptingInput = true;

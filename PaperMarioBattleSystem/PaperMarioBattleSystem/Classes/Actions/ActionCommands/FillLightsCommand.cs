@@ -38,6 +38,11 @@ namespace PaperMarioBattleSystem
         {
             MaxLights = maxLights;
             TimeBetweenLights = timeBetweenLights;
+        }
+
+        public override void StartInput(params object[] values)
+        {
+            base.StartInput(values);
 
             CircleImage = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Circle.png");
         }

@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Sweet Treat";
 
-            SPCost = 0;//100;
+            SPCost = 100;
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(26, 989, 40, 31)),
                 "", MoveResourceTypes.SP, 100, CostDisplayTypes.Shown, MoveAffectionTypes.Self | MoveAffectionTypes.Ally, 

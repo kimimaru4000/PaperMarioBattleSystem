@@ -8,13 +8,10 @@ using Microsoft.Xna.Framework;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// An interface for any object that can have a color tint.
+    /// An interface for any objects with a position.
     /// </summary>
-    public interface ITintable
+    public interface IPosition
     {
-        /// <summary>
-        /// The color to tint the object.
-        /// </summary>
-        Color TintColor { get; set; }
+        Vector2 Position { get; }
     }
 }

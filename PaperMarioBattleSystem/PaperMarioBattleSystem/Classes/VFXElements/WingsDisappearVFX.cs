@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The color to draw the wings.
         /// </summary>
-        public Color TintColor { get; private set; } = Color.White;
+        public Color TintColor { get; set; } = Color.White;
 
         /// <summary>
         /// The wings to render.

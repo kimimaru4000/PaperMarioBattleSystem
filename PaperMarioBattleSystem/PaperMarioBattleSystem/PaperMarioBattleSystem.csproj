@@ -77,6 +77,7 @@
     <Compile Include="Classes\Actions\Fuzzy\KissyKissyAction.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\Goombario\Tattle.cs" />
+    <Compile Include="Classes\Actions\Goombella\RallyWinkAction.cs" />
     <Compile Include="Classes\Actions\Gulpit\LickAction.cs" />
     <Compile Include="Classes\Actions\Gulpit\RockSpitAction.cs" />
     <Compile Include="Classes\Actions\Huff N. Puff\WindBreathAction.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Classes\BattleEvents\WaitBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitForAnimBattleEvent.cs" />
     <Compile Include="Classes\BattleObjects\BattleObject.cs" />
+    <Compile Include="Classes\BattleObjects\ShellBreakAnimObj.cs" />
     <Compile Include="Classes\Collectibles\Badges\AllOrNothingBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\Badge.cs" />
     <Compile Include="Classes\Collectibles\Badges\BumpAttackBadge.cs" />
@@ -267,6 +269,8 @@
     <Compile Include="Classes\Interfaces\IDrawable.cs" />
     <Compile Include="Classes\Interfaces\IFlippableEntity.cs" />
     <Compile Include="Classes\Interfaces\INameable.cs" />
+    <Compile Include="Classes\Interfaces\IPosition.cs" />
+    <Compile Include="Classes\Interfaces\IRotatable.cs" />
     <Compile Include="Classes\Interfaces\ISegmentEntity.cs" />
     <Compile Include="Classes\Interfaces\ISpinnableEntity.cs" />
     <Compile Include="Classes\Interfaces\ITattleableEntity.cs" />
@@ -309,6 +313,7 @@
     <Compile Include="Classes\Sequences\Fuzzy\KissyKissySequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\TattleSequence.cs" />
+    <Compile Include="Classes\Sequences\Goombella\RallyWinkSequence.cs" />
     <Compile Include="Classes\Sequences\Gulpit\LickSequence.cs" />
     <Compile Include="Classes\Sequences\Gulpit\RockSpitSequence.cs" />
     <Compile Include="Classes\Sequences\Huff N. Puff\WindBreathSequence.cs" />
@@ -399,6 +404,7 @@
     <Compile Include="Classes\UIElements\UIText.cs" />
     <Compile Include="Classes\VFXElements\ActionCommandVFX.cs" />
     <Compile Include="Classes\VFXElements\AfterImageVFX.cs" />
+    <Compile Include="Classes\VFXElements\BlinkVFX.cs" />
     <Compile Include="Classes\VFXElements\DamageStarVFX.cs" />
     <Compile Include="Classes\VFXElements\VFXElement.cs" />
     <Compile Include="Classes\VFXElements\WingsDisappearVFX.cs" />

@@ -53,6 +53,8 @@ namespace PaperMarioBattleSystem
         public Vector2 WindowSize => new Vector2(graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
         public Vector2 WindowCenter => WindowSize.HalveInt();
 
+        private bool Initialized = false;
+
         private SpriteRenderer()
         {
             
@@ -63,6 +65,8 @@ namespace PaperMarioBattleSystem
             spriteBatch.Dispose();
             uiBatch.Dispose();
             graphicsDeviceManager.Dispose();
+
+            Initialized = false;
 
             WindowSizeChangedEvent = null;
 
@@ -75,9 +79,13 @@ namespace PaperMarioBattleSystem
         /// <param name="graphics">The GraphicsDeviceManager used for rendering</param>
         public void Initialize(GraphicsDeviceManager graphics)
         {
+            if (Initialized == true) return;
+            
             graphicsDeviceManager = graphics;
             spriteBatch = new SpriteBatch(graphicsDeviceManager.GraphicsDevice);
             uiBatch = new SpriteBatch(graphicsDeviceManager.GraphicsDevice);
+
+            Initialized = true;
         }
 
         /// <summary>
@@ -90,7 +98,7 @@ namespace PaperMarioBattleSystem
             graphicsDeviceManager.PreferredBackBufferHeight = (int)newWindowSize.Y;
 
             graphicsDeviceManager.ApplyChanges();
-
+            
             //Invoke the window size changed event
             WindowSizeChangedEvent?.Invoke(newWindowSize);
         }

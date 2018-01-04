@@ -10,10 +10,12 @@ An open source recreation of the turn-based battle system from the first two Pap
 * Battle Menus
 * Move Sequences (what happens when you perform a move)
 
-Note that visual features (smoothness of movement, UI, etc.) are not being fully developed at the moment. The current focus is implementing the core systems found in the Paper Mario games in a flexible and extensible manner.
+Note that visual features (smoothness of movement, UI, etc.) are not being prioritized at the moment. The current focus is implementing the core systems found in the Paper Mario games in a flexible and extensible manner.
 
 ## Getting Started
-You will need MonoGame 3.7 and Visual Studio 2017, but earlier versions of Visual Studio should work just fine.
+You will need MonoGame 3.7 and Visual Studio 2017, but MonoDevelop, Xamarin Studio, and earlier versions of Visual Studio may work as well. The project targets DesktopGL and .NET 4.7.
+
+Builds for Windows, OSX, and Linux can be made with the Ruge Deploy Tool (https://github.com/MetaSmug/MonoGame.Ruge.DeployTool) using the DeployToolSettings.dt config file in the repository. You may need to adjust the output paths.
 
 ## Contributing
 Feel free to submit a pull request with details on your changes. Make sure your code has been tested and is well-commented.

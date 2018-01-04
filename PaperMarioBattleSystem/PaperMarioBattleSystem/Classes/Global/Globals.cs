@@ -1162,6 +1162,7 @@ namespace PaperMarioBattleSystem
         {
             public const string TattleStartName = "TattleStart";
             public const string TattleFailName = "TattleFail";
+            public const string WinkName = "Wink";
         }
 
         /// <summary>

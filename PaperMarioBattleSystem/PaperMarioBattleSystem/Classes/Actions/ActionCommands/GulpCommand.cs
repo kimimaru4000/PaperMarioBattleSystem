@@ -45,13 +45,13 @@ namespace PaperMarioBattleSystem
         {
             SuccessRange = successRange;
             SpeedScale = speedScale;
-
-            CircleImage = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Circle.png");
         }
 
         public override void StartInput(params object[] values)
         {
             base.StartInput(values);
+
+            CircleImage = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Circle.png");
 
             SuccessStartValue = MaxBarValue - SuccessRange;
 

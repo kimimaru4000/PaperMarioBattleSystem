@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A UIElement with a Position.
     /// </summary>
-    public abstract class PosUIElement : UIElement
+    public abstract class PosUIElement : UIElement, IPosition
     {
         /// <summary>
         /// The position of the PosUIElement.

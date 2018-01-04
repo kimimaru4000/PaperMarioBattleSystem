@@ -63,12 +63,6 @@ namespace PaperMarioBattleSystem
         public BombSquadCommand(IActionCommandHandler commandHandler, int bombCount) : base(commandHandler)
         {
             BombCount = bombCount;
-
-            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
-
-            CroppedTexture2D croppedTex2D = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
-
-            Cursor = new UIFourPiecedTex(croppedTex2D, croppedTex2D.WidthHeightToVector2(), .5f, Color.White);
         }
 
         public override void StartInput(params object[] values)
@@ -82,7 +76,12 @@ namespace PaperMarioBattleSystem
 
             LastBombThrowTime = ElapsedTime + AutomaticThrowTime;
             CursorAngle = MinCursorAngle;
-            
+
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
+
+            CroppedTexture2D croppedTex2D = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
+
+            Cursor = new UIFourPiecedTex(croppedTex2D, croppedTex2D.WidthHeightToVector2(), .5f, Color.White);
             Cursor.Position = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
         }
 

@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// Mash a button to fill the bar as much as you can in the time allotted.
-    /// There is a range of values evenly distributed evenly distributed across the bar.
+    /// There is a range of values evenly distributed across the bar.
     /// The end result will be a value based on how much of the bar is filled when the Action Command ends.
     /// <para>For attacks such as Huff N. Puff's Wind Breath, the start value should be higher than the end value so filling the bar
     /// decreases the damage dealt.</para>

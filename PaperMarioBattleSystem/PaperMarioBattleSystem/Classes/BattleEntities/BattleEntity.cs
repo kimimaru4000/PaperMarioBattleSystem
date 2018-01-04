@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Any fighter that takes part in battle
     /// </summary>
-    public abstract class BattleEntity : INameable, IUpdateable, IDrawable, ITintable, ICleanup
+    public abstract class BattleEntity : INameable, IUpdateable, IDrawable, IPosition, IRotatable, ITintable, ICleanup
     {
         #region Delegates and Events
 
@@ -320,57 +320,6 @@ namespace PaperMarioBattleSystem
         /// <param name="damageResult">The InteractionHolder containing the result of a damage interaction.</param>
         public void TakeDamage(InteractionHolder damageResult)
         {
-            /*Elements element = damageResult.DamageElement;
-            int damage = damageResult.TotalDamage;
-            bool piercing = damageResult.Piercing;
-            StatusChanceHolder[] statusesInflicted = damageResult.StatusesInflicted;
-
-            //Handle the elemental interaction results
-            ElementInteractionResult elementResult = damageResult.ElementResult;
-
-            if (elementResult == ElementInteractionResult.Damage || elementResult == ElementInteractionResult.KO)
-            {
-                if (elementResult == ElementInteractionResult.Damage)
-                {
-                    Debug.Log($"{Name} was hit with {damage} {element} " + (piercing ? "piercing" : "non-piercing") + " damage!");
-
-                    //If the entity took damage during their sequence, it's an interruption, and this event should not occur
-                    if (damage > 0 && (IsTurn == false || PreviousAction?.MoveSequence.InSequence == false))
-                    {
-                        BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage,
-                            new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                            new DamagedBattleEvent(this));
-                    }
-
-                    //Lose HP
-                    LoseHP(damage);
-                }
-                //Kill the entity now on an instant KO
-                else if (elementResult == ElementInteractionResult.KO)
-                {
-                    Debug.Log($"{Name} was instantly KO'd from {element} because it has a {nameof(WeaknessTypes.KO)} weakness");
-
-                    Die();
-                }
-            }
-            //Heal the entity
-            else if (elementResult == ElementInteractionResult.Heal)
-            {
-                Debug.Log($"{Name} was healed for {damage} HP because it has a {nameof(ResistanceTypes.Heal)} resistance to Element {element}");
-
-                //Heal the damage
-                HealHP(damage);
-            }
-
-            //Inflict Statuses if the entity isn't dead
-            if (IsDead == false && statusesInflicted != null)
-            {
-                for (int i = 0; i < statusesInflicted.Length; i++)
-                {
-                    EntityProperties.AfflictStatus(statusesInflicted[i].Status, true);
-                }
-            }*/
-
             int damage = damageResult.TotalDamage;
             Elements element = damageResult.DamageElement;
 

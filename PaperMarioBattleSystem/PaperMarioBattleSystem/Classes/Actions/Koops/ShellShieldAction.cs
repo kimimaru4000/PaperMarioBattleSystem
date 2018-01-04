@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using static PaperMarioBattleSystem.ActionCommandGlobals;
 
 namespace PaperMarioBattleSystem
 {
@@ -35,33 +36,22 @@ namespace PaperMarioBattleSystem
             actionCommand = new ShellShieldCommand(MoveSequence, BarScale, MaxBarVal, CommandTime, CursorTime, GetCommandRangeData());
         }
 
-        private ShellShieldCommand.BarRangeData[] GetCommandRangeData()
+        private ActionCommandGlobals.BarRangeData[] GetCommandRangeData()
         {
             //Scale them by the max bar value so it works for any value
-            return new ShellShieldCommand.BarRangeData[]
+            return new BarRangeData[]
             {
-                new ShellShieldCommand.BarRangeData(0, (MaxBarVal * .2f) + 1, 2, ActionCommand.CommandRank.Nice, Color.Blue),
-                new ShellShieldCommand.BarRangeData((MaxBarVal * .8f) + 1, (MaxBarVal + 1), 2, ActionCommand.CommandRank.Nice, Color.Blue),
+                new BarRangeData(0, (MaxBarVal * .2f) + 1, 2, ActionCommand.CommandRank.Nice, Color.Blue),
+                new BarRangeData((MaxBarVal * .8f) + 1, (MaxBarVal + 1), 2, ActionCommand.CommandRank.Nice, Color.Blue),
 
-                new ShellShieldCommand.BarRangeData((MaxBarVal * .2f) + 1, (MaxBarVal * .35f) + 1, 4, ActionCommand.CommandRank.Nice, Color.DarkBlue),
-                new ShellShieldCommand.BarRangeData((MaxBarVal * .65f) + 1, (MaxBarVal * .8f) + 1, 4, ActionCommand.CommandRank.Nice, Color.DarkBlue),
+                new BarRangeData((MaxBarVal * .2f) + 1, (MaxBarVal * .35f) + 1, 4, ActionCommand.CommandRank.Nice, Color.DarkBlue),
+                new BarRangeData((MaxBarVal * .65f) + 1, (MaxBarVal * .8f) + 1, 4, ActionCommand.CommandRank.Nice, Color.DarkBlue),
 
-                new ShellShieldCommand.BarRangeData((MaxBarVal * .35f) + 1, (MaxBarVal * .45f) + 1, 6, ActionCommand.CommandRank.Good, Color.DarkRed),
-                new ShellShieldCommand.BarRangeData((MaxBarVal * .55f) + 1, (MaxBarVal * .65f) + 1, 6, ActionCommand.CommandRank.Good, Color.DarkRed),
+                new BarRangeData((MaxBarVal * .35f) + 1, (MaxBarVal * .45f) + 1, 6, ActionCommand.CommandRank.Good, Color.DarkRed),
+                new BarRangeData((MaxBarVal * .55f) + 1, (MaxBarVal * .65f) + 1, 6, ActionCommand.CommandRank.Good, Color.DarkRed),
 
-                new ShellShieldCommand.BarRangeData((MaxBarVal * .45f) + 1, (MaxBarVal * .55f) + 1, 8, ActionCommand.CommandRank.Great, Color.Orange)
+                new BarRangeData((MaxBarVal * .45f) + 1, (MaxBarVal * .55f) + 1, 8, ActionCommand.CommandRank.Great, Color.Orange)
             };
-
-            //new ShellShieldCommand.BarRangeData(0, 21, 2, ActionCommand.CommandRank.Nice, Color.Blue),
-            //    new ShellShieldCommand.BarRangeData(80, 101, 2, ActionCommand.CommandRank.Nice, Color.Blue),
-            //
-            //    new ShellShieldCommand.BarRangeData(21, 36, 4, ActionCommand.CommandRank.Nice, Color.DarkBlue),
-            //    new ShellShieldCommand.BarRangeData(65, 80, 4, ActionCommand.CommandRank.Nice, Color.DarkBlue),
-            //
-            //    new ShellShieldCommand.BarRangeData(36, 45, 6, ActionCommand.CommandRank.Nice, Color.DarkRed),
-            //    new ShellShieldCommand.BarRangeData(56, 65, 6, ActionCommand.CommandRank.Nice, Color.DarkRed),
-            //
-            //    new ShellShieldCommand.BarRangeData(45, 56, 8, ActionCommand.CommandRank.Great, Color.Orange)
         }
     }
 }

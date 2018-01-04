@@ -60,6 +60,7 @@
     <Compile Include="Classes\Actions\ActionCommands\MashButtonRangeCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\MultiButtonCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\PowerLiftCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\RallyWinkCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ShellShieldCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\SuperguardCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\SweetTreatCommand.cs" />

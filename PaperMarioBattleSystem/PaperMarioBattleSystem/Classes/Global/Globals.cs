@@ -1547,6 +1547,56 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Defines the range in a bar and the value and CommandRank associated with that range.
+        /// </summary>
+        public struct BarRangeData
+        {
+            /// <summary>
+            /// The start range on the bar. This is inclusive.
+            /// </summary>
+            public float StartBarVal;
+
+            /// <summary>
+            /// The end range on the bar. This is exclusive.
+            /// </summary>
+            public float EndBarVal;
+
+            /// <summary>
+            /// The value associated with the range.
+            /// </summary>
+            public int Value;
+
+            /// <summary>
+            /// The CommandRank associated with the range.
+            /// </summary>
+            public ActionCommand.CommandRank Rank;
+
+            /// <summary>
+            /// The Color of the segment of the bar in this range.
+            /// </summary>
+            public Color SegmentColor;
+
+            public BarRangeData(float startBarVal, float endBarVal, int value, ActionCommand.CommandRank rank, Color segmentColor)
+            {
+                StartBarVal = startBarVal;
+                EndBarVal = endBarVal;
+                Value = value;
+                Rank = rank;
+                SegmentColor = segmentColor;
+            }
+
+            /// <summary>
+            /// Tells if a value is in the bar's range.
+            /// </summary>
+            /// <param name="value">The value to test.</param>
+            /// <returns>true if <paramref name="value"/> is greater than or equal to StartBarVal and less than EndBarVal.</returns>
+            public bool IsValueInRange(float value)
+            {
+                return (value >= StartBarVal && value < EndBarVal);
+            }
+        }
+
         #endregion
     }
 

@@ -81,8 +81,13 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    //Play the wink animation, add the heart (and particles at a later time), and play the sound
+                    //Play the wink animation, add the heart (and particles at a later time), play the sound, and show the Command Rank result
                     User.AnimManager.PlayAnimation(AnimationGlobals.GoombellaBattleAnimations.WinkName, true);
+
+                    if (HighestCommandRank != ActionCommand.CommandRank.None)
+                    {
+                        ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
+                    }
 
                     CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.GoombellaBattleAnimations.WinkName);
                     break;
@@ -92,8 +97,11 @@ namespace PaperMarioBattleSystem
                     break;
                 case 2:
                     //Subtract the used turn count by one to give another turn
-                    //NOTE: Confirm this will work by trying it in TTYD when Mario is immobile in some way
-                    EntitiesAffected[0].SetTurnsUsed(EntitiesAffected[0].TurnsUsed - 1);
+                    //This shouldn't work if the entity is immobile in some way (Ex. Stop, Frozen, etc.), so check for it first
+                    if (EntitiesAffected[0].MaxTurns > 0)
+                    {
+                        EntitiesAffected[0].SetTurnsUsed(EntitiesAffected[0].TurnsUsed - 1);
+                    }
 
                     //Show the message
                     BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Message,

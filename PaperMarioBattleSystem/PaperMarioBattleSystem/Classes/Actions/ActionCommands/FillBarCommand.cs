@@ -31,15 +31,21 @@ namespace PaperMarioBattleSystem
         protected FillBarCommand(IActionCommandHandler commandAction, double maxBarValue) : base(commandAction)
         {
             MaxBarValue = maxBarValue;
-
-            BarImage = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
         }
 
         public override void StartInput(params object[] values)
         {
             base.StartInput(values);
 
+            BarImage = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
             CurBarValue = 0d;
+        }
+
+        public override void EndInput()
+        {
+            base.EndInput();
+
+            BarImage = null;
         }
 
         protected void FillBar(double amount)

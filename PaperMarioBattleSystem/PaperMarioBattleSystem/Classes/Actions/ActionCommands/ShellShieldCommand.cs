@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using static PaperMarioBattleSystem.ActionCommandGlobals;
 
 namespace PaperMarioBattleSystem
 {
@@ -113,7 +114,7 @@ namespace PaperMarioBattleSystem
                     BarRangeData rangeData = BarRanges[i];
 
                     //Check for the range
-                    if (CurBarVal >= rangeData.StartBarVal && CurBarVal < rangeData.EndBarVal)
+                    if (rangeData.IsValueInRange(CurBarVal) == true)
                     {
                         //Send the response and rank, and complete with a Success
                         SendResponse(rangeData.Value);
@@ -165,46 +166,6 @@ namespace PaperMarioBattleSystem
                     Vector2 pos = new Vector2(drawPos.X + (barRange.StartBarVal * barValScaleFactor), drawPos.Y + 5f);
                     SpriteRenderer.Instance.Draw(Box, pos, null, barRange.SegmentColor, 0f, Vector2.Zero, scale, false, false, .41f, true);
                 }
-            }
-        }
-
-        /// <summary>
-        /// Defines the range in a bar and the value and CommandRank associated with that range.
-        /// </summary>
-        public struct BarRangeData
-        {
-            /// <summary>
-            /// The start range on the bar. This is inclusive.
-            /// </summary>
-            public float StartBarVal;
-
-            /// <summary>
-            /// The end range on the bar. This is exclusive.
-            /// </summary>
-            public float EndBarVal;
-
-            /// <summary>
-            /// The value associated with the range.
-            /// </summary>
-            public int Value;
-            
-            /// <summary>
-            /// The CommandRank associated with the range.
-            /// </summary>
-            public CommandRank Rank;
-
-            /// <summary>
-            /// The Color of the segment of the bar in this range.
-            /// </summary>
-            public Color SegmentColor;
-
-            public BarRangeData(float startBarVal, float endBarVal, int value, CommandRank rank, Color segmentColor)
-            {
-                StartBarVal = startBarVal;
-                EndBarVal = endBarVal;
-                Value = value;
-                Rank = rank;
-                SegmentColor = segmentColor;
             }
         }
     }

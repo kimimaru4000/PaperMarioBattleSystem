@@ -190,6 +190,11 @@ namespace PaperMarioBattleSystem
                     //ShouldTakeScreenshot = true;
                     TakeScreenshot();
                 }
+                else if (Input.GetKeyDown(Keys.D, DebugKeyboard))
+                {
+                    //Log dump
+                    DumpLogs();
+                }
             }
 
             //Camera controls
@@ -425,6 +430,27 @@ namespace PaperMarioBattleSystem
             return screenshot;
         }
 
+        public static void DumpLogs()
+        {
+            string initFileName = "Log Dump " + DebugGlobals.GetFileFriendlyTimeStamp();
+
+            //Open the file dialogue so you can name the file and place it wherever you want
+            System.Windows.Forms.SaveFileDialog dialogue = new System.Windows.Forms.SaveFileDialog();
+            dialogue.FileName = initFileName;
+            dialogue.Filter = "TXT (*.txt)|*.txt";
+
+            if (dialogue.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                //Dump the logs to the file
+                using (StreamWriter writer = File.CreateText(dialogue.FileName))
+                {
+                    writer.Write($"Log Dump:\n{Debug.LogDump.ToString()}");
+
+                    writer.Flush();
+                }
+            }
+        }
+
         /// <summary>
         /// Tells whether a set of DebugLogTypes has any of the flags in another DebugLogTypes set.
         /// </summary>
@@ -600,13 +626,24 @@ namespace PaperMarioBattleSystem
             /// <returns>A string with the full name of the crash log file.</returns>
             public static string GetCrashLogPath()
             {
-                string time = DateTime.Now.ToUniversalTime().ToString();
-                time = time.Replace(':', '-');
-                time = time.Replace('/', '-');
+                string time = GetFileFriendlyTimeStamp();
 
                 string path = $"{System.IO.Directory.GetCurrentDirectory()}\\PMBattleSystem Crash Log - {time}.txt";
 
                 return path;
+            }
+
+            /// <summary>
+            /// Returns a file friendly time stamp of the current time.
+            /// </summary>
+            /// <returns>A string representing current time.</returns>
+            public static string GetFileFriendlyTimeStamp()
+            {
+                string time = DateTime.Now.ToUniversalTime().ToString();
+                time = time.Replace(':', '-');
+                time = time.Replace('/', '-');
+
+                return time;
             }
         }
 

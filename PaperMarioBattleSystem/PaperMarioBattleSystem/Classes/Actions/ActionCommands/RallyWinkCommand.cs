@@ -108,14 +108,22 @@ namespace PaperMarioBattleSystem
             FillBar(-DecelerationRate, true);
 
             //Check if you pressed the correct button
-            if (Input.GetKeyDown(CurButton) == true)
+            if (IsBarFull == false)
             {
-                //If so, fill up the bar by the correct amount
-                FillBar(AmountPerPress, true);
+                if (Input.GetKeyDown(CurButton) == true)
+                {
+                    //If so, fill up the bar by the correct amount
+                    FillBar(AmountPerPress, true);
 
-                //If the bar is full, the bar flashes color and deceleration no longer applies
-                if (IsBarFull == true)
-                    DecelerationRate = 0d;
+                    //If the bar is full, the bar flashes color and deceleration no longer applies
+                    if (IsBarFull == true)
+                        DecelerationRate = 0d;
+                }
+            }
+            else
+            {
+                //Interpolate the color of the bar
+                BarFillColor = Color.Lerp(Color.White, Color.Gray, (float)((ElapsedCommandTime % 300f) / 300f));
             }
 
             ElapsedCommandTime += Time.ElapsedMilliseconds;
@@ -137,6 +145,7 @@ namespace PaperMarioBattleSystem
             Vector2 startPos = new Vector2(250, 200);
 
             DrawBar(startPos, BarScale);
+            DrawBarFill(startPos + new Vector2(0f, 5f), new Vector2(BarScale.X, 18f));
 
             //Show the buttons you're supposed to press, with the current button highlighted
             for (int i = 0; i < ButtonsToPress.Length; i++)

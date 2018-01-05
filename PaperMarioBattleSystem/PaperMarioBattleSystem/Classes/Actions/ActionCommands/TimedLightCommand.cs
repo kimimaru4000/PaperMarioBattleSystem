@@ -65,7 +65,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private bool PressedForLight = false;
 
-        protected Texture2D CircleImage = null;
+        protected CroppedTexture2D UnlitLight = null;
+        protected CroppedTexture2D LitLight = null;
 
         protected bool WithinRange
         {
@@ -98,7 +99,18 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput(values);
 
-            CircleImage = AssetManager.Instance.LoadRawTexture2D($"UI/Circle.png");
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
+
+            UnlitLight = new CroppedTexture2D(battleGFX, new Rectangle(390, 298, 44, 44));
+            LitLight = new CroppedTexture2D(battleGFX, new Rectangle(341, 297, 44, 46));
+        }
+
+        public override void EndInput()
+        {
+            base.EndInput();
+
+            UnlitLight = null;
+            LitLight = null;
         }
 
         protected void SpaceOutLightsEvenly()
@@ -195,32 +207,43 @@ namespace PaperMarioBattleSystem
 
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 100), color, .7f);
 
-            Vector2 barScale = new Vector2(100f, 30f);
+            Vector2 barScale = new Vector2(100f, 1f);
             Vector2 startPos = new Vector2(250, 150);
             Vector2 barStartPos = new Vector2(startPos.X, startPos.Y - (barScale.Y / 2f));
 
             DrawBar(startPos, barScale);
+            DrawBarFill(startPos + new Vector2(0f, 5f), new Vector2(barScale.X, 18f));
 
             for (int i = 0; i < NumLights; i++)
             {
-                Color circleColor = Color.Black;
+                CroppedTexture2D light = UnlitLight;
 
-                //Draw the circle as white if the bar is in or past the light
+                //Draw the light as lit if the bar is in or past the light
                 if (CurLight > i || (CurLight == i && WithinRange == true))
-                    circleColor = Color.White;
+                    light = LitLight;
 
-                //Get the value of the light on the bar and use that to find the position
-                //Ex. MaxBarValue = 4000, barScale.X = 100, and a light is on 1000. 1000/4000 = 25, so the light is at 1/4 the bar length
-                double halvedLightRange = LightRange / 2d;
-                double lightCenterBarVal = LightRanges[i].StartRange + halvedLightRange;
-                double relativeBarVal = lightCenterBarVal / MaxBarValue;
+                //Get the start and end ranges
+                float startScale = (float)(LightRanges[i].StartRange / MaxBarValue) * barScale.X;
+                float endScale = (float)(LightRanges[i].EndRange / MaxBarValue) * barScale.X;
 
-                float lightPosX = barScale.X * (float)relativeBarVal;
+                Vector2 lightStartPos = startPos + new Vector2((int)startScale, 0f);
+                Vector2 lightEndPos = startPos + new Vector2((int)endScale, 0f);
 
-                Vector2 lightPos = new Vector2(startPos.X + lightPosX, startPos.Y);
-                Vector2 lightScale = new Vector2(.5f, .5f);//new Vector2((float)(LightRange / MaxBarValue));
+                //We know the start and end positions, so get the difference for the size
+                int xDiff = (int)(lightEndPos.X - lightStartPos.X);
 
-                SpriteRenderer.Instance.Draw(CircleImage, lightPos, null, circleColor, 0f, CircleImage.GetCenterOrigin(), lightScale, false, false, .8f, true);
+                //Get the midpoint
+                Vector2 lightMidPos = new Vector2(lightStartPos.X + (xDiff / 2), lightStartPos.Y + 6f);
+
+                //If the asset is 44x44, the range was 44, and the bar scale was 100, it would be 1
+                //The asset should fit inside xDiff; that's the size it should be
+                //diff / assetSize
+                Vector2 lightScale = new Vector2(xDiff / (float)light.SourceRect.Value.Width);
+
+                //Debug.DebugDrawLine(lightStartPos, lightStartPos + new Vector2(0, 24f), Color.White, .9f, 1, true);
+                //Debug.DebugDrawLine(lightEndPos, lightEndPos + new Vector2(0, 24f), Color.White, .9f, 1, true);
+
+                SpriteRenderer.Instance.Draw(light.Tex, lightMidPos, light.SourceRect, Color.White, 0f, new Vector2(.5f, 0), lightScale, false, false, .8f, true);
             }
         }
 

@@ -24,7 +24,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected double MaxBarValue = 100d;
 
-        protected Texture2D BarImage = null;
+        protected CroppedTexture2D BarEnd = null;
+        protected CroppedTexture2D BarMiddle = null;
+        protected CroppedTexture2D BarFill = null;
+        protected Color BarFillColor = Color.White;
 
         protected bool IsBarFull => (CurBarValue >= MaxBarValue);
 
@@ -37,7 +40,12 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput(values);
 
-            BarImage = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
+
+            BarEnd = new CroppedTexture2D(battleGFX, new Rectangle(514, 245, 6, 28));
+            BarMiddle = new CroppedTexture2D(battleGFX, new Rectangle(530, 245, 1, 28));
+            BarFill = new CroppedTexture2D(battleGFX, new Rectangle(541, 255, 1, 1));
+
             CurBarValue = 0d;
         }
 
@@ -45,7 +53,11 @@ namespace PaperMarioBattleSystem
         {
             base.EndInput();
 
-            BarImage = null;
+            BarEnd = null;
+            BarMiddle = null;
+            BarFill = null;
+
+            BarFillColor = Color.White;
         }
 
         protected void FillBar(double amount)
@@ -78,8 +90,30 @@ namespace PaperMarioBattleSystem
             double progressScale = CurBarValue / maxValue;
             float progressDisplay = (float)progressScale * barSize.X;
 
-            SpriteRenderer.Instance.Draw(BarImage, startPos, null, Color.Black, 0f, BarImage.GetCenterOrigin(), barSize, false, false, .7f, true);
-            SpriteRenderer.Instance.Draw(BarImage, startPos, null, Color.White, 0f, BarImage.GetCenterOrigin(), new Vector2(Math.Min(progressDisplay, barSize.X), barSize.Y), false, false, .71f, true);
+            //Draw the middle
+            SpriteRenderer.Instance.Draw(BarMiddle.Tex, startPos, BarMiddle.SourceRect, Color.White, 0f, Vector2.Zero, new Vector2(barSize.X, barSize.Y), false, false, .7f, true);
+
+            //Draw the ends
+            SpriteRenderer.Instance.Draw(BarEnd.Tex, startPos - new Vector2(BarEnd.SourceRect.Value.Width, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, false, false, .7f, true);
+            SpriteRenderer.Instance.Draw(BarEnd.Tex, startPos + new Vector2(barSize.X, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, true, false, .7f, true);
+
+            //SpriteRenderer.Instance.Draw(BarImage, startPos, null, Color.Black, 0f, BarImage.GetCenterOrigin(), barSize, false, false, .7f, true);
+            //SpriteRenderer.Instance.Draw(BarImage, startPos, null, Color.White, 0f, BarImage.GetCenterOrigin(), new Vector2(Math.Min(progressDisplay, barSize.X), barSize.Y), false, false, .71f, true);
+        }
+
+        protected void DrawBarFill(Vector2 startPos, Vector2 barSize, double? maxValueOverride = null)
+        {
+            //Use the maxValueOverride for drawing the fill if it's not null. Otherwise, use the MaxBarValue
+            double maxValue = maxValueOverride.HasValue ? maxValueOverride.Value : MaxBarValue;
+
+            double progressScale = CurBarValue / maxValue;
+            float progressDisplay = (float)progressScale * barSize.X;
+
+            //Regardless of MaxBarVal, needs to be rendered within the range
+            float barValScaleFactor = (float)(barSize.X / maxValue);
+
+            //Draw the fill
+            SpriteRenderer.Instance.Draw(BarFill.Tex, startPos, BarFill.SourceRect, BarFillColor, 0f, Vector2.Zero, new Vector2(progressDisplay, barSize.Y), false, false, .71f, true);
         }
     }
 }

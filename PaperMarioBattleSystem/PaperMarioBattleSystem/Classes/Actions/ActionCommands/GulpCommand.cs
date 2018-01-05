@@ -113,12 +113,13 @@ namespace PaperMarioBattleSystem
 
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 100), color, .7f);
 
-            Vector2 barScale = new Vector2(100f, 30f);
+            Vector2 barScale = new Vector2(100f, 1f);
             Vector2 startPos = new Vector2(250, 150);
             Vector2 barStartPos = new Vector2(startPos.X, startPos.Y - (barScale.Y / 2f));
 
             DrawBar(barStartPos, barScale, SuccessStartValue);
-            
+            DrawBarFill(barStartPos + new Vector2(0f, 5f), new Vector2(barScale.X, 18f), SuccessStartValue);
+
             SpriteRenderer.Instance.Draw(CircleImage, new Vector2(startPos.X + 100f, startPos.Y), null, circleColor, 0f, CircleImage.GetOrigin(0f, .5f), 2f, false, false, .8f, true);
         }
     }

@@ -26,7 +26,10 @@ namespace PaperMarioBattleSystem
             CubicInOut,
             ExponentialIn,
             ExponentialOut,
-            ExponentialInOut
+            ExponentialInOut,
+            SineIn,
+            SineOut,
+            SineInOut
         }
 
         /// <summary>
@@ -103,6 +106,21 @@ namespace PaperMarioBattleSystem
             return (.5d * -Math.Pow(2, (-20 * time) + 10)) + 1;
         }
 
+        private static double EaseInSineTime(double time)
+        {
+            return Math.Sin((time - 1) * UtilityGlobals.HalfPI) + 1;
+        }
+
+        private static double EaseOutSineTime(double time)
+        {
+            return Math.Sin(time * UtilityGlobals.HalfPI);
+        }
+
+        private static double EaseInOutSineTime(double time)
+        {
+            return (.5d * (1 - Math.Cos(time * Math.PI)));
+        }
+
         #endregion
 
         /// <summary>
@@ -124,6 +142,9 @@ namespace PaperMarioBattleSystem
                 case InterpolationTypes.ExponentialIn: return EaseInExponentialTime;
                 case InterpolationTypes.ExponentialOut: return EaseOutExponentialTime;
                 case InterpolationTypes.ExponentialInOut: return EaseInOutExponentialTime;
+                case InterpolationTypes.SineIn: return EaseInSineTime;
+                case InterpolationTypes.SineOut: return EaseOutSineTime;
+                case InterpolationTypes.SineInOut: return EaseInOutSineTime;
                 default: return null;
             }
         }

@@ -13,6 +13,7 @@ namespace PaperMarioBattleSystem
     public static class UtilityGlobals
     {
         public static readonly double TwoPI = (Math.PI * 2d);
+        public static readonly double HalfPI = (Math.PI / 2d);
 
         public static int Clamp(int value, int min, int max) => (value < min) ? min : (value > max) ? max : value;
         public static float Clamp(float value, float min, float max) => (value < min) ? min : (value > max) ? max : value;

@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
                 DefensiveActionTypes.Guard | DefensiveActionTypes.Superguard, DamageEffects.None);
 
             SetMoveSequence(new RallyWinkSequence(this));
-            actionCommand = new RallyWinkCommand(MoveSequence, new Keys[] { Keys.Z, Keys.X }, 100d, 4000d, 1000d, 10d, .2d, new Vector2(200f, 40f),
+            actionCommand = new RallyWinkCommand(MoveSequence, new Keys[] { Keys.Z, Keys.X }, 100d, 4000d, 1000d, 10d, .2d, new Vector2(200f, 1f),
                 new ActionCommandGlobals.BarRangeData(66f, 101f, 1, ActionCommand.CommandRank.Nice, Color.AliceBlue));
         }
     }

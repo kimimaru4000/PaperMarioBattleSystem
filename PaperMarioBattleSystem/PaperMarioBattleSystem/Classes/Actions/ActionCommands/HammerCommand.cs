@@ -21,6 +21,9 @@ namespace PaperMarioBattleSystem
 
         protected Keys ButtonToHold = Keys.Left;
 
+        protected CroppedTexture2D LightBarEnd = null;
+        protected CroppedTexture2D LightBarMiddle = null;
+
         public HammerCommand(IActionCommandHandler commandAction, int maxLights, double timeBetweenLights) : base(commandAction, maxLights, timeBetweenLights)
         {
 
@@ -33,6 +36,19 @@ namespace PaperMarioBattleSystem
             LightsFilled = 0;
             PrevLightTime = (float)Time.ActiveMilliseconds + TimeBetweenLights;
             PrevEndTime = (float)Time.ActiveMilliseconds + EndTime;
+
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
+
+            LightBarEnd = new CroppedTexture2D(battleGFX, new Rectangle(795, 14, 15, 22));
+            LightBarMiddle = new CroppedTexture2D(battleGFX, new Rectangle(813, 14, 1, 22));
+        }
+
+        public override void EndInput()
+        {
+            base.EndInput();
+
+            LightBarEnd = null;
+            LightBarMiddle = null;
         }
 
         protected override void ReadInput()
@@ -97,7 +113,18 @@ namespace PaperMarioBattleSystem
 
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 100), color, .7f);
 
-            DrawLights(new Vector2(250, 150), 0, true);
+            Vector2 startPos = new Vector2(250, 180);
+            Vector2 barStartPos = startPos + new Vector2(-30, 0f);
+
+            Vector2 barScale = new Vector2(130, 1f);
+
+            //Draw the bar
+            SpriteRenderer.Instance.Draw(LightBarEnd.Tex, barStartPos, LightBarEnd.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), Vector2.One, false, false, .69f, true);
+            SpriteRenderer.Instance.Draw(LightBarMiddle.Tex, barStartPos + new Vector2((int)(LightBarEnd.WidthHeightToVector2().X / 2), 0f), LightBarMiddle.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), barScale, false, false, .69f, true);
+            SpriteRenderer.Instance.Draw(LightBarEnd.Tex, barStartPos + new Vector2(barScale.X + (int)(LightBarEnd.WidthHeightToVector2().X - 1), 0f), LightBarEnd.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), Vector2.One, true, false, .69f, true);
+
+            //Draw the lights
+            DrawLights(startPos, 0, true);
         }
     }
 }

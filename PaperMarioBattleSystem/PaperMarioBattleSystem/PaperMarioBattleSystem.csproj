@@ -220,7 +220,9 @@
     <Compile Include="Classes\Collectibles\Badges\RunawayPayBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SimplifierBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SlowGoBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\SpeedySpinBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SpikeShieldBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\SpinAttackBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\TornadoJumpBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\TripleDipBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\UnsimplifierBadge.cs" />

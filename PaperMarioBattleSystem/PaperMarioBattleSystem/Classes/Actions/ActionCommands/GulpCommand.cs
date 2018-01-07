@@ -37,7 +37,8 @@ namespace PaperMarioBattleSystem
 
         private bool StartedHolding = false;
 
-        private Texture2D CircleImage = null;
+        private CroppedTexture2D UnlitLight = null;
+        private CroppedTexture2D LitLight = null;
 
         private bool WithinRange => (CurBarValue >= SuccessStartValue && CurBarValue < MaxBarValue);
 
@@ -51,11 +52,22 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput(values);
 
-            CircleImage = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Circle.png");
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
+
+            UnlitLight = new CroppedTexture2D(battleGFX, new Rectangle(390, 298, 44, 44));
+            LitLight = new CroppedTexture2D(battleGFX, new Rectangle(341, 297, 44, 46));
 
             SuccessStartValue = MaxBarValue - SuccessRange;
 
             EndTime = Time.ActiveMilliseconds + MaxBarValue;
+        }
+
+        public override void EndInput()
+        {
+            base.EndInput();
+
+            UnlitLight = null;
+            LitLight = null;
         }
 
         protected override void ReadInput()
@@ -88,7 +100,7 @@ namespace PaperMarioBattleSystem
             {
                 StartedHolding = true;
 
-                FillBar(Time.ElapsedMilliseconds * SpeedScale);
+                FillBar(Time.ElapsedMilliseconds * SpeedScale, true);
                 //If the button was held too long, it's a failure
                 if (CurBarValue > MaxBarValue)
                 {
@@ -103,12 +115,12 @@ namespace PaperMarioBattleSystem
 
             string text = "NO!";
             Color color = Color.Red;
-            Color circleColor = Color.Black;
+            CroppedTexture2D light = UnlitLight;
             if (WithinRange == true)
             {
                 text = "OKAY!";
                 color = Color.Green;
-                circleColor = Color.White;
+                light = LitLight;
             }
 
             SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 100), color, .7f);
@@ -117,10 +129,19 @@ namespace PaperMarioBattleSystem
             Vector2 startPos = new Vector2(250, 150);
             Vector2 barStartPos = new Vector2(startPos.X, startPos.Y - (barScale.Y / 2f));
 
+            //Get the start and end ranges
+            float startScale = (float)(SuccessStartValue / MaxBarValue) * barScale.X;
+            float endScale = barScale.X;
+
+            Vector2 lightStartPos = startPos + new Vector2((int)startScale, 0f);
+            Vector2 lightEndPos = startPos + new Vector2((int)endScale, 0f);
+
+            int diff = (int)(lightEndPos.X - startPos.X);
+
             DrawBar(barStartPos, barScale, SuccessStartValue);
             DrawBarFill(barStartPos + new Vector2(0f, 5f), new Vector2(barScale.X, 18f), SuccessStartValue);
 
-            SpriteRenderer.Instance.Draw(CircleImage, new Vector2(startPos.X + 100f, startPos.Y), null, circleColor, 0f, CircleImage.GetOrigin(0f, .5f), 2f, false, false, .8f, true);
+            SpriteRenderer.Instance.Draw(light.Tex, lightStartPos + new Vector2((diff / 2) - BarEnd.WidthHeightToVector2().X, 12f), light.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), 1f, false, false, .8f, true);
         }
     }
 }

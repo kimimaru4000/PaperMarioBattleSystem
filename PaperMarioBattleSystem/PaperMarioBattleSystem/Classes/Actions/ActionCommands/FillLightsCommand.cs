@@ -30,7 +30,8 @@ namespace PaperMarioBattleSystem
         protected int LightsFilled = 0;
         protected double PrevLightTime = 0d;
 
-        protected Texture2D CircleImage = null;
+        protected CroppedTexture2D UnlitLight = null;
+        protected CroppedTexture2D LitLight = null;
 
         public bool AllLightsFilled => (LightsFilled == MaxLights);
 
@@ -44,7 +45,18 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput(values);
 
-            CircleImage = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Circle.png");
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
+
+            UnlitLight = new CroppedTexture2D(battleGFX, new Rectangle(390, 298, 44, 44));
+            LitLight = new CroppedTexture2D(battleGFX, new Rectangle(341, 297, 44, 46));
+        }
+
+        public override void EndInput()
+        {
+            base.EndInput();
+
+            UnlitLight = null;
+            LitLight = null;
         }
 
         public void FillNextLight()
@@ -58,18 +70,28 @@ namespace PaperMarioBattleSystem
             //Make sure this distance is always positive
             distBetweenLights = Math.Abs(distBetweenLights);
 
+            //Get the asset size so the lights can be spaced nicely
+            Vector2 assetSize = UnlitLight.WidthHeightToVector2();
+
+            //Go through all the lights
             for (int i = 0; i < MaxLights; i++)
             {
-                Vector2 newpos = startPos + new Vector2((i * CircleImage.Width) + (i * distBetweenLights), 0);
-                float scale = 1f;
+                Vector2 newpos = startPos;
+                float baseScale = .5f;
+                float newScale = baseScale;
+
+                //Check if the last light should be big and enlarge it and offset it if so
                 if (lastLightBig == true && i == (MaxLights - 1))
                 {
-                    newpos += new Vector2(CircleImage.Width / 2, -(CircleImage.Height / 2));
-                    scale = 2f;
+                    newpos += new Vector2(assetSize.X * (baseScale / 2f), -assetSize.Y * (baseScale / 2f));
+                    newScale = 1f;
                 }
-                Color circleColor = i >= LightsFilled ? Color.Black : Color.White;
 
-                SpriteRenderer.Instance.Draw(CircleImage, newpos, null, circleColor, 0f, CircleImage.GetCenterOrigin(), scale, false, false, .7f, true);
+                newpos += new Vector2((i * (baseScale * assetSize.X)) + (i * (distBetweenLights * baseScale)), 0);
+
+                CroppedTexture2D light = (i >= LightsFilled) ? UnlitLight : LitLight;
+
+                SpriteRenderer.Instance.Draw(light.Tex, newpos, light.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), newScale, false, false, .7f, true);
             }
         }
     }

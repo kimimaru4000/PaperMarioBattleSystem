@@ -146,6 +146,9 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PiercingBlow, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DDownJump, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
 
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Jumpman, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Hammerman, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+
             //MStats.HammerLevel = EquipmentGlobals.HammerLevels.Super;
             //MStats.BootLevel = EquipmentGlobals.BootLevels.Super;
 
@@ -217,7 +220,7 @@ namespace PaperMarioBattleSystem
         public override void Draw()
         {
             base.Draw();
-            
+
             //if (IsDead) return;
             //Rectangle rect = new Rectangle(228, 918, 29, 51);
             //SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), true, .1f);

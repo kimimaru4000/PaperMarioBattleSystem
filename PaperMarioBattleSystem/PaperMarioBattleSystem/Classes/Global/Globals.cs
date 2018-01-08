@@ -2481,6 +2481,7 @@ namespace PaperMarioBattleSystem
         public const string SpriteRoot = "Sprites";
         public const string UIRoot = "UI";
         public const string BattleGFX = UIRoot + "/Battle/BattleGFX";
+        public const string ShaderRoot = "Shaders/";
 
         public const string LuigiPaletteExtension = "LEmblem";
         public const string WarioPaletteExtension = "WEmblem";

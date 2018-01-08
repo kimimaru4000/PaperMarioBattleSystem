@@ -191,6 +191,7 @@
     <Compile Include="Classes\Collectibles\Badges\FPDrainBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\FPPlusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\GroupFocusBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\HammermanBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\HeadRattleBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\HealthStateBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\HPDrainBadge.cs" />
@@ -200,6 +201,7 @@
     <Compile Include="Classes\Collectibles\Badges\IcePowerBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\IceSmashBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ISpyBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\JumpmanBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LastStandBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LEmblemBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LuckyDayBadge.cs" />
@@ -430,6 +432,9 @@
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Shaders\Poison.fx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Sprites\Characters\Bow.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

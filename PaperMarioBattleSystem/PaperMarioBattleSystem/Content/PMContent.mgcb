@@ -139,6 +139,12 @@
 /processorParam:Quality=Best
 /build:Audio/SFX/Switch Partner.wav
 
+#begin Shaders/Poison.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Poison.fx
+
 #begin SpriteFonts/PM Font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

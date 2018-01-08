@@ -42,12 +42,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The SpriteBatch used for drawing non-UI elements
         /// </summary>
-        private SpriteBatch spriteBatch { get; set; } = null;
+        public SpriteBatch spriteBatch { get; private set; } = null;
 
         /// <summary>
         /// The SpriteBatch used for drawing UI elements. UI is always drawn on top of non-UI elements
         /// </summary>
-        private SpriteBatch uiBatch { get; set; } = null;
+        public SpriteBatch uiBatch { get; private set; } = null;
         public GraphicsDeviceManager graphicsDeviceManager { get; private set; } = null;
 
         public Vector2 WindowSize => new Vector2(graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
@@ -103,16 +103,14 @@ namespace PaperMarioBattleSystem
             WindowSizeChangedEvent?.Invoke(newWindowSize);
         }
 
-        public void BeginDrawing()
+        public void BeginDrawing(SpriteBatch batch, SamplerState samplerState, Effect effect, Matrix? transformMatrix)
         {
-            spriteBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, null, null, null, null, /*null*/Camera.Instance.CalculateTransformation());
-            uiBatch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, SamplerState.PointClamp, null, null, null, null);
+            batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, samplerState, null, null, effect, transformMatrix);
         }
 
-        public void EndDrawing()
+        public void EndDrawing(SpriteBatch batch)
         {
-            spriteBatch.End();
-            uiBatch.End();
+            batch.End();
         }
 
         public void Draw(Texture2D texture, Vector2 position, Color color, bool flipX, bool flipY, float layer, bool uibatch = false, bool absOrigin = false)

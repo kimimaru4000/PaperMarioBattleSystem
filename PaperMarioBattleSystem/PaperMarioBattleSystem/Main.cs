@@ -143,6 +143,9 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new PiercingBlowBadge());
             Inventory.Instance.AddBadge(new DDownJumpBadge());
 
+            Inventory.Instance.AddBadge(new JumpmanBadge());
+            Inventory.Instance.AddBadge(new HammermanBadge());
+
             //Items
             Inventory.Instance.AddItem(new Mushroom());
             Inventory.Instance.AddItem(new HoneySyrup());
@@ -249,7 +252,8 @@ namespace PaperMarioBattleSystem
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            SpriteRenderer.Instance.BeginDrawing();
+            SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, null, null, Camera.Instance.CalculateTransformation());
+            SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.uiBatch, SamplerState.PointClamp, null, null);
 
             Debug.DebugDraw();
         }
@@ -284,7 +288,8 @@ namespace PaperMarioBattleSystem
         /// <param name="gameTime">Provides a snapshot of timing values</param>
         private void PostDraw(GameTime gameTime)
         {
-            SpriteRenderer.Instance.EndDrawing();
+            SpriteRenderer.Instance.EndDrawing(SpriteRenderer.Instance.spriteBatch);
+            SpriteRenderer.Instance.EndDrawing(SpriteRenderer.Instance.uiBatch);
 
             base.Draw(gameTime);
         }

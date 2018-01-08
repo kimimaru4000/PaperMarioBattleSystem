@@ -83,7 +83,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The move categories the entity cannot perform because they are disabled
         /// </summary>
-        protected readonly Dictionary<MoveCategories, bool> DisabledMoveCategories = new Dictionary<MoveCategories, bool>();
+        protected readonly Dictionary<MoveCategories, int> DisabledMoveCategories = new Dictionary<MoveCategories, int>();
 
         #region Constructor
 
@@ -1118,15 +1118,14 @@ namespace PaperMarioBattleSystem
         /// <param name="category">The type of moves to disable.</param>
         public void DisableMoveCategory(MoveCategories category)
         {
-            if (IsMoveCategoryDisabled(category) == true)
+            if (IsMoveCategoryDisabled(category) == false)
             {
-                Debug.LogWarning($"Category {category} is already disabled for {Entity.Name}!");
-                return;
+                DisabledMoveCategories.Add(category, 0);
             }
 
-            Debug.Log($"Disabled {category} moves from use for {Entity.Name}");
+            DisabledMoveCategories[category]++;
 
-            DisabledMoveCategories.Add(category, true);
+            Debug.Log($"Disabled {category} moves from use for {Entity.Name}. Total disables: {DisabledMoveCategories[category]}");
         }
 
         /// <summary>
@@ -1135,11 +1134,25 @@ namespace PaperMarioBattleSystem
         /// <param name="category">The type of moves to enable.</param>
         public void EnableMoveCategory(MoveCategories category)
         {
-            bool removed = DisabledMoveCategories.Remove(category);
-
-            if (removed == true)
+            if (DisabledMoveCategories.ContainsKey(category) == false)
             {
+                Debug.LogWarning($"{category} moves are not currently disabled for {Entity.Name}!");
+                return;
+            }
+
+            int newVal = DisabledMoveCategories[category] - 1;
+
+            DisabledMoveCategories[category] = newVal;
+            
+            if (newVal <= 0)
+            {
+                DisabledMoveCategories.Remove(category);
+
                 Debug.Log($"Enabled {category} moves for {Entity.Name} to use once again");
+            }
+            else
+            {
+                Debug.Log($"Enabled {category} moves for {Entity.Name}. Total disables remaining: {newVal}");
             }
         }
 

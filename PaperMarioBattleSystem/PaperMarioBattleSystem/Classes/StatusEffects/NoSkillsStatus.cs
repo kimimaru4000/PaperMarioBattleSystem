@@ -44,16 +44,8 @@ namespace PaperMarioBattleSystem
         public override void Refresh(StatusEffect newStatus)
         {
             //Convert the new status, then check if its category isn't already in the status' disabled dictionary
-            /*As a failsafe, also check if the category isn't already disabled (see comments in OnAfflict())*/
             NoSkillsStatus noSkills = (NoSkillsStatus)newStatus;
-            if (EntityAfflicted.EntityProperties.IsMoveCategoryDisabled(noSkills.CategoryDisabled) == true)
-            {
-                Debug.LogWarning($"{noSkills.CategoryDisabled} moves are already disabled for {EntityAfflicted.Name}. " +
-                    $"Not disabling in {nameof(NoSkillsStatus)} as they could've been disabled through other means");
-
-                return;
-            }
-
+            
             if (CategoriesDisabled.ContainsKey(noSkills.CategoryDisabled) == false)
             {
                 //Adjust the Duration to account for a new category disabled while the status is already active
@@ -74,27 +66,17 @@ namespace PaperMarioBattleSystem
                 EntityAfflicted.EntityProperties.DisableMoveCategory(noSkills.CategoryDisabled);
             }
             else
-            {
-                Debug.LogError($"{noSkills.CategoryDisabled} moves are somehow ENABLED for {EntityAfflicted.Name} but " +
-                    $"ALREADY in the {nameof(CategoryDisabled)} dictionary?! This must mean that this status was somehow Refreshed while suppressed. FIX IT!");
+            { 
+                //Display an error message if trying to disable a move category that NoSkills has already disabled
+                Debug.LogError($"Moves cannot be disabled multiple times by NoSkills. Not refreshing {noSkills.CategoryDisabled} moves' disabled duration");
             }
         }
 
         protected override void OnAfflict()
         {
-            //Check if the move category is already disabled through other means (Ex. Jumpman and Hammerman Badges)
-            //If so, don't disable it now or it'll be re-enabled later
-            /*This is a failsafe, as this check should be performed by the attack when deciding which move category to disable*/
-            if (EntityAfflicted.EntityProperties.IsMoveCategoryDisabled(CategoryDisabled) == false)
-            {
-                CategoriesDisabled.Add(CategoryDisabled, TotalDuration);
-                EntityAfflicted.EntityProperties.DisableMoveCategory(CategoryDisabled);
-            }
-            else
-            {
-                Debug.LogWarning($"{CategoryDisabled} moves are already disabled for {EntityAfflicted.Name}. " +
-                    $"Not disabling in {nameof(NoSkillsStatus)} as they could've been disabled through other means");
-            }
+            //Disable the move category
+            CategoriesDisabled.Add(CategoryDisabled, TotalDuration);
+            EntityAfflicted.EntityProperties.DisableMoveCategory(CategoryDisabled);
         }
 
         protected override void OnEnd()

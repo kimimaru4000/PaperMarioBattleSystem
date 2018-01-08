@@ -11,6 +11,20 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class UnitTests
     {
+        public static void RunInteractionUnitTests()
+        {
+            //Interaction tests
+            InteractionUnitTests.ElementOverrideInteractionUT1();
+            InteractionUnitTests.PaybackInteractionUT1();
+            InteractionUnitTests.PaybackInteractionUT2();
+            InteractionUnitTests.PaybackInteractionUT3();
+        }
+
+        public static void RunStatusUnitTests()
+        {
+            StatusUnitTests.NoSkillsTestDoubleDisable();
+        }
+
         public static class InteractionUnitTests
         {
             public static void ElementOverrideInteractionUT1()
@@ -156,6 +170,27 @@ namespace PaperMarioBattleSystem
                           $"{startString} Damage Effect(s): {interactionHolder.DamageEffect}\n" +
                           $"{startString} IsPaybackDamage: {interactionHolder.IsPaybackDamage}\n" +
                           $"{startString} Don't Damage: {interactionHolder.DontDamageEntity}\n");
+            }
+        }
+
+        public static class StatusUnitTests
+        {
+            public static void NoSkillsTestDoubleDisable()
+            {
+                Goomba goomba = new Goomba();
+                HammermanBadge hmBadge = new HammermanBadge();
+
+                goomba.EntityProperties.AfflictStatus(new NoSkillsStatus(Enumerations.MoveCategories.Jump, 3), false);
+                Debug.Assert(goomba.EntityProperties.IsMoveCategoryDisabled(Enumerations.MoveCategories.Jump));
+
+                hmBadge.Equip(goomba);
+                Debug.Assert(goomba.EntityProperties.IsMoveCategoryDisabled(Enumerations.MoveCategories.Jump));
+
+                goomba.EntityProperties.RemoveStatus(Enumerations.StatusTypes.NoSkills, false);
+                Debug.Assert(goomba.EntityProperties.IsMoveCategoryDisabled(Enumerations.MoveCategories.Jump));
+
+                hmBadge.UnEquip();
+                Debug.Assert(goomba.EntityProperties.IsMoveCategoryDisabled(Enumerations.MoveCategories.Jump) == false);
             }
         }
     }

@@ -484,6 +484,11 @@ namespace PaperMarioBattleSystem
             {
                 UnitTests.InteractionUnitTests.PaybackInteractionUT3();
             }
+            //Status unit tests
+            else if (Input.GetKeyDown(Keys.D4, DebugKeyboard))
+            {
+                UnitTests.RunStatusUnitTests();
+            }
         }
 
         #endregion

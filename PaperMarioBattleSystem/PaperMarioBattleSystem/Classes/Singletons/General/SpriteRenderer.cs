@@ -103,6 +103,20 @@ namespace PaperMarioBattleSystem
             WindowSizeChangedEvent?.Invoke(newWindowSize);
         }
 
+        /* Idea for refactoring rendering to easily support shaders:
+         * 1. Store all info in new struct (spritebatch, texture, position, sourcerect, color, etc.)
+         * 2. Add to a dictionary which has the shader as the key (null is a valid key) and a list of structs as the value
+         * 3. Handle all rendering at once with the data in the dictionary
+         * 4. Clear dictionary after finishing rendering
+         * 
+         * The idea is to batch together everything that is rendered with a particular shader.
+         * 
+         * The main concerns are:
+         *  -If one object wants to change the values of a shader for itself, the new values will be applied to all using that shader
+         *  -Potentially too much memory usage (will need to be tested)
+         *  -It's unsure how shaders will even be used yet
+         */
+
         public void BeginDrawing(SpriteBatch batch, SamplerState samplerState, Effect effect, Matrix? transformMatrix)
         {
             batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, samplerState, null, null, effect, transformMatrix);

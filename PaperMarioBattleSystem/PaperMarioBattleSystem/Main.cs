@@ -144,6 +144,8 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new DDownJumpBadge());
 
             Inventory.Instance.AddBadge(new JumpmanBadge());
+            Inventory.Instance.AddBadge(new JumpmanBadge());
+            Inventory.Instance.AddBadge(new HammermanBadge());
             Inventory.Instance.AddBadge(new HammermanBadge());
 
             //Items

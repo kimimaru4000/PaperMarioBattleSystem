@@ -66,6 +66,7 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.partnerInventory.AddPartner(new Goombario());
             Inventory.Instance.partnerInventory.AddPartner(new Kooper());
             Inventory.Instance.partnerInventory.AddPartner(new Bow());
+            Inventory.Instance.partnerInventory.AddPartner(new Watt());
 
             Inventory.Instance.AddBadge(new DefendPlusBadge());
             Inventory.Instance.AddBadge(new PowerPlusBadge());
@@ -147,6 +148,8 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new JumpmanBadge());
             Inventory.Instance.AddBadge(new HammermanBadge());
             Inventory.Instance.AddBadge(new HammermanBadge());
+
+            Inventory.Instance.AddBadge(new LuckyStartBadge());
 
             //Items
             Inventory.Instance.AddItem(new Mushroom());

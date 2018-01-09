@@ -23,8 +23,6 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(67, 89, 26, 30), 1000d),
                 new Animation.Frame(new Rectangle(131, 88, 26, 31), 100d, new Vector2(0, -1)),
                 new Animation.Frame(new Rectangle(99, 86, 26, 33), 1000d, new Vector2(0, -2))));
-            AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(49, 164, 30, 27), 1000d)));
-            AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(81, 163, 30, 28), 1000d)));
 
             AnimManager.AddAnimation(AnimationGlobals.RunningName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(3, 9, 28, 30), 100d),

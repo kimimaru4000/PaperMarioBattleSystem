@@ -142,6 +142,7 @@
     <Compile Include="Classes\BattleEntities\Players\Bow.cs" />
     <Compile Include="Classes\BattleEntities\Players\Goombario.cs" />
     <Compile Include="Classes\BattleEntities\Players\Kooper.cs" />
+    <Compile Include="Classes\BattleEntities\Players\Watt.cs" />
     <Compile Include="Classes\BattleEntities\Supporting\BattleEntityProperties.cs" />
     <Compile Include="Classes\BattleEvents\BattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DamagedBattleEvent.cs" />
@@ -205,6 +206,7 @@
     <Compile Include="Classes\Collectibles\Badges\LastStandBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LEmblemBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\LuckyDayBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\LuckyStartBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MegaRushBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MegaRushPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MultibounceBadge.cs" />
@@ -296,6 +298,7 @@
     <Compile Include="Classes\Menus\ActionSubMenus\KooperSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\SpecialSubMenu.cs" />
     <Compile Include="Classes\Menus\ActionSubMenus\TacticsSubMenu.cs" />
+    <Compile Include="Classes\Menus\ActionSubMenus\WattSubMenu.cs" />
     <Compile Include="Classes\Menus\BattleMenu.cs" />
     <Compile Include="Classes\Menus\CancelDipMenu.cs" />
     <Compile Include="Classes\Menus\MarioBattleMenu.cs" />
@@ -454,6 +457,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Characters\MarioWLEmblem.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Characters\Watt.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Enemies\Goomba.png">

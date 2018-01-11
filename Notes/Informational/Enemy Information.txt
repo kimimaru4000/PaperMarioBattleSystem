@@ -178,4 +178,9 @@ Flower Fuzzy
 ------------
 -If hit by Payback (via Return Postage or other means) when attacking, it will drain FP but won't restore it
 
+Duplighost
+----------
+-When transformed as a Partner, the power of their attacks is determined by the real Partner's rank
+-If transformed, will transform back into a Duplighost when hit by Electric damage or inflicted with Paralyzed
+  -The Electric damage includes Thunder Bolt and Thunder Rage, and Electric payback from a Volt Shroom or Zap Tap
 

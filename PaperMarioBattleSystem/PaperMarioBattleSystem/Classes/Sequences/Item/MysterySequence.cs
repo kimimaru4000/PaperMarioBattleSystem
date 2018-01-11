@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The item set from the Mystery item.
         /// </summary>
-        private BattleItem[] MysteryItemSet = null;
+        private List<BattleItem> MysteryItemSet = null;
 
         /// <summary>
         /// The random BattleItem chosen from the Mystery item set.
@@ -35,8 +35,8 @@ namespace PaperMarioBattleSystem
         {
             base.OnStart();
 
-            Mystery mysteryItem = (Mystery)itemAction.ItemUsed;
-            MysteryItemSet = mysteryItem.GetItemSet();
+            MysteryAction mysteryAction = (MysteryAction)itemAction;
+            MysteryItemSet = mysteryAction.RevisedItemSet;
 
             EntityUsing = User;
         }
@@ -44,6 +44,8 @@ namespace PaperMarioBattleSystem
         protected override void OnEnd()
         {
             base.OnEnd();
+
+            MysteryItemSet = null;
         }
 
         protected override void SequenceStartBranch()
@@ -57,7 +59,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     //NOTE: For now simply choose a random item and exclude the roulette until we get this working
-                    int randItemIndex = GeneralGlobals.Randomizer.Next(0, MysteryItemSet.Length);
+                    int randItemIndex = GeneralGlobals.Randomizer.Next(0, MysteryItemSet.Count);
                     ItemChosen = MysteryItemSet[randItemIndex];
 
                     Debug.Log($"Chose {ItemChosen.Name} to use for the Mystery!");
@@ -107,6 +109,11 @@ namespace PaperMarioBattleSystem
             //Immediately start using the item
             ItemAction itemChosenAction = ItemChosen.ActionAssociated;
 
+            //Special case: if the item chosen is a Mystery, initialize it
+            //We can't do this earlier in Initialize, otherwise we run into an infinite loop
+            if (itemChosenAction is MysteryAction)
+                itemChosenAction.Initialize();
+
             //1. Find out if this item targets enemies or allies
             //2. If it targets allies, only use it on the entity using it
             //3. If it targets enemies, use it on the first enemy if it targets only one, otherwise use it on all enemies
@@ -132,6 +139,9 @@ namespace PaperMarioBattleSystem
 
             //Start the second half of the sequence
             EntityUsing.StartAction(itemChosenAction, true, entitiesAffected.ToArray());
+
+            EntityUsing = null;
+            ItemChosen = null;
         }
     }
 }

@@ -1051,8 +1051,17 @@ namespace PaperMarioBattleSystem
             /// <summary>
             /// Tells that this BattleEntity is, in general, not targetable.
             /// Certain moves may still be able to target BattleEntities with this property.
+            /// <para>Some BattleEntities innately have this (Ex. Bobbery Bombs), but it can also be applied dynamically
+            /// through darkness or other types of battle settings.</para>
             /// </summary>
             Untargetable,
+
+            /// <summary>
+            /// Tells that this BattleEntity is a light source. If a BattleEntity with this property is in a dark battle,
+            /// a region around it will be lit.
+            /// <para>The value should be a double with the radius of its light.</para>
+            /// </summary>
+            LightSource,
 
             /// <summary>
             /// Tells that this BattleEntity is a helper or part of another BattleEntity.

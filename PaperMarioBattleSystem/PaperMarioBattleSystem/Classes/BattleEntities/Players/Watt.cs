@@ -26,6 +26,9 @@ namespace PaperMarioBattleSystem
             new ContactProperties[] { ContactProperties.None },
             ContactResult.PartialSuccess, ContactResult.Success, 1, null));
 
+            //Watt is a light source that fully lights any battle
+            EntityProperties.AddAdditionalProperty(AdditionalProperty.LightSource, double.MaxValue);
+
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Characters/Watt.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 

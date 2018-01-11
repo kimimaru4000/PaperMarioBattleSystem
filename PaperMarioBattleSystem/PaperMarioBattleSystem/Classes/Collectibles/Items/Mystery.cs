@@ -19,6 +19,7 @@ namespace PaperMarioBattleSystem
     /// Thunder Rage,
     /// Pebble (falls down on Mario) }
     /// </para>
+    /// <para>If an item in question cannot be used (Ex. dark battles), it is removed from the roulette!</para>
     /// </summary>
     public sealed class Mystery : BattleItem
     {
@@ -45,7 +46,7 @@ namespace PaperMarioBattleSystem
             Icon = new CroppedTexture2D(icon, new Rectangle(639, 83, 25, 25));
 
             //Classify Mystery as any type of battle item so it shows up in the item menu
-            ItemType = ItemTypes.Damage | ItemTypes.Healing;
+            ItemType = ItemTypes.Damage | ItemTypes.Healing | ItemTypes.Status;
             
             SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
             MoveAffectionType = Enumerations.MoveAffectionTypes.Self;

@@ -137,6 +137,24 @@ Gulpits' Rocks
 -Spin Smash can't destroy the rocks with the Action Command, and the rocks don't get knocked into each other like enemies do.
 Hitting a rock with a failed Spin Smash causes it to spin and get destroyed.
 
+Goomnut Tree
+------------
+-It doesn't display its HP even after being Tattled or if the Peekaboo Badge is equipped; the battle scripts say it's at Level 1 with -1 HP.
+
+-Can't be targeted by multi-hit moves and items, and isn't hit/affected by them either
+-Can't be targeted by any single-hit item (Ex. Egg Missile)
+
+-Can be targeted by Shell Shot, but Shell Shot can't hit since there's no proper target region
+-Can't be targeted by Air Lift
+-Can't be targeted by Smack or Fan Smack
+-Can't be targeted by Electro Dash or Power Shock
+-Can't be targeted by Squirt
+-Can't be targeted by Spiny Flip
+-Can't be targeted by Hammer Throw
+
+-When hit by Mario or his Partner, a big Goomnut deals 3 damage to the Goomba King, Red Goomba, and Blue Goomba. The Goomnut disappears and the tree cannot be hit again afterwards.
+-When the Goomba King stomps, three small Goomnuts deal 2 damage to Mario. The Goomnuts disappear and the Goomba King cannot use this move afterwards.
+
 Crystal King
 ------------
 -If you use Mega Shock and paralyze him, his Crystal Bits will go away even though they're not affected by it. This will need more testing to be confirmed.
@@ -184,3 +202,18 @@ Duplighost
 -If transformed, will transform back into a Duplighost when hit by Electric damage or inflicted with Paralyzed
   -The Electric damage includes Thunder Bolt and Thunder Rage, and Electric payback from a Volt Shroom or Zap Tap
 
+Lantern
+-------
+-When hit, illuminates the radius around it
+-It takes two hits to be able to target the Big Lantern Ghost that's holding it
+-Four hits on it fully lights up the room
+
+-Is considered the front enemy. Attempting to Hammer will let you target only it
+-Dies with the Big Lantern Ghost
+
+Big Lantern Ghost
+-----------------
+-Puts out the Lantern every other turn if it's lit at all past its default value
+-Has the Lantern light attack that shines to deal 2 damage to Mario and his Partner
+  -This attack does not put out the Lantern
+-Is considered the back enemy. Attempting to Hammer will let you target only its Lantern

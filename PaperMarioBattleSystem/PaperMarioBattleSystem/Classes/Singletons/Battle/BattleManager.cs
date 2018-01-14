@@ -30,6 +30,8 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        public static bool HasInstance => (instance != null);
+
         private static BattleManager instance = null;
 
         #endregion
@@ -60,6 +62,11 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        /// <summary>
+        /// The battle's properties.
+        /// </summary>
+        public BattleProperties Properties = default(BattleProperties);
 
         //Starting positions
         public readonly Vector2 MarioPos = new Vector2(-150, 100);
@@ -190,12 +197,15 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Initializes the battle
         /// </summary>
+        /// <param name="properties">The battle's properties.</param>
         /// <param name="mario">Mario</param>
         /// <param name="partner">Mario's partner</param>
         /// <param name="enemies">The enemies, in order</param>
         /// <param name="others">Other types of BattleEntities to add.</param>
-        public void Initialize(BattleMario mario, BattlePartner partner, List<BattleEntity> enemies, params BattleEntity[] others)
+        public void Initialize(BattleProperties properties, BattleMario mario, BattlePartner partner, List<BattleEntity> enemies, params BattleEntity[] others)
         {
+            Properties = properties;
+
             //Mario always starts out in the front, and the Partner always starts out in the back
             Mario = mario;
             Partner = partner;
@@ -218,6 +228,12 @@ namespace PaperMarioBattleSystem
 
             //Add and initialize all entities
             AddEntities(addedEntities, null, true);
+
+            //Check for the battle setting
+            if (Properties.BattleSetting == BattleSettings.Dark)
+            {
+                BattleObjManager.Instance.AddBattleObject(new BattleDarknessObj());
+            }
 
             Phase = StartingPhase;
 
@@ -423,14 +439,14 @@ namespace PaperMarioBattleSystem
 
             Partner = newPartner;
 
-            //Remove the old partner from the entity dictionary and add the new one
-            RemoveEntities(new BattleEntity[] { oldPartner }, false);
-            AddEntities(new BattleEntity[] { Partner }, null, false);
-
             //Set positions to the old ones
             Partner.Position = oldPartner.Position;
             Partner.SetBattleIndex(oldPartner.BattleIndex);
             Partner.SetBattlePosition(oldPartner.BattlePosition);
+
+            //Remove the old partner from the entity dictionary and add the new one
+            RemoveEntities(new BattleEntity[] { oldPartner }, false);
+            AddEntities(new BattleEntity[] { Partner }, null, false);
 
             //Set the new Partner to use the same max number of turns all Partners have this phase cycle
             Partner.SetMaxTurns(BattlePartner.PartnerMaxTurns);

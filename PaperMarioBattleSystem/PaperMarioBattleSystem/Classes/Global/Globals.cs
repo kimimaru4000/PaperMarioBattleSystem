@@ -1278,6 +1278,22 @@ namespace PaperMarioBattleSystem
     {
         #region Enums
 
+        /// <summary>
+        /// The settings battles can take place in.
+        /// </summary>
+        public enum BattleSettings
+        {
+            /// <summary>
+            /// Normal battles.
+            /// </summary>
+            Normal,
+
+            /// <summary>
+            /// Dark battles. Enemy and Neutral BattleEntities are untargetable if there is no light source that illuminates them.
+            /// </summary>
+            Dark
+        }
+
         public enum StartEventPriorities
         {
             Message = 0, Stage = 500, YuxArrange = 600, BobberyBomb = 750, Status = 1000,
@@ -1310,6 +1326,19 @@ namespace PaperMarioBattleSystem
         #endregion
 
         #region Structs
+
+        /// <summary>
+        /// Holds information containing various properties for battle.
+        /// </summary>
+        public struct BattleProperties
+        {
+            public BattleSettings BattleSetting;
+
+            public BattleProperties(BattleSettings battleSetting)
+            {
+                BattleSetting = battleSetting;
+            }
+        }
 
         /// <summary>
         /// Holds information about a MoveAction being used and the BattleEntities it targets

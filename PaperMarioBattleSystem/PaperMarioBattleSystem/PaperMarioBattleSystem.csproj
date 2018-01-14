@@ -163,6 +163,7 @@
     <Compile Include="Classes\BattleEvents\SwapPositionBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitForAnimBattleEvent.cs" />
+    <Compile Include="Classes\BattleObjects\BattleDarknessObj.cs" />
     <Compile Include="Classes\BattleObjects\BattleObject.cs" />
     <Compile Include="Classes\BattleObjects\ShellBreakAnimObj.cs" />
     <Compile Include="Classes\Collectibles\Badges\AllOrNothingBadge.cs" />

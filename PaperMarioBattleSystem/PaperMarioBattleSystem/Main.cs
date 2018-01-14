@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
             //FOR TESTING
             InitializeInventory();
 
-            BattleManager.Instance.Initialize(
+            BattleManager.Instance.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
                 new List<BattleEntity>() { new Goomba(), new SpikedGoomba(), new Paragoomba() });
@@ -182,9 +182,9 @@ namespace PaperMarioBattleSystem
             AssetManager.Instance.CleanUp();
             SoundManager.Instance.CleanUp();
             SpriteRenderer.Instance.CleanUp();
-            BattleManager.Instance.CleanUp();
             BattleUIManager.Instance.CleanUp();
             BattleObjManager.Instance.CleanUp();
+            BattleManager.Instance.CleanUp();
 
             crashHandler.CleanUp();
         }

@@ -19,5 +19,6 @@ Behavior without a light source:
 -Items that target enemies, such as Fire Flowers, are disabled, but trying to select them does nothing
 -Individual Partner abilities are disabled if they target enemies. If the Partner has moves that only target enemies, such as Kooper, then the entire Abilities icon is disabled
   -Selecting any of these shows a message saying "You can't select it now!"
+-Mystery? omits any damaging items from its wheel
 -Enemies are unaffected and can still attack with no issues (talk about fair!)
 

@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
             BattleObjManager.Instance.AddBattleObject(new ActionCommandVFX(ActionCommand.CommandRank.Nice, User.Position, new Vector2(-15, -15)));
             SoundManager.Instance.PlaySound(SoundManager.Sound.ActionCommandSuccess);
 
-            return new BattleGlobals.DefensiveActionHolder(newDamage, newStatuses, Enumerations.DamageEffects.None);
+            return new BattleGlobals.DefensiveActionHolder(newDamage, newStatuses, Enumerations.DamageEffects.None, DefensiveActionType);
         }
     }
 }

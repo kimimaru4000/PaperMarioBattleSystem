@@ -532,6 +532,7 @@ namespace PaperMarioBattleSystem
                     StepResult.VictimResult.TotalDamage = victimDefenseData.Value.Damage;
                     StepResult.VictimResult.StatusesInflicted = victimDefenseData.Value.Statuses;
                     StepResult.VictimResult.DamageEffect = victimDefenseData.Value.DamageEffect;
+                    StepResult.VictimResult.DefensiveActionsPerformed = victimDefenseData.Value.DefensiveActionType;
 
                     //Store the damage dealt to the attacker, if any
                     if (victimDefenseData.Value.ElementHolder.HasValue == true)

@@ -20,5 +20,7 @@ Behavior without a light source:
 -Individual Partner abilities are disabled if they target enemies. If the Partner has moves that only target enemies, such as Kooper, then the entire Abilities icon is disabled
   -Selecting any of these shows a message saying "You can't select it now!"
 -Mystery? omits any damaging items from its wheel
+-If you have only damaging items in your inventory, the Items command will be disabled. This happens even if Double Dip and/or Triple Dip are/is equipped
+  -Selecting it shows the message "You don't have an item you can use now!" (newline after "item")
 -Enemies are unaffected and can still attack with no issues (talk about fair!)
 

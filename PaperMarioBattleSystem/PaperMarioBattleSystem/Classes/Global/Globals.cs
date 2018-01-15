@@ -399,6 +399,11 @@ namespace PaperMarioBattleSystem
         public Enumerations.DamageEffects DamageEffect;
 
         /// <summary>
+        /// The types of DefensiveActions performed in this interaction, if any.
+        /// </summary>
+        public Enumerations.DefensiveActionTypes DefensiveActionsPerformed;
+
+        /// <summary>
         /// Indicates if the damage to be dealt is from Payback.
         /// </summary>
         public bool IsPaybackDamage;
@@ -424,6 +429,8 @@ namespace PaperMarioBattleSystem
             StatusesInflicted = statusesInflicted;
             Hit = hit;
             DamageEffect = damageEffect;
+            
+            DefensiveActionsPerformed = Enumerations.DefensiveActionTypes.None;
 
             IsPaybackDamage = false;
 
@@ -1383,22 +1390,29 @@ namespace PaperMarioBattleSystem
             public Enumerations.DamageEffects DamageEffect { get; private set; }
 
             /// <summary>
+            /// The type of DefensiveAction that was used.
+            /// </summary>
+            public Enumerations.DefensiveActionTypes DefensiveActionType { get; private set; }
+
+            /// <summary>
             /// The type and amount of damage dealt to the attacker.
             /// If none, set to null.
             /// </summary>
             public ElementDamageHolder? ElementHolder { get; private set; }
 
-            public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect)
-                : this(damage, statuses, damageEffect, null)
+            public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect,
+                Enumerations.DefensiveActionTypes defensiveActionType)
+                : this(damage, statuses, damageEffect, defensiveActionType, null)
             {
             }
 
             public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect,
-                ElementDamageHolder? elementHolder)
+                Enumerations.DefensiveActionTypes defensiveActionType, ElementDamageHolder? elementHolder)
             {
                 Damage = damage;
                 Statuses = statuses;
                 DamageEffect = damageEffect;
+                DefensiveActionType = defensiveActionType;
                 ElementHolder = elementHolder;
             }
         }

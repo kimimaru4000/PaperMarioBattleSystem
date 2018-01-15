@@ -42,7 +42,7 @@ namespace PaperMarioBattleSystem
 
         public override void Draw()
         {
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Text, Position, TintColor, 0f, Origin, 1f, Depth, true);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Text, Position, TintColor, 0f, Origin, 1f, Depth);
         }
     }
 }

@@ -343,7 +343,7 @@ namespace PaperMarioBattleSystem
                 //These offsets allow the lines to match up one-to-one with their actual positions
                 AdjustLineOffset(line, ref scale, ref position);
 
-                SpriteRenderer.Instance.Draw(LineTexture, position, null, LineColor, angle, origin, scale, false, false, .8f, true);
+                SpriteRenderer.Instance.DrawUI(LineTexture, position, null, LineColor, angle, origin, scale, false, false, .8f);
             }
         }
 

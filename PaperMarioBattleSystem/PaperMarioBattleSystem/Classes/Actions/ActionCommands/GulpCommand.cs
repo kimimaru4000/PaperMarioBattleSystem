@@ -123,7 +123,7 @@ namespace PaperMarioBattleSystem
                 light = LitLight;
             }
 
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 100), color, .7f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 100), color, .7f);
 
             Vector2 barScale = new Vector2(100f, 1f);
             Vector2 startPos = new Vector2(250, 150);
@@ -141,7 +141,7 @@ namespace PaperMarioBattleSystem
             DrawBar(barStartPos, barScale, SuccessStartValue);
             DrawBarFill(barStartPos + new Vector2(0f, 5f), new Vector2(barScale.X, 18f), SuccessStartValue);
 
-            SpriteRenderer.Instance.Draw(light.Tex, lightStartPos + new Vector2((diff / 2) - BarEnd.WidthHeightToVector2().X, 12f), light.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), 1f, false, false, .8f, true);
+            SpriteRenderer.Instance.DrawUI(light.Tex, lightStartPos + new Vector2((diff / 2) - BarEnd.WidthHeightToVector2().X, 12f), light.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), 1f, false, false, .8f);
         }
     }
 }

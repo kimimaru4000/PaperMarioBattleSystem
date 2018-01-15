@@ -78,7 +78,7 @@ namespace PaperMarioBattleSystem
         protected override void OnDraw()
         {
             base.OnDraw();
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, CurrentValue.ToString(), new Vector2(355, 150), Color.White, .71f, true);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, CurrentValue.ToString(), new Vector2(355, 150), Color.White, .71f);
         }
     }
 }

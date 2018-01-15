@@ -37,6 +37,8 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(49, 164, 30, 27), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.SpikedTipHurtName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(49, 164, 30, 27), 1000d)));
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(49, 164, 30, 27), 1000d)));
 

@@ -85,7 +85,7 @@ namespace PaperMarioBattleSystem
             Vector2 dizzyPos = iconPos + DizzyIcon.SourceRect.Value.GetCenterOrigin() + new Vector2(3, 1);
             float dizzyDepth = depth + .00001f;
 
-            SpriteRenderer.Instance.Draw(DizzyIcon.Tex, dizzyPos, DizzyIcon.SourceRect, Color.White, rotation, new Vector2(.5f, .5f), 1f, false, false, dizzyDepth, true);
+            SpriteRenderer.Instance.DrawUI(DizzyIcon.Tex, dizzyPos, DizzyIcon.SourceRect, Color.White, rotation, new Vector2(.5f, .5f), 1f, false, false, dizzyDepth);
         }
     }
 }

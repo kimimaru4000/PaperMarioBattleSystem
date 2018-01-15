@@ -144,16 +144,16 @@ namespace PaperMarioBattleSystem
 
             //Draw the bars
             //Draw the middle
-            SpriteRenderer.Instance.Draw(BarMiddle.Tex, drawPos, BarMiddle.SourceRect, Color.White, 0f, Vector2.Zero, new Vector2(BarScale, 1f), false, false, .39f, true);
+            SpriteRenderer.Instance.DrawUI(BarMiddle.Tex, drawPos, BarMiddle.SourceRect, Color.White, 0f, Vector2.Zero, new Vector2(BarScale, 1f), false, false, .39f);
 
             //Draw the ends
-            SpriteRenderer.Instance.Draw(BarEnd.Tex, drawPos - new Vector2(BarEnd.SourceRect.Value.Width, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, false, false, .39f, true);
-            SpriteRenderer.Instance.Draw(BarEnd.Tex, drawPos + new Vector2(BarScale, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, true, false, .39f, true);
+            SpriteRenderer.Instance.DrawUI(BarEnd.Tex, drawPos - new Vector2(BarEnd.SourceRect.Value.Width, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, false, false, .39f);
+            SpriteRenderer.Instance.DrawUI(BarEnd.Tex, drawPos + new Vector2(BarScale, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, true, false, .39f);
 
             //Draw the cursor
             //Regardless of MaxBarVal, needs to be rendered within the range
             float barValScaleFactor = BarScale / MaxBarVal;
-            SpriteRenderer.Instance.Draw(MovingCursor.Tex, drawPos + new Vector2(CurBarVal * barValScaleFactor, 0f), MovingCursor.SourceRect, Color.White, 0f, new Vector2(.5f, 1f), Vector2.One, false, false, .4f, true);
+            SpriteRenderer.Instance.DrawUI(MovingCursor.Tex, drawPos + new Vector2(CurBarVal * barValScaleFactor, 0f), MovingCursor.SourceRect, Color.White, 0f, new Vector2(.5f, 1f), Vector2.One, false, false, .4f);
 
             //Draw the values of the bar sections
             if (BarRanges != null)
@@ -164,7 +164,7 @@ namespace PaperMarioBattleSystem
                     Vector2 scale = new Vector2((barRange.EndBarVal - barRange.StartBarVal) * barValScaleFactor, 18f);
 
                     Vector2 pos = new Vector2(drawPos.X + (barRange.StartBarVal * barValScaleFactor), drawPos.Y + 5f);
-                    SpriteRenderer.Instance.Draw(Box, pos, null, barRange.SegmentColor, 0f, Vector2.Zero, scale, false, false, .41f, true);
+                    SpriteRenderer.Instance.DrawUI(Box, pos, null, barRange.SegmentColor, 0f, Vector2.Zero, scale, false, false, .41f);
                 }
             }
         }

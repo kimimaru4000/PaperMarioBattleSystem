@@ -154,7 +154,7 @@ namespace PaperMarioBattleSystem
                 Color color = Color.Black;
                 if (button == CurButton) color = Color.White;
 
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, button.ToString(), startPos + new Vector2(i * 15, -30f), color, .5f, true);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startPos + new Vector2(i * 15, -30f), color, .5f);
             }
         }
     }

@@ -91,7 +91,7 @@ namespace PaperMarioBattleSystem
 
                 CroppedTexture2D light = (i >= LightsFilled) ? UnlitLight : LitLight;
 
-                SpriteRenderer.Instance.Draw(light.Tex, newpos, light.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), newScale, false, false, .7f, true);
+                SpriteRenderer.Instance.DrawUI(light.Tex, newpos, light.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), newScale, false, false, .7f);
             }
         }
     }

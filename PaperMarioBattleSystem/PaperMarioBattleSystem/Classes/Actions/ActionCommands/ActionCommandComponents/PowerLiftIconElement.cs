@@ -163,7 +163,7 @@ namespace PaperMarioBattleSystem
 
         public void Draw()
         {
-            SpriteRenderer.Instance.Draw(CroppedTex.Tex, Position, CroppedTex.SourceRect, TintColor, new Vector2(.5f, .5f), false, false, Depth, true);
+            SpriteRenderer.Instance.DrawUI(CroppedTex.Tex, Position, CroppedTex.SourceRect, TintColor, new Vector2(.5f, .5f), false, false, Depth);
         }
     }
 }

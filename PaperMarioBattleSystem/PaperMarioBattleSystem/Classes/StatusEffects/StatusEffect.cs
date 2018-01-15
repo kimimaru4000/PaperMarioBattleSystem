@@ -353,12 +353,12 @@ namespace PaperMarioBattleSystem
             if (IsInfinite == true) turnCountString = string.Empty;
 
             //Draw icon
-            SpriteRenderer.Instance.Draw(StatusIcon.Tex, iconPos, StatusIcon.SourceRect, Color.White, false, false, depth, true);
+            SpriteRenderer.Instance.DrawUI(StatusIcon.Tex, iconPos, StatusIcon.SourceRect, Color.White, false, false, depth);
 
             //Draw turn count if it's not infinite
             if (string.IsNullOrEmpty(turnCountString) == false)
             {
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, turnCountString, iconPos + new Vector2(52, 20),
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, turnCountString, iconPos + new Vector2(52, 20),
                     Color.White, 0f, new Vector2(1f, 0f), 1f, turnStringDepth);
             }
         }

@@ -1149,6 +1149,8 @@ namespace PaperMarioBattleSystem
             public const string HammerWindupName = "HammerWindup";
             public const string HammerSlamName = "HammerSlam";
 
+            public const string StoneCapPutOnName = "StoneCapPutOn";
+
             public const string TornadoJumpFailName = "TornadoJumpFail";
 
             public const string MapLiftName = "MapLift";

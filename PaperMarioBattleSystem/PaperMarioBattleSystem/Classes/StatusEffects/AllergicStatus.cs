@@ -92,7 +92,7 @@ namespace PaperMarioBattleSystem
             Vector2 allergicPos = iconPos + allergicOrigin;
             float allergicDepth = depth + .00001f;
 
-            SpriteRenderer.Instance.Draw(AllergicIcon.Tex, allergicPos, AllergicIcon.SourceRect, Color.White, 0f, new Vector2(.25f, .25f), 1f, false, false, allergicDepth, true);
+            SpriteRenderer.Instance.DrawUI(AllergicIcon.Tex, allergicPos, AllergicIcon.SourceRect, Color.White, 0f, new Vector2(.25f, .25f), 1f, false, false, allergicDepth);
         }
 
         /// <summary>

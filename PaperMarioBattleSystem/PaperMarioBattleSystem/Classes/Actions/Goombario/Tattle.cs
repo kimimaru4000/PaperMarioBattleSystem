@@ -35,12 +35,10 @@ namespace PaperMarioBattleSystem
 
         public override void Initialize()
         {
-            //Check if there are any BattleEntities that can be tattled
-            //If there are none, disable the action
-            BattleEntity[] tattleEntities = GetTattleableEntities();
-            if (tattleEntities.Length == 0)
+            base.Initialize();
+
+            if (Disabled == true)
             {
-                Disabled = true;
                 DisabledString = "There's no one that can be tattled!";
             }
         }

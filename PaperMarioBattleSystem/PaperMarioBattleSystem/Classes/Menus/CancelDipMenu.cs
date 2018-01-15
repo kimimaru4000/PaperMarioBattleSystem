@@ -63,7 +63,7 @@ namespace PaperMarioBattleSystem
         {
             //Draw text
             string header = "Don't use an item?";
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, header, Position, Color.White, .7f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, header, Position, Color.White, .7f);
 
             for (int i = 0; i < MenuOptions.Count; i++)
             {
@@ -72,7 +72,7 @@ namespace PaperMarioBattleSystem
 
                 if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) alphaMod *= .7f;
 
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, MenuOptions[i].Option, pos, Color.White * alphaMod, .7f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, MenuOptions[i].Option, pos, Color.White * alphaMod, .7f);
             }
         }
     }

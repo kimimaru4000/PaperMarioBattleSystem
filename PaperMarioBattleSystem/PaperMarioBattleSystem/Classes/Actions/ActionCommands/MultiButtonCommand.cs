@@ -160,11 +160,11 @@ namespace PaperMarioBattleSystem
                 if (i < CurButtonIndex)
                     color = Color.Black;
 
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, button.ToString(), startDrawLoc + new Vector2(xPosDiff * i, 0), color, .7f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startDrawLoc + new Vector2(xPosDiff * i, 0), color, .7f);
             }
 
             //Show time remaining
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Math.Round(InputDuration - ElapsedTime, 2).ToString(), startDrawLoc + new Vector2(0, -20), Color.White, .7f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Math.Round(InputDuration - ElapsedTime, 2).ToString(), startDrawLoc + new Vector2(0, -20), Color.White, .7f);
         }
     }
 }

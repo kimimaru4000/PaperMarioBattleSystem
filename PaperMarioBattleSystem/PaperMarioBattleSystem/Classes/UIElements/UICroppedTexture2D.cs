@@ -45,7 +45,7 @@ namespace PaperMarioBattleSystem
         public override void Draw()
         {
             //This is a UI element, so always render it on the UI layer
-            SpriteRenderer.Instance.Draw(CroppedTex2D.Tex, Position, CroppedTex2D.SourceRect, TintColor, Rotation, Origin, Scale, FlipX, FlipY, Depth, true);
+            SpriteRenderer.Instance.DrawUI(CroppedTex2D.Tex, Position, CroppedTex2D.SourceRect, TintColor, Rotation, Origin, Scale, FlipX, FlipY, Depth);
         }
     }
 }

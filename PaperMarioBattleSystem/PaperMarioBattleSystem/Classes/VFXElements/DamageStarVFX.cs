@@ -121,8 +121,8 @@ namespace PaperMarioBattleSystem
 
             //Merge the pieces into one
             //Flip the right half and make it scale with the left one, positioning it to create a full star
-            SpriteRenderer.Instance.Draw(StarHalfLeft.Tex, Position, StarHalfLeft.SourceRect, Color.Yellow, 0f, origin, CurScale, false, false, depth, false, true);
-            SpriteRenderer.Instance.Draw(StarHalfRight.Tex, Position + new Vector2((width - 1) * CurScale.X, 0f), StarHalfRight.SourceRect, Color.Yellow, 0f, origin, CurScale, true, false, depth, false, true);
+            SpriteRenderer.Instance.Draw(StarHalfLeft.Tex, Position, StarHalfLeft.SourceRect, Color.Yellow, 0f, origin, CurScale, false, false, depth, true);
+            SpriteRenderer.Instance.Draw(StarHalfRight.Tex, Position + new Vector2((width - 1) * CurScale.X, 0f), StarHalfRight.SourceRect, Color.Yellow, 0f, origin, CurScale, true, false, depth, true);
 
             //Show the damage text in the middle of the star
             if (DamageDisplayed > 0)
@@ -133,7 +133,7 @@ namespace PaperMarioBattleSystem
                 float colorAlpha = (MaxScale.X) == 0 ? 0f : (CurScale.X / MaxScale.X);
 
                 //Center the text
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, Position + new Vector2(0f, 0f), Color.Black * colorAlpha, 0f, new Vector2(.5f, .85f), 1f, depth + .01f, false);
+                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, Position + new Vector2(0f, 0f), Color.Black * colorAlpha, 0f, new Vector2(.5f, .85f), 1f, depth + .01f);
             }
         }
     }

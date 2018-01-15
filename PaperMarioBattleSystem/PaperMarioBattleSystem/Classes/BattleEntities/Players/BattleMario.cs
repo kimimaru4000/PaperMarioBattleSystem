@@ -90,6 +90,16 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(119, 667, 35, 44), 150d),
                 new Animation.Frame(new Rectangle(119, 716, 36, 43), 150d)));
 
+            AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.StoneCapPutOnName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(500, 584, 37, 50), 70d),
+                new Animation.Frame(new Rectangle(497, 643, 37, 50), 70d),
+                new Animation.Frame(new Rectangle(496, 699, 38, 49), 70d),
+                new Animation.Frame(new Rectangle(497, 643, 37, 50), 70d),
+                new Animation.Frame(new Rectangle(498, 755, 36, 49), 70d),
+                new Animation.Frame(new Rectangle(497, 643, 37, 50), 70d),
+                new Animation.Frame(new Rectangle(496, 699, 38, 49), 70d),
+                new Animation.Frame(new Rectangle(497, 643, 37, 50), 750d)));
+
             #endregion
         }
         

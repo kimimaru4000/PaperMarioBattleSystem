@@ -320,9 +320,9 @@ namespace PaperMarioBattleSystem
             {
                 if (CommandEnabled == true)
                 {
-                    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont,
+                    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
                     $"Command: {Name} performed by {User.Name}",
-                    new Vector2(SpriteRenderer.Instance.WindowCenter.X, 50f), Color.Black, 0f, new Vector2(.5f, .5f), 1.1f, .9f, true);
+                    new Vector2(SpriteRenderer.Instance.WindowCenter.X, 50f), Color.Black, 0f, new Vector2(.5f, .5f), 1.1f, .9f);
 
                     actionCommand?.Draw();
                 }
@@ -343,11 +343,11 @@ namespace PaperMarioBattleSystem
             //Draw icon
             if (MoveInfo.Icon != null && MoveInfo.Icon.Tex != null)
             {
-                SpriteRenderer.Instance.Draw(MoveInfo.Icon.Tex, position - new Vector2(32, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f, true);
+                SpriteRenderer.Instance.DrawUI(MoveInfo.Icon.Tex, position - new Vector2(32, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f);
             }
 
             //Draw name
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Name, position, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, position, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
 
             //Show FP count if the move costs FP
             if (CostsFP == true && MoveProperties.CostDisplayType != CostDisplayTypes.Hidden)
@@ -362,7 +362,7 @@ namespace PaperMarioBattleSystem
                     fpColor = blueGray;
                 }
 
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, GetCostString(), position + new Vector2(200, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, GetCostString(), position + new Vector2(200, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
             }
         }
 

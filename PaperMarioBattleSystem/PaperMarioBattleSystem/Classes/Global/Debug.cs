@@ -517,7 +517,10 @@ namespace PaperMarioBattleSystem
             Vector2 diff = end - start;
             Vector2 lineScale = new Vector2(diff.Length(), thickness);
             
-            SpriteRenderer.Instance.Draw(box, start, null, color, lineRotation, new Vector2(0f, 0f), lineScale, false, false, layer, uiBatch);
+            if (uiBatch == false)
+                SpriteRenderer.Instance.Draw(box, start, null, color, lineRotation, new Vector2(0f, 0f), lineScale, false, false, layer);
+            else
+                SpriteRenderer.Instance.DrawUI(box, start, null, color, lineRotation, new Vector2(0f, 0f), lineScale, false, false, layer);
         }
 
         /// <summary>
@@ -533,7 +536,10 @@ namespace PaperMarioBattleSystem
 
             Texture2D box = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
 
-            SpriteRenderer.Instance.Draw(box, new Vector2(rect.X, rect.Y), null, color, 0f, Vector2.Zero, new Vector2(rect.Width, rect.Height), false, false, layer, uiBatch);
+            if (uiBatch == false)
+                SpriteRenderer.Instance.Draw(box, new Vector2(rect.X, rect.Y), null, color, 0f, Vector2.Zero, new Vector2(rect.Width, rect.Height), false, false, layer);
+            else
+                SpriteRenderer.Instance.DrawUI(box, new Vector2(rect.X, rect.Y), null, color, 0f, Vector2.Zero, new Vector2(rect.Width, rect.Height), false, false, layer);
         }
 
         /// <summary>
@@ -560,7 +566,10 @@ namespace PaperMarioBattleSystem
 
             for (int i = 0; i < rects.Length; i++)
             {
-                SpriteRenderer.Instance.Draw(box, new Vector2(rects[i].X, rects[i].Y), null, color, 0f, Vector2.Zero, new Vector2(rects[i].Width, rects[i].Height), false, false, layer, uiBatch);
+                if (uiBatch == false)
+                    SpriteRenderer.Instance.Draw(box, new Vector2(rects[i].X, rects[i].Y), null, color, 0f, Vector2.Zero, new Vector2(rects[i].Width, rects[i].Height), false, false, layer);
+                else
+                    SpriteRenderer.Instance.DrawUI(box, new Vector2(rects[i].X, rects[i].Y), null, color, 0f, Vector2.Zero, new Vector2(rects[i].Width, rects[i].Height), false, false, layer);
             }
         }
 
@@ -597,7 +606,10 @@ namespace PaperMarioBattleSystem
 
             for (double val = 0d; val < UtilityGlobals.TwoPI; val += radian)
             {
-                SpriteRenderer.Instance.Draw(box, circle.GetPointAround(val), color, false, false, layer, uiBatch);
+                if (uiBatch == false)
+                    SpriteRenderer.Instance.Draw(box, circle.GetPointAround(val), color, false, false, layer);
+                else
+                    SpriteRenderer.Instance.DrawUI(box, circle.GetPointAround(val), color, false, false, layer);
             }
         }
 
@@ -612,10 +624,10 @@ namespace PaperMarioBattleSystem
 
             //Camera info
             Vector2 cameraBasePos = new Vector2(0, 510);
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, "Camera:", cameraBasePos, Color.White, 0f, Vector2.Zero, 1.2f, .1f);
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"Pos: {Camera.Instance.Position}", cameraBasePos + new Vector2(0, 20), Color.White, 0f, Vector2.Zero, 1.2f, .1f);
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"Rot: {Camera.Instance.Rotation}", cameraBasePos + new Vector2(0, 40), Color.White, 0f, Vector2.Zero, 1.2f, .1f);
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"Zoom: {Camera.Instance.Scale}", cameraBasePos + new Vector2(0, 60), Color.White, 0f, Vector2.Zero, 1.2f, .1f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, "Camera:", cameraBasePos, Color.White, 0f, Vector2.Zero, 1.2f, .1f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Pos: {Camera.Instance.Position}", cameraBasePos + new Vector2(0, 20), Color.White, 0f, Vector2.Zero, 1.2f, .1f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Rot: {Camera.Instance.Rotation}", cameraBasePos + new Vector2(0, 40), Color.White, 0f, Vector2.Zero, 1.2f, .1f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Zoom: {Camera.Instance.Scale}", cameraBasePos + new Vector2(0, 60), Color.White, 0f, Vector2.Zero, 1.2f, .1f);
         }
 
         #region Classes

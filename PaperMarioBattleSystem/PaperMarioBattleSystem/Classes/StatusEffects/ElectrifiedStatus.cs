@@ -105,7 +105,7 @@ namespace PaperMarioBattleSystem
             Vector2 sparkPos = iconPos + sparkOrigin;
             float sparkDepth = depth + .00001f;
 
-            SpriteRenderer.Instance.Draw(SparkIcon.Tex, sparkPos, SparkIcon.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), sparkScale, false, false, sparkDepth, true);
+            SpriteRenderer.Instance.DrawUI(SparkIcon.Tex, sparkPos, SparkIcon.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), sparkScale, false, false, sparkDepth);
         }
     }
 }

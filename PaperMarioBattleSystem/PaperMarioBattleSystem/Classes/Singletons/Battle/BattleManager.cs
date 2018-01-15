@@ -272,7 +272,7 @@ namespace PaperMarioBattleSystem
             //Draw all BattleEntities
             DrawEntities();
 
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"Current turn: {EntityTurn.Name}", new Vector2(250, 10), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Current turn: {EntityTurn.Name}", new Vector2(250, 10), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
         }
 
         private void UpdateEntities()

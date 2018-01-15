@@ -91,11 +91,11 @@ namespace PaperMarioBattleSystem
             float progressDisplay = (float)progressScale * barSize.X;
 
             //Draw the middle
-            SpriteRenderer.Instance.Draw(BarMiddle.Tex, startPos, BarMiddle.SourceRect, Color.White, 0f, Vector2.Zero, new Vector2(barSize.X, barSize.Y), false, false, .7f, true);
+            SpriteRenderer.Instance.DrawUI(BarMiddle.Tex, startPos, BarMiddle.SourceRect, Color.White, 0f, Vector2.Zero, new Vector2(barSize.X, barSize.Y), false, false, .7f);
 
             //Draw the ends
-            SpriteRenderer.Instance.Draw(BarEnd.Tex, startPos - new Vector2(BarEnd.SourceRect.Value.Width, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, false, false, .7f, true);
-            SpriteRenderer.Instance.Draw(BarEnd.Tex, startPos + new Vector2(barSize.X, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, true, false, .7f, true);
+            SpriteRenderer.Instance.DrawUI(BarEnd.Tex, startPos - new Vector2(BarEnd.SourceRect.Value.Width, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, false, false, .7f);
+            SpriteRenderer.Instance.DrawUI(BarEnd.Tex, startPos + new Vector2(barSize.X, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, true, false, .7f);
 
             //SpriteRenderer.Instance.Draw(BarImage, startPos, null, Color.Black, 0f, BarImage.GetCenterOrigin(), barSize, false, false, .7f, true);
             //SpriteRenderer.Instance.Draw(BarImage, startPos, null, Color.White, 0f, BarImage.GetCenterOrigin(), new Vector2(Math.Min(progressDisplay, barSize.X), barSize.Y), false, false, .71f, true);
@@ -113,7 +113,7 @@ namespace PaperMarioBattleSystem
             float barValScaleFactor = (float)(barSize.X / maxValue);
 
             //Draw the fill
-            SpriteRenderer.Instance.Draw(BarFill.Tex, startPos, BarFill.SourceRect, BarFillColor, 0f, Vector2.Zero, new Vector2(progressDisplay, barSize.Y), false, false, .71f, true);
+            SpriteRenderer.Instance.DrawUI(BarFill.Tex, startPos, BarFill.SourceRect, BarFillColor, 0f, Vector2.Zero, new Vector2(progressDisplay, barSize.Y), false, false, .71f);
         }
     }
 }

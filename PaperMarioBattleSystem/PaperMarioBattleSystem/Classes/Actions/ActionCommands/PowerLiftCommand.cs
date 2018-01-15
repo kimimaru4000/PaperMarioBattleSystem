@@ -599,14 +599,14 @@ namespace PaperMarioBattleSystem
             //Draw the stat arrows - Attack is on top while Defense is on the bottom
             if (drawAttackArrow == true)
             {
-                SpriteRenderer.Instance.Draw(ArrowIcon.Tex, new Vector2(50, attackArrowY), ArrowIcon.SourceRect, Color.Red, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth, true);
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"+{AttackBoosts}", new Vector2(50, attackArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth, true);
+                SpriteRenderer.Instance.DrawUI(ArrowIcon.Tex, new Vector2(50, attackArrowY), ArrowIcon.SourceRect, Color.Red, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"+{AttackBoosts}", new Vector2(50, attackArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth);
             }
 
             if (drawDefenseArrow == true)
             {
-                SpriteRenderer.Instance.Draw(ArrowIcon.Tex, new Vector2(50, defenseArrowY), ArrowIcon.SourceRect, Color.Blue, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth, true);
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"+{DefenseBoosts}", new Vector2(50, defenseArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth, true);
+                SpriteRenderer.Instance.DrawUI(ArrowIcon.Tex, new Vector2(50, defenseArrowY), ArrowIcon.SourceRect, Color.Blue, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"+{DefenseBoosts}", new Vector2(50, defenseArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth);
             }
 
             //Draw the bars - one for each stat arrow
@@ -614,20 +614,20 @@ namespace PaperMarioBattleSystem
             Vector2 attackBarPos = new Vector2(110, attackArrowY + 5);
             float attackFillScale = AttackSelections / (float)AttackBoostReq;
 
-            SpriteRenderer.Instance.Draw(BarEdge.Tex, attackBarPos, BarEdge.SourceRect, Color.White, false, false, barDepth, true);
-            SpriteRenderer.Instance.Draw(Bar.Tex, attackBarPos + new Vector2(BarEdge.SourceRect.Value.Width, 0f), Bar.SourceRect, Color.White, 0f, Vector2.Zero, barScale, false, false, barDepth, true);
-            SpriteRenderer.Instance.Draw(BarEdge.Tex, attackBarPos + new Vector2(barScale.X + BarEdge.SourceRect.Value.Width, 0f), BarEdge.SourceRect, Color.White, true, false, barDepth, true);
-            SpriteRenderer.Instance.Draw(BarFill.Tex, attackBarPos + new Vector2(5f, 5f), BarFill.SourceRect, Color.Pink, 0f, Vector2.Zero, new Vector2(attackFillScale * (barScale.X + fillScaleOffset.X), fillScaleOffset.Y), false, false, barFillDepth, true);
+            SpriteRenderer.Instance.DrawUI(BarEdge.Tex, attackBarPos, BarEdge.SourceRect, Color.White, false, false, barDepth);
+            SpriteRenderer.Instance.DrawUI(Bar.Tex, attackBarPos + new Vector2(BarEdge.SourceRect.Value.Width, 0f), Bar.SourceRect, Color.White, 0f, Vector2.Zero, barScale, false, false, barDepth);
+            SpriteRenderer.Instance.DrawUI(BarEdge.Tex, attackBarPos + new Vector2(barScale.X + BarEdge.SourceRect.Value.Width, 0f), BarEdge.SourceRect, Color.White, true, false, barDepth, true);
+            SpriteRenderer.Instance.DrawUI(BarFill.Tex, attackBarPos + new Vector2(5f, 5f), BarFill.SourceRect, Color.Pink, 0f, Vector2.Zero, new Vector2(attackFillScale * (barScale.X + fillScaleOffset.X), fillScaleOffset.Y), false, false, barFillDepth);
 
             //Defense bar
             Vector2 defenseBarPos = new Vector2(110, defenseArrowY + 5);
             float defenseFillScale = DefenseSelections / (float)DefenseBoostReq;
             Color defenseFillColor = new Color(50, 170, 255);
 
-            SpriteRenderer.Instance.Draw(BarEdge.Tex, defenseBarPos, BarEdge.SourceRect, Color.White, false, false, barDepth, true);
-            SpriteRenderer.Instance.Draw(Bar.Tex, defenseBarPos + new Vector2(BarEdge.SourceRect.Value.Width, 0f), Bar.SourceRect, Color.White, 0f, Vector2.Zero, barScale, false, false, barDepth, true);
-            SpriteRenderer.Instance.Draw(BarEdge.Tex, defenseBarPos + new Vector2(barScale.X + BarEdge.SourceRect.Value.Width, 0f), BarEdge.SourceRect, Color.White, true, false, barDepth, true);
-            SpriteRenderer.Instance.Draw(BarFill.Tex, defenseBarPos + new Vector2(5f, 5f), BarFill.SourceRect, defenseFillColor, 0f, Vector2.Zero, new Vector2(defenseFillScale * (barScale.X + fillScaleOffset.X), fillScaleOffset.Y), false, false, barFillDepth, true);
+            SpriteRenderer.Instance.DrawUI(BarEdge.Tex, defenseBarPos, BarEdge.SourceRect, Color.White, false, false, barDepth);
+            SpriteRenderer.Instance.DrawUI(Bar.Tex, defenseBarPos + new Vector2(BarEdge.SourceRect.Value.Width, 0f), Bar.SourceRect, Color.White, 0f, Vector2.Zero, barScale, false, false, barDepth);
+            SpriteRenderer.Instance.DrawUI(BarEdge.Tex, defenseBarPos + new Vector2(barScale.X + BarEdge.SourceRect.Value.Width, 0f), BarEdge.SourceRect, Color.White, true, false, barDepth);
+            SpriteRenderer.Instance.DrawUI(BarFill.Tex, defenseBarPos + new Vector2(5f, 5f), BarFill.SourceRect, defenseFillColor, 0f, Vector2.Zero, new Vector2(defenseFillScale * (barScale.X + fillScaleOffset.X), fillScaleOffset.Y), false, false, barFillDepth);
         }
 
         /// <summary>

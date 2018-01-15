@@ -114,7 +114,7 @@ namespace PaperMarioBattleSystem
                 color = Color.Green;
             }
 
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 100), color, .7f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 100), color, .7f);
 
             //Handle rotation
             float rotation = -ElapsedTime * UtilityGlobals.ToRadians(.1f);
@@ -134,10 +134,10 @@ namespace PaperMarioBattleSystem
 
             //origins are offset instead of position so each piece rotates from the center of the overall big circle they create
             //May need adjusting
-            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, bigOrigin, 1f, false, false, .2f, true);
-            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(-bigOrigin.X, bigOrigin.Y), 1f, true, false, .2f, true);
-            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(bigOrigin.X, 0), 1f, false, true, .2f, true);
-            SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, -bigOrigin, 1f, true, true, .2f, true);
+            SpriteRenderer.Instance.DrawUI(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, bigOrigin, 1f, false, false, .2f);
+            SpriteRenderer.Instance.DrawUI(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(-bigOrigin.X, bigOrigin.Y), 1f, true, false, .2f);
+            SpriteRenderer.Instance.DrawUI(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(bigOrigin.X, 0), 1f, false, true, .2f);
+            SpriteRenderer.Instance.DrawUI(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, -bigOrigin, 1f, true, true, .2f);
 
             //Draw the middle cursor indicating the small cursor is near
             //It gets smaller the closer the small cursor is to the center
@@ -152,10 +152,10 @@ namespace PaperMarioBattleSystem
                 float scale = UtilityGlobals.Clamp(diff, 0f, maxScale);
 
                 //Draw the middle cursor
-                SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, bigOrigin, scale, false, false, .2f, true);
-                SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(-bigOrigin.X, bigOrigin.Y), scale, true, false, .2f, true);
-                SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(bigOrigin.X, 0), scale, false, true, .2f, true);
-                SpriteRenderer.Instance.Draw(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, -bigOrigin, scale, true, true, .2f, true);
+                SpriteRenderer.Instance.DrawUI(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, bigOrigin, scale, false, false, .2f);
+                SpriteRenderer.Instance.DrawUI(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(-bigOrigin.X, bigOrigin.Y), scale, true, false, .2f);
+                SpriteRenderer.Instance.DrawUI(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, new Vector2(bigOrigin.X, 0), scale, false, true, .2f);
+                SpriteRenderer.Instance.DrawUI(BigCursor.Tex, BigCursorPos, BigCursor.SourceRect, Color.White, rotation, -bigOrigin, scale, true, true, .2f);
             }
         }
 
@@ -163,10 +163,10 @@ namespace PaperMarioBattleSystem
         {
             Vector2 smallOrigin = new Vector2(SmallCursor.SourceRect.Value.Width, SmallCursor.SourceRect.Value.Height);
 
-            SpriteRenderer.Instance.Draw(SmallCursor.Tex, SmallCursorPos, SmallCursor.SourceRect, Color.White, smallOrigin, false, false, .25f, true);
-            SpriteRenderer.Instance.Draw(SmallCursor.Tex, SmallCursorPos + new Vector2(smallOrigin.X, 0), SmallCursor.SourceRect, Color.White, smallOrigin, true, false, .25f, true);
-            SpriteRenderer.Instance.Draw(SmallCursor.Tex, SmallCursorPos + new Vector2(0, smallOrigin.Y), SmallCursor.SourceRect, Color.White, smallOrigin, false, true, .25f, true);
-            SpriteRenderer.Instance.Draw(SmallCursor.Tex, SmallCursorPos + new Vector2(smallOrigin.X, smallOrigin.Y), SmallCursor.SourceRect, Color.White, smallOrigin, true, true, .25f, true);
+            SpriteRenderer.Instance.DrawUI(SmallCursor.Tex, SmallCursorPos, SmallCursor.SourceRect, Color.White, smallOrigin, false, false, .25f);
+            SpriteRenderer.Instance.DrawUI(SmallCursor.Tex, SmallCursorPos + new Vector2(smallOrigin.X, 0), SmallCursor.SourceRect, Color.White, smallOrigin, true, false, .25f);
+            SpriteRenderer.Instance.DrawUI(SmallCursor.Tex, SmallCursorPos + new Vector2(0, smallOrigin.Y), SmallCursor.SourceRect, Color.White, smallOrigin, false, true, .25f);
+            SpriteRenderer.Instance.DrawUI(SmallCursor.Tex, SmallCursorPos + new Vector2(smallOrigin.X, smallOrigin.Y), SmallCursor.SourceRect, Color.White, smallOrigin, true, true, .25f);
         }
     }
 }

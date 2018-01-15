@@ -127,27 +127,9 @@ namespace PaperMarioBattleSystem
             batch.End();
         }
 
-        public void Draw(Texture2D texture, Vector2 position, Color color, bool flipX, bool flipY, float layer, bool uibatch = false, bool absOrigin = false)
-        {
-            Draw(texture, position, null, color, flipX, flipY, layer, uibatch, absOrigin);
-        }
+        #region Generalized Draw Methods
 
-        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, bool flipX, bool flipY, float layer, bool uibatch = false, bool absOrigin = false)
-        {
-            Draw(texture, position, sourceRect, color, Vector2.Zero, flipX, flipY, layer, uibatch, absOrigin);
-        }
-
-        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, Vector2 origin, bool flipX, bool flipY, float layer, bool uibatch = false, bool absOrigin = false)
-        {
-            Draw(texture, position, sourceRect, color, 0f, origin, 1f, flipX, flipY, layer, uibatch, absOrigin);
-        }
-
-        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, float scale, bool flipX, bool flipY, float layer, bool uibatch = false, bool absOrigin = false)
-        {
-            Draw(texture, position, sourceRect, color, rotation, origin, new Vector2(scale, scale), flipX, flipY, layer, uibatch, absOrigin);
-        }
-
-        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool uibatch = false, bool absOrigin = false)
+        public void Draw(SpriteBatch batch, Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool absOrigin = false)
         {
             SpriteEffects se = SpriteEffects.None;
             if (flipX == true) se |= SpriteEffects.FlipHorizontally;
@@ -157,22 +139,98 @@ namespace PaperMarioBattleSystem
             //Come up with something better later
 
             Vector2 realOrigin = (sourceRect.HasValue && absOrigin == false) ? sourceRect.Value.GetOrigin(origin.X, origin.Y) : origin;
-            if (uibatch == false)
-                spriteBatch.Draw(texture, position, sourceRect, color, rotation, realOrigin, scale, se, layer);
-            else uiBatch.Draw(texture, position, sourceRect, color, rotation, realOrigin, scale, se, layer);
+
+            batch.Draw(texture, position, sourceRect, color, rotation, realOrigin, scale, se, layer);
         }
 
-        public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float layer, bool uibatch = true)
-        {
-            DrawText(spriteFont, text, position, color, 0f, Vector2.Zero, 1f, layer, uibatch);
-        }
-
-        public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer, bool uibatch = true)
+        public void DrawText(SpriteBatch batch, SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)
         {
             Vector2 realOrigin = spriteFont.GetOrigin(text, origin.X, origin.Y);
-            if (uibatch == true)
-                uiBatch.DrawString(spriteFont, text, position, color, rotation, realOrigin, scale, SpriteEffects.None, layer);
-            else spriteBatch.DrawString(spriteFont, text, position, color, rotation, realOrigin, scale, SpriteEffects.None, layer);
+            batch.DrawString(spriteFont, text, position, color, rotation, realOrigin, scale, SpriteEffects.None, layer);
         }
+
+        #endregion
+
+        #region Sprite Draw Methods
+
+        public void Draw(Texture2D texture, Vector2 position, Color color, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            Draw(texture, position, null, color, flipX, flipY, layer, absOrigin);
+        }
+
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            Draw(texture, position, sourceRect, color, Vector2.Zero, flipX, flipY, layer, absOrigin);
+        }
+
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, Vector2 origin, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            Draw(texture, position, sourceRect, color, 0f, origin, 1f, flipX, flipY, layer, absOrigin);
+        }
+
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, float scale, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            Draw(texture, position, sourceRect, color, rotation, origin, new Vector2(scale, scale), flipX, flipY, layer, absOrigin);
+        }
+
+        public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            Draw(spriteBatch, texture, position, sourceRect, color, rotation, origin, scale, flipX, flipY, layer, absOrigin);
+        }
+
+        #endregion
+
+        #region UI Draw Methods
+
+        public void DrawUI(Texture2D texture, Vector2 position, Color color, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            DrawUI(texture, position, null, color, flipX, flipY, layer, absOrigin);
+        }
+
+        public void DrawUI(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            DrawUI(texture, position, sourceRect, color, Vector2.Zero, flipX, flipY, layer, absOrigin);
+        }
+
+        public void DrawUI(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, Vector2 origin, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            DrawUI(texture, position, sourceRect, color, 0f, origin, 1f, flipX, flipY, layer, absOrigin);
+        }
+
+        public void DrawUI(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, float scale, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            DrawUI(texture, position, sourceRect, color, rotation, origin, new Vector2(scale, scale), flipX, flipY, layer, absOrigin);
+        }
+
+        public void DrawUI(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            Draw(uiBatch, texture, position, sourceRect, color, rotation, origin, scale, flipX, flipY, layer, absOrigin);
+        }
+
+        #endregion
+
+        #region Text Draw Methods
+
+        public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float layer)
+        {
+            DrawText(spriteFont, text, position, color, 0f, Vector2.Zero, 1f, layer);
+        }
+
+        public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)
+        {
+            DrawText(spriteBatch, spriteFont, text, position, color, rotation, origin, scale, layer);
+        }
+
+        public void DrawUIText(SpriteFont spriteFont, string text, Vector2 position, Color color, float layer)
+        {
+            DrawUIText(spriteFont, text, position, color, 0f, Vector2.Zero, 1f, layer);
+        }
+
+        public void DrawUIText(SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)
+        {
+            DrawText(uiBatch, spriteFont, text, position, color, rotation, origin, scale, layer);
+        }
+
+        #endregion
     }
 }

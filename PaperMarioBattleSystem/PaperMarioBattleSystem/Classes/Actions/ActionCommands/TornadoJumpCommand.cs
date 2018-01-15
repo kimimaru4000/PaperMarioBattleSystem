@@ -90,10 +90,10 @@ namespace PaperMarioBattleSystem
                     Color buttonColor = Color.White;
                     if (ButtonIndex > i) buttonColor = Color.Black;
 
-                    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, button.ToString(), startDrawLoc + new Vector2(xPosDiff * i, 0), buttonColor, .7f);
+                    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startDrawLoc + new Vector2(xPosDiff * i, 0), buttonColor, .7f);
                 }
 
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Math.Round(TornadoEndTime - Time.ActiveMilliseconds, 2).ToString(), startDrawLoc + new Vector2(0, -20), Color.White, .7f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Math.Round(TornadoEndTime - Time.ActiveMilliseconds, 2).ToString(), startDrawLoc + new Vector2(0, -20), Color.White, .7f);
             }
         }
 

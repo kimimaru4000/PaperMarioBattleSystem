@@ -90,7 +90,7 @@ namespace PaperMarioBattleSystem
                 if (showHP > 0)
                 {
                     //Show HP
-                    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"{CurHP}/{BattleStats.MaxHP}", Position + new Vector2(0, 40), Color.White, .2f, false);
+                    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"{CurHP}/{BattleStats.MaxHP}", Position + new Vector2(0, 40), Color.White, .2f);
                 }
             }
         }

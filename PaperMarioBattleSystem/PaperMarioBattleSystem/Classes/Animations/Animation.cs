@@ -324,7 +324,9 @@ namespace PaperMarioBattleSystem
                 Vector2 realPos = position + PosOffset;
                 float realLayer = layer + DepthOffset;
 
-                SpriteRenderer.Instance.Draw(spriteSheet, realPos, DrawRegion, color, 0f, origin, scale, flipped, false, realLayer, uibatch);
+                if (uibatch == true)
+                    SpriteRenderer.Instance.DrawUI(spriteSheet, realPos, DrawRegion, color, 0f, origin, scale, flipped, false, realLayer);
+                else SpriteRenderer.Instance.Draw(spriteSheet, realPos, DrawRegion, color, 0f, origin, scale, flipped, false, realLayer, uibatch);
             }
         }
     }

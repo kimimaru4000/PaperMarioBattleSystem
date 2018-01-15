@@ -117,7 +117,7 @@ namespace PaperMarioBattleSystem
                 CroppedTexture2D croppedTex = TexList[i];
                 float realDepth = BaseDepth + (i * DepthDiff);
 
-                SpriteRenderer.Instance.Draw(croppedTex.Tex, Position, croppedTex.SourceRect, TintColor, Rotation, Vector2.Zero, Scale, FlipX, FlipY, realDepth, true);
+                SpriteRenderer.Instance.DrawUI(croppedTex.Tex, Position, croppedTex.SourceRect, TintColor, Rotation, Vector2.Zero, Scale, FlipX, FlipY, realDepth);
             }
         }
     }

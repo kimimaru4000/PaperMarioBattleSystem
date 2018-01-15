@@ -40,10 +40,10 @@ namespace PaperMarioBattleSystem
 
         public static void Draw()
         {
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"{FPSValue}", Vector2.Zero, Color.White, .5f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"{FPSValue}", Vector2.Zero, Color.White, .5f);
             if (Time.RunningSlowly == true)
             {
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"RUNNING SLOW!", new Vector2(0f, 20f), Color.Red, .5f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"RUNNING SLOW!", new Vector2(0f, 20f), Color.Red, .5f);
             }
         }
     }

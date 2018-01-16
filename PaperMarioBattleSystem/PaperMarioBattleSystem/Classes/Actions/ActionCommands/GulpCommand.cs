@@ -42,10 +42,12 @@ namespace PaperMarioBattleSystem
 
         private bool WithinRange => (CurBarValue >= SuccessStartValue && CurBarValue < MaxBarValue);
 
-        public GulpCommand(IActionCommandHandler commandAction, double totalDuration, double successRange, double speedScale) : base(commandAction, totalDuration)
+        public GulpCommand(IActionCommandHandler commandAction, double totalDuration, double successRange, double speedScale, Keys buttonToHold) : base(commandAction, totalDuration)
         {
             SuccessRange = successRange;
             SpeedScale = speedScale;
+
+            KeyToHold = buttonToHold;
         }
 
         public override void StartInput(params object[] values)
@@ -100,7 +102,7 @@ namespace PaperMarioBattleSystem
             {
                 StartedHolding = true;
 
-                FillBar(Time.ElapsedMilliseconds * SpeedScale, true);
+                FillBar(Time.ElapsedMilliseconds * SpeedScale);
                 //If the button was held too long, it's a failure
                 if (CurBarValue > MaxBarValue)
                 {

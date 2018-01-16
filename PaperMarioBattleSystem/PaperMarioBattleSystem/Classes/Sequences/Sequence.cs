@@ -401,8 +401,6 @@ namespace PaperMarioBattleSystem
 
         #region Action Command Methods
 
-        //We have OnCommandSuccess() non-virtual so we can perform general functionality for successfully completing any Action Command
-        //Examples include showing the degrees of success ("Nice," "Great," etc.) and increasing the damage dealt by All or Nothing
         public void OnCommandSuccess()
         {
             CommandResult = ActionCommand.CommandResults.Success;
@@ -410,8 +408,6 @@ namespace PaperMarioBattleSystem
             CommandSuccess();
         }
 
-        //We have OnCommandFailed() non-virtual so we can perform general functionality for failing to complete any Action Command
-        //Examples include dealing no damage with the All or Nothing Badge
         public void OnCommandFailed()
         {
             CommandResult = ActionCommand.CommandResults.Failure;
@@ -419,9 +415,8 @@ namespace PaperMarioBattleSystem
             CommandFailed();
         }
 
-        //NOTE: For some moves, these only show up when you hit (Ex. Jump, Hammer, Power Shell).
+        //For some moves, these only show up when you hit (Ex. Jump, Hammer, Power Shell).
         //Other moves show them as you perform the command, even if they deal damage later (Ex. Mini-Egg, Earth Tremor).
-        //Find a way to define when to show them in each move
         public void OnCommandRankResult(ActionCommand.CommandRank commandRank)
         {
             //Don't bother if the CommandRank is nothing

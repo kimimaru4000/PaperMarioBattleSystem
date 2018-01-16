@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
         public WattSubMenu()
         {
             Position = new Vector2(210, 150);
-            BattleActions = new List<MoveAction>() { new Bonk() };
+            BattleActions = new List<MoveAction>() { new ElectroDashAction() };
         }
     }
 }

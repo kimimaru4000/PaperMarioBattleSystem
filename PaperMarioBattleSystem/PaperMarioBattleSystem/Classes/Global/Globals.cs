@@ -1209,6 +1209,14 @@ namespace PaperMarioBattleSystem
             public const string EggThrowName = "EggThrow";
         }
 
+        /// <summary>
+        /// Watt-specific battle animations.
+        /// </summary>
+        public static class WattBattleAnimations
+        {
+            public const string WattElectricChargeName = "WattElectricCharge";
+        }
+
         public static class ParagoombaBattleAnimations
         {
             public const string DiveKickName = "DiveKick";

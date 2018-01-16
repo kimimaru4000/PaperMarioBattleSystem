@@ -60,7 +60,7 @@ added to your total in battle shortly afterwards. This can be repeated.
 
 Bowser
 ------
-Shockwave Drain (Star Rod wave attack) - Removes all positive Status Effects on Mario and his Partner (it removes Goombario's Charge), even if they Guard it. This also removes Electrified (not with Zap Tap equipped)
+Shockwave Drain (Star Rod wave attack) - Removes all positive Status Effects on Mario and his Partner (it removes Goombario's Charge), even if they Guard it. This also removes Electrified (not with Zap Tap equipped) and even Stone!
 Power Up - Removes all negative Status Effects on Bowser, makes him Invincible, and doubles the power of all attacks except Shockwave Drain
 
 Bandits/Big Bandits/Badge Bandits

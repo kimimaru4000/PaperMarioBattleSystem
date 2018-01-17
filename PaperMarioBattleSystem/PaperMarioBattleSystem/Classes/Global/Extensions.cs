@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
     public static class Extensions
     {
         #region Texture2D Extensions
-
+        
         /// <summary>
         /// Gets the origin of a Texture2D by ratio instead of specifying width and height
         /// </summary>
@@ -42,6 +42,44 @@ namespace PaperMarioBattleSystem
         public static Vector2 GetCenterOrigin(this Texture2D texture2D)
         {
             return texture2D.GetOrigin(.5f, .5f);
+        }
+
+        /// <summary>
+        /// Gets the texture coordinates at specified X and Y values of a Texture2D in a Vector2. The returned X and Y values will be from 0 to 1.
+        /// </summary>
+        /// <param name="texture2D">The Texture2D to get the texture coordinates from.</param>
+        /// <param name="sourceRect">The Rectangle to get the coordinates from.</param>
+        /// <returns>A Vector2 with the Rectangle's X and Y values divided by the texture's width and height, respectively.</returns>
+        public static Vector2 GetTexCoordsAt(this Texture2D texture2D, Rectangle? sourceRect)
+        {
+            Vector2 texCoords = Vector2.Zero;
+
+            if (sourceRect != null)
+            {
+                return GetTexCoordsAt(texture2D, sourceRect.Value.X, sourceRect.Value.Y);
+            }
+
+            return texCoords;
+        }
+
+        /// <summary>
+        /// Gets the texture coordinates at specified X and Y values of a Texture2D in a Vector2. The returned X and Y values will be from 0 to 1.
+        /// </summary>
+        /// <param name="texture2D">The Texture2D to get the texture coordinates from.</param>
+        /// <param name="x">The X position on the texture.</param>
+        /// <param name="y">The Y position on the texture.</param>
+        /// <returns>A Vector2 with the X and Y values divided by the texture's width and height, respectively.</returns>
+        public static Vector2 GetTexCoordsAt(this Texture2D texture2D, int x, int y)
+        {
+            Vector2 texCoords = Vector2.Zero;
+
+            //Get the ratio of the X and Y values from the Width and Height of the texture
+            if (texture2D.Width > 0)
+                texCoords.X = x / (float)texture2D.Width;
+            if (texture2D.Height > 0)
+                texCoords.Y = y / (float)texture2D.Height;
+
+            return texCoords;
         }
 
         #endregion

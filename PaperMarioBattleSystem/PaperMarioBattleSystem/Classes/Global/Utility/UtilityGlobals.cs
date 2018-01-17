@@ -42,6 +42,31 @@ namespace PaperMarioBattleSystem
         public static int LerpPrecise(int value1, int value2, float amount) => (int)(((1 - amount) * value1) + (value2 * amount));
 
         /// <summary>
+        /// Bounces a value between 0 and a max value.
+        /// </summary>
+        /// <param name="time">The time value.</param>
+        /// <param name="maxVal">The max value.</param>
+        /// <returns>A double with a value between 0 and <paramref name="maxVal"/>.</returns>
+        public static double PingPong(double time, double maxVal)
+        {
+            double lengthTimesTwo = maxVal * 2d;
+            double timeMod = time % lengthTimesTwo;
+
+            if (timeMod >= 0 && timeMod < maxVal)
+                return timeMod;
+            else
+                return lengthTimesTwo - timeMod;
+        }
+
+        /// <summary>
+        /// Bounces a value between 0 and a max value.
+        /// </summary>
+        /// <param name="time">The time value.</param>
+        /// <param name="maxVal">The max value.</param>
+        /// <returns>A float with a value between 0 and <paramref name="maxVal"/>.</returns>
+        public static float PingPong(double time, float maxVal) => (float)PingPong(time, (double)maxVal);
+
+        /// <summary>
         /// Performs a Hermite spline interpolation.
         /// </summary>
         /// <remarks>This is a more verbose but readable version of MonoGame's Hermite.

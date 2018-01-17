@@ -9,9 +9,16 @@
 
 sampler s0;
 
-float4 PoisonTint(float2 coords: TEXCOORD0) : COLOR0
+struct VertexShaderOutput
 {
-	float4 color = tex2D(s0, coords);
+	float4 Position : SV_POSITION;
+	float4 Color : COLOR0;
+	float2 TextureCoordinates : TEXCOORD0;
+};
+
+float4 PoisonTint(VertexShaderOutput input) : COLOR0
+{
+	float4 color = tex2D(s0, input.TextureCoordinates);
 	
 	//R and B are multiplied by some scale; G is untouched
 	color.r = color.r * 0.6277;

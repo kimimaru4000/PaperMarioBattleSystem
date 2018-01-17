@@ -259,7 +259,13 @@ namespace PaperMarioBattleSystem
 
             //Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}/Charge");
             //Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
+
+            //BattleMario mario = BattleManager.Instance.GetMario();
+
             //chargeEffect.Parameters["chargeTex"].SetValue(tex);
+            //chargeEffect.Parameters["chargeAlpha"].SetValue((float)(UtilityGlobals.PingPong(Time.ActiveMilliseconds / 1000f, 1f)));
+            //chargeEffect.Parameters["entityColor"].SetValue(mario.TintColor.ToVector4());
+            //chargeEffect.Parameters["chargeOffset"].SetValue(new Vector2(0f, ((float)Time.ActiveMilliseconds % 1000f) / 1000f));
 
             SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.CalculateTransformation());
             SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);

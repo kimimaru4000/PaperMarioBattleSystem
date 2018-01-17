@@ -16,9 +16,11 @@ namespace PaperMarioBattleSystem
     {
         private const double MoveTime = 500d;
 
-        public OuttaSightSecondHalfSequence(MoveAction moveAction) : base(moveAction)
+        private float AlphaVal = .3f;
+        
+        public OuttaSightSecondHalfSequence(MoveAction moveAction, float alphaVal) : base(moveAction)
         {
-
+            AlphaVal = alphaVal;
         }
 
         protected override void SequenceStartBranch()
@@ -33,8 +35,18 @@ namespace PaperMarioBattleSystem
                     allyAffected.RemoveEvasionMod(0d);
 
                     //Turn transparency back
-                    User.TintColor = Color.White;
-                    allyAffected.TintColor = Color.White;
+                    Color entityColor = User.TintColor;
+                    Color allyColor = allyAffected.TintColor;
+
+                    double colorDiff = (1 / (double)AlphaVal);
+                
+                    User.TintColor = new Color((int)Math.Ceiling(entityColor.R * colorDiff), (int)Math.Ceiling(entityColor.G * colorDiff), (int)Math.Ceiling(entityColor.B * colorDiff), (int)Math.Ceiling(entityColor.A * colorDiff));
+                    allyAffected.TintColor = new Color((int)Math.Ceiling(allyColor.R * colorDiff), (int)Math.Ceiling(allyColor.G * colorDiff), (int)Math.Ceiling(allyColor.B * colorDiff), (int)Math.Ceiling(allyColor.A * colorDiff));
+
+                    User.EntityProperties.UnsuppressStatuses(Enumerations.StatusSuppressionTypes.Effects, Enumerations.StatusTypes.Poison, Enumerations.StatusTypes.Burn, Enumerations.StatusTypes.Frozen);
+                    allyAffected.EntityProperties.UnsuppressStatuses(Enumerations.StatusSuppressionTypes.Effects, Enumerations.StatusTypes.Poison, Enumerations.StatusTypes.Burn, Enumerations.StatusTypes.Frozen);
+                    User.EntityProperties.UnsuppressStatuses(Enumerations.StatusSuppressionTypes.TurnCount, Enumerations.StatusTypes.Invisible);
+                    allyAffected.EntityProperties.UnsuppressStatuses(Enumerations.StatusSuppressionTypes.TurnCount, Enumerations.StatusTypes.Invisible);
 
                     //Make the ally play its idle animation
                     allyAffected.AnimManager.PlayAnimation(EntitiesAffected[0].GetIdleAnim());

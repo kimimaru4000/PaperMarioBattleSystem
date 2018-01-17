@@ -8,27 +8,14 @@
 #endif
 
 sampler s0;
-float4 colorVal = (0, 0, 0, 0);
 
-float4 SetColor(float2 coords : TEXCOORD0) : COLOR0
+float4 PoisonTint(float2 coords: TEXCOORD0) : COLOR0
 {
 	float4 color = tex2D(s0, coords);
-	color.rgb = colorVal.rgb;
-
-	return color;
-}
-
-float4 GrayScale(float2 coords: TEXCOORD0) : COLOR0
-{
-    float4 color = tex2D(s0, coords);
-		color.rgb = color.r;
-    return color;
-}
-
-float4 ColorFlip(float2 coords: TEXCOORD0) : COLOR0
-{
-	float4 color = tex2D(s0, coords);
-	color.rgb = color.bgr;
+	
+	//R and B are multiplied by some scale; G is untouched
+	color.r = color.r * 0.6277;
+	color.b = color.b * 0.3896;
 
 	return color;
 }
@@ -37,10 +24,6 @@ technique BasicColorDrawing
 {
 	pass P0
 	{
-		PixelShader = compile PS_SHADERMODEL GrayScale();
+		PixelShader = compile PS_SHADERMODEL PoisonTint();
 	}
-	//pass P1
-	//{
-	//	PixelShader = compile PS_SHADERMODEL ColorFlip();
-	//}
 };

@@ -16,9 +16,11 @@ namespace PaperMarioBattleSystem
     {
         private const double MoveTime = 500d;
 
-        public VeilSecondHalfSequence(MoveAction moveAction) : base(moveAction)
-        {
+        private float ScaleVal = float.Epsilon;
 
+        public VeilSecondHalfSequence(MoveAction moveAction, float scaleVal) : base(moveAction)
+        {
+            ScaleVal = scaleVal;
         }
 
         protected override void SequenceStartBranch()
@@ -37,8 +39,8 @@ namespace PaperMarioBattleSystem
                     allyAffected.EntityProperties.UnsuppressStatuses(Enumerations.StatusSuppressionTypes.Effects, Enumerations.StatusTypes.Poison, Enumerations.StatusTypes.Burn, Enumerations.StatusTypes.Frozen);
 
                     //Make them visible
-                    User.TintColor = Color.White;
-                    allyAffected.TintColor = Color.White;
+                    User.Scale /= ScaleVal;
+                    allyAffected.Scale /= ScaleVal;
 
                     CurSequenceAction = new WaitSeqAction(0d);
 

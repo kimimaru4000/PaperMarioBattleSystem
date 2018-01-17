@@ -20,6 +20,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private const double EvasionValue = 0d;
 
+        private float AlphaValue = .5f;
+
         public InvisibleStatus(int duration)
         {
             StatusType = Enumerations.StatusTypes.Invisible;
@@ -36,11 +38,17 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             EntityAfflicted.AddEvasionMod(EvasionValue);
+
+            EntityAfflicted.TintColor = EntityAfflicted.TintColor.CeilingMult(AlphaValue);
         }
 
         protected override void OnEnd()
         {
             EntityAfflicted.RemoveEvasionMod(EvasionValue);
+
+            Color color = EntityAfflicted.TintColor;
+            float val = (1 / AlphaValue);
+            EntityAfflicted.TintColor *= val;
         }
 
         protected override void OnPhaseCycleStart()

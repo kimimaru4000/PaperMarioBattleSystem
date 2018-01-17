@@ -257,8 +257,8 @@ namespace PaperMarioBattleSystem
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, null, null, Camera.Instance.CalculateTransformation());
-            SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.uiBatch, SamplerState.PointClamp, null, null);
+            SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.CalculateTransformation());
+            SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 
             Debug.DebugDraw();
         }

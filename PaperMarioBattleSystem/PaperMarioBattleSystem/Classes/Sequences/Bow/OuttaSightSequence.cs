@@ -17,6 +17,8 @@ namespace PaperMarioBattleSystem
     {
         private const double MoveTime = 500d;
 
+        private float AlphaVal = .3f;
+
         /// <summary>
         /// The BattleEntity using the action.
         /// </summary>
@@ -71,8 +73,17 @@ namespace PaperMarioBattleSystem
                     AllyAffected.AddEvasionMod(0d);
 
                     //Turn them both transparent
-                    User.TintColor *= .3f;
-                    AllyAffected.TintColor *= .3f;
+                    User.TintColor = User.TintColor.CeilingMult(AlphaVal);
+                    AllyAffected.TintColor = AllyAffected.TintColor.CeilingMult(AlphaVal);
+
+                    //Suppress these Statuses in these ways
+                    //In PM, Outta Sight technically doesn't suppress anything, since Status Effects take place on the character's turn instead
+                    //of at the start of each phase cycle
+                    //Follow Veil in this regard, since that was designed with TTYD's battle system
+                    EntityUsing.EntityProperties.SuppressStatuses(Enumerations.StatusSuppressionTypes.Effects, Enumerations.StatusTypes.Poison, Enumerations.StatusTypes.Burn, Enumerations.StatusTypes.Frozen);
+                    AllyAffected.EntityProperties.SuppressStatuses(Enumerations.StatusSuppressionTypes.Effects, Enumerations.StatusTypes.Poison, Enumerations.StatusTypes.Burn, Enumerations.StatusTypes.Frozen);
+                    EntityUsing.EntityProperties.SuppressStatuses(Enumerations.StatusSuppressionTypes.TurnCount, Enumerations.StatusTypes.Invisible);
+                    AllyAffected.EntityProperties.SuppressStatuses(Enumerations.StatusSuppressionTypes.TurnCount, Enumerations.StatusTypes.Invisible);
 
                     //The ally assumes the Guard position
                     AllyAffected.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName);
@@ -153,7 +164,7 @@ namespace PaperMarioBattleSystem
             MoveAction outtaSightSecondHalf = new MoveAction("Outta Sight Second Half",
                 new MoveActionData(null, "Second half of Outta Sight", Enumerations.MoveResourceTypes.FP, 0,
                 Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.First,
-                false, null), new OuttaSightSecondHalfSequence(null));
+                false, null), new OuttaSightSecondHalfSequence(null, AlphaVal));
 
             //Start the second half of the sequence
             EntityUsing.StartAction(outtaSightSecondHalf, true, AllyAffected);

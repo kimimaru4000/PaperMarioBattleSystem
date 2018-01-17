@@ -109,6 +109,32 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Color Extensions
+
+        /// <summary>
+        /// Divides a Color's components by a scalar amount.
+        /// </summary>
+        /// <param name="color">The Color.</param>
+        /// <param name="scalar">The scalar value to divide the Color components by.</param>
+        /// <returns>A Color which has the components of the original Color divided by the scalar amount and floored due to integer casting.</returns>
+        public static Color Divide(this Color color, float scalar)
+        {
+            return new Color((int)(color.R / scalar), (int)(color.G / scalar), (int)(color.B / scalar), (int)(color.A / scalar));
+        }
+
+        /// <summary>
+        /// Multiplies a Color's components by a scalar amount, using the ceiling of the resulting values.
+        /// </summary>
+        /// <param name="color">The Color.</param>
+        /// <param name="scalar">The scalar value to multiply the Color components by.</param>
+        /// <returns>A Color which has the components of the original Color multiplied by the scalar amount, using the ceiling of the results.</returns>
+        public static Color CeilingMult(this Color color, float scalar)
+        {
+            return new Color((int)Math.Ceiling(color.R * scalar), (int)Math.Ceiling(color.G * scalar), (int)Math.Ceiling(color.B * scalar), (int)Math.Ceiling(color.A * scalar));
+        }
+
+        #endregion
+
         #region Vector2 Extensions
 
         /// <summary>

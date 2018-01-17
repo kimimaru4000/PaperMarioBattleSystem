@@ -117,9 +117,9 @@ namespace PaperMarioBattleSystem
          *  -It's unsure how shaders will even be used yet
          */
 
-        public void BeginDrawing(SpriteBatch batch, SamplerState samplerState, Effect effect, Matrix? transformMatrix)
+        public void BeginDrawing(SpriteBatch batch, BlendState blendState, SamplerState samplerState, Effect effect, Matrix? transformMatrix)
         {
-            batch.Begin(SpriteSortMode.FrontToBack, BlendState.AlphaBlend, samplerState, null, null, effect, transformMatrix);
+            batch.Begin(SpriteSortMode.FrontToBack, blendState, samplerState, null, null, effect, transformMatrix);
         }
 
         public void EndDrawing(SpriteBatch batch)

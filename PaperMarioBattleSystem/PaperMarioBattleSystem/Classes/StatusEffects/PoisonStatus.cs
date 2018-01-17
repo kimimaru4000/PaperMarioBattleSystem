@@ -16,6 +16,9 @@ namespace PaperMarioBattleSystem
     {
         private int PoisonDamage = 1;
 
+        private float RedTint = 0.6277f;
+        private float BlueTint = 0.3896f;
+        
         public PoisonStatus(int duration)
         {
             StatusType = Enumerations.StatusTypes.Poison;
@@ -31,12 +34,13 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-            
+            EntityAfflicted.TintColor = new Color((int)Math.Ceiling(EntityAfflicted.TintColor.R * RedTint), EntityAfflicted.TintColor.G, (int)Math.Ceiling(EntityAfflicted.TintColor.B * BlueTint), EntityAfflicted.TintColor.A);
         }
 
         protected override void OnEnd()
         {
-            
+            Color color = EntityAfflicted.TintColor;
+            EntityAfflicted.TintColor = new Color((int)(color.R * (1f / RedTint)), color.G, (int)(color.B * (1f / BlueTint)), color.A);
         }
 
         protected override void OnPhaseCycleStart()

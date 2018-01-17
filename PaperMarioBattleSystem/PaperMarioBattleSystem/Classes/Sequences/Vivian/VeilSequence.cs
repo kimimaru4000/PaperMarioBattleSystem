@@ -24,6 +24,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private BattleEntity AllyAffected = null;
 
+        private float ScaleVal = .000001f;
+
         public VeilSequence(MoveAction moveAction) : base(moveAction)
         {
 
@@ -91,11 +93,10 @@ namespace PaperMarioBattleSystem
 
                     break;
                 case 1:
-                    //Make them invisible
-                    //NOTE: We need to change this to scale down the characters to almost 0, as that is how it works in the actual game
-                    EntityUsing.TintColor = Color.White * 0f;
-                    AllyAffected.TintColor = Color.White * 0f;
-
+                    //Scale down the characters to almost 0; that is how it works in the actual game
+                    EntityUsing.Scale *= ScaleVal;
+                    AllyAffected.Scale *= ScaleVal;
+                    
                     //Add evasion so attacks against these entities always miss
                     EntityUsing.AddEvasionMod(0d);
                     AllyAffected.AddEvasionMod(0d);
@@ -180,7 +181,7 @@ namespace PaperMarioBattleSystem
             MoveAction veilSecondHalf = new MoveAction("Veil Second Half",
                 new MoveActionData(null, "Second half of Veil", Enumerations.MoveResourceTypes.FP, 0,
                 Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.First,
-                false, null), new VeilSecondHalfSequence(null));
+                false, null), new VeilSecondHalfSequence(null, ScaleVal));
 
             //Start the second half of the sequence
             EntityUsing.StartAction(veilSecondHalf, true, AllyAffected);

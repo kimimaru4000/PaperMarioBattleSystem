@@ -26,6 +26,40 @@ namespace PaperMarioBattleSystem
             AfflictedMessage = "Huge! Attack power is\nnow boosted!";
         }
 
+        protected override void OnAfflict()
+        {
+            base.OnAfflict();
+
+            EntityAfflicted.Scale *= 2f;
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            EntityAfflicted.Scale /= 2f;
+        }
+
+        protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
+        {
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                base.OnSuppress(statusSuppressionType);
+
+                EntityAfflicted.Scale /= 2f;
+            }
+        }
+
+        protected override void OnUnsuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
+        {
+            if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
+            {
+                base.OnUnsuppress(statusSuppressionType);
+
+                EntityAfflicted.Scale *= 2f;
+            }
+        }
+
         public override StatusEffect Copy()
         {
             return new HugeStatus(Duration);

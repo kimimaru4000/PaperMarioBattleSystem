@@ -9,13 +9,17 @@
 
 sampler s0;
 
-float4 PoisonTint(float2 coords: TEXCOORD0) : COLOR0
+Texture2D chargeTex;
+sampler chargeSampler = sampler_state { Texture = <chargeTex>; };
+
+float4 ChargeScroll(float2 coords: TEXCOORD0) : COLOR0
 {
 	float4 color = tex2D(s0, coords);
 	
-	//R and B are multiplied by some scale; G is untouched
-	color.r = color.r * 0.6277;
-	color.b = color.b * 0.3896;
+	float4 chargeColor = tex2D(chargeSampler, coords);
+
+	if (color.a)
+		return chargeColor;
 
 	return color;
 }
@@ -24,6 +28,6 @@ technique BasicColorDrawing
 {
 	pass P0
 	{
-		PixelShader = compile PS_SHADERMODEL PoisonTint();
+		PixelShader = compile PS_SHADERMODEL ChargeScroll();
 	}
 };

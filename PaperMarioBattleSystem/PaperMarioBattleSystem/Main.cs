@@ -257,6 +257,10 @@ namespace PaperMarioBattleSystem
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            //Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}/Charge");
+            //Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
+            //chargeEffect.Parameters["chargeTex"].SetValue(tex);
+
             SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.CalculateTransformation());
             SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 

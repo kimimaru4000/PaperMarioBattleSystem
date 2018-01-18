@@ -9,14 +9,22 @@
 
 sampler s0;
 
+//The Charge texture
 Texture2D chargeTex;
 sampler chargeSampler = sampler_state { Texture = <chargeTex>; };
 
+//The alpha value to make the Charge texture
 float chargeAlpha;
+//The color of the object that's being rendered
 float4 objColor;
 
+//The offset to sample the Charge texture from
 float2 chargeOffset;
+//The ratio between the Charge texture and the object's full texture (Ex. spritesheet)
+//The lower this value is, the closer together the colors of the Charge texture will be
 float chargeTexRatio;
+//The texture coordinates of the frame the object is rendering in the spritesheet
+float2 objFrameOffset;
 
 struct VertexShaderOutput
 {
@@ -38,13 +46,17 @@ float4 ChargeScroll(VertexShaderOutput input) : COLOR0
 
 	float4 color = tex2D(s0, input.TextureCoordinates);
 
+	//Offset the rendered object's current frame from the top of the spritesheet so the charge effect is always consistent
+	float2 scaledCoords = input.TextureCoordinates - objFrameOffset;
+	if (scaledCoords.x < 0) scaledCoords.x = 0;
+	if (scaledCoords.y < 0) scaledCoords.y = 0;
+
 	//Check the Y pixel
 	//For each Y, go down the Y on the Charge texture
 	//So Y = 0, then the pixel chosen is at coords.y = 0
 	//Wrap around every 64, which is the height of the Charge texture (use variable later)
 	//So, if the current pixel is at 65, we would choose pixel 1 on the Charge texture
-
-	float2 coords = float2(input.TextureCoordinates.x, input.TextureCoordinates.y / chargeTexRatio);
+	float2 coords = float2(scaledCoords.x, scaledCoords.y / chargeTexRatio);
 
 	//Frac will wrap the values on the Charge texture from 0 to (less than) 1
 	float4 chargeColor = tex2D(chargeSampler, frac(coords + chargeOffset));

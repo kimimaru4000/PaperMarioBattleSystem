@@ -13,10 +13,10 @@ Texture2D chargeTex;
 sampler chargeSampler = sampler_state { Texture = <chargeTex>; };
 
 float chargeAlpha;
-float4 entityColor;
+float4 objColor;
 
 float2 chargeOffset;
-float diff;
+float chargeTexRatio;
 
 struct VertexShaderOutput
 {
@@ -44,15 +44,15 @@ float4 ChargeScroll(VertexShaderOutput input) : COLOR0
 	//Wrap around every 64, which is the height of the Charge texture (use variable later)
 	//So, if the current pixel is at 65, we would choose pixel 1 on the Charge texture
 
-	float2 coords = float2(input.TextureCoordinates.x, input.TextureCoordinates.y / diff);
+	float2 coords = float2(input.TextureCoordinates.x, input.TextureCoordinates.y / chargeTexRatio);
 
 	//Frac will wrap the values on the Charge texture from 0 to (less than) 1
 	float4 chargeColor = tex2D(chargeSampler, frac(coords + chargeOffset));
 
 	if (color.a)
 	{
-		float4 multChargeAlpha = mul(chargeColor, mul(chargeAlpha, entityColor.a));
-		return multChargeAlpha + color;
+		float4 multChargeAlpha = chargeColor * (chargeAlpha * objColor.a);
+		return multChargeAlpha + (color * objColor);
 	}
 
 	return color;

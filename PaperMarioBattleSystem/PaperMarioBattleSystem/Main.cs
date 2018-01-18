@@ -267,9 +267,9 @@ namespace PaperMarioBattleSystem
 
             chargeEffect.Parameters["chargeTex"].SetValue(tex);
             chargeEffect.Parameters["chargeAlpha"].SetValue((float)(UtilityGlobals.PingPong(Time.ActiveMilliseconds / 1000f, .8f)));
-            chargeEffect.Parameters["entityColor"].SetValue(mario.TintColor.ToVector4());
+            chargeEffect.Parameters["objColor"].SetValue(mario.TintColor.ToVector4());
             chargeEffect.Parameters["chargeOffset"].SetValue(new Vector2(0f, ((float)Time.ActiveMilliseconds % 2000f) / 2000f));
-            chargeEffect.Parameters["diff"].SetValue(dimensionRatio.Y);
+            chargeEffect.Parameters["chargeTexRatio"].SetValue(dimensionRatio.Y);
 
             SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, chargeEffect, Camera.Instance.CalculateTransformation());
             SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);

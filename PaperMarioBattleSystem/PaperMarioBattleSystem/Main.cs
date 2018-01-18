@@ -257,17 +257,21 @@ namespace PaperMarioBattleSystem
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}/Charge");
-            //Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
+            Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}/Charge");
+            Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
 
-            //BattleMario mario = BattleManager.Instance.GetMario();
+            BattleMario mario = BattleManager.Instance.GetMario();
+            Texture2D spriteSheet = mario.AnimManager.CurrentAnim.SpriteSheet;
 
-            //chargeEffect.Parameters["chargeTex"].SetValue(tex);
-            //chargeEffect.Parameters["chargeAlpha"].SetValue((float)(UtilityGlobals.PingPong(Time.ActiveMilliseconds / 1000f, 1f)));
-            //chargeEffect.Parameters["entityColor"].SetValue(mario.TintColor.ToVector4());
-            //chargeEffect.Parameters["chargeOffset"].SetValue(new Vector2(0f, ((float)Time.ActiveMilliseconds % 1000f) / 1000f));
+            Vector2 dimensionRatio = new Vector2(tex.Width, tex.Height) / new Vector2(spriteSheet.Width, spriteSheet.Height);
 
-            SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.CalculateTransformation());
+            chargeEffect.Parameters["chargeTex"].SetValue(tex);
+            chargeEffect.Parameters["chargeAlpha"].SetValue((float)(UtilityGlobals.PingPong(Time.ActiveMilliseconds / 1000f, .8f)));
+            chargeEffect.Parameters["entityColor"].SetValue(mario.TintColor.ToVector4());
+            chargeEffect.Parameters["chargeOffset"].SetValue(new Vector2(0f, ((float)Time.ActiveMilliseconds % 2000f) / 2000f));
+            chargeEffect.Parameters["diff"].SetValue(dimensionRatio.Y);
+
+            SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, chargeEffect, Camera.Instance.CalculateTransformation());
             SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 
             Debug.DebugDraw();

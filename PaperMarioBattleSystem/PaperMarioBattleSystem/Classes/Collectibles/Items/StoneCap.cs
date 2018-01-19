@@ -15,6 +15,8 @@ namespace PaperMarioBattleSystem
         public StatusChanceHolder[] StatusesInflicted { get; private set; }
         private const int StoneTurns = 3;
 
+        public override Sequence SequencePerformed => new StoneCapSequence(null);
+
         public StoneCap()
         {
             Name = "Stone Cap";

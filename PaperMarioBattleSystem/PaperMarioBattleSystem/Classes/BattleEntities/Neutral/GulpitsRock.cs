@@ -42,8 +42,8 @@ namespace PaperMarioBattleSystem
 
             SetStatusProperties();
 
-            //Gulpits' Rocks do not move at all, so their base turns are 0
-            BaseTurns = 0;
+            //Gulpits' Rocks do not move at all, so their base turns are less than 0
+            BaseTurns = -99;
 
             BigRock = bigRock;
 

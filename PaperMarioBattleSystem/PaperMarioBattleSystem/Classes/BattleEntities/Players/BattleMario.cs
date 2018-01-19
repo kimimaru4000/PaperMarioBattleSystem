@@ -156,6 +156,8 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PiercingBlow, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DDownJump, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
 
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.QuakeHammer, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Jumpman, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Hammerman, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
 

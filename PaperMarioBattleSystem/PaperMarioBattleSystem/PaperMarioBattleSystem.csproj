@@ -98,6 +98,7 @@
     <Compile Include="Classes\Actions\Mario\Multibounce.cs" />
     <Compile Include="Classes\Actions\Mario\PiercingBlowAction.cs" />
     <Compile Include="Classes\Actions\Mario\PowerBounce.cs" />
+    <Compile Include="Classes\Actions\Mario\QuakeHammerAction.cs" />
     <Compile Include="Classes\Actions\Mario\TornadoJump.cs" />
     <Compile Include="Classes\Actions\MenuAction.cs" />
     <Compile Include="Classes\Actions\MessageAction.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Classes\Collectibles\Badges\PowerRushPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PrettyLuckyBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PrettyLuckyPBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\QuakeHammerBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\QuickChangeBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ReturnPostageBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\RunawayPayBadge.cs" />
@@ -329,6 +331,7 @@
     <Compile Include="Classes\Sequences\Huff N. Puff\WindBreathSequence.cs" />
     <Compile Include="Classes\Sequences\Item\ItemSequence.cs" />
     <Compile Include="Classes\Sequences\Item\MysterySequence.cs" />
+    <Compile Include="Classes\Sequences\Item\StoneCapSequence.cs" />
     <Compile Include="Classes\Sequences\Koopatrol\SummonKoopatrolSequence.cs" />
     <Compile Include="Classes\Sequences\Kooper\ShellTossSequence.cs" />
     <Compile Include="Classes\Sequences\Koops\ShellShieldSequence.cs" />
@@ -336,6 +339,7 @@
     <Compile Include="Classes\Sequences\Mario\JumpSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\MultibounceSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\PowerBounceSequence.cs" />
+    <Compile Include="Classes\Sequences\Mario\QuakeHammerSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\TornadoJumpSequence.cs" />
     <Compile Include="Classes\Sequences\NoSequence.cs" />
     <Compile Include="Classes\Sequences\Paragoomba\DiveKickSequence.cs" />

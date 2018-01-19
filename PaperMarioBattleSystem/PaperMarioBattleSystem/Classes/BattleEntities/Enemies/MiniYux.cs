@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
             Name = "Mini-Yux";
 
             //All types of Mini-Yuxes don't take turns
-            BaseTurns = 0;
+            BaseTurns = -99;
 
             Scale = new Vector2(.5f, .5f);
 

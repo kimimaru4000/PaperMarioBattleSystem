@@ -9,6 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A SequenceAction that waits for an animation to finish before proceeding.
     /// Do not use this for animations that loop infinitely, as this will never end
+    /// <para>Make sure to play the animation for the BattleEntity before waiting on this.</para>
     /// </summary>
     public class WaitForAnimationSeqAction : SequenceAction
     {

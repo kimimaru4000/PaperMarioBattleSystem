@@ -19,21 +19,27 @@ namespace PaperMarioBattleSystem
             AutoSelectSingle = true;
 
             BattleActions.Add(new Hammer());
-            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.IceSmash) > 0)
+            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PiercingBlow) > 0)
             {
-                BattleActions.Add(new IceSmash());
+                BattleActions.Add(new PiercingBlowAction());
             }
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.HeadRattle) > 0)
             {
                 BattleActions.Add(new HeadRattle());
             }
+            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.IceSmash) > 0)
+            {
+                BattleActions.Add(new IceSmash());
+            }
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DDownPound) > 0)
             {
                 BattleActions.Add(new DDownPoundAction());
             }
-            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PiercingBlow) > 0)
+
+            int quakeCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.QuakeHammer);
+            if (quakeCount > 0)
             {
-                BattleActions.Add(new PiercingBlowAction());
+                BattleActions.Add(new QuakeHammerAction(quakeCount));
             }
         }
     }

@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(216, 845, 22, 22)),
                 "Pierce enemy defense, dealing 5 damage.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown, MoveAffectionTypes.Other, 
-                TargetSelectionMenu.EntitySelectionType.Single, true, null, new EntityTypes[] { EntityTypes.Neutral, EntityTypes.Enemy });
+                TargetSelectionMenu.EntitySelectionType.Single, true, null, new EntityTypes[] { User.GetOpposingEntityType() });
 
             DamageInfo = new DamageData(5, Elements.Electric, true, ContactTypes.SideDirect, ContactProperties.None, null, DamageEffects.None);
 

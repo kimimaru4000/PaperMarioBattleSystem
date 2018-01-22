@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Any fighter that takes part in battle
     /// </summary>
-    public abstract class BattleEntity : INameable, IUpdateable, IDrawable, IPosition, IRotatable, ITintable, ICleanup
+    public abstract class BattleEntity : INameable, IUpdateable, IDrawable, IPosition, IRotatable, IScalable, ITintable, ICleanup
     {
         #region Delegates and Events
 

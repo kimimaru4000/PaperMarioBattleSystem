@@ -115,9 +115,9 @@ namespace PaperMarioBattleSystem
 
             if (ButtonImage != null && ButtonImage.Tex != null)
             {
-                SpriteRenderer.Instance.DrawUI(ButtonImage.Tex, uiPos, ButtonImage.SourceRect, iconColor, false, false, .4f);
+                SpriteRenderer.Instance.DrawUI(ButtonImage.Tex, uiPos, ButtonImage.SourceRect, iconColor, new Vector2(.5f, 0), false, false, .4f);
             }
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, uiPos - new Vector2(0, 30), iconColor, .45f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, uiPos - new Vector2(0, 10), iconColor, 0f, new Vector2(.5f, .5f), 1f, .45f);
         }
     }
 }

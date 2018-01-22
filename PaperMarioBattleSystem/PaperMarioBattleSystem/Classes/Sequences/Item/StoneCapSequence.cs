@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class StoneCapSequence : ItemSequence
     {
-        private double PostWaitDur = 300d;
+        //private double PostWaitDur = 300d;
 
         public StoneCapSequence(ItemAction itemAction) : base(itemAction)
         {

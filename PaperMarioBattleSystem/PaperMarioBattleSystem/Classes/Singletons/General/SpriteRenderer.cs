@@ -129,7 +129,7 @@ namespace PaperMarioBattleSystem
 
         #region Generalized Draw Methods
 
-        public void Draw(SpriteBatch batch, Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        public void DrawBatch(SpriteBatch batch, Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool absOrigin = false)
         {
             SpriteEffects se = SpriteEffects.None;
             if (flipX == true) se |= SpriteEffects.FlipHorizontally;
@@ -141,6 +141,17 @@ namespace PaperMarioBattleSystem
             Vector2 realOrigin = (sourceRect.HasValue && absOrigin == false) ? sourceRect.Value.GetOrigin(origin.X, origin.Y) : origin;
 
             batch.Draw(texture, position, sourceRect, color, rotation, realOrigin, scale, se, layer);
+        }
+
+        public void DrawBatch(SpriteBatch batch, Texture2D texture, Rectangle destinationRect, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            SpriteEffects se = SpriteEffects.None;
+            if (flipX == true) se |= SpriteEffects.FlipHorizontally;
+            if (flipY == true) se |= SpriteEffects.FlipVertically;
+
+            Vector2 realOrigin = (sourceRect.HasValue && absOrigin == false) ? sourceRect.Value.GetOrigin(origin.X, origin.Y) : origin;
+
+            batch.Draw(texture, destinationRect, sourceRect, color, rotation, realOrigin, se, layer);
         }
 
         public void DrawText(SpriteBatch batch, SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)
@@ -175,7 +186,12 @@ namespace PaperMarioBattleSystem
 
         public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool absOrigin = false)
         {
-            Draw(spriteBatch, texture, position, sourceRect, color, rotation, origin, scale, flipX, flipY, layer, absOrigin);
+            DrawBatch(spriteBatch, texture, position, sourceRect, color, rotation, origin, scale, flipX, flipY, layer, absOrigin);
+        }
+
+        public void Draw(Texture2D texture, Rectangle destinationRect, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            DrawBatch(spriteBatch, texture, destinationRect, sourceRect, color, rotation, origin, flipX, flipY, layer, absOrigin);
         }
 
         #endregion
@@ -204,7 +220,12 @@ namespace PaperMarioBattleSystem
 
         public void DrawUI(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool absOrigin = false)
         {
-            Draw(uiBatch, texture, position, sourceRect, color, rotation, origin, scale, flipX, flipY, layer, absOrigin);
+            DrawBatch(uiBatch, texture, position, sourceRect, color, rotation, origin, scale, flipX, flipY, layer, absOrigin);
+        }
+
+        public void DrawUI(Texture2D texture, Rectangle destinationRect, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, bool flipX, bool flipY, float layer, bool absOrigin = false)
+        {
+            DrawBatch(uiBatch, texture, destinationRect, sourceRect, color, rotation, origin, flipX, flipY, layer, absOrigin);
         }
 
         #endregion

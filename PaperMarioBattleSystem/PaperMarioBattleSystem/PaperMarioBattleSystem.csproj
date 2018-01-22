@@ -256,6 +256,7 @@
     <Compile Include="Classes\Collectibles\Items\TastyTonic.cs" />
     <Compile Include="Classes\Collectibles\Items\VoltShroom.cs" />
     <Compile Include="Classes\CollisionShapes\CollisionRect.cs" />
+    <Compile Include="Classes\ExtendedTypes\NineSlicedTexture2D.cs" />
     <Compile Include="Classes\ExtendedTypes\CroppedTexture2D.cs" />
     <Compile Include="Classes\General\Transform.cs" />
     <Compile Include="Classes\Global\CollisionTracker.cs" />
@@ -282,6 +283,7 @@
     <Compile Include="Classes\Interfaces\INameable.cs" />
     <Compile Include="Classes\Interfaces\IPosition.cs" />
     <Compile Include="Classes\Interfaces\IRotatable.cs" />
+    <Compile Include="Classes\Interfaces\IScalable.cs" />
     <Compile Include="Classes\Interfaces\ISegmentEntity.cs" />
     <Compile Include="Classes\Interfaces\ISpinnableEntity.cs" />
     <Compile Include="Classes\Interfaces\ITattleableEntity.cs" />
@@ -531,6 +533,12 @@
     </Content>
     <Content Include="Content\UI\DebugAssets\BoxOutline.png" />
     <Content Include="Content\UI\DebugAssets\BoxOutline2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\UI\RoundedRect.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\UI\RedRoundedRect.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">

@@ -258,6 +258,7 @@
     <Compile Include="Classes\CollisionShapes\CollisionRect.cs" />
     <Compile Include="Classes\ExtendedTypes\NineSlicedTexture2D.cs" />
     <Compile Include="Classes\ExtendedTypes\CroppedTexture2D.cs" />
+    <Compile Include="Classes\ExtendedTypes\SlicedTexture2D.cs" />
     <Compile Include="Classes\General\Transform.cs" />
     <Compile Include="Classes\Global\CollisionTracker.cs" />
     <Compile Include="Classes\Global\CrashHandler.cs" />

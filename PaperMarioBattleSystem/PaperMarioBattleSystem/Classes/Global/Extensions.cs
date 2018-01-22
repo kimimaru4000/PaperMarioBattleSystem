@@ -373,5 +373,56 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        #region SpriteRenderer Extensions
+
+        public static void DrawSliced(this SpriteRenderer spriteRenderer, SlicedTexture2D slicedTex2D, Rectangle posAndSize,
+            Color color, /*float rotation, Vector2 absOrigin, bool flipX, bool flipY,*/ float layer)
+        {
+            if (slicedTex2D == null || slicedTex2D.Tex == null)
+            {
+                Debug.LogError($"{nameof(slicedTex2D)} or its Texture is null, so nothing can be drawn!");
+                return;
+            }
+
+            //NOTE: Do this until we figure out how to effectively apply these to sliced textures
+            float rotation = 0f;
+            Vector2 absOrigin = Vector2.Zero;
+            bool flipX = false;
+            bool flipY = false;
+
+            for (int i = 0; i < slicedTex2D.Regions.Length; i++)
+            {
+                Rectangle destRect = slicedTex2D.GetRectForIndex(posAndSize, i);
+
+                spriteRenderer.Draw(slicedTex2D.Tex, destRect, slicedTex2D.Regions[i], color, rotation, absOrigin, flipX, flipY, layer, true);
+            }
+        }
+
+        public static void DrawUISliced(this SpriteRenderer spriteRenderer, SlicedTexture2D slicedTex2D, Rectangle posAndSize,
+            Color color, /*float rotation, Vector2 absOrigin, bool flipX, bool flipY,*/ float layer)
+        {
+            if (slicedTex2D == null || slicedTex2D.Tex == null)
+            {
+                Debug.LogError($"{nameof(slicedTex2D)} or its Texture is null, so nothing can be drawn!");
+                return;
+            }
+
+            //NOTE: Do this until we figure out how to effectively apply these to sliced textures
+            float rotation = 0f;
+            Vector2 absOrigin = Vector2.Zero;
+            bool flipX = false;
+            bool flipY = false;
+
+            for (int i = 0; i < slicedTex2D.Regions.Length; i++)
+            {
+                Rectangle destRect = slicedTex2D.GetRectForIndex(posAndSize, i);
+
+                //Sliced textures must use absolute origins since they can have vastly different sizes for each region
+                spriteRenderer.DrawUI(slicedTex2D.Tex, destRect, slicedTex2D.Regions[i], color, rotation, absOrigin, flipX, flipY, layer, true);
+            }
+        }
+
+        #endregion
     }
 }

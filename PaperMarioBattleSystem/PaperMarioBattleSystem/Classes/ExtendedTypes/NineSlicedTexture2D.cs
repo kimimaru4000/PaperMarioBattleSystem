@@ -11,41 +11,19 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A 9-sliced Texture2D. It produces a set of source rectangles that slice the Texture2D into 9 slices, which can be used for rendering.
     /// </summary>
-    public class NineSlicedTexture2D : ICopyable<NineSlicedTexture2D>
+    public class NineSlicedTexture2D : SlicedTexture2D, ICopyable<NineSlicedTexture2D>
     {
-        /// <summary>
-        /// The Texture2D to slice.
-        /// </summary>
-        public Texture2D Tex { get; private set; }
-
-        /// <summary>
-        /// The Rectangle representing the region of the Texture2D to slice from.
-        /// If null, the entire texture will be used.
-        /// </summary>
-        public Rectangle? SourceRect { get; private set; }
-
         public int LeftLine { get; private set; }
         public int RightLine { get; private set; }
         public int TopLine { get; private set; }
         public int BottomLine { get; private set; }
 
-        public Rectangle[] Regions { get; private set; }
+        public override int Slices => 9;
 
         public NineSlicedTexture2D(Texture2D tex, Rectangle? sourceRect, int leftCutoff, int rightCutoff, int topCutoff, int bottomCutoff)
+            : base(tex, sourceRect)
         {
-            SetTexture(tex);
-            SetSourceRect(sourceRect);
             SetCutoffRegions(leftCutoff, rightCutoff, topCutoff, bottomCutoff);
-        }
-
-        public void SetTexture(Texture2D texture)
-        {
-            Tex = texture;
-        }
-
-        public void SetSourceRect(Rectangle? sourceRect)
-        {
-            SourceRect = sourceRect;
         }
 
         public void SetCutoffRegions(int leftCutoff, int rightCutoff, int topCutoff, int bottomCutoff)
@@ -64,7 +42,7 @@ namespace PaperMarioBattleSystem
         /// <param name="rectangle">The Rectangle containing the position and scale of the texture.</param>
         /// <param name="index">The index of the rectangle to get the slices from. This goes from 0 to 8 for 9 slices.</param>
         /// <returns>A Rectangle corresponding to the region of the 9-sliced texture.</returns>
-        public Rectangle GetRectForIndex(Rectangle rectangle, int index)
+        public override Rectangle GetRectForIndex(Rectangle rectangle, int index)
         {
             int x = rectangle.X;
             int y = rectangle.Y;

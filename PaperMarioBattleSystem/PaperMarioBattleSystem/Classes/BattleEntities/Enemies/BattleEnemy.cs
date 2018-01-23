@@ -78,21 +78,5 @@ namespace PaperMarioBattleSystem
         {
             HeldCollectible = heldCollectible;
         }
-
-        public override void Draw()
-        {
-            base.Draw();
-
-            if (BattleManager.Instance.ShouldShowPlayerTurnUI == true)
-            {
-                int showHP = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP);
-
-                if (showHP > 0)
-                {
-                    //Show HP
-                    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"{CurHP}/{BattleStats.MaxHP}", Position + new Vector2(0, 40), Color.White, .2f);
-                }
-            }
-        }
     }
 }

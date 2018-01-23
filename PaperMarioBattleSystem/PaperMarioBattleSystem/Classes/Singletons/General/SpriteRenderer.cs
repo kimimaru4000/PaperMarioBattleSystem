@@ -154,7 +154,7 @@ namespace PaperMarioBattleSystem
             batch.Draw(texture, destinationRect, sourceRect, color, rotation, realOrigin, se, layer);
         }
 
-        public void DrawText(SpriteBatch batch, SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)
+        public void DrawBatchText(SpriteBatch batch, SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)
         {
             Vector2 realOrigin = spriteFont.GetOrigin(text, origin.X, origin.Y);
             batch.DrawString(spriteFont, text, position, color, rotation, realOrigin, scale, SpriteEffects.None, layer);
@@ -239,7 +239,7 @@ namespace PaperMarioBattleSystem
 
         public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)
         {
-            DrawText(spriteBatch, spriteFont, text, position, color, rotation, origin, scale, layer);
+            DrawBatchText(spriteBatch, spriteFont, text, position, color, rotation, origin, scale, layer);
         }
 
         public void DrawUIText(SpriteFont spriteFont, string text, Vector2 position, Color color, float layer)
@@ -249,7 +249,7 @@ namespace PaperMarioBattleSystem
 
         public void DrawUIText(SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)
         {
-            DrawText(uiBatch, spriteFont, text, position, color, rotation, origin, scale, layer);
+            DrawBatchText(uiBatch, spriteFont, text, position, color, rotation, origin, scale, layer);
         }
 
         #endregion

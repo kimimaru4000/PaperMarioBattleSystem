@@ -52,6 +52,20 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public event OnEntityRemoved EntityRemovedEvent = null;
 
+        public delegate void OnBattleTurnStart(BattleEntity battleEntity);
+        /// <summary>
+        /// The event invoked when any BattleEntity's turn is started.
+        /// <para>This is invoked right before the BattleEntity is notified to start its turn.</para>
+        /// </summary>
+        public event OnBattleTurnStart BattleTurnStartedEvent = null;
+
+        public delegate void OnBattleTurnEnd(BattleEntity battleEntity);
+        /// <summary>
+        /// The event invoked when any BattleEntity's turn is ended.
+        /// <para>This is invoked right before the BattleEntity is notified to end its turn.</para>
+        /// </summary>
+        public event OnBattleTurnEnd BattleTurnEndedEvent = null;
+
         #endregion
 
         #region Enumerations
@@ -192,6 +206,8 @@ namespace PaperMarioBattleSystem
 
             EntityAddedEvent = null;
             EntityRemovedEvent = null;
+            BattleTurnStartedEvent = null;
+            BattleTurnEndedEvent = null;
         }
 
         /// <summary>
@@ -229,11 +245,15 @@ namespace PaperMarioBattleSystem
             //Add and initialize all entities
             AddEntities(addedEntities, null, true);
 
-            //Check for the battle setting
+            //Initialize helper objects
+            //Check for the battle setting and add darkness if so
             if (Properties.BattleSetting == BattleSettings.Dark)
             {
                 BattleObjManager.Instance.AddBattleObject(new BattleDarknessObj());
             }
+
+            //Add the HP bar manager
+            BattleObjManager.Instance.AddBattleObject(new HPBarManagerObj());
 
             Phase = StartingPhase;
 
@@ -478,6 +498,9 @@ namespace PaperMarioBattleSystem
 
             ChangeBattleState(BattleState.Turn);
 
+            //Invoke the event for starting the turn
+            BattleTurnStartedEvent?.Invoke(EntityTurn);
+
             EntityTurn.StartTurn();
         }
 
@@ -488,6 +511,9 @@ namespace PaperMarioBattleSystem
                 Debug.LogError($"Attemping to END turn when the battle is over!");
                 return;
             }
+
+            //Invoke the event for ending the turn
+            BattleTurnEndedEvent?.Invoke(EntityTurn);
 
             EntityTurn.EndTurn();
 

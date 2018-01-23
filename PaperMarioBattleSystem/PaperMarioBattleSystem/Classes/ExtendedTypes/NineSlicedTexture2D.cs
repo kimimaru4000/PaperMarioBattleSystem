@@ -76,29 +76,6 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        /// <summary>
-        /// Retrieves a set of Rectangles corresponding to the regions of the 9-sliced texture.
-        /// </summary>
-        /// <param name="rectangle">The Rectangle containing the position and scale of the texture.</param>
-        /// <returns>An array of Rectangles associated with the regions of the 9-sliced texture.</returns>
-        public Rectangle[] CreateRegions(Rectangle rectangle)
-        {
-            return new Rectangle[]
-            {
-                GetRectForIndex(rectangle, 0),
-                GetRectForIndex(rectangle, 1),
-                GetRectForIndex(rectangle, 2),
-
-                GetRectForIndex(rectangle, 3),
-                GetRectForIndex(rectangle, 4),
-                GetRectForIndex(rectangle, 5),
-
-                GetRectForIndex(rectangle, 6),
-                GetRectForIndex(rectangle, 7),
-                GetRectForIndex(rectangle, 8)
-            };
-        }
-
         public NineSlicedTexture2D Copy()
         {
             return new NineSlicedTexture2D(Tex, SourceRect, LeftLine, RightLine, TopLine, BottomLine);

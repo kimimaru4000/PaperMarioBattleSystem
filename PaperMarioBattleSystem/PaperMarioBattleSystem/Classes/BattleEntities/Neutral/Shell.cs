@@ -60,9 +60,6 @@ namespace PaperMarioBattleSystem
 
             Scale = new Vector2(.5f, .5f);
 
-            //Add this here for now to make it easier to debug
-            this.AddShowHPProperty();
-
             //Subscribe to the removed event so we can remove the protection and clear the entity reference if it's removed
             BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;
             BattleManager.Instance.EntityRemovedEvent += EntityRemoved;
@@ -120,6 +117,17 @@ namespace PaperMarioBattleSystem
             Debug.Log($"The Shell started defending {EntityDefending.Name}!");
         }
 
+        public override void OnBattleStart()
+        {
+            base.OnBattleStart();
+
+            //Show the Shell's HP, which can only be viewed with the Peekaboo Badge since it can't be tattled (in the actual games, at least)
+            if (BattleManager.Instance.GetMario().GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.Peekaboo) > 0)
+            {
+                this.AddShowHPProperty();
+            }
+        }
+
         public override void OnTurnStart()
         {
             //In the event the Shell does start its turn, simply do nothing
@@ -162,25 +170,7 @@ namespace PaperMarioBattleSystem
                 this.AddRemoveStatusImmunity(statuses[i], true);
             }
         }
-
-        public override void Draw()
-        {
-            base.Draw();
-
-            //Show the Shell's HP, which can only be viewed with the Peekaboo Badge since it can't be tattled (in the actual games, at least)
-            //NOTE: Have a way to add the ShowHP property on anything with Peekaboo, not only enemies (maybe through an interface?)
-            if (BattleManager.Instance.ShouldShowPlayerTurnUI == true)
-            {
-                int showHP = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP);
-
-                if (showHP > 0)
-                {
-                    //Show HP
-                    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"{CurHP}/{BattleStats.MaxHP}", Position + new Vector2(0, 40), Color.White, .2f);
-                }
-            }
-        }
-
+        
         private void EntityRemoved(BattleEntity entityRemoved)
         {
             //Remove the BattleEntity the Shell is defending and kill the Shell

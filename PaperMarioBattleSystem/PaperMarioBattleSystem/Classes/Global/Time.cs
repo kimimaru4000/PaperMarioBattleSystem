@@ -67,6 +67,16 @@ namespace PaperMarioBattleSystem
         public static bool RunningSlowly { get; private set; } = false;
 
         /// <summary>
+        /// Whether the game is run at a fixed interval or not.
+        /// </summary>
+        public static bool FixedTimeStep = true;
+
+        /// <summary>
+        /// Whether VSync is enabled or not.
+        /// </summary>
+        public static bool VSyncEnabled = true;
+
+        /// <summary>
         /// Enables or disables in-game time. If false, <see cref="ActiveMilliseconds"/> will not be updated.
         /// </summary>
         /// <param name="ingameTimeEnabled"></param>

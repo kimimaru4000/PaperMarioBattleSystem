@@ -27,9 +27,10 @@ namespace PaperMarioBattleSystem
             graphics = new GraphicsDeviceManager(this);
             
             crashHandler = new CrashHandler();
-            
+
             //false for variable timestep, true for fixed
-            IsFixedTimeStep = true;
+            Time.FixedTimeStep = true;
+            Time.VSyncEnabled = true;
         }
 
         /// <summary>
@@ -40,6 +41,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected override void Initialize()
         {
+            IsFixedTimeStep = Time.FixedTimeStep;
+            graphics.SynchronizeWithVerticalRetrace = Time.VSyncEnabled;
+
             graphics.PreferMultiSampling = true;
             
             AssetManager.Instance.Initialize(Content);
@@ -241,6 +245,10 @@ namespace PaperMarioBattleSystem
                 Input.UpdateInputState();
             
             base.Update(gameTime);
+
+            //Set time step and VSync settings
+            IsFixedTimeStep = Time.FixedTimeStep;
+            graphics.SynchronizeWithVerticalRetrace = Time.VSyncEnabled;
 
             //This should always be at the end of PostUpdate()
             if (Time.UpdateFPS == true)

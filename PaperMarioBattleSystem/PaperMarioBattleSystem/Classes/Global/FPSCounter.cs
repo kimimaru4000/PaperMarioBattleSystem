@@ -25,6 +25,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private static int Frames = 0;
 
+        /// <summary>
+        /// The amount of elapsed time spent drawing.
+        /// </summary>
+        private static double FrameTime = 0d;
+
         public static void Update()
         {
             PrevUpdateVal += Time.ElapsedMilliseconds;
@@ -34,44 +39,45 @@ namespace PaperMarioBattleSystem
             {
                 PrevUpdateVal = 0d;
 
-                if (UpdateInterval == 0d)
+                if (UpdateInterval <= 0d)
                 {
                     FPSValue = 0d;
                 }
                 else
                 {
-                    //Calculate the FPS value displayed by checking if we drew the number of times we should have at the current FPS
-                    FPSValue = (Frames * (Time.MsPerS / UpdateInterval));
+                    //Use our target FPS value for fixed time steps
+                    if (Time.FixedTimeStep == true)
+                    {
+                        double diff = FrameTime / UpdateInterval;
+
+                        //Use the target frame rate for fixed time step
+                        FPSValue = diff * Time.FPS;
+                    }
+                    else
+                    {
+                        double msScale = Time.MsPerS / UpdateInterval;
+
+                        //Calculate the FPS value displayed by checking if we drew the number of times we should have at the current FPS
+                        FPSValue = Frames * msScale;
+                    }
                 }
 
                 Frames = 0;
+                FrameTime = 0d;
             }
-
-            //if (Time.TotalMilliseconds >= PrevUpdateVal)
-            //{
-            //    PrevUpdateVal = (float)Time.TotalMilliseconds + UpdateInterval;
-            //
-            //    //Handle division by 0
-            //    if (Time.ElapsedMilliseconds == 0d)
-            //    {
-            //        FPSValue = 0d;
-            //    }
-            //    else
-            //    {
-            //        FPSValue = Math.Round(1000d / Time.ElapsedMilliseconds, 2);
-            //    }
-            //}
         }
 
         public static void Draw()
         {
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"{FPSValue}", Vector2.Zero, Color.White, .5f);
+            string fpsText = FPSValue == 0 ? "Infinity" : FPSValue.ToString();
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, fpsText, Vector2.Zero, Color.White, .5f);
             if (Time.RunningSlowly == true)
             {
                 SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"RUNNING SLOW!", new Vector2(0f, 20f), Color.Red, .5f);
             }
 
             Frames++;
+            FrameTime += Time.ElapsedMilliseconds;
         }
     }
 }

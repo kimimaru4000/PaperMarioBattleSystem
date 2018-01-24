@@ -257,6 +257,8 @@ namespace PaperMarioBattleSystem
         /// <param name="gameTime">Provides a snapshot of timing values</param>
         private void PreDraw(GameTime gameTime)
         {
+            Time.UpdateFrames();
+
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             //Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}/Charge");

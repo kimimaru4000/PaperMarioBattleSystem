@@ -15,27 +15,52 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The amount of time, in milliseconds, to wait before updating the FPS display
         /// </summary>
-        public static float UpdateInterval = 100f;
+        public static double UpdateInterval = 100d;
 
         private static double FPSValue = 0d;
-        private static float PrevUpdateVal = 0f;
+        private static double PrevUpdateVal = 0d;
+
+        /// <summary>
+        /// The number of frames that have been drawn.
+        /// </summary>
+        private static int Frames = 0;
 
         public static void Update()
         {
-            if (Time.TotalMilliseconds >= PrevUpdateVal)
-            {
-                PrevUpdateVal = (float)Time.TotalMilliseconds + UpdateInterval;
+            PrevUpdateVal += Time.ElapsedMilliseconds;
 
-                //Handle division by 0
-                if (Time.ElapsedMilliseconds == 0d)
+            //Check if we should update the FPS value displayed
+            if (PrevUpdateVal >= UpdateInterval)
+            {
+                PrevUpdateVal = 0d;
+
+                if (UpdateInterval == 0d)
                 {
                     FPSValue = 0d;
                 }
                 else
                 {
-                    FPSValue = Math.Round(1000d / Time.ElapsedMilliseconds, 2);
+                    //Calculate the FPS value displayed by checking if we drew the number of times we should have at the current FPS
+                    FPSValue = (Frames * (Time.MsPerS / UpdateInterval));
                 }
+
+                Frames = 0;
             }
+
+            //if (Time.TotalMilliseconds >= PrevUpdateVal)
+            //{
+            //    PrevUpdateVal = (float)Time.TotalMilliseconds + UpdateInterval;
+            //
+            //    //Handle division by 0
+            //    if (Time.ElapsedMilliseconds == 0d)
+            //    {
+            //        FPSValue = 0d;
+            //    }
+            //    else
+            //    {
+            //        FPSValue = Math.Round(1000d / Time.ElapsedMilliseconds, 2);
+            //    }
+            //}
         }
 
         public static void Draw()
@@ -45,6 +70,8 @@ namespace PaperMarioBattleSystem
             {
                 SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"RUNNING SLOW!", new Vector2(0f, 20f), Color.Red, .5f);
             }
+
+            Frames++;
         }
     }
 }

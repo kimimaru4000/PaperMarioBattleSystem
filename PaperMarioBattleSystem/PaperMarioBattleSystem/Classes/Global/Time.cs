@@ -37,9 +37,14 @@ namespace PaperMarioBattleSystem
         public static bool InGameTimeEnabled { get; private set; } = true;
 
         /// <summary>
-        /// The total number of frames since the game booted up.
+        /// The total number of game updates since the game booted up.
         /// </summary>
-        public static long TotalFrames { get; private set; } = 0;
+        public static long TotalUpdates { get; private set; } = 0L;
+
+        /// <summary>
+        /// The total number of frames drawn since the game booted up.
+        /// </summary>
+        public static long TotalFrames { get; private set; } = 0L;
 
         /// <summary>
         /// The total amount of time, in milliseconds, since the game booted up
@@ -94,6 +99,14 @@ namespace PaperMarioBattleSystem
                 ActiveElapsedTime += ElapsedTime.TotalMilliseconds;
             }
 
+            TotalUpdates++;
+        }
+
+        /// <summary>
+        /// Updates the number of drawn frames.
+        /// </summary>
+        public static void UpdateFrames()
+        {
             TotalFrames++;
         }
     }

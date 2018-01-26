@@ -141,12 +141,12 @@ namespace PaperMarioBattleSystem
          * Victim:
          * -------
          * 1. Base damage
-         * 2. Get the contact result (Success, PartialSuccess, Failure)
-         * 3. Check Element Overrides to change the attacker's Element damage based on the PhysicalAttributes of the victim (Ex. Ice Power Badge)
-         * 4. Calculate the Victim's Weaknesses/Resistances to the Element
-         * 5. Subtract or add to the damage based on the # of P-Up, D-Down and P-Down, D-Up Badges equipped
-         * 6. If Guarded, subtract 1 from the damage and add the # of Damage Dodge Badges to the victim's Defense. If Superguarded, damage = 0
-         * 7. If the damage dealt is not Piercing, subtract the victim's Defense from the damage
+         * 2. Check Element Overrides to change the attacker's Element damage based on the PhysicalAttributes of the victim (Ex. Ice Power Badge)
+         * 3. Calculate the Victim's Weaknesses/Resistances to the Element
+         * 4. Subtract or add to the damage based on the # of P-Up, D-Down and P-Down, D-Up Badges equipped
+         * 5. If Guarded, subtract 1 from the damage and add the # of Damage Dodge Badges to the victim's Defense. If Superguarded, damage = 0
+         * 6. If the damage dealt is not Piercing, subtract the victim's Defense from the damage
+         * 7. Get the contact result (Success, PartialSuccess, Failure)
          * 8. Multiply by: (number of Double Pains equipped + 1)
          * 9. If in Danger or Peril, divide by: (number of Last Stands equipped + 1) (ceiling the damage if it's > 0)
          * 
@@ -154,7 +154,7 @@ namespace PaperMarioBattleSystem
          * 
          * Attacker:
          * ---------
-         * 1. Start with the total unscaled damage dealt to the Victim - Double Pain and Last Stand are not factored in
+         * 1. Start with the total damage dealt to the Victim - Double Pain and Last Stand are factored in
          * 2. Get the Payback from the Contact Result
          * 3. If the Victim performed a Superguard, override the Payback with the the Superguard's Payback
          * 4. Calculate the Attacker's Weaknesses/Resistances to the Payback Element
@@ -170,13 +170,13 @@ namespace PaperMarioBattleSystem
 
             //Victim steps
             DamageCalculationSteps.Add(new InitStep());
-            DamageCalculationSteps.Add(new ContactResultStep());
             DamageCalculationSteps.Add(new ElementOverrideStep());
             DamageCalculationSteps.Add(new VictimAttackerStrengthStep());
             DamageCalculationSteps.Add(new VictimElementDamageStep());
             DamageCalculationSteps.Add(new VictimDamageReductionStep());
             DamageCalculationSteps.Add(new VictimCheckHitStep());
             DamageCalculationSteps.Add(new VictimDefensiveStep());
+            DamageCalculationSteps.Add(new ContactResultStep());
             //DamageCalculationSteps.Add(new VictimDamageEffectStep());
             DamageCalculationSteps.Add(new VictimDoublePainStep());
             DamageCalculationSteps.Add(new VictimLastStandStep());
@@ -418,8 +418,23 @@ namespace PaperMarioBattleSystem
                 BattleEntity victim = StepResult.VictimResult.Entity;
                 BattleEntity attacker = StepResult.AttackerResult.Entity;
 
+                ContactTypes contactType = StepResult.VictimResult.ContactType;
+
+                //Get paybacks - account for the defensive action's Payback
+                List<PaybackHolder> victimPaybacks = new List<PaybackHolder>();
+                victimPaybacks.AddRange(victim.EntityProperties.GetAllPaybacks());
+
+                //Account for the Defensive Action's Payback
+                //NOTE: If we decide we want to make this override the Victim's payback, simply exclude any of its other paybacks in this case
+                if (StepContactResultInfo.Paybackholder.Element != Elements.Invalid)
+                {
+                    victimPaybacks.Add(StepContactResultInfo.Paybackholder);
+                }
+
                 //Get contact results
-                StepContactResultInfo = victim.EntityProperties.GetContactResult(attacker, StepResult.VictimResult.ContactType, StepResult.VictimResult.ContactProperty);
+                StepContactResultInfo = GetContactResult(attacker.EntityProperties.GetAllPhysAttributes(), contactType,
+                    StepResult.VictimResult.ContactProperty, victimPaybacks, attacker.EntityProperties.GetContactExceptions(contactType));
+                //victim.EntityProperties.GetContactResult(attacker, StepResult.VictimResult.ContactType, StepResult.VictimResult.ContactProperty);
             }
         }
 
@@ -435,20 +450,6 @@ namespace PaperMarioBattleSystem
                 ElementOverrideHolder newElement = StepResult.AttackerResult.Entity.EntityProperties.GetTotalElementOverride(victim);
                 if (newElement.Element != Elements.Invalid)
                 {
-                    /*NOTE: Idea for stacking weaknesses
-                      (Ex. 1 Ice Power is 1 weakness, Ice Power + Ice Smash = 2 weaknesses)
-                      
-                      Ex. damage = 2
-                      player inflicts ice 2 times: ice power & ice smash
-
-                      ice_inflicted_times = 2
-                      if (enemy weak to ice)
-                        damage += ice_inflicted_times
-                      end
-
-                      #damage = 4
-                    */
-
                     //Add the number of element overrides to the damage if the element used already exists as an override and the victim has a Weakness
                     //to the Element. This allows Badges such as Ice Power to deal more damage if used in conjunction with attacks
                     //that deal the same type of damage (Ex. Ice Power and Ice Smash deal 2 additional damage total rather than 1).
@@ -535,30 +536,31 @@ namespace PaperMarioBattleSystem
                     StepResult.VictimResult.DefensiveActionsPerformed = victimDefenseData.Value.DefensiveActionType;
 
                     //Store the damage dealt to the attacker, if any
-                    if (victimDefenseData.Value.ElementHolder.HasValue == true)
+                    if (victimDefenseData.Value.Payback.HasValue == true)
                     {
-                        ElementDamageHolder elementHolder = victimDefenseData.Value.ElementHolder.Value;
+                        PaybackHolder payback = victimDefenseData.Value.Payback.Value;
 
+                        StepContactResultInfo.Paybackholder = payback;
                         //If the Defensive action dealt damage and the contact was direct
                         //the Defensive action has caused a Failure for the Attacker (Ex. Superguarding)
-                        if (StepResult.VictimResult.ContactType == ContactTypes.Latch
-                            || StepResult.VictimResult.ContactType == ContactTypes.TopDirect
-                            || StepResult.VictimResult.ContactType == ContactTypes.SideDirect)
-                        {
-                            StepContactResultInfo.ContactResult = ContactResult.Failure;
-
-                            //Use the damage from the Defensive Action
-                            StepResult.AttackerResult.TotalDamage = elementHolder.Damage;
-
-                            //Update the Paybackholder to use the Payback data from the Defensive Action
-                            //NOTE: Use temp extra data for now; FIX ASAP!!!!
-                            StepContactResultInfo.Paybackholder = new PaybackHolder(PaybackTypes.Constant, PhysicalAttributes.None,
-                                elementHolder.Element, new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect },
-                                new ContactProperties[] { ContactProperties.None, ContactProperties.Protected, ContactProperties.WeaponDirect },
-                                ContactResult.Failure, ContactResult.Failure, elementHolder.Damage);
-                        }
-
-                        StepResult.AttackerResult.DamageElement = victimDefenseData.Value.ElementHolder.Value.Element;
+                        //if (StepResult.VictimResult.ContactType == ContactTypes.Latch
+                        //    || StepResult.VictimResult.ContactType == ContactTypes.TopDirect
+                        //    || StepResult.VictimResult.ContactType == ContactTypes.SideDirect)
+                        //{
+                        //    StepContactResultInfo.ContactResult = ContactResult.Failure;
+                        //
+                        //    //Use the damage from the Defensive Action
+                        //    StepResult.AttackerResult.TotalDamage = payback.Damage;
+                        //
+                        //    //Update the Paybackholder to use the Payback data from the Defensive Action
+                        //    //NOTE: Use temp extra data for now; FIX ASAP!!!!
+                        //    StepContactResultInfo.Paybackholder = new PaybackHolder(PaybackTypes.Constant, PhysicalAttributes.None,
+                        //        payback.Element, new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect },
+                        //        new ContactProperties[] { ContactProperties.None, ContactProperties.Protected, ContactProperties.WeaponDirect },
+                        //        ContactResult.Failure, ContactResult.Failure, payback.Damage);
+                        //}
+                        //
+                        //StepResult.AttackerResult.DamageElement = victimDefenseData.Value.ElementHolder.Value.Element;
                     }
 
                     //Factor in the additional Guard defense for all DefensiveActions (for now, at least)
@@ -574,10 +576,10 @@ namespace PaperMarioBattleSystem
                 }
 
                 //Store the final unscaled damage in the Attacker's result if there was no Defensive Action payback, as it will use it later
-                if (victimDefenseData.HasValue == false || victimDefenseData.Value.ElementHolder.HasValue == false)
-                {
+                //if (victimDefenseData.HasValue == false || victimDefenseData.Value.Payback.HasValue == false)
+                //{
                     StepResult.AttackerResult.TotalDamage = StepResult.VictimResult.TotalDamage;
-                }
+                //}
             }
         }
 
@@ -711,9 +713,9 @@ namespace PaperMarioBattleSystem
         {
             protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
             {
-                //The unscaled damage the Attacker dealt to the Victim
+                //The final damage the Attacker dealt to the Victim
                 //This will be the Payback damage dealt from a Defensive Action if one that deals damage has been performed
-                int unscaledAttackerDamage = StepResult.AttackerResult.TotalDamage;
+                int unscaledAttackerDamage = StepResult.VictimResult.TotalDamage;
 
                 int damageDealt = unscaledAttackerDamage;
                 PaybackHolder paybackHolder = StepContactResultInfo.Paybackholder;
@@ -723,7 +725,6 @@ namespace PaperMarioBattleSystem
                     paybackHolder.Element, damageDealt);
 
                 //Get Payback damage - Payback damage is calculated after everything else
-                //However, it does NOT factor in Double Pain or Last Stand, hence why we use the unscaled Victim damage
                 int paybackDamage = paybackHolder.GetPaybackDamage(attackerElementDamage.Damage);
 
                 //If Constant Payback, the constant damage value will be returned as the Payback damage

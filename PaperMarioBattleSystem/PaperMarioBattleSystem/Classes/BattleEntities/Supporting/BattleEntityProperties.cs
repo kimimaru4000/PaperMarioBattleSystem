@@ -202,7 +202,7 @@ namespace PaperMarioBattleSystem
         /// Returns all PhysicalAttributes the BattleEntity has.
         /// </summary>
         /// <returns>An array of all PhysicalAttributes the BattleEntity has, with higher PhysicalAttribute values first.</returns>
-        protected PhysicalAttributes[] GetAllPhysAttributes()
+        public PhysicalAttributes[] GetAllPhysAttributes()
         {
             return PhysAttributes.Keys.ToArray();
         }

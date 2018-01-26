@@ -1390,7 +1390,7 @@ namespace PaperMarioBattleSystem
             /// A filtered set of StatusEffects, influenced by the Defensive Action
             /// </summary>
             public StatusChanceHolder[] Statuses { get; private set; }
-
+            
             /// <summary>
             /// The filtered DamageEffects, influenced by the Defensive Action.
             /// <para>For example, Koops won't get flipped if he Guards or Superguards a Goomba's bonk.</para>
@@ -1406,7 +1406,8 @@ namespace PaperMarioBattleSystem
             /// The type and amount of damage dealt to the attacker.
             /// If none, set to null.
             /// </summary>
-            public ElementDamageHolder? ElementHolder { get; private set; }
+            //public ElementDamageHolder? ElementHolder { get; private set; }
+            public StatusGlobals.PaybackHolder? Payback { get; private set; }
 
             public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect,
                 Enumerations.DefensiveActionTypes defensiveActionType)
@@ -1415,13 +1416,14 @@ namespace PaperMarioBattleSystem
             }
 
             public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect,
-                Enumerations.DefensiveActionTypes defensiveActionType, ElementDamageHolder? elementHolder)
+                Enumerations.DefensiveActionTypes defensiveActionType, StatusGlobals.PaybackHolder? payback)//ElementDamageHolder? elementHolder)
             {
                 Damage = damage;
                 Statuses = statuses;
                 DamageEffect = damageEffect;
                 DefensiveActionType = defensiveActionType;
-                ElementHolder = elementHolder;
+                //ElementHolder = elementHolder;
+                Payback = payback;
             }
         }
 
@@ -2007,8 +2009,11 @@ namespace PaperMarioBattleSystem
 
             /// <summary>
             /// Gets the Payback damage that this PaybackHolder deals.
-            /// <para>The minimum damage Payback can deal is 1.</para>
+            /// <para>The minimum damage Payback can deal is 1. Half Payback rounds down.</para>
             /// </summary>
+            /// <remarks>TTYD takes the halved damage and doubles it for Full payback.
+            /// This leads to some seemingly odd cases (Ex. 5 damage dealt is lowered to 2 and doubled, dealing 4).
+            /// </remarks>
             /// <param name="damageDealt">The amount of damage to deal.</param>
             /// <returns>All the damage dealt, half of it, or a constant amount of damage based on the PaybackType.
             /// 1 if the Payback damage is 0 or less.</returns>
@@ -2016,8 +2021,8 @@ namespace PaperMarioBattleSystem
             {
                 switch (PaybackType)
                 {
-                    case PaybackTypes.Full: return Math.Max(damageDealt + Damage, 1);
-                    case PaybackTypes.Half: return Math.Max((int)Math.Ceiling(damageDealt / 2f) + Damage, 1);
+                    case PaybackTypes.Full: return Math.Max(((int)Math.Floor(damageDealt / 2f) * 2) + Damage, 1);
+                    case PaybackTypes.Half: return Math.Max((int)Math.Floor(damageDealt / 2f) + Damage, 1);
                     default: return Math.Max(Damage, 1);
                 }
             }

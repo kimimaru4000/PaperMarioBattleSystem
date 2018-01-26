@@ -34,8 +34,13 @@ namespace PaperMarioBattleSystem
             BattleObjManager.Instance.AddBattleObject(new ActionCommandVFX(ActionCommand.CommandRank.Great, User.Position, new Vector2(-15, -15)));
             SoundManager.Instance.PlaySound(SoundManager.Sound.ActionCommandSuccess);
 
-            return new BattleGlobals.DefensiveActionHolder(newDamage, newStatuses, Enumerations.DamageEffects.None, DefensiveActionType,
-                new ElementDamageHolder(1, Enumerations.Elements.Normal));
+            StatusGlobals.PaybackHolder paybackData =
+                new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Constant, PhysicalAttributes.None, Elements.Normal,
+                new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect },
+                new ContactProperties[] { ContactProperties.None, ContactProperties.Protected, ContactProperties.WeaponDirect },
+                ContactResult.Failure, ContactResult.Failure, 1, null);
+
+            return new BattleGlobals.DefensiveActionHolder(newDamage, newStatuses, DamageEffects.None, DefensiveActionType, paybackData);
         }
     }
 }

@@ -575,19 +575,37 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Draws a circle.
-        /// <para>NOTE: This method is extremely slow.</para>
         /// </summary>
         /// <param name="circle">The circle to draw.</param>
         /// <param name="color">The color of the circle.</param>
         /// <param name="layer">The layer of the circle.</param>
         /// <param name="uiBatch">Whether to draw the circle in the UI layer or not.</param>
+        /// <remarks>Brute force algorithm obtained from here: https://stackoverflow.com/a/1237519 
+        /// This seems to gives a more full looking circle than Bresenham's algorithm.
+        /// </remarks>
         public static void DebugDrawCircle(Circle circle, Color color, float layer, bool uiBatch)
         {
-            double radian = UtilityGlobals.ToRadians(1d / 360d);
+            Texture2D box = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
+            float radius = (float)circle.Radius;
+            Vector2 origin = circle.Center;
+            float radiusSquared = radius * radius;
+            float radiusSquaredPlusRadius = radiusSquared + radius;
 
-            for (double val = 0d; val < UtilityGlobals.TwoPI; val += radian)
+            for (float y = -radius; y <= radius; y++)
             {
-                DebugDrawLine(circle.Center, circle.GetPointAround(val), color, layer, 1, uiBatch);
+                for (float x = -radius; x <= radius; x++)
+                {
+                    float xSquared = x * x;
+                    float ySquared = y * y;
+
+                    if ((xSquared + ySquared) < radiusSquaredPlusRadius)
+                    {
+                        if (uiBatch == false)
+                            SpriteRenderer.Instance.Draw(box, new Vector2(origin.X + x, origin.Y + y), color, false, false, layer);
+                        else
+                            SpriteRenderer.Instance.DrawUI(box, new Vector2(origin.X + x, origin.Y + y), color, false, false, layer);
+                    }
+                }
             }
         }
 
@@ -598,18 +616,33 @@ namespace PaperMarioBattleSystem
         /// <param name="color">The color of the hollow circle.</param>
         /// <param name="layer">The layer of the hollow circle.</param>
         /// <param name="uiBatch">Whether to draw the hollow circle in the UI layer or not.</param>
+        /// <remarks>Brute force algorithm obtained from here: https://stackoverflow.com/a/1237519 
+        /// This seems to gives a more full looking circle than Bresenham's algorithm.
+        /// </remarks>
         public static void DebugDrawHollowCircle(Circle circle, Color color, float layer, bool uiBatch)
         {
-            double radian = UtilityGlobals.ToRadians(1d / 360d);
-
             Texture2D box = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
+            float radius = (float)circle.Radius;
+            Vector2 origin = circle.Center;
+            float radiusSquared = radius * radius;
+            float radiusSqMinusRadius = radiusSquared - radius;
+            float radiusSqPlusRadius = radiusSquared + radius;
 
-            for (double val = 0d; val < UtilityGlobals.TwoPI; val += radian)
+            for (float y = -radius; y <= radius; y++)
             {
-                if (uiBatch == false)
-                    SpriteRenderer.Instance.Draw(box, circle.GetPointAround(val), color, false, false, layer);
-                else
-                    SpriteRenderer.Instance.DrawUI(box, circle.GetPointAround(val), color, false, false, layer);
+                for (float x = -radius; x <= radius; x++)
+                {
+                    float xSquared = x * x;
+                    float ySquared = y * y;
+
+                    if ((xSquared + ySquared) > radiusSqMinusRadius && (xSquared + ySquared) < radiusSqPlusRadius)
+                    {
+                        if (uiBatch == false)
+                            SpriteRenderer.Instance.Draw(box, new Vector2(origin.X + x, origin.Y + y), color, false, false, layer);
+                        else
+                            SpriteRenderer.Instance.DrawUI(box, new Vector2(origin.X + x, origin.Y + y), color, false, false, layer);
+                    }
+                }
             }
         }
 

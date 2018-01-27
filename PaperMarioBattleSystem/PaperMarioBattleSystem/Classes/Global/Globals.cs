@@ -446,7 +446,7 @@ namespace PaperMarioBattleSystem
         public CroppedTexture2D Icon;
         public string Description;
         public Enumerations.MoveResourceTypes ResourceType;
-        public int ResourceCost;
+        public float ResourceCost;
         public Enumerations.CostDisplayTypes CostDisplayType;
         public Enumerations.MoveAffectionTypes MoveAffectionType;
         public TargetSelectionMenu.EntitySelectionType SelectionType;
@@ -460,7 +460,7 @@ namespace PaperMarioBattleSystem
         public Enumerations.EntityTypes[] OtherEntTypes;
 
         public MoveActionData(CroppedTexture2D icon, string description, Enumerations.MoveResourceTypes resourceType,
-            int resourceCost, Enumerations.CostDisplayTypes costDisplayType, Enumerations.MoveAffectionTypes moveAffectionType,
+            float resourceCost, Enumerations.CostDisplayTypes costDisplayType, Enumerations.MoveAffectionTypes moveAffectionType,
             TargetSelectionMenu.EntitySelectionType selectionType, bool usesCharge, Enumerations.HeightStates[] heightsAffected,
             params Enumerations.EntityTypes[] otherEntTypes)
         {
@@ -876,7 +876,18 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum MoveResourceTypes
         {
-            FP, SP
+            /// <summary>
+            /// FP
+            /// </summary>
+            FP,
+            /// <summary>
+            /// Star Spirit Star Power
+            /// </summary>
+            SSSP,
+            /// <summary>
+            /// Crystal Star Star Power
+            /// </summary>
+            CSSP
         }
         
         /// <summary>

@@ -16,10 +16,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Lullaby";
 
-            SPCost = 100;
-
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(66, 961, 24, 24)),
-                "Lull enemies to sleep with\na tender lullaby.", Enumerations.MoveResourceTypes.SP,
+                "Lull enemies to sleep with\na tender lullaby.", Enumerations.MoveResourceTypes.SSSP,
                 100, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other,
                 TargetSelectionMenu.EntitySelectionType.All, false, null, Enumerations.EntityTypes.Enemy);
                 

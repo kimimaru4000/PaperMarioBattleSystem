@@ -80,6 +80,12 @@ namespace PaperMarioBattleSystem
         public bool CostsFP => (MoveProperties.ResourceType == MoveResourceTypes.FP && MoveProperties.ResourceCost > 0);
 
         /// <summary>
+        /// Tells if the MoveActionCosts SP or not.
+        /// </summary>
+        public bool CostsSP => ((MoveProperties.ResourceType == MoveResourceTypes.SSSP 
+            || MoveProperties.ResourceType == MoveResourceTypes.CSSP) && MoveProperties.ResourceCost > 0);
+
+        /// <summary>
         /// Tells if the MoveAction heals in some capacity or not.
         /// </summary>
         public bool Heals => (HealingInfo != null);
@@ -208,6 +214,38 @@ namespace PaperMarioBattleSystem
                     return;
                 }
             }
+            else if (CostsSP == true)
+            {
+                MarioStats mStats = User.BattleStats as MarioStats;
+                if (mStats == null)
+                {
+                    Disabled = true;
+                    DisabledString = "No Star Power available to use!";
+                    return;
+                }
+
+                StarPowerBase starPower = null;
+
+                if (MoveProperties.ResourceType == MoveResourceTypes.SSSP)
+                    starPower = mStats.GetStarPowerFromType(StarPowerGlobals.StarPowerTypes.StarSpirit);
+                else if (MoveProperties.ResourceType == MoveResourceTypes.CSSP)
+                    starPower = mStats.GetStarPowerFromType(StarPowerGlobals.StarPowerTypes.CrystalStar);
+
+                if (starPower == null)
+                {
+                    Disabled = true;
+                    DisabledString = "No Star Power available to use!";
+                    return;
+                }
+
+                //Disable the move if you don't have enough SP to use it
+                if (starPower.CanUseStarPower(MoveProperties.ResourceCost) == false)
+                {
+                    Disabled = true;
+                    DisabledString = "Not enough SP.";
+                    return;
+                }
+            }
 
             //If the move targets entities, check if any entities can be targeted
             if (MoveProperties.MoveAffectionType != MoveAffectionTypes.None)
@@ -267,7 +305,28 @@ namespace PaperMarioBattleSystem
             //at this point, as the action is not selectable from the menu if it doesn't have enough
             if (CostsFP == true)
             {
-                User.LoseFP(MoveProperties.ResourceCost);
+                User.LoseFP((int)MoveProperties.ResourceCost);
+            }
+
+            //Subtract SP if the move costs SP. The BattleEntity must have enough SP at this point since the move can't be selected otherwise
+            if (CostsSP == true)
+            {
+                MarioStats mStats = User.BattleStats as MarioStats;
+                if (mStats != null)
+                {
+                    StarPowerBase starPower = null;
+
+                    if (MoveProperties.ResourceType == MoveResourceTypes.SSSP)
+                        starPower = mStats.GetStarPowerFromType(StarPowerGlobals.StarPowerTypes.StarSpirit);
+                    else if (MoveProperties.ResourceType == MoveResourceTypes.CSSP)
+                        starPower = mStats.GetStarPowerFromType(StarPowerGlobals.StarPowerTypes.CrystalStar);
+
+                    //Decrease SP
+                    if (starPower != null)
+                    {
+                        starPower.LoseStarPower(MoveProperties.ResourceCost);
+                    }
+                }
             }
 
             //If it's not an item move, remove the dip item turns property
@@ -356,12 +415,12 @@ namespace PaperMarioBattleSystem
             //Draw name
             SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, position, textColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
 
-            //Show FP count if the move costs FP
-            if (CostsFP == true && MoveProperties.CostDisplayType != CostDisplayTypes.Hidden)
+            //Show cost if the move costs anything
+            if ((CostsFP == true || CostsSP == true) && MoveProperties.CostDisplayType != CostDisplayTypes.Hidden)
             {
                 Color fpColor = textColor;
 
-                //If the FP cost was lowered, show it a bluish-gray color (This feature is from PM)
+                //If the resource cost was lowered, show it a bluish-gray color (This feature is from PM)
                 //Keep it gray if the move is disabled for any reason
                 if (Disabled == false && MoveProperties.CostDisplayType == CostDisplayTypes.Special)
                 {
@@ -379,7 +438,14 @@ namespace PaperMarioBattleSystem
         /// <returns>A string of the cost to use the action.</returns>
         public virtual string GetCostString()
         {
-            return $"{MoveProperties.ResourceCost} {MoveProperties.ResourceType.ToString()}";
+            if (MoveProperties.ResourceType == MoveResourceTypes.FP)
+            {
+                return $"{MoveProperties.ResourceCost} FP";
+            }
+            else
+            {
+                return $"{MoveProperties.ResourceCost / StarPowerGlobals.SPUPerStarPower} SP";
+            }
         }
 
         /// <summary>

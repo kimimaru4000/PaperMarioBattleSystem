@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
             Name = "Focus";
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(182, 812, 24, 24)),
-                "Charge Star Energy.", Enumerations.MoveResourceTypes.SP, 0,
+                "Charge Star Energy.", Enumerations.MoveResourceTypes.SSSP, 0,
                 Enumerations.CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.First,
                 false, null);
             SetMoveSequence(new FocusSequence(this));

@@ -105,22 +105,22 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public override void DrawMenuInfo(Vector2 position, Color color, float alphaMod)
+        public override void DrawMenuInfo(Vector2 position, Color color, Color textColor, float alphaMod, float iconXOffset, float resourceCostXOffset)
         {
             //Draw icon
             if (MoveInfo.Icon != null && MoveInfo.Icon.Tex != null)
             {
-                SpriteRenderer.Instance.DrawUI(MoveInfo.Icon.Tex, position - new Vector2(32, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f);
+                SpriteRenderer.Instance.DrawUI(MoveInfo.Icon.Tex, position - new Vector2(iconXOffset, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f);
             }
 
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, position, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, position, textColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
 
             //Show SP count if the Special Move costs SP
             if (CostsSP == true && MoveProperties.CostDisplayType != Enumerations.CostDisplayTypes.Hidden)
             {
-                Color spColor = color;
+                Color spColor = textColor;
 
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, GetCostString(), position + new Vector2(200, 0), spColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, GetCostString(), position + new Vector2(resourceCostXOffset, 0), spColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
             }
         }
 

@@ -13,12 +13,12 @@ namespace PaperMarioBattleSystem
     /// A button representing the main actions during battle. This includes battle actions like Jump, Hammer, etc.
     /// This is only used by the player
     /// </summary>
-    public sealed class ActionButton : IDisableable
+    public sealed class ActionButton : IDisableable, INameable
     {
         /// <summary>
         /// The name of the main action the button represents.
         /// </summary>
-        private string Name = "Button";
+        public string Name { get; private set; } = "Button";
 
         /// <summary>
         /// The image to use for the button.

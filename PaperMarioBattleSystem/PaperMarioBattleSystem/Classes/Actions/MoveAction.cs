@@ -117,10 +117,14 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public static readonly Color EnabledColor = Color.White;
 
+        public static readonly Color TextEnabledColor = Color.Black;
+
         /// <summary>
         /// The color used for displaying when a MoveAction is disabled.
         /// </summary>
         public static readonly Color DisabledColor = Color.LightSlateGray;
+
+        public static readonly Color TextDisabledColor = Color.DarkSlateGray;
 
         /// <summary>
         /// The alpha of the MoveAction's entry in the menu when it's not selected.
@@ -337,22 +341,25 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="position">The position to draw the information at.</param>
         /// <param name="color">The color to draw the information.</param>
+        /// <param name="textColor">The color to draw the text for the information.</param>
         /// <param name="alphaMod">The alpha value of the color. This is less than 1 if this MoveAction isn't currently selected on the menu.</param>
-        public virtual void DrawMenuInfo(Vector2 position, Color color, float alphaMod)
+        /// <param name="iconXOffset">The X offset to display the move's icon.</param>
+        /// <param name="resourceCostXOffset">The X offset to display the move's resource cost.</param>
+        public virtual void DrawMenuInfo(Vector2 position, Color color, Color textColor, float alphaMod, float iconXOffset, float resourceCostXOffset)
         {
             //Draw icon
             if (MoveInfo.Icon != null && MoveInfo.Icon.Tex != null)
             {
-                SpriteRenderer.Instance.DrawUI(MoveInfo.Icon.Tex, position - new Vector2(32, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f);
+                SpriteRenderer.Instance.DrawUI(MoveInfo.Icon.Tex, position - new Vector2(iconXOffset, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f);
             }
 
             //Draw name
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, position, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, position, textColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
 
             //Show FP count if the move costs FP
             if (CostsFP == true && MoveProperties.CostDisplayType != CostDisplayTypes.Hidden)
             {
-                Color fpColor = color;
+                Color fpColor = textColor;
 
                 //If the FP cost was lowered, show it a bluish-gray color (This feature is from PM)
                 //Keep it gray if the move is disabled for any reason
@@ -362,7 +369,7 @@ namespace PaperMarioBattleSystem
                     fpColor = blueGray;
                 }
 
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, GetCostString(), position + new Vector2(200, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, GetCostString(), position + new Vector2(resourceCostXOffset, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
             }
         }
 

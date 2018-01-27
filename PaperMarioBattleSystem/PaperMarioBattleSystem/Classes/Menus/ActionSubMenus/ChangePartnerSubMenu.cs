@@ -15,9 +15,10 @@ namespace PaperMarioBattleSystem
     {
         public ChangePartnerSubMenu()
         {
+            Name = "Change Partner";
             Position = new Vector2(230, 150);
 
-            YSpacing = 25;
+            HeaderSize.X = 200f;
 
             BattlePartner[] partners = Inventory.Instance.partnerInventory.GetAllPartners();
 

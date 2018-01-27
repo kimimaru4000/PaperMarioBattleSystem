@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
             int groupFocusCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.GroupFocus);
             if (groupFocusCount > 0)
             {
-                ActionSubMenu focusMenu = new ActionSubMenu(new Focus());
+                ActionSubMenu focusMenu = new ActionSubMenu("Focus", new Focus());
                 focusMenu.AutoSelectSingle = true;
 
                 CroppedTexture2D starPower = new CroppedTexture2D(abilityTex, new Rectangle(182, 812, 24, 24));

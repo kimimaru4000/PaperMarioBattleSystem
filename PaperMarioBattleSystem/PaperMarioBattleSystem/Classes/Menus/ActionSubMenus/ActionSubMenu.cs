@@ -15,8 +15,13 @@ namespace PaperMarioBattleSystem
     /// This is only used by the player
     /// <para>All ActionSubMenus have the "SubMenu" suffix</para>
     /// </summary>
-    public class ActionSubMenu : BattleMenu
+    public class ActionSubMenu : BattleMenu, INameable
     {
+        /// <summary>
+        /// The name of the SubMenu.
+        /// </summary>
+        public string Name { get; protected set; } = string.Empty;
+
         /// <summary>
         /// The list of move actions in the submenu
         /// </summary>
@@ -43,6 +48,14 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected float YSpacing = 25f;
 
+        protected float IconXOffset = 32f;
+        protected float ResourceCostXOffset = 200f;
+
+        protected Vector2 HeaderSize = new Vector2(100, 32);
+
+        protected NineSlicedTexture2D HeaderImage = null;
+        protected NineSlicedTexture2D MenuBG = null;
+
         protected TextBox BoxMenu = null;
         protected LoopAnimation SelectionCursor = null;
 
@@ -53,15 +66,21 @@ namespace PaperMarioBattleSystem
             BoxMenu = new TextBox(new Vector2(SpriteRenderer.Instance.WindowCenter.X, SpriteRenderer.Instance.WindowCenter.Y + 220f), new Vector2(320f, 80f), null);
             BoxMenu.SetText(string.Empty);
 
+            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
+
             Rectangle rect = new Rectangle(743, 59, 15, 12);
-            SelectionCursor = new LoopAnimation(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
+            SelectionCursor = new LoopAnimation(battleGFX,
                 AnimationGlobals.InfiniteLoop, true,
                 new Animation.Frame(rect, 200d),
                 new Animation.Frame(rect, 200d, new Vector2(1, 0)));
+
+            HeaderImage = new NineSlicedTexture2D(battleGFX, new Rectangle(457, 812, 32, 16), 7, 6, 7, 9);
+            MenuBG = new NineSlicedTexture2D(battleGFX, new Rectangle(485, 846, 16, 16), 8, 8, 8, 8);
         }
 
-        public ActionSubMenu(params MoveAction[] battleActions) : this()
+        public ActionSubMenu(string name, params MoveAction[] battleActions) : this()
         {
+            Name = name;
             BattleActions.AddRange(battleActions);
         }
 
@@ -131,35 +150,32 @@ namespace PaperMarioBattleSystem
 
                 Vector2 pos = Position + new Vector2(0, i * YSpacing);
                 Color color = moveAction.Disabled == false ? MoveAction.EnabledColor : MoveAction.DisabledColor;
+                Color textColor = moveAction.Disabled == false ? MoveAction.TextEnabledColor : MoveAction.TextDisabledColor;
                 if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) alphaMod = MoveAction.UnselectedAlpha;
-                //SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, moveAction.Name, pos, color * alphaMod, 0f, Vector2.Zero, 1f, .4f);
 
                 //Draw all information including name and FP cost
-                moveAction.DrawMenuInfo(pos, color, alphaMod);
-
-                //Show FP count if the move costs FP
-                //if (moveAction.CostsFP == true && moveAction.MoveProperties.HideFPCost == false)
-                //{
-                //    Color fpColor = color;
-                //
-                //    //If the FP cost was lowered, show it a bluish-gray color (This feature is from PM)
-                //    //Keep it gray if the move is disabled for any reason
-                //    if (moveAction.Disabled == false && moveAction.LoweredFPCost)
-                //    {
-                //        //NOTE: Change back to blue gray later, this is just so it's visible now
-                //        Color blueGray = Color.Blue;//new Color(102, 153, 204);
-                //        fpColor = blueGray;
-                //    }
-                //
-                //    SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, $"{moveAction.MoveProperties.FPCost} FP", pos + new Vector2(200, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
-                //}
+                moveAction.DrawMenuInfo(pos, color, textColor, alphaMod, IconXOffset, ResourceCostXOffset);
             }
 
             //Show description window at the bottom
             BoxMenu.Draw();
-
+            
             //Draw the selection cursor
-            SelectionCursor.Draw(Position + new Vector2(-64, CurSelection * YSpacing), Color.White, Vector2.Zero, new Vector2(2f, 2f), false, .38f);
+            SelectionCursor.Draw(Position + new Vector2(-(IconXOffset * 2), CurSelection * YSpacing), Color.White, Vector2.Zero, new Vector2(2f, 2f), false, .38f);
+
+            //Draw the menu background
+            SpriteRenderer.Instance.DrawUISliced(MenuBG, new Rectangle((int)(Position.X - IconXOffset) - 6, (int)(Position.Y - (YSpacing / 2)), (int)(ResourceCostXOffset + (IconXOffset * 3)), (int)((BattleActions.Count * YSpacing) + (YSpacing))),
+                Color.White, .35f);
+
+            //Draw the header
+            Vector2 headerOffset = new Vector2(HeaderSize.X / 2, HeaderSize.Y / 2);
+            Vector2 headerPos = new Vector2((int)(Position.X + (ResourceCostXOffset / 2f)), (int)(Position.Y - YSpacing) + (YSpacing / 4)) - headerOffset;
+            Rectangle headerRect = new Rectangle((int)headerPos.X, (int)headerPos.Y, (int)HeaderSize.X, (int)HeaderSize.Y);
+            SpriteRenderer.Instance.DrawUISliced(HeaderImage, headerRect, Color.Blue, .42f);
+
+            Vector2 fontSize = AssetManager.Instance.TTYDFont.MeasureString(Name);
+            Vector2 diff = new Vector2((HeaderSize.X - fontSize.X) / 2, ((HeaderSize.Y - fontSize.Y) / 2) + (fontSize.Y / 4));
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, headerPos + diff, Color.White, 0f, Vector2.Zero, 1f, .43f);
         }
     }
 }

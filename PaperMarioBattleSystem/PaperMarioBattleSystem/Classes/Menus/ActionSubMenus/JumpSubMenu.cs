@@ -14,6 +14,7 @@ namespace PaperMarioBattleSystem
     {
         public JumpSubMenu()
         {
+            Name = "Jump";
             Position = new Vector2(230, 150);
             AutoSelectSingle = true;
 

@@ -15,6 +15,7 @@ namespace PaperMarioBattleSystem
     {
         public TacticsSubMenu()
         {
+            Name = "Tactics";
             Position = new Vector2(230, 150);
 
             BattleEntity entity = BattleManager.Instance.EntityTurn;

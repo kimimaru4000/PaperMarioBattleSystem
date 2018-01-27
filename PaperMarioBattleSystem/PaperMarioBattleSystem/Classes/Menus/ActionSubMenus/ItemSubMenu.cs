@@ -40,6 +40,7 @@ namespace PaperMarioBattleSystem
         /// <param name="isRootMenu">Tells if the ItemSubMenu is the root menu. This is only true if Double/Triple Dip is used.</param>
         public ItemSubMenu(int dipTurnCount, int fpCost, bool isRootMenu = false)
         {
+            Name = "Items";
             Position = new Vector2(230, 150);
 
             DipTurnCount = dipTurnCount;

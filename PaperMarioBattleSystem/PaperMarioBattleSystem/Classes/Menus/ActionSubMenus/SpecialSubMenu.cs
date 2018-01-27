@@ -16,6 +16,7 @@ namespace PaperMarioBattleSystem
     {
         public SpecialSubMenu()
         {
+            Name = "Special";
             Position = new Vector2(230, 150);
 
             BattleActions.Add(new Focus());

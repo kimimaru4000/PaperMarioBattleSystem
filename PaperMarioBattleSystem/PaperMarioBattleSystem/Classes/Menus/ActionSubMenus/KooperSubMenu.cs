@@ -14,6 +14,7 @@ namespace PaperMarioBattleSystem
     {
         public KooperSubMenu()
         {
+            Name = "Abilities";
             Position = new Vector2(210, 150);
             BattleActions = new List<MoveAction>() { new ShellToss(), new ShellShieldAction() };
         }

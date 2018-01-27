@@ -15,6 +15,7 @@ namespace PaperMarioBattleSystem
     {
         public HammerSubMenu()
         {
+            Name = "Hammer";
             Position = new Vector2(230, 150);
             AutoSelectSingle = true;
 

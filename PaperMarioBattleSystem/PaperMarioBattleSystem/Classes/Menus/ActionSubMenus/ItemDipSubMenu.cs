@@ -15,6 +15,7 @@ namespace PaperMarioBattleSystem
     {
         public ItemDipSubMenu()
         {
+            Name = "Items";
             Position = new Vector2(230, 150);
 
             int doubleDipCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DoubleDip);

@@ -16,9 +16,35 @@ namespace PaperMarioBattleSystem
 
         private double WaitDur = 500d;
 
+        /// <summary>
+        /// The heart VFX after successfully performing Rally Wink.
+        /// </summary>
+        private RallyWinkHeartVFX HeartVFX = null;
+
         public RallyWinkSequence(MoveAction moveAction) : base(moveAction)
         {
 
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            HeartVFX = new RallyWinkHeartVFX(EntitiesAffected[0].Position, WaitDur, WaitDur, .6f);
+        }
+
+        protected override void OnEnd()
+        {
+            if (HeartVFX != null)
+            {
+                //Ensure the heart will be removed
+                if (HeartVFX.ReadyForRemoval == false && HeartVFX.HeartState != RallyWinkHeartVFX.HeartStates.FadeOut)
+                {
+                    HeartVFX.FadeOut();
+                }
+            }
+
+            HeartVFX = null;
         }
 
         protected override void SequenceStartBranch()
@@ -89,6 +115,9 @@ namespace PaperMarioBattleSystem
                         ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
                     }
 
+                    BattleObjManager.Instance.AddBattleObject(HeartVFX);
+                    EntitiesAffected[0].AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName);
+
                     CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.GoombellaBattleAnimations.WinkName);
                     break;
                 case 1:
@@ -103,10 +132,18 @@ namespace PaperMarioBattleSystem
                         EntitiesAffected[0].SetTurnsUsed(EntitiesAffected[0].TurnsUsed - 1);
                     }
 
+                    MessageBattleEvent msgEvent = new MessageBattleEvent(SuccessMessage, 2000d);
+
                     //Show the message
                     BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Message,
-                        new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
-                        new MessageBattleEvent(SuccessMessage, 2000d));
+                        new BattleManager.BattleState[] { BattleManager.BattleState.Turn }, msgEvent);
+
+                    CurSequenceAction = new WaitForBattleEventSeqAction(msgEvent);
+                    break;
+                case 3:
+                    EntitiesAffected[0].AnimManager.PlayAnimation(EntitiesAffected[0].GetIdleAnim());
+                    HeartVFX.FadeOut();
+                    CurSequenceAction = new WaitSeqAction(0d);
 
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;

@@ -317,6 +317,7 @@
     <Compile Include="Classes\SequenceActions\MoveToSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\SequenceAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForAnimationSeqAction.cs" />
+    <Compile Include="Classes\SequenceActions\WaitForBattleEventSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForCommandSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitSeqAction.cs" />
     <Compile Include="Classes\Sequences\Bobbery Bomb\BlinkFasterSequence.cs" />
@@ -425,6 +426,7 @@
     <Compile Include="Classes\VFXElements\AfterImageVFX.cs" />
     <Compile Include="Classes\VFXElements\BlinkVFX.cs" />
     <Compile Include="Classes\VFXElements\DamageStarVFX.cs" />
+    <Compile Include="Classes\VFXElements\RallyWinkHeartVFX.cs" />
     <Compile Include="Classes\VFXElements\VFXElement.cs" />
     <Compile Include="Classes\VFXElements\WingsDisappearVFX.cs" />
     <Compile Include="Main.cs" />

@@ -8,18 +8,18 @@ using static PaperMarioBattleSystem.Enumerations;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// An interface for BattleEntities with segments.
+    /// An interface for handling objects with segments.
     /// <para>Examples include Pokeys and Shy Stacks.</para>
     /// </summary>
-    public interface ISegmentEntity
+    public interface ISegmentObj
     {
         /// <summary>
-        /// How many max segments the BattleEntity has.
+        /// How many max segments the object has.
         /// </summary>
         uint MaxSegments { get; }
 
         /// <summary>
-        /// How many segments the BattleEntity currently has.
+        /// How many segments the object currently has.
         /// </summary>
         uint CurSegmentCount { get; }
 

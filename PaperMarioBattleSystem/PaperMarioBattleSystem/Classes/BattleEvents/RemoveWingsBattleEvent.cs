@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// A BattleEvent that removes an <see cref="IWingedEntity"/>'s wings when it stops being targeted.
+    /// A BattleEvent that removes an <see cref="IWingedObj"/>'s wings when it stops being targeted.
     /// </summary>
     public sealed class RemoveWingsBattleEvent : BattleEvent
     {
-        private IWingedEntity WingedEntity = null;
+        private IWingedObj WingedEntity = null;
         private BattleEntity Entity = null;
 
-        public RemoveWingsBattleEvent(IWingedEntity wingedEntity)
+        public RemoveWingsBattleEvent(IWingedObj wingedEntity, BattleEntity entity)
         {
             WingedEntity = wingedEntity;
-            Entity = wingedEntity as BattleEntity;
+            Entity = entity;
         }
 
         protected override void OnUpdate()
@@ -25,7 +25,7 @@ namespace PaperMarioBattleSystem
             //Don't do anything with invalid input
             if (WingedEntity == null || Entity == null)
             {
-                Debug.LogError($"A null {nameof(IWingedEntity)} has been passed in or it isn't a {nameof(BattleEntity)}. Fix this");
+                Debug.LogError($"A null {nameof(IWingedObj)} or {nameof(BattleEntity)} has been passed in. Fix this");
                 End();
                 return;
             }

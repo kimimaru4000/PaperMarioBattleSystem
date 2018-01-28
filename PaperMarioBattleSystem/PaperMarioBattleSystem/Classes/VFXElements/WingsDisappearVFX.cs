@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// VFX showing an <see cref="IWingedEntity"/>'s wings disappearing when it has been grounded.
+    /// VFX showing an <see cref="IWingedObj"/>'s wings disappearing when it has been grounded.
     /// </summary>
     public sealed class WingsDisappearVFX : VFXElement, ITintable
     {

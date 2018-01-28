@@ -14,6 +14,6 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The name of the object.
         /// </summary>
-        string Name { get; }
+        string Name { get; set; }
     }
 }

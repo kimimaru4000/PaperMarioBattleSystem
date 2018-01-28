@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The name of the SubMenu.
         /// </summary>
-        public string Name { get; protected set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
 
         /// <summary>
         /// The list of move actions in the submenu

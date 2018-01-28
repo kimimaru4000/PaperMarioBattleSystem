@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The name of the action
         /// </summary>
-        public string Name { get; protected set; } = "Action";
+        public string Name { get; set; } = "Action";
 
         /// <summary>
         /// The user of this action.

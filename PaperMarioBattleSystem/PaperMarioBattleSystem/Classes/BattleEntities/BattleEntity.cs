@@ -99,7 +99,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public int MaxTurns { get; protected set; } = BattleGlobals.DefaultTurnCount;
 
-        public string Name { get; protected set; } = "Entity";
+        public string Name { get; set; } = "Entity";
 
         public Color TintColor { get; set;  } = Color.White;
 

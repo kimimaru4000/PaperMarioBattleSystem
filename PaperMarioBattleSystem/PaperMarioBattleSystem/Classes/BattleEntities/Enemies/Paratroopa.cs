@@ -11,8 +11,10 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Paratroopa - A Koopa Troopa with wings.
     /// </summary>
-    public sealed class Paratroopa : KoopaTroopa, IWingedEntity, ITattleableEntity
+    public sealed class Paratroopa : KoopaTroopa, ITattleableEntity
     {
+        private IWingedObj WingedBehavior = null;
+
         public Paratroopa()
         {
             Name = "Paratroopa";
@@ -69,113 +71,34 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(66, 190, 45, 26), 250d, new Vector2(-1, 2), -.01f));
         }
 
+        protected override void SetFlippedBehavior()
+        {
+            FlippedBehavior = new ParatroopaFlippedBehavior(this, 2, EntityProperties.GetVulnerableDamageEffects(), BattleStats.BaseDefense);
+        }
+
+        public override void CleanUp()
+        {
+            base.CleanUp();
+
+            WingedBehavior?.CleanUp();
+        }
+
         public override void OnBattleStart()
         {
             base.OnBattleStart();
+
+            WingedBehavior = new ParatroopaWingedBehavior(this, -1, Enumerations.DamageEffects.RemovesWings, new KoopaTroopa());
 
             AnimManager.PlayAnimation(GetIdleAnim());
         }
 
         public override string GetIdleAnim()
         {
-            if (Grounded == false) return AnimationGlobals.WingedBattleAnimations.WingedIdleName;
+            if (WingedBehavior.Grounded == false) return AnimationGlobals.WingedBattleAnimations.WingedIdleName;
 
             return base.GetIdleAnim();
         }
-
-        protected override void HandleDamageEffects(Enumerations.DamageEffects damageEffects)
-        {
-            //Prioritize winged first
-            //This allows the Paratroopa to be flipped after landing if hit with two Jump-like moves in one turn
-            if (UtilityGlobals.DamageEffectHasFlag(damageEffects, Enumerations.DamageEffects.RemovesWings) == true
-                && EntityProperties.IsVulnerableToDamageEffect(Enumerations.DamageEffects.RemovesWings) == true)
-            {
-                HandleGrounded();
-            }
-            else
-            {
-                base.HandleDamageEffects(damageEffects);
-            }
-        }
-
-        #region Winged Implementation
-
-        public bool Grounded { get; private set; } = false;
-
-        public BattleEntity GroundedEntity { get; private set; } = new KoopaTroopa();
-
-        public int GroundedTurns => -1;
-
-        public int ElapsedGroundedTurns { get; private set; } = 0;
-
-        public void HandleGrounded()
-        {
-            Grounded = true;
-
-            ChangeToGroundedEntity();
-
-            //Queue the BattleEvent to move the entity down
-            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage - 1,
-                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                new GroundedBattleEvent(this, new Vector2(BattlePosition.X, BattleManager.Instance.EnemyStartPos.Y)));
-
-            //Queue the BattleEvent to remove the wings
-            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage - 1,
-                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                new RemoveWingsBattleEvent(this));
-
-            //After all this set the GroundedEntity to null, as we don't need its information anymore
-            GroundedEntity = null;
-        }
-
-        public void RemoveWings()
-        {
-            Animation[] animations = AnimManager.GetAnimations(AnimationGlobals.HurtName);
-
-            for (int i = 0; i < animations.Length; i++)
-            {
-                animations[i].SetChildFrames(null);
-            }
-
-            //Add VFX for the wings disappearing
-            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Paratroopa.png");
-            CroppedTexture2D wingSprite = new CroppedTexture2D(spriteSheet, new Rectangle(66, 190, 45, 26));
-
-            //Put the wings in the same spot as they were in the Paratroopa's last animation
-            WingsDisappearVFX wingsDisappear = new WingsDisappearVFX(wingSprite, BattlePosition + new Vector2(-1, 2),
-                EntityType != Enumerations.EntityTypes.Enemy, .1f - .01f, 500d, 500d, (1d / 30d) * Time.MsPerS);
-
-            BattleObjManager.Instance.AddBattleObject(wingsDisappear);
-        }
-
-        #endregion
-
-        private void ChangeToGroundedEntity()
-        {
-            //Check if the winged entity and its grounded version have entries in the Tattle database
-            bool wingedInTattle = TattleDatabase.HasTattleDescription(Name);
-            bool groundedInTattle = TattleDatabase.HasTattleDescription(GroundedEntity.Name);
-
-            //If the winged entity has an entry and the grounded version doesn't, remove its ShowHP property
-            if (wingedInTattle == true && groundedInTattle == false)
-            {
-                this.SubtractShowHPProperty();
-            }
-            //If the winged entity doesn't have an entry and the grounded version does, add its ShowHP property
-            else if (wingedInTattle == false && groundedInTattle == true)
-            {
-                this.AddShowHPProperty();
-            }
-
-            Name = GroundedEntity.Name;
-
-            //Set the vulnerability to the same as the grounded entity. The grounded entity shouldn't have a winged vulnerabilty
-            EntityProperties.SetVulnerableDamageEffects(GroundedEntity.EntityProperties.GetVulnerableDamageEffects());
-
-            //Change HeightState
-            ChangeHeightState(Enumerations.HeightStates.Grounded);
-        }
-
+        
         #region Tattle Information
 
         public new string[] GetTattleLogEntry()

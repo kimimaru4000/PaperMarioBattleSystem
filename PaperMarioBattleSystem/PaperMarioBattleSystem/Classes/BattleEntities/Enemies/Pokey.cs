@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Pokey enemy. It has 3 segments.
     /// </summary>
-    public class Pokey : BattleEnemy, ISegmentEntity, ITattleableEntity
+    public class Pokey : BattleEnemy, ITattleableEntity
     {
         public Pokey() : base(new Stats(11, 4, 0, 2, 0))
         {
@@ -43,28 +43,7 @@ namespace PaperMarioBattleSystem
 
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Pokey.png");
             AnimManager.SetSpriteSheet(spriteSheet);
-
-            //Set segment count
-            CurSegmentCount = MaxSegments;
         }
-
-        #region Interface Implementation
-
-        public uint MaxSegments { get; protected set; } = 3;
-
-        public uint CurSegmentCount { get; protected set; } = 0;
-
-        public void HandleSegmentRemoved(uint segmentsRemoved)
-        {
-
-        }
-
-        public void HandleSegmentAdded(uint segmentsAdded)
-        {
-            
-        }
-
-        #endregion
 
         #region Tattle Info
 

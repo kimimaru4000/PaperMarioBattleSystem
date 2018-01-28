@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The name of the Collectible
         /// </summary>
-        public string Name { get; protected set; } = "Item";
+        public string Name { get; set; } = "Item";
 
         /// <summary>
         /// The description of the Collectible

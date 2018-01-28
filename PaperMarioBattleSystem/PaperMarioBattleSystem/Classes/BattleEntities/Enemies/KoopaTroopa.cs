@@ -11,10 +11,12 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Koopa Troopa
     /// </summary>
-    public class KoopaTroopa : BattleEnemy, IFlippableEntity, ITattleableEntity
+    public class KoopaTroopa : BattleEnemy, ITattleableEntity
     {
         //NOTE: Temporary until we get a simple enemy AI system in
         protected virtual MoveAction ActionUsed => new ShellToss();
+
+        protected IFlippableObj FlippedBehavior = null;
 
         public KoopaTroopa() : base(new Stats(8, 4, 0, 1, 1))
         {
@@ -67,37 +69,46 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(68, 209, 54, 30), 300d)));
         }
 
+        protected virtual void SetFlippedBehavior()
+        {
+            FlippedBehavior = new KoopaFlippedBehavior(this, 2, EntityProperties.GetVulnerableDamageEffects(), BattleStats.BaseDefense);
+        }
+
+        public override void CleanUp()
+        {
+            base.CleanUp();
+
+            FlippedBehavior?.CleanUp();
+        }
+
+        public override void OnBattleStart()
+        {
+            base.OnBattleStart();
+
+            SetFlippedBehavior();
+        }
+
         public override void OnTurnStart()
         {
             base.OnTurnStart();
 
-            if (Flipped == true)
+            //If it's flipped, don't do anything
+            if (FlippedBehavior.Flipped == false)
             {
-                ManageFlippedTurn();
+                StartAction(ActionUsed, false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
             }
             else
             {
-                StartAction(ActionUsed, false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
+                StartAction(new NoAction(), true, null);
             }
         }
 
         public override string GetIdleAnim()
         {
             //If Flipped, return the Flipped animation
-            if (Flipped == true) return AnimationGlobals.ShelledBattleAnimations.FlippedName;
+            if (FlippedBehavior.Flipped == true) return AnimationGlobals.ShelledBattleAnimations.FlippedName;
 
             return base.GetIdleAnim();
-        }
-
-        protected override void HandleDamageEffects(Enumerations.DamageEffects damageEffects)
-        {
-            base.HandleDamageEffects(damageEffects);
-
-            //Check whether any of the flags to flip are here
-            if (UtilityGlobals.DamageEffectHasFlag(FlippedOnEffects, damageEffects) == true)
-            {
-                HandleFlipped();
-            }
         }
 
         #region Flippable Implementation

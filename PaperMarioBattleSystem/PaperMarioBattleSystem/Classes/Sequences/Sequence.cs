@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public MoveAction Action { get; private set; } = null;
 
-        public string Name => Action.Name;
+        public string Name { get => Action.Name; set { } }
 
         protected BattleEntity User => Action.User;
 

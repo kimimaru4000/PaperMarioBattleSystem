@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The name of the main action the button represents.
         /// </summary>
-        public string Name { get; private set; } = "Button";
+        public string Name { get; set; } = "Button";
 
         /// <summary>
         /// The image to use for the button.

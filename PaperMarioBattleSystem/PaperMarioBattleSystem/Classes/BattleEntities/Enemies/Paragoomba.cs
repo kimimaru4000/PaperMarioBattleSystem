@@ -11,9 +11,11 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Paragoomba - A Goomba with wings.
     /// </summary>
-    public sealed class Paragoomba : Goomba, IWingedEntity, ITattleableEntity
+    public sealed class Paragoomba : Goomba, ITattleableEntity
     {
-        protected override MoveAction ActionUsed => Grounded == false ? new DiveKick() : base.ActionUsed;
+        protected override MoveAction ActionUsed => WingedBehavior.Grounded == false ? new DiveKick() : base.ActionUsed;
+
+        private IWingedObj WingedBehavior = null;
 
         public Paragoomba()
         {
@@ -60,109 +62,27 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(120, 121, 31, 21), 1000d, new Vector2(-1, -9), -.01f));
         }
 
+        public override void CleanUp()
+        {
+            base.CleanUp();
+
+            WingedBehavior?.CleanUp();
+        }
+
         public override void OnBattleStart()
         {
             base.OnBattleStart();
 
+            WingedBehavior = new ParagoombaWingedBehavior(this, -1, EntityProperties.GetVulnerableDamageEffects(), new Goomba());
+
             AnimManager.PlayAnimation(GetIdleAnim());
-        }
-
-        protected override void HandleDamageEffects(Enumerations.DamageEffects damageEffects)
-        {
-            base.HandleDamageEffects(damageEffects);
-
-            if (UtilityGlobals.DamageEffectHasFlag(damageEffects, Enumerations.DamageEffects.RemovesWings) == true
-                && EntityProperties.IsVulnerableToDamageEffect(Enumerations.DamageEffects.RemovesWings) == true)
-            {
-                HandleGrounded();
-            }
         }
 
         public override string GetIdleAnim()
         {
-            if (Grounded == false) return AnimationGlobals.WingedBattleAnimations.WingedIdleName;
+            if (WingedBehavior.Grounded == false) return AnimationGlobals.WingedBattleAnimations.WingedIdleName;
 
             return base.GetIdleAnim();
-        }
-
-        #region Interface Implementation
-
-        public bool Grounded { get; private set; } = false;
-
-        public BattleEntity GroundedEntity { get; private set; } = new Goomba();
-
-        public int GroundedTurns => -1;
-
-        public int ElapsedGroundedTurns { get; private set; }
-
-        public void RemoveWings()
-        {
-            //Remove the wings from the hurt and death animations
-            Animation[] animations = AnimManager.GetAnimations(AnimationGlobals.HurtName, AnimationGlobals.DeathName);
-
-            //Clear all child frames with wings
-            for (int i = 0; i < animations.Length; i++)
-            {
-                animations[i].SetChildFrames(null);
-            }
-
-            //Add VFX for the wings disappearing
-            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Paragoomba.png");
-            CroppedTexture2D wingSprite = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
-
-            //Put the wings in the same spot as they were in the Paragoomba's last animation
-            WingsDisappearVFX wingsDisappear = new WingsDisappearVFX(wingSprite, BattlePosition + new Vector2(-4, -1),
-                EntityType != Enumerations.EntityTypes.Enemy, .1f - .01f, 500d, 500d, (1d / 30d) * Time.MsPerS);
-
-            BattleObjManager.Instance.AddBattleObject(wingsDisappear);
-        }
-
-        public void HandleGrounded()
-        {
-            Grounded = true;
-
-            ChangeToGroundedEntity();
-
-            //Queue the BattleEvent to move the entity down
-            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage - 1,
-                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                new GroundedBattleEvent(this, new Vector2(BattlePosition.X, BattleManager.Instance.EnemyStartPos.Y)));
-
-            //Queue the BattleEvent to remove the wings
-            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage - 1,
-                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                new RemoveWingsBattleEvent(this));
-
-            //After all this set the GroundedEntity to null, as we don't need its information anymore
-            GroundedEntity = null;
-        }
-
-        #endregion
-
-        private void ChangeToGroundedEntity()
-        {
-            //Check if the winged entity and its grounded version have entries in the Tattle database
-            bool wingedInTattle = TattleDatabase.HasTattleDescription(Name);
-            bool groundedInTattle = TattleDatabase.HasTattleDescription(GroundedEntity.Name);
-
-            //If the winged entity has an entry and the grounded version doesn't, remove its ShowHP property
-            if (wingedInTattle == true && groundedInTattle == false)
-            {
-                this.SubtractShowHPProperty();
-            }
-            //If the winged entity doesn't have an entry and the grounded version does, add its ShowHP property
-            else if (wingedInTattle == false && groundedInTattle == true)
-            {
-                this.AddShowHPProperty();
-            }
-
-            Name = GroundedEntity.Name;
-
-            //Set the vulnerability to the same as the grounded entity. The grounded entity shouldn't have a winged vulnerabilty
-            EntityProperties.SetVulnerableDamageEffects(GroundedEntity.EntityProperties.GetVulnerableDamageEffects());
-
-            //Change HeightState
-            ChangeHeightState(Enumerations.HeightStates.Grounded);
         }
 
         #region Tattle Information

@@ -76,6 +76,11 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(337, 97, 58, 36), 300d)));
         }
 
+        protected override void SetFlippedBehavior()
+        {
+            FlippedBehavior = new KoopatrolFlippedBehavior(this, 2, EntityProperties.GetVulnerableDamageEffects(), BattleStats.BaseDefense, SpikedPayback, Enumerations.PhysicalAttributes.Spiked);
+        }
+
         protected override MoveAction ActionUsed
         {
             get
@@ -111,22 +116,6 @@ namespace PaperMarioBattleSystem
 
                 return base.ActionUsed;
             }
-        }
-
-        public override void HandleFlipped()
-        {
-            base.HandleFlipped();
-
-            EntityProperties.RemovePayback(SpikedPayback);
-            EntityProperties.RemovePhysAttribute(Enumerations.PhysicalAttributes.Spiked);
-        }
-
-        protected override void UnFlip()
-        {
-            base.UnFlip();
-
-            EntityProperties.AddPayback(SpikedPayback);
-            EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Spiked);
         }
 
         #region Tattle Information

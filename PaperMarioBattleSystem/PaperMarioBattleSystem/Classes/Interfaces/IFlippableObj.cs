@@ -8,41 +8,45 @@ using static PaperMarioBattleSystem.Enumerations;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// An interface for any BattleEntity that can be flipped.
+    /// An interface for any object that handles flipping.
     /// <para>Examples include Koopa Troopas and Clefts.</para>
     /// </summary>
-    public interface IFlippableEntity
+    public interface IFlippableObj : ICleanup
     {
         /// <summary>
-        /// Whether the BattleEntity is flipped or not.
+        /// Whether the object is flipped or not.
         /// </summary>
         bool Flipped { get; }
 
         /// <summary>
-        /// How many turns the BattleEntity stays flipped.
+        /// How many turns the object stays flipped.
         /// </summary>
         int FlippedTurns { get; }
 
         /// <summary>
-        /// How many turns the BattleEntity has been flipped.
+        /// How many turns the object has been flipped.
         /// </summary>
         int ElapsedFlippedTurns { get; }
 
         /// <summary>
-        /// The DamageEffects that cause the BattleEntity to flip.
-        /// <para>This should only be FlipsShelled and/or FlipsClefts.</para>
+        /// The DamageEffects that cause the object to flip.
         /// </summary>
         DamageEffects FlippedOnEffects { get; }
 
         /// <summary>
-        /// The amount of Defense lost by the BattleEntity when flipped.
-        /// In many cases this will be the BattleEntity's BaseDefense.
+        /// The amount of Defense lost by the object when flipped.
+        /// In many cases this will be the object's BaseDefense.
         /// </summary>
         int DefenseLoss { get; }
 
         /// <summary>
-        /// What happens when the BattleEntity is flipped.
+        /// What happens when the object is flipped.
         /// </summary>
         void HandleFlipped();
+
+        /// <summary>
+        /// What happens when the object is unflipped.
+        /// </summary>
+        void UnFlip();
     }
 }

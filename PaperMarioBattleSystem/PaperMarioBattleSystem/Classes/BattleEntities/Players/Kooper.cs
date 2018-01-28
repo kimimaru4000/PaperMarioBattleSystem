@@ -8,8 +8,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
-    public sealed class Kooper : BattlePartner, IFlippableEntity
+    public sealed class Kooper : BattlePartner
     {
+        private IFlippableObj FlippedBehavior = null;
+
         public Kooper() : base(new PartnerStats(PartnerGlobals.PartnerRanks.Normal, 50, 0, 1))
         {
             Name = "Kooper";
@@ -18,6 +20,8 @@ namespace PaperMarioBattleSystem
 
             //As Kooper is a Koopa, he can be flipped
             EntityProperties.SetVulnerableDamageEffects(Enumerations.DamageEffects.FlipsShelled | Enumerations.DamageEffects.FlipsClefts);
+
+            FlippedBehavior = new KoopaFlippedBehavior(this, 2, EntityProperties.GetVulnerableDamageEffects(), BattleStats.BaseDefense);
 
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Characters/Kooper.png");
             AnimManager.SetSpriteSheet(spriteSheet);
@@ -48,6 +52,13 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(5, 218, 54, 28), 350d)));
         }
 
+        public override void CleanUp()
+        {
+            base.CleanUp();
+
+            FlippedBehavior?.CleanUp();
+        }
+
         protected sealed override BattleMenu GetMainBattleMenu()
         {
             return new PartnerBattleMenu(new KooperSubMenu(), Enumerations.PartnerTypes.Kooper);
@@ -57,9 +68,11 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
-            if (Flipped == true)
+            if (FlippedBehavior.Flipped == true)
             {
-                ManageFlippedTurn();
+                //Make Kooper do a NoAction instead of directly ending his turn
+                BattleUIManager.Instance.ClearMenuStack();
+                StartAction(new NoAction(), true, null);
             }
         }
 
@@ -72,93 +85,9 @@ namespace PaperMarioBattleSystem
         public override string GetIdleAnim()
         {
             //If Flipped, return the Flipped animation
-            if (Flipped == true) return AnimationGlobals.ShelledBattleAnimations.FlippedName;
+            if (FlippedBehavior.Flipped == true) return AnimationGlobals.ShelledBattleAnimations.FlippedName;
 
             return base.GetIdleAnim();
-        }
-
-        protected override void HandleDamageEffects(Enumerations.DamageEffects damageEffects)
-        {
-            base.HandleDamageEffects(damageEffects);
-
-            //Check whether any of the flags to flip are here
-            if (UtilityGlobals.DamageEffectHasFlag(FlippedOnEffects, damageEffects) == true)
-            {
-                HandleFlipped();
-            }
-        }
-
-        #region Interface Implementations
-
-        public bool Flipped { get; private set; } = false;
-
-        public int FlippedTurns { get; private set; } = 2;
-
-        public int ElapsedFlippedTurns { get; private set; } = 0;
-
-        public Enumerations.DamageEffects FlippedOnEffects => 
-            (Enumerations.DamageEffects.FlipsShelled | Enumerations.DamageEffects.FlipsClefts);
-
-        public int DefenseLoss => BattleStats.BaseDefense;
-
-        public void HandleFlipped()
-        {
-            if (Flipped == false)
-            {
-                int immobile = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.Immobile) + 1;
-                EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Immobile, immobile);
-
-                //Lower defense by an amount when flipped
-                LowerDefense(DefenseLoss);
-            }
-
-            Flipped = true;
-
-            //Don't play this animation if dead
-            if (IsDead == false)
-            {
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage - 2,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                    new PlayAnimBattleEvent(this, GetIdleAnim(), false));
-            }
-
-            //Getting hit again while flipped refreshes the flip timer
-            ElapsedFlippedTurns = 0;
-        }
-
-        #endregion
-
-        private void ManageFlippedTurn()
-        {
-            ElapsedFlippedTurns++;
-
-            if (ElapsedFlippedTurns >= FlippedTurns)
-            {
-                //Get up; this still uses up a turn
-                UnFlip();
-            }
-
-            //Make Kooper do a NoAction instead of directly ending his turn
-            BattleUIManager.Instance.ClearMenuStack();
-            StartAction(new NoAction(), true, null);
-        }
-
-        private void UnFlip()
-        {
-            Flipped = false;
-            AnimManager.PlayAnimation(GetIdleAnim(), true);
-
-            int immobile = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.Immobile) - 1;
-            EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.Immobile);
-            if (immobile > 0)
-            {
-                EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.Immobile, immobile);
-            }
-
-            //Raise defense again after unflipping
-            RaiseDefense(DefenseLoss);
-
-            ElapsedFlippedTurns = 0;
         }
     }
 }

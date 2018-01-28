@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Additional frames to be rendered at the same time as the normal frames. This cannot exceed the number of 
         /// frames in the normal frames array.
-        /// <para>This is commonly used for BattleEntities implementing <see cref="IWingedEntity"/>.</para>
+        /// <para>This is commonly used for wings.</para>
         /// </summary>
         protected Frame[] ChildFrames = null;
 

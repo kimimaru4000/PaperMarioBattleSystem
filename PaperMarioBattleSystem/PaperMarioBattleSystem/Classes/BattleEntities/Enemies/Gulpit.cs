@@ -102,6 +102,8 @@ namespace PaperMarioBattleSystem
 
         #region Tattle Information
 
+        public bool CanBeTattled { get; set; } = true;
+
         public string[] GetTattleLogEntry()
         {
             //Log entries don't exist in the original PM and Gulpits are PM-only enemies, so they don't have one

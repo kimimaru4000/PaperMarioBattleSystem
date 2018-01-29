@@ -861,7 +861,7 @@ namespace PaperMarioBattleSystem
         #region Status Property Methods
 
         /// <summary>
-        /// Adds a StatusProperty for a particular StatusEffect to the entity.
+        /// Adds a StatusProperty for a particular StatusEffect to the BattleEntity.
         /// If a StatusProperty already exists for a StatusEffect, it will be replaced.
         /// </summary>
         /// <param name="statusType">The StatusType of the StatusEffect.</param>
@@ -878,7 +878,22 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells if the entity has a StatusPropertyHolder associated with a particular StatusEffect or not
+        /// Removes a StatusProperty for a particular StatusEffect from the BattleEntity.
+        /// </summary>
+        /// <param name="statusType">The StatusType of the StatusEffect.</param>
+        public void RemoveStatusProperty(StatusTypes statusType)
+        {
+            if (HasStatusProperty(statusType) == false)
+            {
+                Debug.LogWarning($"{Entity.Name} doesn't have a {nameof(StatusPropertyHolder)} for the {statusType} Status!");
+                return;
+            }
+
+            StatusProperties.Remove(statusType);
+        }
+
+        /// <summary>
+        /// Tells if the BattleEntity has a StatusPropertyHolder associated with a particular StatusEffect or not
         /// </summary>
         /// <param name="statusType">The StatusType of the StatusEffect</param>
         /// <returns>true if a StatusPropertyHolder can be found for the specified StatusType, false otherwise</returns>
@@ -900,6 +915,35 @@ namespace PaperMarioBattleSystem
             }
 
             return StatusProperties[statusType];
+        }
+
+        /// <summary>
+        /// Copies StatusProperties from a <see cref="BattleEntityProperties"/> to this one.
+        /// This removes all existing StatusProperties before copying.
+        /// </summary>
+        /// <param name="entityProperties">The BattleEntityProperties to copy StatusProperties from.</param>
+        public void CopyStatusProperties(BattleEntityProperties entityProperties)
+        {
+            //Don't do anything if null was passed in
+            if (entityProperties == null)
+            {
+                Debug.LogError($"{nameof(entityProperties)} is null in {nameof(CopyStatusProperties)}! Fix this!!");
+                return;
+            }
+
+            //Remove all Status Properties first
+            RemoveAllStatusProperties();
+
+            //Copy the data from the other StatusProperties
+            StatusProperties.CopyDictionaryData(entityProperties.StatusProperties);
+        }
+
+        /// <summary>
+        /// Removes all StatusProperties. This is for internal use.
+        /// </summary>
+        private void RemoveAllStatusProperties()
+        {
+            StatusProperties.Clear();
         }
 
         #endregion

@@ -67,6 +67,8 @@ namespace PaperMarioBattleSystem
 
         #region Tattle Info
 
+        public bool CanBeTattled { get; set; } = true;
+
         public string[] GetTattleLogEntry()
         {
             return new string[]

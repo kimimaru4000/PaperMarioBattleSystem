@@ -103,6 +103,8 @@ namespace PaperMarioBattleSystem
 
         public new string[] GetTattleLogEntry()
         {
+            if (WingedBehavior.Grounded == true) return base.GetTattleLogEntry();   
+
             return new string[]
             {
                 $"HP: {BattleStats.MaxHP} Attack: {BattleStats.BaseAttack}\nDefense: {BattleStats.BaseDefense}",
@@ -113,6 +115,8 @@ namespace PaperMarioBattleSystem
 
         public new string[] GetTattleDescription()
         {
+            if (WingedBehavior.Grounded == true) return base.GetTattleDescription();
+
             return new string[]
             {
                 "That's a Koopa Paratroopa. Well, umm... It's basically a Koopa Troopa with wings.",

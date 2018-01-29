@@ -12,6 +12,12 @@ namespace PaperMarioBattleSystem
     public interface ITattleableEntity
     {
         /// <summary>
+        /// Tells whether the BattleEntity can currently be tattled.
+        /// <para>This is useful if the BattleEntity did something to prevent itself from being tattled.</para>
+        /// </summary>
+        bool CanBeTattled { get; set; }
+
+        /// <summary>
         /// The log entry description of the BattleEntity. This is shown when viewing the Tattle Log outside of battle.
         /// <para>Each entry in the array correlates to a different set of text in the text box.</para>
         /// </summary>

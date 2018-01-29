@@ -353,6 +353,34 @@ namespace PaperMarioBattleSystem
         #region Dictionary Extensions
 
         /// <summary>
+        /// Copies unique keys and values from a <see cref="Dictionary{TKey, TValue}"/> into an existing <see cref="Dictionary{TKey, TValue}"/>.
+        /// If the key already exists in the dictionary to copy to, it will replace it.
+        /// </summary>
+        /// <typeparam name="T">The type of the key.</typeparam>
+        /// <typeparam name="U">The type of the value.</typeparam>
+        /// <param name="dictCopiedTo">The Dictionary to copy values to.</param>
+        /// <param name="dictCopiedFrom">The Dictionary to copy from.</param>
+        public static void CopyDictionaryData<T,U>(this Dictionary<T,U> dictCopiedTo, Dictionary<T,U> dictCopiedFrom)
+        {
+            //Don't do anything if null, since there's nothing to copy from
+            if (dictCopiedFrom == null) return;
+
+            //Go through all keys and values
+            foreach (KeyValuePair<T, U> kvPair in dictCopiedFrom)
+            {
+                T key = kvPair.Key;
+
+                //Replace if already exists
+                if (dictCopiedTo.ContainsKey(key) == true)
+                {
+                    dictCopiedTo.Remove(key);
+                }
+
+                dictCopiedTo.Add(key, kvPair.Value);
+            }
+        }
+
+        /// <summary>
         /// Copies the keys and values from this <see cref="Dictionary{TKey, TValue}"/> into a new <see cref="Dictionary{TKey, TValue}"/>.
         /// </summary>
         /// <typeparam name="T">The type of the key.</typeparam>

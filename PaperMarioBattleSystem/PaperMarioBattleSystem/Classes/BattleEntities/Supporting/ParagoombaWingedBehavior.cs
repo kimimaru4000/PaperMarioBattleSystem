@@ -25,12 +25,18 @@ namespace PaperMarioBattleSystem
 
         public Enumerations.DamageEffects GroundedOnEffects { get; set; } = Enumerations.DamageEffects.RemovesWings;
 
+        protected Vector2 WingOffset = Vector2.Zero;
+        protected Rectangle WingRectRegion = Rectangle.Empty;
+
         public ParagoombaWingedBehavior(BattleEntity entity, int groundedTurns, Enumerations.DamageEffects groundedOnEffects, BattleEntity groundedEntity)
         {
             Entity = entity;
             GroundedTurns = groundedTurns;
             GroundedOnEffects = groundedOnEffects;
             GroundedEntity = groundedEntity;
+
+            WingOffset = new Vector2(-4, -1);
+            WingRectRegion = new Rectangle(3, 166, 41, 18);
 
             Entity.DamageTakenEvent -= OnDamageTaken;
             Entity.DamageTakenEvent += OnDamageTaken;
@@ -89,9 +95,6 @@ namespace PaperMarioBattleSystem
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                 new RemoveWingsBattleEvent(this, Entity));
 
-            //After all this set the GroundedEntity to null, as we don't need its information anymore
-            GroundedEntity = null;
-
             //Remove the damage event, since we don't need it anymore
             Entity.DamageTakenEvent -= OnDamageTaken;
         }
@@ -109,13 +112,37 @@ namespace PaperMarioBattleSystem
 
             //Add VFX for the wings disappearing
             Texture2D spriteSheet = Entity.AnimManager.SpriteSheet;
-            CroppedTexture2D wingSprite = new CroppedTexture2D(spriteSheet, new Rectangle(3, 166, 41, 18));
+            CroppedTexture2D wingSprite = new CroppedTexture2D(spriteSheet, WingRectRegion);
 
             //Put the wings in the same spot as they were in the Paragoomba's last animation
-            WingsDisappearVFX wingsDisappear = new WingsDisappearVFX(wingSprite, Entity.BattlePosition + new Vector2(-4, -1),
+            WingsDisappearVFX wingsDisappear = new WingsDisappearVFX(wingSprite, Entity.BattlePosition + WingOffset,
                 Entity.EntityType != Enumerations.EntityTypes.Enemy, .1f - .01f, 500d, 500d, (1d / 30d) * Time.MsPerS);
 
             BattleObjManager.Instance.AddBattleObject(wingsDisappear);
+
+            //Copy the StatusProperties from the grounded entity
+            //This happens here, as winged entities use their own status tables until they've been grounded
+            if (GroundedEntity != null)
+            {
+                Entity.EntityProperties.CopyStatusProperties(GroundedEntity.EntityProperties);
+            }
+
+            //Don't modify Tattle information
+            //The entity knows what its grounded version is
+            //However, one thing we can do here is disable tattling if the grounded version doesn't support it
+            ITattleableEntity gTattleable = GroundedEntity as ITattleableEntity;
+            if (gTattleable == null)
+            {
+                //Disable tattling if the grounded version can't be Tattled
+                ITattleableEntity entity = Entity as ITattleableEntity;
+                if (entity != null)
+                {
+                    entity.CanBeTattled = false;
+                }
+            }
+
+            //After all this set the GroundedEntity to null, as we don't need its information anymore
+            GroundedEntity = null;
         }
 
         private void OnDamageTaken(InteractionHolder damageInfo)

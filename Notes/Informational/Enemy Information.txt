@@ -1,6 +1,10 @@
 Enemy Information (3/13/17)
 ---------------------------
 
+Winged Enemies
+--------------
+-When inflicted with a status, Winged enemies use their own status tables rather than their grounded variants. This includes when you jump on them
+
 Ice Puffs
 ---------
 -Have a Heal Resistance to Ice

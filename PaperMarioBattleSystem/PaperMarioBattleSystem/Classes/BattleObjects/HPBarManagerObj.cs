@@ -78,6 +78,27 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Updates the list of BattleEntities that have their HP shown and now should have it hidden.
+        /// It looks through the list of BattleEntities who have their HP shown and adds them to the hidden list if they should not show their HP anymore.
+        /// </summary>
+        private void CheckHideEntityHP()
+        {
+            for (int i = 0; i < HPShownEntities.Count; i++)
+            {
+                //Check if the entities should no longer have their HP shown
+                if (HPShownEntities[i].EntityProperties.HasAdditionalProperty(Enumerations.AdditionalProperty.ShowHP) == false)
+                {
+                    //Add them to the not shown list
+                    NoHPEntities.Add(HPShownEntities[i]);
+
+                    //Remove them from the shown list
+                    HPShownEntities.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        /// <summary>
         /// Updates the list of BattleEntities that should have their HP shown.
         /// It looks through the list of BattleEntities who don't have their HP shown and adds them to the HP shown list if they should now show their HP.
         /// </summary>
@@ -143,6 +164,7 @@ namespace PaperMarioBattleSystem
         private void OnBattleTurnEnded(BattleEntity battleEntity)
         {
             //Update the HP shown list on turn end
+            CheckHideEntityHP();
             CheckShowEntityHP();
         }
     }

@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
         
         /// <summary>
         /// Gets all BattleEntities that can be tattled.
-        /// They all implement the <see cref="ITattleableEntity"/> interface.
+        /// They all implement the <see cref="ITattleableEntity"/> interface and are available to be tattled.
         /// </summary>
         /// <returns>An array of BattleEntities of the opposing EntityType that can be tattled.</returns>
         private BattleEntity[] GetTattleableEntities()
@@ -66,9 +66,11 @@ namespace PaperMarioBattleSystem
 
                     for (int j = 0; j < entities.Length; j++)
                     {
-                        //Safely cast to see if the BattleEntity can be tattled and add it if so
+                        //Safely cast to see if the BattleEntity can be tattled
                         ITattleableEntity tattleableEntity = entities[j] as ITattleableEntity;
-                        if (tattleableEntity != null)
+
+                        //Add it if the entity is tattleable and can currently be tattled
+                        if (tattleableEntity != null && tattleableEntity.CanBeTattled == true)
                         {
                             tattleableEntities.Add(entities[j]);
                         }

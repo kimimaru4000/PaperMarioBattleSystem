@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// An interface for any Winged object that can be knocked to the ground.
     /// <para>Examples include Paragoombas and Stilt Guys.
-    /// Parakarry is excluded as he cannot be knocked to the ground.</para>
+    /// Parakarry is excluded, as he cannot be knocked to the ground.</para>
     /// </summary>
     public interface IWingedObj : ICleanup
     {
@@ -43,12 +43,12 @@ namespace PaperMarioBattleSystem
         Enumerations.DamageEffects GroundedOnEffects { get; }
 
         /// <summary>
-        /// Removes the Winged object's wings.
+        /// Removes the Winged object's wings, performing any other logic required to transition it to the GroundedEntity.
         /// </summary>
         void RemoveWings();
 
         /// <summary>
-        /// What happens when the object turns Grounded.
+        /// What happens when the object is hit by a move that grounds it.
         /// </summary>
         void HandleGrounded();
     }

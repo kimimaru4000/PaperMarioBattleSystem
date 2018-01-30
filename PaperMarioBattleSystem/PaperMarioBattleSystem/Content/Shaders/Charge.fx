@@ -48,8 +48,6 @@ float4 ChargeScroll(VertexShaderOutput input) : COLOR0
 
 	//Offset the rendered object's current frame from the top of the spritesheet so the charge effect is always consistent
 	float2 scaledCoords = input.TextureCoordinates - objFrameOffset;
-	if (scaledCoords.x < 0) scaledCoords.x = 0;
-	if (scaledCoords.y < 0) scaledCoords.y = 0;
 
 	//Check the Y pixel
 	//For each Y, go down the Y on the Charge texture

@@ -56,6 +56,16 @@ namespace PaperMarioBattleSystem
         private bool Initialized = false;
 
         /// <summary>
+        /// The number of post-processing shaders in effect.
+        /// </summary>
+        public int PostProcessingCount => PostProcessingEffects.Count;
+
+        /// <summary>
+        /// A list of post-processing shaders to apply. They'll be applied in order.
+        /// </summary>
+        private readonly List<Effect> PostProcessingEffects = new List<Effect>();
+
+        /// <summary>
         /// The main RenderTarget used to render the screen to.
         /// </summary>
         private RenderTarget2D MainRenderTarget = null;
@@ -76,6 +86,8 @@ namespace PaperMarioBattleSystem
             spriteBatch.Dispose();
             uiBatch.Dispose();
             graphicsDeviceManager.Dispose();
+
+            RemoveAllPostProcessingEffects();
 
             Initialized = false;
 
@@ -198,17 +210,79 @@ namespace PaperMarioBattleSystem
             //Clear screen with color
             graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            //Start a new batch just to draw the RenderTarget
-            BeginBatch(spriteBatch, null, null, null, null);
+            //Render without a shader
+            if (PostProcessingCount == 0)
+            {
+                //Start a new batch just to draw the RenderTarget
+                BeginBatch(spriteBatch, null, null, null, null);
 
-            //Draw the render target
-            Draw(MainRenderTarget, new Rectangle(0, 0, MainRenderTarget.Width, MainRenderTarget.Height), null, Color.White, 0f, Vector2.Zero, false, false, 1f);
+                //Draw the render target
+                Draw(MainRenderTarget, new Rectangle(0, 0, MainRenderTarget.Width, MainRenderTarget.Height), null, Color.White, 0f, Vector2.Zero, false, false, 1f);
 
-            //End the batch
-            EndBatch(spriteBatch);
+                //End the batch
+                EndBatch(spriteBatch);
+            }
+            else
+            {
+                //Render with all post-processing effects
+                for (int i = 0; i < PostProcessingCount; i++)
+                {
+                    //Start a new batch just to draw the RenderTarget
+                    BeginBatch(spriteBatch, null, null, PostProcessingEffects[i], null);
+
+                    //Draw the render target
+                    Draw(MainRenderTarget, new Rectangle(0, 0, MainRenderTarget.Width, MainRenderTarget.Height), null, Color.White, 0f, Vector2.Zero, false, false, 1f);
+
+                    //End the batch
+                    EndBatch(spriteBatch);
+                }
+            }
 
             //Mark that we unset the render target
             SetRenderTarget = false;
+        }
+
+        /// <summary>
+        /// Adds a post-processing effect.
+        /// </summary>
+        /// <param name="effect">The post-processing effect to add.</param>
+        /// <param name="index">The index to insert the effect at. If less than 0, it will add it to the end of the list.</param>
+        public void AddPostProcessingEffect(Effect effect, int index = -1)
+        {
+            if (index < 0)
+            {
+                PostProcessingEffects.Add(effect);
+            }
+            else
+            {
+                PostProcessingEffects.Insert(index, effect);
+            }
+        }
+
+        /// <summary>
+        /// Removes a post-processing effect.
+        /// </summary>
+        /// <param name="effectToRemove">The post-processing effect to remove.</param>
+        public void RemovePostProcessingEffect(Effect effectToRemove)
+        {
+            PostProcessingEffects.Remove(effectToRemove);
+        }
+
+        /// <summary>
+        /// Removes a post-processing effect at a particular index.
+        /// </summary>
+        /// <param name="index">The index to remove the post-processing effect at.</param>
+        public void RemovePostProcessingEffect(int index)
+        {
+            PostProcessingEffects.RemoveAt(index);
+        }
+
+        /// <summary>
+        /// Removes all post-processing effects.
+        /// </summary>
+        public void RemoveAllPostProcessingEffects()
+        {
+            PostProcessingEffects.Clear();
         }
 
         public void BeginBatch(SpriteBatch batch, BlendState blendState, SamplerState samplerState, Effect effect, Matrix? transformMatrix)

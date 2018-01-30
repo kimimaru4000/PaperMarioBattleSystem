@@ -55,6 +55,17 @@ namespace PaperMarioBattleSystem
 
         private bool Initialized = false;
 
+        /// <summary>
+        /// The main RenderTarget used to render the screen to.
+        /// </summary>
+        private RenderTarget2D MainRenderTarget = null;
+
+        /// <summary>
+        /// Whether the RenderTarget was set or not.
+        /// If true, no screen size changes will be applied until the next frame.
+        /// </summary>
+        private bool SetRenderTarget = false;
+
         private SpriteRenderer()
         {
             
@@ -85,6 +96,8 @@ namespace PaperMarioBattleSystem
             spriteBatch = new SpriteBatch(graphicsDeviceManager.GraphicsDevice);
             uiBatch = new SpriteBatch(graphicsDeviceManager.GraphicsDevice);
 
+            MainRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
+
             Initialized = true;
         }
 
@@ -99,8 +112,28 @@ namespace PaperMarioBattleSystem
 
             graphicsDeviceManager.ApplyChanges();
             
+            //Replace the main RenderTarget if we can
+            if (SetRenderTarget == false)
+            {
+                ReplaceMainRenderTarget(graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
+            }
+
             //Invoke the window size changed event
             WindowSizeChangedEvent?.Invoke(newWindowSize);
+        }
+
+        /// <summary>
+        /// Replaces the main RenderTarget with a new one of a different size.
+        /// Don't call this until the RenderTarget is cleared from the GraphicsDevice.
+        /// </summary>
+        /// <param name="newWidth">The new width of the RenderTarget.</param>
+        /// <param name="newHeight">The new height of the RenderTarget.</param>
+        private void ReplaceMainRenderTarget(int newWidth, int newHeight)
+        {
+            MainRenderTarget?.Dispose();
+            MainRenderTarget = null;
+
+            MainRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, newWidth, newHeight);
         }
 
         /* Idea for refactoring rendering to easily support shaders:
@@ -117,12 +150,73 @@ namespace PaperMarioBattleSystem
          *  -It's unsure how shaders will even be used yet
          */
 
-        public void BeginDrawing(SpriteBatch batch, BlendState blendState, SamplerState samplerState, Effect effect, Matrix? transformMatrix)
+        /// <summary>
+        /// Sets up initial drawing to the main RenderTarget.
+        /// </summary>
+        public void SetupDrawing()
+        {
+            if (SetRenderTarget == true)
+            {
+                Debug.LogError($"Cannot set up drawing since it hasn't concluded!");
+                return;
+            }
+
+            Vector2 windowSize = WindowSize;
+            int width = (int)windowSize.X;
+            int height = (int)windowSize.Y;
+
+            //If our main RenderTarget isn't large enough, change its size
+            if (MainRenderTarget.Width != width || MainRenderTarget.Height != height)
+            {
+                ReplaceMainRenderTarget(width, height);
+            }
+
+            //Set the RenderTarget to the graphics device
+            graphicsDeviceManager.GraphicsDevice.SetRenderTarget(MainRenderTarget);
+
+            //Clear the contents
+            graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            //Mark that we set the RenderTarget
+            SetRenderTarget = true;
+        }
+
+        /// <summary>
+        /// Ends drawing for the frame, rendering the contents of the main RenderTarget to the screen.
+        /// </summary>
+        public void ConcludeDrawing()
+        {
+            if (SetRenderTarget == false)
+            {
+                Debug.LogError($"Cannot conclude drawing since it hasn't started!");
+                return;
+            }
+
+            //Clear RenderTarget
+            graphicsDeviceManager.GraphicsDevice.SetRenderTarget(null);
+
+            //Clear screen with color
+            graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
+
+            //Start a new batch just to draw the RenderTarget
+            BeginBatch(spriteBatch, null, null, null, null);
+
+            //Draw the render target
+            Draw(MainRenderTarget, new Rectangle(0, 0, MainRenderTarget.Width, MainRenderTarget.Height), null, Color.White, 0f, Vector2.Zero, false, false, 1f);
+
+            //End the batch
+            EndBatch(spriteBatch);
+
+            //Mark that we unset the render target
+            SetRenderTarget = false;
+        }
+
+        public void BeginBatch(SpriteBatch batch, BlendState blendState, SamplerState samplerState, Effect effect, Matrix? transformMatrix)
         {
             batch.Begin(SpriteSortMode.FrontToBack, blendState, samplerState, null, null, effect, transformMatrix);
         }
 
-        public void EndDrawing(SpriteBatch batch)
+        public void EndBatch(SpriteBatch batch)
         {
             batch.End();
         }

@@ -267,7 +267,8 @@ namespace PaperMarioBattleSystem
         {
             Time.UpdateFrames();
 
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            //Set up drawing to the render target
+            SpriteRenderer.Instance.SetupDrawing();
 
             //Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}/Charge");
             //Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
@@ -284,8 +285,8 @@ namespace PaperMarioBattleSystem
             //chargeEffect.Parameters["chargeTexRatio"].SetValue(dimensionRatio.Y);
             //chargeEffect.Parameters["objFrameOffset"].SetValue(spriteSheet.GetTexCoordsAt(mario.AnimManager.CurrentAnim.CurFrame.DrawRegion));
 
-            SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.CalculateTransformation());
-            SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+            SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.CalculateTransformation());
+            SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 
             Debug.DebugDraw();
         }
@@ -320,8 +321,11 @@ namespace PaperMarioBattleSystem
         /// <param name="gameTime">Provides a snapshot of timing values</param>
         private void PostDraw(GameTime gameTime)
         {
-            SpriteRenderer.Instance.EndDrawing(SpriteRenderer.Instance.spriteBatch);
-            SpriteRenderer.Instance.EndDrawing(SpriteRenderer.Instance.uiBatch);
+            SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
+            SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.uiBatch);
+
+            //End drawing and render the RenderTarget's contents to the screen
+            SpriteRenderer.Instance.ConcludeDrawing();
 
             base.Draw(gameTime);
         }

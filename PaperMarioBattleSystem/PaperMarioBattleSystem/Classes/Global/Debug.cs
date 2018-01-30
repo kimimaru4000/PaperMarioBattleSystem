@@ -160,6 +160,9 @@ namespace PaperMarioBattleSystem
             {
                 if (Time.InGameTimeEnabled == false)
                     Time.ToggleInGameTime(true);
+
+                //Update the input state if debug is disabled so that the toggle functions properly
+                Input.UpdateInputState(ref DebugKeyboard);
                 return;
             }
 
@@ -190,7 +193,7 @@ namespace PaperMarioBattleSystem
                     //ShouldTakeScreenshot = true;
                     TakeScreenshot();
                 }
-                else if (Input.GetKeyDown(Keys.D, DebugKeyboard))
+                else if (Input.GetKeyDown(Keys.M, DebugKeyboard))
                 {
                     //Log dump
                     DumpLogs();
@@ -277,8 +280,28 @@ namespace PaperMarioBattleSystem
 
             int turnCount = 3;
 
+            //Inflict NoSkills
+            if (Input.GetKey(Keys.N, DebugKeyboard) == true)
+            {
+                StatusEffect status = null;
+                //Disable Jump
+                if (Input.GetKeyDown(Keys.J, DebugKeyboard) == true)
+                    status = new NoSkillsStatus(Enumerations.MoveCategories.Jump, turnCount);
+                //Disable Hammer
+                else if (Input.GetKeyDown(Keys.H, DebugKeyboard) == true) status = new NoSkillsStatus(Enumerations.MoveCategories.Hammer, turnCount);
+                //Disable Items
+                else if (Input.GetKeyDown(Keys.I, DebugKeyboard) == true) status = new NoSkillsStatus(Enumerations.MoveCategories.Item, turnCount);
+                //Disable Tactics
+                else if (Input.GetKeyDown(Keys.T, DebugKeyboard) == true) status = new NoSkillsStatus(Enumerations.MoveCategories.Tactics, turnCount);
+                //Disable Partner moves
+                else if (Input.GetKeyDown(Keys.P, DebugKeyboard) == true) status = new NoSkillsStatus(Enumerations.MoveCategories.Partner, turnCount);
+                //Disable Special moves
+                else if (Input.GetKeyDown(Keys.S, DebugKeyboard) == true) status = new NoSkillsStatus(Enumerations.MoveCategories.Special, turnCount);
+
+                if (status != null) DebugInflictStatus(status, entityType);
+            }
             //Inflict Poison, Payback, or Paralyzed
-            if (Input.GetKeyDown(Keys.P, DebugKeyboard) == true)
+            else if (Input.GetKeyDown(Keys.P, DebugKeyboard) == true)
             {
                 StatusEffect status = new PoisonStatus(turnCount);
                 //Inflict Payback

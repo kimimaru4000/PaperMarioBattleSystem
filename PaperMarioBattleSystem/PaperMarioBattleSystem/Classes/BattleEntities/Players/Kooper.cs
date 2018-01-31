@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
-    public sealed class Kooper : BattlePartner
+    public sealed class Kooper : BattlePartner, IFlippableEntity
     {
-        private IFlippableObj FlippedBehavior = null;
+        public IFlippableBehavior FlippedBehavior { get; private set; } = null;
 
         public Kooper() : base(new PartnerStats(PartnerGlobals.PartnerRanks.Normal, 50, 0, 1))
         {

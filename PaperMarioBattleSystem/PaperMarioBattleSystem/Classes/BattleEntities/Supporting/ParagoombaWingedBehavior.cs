@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Behavior for handling Paragoombas losing their wings.
     /// </summary>
-    public class ParagoombaWingedBehavior : IWingedObj
+    public class ParagoombaWingedBehavior : IWingedBehavior
     {
         public BattleEntity Entity = null;
 

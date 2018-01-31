@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// An interface for any object that handles flipping.
     /// <para>Examples include Koopa Troopas and Clefts.</para>
     /// </summary>
-    public interface IFlippableObj : ICleanup
+    public interface IFlippableBehavior : ICleanup
     {
         /// <summary>
         /// Whether the object is flipped or not.

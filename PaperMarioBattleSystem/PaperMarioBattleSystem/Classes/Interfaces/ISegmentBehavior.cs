@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// An interface for handling objects with segments.
     /// <para>Examples include Pokeys and Shy Stacks.</para>
     /// </summary>
-    public interface ISegmentObj
+    public interface ISegmentBehavior
     {
         /// <summary>
         /// How many max segments the object has.

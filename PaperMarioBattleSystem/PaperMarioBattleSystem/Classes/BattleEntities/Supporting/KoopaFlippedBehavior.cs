@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Behavior for handling Koopa Troopas being flipped.
     /// </summary>
-    public class KoopaFlippedBehavior : IFlippableObj
+    public class KoopaFlippedBehavior : IFlippableBehavior
     {
         public BattleEntity Entity = null;
 

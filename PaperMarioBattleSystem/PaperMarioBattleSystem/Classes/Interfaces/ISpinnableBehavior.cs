@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <para>The only known example is Kent C. Koopa, who drops 6 coins when hitting his tail with Spin Smash.
     /// As Super Hammer and Ultra Hammer are TTYD's versions of Spin Smash, they would also likely spin him out.</para>
     /// </summary>
-    public interface ISpinnableObj
+    public interface ISpinnableBehavior
     {
         /// <summary>
         /// The number of times the object was spun.

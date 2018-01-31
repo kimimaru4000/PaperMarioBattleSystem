@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <para>Examples include Paragoombas and Stilt Guys.
     /// Parakarry is excluded, as he cannot be knocked to the ground.</para>
     /// </summary>
-    public interface IWingedObj : ICleanup
+    public interface IWingedBehavior : ICleanup
     {
         /// <summary>
         /// Whether the object is Grounded or not.

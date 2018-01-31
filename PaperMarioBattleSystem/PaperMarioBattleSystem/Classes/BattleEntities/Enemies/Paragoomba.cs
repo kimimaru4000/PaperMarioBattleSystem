@@ -11,11 +11,11 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Paragoomba - A Goomba with wings.
     /// </summary>
-    public sealed class Paragoomba : Goomba, ITattleableEntity
+    public sealed class Paragoomba : Goomba, ITattleableEntity, IWingedEntity
     {
         protected override MoveAction ActionUsed => WingedBehavior.Grounded == false ? new DiveKick() : base.ActionUsed;
 
-        private IWingedObj WingedBehavior = null;
+        public IWingedBehavior WingedBehavior { get; private set; } = null;
 
         public Paragoomba()
         {

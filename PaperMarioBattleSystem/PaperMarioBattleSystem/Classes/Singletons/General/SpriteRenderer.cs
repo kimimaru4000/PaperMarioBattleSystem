@@ -204,37 +204,37 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            //Clear RenderTarget
-            graphicsDeviceManager.GraphicsDevice.SetRenderTarget(null);
-
-            //Clear screen with color
-            graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            //Render without a shader
-            if (PostProcessingCount == 0)
+            //If there are no post-processing effects, don't draw any
+            if (PostProcessingCount <= 0)
             {
-                //Start a new batch just to draw the RenderTarget
-                BeginBatch(spriteBatch, null, null, null, null);
+                //Render directly to the backbuffer
+                graphicsDeviceManager.GraphicsDevice.SetRenderTarget(null);
+                graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-                //Draw the render target
-                Draw(MainRenderTarget, new Rectangle(0, 0, MainRenderTarget.Width, MainRenderTarget.Height), null, Color.White, 0f, Vector2.Zero, false, false, 1f);
+                spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, null);
 
-                //End the batch
-                EndBatch(spriteBatch);
+                spriteBatch.Draw(MainRenderTarget, new Rectangle(0, 0, MainRenderTarget.Width, MainRenderTarget.Height), null, Color.White);
+
+                spriteBatch.End();
             }
+            //Draw all post-processing effects if there are any
             else
             {
-                //Render with all post-processing effects
                 for (int i = 0; i < PostProcessingCount; i++)
                 {
-                    //Start a new batch just to draw the RenderTarget
-                    BeginBatch(spriteBatch, null, null, PostProcessingEffects[i], null);
+                    //Keep rendering to the RenderTarget until the last effect
+                    //The last effect will be rendered to the backbuffer
+                    if (i == (PostProcessingCount - 1))
+                    {
+                        graphicsDeviceManager.GraphicsDevice.SetRenderTarget(null);
+                        graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
+                    }
 
-                    //Draw the render target
-                    Draw(MainRenderTarget, new Rectangle(0, 0, MainRenderTarget.Width, MainRenderTarget.Height), null, Color.White, 0f, Vector2.Zero, false, false, 1f);
+                    spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, PostProcessingEffects[i], null);
 
-                    //End the batch
-                    EndBatch(spriteBatch);
+                    spriteBatch.Draw(MainRenderTarget, new Rectangle(0, 0, MainRenderTarget.Width, MainRenderTarget.Height), null, Color.White);
+
+                    spriteBatch.End();
                 }
             }
 

@@ -269,7 +269,7 @@ namespace PaperMarioBattleSystem
 
             //Set up drawing to the render target
             SpriteRenderer.Instance.SetupDrawing();
-
+            
             //Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}/Charge");
             //Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
             //

@@ -11,9 +11,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Paratroopa - A Koopa Troopa with wings.
     /// </summary>
-    public sealed class Paratroopa : KoopaTroopa, ITattleableEntity
+    public sealed class Paratroopa : KoopaTroopa, ITattleableEntity, IWingedEntity
     {
-        private IWingedObj WingedBehavior = null;
+        public IWingedBehavior WingedBehavior { get; private set; } = null;
 
         public Paratroopa()
         {

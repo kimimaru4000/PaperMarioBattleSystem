@@ -11,12 +11,12 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Koopa Troopa
     /// </summary>
-    public class KoopaTroopa : BattleEnemy, ITattleableEntity
+    public class KoopaTroopa : BattleEnemy, ITattleableEntity, IFlippableEntity
     {
         //NOTE: Temporary until we get a simple enemy AI system in
         protected virtual MoveAction ActionUsed => new ShellToss();
 
-        protected IFlippableObj FlippedBehavior = null;
+        public IFlippableBehavior FlippedBehavior { get; protected set; } = null;
 
         public KoopaTroopa() : base(new Stats(8, 4, 0, 1, 1))
         {

@@ -49,7 +49,7 @@ namespace PaperMarioBattleSystem
                     allyAffected.EntityProperties.UnsuppressStatuses(Enumerations.StatusSuppressionTypes.TurnCount, Enumerations.StatusTypes.Invisible);
 
                     //Make the ally play its idle animation
-                    allyAffected.AnimManager.PlayAnimation(EntitiesAffected[0].GetIdleAnim());
+                    allyAffected.AnimManager.PlayAnimation(allyAffected.GetIdleAnim());
 
                     CurSequenceAction = new WaitSeqAction(0d);
 

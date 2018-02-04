@@ -57,14 +57,6 @@ namespace PaperMarioBattleSystem
             base.TurnUpdate();
         }
 
-        public override void Draw()
-        {
-            base.Draw();
-
-            //Rectangle rect = new Rectangle(67, 107, 26, 28);
-            //SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), false, .1f);
-        }
-
         #region Tattle Info
 
         public bool CanBeTattled { get; set; } = true;

@@ -2540,6 +2540,23 @@ namespace PaperMarioBattleSystem
     {
         public const int WindowWidth = 800;
         public const int WindowHeight = 600;
+
+        /// <summary>
+        /// Gets the current global offset the Charge shader's texture should have.
+        /// </summary>
+        /// <returns></returns>
+        public static float ChargeShaderTexOffset => (((float)Time.ActiveMilliseconds % 1000f) / 1000f);
+
+        /// <summary>
+        /// Gets the current global alpha value the Charge shader should have.
+        /// </summary>
+        public static float ChargeShaderAlphaVal
+        {
+            get
+            {
+                return (UtilityGlobals.PingPong(Time.ActiveMilliseconds / 1000f, .9f));
+            }
+        }
     }
 
     public static class AudioGlobals

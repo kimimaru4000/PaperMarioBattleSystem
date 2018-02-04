@@ -119,7 +119,7 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.QuickChange, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFine, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaver, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Charge, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Charge, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AllOrNothing, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoublePain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LastStand, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
@@ -230,37 +230,6 @@ namespace PaperMarioBattleSystem
             }
 
             return Inventory.Instance.GetActiveBadgeCount(newBadgeType);
-        }
-
-        public override void Draw()
-        {
-            //SpriteRenderer.Instance.EndDrawing(SpriteRenderer.Instance.spriteBatch);
-            //
-            //Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Charge");
-            //
-            //Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
-            //Texture2D spriteSheet = AnimManager.SpriteSheet;
-            //
-            //Vector2 dimensionRatio = new Vector2(tex.Width, tex.Height) / new Vector2(spriteSheet.Width, spriteSheet.Height);
-            //
-            //chargeEffect.Parameters["chargeTex"].SetValue(tex);
-            //chargeEffect.Parameters["chargeAlpha"].SetValue((float)(UtilityGlobals.PingPong(Time.ActiveMilliseconds / 1000f, .9f)));
-            //chargeEffect.Parameters["objColor"].SetValue(TintColor.ToVector4());
-            //chargeEffect.Parameters["chargeOffset"].SetValue(new Vector2(0f, ((float)Time.ActiveMilliseconds % 1000f) / 1000f));
-            //chargeEffect.Parameters["chargeTexRatio"].SetValue(dimensionRatio.Y);
-            //chargeEffect.Parameters["objFrameOffset"].SetValue(spriteSheet.GetTexCoordsAt(AnimManager.CurrentAnim.CurFrame.DrawRegion));
-            //
-            //SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, chargeEffect, Camera.Instance.Transform);
-
-            base.Draw();
-
-            //SpriteRenderer.Instance.EndDrawing(SpriteRenderer.Instance.spriteBatch);
-            //
-            //SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.Transform);
-
-            //if (IsDead) return;
-            //Rectangle rect = new Rectangle(228, 918, 29, 51);
-            //SpriteRenderer.Instance.Draw(SpriteSheet, Position, rect, Color.White, new Vector2(0, 0), true, .1f);
         }
     }
 }

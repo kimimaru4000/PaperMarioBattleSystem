@@ -4,7 +4,7 @@ This will go over the individual shaders and the ideas behind their implementati
 
 Charge
 ======
-The Charge shader is intended to mimmick the one present in TTYD. A 4x64 rainbow texture, ripped directly from TTYD, is used in this shader.
+The Charge shader is intended to mimic the one present in TTYD. A 4x64 rainbow texture, ripped directly from TTYD, is used in this shader.
 
 High-level Overview
 -------------------
@@ -17,7 +17,7 @@ We have several variables:
 sampler s0; - The sampler for the rendered object. It's automatically loaded into the shader
 
 Texture2D chargeTex; - A 4x64 rainbow texture, ripped directly from TTYD
-sampler chargeSampler = sampler_state { Texture = <chargeTex>; }; - Sampler for sampling chargeTex
+sampler chargeSampler = sampler_state { Texture = <chargeTex>; AddressU = Wrap; AddressV = Wrap; }; - Sampler for sampling chargeTex
 
 float chargeAlpha; - The alpha of the Charge texture
 float4 objColor; - The TintColor of the object
@@ -32,16 +32,16 @@ Our steps are as follows:
 
 1. Start by sampling the color of the pixel from the object's texture at the input coordinates (s0)
 
-2. Offset the rendered object's current frame from the top of the spritesheet so the charge effect is consistent for each frame rendered. This involves subtracting the texture coordinates from objFrameOffset. Wrapping is on the Charge texture, so negative values are valid.
+2. Offset the rendered object's current frame from the top of the spritesheet so the charge effect is consistent for each frame rendered. This involves subtracting the texture coordinates from objFrameOffset. The UVs of the Charge texture are set to Wrap in the sampler, so negative values are valid.
 
 The result is that no matter which frame is displayed, the colors sampled from the Charge texture are always the same for a frame at the top of the spritesheet and one at the bottom. This fixes the jumpiness in colors when changing frames.
 
-3. Fetch the corresponding coordinates scaled with the Charge texture. We only care about the Y, since the X values in the Charge texture are the same, so the coordinate ends up being input.TextureCoordinates.y / chargeTexRatio. This ensures that every time we reach the height of the Charge texture (Ex. 128 in obj texture when Charge tex has height of 64), we start back from the beginning of the Charge texture
+3. Fetch the corresponding coordinates scaled with the Charge texture. We only care about the Y, since the X values in the Charge texture are the same, so the coordinate ends up being input.TextureCoordinates.y / chargeTexRatio. This ensures that every time we reach the height of the Charge texture (Ex. 128 in obj texture when Charge tex has height of 64), we start back from the beginning of the Charge texture.
 
-4. Sample the color of the pixel at the coordinates on the Charge texture. this is simply the coordinates we found in step 2 + chargeOffset. We wrap those in a frac() call so that it wraps around the texture
+4. Sample the color of the pixel at the coordinates on the Charge texture. this is simply the coordinates we found in step 2 + chargeOffset. This wraps around the texture since the UVs are set to wrap.
 
-5A. If the object texture's color doesn't have an alpha value, simply return the same color. We don't want to modify transparent pixels
+5A. If the object texture's color doesn't have an alpha value, simply return the same color. We don't want to modify transparent pixels.
 
 5B. If it does have an alpha value, we now need to use both colors to get the final color. Multiply the Charge texture color we sampled with (chargeAlpha * objColor.a). This gets us a color scaled with both the Charge alpha and the object's own alpha.
 
-  5B1. Finally, return the base color times the object's color added to the color we calculated. (color * objColor) takes into account the object's tint, and we simply add the Charge color onto that to get the final result
+  5B1. Finally, return the base color times the object's color added to the color we calculated. (color * objColor) takes into account the object's tint, and we simply add the Charge color onto that to get the final result.

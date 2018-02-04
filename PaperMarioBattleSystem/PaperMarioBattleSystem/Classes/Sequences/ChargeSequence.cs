@@ -29,25 +29,29 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition - new Vector2(10, 0), 100d);
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
+                    CurSequenceAction = new WaitSeqAction(0d);
                     break;
                 case 1:
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, 100d);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition - new Vector2(10, 0), 100d);
                     break;
                 case 2:
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition + new Vector2(10, 0), 100d);
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, 100d);
                     break;
                 case 3:
-                    goto case 1;
+                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition + new Vector2(10, 0), 100d);
+                    break;
                 case 4:
-                    goto case 0;
+                    goto case 2;
                 case 5:
                     goto case 1;
                 case 6:
                     goto case 2;
                 case 7:
+                    goto case 3;
+                case 8:
                     ChangeSequenceBranch(SequenceBranch.Main);
-                    goto case 1;
+                    goto case 2;
                 default:
                     PrintInvalidSequence();
                     break;
@@ -83,6 +87,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    User.AnimManager.PlayAnimation(User.GetIdleAnim());
                     EndSequence();
                     break;
                 default:

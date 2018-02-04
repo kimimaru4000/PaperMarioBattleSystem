@@ -56,8 +56,8 @@ namespace PaperMarioBattleSystem
 
             BattleManager.Instance.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
-                Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEntity>() { new Paratroopa() });
+                Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Watt),
+                new List<BattleEntity>() { new Goomba(), new Paratroopa(), new Gulpit(), new GulpitsRock(false), new GulpitsRock(true), new GulpitsRock(false), new GulpitsRock(true), new GulpitsRock(false) });
 
             base.Initialize();
         }
@@ -270,21 +270,6 @@ namespace PaperMarioBattleSystem
             //Set up drawing to the render target
             SpriteRenderer.Instance.SetupDrawing();
             
-            //Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}/Charge");
-            //Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
-            //
-            //BattleEntity mario = BattleManager.Instance.GetMario();
-            //Texture2D spriteSheet = mario.AnimManager.CurrentAnim.SpriteSheet;
-            //
-            //Vector2 dimensionRatio = new Vector2(tex.Width, tex.Height) / new Vector2(spriteSheet.Width, spriteSheet.Height);
-            //
-            //chargeEffect.Parameters["chargeTex"].SetValue(tex);
-            //chargeEffect.Parameters["chargeAlpha"].SetValue((float)(UtilityGlobals.PingPong(Time.ActiveMilliseconds / 1000f, .8f)));
-            //chargeEffect.Parameters["objColor"].SetValue(mario.TintColor.ToVector4());
-            //chargeEffect.Parameters["chargeOffset"].SetValue(new Vector2(0f, ((float)Time.ActiveMilliseconds % 2000f) / 2000f));
-            //chargeEffect.Parameters["chargeTexRatio"].SetValue(dimensionRatio.Y);
-            //chargeEffect.Parameters["objFrameOffset"].SetValue(spriteSheet.GetTexCoordsAt(mario.AnimManager.CurrentAnim.CurFrame.DrawRegion));
-
             SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.CalculateTransformation());
             SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 

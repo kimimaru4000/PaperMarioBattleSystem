@@ -354,10 +354,12 @@ namespace PaperMarioBattleSystem
                 else if (Input.GetKey(Keys.P, DebugKeyboard) == true) status = new StopStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
-            //Inflict Confused
+            //Inflict Confused or Charged
             else if (Input.GetKeyDown(Keys.C, DebugKeyboard) == true)
             {
                 StatusEffect status = new ConfusedStatus(turnCount);
+                //Inflict Charged
+                if (Input.GetKey(Keys.H, DebugKeyboard) == true) status = new ChargedStatus(1);
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Burn

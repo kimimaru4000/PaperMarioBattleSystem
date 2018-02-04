@@ -993,8 +993,40 @@ namespace PaperMarioBattleSystem
 
         public virtual void Draw()
         {
+            //NOTE: SUPER VERY ULTRA hackish; just getting this in until we come up with a better way to handle it
+            //(I'm looking into it on the side so don't worry)!
+            bool hasCharge = EntityProperties.HasAdditionalProperty(AdditionalProperty.ChargedDamage);
+            if (hasCharge == true)
+            {
+                SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
+
+                Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Charge");
+                
+                Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
+                Texture2D spriteSheet = AnimManager.SpriteSheet;
+                
+                Vector2 dimensionRatio = new Vector2(tex.Width, tex.Height) / new Vector2(spriteSheet.Width, spriteSheet.Height);
+                
+                chargeEffect.Parameters["chargeTex"].SetValue(tex);
+                chargeEffect.Parameters["chargeAlpha"].SetValue(RenderingGlobals.ChargeShaderAlphaVal);
+                chargeEffect.Parameters["objColor"].SetValue(TintColor.ToVector4());
+                chargeEffect.Parameters["chargeOffset"].SetValue(new Vector2(0f, RenderingGlobals.ChargeShaderTexOffset));
+                chargeEffect.Parameters["chargeTexRatio"].SetValue(dimensionRatio.Y);
+                chargeEffect.Parameters["objFrameOffset"].SetValue(spriteSheet.GetTexCoordsAt(AnimManager.CurrentAnim.CurFrame.DrawRegion));
+
+                SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, chargeEffect, Camera.Instance.Transform);
+            }
+
             AnimManager.CurrentAnim?.Draw(Position, TintColor, Vector2.Zero, Scale, EntityType == EntityTypes.Player, .1f);
             PreviousAction?.Draw();
+
+            //Deals with the aforementioned ULTRA HACKY code
+            if (hasCharge == true)
+            {
+                SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
+
+                SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.Transform);
+            }
 
             //Draw Status Effect icons on the BattleEntity
             //You can't see the icons unless it's Mario or his Partner's turn and they're not in a Sequence

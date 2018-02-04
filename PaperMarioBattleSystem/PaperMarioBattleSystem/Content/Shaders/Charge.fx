@@ -11,7 +11,8 @@ sampler s0;
 
 //The Charge texture
 Texture2D chargeTex;
-sampler chargeSampler = sampler_state { Texture = <chargeTex>; };
+//Ensure we wrap the UVs
+sampler chargeSampler = sampler_state { Texture = <chargeTex>; AddressU = Wrap; AddressV = Wrap; };
 
 //The alpha value to make the Charge texture
 float chargeAlpha;
@@ -52,12 +53,13 @@ float4 ChargeScroll(VertexShaderOutput input) : COLOR0
 	//Check the Y pixel
 	//For each Y, go down the Y on the Charge texture
 	//So Y = 0, then the pixel chosen is at coords.y = 0
-	//Wrap around every 64, which is the height of the Charge texture (use variable later)
+	//Wrap around every 64, which is the height of the Charge texture
 	//So, if the current pixel is at 65, we would choose pixel 1 on the Charge texture
+	//Dividing by the ratio of the Charge texture's size and the spritesheet's size does this
 	float2 coords = float2(scaledCoords.x, scaledCoords.y / chargeTexRatio);
 
-	//Frac will wrap the values on the Charge texture from 0 to (less than) 1
-	float4 chargeColor = tex2D(chargeSampler, frac(coords + chargeOffset));
+	//Adding the offset does not require a Frac for wrapping, as the Charge texture will wrap its UVs
+	float4 chargeColor = tex2D(chargeSampler, coords + chargeOffset);
 
 	if (color.a)
 	{

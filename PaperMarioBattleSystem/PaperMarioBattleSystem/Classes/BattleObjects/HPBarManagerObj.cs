@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// An object that manages rendering HP bars for BattleEntities with a <see cref="Enumerations.AdditionalProperty.ShowHP"/> property.
     /// </summary>
-    public sealed class HPBarManagerObj : BattleObject
+    public sealed class HPBarManagerObj : EntityListenerObj
     {
         /// <summary>
         /// The list of BattleEntities that have their HP shown.
@@ -36,11 +36,7 @@ namespace PaperMarioBattleSystem
             Initialize();
 
             //Subscribe to the events
-            BattleManager.Instance.EntityAddedEvent -= EntityAdded;
-            BattleManager.Instance.EntityAddedEvent += EntityAdded;
-
-            BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;
-            BattleManager.Instance.EntityRemovedEvent += EntityRemoved;
+            ListenToEntityEvents();
 
             BattleManager.Instance.BattleTurnEndedEvent -= OnBattleTurnEnded;
             BattleManager.Instance.BattleTurnEndedEvent += OnBattleTurnEnded;
@@ -54,10 +50,10 @@ namespace PaperMarioBattleSystem
             HPBar = null;
             HPBarFill = null;
 
+            base.CleanUp();
+
             if (BattleManager.HasInstance == true)
             {
-                BattleManager.Instance.EntityAddedEvent -= EntityAdded;
-                BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;
                 BattleManager.Instance.BattleTurnEndedEvent -= OnBattleTurnEnded;
             }
         }
@@ -140,7 +136,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private void EntityAdded(BattleEntity battleEntity)
+        protected override void EntityAdded(BattleEntity battleEntity)
         {
             //Check if the entity has the ShowHP property and add it to the HP shown list
             if (battleEntity.EntityProperties.HasAdditionalProperty(Enumerations.AdditionalProperty.ShowHP) == true)
@@ -154,7 +150,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private void EntityRemoved(BattleEntity battleEntity)
+        protected override void EntityRemoved(BattleEntity battleEntity)
         {
             //Remove the entity
             NoHPEntities.Remove(battleEntity);

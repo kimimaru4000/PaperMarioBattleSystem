@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// are light sources present.
     /// <para>In the PM games, Mario and his Partner are always targetable in darkness. As such, this doesn't handle Players.</para>
     /// </summary>
-    public class BattleDarknessObj : BattleObject
+    public class BattleDarknessObj : EntityListenerObj
     {
         /* What we need to do:
          * 1. We need all the BattleEntities in battle first
@@ -49,11 +49,7 @@ namespace PaperMarioBattleSystem
 
             CircleTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Circle.png");
 
-            BattleManager.Instance.EntityAddedEvent -= EntityAdded;
-            BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;
-
-            BattleManager.Instance.EntityAddedEvent += EntityAdded;
-            BattleManager.Instance.EntityRemovedEvent += EntityRemoved;
+            ListenToEntityEvents();
         }
 
         public override void CleanUp()
@@ -65,11 +61,7 @@ namespace PaperMarioBattleSystem
 
             CircleTex = null;
 
-            if (BattleManager.HasInstance == true)
-            {
-                BattleManager.Instance.EntityAddedEvent -= EntityAdded;
-                BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;
-            }
+            base.CleanUp();
         }
 
         private void Initialize()
@@ -247,7 +239,7 @@ namespace PaperMarioBattleSystem
             return entity.EntityProperties.GetAdditionalProperty<double>(Enumerations.AdditionalProperty.LightSource);
         }
 
-        private void EntityAdded(BattleEntity entity)
+        protected override void EntityAdded(BattleEntity entity)
         {
             //If the entity is a light source, add it and re-handle the targets
             if (IsLightSource(entity) == true)
@@ -265,7 +257,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private void EntityRemoved(BattleEntity entity)
+        protected override void EntityRemoved(BattleEntity entity)
         {
             //Check if the entity removed was a light source
             if (IsLightSource(entity) == true)

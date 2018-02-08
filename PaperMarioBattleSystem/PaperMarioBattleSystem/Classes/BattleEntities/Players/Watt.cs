@@ -17,6 +17,8 @@ namespace PaperMarioBattleSystem
             PartnerDescription = "";
             PartnerType = Enumerations.PartnerTypes.Watt;
 
+            ChangeHeightState(HeightStates.Airborne);
+
             //Watt is Electrified
             EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
 

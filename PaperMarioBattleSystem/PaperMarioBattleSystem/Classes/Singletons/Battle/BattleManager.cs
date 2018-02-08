@@ -84,7 +84,7 @@ namespace PaperMarioBattleSystem
 
         //Starting positions
         public readonly Vector2 MarioPos = new Vector2(-150, 100);
-        public readonly Vector2 PartnerPos = new Vector2(-190, 120);
+        public readonly Vector2 PartnerPos = new Vector2(-190, 100);
         public readonly Vector2 EnemyStartPos = new Vector2(150, 125);
         public readonly int PositionXDiff = 30;
         
@@ -421,8 +421,8 @@ namespace PaperMarioBattleSystem
             int backBattleIndex = curBack.BattleIndex;
 
             //Swap positions
-            curFront.SetBattlePosition(backBattlePosition);
-            curBack.SetBattlePosition(frontBattlePosition);
+            curFront.SetBattlePosition(new Vector2(backBattlePosition.X, frontBattlePosition.Y));
+            curBack.SetBattlePosition(new Vector2(frontBattlePosition.X, backBattlePosition.Y));
 
             //Swap BattleIndex; the lists will be automatically sorted
             curFront.SetBattleIndex(backBattleIndex);
@@ -459,11 +459,24 @@ namespace PaperMarioBattleSystem
 
             Partner = newPartner;
 
+            Vector2 offset = Vector2.Zero;
+
+            //If the old Partner was airborne and the new one isn't, move the new one down
+            if (oldPartner.HeightState == HeightStates.Airborne && Partner.HeightState != HeightStates.Airborne)
+            {
+                offset.Y += AirborneY;
+            }
+            //Otherwise, if the old Partner wasn't airborne and the new one is, move the new one up
+            else if (oldPartner.HeightState != HeightStates.Airborne && Partner.HeightState == HeightStates.Airborne)
+            {
+                offset.Y -= AirborneY;
+            }
+
             //Set positions to the old ones
             Partner.Position = oldPartner.Position;
             Partner.SetBattleIndex(oldPartner.BattleIndex);
-            Partner.SetBattlePosition(oldPartner.BattlePosition);
-
+            Partner.SetBattlePosition(oldPartner.BattlePosition + offset);
+            
             //Remove the old partner from the entity dictionary and add the new one
             RemoveEntities(new BattleEntity[] { oldPartner }, false);
             AddEntities(new BattleEntity[] { Partner }, null, false);
@@ -564,10 +577,6 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void CheckDeadEntities()
         {
-            //if (Mario.IsDead == true)
-            //{
-            //    Mario.PlayAnimation(AnimationGlobals.DeathName);
-            //}
             if (Partner.IsDead == true)
             {
                 //If the Partner died and is in front, switch places with Mario
@@ -575,7 +584,8 @@ namespace PaperMarioBattleSystem
                 {
                     //Queue the event to switch Mario with his Partner
                     BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Stage, new BattleState[] { BattleState.Turn, BattleState.TurnEnd },
-                        new SwapPositionBattleEvent(FrontPlayer, BackPlayer, BackPlayer.BattlePosition, FrontPlayer.BattlePosition, 500f));
+                        new SwapPositionBattleEvent(FrontPlayer, BackPlayer,
+                        new Vector2(BackPlayer.BattlePosition.X, FrontPlayer.BattlePosition.Y), new Vector2(FrontPlayer.BattlePosition.X, BackPlayer.BattlePosition.Y), 500f));
 
                     //Switch Mario in front
                     SwitchToTurn(PlayerTypes.Mario);

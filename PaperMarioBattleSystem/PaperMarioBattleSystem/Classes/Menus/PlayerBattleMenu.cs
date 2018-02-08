@@ -130,12 +130,14 @@ namespace PaperMarioBattleSystem
                     BattleManager.Instance.EntityTurn.SetTurnsUsed(BattleManager.Instance.EntityTurn.TurnsUsed - 1);
                     BattleManager.Instance.TurnEnd();
 
+                    BattleEntity back = BattleManager.Instance.GetBackPlayer();
+                    BattleEntity front = BattleManager.Instance.GetFrontPlayer();
+
                     //Queue a Battle Event to swap the current positions of Mario and his Partner
                     //Since we updated the references earlier, their new positions are their own battle positions
                     BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Stage,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                        new SwapPositionBattleEvent(BattleManager.Instance.GetBackPlayer(), BattleManager.Instance.GetFrontPlayer(),
-                        BattleManager.Instance.GetBackPlayer().BattlePosition, BattleManager.Instance.GetFrontPlayer().BattlePosition, 500f));
+                        new SwapPositionBattleEvent(back, front, back.BattlePosition, front.BattlePosition, 500f));
                 }
                 else
                 {

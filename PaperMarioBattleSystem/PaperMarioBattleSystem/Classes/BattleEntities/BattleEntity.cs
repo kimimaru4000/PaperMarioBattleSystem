@@ -1018,7 +1018,6 @@ namespace PaperMarioBattleSystem
             }
 
             AnimManager.CurrentAnim?.Draw(Position, TintColor, Vector2.Zero, Scale, EntityType == EntityTypes.Player, .1f);
-            PreviousAction?.Draw();
 
             //Deals with the aforementioned ULTRA HACKY code
             if (hasCharge == true)
@@ -1027,6 +1026,8 @@ namespace PaperMarioBattleSystem
 
                 SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.Transform);
             }
+
+            PreviousAction?.Draw();
 
             //Draw Status Effect icons on the BattleEntity
             //You can't see the icons unless it's Mario or his Partner's turn and they're not in a Sequence

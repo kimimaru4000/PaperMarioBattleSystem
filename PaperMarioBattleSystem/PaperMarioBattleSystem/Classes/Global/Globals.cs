@@ -1095,7 +1095,13 @@ namespace PaperMarioBattleSystem
             /// This is inactive during this BattleEntity's phase to allow itself and allies to positively affect it, and active otherwise.
             /// If active, the BattleEntity defending this one will be targeted by opponents instead.</para>
             /// </summary>
-            DefendedByEntity
+            DefendedByEntity,
+
+            /// <summary>
+            /// Tells that Stylish Move timings should be shown for this BattleEntity.
+            /// <para>This should have an integer as the value, as multiple Timing Tutor badges can be equipped.</para>
+            /// </summary>
+            ShowStylishTimings
         }
     }
 

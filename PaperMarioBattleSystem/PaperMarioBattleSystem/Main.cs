@@ -156,6 +156,7 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new LuckyStartBadge());
 
             Inventory.Instance.AddBadge(new QuakeHammerBadge());
+            Inventory.Instance.AddBadge(new TimingTutorBadge());
 
             //Items
             Inventory.Instance.AddItem(new Mushroom());

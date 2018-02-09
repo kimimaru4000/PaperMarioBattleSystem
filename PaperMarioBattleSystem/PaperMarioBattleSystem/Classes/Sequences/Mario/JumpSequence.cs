@@ -112,6 +112,9 @@ namespace PaperMarioBattleSystem
                         ShowCommandRankVFX(HighestCommandRank, CurTarget.Position);
                     }
 
+                    //Set Stylish data
+                    SetStylishData(0d, 600d, 0);
+
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 2:
@@ -193,6 +196,16 @@ namespace PaperMarioBattleSystem
         {
             if (element == Elements.Sharp) InterruptionHandler = SpikedEntityInterruption;
             else base.OnInterruption(element);
+        }
+
+        protected override void HandleStylishMove(int index)
+        {
+            base.HandleStylishMove(index);
+
+            if (index == 0)
+            {
+                User.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName);
+            }
         }
 
         /// <summary>

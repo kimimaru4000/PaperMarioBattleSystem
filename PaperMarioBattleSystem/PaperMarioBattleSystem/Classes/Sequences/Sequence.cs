@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
@@ -24,7 +25,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum SequenceBranch
         {
-            None, Start, End, Main, Success, Failed, Interruption, Miss
+            None, Start, End, Main, Success, Failed, Interruption, Miss, Stylish
         }
 
         /// <summary>
@@ -32,6 +33,12 @@ namespace PaperMarioBattleSystem
         /// It should follow the same conventions as the other branches.
         /// </summary>
         protected delegate void InterruptionDelegate();
+
+        /// <summary>
+        /// A delegate for handling Stylish Moves that require their own sequences.
+        /// It should follow the same conventions as the other branches.
+        /// </summary>
+        protected delegate void StylishDelegate();
 
         #region Fields/Properties
 
@@ -88,6 +95,12 @@ namespace PaperMarioBattleSystem
         protected InterruptionDelegate InterruptionHandler = null;
 
         /// <summary>
+        /// The handler used for Stylish Moves. This exists so each Sequence can specify different handlers for various Stylish Moves.
+        /// There are no Stylish Moves by default, so this defaults to null.
+        /// </summary>
+        protected StylishDelegate StylishHandler = null;
+
+        /// <summary>
         /// The result of performing the Action Command.
         /// </summary>
         public ActionCommand.CommandResults CommandResult { get; private set; } = ActionCommand.CommandResults.Success;
@@ -96,6 +109,11 @@ namespace PaperMarioBattleSystem
         /// The highest CommandRank the player obtained when performing the Action Command.
         /// </summary>
         public ActionCommand.CommandRank HighestCommandRank { get; private set; } = ActionCommand.CommandRank.None;
+
+        /// <summary>
+        /// The data of the current Stylish Move being performed.
+        /// </summary>
+        protected StylishData? CurStylishData { get; private set; } = null;
 
         #endregion
 
@@ -168,7 +186,9 @@ namespace PaperMarioBattleSystem
             ChangeJumpBranch(SequenceBranch.None);
 
             InterruptionHandler = BaseInterruptionHandler;
-
+            StylishHandler = null;
+            CurStylishData = null;
+            
             OnEnd();
 
             EntitiesAffected = null;
@@ -247,6 +267,21 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Sets data for the next Stylish Move to be performed.
+        /// Stylish Data will not be set if the one performing the Sequence is not a player.
+        /// </summary>
+        /// <param name="startRange">The relative start range of the Stylish Move. This is the time from now.</param>
+        /// <param name="endRange">The relative end range of the Stylish Move. This is the time from now.</param>
+        /// <param name="index">The index of the Stylish Move.</param>
+        protected void SetStylishData(double startRange, double endRange, int index)
+        {
+            //Ignore for non-players
+            if (User.EntityType != EntityTypes.Player) return;
+
+            CurStylishData = new StylishData(startRange, endRange, index);
+        }
+
+        /// <summary>
         /// What occurs next in the sequence when it's progressed.
         /// </summary>
         private void OnProgressSequence()
@@ -270,6 +305,9 @@ namespace PaperMarioBattleSystem
                     break;
                 case SequenceBranch.Miss:
                     SequenceMissBranch();
+                    break;
+                case SequenceBranch.Stylish:
+                    SequenceStylishBranch();
                     break;
                 case SequenceBranch.End:
                 default:
@@ -327,6 +365,23 @@ namespace PaperMarioBattleSystem
         /// What occurs when the action misses
         /// </summary>
         protected abstract void SequenceMissBranch();
+
+        /// <summary>
+        /// What occurs during various Stylish Moves that require branches.
+        /// <para>What this does depends on what the StylishHandler is set to.
+        /// There can be any number of Stylish Moves, so Sequences must provide what they want.</para>
+        /// </summary>
+        protected virtual void SequenceStylishBranch()
+        {
+            if (StylishHandler == null)
+            {
+                Debug.LogError($"{nameof(StylishHandler)} is null for {Name}! This should never happen - did this Stylish Move intend to have its own branch?");
+                return;
+            }
+
+            //Perform the Stylish Move
+            StylishHandler();
+        }
 
         /// <summary>
         /// The base interruption handler
@@ -395,6 +450,15 @@ namespace PaperMarioBattleSystem
         protected virtual void OnInterruption(Elements element)
         {
             InterruptionHandler = BaseInterruptionHandler;
+        }
+
+        /// <summary>
+        /// Handles a successfully performed Stylish Move.
+        /// </summary>
+        /// <param name="index">The index of the Stylish Move.</param>
+        protected virtual void HandleStylishMove(int index)
+        {
+            Debug.Log($"Stylish Move for {Name} with index {index} was successfully performed!");
         }
 
         #endregion
@@ -487,7 +551,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// What occurs right before the Sequence updates.
         /// </summary>
-        protected virtual void PreSequenceUpdate()
+        private void PreSequenceUpdate()
         {
             //If the action command is enabled, let it handle the sequence
             if (CommandEnabled == true)
@@ -504,6 +568,9 @@ namespace PaperMarioBattleSystem
             {
                 PreSequenceUpdate();
 
+                //Update Stylish Moves
+                UpdateStylishMove();
+
                 CurSequenceAction.Update();
                 if (CurSequenceAction.IsDone == true)
                 {
@@ -515,10 +582,41 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Updates the current Stylish Move.
+        /// </summary>
+        private void UpdateStylishMove()
+        {
+            if (CurStylishData.HasValue == true)
+            {
+                StylishData curData = CurStylishData.Value;
+
+                //The Stylish Move cannot be performed since it's finished; remove it
+                if (curData.Finished == true)
+                {
+                    CurStylishData = null;
+                    return;
+                }
+
+                //Check if the correct button was pressed
+                if (Input.GetKeyDown(StylishData.ButtonToPerform) == true)
+                {
+                    //Clear the current data regardless, as an incorrectly timed press prevents the Stylish Move from being performed
+                    CurStylishData = null;
+
+                    //If the Stylish Move is within range, handle it
+                    if (curData.WithinRange == true)
+                    {
+                        HandleStylishMove(curData.Index);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// Handles anything that needs to be done directly after updating the sequence.
         /// This is where it jumps to a new branch, if it should.
         /// </summary>
-        protected void PostUpdate()
+        private void PostUpdate()
         {
             if (InSequence == true && JumpToBranch != SequenceBranch.None)
             {
@@ -533,7 +631,11 @@ namespace PaperMarioBattleSystem
 
         public virtual void Draw()
         {
-
+            //Debug stylish success range
+            if (CurStylishData.HasValue == true && CurStylishData.Value.WithinRange == true)
+            {
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, "STYLISH: YES", new Vector2(300f, 100f), Color.DeepPink, .6f);
+            }
         }
 
         #endregion
@@ -677,5 +779,59 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        /// <summary>
+        /// Holds data regarding Stylish Moves.
+        /// </summary>
+        protected struct StylishData
+        {
+            /// <summary>
+            /// The button to press to perform the Stylish Move.
+            /// <para>Make this instance-based to change the button required to perform certain Stylish Moves.</para>
+            /// </summary>
+            public static Keys ButtonToPerform = Keys.Z;
+
+            /// <summary>
+            /// The relative start range of the Stylish Move. This is the time from now.
+            /// <para>For example, if this was 400ms, the Stylish Move would start 400ms after it was defined.</para>
+            /// </summary>
+            public double StartRange;
+
+            /// <summary>
+            /// The relative end range of the Stylish Move. This is the time from now.
+            /// <para>For example, if this was 800ms, the Stylish Move would end 800ms after it was defined.</para>
+            /// </summary>
+            public double EndRange;
+
+            /// <summary>
+            /// The index of the Stylish Move. This will be handled by the Sequence if performed successfully.
+            /// </summary>
+            public int Index;
+
+            private double StartTime;
+            private double EndTime;
+
+            /// <summary>
+            /// Tells if the current time is in the range of the Stylish Move's timing.
+            /// </summary>
+            /// <returns>true if so, otherwise false.</returns>
+            public bool WithinRange => (Time.ActiveMilliseconds >= StartTime && Time.ActiveMilliseconds < EndTime);
+
+            /// <summary>
+            /// Tells if the Stylish Move's timing is finished.
+            /// </summary>
+            public bool Finished => (Time.ActiveMilliseconds >= EndTime);
+
+            public StylishData(double startRange, double endRange, int index)
+            {
+                StartRange = startRange;
+                EndRange = endRange;
+                Index = index;
+
+                //Cache actual start and end times
+                StartTime = Time.ActiveMilliseconds + StartRange;
+                EndTime = Time.ActiveMilliseconds + EndRange;
+            }
+        }
     }
 }

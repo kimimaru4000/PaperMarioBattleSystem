@@ -25,12 +25,14 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            
+            //Flag that this BattleEntity should have Stylish Move timings shown
+            EntityEquipped.AddIntAdditionalProperty(Enumerations.AdditionalProperty.ShowStylishTimings, 1);
         }
 
         protected override void OnUnequip()
         {
-            
+            //Remove the flag that Stylish Move timings should be shown
+            EntityEquipped.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.ShowStylishTimings, 1);
         }
     }
 }

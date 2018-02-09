@@ -86,3 +86,11 @@ Whether the Action Command is successfully completed or not, Mario will wait for
 Therefore, we need the Stylish Move's index to be in the Sequence itself. This way, you can define a Sequence for each Stylish Move in the Stylish branch as you see fit. With this, the Stylish branch for Power Smash can check for the index and perform the correct Sequence.
 
 With this system, we should be able to do everything that TTYD supports. Test it out and note anything that needs work.
+
+Update (2/9/18)
+---------------
+We can clean this up by taking a similar approach to the Interruption branch. Remove the StylishIndex field in the Sequence itself, and add it back to StylishData. Add a StylishDelegate and associated StylishHandler. The StylishHandler will be performed in the Stylish branch.
+
+If a Stylish Move needs its own branch, HandleStylishMove() can set the branch to the Stylish branch and the StylishHandler to perform.
+
+This removes cluttering the Stylish branch with conditional checks and allows a clean separation of different Stylish Moves.

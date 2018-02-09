@@ -113,7 +113,7 @@ namespace PaperMarioBattleSystem
                     }
 
                     //Set Stylish data
-                    SetStylishData(0d, 600d, 0);
+                    SetStylishData(200d, 600d, 0);
 
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;

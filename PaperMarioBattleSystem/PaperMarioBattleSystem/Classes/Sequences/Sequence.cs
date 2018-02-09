@@ -113,7 +113,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The data of the current Stylish Move being performed.
         /// </summary>
-        protected StylishData? CurStylishData { get; private set; } = null;
+        protected StylishData CurStylishData { get; private set; } = null;
 
         #endregion
 
@@ -279,6 +279,12 @@ namespace PaperMarioBattleSystem
             if (User.EntityType != EntityTypes.Player) return;
 
             CurStylishData = new StylishData(startRange, endRange, index);
+
+            //If we should should Stylish Move timings, send out an object to show it
+            if (User.EntityProperties.HasAdditionalProperty(AdditionalProperty.ShowStylishTimings) == true)
+            {
+                BattleObjManager.Instance.AddBattleObject(new StylishIndicatorVFX(User, CurStylishData));
+            }
         }
 
         /// <summary>
@@ -586,12 +592,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void UpdateStylishMove()
         {
-            if (CurStylishData.HasValue == true)
+            if (CurStylishData != null)
             {
-                StylishData curData = CurStylishData.Value;
-
                 //The Stylish Move cannot be performed since it's finished; remove it
-                if (curData.Finished == true)
+                if (CurStylishData.Finished == true)
                 {
                     CurStylishData = null;
                     return;
@@ -600,13 +604,20 @@ namespace PaperMarioBattleSystem
                 //Check if the correct button was pressed
                 if (Input.GetKeyDown(StylishData.ButtonToPerform) == true)
                 {
+                    bool inRange = CurStylishData.WithinRange;
+                    int index = CurStylishData.Index;
+
                     //Clear the current data regardless, as an incorrectly timed press prevents the Stylish Move from being performed
+                    CurStylishData.FinishTiming();
                     CurStylishData = null;
 
                     //If the Stylish Move is within range, handle it
-                    if (curData.WithinRange == true)
+                    if (inRange == true)
                     {
-                        HandleStylishMove(curData.Index);
+                        HandleStylishMove(index);
+
+                        //Play the VFX and have it head towards the user's position
+                        BattleObjManager.Instance.AddBattleObject(new StylishMoveVFX(User.Position));
                     }
                 }
             }
@@ -632,7 +643,7 @@ namespace PaperMarioBattleSystem
         public virtual void Draw()
         {
             //Debug stylish success range
-            if (CurStylishData.HasValue == true && CurStylishData.Value.WithinRange == true)
+            if (CurStylishData != null && CurStylishData.WithinRange == true)
             {
                 SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, "STYLISH: YES", new Vector2(300f, 100f), Color.DeepPink, .6f);
             }
@@ -783,7 +794,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Holds data regarding Stylish Moves.
         /// </summary>
-        protected struct StylishData
+        public class StylishData
         {
             /// <summary>
             /// The button to press to perform the Stylish Move.
@@ -795,21 +806,21 @@ namespace PaperMarioBattleSystem
             /// The relative start range of the Stylish Move. This is the time from now.
             /// <para>For example, if this was 400ms, the Stylish Move would start 400ms after it was defined.</para>
             /// </summary>
-            public double StartRange;
+            public double StartRange = 0d;
 
             /// <summary>
             /// The relative end range of the Stylish Move. This is the time from now.
             /// <para>For example, if this was 800ms, the Stylish Move would end 800ms after it was defined.</para>
             /// </summary>
-            public double EndRange;
+            public double EndRange = 0d;
 
             /// <summary>
             /// The index of the Stylish Move. This will be handled by the Sequence if performed successfully.
             /// </summary>
-            public int Index;
+            public int Index = 0;
 
-            private double StartTime;
-            private double EndTime;
+            private double StartTime = 0d;
+            private double EndTime = 0d;
 
             /// <summary>
             /// Tells if the current time is in the range of the Stylish Move's timing.
@@ -831,6 +842,14 @@ namespace PaperMarioBattleSystem
                 //Cache actual start and end times
                 StartTime = Time.ActiveMilliseconds + StartRange;
                 EndTime = Time.ActiveMilliseconds + EndRange;
+            }
+
+            /// <summary>
+            /// Instantly finishes the timing for the Stylish Move.
+            /// </summary>
+            public void FinishTiming()
+            {
+                EndTime = Time.ActiveMilliseconds;
             }
         }
     }

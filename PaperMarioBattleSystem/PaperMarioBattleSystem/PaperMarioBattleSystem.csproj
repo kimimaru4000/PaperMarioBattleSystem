@@ -422,7 +422,7 @@
     <Compile Include="Classes\StatusEffects\TurboChargeStatus.cs" />
     <Compile Include="Classes\StatusEffects\WaterBlockStatus.cs" />
     <Compile Include="Classes\UIElements\BattleHUD.cs" />
-    <Compile Include="Classes\UIElements\IDisableable.cs" />
+    <Compile Include="Classes\Interfaces\IDisableable.cs" />
     <Compile Include="Classes\UIElements\PosUIElement.cs" />
     <Compile Include="Classes\UIElements\TextBox.cs" />
     <Compile Include="Classes\UIElements\UICroppedTexture2D.cs" />
@@ -436,6 +436,8 @@
     <Compile Include="Classes\VFXElements\BlinkVFX.cs" />
     <Compile Include="Classes\VFXElements\DamageStarVFX.cs" />
     <Compile Include="Classes\VFXElements\RallyWinkHeartVFX.cs" />
+    <Compile Include="Classes\VFXElements\StylishIndicatorVFX.cs" />
+    <Compile Include="Classes\VFXElements\StylishMoveVFX.cs" />
     <Compile Include="Classes\VFXElements\VFXElement.cs" />
     <Compile Include="Classes\VFXElements\WingsDisappearVFX.cs" />
     <Compile Include="Main.cs" />

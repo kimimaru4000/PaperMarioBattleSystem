@@ -401,7 +401,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="element">The Element the BattleEntity is weak to</param>
         /// <param name="weaknessHolder">The data for the Weakness</param>
-        public void AddWeakness(Elements element, WeaknessHolder weaknessHolder)
+        public void AddWeakness(Elements element, in WeaknessHolder weaknessHolder)
         {
             if (HasWeakness(element) == false)
             {
@@ -416,7 +416,7 @@ namespace PaperMarioBattleSystem
         /// Removes a Weakness on the BattleEntity
         /// </summary>
         /// <param name="element">The Element the BattleEntity is weak to</param>
-        public void RemoveWeakness(Elements element, WeaknessHolder weakness)
+        public void RemoveWeakness(Elements element, in WeaknessHolder weakness)
         {
             if (HasWeakness(element) == false)
             {
@@ -480,7 +480,7 @@ namespace PaperMarioBattleSystem
         ///</summary>
         ///<param name="element">The element the BattleEntity is resistant to</param>
         ///<param name="resistanceHolder">The data for the Resistance</param>
-        public void AddResistance(Elements element, ResistanceHolder resistanceHolder)
+        public void AddResistance(Elements element, in ResistanceHolder resistanceHolder)
         {
             if (HasResistance(element) == false)
             {
@@ -495,7 +495,7 @@ namespace PaperMarioBattleSystem
         /// Removes a Resistance on the BattleEntity
         /// </summary>
         /// <param name="element">The Element the BattleEntity is resistant to</param>
-        public void RemoveResistance(Elements element, ResistanceHolder resistanceHolder)
+        public void RemoveResistance(Elements element, in ResistanceHolder resistanceHolder)
         {
             if (HasResistance(element) == false)
             {
@@ -559,7 +559,7 @@ namespace PaperMarioBattleSystem
         ///</summary>
         ///<param name="physAttribute">The PhysicalAttribute the BattleEntity is strong against.</param>
         ///<param name="strengthHolder">The data for the Strength.</param>
-        public void AddStrength(PhysicalAttributes physAttribute, StrengthHolder strengthHolder)
+        public void AddStrength(PhysicalAttributes physAttribute, in StrengthHolder strengthHolder)
         {
             if (HasStrength(physAttribute) == false)
             {
@@ -574,7 +574,7 @@ namespace PaperMarioBattleSystem
         /// Removes a Strength from the BattleEntity.
         /// </summary>
         /// <param name="physAttribute">The PhysicalAttribute the BattleEntity is strong against.</param>
-        public void RemoveStrength(PhysicalAttributes physAttribute, StrengthHolder strengthHolder)
+        public void RemoveStrength(PhysicalAttributes physAttribute, in StrengthHolder strengthHolder)
         {
             if (HasStrength(physAttribute) == false)
             {
@@ -866,7 +866,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="statusType">The StatusType of the StatusEffect.</param>
         /// <param name="statusProperty">The StatusPropertyHolder associated with the StatusEffect.</param>
-        public void AddStatusProperty(StatusTypes statusType, StatusPropertyHolder statusProperty)
+        public void AddStatusProperty(StatusTypes statusType, in StatusPropertyHolder statusProperty)
         {
             if (HasStatusProperty(statusType) == true)
             {
@@ -922,7 +922,7 @@ namespace PaperMarioBattleSystem
         /// This removes all existing StatusProperties before copying.
         /// </summary>
         /// <param name="entityProperties">The BattleEntityProperties to copy StatusProperties from.</param>
-        public void CopyStatusProperties(BattleEntityProperties entityProperties)
+        public void CopyStatusProperties(in BattleEntityProperties entityProperties)
         {
             //Don't do anything if null was passed in
             if (entityProperties == null)
@@ -993,7 +993,7 @@ namespace PaperMarioBattleSystem
         /// Adds Payback to the BattleEntity, causing it to deal damage to direct attackers.
         /// </summary>
         /// <param name="paybackHolder">The PaybackHolder to add.</param>
-        public void AddPayback(PaybackHolder paybackHolder)
+        public void AddPayback(in PaybackHolder paybackHolder)
         {
             Debug.Log($"Added {paybackHolder.Element} Payback of type {paybackHolder.PaybackType} to {Entity.Name}!");
 
@@ -1004,7 +1004,7 @@ namespace PaperMarioBattleSystem
         /// Removes a Payback on the BattleEntity.
         /// </summary>
         /// <param name="paybackHolder">The PaybackHolder to remove.</param>
-        public void RemovePayback(PaybackHolder paybackHolder)
+        public void RemovePayback(in PaybackHolder paybackHolder)
         {
             bool removed = Paybacks.Remove(paybackHolder);
 
@@ -1100,7 +1100,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="property">The AdditionalProperty to add.</param>
         /// <param name="value">An object of the value corresponding to the AdditionalProperty.</param>
-        public void AddAdditionalProperty(AdditionalProperty property, object value)
+        public void AddAdditionalProperty(AdditionalProperty property, in object value)
         {
             //Remove if the entity already has it
             if (HasAdditionalProperty(property) == true)

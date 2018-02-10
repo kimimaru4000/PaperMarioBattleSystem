@@ -360,7 +360,7 @@ namespace PaperMarioBattleSystem
         /// <typeparam name="U">The type of the value.</typeparam>
         /// <param name="dictCopiedTo">The Dictionary to copy values to.</param>
         /// <param name="dictCopiedFrom">The Dictionary to copy from.</param>
-        public static void CopyDictionaryData<T,U>(this Dictionary<T,U> dictCopiedTo, Dictionary<T,U> dictCopiedFrom)
+        public static void CopyDictionaryData<T,U>(this Dictionary<T,U> dictCopiedTo, in Dictionary<T,U> dictCopiedFrom)
         {
             //Don't do anything if null, since there's nothing to copy from
             if (dictCopiedFrom == null) return;

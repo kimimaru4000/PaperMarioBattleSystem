@@ -35,7 +35,7 @@ namespace PaperMarioBattleSystem
             ChangeSequenceBranch(SequenceBranch.Failed);
         }
 
-        public override void OnCommandResponse(object response)
+        public override void OnCommandResponse(in object response)
         {
             AdditionalDamage = (int)response;
         }

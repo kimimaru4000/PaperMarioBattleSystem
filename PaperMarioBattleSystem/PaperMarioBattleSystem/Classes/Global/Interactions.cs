@@ -352,7 +352,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="interactionParam">An InteractionParamHolder containing the BattleEntities interacting and data about their interaction.</param>
         /// <returns>An InteractionResult containing InteractionHolders for both the victim and the attacker.</returns>
-        public static InteractionResult GetDamageInteraction(InteractionParamHolder interactionParam)
+        public static InteractionResult GetDamageInteraction(in InteractionParamHolder interactionParam)
         {
             InteractionResult finalInteraction = new InteractionResult();
             ContactResultInfo contactResultInfo = new ContactResultInfo();
@@ -384,20 +384,20 @@ namespace PaperMarioBattleSystem
 
             public ContactResultInfo StepContactResultInfo = new ContactResultInfo();
 
-            public InteractionResult Calculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            public InteractionResult Calculate(in InteractionParamHolder damageInfo, in InteractionResult curResult, in ContactResultInfo curContactResult)
             {
                 StepResult = new InteractionResult(curResult);
                 StepContactResultInfo = curContactResult;
-                OnCalculate(damageInfo, curResult, curContactResult);
+                OnCalculate(damageInfo);
                 return StepResult;
             }
         
-            protected abstract void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult);
+            protected abstract void OnCalculate(in InteractionParamHolder damageInfo);
         }
 
         private sealed class InitStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 StepResult.AttackerResult.Entity = damageInfo.Attacker;
                 StepResult.VictimResult.Entity = damageInfo.Victim;
@@ -413,7 +413,7 @@ namespace PaperMarioBattleSystem
 
         private sealed class ContactResultStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 BattleEntity victim = StepResult.VictimResult.Entity;
                 BattleEntity attacker = StepResult.AttackerResult.Entity;
@@ -440,7 +440,7 @@ namespace PaperMarioBattleSystem
 
         private sealed class ElementOverrideStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 Elements element = StepResult.VictimResult.DamageElement;
                 BattleEntity victim = StepResult.VictimResult.Entity;
@@ -472,7 +472,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private sealed class VictimAttackerStrengthStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 StrengthHolder totalStrength = StepResult.AttackerResult.Entity.EntityProperties.GetTotalStrength(StepResult.VictimResult.Entity);
                 StepResult.VictimResult.TotalDamage += totalStrength.Value;
@@ -481,7 +481,7 @@ namespace PaperMarioBattleSystem
 
         private sealed class VictimElementDamageStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 ElementDamageResultHolder victimElementDamage = GetElementalDamage(StepResult.VictimResult.Entity,
                     StepResult.VictimResult.DamageElement, StepResult.VictimResult.TotalDamage);
@@ -493,7 +493,7 @@ namespace PaperMarioBattleSystem
 
         private sealed class VictimDamageReductionStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 StepResult.VictimResult.TotalDamage -= StepResult.VictimResult.Entity.BattleStats.DamageReduction;
             }
@@ -501,7 +501,7 @@ namespace PaperMarioBattleSystem
 
         private sealed class VictimCheckHitStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 //If the move cannot miss, hit is set to true
                 if (damageInfo.CantMiss == true) StepResult.VictimResult.Hit = true;
@@ -514,7 +514,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private sealed class VictimDefensiveStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 //Defense added from Damage Dodge Badges upon a successful Guard
                 int damageDodgeDefense = 0;
@@ -541,26 +541,6 @@ namespace PaperMarioBattleSystem
                         PaybackHolder payback = victimDefenseData.Value.Payback.Value;
 
                         StepContactResultInfo.Paybackholder = payback;
-                        //If the Defensive action dealt damage and the contact was direct
-                        //the Defensive action has caused a Failure for the Attacker (Ex. Superguarding)
-                        //if (StepResult.VictimResult.ContactType == ContactTypes.Latch
-                        //    || StepResult.VictimResult.ContactType == ContactTypes.TopDirect
-                        //    || StepResult.VictimResult.ContactType == ContactTypes.SideDirect)
-                        //{
-                        //    StepContactResultInfo.ContactResult = ContactResult.Failure;
-                        //
-                        //    //Use the damage from the Defensive Action
-                        //    StepResult.AttackerResult.TotalDamage = payback.Damage;
-                        //
-                        //    //Update the Paybackholder to use the Payback data from the Defensive Action
-                        //    //NOTE: Use temp extra data for now; FIX ASAP!!!!
-                        //    StepContactResultInfo.Paybackholder = new PaybackHolder(PaybackTypes.Constant, PhysicalAttributes.None,
-                        //        payback.Element, new ContactTypes[] { ContactTypes.SideDirect, ContactTypes.TopDirect },
-                        //        new ContactProperties[] { ContactProperties.None, ContactProperties.Protected, ContactProperties.WeaponDirect },
-                        //        ContactResult.Failure, ContactResult.Failure, payback.Damage);
-                        //}
-                        //
-                        //StepResult.AttackerResult.DamageElement = victimDefenseData.Value.ElementHolder.Value.Element;
                     }
 
                     //Factor in the additional Guard defense for all DefensiveActions (for now, at least)
@@ -575,11 +555,8 @@ namespace PaperMarioBattleSystem
                     StepResult.VictimResult.TotalDamage -= totalDefense;
                 }
 
-                //Store the final unscaled damage in the Attacker's result if there was no Defensive Action payback, as it will use it later
-                //if (victimDefenseData.HasValue == false || victimDefenseData.Value.Payback.HasValue == false)
-                //{
-                    StepResult.AttackerResult.TotalDamage = StepResult.VictimResult.TotalDamage;
-                //}
+                //Store the final unscaled damage in the Attacker's result
+                StepResult.AttackerResult.TotalDamage = StepResult.VictimResult.TotalDamage;
             }
         }
 
@@ -634,7 +611,7 @@ namespace PaperMarioBattleSystem
 
         private sealed class VictimDoublePainStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 //Factor in Double Pain for the Victim
                 int doublePainCount = StepResult.VictimResult.Entity.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DoublePain);
@@ -645,7 +622,7 @@ namespace PaperMarioBattleSystem
 
         private sealed class VictimLastStandStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 //Factor in Last Stand for the Victim, if the Victim is in Danger or Peril
                 if (StepResult.VictimResult.Entity.IsInDanger == true)
@@ -662,7 +639,7 @@ namespace PaperMarioBattleSystem
 
         private sealed class ClampVictimDamageStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 //Clamp Victim damage
                 StepResult.VictimResult.TotalDamage =
@@ -672,7 +649,7 @@ namespace PaperMarioBattleSystem
 
         private sealed class VictimFilteredStatusStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 StepResult.VictimResult.StatusesInflicted =
                     GetFilteredInflictedStatuses(StepResult.VictimResult.Entity, StepResult.VictimResult.StatusesInflicted);
@@ -681,7 +658,7 @@ namespace PaperMarioBattleSystem
 
         private sealed class VictimCheckInvincibleStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 //Check if the Victim is Invincible. If so, ignore all damage
                 //If Invincible entities want to be immune to Status Effects, they should add immunities when turning Invincible
@@ -698,7 +675,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private sealed class VictimCheckContactResultStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 if (StepContactResultInfo.ContactResult == ContactResult.Failure)
                 {
@@ -711,7 +688,7 @@ namespace PaperMarioBattleSystem
 
         private sealed class AttackerPaybackDamageStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 //The final damage the Attacker dealt to the Victim
                 //This will be the Payback damage dealt from a Defensive Action if one that deals damage has been performed
@@ -750,7 +727,7 @@ namespace PaperMarioBattleSystem
 
         private class ClampAttackerDamageStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 StepResult.AttackerResult.TotalDamage = 
                     UtilityGlobals.Clamp(StepResult.AttackerResult.TotalDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
@@ -759,7 +736,7 @@ namespace PaperMarioBattleSystem
 
         private class AttackerFilteredStatusStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 StepResult.AttackerResult.StatusesInflicted =
                     GetFilteredInflictedStatuses(StepResult.AttackerResult.Entity, StepResult.AttackerResult.StatusesInflicted);
@@ -768,7 +745,7 @@ namespace PaperMarioBattleSystem
 
         private class AttackerCheckInvincibleStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 //Check if the Attacker is Invincible. If so, ignore all damage
                 //If Invincible entities want to be immune to Status Effects, they should add immunities when turning Invincible
@@ -785,7 +762,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private sealed class AttackerCheckContactResultStep : DamageCalcStep
         {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
+            protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 if (StepContactResultInfo.ContactResult == ContactResult.Success)
                 {

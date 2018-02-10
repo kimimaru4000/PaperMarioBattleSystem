@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
             BombCount = bombCount;
         }
 
-        public override void OnCommandResponse(object response)
+        public override void OnCommandResponse(in object response)
         {
             base.OnCommandResponse(response);
 

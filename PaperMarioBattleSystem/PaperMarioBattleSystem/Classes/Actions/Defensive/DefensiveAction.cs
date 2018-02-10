@@ -76,7 +76,7 @@ namespace PaperMarioBattleSystem
 
         }
 
-        public virtual void OnCommandResponse(object response)
+        public virtual void OnCommandResponse(in object response)
         {
             
         }

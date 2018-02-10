@@ -39,6 +39,6 @@ namespace PaperMarioBattleSystem
         /// by speeding up Mario's hammer windup animation.</para>
         /// </summary>
         /// <param name="response">An object representing a response from the action command.</param>
-        void OnCommandResponse(object response);
+        void OnCommandResponse(in object response);
     }
 }

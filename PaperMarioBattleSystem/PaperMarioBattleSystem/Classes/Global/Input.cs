@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
             return GetKey(key, KBState);
         }
 
-        public static bool GetKey(Keys key, KeyboardState keyboardState)
+        public static bool GetKey(Keys key, in KeyboardState keyboardState)
         {
             return keyboardState.IsKeyDown(key);
         }
@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
             return GetKeyUp(key, InputKeyboard);
         }
 
-        public static bool GetKeyUp(Keys key, KeyboardState keyboardState)
+        public static bool GetKeyUp(Keys key, in KeyboardState keyboardState)
         {
             return (keyboardState.IsKeyDown(key) == true && KBState.IsKeyUp(key) == true);
         }
@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
             return GetKeyDown(key, InputKeyboard);
         }
 
-        public static bool GetKeyDown(Keys key, KeyboardState keyboardState)
+        public static bool GetKeyDown(Keys key, in KeyboardState keyboardState)
         {
             return (keyboardState.IsKeyUp(key) == true && KBState.IsKeyDown(key) == true);
         }

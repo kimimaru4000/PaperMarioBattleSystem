@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
             
         }
 
-        public override void OnCommandResponse(object response)
+        public override void OnCommandResponse(in object response)
         {
             User.AnimManager.PlayAnimation(AnimationGlobals.YoshiBattleAnimations.EggLayName);
             EggsToThrow = (int)response;

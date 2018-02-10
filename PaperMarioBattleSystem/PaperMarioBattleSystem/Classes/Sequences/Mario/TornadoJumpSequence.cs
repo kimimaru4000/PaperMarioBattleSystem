@@ -68,7 +68,7 @@ namespace PaperMarioBattleSystem
             DamageMod = 2;
         }
 
-        public override void OnCommandResponse(object response)
+        public override void OnCommandResponse(in object response)
         {
             //Pressing each successful button during the tornado part of the Action Command causes Mario to spin faster
             SuccessfulButtons = (int)response;

@@ -29,7 +29,7 @@ namespace PaperMarioBattleSystem
             DamageDealt = 0;
         }
 
-        public override void OnCommandResponse(object response)
+        public override void OnCommandResponse(in object response)
         {
             DamageDealt = (int)response;
         }

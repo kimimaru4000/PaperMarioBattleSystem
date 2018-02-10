@@ -2049,7 +2049,7 @@ namespace PaperMarioBattleSystem
             /// </summary>
             /// <param name="paybackHolders">The set of PaybackHolders to combine.</param>
             /// <returns>A combined PaybackHolder. If the set is null or empty, then a PaybackHolder with default values.</returns>
-            public static PaybackHolder CombinePaybacks(IList<PaybackHolder> paybackHolders)
+            public static PaybackHolder CombinePaybacks(in IList<PaybackHolder> paybackHolders)
             {
                 //Initialize default values
                 PaybackTypes totalType = PaybackTypes.Constant;

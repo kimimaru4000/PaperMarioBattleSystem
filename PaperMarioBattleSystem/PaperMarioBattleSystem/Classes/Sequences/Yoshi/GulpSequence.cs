@@ -52,11 +52,6 @@ namespace PaperMarioBattleSystem
             ChangeSequenceBranch(SequenceBranch.Failed);
         }
 
-        public override void OnCommandResponse(object response)
-        {
-
-        }
-
         protected override void SequenceStartBranch()
         {
             switch (SequenceStep)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -11,6 +12,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class HammerSequence : Sequence
     {
+        protected double SlamWaitDur = 400d;
+        protected double StylishWaitDur = 700d;
         protected float WalkDuration = 1000f;
         protected int DamageMod = 1;
 
@@ -46,6 +49,23 @@ namespace PaperMarioBattleSystem
             {
                 Animation windupAnim = User.AnimManager.GetAnimation(WindupAnimName);
                 windupAnim?.SetSpeed(2f);
+            }
+        }
+
+        protected override void HandleStylishMove(int index)
+        {
+            base.HandleStylishMove(index);
+
+            if (index == 0)
+            {
+                ChangeJumpBranch(SequenceBranch.Stylish);
+                StylishHandler = FirstStylishSequence;
+            }
+            else if (index == 1)
+            {
+                //Change the branch; don't change the Jump branch here so we wait for the first Stylish sequence to finish
+                ChangeSequenceBranch(SequenceBranch.Stylish);
+                StylishHandler = SecondStylishSequence;
             }
         }
 
@@ -96,6 +116,11 @@ namespace PaperMarioBattleSystem
                         ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
 
                     CurSequenceAction = new WaitForAnimationSeqAction(SlamAnimName);
+                    break;
+                case 1:
+                    SetStylishData(0d, SlamWaitDur, 0);
+
+                    CurSequenceAction = new WaitSeqAction(SlamWaitDur);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -112,6 +137,11 @@ namespace PaperMarioBattleSystem
                     User.AnimManager.PlayAnimation(SlamAnimName, true);
                     AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, Action.DamageProperties, false);
                     CurSequenceAction = new WaitForAnimationSeqAction(SlamAnimName);
+                    break;
+                case 1:
+                    SetStylishData(0d, SlamWaitDur, 0);
+
+                    CurSequenceAction = new WaitSeqAction(SlamWaitDur);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
@@ -142,6 +172,61 @@ namespace PaperMarioBattleSystem
         {
             switch (SequenceStep)
             {
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        protected void FirstStylishSequence()
+        {
+            Vector2 baseMoveAmount = new Vector2(20, -50);
+
+            switch (SequenceStep)
+            {
+                case 0:
+                    User.AnimManager.PlayAnimation(AnimationGlobals.IdleName);
+
+                    //Move back a bit
+                    Vector2 moveAmount = baseMoveAmount;
+                    if (User.EntityType == Enumerations.EntityTypes.Player)
+                    {
+                        moveAmount.X = -moveAmount.X;
+                    }
+
+                    CurSequenceAction = new MoveAmountSeqAction(moveAmount, SlamWaitDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
+                    break;
+                case 1:
+                    //Move back a bit
+                    moveAmount = baseMoveAmount;
+                    if (User.EntityType == Enumerations.EntityTypes.Player)
+                    {
+                        moveAmount.X = -moveAmount.X;
+                    }
+                    moveAmount.Y = -moveAmount.Y;
+
+                    //Add the second Stylish Move for Hammer
+                    SetStylishData(100d, SlamWaitDur, 1);
+
+                    CurSequenceAction = new MoveAmountSeqAction(moveAmount, SlamWaitDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+                    ChangeSequenceBranch(SequenceBranch.End);
+                    break;
+                default:
+                    PrintInvalidSequence();
+                    break;
+            }
+        }
+
+        protected void SecondStylishSequence()
+        {
+            switch(SequenceStep)
+            {
+                case 0:
+                    User.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName);
+
+                    CurSequenceAction = new WaitSeqAction(StylishWaitDur);
+                    ChangeSequenceBranch(SequenceBranch.End);
+                    break;
                 default:
                     PrintInvalidSequence();
                     break;

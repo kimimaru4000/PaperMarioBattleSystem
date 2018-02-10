@@ -94,3 +94,7 @@ We can clean this up by taking a similar approach to the Interruption branch. Re
 If a Stylish Move needs its own branch, HandleStylishMove() can set the branch to the Stylish branch and the StylishHandler to perform.
 
 This removes cluttering the Stylish branch with conditional checks and allows a clean separation of different Stylish Moves.
+
+Update (2/10/18)
+----------------
+I implemented this and was able to implement Jump and Hammer's Stylish Moves in such a quick, easy manner. Hammer uses Sequences, and it was so easy and painless to set up; I was able to do whatever I wanted. This system looks great - I can confidently say it's finished!

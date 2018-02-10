@@ -377,7 +377,7 @@ namespace PaperMarioBattleSystem
         /// <para>What this does depends on what the StylishHandler is set to.
         /// There can be any number of Stylish Moves, so Sequences must provide what they want.</para>
         /// </summary>
-        protected virtual void SequenceStylishBranch()
+        protected void SequenceStylishBranch()
         {
             if (StylishHandler == null)
             {

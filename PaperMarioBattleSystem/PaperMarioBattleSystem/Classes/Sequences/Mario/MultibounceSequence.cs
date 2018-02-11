@@ -59,6 +59,9 @@ namespace PaperMarioBattleSystem
                         ShowCommandRankVFX(HighestCommandRank, CurTarget.Position);
                     }
 
+                    //Set Stylish data
+                    SetStylishData(200d, 600d, 0);
+
                     //Restart with the next target
                     if (NextTargetIndex < EntitiesAffected.Length)
                     {

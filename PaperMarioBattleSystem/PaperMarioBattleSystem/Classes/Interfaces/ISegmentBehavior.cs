@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// An interface for handling objects with segments.
     /// <para>Examples include Pokeys and Shy Stacks.</para>
     /// </summary>
-    public interface ISegmentBehavior
+    public interface ISegmentBehavior : ICleanup
     {
         /// <summary>
         /// How many max segments the object has.
@@ -22,6 +22,11 @@ namespace PaperMarioBattleSystem
         /// How many segments the object currently has.
         /// </summary>
         uint CurSegmentCount { get; }
+
+        /// <summary>
+        /// The DamageEffects the object has a segment removed from.
+        /// </summary>
+        DamageEffects SegmentRemovedOnEffects { get; }
 
         /// <summary>
         /// What happens when segments are removed.

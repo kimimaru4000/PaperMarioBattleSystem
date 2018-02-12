@@ -75,7 +75,11 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), WalkDuration);
+
+                    Vector2 pos = BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy);
+                    pos.Y = User.Position.Y;
+
+                    CurSequenceAction = new MoveToSeqAction(pos, WalkDuration);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(PickupAnimName, true);

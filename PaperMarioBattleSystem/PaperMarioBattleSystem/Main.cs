@@ -56,8 +56,8 @@ namespace PaperMarioBattleSystem
 
             BattleManager.Instance.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
-                Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Watt),
-                new List<BattleEntity>() { new Goomba(), new Paratroopa(), new Gulpit(), new GulpitsRock(false), new GulpitsRock(true), new GulpitsRock(false), new GulpitsRock(true), new GulpitsRock(false) });
+                Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Kooper),
+                new List<BattleEntity>() { new Pokey() });
 
             base.Initialize();
         }

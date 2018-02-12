@@ -152,6 +152,7 @@
     <Compile Include="Classes\BattleEntities\Supporting\ParagoombaWingedBehavior.cs" />
     <Compile Include="Classes\BattleEntities\Supporting\ParatroopaFlippedBehavior.cs" />
     <Compile Include="Classes\BattleEntities\Supporting\ParatroopaWingedBehavior.cs" />
+    <Compile Include="Classes\BattleEntities\Supporting\PokeySegmentBehavior.cs" />
     <Compile Include="Classes\BattleEvents\BattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DamagedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DeathBattleEvent.cs" />
@@ -296,6 +297,7 @@
     <Compile Include="Classes\Interfaces\IRotatable.cs" />
     <Compile Include="Classes\Interfaces\IScalable.cs" />
     <Compile Include="Classes\Interfaces\ISegmentBehavior.cs" />
+    <Compile Include="Classes\Interfaces\ISegmentEntity.cs" />
     <Compile Include="Classes\Interfaces\ISpinnableBehavior.cs" />
     <Compile Include="Classes\Interfaces\ITattleableEntity.cs" />
     <Compile Include="Classes\Interfaces\ITintable.cs" />

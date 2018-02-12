@@ -47,6 +47,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     Vector2 frontPos = BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontmostBattleEntity(CurTarget.EntityType, null), User.EntityType != EntityTypes.Enemy);
+                    frontPos.Y = User.Position.Y;
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
                     CurSequenceAction = new MoveToSeqAction(frontPos, WalkDuration);
@@ -105,10 +106,10 @@ namespace PaperMarioBattleSystem
                     if (interactions[0] != null && interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
                     {
                         ShowCommandRankVFX(HighestCommandRank, CurTarget.Position);
-                    }
 
-                    //Set Stylish data
-                    SetStylishData(200d, 600d, 0);
+                        //Set Stylish data
+                        SetStylishData(200d, 600d, 0);
+                    }
 
                     CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
@@ -224,7 +225,7 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.SpikedTipHurtName);
                     break;
                 case 2:
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration / 2f, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, User.BattlePosition.Y - User.Position.Y), JumpDuration / 2f, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     break;
                 case 3:
                     //Do the same bounce as the end sequence, except keep playing the same animation

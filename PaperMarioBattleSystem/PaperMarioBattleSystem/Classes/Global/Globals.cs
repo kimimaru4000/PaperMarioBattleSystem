@@ -1261,6 +1261,14 @@ namespace PaperMarioBattleSystem
             public const string SummonKoopatrolName = "SummonKoopatrol";
         }
 
+        public static class DuplighostBattleAnimations
+        {
+            public const string HeadbuttStartName = "HeadbuttStart";
+            public const string HeadbuttName = "Headbutt";
+            public const string DisguiseStartName = "DisguiseStart";
+            public const string DisguiseName = "Disguise";
+        }
+
         /// <summary>
         /// Animations for Shelled BattleEntities.
         /// </summary>

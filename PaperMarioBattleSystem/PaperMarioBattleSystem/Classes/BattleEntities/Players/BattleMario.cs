@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Mario in battle
     /// </summary>
-    public sealed class BattleMario : BattlePlayer
+    public sealed class BattleMario : BattlePlayer, ITattleableEntity
     {
         public MarioStats MStats { get; private set; } = null;
 
@@ -232,5 +232,26 @@ namespace PaperMarioBattleSystem
 
             return Inventory.Instance.GetActiveBadgeCount(newBadgeType);
         }
+
+        //Mario can be tattled by Duplighosts disguised as Goombario
+        #region Tattle Information
+
+        public bool CanBeTattled { get; set; } = true;
+
+        public string[] GetTattleLogEntry()
+        {
+            return new string[] { "N/A" };
+        }
+
+        public string[] GetTattleDescription()
+        {
+            return new string[]
+            {
+                "It's Mario, silly!\nHe's here to save Princess\nPeach, who was kidnapped by\nBowser. Remember?",
+                "He fights until the bitter end,\nno matter what enemies attack."
+            };
+        }
+
+        #endregion
     }
 }

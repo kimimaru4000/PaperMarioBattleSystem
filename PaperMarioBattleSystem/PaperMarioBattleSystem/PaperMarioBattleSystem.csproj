@@ -76,6 +76,7 @@
     <Compile Include="Classes\Actions\Defensive\DefensiveAction.cs" />
     <Compile Include="Classes\Actions\Defensive\Guard.cs" />
     <Compile Include="Classes\Actions\Defensive\Superguard.cs" />
+    <Compile Include="Classes\Actions\Duplighost\HeadbuttAction.cs" />
     <Compile Include="Classes\Actions\Fuzzy\KissyKissyAction.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
     <Compile Include="Classes\Actions\Goombario\Tattle.cs" />
@@ -126,6 +127,7 @@
     <Compile Include="Classes\Animations\ReverseAnimation.cs" />
     <Compile Include="Classes\BattleEntities\BattleEntity.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\BattleEnemy.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\Duplighost.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Goomba.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Gulpit.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Koopatrol.cs" />
@@ -339,6 +341,7 @@
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />
     <Compile Include="Classes\Sequences\ChargeSequence.cs" />
     <Compile Include="Classes\Sequences\DefendSequence.cs" />
+    <Compile Include="Classes\Sequences\Duplighost\HeadbuttSequence.cs" />
     <Compile Include="Classes\Sequences\Fuzzy\KissyKissySequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\TattleSequence.cs" />
@@ -493,6 +496,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Characters\Watt.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Enemies\Duplighost.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Enemies\Goomba.png">

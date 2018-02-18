@@ -278,5 +278,16 @@ namespace PaperMarioBattleSystem
             CurrentAnim = animToPlay;
             CurrentAnim.Play(onFinish);
         }
+
+        /// <summary>
+        /// Clears all animations from the animation manager.
+        /// </summary>
+        public void ClearAllAnimations()
+        {
+            CurrentAnim = null;
+            PreviousAnim = null;
+
+            Animations.Clear();
+        }
     }
 }

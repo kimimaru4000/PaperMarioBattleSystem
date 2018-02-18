@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -22,6 +23,18 @@ namespace PaperMarioBattleSystem
         /// The flippable behavior for the Duplighost for when it's disguised as Kooper.
         /// </summary>
         public IFlippableBehavior FlippableBehavior = null;
+
+        /// <summary>
+        /// The Payback the Duplighost obtained when disguising.
+        /// </summary>
+        public StatusGlobals.PaybackHolder? PaybackCopied = null;
+
+        /// <summary>
+        /// The Duplighost's original set of animations.
+        /// When disguising, its primary animation manager will copy the animations of the BattleEntity it's disguised as.
+        /// This reference exists so it an easily swap back to its original animations.
+        /// </summary>
+        public ObjAnimManager OrigAnimations = null;
 
         public Duplighost() : base(new Stats(23, 15, 0, 0, 0))
         {
@@ -79,21 +92,59 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.DizzyName, dizzyAnim);
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.ConfusedName, dizzyAnim);
+
+            //Copy animations into its original set
+            OrigAnimations = new ObjAnimManager(this);
+            Animation[] allAnims = AnimManager.GetAllAnimations();
+            for (int i = 0; i < allAnims.Length; i++)
+            {
+                Animation anim = allAnims[i];
+                OrigAnimations.AddAnimation(anim.Key, anim);
+            }
         }
 
         public override void CleanUp()
         {
-            if (IsDead == false)
-            {
-                RemoveDisguise();
-            }
+            RemoveDisguise();
+        }
+
+        public override string GetIdleAnim()
+        {
+            //If Flipped, return the Flipped animation
+            if (FlippableBehavior?.Flipped == true) return AnimationGlobals.ShelledBattleAnimations.FlippedName;
+
+            return base.GetIdleAnim();
         }
 
         public override void OnTurnStart()
         {
             base.OnTurnStart();
 
-            StartAction(new HeadbuttAction(), false, BattleManager.Instance.GetFrontPlayer());
+            //If it's flipped, don't do anything
+            if (FlippableBehavior != null && FlippableBehavior.Flipped == true)
+            {
+                StartAction(new NoAction(), true, null);
+                return;
+            }
+
+            if (PartnerTypeDisguise == PartnerTypes.None)
+            {
+                //For testing, say that it's a 50% chance of disguising and headbutting
+                int randVal = GeneralGlobals.Randomizer.Next(0, 2);
+
+                if (randVal == 0)
+                {
+                    StartAction(new DisguiseAction(), false, BattleManager.Instance.GetPartner());
+                }
+                else
+                {
+                    StartAction(new HeadbuttAction(), false, BattleManager.Instance.GetFrontPlayer());
+                }
+            }
+            else
+            {
+                StartAction(new HeadbuttAction(), false, BattleManager.Instance.GetFrontPlayer());
+            }
         }
 
         protected override void OnTakeDamage(InteractionHolder damageInfo)
@@ -103,29 +154,101 @@ namespace PaperMarioBattleSystem
                 || EntityProperties.HasStatus(Enumerations.StatusTypes.Paralyzed) == true)
             {
                 //Remove disguise through a Battle Event
-                
+                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage - 1,
+                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
+                    new RemoveDisguiseBattleEvent(this));
             }
         }
 
         /// <summary>
         /// Removes the Duplighost's disguise.
+        /// <para>If it's already disguised, make sure to remove its disguise first before disguising as something else.</para>
         /// </summary>
         public void RemoveDisguise()
         {
-            PartnerTypeDisguise = Enumerations.PartnerTypes.None;
-            FlippableBehavior = null;
+            //If the Duplighost isn't disguised, there's no disguise to remove
+            if (PartnerTypeDisguise == PartnerTypes.None)
+            {
+                return;
+            }
+
+            //Revert back to original Defense and attributes
+            //NOTE: We may want to copy attributes and defense back...it's hard to tell with all the modifications that could be made, though
+            //This normally isn't a problem because Partners can't be inflicted with Status Effects (barring Injured) or anything else in PM
+            BattleStats.BaseDefense = 0;
+
+            //Change back to Grounded if not Grounded
+            if (HeightState != HeightStates.Grounded)
+            {
+                ChangeHeightState(HeightStates.Grounded);
+
+                //Move the Duplighost back down
+                SetBattlePosition(BattlePosition + new Vector2(0f, BattleManager.Instance.AirborneY));
+                if (PreviousAction?.MoveSequence.InSequence == false)
+                {
+                    Position = BattlePosition;
+                }
+            }
+
+            if (PartnerTypeDisguise == PartnerTypes.Watt)
+            {
+                //If it copied Watt, remove Electrified, its light source, and its Payback
+                EntityProperties.RemovePhysAttribute(PhysicalAttributes.Electrified);
+                EntityProperties.RemoveAdditionalProperty(AdditionalProperty.LightSource);
+            }
+
+            //Remove any Payback it obtained, if it had any
+            if (PaybackCopied != null)
+            {
+                EntityProperties.RemovePayback(PaybackCopied.Value);
+                PaybackCopied = null;
+            }
+
+            //Clean up its Flippable behavior if it copied a shelled Partner
+            if (FlippableBehavior != null)
+            {
+                if (FlippableBehavior.Flipped == true)
+                {
+                    FlippableBehavior.UnFlip();
+                }
+                FlippableBehavior.CleanUp();
+                FlippableBehavior = null;
+            }
+
+            PartnerTypeDisguise = PartnerTypes.None;
+
+            //Make the Duplighost copy back its original animations
+            CopyEntityAnimations(OrigAnimations);
+            AnimManager.PlayAnimation(GetIdleAnim());
+        }
+
+        /// <summary>
+        /// Copies all animations from an animation manager to the Duplighost's primary animation manager.
+        /// The Duplighost's primary animation manager is cleared before copying.
+        /// </summary>
+        /// <param name="objAnimManager">The animation manager to copy animations from.</param>
+        public void CopyEntityAnimations(ObjAnimManager objAnimManager)
+        {
+            AnimManager.ClearAllAnimations();
+
+            Animation[] allAnims = objAnimManager.GetAllAnimations();
+            for (int i = 0; i < allAnims.Length; i++)
+            {
+                Animation anim = allAnims[i];
+                AnimManager.AddAnimation(anim.Key, anim);
+            }
         }
 
         #region Tattle Information
 
         public bool CanBeTattled { get; set; } = true;
 
-        public string[] GetTattleDescription()
+        public virtual string[] GetTattleLogEntry()
         {
             return new string[] { "N/A" };
         }
 
-        public virtual string[] GetTattleLogEntry()
+        public string[] GetTattleDescription()
         {
             //Return a different Tattle for each Partner the Duplighost is disguised as
             switch (PartnerTypeDisguise)

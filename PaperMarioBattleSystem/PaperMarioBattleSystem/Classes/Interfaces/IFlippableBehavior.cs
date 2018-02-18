@@ -48,5 +48,12 @@ namespace PaperMarioBattleSystem
         /// What happens when the object is unflipped.
         /// </summary>
         void UnFlip();
+
+        /// <summary>
+        /// Copies this behavior.
+        /// </summary>
+        /// <param name="entity">The BattleEntity this behavior is for.</param>
+        /// <returns>A copy of this IFlippableBehavior.</returns>
+        IFlippableBehavior CopyBehavior(BattleEntity entity);
     }
 }

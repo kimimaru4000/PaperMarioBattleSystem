@@ -116,5 +116,10 @@ namespace PaperMarioBattleSystem
                 HandleFlipped();
             }
         }
+
+        public virtual IFlippableBehavior CopyBehavior(BattleEntity entity)
+        {
+            return new KoopaFlippedBehavior(entity, FlippedTurns, FlippedOnEffects, DefenseLoss);
+        }
     }
 }

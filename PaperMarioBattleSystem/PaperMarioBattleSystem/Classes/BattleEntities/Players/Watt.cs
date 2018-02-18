@@ -11,6 +11,14 @@ namespace PaperMarioBattleSystem
 {
     public sealed class Watt : BattlePartner
     {
+        /// <summary>
+        /// Watt's Electric Payback.
+        /// </summary>
+        public StatusGlobals.PaybackHolder ElectricPayback { get; private set; } = new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Constant, PhysicalAttributes.Electrified,
+            Elements.Electric, new ContactTypes[] { ContactTypes.Latch, ContactTypes.SideDirect, ContactTypes.TopDirect },
+            new ContactProperties[] { ContactProperties.None },
+            ContactResult.PartialSuccess, ContactResult.Success, 1, null);
+
         public Watt() : base(new PartnerStats(PartnerGlobals.PartnerRanks.Normal, 50, 0, 0))
         {
             Name = "Watt";
@@ -23,10 +31,7 @@ namespace PaperMarioBattleSystem
             EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
 
             //Add Watt's Electrified Payback
-            EntityProperties.AddPayback(new StatusGlobals.PaybackHolder(StatusGlobals.PaybackTypes.Constant, PhysicalAttributes.Electrified,
-            Elements.Electric, new ContactTypes[] { ContactTypes.Latch, ContactTypes.SideDirect, ContactTypes.TopDirect },
-            new ContactProperties[] { ContactProperties.None },
-            ContactResult.PartialSuccess, ContactResult.Success, 1, null));
+            EntityProperties.AddPayback(ElectricPayback);
 
             //Watt is a light source that fully lights any battle
             EntityProperties.AddAdditionalProperty(AdditionalProperty.LightSource, 10000d);

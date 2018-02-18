@@ -39,5 +39,10 @@ namespace PaperMarioBattleSystem
             Entity.EntityProperties.AddPayback(PaybackRemoved);
             Entity.EntityProperties.AddPhysAttribute(AttributeRemoved);
         }
+
+        public override IFlippableBehavior CopyBehavior(BattleEntity entity)
+        {
+            return new KoopatrolFlippedBehavior(entity, FlippedTurns, FlippedOnEffects, DefenseLoss, PaybackRemoved, AttributeRemoved);
+        }
     }
 }

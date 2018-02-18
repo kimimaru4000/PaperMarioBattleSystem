@@ -29,5 +29,10 @@ namespace PaperMarioBattleSystem
                 HandleFlipped();
             }
         }
+
+        public override IFlippableBehavior CopyBehavior(BattleEntity entity)
+        {
+            return new ParatroopaFlippedBehavior(entity, FlippedTurns, FlippedOnEffects, DefenseLoss);
+        }
     }
 }

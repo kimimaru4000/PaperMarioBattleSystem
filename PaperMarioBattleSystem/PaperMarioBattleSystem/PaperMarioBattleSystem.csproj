@@ -76,6 +76,7 @@
     <Compile Include="Classes\Actions\Defensive\DefensiveAction.cs" />
     <Compile Include="Classes\Actions\Defensive\Guard.cs" />
     <Compile Include="Classes\Actions\Defensive\Superguard.cs" />
+    <Compile Include="Classes\Actions\Duplighost\DisguiseAction.cs" />
     <Compile Include="Classes\Actions\Duplighost\HeadbuttAction.cs" />
     <Compile Include="Classes\Actions\Fuzzy\KissyKissyAction.cs" />
     <Compile Include="Classes\Actions\Goombario\Bonk.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="Classes\BattleEvents\MoveToBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\MoveWithAfterImagesBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\PlayAnimBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\RemoveDisguiseBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\RemoveWingsBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\RevivedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\ShellBreakBattleEvent.cs" />
@@ -341,6 +343,7 @@
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />
     <Compile Include="Classes\Sequences\ChargeSequence.cs" />
     <Compile Include="Classes\Sequences\DefendSequence.cs" />
+    <Compile Include="Classes\Sequences\Duplighost\DisguiseSequence.cs" />
     <Compile Include="Classes\Sequences\Duplighost\HeadbuttSequence.cs" />
     <Compile Include="Classes\Sequences\Fuzzy\KissyKissySequence.cs" />
     <Compile Include="Classes\Sequences\Goombario\BonkSequence.cs" />

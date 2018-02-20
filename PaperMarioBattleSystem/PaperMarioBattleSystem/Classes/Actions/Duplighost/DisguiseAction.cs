@@ -14,6 +14,8 @@ namespace PaperMarioBattleSystem
     {
         public DisguiseAction()
         {
+            Name = "Disguise";
+
             MoveInfo = new MoveActionData(null, "Disguise as one of Mario's Partners.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
                 MoveAffectionTypes.Custom, TargetSelectionMenu.EntitySelectionType.Single, false, null, null);
 

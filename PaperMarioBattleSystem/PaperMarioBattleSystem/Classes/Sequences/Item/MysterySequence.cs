@@ -48,11 +48,6 @@ namespace PaperMarioBattleSystem
             MysteryItemSet = null;
         }
 
-        protected override void SequenceStartBranch()
-        {
-            base.SequenceStartBranch();
-        }
-
         protected override void SequenceMainBranch()
         {
             switch (SequenceStep)

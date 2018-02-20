@@ -16,7 +16,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Abilities";
             Position = new Vector2(210, 150);
-            BattleActions = new List<MoveAction>() { new ElectroDashAction() };
+            BattleActions = new List<MoveAction>() { new ElectroDashAction(), new PowerShockAction() };
         }
     }
 }

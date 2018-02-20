@@ -36,6 +36,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public ObjAnimManager OrigAnimations = null;
 
+        /// <summary>
+        /// Tells if the Duplighost is disguised or not.
+        /// </summary>
+        public bool IsDisguised => (PartnerTypeDisguise != PartnerTypes.None);
+
         public Duplighost() : base(new Stats(23, 15, 0, 0, 0))
         {
             Name = "Duplighost";
@@ -143,13 +148,39 @@ namespace PaperMarioBattleSystem
             }
             else
             {
-                StartAction(new HeadbuttAction(), false, BattleManager.Instance.GetFrontPlayer());
+                if (PartnerTypeDisguise == PartnerTypes.Goombario)
+                {
+                    int rand = GeneralGlobals.Randomizer.Next(0, 2);
+
+                    if (rand == 0)
+                        StartAction(new Bonk(), false, BattleManager.Instance.GetFrontPlayer());
+                    else
+                        StartAction(new Tattle(false), false, BattleManager.Instance.GetMario());
+                }
+                else if (PartnerTypeDisguise == PartnerTypes.Kooper)
+                {
+                    StartAction(new ShellToss(), false, BattleManager.Instance.GetFrontPlayer());
+                }
+                else if (PartnerTypeDisguise == PartnerTypes.Watt)
+                {
+                    StartAction(new ElectroDashAction(), false, BattleManager.Instance.GetFrontPlayer());
+                }
+                else
+                {
+                    StartAction(new HeadbuttAction(), false, BattleManager.Instance.GetFrontPlayer());
+                }
             }
         }
 
         protected override void OnTakeDamage(InteractionHolder damageInfo)
         {
+            //Return if not disguised
+            if (IsDisguised == false)
+                return;
+
             //If a Duplighost is inflicted with Paralyzed or takes Electric damage, its disguise is removed
+            //NOTE: This is flawed; if the Duplighost is inflicted with Paralyzed and takes any damage, its disguised will be removed
+            //Technically it should work fine, but the idea is to remove the disguise only when it's just inflicted with Paralyzed
             if (damageInfo.Hit == true && damageInfo.DamageElement == Enumerations.Elements.Electric 
                 || EntityProperties.HasStatus(Enumerations.StatusTypes.Paralyzed) == true)
             {
@@ -167,7 +198,7 @@ namespace PaperMarioBattleSystem
         public void RemoveDisguise()
         {
             //If the Duplighost isn't disguised, there's no disguise to remove
-            if (PartnerTypeDisguise == PartnerTypes.None)
+            if (IsDisguised == false)
             {
                 return;
             }

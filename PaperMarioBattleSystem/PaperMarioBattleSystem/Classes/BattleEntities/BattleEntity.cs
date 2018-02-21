@@ -991,7 +991,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public virtual void Draw()
+        public void Draw()
         {
             //NOTE: SUPER VERY ULTRA hackish; just getting this in until we come up with a better way to handle it
             //(I'm looking into it on the side so don't worry)!
@@ -1017,7 +1017,8 @@ namespace PaperMarioBattleSystem
                 SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, chargeEffect, Camera.Instance.Transform);
             }
 
-            AnimManager.CurrentAnim?.Draw(Position, TintColor, Vector2.Zero, Scale, EntityType == EntityTypes.Player, .1f);
+            //Draw the entity itself
+            DrawEntity();
 
             //Deals with the aforementioned ULTRA HACKY code
             if (hasCharge == true)
@@ -1027,6 +1028,23 @@ namespace PaperMarioBattleSystem
                 SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.Transform);
             }
 
+            //Draw anything else, such as Status Effect icons
+            DrawOther();
+        }
+
+        /// <summary>
+        /// Draws the BattleEntity itself.
+        /// </summary>
+        protected virtual void DrawEntity()
+        {
+            AnimManager.CurrentAnim?.Draw(Position, TintColor, Vector2.Zero, Scale, EntityType == EntityTypes.Player, .1f);
+        }
+
+        /// <summary>
+        /// Draws anything else related to the BattleEntity.
+        /// </summary>
+        protected virtual void DrawOther()
+        {
             PreviousAction?.Draw();
 
             //Draw Status Effect icons on the BattleEntity

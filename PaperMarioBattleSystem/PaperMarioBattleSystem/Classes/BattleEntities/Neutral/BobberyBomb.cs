@@ -164,9 +164,9 @@ namespace PaperMarioBattleSystem
             SparkAnimation.Update();
         }
 
-        public override void Draw()
+        protected override void DrawOther()
         {
-            base.Draw();
+            base.DrawOther();
 
             //Draw the spark animation if it's playing
             if (SparkAnimation.IsPlaying == true)

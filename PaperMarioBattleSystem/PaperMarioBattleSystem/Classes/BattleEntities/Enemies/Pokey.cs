@@ -183,9 +183,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public override void Draw()
+        protected override void DrawEntity()
         {
-            base.Draw();
+            base.DrawEntity();
 
             Animation.Frame curFrame = AnimManager.CurrentAnim.CurFrame;
 

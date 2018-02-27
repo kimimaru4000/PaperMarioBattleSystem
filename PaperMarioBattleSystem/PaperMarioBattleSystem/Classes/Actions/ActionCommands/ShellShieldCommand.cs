@@ -106,6 +106,21 @@ namespace PaperMarioBattleSystem
             //The cursor value updates before accepting input - this is evident if you press A when doing Shell Shield with frame advance
             UpdateCursorVal();
 
+            if (AutoComplete == true)
+            {
+                //Assume the last one is the highest value
+                BarRangeData rangeData = BarRanges[BarRanges.Length - 1];
+                if (rangeData.IsValueInRange(CurBarVal) == true)
+                {
+                    //Send the response and rank, and complete with a Success
+                    SendResponse(rangeData.Value);
+                    SendCommandRank(rangeData.Rank);
+
+                    OnComplete(CommandResults.Success);
+                }
+                return;
+            }
+
             if (Input.GetKeyDown(ButtonToPress) == true)
             {
                 //Check the range the cursor is in

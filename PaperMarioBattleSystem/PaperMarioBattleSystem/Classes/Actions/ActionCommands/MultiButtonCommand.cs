@@ -96,10 +96,10 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < ValidSequenceButtons.Length; i++)
             {
                 Keys buttonPressed = ValidSequenceButtons[i];
-                if (Input.GetKeyDown(buttonPressed) == true)
+                if (AutoComplete == true || Input.GetKeyDown(buttonPressed) == true)
                 {
                     //If the button pressed is the next one that should be pressed, we pressed the correct one
-                    if (buttonPressed == NextButtonToPress)
+                    if (AutoComplete == true || buttonPressed == NextButtonToPress)
                     {
                         pressedCorrectButton = true;
                         break;

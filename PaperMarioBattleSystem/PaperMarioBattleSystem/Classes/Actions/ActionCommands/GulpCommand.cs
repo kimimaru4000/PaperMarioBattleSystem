@@ -82,7 +82,7 @@ namespace PaperMarioBattleSystem
             }
 
             //If you started holding then stopped, check when the player stopped holding
-            if (StartedHolding == true && Input.GetKey(KeyToHold) == false)
+            if (StartedHolding == true && Input.GetKey(KeyToHold) == false && AutoComplete == false)
             {
                 if (WithinRange == true)
                 {
@@ -98,11 +98,15 @@ namespace PaperMarioBattleSystem
 
             //Have the bar keep increasing, and make the light light up at a certain value range
             //The bar value can increase further than the light, but it won't show past the light
-            if (Input.GetKey(KeyToHold) == true)
+            if (AutoComplete == true || Input.GetKey(KeyToHold) == true)
             {
                 StartedHolding = true;
 
                 FillBar(Time.ElapsedMilliseconds * SpeedScale);
+
+                if (WithinRange == true)
+                    AutoComplete = false;
+
                 //If the button was held too long, it's a failure
                 if (CurBarValue > MaxBarValue)
                 {

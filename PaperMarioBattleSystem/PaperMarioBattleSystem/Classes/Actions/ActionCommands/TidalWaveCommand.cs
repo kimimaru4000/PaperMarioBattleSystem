@@ -84,9 +84,9 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < PossibleButtons.Length; i++)
             {
                 Keys currentButton = PossibleButtons[i];
-                if (Input.GetKeyDown(currentButton) == true)
+                if (AutoComplete == true || Input.GetKeyDown(currentButton) == true)
                 {
-                    if (currentButton == NextButtonToPress)
+                    if (AutoComplete == true || currentButton == NextButtonToPress)
                     {
                         //Add the button to the list, send the response, and retrieve the new one
                         ButtonsPressed.Add(NextButtonToPress);

@@ -984,9 +984,14 @@ namespace PaperMarioBattleSystem
         {
             AnimManager.CurrentAnim?.Update();
 
+            bool autoComplete = EntityProperties.HasAdditionalProperty(AdditionalProperty.AutoActionCommands);
+
             //Update Defensive actions
             for (int i = 0; i < DefensiveActions.Count; i++)
             {
+                //There isn't an easy and safe way to access and manipulate DefensiveActions from outside, so do this for now
+                DefensiveActions[i].actionCommand.AutoComplete = autoComplete;
+
                 DefensiveActions[i].Update();
             }
         }

@@ -79,20 +79,20 @@ namespace PaperMarioBattleSystem
             }
 
             //Check if the player pressed the input button at the right time
-            if (Input.GetKeyDown(InputButton) == true)
+            if (AutoComplete == true || Input.GetKeyDown(InputButton) == true)
             {
-                //Out of range, so a failure
-                if (WithinRange == false)
-                {
-                    OnComplete(CommandResults.Failure);
-                    return;
-                }
                 //In range, so success
-                else
+                if (WithinRange == true)
                 {
                     SendCommandRank(CommandRank.Nice);
 
                     OnComplete(CommandResults.Success);
+                    return;
+                }
+                //Out of range, so a failure
+                else if (AutoComplete == false)
+                {
+                    OnComplete(CommandResults.Failure);
                     return;
                 }
             }

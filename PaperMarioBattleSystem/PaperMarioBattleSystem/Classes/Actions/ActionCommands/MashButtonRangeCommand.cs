@@ -68,7 +68,7 @@ namespace PaperMarioBattleSystem
             //Keep lowering the bar by this amount each frame
             FillBar(-DecelerationRate, true);
 
-            if (Input.GetKeyDown(ButtonToPress) == true)
+            if (AutoComplete == true || Input.GetKeyDown(ButtonToPress) == true)
             {
                 //Fill the bar for pressing the button
                 FillBar(AmountPerPress, true);

@@ -106,7 +106,7 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            if (Input.GetKeyDown(ButtonToPress))
+            if (AutoComplete == true || Input.GetKeyDown(ButtonToPress))
             {
                 //Send a success if within range and move onto the tornado part
                 if (WithinRange == true)
@@ -117,7 +117,7 @@ namespace PaperMarioBattleSystem
                     OnComplete(CommandResults.Success);
                 }
                 //Otherwise failure
-                else
+                else if (AutoComplete == false)
                 {
                     OnComplete(CommandResults.Failure);
                 }
@@ -146,11 +146,11 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < PossibleButtons.Length; i++)
             {
                 Keys currentButton = PossibleButtons[i];
-                if (Input.GetKeyDown(currentButton) == true)
+                if (AutoComplete == true || Input.GetKeyDown(currentButton) == true)
                 {
                     Keys nextButton = ButtonsToPress[ButtonIndex];
 
-                    if (currentButton == nextButton)
+                    if (AutoComplete == true || currentButton == nextButton)
                     {
                         ButtonIndex++;
                         SendResponse(ButtonIndex);

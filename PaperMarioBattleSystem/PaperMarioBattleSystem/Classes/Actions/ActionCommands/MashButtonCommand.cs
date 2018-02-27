@@ -58,7 +58,7 @@ namespace PaperMarioBattleSystem
                 }
             }
 
-            if (Input.GetKeyDown(ButtonToPress) == true)
+            if (AutoComplete == true || Input.GetKeyDown(ButtonToPress) == true)
             {
                 FillBar(AmountPerPress);
 

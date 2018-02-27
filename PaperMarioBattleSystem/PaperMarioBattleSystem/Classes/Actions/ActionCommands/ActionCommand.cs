@@ -31,6 +31,12 @@ namespace PaperMarioBattleSystem
         public bool AcceptingInput { get; protected set; } = false;
         public IActionCommandHandler Handler { get; private set; } = null;
 
+        /// <summary>
+        /// Whether the Action Command should automatically be successfully performed or not.
+        /// <para>This may not always work, as the absolute success of some commands may be arbitrary (Ex. Art Attack, Bomb Squad).</para>
+        /// </summary>
+        public bool AutoComplete = false;
+
         protected ActionCommand(IActionCommandHandler commandHandler)
         {
             SetHandler(commandHandler);

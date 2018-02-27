@@ -63,7 +63,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Holding Left
-            if (Input.GetKey(ButtonToHold))
+            if (AutoComplete == true || Input.GetKey(ButtonToHold))
             {
                 //The first time you hold left, the first light instantly lights up
                 if (time >= PrevLightTime || HeldLeft == false)
@@ -72,6 +72,10 @@ namespace PaperMarioBattleSystem
 
                     //Send the number of lights lit
                     SendResponse(LightsFilled);
+
+                    //Auto complete
+                    if (AllLightsFilled == true)
+                        AutoComplete = false;
 
                     //Held Left too long (past the last light)
                     if (LightsFilled > MaxLights)

@@ -110,7 +110,7 @@ namespace PaperMarioBattleSystem
             //Check if you pressed the correct button
             if (IsBarFull == false)
             {
-                if (Input.GetKeyDown(CurButton) == true)
+                if (AutoComplete == true || Input.GetKeyDown(CurButton) == true)
                 {
                     //If so, fill up the bar by the correct amount
                     FillBar(AmountPerPress, true);

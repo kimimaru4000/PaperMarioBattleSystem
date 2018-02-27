@@ -178,7 +178,7 @@ namespace PaperMarioBattleSystem
                 }
 
                 //Check if the correct button was pressed
-                if (PressedForLight == false && Input.GetKeyDown(KeyToPress) == true)
+                if (PressedForLight == false && (Input.GetKeyDown(KeyToPress) == true || (AutoComplete == true && WithinRange == true)))
                 {
                     //Check to see if the bar's value is within the next light's range
                     if (WithinRange == true)

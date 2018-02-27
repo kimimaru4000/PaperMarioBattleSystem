@@ -57,7 +57,7 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            if (Input.GetKeyDown(ButtonToPress))
+            if (AutoComplete == true || Input.GetKeyDown(ButtonToPress))
             {
                 //Success if within range
                 if (WithinRange == true)
@@ -66,7 +66,7 @@ namespace PaperMarioBattleSystem
                     OnComplete(CommandResults.Success);
                 }
                 //Otherwise failure
-                else
+                else if (AutoComplete == false)
                 {
                     OnComplete(CommandResults.Failure);
                 }

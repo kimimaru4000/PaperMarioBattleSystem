@@ -115,6 +115,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected StylishData CurStylishData { get; private set; } = null;
 
+        /// <summary>
+        /// Whether Stylish Moves are automatically completed or not.
+        /// </summary>
+        private bool AutoCompleteStylish = false;
+
         #endregion
 
         protected Sequence(MoveAction moveAction)
@@ -152,6 +157,11 @@ namespace PaperMarioBattleSystem
 
             InterruptionHandler = BaseInterruptionHandler;
 
+            //Set auto completing Action Commands and Stylish Moves if the BattleEntity performing the Sequence has the pre-requisites
+            if (actionCommand != null)
+                actionCommand.AutoComplete = User.EntityProperties.HasAdditionalProperty(AdditionalProperty.AutoActionCommands);
+            AutoCompleteStylish = User.EntityProperties.HasAdditionalProperty(AdditionalProperty.AutoStylishMoves);
+
             OnStart();
 
             //Start the first sequence
@@ -188,7 +198,12 @@ namespace PaperMarioBattleSystem
             InterruptionHandler = BaseInterruptionHandler;
             StylishHandler = null;
             CurStylishData = null;
-            
+
+            //Clear auto completing flags
+            if (actionCommand != null)
+                actionCommand.AutoComplete = false;
+            AutoCompleteStylish = false;
+
             OnEnd();
 
             EntitiesAffected = null;
@@ -280,7 +295,7 @@ namespace PaperMarioBattleSystem
 
             CurStylishData = new StylishData(startRange, endRange, index);
 
-            //If we should should Stylish Move timings, send out an object to show it
+            //If we should show Stylish Move timings, send out an object to show it
             if (User.EntityProperties.HasAdditionalProperty(AdditionalProperty.ShowStylishTimings) == true)
             {
                 BattleObjManager.Instance.AddBattleObject(new StylishIndicatorVFX(User, CurStylishData));
@@ -602,10 +617,13 @@ namespace PaperMarioBattleSystem
                 }
 
                 //Check if the correct button was pressed
-                if (Input.GetKeyDown(StylishData.ButtonToPerform) == true)
+                if (Input.GetKeyDown(StylishData.ButtonToPerform) == true || AutoCompleteStylish == true)
                 {
                     bool inRange = CurStylishData.WithinRange;
                     int index = CurStylishData.Index;
+
+                    if (AutoCompleteStylish == true && inRange == false)
+                        return;
 
                     //Clear the current data regardless, as an incorrectly timed press prevents the Stylish Move from being performed
                     CurStylishData.FinishTiming();

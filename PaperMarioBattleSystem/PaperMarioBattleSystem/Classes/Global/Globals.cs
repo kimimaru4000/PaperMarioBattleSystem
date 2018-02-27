@@ -1101,7 +1101,19 @@ namespace PaperMarioBattleSystem
             /// Tells that Stylish Move timings should be shown for this BattleEntity.
             /// <para>This should have an integer as the value, as multiple Timing Tutor badges can be equipped.</para>
             /// </summary>
-            ShowStylishTimings
+            ShowStylishTimings,
+            
+            /// <summary>
+            /// Tells that this BattleEntity should automatically complete Action Commands, provided they're enabled.
+            /// <para>This should have an integer as the value, as it may be modified in multiple locations.</para>
+            /// </summary>
+            AutoActionCommands,
+
+            /// <summary>
+            /// Tells that this BattleEntity should automatically complete Stylish Moves.
+            /// <para>This should have an integer as the value, as it may be modified in multiple locations.</para>
+            /// </summary>
+            AutoStylishMoves
         }
     }
 
@@ -2466,7 +2478,7 @@ namespace PaperMarioBattleSystem
             AttackFXA = 103, AttackFXB = 104, AttackFXC = 105, AttackFXD = 106, AttackFXE = 107,
             AttackFXR = 108, AttackFXY = 109, AttackFXG = 110, AttackFXP = 111,
             //Unused & Beta Badges
-            AngersPower = 112
+            AngersPower = 112, RightOn = 113
             //New badges
         }
 

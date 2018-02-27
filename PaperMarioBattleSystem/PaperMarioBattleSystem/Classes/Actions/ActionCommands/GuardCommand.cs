@@ -45,9 +45,9 @@ namespace PaperMarioBattleSystem
 
         protected override void ReadInput()
         {
-            if (Input.GetKeyDown(GuardButton) == true)
+            if (AutoComplete == true || Input.GetKeyDown(GuardButton) == true)
             {
-                if (Time.ActiveMilliseconds >= PrevGuardCooldown)
+                if (AutoComplete == true || Time.ActiveMilliseconds >= PrevGuardCooldown)
                 {
                     //Debug.Log("Pressed correct time for Guard!");
                     //SendCommandRank(RankToSend);

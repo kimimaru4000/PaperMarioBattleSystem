@@ -239,6 +239,7 @@
     <Compile Include="Classes\Collectibles\Badges\QuakeHammerBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\QuickChangeBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ReturnPostageBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\RightOnBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\RunawayPayBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SimplifierBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\SlowGoBadge.cs" />

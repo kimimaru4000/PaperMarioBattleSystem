@@ -71,7 +71,7 @@ namespace PaperMarioBattleSystem
             CommandResult = ActionCommand.CommandResults.Failure;
         }
 
-        public virtual void OnCommandRankResult(ActionCommand.CommandRank commandRank)
+        public virtual void OnCommandRankResult(in ActionCommand.CommandRank commandRank)
         {
 
         }

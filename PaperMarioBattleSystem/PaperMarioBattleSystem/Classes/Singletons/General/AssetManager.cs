@@ -114,7 +114,7 @@ namespace PaperMarioBattleSystem
         /// <param name="texturePath">The path to load the Texture2D from.
         /// The content root directory is appended to the start of this.</param>
         /// <returns>A Texture2D found at <paramref name="texturePath"/>, otherwise null.</returns>
-        public Texture2D LoadRawTexture2D(string texturePath)
+        public Texture2D LoadRawTexture2D(in string texturePath)
         {
             Texture2D tex = null;
 
@@ -151,7 +151,7 @@ namespace PaperMarioBattleSystem
             return tex;
         }
 
-        public SoundEffect LoadRawSound(string soundPath)
+        public SoundEffect LoadRawSound(in string soundPath)
         {
             SoundEffect sound = null;
             
@@ -194,7 +194,7 @@ namespace PaperMarioBattleSystem
         /// <typeparam name="T">The type of content to load</typeparam>
         /// <param name="assetPath">The path to load the asset from</param>
         /// <returns>The asset if it was successfully found. Returns the same instance if the same asset was loaded previously</returns>
-        public T LoadAsset<T>(string assetPath)
+        public T LoadAsset<T>(in string assetPath)
         {
             //NOTE: I opted for this rather than not handling the exception to make the content workflow less of a hassle
             //I find that missing assets are very easy to spot, so just look at the logs if you notice an asset missing

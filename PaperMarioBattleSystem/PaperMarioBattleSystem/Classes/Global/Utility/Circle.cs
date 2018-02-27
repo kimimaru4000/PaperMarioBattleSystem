@@ -12,6 +12,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public struct Circle
     {
+        private static readonly Circle emptyCircle = new Circle(Vector2.Zero, 0f);
+
         /// <summary>
         /// The center point of the Circle.
         /// </summary>
@@ -30,7 +32,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Returns an empty Circle at the origin with a radius of 0.
         /// </summary>
-        public static Circle Empty => new Circle(Vector2.Zero, 0f);
+        public static ref readonly Circle Empty => ref emptyCircle;
 
         /// <summary>
         /// Creates a new instance of a Circle with a specified center point and radius.

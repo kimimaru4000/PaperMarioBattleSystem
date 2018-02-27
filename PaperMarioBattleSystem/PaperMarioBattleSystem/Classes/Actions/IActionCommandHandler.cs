@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
         /// What occurs when a CommandRank is sent. This is an indicator of how well the Action Command was performed.
         /// </summary>
         /// <param name="actionResult">The result of the Action Command.</param>
-        void OnCommandRankResult(ActionCommand.CommandRank commandRank);
+        void OnCommandRankResult(in ActionCommand.CommandRank commandRank);
 
         /// <summary>
         /// Handles BattleAction responses sent from an ActionCommand that are not a definite Success or Failure.

@@ -502,7 +502,7 @@ namespace PaperMarioBattleSystem
 
         //For some moves, these only show up when you hit (Ex. Jump, Hammer, Power Shell).
         //Other moves show them as you perform the command, even if they deal damage later (Ex. Mini-Egg, Earth Tremor).
-        public void OnCommandRankResult(ActionCommand.CommandRank commandRank)
+        public void OnCommandRankResult(in ActionCommand.CommandRank commandRank)
         {
             //Don't bother if the CommandRank is nothing
             if (commandRank == ActionCommand.CommandRank.None) return;

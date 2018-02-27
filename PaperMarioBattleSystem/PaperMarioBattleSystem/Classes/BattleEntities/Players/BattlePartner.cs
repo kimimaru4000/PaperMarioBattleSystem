@@ -75,6 +75,7 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.GroupFocus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFineP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlusP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
         }
 
         public override void OnPhaseCycleStart()
@@ -112,13 +113,13 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Swaps Badges from one Partner to another new Partner to apply the effects to that Partner
+        /// Swaps Badges from one Partner to another new Partner to apply the effects to that Partner.
         /// </summary>
-        /// <param name="partnerEquipped">The Partner currently equipped with the Badges</param>
-        /// <param name="newPartner">The Partner to equip the Badges to</param>
+        /// <param name="partnerEquipped">The Partner currently equipped with the Badges.</param>
+        /// <param name="newPartner">The Partner to equip the Badges to.</param>
         public static void SwapPartnerBadges(BattlePartner partnerEquipped, BattlePartner newPartner)
         {
-            List<Badge> partnerBadges = Inventory.Instance.GetActivePartnerBadges(true);
+            List<Badge> partnerBadges = Inventory.Instance.GetActiveBadgesOnEntity(partnerEquipped);
 
             //Go through all the Badges
             for (int i = 0; i < partnerBadges.Count; i++)

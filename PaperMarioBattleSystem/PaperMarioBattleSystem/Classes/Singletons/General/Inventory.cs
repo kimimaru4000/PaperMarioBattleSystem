@@ -511,13 +511,24 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets all active Badges affecting Mario's Partners
+        /// Gets all active Badges affecting Mario's Partners.
+        /// NOTE: This doesn't work correctly for Self Badges that are equipped to Partners right now.
         /// </summary>
         /// <returns>A List of all active Badges affecting Mario's Partners</returns>
         /// <param name="excludeBoth">Whether to exclude Badges that affect both Mario and his Partners or not.</param>
         public List<Badge> GetActivePartnerBadges(bool excludeBoth)
         {
             return ActiveBadges.FindAll((badge) => (badge.AffectedType == AffectedTypes.Partner || (excludeBoth == false && badge.AffectedType == AffectedTypes.Both)));
+        }
+
+        /// <summary>
+        /// Gets all active Badges affecting a particular BattleEntity.
+        /// </summary>
+        /// <param name="battleEntity">The BattleEntity to </param>
+        /// <returns>A new List of all active Badges affecting the BattleEntity.</returns>
+        public List<Badge> GetActiveBadgesOnEntity(BattleEntity battleEntity)
+        {
+            return ActiveBadges.FindAll((badge) => badge.EntityEquipped == battleEntity);
         }
 
         #endregion

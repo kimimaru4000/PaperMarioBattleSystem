@@ -259,6 +259,7 @@ namespace PaperMarioBattleSystem
                 //Make sure the star doesn't go past the designated X value
                 if (StarsThrown[i].Position.X >= StarMaxX)
                 {
+                    BattleUIManager.Instance.RemoveUIElement(StarsThrown[i]);
                     StarsThrown.RemoveAt(i);
                     i--;
 

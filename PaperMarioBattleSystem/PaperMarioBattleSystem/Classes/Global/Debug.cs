@@ -680,6 +680,10 @@ namespace PaperMarioBattleSystem
             //FPS counter
             FPSCounter.Draw();
 
+            //Memory usage
+            Vector2 memBasePos = new Vector2(0, 70);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Managed Mem: {Math.Round(GC.GetTotalMemory(false) / 1024f / 1024f, 2)} MB", memBasePos, Color.White, 0f, Vector2.Zero, 1f, .1f);
+
             //Camera info
             Vector2 cameraBasePos = new Vector2(0, 510);
             SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, "Camera:", cameraBasePos, Color.White, 0f, Vector2.Zero, 1.2f, .1f);

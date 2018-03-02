@@ -16,8 +16,6 @@ sampler chargeSampler = sampler_state { Texture = <chargeTex>; AddressU = Wrap; 
 
 //The alpha value to make the Charge texture
 float chargeAlpha;
-//The color of the object that's being rendered
-float4 objColor;
 
 //The offset to sample the Charge texture from
 float2 chargeOffset;
@@ -63,8 +61,8 @@ float4 ChargeScroll(VertexShaderOutput input) : COLOR0
 
 	if (color.a)
 	{
-		float4 multChargeAlpha = chargeColor * (chargeAlpha * objColor.a);
-		return multChargeAlpha + (color * objColor);
+		float4 multChargeAlpha = chargeColor * (chargeAlpha * input.Color.a);
+		return multChargeAlpha + (color * input.Color);
 	}
 
 	return color;

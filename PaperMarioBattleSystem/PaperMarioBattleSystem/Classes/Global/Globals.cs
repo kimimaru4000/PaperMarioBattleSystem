@@ -2478,7 +2478,7 @@ namespace PaperMarioBattleSystem
             AttackFXA = 103, AttackFXB = 104, AttackFXC = 105, AttackFXD = 106, AttackFXE = 107,
             AttackFXR = 108, AttackFXY = 109, AttackFXG = 110, AttackFXP = 111,
             //Unused & Beta Badges
-            AngersPower = 112, RightOn = 113
+            AttackFXF = 112, AngersPower = 113, RightOn = 114
             //New badges
         }
 

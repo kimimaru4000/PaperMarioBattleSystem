@@ -200,6 +200,15 @@
     <Compile Include="Classes\BattleObjects\ShellBreakAnimObj.cs" />
     <Compile Include="Classes\Collectibles\Badges\AllOrNothingBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\AttackFXABadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\AttackFXCBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\AttackFXBBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\AttackFXDBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\AttackFXEBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\AttackFXFBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\AttackFXGBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\AttackFXPBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\AttackFXRBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\AttackFXYBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\Badge.cs" />
     <Compile Include="Classes\Collectibles\Badges\BumpAttackBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\ChargeBadge.cs" />

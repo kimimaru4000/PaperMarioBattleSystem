@@ -20,7 +20,6 @@ Texture2D chargeTex; - A 4x64 rainbow texture, ripped directly from TTYD
 sampler chargeSampler = sampler_state { Texture = <chargeTex>; AddressU = Wrap; AddressV = Wrap; }; - Sampler for sampling chargeTex
 
 float chargeAlpha; - The alpha of the Charge texture
-float4 objColor; - The TintColor of the object
 
 float2 chargeOffset; - The offset to sample the Charge texture from
 float chargeTexRatio; - The ratio between the Charge texture and the object's full texture (Ex. spritesheet)
@@ -42,6 +41,6 @@ The result is that no matter which frame is displayed, the colors sampled from t
 
 5A. If the object texture's color doesn't have an alpha value, simply return the same color. We don't want to modify transparent pixels.
 
-5B. If it does have an alpha value, we now need to use both colors to get the final color. Multiply the Charge texture color we sampled with (chargeAlpha * objColor.a). This gets us a color scaled with both the Charge alpha and the object's own alpha.
+5B. If it does have an alpha value, we now need to use both colors to get the final color. Multiply the Charge texture color we sampled with (chargeAlpha * input.Color.a). This gets us a color scaled with both the Charge alpha and the object's own alpha, which was passed through the SpriteBatch.
 
-  5B1. Finally, return the base color times the object's color added to the color we calculated. (color * objColor) takes into account the object's tint, and we simply add the Charge color onto that to get the final result.
+  5B1. Finally, return the base color times the object's color added to the color we calculated. (color * input.Color) takes into account the object's tint, and we simply add the Charge color onto that to get the final result.

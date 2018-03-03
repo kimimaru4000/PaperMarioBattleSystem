@@ -9,27 +9,19 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Attack FX C Badge - Changes the sounds of Mario's attacks to the sound of a mechanical noise.
     /// </summary>
-    public sealed class AttackFXCBadge : Badge
+    public sealed class AttackFXCBadge : AttackFXBadge
     {
         public AttackFXCBadge()
         {
             Name = "Attack FX C";
-            Description = "Changes the sound effects when Mario's attacking.";
+            Description = "Changes the sound effects when\nMario's attacking.";
 
             BPCost = 0;
 
             BadgeType = BadgeGlobals.BadgeTypes.AttackFXC;
             AffectedType = BadgeGlobals.AffectedTypes.Self;
-        }
 
-        protected override void OnEquip()
-        {
-
-        }
-
-        protected override void OnUnequip()
-        {
-
+            SoundToPlay = SoundManager.Sound.AttackFXC;
         }
     }
 }

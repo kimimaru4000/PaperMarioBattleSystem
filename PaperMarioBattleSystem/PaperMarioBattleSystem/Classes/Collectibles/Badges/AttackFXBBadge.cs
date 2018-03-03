@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// The Attack FX B Badge - Changes the sounds of Mario's attacks to the sound of a slide whistle or mouse's squeak.
     /// <para>There is a different Attack FX B in each PM game. There's a parameter in the constructor telling which to use.</para>
     /// </summary>
-    public sealed class AttackFXBBadge : Badge
+    public sealed class AttackFXBBadge : AttackFXBadge
     {
         /// <summary>
         /// Constructor.
@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
 
             if (pmAttackFXB == true)
             {
-                Description = "Changes the sound effects when Mario's attacking.";
+                Description = "Changes the sound effects when\nMario's attacking.";
             }
             else
             {
@@ -34,16 +34,8 @@ namespace PaperMarioBattleSystem
 
             BadgeType = BadgeGlobals.BadgeTypes.AttackFXB;
             AffectedType = BadgeGlobals.AffectedTypes.Self;
-        }
 
-        protected override void OnEquip()
-        {
-
-        }
-
-        protected override void OnUnequip()
-        {
-
+            SoundToPlay = SoundManager.Sound.AttackFXB;
         }
     }
 }

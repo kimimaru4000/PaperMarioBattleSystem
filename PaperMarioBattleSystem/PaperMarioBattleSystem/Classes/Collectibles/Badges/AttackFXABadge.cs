@@ -9,27 +9,17 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Attack FX A Badge - Changes the sounds of Mario's attacks to the sound of a whistle.
     /// </summary>
-    public sealed class AttackFXABadge : Badge
+    public sealed class AttackFXABadge : AttackFXBadge
     {
         public AttackFXABadge()
         {
             Name = "Attack FX A";
-            Description = "Changes the sound effects when Mario's attacking.";
+            Description = "Changes the sound effects when\nMario's attacking.";
 
             BPCost = 0;
 
             BadgeType = BadgeGlobals.BadgeTypes.AttackFXA;
             AffectedType = BadgeGlobals.AffectedTypes.Self;
-        }
-
-        protected override void OnEquip()
-        {
-            
-        }
-
-        protected override void OnUnequip()
-        {
-            
         }
     }
 }

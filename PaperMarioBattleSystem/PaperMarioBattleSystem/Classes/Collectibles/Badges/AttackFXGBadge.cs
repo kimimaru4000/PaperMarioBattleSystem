@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Attack FX G Badge - Changes the sounds of Mario's attacks to the sound of a giggle.
     /// </summary>
-    public sealed class AttackFXGBadge : Badge
+    public sealed class AttackFXGBadge : AttackFXBadge
     {
         public AttackFXGBadge()
         {
@@ -21,16 +21,6 @@ namespace PaperMarioBattleSystem
 
             BadgeType = BadgeGlobals.BadgeTypes.AttackFXG;
             AffectedType = BadgeGlobals.AffectedTypes.Self;
-        }
-
-        protected override void OnEquip()
-        {
-
-        }
-
-        protected override void OnUnequip()
-        {
-
         }
     }
 }

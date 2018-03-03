@@ -13,6 +13,36 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin Audio/SFX/Attack FX B.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Attack FX B.wav
+
+#begin Audio/SFX/Attack FX C.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Attack FX C.wav
+
+#begin Audio/SFX/Attack FX D.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Attack FX D.wav
+
+#begin Audio/SFX/Attack FX E.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Attack FX E.wav
+
+#begin Audio/SFX/Attack FX F.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Audio/SFX/Attack FX F.wav
+
 #begin Audio/SFX/Command Cursor Move.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor

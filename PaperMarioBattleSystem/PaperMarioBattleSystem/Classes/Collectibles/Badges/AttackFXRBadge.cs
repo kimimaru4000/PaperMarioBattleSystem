@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Attack FX R Badge - Changes the sounds of Mario's attacks to the sound of a cricket.
     /// </summary>
-    public sealed class AttackFXRBadge : Badge
+    public sealed class AttackFXRBadge : AttackFXBadge
     {
         public AttackFXRBadge()
         {
@@ -21,16 +21,6 @@ namespace PaperMarioBattleSystem
 
             BadgeType = BadgeGlobals.BadgeTypes.AttackFXR;
             AffectedType = BadgeGlobals.AffectedTypes.Self;
-        }
-
-        protected override void OnEquip()
-        {
-
-        }
-
-        protected override void OnUnequip()
-        {
-
         }
     }
 }

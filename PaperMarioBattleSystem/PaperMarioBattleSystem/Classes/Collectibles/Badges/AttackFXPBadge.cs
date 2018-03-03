@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Attack FX P Badge - Changes the sounds of Mario's attacks to the sound of a Bowser roar.
     /// </summary>
-    public sealed class AttackFXPBadge : Badge
+    public sealed class AttackFXPBadge : AttackFXBadge
     {
         public AttackFXPBadge()
         {
@@ -21,16 +21,6 @@ namespace PaperMarioBattleSystem
 
             BadgeType = BadgeGlobals.BadgeTypes.AttackFXP;
             AffectedType = BadgeGlobals.AffectedTypes.Self;
-        }
-
-        protected override void OnEquip()
-        {
-
-        }
-
-        protected override void OnUnequip()
-        {
-
         }
     }
 }

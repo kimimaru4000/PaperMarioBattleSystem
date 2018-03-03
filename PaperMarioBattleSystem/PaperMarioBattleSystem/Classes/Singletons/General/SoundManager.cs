@@ -47,7 +47,8 @@ namespace PaperMarioBattleSystem
             CursorMove, CommandCursorMove, MenuBackOut, MenuSelect,
             ActionCommandSuccess,
             StarSpiritAppear, StarSpiritSummon, PMStarPowerIncrease,
-            Lullaby, FrightMask
+            Lullaby, FrightMask,
+            AttackFXB, AttackFXC, AttackFXD, AttackFXE, AttackFXF
         }
 
         #endregion
@@ -72,7 +73,13 @@ namespace PaperMarioBattleSystem
             { Sound.StarSpiritSummon, $"{ContentGlobals.SoundRoot}Star Spirit Summon" },
             { Sound.PMStarPowerIncrease, $"{ContentGlobals.SoundRoot}PM Star Power Increase" },
             { Sound.Lullaby, $"{ContentGlobals.SoundRoot}Lullaby" },
-            { Sound.FrightMask, $"{ContentGlobals.SoundRoot}Fright Mask" }
+            { Sound.FrightMask, $"{ContentGlobals.SoundRoot}Fright Mask" },
+            { Sound.AttackFXB, $"{ContentGlobals.SoundRoot}Attack FX B" },
+            { Sound.AttackFXC, $"{ContentGlobals.SoundRoot}Attack FX C" },
+            { Sound.AttackFXD, $"{ContentGlobals.SoundRoot}Attack FX D" },
+            { Sound.AttackFXE, $"{ContentGlobals.SoundRoot}Attack FX E" },
+            { Sound.AttackFXF, $"{ContentGlobals.SoundRoot}Attack FX F" }
+
         };
 
         /// <summary>

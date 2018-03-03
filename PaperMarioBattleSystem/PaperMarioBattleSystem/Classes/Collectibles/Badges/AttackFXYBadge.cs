@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Attack FX Y Badge - Changes the sounds of Mario's attacks to the sound of a dull bell.
     /// </summary>
-    public sealed class AttackFXYBadge : Badge
+    public sealed class AttackFXYBadge : AttackFXBadge
     {
         public AttackFXYBadge()
         {
@@ -21,16 +21,6 @@ namespace PaperMarioBattleSystem
 
             BadgeType = BadgeGlobals.BadgeTypes.AttackFXY;
             AffectedType = BadgeGlobals.AffectedTypes.Self;
-        }
-
-        protected override void OnEquip()
-        {
-
-        }
-
-        protected override void OnUnequip()
-        {
-
         }
     }
 }

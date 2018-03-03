@@ -200,6 +200,7 @@
     <Compile Include="Classes\BattleObjects\ShellBreakAnimObj.cs" />
     <Compile Include="Classes\Collectibles\Badges\AllOrNothingBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\AttackFXABadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\AttackFXBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\AttackFXCBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\AttackFXBBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\AttackFXDBadge.cs" />
@@ -700,6 +701,21 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Audio\SFX\Menu Select.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\SFX\Attack FX B.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\SFX\Attack FX C.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\SFX\Attack FX D.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\SFX\Attack FX E.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\SFX\Attack FX F.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Content\Fonts\Font.spritefont">

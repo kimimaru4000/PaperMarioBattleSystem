@@ -163,6 +163,11 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddBadge(new AttackFXDBadge());
             Inventory.Instance.AddBadge(new AttackFXEBadge());
             Inventory.Instance.AddBadge(new AttackFXFBadge());
+            Inventory.Instance.AddBadge(new AttackFXBBadge(true));
+            Inventory.Instance.AddBadge(new AttackFXCBadge());
+            Inventory.Instance.AddBadge(new AttackFXDBadge());
+            Inventory.Instance.AddBadge(new AttackFXEBadge());
+            Inventory.Instance.AddBadge(new AttackFXFBadge());
 
             //Debug Badge - Right On!
             Inventory.Instance.AddBadge(new RightOnBadge());

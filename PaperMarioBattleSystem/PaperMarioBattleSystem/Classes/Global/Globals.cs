@@ -1113,7 +1113,14 @@ namespace PaperMarioBattleSystem
             /// Tells that this BattleEntity should automatically complete Stylish Moves.
             /// <para>This should have an integer as the value, as it may be modified in multiple locations.</para>
             /// </summary>
-            AutoStylishMoves
+            AutoStylishMoves,
+
+            /// <summary>
+            /// Tells that this BattleEntity plays sounds from Attack FX badges when dealing damage.
+            /// <para>This should have an <see cref="AttackFXManager"/> as the value.
+            /// Initialize it when adding this property, and clean it up when removing it.</para>
+            /// </summary>
+            AttackFXSounds
         }
     }
 

@@ -18,24 +18,41 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            EntityEquipped.DealtDamageEvent -= OnDealtDamage;
-            EntityEquipped.DealtDamageEvent += OnDealtDamage;
+            AttackFXManager manager = EntityEquipped.EntityProperties.GetAdditionalProperty<AttackFXManager>(Enumerations.AdditionalProperty.AttackFXSounds);
+
+            //If the AttackFXManager is null, create it
+            if (manager == null)
+            {
+                manager = new AttackFXManager();
+                manager.Initialize(EntityEquipped);
+
+                //Add it as a property to the BattleEntity
+                EntityEquipped.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.AttackFXSounds, manager);
+            }
+
+            //Add the sound
+            manager.AddSound(SoundToPlay);
         }
 
         protected override void OnUnequip()
         {
-            EntityEquipped.DealtDamageEvent -= OnDealtDamage;
-        }
+            AttackFXManager manager = EntityEquipped.EntityProperties.GetAdditionalProperty<AttackFXManager>(Enumerations.AdditionalProperty.AttackFXSounds);
 
-        private void OnDealtDamage(InteractionHolder damageInfo)
-        {
-            //Attack FX badges don't take effect if damaging with Payback
-            if (damageInfo.IsPaybackDamage == true || damageInfo.ContactType == Enumerations.ContactTypes.None)
+            if (manager != null)
             {
-                return;
+                //Remove the sound
+                manager.RemoveSound(SoundToPlay);
+
+                //If there are no more sounds to play, clean up the AttackFXManager and remove the property from the BattleEntity
+                if (manager.SoundCount == 0)
+                {
+                    manager.CleanUp();
+
+                    EntityEquipped.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.AttackFXSounds);
+                }
+
+                manager = null;
             }
-            
-            SoundManager.Instance.PlaySound(SoundToPlay);
         }
     }
 }

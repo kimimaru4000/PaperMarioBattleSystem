@@ -66,9 +66,19 @@ namespace PaperMarioBattleSystem
         private readonly List<Effect> PostProcessingEffects = new List<Effect>();
 
         /// <summary>
+        /// The RenderTarget containing the final output.
+        /// </summary>
+        public RenderTarget2D FinalRenderTarget { get; private set; } = null;
+
+        /// <summary>
         /// The main RenderTarget used to render the screen to.
         /// </summary>
         private RenderTarget2D MainRenderTarget = null;
+
+        /// <summary>
+        /// The alternative RenderTarget used to aid in post-processing effects.
+        /// </summary>
+        private RenderTarget2D PPRenderTarget = null;
 
         /// <summary>
         /// Whether the RenderTarget was set or not.
@@ -109,6 +119,9 @@ namespace PaperMarioBattleSystem
             uiBatch = new SpriteBatch(graphicsDeviceManager.GraphicsDevice);
 
             MainRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
+            PPRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
+
+            FinalRenderTarget = MainRenderTarget;
 
             Initialized = true;
         }
@@ -142,25 +155,18 @@ namespace PaperMarioBattleSystem
         /// <param name="newHeight">The new height of the RenderTarget.</param>
         private void ReplaceMainRenderTarget(int newWidth, int newHeight)
         {
+            FinalRenderTarget = null;
+
             MainRenderTarget?.Dispose();
             MainRenderTarget = null;
+            PPRenderTarget?.Dispose();
+            PPRenderTarget = null;
 
             MainRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, newWidth, newHeight);
-        }
+            PPRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, newWidth, newHeight);
 
-        /* Idea for refactoring rendering to easily support shaders:
-         * 1. Store all info in new struct (spritebatch, texture, position, sourcerect, color, etc.)
-         * 2. Add to a dictionary which has the shader as the key (null is a valid key) and a list of structs as the value
-         * 3. Handle all rendering at once with the data in the dictionary
-         * 4. Clear dictionary after finishing rendering
-         * 
-         * The idea is to batch together everything that is rendered with a particular shader.
-         * 
-         * The main concerns are:
-         *  -If one object wants to change the values of a shader for itself, the new values will be applied to all using that shader
-         *  -Potentially too much memory usage (will need to be tested)
-         *  -It's unsure how shaders will even be used yet
-         */
+            FinalRenderTarget = MainRenderTarget;
+        }
 
         /// <summary>
         /// Sets up initial drawing to the main RenderTarget.
@@ -189,6 +195,8 @@ namespace PaperMarioBattleSystem
             //Clear the contents
             graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            FinalRenderTarget = MainRenderTarget;
+
             //Mark that we set the RenderTarget
             SetRenderTarget = true;
         }
@@ -204,39 +212,35 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            //If there are no post-processing effects, don't draw any
-            if (PostProcessingCount <= 0)
+            //Handle rendering multiple post-processing effects with two RenderTargets
+            RenderTarget2D renderToTarget = PPRenderTarget;
+            RenderTarget2D renderTarget = MainRenderTarget;
+
+            //Render all post-processing effects
+            for (int i = 0; i < PostProcessingCount; i++)
             {
-                //Render directly to the backbuffer
-                graphicsDeviceManager.GraphicsDevice.SetRenderTarget(null);
-                graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
+                graphicsDeviceManager.GraphicsDevice.SetRenderTarget(renderToTarget);
 
-                spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, null, null);
+                spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, PostProcessingEffects[i], null);
 
-                spriteBatch.Draw(MainRenderTarget, new Rectangle(0, 0, MainRenderTarget.Width, MainRenderTarget.Height), null, Color.White);
+                spriteBatch.Draw(renderTarget, new Rectangle(0, 0, renderTarget.Width, renderTarget.Height), null, Color.White);
 
                 spriteBatch.End();
+
+                //Swap RenderTargets; the one that was just rendered to has the updated data
+                UtilityGlobals.Swap(ref renderToTarget, ref renderTarget);
             }
-            //Draw all post-processing effects if there are any
-            else
-            {
-                for (int i = 0; i < PostProcessingCount; i++)
-                {
-                    //Keep rendering to the RenderTarget until the last effect
-                    //The last effect will be rendered to the backbuffer
-                    if (i == (PostProcessingCount - 1))
-                    {
-                        graphicsDeviceManager.GraphicsDevice.SetRenderTarget(null);
-                        graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
-                    }
 
-                    spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, PostProcessingEffects[i], null);
+            //Set the final render target to the one with the updated data
+            FinalRenderTarget = renderTarget;
 
-                    spriteBatch.Draw(MainRenderTarget, new Rectangle(0, 0, MainRenderTarget.Width, MainRenderTarget.Height), null, Color.White);
+            //Perform one final draw to the backbuffer
+            graphicsDeviceManager.GraphicsDevice.SetRenderTarget(null);
+            graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-                    spriteBatch.End();
-                }
-            }
+            spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, null);
+            spriteBatch.Draw(FinalRenderTarget, new Rectangle(0, 0, FinalRenderTarget.Width, FinalRenderTarget.Height), null, Color.White);
+            spriteBatch.End();
 
             //Mark that we unset the render target
             SetRenderTarget = false;

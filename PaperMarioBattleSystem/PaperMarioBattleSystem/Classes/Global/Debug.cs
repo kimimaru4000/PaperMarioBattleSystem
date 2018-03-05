@@ -37,8 +37,6 @@ namespace PaperMarioBattleSystem
         public static bool DebugPaused { get; private set; } = false;
         public static bool AdvanceNextFrame { get; private set; } = false;
 
-        //public static bool ShouldTakeScreenshot { get; private set; } = false;
-
         /// <summary>
         /// The level of logs to output. By default, it logs all types of logs.
         /// </summary>
@@ -190,7 +188,6 @@ namespace PaperMarioBattleSystem
                 //Take screenshot
                 else if (Input.GetKeyDown(Keys.S, DebugKeyboard))
                 {
-                    //ShouldTakeScreenshot = true;
                     TakeScreenshot();
                 }
                 else if (Input.GetKeyDown(Keys.M, DebugKeyboard))
@@ -424,9 +421,6 @@ namespace PaperMarioBattleSystem
                     }
                 }
             }
-
-            //Reset screenshot flag
-            //ShouldTakeScreenshot = false;
         }
 
         /// <summary>

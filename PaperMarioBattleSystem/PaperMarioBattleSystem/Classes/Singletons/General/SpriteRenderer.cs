@@ -39,6 +39,20 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public event OnWindowSizeChanged WindowSizeChangedEvent = null;
 
+        public delegate void ConcludedDrawing(in RenderTarget2D finalRenderTarget);
+        /// <summary>
+        /// An event invoked when drawing has concluded for the frame and the final RenderTarget is ready.
+        /// <para>This is invoked right after obtaining the final RenderTarget but right before it is drawn to the backbuffer.</para>
+        /// </summary>
+        public event ConcludedDrawing ConcludedDrawingEvent = null;
+
+        public delegate void FullyConcludedDrawing(in RenderTarget2D finalRenderTarget);
+        /// <summary>
+        /// An event invoked when drawing has fully concluded for the frame and the final RenderTarget has been drawn to the backbuffer.
+        /// <para>Anything that needs to draw at this point must draw to the backbuffer.</para>
+        /// </summary>
+        public event FullyConcludedDrawing FullyConcludedDrawingEvent = null;
+
         /// <summary>
         /// The SpriteBatch used for drawing non-UI elements
         /// </summary>
@@ -102,6 +116,8 @@ namespace PaperMarioBattleSystem
             Initialized = false;
 
             WindowSizeChangedEvent = null;
+            ConcludedDrawingEvent = null;
+            FullyConcludedDrawingEvent = null;
 
             instance = null;
         }
@@ -220,6 +236,7 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < PostProcessingCount; i++)
             {
                 graphicsDeviceManager.GraphicsDevice.SetRenderTarget(renderToTarget);
+                graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
 
                 spriteBatch.Begin(SpriteSortMode.Texture, null, null, null, null, PostProcessingEffects[i], null);
 
@@ -234,6 +251,10 @@ namespace PaperMarioBattleSystem
             //Set the final render target to the one with the updated data
             FinalRenderTarget = renderTarget;
 
+            //Invoke the event saying we finished drawing and pass in the final RenderTarget
+            //Do this before drawing to the backbuffer so other RenderTargets can do as they please without clearing it
+            ConcludedDrawingEvent?.Invoke(FinalRenderTarget);
+
             //Perform one final draw to the backbuffer
             graphicsDeviceManager.GraphicsDevice.SetRenderTarget(null);
             graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
@@ -244,6 +265,9 @@ namespace PaperMarioBattleSystem
 
             //Mark that we unset the render target
             SetRenderTarget = false;
+
+            //Invoke the event saying we completely finished rendering
+            FullyConcludedDrawingEvent?.Invoke(FinalRenderTarget);
         }
 
         /// <summary>

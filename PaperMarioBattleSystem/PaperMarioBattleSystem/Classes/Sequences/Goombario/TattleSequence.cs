@@ -13,9 +13,17 @@ namespace PaperMarioBattleSystem
     public sealed class TattleSequence : Sequence
     {
         private const double WaitTime = 1000d;
+        private const double ShowWait = 2000d;
+        private const double WindowMoveTime = 600d;
+        private const double WindowOpenCloseTime = 300d;
         private const double EndWait = 250d;
 
         private ITattleableEntity TattledEntity = null;
+
+        /// <summary>
+        /// The tattle box showing the BattleEntity tattled inside.
+        /// </summary>
+        private TattleRenderObj TattleBox = null;
 
         public TattleSequence(MoveAction moveAction) : base(moveAction)
         {
@@ -32,6 +40,13 @@ namespace PaperMarioBattleSystem
         protected override void OnEnd()
         {
             base.OnEnd();
+
+            if (TattleBox != null)
+            {
+                BattleObjManager.Instance.RemoveBattleObject(TattleBox);
+
+                TattleBox = null;
+            }
 
             TattledEntity = null;
         }
@@ -105,6 +120,10 @@ namespace PaperMarioBattleSystem
                         ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
                     }
 
+                    //Create the tattle box and add it so it updates
+                    TattleBox = new TattleRenderObj(Camera.Instance.SpriteToUIPos(EntitiesAffected[0].DrawnPosition));
+                    BattleObjManager.Instance.AddBattleObject(TattleBox);
+
                     string entityName = EntitiesAffected[0].Name;
 
                     //Check if the enemy is in the Tattle database
@@ -140,6 +159,39 @@ namespace PaperMarioBattleSystem
 
                     Console.WriteLine(tattle);
 
+                    //Start moving the tattle box down
+                    TattleBox.Start(WindowMoveTime);
+
+                    CurSequenceAction = new WaitSeqAction(WindowMoveTime);
+                    break;
+                case 1:
+                    //Open the tattle box to show the BattleEntity tattled
+                    TattleBox.Open(WindowOpenCloseTime);
+
+                    CurSequenceAction = new WaitSeqAction(WindowOpenCloseTime);
+                    break;
+                case 2:
+                    //Wait
+                    CurSequenceAction = new WaitSeqAction(ShowWait);
+                    break;
+                case 3:
+                    //Close the tattle box
+                    TattleBox.Close(WindowOpenCloseTime);
+
+                    CurSequenceAction = new WaitSeqAction(WindowOpenCloseTime);
+                    break;
+                case 4:
+                    //Move the tattle box offscreen
+                    TattleBox.End(WindowMoveTime);
+
+                    CurSequenceAction = new WaitSeqAction(WindowMoveTime);
+                    break;
+                case 5:
+                    //Remove the tattle box
+                    BattleObjManager.Instance.RemoveBattleObject(TattleBox);
+                    TattleBox = null;
+
+                    CurSequenceAction = new WaitSeqAction(0d);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

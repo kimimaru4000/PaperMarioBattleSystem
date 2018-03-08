@@ -71,14 +71,6 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(45, 50, 187, 189), 1000d)));
         }
 
-        public override void OnTurnStart()
-        {
-            base.OnTurnStart();
-
-            //Do nothing for now; we'll implement the attack later
-            StartAction(new NoAction(), false, null);
-        }
-
         public override void CleanUp()
         {
             base.CleanUp();

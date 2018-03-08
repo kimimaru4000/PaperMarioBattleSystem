@@ -57,10 +57,10 @@ namespace PaperMarioBattleSystem
                     if (interactions[0] != null && interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
                     {
                         ShowCommandRankVFX(HighestCommandRank, CurTarget.Position);
-                    }
 
-                    //Set Stylish data
-                    SetStylishData(200d, 600d, 0);
+                        //Set Stylish data
+                        SetStylishData(200d, 600d, 0);
+                    }
 
                     //Restart with the next target
                     if (NextTargetIndex < EntitiesAffected.Length)

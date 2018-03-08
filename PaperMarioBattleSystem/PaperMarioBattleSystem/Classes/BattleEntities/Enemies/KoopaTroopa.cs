@@ -13,14 +13,13 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class KoopaTroopa : BattleEnemy, ITattleableEntity, IFlippableEntity
     {
-        //NOTE: Temporary until we get a simple enemy AI system in
-        protected virtual MoveAction ActionUsed => new ShellToss();
-
         public IFlippableBehavior FlippedBehavior { get; protected set; } = null;
 
         public KoopaTroopa() : base(new Stats(8, 4, 0, 1, 1))
         {
             Name = "Koopa Troopa";
+
+            AIBehavior = new KoopaTroopaAI(this);
 
             EntityProperties.SetVulnerableDamageEffects(Enumerations.DamageEffects.FlipsShelled | Enumerations.DamageEffects.FlipsClefts);
 
@@ -86,21 +85,6 @@ namespace PaperMarioBattleSystem
             base.OnBattleStart();
 
             SetFlippedBehavior();
-        }
-
-        public override void OnTurnStart()
-        {
-            base.OnTurnStart();
-
-            //If it's flipped, don't do anything
-            if (FlippedBehavior.Flipped == false)
-            {
-                StartAction(ActionUsed, false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
-            }
-            else
-            {
-                StartAction(new NoAction(), true, null);
-            }
         }
 
         public override string GetIdleAnim()

@@ -25,6 +25,8 @@ namespace PaperMarioBattleSystem
             //Using their TTYD stats
             BattleStats = new Stats(26, 6, 0, 4, 2);
 
+            AIBehavior = new KoopatrolAI(this);
+
             EntityProperties.AddPayback(SpikedPayback);
             EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Spiked);
 
@@ -79,43 +81,6 @@ namespace PaperMarioBattleSystem
         protected override void SetFlippedBehavior()
         {
             FlippedBehavior = new KoopatrolFlippedBehavior(this, 2, EntityProperties.GetVulnerableDamageEffects(), BattleStats.BaseDefense, SpikedPayback, Enumerations.PhysicalAttributes.Spiked);
-        }
-
-        protected override MoveAction ActionUsed
-        {
-            get
-            {
-                //Check if any other Koopatrols are available
-                //If there are less than a certain number, summon one if a random check succeeds
-                bool shouldSummon = UtilityGlobals.TestRandomCondition(35d);
-                if (shouldSummon == true)
-                {
-                    //Since the Koopatrol excludes itself, this number should be 1 less than the minimum number required for this action
-                    const int minCountSummon = 2;
-
-                    List<BattleEntity> koopatrolsList = new List<BattleEntity>(BattleManager.Instance.GetEntityAllies(this, HeightState));
-                    Type koopatrolType = this.GetType();
-                    for (int i = 0; i < koopatrolsList.Count; i++)
-                    {
-                        //Check exact types. Remove BattleEntities that aren't Koopatrols
-                        Type enemyType = koopatrolsList[i].GetType();
-
-                        if (koopatrolType != enemyType)
-                        {
-                            koopatrolsList.RemoveAt(i);
-                            i--;
-                        }
-                    }
-
-                    //Summon another Koopatrol
-                    if (koopatrolsList.Count < minCountSummon)
-                    {
-                        return new SummonKoopatrolAction();
-                    }
-                }
-
-                return base.ActionUsed;
-            }
         }
 
         #region Tattle Information

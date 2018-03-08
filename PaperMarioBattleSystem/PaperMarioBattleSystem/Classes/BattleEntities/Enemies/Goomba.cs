@@ -12,13 +12,12 @@ namespace PaperMarioBattleSystem
     /// The standard Goomba enemy
     /// </summary>
     public class Goomba : BattleEnemy, ITattleableEntity
-    {
-        //NOTE: Temporary until we get a simple enemy AI system in
-        protected virtual MoveAction ActionUsed => new Jump();
-        
+    {   
         public Goomba() : base(new Stats(1, 2, 0, 0, 0))
         {
             Name = "Goomba";
+
+            AIBehavior = new GoombaAI(this);
 
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Sleep, new StatusPropertyHolder(100, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Stop, new StatusPropertyHolder(110, 0));
@@ -43,13 +42,6 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(129, 73, 28, 30), 150d),
                 new Animation.Frame(new Rectangle(67, 107, 26, 28), 100d),
                 new Animation.Frame(new Rectangle(99, 75, 28, 28), 150d)));
-        }
-
-        public override void OnTurnStart()
-        {
-            base.OnTurnStart();
-
-            StartAction(ActionUsed, false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
         }
 
         public override void TurnUpdate()

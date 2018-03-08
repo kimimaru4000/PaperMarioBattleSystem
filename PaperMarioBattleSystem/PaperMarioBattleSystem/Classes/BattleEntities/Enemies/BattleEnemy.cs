@@ -13,15 +13,23 @@ namespace PaperMarioBattleSystem
     public abstract class BattleEnemy : BattleEntity
     {
         /// <summary>
-        /// The Collectible the Enemy is holding
+        /// The Collectible the Enemy is holding.
         /// </summary>
         public Collectible HeldCollectible { get; protected set; } = null;
+
+        /// <summary>
+        /// The Enemy's AI behavior.
+        /// </summary>
+        public EnemyAIBehavior AIBehavior { get; protected set; } = null;
 
         protected BattleEnemy(Stats stats) : base(stats)
         {
             Name = "Partner";
 
             EntityType = Enumerations.EntityTypes.Enemy;
+
+            //Use the default AI behavior
+            AIBehavior = new DefaultEnemyAI(this);
         }
 
         public override void OnBattleStart()
@@ -52,6 +60,14 @@ namespace PaperMarioBattleSystem
             {
                 this.AddShowHPProperty();                
             }
+        }
+
+        public sealed override void OnTurnStart()
+        {
+            base.OnTurnStart();
+
+            //Make the enemy perform an action on its turn
+            AIBehavior.PerformAction();
         }
 
         public override Item GetItemOfType(Item.ItemTypes itemTypes)

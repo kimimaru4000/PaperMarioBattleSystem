@@ -44,7 +44,9 @@ namespace PaperMarioBattleSystem
         public Duplighost() : base(new Stats(23, 15, 0, 0, 0))
         {
             Name = "Duplighost";
-            
+
+            AIBehavior = new DuplighostAI(this);
+
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Sleep, new StatusPropertyHolder(60, -1));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Stop, new StatusPropertyHolder(80, -1));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Dizzy, new StatusPropertyHolder(75, -1));
@@ -119,57 +121,6 @@ namespace PaperMarioBattleSystem
             if (FlippableBehavior?.Flipped == true) return AnimationGlobals.ShelledBattleAnimations.FlippedName;
 
             return base.GetIdleAnim();
-        }
-
-        public override void OnTurnStart()
-        {
-            base.OnTurnStart();
-
-            //If it's flipped, don't do anything
-            if (FlippableBehavior != null && FlippableBehavior.Flipped == true)
-            {
-                StartAction(new NoAction(), true, null);
-                return;
-            }
-
-            if (PartnerTypeDisguise == PartnerTypes.None)
-            {
-                //For testing, say that it's a 50% chance of disguising and headbutting
-                int randVal = GeneralGlobals.Randomizer.Next(0, 2);
-
-                if (randVal == 0)
-                {
-                    StartAction(new DisguiseAction(), false, BattleManager.Instance.GetPartner());
-                }
-                else
-                {
-                    StartAction(new HeadbuttAction(), false, BattleManager.Instance.GetFrontPlayer());
-                }
-            }
-            else
-            {
-                if (PartnerTypeDisguise == PartnerTypes.Goombario)
-                {
-                    int rand = GeneralGlobals.Randomizer.Next(0, 2);
-
-                    if (rand == 0)
-                        StartAction(new Bonk(), false, BattleManager.Instance.GetFrontPlayer());
-                    else
-                        StartAction(new Tattle(false), false, BattleManager.Instance.GetMario());
-                }
-                else if (PartnerTypeDisguise == PartnerTypes.Kooper)
-                {
-                    StartAction(new ShellToss(), false, BattleManager.Instance.GetFrontPlayer());
-                }
-                else if (PartnerTypeDisguise == PartnerTypes.Watt)
-                {
-                    StartAction(new ElectroDashAction(), false, BattleManager.Instance.GetFrontPlayer());
-                }
-                else
-                {
-                    StartAction(new HeadbuttAction(), false, BattleManager.Instance.GetFrontPlayer());
-                }
-            }
         }
 
         protected override void OnTakeDamage(InteractionHolder damageInfo)

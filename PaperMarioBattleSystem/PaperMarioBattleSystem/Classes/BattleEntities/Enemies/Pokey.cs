@@ -27,6 +27,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Pokey";
 
+            AIBehavior = new GoombaAI(this);
+
             #region Entity Property Setup
 
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Sleep, new StatusPropertyHolder(95, 0));
@@ -100,13 +102,6 @@ namespace PaperMarioBattleSystem
                 SetBattlePosition(pos);
                 Position = pos;
             }
-        }
-
-        public override void OnTurnStart()
-        {
-            base.OnTurnStart();
-
-            StartAction(new Jump(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
         }
 
         protected override void OnTakeDamage(InteractionHolder damageInfo)

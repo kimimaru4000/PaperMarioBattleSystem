@@ -69,14 +69,6 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public override void OnTurnStart()
-        {
-            base.OnTurnStart();
-
-            //Mini-Yuxes don't move, but if they somehow do, make them do nothing
-            StartAction(new NoAction(), true, null);
-        }
-
         #region Tattle Information
 
         public bool CanBeTattled { get; set; } = true;

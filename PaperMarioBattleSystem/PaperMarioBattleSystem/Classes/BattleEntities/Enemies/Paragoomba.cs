@@ -13,8 +13,6 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class Paragoomba : Goomba, ITattleableEntity, IWingedEntity
     {
-        protected override MoveAction ActionUsed => WingedBehavior.Grounded == false ? new DiveKick() : base.ActionUsed;
-
         public IWingedBehavior WingedBehavior { get; private set; } = null;
 
         public Paragoomba()
@@ -22,6 +20,8 @@ namespace PaperMarioBattleSystem
             Name = "Paragoomba";
 
             EntityProperties.SetVulnerableDamageEffects(Enumerations.DamageEffects.RemovesWings);
+
+            AIBehavior = new ParagoombaAI(this);
 
             ChangeHeightState(Enumerations.HeightStates.Airborne);
 

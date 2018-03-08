@@ -146,6 +146,14 @@
     <Compile Include="Classes\BattleEntities\BattleEntity.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\BattleEnemy.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Duplighost.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\DefaultEnemyAI.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\DuplighostAI.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\EnemyAIBehavior.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\GoombaAI.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\GulpitAI.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\KoopatrolAI.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\KoopaTroopaAI.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\ParagoombaAI.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Goomba.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Gulpit.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Koopatrol.cs" />

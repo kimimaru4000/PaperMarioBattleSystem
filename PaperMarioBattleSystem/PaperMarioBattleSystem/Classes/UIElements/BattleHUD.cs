@@ -35,8 +35,11 @@ namespace PaperMarioBattleSystem
 
             SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
                 $"{mario.Name} HP: {mario.CurHP}/{mario.BattleStats.MaxHP}", new Vector2(30, 10), Color.White, .2f);
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
-                $"{partner.Name} HP: {partner.CurHP}/{partner.BattleStats.MaxHP}", new Vector2(30, 30), Color.White, .2f);
+            if (partner != null)
+            {
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
+                    $"{partner.Name} HP: {partner.CurHP}/{partner.BattleStats.MaxHP}", new Vector2(30, 30), Color.White, .2f);
+            }
             SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
                 $"FP: {mario.CurFP}/{mario.BattleStats.MaxFP}", new Vector2(30, 50), Color.White, .2f);
             SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,

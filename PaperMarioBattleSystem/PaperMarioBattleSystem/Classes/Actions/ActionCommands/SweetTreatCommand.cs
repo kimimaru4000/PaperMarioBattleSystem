@@ -84,6 +84,10 @@ namespace PaperMarioBattleSystem
 
             StartPosition = Camera.Instance.SpriteToUIPos((Vector2)values[0]);
 
+            //Count how many BattleEntities are affected
+            //If there's only one, then don't add any of the Partner information
+            int entitiesAffected = (int)values[1];
+
             CursorAngle = MinCursorAngle;
 
             //Define the UI to display
@@ -93,27 +97,34 @@ namespace PaperMarioBattleSystem
             Cursor = new UIFourPiecedTex(croppedTex2D, croppedTex2D.WidthHeightToVector2(), .5f, Color.White);
 
             MarioHPIcon = new UICroppedTexture2D(new CroppedTexture2D(battleGFX, new Rectangle(324, 407, 61, 58)));
-            PartnerHPIcon = new UICroppedTexture2D(new CroppedTexture2D(battleGFX, new Rectangle(324, 407, 61, 58)));
             FPIcon = new UICroppedTexture2D(new CroppedTexture2D(battleGFX, new Rectangle(179, 416, 40, 39)));
 
             MarioHPText = new UIText("0", Color.Black);
-            PartnerHPText = new UIText("0", Color.Black);
             FPText = new UIText("0", Color.Black);
 
             //Set UI properties
             MarioHPIcon.Position = MarioHPText.Position = StartPosition + new Vector2(-10, -45);
-            PartnerHPIcon.Position = PartnerHPText.Position = StartPosition + new Vector2(-80, -45);
             FPIcon.Position = FPText.Position = StartPosition + new Vector2(-45, -95);
 
             MarioHPText.Position += new Vector2(0f, 10f);
-            PartnerHPText.Position += new Vector2(0f, 10f);
             FPText.Position += new Vector2(0f, 10f);
 
-            MarioHPIcon.Depth = PartnerHPIcon.Depth = FPIcon.Depth = .6f;
-            MarioHPText.Depth = PartnerHPText.Depth = FPText.Depth = .61f;
+            if (entitiesAffected > 1)
+            {
+                PartnerHPIcon = new UICroppedTexture2D(new CroppedTexture2D(battleGFX, new Rectangle(324, 407, 61, 58)));
+                PartnerHPText = new UIText("0", Color.Black);
 
-            MarioHPIcon.Origin = PartnerHPIcon.Origin = FPIcon.Origin = MarioHPText.Origin = PartnerHPText.Origin = FPText.Origin = new Vector2(.5f, .5f);
+                PartnerHPIcon.Position = PartnerHPText.Position = StartPosition + new Vector2(-80, -45);
+                PartnerHPText.Position += new Vector2(0f, 10f);
+                PartnerHPIcon.Origin = PartnerHPText.Origin = new Vector2(.5f, .5f);
+                PartnerHPIcon.Depth = .6f;
+                PartnerHPText.Depth = .61f;
+            }
 
+            MarioHPIcon.Depth = FPIcon.Depth = .6f;
+            MarioHPText.Depth = FPText.Depth = .61f;
+
+            MarioHPIcon.Origin = FPIcon.Origin = MarioHPText.Origin = FPText.Origin = new Vector2(.5f, .5f);
 
             //Set cursor position
             Cursor.Position = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
@@ -121,19 +132,34 @@ namespace PaperMarioBattleSystem
             //Define the spawner
             Vector2 startPos = new Vector2(500, 15);
             Vector2 endPos = new Vector2(startPos.X, BattleManager.Instance.PartnerPos.Y + 350f);
-            IconSpawner = new SweetTreatElementSpawner(4, 40f, 5000d, 750d, startPos, endPos, new RestoreTypes[]
+
+            RestoreTypes[] restoreTypes = null;
+            int[] restoreTypeCounts = null;
+            if (entitiesAffected <= 1)
             {
-                RestoreTypes.MarioHP, RestoreTypes.PartnerHP, RestoreTypes.FP, RestoreTypes.PoisonMushroom
-            }, new int[] { 7, 7, 6, 2 });
+                restoreTypes = new RestoreTypes[] { RestoreTypes.MarioHP, RestoreTypes.FP, RestoreTypes.PoisonMushroom };
+                restoreTypeCounts = new int[] { 14, 6, 2 };
+            }
+            else
+            {
+                restoreTypes = new RestoreTypes[] { RestoreTypes.MarioHP, RestoreTypes.PartnerHP, RestoreTypes.FP, RestoreTypes.PoisonMushroom };
+                restoreTypeCounts = new int[] { 7, 7, 6, 2 };
+            }
+
+            IconSpawner = new SweetTreatElementSpawner(4, 40f, 5000d, 750d, startPos, endPos, restoreTypes, restoreTypeCounts);
 
             //Add the cursor and other UI elements
             BattleUIManager.Instance.AddUIElement(Cursor);
             BattleUIManager.Instance.AddUIElement(MarioHPIcon);
-            BattleUIManager.Instance.AddUIElement(PartnerHPIcon);
             BattleUIManager.Instance.AddUIElement(FPIcon);
             BattleUIManager.Instance.AddUIElement(MarioHPText);
-            BattleUIManager.Instance.AddUIElement(PartnerHPText);
             BattleUIManager.Instance.AddUIElement(FPText);
+
+            if (entitiesAffected > 1)
+            {
+                BattleUIManager.Instance.AddUIElement(PartnerHPIcon);
+                BattleUIManager.Instance.AddUIElement(PartnerHPText);
+            }
 
             HealingResponse = default(SweetTreatResponse);
         }
@@ -309,7 +335,10 @@ namespace PaperMarioBattleSystem
             }
 
             MarioHPText.Text = HealingResponse.MarioHPRestored.ToString();
-            PartnerHPText.Text = HealingResponse.PartnerHPRestored.ToString();
+            if (PartnerHPText != null)
+            {
+                PartnerHPText.Text = HealingResponse.PartnerHPRestored.ToString();
+            }
             FPText.Text = HealingResponse.FPRestored.ToString();
         }
     }

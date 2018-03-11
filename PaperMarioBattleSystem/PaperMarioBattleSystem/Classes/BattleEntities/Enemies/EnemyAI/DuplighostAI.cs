@@ -34,7 +34,10 @@ namespace PaperMarioBattleSystem
                 //For testing, say that it's a 50% chance of disguising and headbutting
                 int randVal = GeneralGlobals.Randomizer.Next(0, 2);
 
-                if (randVal == 0)
+                //Ensure there's a Partner to copy
+                bool partnerExists = (BattleManager.Instance.GetPartner() != null);
+
+                if (randVal == 0 && partnerExists == true)
                 {
                     duplighost.StartAction(new DisguiseAction(), false, BattleManager.Instance.GetPartner().GetTrueTarget());
                 }

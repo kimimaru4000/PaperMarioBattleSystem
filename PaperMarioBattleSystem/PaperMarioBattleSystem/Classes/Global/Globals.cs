@@ -1394,10 +1394,12 @@ namespace PaperMarioBattleSystem
         public struct BattleProperties
         {
             public BattleSettings BattleSetting;
+            public bool Runnable;
 
-            public BattleProperties(BattleSettings battleSetting)
+            public BattleProperties(BattleSettings battleSetting, bool runnable)
             {
                 BattleSetting = battleSetting;
+                Runnable = runnable;
             }
         }
 

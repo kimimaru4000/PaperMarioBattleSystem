@@ -80,7 +80,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The battle's properties.
         /// </summary>
-        public BattleProperties Properties = default(BattleProperties);
+        public BattleProperties Properties { get; private set; } = default(BattleProperties);
 
         //Starting positions
         public readonly Vector2 MarioPos = new Vector2(-150, 100);
@@ -558,7 +558,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void UpdateBattleState()
         {
-            if (Mario.IsDead == true)
+            if (Mario == null || Mario.IsDead == true)
             {
                 ChangeBattleState(BattleState.Done);
                 Debug.Log("GAME OVER");
@@ -566,8 +566,8 @@ namespace PaperMarioBattleSystem
             else if (EnemiesAlive <= 0)
             {
                 ChangeBattleState(BattleState.Done);
-                Mario.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
-                Partner.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
+                Mario?.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
+                Partner?.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
                 Debug.Log("VICTORY");
             }
         }
@@ -577,7 +577,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void CheckDeadEntities()
         {
-            if (Partner.IsDead == true)
+            if (Partner?.IsDead == true)
             {
                 //If the Partner died and is in front, switch places with Mario
                 if (Partner == FrontPlayer)

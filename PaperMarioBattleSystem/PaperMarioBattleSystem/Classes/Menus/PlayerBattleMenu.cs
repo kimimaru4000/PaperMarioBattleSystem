@@ -141,7 +141,11 @@ namespace PaperMarioBattleSystem
                 }
                 else
                 {
-                    Debug.LogError($"{otherPlayer.Name} used all of his/her turns or is dead, so turns cannot be swapped with him/her.");
+                    if (otherPlayer != null)
+                    {
+                        Debug.LogError($"{otherPlayer.Name} used all of his/her turns or is dead, so turns cannot be swapped with him/her.");
+                    }
+                    else Debug.LogError($"Either Mario or his Partner is null, so there's no one to swap with!");
                 }
             }
         }
@@ -204,6 +208,9 @@ namespace PaperMarioBattleSystem
         {
             BattleEntity otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.GetFrontPlayer()
                     ? BattleManager.Instance.GetBackPlayer() : BattleManager.Instance.GetFrontPlayer();
+
+            if (otherPlayer == null)
+                return false;
 
             int immobile = otherPlayer.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.Immobile);
 

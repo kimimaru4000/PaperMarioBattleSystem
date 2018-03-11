@@ -16,11 +16,13 @@ namespace PaperMarioBattleSystem
     {
         private BattleEntity Entity = null;
         private Animation DeathAnim = null;
+        private bool OverrideRevival = false;
 
-        public DeathBattleEvent(BattleEntity entity)
+        public DeathBattleEvent(BattleEntity entity, bool overrideRevival)
         {
             Entity = entity;
             DeathAnim = Entity.AnimManager.GetAnimation(AnimationGlobals.DeathName);
+            OverrideRevival = overrideRevival;
 
             IsUnique = true;
         }
@@ -54,7 +56,14 @@ namespace PaperMarioBattleSystem
             }
 
             //If this BattleEntity is being revived, add the revival event and don't check for deaths
-            Item revivalItem = Entity.GetItemOfType(Item.ItemTypes.Revival);
+            Item revivalItem = null;
+
+            //If we should override revival, don't check for a revival item
+            if (OverrideRevival == false)
+            {
+                revivalItem = Entity.GetItemOfType(Item.ItemTypes.Revival);
+            }
+
             if (revivalItem != null)
             {
                 //NOTE: In TTYD if both Mario and his Partner die at the same time, it'll use up only one Life Shroom

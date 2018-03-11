@@ -195,6 +195,8 @@ namespace PaperMarioBattleSystem
 
         public void CleanUp()
         {
+            State = BattleState.Done;
+
             //Remove and cleanup all BattleEntities in battle
             List<BattleEntity> removedEntities = GetAllEntitiesList();
 
@@ -794,6 +796,16 @@ namespace PaperMarioBattleSystem
                 if (cleanUp == true)
                 {
                     entity.CleanUp();
+
+                    //Clear these references if the BattleEntity removed is Mario or his Partner
+                    if (entity == Mario)
+                    {
+                        Mario = null;
+                    }
+                    if (entity == Partner)
+                    {
+                        Partner = null;
+                    }
                 }
                 
                 //Invoke the entity removed event

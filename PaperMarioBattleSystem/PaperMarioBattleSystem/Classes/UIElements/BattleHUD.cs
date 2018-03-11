@@ -33,17 +33,23 @@ namespace PaperMarioBattleSystem
             BattleMario mario = BattleManager.Instance.GetMario();
             BattlePartner partner = BattleManager.Instance.GetPartner();
 
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
-                $"{mario.Name} HP: {mario.CurHP}/{mario.BattleStats.MaxHP}", new Vector2(30, 10), Color.White, .2f);
+            if (mario != null)
+            {
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
+                    $"{mario.Name} HP: {mario.CurHP}/{mario.BattleStats.MaxHP}", new Vector2(30, 10), Color.White, .2f);
+            }
             if (partner != null)
             {
                 SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
                     $"{partner.Name} HP: {partner.CurHP}/{partner.BattleStats.MaxHP}", new Vector2(30, 30), Color.White, .2f);
             }
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
-                $"FP: {mario.CurFP}/{mario.BattleStats.MaxFP}", new Vector2(30, 50), Color.White, .2f);
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
-                $"SP: {mario.MStats.SSStarPower.SPU}/{mario.MStats.SSStarPower.MaxSPU}", new Vector2(155, 50), Color.White, .2f);
+            if (mario != null)
+            {
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
+                    $"FP: {mario.CurFP}/{mario.BattleStats.MaxFP}", new Vector2(30, 50), Color.White, .2f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
+                    $"SP: {mario.MStats.SSStarPower.SPU}/{mario.MStats.SSStarPower.MaxSPU}", new Vector2(155, 50), Color.White, .2f);
+            }
         }
     }
 }

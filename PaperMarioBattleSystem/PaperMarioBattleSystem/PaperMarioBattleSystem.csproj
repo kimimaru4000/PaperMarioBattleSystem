@@ -183,6 +183,7 @@
     <Compile Include="Classes\BattleEntities\Supporting\ParatroopaWingedBehavior.cs" />
     <Compile Include="Classes\BattleEntities\Supporting\PokeySegmentBehavior.cs" />
     <Compile Include="Classes\BattleEvents\BattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\BlownAwayBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DamagedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DeathBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DetonateBobberyBombBattleEvent.cs" />

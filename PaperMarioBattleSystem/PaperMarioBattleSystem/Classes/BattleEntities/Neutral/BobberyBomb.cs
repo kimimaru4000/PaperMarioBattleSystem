@@ -170,7 +170,7 @@ namespace PaperMarioBattleSystem
 
             //Draw the spark animation if it's playing
             if (SparkAnimation.IsPlaying == true)
-                SparkAnimation.Draw(Position, TintColor, Vector2.Zero, Vector2.One, false, .11f);
+                SparkAnimation.Draw(Position, TintColor, Rotation, Vector2.Zero, Vector2.One, false, .11f);
 
             //DrawHitbox();
         }

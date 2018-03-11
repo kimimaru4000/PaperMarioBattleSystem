@@ -102,10 +102,18 @@ namespace PaperMarioBattleSystem
 
             #endregion
         }
-        
+
+        public override void CleanUp()
+        {
+            BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
+        }
+
         public sealed override void OnBattleStart()
         {
             base.OnBattleStart();
+
+            BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
+            BattleManager.Instance.EntityRemovedEvent += OnEntityRemoved;
 
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.SpikeShield, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.IcePower, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
@@ -260,5 +268,14 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        private void OnEntityRemoved(BattleEntity entity)
+        {
+            //If the Partner was removed, set Mario's BattleIndex to 0
+            if (BattleIndex > 0 && BattleManager.Instance.GetPartner() == null)
+            {
+                SetBattleIndex(0, false);
+            }
+        }
     }
 }

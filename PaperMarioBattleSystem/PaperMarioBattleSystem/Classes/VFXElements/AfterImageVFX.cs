@@ -120,6 +120,13 @@ namespace PaperMarioBattleSystem
             if (Entity == null)
                 return;
 
+            //If the BattleEntity isn't in battle anymore, remove the after-images
+            if (Entity.IsInBattle == false)
+            {
+                ReadyForRemoval = true;
+                return;
+            }
+
             //If we're past the position capacity, remove the last one
             if (PrevEntityStates.Count >= PrevEntityStates.Capacity)
             {
@@ -173,13 +180,13 @@ namespace PaperMarioBattleSystem
                 //Render based on the animation setting
                 if (AnimSetting == AfterImageAnimSetting.Current)
                 {
-                    Entity.AnimManager.CurrentAnim.Draw(PrevEntityStates[posIndex].Position, color, Vector2.Zero, Entity.Scale,
+                    Entity.AnimManager.CurrentAnim.Draw(PrevEntityStates[posIndex].Position, color, Entity.Rotation, Vector2.Zero, Entity.Scale,
                         Entity.EntityType == Enumerations.EntityTypes.Player, .09f);
                 }
                 else if (AnimSetting == AfterImageAnimSetting.Previous)
                 {
                     PrevEntityStates[posIndex].AnimFrame.Draw(Entity.AnimManager.SpriteSheet, PrevEntityStates[posIndex].Position,
-                        color, Vector2.Zero, Entity.Scale, Entity.EntityType == Enumerations.EntityTypes.Player, .09f, false);
+                        color, Entity.Rotation, Vector2.Zero, Entity.Scale, Entity.EntityType == Enumerations.EntityTypes.Player, .09f, false);
                 }
             }
         }

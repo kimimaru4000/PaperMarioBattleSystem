@@ -245,14 +245,14 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public void Draw(Vector2 position, Color color, Vector2 origin, Vector2 scale, bool flipped, float layer)
+        public void Draw(Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipped, float layer)
         {
-            CurFrame.Draw(SpriteSheet, position, color, origin, scale, flipped, layer, IsUIAnim);
+            CurFrame.Draw(SpriteSheet, position, color, rotation, origin, scale, flipped, layer, IsUIAnim);
 
             //Draw child frames
             if (ChildFrames != null && CurFrameNum < ChildFrames.Length)
             {
-                ChildFrames[CurFrameNum].Draw(SpriteSheet, position, color, origin, scale, flipped, layer, IsUIAnim);
+                ChildFrames[CurFrameNum].Draw(SpriteSheet, position, color, rotation, origin, scale, flipped, layer, IsUIAnim);
             }
         }
 
@@ -319,14 +319,14 @@ namespace PaperMarioBattleSystem
                 DepthOffset = depthOffset;
             }
 
-            public void Draw(Texture2D spriteSheet, Vector2 position, Color color, Vector2 origin, Vector2 scale, bool flipped, float layer, bool uibatch)
+            public void Draw(Texture2D spriteSheet, Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipped, float layer, bool uibatch)
             {
                 Vector2 realPos = position + PosOffset;
                 float realLayer = layer + DepthOffset;
 
                 if (uibatch == true)
-                    SpriteRenderer.Instance.DrawUI(spriteSheet, realPos, DrawRegion, color, 0f, origin, scale, flipped, false, realLayer);
-                else SpriteRenderer.Instance.Draw(spriteSheet, realPos, DrawRegion, color, 0f, origin, scale, flipped, false, realLayer, uibatch);
+                    SpriteRenderer.Instance.DrawUI(spriteSheet, realPos, DrawRegion, color, rotation, origin, scale, flipped, false, realLayer);
+                else SpriteRenderer.Instance.Draw(spriteSheet, realPos, DrawRegion, color, rotation, origin, scale, flipped, false, realLayer, uibatch);
             }
         }
     }

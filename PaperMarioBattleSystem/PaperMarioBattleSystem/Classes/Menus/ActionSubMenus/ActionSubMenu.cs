@@ -161,7 +161,7 @@ namespace PaperMarioBattleSystem
             BoxMenu.Draw();
             
             //Draw the selection cursor
-            SelectionCursor.Draw(Position + new Vector2(-(IconXOffset * 2), CurSelection * YSpacing), Color.White, Vector2.Zero, new Vector2(2f, 2f), false, .38f);
+            SelectionCursor.Draw(Position + new Vector2(-(IconXOffset * 2), CurSelection * YSpacing), Color.White, 0f, Vector2.Zero, new Vector2(2f, 2f), false, .38f);
 
             //Draw the menu background
             SpriteRenderer.Instance.DrawUISliced(MenuBG, new Rectangle((int)(Position.X - IconXOffset) - 6, (int)(Position.Y - (YSpacing / 2)), (int)(ResourceCostXOffset + (IconXOffset * 3)), (int)((BattleActions.Count * YSpacing) + (YSpacing))),

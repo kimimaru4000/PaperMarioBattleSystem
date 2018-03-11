@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
         protected override void OnUpdate()
         {
             //Even if the animation is null, still wait
-            bool animFinished = (Anim == null || Anim.Finished == true);
+            bool animFinished = (Anim == null || Anim.Finished == true || Entity.IsInBattle == false);
 
             if (animFinished)
             {

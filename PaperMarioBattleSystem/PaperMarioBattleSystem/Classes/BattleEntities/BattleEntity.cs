@@ -517,7 +517,7 @@ namespace PaperMarioBattleSystem
 
             BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Death,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                new DeathBattleEvent(this));
+                new DeathBattleEvent(this, IsInBattle == false));
         }
 
         /// <summary>
@@ -1041,7 +1041,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void DrawEntity()
         {
-            AnimManager.CurrentAnim?.Draw(Position, TintColor, Vector2.Zero, Scale, EntityType == EntityTypes.Player, .1f);
+            AnimManager.CurrentAnim?.Draw(Position, TintColor, Rotation, Vector2.Zero, Scale, EntityType == EntityTypes.Player, .1f);
         }
 
         /// <summary>

@@ -24,20 +24,26 @@ namespace PaperMarioBattleSystem
 
         public override void HandleFlipped()
         {
-            base.HandleFlipped();
+            if (Flipped == false)
+            {
+                //Remove these when being flipped
+                Entity.EntityProperties.RemovePayback(PaybackRemoved);
+                Entity.EntityProperties.RemovePhysAttribute(AttributeRemoved);
+            }
 
-            //Remove these when being flipped
-            Entity.EntityProperties.RemovePayback(PaybackRemoved);
-            Entity.EntityProperties.RemovePhysAttribute(AttributeRemoved);
+            base.HandleFlipped();
         }
 
         public override void UnFlip()
         {
-            base.UnFlip();
+            if (Flipped == true)
+            {
+                //Add them back when unflipping
+                Entity.EntityProperties.AddPayback(PaybackRemoved);
+                Entity.EntityProperties.AddPhysAttribute(AttributeRemoved);
+            }
 
-            //Add them back when unflipping
-            Entity.EntityProperties.AddPayback(PaybackRemoved);
-            Entity.EntityProperties.AddPhysAttribute(AttributeRemoved);
+            base.UnFlip();
         }
 
         public override IFlippableBehavior CopyBehavior(BattleEntity entity)

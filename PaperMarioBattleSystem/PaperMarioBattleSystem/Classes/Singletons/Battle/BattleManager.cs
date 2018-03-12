@@ -478,7 +478,10 @@ namespace PaperMarioBattleSystem
             Partner.Position = oldPartner.Position;
             Partner.SetBattleIndex(oldPartner.BattleIndex);
             Partner.SetBattlePosition(oldPartner.BattlePosition + offset);
-            
+
+            //Set flip state
+            Partner.SpriteFlip = oldPartner.SpriteFlip;
+
             //Remove the old partner from the entity dictionary and add the new one
             RemoveEntities(new BattleEntity[] { oldPartner }, false);
             AddEntities(new BattleEntity[] { Partner }, null, false);
@@ -564,6 +567,8 @@ namespace PaperMarioBattleSystem
             {
                 ChangeBattleState(BattleState.Done);
                 Debug.Log("GAME OVER");
+
+                BattleUIManager.Instance.ClearMenuStack();
             }
             else if (EnemiesAlive <= 0)
             {
@@ -571,6 +576,8 @@ namespace PaperMarioBattleSystem
                 Mario?.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
                 Partner?.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
                 Debug.Log("VICTORY");
+
+                BattleUIManager.Instance.ClearMenuStack();
             }
         }
 

@@ -14,6 +14,11 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class BlownStatus : StatusEffect
     {
+        /// <summary>
+        /// The time it takes for BattleEntities afflicted with Blown to move offscreen.
+        /// </summary>
+        private const double BlownMoveTime = 1200d;
+
         public BlownStatus()
         {
             StatusType = Enumerations.StatusTypes.Blown;
@@ -29,9 +34,9 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             //Remove entities afflicted with Blown
-            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Death - 1,
+            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.BlownAway,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                new BlownAwayBattleEvent(EntityAfflicted, new Vector2(SpriteRenderer.Instance.WindowSize.X, EntityAfflicted.Position.Y), 1200d));
+                new BlownAwayBattleEvent(EntityAfflicted, new Vector2(SpriteRenderer.Instance.WindowSize.X + 100f, EntityAfflicted.Position.Y), BlownMoveTime));
         }
 
         protected override void OnEnd()
@@ -44,7 +49,6 @@ namespace PaperMarioBattleSystem
 
         }
 
-        //Blown cannot be suspended, as it instantly kills any entity afflicted with it
         protected override void OnSuppress(Enumerations.StatusSuppressionTypes statusSuppressionType)
         {
 

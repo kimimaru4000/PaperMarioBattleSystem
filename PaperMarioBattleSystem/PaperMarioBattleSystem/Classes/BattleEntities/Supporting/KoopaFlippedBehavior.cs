@@ -53,6 +53,9 @@ namespace PaperMarioBattleSystem
             {
                 Entity.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Immobile, 1);
 
+                //Flipped Koopas are immune to Fright
+                Entity.AddRemoveStatusImmunity(Enumerations.StatusTypes.Fright, true);
+
                 //Lower defense by an amount when flipped
                 Entity.LowerDefense(DefenseLoss);
             }
@@ -77,13 +80,19 @@ namespace PaperMarioBattleSystem
 
         public virtual void UnFlip()
         {
+            if (Flipped == true)
+            {
+                Entity.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Immobile, 1);
+
+                //Remove the immunity to Fright after they get up
+                Entity.AddRemoveStatusImmunity(Enumerations.StatusTypes.Fright, false);
+
+                //Raise defense again after unflipping
+                Entity.RaiseDefense(DefenseLoss);
+            }
+
             Flipped = false;
             Entity.AnimManager.PlayAnimation(Entity.GetIdleAnim(), true);
-
-            Entity.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Immobile, 1);
-
-            //Raise defense again after unflipping
-            Entity.RaiseDefense(DefenseLoss);
 
             ElapsedFlippedTurns = 0;
 

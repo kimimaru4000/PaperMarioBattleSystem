@@ -142,6 +142,7 @@ namespace PaperMarioBattleSystem
 
         public float Rotation { get; set; } = 0f;
         public Vector2 Scale { get; set; } = Vector2.One;
+        public bool SpriteFlip { get; set; } = false;
 
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
@@ -588,7 +589,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public virtual void OnBattleStart()
         {
-
+            //By default, set the direction the BattleEntity is facing to be right for players and left for everything else
+            SpriteFlip = (EntityType == EntityTypes.Player);
         }
 
         #region Damage Related
@@ -1041,7 +1043,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void DrawEntity()
         {
-            AnimManager.CurrentAnim?.Draw(Position, TintColor, Rotation, Vector2.Zero, Scale, EntityType == EntityTypes.Player, .1f);
+            AnimManager.CurrentAnim?.Draw(Position, TintColor, Rotation, Vector2.Zero, Scale, SpriteFlip, .1f);
         }
 
         /// <summary>

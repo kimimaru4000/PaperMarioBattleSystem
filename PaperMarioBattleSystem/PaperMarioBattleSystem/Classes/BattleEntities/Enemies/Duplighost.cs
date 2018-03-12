@@ -113,6 +113,8 @@ namespace PaperMarioBattleSystem
         public override void CleanUp()
         {
             RemoveDisguise();
+
+            base.CleanUp();
         }
 
         public override string GetIdleAnim()

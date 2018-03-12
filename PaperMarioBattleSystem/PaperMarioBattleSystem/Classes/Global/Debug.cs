@@ -321,7 +321,7 @@ namespace PaperMarioBattleSystem
             {
                 DebugInflictStatus(new ElectrifiedStatus(turnCount), entityType);
             }
-            //Inflict Fast, Frozen, or FPRegen
+            //Inflict Fast, Frozen, FPRegen, or Fright
             else if (Input.GetKeyDown(Keys.F, DebugKeyboard) == true)
             {
                 StatusEffect status = new FastStatus(turnCount);
@@ -329,6 +329,7 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKey(Keys.R, DebugKeyboard) == true) status = new FrozenStatus(turnCount);
                 //Inflict FPRegen
                 else if (Input.GetKey(Keys.P, DebugKeyboard) == true) status = new FPRegenStatus(2, turnCount);
+                else if (Input.GetKey(Keys.I, DebugKeyboard) == true) status = new FrightStatus();
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Dizzy or Dodgy
@@ -359,10 +360,11 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKey(Keys.H, DebugKeyboard) == true) status = new ChargedStatus(1);
                 DebugInflictStatus(status, entityType);
             }
-            //Inflict Burn
+            //Inflict Burn or Blown
             else if (Input.GetKeyDown(Keys.B, DebugKeyboard) == true)
             {
                 StatusEffect status = new BurnStatus(turnCount);
+                if (Input.GetKey(Keys.L, DebugKeyboard) == true) status = new BlownStatus();
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Tiny

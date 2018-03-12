@@ -181,12 +181,12 @@ namespace PaperMarioBattleSystem
                 if (AnimSetting == AfterImageAnimSetting.Current)
                 {
                     Entity.AnimManager.CurrentAnim.Draw(PrevEntityStates[posIndex].Position, color, Entity.Rotation, Vector2.Zero, Entity.Scale,
-                        Entity.EntityType == Enumerations.EntityTypes.Player, .09f);
+                        Entity.SpriteFlip, .09f);
                 }
                 else if (AnimSetting == AfterImageAnimSetting.Previous)
                 {
                     PrevEntityStates[posIndex].AnimFrame.Draw(Entity.AnimManager.SpriteSheet, PrevEntityStates[posIndex].Position,
-                        color, Entity.Rotation, Vector2.Zero, Entity.Scale, Entity.EntityType == Enumerations.EntityTypes.Player, .09f, false);
+                        color, Entity.Rotation, Vector2.Zero, Entity.Scale, Entity.SpriteFlip, .09f, false);
                 }
             }
         }

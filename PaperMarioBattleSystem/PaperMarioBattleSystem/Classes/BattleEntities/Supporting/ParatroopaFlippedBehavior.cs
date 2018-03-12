@@ -20,14 +20,10 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDamageTaken(InteractionHolder damageInfo)
         {
-            if (Entity.IsDead == true || damageInfo.Hit == false || Entity.HeightState != Enumerations.HeightStates.Grounded) return;
+            //If the Paratroopa is still in the air, it can't be flipped
+            if (Entity.HeightState != Enumerations.HeightStates.Grounded) return;
 
-            //Check if the entity was hit with DamageEffects that flip it
-            if (UtilityGlobals.DamageEffectHasFlag(FlippedOnEffects, damageInfo.DamageEffect) == true)
-            {
-                //Handle flipping the entity
-                HandleFlipped();
-            }
+            base.OnDamageTaken(damageInfo);
         }
 
         public override IFlippableBehavior CopyBehavior(BattleEntity entity)

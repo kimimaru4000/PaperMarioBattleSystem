@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Abilities";
             Position = new Vector2(210, 150);
-            BattleActions = new List<MoveAction> { new Bonk(), new Tattle(true), new TidalWave(), new Gulp(), new MiniEgg(), new BombSquadAction(3, 3), new RallyWinkAction() };
+            BattleActions = new List<MoveAction> { new Bonk(), new Tattle(true), new TidalWave(), new Gulp(), new MiniEgg(), new BombSquadAction(3, 3), new RallyWinkAction(), new AirLiftAction() };
         }
     }
 }

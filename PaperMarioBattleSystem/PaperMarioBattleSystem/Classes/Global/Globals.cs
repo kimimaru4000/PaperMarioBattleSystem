@@ -1236,6 +1236,14 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Parakarry-specific battle animations.
+        /// </summary>
+        public static class ParakarryBattleAnimations
+        {
+            public const string AirLiftName = "AirLift";
+        }
+
+        /// <summary>
         /// Yoshi-specific battle animations
         /// </summary>
         public static class YoshiBattleAnimations

@@ -65,6 +65,7 @@
     <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\SweetTreatElementSpawner.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\SweetTreatRestorationElement.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ActionCommandComponents\SweetTreatThrownStar.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\AirLiftCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ArtAttackCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\BombSquadCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\FillBarCommand.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Classes\Actions\MoveAction.cs" />
     <Compile Include="Classes\Actions\NoAction.cs" />
     <Compile Include="Classes\Actions\Paragoomba\DiveKick.cs" />
+    <Compile Include="Classes\Actions\Parakarry\AirLiftAction.cs" />
     <Compile Include="Classes\Actions\Player\ChangePartner.cs" />
     <Compile Include="Classes\Actions\Player\Defend.cs" />
     <Compile Include="Classes\Actions\Special\ArtAttack.cs" />
@@ -371,6 +373,7 @@
     <Compile Include="Classes\Menus\PlayerBattleMenu.cs" />
     <Compile Include="Classes\Menus\TargetSelectionMenu.cs" />
     <Compile Include="Classes\SequenceActions\MoveAmountSeqAction.cs" />
+    <Compile Include="Classes\SequenceActions\MoveToFollowSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\MoveToSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\SequenceAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForAnimationSeqAction.cs" />
@@ -407,6 +410,7 @@
     <Compile Include="Classes\Sequences\Mario\TornadoJumpSequence.cs" />
     <Compile Include="Classes\Sequences\NoSequence.cs" />
     <Compile Include="Classes\Sequences\Paragoomba\DiveKickSequence.cs" />
+    <Compile Include="Classes\Sequences\Parakarry\AirLiftSequence.cs" />
     <Compile Include="Classes\Sequences\Sequence.cs" />
     <Compile Include="Classes\Sequences\Special\ArtAttackSequence.cs" />
     <Compile Include="Classes\Sequences\Special\CrystalStarMoveSequence.cs" />

@@ -935,6 +935,12 @@ namespace PaperMarioBattleSystem
                 return AnimationGlobals.StatusBattleAnimations.StoneName;
             else if (EntityProperties.HasStatus(StatusTypes.Injured) == true)
                 return AnimationGlobals.StatusBattleAnimations.InjuredName;
+            else if (EntityProperties.HasStatus(StatusTypes.Dizzy) == true)
+                return AnimationGlobals.StatusBattleAnimations.DizzyName;
+            else if (EntityProperties.HasStatus(StatusTypes.Confused) == true)
+                return AnimationGlobals.StatusBattleAnimations.ConfusedName;
+            else if (EntityProperties.HasStatus(StatusTypes.Poison) == true)
+                return AnimationGlobals.StatusBattleAnimations.PoisonName;
 
             switch (HealthState)
             {

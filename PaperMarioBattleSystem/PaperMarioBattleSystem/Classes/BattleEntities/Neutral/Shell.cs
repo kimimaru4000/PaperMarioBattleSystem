@@ -143,7 +143,7 @@ namespace PaperMarioBattleSystem
             //Add a Battle Event to end the protection and play the animation of the Shell breaking at the end of the turn
             if (SentDeathBattleEvent == false)
             {
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Status - 1,
+                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status - 1,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
                     new ShellBreakBattleEvent(this));
 

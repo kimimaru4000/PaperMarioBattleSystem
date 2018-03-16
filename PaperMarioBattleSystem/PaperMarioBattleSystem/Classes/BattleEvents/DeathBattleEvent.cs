@@ -72,7 +72,7 @@ namespace PaperMarioBattleSystem
                 //This will have to be revised in some way to work properly
 
                 //Queue the revival event with the same priority as death so it occurs immediately
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Death,
+                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Death,
                     new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                     new RevivedBattleEvent(1000d, Entity, revivalItem));
             }

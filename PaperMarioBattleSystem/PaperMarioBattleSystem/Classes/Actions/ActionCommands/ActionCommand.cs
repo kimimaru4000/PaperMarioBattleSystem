@@ -128,7 +128,7 @@ namespace PaperMarioBattleSystem
         {
             if (AcceptingInput == true)
             {
-                OnDraw();   
+                OnDraw();
             }
         }
 

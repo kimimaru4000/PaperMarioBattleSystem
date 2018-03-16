@@ -14,6 +14,7 @@ List of known Audience events:
 -Punies fleeing when hearing certain loud noises
 -Piranha plants eating nearby audience members
 -X-Nauts teaming up with other X-Nauts to throw rocks (these rocks deal 3 damage)
+-Water spilling onto the Audience, causing all Punies to run away
 
 I'll eventually look into what conditions cause these events to occur via Dolphin's debugger.
 

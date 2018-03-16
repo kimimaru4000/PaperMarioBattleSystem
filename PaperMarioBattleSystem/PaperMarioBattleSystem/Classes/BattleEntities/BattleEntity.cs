@@ -251,7 +251,7 @@ namespace PaperMarioBattleSystem
                     //If the entity took damage during their sequence, it's an interruption, and this event should not occur
                     if (damage > 0 && (IsTurn == false || PreviousAction?.MoveSequence.InSequence == false))
                     {
-                        BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage,
+                        BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage,
                             new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                             new DamagedBattleEvent(this));
 
@@ -516,7 +516,7 @@ namespace PaperMarioBattleSystem
             //NOTE: The death event occurs for standard enemies like Goombas during their sequence if it was interrupted
             //I'm not sure about bosses yet, so that'll need to be tested
 
-            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Death,
+            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Death,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                 new DeathBattleEvent(this, IsInBattle == false));
         }
@@ -935,12 +935,18 @@ namespace PaperMarioBattleSystem
                 return AnimationGlobals.StatusBattleAnimations.StoneName;
             else if (EntityProperties.HasStatus(StatusTypes.Injured) == true)
                 return AnimationGlobals.StatusBattleAnimations.InjuredName;
+            else if (EntityProperties.HasStatus(StatusTypes.Stop) == true || EntityProperties.HasStatus(StatusTypes.Frozen) == true)
+                return AnimationGlobals.DeathName;
+            else if (EntityProperties.HasStatus(StatusTypes.Sleep) == true)
+                return AnimationGlobals.StatusBattleAnimations.SleepName;
             else if (EntityProperties.HasStatus(StatusTypes.Dizzy) == true)
                 return AnimationGlobals.StatusBattleAnimations.DizzyName;
             else if (EntityProperties.HasStatus(StatusTypes.Confused) == true)
                 return AnimationGlobals.StatusBattleAnimations.ConfusedName;
             else if (EntityProperties.HasStatus(StatusTypes.Poison) == true)
-                return AnimationGlobals.StatusBattleAnimations.PoisonName;
+                return AnimationGlobals.PlayerBattleAnimations.DangerName;
+            else if (EntityProperties.HasStatus(StatusTypes.Paralyzed) == true)
+                return AnimationGlobals.IdleName;
 
             switch (HealthState)
             {

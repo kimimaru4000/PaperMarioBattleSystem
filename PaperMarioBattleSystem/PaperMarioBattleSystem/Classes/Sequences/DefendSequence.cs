@@ -62,7 +62,7 @@ namespace PaperMarioBattleSystem
                     EntityUsing.TurnStartEvent += DecreaseDefenseBoost;
 
                     //Show the Battle Event
-                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Message,
+                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                         new MessageBattleEvent("Defense will be boosted\nthis turn!", MessageDur));
 

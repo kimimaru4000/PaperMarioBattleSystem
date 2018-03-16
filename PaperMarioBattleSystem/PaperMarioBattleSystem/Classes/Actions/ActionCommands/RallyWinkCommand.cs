@@ -123,7 +123,9 @@ namespace PaperMarioBattleSystem
             else
             {
                 //Interpolate the color of the bar
-                BarFillColor = Color.Lerp(Color.White, Color.Gray, (float)((ElapsedCommandTime % 300f) / 300f));
+                //Interpolate the color of the bar
+                float colorVal = UtilityGlobals.PingPong(ElapsedCommandTime / 300f, 1f - .3f) + .3f;
+                BarFillColor = new Color(colorVal, colorVal, colorVal, 1f);
             }
 
             ElapsedCommandTime += Time.ElapsedMilliseconds;

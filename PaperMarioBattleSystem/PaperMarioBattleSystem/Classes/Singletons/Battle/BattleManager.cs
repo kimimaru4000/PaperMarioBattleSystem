@@ -257,6 +257,13 @@ namespace PaperMarioBattleSystem
             //Add the HP bar manager
             BattleObjManager.Instance.AddBattleObject(new HPBarManagerObj());
 
+            //If you can't run from battle, show a message at the start saying so
+            if (Properties.Runnable == false)
+            {
+                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message, new BattleState[] { BattleState.Turn },
+                    new MessageBattleEvent(BattleGlobals.NoRunMessage, MessageBattleEvent.DefaultWaitDuration));
+            }
+
             Phase = StartingPhase;
 
             StartBattle();
@@ -565,14 +572,14 @@ namespace PaperMarioBattleSystem
         {
             if (Mario == null || Mario.IsDead == true)
             {
-                ChangeBattleState(BattleState.Done);
+                EndBattle();
                 Debug.Log("GAME OVER");
 
                 BattleUIManager.Instance.ClearMenuStack();
             }
             else if (EnemiesAlive <= 0)
             {
-                ChangeBattleState(BattleState.Done);
+                EndBattle();
                 Mario?.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
                 Partner?.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
                 Debug.Log("VICTORY");
@@ -592,7 +599,7 @@ namespace PaperMarioBattleSystem
                 if (Partner == FrontPlayer)
                 {
                     //Queue the event to switch Mario with his Partner
-                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Stage, new BattleState[] { BattleState.Turn, BattleState.TurnEnd },
+                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Stage, new BattleState[] { BattleState.Turn, BattleState.TurnEnd },
                         new SwapPositionBattleEvent(FrontPlayer, BackPlayer,
                         new Vector2(BackPlayer.BattlePosition.X, FrontPlayer.BattlePosition.Y), new Vector2(FrontPlayer.BattlePosition.X, BackPlayer.BattlePosition.Y), 500f));
 

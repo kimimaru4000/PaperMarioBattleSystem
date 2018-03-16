@@ -74,7 +74,7 @@ namespace PaperMarioBattleSystem
                 //to stop using items.
 
                 MessageAction noItems = new MessageAction("No Items", null, "You have no items.",
-                    (int)BattleGlobals.StartEventPriorities.Message, "You can't select that!");
+                    (int)BattleGlobals.BattleEventPriorities.Message, "You can't select that!");
                 BattleActions.Add(noItems);
             }
 

@@ -135,7 +135,7 @@ namespace PaperMarioBattleSystem
                     MessageBattleEvent msgEvent = new MessageBattleEvent(SuccessMessage, 2000d);
 
                     //Show the message
-                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Message,
+                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn }, msgEvent);
 
                     CurSequenceAction = new WaitForBattleEventSeqAction(msgEvent);

@@ -188,7 +188,10 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        //Virtual to account for all types of MoveActions (Ex. Special Moves check for SP instead of FP)
+        /// <summary>
+        /// Initializes the MoveAction, checking if it should be disabled or not based on certain conditions.
+        /// <para>Common conditions include not having enough FP to perform the move and not being able to reach any BattleEntities with this move.</para>
+        /// </summary>
         public virtual void Initialize()
         {
             /*Check if the MoveAction should be disabled or not

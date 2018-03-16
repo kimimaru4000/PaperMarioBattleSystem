@@ -27,6 +27,7 @@ namespace PaperMarioBattleSystem
             AnimManager.SetSpriteSheet(spriteSheet);
 
             AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(97, 117, 30, 50), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.DangerName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(97, 117, 30, 50), 1000d)));
 
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(4, 170, 42, 45), 500d),
@@ -37,10 +38,20 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(97, 117, 30, 50), 100d),
                 new Animation.Frame(new Rectangle(89, 3, 34, 48), 100d)));
 
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(225, 117, 30, 50), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.DangerChoosingActionName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(225, 117, 30, 50), 1000d)));
+
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(233, 60, 34, 51), 700d)));
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarWishName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(193, 62, 30, 49), 700d)));
+
+            AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.DizzyName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(97, 117, 30, 50), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.ConfusedName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(97, 117, 30, 50), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.SleepName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(97, 117, 30, 50), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.InjuredName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(4, 170, 42, 45), 500d),
+                new Animation.Frame(new Rectangle(52, 173, 41, 42), 500d)));
 
             AnimManager.AddAnimation(AnimationGlobals.ShelledBattleAnimations.ShellSpinName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(162, 222, 28, 25), 250d),

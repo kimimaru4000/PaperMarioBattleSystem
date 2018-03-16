@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The priority of the message event sent out.
         /// </summary>
-        private int MessagePriority = (int)BattleGlobals.StartEventPriorities.Message;
+        private int MessagePriority = (int)BattleGlobals.BattleEventPriorities.Message;
 
         /// <summary>
         /// The message sent out.

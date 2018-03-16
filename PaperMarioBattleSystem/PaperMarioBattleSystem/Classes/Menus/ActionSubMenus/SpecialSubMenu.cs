@@ -29,7 +29,7 @@ namespace PaperMarioBattleSystem
             if (BattleActions.Count == 0)
             {
                 MessageAction noSpecials = new MessageAction("No Specials", null, "No Special Moves are available.",
-                    (int)BattleGlobals.StartEventPriorities.Message, "You can't select that!");
+                    (int)BattleGlobals.BattleEventPriorities.Message, "You can't select that!");
 
                 BattleActions.Add(noSpecials);
             }

@@ -79,6 +79,7 @@
     <Compile Include="Classes\Actions\ActionCommands\MultiButtonCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\PowerLiftCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\RallyWinkCommand.cs" />
+    <Compile Include="Classes\Actions\ActionCommands\RunAwayCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\ShellShieldCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\SuperguardCommand.cs" />
     <Compile Include="Classes\Actions\ActionCommands\SweetTreatCommand.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Classes\Actions\Parakarry\AirLiftAction.cs" />
     <Compile Include="Classes\Actions\Player\ChangePartner.cs" />
     <Compile Include="Classes\Actions\Player\Defend.cs" />
+    <Compile Include="Classes\Actions\Player\RunAwayAction.cs" />
     <Compile Include="Classes\Actions\Special\ArtAttack.cs" />
     <Compile Include="Classes\Actions\Special\Focus.cs" />
     <Compile Include="Classes\Actions\Special\Lullaby.cs" />
@@ -372,6 +374,7 @@
     <Compile Include="Classes\Menus\PartnerBattleMenu.cs" />
     <Compile Include="Classes\Menus\PlayerBattleMenu.cs" />
     <Compile Include="Classes\Menus\TargetSelectionMenu.cs" />
+    <Compile Include="Classes\SequenceActions\MoveAmountMultipleSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\MoveAmountSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\MoveToFollowSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\MoveToSeqAction.cs" />
@@ -411,6 +414,7 @@
     <Compile Include="Classes\Sequences\NoSequence.cs" />
     <Compile Include="Classes\Sequences\Paragoomba\DiveKickSequence.cs" />
     <Compile Include="Classes\Sequences\Parakarry\AirLiftSequence.cs" />
+    <Compile Include="Classes\Sequences\RunAwaySequence.cs" />
     <Compile Include="Classes\Sequences\Sequence.cs" />
     <Compile Include="Classes\Sequences\Special\ArtAttackSequence.cs" />
     <Compile Include="Classes\Sequences\Special\CrystalStarMoveSequence.cs" />

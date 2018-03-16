@@ -1176,11 +1176,13 @@ namespace PaperMarioBattleSystem
         public static class PlayerBattleAnimations
         {
             public const string ChoosingActionName = "ChoosingAction";
+            public const string DangerChoosingActionName = "DangerChoosingAction";
             public const string GuardName = "Guard";
             public const string SuperguardName = "Superguard";
             public const string DangerName = "Danger";
             public const string StarSpecialName = "StarSpecial";
             public const string StarWishName = "StarWish";
+            public const string RunAwayFailName = "RunAwayFail";
         }
 
         /// <summary>
@@ -1335,8 +1337,8 @@ namespace PaperMarioBattleSystem
             public const string StoneName = "StoneName";
             public const string DizzyName = "Dizzy";
             public const string ConfusedName = "Confused";
-            public const string PoisonName = "Poison";
             public const string InjuredName = "Injured";
+            public const string SleepName = "Sleep";
         }
     }
 
@@ -1363,7 +1365,10 @@ namespace PaperMarioBattleSystem
             Dark
         }
 
-        public enum StartEventPriorities
+        /// <summary>
+        /// Priority values for various types of Battle Events.
+        /// </summary>
+        public enum BattleEventPriorities
         {
             Message = 0, Stage = 500, YuxArrange = 600, BobberyBomb = 750, Status = 1000,
             HealHP = 1250, HealFP = 1251, Dialogue = 1500, Fright = 1700, BlownAway = 1800, Death = 2000, Damage = 2500
@@ -1391,6 +1396,8 @@ namespace PaperMarioBattleSystem
         /// won't end until the Action Command is successfully performed.
         /// </summary>
         public const int InfiniteSuccessionAttacks = 0;
+
+        public const string NoRunMessage = "Can't flee this fight!";
 
         #endregion
 

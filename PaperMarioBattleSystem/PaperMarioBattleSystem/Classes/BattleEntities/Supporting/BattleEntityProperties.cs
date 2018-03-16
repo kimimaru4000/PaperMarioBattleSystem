@@ -689,7 +689,7 @@ namespace PaperMarioBattleSystem
                 //Show the same affliction battle message when the status is refreshed, provided the message isn't empty
                 if (showMessage == true && string.IsNullOrEmpty(refreshedStatus.AfflictedMessage) == false)
                 {
-                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Message + refreshedStatus.Priority,
+                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + refreshedStatus.Priority,
                         new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(refreshedStatus.AfflictedMessage, 2000d));
                 }
 
@@ -709,7 +709,7 @@ namespace PaperMarioBattleSystem
             //Show a battle message when the status is afflicted, provided the message isn't empty
             if (showMessage == true && string.IsNullOrEmpty(newStatus.AfflictedMessage) == false)
             {
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Message + newStatus.Priority,
+                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + newStatus.Priority,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(newStatus.AfflictedMessage, 2000d));
             }
 
@@ -742,7 +742,7 @@ namespace PaperMarioBattleSystem
             //Show a battle message when the status is removed, provided the message isn't empty
             if (showMessage == true && string.IsNullOrEmpty(status.RemovedMessage) == false)
             {
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Message + status.Priority,
+                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + status.Priority,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(status.RemovedMessage, 2000d));
             }
 

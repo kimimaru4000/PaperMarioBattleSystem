@@ -250,3 +250,7 @@ How does Shell Shield work against moves that inflict Statuses? Also moves that 
 Results: Since the attack targets the shell directly, Mario doesn't get inflicted with Statuses. Enemies that attack the shell directly are not affected by Mario's Payback.
 
 
+Running before obtaining Lucky Star
+-----------------------------------
+Can you run before you obtain the Lucky Star in PM? Run Away has an action command, so how does it act? If you can't run, is it not on the menu, or is it disabled with a message upon selection?
+

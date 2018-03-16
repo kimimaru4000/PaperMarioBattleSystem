@@ -73,6 +73,9 @@ namespace PaperMarioBattleSystem
 
             //Do nothing action
             BattleActions.Add(new NoAction());
+
+            //Run away action
+            BattleActions.Add(new RunAwayAction());
         }
     }
 }

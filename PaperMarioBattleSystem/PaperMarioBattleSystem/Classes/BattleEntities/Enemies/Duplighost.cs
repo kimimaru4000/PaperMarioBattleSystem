@@ -138,7 +138,7 @@ namespace PaperMarioBattleSystem
                 || EntityProperties.HasStatus(Enumerations.StatusTypes.Paralyzed) == true)
             {
                 //Remove disguise through a Battle Event
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.StartEventPriorities.Damage - 1,
+                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
                     new RemoveDisguiseBattleEvent(this));
             }

@@ -49,7 +49,14 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
-            AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName);
+            if (IsInDanger == true || EntityProperties.HasStatus(StatusTypes.Poison) == true)
+            {
+                AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.DangerChoosingActionName);
+            }
+            else
+            {
+                AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName);
+            }
 
             int itemTurns = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.DipItemTurns);
             if (itemTurns > 0)

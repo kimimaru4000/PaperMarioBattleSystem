@@ -1,0 +1,91 @@
+No Action Command Move Behavior (3/16/18)
+-----------------------------------------
+This document describes the behavior of moves in Paper Mario without Action Commands enabled.
+
+Testing is performed on a new file after obtaining Goombario, then enabling cheats to obtain all other Partners at Ultra Rank. Cheats were also used to obtain badges and the BP required to equip them.
+
+Goombario
+---------
+Bonk - Viewable normally; acts as if you failed the jump input
+Tattle - Has no Action Command, so acts like normal
+Charge - Has no Action Command, so acts like normal
+Multibonk - Acts as if you failed the initial input
+
+Kooper
+------
+Shell Toss - Zooms into Kooper, who spins in his shell rapidly forever - softlock
+Power Shell - Same as Shell Toss
+Dizzy Shell - Zooms into Kooper, who spins in his shell and shoots forward. Dizzy always fails to be inflicted
+Fire Shell - Same as Dizzy Shell. It deals 1 damage, even at Ultra Rank
+
+Bombette
+--------
+Body Slam - Waits for a bit, walks up to the enemy, then attacks as if you failed the Action Command
+Bomb - Walks up to the enemy immediately, then blows up, dealing 1 damage even at Ultra Rank
+Power Bomb - Same as Bomb, except for all ground enemies
+Mega Bomb - Same as Bomb and Power Bomb, except for all enemies
+
+Parakarry
+---------
+Sky Dive - Acts as if you failed the Action Command; 4 damage at Ultra Rank
+Shell Shot - Forces the Action Command!
+Air Lift - Parakarry goes up and grabs the enemy like normal. It even shows the bar, but not the text box or anything else for the Action Command. It always fails
+Air Raid - Acts like normal except with no Action Command. It deals 2 damage even at Ultra Rank
+
+Bow
+---
+Smack - Goes up to the enemy and prepares to smack like normal, then attacks for 1 damage as if you never performed the Action Command
+Outta Sight - Has no Action Command, so acts like normal
+Spook - Acts like normal except with no Action Command information. Always fails to frighten enemies
+Fan Smack - Same as Smack, with the laughing animation instead of the preparing smack one, and deals 2 damage
+
+Watt
+----
+Electro Dash - Waits a bit, then goes up to the enemy, charges (as if you were holding the input), and attacks dealing 1 damage even at Ultra Rank
+Power Shock - Similar case to Electro Dash; Watt waits a bit, then goes up and charges for a while. The Paralysis always fails
+Turbo Charge - Acts completely like normal, then shows the end with Mario jumping as if he was charged, but he doesn't actually get charged!
+Mega Shock - The same as Power Shock. The Paralysis always fails for this too
+
+Sushie
+------
+Belly Flop - Stands and waits in her idle animation, then attacks, dealing 3 damage even at Ultra Rank
+Squirt - Inhales to prepare to shoot water, then waits like that for a bit and attacks, dealing 3 damage even at Ultra Rank
+Water Block - Sushie acts like normal, except at the end she doesn't spray water over Mario and form a Water Block. Instead, she just moves back into position
+Tidal Wave - Acts like normal except with no Action Command information. Always deals 0 damage, even at Ultra Rank
+
+Lakilester
+----------
+Spiny Flip - Forces the Action Command!
+Spiny Surge - Lakilester flies up and forwards like normal, then just waits a little and goes back without doing anything
+Cloud Nine - Flies up and extends his cloud to Mario, who jumps up like normal. In the Action Command section, waits a bit then drops Mario like normal and doesn't give him a cloud
+Hurricane - Goes up and starts blowing wind like normal. Always fails to blow enemies away
+
+Mario
+-----
+Jump - Viewable normally; acts as if you failed the Action Command
+Hammer - Viewable normally; acts as if you failed the Action Command
+Power Jump - Viewable normally; acts as if you failed the Action Command
+Hammer Throw - Viewable normally; acts as if you failed the Action Command
+
+Power Bounce - Acts as if you failed the jump input
+Multibounce - Acts as if you failed the jump input
+Dizzy Stomp - Acts as if you failed the jump input; has no problems inflicting Dizzy
+Sleep Stomp - Acts as if you failed the jump input; has no problems inflicting Sleep
+Shrink Stomp - Acts as if you failed the jump input; has no problems inflicting Shrink
+Mega Jump - Not viewable normally, otherwise same as Power Jump
+D-Down Jump - Not viewable normally, otherwise same as Jump
+
+Spin Smash - Mario goes up and takes out his hammer, but never swings - softlock
+Quake Hammer - Mario goes up and takes out his hammer, but never swings - softlock
+Power Quake - Same as Quake Hammer
+Mega Quake - Same as Quake Hammer
+D-Down Pound - Acts just like Hammer, except pierces Defense
+Power Smash - Same as Hammer, except with more damage
+Mega Smash - Same as Power Smash, except with more damage
+Shrink Smash (unused) - Not viewable normally, otherwise, same as Hammer; has no problems inflicting Shrink
+Earthquake Jump (unused) - Mario runs up a little, then jumps and immediately starts to land, inflicting damage to all ground and ceiling enemies
+
+Notes
+-----
+-All Or Nothing acts as if you always failed the Action Command and makes any move do 0 damage
+-Right On! doesn't work if you don't have Action Commands. The same goes for the Perfect Step (Jump) and Perfect Strike (Hammer) badges

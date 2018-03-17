@@ -254,3 +254,18 @@ Running before obtaining Lucky Star
 -----------------------------------
 Can you run before you obtain the Lucky Star in PM? Run Away has an action command, so how does it act? If you can't run, is it not on the menu, or is it disabled with a message upon selection?
 
+1. Yes, you can run. There's no Action Command, so on the surface level, I see two possibilities with how it may determine a successful run:
+  
+  1. Running is determined randomly within a range
+  2. The Action Command carries out in the background with the base amount the bar is filled when selecting to run against that enemy group
+     -For example, say the bar is 50% filled when running against a single Goomba at the start of the game. The cursor is moving in the background while the bar remains 50% full
+     
+These possibilities would require more research to be proven true.
+
+Update: I tested more, and it's looking a lot like #2 is true. Here's what I did:
+
+-Stayed at Level 1 by, fighting nothing but required fights
+-Obtained the Lucky Star
+-Went back to Goombas at Level 1, with the Action Command
+
+Using Run Away with the Action Command at this level against Goombas shows that the bar is about 95% full, which means there's a very low chance of failing. The majority of my run attempts without the Lucky Star were successful, which leads me to believe this is what's actually going on!

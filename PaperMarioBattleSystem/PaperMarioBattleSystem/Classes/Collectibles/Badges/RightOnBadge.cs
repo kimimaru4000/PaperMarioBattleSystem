@@ -14,7 +14,9 @@ namespace PaperMarioBattleSystem
         public RightOnBadge()
         {
             Name = "Right On!";
-            Description = "Performs all Action Commands perfectly and automatically.";
+            Description = "Makes the action command work\nevery time Mario attacks.";
+
+            BPCost = 8;
 
             BadgeType = BadgeGlobals.BadgeTypes.RightOn;
             AffectedType = BadgeGlobals.AffectedTypes.Self;

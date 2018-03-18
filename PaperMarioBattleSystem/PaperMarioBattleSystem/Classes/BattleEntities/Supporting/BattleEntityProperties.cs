@@ -746,6 +746,10 @@ namespace PaperMarioBattleSystem
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(status.RemovedMessage, 2000d));
             }
 
+            //Queue a battle event for the status removal
+            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status + status.Priority,
+                new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new StatusEndedBattleEvent(Entity));
+
             string turnMessage = status.TotalDuration.ToString();
             if (status.IsInfinite == true) turnMessage = "Infinite";
             Debug.LogWarning($"Removed the {statusType} Status on {Entity.Name} which was inflicted for {turnMessage} turns!");

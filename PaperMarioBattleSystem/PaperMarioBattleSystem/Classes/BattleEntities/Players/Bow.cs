@@ -21,13 +21,37 @@ namespace PaperMarioBattleSystem
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Characters/Bow.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
-            AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(null, new Animation.Frame(new Rectangle(151, 4, 39, 33), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.IdleName, new ReverseAnimation(null, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(150, 123, 41, 34), 100d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(54, 163, 41, 34), 100d),
+                new Animation.Frame(new Rectangle(54, 43, 41, 34), 100d, new Vector2(0, 1))));
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.DangerName, new ReverseAnimation(null, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(150, 123, 41, 34), 100d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(54, 163, 41, 34), 100d),
+                new Animation.Frame(new Rectangle(54, 43, 41, 34), 100d, new Vector2(0, 1))));
+
+            AnimManager.AddAnimation(AnimationGlobals.RunningName, new ReverseAnimation(null, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(150, 123, 41, 34), 60d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(54, 163, 41, 34), 60d),
+                new Animation.Frame(new Rectangle(54, 43, 41, 34), 60d, new Vector2(0, 1))));
+
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(null,
+                new Animation.Frame(new Rectangle(151, 44, 39, 33), 100d),
+                new Animation.Frame(new Rectangle(199, 44, 39, 33), 100d),
+                new Animation.Frame(new Rectangle(247, 44, 39, 33), 100d)));
+            AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.DizzyName, new LoopAnimation(null, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(151, 44, 39, 33), 100d),
+                new Animation.Frame(new Rectangle(199, 44, 39, 33), 100d),
+                new Animation.Frame(new Rectangle(247, 44, 39, 33), 100d)));
+            AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.ConfusedName, new LoopAnimation(null, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(151, 44, 39, 33), 100d),
                 new Animation.Frame(new Rectangle(199, 44, 39, 33), 100d),
                 new Animation.Frame(new Rectangle(247, 44, 39, 33), 100d)));
 
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(null, new Animation.Frame(new Rectangle(199, 44, 39, 33), 1000d)));
+
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName, new Animation(null, new Animation.Frame(new Rectangle(151, 4, 39, 33), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.DangerChoosingActionName, new Animation(null, new Animation.Frame(new Rectangle(151, 4, 39, 33), 1000d)));
         }
 
         protected override BattleMenu GetMainBattleMenu()

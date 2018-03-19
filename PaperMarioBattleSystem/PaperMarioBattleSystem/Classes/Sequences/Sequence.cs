@@ -157,10 +157,13 @@ namespace PaperMarioBattleSystem
 
             InterruptionHandler = BaseInterruptionHandler;
 
-            //Set auto completing Action Commands and Stylish Moves if the BattleEntity performing the Sequence has the pre-requisites
-            if (actionCommand != null)
+            //Set auto completing Stylish Moves if the BattleEntity performing the Sequence has the pre-requisites
+            //We check if they're false first so we don't overwrite it if they were set manually
+            //NOTE: There must be a better way of setting this so it's easy to specify if we also want it always false in certain cases
+            if (actionCommand != null && actionCommand.AutoComplete == false)
                 actionCommand.AutoComplete = User.EntityProperties.HasAdditionalProperty(AdditionalProperty.AutoActionCommands);
-            AutoCompleteStylish = User.EntityProperties.HasAdditionalProperty(AdditionalProperty.AutoStylishMoves);
+            if (AutoCompleteStylish == false)
+                AutoCompleteStylish = User.EntityProperties.HasAdditionalProperty(AdditionalProperty.AutoStylishMoves);
 
             OnStart();
 

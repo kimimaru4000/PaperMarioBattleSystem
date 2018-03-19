@@ -887,7 +887,7 @@ namespace PaperMarioBattleSystem
                     {
                         //Disable action commands when attacking allies from Confusion, if the action has an Action Command
                         if (actualAction.HasActionCommand == true)
-                            actualAction.DisableActionCommand = true;
+                            actualAction.EnableActionCommand = false;
                     }
                 }
             }

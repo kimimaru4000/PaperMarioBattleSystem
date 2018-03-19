@@ -92,6 +92,12 @@ namespace PaperMarioBattleSystem
             {
                 BattleActions[i].SetMoveCategory(MoveCategory);
                 BattleActions[i].Initialize();
+
+                //Enable Action Commands for players by default
+                if (BattleActions[i].HasActionCommand == true)
+                {
+                    BattleActions[i].EnableActionCommand = true;
+                }
             }
         }
 

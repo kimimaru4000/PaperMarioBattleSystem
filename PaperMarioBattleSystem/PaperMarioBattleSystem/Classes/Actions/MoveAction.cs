@@ -56,13 +56,17 @@ namespace PaperMarioBattleSystem
         /// Tells whether the action command is enabled or not.
         /// Action commands are by default disabled for enemies
         /// </summary>
-        public virtual bool CommandEnabled => (HasActionCommand == true && User.EntityType == EntityTypes.Player && DisableActionCommand == false);
+        public bool CommandEnabled => (HasActionCommand == true && EnableActionCommand == true);
 
         /// <summary>
-        /// Whether Action Commands are disabled on this action.
-        /// This value automatically resets to false after the action is completed.
+        /// Whether Action Commands are enabled on this action.
         /// </summary>
-        public bool DisableActionCommand { get; set; }
+        public bool EnableActionCommand { get; set; } = false;
+
+        /// <summary>
+        /// Whether to draw Action Command information or not.
+        /// </summary>
+        public bool DrawActionCommandInfo { get; set; } = true;
 
         /// <summary>
         /// Tells if the MoveAction has an Action Command.
@@ -384,7 +388,8 @@ namespace PaperMarioBattleSystem
 
             if (MoveSequence.InSequence == true)
             {
-                if (CommandEnabled == true)
+                //Don't show Action Command information if we shouldn't
+                if (CommandEnabled == true && DrawActionCommandInfo == true)
                 {
                     SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
                     $"Command: {Name} performed by {User.Name}",

@@ -17,8 +17,6 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class KissyKissyAction : MoveAction
     {
-        public override bool CommandEnabled => (HasActionCommand == true && DisableActionCommand == false);
-
         public KissyKissyAction(bool hasActionCommand, int numAttacks, int damagePerAttack, Elements damageElement,
             bool piercing, bool sideDirect, HeightStates[] heightsAffected)
         {
@@ -35,6 +33,8 @@ namespace PaperMarioBattleSystem
                 DefensiveActionTypes.None, DamageEffects.None);
 
             SetMoveSequence(new KissyKissySequence(this, numAttacks));
+
+            EnableActionCommand = hasActionCommand;
 
             if (hasActionCommand == true)
             {

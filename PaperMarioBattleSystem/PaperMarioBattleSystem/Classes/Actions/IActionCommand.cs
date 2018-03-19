@@ -29,6 +29,6 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// A value denoting to disable the Action Command
         /// </summary>
-        bool DisableActionCommand { get; set; }
+        bool EnableActionCommand { get; set; }
     }
 }

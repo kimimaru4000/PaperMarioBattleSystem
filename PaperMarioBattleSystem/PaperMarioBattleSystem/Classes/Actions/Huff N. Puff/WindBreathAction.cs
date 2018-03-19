@@ -15,8 +15,6 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class WindBreathAction : MoveAction
     {
-        public override bool CommandEnabled => (HasActionCommand == true && DisableActionCommand == false);
-
         public WindBreathAction(int minDamage, int maxDamage)
         {
             Name = "Wind Breath";
@@ -29,6 +27,8 @@ namespace PaperMarioBattleSystem
 
             SetMoveSequence(new WindBreathSequence(this));
             actionCommand = new MashButtonRangeCommand(MoveSequence, 100d, 10d, 7000d, Keys.Z, .3d, maxDamage, minDamage);
+
+            EnableActionCommand = true;
         }
     }
 }

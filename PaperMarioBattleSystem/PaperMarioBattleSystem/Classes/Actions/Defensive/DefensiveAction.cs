@@ -15,11 +15,11 @@ namespace PaperMarioBattleSystem
     public abstract class DefensiveAction : BattleAction, IActionCommand, IActionCommandHandler
     {
         public ActionCommand actionCommand { get; set; } = null;
-        public bool DisableActionCommand { get; set; } = false;
+        public bool EnableActionCommand { get; set; } = false;
 
         public override BattleEntity User => actionUser;
 
-        public bool CommandEnabled => (actionCommand != null && UserImmobile == false && DisableActionCommand == false);
+        public bool CommandEnabled => (actionCommand != null && UserImmobile == false && EnableActionCommand == false);
         public bool IsSuccessful => (PrevCommandTimer >= Time.ActiveMilliseconds);
 
         //NOTE: Ideally, check the CommandResult instead of the timer - not super important right now, though

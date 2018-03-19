@@ -72,10 +72,12 @@ namespace PaperMarioBattleSystem
             }
 
             //Duplighosts Auto-complete Action Commands
-            //NOTE: With the current setup, they won't perform Action Commands since they're disabled for enemies by default
-            //Make it more flexible to enable or disable them
-            if (duplighost.PreviousAction != null && duplighost.PreviousAction.actionCommand != null)
+            if (duplighost.PreviousAction != null && duplighost.PreviousAction.HasActionCommand == true)
+            {
+                duplighost.PreviousAction.DrawActionCommandInfo = false;
+                duplighost.PreviousAction.EnableActionCommand = true;
                 duplighost.PreviousAction.actionCommand.AutoComplete = true;
+            }
         }
     }
 }

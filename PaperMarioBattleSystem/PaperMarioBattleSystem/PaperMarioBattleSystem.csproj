@@ -308,6 +308,7 @@
     <Compile Include="Classes\Collectibles\Items\IStatusInflictingItem.cs" />
     <Compile Include="Classes\Collectibles\Items\Item.cs" />
     <Compile Include="Classes\Collectibles\Items\LifeShroom.cs" />
+    <Compile Include="Classes\Collectibles\Items\LuckyStar.cs" />
     <Compile Include="Classes\Collectibles\Items\Mushroom.cs" />
     <Compile Include="Classes\Collectibles\Items\Mystery.cs" />
     <Compile Include="Classes\Collectibles\Items\ShootingStar.cs" />

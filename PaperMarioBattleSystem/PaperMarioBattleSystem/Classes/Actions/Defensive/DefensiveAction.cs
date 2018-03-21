@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
 
         public override BattleEntity User => actionUser;
 
-        public bool CommandEnabled => (actionCommand != null && UserImmobile == false && EnableActionCommand == false);
+        public bool CommandEnabled => (actionCommand != null && UserImmobile == false && EnableActionCommand == true);
         public bool IsSuccessful => (PrevCommandTimer >= Time.ActiveMilliseconds);
 
         //NOTE: Ideally, check the CommandResult instead of the timer - not super important right now, though

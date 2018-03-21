@@ -43,6 +43,20 @@ namespace PaperMarioBattleSystem
 
             SetBattlePosition(battlepos);
             Position = BattlePosition;
+
+            bool hasLuckyStar = (Inventory.Instance.FindItem(LuckyStar.LuckyStarName, true) != null);
+            bool autoComplete = EntityProperties.HasAdditionalProperty(AdditionalProperty.AutoActionCommands);
+
+            //Check for enabling and auto-completing Action Commands for Defensive Actions
+            for (int i = 0; i < DefensiveActions.Count; i++)
+            {
+                DefensiveActions[i].EnableActionCommand = hasLuckyStar;
+
+                if (DefensiveActions[i].actionCommand != null)
+                {
+                    DefensiveActions[i].actionCommand.AutoComplete = autoComplete;
+                }
+            }
         }
 
         public override void OnTurnStart()

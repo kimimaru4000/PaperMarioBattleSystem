@@ -32,7 +32,13 @@ namespace PaperMarioBattleSystem
             Healing = 1 << 0,
             Damage = 1 << 1,
             Status = 1 << 2,
-            Revival = 1 << 3
+            Revival = 1 << 3,
+
+            /// <summary>
+            /// Items that are used for non-standard purposes.
+            /// This includes the Lucky Star, which enables Action Commands.
+            /// </summary>
+            Special = 1 << 4
         }
 
         public ItemCategories ItemCategory { get; protected set; } = ItemCategories.Standard;

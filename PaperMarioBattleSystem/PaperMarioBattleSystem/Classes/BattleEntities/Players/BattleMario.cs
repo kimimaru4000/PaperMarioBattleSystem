@@ -123,10 +123,8 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
         }
 
-        public sealed override void OnBattleStart()
+        public override void OnBattleStart()
         {
-            base.OnBattleStart();
-
             BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
             BattleManager.Instance.EntityRemovedEvent += OnEntityRemoved;
 
@@ -199,6 +197,8 @@ namespace PaperMarioBattleSystem
             //MStats.BootLevel = EquipmentGlobals.BootLevels.Super;
 
             //BattleObjManager.Instance.AddBattleObject(new AfterImageVFX(this, 4, 4, .2f, AfterImageVFX.AfterImageAlphaSetting.FadeOff, AfterImageVFX.AfterImageAnimSetting.Current));
+
+            base.OnBattleStart();
         }
 
         protected sealed override BattleMenu GetMainBattleMenu()

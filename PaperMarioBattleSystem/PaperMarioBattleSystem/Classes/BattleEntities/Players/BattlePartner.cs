@@ -66,8 +66,6 @@ namespace PaperMarioBattleSystem
 
         public override void OnBattleStart()
         {
-            base.OnBattleStart();
-
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ChargeP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaverP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDipP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
@@ -76,6 +74,8 @@ namespace PaperMarioBattleSystem
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFineP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlusP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+
+            base.OnBattleStart();
         }
 
         public override void OnPhaseCycleStart()

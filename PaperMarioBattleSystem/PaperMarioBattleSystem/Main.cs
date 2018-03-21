@@ -72,6 +72,8 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.partnerInventory.AddPartner(new Bow());
             Inventory.Instance.partnerInventory.AddPartner(new Watt());
 
+            Inventory.Instance.AddItem(new LuckyStar());
+
             Inventory.Instance.AddBadge(new DefendPlusBadge());
             Inventory.Instance.AddBadge(new PowerPlusBadge());
             Inventory.Instance.AddBadge(new SpikeShieldBadge());

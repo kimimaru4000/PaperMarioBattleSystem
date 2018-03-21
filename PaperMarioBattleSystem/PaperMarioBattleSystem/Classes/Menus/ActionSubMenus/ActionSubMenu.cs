@@ -88,6 +88,10 @@ namespace PaperMarioBattleSystem
         {
             BoxMenu.SetText(BattleActions[0].MoveProperties.Description);
 
+            //The Lucky Star is required to perform Action Commands
+            //NOTE: Cache the flag for having the Lucky Star somewhere
+            bool hasLuckyStar = (Inventory.Instance.FindItem(LuckyStar.LuckyStarName, true) != null);
+
             for (int i = 0; i < BattleActions.Count; i++)
             {
                 BattleActions[i].SetMoveCategory(MoveCategory);
@@ -96,7 +100,7 @@ namespace PaperMarioBattleSystem
                 //Enable Action Commands for players by default
                 if (BattleActions[i].HasActionCommand == true)
                 {
-                    BattleActions[i].EnableActionCommand = true;
+                    BattleActions[i].EnableActionCommand = hasLuckyStar;
                 }
             }
         }

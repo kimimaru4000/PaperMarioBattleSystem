@@ -500,7 +500,7 @@ namespace PaperMarioBattleSystem
             return ActiveBadgeCounts.ContainsKey(badgeType);
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Gets all active Badges affecting Mario
         /// </summary>
         /// <returns>A List of all active Badges affecting Mario</returns>
@@ -519,7 +519,7 @@ namespace PaperMarioBattleSystem
         public List<Badge> GetActivePartnerBadges(bool excludeBoth)
         {
             return ActiveBadges.FindAll((badge) => (badge.AffectedType == AffectedTypes.Partner || (excludeBoth == false && badge.AffectedType == AffectedTypes.Both)));
-        }
+        }*/
 
         /// <summary>
         /// Gets all active Badges affecting a particular BattleEntity.

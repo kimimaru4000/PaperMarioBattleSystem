@@ -2508,8 +2508,9 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Who the Badge affects.
-        /// <para>For Players, Self refers to Mario. For Enemies, Partner doesn't have any effect.
-        /// Both is for Badges such as Simplifier and Unsimplifier that affect both Mario and Partners.</para>
+        /// <para>For Players, Self refers to Mario, and Partner refers to Partners.
+        /// Both is for Badges such as Simplifier and Unsimplifier that affect both Mario and Partners.
+        /// For Enemies, all types affect the Enemy equipped.</para>
         /// </summary>
         public enum AffectedTypes
         {
@@ -2521,7 +2522,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum BadgeFilterType
         {
-            All, Equipped,UnEquipped
+            All, Equipped, UnEquipped
         }
 
         #endregion

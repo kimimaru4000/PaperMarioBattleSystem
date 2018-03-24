@@ -510,6 +510,11 @@ namespace PaperMarioBattleSystem
             {
                 UnitTests.RunStatusUnitTests();
             }
+            //Badge unit tests
+            else if (Input.GetKeyDown(Keys.D5, DebugKeyboard))
+            {
+                UnitTests.RunBadgeUnitTests();
+            }
         }
 
         #endregion

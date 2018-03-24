@@ -337,9 +337,14 @@ namespace PaperMarioBattleSystem
             return percentages.Count - 1;
         }
 
+        /// <summary>
+        /// Returns a cached array containing all the values of an Enum type.
+        /// </summary>
+        /// <typeparam name="T">The Enum type.</typeparam>
+        /// <returns>An array containing all the values of an Enum type.</returns>
         public static T[] GetEnumValues<T>()
         {
-            return (T[])Enum.GetValues(typeof(T));
+            return EnumUtility.GetValues<T>.EnumValues;
         }
 
         /// <summary>

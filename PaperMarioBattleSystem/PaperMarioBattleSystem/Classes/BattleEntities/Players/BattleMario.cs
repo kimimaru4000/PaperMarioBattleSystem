@@ -234,7 +234,7 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.ClearMenuStack();
         }
 
-        public sealed override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
+        /*public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
         {
             //NOTE: This isn't entity-specific right now, so it technically doesn't work properly.
             //For example, if a Partner had Mario's Jump, it could use Power Bounce if Mario had
@@ -261,7 +261,7 @@ namespace PaperMarioBattleSystem
             }
 
             return Inventory.Instance.GetActiveBadgeCount(newBadgeType);
-        }
+        }*/
 
         //Mario can be tattled by Duplighosts disguised as Goombario
         #region Tattle Information

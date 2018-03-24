@@ -74,7 +74,8 @@ namespace PaperMarioBattleSystem
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFineP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlusP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
             //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-
+            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Peekaboo, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            
             base.OnBattleStart();
         }
 
@@ -86,7 +87,7 @@ namespace PaperMarioBattleSystem
             PartnerMaxTurns = MaxTurns;
         }
 
-        public sealed override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
+        /*public sealed override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
         {
             BadgeGlobals.BadgeTypes newBadgeType = badgeType;
 
@@ -105,7 +106,7 @@ namespace PaperMarioBattleSystem
             }
 
             return Inventory.Instance.GetActiveBadgeCount(newBadgeType);
-        }
+        }*/
 
         public sealed override StarPowerBase GetStarPower(StarPowerGlobals.StarPowerTypes starPowerType)
         {

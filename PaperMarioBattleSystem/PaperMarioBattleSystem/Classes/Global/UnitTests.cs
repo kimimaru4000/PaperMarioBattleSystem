@@ -25,6 +25,16 @@ namespace PaperMarioBattleSystem
             StatusUnitTests.NoSkillsTestDoubleDisable();
         }
 
+        public static void RunBadgeUnitTests()
+        {
+            BadgeUnitTests.TestPAndNoPEquipCount(new BattleMario(new MarioStats(0, 0, 0, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)));
+            BadgeUnitTests.TestPAndNoPEquipCount(new Goombario());
+            BadgeUnitTests.TestPAndNoPEquipCount2(new BattleMario(new MarioStats(0, 0, 0, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)));
+            BadgeUnitTests.TestPAndNoPEquipCount2(new Goombario());
+            BadgeUnitTests.TestBothEquipCount();
+            BadgeUnitTests.TestMixedEquipCount();
+        }
+
         public static class InteractionUnitTests
         {
             public static void ElementOverrideInteractionUT1()
@@ -191,6 +201,108 @@ namespace PaperMarioBattleSystem
 
                 hmBadge.UnEquip();
                 Debug.Assert(goomba.EntityProperties.IsMoveCategoryDisabled(Enumerations.MoveCategories.Jump) == false);
+            }
+        }
+
+        public static class BadgeUnitTests
+        {
+            public static void TestPAndNoPEquipCount(BattlePlayer player)
+            {
+                CloseCallBadge CC = new CloseCallBadge();
+                CloseCallBadge CC2 = new CloseCallBadge();
+                CloseCallBadge CC3 = new CloseCallBadge();
+                CloseCallBadge CC4 = new CloseCallBadge();
+                CloseCallPBadge CCP = new CloseCallPBadge();
+
+                CC.Equip(player);
+                CC2.Equip(player);
+                CC3.Equip(player);
+                CC4.Equip(player);
+                CCP.Equip(player);
+
+                Debug.Assert(player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCall) == player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCallP));
+
+                CC.UnEquip();
+                CC2.UnEquip();
+                CC3.UnEquip();
+                CC4.UnEquip();
+                CCP.UnEquip();
+
+                Debug.Log("\n");
+            }
+
+            public static void TestPAndNoPEquipCount2(BattlePlayer player)
+            {
+                CloseCallPBadge CCP1 = new CloseCallPBadge();
+                CloseCallPBadge CCP2 = new CloseCallPBadge();
+                CloseCallPBadge CCP3 = new CloseCallPBadge();
+                CloseCallPBadge CCP4 = new CloseCallPBadge();
+                CloseCallBadge CC = new CloseCallBadge();
+
+                CCP1.Equip(player);
+                CCP2.Equip(player);
+                CCP3.Equip(player);
+                CCP4.Equip(player);
+                CC.Equip(player);
+
+                Debug.Assert(player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCall) == player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCallP));
+
+                CCP1.UnEquip();
+                CCP2.UnEquip();
+                CCP3.UnEquip();
+                CCP4.UnEquip();
+                CC.UnEquip();
+
+                Debug.Log("\n");
+            }
+
+            public static void TestBothEquipCount()
+            {
+                BattleMario mario = new BattleMario(new MarioStats(0, 0, 0, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
+                Goombario goombario = new Goombario();
+
+                QuickChangeBadge qc = new QuickChangeBadge();
+                TimingTutorBadge tt = new TimingTutorBadge();
+                qc.Equip(mario);
+                tt.Equip(goombario);
+
+                Debug.Assert(mario.GetEquippedBadgeCount(qc.BadgeType) == goombario.GetEquippedBadgeCount(qc.BadgeType));
+                Debug.Assert(mario.GetEquippedBadgeCount(tt.BadgeType) == goombario.GetEquippedBadgeCount(tt.BadgeType));
+
+                qc.UnEquip();
+                tt.UnEquip();
+
+                Debug.Log("\n");
+
+                qc.Equip(goombario);
+                tt.Equip(mario);
+
+                Debug.Assert(mario.GetEquippedBadgeCount(qc.BadgeType) == goombario.GetEquippedBadgeCount(qc.BadgeType));
+                Debug.Assert(mario.GetEquippedBadgeCount(tt.BadgeType) == goombario.GetEquippedBadgeCount(tt.BadgeType));
+
+                qc.UnEquip();
+                tt.UnEquip();
+
+                Debug.Log("\n");
+            }
+
+            public static void TestMixedEquipCount()
+            {
+                BattleMario mario = new BattleMario(new MarioStats(0, 0, 0, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
+                Goombario goombario = new Goombario();
+
+                QuickChangeBadge qc = new QuickChangeBadge();
+                RightOnBadge ro = new RightOnBadge();
+                qc.Equip(mario);
+                ro.Equip(goombario);
+
+                Debug.Assert(mario.GetEquippedBadgeCount(qc.BadgeType) == goombario.GetEquippedBadgeCount(qc.BadgeType));
+                Debug.Assert(mario.GetEquippedBadgeCount(ro.BadgeType) != goombario.GetEquippedBadgeCount(ro.BadgeType));
+
+                qc.UnEquip();
+                ro.UnEquip();
+
+                Debug.Log("\n");
             }
         }
     }

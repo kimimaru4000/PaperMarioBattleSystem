@@ -18,8 +18,8 @@ namespace PaperMarioBattleSystem
             Name = "Items";
             Position = new Vector2(230, 150);
 
-            int doubleDipCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DoubleDip);
-            int tripleDipCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.TripleDip);
+            int doubleDipCount = BattleManager.Instance.EntityTurn.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.DoubleDip);
+            int tripleDipCount = BattleManager.Instance.EntityTurn.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.TripleDip);
 
             Texture2D battleTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
 

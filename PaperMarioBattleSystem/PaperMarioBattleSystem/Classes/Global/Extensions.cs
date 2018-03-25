@@ -330,6 +330,106 @@ namespace PaperMarioBattleSystem
             return battleEntity;
         }
 
+        /// <summary>
+        /// Gets the number of Badges of a particular BadgeType that the BattleEntity has equipped.
+        /// </summary>
+        /// <param name="badgeType">The BadgeType to check for.</param>
+        /// <returns>The number of Badges of the BadgeType that the BattleEntity has equipped.</returns>
+        public static int GetEquippedBadgeCount(this BattleEntity battleEntity, BadgeGlobals.BadgeTypes badgeType)
+        {
+            if (battleEntity == null) return 0;
+
+            return battleEntity.EntityProperties.GetEquippedBadgeCount(badgeType);
+        }
+
+        /// <summary>
+        /// Gets the number of Badges of a particular BadgeType, for both its Partner and Non-Partner versions, that the BattleEntity has equipped.
+        /// </summary>
+        /// <param name="battleEntity">The BattleEntity.</param>
+        /// <param name="badgeType">The BadgeType to check for.</param>
+        /// <returns>The number of Badges of the Partner and Non-Partner versions of the BadgeType that the BattleEntity has equipped.</returns>
+        public static int GetEquippedNPBadgeCount(this BattleEntity battleEntity, BadgeGlobals.BadgeTypes badgeType)
+        {
+            BadgeGlobals.BadgeTypes? npBadgeType = BadgeGlobals.GetNonPartnerBadgeType(badgeType);
+            BadgeGlobals.BadgeTypes? pBadgeType = BadgeGlobals.GetPartnerBadgeType(badgeType);
+
+            int count = 0;
+            if (npBadgeType != null) count += battleEntity.GetEquippedBadgeCount(npBadgeType.Value);
+            if (pBadgeType != null) count += battleEntity.GetEquippedBadgeCount(pBadgeType.Value);
+
+            return count;
+        }
+
+        /// <summary>
+        /// Gets the number of Badges of a particular BadgeType that the BattleEntity and its allies have equipped.
+        /// </summary>
+        /// <param name="battleEntity"></param>
+        /// <param name="badgeType">The BadgeType to check for.</param>
+        /// <returns>The total number of Badges of the BadgeType that the BattleEntity and its allies have equipped.</returns>
+        public static int GetPartyEquippedBadgeCount(this BattleEntity battleEntity, BadgeGlobals.BadgeTypes badgeType)
+        {
+            if (battleEntity == null) return 0;
+
+            return EntityGlobals.GetCombinedEquippedBadgeCount(BattleManager.Instance.GetEntities(battleEntity.EntityType, null), badgeType);
+        }
+
+        /// <summary>
+        /// Gets the number of Badges of a particular BadgeType, for both its Partner and Non-Partner versions, that the BattleEntity and its allies have equipped.
+        /// </summary>
+        /// <param name="battleEntity"></param>
+        /// <param name="badgeType">The BadgeType to check for.</param>
+        /// <returns>The total number of Badges of the Partner and Non-Partner versions of the BadgeType that the BattleEntity and its allies have equipped.</returns>
+        public static int GetPartyEquippedNPBadgeCount(this BattleEntity battleEntity, BadgeGlobals.BadgeTypes badgeType)
+        {
+            if (battleEntity == null) return 0;
+
+            return EntityGlobals.GetCombinedEquippedNPBadgeCount(BattleManager.Instance.GetEntities(battleEntity.EntityType, null), badgeType);
+        }
+
+        /// <summary>
+        /// Checks if the BattleEntity or its allies have an AdditionalProperty.
+        /// </summary>
+        /// <param name="property">The AdditionalProperty to check.</param>
+        /// <returns>true if the BattleEntity or its allies have the AdditionalProperty, otherwise false</returns>
+        public static bool PartyHasAdditionalProperty(this BattleEntity battleEntity, AdditionalProperty property)
+        {
+            if (battleEntity == null) return false;
+
+            return EntityGlobals.CombinedHaveAdditionalProperty(BattleManager.Instance.GetEntities(battleEntity.EntityType, null), property);
+        }
+
+        #endregion
+
+        #region BattlePlayer Extensions
+
+        /// <summary>
+        /// Activates a Badge in the Inventory and equips the Badge to the player.
+        /// </summary>
+        /// <param name="player">The BattlePlayer to equip the Badge to.</param>
+        /// <param name="badge">The Badge to activate and equip.</param>
+        public static void ActivateAndEquipBadge(this BattlePlayer player, Badge badge)
+        {
+            if (player == null || badge == null) return;
+
+            //Activate and equip the Badge.
+            Inventory.Instance.ActivateBadge(badge);
+            badge.Equip(player);
+        }
+
+        /// <summary>
+        /// Deactivates a Badge in the Inventory and unequips the Badge from the player.
+        /// </summary>
+        /// <param name="player">The BattlePlayer to unequip the Badge from.</param>
+        /// <param name="badge">The Badge to deactivate and unequip.</param>
+        public static void DeactivateAndUnequipBadge(this BattlePlayer player, Badge badge)
+        {
+            if (player == null || badge == null) return;
+
+            //Deactivate and unequip the Badge
+            Inventory.Instance.DeactivateBadge(badge);
+            badge.UnEquip();
+        }
+
         #endregion
 
         #region List Extensions

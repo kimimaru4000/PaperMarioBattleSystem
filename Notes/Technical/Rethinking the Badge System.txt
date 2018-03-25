@@ -33,3 +33,21 @@ public List<BattleEntity> EntitiesEquipped { get; private set; } = new List<Batt
 
 public void UnEquip(BattleEntity entity) - Unequips this Badge from one particular BattleEntity.
 public void UnEquipAll() - Unequips this Badge from all BattleEntities
+
+Update (3/24/18)
+----------------
+When implementing this, I ran into hurdles with Badges that rely on certain events, such as Close Call and how it relies on the HealthStateChangedEvent. There's no way to check for which BattleEntity was affected, and adding that in would simply be messy.
+
+Instead of Badges being able to be equipped to multiple BattleEntities, I think it's best to revert to the previous way but still keep the Badges decoupled from the Inventory.
+
+Most party-related (Player, Enemy, etc.) effects, such as Quick Change, know that they affect the party already. In that case, why not simply check if anyone in the party has a certain Badge equipped or a certain AdditionalProperty?
+
+This would:
+
+1. Reduce the amount of refactoring and newly introduced complexity (Ex. multiple BattleEntities per Badge)
+2. Allow keeping the existing system's strengths
+3. Allow checking for shared effects
+
+We can add extension methods to easily check for these when we need.
+
+This seems like what we actually want. Test it out and see how it works.

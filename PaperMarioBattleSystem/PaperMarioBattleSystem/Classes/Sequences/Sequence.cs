@@ -299,7 +299,7 @@ namespace PaperMarioBattleSystem
             CurStylishData = new StylishData(startRange, endRange, index);
 
             //If we should show Stylish Move timings, send out an object to show it
-            if (User.EntityProperties.HasAdditionalProperty(AdditionalProperty.ShowStylishTimings) == true)
+            if (User.PartyHasAdditionalProperty(AdditionalProperty.ShowStylishTimings) == true)
             {
                 BattleObjManager.Instance.AddBattleObject(new StylishIndicatorVFX(User, CurStylishData));
             }
@@ -511,8 +511,8 @@ namespace PaperMarioBattleSystem
             if (commandRank == ActionCommand.CommandRank.None) return;
 
             //Get how many Simplifiers and Unsimplifiers the entity has equipped
-            int simplifierCount = UtilityGlobals.Clamp(User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.Simplifier), 0, BadgeGlobals.MaxSimplifierCount);
-            int unsimplifierCount = UtilityGlobals.Clamp(User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.Unsimplifier), 0, BadgeGlobals.MaxUnsimplifierCount);
+            int simplifierCount = UtilityGlobals.Clamp(User.GetPartyEquippedBadgeCount(BadgeGlobals.BadgeTypes.Simplifier), 0, BadgeGlobals.MaxSimplifierCount);
+            int unsimplifierCount = UtilityGlobals.Clamp(User.GetPartyEquippedBadgeCount(BadgeGlobals.BadgeTypes.Unsimplifier), 0, BadgeGlobals.MaxUnsimplifierCount);
 
             int rankInt = (int)commandRank;
 
@@ -708,7 +708,7 @@ namespace PaperMarioBattleSystem
             if (damageInfo.AllOrNothingAffected == true)
             {
                 //If it's equipped, add the number to the damage if the Action Command succeeded, otherwise set the damage to the minimum value
-                int allOrNothingCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.AllOrNothing);
+                int allOrNothingCount = User.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.AllOrNothing);
                 if (allOrNothingCount > 0)
                 {
                     if (CommandResult == ActionCommand.CommandResults.Success)

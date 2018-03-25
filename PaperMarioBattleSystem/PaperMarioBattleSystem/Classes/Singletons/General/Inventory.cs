@@ -243,6 +243,14 @@ namespace PaperMarioBattleSystem
         #region Badge Methods
 
         /// <summary>
+        /// Tells if the Badge can be equipped or not based on how much BP it costs.
+        /// </summary>
+        public bool CanEquip(Badge badge)
+        {
+            return (badge != null && BP >= badge.BPCost);
+        }
+
+        /// <summary>
         /// Adds a Badge to the Player's Inventory
         /// </summary>
         /// <param name="badge">The Badge to add</param>
@@ -364,7 +372,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets the number of Badges of a particular BadgeType in the Player's Inventory
+        /// Gets the number of Badges of a particular BadgeType in the Player's Inventory.
         /// </summary>
         /// <param name="badgeType">The BadgeType to find</param>
         /// <returns>The number of Badges of the BadgeType in the Player's Inventory</returns>
@@ -388,10 +396,10 @@ namespace PaperMarioBattleSystem
         /*Active Badges*/
 
         /// <summary>
-        /// Adds a Badge to the active Badge list. This is called when the Badge is equipped to a Player entity.
+        /// Adds a Badge to the active Badge list.
         /// Do not add new Badges instances here. Add only Badges that are already in the Inventory.
         /// </summary>
-        /// <param name="badge">The Badge to activate</param>
+        /// <param name="badge">The Badge to activate.</param>
         public void ActivateBadge(Badge badge)
         {
             if (badge == null)
@@ -425,9 +433,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Removes a Badge from the active Badge list. This is called when the Badge is unequipped from a Player entity.
+        /// Removes a Badge from the active Badge list.
         /// </summary>
-        /// <param name="badge">The Badge to deactivate</param>
+        /// <param name="badge">The Badge to deactivate.</param>
         public void DeactivateBadge(Badge badge)
         {
             if (badge == null)
@@ -479,7 +487,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets the number of active Badges of a particular BadgeType
+        /// Gets the number of active Badges of a particular BadgeType the Player has equipped.
         /// </summary>
         /// <param name="badgeType">The BadgeType to find</param>
         /// <returns>The number of active Badges of the BadgeType</returns>
@@ -500,31 +508,10 @@ namespace PaperMarioBattleSystem
             return ActiveBadgeCounts.ContainsKey(badgeType);
         }
 
-        /*/// <summary>
-        /// Gets all active Badges affecting Mario
-        /// </summary>
-        /// <returns>A List of all active Badges affecting Mario</returns>
-        /// <param name="excludeBoth">Whether to exclude Badges that affect both Mario and his Partners or not.</param>
-        public List<Badge> GetActiveMarioBadges(bool excludeBoth)
-        {
-            return ActiveBadges.FindAll((badge) => (badge.AffectedType == AffectedTypes.Self || (excludeBoth == false && badge.AffectedType == AffectedTypes.Both)));
-        }
-
-        /// <summary>
-        /// Gets all active Badges affecting Mario's Partners.
-        /// NOTE: This doesn't work correctly for Self Badges that are equipped to Partners right now.
-        /// </summary>
-        /// <returns>A List of all active Badges affecting Mario's Partners</returns>
-        /// <param name="excludeBoth">Whether to exclude Badges that affect both Mario and his Partners or not.</param>
-        public List<Badge> GetActivePartnerBadges(bool excludeBoth)
-        {
-            return ActiveBadges.FindAll((badge) => (badge.AffectedType == AffectedTypes.Partner || (excludeBoth == false && badge.AffectedType == AffectedTypes.Both)));
-        }*/
-
         /// <summary>
         /// Gets all active Badges affecting a particular BattleEntity.
         /// </summary>
-        /// <param name="battleEntity">The BattleEntity to </param>
+        /// <param name="battleEntity">The BattleEntity to find the active Badges on.</param>
         /// <returns>A new List of all active Badges affecting the BattleEntity.</returns>
         public List<Badge> GetActiveBadgesOnEntity(BattleEntity battleEntity)
         {

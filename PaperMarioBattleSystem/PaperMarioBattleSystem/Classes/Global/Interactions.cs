@@ -545,7 +545,7 @@ namespace PaperMarioBattleSystem
 
                     //Factor in the additional Guard defense for all DefensiveActions (for now, at least)
                     //If it's not Piercing, this will be subtracted, in addition to the Victim's Defense, from the damage dealt to the Victim
-                    damageDodgeDefense = StepResult.VictimResult.Entity.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DamageDodge);
+                    damageDodgeDefense = StepResult.VictimResult.Entity.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.DamageDodge);
                 }
 
                 //Subtract Defense on non-piercing damage
@@ -614,7 +614,7 @@ namespace PaperMarioBattleSystem
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
                 //Factor in Double Pain for the Victim
-                int doublePainCount = StepResult.VictimResult.Entity.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DoublePain);
+                int doublePainCount = StepResult.VictimResult.Entity.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.DoublePain);
 
                 StepResult.VictimResult.TotalDamage *= (1 + doublePainCount);
             }
@@ -629,7 +629,7 @@ namespace PaperMarioBattleSystem
                 {
                     //PM rounds down, whereas TTYD rounds up. We're going with the latter
                     //TTYD always ceilings the value (Ex. 3.2 turns to 4)
-                    int lastStandCount = StepResult.VictimResult.Entity.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.LastStand);
+                    int lastStandCount = StepResult.VictimResult.Entity.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.LastStand);
                     
                     int lastStandDivider = (1 + lastStandCount);
                     StepResult.VictimResult.TotalDamage = (int)Math.Ceiling(StepResult.VictimResult.TotalDamage / (float)lastStandDivider);

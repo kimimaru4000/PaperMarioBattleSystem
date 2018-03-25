@@ -72,20 +72,6 @@ namespace PaperMarioBattleSystem
             return (HeldCollectible as Item);
         }
 
-        public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
-        {
-            if (HeldCollectible?.CollectibleType == Enumerations.CollectibleTypes.Badge)
-            {
-                Badge heldBadge = (Badge)HeldCollectible;
-                if (heldBadge.BadgeType == badgeType)
-                {
-                    return 1;
-                }
-            }
-
-            return 0;
-        }
-
         public void SetHeldCollectible(Collectible heldCollectible)
         {
             HeldCollectible = heldCollectible;

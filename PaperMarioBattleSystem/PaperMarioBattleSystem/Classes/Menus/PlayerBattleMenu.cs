@@ -194,8 +194,8 @@ namespace PaperMarioBattleSystem
         /// <returns>true if the BattleEntity using this menu has at least one Double Dip or Triple Dip Badge equipped.</returns>
         private bool CheckUseDipMenu()
         {
-            int doubleDipCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DoubleDip);
-            int tripleDipCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.TripleDip);
+            int doubleDipCount = BattleManager.Instance.EntityTurn.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.DoubleDip);
+            int tripleDipCount = BattleManager.Instance.EntityTurn.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.TripleDip);
 
             return (doubleDipCount > 0 || tripleDipCount > 0);
         }

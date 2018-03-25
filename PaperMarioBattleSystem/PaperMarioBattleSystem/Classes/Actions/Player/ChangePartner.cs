@@ -44,13 +44,13 @@ namespace PaperMarioBattleSystem
 
         public override void OnMenuSelected()
         {
-            //Check if the User is a Player and has Quick Change equipped.
+            //Check if the User has Quick Change equipped.
             //This is done here in the menu because if Confusion causes a Player to swap Partners,
             //it's not affected by Quick Change and thus will cause the Player to use a turn whether it's equipped or not
-            int quickChangeCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.QuickChange);
+            int quickChangeCount = User.GetPartyEquippedBadgeCount(BadgeGlobals.BadgeTypes.QuickChange);
             
-            //If Quick Change is equipped and Partners were swapped by a Player, don't use up a turn
-            if (quickChangeCount > 0 && User.EntityType == Enumerations.EntityTypes.Player)
+            //If Quick Change is equipped, don't use up a turn
+            if (quickChangeCount > 0)
             {
                 User.SetTurnsUsed(User.TurnsUsed - 1);
             }

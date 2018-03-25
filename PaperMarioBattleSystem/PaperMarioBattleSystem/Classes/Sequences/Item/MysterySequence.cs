@@ -118,7 +118,8 @@ namespace PaperMarioBattleSystem
             {
                 //If this selects the first or a single entity and it's an ally, make sure it always targets the entity using the Mystery
                 //Examples include a Mushroom or Honey Syrup
-                if (itemChosenAction.MoveProperties.MoveAffectionType == MoveAffectionTypes.Ally)
+                if (UtilityGlobals.MoveAffectionTypesHasFlag(itemChosenAction.MoveProperties.MoveAffectionType,
+                    MoveAffectionTypes.Self | MoveAffectionTypes.Ally))
                 {
                     entitiesAffected.Clear();
                     entitiesAffected.Add(EntityUsing);

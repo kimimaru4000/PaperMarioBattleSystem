@@ -55,10 +55,7 @@ namespace PaperMarioBattleSystem
             if (HeldCollectible?.CollectibleType == Enumerations.CollectibleTypes.Badge)
             {
                 Badge heldBadge = (Badge)HeldCollectible;
-                if (heldBadge.AffectedType == BadgeGlobals.AffectedTypes.Self || heldBadge.AffectedType == BadgeGlobals.AffectedTypes.Both)
-                {
-                    heldBadge.Equip(this);
-                }
+                heldBadge.Equip(this);
             }
 
             //Check if the enemy has an entry in the Tattle table

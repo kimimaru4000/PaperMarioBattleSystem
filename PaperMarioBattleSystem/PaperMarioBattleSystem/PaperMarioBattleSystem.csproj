@@ -324,6 +324,7 @@
     <Compile Include="Classes\Global\CollisionTracker.cs" />
     <Compile Include="Classes\Global\CrashHandler.cs" />
     <Compile Include="Classes\Global\Debug.cs" />
+    <Compile Include="Classes\Global\EntityGlobals.cs" />
     <Compile Include="Classes\Global\Extensions.cs" />
     <Compile Include="Classes\Global\FPSCounter.cs" />
     <Compile Include="Classes\Global\Globals.cs" />

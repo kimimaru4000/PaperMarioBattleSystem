@@ -177,7 +177,7 @@ namespace PaperMarioBattleSystem
 
         protected readonly List<DefensiveAction> DefensiveActions = new List<DefensiveAction>();
 
-        protected BattleEntity()
+        private BattleEntity()
         {
             EntityProperties = new BattleEntityProperties(this);
             AnimManager = new ObjAnimManager(this);
@@ -186,6 +186,7 @@ namespace PaperMarioBattleSystem
         protected BattleEntity(Stats stats) : this()
         {
             BattleStats = stats;
+            UpdateHealthState();
         }
 
         public virtual void CleanUp()
@@ -963,13 +964,6 @@ namespace PaperMarioBattleSystem
         /// <param name="itemTypes">The ItemType enum value. If an item has any of these values, it will be returned.</param>
         /// <returns></returns>
         public abstract Item GetItemOfType(Item.ItemTypes itemTypes);
-
-        /// <summary>
-        /// Gets the number of Badges of a particular BadgeType that the BattleEntity has equipped.
-        /// </summary>
-        /// <param name="badgeType">The BadgeType to check for.</param>
-        /// <returns>The number of Badges of the BadgeType that the BattleEntity has equipped.</returns>
-        public abstract int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType);
 
         #endregion
 

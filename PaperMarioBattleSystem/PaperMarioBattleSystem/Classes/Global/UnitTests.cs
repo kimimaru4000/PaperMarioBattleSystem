@@ -33,6 +33,7 @@ namespace PaperMarioBattleSystem
             BadgeUnitTests.TestPAndNoPEquipCount2(new Goombario());
             BadgeUnitTests.TestBothEquipCount();
             BadgeUnitTests.TestMixedEquipCount();
+            BadgeUnitTests.TestPartyNPEquipCount();
         }
 
         public static class InteractionUnitTests
@@ -220,7 +221,10 @@ namespace PaperMarioBattleSystem
                 CC4.Equip(player);
                 CCP.Equip(player);
 
-                Debug.Assert(player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCall) == player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCallP));
+                Debug.Assert(player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCall) == 4);
+                Debug.Assert(player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCallP) == 1);
+                Debug.Assert(player.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.CloseCall) == 5);
+                Debug.Assert(player.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.CloseCallP) == 5);
 
                 CC.UnEquip();
                 CC2.UnEquip();
@@ -245,7 +249,10 @@ namespace PaperMarioBattleSystem
                 CCP4.Equip(player);
                 CC.Equip(player);
 
-                Debug.Assert(player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCall) == player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCallP));
+                Debug.Assert(player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCall) == 1);
+                Debug.Assert(player.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.CloseCallP) == 4);
+                Debug.Assert(player.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.CloseCall) == 5);
+                Debug.Assert(player.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.CloseCallP) == 5);
 
                 CCP1.UnEquip();
                 CCP2.UnEquip();
@@ -261,13 +268,17 @@ namespace PaperMarioBattleSystem
                 BattleMario mario = new BattleMario(new MarioStats(0, 0, 0, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
                 Goombario goombario = new Goombario();
 
+                List<BattleEntity> set = new List<BattleEntity>() { mario, goombario };
+
                 QuickChangeBadge qc = new QuickChangeBadge();
                 TimingTutorBadge tt = new TimingTutorBadge();
                 qc.Equip(mario);
                 tt.Equip(goombario);
 
-                Debug.Assert(mario.GetEquippedBadgeCount(qc.BadgeType) == goombario.GetEquippedBadgeCount(qc.BadgeType));
-                Debug.Assert(mario.GetEquippedBadgeCount(tt.BadgeType) == goombario.GetEquippedBadgeCount(tt.BadgeType));
+                Debug.Assert(mario.GetEquippedBadgeCount(qc.BadgeType) != goombario.GetEquippedBadgeCount(qc.BadgeType));
+                Debug.Assert(mario.GetEquippedBadgeCount(tt.BadgeType) != goombario.GetEquippedBadgeCount(tt.BadgeType));
+                Debug.Assert(EntityGlobals.GetCombinedEquippedBadgeCount(set, qc.BadgeType) == 1);
+                Debug.Assert(EntityGlobals.GetCombinedEquippedBadgeCount(set, tt.BadgeType) == 1);
 
                 qc.UnEquip();
                 tt.UnEquip();
@@ -277,8 +288,10 @@ namespace PaperMarioBattleSystem
                 qc.Equip(goombario);
                 tt.Equip(mario);
 
-                Debug.Assert(mario.GetEquippedBadgeCount(qc.BadgeType) == goombario.GetEquippedBadgeCount(qc.BadgeType));
-                Debug.Assert(mario.GetEquippedBadgeCount(tt.BadgeType) == goombario.GetEquippedBadgeCount(tt.BadgeType));
+                Debug.Assert(mario.GetEquippedBadgeCount(qc.BadgeType) != goombario.GetEquippedBadgeCount(qc.BadgeType));
+                Debug.Assert(mario.GetEquippedBadgeCount(tt.BadgeType) != goombario.GetEquippedBadgeCount(tt.BadgeType));
+                Debug.Assert(EntityGlobals.GetCombinedEquippedBadgeCount(set, qc.BadgeType) == 1);
+                Debug.Assert(EntityGlobals.GetCombinedEquippedBadgeCount(set, tt.BadgeType) == 1);
 
                 qc.UnEquip();
                 tt.UnEquip();
@@ -291,16 +304,45 @@ namespace PaperMarioBattleSystem
                 BattleMario mario = new BattleMario(new MarioStats(0, 0, 0, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
                 Goombario goombario = new Goombario();
 
+                List<BattleEntity> set = new List<BattleEntity>() { mario, goombario };
+
                 QuickChangeBadge qc = new QuickChangeBadge();
                 RightOnBadge ro = new RightOnBadge();
                 qc.Equip(mario);
                 ro.Equip(goombario);
 
-                Debug.Assert(mario.GetEquippedBadgeCount(qc.BadgeType) == goombario.GetEquippedBadgeCount(qc.BadgeType));
+                Debug.Assert(EntityGlobals.GetCombinedEquippedBadgeCount(set, qc.BadgeType) == 1);
                 Debug.Assert(mario.GetEquippedBadgeCount(ro.BadgeType) != goombario.GetEquippedBadgeCount(ro.BadgeType));
 
                 qc.UnEquip();
                 ro.UnEquip();
+
+                Debug.Log("\n");
+            }
+
+            public static void TestPartyNPEquipCount()
+            {
+                BattleMario mario = new BattleMario(new MarioStats(0, 0, 0, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
+                Goombario goombario = new Goombario();
+
+                List<BattleEntity> set = new List<BattleEntity>() { mario, goombario };
+
+                CloseCallBadge cc = new CloseCallBadge();
+                CloseCallPBadge ccp = new CloseCallPBadge();
+
+                cc.Equip(mario);
+                ccp.Equip(goombario);
+
+                Debug.Assert(EntityGlobals.GetCombinedEquippedBadgeCount(set, cc.BadgeType) == 1);
+                Debug.Assert(EntityGlobals.GetCombinedEquippedBadgeCount(set, ccp.BadgeType) == 1);
+                
+                Debug.Assert(EntityGlobals.GetCombinedEquippedNPBadgeCount(set, cc.BadgeType) == 2);
+                Debug.Assert(EntityGlobals.GetCombinedEquippedNPBadgeCount(set, ccp.BadgeType) == 2);
+                Debug.Assert(EntityGlobals.GetCombinedEquippedNPBadgeCount(set,cc.BadgeType) == 2);
+                Debug.Assert(EntityGlobals.GetCombinedEquippedNPBadgeCount(set, ccp.BadgeType) == 2);
+
+                cc.UnEquip();
+                ccp.UnEquip();
 
                 Debug.Log("\n");
             }

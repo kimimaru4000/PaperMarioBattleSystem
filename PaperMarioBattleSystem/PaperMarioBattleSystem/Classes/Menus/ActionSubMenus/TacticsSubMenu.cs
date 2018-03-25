@@ -41,20 +41,8 @@ namespace PaperMarioBattleSystem
 
             #region Charge Menu
 
-            BadgeGlobals.BadgeTypes chargeBadgeType = BadgeGlobals.BadgeTypes.Charge;
-
-            //Check for a Player; if the Player is a Partner, check the number of Charge P's instead
-            if (entity.EntityType == Enumerations.EntityTypes.Player)
-            {
-                BattlePlayer player = (BattlePlayer)entity;
-                if (player.PlayerType == Enumerations.PlayerTypes.Partner)
-                {
-                    chargeBadgeType = BadgeGlobals.BadgeTypes.ChargeP;
-                }
-            }
-
             //Charge action if the Charge or Charge P Badge is equipped
-            int chargeCount = entity.GetEquippedBadgeCount(chargeBadgeType);
+            int chargeCount = entity.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.Charge);
             if (chargeCount > 0)
             {
                 //Charge starts out at 2 then increases by 1 for each additional Badge

@@ -111,26 +111,6 @@ namespace PaperMarioBattleSystem
             return Inventory.Instance.FindItem(Item.ItemCategories.Standard, itemTypes);
         }
 
-        public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
-        {
-            //See if the Badge affects both Mario and his Partners
-            Badge badgeEquip = Inventory.Instance.GetBadge(badgeType, BadgeGlobals.BadgeFilterType.Equipped);
-
-            //If so, return the number of active badges of this BadgeType
-            if (badgeEquip != null && badgeEquip.AffectedType == BadgeGlobals.AffectedTypes.Both)
-            {
-                return Inventory.Instance.GetActiveBadgeCount(badgeType);
-            }
-
-            //Otherwise, return all Non-Partner and Partner versions of this Badge equipped to this BattleEntity
-            BadgeGlobals.BadgeTypes? npBadgeType = BadgeGlobals.GetNonPartnerBadgeType(badgeType);
-            BadgeGlobals.BadgeTypes? pBadgeType = BadgeGlobals.GetPartnerBadgeType(badgeType);
-
-            List<Badge> badgesOnPlayer = Inventory.Instance.GetActiveBadgesOnEntity(this).FindAll((badge) => (badge.BadgeType == npBadgeType || badge.BadgeType == pBadgeType));
-
-            return badgesOnPlayer.Count;
-        }
-
         /// <summary>
         /// Gets the BattleMenu the BattlePlayer uses at the start of its turn.
         /// </summary>

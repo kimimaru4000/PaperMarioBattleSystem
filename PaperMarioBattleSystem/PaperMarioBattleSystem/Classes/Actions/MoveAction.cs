@@ -206,7 +206,7 @@ namespace PaperMarioBattleSystem
             if (CostsFP == true)
             {
                 //Check for the number of Flower Saver Badges on the entity and reduce the FP cost by that amount; minimum of 1
-                int flowerSaverCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.FlowerSaver);
+                int flowerSaverCount = User.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.FlowerSaver);
                 MoveInfo.ResourceCost = UtilityGlobals.Clamp(MoveInfo.ResourceCost - flowerSaverCount, 1, 99);
 
                 //If there is at least one Flower Saver Badge equipped, display the FP count in a bluish-gray color

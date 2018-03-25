@@ -66,15 +66,15 @@ namespace PaperMarioBattleSystem
 
         public override void OnBattleStart()
         {
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ChargeP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaverP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDipP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDipP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.GroupFocus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFineP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlusP, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Peekaboo, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ChargeP, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaverP, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDipP, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDipP, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.GroupFocus, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFineP, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlusP, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Peekaboo, BadgeGlobals.BadgeFilterType.UnEquipped));
             
             base.OnBattleStart();
         }
@@ -86,27 +86,6 @@ namespace PaperMarioBattleSystem
             //Set the number of max turns each Partner should have to the number of max turns this one does
             PartnerMaxTurns = MaxTurns;
         }
-
-        /*public sealed override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
-        {
-            BadgeGlobals.BadgeTypes newBadgeType = badgeType;
-
-            //Find the Partner version of the Badge
-            BadgeGlobals.BadgeTypes? tempBadgeType = BadgeGlobals.GetPartnerBadgeType(badgeType);
-            if (tempBadgeType != null)
-            {
-                newBadgeType = tempBadgeType.Value;
-            }
-            else
-            {
-                //If there is no Partner version, get the Badge and check if it affects Partners
-                Badge badge = Inventory.Instance.GetBadge(newBadgeType, BadgeGlobals.BadgeFilterType.Equipped);
-                //If the Badge isn't equipped or doesn't affect Both or the Partner, none are equipped to this Partner
-                if (badge == null || badge.AffectedType == BadgeGlobals.AffectedTypes.Self) return 0;
-            }
-
-            return Inventory.Instance.GetActiveBadgeCount(newBadgeType);
-        }*/
 
         public sealed override StarPowerBase GetStarPower(StarPowerGlobals.StarPowerTypes starPowerType)
         {
@@ -120,10 +99,10 @@ namespace PaperMarioBattleSystem
         /// <param name="newPartner">The Partner to equip the Badges to.</param>
         public static void SwapPartnerBadges(BattlePartner partnerEquipped, BattlePartner newPartner)
         {
-            List<Badge> partnerBadges = Inventory.Instance.GetActiveBadgesOnEntity(partnerEquipped);
-
+            Badge[] partnerBadges = partnerEquipped.EntityProperties.GetEquippedBadges();
+            
             //Go through all the Badges
-            for (int i = 0; i < partnerBadges.Count; i++)
+            for (int i = 0; i < partnerBadges.Length; i++)
             {
                 //Unequip them from the current Partner
                 partnerBadges[i].UnEquip();

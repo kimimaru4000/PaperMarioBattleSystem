@@ -139,12 +139,6 @@ namespace PaperMarioBattleSystem
             return null;
         }
 
-        public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
-        {
-            //Bomb Squad Bombs don't have any held items or badges
-            return 0;
-        }
-
         /// <summary>
         /// Initializes the Bobbery Bomb when it comes to rest after being thrown.
         /// It sets its BattlePosition to its current position and starts playing the spark animation.

@@ -105,12 +105,6 @@ namespace PaperMarioBattleSystem
             return null;
         }
 
-        public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
-        {
-            //Gulpits' Rocks don't have any held items or badges
-            return 0;
-        }
-
         private void SetStatusProperties()
         {
             //Gulpits' Rocks are immune to all Status Effects

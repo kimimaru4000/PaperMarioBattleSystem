@@ -85,6 +85,20 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected readonly Dictionary<MoveCategories, int> DisabledMoveCategories = new Dictionary<MoveCategories, int>();
 
+        #region Badge Fields
+
+        /// <summary>
+        /// The Badges equipped to this BattleEntity.
+        /// </summary>
+        protected readonly List<Badge> EquippedBadges = new List<Badge>();
+
+        /// <summary>
+        /// The counts for each type of Badge equipped to the BattleEntity.
+        /// </summary>
+        protected readonly Dictionary<BadgeGlobals.BadgeTypes, int> EquippedBadgeCounts = new Dictionary<BadgeGlobals.BadgeTypes, int>();
+
+        #endregion
+
         #region Constructor
 
         public BattleEntityProperties(BattleEntity entity)
@@ -113,6 +127,15 @@ namespace PaperMarioBattleSystem
 
             Paybacks.Clear();
             DisabledMoveCategories.Clear();
+
+            //Unequip all Badges from the BattleEntity
+            for (int i = EquippedBadges.Count - 1; i >= 0; i--)
+            {
+                EquippedBadges[i].UnEquip();
+                EquippedBadges.RemoveAt(i);
+            }
+
+            EquippedBadgeCounts.Clear();
         }
 
         #region Physical Attribute Methods
@@ -1221,6 +1244,93 @@ namespace PaperMarioBattleSystem
         public MoveCategories[] GetDisabledMoveCategories()
         {
             return DisabledMoveCategories.Keys.ToArray();
+        }
+
+        #endregion
+
+        #region Badge Methods
+
+        /// <summary>
+        /// Adds a Badge to a BattleEntity. This is called from the Badge's Equip methods.
+        /// </summary>
+        /// <param name="badge">The Badge to equip.</param>
+        public void AddEquippedBadge(Badge badge)
+        {
+            if (badge == null)
+            {
+                Debug.LogError("Can't add a null Badge!");
+                return;
+            }
+
+            //Add the Badge
+            EquippedBadges.Add(badge);
+
+            //Add a new entry if it doesn't exist
+            if (EquippedBadgeCounts.ContainsKey(badge.BadgeType) == false)
+            {
+                EquippedBadgeCounts.Add(badge.BadgeType, 0);
+            }
+
+            //Increment the number of Badges of this type equipped
+            EquippedBadgeCounts[badge.BadgeType]++;
+        }
+
+        /// <summary>
+        /// Removes a Badge from a BattleEntity. This is called from the Badge's UnEquip methods.
+        /// </summary>
+        /// <param name="badge">The Badge to unequip.</param>
+        public void RemoveEquippedBadge(Badge badge)
+        {
+            if (badge == null)
+            {
+                Debug.LogError("Can't remove a null Badge!");
+                return;
+            }
+
+            //Remove the Badge
+            bool removed = EquippedBadges.Remove(badge);
+
+            //Check if we removed the Badge from our equipped list
+            if (removed == true)
+            {
+                //Update the Badge count by subtracting one
+                if (EquippedBadgeCounts.ContainsKey(badge.BadgeType) == true)
+                {
+                    int newBadgeCount = EquippedBadgeCounts[badge.BadgeType] - 1;
+
+                    //If no more Badges of this type are equipped, remove the entry
+                    if (newBadgeCount <= 0)
+                    {
+                        EquippedBadgeCounts.Remove(badge.BadgeType);
+                    }
+                    //Otherwise, simply update the entry
+                    else
+                    {
+                        EquippedBadgeCounts[badge.BadgeType] = newBadgeCount;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Returns all equipped Badges on this BattleEntity in a new array.
+        /// </summary>
+        /// <returns>All Badges equipped to this BattleEntity in a new array.</returns>
+        public Badge[] GetEquippedBadges()
+        {
+            return EquippedBadges.ToArray();
+        }
+
+        /// <summary>
+        /// Returns the number of equipped Badges of a particular BadgeType on the BattleEntity.
+        /// </summary>
+        /// <param name="badgeType">The BadgeType to get the equipped count for.</param>
+        /// <returns>The number of Badges of this BadgeType equipped to the BattleEntity.</returns>
+        public int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
+        {
+            if (EquippedBadgeCounts.ContainsKey(badgeType) == false) return 0;
+
+            return EquippedBadgeCounts[badgeType];
         }
 
         #endregion

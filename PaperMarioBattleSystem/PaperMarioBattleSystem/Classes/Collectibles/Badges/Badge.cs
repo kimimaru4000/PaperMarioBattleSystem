@@ -13,44 +13,37 @@ namespace PaperMarioBattleSystem
     /// The base class for all Badges.
     /// <para>"P" Badges should derive from their regular counterparts and will only need to update their BPCost, BadgeType, and AffectedType.</para>
     /// </summary>
-    //Notes on the Feeling Fine Badge:
-    //It protects against every StatusEffect EXCEPT Burn, Frozen, and Allergic
     public abstract class Badge : Collectible
     {
         /// <summary>
-        /// The amount of BP the Badge costs to wear
+        /// The amount of BP the Badge costs to wear.
         /// </summary>
         public int BPCost { get; protected set; } = 0;
 
         /// <summary>
-        /// The type of Badge this is
+        /// The type of Badge this is.
         /// </summary>
         public BadgeTypes BadgeType { get; protected set; } = BadgeTypes.None;
 
         /// <summary>
-        /// Which type of entity the Badge affects when equipped
+        /// Which type of entity the Badge affects when equipped.
         /// </summary>
         public AffectedTypes AffectedType { get; protected set; } = AffectedTypes.Self;
 
         /// <summary>
-        /// The Type Number of the Badge
+        /// The Type Number of the Badge.
         /// </summary>
         public int TypeNumber => (int)BadgeType;
 
         /// <summary>
-        /// The BattleEntity the Badge is equipped to
+        /// The BattleEntity the Badge is equipped to.
         /// </summary>
         public BattleEntity EntityEquipped { get; private set; } = null;
 
         /// <summary>
-        /// Whether the Badge is equipped or not
+        /// Whether the Badge is equipped or not.
         /// </summary>
         public bool Equipped { get; private set; } = false;
-
-        /// <summary>
-        /// Tells if the Badge can be equipped by the Player or not
-        /// </summary>
-        public bool CanEquip => (Inventory.Instance.BP >= BPCost);
 
         protected Badge()
         {
@@ -71,13 +64,10 @@ namespace PaperMarioBattleSystem
 
             EntityEquipped = entity;
 
-            //Activate the Badge if equipped to a Player entity
-            if (EntityEquipped?.EntityType == Enumerations.EntityTypes.Player)
-            {
-                Inventory.Instance.ActivateBadge(this);
-            }
+            //Add this Badge to the BattleEntity's equipped list
+            EntityEquipped.EntityProperties.AddEquippedBadge(this);
 
-            //Set the equipped flag after activation
+            //Set the equipped flag
             Equipped = true;
 
             if (EntityEquipped == null)
@@ -108,11 +98,8 @@ namespace PaperMarioBattleSystem
             //Apply UnEquip effects
             OnUnequip();
 
-            //Dectivate the Badge if unequipped from a Player entity
-            if (EntityEquipped?.EntityType == Enumerations.EntityTypes.Player)
-            {
-                Inventory.Instance.DeactivateBadge(this);
-            }
+            //Remove this Badge from the BattleEntity's equipped list
+            EntityEquipped.EntityProperties.RemoveEquippedBadge(this);
 
             //Clear the equipped flag after deactivation
             Equipped = false;

@@ -128,70 +128,70 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
             BattleManager.Instance.EntityRemovedEvent += OnEntityRemoved;
 
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.SpikeShield, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.IcePower, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ZapTap, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerPlus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerBounce, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Multibounce, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.IceSmash, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HeadRattle, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TornadoJump, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.QuickChange, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFine, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaver, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Charge, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AllOrNothing, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoublePain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LastStand, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDip, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDip, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TripleDip, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DeepFocus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DeepFocus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DeepFocus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ReturnPostage, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PrettyLucky, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PrettyLucky, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PrettyLucky, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LuckyDay, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.SpikeShield, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.IcePower, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ZapTap, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerPlus, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerBounce, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Multibounce, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.IceSmash, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HeadRattle, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TornadoJump, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.QuickChange, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFine, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaver, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Charge, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AllOrNothing, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoublePain, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LastStand, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDip, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDip, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TripleDip, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DeepFocus, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DeepFocus, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DeepFocus, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ReturnPostage, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PrettyLucky, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PrettyLucky, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PrettyLucky, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LuckyDay, BadgeGlobals.BadgeFilterType.UnEquipped));
 
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPPlus, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlus, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPPlus, BadgeGlobals.BadgeFilterType.UnEquipped));
 
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Peekaboo, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Peekaboo, BadgeGlobals.BadgeFilterType.UnEquipped));
 
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LEmblem, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.WEmblem, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.WEmblem, BadgeGlobals.BadgeFilterType.Equipped)?.UnEquip();
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LEmblem, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.WEmblem, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.DeactivateAndUnequipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.WEmblem, BadgeGlobals.BadgeFilterType.Equipped));
 
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PityFlower, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Unsimplifier, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Unsimplifier, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PityFlower, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Unsimplifier, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Unsimplifier, BadgeGlobals.BadgeFilterType.UnEquipped));
 
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DDownPound, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PiercingBlow, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DDownJump, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DDownPound, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PiercingBlow, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DDownJump, BadgeGlobals.BadgeFilterType.UnEquipped));
 
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.QuakeHammer, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.QuakeHammer, BadgeGlobals.BadgeFilterType.UnEquipped));
 
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Jumpman, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Hammerman, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Jumpman, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Hammerman, BadgeGlobals.BadgeFilterType.UnEquipped));
 
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LuckyStart, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TimingTutor, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LuckyStart, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TimingTutor, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped));
 
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXB, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXC, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXD, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXE, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
-            //Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXF, BadgeGlobals.BadgeFilterType.UnEquipped)?.Equip(this);
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXB, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXC, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXD, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXE, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXF, BadgeGlobals.BadgeFilterType.UnEquipped));
 
             //MStats.HammerLevel = EquipmentGlobals.HammerLevels.Super;
             //MStats.BootLevel = EquipmentGlobals.BootLevels.Super;

@@ -15,20 +15,23 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The amount of time, in milliseconds, to wait before updating the FPS display
         /// </summary>
-        public static double UpdateInterval = 100d;
+        private static double UpdateInterval = 1000d;
 
+        /// <summary>
+        /// The current frame rate.
+        /// </summary>
         private static double FPSValue = 0d;
         private static double PrevUpdateVal = 0d;
+
+        /// <summary>
+        /// The number of updates that have been performed.
+        /// </summary>
+        private static int Updates = 0;
 
         /// <summary>
         /// The number of frames that have been drawn.
         /// </summary>
         private static int Frames = 0;
-
-        /// <summary>
-        /// The amount of elapsed time spent drawing.
-        /// </summary>
-        private static double FrameTime = 0d;
 
         public static void Update()
         {
@@ -37,34 +40,23 @@ namespace PaperMarioBattleSystem
             //Check if we should update the FPS value displayed
             if (PrevUpdateVal >= UpdateInterval)
             {
-                PrevUpdateVal = 0d;
-
                 if (UpdateInterval <= 0d)
                 {
                     FPSValue = 0d;
                 }
                 else
                 {
-                    //Use our target FPS value for fixed time steps
-                    if (Time.FixedTimeStep == true)
-                    {
-                        double diff = FrameTime / UpdateInterval;
-
-                        //Use the target frame rate for fixed time step
-                        FPSValue = diff * Time.FPS;
-                    }
-                    else
-                    {
-                        double msScale = Time.MsPerS / UpdateInterval;
-
-                        //Calculate the FPS value displayed by checking if we drew the number of times we should have at the current FPS
-                        FPSValue = Frames * msScale;
-                    }
+                    //Our FPS is how many frames passed in the update interval
+                    FPSValue = (Frames / UpdateInterval) * Time.MsPerS;
                 }
 
+                Updates = 0;
                 Frames = 0;
-                FrameTime = 0d;
+                PrevUpdateVal = 0d;
             }
+
+            //Count each update
+            Updates++;
         }
 
         public static void Draw()
@@ -76,8 +68,8 @@ namespace PaperMarioBattleSystem
                 SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"RUNNING SLOW!", new Vector2(0f, 20f), Color.Red, .5f);
             }
 
+            //Count each frame
             Frames++;
-            FrameTime += Time.ElapsedMilliseconds;
         }
     }
 }

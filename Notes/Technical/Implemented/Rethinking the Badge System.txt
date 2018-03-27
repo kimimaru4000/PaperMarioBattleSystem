@@ -51,3 +51,7 @@ This would:
 We can add extension methods to easily check for these when we need.
 
 This seems like what we actually want. Test it out and see how it works.
+
+Update (3/26/18)
+----------------
+This has been implemented and works very well!

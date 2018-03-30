@@ -16,6 +16,8 @@ namespace PaperMarioBattleSystem
         public RemoveDisguiseBattleEvent(Duplighost duplighost)
         {
             DuplighostRef = duplighost;
+
+            IsUnique = true;
         }
 
         protected override void OnUpdate()
@@ -23,6 +25,25 @@ namespace PaperMarioBattleSystem
             DuplighostRef.RemoveDisguise();
 
             End();
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            DuplighostRef = null;
+        }
+
+        public override bool AreContentsEqual(BattleEvent other)
+        {
+            if (base.AreContentsEqual(other) == true) return true;
+
+            //Compare the Duplighost references
+            RemoveDisguiseBattleEvent disguiseEvent = other as RemoveDisguiseBattleEvent;
+
+            if (disguiseEvent == null || disguiseEvent.DuplighostRef != DuplighostRef) return false;
+
+            return true;
         }
     }
 }

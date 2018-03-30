@@ -108,10 +108,15 @@ namespace PaperMarioBattleSystem
                 Animation anim = allAnims[i];
                 OrigAnimations.AddAnimation(anim.Key, anim);
             }
+
+            //Subscribe to its own StatusInflicted event
+            StatusInflictedEvent -= OnStatusInflicted;
+            StatusInflictedEvent += OnStatusInflicted;
         }
 
         public override void CleanUp()
         {
+            StatusInflictedEvent -= OnStatusInflicted;
             RemoveDisguise();
 
             base.CleanUp();
@@ -132,10 +137,19 @@ namespace PaperMarioBattleSystem
                 return;
 
             //If a Duplighost is inflicted with Paralyzed or takes Electric damage, its disguise is removed
-            //NOTE: This is flawed; if the Duplighost is inflicted with Paralyzed and takes any damage, its disguised will be removed
-            //Technically it should work fine, but the idea is to remove the disguise only when it's just inflicted with Paralyzed
-            if (damageInfo.Hit == true && damageInfo.DamageElement == Enumerations.Elements.Electric 
-                || EntityProperties.HasStatus(Enumerations.StatusTypes.Paralyzed) == true)
+            if (damageInfo.Hit == true && damageInfo.DamageElement == Enumerations.Elements.Electric)
+            {
+                //Remove disguise through a Battle Event
+                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
+                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
+                    new RemoveDisguiseBattleEvent(this));
+            }
+        }
+
+        private void OnStatusInflicted(StatusEffect statusEffect)
+        {
+            //If a Duplighost is inflicted with Paralyzed, its disguise is removed
+            if (statusEffect != null && statusEffect.StatusType == StatusTypes.Paralyzed)
             {
                 //Remove disguise through a Battle Event
                 BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,

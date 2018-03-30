@@ -57,6 +57,13 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public event DealtDamage DealtDamageEvent = null;
 
+        public delegate void StatusInflicted(StatusEffect statusEffect);
+        /// <summary>
+        /// The event invoked when the BattleEntity is inflicted with a Status Effect.
+        /// This is invoked after the Status Effect is actually inflicted.
+        /// </summary>
+        public event StatusInflicted StatusInflictedEvent = null;
+
         #endregion
 
         /// <summary>
@@ -201,6 +208,7 @@ namespace PaperMarioBattleSystem
             TurnEndEvent = null;
             DamageTakenEvent = null;
             DealtDamageEvent = null;
+            StatusInflictedEvent = null;
         }
 
         #region Damage Handling
@@ -303,6 +311,9 @@ namespace PaperMarioBattleSystem
                 for (int i = 0; i < statusesInflicted.Length; i++)
                 {
                     EntityProperties.AfflictStatus(statusesInflicted[i].Status, true);
+
+                    //Invoke the status inflicted event
+                    StatusInflictedEvent?.Invoke(statusesInflicted[i].Status);
                 }
             }
         }
@@ -1052,8 +1063,6 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void DrawOther()
         {
-            PreviousAction?.Draw();
-
             //Draw Status Effect icons on the BattleEntity
             //You can't see the icons unless it's Mario or his Partner's turn and they're not in a Sequence
             if (BattleManager.Instance.ShouldShowPlayerTurnUI == true)

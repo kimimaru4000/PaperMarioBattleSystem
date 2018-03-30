@@ -301,6 +301,12 @@ namespace PaperMarioBattleSystem
             //Draw all BattleEntities
             DrawEntities();
 
+            //Draw the action the current BattleEntity is performing
+            if (EntityTurn != null)
+            {
+                EntityTurn.PreviousAction?.Draw();
+            }
+
             SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Current turn: {EntityTurn.Name}", new Vector2(250, 10), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
         }
 
@@ -912,6 +918,20 @@ namespace PaperMarioBattleSystem
             FilterEntitiesByHeights(allentities, heightStates);
 
             return allentities.ToArray();
+        }
+
+        /// <summary>
+        /// Returns the number of BattleEntities of the specified EntityType are participating in battle.
+        /// </summary>
+        /// <param name="entityType">The EntityType of BattleEntities to return the count for.</param>
+        /// <returns>The number of BattleEntities in battle of the particular EntityType.</returns>
+        public int GetEntitiesCount(EntityTypes entityType)
+        {
+            //Get the same list reference and return its count
+            List<BattleEntity> entities = GetEntitiesList(entityType);
+
+            if (entities == null) return 0;
+            else return entities.Count;
         }
 
         /// <summary>

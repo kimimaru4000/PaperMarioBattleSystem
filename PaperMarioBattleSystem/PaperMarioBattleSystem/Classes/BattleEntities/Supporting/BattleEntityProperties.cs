@@ -110,7 +110,7 @@ namespace PaperMarioBattleSystem
 
         public void CleanUp()
         {
-            RemoveAllStatuses(false);
+            RemoveAllStatuses();
 
             AdditionalProperties.Clear();
             PhysAttributes.Clear();
@@ -697,8 +697,7 @@ namespace PaperMarioBattleSystem
         /// Directly afflicts the entity with a StatusEffect
         /// </summary>
         /// <param name="status">The StatusEffect to afflict the entity with</param>
-        /// <param name="showMessage">Whether to show the StatusEffect's AfflictedMessage as a Battle Message when it is afflicted.</param>
-        public void AfflictStatus(StatusEffect status, bool showMessage)
+        public void AfflictStatus(StatusEffect status)
         {
             //If the entity already has this StatusEffect, refresh its properties with the new properties.
             //By default, the duration is refreshed.
@@ -708,13 +707,6 @@ namespace PaperMarioBattleSystem
             {
                 StatusEffect refreshedStatus = GetStatus(status.StatusType);
                 refreshedStatus.Refresh(status);
-
-                //Show the same affliction battle message when the status is refreshed, provided the message isn't empty
-                if (showMessage == true && string.IsNullOrEmpty(refreshedStatus.AfflictedMessage) == false)
-                {
-                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + refreshedStatus.Priority,
-                        new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(refreshedStatus.AfflictedMessage, 2000d));
-                }
 
                 string refreshedTurnMessage = refreshedStatus.Duration.ToString();
                 if (refreshedStatus.IsInfinite == true) refreshedTurnMessage = "Infinite";
@@ -729,13 +721,6 @@ namespace PaperMarioBattleSystem
             newStatus.SetEntity(Entity);
             newStatus.Afflict();
 
-            //Show a battle message when the status is afflicted, provided the message isn't empty
-            if (showMessage == true && string.IsNullOrEmpty(newStatus.AfflictedMessage) == false)
-            {
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + newStatus.Priority,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(newStatus.AfflictedMessage, 2000d));
-            }
-
             string turnMessage = newStatus.TotalDuration.ToString();
             if (newStatus.IsInfinite == true) turnMessage = "Infinite";
             Debug.LogWarning($"Afflicted {Entity.Name} with the {newStatus.StatusType} Status for {turnMessage} turns!");
@@ -746,13 +731,14 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="statusType">The StatusTypes of the StatusEffect to remove</param>
         /// <param name="showMessage">Whether to show the StatusEffect's RemovedMessage as a Battle Message when it is removed.</param>
-        public void RemoveStatus(StatusTypes statusType, bool showMessage)
+        /// <returns>The StatusEffect removed from the BattleEntity.</returns>
+        public StatusEffect RemoveStatus(StatusTypes statusType)
         {
             //Don't do anything if the entity doesn't have this status
             if (HasStatus(statusType) == false)
             {
                 Debug.Log($"{Entity.Name} is not currently afflicted with the {statusType} Status!");
-                return;
+                return null;
             }
 
             StatusEffect status = Statuses[statusType];
@@ -762,32 +748,22 @@ namespace PaperMarioBattleSystem
             status.ClearEntity();
             Statuses.Remove(statusType);
 
-            //Show a battle message when the status is removed, provided the message isn't empty
-            if (showMessage == true && string.IsNullOrEmpty(status.RemovedMessage) == false)
-            {
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + status.Priority,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(status.RemovedMessage, 2000d));
-            }
-
-            //Queue a battle event for the status removal
-            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status + status.Priority,
-                new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new StatusEndedBattleEvent(Entity));
-
             string turnMessage = status.TotalDuration.ToString();
             if (status.IsInfinite == true) turnMessage = "Infinite";
             Debug.LogWarning($"Removed the {statusType} Status on {Entity.Name} which was inflicted for {turnMessage} turns!");
+
+            return status;
         }
 
         /// <summary>
-        /// Ends and removes all StatusEffects on the entity
+        /// Ends and removes all StatusEffects on the BattleEntity.
         /// </summary>
-        /// <param name="showMessage">Whether to show each StatusEffect's RemovedMessage as a Battle Message when it is removed.</param>
-        public void RemoveAllStatuses(bool showMessage)
+        public void RemoveAllStatuses()
         {
             StatusEffect[] statusEffects = GetStatuses();
             for (int i = 0; i < statusEffects.Length; i++)
             {
-                RemoveStatus(statusEffects[i].StatusType, showMessage);
+                RemoveStatus(statusEffects[i].StatusType);
             }
         }
 

@@ -37,6 +37,9 @@ namespace PaperMarioBattleSystem
             CategoryDisabled = categoryDisabled;
 
             AfflictedMessage = GetMessageFromCategory(CategoryDisabled);
+
+            //NoSkills doesn't play the end event
+            ShouldQueueEndEvent = false;
         }
 
         //NoSkills cannot be refreshed like other status effects, as a move category cannot be disabled more than once

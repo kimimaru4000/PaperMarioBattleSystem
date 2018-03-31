@@ -11,29 +11,9 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// Manages BattleEvents.
-    /// <para>This is a Singleton.</para>
     /// </summary>
     public sealed class BattleEventManager
     {
-        #region Singleton Fields
-
-        public static BattleEventManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new BattleEventManager();
-                }
-
-                return instance;
-            }
-        }
-
-        private static BattleEventManager instance = null;
-
-        #endregion
-
         /// <summary>
         /// The current Battle Events taking place. These are completed before the next BattleEntity's turn takes place.
         /// </summary>
@@ -56,7 +36,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool HasBattleEvents => (BattleEvents.Count > 0);
 
-        private BattleEventManager()
+        public BattleEventManager()
         {
 
         }

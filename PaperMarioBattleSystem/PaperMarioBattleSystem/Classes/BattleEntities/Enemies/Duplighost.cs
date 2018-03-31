@@ -140,7 +140,7 @@ namespace PaperMarioBattleSystem
             if (damageInfo.Hit == true && damageInfo.DamageElement == Enumerations.Elements.Electric)
             {
                 //Remove disguise through a Battle Event
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
+                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
                     new RemoveDisguiseBattleEvent(this));
             }
@@ -152,7 +152,7 @@ namespace PaperMarioBattleSystem
             if (statusEffect != null && statusEffect.StatusType == StatusTypes.Paralyzed)
             {
                 //Remove disguise through a Battle Event
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
+                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
                     new RemoveDisguiseBattleEvent(this));
             }

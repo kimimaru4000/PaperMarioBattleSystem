@@ -96,6 +96,11 @@ namespace PaperMarioBattleSystem
         public string RemovedMessage { get; protected set; } = string.Empty;
 
         /// <summary>
+        /// Says whether this Status Effect should tell the BattleEntity afflicted with it to queue the <see cref="StatusEndedBattleEvent"/> when it ends by turn count. 
+        /// </summary>
+        protected bool ShouldQueueEndEvent = true;
+
+        /// <summary>
         /// The icon of the StatusEffect.
         /// </summary>
         public CroppedTexture2D StatusIcon { get; protected set; } = null;
@@ -170,7 +175,7 @@ namespace PaperMarioBattleSystem
             //When the StatusEffect is finished, remove it
             if (IsFinished == true)
             {
-                EntityAfflicted.EntityProperties.RemoveStatus(StatusType, true);
+                EntityAfflicted.RemoveStatus(StatusType, true, ShouldQueueEndEvent);
             }
         }
 

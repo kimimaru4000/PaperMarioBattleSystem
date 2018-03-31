@@ -64,6 +64,13 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public event StatusInflicted StatusInflictedEvent = null;
 
+        public delegate void StatusRemoved(StatusEffect statusEffect);
+        /// <summary>
+        /// The event invoked when a Status Effect is removed from the BattleEntity.
+        /// This is invoked after the Status Effect is actually removed.
+        /// </summary>
+        public event StatusRemoved StatusRemovedEvent = null;
+
         #endregion
 
         /// <summary>
@@ -209,6 +216,7 @@ namespace PaperMarioBattleSystem
             DamageTakenEvent = null;
             DealtDamageEvent = null;
             StatusInflictedEvent = null;
+            StatusRemovedEvent = null;
         }
 
         #region Damage Handling
@@ -260,7 +268,7 @@ namespace PaperMarioBattleSystem
                     //If the entity took damage during their sequence, it's an interruption, and this event should not occur
                     if (damage > 0 && (IsTurn == false || PreviousAction?.MoveSequence.InSequence == false))
                     {
-                        BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage,
+                        BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage,
                             new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                             new DamagedBattleEvent(this));
 
@@ -310,10 +318,7 @@ namespace PaperMarioBattleSystem
             {
                 for (int i = 0; i < statusesInflicted.Length; i++)
                 {
-                    EntityProperties.AfflictStatus(statusesInflicted[i].Status, true);
-
-                    //Invoke the status inflicted event
-                    StatusInflictedEvent?.Invoke(statusesInflicted[i].Status);
+                    AfflictStatus(statusesInflicted[i].Status, true);
                 }
             }
         }
@@ -383,6 +388,64 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        /// <summary>
+        /// Afflicts the BattleEntity with a StatusEffect.
+        /// <para>This wraps around the method in <see cref="BattleEntityProperties"/>. It calls the <see cref="StatusInflictedEvent"/> and handles the Battle Message.</para>
+        /// <para>In most cases, this method should be used. If you wish to bypass all of these, directly call the method in <see cref="BattleEntityProperties"/> instead.</para>
+        /// </summary>
+        /// <param name="status">The StatusEffect to afflict the BattleEntity with</param>
+        /// <param name="showMessage">Whether to show the StatusEffect's AfflictedMessage as a Battle Message when it is afflicted.</param>
+        public void AfflictStatus(StatusEffect statusEffect, bool showMessage)
+        {
+            EntityProperties.AfflictStatus(statusEffect);
+
+            //Invoke the status inflicted event
+            StatusInflictedEvent?.Invoke(statusEffect);
+
+            //Show a battle message when the status is afflicted, provided the message isn't empty
+            if (showMessage == true && string.IsNullOrEmpty(statusEffect.AfflictedMessage) == false)
+            {
+                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + statusEffect.Priority,
+                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(statusEffect.AfflictedMessage, 2000d));
+            }
+        }
+
+        /// <summary>
+        /// Ends and removes a StatusEffect on the BattleEntity.
+        /// <para>This wraps around the method in <see cref="BattleEntityProperties"/>. It calls the <see cref="StatusRemovedEvent"/> and handles the Battle Message.</para>
+        /// <para>In most cases, this method should be used. If you wish to bypass all of these, directly call the method in <see cref="BattleEntityProperties"/> instead.</para>
+        /// </summary>
+        /// <param name="statusType">The StatusTypes of the StatusEffect to remove.</param>
+        /// <param name="showMessage">Whether to show the StatusEffect's RemovedMessage as a Battle Message when it is removed.</param>
+        /// <param name="queueBattleEvent">Whether to queue up the <see cref="StatusEndedBattleEvent"/> or not.</param>
+        /// <returns>The StatusEffect removed from the BattleEntity.</returns>
+        public void RemoveStatus(StatusTypes statusType, bool showMessage, bool queueBattleEvent)
+        {
+            StatusEffect status = EntityProperties.RemoveStatus(statusType);
+
+            //This is null only if the BattleEntity wasn't afflicted with the Status Effect to begin with
+            //If the Status Effect wasn't removed, then just return
+            if (status == null)
+                return;
+
+            //Invoke the status removed event
+            StatusRemovedEvent?.Invoke(status);
+
+            //Show a battle message when the status is removed, provided the message isn't empty
+            if (showMessage == true && string.IsNullOrEmpty(status.RemovedMessage) == false)
+            {
+                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + status.Priority,
+                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(status.RemovedMessage, 2000d));
+            }
+
+            //Queue a battle event for the status removal
+            if (queueBattleEvent == true)
+            {
+                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status + status.Priority,
+                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new StatusEndedBattleEvent(this));
+            }
+        }
 
         #region Stat Manipulations
 
@@ -521,14 +584,14 @@ namespace PaperMarioBattleSystem
             //AnimManager.PlayAnimation(AnimationGlobals.DeathName, true);
 
             //Remove all StatusEffects on the entity
-            EntityProperties.RemoveAllStatuses(false);
+            EntityProperties.RemoveAllStatuses();
 
             OnDeath();
 
             //NOTE: The death event occurs for standard enemies like Goombas during their sequence if it was interrupted
             //I'm not sure about bosses yet, so that'll need to be tested
 
-            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Death,
+            BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Death,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                 new DeathBattleEvent(this, IsInBattle == false));
         }

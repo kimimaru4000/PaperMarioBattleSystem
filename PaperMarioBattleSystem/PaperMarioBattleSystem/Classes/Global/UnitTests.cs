@@ -79,7 +79,7 @@ namespace PaperMarioBattleSystem
                 BattleMario mario = new BattleMario(new MarioStats(1, 5, 50, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
                 Goomba goomba = new Goomba();
                 
-                mario.EntityProperties.AfflictStatus(new HoldFastStatus(3), false);
+                mario.EntityProperties.AfflictStatus(new HoldFastStatus(3));
 
                 Debug.Assert(mario.EntityProperties.HasPayback());
 
@@ -191,13 +191,13 @@ namespace PaperMarioBattleSystem
                 Goomba goomba = new Goomba();
                 HammermanBadge hmBadge = new HammermanBadge();
 
-                goomba.EntityProperties.AfflictStatus(new NoSkillsStatus(Enumerations.MoveCategories.Jump, 3), false);
+                goomba.EntityProperties.AfflictStatus(new NoSkillsStatus(Enumerations.MoveCategories.Jump, 3));
                 Debug.Assert(goomba.EntityProperties.IsMoveCategoryDisabled(Enumerations.MoveCategories.Jump));
 
                 hmBadge.Equip(goomba);
                 Debug.Assert(goomba.EntityProperties.IsMoveCategoryDisabled(Enumerations.MoveCategories.Jump));
 
-                goomba.EntityProperties.RemoveStatus(Enumerations.StatusTypes.NoSkills, false);
+                goomba.EntityProperties.RemoveStatus(Enumerations.StatusTypes.NoSkills);
                 Debug.Assert(goomba.EntityProperties.IsMoveCategoryDisabled(Enumerations.MoveCategories.Jump));
 
                 hmBadge.UnEquip();

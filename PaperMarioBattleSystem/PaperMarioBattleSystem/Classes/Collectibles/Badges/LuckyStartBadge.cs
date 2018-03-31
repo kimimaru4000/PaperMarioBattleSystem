@@ -65,7 +65,7 @@ namespace PaperMarioBattleSystem
                 //it's not inflicted yet the "LUCKY" text is displayed and the sound plays
                 if (EntityEquipped.EntityProperties.TryAfflictStatus(100d, statuses[randStatus]) == true)
                 {
-                    EntityEquipped.EntityProperties.AfflictStatus(statuses[randStatus], true);
+                    EntityEquipped.AfflictStatus(statuses[randStatus], true);
                 }
             }
         }

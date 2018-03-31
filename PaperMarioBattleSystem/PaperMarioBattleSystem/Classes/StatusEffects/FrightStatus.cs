@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             //Remove entities afflicted with Fright
-            BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Fright,
+            BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Fright,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                 new FrightBattleEvent(EntityAfflicted, FrightSpeed, FrightRunTime));
         }

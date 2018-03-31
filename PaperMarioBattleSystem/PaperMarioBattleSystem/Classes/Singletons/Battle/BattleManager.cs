@@ -78,6 +78,11 @@ namespace PaperMarioBattleSystem
         #endregion
 
         /// <summary>
+        /// The BattleManager's event manager.
+        /// </summary>
+        public BattleEventManager battleEventManager { get; private set; } = new BattleEventManager();
+
+        /// <summary>
         /// The battle's properties.
         /// </summary>
         public BattleProperties Properties { get; private set; } = default(BattleProperties);
@@ -260,7 +265,7 @@ namespace PaperMarioBattleSystem
             //If you can't run from battle, show a message at the start saying so
             if (Properties.Runnable == false)
             {
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message, new BattleState[] { BattleState.Turn },
+                battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message, new BattleState[] { BattleState.Turn },
                     new MessageBattleEvent(BattleGlobals.NoRunMessage, MessageBattleEvent.DefaultWaitDuration));
             }
 
@@ -274,16 +279,16 @@ namespace PaperMarioBattleSystem
             //NOTE: Create a general way to halt turns in battle in place of these hardcoded event check
 
             //Update battle events if there are any
-            if (BattleEventManager.Instance.HasBattleEvents == true)
+            if (battleEventManager.HasBattleEvents == true)
             {
-                BattleEventManager.Instance.UpdateBattleEvents();
+                battleEventManager.UpdateBattleEvents();
             }
 
             //If a turn just ended, update the current state
             if (State == BattleState.TurnEnd)
             {
                 //Don't start the next turn until all Battle Events are finished
-                if (BattleEventManager.Instance.HasBattleEvents == false)
+                if (battleEventManager.HasBattleEvents == false)
                     TurnStart();
             }
 
@@ -300,7 +305,7 @@ namespace PaperMarioBattleSystem
         {
             //Draw all BattleEntities
             DrawEntities();
-
+            
             //Draw the action the current BattleEntity is performing
             if (EntityTurn != null)
             {
@@ -359,7 +364,7 @@ namespace PaperMarioBattleSystem
         {
             State = state;
 
-            BattleEventManager.Instance.AddPendingEvents();
+            battleEventManager.AddPendingEvents();
         }
 
         private void SwitchPhase(int phase)
@@ -605,7 +610,7 @@ namespace PaperMarioBattleSystem
                 if (Partner == FrontPlayer)
                 {
                     //Queue the event to switch Mario with his Partner
-                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Stage, new BattleState[] { BattleState.Turn, BattleState.TurnEnd },
+                    battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Stage, new BattleState[] { BattleState.Turn, BattleState.TurnEnd },
                         new SwapPositionBattleEvent(FrontPlayer, BackPlayer,
                         new Vector2(BackPlayer.BattlePosition.X, FrontPlayer.BattlePosition.Y), new Vector2(FrontPlayer.BattlePosition.X, BackPlayer.BattlePosition.Y), 500f));
 
@@ -918,6 +923,28 @@ namespace PaperMarioBattleSystem
             FilterEntitiesByHeights(allentities, heightStates);
 
             return allentities.ToArray();
+        }
+
+        /// <summary>
+        /// Returns the number of BattleEntities participating in battle.
+        /// </summary>
+        /// <returns>The number of BattleEntities in battle.</returns>
+        public int GetAllEntitiesCount()
+        {
+            int count = 0;
+
+            //Get all BattleEntities
+            EntityTypes[] entityTypes = UtilityGlobals.GetEnumValues<EntityTypes>();
+            for (int i = 0; i < entityTypes.Length; i++)
+            {
+                List<BattleEntity> existingList = GetEntitiesList(entityTypes[i]);
+                if (existingList != null)
+                {
+                    count += existingList.Count;
+                }
+            }
+
+            return count;
         }
 
         /// <summary>

@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
 
         public override void OnMenuSelected()
         {
-            BattleEventManager.Instance.QueueBattleEvent(MessagePriority, new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+            BattleManager.Instance.battleEventManager.QueueBattleEvent(MessagePriority, new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                 new MessageBattleEvent(Message, MessageDuration));
         }
     }

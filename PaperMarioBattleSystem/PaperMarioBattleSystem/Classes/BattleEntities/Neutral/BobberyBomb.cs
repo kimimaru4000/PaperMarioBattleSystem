@@ -89,7 +89,7 @@ namespace PaperMarioBattleSystem
                         GetHitbox, HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne);
 
                     //Queue the event
-                    BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.BobberyBomb,
+                    BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.BobberyBomb,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                         detonateEvent);
 
@@ -124,7 +124,7 @@ namespace PaperMarioBattleSystem
                     GetHitbox, HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne);
 
                 //Queue the event
-                BattleEventManager.Instance.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.BobberyBomb,
+                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.BobberyBomb,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
                     detonateEvent);
 

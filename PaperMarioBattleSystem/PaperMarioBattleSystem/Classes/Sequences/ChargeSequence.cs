@@ -63,7 +63,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.EntityProperties.AfflictStatus(new ChargedStatus(ChargeAmount), true);
+                    User.AfflictStatus(new ChargedStatus(ChargeAmount), true);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

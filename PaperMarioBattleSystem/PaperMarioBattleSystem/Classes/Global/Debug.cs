@@ -397,7 +397,7 @@ namespace PaperMarioBattleSystem
 
             for (int i = 0; i < entities.Length; i++)
             {
-                entities[i].EntityProperties.AfflictStatus(status, true);
+                entities[i].EntityProperties.AfflictStatus(status);
             }
         }
 

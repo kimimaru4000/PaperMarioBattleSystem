@@ -794,7 +794,7 @@ namespace PaperMarioBattleSystem
                     {
                         StatusTypes statusHealed = statusesHealed[j];
 
-                        entityHealed.EntityProperties.RemoveStatus(statusHealed, true);
+                        entityHealed.RemoveStatus(statusHealed, true, true);
                     }
                 }
             }

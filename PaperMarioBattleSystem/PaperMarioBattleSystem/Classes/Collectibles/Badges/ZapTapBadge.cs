@@ -45,18 +45,18 @@ namespace PaperMarioBattleSystem
         {
             if (EntityEquipped.EntityProperties.HasStatus(Enumerations.StatusTypes.Electrified) == false)
             {
-                EntityEquipped.EntityProperties.AfflictStatus(new ElectrifiedStatus(StatusGlobals.InfiniteDuration), false);
+                EntityEquipped.AfflictStatus(new ElectrifiedStatus(StatusGlobals.InfiniteDuration), false);
             }
         }
 
         /// <summary>
-        /// Removes Electrified the BattleEntity is afflicted with it. This is called when removing the badge.
+        /// Removes Electrified if the BattleEntity is afflicted with it. This is called when removing the badge.
         /// </summary>
         private void RemoveElectrified()
         {
             if (EntityEquipped.EntityProperties.HasStatus(Enumerations.StatusTypes.Electrified) == true)
             {
-                EntityEquipped.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Electrified, false);
+                EntityEquipped.RemoveStatus(Enumerations.StatusTypes.Electrified, true, true);
             }
         }
     }

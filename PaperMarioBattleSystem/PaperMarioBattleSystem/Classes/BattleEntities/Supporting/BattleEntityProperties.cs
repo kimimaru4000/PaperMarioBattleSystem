@@ -132,7 +132,6 @@ namespace PaperMarioBattleSystem
             for (int i = EquippedBadges.Count - 1; i >= 0; i--)
             {
                 EquippedBadges[i].UnEquip();
-                EquippedBadges.RemoveAt(i);
             }
 
             EquippedBadgeCounts.Clear();

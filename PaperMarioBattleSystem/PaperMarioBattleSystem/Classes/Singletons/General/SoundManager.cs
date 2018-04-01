@@ -295,8 +295,15 @@ namespace PaperMarioBattleSystem
                         Debug.LogError($"Sound {SoundPath} has a duration of 0 and is invalid");
                         return;
                     }
-
+                    
                     Duration = newSound.Duration;
+
+                    if (SoundInstance != null)
+                    {
+                        SoundInstance.Dispose();
+                        SoundInstance = null;
+                    }
+                    
                     SoundInstance = newSound.CreateInstance();
                 }
             }

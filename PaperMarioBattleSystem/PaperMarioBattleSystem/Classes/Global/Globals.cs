@@ -70,7 +70,7 @@ namespace PaperMarioBattleSystem
         }
     }
 
-    public struct WeaknessHolder
+    public struct WeaknessHolder : IEquatable<WeaknessHolder>
     {
         public WeaknessTypes WeaknessType;
         public int Value;
@@ -88,6 +88,11 @@ namespace PaperMarioBattleSystem
         public override bool Equals(object obj)
         {
             return (obj is WeaknessHolder) && this == (WeaknessHolder)obj;
+        }
+
+        public bool Equals(WeaknessHolder other)
+        {
+            return (this == other);
         }
 
         public override int GetHashCode()
@@ -134,7 +139,7 @@ namespace PaperMarioBattleSystem
         #endregion
     }
 
-    public struct ResistanceHolder
+    public struct ResistanceHolder : IEquatable<ResistanceHolder>
     {
         public ResistanceTypes ResistanceType;
         public int Value;
@@ -152,6 +157,11 @@ namespace PaperMarioBattleSystem
         public override bool Equals(object obj)
         {
             return (obj is ResistanceHolder) && this == (ResistanceHolder)obj;
+        }
+
+        public bool Equals(ResistanceHolder other)
+        {
+            return (this == other);
         }
 
         public override int GetHashCode()
@@ -318,7 +328,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Holds immutable data regarding a chance at inflicting a particular StatusEffect.
     /// </summary>
-    public struct StatusChanceHolder
+    public struct StatusChanceHolder : IEquatable<StatusChanceHolder>
     {
         /// <summary>
         /// The percentage of inflicting the StatusEffect.
@@ -334,6 +344,11 @@ namespace PaperMarioBattleSystem
         {
             Percentage = percentage;
             Status = status;
+        }
+
+        public bool Equals(StatusChanceHolder other)
+        {
+            return (this.Percentage == other.Percentage && this.Status == other.Status);
         }
     }
 

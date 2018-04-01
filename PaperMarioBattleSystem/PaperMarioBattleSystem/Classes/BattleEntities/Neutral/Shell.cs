@@ -59,6 +59,7 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(242, 4, 42, 98), 1000d, new Vector2(36, 1)));
 
             Scale = new Vector2(.5f, .5f);
+            Layer = .15f;
 
             //Subscribe to the removed event so we can remove the protection and clear the entity reference if it's removed
             BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;

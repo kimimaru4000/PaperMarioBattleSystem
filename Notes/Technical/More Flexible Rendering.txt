@@ -38,3 +38,9 @@ Main.PostDraw():
 -Call SpriteRenderer.Instance.ConcludeDrawing() to perform post-processing effects, render to the backbuffer, and clear the RenderTarget on the graphics device
 
 This is a pretty rough outline, but I think it would get us what we need without drastically altering the code. Test it out and see how it goes.
+
+Update (4/1/18)
+---------------
+It's been implemented and it looks good! As a result of this refactoring, some rendering behavior looks slightly different, but it isn't an issue since the differences are minor and rendering isn't a high priority. I managed to squeeze a bit more performance by sharing as many batches as possible.
+
+This isn't an April Fools' joke.

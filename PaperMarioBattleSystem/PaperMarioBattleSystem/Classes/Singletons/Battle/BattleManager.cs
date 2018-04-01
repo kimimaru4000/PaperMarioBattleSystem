@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Handles turns in battle
     /// <para>This is a Singleton</para>
     /// </summary>
-    public class BattleManager : IUpdateable, IDrawable, ICleanup
+    public class BattleManager : IUpdateable, /*IDrawable,*/ ICleanup
     {
         #region Singleton Fields
 
@@ -108,7 +108,7 @@ namespace PaperMarioBattleSystem
         /// Whether certain UI, such as Status Effect icons and enemy HP, should show up or not.
         /// This UI shows up only when the Player is choosing an action.
         /// </summary>
-        public bool ShouldShowPlayerTurnUI => (EntityTurn.EntityType == EntityTypes.Player && EntityTurn.PreviousAction?.MoveSequence.InSequence != true);
+        public bool ShouldShowPlayerTurnUI => (EntityTurn?.EntityType == EntityTypes.Player && EntityTurn.PreviousAction?.MoveSequence.InSequence != true);
 
         /// <summary>
         /// The phase order in battle.
@@ -270,12 +270,13 @@ namespace PaperMarioBattleSystem
             }
 
             Phase = StartingPhase;
-
-            StartBattle();
         }
 
         public void Update()
         {
+            //Don't do anything until the battle starts
+            if (State == BattleState.Init) return;
+
             //NOTE: Create a general way to halt turns in battle in place of these hardcoded event check
 
             //Update battle events if there are any
@@ -301,7 +302,7 @@ namespace PaperMarioBattleSystem
             UpdateEntities();
         }
 
-        public void Draw()
+        /*public void Draw()
         {
             //Draw all BattleEntities
             DrawEntities();
@@ -311,9 +312,9 @@ namespace PaperMarioBattleSystem
             {
                 EntityTurn.PreviousAction?.Draw();
             }
-
+            
             SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Current turn: {EntityTurn.Name}", new Vector2(250, 10), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
-        }
+        }*/
 
         private void UpdateEntities()
         {

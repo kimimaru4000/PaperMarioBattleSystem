@@ -157,6 +157,7 @@ namespace PaperMarioBattleSystem
         public float Rotation { get; set; } = 0f;
         public Vector2 Scale { get; set; } = Vector2.One;
         public bool SpriteFlip { get; set; } = false;
+        public float Layer { get; set; } = .1f;
 
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
@@ -1075,39 +1076,8 @@ namespace PaperMarioBattleSystem
 
         public void Draw()
         {
-            //NOTE: SUPER VERY ULTRA hackish; just getting this in until we come up with a better way to handle it
-            //(I'm looking into it on the side so don't worry)!
-            bool hasCharge = EntityProperties.HasAdditionalProperty(AdditionalProperty.ChargedDamage);
-            if (hasCharge == true)
-            {
-                SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
-
-                Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Charge");
-                
-                Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
-                Texture2D spriteSheet = AnimManager.SpriteSheet;
-                
-                Vector2 dimensionRatio = new Vector2(tex.Width, tex.Height) / new Vector2(spriteSheet.Width, spriteSheet.Height);
-                
-                chargeEffect.Parameters["chargeTex"].SetValue(tex);
-                chargeEffect.Parameters["chargeAlpha"].SetValue(RenderingGlobals.ChargeShaderAlphaVal);
-                chargeEffect.Parameters["chargeOffset"].SetValue(new Vector2(0f, RenderingGlobals.ChargeShaderTexOffset));
-                chargeEffect.Parameters["chargeTexRatio"].SetValue(dimensionRatio.Y);
-                chargeEffect.Parameters["objFrameOffset"].SetValue(spriteSheet.GetTexCoordsAt(AnimManager.CurrentAnim.CurFrame.DrawRegion));
-
-                SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, chargeEffect, Camera.Instance.Transform);
-            }
-
             //Draw the entity itself
             DrawEntity();
-
-            //Deals with the aforementioned ULTRA HACKY code
-            if (hasCharge == true)
-            {
-                SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
-
-                SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.Transform);
-            }
 
             //Draw anything else, such as Status Effect icons
             DrawOther();
@@ -1118,7 +1088,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void DrawEntity()
         {
-            AnimManager.CurrentAnim?.Draw(Position, TintColor, Rotation, Vector2.Zero, Scale, SpriteFlip, .1f);
+            AnimManager.CurrentAnim?.Draw(Position, TintColor, Rotation, Vector2.Zero, Scale, SpriteFlip, Layer);
         }
 
         /// <summary>
@@ -1128,7 +1098,7 @@ namespace PaperMarioBattleSystem
         {
             //Draw Status Effect icons on the BattleEntity
             //You can't see the icons unless it's Mario or his Partner's turn and they're not in a Sequence
-            if (BattleManager.Instance.ShouldShowPlayerTurnUI == true)
+            /*if (BattleManager.Instance.ShouldShowPlayerTurnUI == true)
             {
                 Vector2 statusIconPos = new Vector2(Position.X + 10, Position.Y - 40);
                 StatusEffect[] statuses = EntityProperties.GetStatuses();
@@ -1155,7 +1125,7 @@ namespace PaperMarioBattleSystem
 
                     index++;
                 }
-            }
+            }*/
         }
     }
 }

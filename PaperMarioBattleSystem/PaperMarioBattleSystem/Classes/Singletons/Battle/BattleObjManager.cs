@@ -97,6 +97,15 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Returns all BattleObjects in a new list.
+        /// </summary>
+        /// <returns>A new list containing all the BattleObjects.</returns>
+        public List<BattleObject> GetAllBattleObjects()
+        {
+            return new List<BattleObject>(BattleObjects);
+        }
+
+        /// <summary>
         /// Removes all BattleObjects.
         /// </summary>
         public void ClearAllBattleObjects()

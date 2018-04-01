@@ -54,10 +54,14 @@ namespace PaperMarioBattleSystem
             //FOR TESTING
             InitializeInventory();
 
+            //Initialize the BattleManager
             BattleManager.Instance.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
                 new List<BattleEntity>() { new Duplighost() });
+
+            //Start the battle
+            BattleManager.Instance.StartBattle();
 
             base.Initialize();
         }
@@ -261,7 +265,10 @@ namespace PaperMarioBattleSystem
             //Frame advance debugging for input
             if (Debug.DebugPaused == false || Debug.AdvanceNextFrame == true)
                 Input.UpdateInputState();
-            
+
+            //Calculate transformation for use when rendering
+            Camera.Instance.CalculateTransformation();
+
             base.Update(gameTime);
 
             //Set time step and VSync settings
@@ -287,11 +294,6 @@ namespace PaperMarioBattleSystem
 
             //Set up drawing to the render target
             SpriteRenderer.Instance.SetupDrawing();
-            
-            SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.CalculateTransformation());
-            SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
-
-            Debug.DebugDraw();
         }
 
         /// <summary>
@@ -300,9 +302,25 @@ namespace PaperMarioBattleSystem
         /// <param name="gameTime">Provides a snapshot of timing values</param>
         private void MainDraw(GameTime gameTime)
         {
-            BattleManager.Instance.Draw();
-            BattleUIManager.Instance.Draw();
-            BattleObjManager.Instance.Draw();
+            //Don't render if the battle didn't start yet
+            if (BattleManager.Instance.State == BattleManager.BattleState.Init) return;
+
+            BattleEntity[] allEntities = BattleManager.Instance.GetAllEntities(null);
+
+            //Potentially both
+            RenderBattleObjects();
+            RenderBattleInfo();
+
+            //Sprite
+            RenderBattleEntities(allEntities);
+
+            //UI
+            RenderStatusInfo(allEntities);
+            RenderUI();
+
+            //BattleManager.Instance.Draw();
+            //BattleUIManager.Instance.Draw();
+            //BattleObjManager.Instance.Draw();
         }
 
         /// <summary>
@@ -324,7 +342,11 @@ namespace PaperMarioBattleSystem
         /// <param name="gameTime">Provides a snapshot of timing values</param>
         private void PostDraw(GameTime gameTime)
         {
-            SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
+            //Draw debug info
+            SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+
+            Debug.DebugDraw();
+
             SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.uiBatch);
 
             //End drawing and render the RenderTarget's contents to the screen
@@ -332,5 +354,130 @@ namespace PaperMarioBattleSystem
 
             base.Draw(gameTime);
         }
+
+        #region Separated Rendering Methods
+
+        private void RenderBattleEntities(IList<BattleEntity> allEntities)
+        {
+            //Charge list
+            List<BattleEntity> chargedEntities = null;
+
+            //Render all BattleEntities normally
+            for (int i = allEntities.Count - 1; i >= 0; i--)
+            {
+                if (allEntities[i].HasCharge() == true)
+                {
+                    if (chargedEntities == null)
+                    {
+                        chargedEntities = new List<BattleEntity>(allEntities.Count);
+                    }
+
+                    chargedEntities.Add(allEntities[i]);
+
+                    continue;
+                }
+
+                allEntities[i].Draw();
+            }
+
+            //End batch for the set drawn
+            SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
+
+            if (UtilityGlobals.IListIsNullOrEmpty(chargedEntities) == false)
+            {
+                Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Charge");
+                Texture2D chargeShaderTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
+
+                //Render the Charged BattleEntities with the Charge shader
+                for (int i = 0; i < chargedEntities.Count; i++)
+                {
+                    BattleEntity chargedEntity = chargedEntities[i];
+                    Texture2D spriteSheet = chargedEntity.AnimManager.CurrentAnim.SpriteSheet;
+
+                    //Set effect information
+                    Vector2 dimensionRatio = new Vector2(chargeShaderTex.Width, chargeShaderTex.Height) / new Vector2(spriteSheet.Width, spriteSheet.Height);
+
+                    chargeEffect.Parameters["chargeTex"].SetValue(chargeShaderTex);
+                    chargeEffect.Parameters["chargeAlpha"].SetValue(RenderingGlobals.ChargeShaderAlphaVal);
+                    chargeEffect.Parameters["chargeOffset"].SetValue(new Vector2(0f, RenderingGlobals.ChargeShaderTexOffset));
+                    chargeEffect.Parameters["chargeTexRatio"].SetValue(dimensionRatio.Y);
+                    chargeEffect.Parameters["objFrameOffset"].SetValue(spriteSheet.GetTexCoordsAt(chargedEntity.AnimManager.CurrentAnim.CurFrame.DrawRegion));
+
+                    //Render with the shader
+                    SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, chargeEffect, Camera.Instance.Transform);
+
+                    chargedEntity.Draw();
+
+                    SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
+                }
+            }
+        }
+
+        private void RenderBattleInfo()
+        {
+            //Draw the action the current BattleEntity is performing
+            if (BattleManager.Instance.EntityTurn != null)
+            {
+                BattleManager.Instance.EntityTurn.PreviousAction?.Draw();
+
+                //Show current turn debug text
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Current turn: {BattleManager.Instance.EntityTurn.Name}", new Vector2(250, 10), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
+            }
+        }
+
+        private void RenderStatusInfo(IList<BattleEntity> allEntities)
+        {
+            //Ignore if we shouldn't show this UI
+            if (BattleManager.Instance.ShouldShowPlayerTurnUI == true && UtilityGlobals.IListIsNullOrEmpty(allEntities) == false)
+            {
+                for (int i = 0; i < allEntities.Count; i++)
+                {
+                    BattleEntity entity = allEntities[i];
+
+                    Vector2 statusIconPos = new Vector2(entity.Position.X + 10, entity.Position.Y - 40);
+                    StatusEffect[] statuses = entity.EntityProperties.GetStatuses();
+                    int index = 0;
+
+                    for (int j = 0; j < statuses.Length; j++)
+                    {
+                        StatusEffect status = statuses[j];
+                        CroppedTexture2D texture = status.StatusIcon;
+
+                        //Don't draw the status if it doesn't have an icon or if it's Icon suppressed
+                        if (texture == null || texture.Tex == null || status.IsSuppressed(Enumerations.StatusSuppressionTypes.Icon) == true)
+                        {
+                            continue;
+                        }
+
+                        float yOffset = ((index + 1) * StatusGlobals.IconYOffset);
+                        Vector2 iconPos = Camera.Instance.SpriteToUIPos(new Vector2(statusIconPos.X, statusIconPos.Y - yOffset));
+
+                        float depth = .35f - (index * .01f);
+                        float turnStringDepth = depth + .0001f;
+
+                        status.DrawStatusInfo(iconPos, depth, turnStringDepth);
+
+                        index++;
+                    }
+                }
+            }
+        }
+
+        private void RenderUI()
+        {
+            BattleUIManager.Instance.Draw();
+
+            SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.uiBatch);
+        }
+
+        private void RenderBattleObjects()
+        {
+            SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.Transform);
+            SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
+
+            BattleObjManager.Instance.Draw();
+        }
+
+        #endregion
     }
 }

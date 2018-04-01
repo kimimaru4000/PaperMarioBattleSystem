@@ -133,6 +133,15 @@ namespace PaperMarioBattleSystem
             return BattleUIElements.Remove(uiElement);
         }
 
+        /// <summary>
+        /// Returns all UIElements in a new list.
+        /// </summary>
+        /// <returns>A new list containing all the BattleUIElements.</returns>
+        public List<UIElement> GetAllUIElements()
+        {
+            return new List<UIElement>(BattleUIElements);
+        }
+
         #endregion
 
         public void Update()

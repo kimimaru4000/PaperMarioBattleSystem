@@ -67,7 +67,7 @@ namespace PaperMarioBattleSystem
         private void Initialize()
         {
             //Add all entities, then call the checker
-            NonLightSources.AddRange(BattleManager.Instance.GetAllEntities(null));
+            BattleManager.Instance.GetAllBattleEntities(NonLightSources, null);
 
             CheckUpdates();
             RecalculateTargets();

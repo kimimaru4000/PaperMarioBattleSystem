@@ -24,11 +24,13 @@ namespace PaperMarioBattleSystem
             base.OnStart();
 
             //Check if there is a BattleEntity behind the one eaten and if it can be hit by this move
-            BattleEntity[] behindEntities = BattleManager.Instance.GetEntitiesBehind(EntitiesAffected[0]);
-            behindEntities = BattleManager.Instance.FilterEntitiesByHeights(behindEntities, Action.MoveProperties.HeightsAffected);
+            List<BattleEntity> behindEntities = new List<BattleEntity>();
+
+            BattleManager.Instance.GetEntitiesBehind(behindEntities, EntitiesAffected[0]);
+            BattleManager.Instance.FilterEntitiesByHeights(behindEntities, Action.MoveProperties.HeightsAffected);
 
             //Store the reference to the behind entity and tell it it's being targeted
-            if (behindEntities.Length > 0)
+            if (behindEntities.Count > 0)
             {
                 BehindEntity = behindEntities[0];
                 BehindEntity.TargetForMove(User);

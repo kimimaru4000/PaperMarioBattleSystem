@@ -520,15 +520,15 @@ namespace PaperMarioBattleSystem
             }
 
             //Filter out untargetable BattleEntities
-            BattleEntity[] finalEntities = BattleManager.Instance.FilterEntitiesByTargetable(entities.ToArray());
+            BattleManager.Instance.FilterEntitiesByTargetable(entities);
 
             //Set to the true targets in the event something is defending them
-            for (int i = 0; i < finalEntities.Length; i++)
+            for (int i = 0; i < entities.Count; i++)
             {
-                finalEntities[i] = finalEntities[i].GetTrueTarget();
+                entities[i] = entities[i].GetTrueTarget();
             }
 
-            return finalEntities;
+            return entities.ToArray();
         }
 
         protected virtual BattleEntity[] GetCustomAffectedEntities()

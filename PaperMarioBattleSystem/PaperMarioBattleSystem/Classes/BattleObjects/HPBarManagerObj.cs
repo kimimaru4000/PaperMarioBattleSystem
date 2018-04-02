@@ -61,7 +61,7 @@ namespace PaperMarioBattleSystem
         private void Initialize()
         {
             //Add all existing entities
-            NoHPEntities.AddRange(BattleManager.Instance.GetAllEntities(null));
+            BattleManager.Instance.GetAllBattleEntities(NoHPEntities, null);
 
             CheckShowEntityHP();
 

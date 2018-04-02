@@ -39,7 +39,8 @@ namespace PaperMarioBattleSystem
             base.OnStart();
 
             //Damage everyone
-            List<BattleEntity> entities = new List<BattleEntity>(BattleManager.Instance.GetAllEntities(AffectedHeightStates));
+            List<BattleEntity> entities = new List<BattleEntity>();
+            BattleManager.Instance.GetAllBattleEntities(entities, AffectedHeightStates);
             entities.Remove(Bomb);
 
             for (int i = 0; i < entities.Count; i++)

@@ -39,21 +39,31 @@ namespace PaperMarioBattleSystem
          * http://www.kevinandamanda.com/fonts/freescrapbookfonts/hey-gorgeous/
          */
 
-        private ContentManager Content { get; set; } = null;
+        private ContentManager Content = null;
 
-        public SpriteFont Font = null;
+        public SpriteFont Font { get; private set; } = null;
 
         /// <summary>
         /// The font used in Paper Mario (pmdialog2).
         /// <para>Credit: Retriever II from MFGG</para>
         /// </summary>
-        public SpriteFont PMFont = null;
+        public SpriteFont PMFont { get; private set; } = null;
 
         /// <summary>
         /// The font used in Paper Mario The Thousand Year Door (PopJoyStd-B).
         /// <para>Credit: https://en.fontke.com/font/10390387/ (Copyright 2003 - Fontworks Japan, Inc.)</para>
         /// </summary>
-        public SpriteFont TTYDFont = null;
+        public SpriteFont TTYDFont { get; private set; } = null;
+
+        /// <summary>
+        /// The Charge shader used for Charged BattleEntities.
+        /// </summary>
+        public Effect ChargeShader { get; private set; } = null;
+
+        /// <summary>
+        /// The Charge texture used for the Charge shader.
+        /// </summary>
+        public Texture2D ChargeShaderTex { get; private set; } = null;
 
         /// <summary>
         /// Holds loaded raw Texture2Ds. These are disposed on cleanup.
@@ -81,6 +91,9 @@ namespace PaperMarioBattleSystem
             Font = LoadAsset<SpriteFont>("Fonts/Font");
             PMFont = LoadAsset<SpriteFont>("Fonts/PM Font");
             TTYDFont = LoadAsset<SpriteFont>("Fonts/Real TTYD Font");
+
+            ChargeShader = LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Charge");
+            ChargeShaderTex = LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
         }
 
         public void CleanUp()

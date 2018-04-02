@@ -916,7 +916,7 @@ namespace PaperMarioBattleSystem
                   5. If there are no allies to attack after all the filtering, make the entity do nothing*/
                 if (changeTargets == 1)
                 {
-                    BattleEntity[] allies = null;
+                    List<BattleEntity> allies = new List<BattleEntity>();
 
                     //If this action targets only the first player/enemy, look for adjacent allies
                     if (actualAction.MoveProperties.SelectionType == TargetSelectionMenu.EntitySelectionType.First)
@@ -924,36 +924,34 @@ namespace PaperMarioBattleSystem
                         Debug.Log($"{Name} is looking for valid adjacent allies to attack!");
 
                         //Find adjacent allies and filter out all non-ally entities
-                        List<BattleEntity> adjacentEntities = new List<BattleEntity>(BattleManager.Instance.GetAdjacentEntities(this));
-                        adjacentEntities.RemoveAll((adjacent) => adjacent.EntityType != EntityType);
-                        allies = adjacentEntities.ToArray();
+                        BattleManager.Instance.GetAdjacentEntities(allies, this);
+                        allies.RemoveAll((adjacent) => adjacent.EntityType != EntityType);
                     }
                     else
                     {
                         //Find all allies
-                        allies = BattleManager.Instance.GetEntityAllies(this);
+                        BattleManager.Instance.GetEntityAllies(allies, this);
                     }
 
                     //Filter by heights
-                    allies = BattleManager.Instance.FilterEntitiesByHeights(allies, actualAction.MoveProperties.HeightsAffected);
+                    BattleManager.Instance.FilterEntitiesByHeights(allies, actualAction.MoveProperties.HeightsAffected);
 
                     //Filter dead entities
-                    allies = BattleManager.Instance.FilterDeadEntities(allies);
+                    BattleManager.Instance.FilterDeadEntities(allies);
 
                     //Choose a random ally to attack if the action only targets one entity
-                    if (allies.Length > 0 && actualAction.MoveProperties.SelectionType != TargetSelectionMenu.EntitySelectionType.All)
+                    if (allies.Count > 0 && actualAction.MoveProperties.SelectionType != TargetSelectionMenu.EntitySelectionType.All)
                     {
-                        int randTarget = GeneralGlobals.Randomizer.Next(0, allies.Length);
-                        allies = new BattleEntity[] { allies[randTarget] };
+                        int randTarget = GeneralGlobals.Randomizer.Next(0, allies.Count);
+                        BattleEntity target = allies[randTarget];
+                        allies.Clear();
+                        allies.Add(target);
 
                         Debug.Log($"{Name} is choosing to attack ally {allies[0].Name} in Confusion!");
                     }
 
-                    //Set the actual targets to be the set of allies
-                    actualTargets = allies;
-
                     //If you can't attack any allies, do nothing
-                    if (actualTargets.Length == 0)
+                    if (allies.Count == 0)
                     {
                         actualAction = new NoAction();
 
@@ -961,6 +959,9 @@ namespace PaperMarioBattleSystem
                     }
                     else
                     {
+                        //Set the actual targets to be the set of allies
+                        actualTargets = allies.ToArray();
+
                         //Disable action commands when attacking allies from Confusion, if the action has an Action Command
                         if (actualAction.HasActionCommand == true)
                             actualAction.EnableActionCommand = false;

@@ -22,6 +22,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public GameWindow GameWindow => Window;
 
+        private List<BattleEntity> BattleEntities = null;
+        //A list of Charged BattleEntities for rendering
+        private List<BattleEntity> ChargedEntities = null;
+
         public Main()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -45,11 +49,11 @@ namespace PaperMarioBattleSystem
             graphics.SynchronizeWithVerticalRetrace = Time.VSyncEnabled;
 
             graphics.PreferMultiSampling = true;
-            
-            AssetManager.Instance.Initialize(Content);
-            SpriteRenderer.Instance.Initialize(graphics);
 
+            SpriteRenderer.Instance.Initialize(graphics);
             SpriteRenderer.Instance.AdjustWindowSize(new Vector2(RenderingGlobals.WindowWidth, RenderingGlobals.WindowHeight));
+
+            AssetManager.Instance.Initialize(Content);
 
             //FOR TESTING
             InitializeInventory();
@@ -58,10 +62,14 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEntity>() { new Duplighost() });
+                new List<BattleEntity>() { new Duplighost(), new Duplighost() });
 
             //Start the battle
             BattleManager.Instance.StartBattle();
+
+            //Initialize the lists with a capacity equal to the current number of BattleEntities in battle
+            BattleEntities = new List<BattleEntity>(BattleManager.Instance.TotalEntityCount);
+            ChargedEntities = new List<BattleEntity>(BattleManager.Instance.TotalEntityCount);
 
             base.Initialize();
         }
@@ -305,18 +313,22 @@ namespace PaperMarioBattleSystem
             //Don't render if the battle didn't start yet
             if (BattleManager.Instance.State == BattleManager.BattleState.Init) return;
 
-            BattleEntity[] allEntities = BattleManager.Instance.GetAllEntities(null);
+            BattleManager.Instance.GetAllBattleEntities(BattleEntities, null);
 
             //Potentially both
             RenderBattleObjects();
             RenderBattleInfo();
 
             //Sprite
-            RenderBattleEntities(allEntities);
+            RenderBattleEntities(BattleEntities);
 
             //UI
-            RenderStatusInfo(allEntities);
+            RenderStatusInfo(BattleEntities);
             RenderUI();
+
+            //Clear the lists
+            BattleEntities.Clear();
+            ChargedEntities.Clear();
 
             //BattleManager.Instance.Draw();
             //BattleUIManager.Instance.Draw();
@@ -359,20 +371,12 @@ namespace PaperMarioBattleSystem
 
         private void RenderBattleEntities(IList<BattleEntity> allEntities)
         {
-            //Charge list
-            List<BattleEntity> chargedEntities = null;
-
             //Render all BattleEntities normally
             for (int i = allEntities.Count - 1; i >= 0; i--)
             {
                 if (allEntities[i].HasCharge() == true)
                 {
-                    if (chargedEntities == null)
-                    {
-                        chargedEntities = new List<BattleEntity>(allEntities.Count);
-                    }
-
-                    chargedEntities.Add(allEntities[i]);
+                    ChargedEntities.Add(allEntities[i]);
 
                     continue;
                 }
@@ -383,15 +387,15 @@ namespace PaperMarioBattleSystem
             //End batch for the set drawn
             SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
 
-            if (UtilityGlobals.IListIsNullOrEmpty(chargedEntities) == false)
+            if (UtilityGlobals.IListIsNullOrEmpty(ChargedEntities) == false)
             {
-                Effect chargeEffect = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Charge");
-                Texture2D chargeShaderTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
+                Effect chargeEffect = AssetManager.Instance.ChargeShader;
+                Texture2D chargeShaderTex = AssetManager.Instance.ChargeShaderTex;
 
                 //Render the Charged BattleEntities with the Charge shader
-                for (int i = 0; i < chargedEntities.Count; i++)
+                for (int i = 0; i < ChargedEntities.Count; i++)
                 {
-                    BattleEntity chargedEntity = chargedEntities[i];
+                    BattleEntity chargedEntity = ChargedEntities[i];
                     Texture2D spriteSheet = chargedEntity.AnimManager.CurrentAnim.SpriteSheet;
 
                     //Set effect information

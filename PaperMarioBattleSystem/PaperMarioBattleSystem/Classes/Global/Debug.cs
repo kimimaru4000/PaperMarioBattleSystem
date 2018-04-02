@@ -277,10 +277,11 @@ namespace PaperMarioBattleSystem
 
             int turnCount = 3;
 
+            StatusEffect status = null;
+
             //Inflict NoSkills
             if (Input.GetKey(Keys.N, DebugKeyboard) == true)
             {
-                StatusEffect status = null;
                 //Disable Jump
                 if (Input.GetKeyDown(Keys.J, DebugKeyboard) == true)
                     status = new NoSkillsStatus(Enumerations.MoveCategories.Jump, turnCount);
@@ -300,19 +301,20 @@ namespace PaperMarioBattleSystem
             //Inflict Poison, Payback, or Paralyzed
             else if (Input.GetKeyDown(Keys.P, DebugKeyboard) == true)
             {
-                StatusEffect status = new PoisonStatus(turnCount);
                 //Inflict Payback
                 if (Input.GetKey(Keys.B, DebugKeyboard) == true) status = new PaybackStatus(turnCount);
                 //Inflict Paralyzed
                 else if (Input.GetKey(Keys.Z, DebugKeyboard) == true) status = new ParalyzedStatus(turnCount);
+                else status = new PoisonStatus(turnCount);
+
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Invisible or Injured
             else if (Input.GetKeyDown(Keys.I, DebugKeyboard) == true)
             {
-                StatusEffect status = new InvisibleStatus(turnCount);
                 //Inflict Injured
                 if (Input.GetKey(Keys.J, DebugKeyboard) == true) status = new InjuredStatus(turnCount);
+                else status = new InvisibleStatus(turnCount);
 
                 DebugInflictStatus(status, entityType);
             }
@@ -324,69 +326,75 @@ namespace PaperMarioBattleSystem
             //Inflict Fast, Frozen, FPRegen, or Fright
             else if (Input.GetKeyDown(Keys.F, DebugKeyboard) == true)
             {
-                StatusEffect status = new FastStatus(turnCount);
                 //Inflict Frozen
                 if (Input.GetKey(Keys.R, DebugKeyboard) == true) status = new FrozenStatus(turnCount);
                 //Inflict FPRegen
                 else if (Input.GetKey(Keys.P, DebugKeyboard) == true) status = new FPRegenStatus(2, turnCount);
                 else if (Input.GetKey(Keys.I, DebugKeyboard) == true) status = new FrightStatus();
+                else status = new FastStatus(turnCount);
+
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Dizzy or Dodgy
             else if (Input.GetKeyDown(Keys.D, DebugKeyboard) == true)
             {
-                StatusEffect status = new DizzyStatus(turnCount);
                 //Inflict Dodgy
                 if (Input.GetKey(Keys.O, DebugKeyboard) == true) status = new DodgyStatus(turnCount);
+                else status = new DizzyStatus(turnCount);
+
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Sleep, Stone, Slow, or Stop
             else if (Input.GetKeyDown(Keys.S, DebugKeyboard) == true)
             {
-                StatusEffect status = new SleepStatus(turnCount);
                 //Inflict Stone
                 if (Input.GetKey(Keys.T, DebugKeyboard) == true) status = new StoneStatus(turnCount);
                 //Inflict Slow
                 else if (Input.GetKey(Keys.L, DebugKeyboard) == true) status = new SlowStatus(turnCount);
                 //Inflict Stop
                 else if (Input.GetKey(Keys.P, DebugKeyboard) == true) status = new StopStatus(turnCount);
+                else status = new SleepStatus(turnCount);
+
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Confused or Charged
             else if (Input.GetKeyDown(Keys.C, DebugKeyboard) == true)
             {
-                StatusEffect status = new ConfusedStatus(turnCount);
                 //Inflict Charged
                 if (Input.GetKey(Keys.H, DebugKeyboard) == true) status = new ChargedStatus(1);
+                else status = new ConfusedStatus(turnCount);
+
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Burn or Blown
             else if (Input.GetKeyDown(Keys.B, DebugKeyboard) == true)
             {
-                StatusEffect status = new BurnStatus(turnCount);
                 if (Input.GetKey(Keys.L, DebugKeyboard) == true) status = new BlownStatus();
+                else status = new BurnStatus(turnCount);
+
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Tiny
             else if (Input.GetKeyDown(Keys.T, DebugKeyboard) == true)
             {
-                StatusEffect status = new TinyStatus(turnCount);
+                status = new TinyStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Huge or HPRegen
             else if (Input.GetKeyDown(Keys.H, DebugKeyboard) == true)
             {
-                StatusEffect status = new HugeStatus(turnCount);
                 //Inflict HPRegen
                 if (Input.GetKey(Keys.P, DebugKeyboard) == true) status = new HPRegenStatus(2, turnCount);
                 //Inflict Hold Fast
                 else if (Input.GetKey(Keys.O, DebugKeyboard) == true) status = new HoldFastStatus(turnCount);
+                else status = new HugeStatus(turnCount);
+
                 DebugInflictStatus(status, entityType);
             }
             //Inflict Allergic
             else if (Input.GetKeyDown(Keys.A, DebugKeyboard) == true)
             {
-                StatusEffect status = new AllergicStatus(turnCount);
+                status = new AllergicStatus(turnCount);
                 DebugInflictStatus(status, entityType);
             }
         }

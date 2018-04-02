@@ -78,7 +78,7 @@ namespace PaperMarioBattleSystem
         public bool IsPlaying => (Finished == false && Paused == false);
 
         protected int MaxFrameIndex => MaxFrames - 1;
-        public Frame CurFrame => Frames[CurFrameNum];
+        public ref readonly Frame CurFrame => ref Frames[CurFrameNum];
 
         protected double ElapsedFrameTime => (Time.ActiveMilliseconds - PrevFrameTimer);
         protected double TrueCurFrameDuration => (CurFrame.Duration * (Speed <= 0f ? 0f : (1f / Speed)));

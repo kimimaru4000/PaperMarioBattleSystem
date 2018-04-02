@@ -343,6 +343,7 @@
     <Compile Include="Classes\Global\UnitTests.cs" />
     <Compile Include="Classes\Global\Utility\Circle.cs" />
     <Compile Include="Classes\Global\Utility\EnumUtility.cs" />
+    <Compile Include="Classes\Global\Utility\GCWatcher.cs" />
     <Compile Include="Classes\Global\Utility\Interpolation.cs" />
     <Compile Include="Classes\Global\Utility\Line.cs" />
     <Compile Include="Classes\Global\Utility\UtilityGlobals.cs" />

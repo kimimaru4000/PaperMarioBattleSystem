@@ -60,11 +60,13 @@ namespace PaperMarioBattleSystem
             //Get all BattleEntities of the types specified in the move information
             if (MoveProperties.OtherEntTypes != null)
             {
+                List<BattleEntity> entities = new List<BattleEntity>();
+
                 for (int i = 0; i < MoveProperties.OtherEntTypes.Length; i++)
                 {
-                    BattleEntity[] entities = BattleManager.Instance.GetEntities(MoveProperties.OtherEntTypes[i], null);
+                    BattleManager.Instance.GetEntities(entities, MoveProperties.OtherEntTypes[i], null);
 
-                    for (int j = 0; j < entities.Length; j++)
+                    for (int j = 0; j < entities.Count; j++)
                     {
                         //Safely cast to see if the BattleEntity can be tattled
                         ITattleableEntity tattleableEntity = entities[j] as ITattleableEntity;
@@ -75,6 +77,8 @@ namespace PaperMarioBattleSystem
                             tattleableEntities.Add(entities[j]);
                         }
                     }
+
+                    entities.Clear();
                 }
             }
 

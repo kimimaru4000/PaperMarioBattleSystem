@@ -28,7 +28,9 @@ namespace PaperMarioBattleSystem
                     //Since the Koopatrol excludes itself, this number should be 1 less than the minimum number required for this action
                     const int minCountSummon = 2;
 
-                    List<BattleEntity> koopatrolsList = new List<BattleEntity>(BattleManager.Instance.GetEntityAllies(Enemy, Enemy.HeightState));
+                    List<BattleEntity> koopatrolsList = new List<BattleEntity>();
+                    BattleManager.Instance.GetEntityAllies(koopatrolsList, Enemy, Enemy.HeightState);
+
                     Type koopatrolType = Enemy.GetType();
                     for (int i = 0; i < koopatrolsList.Count; i++)
                     {

@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
         /// <param name="texture2D">The Texture2D to get the texture coordinates from.</param>
         /// <param name="sourceRect">The Rectangle to get the coordinates from.</param>
         /// <returns>A Vector2 with the Rectangle's X and Y values divided by the texture's width and height, respectively.</returns>
-        public static Vector2 GetTexCoordsAt(this Texture2D texture2D, Rectangle? sourceRect)
+        public static Vector2 GetTexCoordsAt(this Texture2D texture2D, in Rectangle? sourceRect)
         {
             Vector2 texCoords = Vector2.Zero;
 
@@ -457,6 +457,23 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < elements.Count; i++)
             {
                 list.Remove(elements[i]);
+            }
+        }
+
+        /// <summary>
+        /// Copies an <see cref="IList{T}"/> of elements to the <see cref="List{T}"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the List and IList.</typeparam>
+        /// <param name="list">The <see cref="List{T}"/>to copy elements to.</param>
+        /// <param name="elementsToCopy">The elements to copy to the <see cref="List{T}"/>.</param>
+        public static void CopyFromList<T>(this List<T> list, in IList<T> elementsToCopy)
+        {
+            //Return if null
+            if (elementsToCopy == null) return;
+
+            for (int i = 0; i < elementsToCopy.Count; i++)
+            {
+                list.Add(elementsToCopy[i]);
             }
         }
 

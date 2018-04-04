@@ -106,6 +106,17 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Puts all BattleObjects in a supplied list.
+        /// </summary>
+        /// <param name="battleObjs">The list to put the BattleObjects into.</param>
+        public void GetAllBattleObjects(List<BattleObject> battleObjs)
+        {
+            if (battleObjs == null) return;
+
+            battleObjs.CopyFromList(BattleObjects);
+        }
+
+        /// <summary>
         /// Removes all BattleObjects.
         /// </summary>
         public void ClearAllBattleObjects()

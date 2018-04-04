@@ -733,6 +733,107 @@ namespace PaperMarioBattleSystem
 
                 return time;
             }
+
+            /// <summary>
+            /// Gets the name of the assembly.
+            /// </summary>
+            /// <returns>A string representing the name of the assembly.</returns>
+            public static string GetAssemblyName()
+            {
+                //Get the name from the assembly information
+                System.Reflection.Assembly assembly = typeof(Debug).Assembly;
+                System.Reflection.AssemblyName asm = assembly.GetName();
+
+                return asm.Name;
+            }
+
+            /// <summary>
+            /// Gets the full build number as a string.
+            /// </summary>
+            /// <returns>A string representing the full build number.</returns>
+            public static string GetBuildNumber()
+            {
+                //Get the build number from the assembly information
+                System.Reflection.Assembly assembly = typeof(Debug).Assembly;
+                System.Reflection.AssemblyName asm = assembly.GetName();
+
+                return asm.Version.Major + "." + asm.Version.Minor + "." + asm.Version.Build + "." + asm.Version.Revision;
+            }
+
+            /// <summary>
+            /// Gets the name, version, and word size of the operating system as a string.
+            /// </summary>
+            /// <returns>A string representing the OS name, version, and word size.</returns>
+            public static string GetOSInfo()
+            {
+                string osVersion = string.Empty;
+
+                //Getting the OS version can fail if the user is running an extremely uncommon or old OS and/or it can't retrieve the information
+                try
+                {
+                    osVersion = Environment.OSVersion.ToString();
+
+                    //Check for a Linux OS and get more detailed info
+                    if (osVersion.ToLower().StartsWith("unix") == true)
+                    {
+                        string detailedLinux = GetDetailedLinuxOSInfo();
+
+                        //If we got the info, set the OS string to the detailed version
+                        if (string.IsNullOrEmpty(detailedLinux) == false)
+                        {
+                            osVersion = detailedLinux;
+                        }
+                    }
+                }
+                catch (InvalidOperationException)
+                {
+                    if (string.IsNullOrEmpty(osVersion) == true)
+                        osVersion = "N/A";
+                }
+
+                //Get word size
+                string osBit = Environment.Is64BitOperatingSystem ? "64-bit" : "32-bit";
+
+                return $"{osVersion} {osBit}";
+            }
+
+            /// <summary>
+            /// Retrieves more detailed information about a Linux OS by reading from its lsb-release file.
+            /// </summary>
+            /// <returns>A string representing the Linux ID and Release number. If the file isn't found or accessible, then null.</returns>
+            private static string GetDetailedLinuxOSInfo()
+            {
+                //Try to find the OS info in the "/etc/lsb-release" file
+                //"/" is the root
+                const string lsbRelease = "/etc/lsb-release";
+
+                //Check if the file exists and we have permission to access it
+                if (File.Exists(lsbRelease) == true)
+                {
+                    try
+                    {
+                        //Get all the text in the file
+                        string releaseText = File.ReadAllText(lsbRelease);
+
+                        //The DISTRIB_DESCRIPTION is the only thing we need, as it includes both the ID and Release number
+                        const string findString = "DISTRIB_DESCRIPTION=\"";
+
+                        //Find the location of the description in the file
+                        int index = releaseText.IndexOf(findString) + findString.Length;
+
+                        //The OS description will be here
+                        //The description is in quotation marks, so exclude the last character
+                        string osDescription = releaseText.Substring(index, releaseText.Length - index - 2);
+                        return osDescription;
+                    }
+                    catch (Exception)
+                    {
+                        //If we ran into an error, there's nothing we can really do, so exit
+                    }
+                }
+
+                return null;
+            }
         }
 
         #endregion

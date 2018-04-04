@@ -142,6 +142,17 @@ namespace PaperMarioBattleSystem
             return new List<UIElement>(BattleUIElements);
         }
 
+        /// <summary>
+        /// Puts all UIElements in a supplied list.
+        /// </summary>
+        /// <param name="uiElements">The list to put the UIElements into.</param>
+        public void GetAllUIElements(List<UIElement> uiElements)
+        {
+            if (uiElements == null) return;
+
+            uiElements.CopyFromList(BattleUIElements);
+        }
+
         #endregion
 
         public void Update()

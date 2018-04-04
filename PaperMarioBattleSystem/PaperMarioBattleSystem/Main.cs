@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
             graphics = new GraphicsDeviceManager(this);
             
             crashHandler = new CrashHandler();
-
+            
             //false for variable timestep, true for fixed
             Time.FixedTimeStep = true;
             Time.VSyncEnabled = true;
@@ -70,7 +70,7 @@ namespace PaperMarioBattleSystem
             //Initialize the lists with a capacity equal to the current number of BattleEntities in battle
             BattleEntities = new List<BattleEntity>(BattleManager.Instance.TotalEntityCount);
             ChargedEntities = new List<BattleEntity>(BattleManager.Instance.TotalEntityCount);
-
+            
             base.Initialize();
         }
 

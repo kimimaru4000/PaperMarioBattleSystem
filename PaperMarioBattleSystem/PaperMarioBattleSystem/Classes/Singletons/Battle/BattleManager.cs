@@ -970,18 +970,18 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets all BattleEntities taking part in battle into a supplied list. This method generates no garbage.
         /// </summary>
-        /// <param name="list">The list to put the BattleEntities into.</param>
+        /// <param name="entityList">The list to put the BattleEntities into.</param>
         /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
         /// If null, will include entities of all height states.</param>
-        public void GetAllBattleEntities(List<BattleEntity> list, params HeightStates[] heightStates)
+        public void GetAllBattleEntities(List<BattleEntity> entityList, params HeightStates[] heightStates)
         {
             //Add all the BattleEntities to the existing list
             foreach(KeyValuePair<EntityTypes, List<BattleEntity>> entities in AllEntities)
             {
-                list.CopyFromList(entities.Value);
+                entityList.CopyFromList(entities.Value);
             }
 
-            FilterEntitiesByHeights(list, heightStates);
+            FilterEntitiesByHeights(entityList, heightStates);
         }
 
         /// <summary>
@@ -1014,16 +1014,16 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Adds all entities of a specified EntityType in a supplied List. This method generates no garbage.
         /// </summary>
-        /// <param name="list">The List to add the BattleEntities to.</param>
+        /// <param name="entityList">The List to add the BattleEntities to.</param>
         /// <param name="entityType">The EntityType of BattleEntities to return.</param>
         /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
         /// If null, will include entities of all height states</param>
-        public void GetEntities(List<BattleEntity> list, EntityTypes entityType, params HeightStates[] heightStates)
+        public void GetEntities(List<BattleEntity> entityList, EntityTypes entityType, params HeightStates[] heightStates)
         {
             List<BattleEntity> entList = GetEntitiesList(entityType);
-            list.CopyFromList(entList);
+            entityList.CopyFromList(entList);
 
-            FilterEntitiesByHeights(list, heightStates);
+            FilterEntitiesByHeights(entityList, heightStates);
         }
 
         /// <summary>
@@ -1204,16 +1204,16 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets all allies of a particular BattleEntity. This method generates no garbage.
         /// </summary>
-        /// <param name="list">The list to put the allies into.</param>
+        /// <param name="entityList">The list to put the allies into.</param>
         /// <param name="entity">The BattleEntity whose allies to get.</param>
         /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
         /// If null or empty, will return the entities passed in</param>
-        public void GetEntityAllies(List<BattleEntity> list, BattleEntity entity, params HeightStates[] heightStates)
+        public void GetEntityAllies(List<BattleEntity> entityList, BattleEntity entity, params HeightStates[] heightStates)
         {
             List<BattleEntity> entList = GetEntitiesList(entity.EntityType);
 
-            list.CopyFromList(entList);
-            list.Remove(entity);
+            entityList.CopyFromList(entList);
+            entityList.Remove(entity);
         }
 
         /// <summary>
@@ -1296,22 +1296,22 @@ namespace PaperMarioBattleSystem
         /// Gets the BattleEntities behind a particular BattleEntity. This method generates no garbage.
         /// </summary>
         /// <param name="entity">The BattleEntity to find entities behind</param>
-        public void GetEntitiesBehind(List<BattleEntity> list, BattleEntity entity)
+        public void GetEntitiesBehind(List<BattleEntity> entityList, BattleEntity entity)
         {
             List<BattleEntity> entList = GetEntitiesList(entity.EntityType);
 
             //Copy the BattleEntities into this list
-            list.CopyFromList(entList);
-            list.Remove(entity);
+            entityList.CopyFromList(entList);
+            entityList.Remove(entity);
 
             //Compare Battle Index
             //BattleEntities behind have higher Battle Indices
             int battleIndex = entity.BattleIndex;
-            for (int i = 0; i < list.Count; i++)
+            for (int i = 0; i < entityList.Count; i++)
             {
-                if (list[i].BattleIndex <= battleIndex)
+                if (entityList[i].BattleIndex <= battleIndex)
                 {
-                    list.RemoveAt(i);
+                    entityList.RemoveAt(i);
                     i--;
                 }
             }
@@ -1514,17 +1514,6 @@ namespace PaperMarioBattleSystem
 
             //A BattleEntity wasn't found
             return null;
-
-            //List<BattleEntity> entities = GetEntitiesList(entityType, heightStates);
-            //
-            ////The BattleEntity in front is the first in the list, as they're sorted by BattleIndex
-            //if (entities.Count > 0)
-            //{
-            //    return entities[0];
-            //}
-            //
-            ////There's nothing to return
-            //return null;
         }
 
         #endregion

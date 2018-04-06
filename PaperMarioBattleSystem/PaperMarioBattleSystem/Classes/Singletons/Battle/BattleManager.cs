@@ -223,14 +223,13 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Initializes the battle
+        /// Initializes the battle.
         /// </summary>
         /// <param name="properties">The battle's properties.</param>
-        /// <param name="mario">Mario</param>
-        /// <param name="partner">Mario's partner</param>
-        /// <param name="enemies">The enemies, in order</param>
-        /// <param name="others">Other types of BattleEntities to add.</param>
-        public void Initialize(BattleProperties properties, BattleMario mario, BattlePartner partner, List<BattleEntity> enemies, params BattleEntity[] others)
+        /// <param name="mario">Mario.</param>
+        /// <param name="partner">Mario's partner.</param>
+        /// <param name="otherEntities">The BattleEntities to add, in order. This includes enemies.</param>
+        public void Initialize(BattleProperties properties, BattleMario mario, BattlePartner partner, List<BattleEntity> otherEntities)
         {
             Properties = properties;
 
@@ -245,13 +244,10 @@ namespace PaperMarioBattleSystem
             addedEntities.Add(mario);
             addedEntities.Add(partner);
 
-            //Add enemies
-            addedEntities.AddRange(enemies);
-
             //Add others
-            if (others != null && others.Length > 0)
+            if (otherEntities != null)
             {
-                addedEntities.AddRange(others);
+                addedEntities.AddRange(otherEntities);
             }
 
             //Add and initialize all entities

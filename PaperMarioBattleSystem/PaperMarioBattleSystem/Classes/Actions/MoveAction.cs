@@ -193,11 +193,28 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Initializes settings for the action's Action Command and MoveSequence.
+        /// Settings include whether they should auto-complete or not based on the action user's properties.
+        /// </summary>
+        protected void InitActionCommandSequenceSettings()
+        {
+            //Set auto completing Action Commands and Stylish Moves if the BattleEntity has the pre-requisites
+            if (HasActionCommand == true)
+                actionCommand.AutoComplete = User.EntityProperties.HasAdditionalProperty(AdditionalProperty.AutoActionCommands);
+            
+            //This can be null at this point for non-standard MoveActions, such as MenuActions
+            if (MoveSequence != null)
+                MoveSequence.AutoCompleteStylish = User.EntityProperties.HasAdditionalProperty(AdditionalProperty.AutoStylishMoves);
+        }
+
+        /// <summary>
         /// Initializes the MoveAction, checking if it should be disabled or not based on certain conditions.
         /// <para>Common conditions include not having enough FP to perform the move and not being able to reach any BattleEntities with this move.</para>
         /// </summary>
         public virtual void Initialize()
         {
+            InitActionCommandSequenceSettings();
+
             /*Check if the MoveAction should be disabled or not
                1. Check the FP cost, if it costs FP
                2. Check if the move can hit any BattleEntities it targets

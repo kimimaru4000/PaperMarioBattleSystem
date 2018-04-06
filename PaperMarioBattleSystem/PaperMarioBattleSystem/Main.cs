@@ -35,6 +35,21 @@ namespace PaperMarioBattleSystem
             //false for variable timestep, true for fixed
             Time.FixedTimeStep = true;
             Time.VSyncEnabled = true;
+
+            //MonoGame sets x32 MSAA by default if enabled
+            //If enabled and we want a lower value, set the value in the PreparingDeviceSettings event
+            graphics.SynchronizeWithVerticalRetrace = Time.VSyncEnabled;
+            graphics.PreferMultiSampling = true;
+
+            graphics.PreparingDeviceSettings -= OnPreparingDeviceSettings;
+            graphics.PreparingDeviceSettings += OnPreparingDeviceSettings;
+        }
+
+        private void OnPreparingDeviceSettings(object sender, PreparingDeviceSettingsEventArgs e)
+        {
+            //Prepare any graphics device settings here
+            //Note that OpenGL does not provide a way to set the adapter; the driver is responsible for that
+            graphics.PreparingDeviceSettings -= OnPreparingDeviceSettings;
         }
 
         /// <summary>
@@ -46,9 +61,6 @@ namespace PaperMarioBattleSystem
         protected override void Initialize()
         {
             IsFixedTimeStep = Time.FixedTimeStep;
-            graphics.SynchronizeWithVerticalRetrace = Time.VSyncEnabled;
-
-            graphics.PreferMultiSampling = true;
 
             SpriteRenderer.Instance.Initialize(graphics);
             SpriteRenderer.Instance.AdjustWindowSize(new Vector2(RenderingGlobals.WindowWidth, RenderingGlobals.WindowHeight));
@@ -62,7 +74,7 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEntity>() { new Duplighost(), new Duplighost() });
+                new List<BattleEntity>() { new Duplighost() });
 
             //Start the battle
             BattleManager.Instance.StartBattle();
@@ -215,6 +227,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected override void UnloadContent()
         {
+            graphics.PreparingDeviceSettings -= OnPreparingDeviceSettings;
+
             AssetManager.Instance.CleanUp();
             SoundManager.Instance.CleanUp();
             SpriteRenderer.Instance.CleanUp();

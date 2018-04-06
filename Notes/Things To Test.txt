@@ -269,3 +269,14 @@ Update: I tested more, and it's looking a lot like #2 is true. Here's what I did
 -Went back to Goombas at Level 1, with the Action Command
 
 Using Run Away with the Action Command at this level against Goombas shows that the bar is about 95% full, which means there's a very low chance of failing. The majority of my run attempts without the Lucky Star were successful, which leads me to believe this is what's actually going on!
+
+Dying with turn modifier Statuses
+---------------------------------
+If you die via Burn or Poison and are afflicted with Stop and subsequently are revived with a Life Shroom, do you still go? Test with Stop, Burn, and Poison on Mario with a Life Shroom.
+
+Results:
+
+1. Poison + Sleep = Mario goes
+2. Burn + Frozen + Sleep + Stop = Mario goes
+
+I think these results make it safe to say that Mario does not lose a turn when dying from Status Effects.

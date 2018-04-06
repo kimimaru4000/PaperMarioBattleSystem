@@ -20,7 +20,7 @@ You will need MonoGame 3.7 and Visual Studio 2017, but MonoDevelop, Xamarin Stud
 Builds for Windows, OSX, and Linux can be made with the Ruge Deploy Tool (https://github.com/MetaSmug/MonoGame.Ruge.DeployTool) using the DeployToolSettings.dt config file in the repository. You may need to adjust the output paths.
 
 ## Contributing
-Feel free to submit a pull request with details on your changes. Make sure your code has been tested and is well-commented.
+Feel free to submit a pull request with details on your changes. Please make sure that your code has been tested and is well-commented. Also feel free to open an issue if you encounter a bug or behavior that seems like a bug.
 
 ## Author(s)
 * **Thomas Deeb (aka Kimimaru)**

@@ -127,6 +127,11 @@ namespace PaperMarioBattleSystem
         private int Phase = 0;
 
         /// <summary>
+        /// Tells whether the BattleManager is currently switching phases or not.
+        /// </summary>
+        private bool SwitchingPhase = false;
+
+        /// <summary>
         /// The current phase, represented as an <see cref="EntityTypes"/>.
         /// This is a property that references the <see cref="PhaseOrder"/>.
         /// </summary>
@@ -138,7 +143,7 @@ namespace PaperMarioBattleSystem
         public BattleState State { get; private set; } = BattleState.Init;
 
         /// <summary>
-        /// The current entity going
+        /// The BattleEntity whose turn it currently is.
         /// </summary>
         public BattleEntity EntityTurn { get; private set; } = null;
 
@@ -281,7 +286,7 @@ namespace PaperMarioBattleSystem
             //Don't do anything until the battle starts
             if (State == BattleState.Init) return;
 
-            //NOTE: Create a general way to halt turns in battle in place of these hardcoded event check
+            //NOTE: Create a general way to halt turns in battle in place of these hardcoded event checks
 
             //Update battle events if there are any
             if (battleEventManager.HasBattleEvents == true)
@@ -294,7 +299,21 @@ namespace PaperMarioBattleSystem
             {
                 //Don't start the next turn until all Battle Events are finished
                 if (battleEventManager.HasBattleEvents == false)
-                    TurnStart();
+                {
+                    //If we should switch phases, switch to the next phase here
+                    //Putting this here fixes all Battle Events being delayed until a BattleEntity has a turn
+                    if (SwitchingPhase == true)
+                    {
+                        //All of the entities on this phase are done with their turns, so go to the next phase
+                        int nextPhase = UtilityGlobals.Wrap(Phase + 1, 0, PhaseOrder.Length - 1);
+                        SwitchPhase(nextPhase);
+                    }
+                    //Otherwise, start the current turn
+                    else
+                    {
+                        TurnStart();
+                    }
+                }
             }
 
             if (State == BattleState.Turn)
@@ -350,6 +369,7 @@ namespace PaperMarioBattleSystem
         public void StartBattle()
         {
             ChangeBattleState(BattleState.TurnEnd);
+            SwitchingPhase = true;
             SwitchPhase(Phase);
         }
 
@@ -374,6 +394,8 @@ namespace PaperMarioBattleSystem
 
         private void SwitchPhase(int phase)
         {
+            SwitchingPhase = false;
+
             EntityTypes prevPhase = PhaseOrder[Phase];
             Phase = phase;
 
@@ -417,11 +439,6 @@ namespace PaperMarioBattleSystem
                     entities[i].OnPhaseStart();
                 }
             }
-
-            //NOTE: There's a bug: if all players and enemies have no turns, all BattleEvents will be delayed until one of them
-            //has a turn. This is because it never gets to Update() since it searches for a turn, switches phases, then searches
-            //for a turn again, switches phases again, and repeats.
-            //This is easiest to replicate by inflicting everyone with Stop or a derived status (Ex. Frozen)
 
             //Find out who should go now
             FindNextEntityTurn();
@@ -685,9 +702,7 @@ namespace PaperMarioBattleSystem
                 }
             }
 
-            //All of the entities on this phase are done with their turns, so go to the next phase
-            int nextPhase = UtilityGlobals.Wrap(Phase + 1, 0, PhaseOrder.Length - 1);
-            SwitchPhase(nextPhase);
+            SwitchingPhase = true;
         }
 
         /*NOTE: When adding enemies or other entities in-battle,

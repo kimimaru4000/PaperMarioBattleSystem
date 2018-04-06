@@ -728,9 +728,15 @@ namespace PaperMarioBattleSystem
             TurnsUsed = 0;
             MaxTurns = BaseTurns;
 
+            //If the BattleEntity dies before the last Status Effect and clears all statuses, the ones that follow will have a null entity reference
+            //Status Effects that alter turn count are unaffected, so if the BattleEntity gets revived with a Life Shroom it will still move this turn
+            //This is how it works in TTYD. For our purposes, simply break when encountering a null reference to replicate this behavior
             StatusEffect[] statuses = EntityProperties.GetStatuses();
             for (int i = 0; i < statuses.Length; i++)
             {
+                //Break on null; this indicates the BattleEntity died and all Status Effects on it were removed partway into this loop
+                if (statuses[i].EntityAfflicted == null) break;
+
                 statuses[i].PhaseCycleStart();
             }
 
@@ -1013,7 +1019,7 @@ namespace PaperMarioBattleSystem
             else if (EntityProperties.HasStatus(StatusTypes.Injured) == true)
                 return AnimationGlobals.StatusBattleAnimations.InjuredName;
             else if (EntityProperties.HasStatus(StatusTypes.Stop) == true || EntityProperties.HasStatus(StatusTypes.Frozen) == true)
-                return AnimationGlobals.DeathName;
+                return AnimationGlobals.HurtName;
             else if (EntityProperties.HasStatus(StatusTypes.Sleep) == true)
                 return AnimationGlobals.StatusBattleAnimations.SleepName;
             else if (EntityProperties.HasStatus(StatusTypes.Dizzy) == true)

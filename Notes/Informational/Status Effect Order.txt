@@ -6,26 +6,40 @@ Testing is done by afflicting Status Effects with the same turn counts (via chea
 
 Preliminary Notes:
 -Most negative statuses in PM are impossible to test the order for since each character can be affected by only one negative status at a time (Ex. can't inflict Sleep + Dizzy)
--PM's status order is different: they apply at the start of the character's turn rather than at the start of the phase cycle
+-PM's status order is different: they apply at the start of the character's turn rather than at the start of the phase cycle. As a result, most Statuses end at the same exact time too
 -Injured is PM-only, and only Partners can be afflicted by it. The PM status order combined with the Partners' inability to be afflicted by any other statuses makes Injured's order unclear
--The following pairs of Status Effects share memory addresses with one other in TTYD. This means it's impossible to inflict both in the pair at the same time (Ex. Tiny and Huge):
+-The following pairs of Status Effects share memory addresses with one other in TTYD. This means it's impossible to inflict both in the pair on the same character at the same time (Ex. Tiny and Huge):
   -Tiny and Huge
   -DEF Down and DEF Up
   -POW Down and POW Up
- -However, they're still considered separate Status Effects. Test the pairs on different characters to find their orders
+ -However, they're still considered separate Status Effects. Test the pairs on two different characters to find their orders
 -Status Effects that KO and/or force a character out of battle, such as Fright, cannot be tested since the character is either out of battle or had all of its statuses removed due to dying
-  
+-NoSkills doesn't indicate when it ends in TTYD, so its order is based on when the re-enabled icon drops down in PM in relation to other statuses
+-Stone's suppression of several Status Effects' turn counts makes its order unclear
+
+The order of certain statuses listed may be estimated or guessed if they're impossible to figure out. Read "Additional Notes" for more information.
+
 Status Order
 ------------
+-KO
+-Fright
+-Blown
+-Water Block
+-Cloud Nine
+-Turbo Charge
 -Sleep
 -Stop
+-Paralyzed
+-Injured
 -Dizzy
 -Confused
 -Electrified
 -Dodgy
 -Burn
+-Frozen
 -Huge
 -Tiny
+-Poison
 -POW Up
 -POW Down
 -DEF Up
@@ -34,15 +48,35 @@ Status Order
 -HP Regen
 -FP Regen
 -Invisible
+-Stone
+-NoSkills
 -Fast
--Payback
--Frozen
--Poison
 -Slow
+-Payback
 -Hold Fast
+-Charged
+
+Water Block before Stone
+Water Block before NoSkills
+Water Block before Electrified
+Water Block before Poison
+Water Block before Sleep
+Stone before NoSkills
+
+Affection Order - Covers the order of Statuses performing their effects (Ex. Poison damaging)
+---------------
+-Poison
+-Burn
+-HP Regen
+-FP Regen
+-Frozen
 
 Additional Notes
 ----------------
--The order for the start of phase effects (Ex. taking damage) look to be indicated by the order of the status icons, from bottom to top:
-  -Poison's takes effect before Burn, but Poison finishes after Burn
-  -FP Regen's takes effect before Burn, but FP Regen finishes after Burn
+-KO, Fright, and Blown are placed at the top since one would expect them to take effect immediately if they were to be delayed. Picture a new Status Effect that KOs a character in a few turns - it would make sense to have this new Status Effect occur before the rest since the previous effects would be redundant to carry out if the character is dying anyway. Their order in relation to each other is a guess
+
+-Stone's placement is estimated based on its relation to NoSkills
+
+-Charged is placed last because it's unlike any of the other Status Effects and is inconsequential in this context. Since it has no turn count, removal indication, or icon, it's unclear where it would actually be placed
+
+-Paralyzed and Injured are placed above Dizzy for consistency; this groups them with other Status Effects that stop characters from moving. Their order in relation to each other is a guess since Paralyzed is only in PM, and characters in PM cannot be afflicted by both statuses - attempting to do so removes the previous status and afflicts the new one. See "Preliminary Notes"

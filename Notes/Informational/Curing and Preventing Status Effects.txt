@@ -152,3 +152,10 @@ Effect Suppressed
 -Frozen (The animation plays, but no damage when it wears off)
 -Confused (Vivian always comes back up on her next turn, and Mario never does anything on his turn)
 
+
+Update (4/7/18)
+---------------
+Since I encountered the falling water a few times since the last update, I figure it'll be beneficial to start documenting what I've seen it cure.
+
+== Falling Water ==
+-Frozen

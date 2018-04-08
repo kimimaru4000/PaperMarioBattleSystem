@@ -30,12 +30,8 @@ namespace PaperMarioBattleSystem
         {
             base.OnAfflict();
 
-            //Stone suppresses Electrified, Poison, Invisible, and Tiny's turn counts
-            //It suppresses the effects of Electrified and Poison, it and suppresses the VFX and Icon of Electrified
-            EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Invisible, StatusTypes.Tiny);
-            EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
-            EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
-            EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Tiny);
+            //Suppress the statuses it suppresses
+            HandleStatusSuppression(true);
 
             //Add the Invincible AdditionalProperty
             EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
@@ -55,10 +51,7 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
             //Unsuppress the statuses it suppressed in this way
-            EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Invisible, StatusTypes.Tiny);
-            EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
-            EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
-            EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Tiny);
+            HandleStatusSuppression(false);
 
             EntityAfflicted.AnimManager.PlayAnimation(EntityAfflicted.GetIdleAnim());
 
@@ -77,10 +70,7 @@ namespace PaperMarioBattleSystem
                 EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
 
                 //Unsuppress the statuses it suppressed in this way
-                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Invisible, StatusTypes.Tiny);
-                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
-                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
-                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Tiny);
+                HandleStatusSuppression(false);
 
                 EntityAfflicted.AnimManager.PlayAnimation(EntityAfflicted.GetIdleAnim());
 
@@ -97,10 +87,7 @@ namespace PaperMarioBattleSystem
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
                 //Resume suppressing the statuses again
-                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Invisible, StatusTypes.Tiny);
-                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
-                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
-                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Tiny);
+                HandleStatusSuppression(true);
 
                 //Add the Invincible AdditionalProperty
                 EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Invincible, 1);
@@ -121,7 +108,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Handles adding/removing Stone's Status Effect immunities.
         /// </summary>
-        /// <param name="immune">Whether to add or remove the immunity.</param>
+        /// <param name="immune">Whether to add or remove the immunities.</param>
         private void HandleStatusImmunities(bool immune)
         {
             EntityAfflicted.AddRemoveStatusImmunity(StatusTypes.Poison, immune);
@@ -130,6 +117,30 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.AddRemoveStatusImmunity(StatusTypes.Tiny, immune);
             EntityAfflicted.AddRemoveStatusImmunity(StatusTypes.Frozen, immune);
             EntityAfflicted.AddRemoveStatusImmunity(StatusTypes.NoSkills, immune);
+        }
+
+        /// <summary>
+        /// Handles suppressing/unsuppressing the Status Effects that Stone affects.
+        /// </summary>
+        /// <param name="suppress">Whether to suppress or unsuppress the Status Effects.</param>
+        private void HandleStatusSuppression(bool suppress)
+        {
+            if (suppress == true)
+            {
+                //Stone suppresses Electrified, Poison, Invisible, and Tiny's turn counts
+                //It suppresses the effects of Electrified and Poison, it and suppresses the VFX and Icon of Electrified
+                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Invisible, StatusTypes.Tiny);
+                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
+                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
+                EntityAfflicted.EntityProperties.SuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Tiny);
+            }
+            else
+            {
+                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.TurnCount, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Invisible, StatusTypes.Tiny);
+                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Effects, StatusTypes.Electrified, StatusTypes.Poison);
+                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.VFX, StatusTypes.Electrified);
+                EntityAfflicted.EntityProperties.UnsuppressStatuses(StatusSuppressionTypes.Icon, StatusTypes.Electrified, StatusTypes.Poison, StatusTypes.Tiny);
+            }
         }
     }
 }

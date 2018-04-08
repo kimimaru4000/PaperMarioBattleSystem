@@ -4,3 +4,7 @@ Status Effect Information (12/28/17)
 Injured
 -------
 In PM, disallows partners from being switched out.
+
+Confused
+--------
+When a Confused player (Ex. Mario or his Partner) takes an action when Confused, it'll switch to that action's category. For example, if Mario used Defend and Confused made him use Hammer instead, the cursor will be on the Hammer move category at the start of his next turn.

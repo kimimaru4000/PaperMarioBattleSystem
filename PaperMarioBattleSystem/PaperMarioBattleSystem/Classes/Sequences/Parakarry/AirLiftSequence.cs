@@ -143,7 +143,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     //Move offscreen
-                    CurSequenceAction = new MoveToFollowSeqAction(EntitiesAffected[0], new Vector2(SpriteRenderer.Instance.WindowSize.X + 100f, User.Position.Y - 50),
+                    CurSequenceAction = new MoveToFollowSeqAction(EntitiesAffected[0], new Vector2(RenderingGlobals.BaseResolutionWidth + 100f, User.Position.Y - 50),
                         LiftMoveDur, new Vector2(0f, 10f), Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.Linear);
                     break;
                 case 1:

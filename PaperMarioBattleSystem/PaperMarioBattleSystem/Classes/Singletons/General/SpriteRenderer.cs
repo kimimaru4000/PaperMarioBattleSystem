@@ -64,8 +64,11 @@ namespace PaperMarioBattleSystem
         public SpriteBatch uiBatch { get; private set; } = null;
         public GraphicsDeviceManager graphicsDeviceManager { get; private set; } = null;
 
-        public Vector2 WindowSize => new Vector2(graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
+        public Vector2 WindowSize => new Vector2(graphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferWidth, graphicsDeviceManager.GraphicsDevice.PresentationParameters.BackBufferHeight);
         public Vector2 WindowCenter => WindowSize.HalveInt();
+        public Vector2 ResolutionScale => WindowSize / new Vector2(RenderingGlobals.BaseResolutionWidth, RenderingGlobals.BaseResolutionHeight);
+
+        public bool IsFullscreen => graphicsDeviceManager.IsFullScreen;
 
         private bool Initialized = false;
 
@@ -95,10 +98,9 @@ namespace PaperMarioBattleSystem
         private RenderTarget2D PPRenderTarget = null;
 
         /// <summary>
-        /// Whether the RenderTarget was set or not.
-        /// If true, no screen size changes will be applied until the next frame.
+        /// Whether drawing for the frame started or not.
         /// </summary>
-        private bool SetRenderTarget = false;
+        private bool StartedDrawing = false;
 
         private SpriteRenderer()
         {
@@ -134,8 +136,13 @@ namespace PaperMarioBattleSystem
             spriteBatch = new SpriteBatch(graphicsDeviceManager.GraphicsDevice);
             uiBatch = new SpriteBatch(graphicsDeviceManager.GraphicsDevice);
 
-            MainRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
-            PPRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
+            //Set the RenderTargets to the base resolution
+            //From there, we can upscale or downscale it
+            int width = RenderingGlobals.BaseResolutionWidth;
+            int height = RenderingGlobals.BaseResolutionHeight;
+
+            MainRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, width, height);
+            PPRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, width, height);
 
             FinalRenderTarget = MainRenderTarget;
 
@@ -152,15 +159,21 @@ namespace PaperMarioBattleSystem
             graphicsDeviceManager.PreferredBackBufferHeight = (int)newWindowSize.Y;
 
             graphicsDeviceManager.ApplyChanges();
-            
-            //Replace the main RenderTarget if we can
-            if (SetRenderTarget == false)
-            {
-                ReplaceMainRenderTarget(graphicsDeviceManager.PreferredBackBufferWidth, graphicsDeviceManager.PreferredBackBufferHeight);
-            }
 
             //Invoke the window size changed event
             WindowSizeChangedEvent?.Invoke(newWindowSize);
+        }
+
+        /// <summary>
+        /// Toggles full screen.
+        /// </summary>
+        /// <param name="fullScreen">Whether to set full screen or not.</param>
+        public void ToggleFullscreen(bool fullScreen)
+        {
+            //Internally, ToggleFullScreen() in GraphicsDeviceManager sets IsFullScreen to the opposite value
+            //To get the desired result, we set it to the opposite here
+            graphicsDeviceManager.IsFullScreen = !fullScreen;
+            graphicsDeviceManager.ToggleFullScreen();
         }
 
         /// <summary>
@@ -189,20 +202,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void SetupDrawing()
         {
-            if (SetRenderTarget == true)
+            if (StartedDrawing == true)
             {
                 Debug.LogError($"Cannot set up drawing since it hasn't concluded!");
                 return;
-            }
-
-            Vector2 windowSize = WindowSize;
-            int width = (int)windowSize.X;
-            int height = (int)windowSize.Y;
-
-            //If our main RenderTarget isn't large enough, change its size
-            if (MainRenderTarget.Width != width || MainRenderTarget.Height != height)
-            {
-                ReplaceMainRenderTarget(width, height);
             }
 
             //Set the RenderTarget to the graphics device
@@ -213,8 +216,8 @@ namespace PaperMarioBattleSystem
 
             FinalRenderTarget = MainRenderTarget;
 
-            //Mark that we set the RenderTarget
-            SetRenderTarget = true;
+            //Mark that we started drawing
+            StartedDrawing = true;
         }
 
         /// <summary>
@@ -222,7 +225,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void ConcludeDrawing()
         {
-            if (SetRenderTarget == false)
+            if (StartedDrawing == false)
             {
                 Debug.LogError($"Cannot conclude drawing since it hasn't started!");
                 return;
@@ -259,12 +262,13 @@ namespace PaperMarioBattleSystem
             graphicsDeviceManager.GraphicsDevice.SetRenderTarget(null);
             graphicsDeviceManager.GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            //Scale the final RenderTarget by the resolution
             spriteBatch.Begin(SpriteSortMode.Immediate, null, null, null, null, null, null);
-            spriteBatch.Draw(FinalRenderTarget, new Rectangle(0, 0, FinalRenderTarget.Width, FinalRenderTarget.Height), null, Color.White);
+            spriteBatch.Draw(FinalRenderTarget, Vector2.Zero, null, Color.White, 0f, Vector2.Zero, ResolutionScale, SpriteEffects.None, 1f);
             spriteBatch.End();
 
-            //Mark that we unset the render target
-            SetRenderTarget = false;
+            //Mark that we stopped drawing
+            StartedDrawing = false;
 
             //Invoke the event saying we completely finished rendering
             FullyConcludedDrawingEvent?.Invoke(FinalRenderTarget);

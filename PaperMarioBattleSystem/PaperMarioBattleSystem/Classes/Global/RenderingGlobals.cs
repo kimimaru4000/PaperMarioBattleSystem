@@ -11,8 +11,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public static class RenderingGlobals
     {
-        public const int WindowWidth = 800;
-        public const int WindowHeight = 600;
+        public const int BaseResolutionWidth = 800;
+        public const int BaseResolutionHeight = 600;
 
         /// <summary>
         /// Gets the current global offset the Charge shader's texture should have.

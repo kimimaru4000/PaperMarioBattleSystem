@@ -41,6 +41,9 @@ namespace PaperMarioBattleSystem
             graphics.SynchronizeWithVerticalRetrace = Time.VSyncEnabled;
             graphics.PreferMultiSampling = true;
 
+            //Allows for borderless full screen on DesktopGL
+            graphics.HardwareModeSwitch = false;
+
             graphics.PreparingDeviceSettings -= OnPreparingDeviceSettings;
             graphics.PreparingDeviceSettings += OnPreparingDeviceSettings;
         }
@@ -63,7 +66,7 @@ namespace PaperMarioBattleSystem
             IsFixedTimeStep = Time.FixedTimeStep;
 
             SpriteRenderer.Instance.Initialize(graphics);
-            SpriteRenderer.Instance.AdjustWindowSize(new Vector2(RenderingGlobals.WindowWidth, RenderingGlobals.WindowHeight));
+            SpriteRenderer.Instance.AdjustWindowSize(new Vector2(RenderingGlobals.BaseResolutionWidth, RenderingGlobals.BaseResolutionHeight));
 
             AssetManager.Instance.Initialize(Content);
 

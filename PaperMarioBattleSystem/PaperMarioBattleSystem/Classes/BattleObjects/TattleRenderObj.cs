@@ -101,9 +101,14 @@ namespace PaperMarioBattleSystem
 
             //Set the region of the screen to draw from, and ensure it doesn't go outside the screen's bounds
             ScreenRegion = new Rectangle((int)TattledEntityPos.X - regionWidthOver2, (int)TattledEntityPos.Y - regionHeightOver2, (int)RenderRegionSize.X, (int)RenderRegionSize.Y);
+
+            if (ScreenRegion.X > windowSize.X) ScreenRegion.X -= (ScreenRegion.X - (int)windowSize.X) - ScreenRegion.Width;
             if (ScreenRegion.X < 0) ScreenRegion.X = 0;
+
+            if (ScreenRegion.Y > windowSize.Y) ScreenRegion.Y -= (ScreenRegion.Y - (int)windowSize.Y) - ScreenRegion.Height;
             if (ScreenRegion.Y < 0) ScreenRegion.Y = 0;
-            if (ScreenRegion.Right > windowSize.X) ScreenRegion.Width = (int)windowSize.X - ScreenRegion.X;
+
+            if (ScreenRegion.Right > windowSize.X) ScreenRegion.Width = ScreenRegion.Right - (int)windowSize.X;
             if (ScreenRegion.Bottom > windowSize.Y) ScreenRegion.Height = (int)windowSize.Y - ScreenRegion.Y;
 
             StartPos = new Vector2(EndPos.X, -ScreenRegion.Height - Math.Abs(RenderRegionSize.Y - TattleBoxSize.Y));

@@ -36,7 +36,7 @@ namespace PaperMarioBattleSystem
             //Remove entities afflicted with Blown
             BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.BlownAway,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                new BlownAwayBattleEvent(EntityAfflicted, new Vector2(SpriteRenderer.Instance.WindowSize.X + 100f, EntityAfflicted.Position.Y), BlownMoveTime));
+                new BlownAwayBattleEvent(EntityAfflicted, new Vector2(RenderingGlobals.BaseResolutionWidth + 100f, EntityAfflicted.Position.Y), BlownMoveTime));
         }
 
         protected override void OnEnd()

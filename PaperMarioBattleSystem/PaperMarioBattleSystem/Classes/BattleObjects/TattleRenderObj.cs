@@ -31,6 +31,17 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private readonly Vector2 TattleBoxSize = new Vector2(150, 110);
 
+        /// <summary>
+        /// The RenderTarget to put the portion of the screen into.
+        /// </summary>
+        private RenderTarget2D PortionRenderTarget = null;
+
+        /// <summary>
+        /// A RenderTarget holding a copy of the screen data.
+        /// This allows us to render <see cref="PortionRenderTarget"/> to the final RenderTarget without losing the final RenderTarget's data.
+        /// </summary>
+        private RenderTarget2D ScreenCopy = null;
+
         public Vector2 Position { get; set; } = Vector2.Zero;
 
         /// <summary>
@@ -44,9 +55,9 @@ namespace PaperMarioBattleSystem
         private readonly Rectangle ScreenRegion = Rectangle.Empty;
 
         /// <summary>
-        /// The current region of the screen that's being rendered.
+        /// The current region of the RenderTarget that's being rendered. This is used for the "open" effect.
         /// </summary>
-        private Rectangle CurRegion = Rectangle.Empty;
+        private Rectangle CurTargetRegion = Rectangle.Empty;
 
         /// <summary>
         /// The scale to draw the region at.
@@ -99,36 +110,47 @@ namespace PaperMarioBattleSystem
             int regionWidthOver2 = (int)RenderRegionSize.X / 2;
             int regionHeightOver2 = (int)RenderRegionSize.Y / 2;
 
-            //Set the region of the screen to draw from, and ensure it doesn't go outside the screen's bounds
+            //Set the region of the screen to draw from
             ScreenRegion = new Rectangle((int)TattledEntityPos.X - regionWidthOver2, (int)TattledEntityPos.Y - regionHeightOver2, (int)RenderRegionSize.X, (int)RenderRegionSize.Y);
 
-            if (ScreenRegion.X > windowSize.X) ScreenRegion.X -= (ScreenRegion.X - (int)windowSize.X) - ScreenRegion.Width;
-            if (ScreenRegion.X < 0) ScreenRegion.X = 0;
+            /*Commented; we want to ensure that we get the full size of the part of the screen we need
+            It's easier to make sure that no BattleEntities are outside of this region than to adjust it, which has its own set of problems*/
 
-            if (ScreenRegion.Y > windowSize.Y) ScreenRegion.Y -= (ScreenRegion.Y - (int)windowSize.Y) - ScreenRegion.Height;
-            if (ScreenRegion.Y < 0) ScreenRegion.Y = 0;
-
-            if (ScreenRegion.Right > windowSize.X) ScreenRegion.Width = ScreenRegion.Right - (int)windowSize.X;
-            if (ScreenRegion.Bottom > windowSize.Y) ScreenRegion.Height = (int)windowSize.Y - ScreenRegion.Y;
+            //if (ScreenRegion.X > windowSize.X) ScreenRegion.X -= (ScreenRegion.X - (int)windowSize.X) - ScreenRegion.Width;
+            //if (ScreenRegion.X < 0) ScreenRegion.X = 0;
+            //
+            //if (ScreenRegion.Y > windowSize.Y) ScreenRegion.Y -= (ScreenRegion.Y - (int)windowSize.Y) - ScreenRegion.Height;
+            //if (ScreenRegion.Y < 0) ScreenRegion.Y = 0;
+            //
+            //if (ScreenRegion.Right > windowSize.X) ScreenRegion.Width = ScreenRegion.Right - (int)windowSize.X;
+            //if (ScreenRegion.Bottom > windowSize.Y) ScreenRegion.Height = (int)windowSize.Y - ScreenRegion.Y;
 
             StartPos = new Vector2(EndPos.X, -ScreenRegion.Height - Math.Abs(RenderRegionSize.Y - TattleBoxSize.Y));
             Position = StartPos;
 
             //Start out closed
-            CurRegion = ScreenRegion;
-            CurRegion.Y = StartRegionY;
-            CurRegion.Height = 0;
+            CurTargetRegion = new Rectangle(0, ScreenRegion.Height / 2, ScreenRegion.Width, 0);
+
+            //Set up the RenderTargets
+            PortionRenderTarget = new RenderTarget2D(SpriteRenderer.Instance.graphicsDeviceManager.GraphicsDevice, ScreenRegion.Width, ScreenRegion.Height);
+            ScreenCopy = new RenderTarget2D(SpriteRenderer.Instance.graphicsDeviceManager.GraphicsDevice, RenderingGlobals.BaseResolutionWidth, RenderingGlobals.BaseResolutionHeight);
 
             TattleWindow = new NineSlicedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"),
                 new Rectangle(457, 812, 32, 16), 7, 6, 7, 9);
 
-            SpriteRenderer.Instance.FullyConcludedDrawingEvent -= OnDrawingFullyConcluded;
-            SpriteRenderer.Instance.FullyConcludedDrawingEvent += OnDrawingFullyConcluded;
+            SpriteRenderer.Instance.ConcludedDrawingEvent -= OnDrawingConcluded;
+            SpriteRenderer.Instance.ConcludedDrawingEvent += OnDrawingConcluded;
         }
 
         public override void CleanUp()
         {
-            SpriteRenderer.Instance.FullyConcludedDrawingEvent -= OnDrawingFullyConcluded;
+            SpriteRenderer.Instance.ConcludedDrawingEvent -= OnDrawingConcluded;
+
+            PortionRenderTarget.Dispose();
+            PortionRenderTarget = null;
+
+            ScreenCopy.Dispose();
+            ScreenCopy = null;
 
             TattleWindow = null;
         }
@@ -155,8 +177,8 @@ namespace PaperMarioBattleSystem
             ElapsedTime = 0d;
             OpenCloseTime = openTime;
 
-            CurRegion.Y = StartRegionY;
-            CurRegion.Height = 0;
+            CurTargetRegion.Y = ScreenRegion.Height / 2;
+            CurTargetRegion.Height = 0;
         }
 
         /// <summary>
@@ -169,8 +191,8 @@ namespace PaperMarioBattleSystem
             ElapsedTime = 0d;
             OpenCloseTime = closeTime;
 
-            CurRegion.Y = ScreenRegion.Y;
-            CurRegion.Height = ScreenRegion.Height;
+            CurTargetRegion.Y = 0;
+            CurTargetRegion.Height = ScreenRegion.Height;
         }
 
         /// <summary>
@@ -217,13 +239,13 @@ namespace PaperMarioBattleSystem
             {
                 if (CurState == States.Opening)
                 {
-                    CurRegion.Y = Interpolation.Interpolate(StartRegionY, ScreenRegion.Y, ElapsedTime / OpenCloseTime, Interpolation.InterpolationTypes.Linear);
-                    CurRegion.Height = Interpolation.Interpolate(0, ScreenRegion.Height, ElapsedTime / OpenCloseTime, Interpolation.InterpolationTypes.Linear);
+                    CurTargetRegion.Y = Interpolation.Interpolate(ScreenRegion.Height / 2, 0, ElapsedTime / OpenCloseTime, Interpolation.InterpolationTypes.Linear);
+                    CurTargetRegion.Height = Interpolation.Interpolate(0, ScreenRegion.Height, ElapsedTime / OpenCloseTime, Interpolation.InterpolationTypes.Linear);
                 }
                 else
                 {
-                    CurRegion.Y = Interpolation.Interpolate(ScreenRegion.Y, StartRegionY, ElapsedTime / OpenCloseTime, Interpolation.InterpolationTypes.Linear);
-                    CurRegion.Height = Interpolation.Interpolate(ScreenRegion.Height, 0, ElapsedTime / OpenCloseTime, Interpolation.InterpolationTypes.Linear);
+                    CurTargetRegion.Y = Interpolation.Interpolate(0, ScreenRegion.Height / 2, ElapsedTime / OpenCloseTime, Interpolation.InterpolationTypes.Linear);
+                    CurTargetRegion.Height = Interpolation.Interpolate(ScreenRegion.Height, 0, ElapsedTime / OpenCloseTime, Interpolation.InterpolationTypes.Linear);
                 }
 
                 if (ElapsedTime > OpenCloseTime)
@@ -234,18 +256,41 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private void OnDrawingFullyConcluded(in RenderTarget2D finalRenderTarget)
+        private void OnDrawingConcluded(in RenderTarget2D finalRenderTarget)
         {
-            //After finishing all drawing, render this to the backbuffer
-            //This renders on top of the final RenderTarget, which prevents us from rendering over that portion of the screen in the RenderTarget
-            
+            //After finishing all drawing, render this portion of the screen to the RenderTarget
+            //This renders on top of the final RenderTarget, which prevents us from rendering over that portion of the screen
+
+            if (CurTargetRegion.Width != 0 && CurTargetRegion.Height != 0)
+            {
+                //Get a copy of the screen so we don't lose the final RenderTargets original data
+                SpriteRenderer.Instance.graphicsDeviceManager.GraphicsDevice.SetRenderTarget(ScreenCopy);
+
+                SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.Opaque, SamplerState.PointClamp, null, null);
+                SpriteRenderer.Instance.Draw(finalRenderTarget, Vector2.Zero, Color.White, false, false, 1f);
+                SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
+
+                //Draw the part of the screen we need into our destination render target
+                SpriteRenderer.Instance.graphicsDeviceManager.GraphicsDevice.SetRenderTarget(PortionRenderTarget);
+                
+                SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.Opaque, SamplerState.PointClamp, null, null);
+                SpriteRenderer.Instance.Draw(ScreenCopy, new Rectangle(0, 0, PortionRenderTarget.Width, PortionRenderTarget.Height), ScreenRegion, Color.White, 0f, Vector2.Zero, false, false, 1f);
+                SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
+
+                //Copy back the final RenderTarget's data with the copy we had earlier
+                SpriteRenderer.Instance.graphicsDeviceManager.GraphicsDevice.SetRenderTarget(finalRenderTarget);
+                SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.Opaque, SamplerState.PointClamp, null, null);
+                SpriteRenderer.Instance.Draw(ScreenCopy, Vector2.Zero, Color.White, false, false, 1f);
+                SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
+            }
+
             SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.uiBatch, null, SamplerState.PointClamp, null, null);
             SpriteRenderer.Instance.DrawUISliced(TattleWindow, new Rectangle((int)Position.X - (int)(TattleBoxSize.X * (DrawScale.X / 2f)), (int)Position.Y - (int)(TattleBoxSize.Y * (DrawScale.Y / 2f)), (int)TattleBoxSize.X * (int)DrawScale.X, (int)TattleBoxSize.Y * (int)DrawScale.Y), Color.Blue, .9f);
             
             //Don't render this part of the screen if we're not displaying it yet
-            if (CurRegion.Width != 0 && CurRegion.Height != 0)
+            if (CurTargetRegion.Width != 0 && CurTargetRegion.Height != 0)
             {
-                SpriteRenderer.Instance.DrawUI(finalRenderTarget, Position, CurRegion, Color.White, 0f, new Vector2(.5f, .5f), DrawScale, false, false, 1f);
+                SpriteRenderer.Instance.DrawUI(PortionRenderTarget, Position, CurTargetRegion, Color.White, 0f, new Vector2(.5f, .5f), DrawScale, false, false, 1f);
             }
 
             SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.uiBatch);

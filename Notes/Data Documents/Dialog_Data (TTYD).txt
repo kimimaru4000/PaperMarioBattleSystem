@@ -1,0 +1,83 @@
+Text Modifiers:
+    <anim %s %s %d %d %f %d>    Displays an image of a model. Format: name subname x y scale unk(z?)
+    <boss> </boss>              Message Modifier: Boss/Spooky
+    <clear>                     Message Modifier: Clear. Removes the speech bubble and displays only the text.
+    <col %08X> </col>           Text Modifier: Change the text colour to %x(hexadecimal RRGGBBAA)
+    <diary> <diary>             Message Modifier: Diary/Journal Ripped Paper
+    <dkey> </dkey>              Unknown Text Modifier.
+    <dynamic %d> </dynamic>     Sets the starting size for text to fall in place.
+    <housou> <housou>           Message Modifier: Mechanical
+    <icon %s %f %d %d %d>       Display icon %s with scale of %f and position %d(x), %d(y), %d(z?).
+    <k>                         Shorter version of <key>. Wait for key press.
+    <kanban> <kanban>           Message Modifier: Banner/Sign Wood
+    <key>                       Wait for key press.
+    <keyxon> </keyxon>          Message Modifier: Allows to skip messages.
+    <majo>                      Message Modifier: Final boss message.
+    <me %s>                     Function Unknown.
+    <noise> </noise>            Message Modifier: Adds "noise" to the characters (like analog TV noise).
+    <nowinse>                   Function Unknown.
+    <o>                         Prevents the message from closing. Used only when another event (like a selection) is supposed to take place.
+    <once_stop>                 Stop Scrolling.
+    <p>                         Begin new paragraph.
+    <paper %s %d> </paper>      Function Unknown. (Seems to grey out the star icon?)
+    <plate>	</plate>            Message Modifier: Sign Post/Bulletin
+    <pos %d %d>                 Set the position of the text to (%d[x], %d[y]).
+    <r>                         Function Unknown.
+    <red> </red>                Function Unknown.
+    <scale %f> </scale>         Set the scale of the text to %f.
+    <scaleX> </scale>           Parameters Unknown, Function Unknown.
+    <scrl_auto>                 Automatic Scrolling.
+    <se %d>                     Function Unknown. Sets size??
+    <select %hd %hd %hd %hd>    Multiple choice selection. %d initial selection, %d size, %d type, %d flags
+    <shake> </shake>            Text Modifier: Shakes the text.
+    <small> </small>            Message Modifier: Small (Background)
+    <speed> </speed>            Text Modifier: Speeds up the text.
+    <system> </system>          Message Modifier: System Message.
+    <tec> </tec>                Message Modifier: T.E.C. (computer)
+    <vol>                       Function Unknown.
+    <wait %d>                   Wait %d milliseconds.
+    <wave> </wave>              Text Modifier: Waves the text up and down.
+    <wpos %hd %hd %hd %hd>      Function Unknown.
+
+    <!%s>                       Comment
+
+Grammar:
+    <AN>                English Grammar; Preceeds <ITEM>.
+    <AN_ITEM>           English Single
+    <MPLdie>            Unknown
+    <FPLdie>            Unknown
+    <NPLdie>            Unknown
+    <Einen>             German Unknown
+    <Ein_ITEM>          German Unknown
+    <Einen_ITEM>        German Unknown
+    <PLles>             French Plural
+    <Un_ITEM>           French Single
+    <PLunos>            Spanish Unknown
+    <PLunas>            Spanish Unknown
+    <S>                 Plural; Follows <NUM>.
+
+<ITEM>              Displays the name of an item.
+<COIN>              Unknown (Coins?)
+<POINT>             Unknown (Points?)
+<OGGETTO>           Unknown
+<NUM>               Displays a number.
+    
+Icon List:
+    PAD_A
+    PAD_B
+    STICK_LEFT
+    STICK
+    AC_ON
+    BUTTON_L
+    BUTTON_R
+    HM
+    PAD_X
+    PAD_X_ON
+    PAD_Y
+    PAD_Y_ON
+    PAD_Z_OFF
+    PAD_ST_OFF
+    black_key
+    ANM_PAD_A
+    ANM_STICK_RIGHT
+    ANM_PAD_START

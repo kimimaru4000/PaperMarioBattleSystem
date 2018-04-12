@@ -33,6 +33,8 @@ namespace PaperMarioBattleSystem
 
         public const string SpikedTipHurtName = "SpikedTipHurt";
 
+        public const string TalkName = "Talk";
+
         /// <summary>
         /// Battle animations specific to playable characters
         /// </summary>

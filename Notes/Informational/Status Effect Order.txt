@@ -56,13 +56,6 @@ Status Order
 -Hold Fast
 -Charged
 
-Water Block before Stone
-Water Block before NoSkills
-Water Block before Electrified
-Water Block before Poison
-Water Block before Sleep
-Stone before NoSkills
-
 Affection Order - Covers the order of Statuses performing their effects (Ex. Poison damaging)
 ---------------
 -Poison

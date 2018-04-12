@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
@@ -273,25 +274,27 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Defines the priority of StatusEffects. Higher priorities affect BattleEntities sooner.
-        /// <para>Related StatusEffects are grouped together in lines for readability</para>
+        /// <para>Related StatusEffects are sometimes grouped together in lines for readability</para>
         /// </summary>
-        private readonly static Dictionary<Enumerations.StatusTypes, int> StatusOrder = new Dictionary<Enumerations.StatusTypes, int>()
+        private readonly static Dictionary<StatusTypes, int> StatusOrder = new Dictionary<StatusTypes, int>()
         {
-            { Enumerations.StatusTypes.KO, 350 }, { Enumerations.StatusTypes.Fright, 349 }, { Enumerations.StatusTypes.Blown, 348 }, { Enumerations.StatusTypes.Lifted, 347 },
-            { Enumerations.StatusTypes.WaterBlock, 250 }, { Enumerations.StatusTypes.CloudNine, 249 }, { Enumerations.StatusTypes.TurboCharge, 248 },
-            { Enumerations.StatusTypes.Poison, 200 }, { Enumerations.StatusTypes.Burn, 199 },
-            { Enumerations.StatusTypes.Fast, 150 }, { Enumerations.StatusTypes.Slow, 149 },
-            { Enumerations.StatusTypes.Stone, 2 }, { Enumerations.StatusTypes.Sleep, 147 }, { Enumerations.StatusTypes.Stop, 146 }, { Enumerations.StatusTypes.Frozen, 145 }, { Enumerations.StatusTypes.Injured, 144 }, { Enumerations.StatusTypes.Paralyzed, 143 },
-            { Enumerations.StatusTypes.POWDown, 130 }, { Enumerations.StatusTypes.POWUp, 129 }, { Enumerations.StatusTypes.DEFDown, 128 }, { Enumerations.StatusTypes.DEFUp, 127 },
-            { Enumerations.StatusTypes.Tiny, 109 }, { Enumerations.StatusTypes.Huge, 108 },
-            { Enumerations.StatusTypes.HPRegen, 90 }, { Enumerations.StatusTypes.FPRegen, 89 },
-            { Enumerations.StatusTypes.Dizzy, 80 }, { Enumerations.StatusTypes.Dodgy, 79 },
-            { Enumerations.StatusTypes.Electrified, 70 }, { Enumerations.StatusTypes.Invisible, 69 },
-            { Enumerations.StatusTypes.Confused, 50 },
-            { Enumerations.StatusTypes.Payback, 25 }, { Enumerations.StatusTypes.HoldFast, 24 },
-            { Enumerations.StatusTypes.NoSkills, 10 },
-            { Enumerations.StatusTypes.Charged, 5 },
-            { Enumerations.StatusTypes.Allergic, 1 }
+            { StatusTypes.KO, 350 }, { StatusTypes.Fright, 349 }, { StatusTypes.Blown, 348 }, { StatusTypes.Lifted, 347 },
+            { StatusTypes.WaterBlock, 300 }, { StatusTypes.CloudNine, 299 }, { StatusTypes.TurboCharge, 298 },
+            { StatusTypes.Sleep, 250 }, { StatusTypes.Stop, 249 }, { StatusTypes.Paralyzed, 248 }, { StatusTypes.Injured, 247 },
+            { StatusTypes.Dizzy, 200 }, { StatusTypes.Confused, 199 },
+            { StatusTypes.Electrified, 150 }, { StatusTypes.Dodgy, 149 },
+            { StatusTypes.Burn, 130 }, { StatusTypes.Frozen, 129 },
+            { StatusTypes.Huge, 120 }, { StatusTypes.Tiny, 119 },
+            { StatusTypes.Poison, 110 },
+            { StatusTypes.POWUp, 100 }, { StatusTypes.POWDown, 99 }, { StatusTypes.DEFUp, 98 }, { StatusTypes.DEFDown, 97 },
+            { StatusTypes.Allergic, 90 },
+            { StatusTypes.HPRegen, 80 }, { StatusTypes.FPRegen, 79 },
+            { StatusTypes.Invisible, 70 },
+            { StatusTypes.Stone, 60 },
+            { StatusTypes.NoSkills, 50 },
+            { StatusTypes.Fast, 40 }, { StatusTypes.Slow, 39 },
+            { StatusTypes.Payback, 30 }, { StatusTypes.HoldFast, 29 },
+            { StatusTypes.Charged, 0 }
         };
 
         #endregion

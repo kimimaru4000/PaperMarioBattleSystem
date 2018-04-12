@@ -261,6 +261,14 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.Update();
             BattleUIManager.Instance.Update();
             BattleObjManager.Instance.Update();
+
+            if (bubble != null)
+                bubble.Update();
+
+            if (bubble == null && Input.GetKeyDown(Keys.Y))
+            {
+                bubble = new DialogueBubble("Hello World!", 100d);
+            }
         }
 
         /// <summary>
@@ -364,7 +372,7 @@ namespace PaperMarioBattleSystem
 
             PostDraw(gameTime);
         }
-
+        DialogueBubble bubble = null;
         /// <summary>
         /// Any drawing that should occur immediately after the main Draw method
         /// </summary>
@@ -487,6 +495,13 @@ namespace PaperMarioBattleSystem
         private void RenderUI()
         {
             BattleUIManager.Instance.Draw();
+
+            //Draw Test Dialogue Bubble
+            if (bubble != null)
+            {
+                SpriteRenderer.Instance.DrawUI(bubble.BubbleImage.Tex, new Vector2(100, 100), bubble.BubbleImage.SourceRect, Color.White, false, false, .9f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, bubble.stringBuilder, new Vector2(110, 110), Color.Black, 0f, Vector2.Zero, 1f, 1f);
+            }
 
             SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.uiBatch);
         }

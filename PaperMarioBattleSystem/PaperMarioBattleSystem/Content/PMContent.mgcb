@@ -175,6 +175,12 @@
 /processorParam:DebugMode=Auto
 /build:Shaders/Charge.fx
 
+#begin Shaders/DialogueBubbleText.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/DialogueBubbleText.fx
+
 #begin Shaders/Poison.fx
 /importer:EffectImporter
 /processor:EffectProcessor

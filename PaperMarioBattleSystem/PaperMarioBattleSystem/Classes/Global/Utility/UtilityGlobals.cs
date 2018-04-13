@@ -59,12 +59,33 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Bounces a value between a min and a max value.
+        /// </summary>
+        /// <param name="time">The time value.</param>
+        /// <param name="minVal">The min value.</param>
+        /// <param name="maxVal">The max value.</param>
+        /// <returns>A float with a value between <paramref name="minVal"/> and <paramref name="maxVal"/>.</returns>
+        public static double PingPong(double time, double minVal, double maxVal)
+        {
+            return PingPong(time, maxVal - minVal) + minVal;
+        }
+
+        /// <summary>
         /// Bounces a value between 0 and a max value.
         /// </summary>
         /// <param name="time">The time value.</param>
         /// <param name="maxVal">The max value.</param>
         /// <returns>A float with a value between 0 and <paramref name="maxVal"/>.</returns>
         public static float PingPong(double time, float maxVal) => (float)PingPong(time, (double)maxVal);
+
+        /// <summary>
+        /// Bounces a value between a min and a max value.
+        /// </summary>
+        /// <param name="time">The time value.</param>
+        /// <param name="minVal">The min value.</param>
+        /// <param name="maxVal">The max value.</param>
+        /// <returns>A float with a value between <paramref name="minVal"/> and <paramref name="maxVal"/>.</returns>
+        public static float PingPong(double time, float minVal, float maxVal) => (float)PingPong(time, (double)minVal, (double)maxVal);
 
         /// <summary>
         /// Performs a Hermite spline interpolation.

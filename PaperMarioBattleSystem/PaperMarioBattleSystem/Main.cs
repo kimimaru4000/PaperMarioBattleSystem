@@ -263,11 +263,17 @@ namespace PaperMarioBattleSystem
             BattleObjManager.Instance.Update();
 
             if (bubble != null)
+            {
                 bubble.Update();
+                if (bubble.IsDone == true)
+                {
+                    bubble = null;
+                }
+            }
 
             if (bubble == null && Input.GetKeyDown(Keys.Y))
             {
-                bubble = new DialogueBubble("Hello World!", 100d);
+                bubble = new DialogueBubble(new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!" }, 34d);
             }
         }
 
@@ -499,8 +505,7 @@ namespace PaperMarioBattleSystem
             //Draw Test Dialogue Bubble
             if (bubble != null)
             {
-                SpriteRenderer.Instance.DrawUI(bubble.BubbleImage.Tex, new Vector2(100, 100), bubble.BubbleImage.SourceRect, Color.White, false, false, .9f);
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, bubble.stringBuilder, new Vector2(110, 110), Color.Black, 0f, Vector2.Zero, 1f, 1f);
+                bubble.Draw();
             }
 
             SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.uiBatch);

@@ -92,6 +92,9 @@ namespace PaperMarioBattleSystem
             PMFont = LoadAsset<SpriteFont>("Fonts/PM Font");
             TTYDFont = LoadAsset<SpriteFont>("Fonts/Real TTYD Font");
 
+            //Set line spacing, as PopJoy's default value is really large for some reason
+            TTYDFont.LineSpacing = 22;
+
             ChargeShader = LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Charge");
             ChargeShaderTex = LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
         }

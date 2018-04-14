@@ -267,6 +267,7 @@ namespace PaperMarioBattleSystem
                 bubble.Update();
                 if (bubble.IsDone == true)
                 {
+                    bubble.CleanUp();
                     bubble = null;
                 }
             }
@@ -506,9 +507,23 @@ namespace PaperMarioBattleSystem
             if (bubble != null)
             {
                 bubble.Draw();
+
+                SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.uiBatch);
+
+                //We need a new batch to use the bubble's Rasterizer State, which enables the ScissorRectangle
+                SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.uiBatch, SpriteSortMode.FrontToBack, BlendState.AlphaBlend,
+                    SamplerState.PointClamp, null, bubble.BubbleRasterizerState, null, null);
+
+                //Set the ScissorRectangle to the bubble's bounds
+                graphics.GraphicsDevice.ScissorRectangle = new Rectangle((int)bubble.Position.X, (int)bubble.Position.Y, (int)bubble.Scale.X, (int)bubble.Scale.Y);
+
+                bubble.DrawText();
             }
 
             SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.uiBatch);
+
+            //Reset the ScissorRectangle
+            graphics.GraphicsDevice.ScissorRectangle = graphics.GraphicsDevice.Viewport.Bounds;
         }
 
         private void RenderBattleObjects()

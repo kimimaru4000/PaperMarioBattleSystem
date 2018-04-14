@@ -581,5 +581,43 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        #region StringBuilder Extensions
+
+        /// <summary>
+        /// Returns a new string containing a range of characters in the StringBuilder.
+        /// If the range specified is invalid, then an empty string is returned.
+        /// </summary>
+        /// <param name="stringBuilder">The StringBuilder to get the characters from.</param>
+        /// <param name="startIndex">The index to start at.</param>
+        /// <param name="endIndex">The index to end at. This must be greater than <paramref name="startIndex"/>.</param>
+        /// <returns>A new string containing all characters in the StringBuilder ranging from <paramref name="startIndex"/> to <paramref name="endIndex"/>.
+        /// If the indices are out of range or <paramref name="endIndex"/> is less than or equal to <paramref name="startIndex"/>, an empty string.</returns>
+        public static string Range(this StringBuilder stringBuilder, int startIndex, int endIndex)
+        {
+            //Return a null string if out of bounds or invalid input
+            if (startIndex < 0 || startIndex >= stringBuilder.Length || endIndex <= startIndex || endIndex >= stringBuilder.Length)
+                return string.Empty;
+
+            //Get the count by subtracting the end from the start
+            int count = endIndex - startIndex;
+
+            //Optimization - if there's only one character, simply return it
+            if (count == 1)
+            {
+                return stringBuilder[startIndex].ToString();
+            }
+
+            //Create the array
+            char[] charArray = new char[count];
+
+            //Copy the characters into the new array
+            stringBuilder.CopyTo(startIndex, charArray, 0, count);
+
+            //Return a new string
+            return new string(charArray);
+        }
+
+        #endregion
     }
 }

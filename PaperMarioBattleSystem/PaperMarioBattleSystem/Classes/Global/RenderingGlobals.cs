@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -13,6 +14,12 @@ namespace PaperMarioBattleSystem
     {
         public const int BaseResolutionWidth = 800;
         public const int BaseResolutionHeight = 600;
+
+        private static readonly Vector2 Resolution = new Vector2(BaseResolutionWidth, BaseResolutionHeight);
+        private static readonly Vector2 ResolutionHalf = Resolution / 2;
+
+        public static ref readonly Vector2 BaseResolutionVec2 => ref Resolution;
+        public static ref readonly Vector2 BaseResolutionHalved => ref ResolutionHalf;
 
         /// <summary>
         /// Gets the current global offset the Charge shader's texture should have.

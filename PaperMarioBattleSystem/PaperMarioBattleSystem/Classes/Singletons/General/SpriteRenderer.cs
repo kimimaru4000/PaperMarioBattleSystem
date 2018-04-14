@@ -317,9 +317,15 @@ namespace PaperMarioBattleSystem
             PostProcessingEffects.Clear();
         }
 
+        public void BeginBatch(SpriteBatch batch, SpriteSortMode spriteSortMode, BlendState blendState, SamplerState samplerState, 
+            DepthStencilState depthStencilState, RasterizerState rasterizerState, Effect effect, Matrix? transformMatrix)
+        {
+            batch.Begin(spriteSortMode, blendState, samplerState, depthStencilState, rasterizerState, effect, transformMatrix);
+        }
+
         public void BeginBatch(SpriteBatch batch, BlendState blendState, SamplerState samplerState, Effect effect, Matrix? transformMatrix)
         {
-            batch.Begin(SpriteSortMode.FrontToBack, blendState, samplerState, null, null, effect, transformMatrix);
+            BeginBatch(batch, SpriteSortMode.FrontToBack, blendState, samplerState, null, null, effect, transformMatrix);
         }
 
         public void EndBatch(SpriteBatch batch)

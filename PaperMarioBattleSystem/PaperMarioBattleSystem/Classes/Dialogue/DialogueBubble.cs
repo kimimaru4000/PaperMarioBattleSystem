@@ -18,6 +18,7 @@ namespace PaperMarioBattleSystem
     /// Look into HTML or XML parsers that might help with this, as the control codes follow a similar syntax.</remarks>
     public class DialogueBubble : IPosition, IScalable, IUpdateable, IDrawable, ICleanup
     {
+        public const double DefaultTimeBetweenChars = 34d;
         private const float TextScrollSpeed = -4f;
         private const float FastTextScrollSpeed = -12f;
 
@@ -45,6 +46,12 @@ namespace PaperMarioBattleSystem
         private int CurTextIndex = 0;
         private int MaxArrayIndex = 0;
 
+        /// <summary>
+        /// Tracks the number of new lines in the current text.
+        /// This helps determine how many new lines to use to offset the next set of text.
+        /// </summary>
+        private int NewLineCount = 0;
+
         private CroppedTexture2D BubbleImage = null;
 
         /// <summary>
@@ -69,12 +76,9 @@ namespace PaperMarioBattleSystem
 
         public RasterizerState BubbleRasterizerState { get; private set; } = null;
 
-        public DialogueBubble(string[] textArray, double timeBetweenCharacters)
+        public DialogueBubble()
         {
-            TextArray = textArray;
-
-            Text = TextArray[CurArrayIndex];
-            TimeBetweenCharacters = timeBetweenCharacters;
+            TimeBetweenCharacters = DefaultTimeBetweenChars;
 
             ProgressTextStar = new ProgressDialogueStar();
             ProgressTextStar.Disabled = true;
@@ -87,6 +91,18 @@ namespace PaperMarioBattleSystem
             //This lets us use the ScissorRectangle to clip any text outside the textbox
             BubbleRasterizerState = new RasterizerState();
             BubbleRasterizerState.ScissorTestEnable = true;
+        }
+
+        /// <summary>
+        /// Resets the Dialogue Bubble and sets new text for it.
+        /// </summary>
+        /// <param name="textArray">An array of strings containing the text for the Dialogue Bubble to print.</param>
+        public void SetText(string[] textArray)
+        {
+            Reset();
+
+            TextArray = textArray;
+            Text = TextArray[CurArrayIndex];
         }
 
         public void CleanUp()
@@ -103,6 +119,28 @@ namespace PaperMarioBattleSystem
 
             BubbleImage = new CroppedTexture2D(tex,
                 new Rectangle(0, 0, 1, 1));//new Rectangle(413, 159, 126, 74));//, 57, 57, 31, 41);
+        }
+
+        /// <summary>
+        /// Resets the Dialogue Bubble.
+        /// </summary>
+        public void Reset()
+        {
+            CurScrollSpeed = TextScrollSpeed;
+
+            TextArray = null;
+            Text = string.Empty;
+            CurTextIndex = 0;
+            CurArrayIndex = 0;
+            MaxArrayIndex = 0;
+            TextYOffset = 0f;
+            OffsetToScroll = 0f;
+            NewLineCount = 0;
+
+            stringBuilder.Clear();
+            ElapsedTime = 0d;
+
+            IsDone = false;
         }
 
         public void Update()
@@ -138,9 +176,17 @@ namespace PaperMarioBattleSystem
                 //If we should print a new character in the text, do so
                 if (ElapsedTime >= TimeBetweenCharacters)
                 {
-                    stringBuilder.Append(Text[CurTextIndex]);
+                    char curChar = Text[CurTextIndex];
+
+                    stringBuilder.Append(curChar);
                     CurTextIndex++;
                     ElapsedTime = 0d;
+
+                    //If we encounter a new line, increment the new line count
+                    if (curChar == '\n')
+                    {
+                        NewLineCount++;
+                    }
                 }
             }
         }
@@ -192,8 +238,13 @@ namespace PaperMarioBattleSystem
                 if (CurTextIndex < Text.Length)
                 {
                     //Append the remaining part of the string and set the index to the final value
-                    stringBuilder.Append(Text.Substring(CurTextIndex, Text.Length - CurTextIndex));
+                    string remainingString = Text.Substring(CurTextIndex, Text.Length - CurTextIndex);
+
+                    stringBuilder.Append(remainingString);
                     CurTextIndex = Text.Length;
+
+                    //Add the number of new lines in the remaining string
+                    NewLineCount += remainingString.Count((c) => c == '\n');
                 }
                 //We're done printing - progress
                 else
@@ -229,14 +280,20 @@ namespace PaperMarioBattleSystem
                         //Move the text up
                         OffsetToScroll -= YMoveAmount;
 
+                        int diff = 4 - NewLineCount;
+
                         //Append new lines to offset the next set of text that will be printed
-                        stringBuilder.Append("\n\n\n\n");
+                        if (diff > 0)
+                        {
+                            stringBuilder.Append(new String('\n', diff));
+                        }
 
                         //Set text to the new value and reset the text index so it can print
                         Text = TextArray[CurArrayIndex];
 
                         CurTextIndex = 0;
                         ElapsedTime = 0d;
+                        NewLineCount = 0;
                     }
                 }
             }
@@ -285,7 +342,7 @@ namespace PaperMarioBattleSystem
         {
             if (stringBuilder.Length > 0)
             {
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, stringBuilder, Position + new Vector2(10, 5 + TextYOffset), Color.Black, 0f, Vector2.Zero, 1f, .95f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, stringBuilder, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, 1f, .95f);
             }
         }
     }

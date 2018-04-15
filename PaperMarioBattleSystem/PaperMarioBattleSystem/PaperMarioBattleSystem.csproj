@@ -397,6 +397,7 @@
     <Compile Include="Classes\SequenceActions\WaitForAnimationSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForBattleEventSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForCommandSeqAction.cs" />
+    <Compile Include="Classes\SequenceActions\WaitForDialogueSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitSeqAction.cs" />
     <Compile Include="Classes\Sequences\Bobbery Bomb\BlinkFasterSequence.cs" />
     <Compile Include="Classes\Sequences\Bobbery\BombSquadSequence.cs" />
@@ -451,6 +452,7 @@
     <Compile Include="Classes\Singletons\Battle\BattleManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleObjManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleUIManager.cs" />
+    <Compile Include="Classes\Singletons\Battle\DialogueManager.cs" />
     <Compile Include="Classes\Singletons\General\AssetManager.cs" />
     <Compile Include="Classes\Singletons\General\Camera.cs" />
     <Compile Include="Classes\Singletons\General\Inventory.cs" />

@@ -254,9 +254,10 @@ namespace PaperMarioBattleSystem
                 default:
                     return new string[]
                     {
-                        "This is a Duplighost. Duplighosts disguise themselves as members of our party.",
-                        "Max HP: 15, Attack Power: 4, Defense Power: 0",
-                        "They love to attack in disguise. It seems like they're generally stronger fighters when they're not disguised, though."
+                        "This is a Duplighost.\nDuplighosts disguise themselves\nas members of our party.",
+                        "Max HP: 15, Attack Power: 4,\nDefense Power: 0",
+                        "They love to attack in disguise.",
+                        "It seems like they're generally\nstronger fighters when they're\nnot disguised, though."
                     };
                 case Enumerations.PartnerTypes.Goombario:
                     return new string[]

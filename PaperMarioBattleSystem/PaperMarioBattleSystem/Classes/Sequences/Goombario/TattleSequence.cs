@@ -146,6 +146,19 @@ namespace PaperMarioBattleSystem
                         }
                     }
 
+                    //Start moving the tattle box down
+                    TattleBox.Start(WindowMoveTime);
+
+                    CurSequenceAction = new WaitSeqAction(WindowMoveTime);
+
+                    break;
+                case 1:
+                    //Open the tattle box to show the BattleEntity tattled
+                    TattleBox.Open(WindowOpenCloseTime);
+
+                    CurSequenceAction = new WaitSeqAction(WindowOpenCloseTime);
+                    break;
+                case 2:
                     //NOTE: Show dialogue bubble coming from Goombario/Goombella along with the enemy's Tattle log entry (with image and stats)
                     string[] tattleDescriptions = TattledEntity.GetTattleDescription();
 
@@ -159,21 +172,14 @@ namespace PaperMarioBattleSystem
 
                     Console.WriteLine(tattle);
 
-                    //Start moving the tattle box down
-                    TattleBox.Start(WindowMoveTime);
-
-                    CurSequenceAction = new WaitSeqAction(WindowMoveTime);
+                    //Create the dialogue bubble
+                    DialogueManager.Instance.CreateBubble(tattleDescriptions);
+                    CurSequenceAction = new WaitForDialogueSeqAction(DialogueManager.Instance.CurDialogueBubble);
                     break;
-                case 1:
-                    //Open the tattle box to show the BattleEntity tattled
-                    TattleBox.Open(WindowOpenCloseTime);
-
-                    CurSequenceAction = new WaitSeqAction(WindowOpenCloseTime);
-                    break;
-                case 2:
-                    //Wait
-                    CurSequenceAction = new WaitSeqAction(ShowWait);
-                    break;
+                //case 3:
+                //    //Wait
+                //    CurSequenceAction = new WaitSeqAction(ShowWait);
+                //    break;
                 case 3:
                     //Close the tattle box
                     TattleBox.Close(WindowOpenCloseTime);

@@ -262,19 +262,11 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.Update();
             BattleObjManager.Instance.Update();
 
-            if (bubble != null)
-            {
-                bubble.Update();
-                if (bubble.IsDone == true)
-                {
-                    bubble.CleanUp();
-                    bubble = null;
-                }
-            }
+            DialogueManager.Instance.Update();
 
-            if (bubble == null && Input.GetKeyDown(Keys.Y))
+            if (Input.GetKeyDown(Keys.Y))
             {
-                bubble = new DialogueBubble(new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!" }, 34d);
+                DialogueManager.Instance.CreateBubble(new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!", "test more" });
             }
         }
 
@@ -379,7 +371,7 @@ namespace PaperMarioBattleSystem
 
             PostDraw(gameTime);
         }
-        DialogueBubble bubble = null;
+
         /// <summary>
         /// Any drawing that should occur immediately after the main Draw method
         /// </summary>
@@ -503,7 +495,9 @@ namespace PaperMarioBattleSystem
         {
             BattleUIManager.Instance.Draw();
 
-            //Draw Test Dialogue Bubble
+            DialogueBubble bubble = DialogueManager.Instance.CurDialogueBubble;
+
+            //Draw Dialogue Bubble
             if (bubble != null)
             {
                 bubble.Draw();

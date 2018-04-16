@@ -173,7 +173,7 @@ namespace PaperMarioBattleSystem
                     Console.WriteLine(tattle);
 
                     //Create the dialogue bubble
-                    DialogueManager.Instance.CreateBubble(tattleDescriptions);
+                    DialogueManager.Instance.CreateBubble(tattleDescriptions, User);
                     CurSequenceAction = new WaitForDialogueSeqAction(DialogueManager.Instance.CurDialogueBubble);
                     break;
                 //case 3:

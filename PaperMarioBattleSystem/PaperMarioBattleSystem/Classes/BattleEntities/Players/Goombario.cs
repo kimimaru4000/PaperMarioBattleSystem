@@ -59,6 +59,11 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.SleepName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(81, 163, 30, 28), 650d),
                 new Animation.Frame(new Rectangle(7, 162, 32, 29), 650d)));
+
+            AnimManager.AddAnimation(AnimationGlobals.TalkName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(67, 89, 26, 30), 32d),
+                new Animation.Frame(new Rectangle(3, 88, 26, 31), 32d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(67, 46, 26, 33), 32d, new Vector2(0, -3))));
         }
 
         protected sealed override BattleMenu GetMainBattleMenu()

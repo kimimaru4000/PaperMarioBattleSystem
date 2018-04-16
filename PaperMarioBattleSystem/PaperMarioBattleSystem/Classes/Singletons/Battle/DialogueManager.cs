@@ -54,11 +54,23 @@ namespace PaperMarioBattleSystem
         /// <param name="textArray">An array of strings containing the text for the Dialogue Bubble to print.</param>
         public void CreateBubble(string[] textArray)
         {
+            CreateBubble(textArray, null);
+        }
+
+        /// <summary>
+        /// Creates a Dialogue Bubble with a set of text.
+        /// If a Dialogue Bubble already exists, the current one will be reset.
+        /// </summary>
+        /// <param name="textArray">An array of strings containing the text for the Dialogue Bubble to print.</param>
+        /// <param name="speaker">An optional BattleEntity that is set as the designated speaker of the Dialogue Bubble.</param>
+        public void CreateBubble(string[] textArray, BattleEntity speaker)
+        {
             if (DialogBubble == null)
                 DialogBubble = new DialogueBubble();
 
             DialogBubble.Reset();
             DialogBubble.SetText(textArray);
+            DialogBubble.AttachSpeaker(speaker);
         }
 
         public void Update()

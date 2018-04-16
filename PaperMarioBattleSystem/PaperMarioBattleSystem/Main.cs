@@ -266,7 +266,7 @@ namespace PaperMarioBattleSystem
 
             if (Input.GetKeyDown(Keys.Y))
             {
-                DialogueManager.Instance.CreateBubble(new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!", "test more" });
+                DialogueManager.Instance.CreateBubble(new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!", "test more" }, null);
             }
         }
 

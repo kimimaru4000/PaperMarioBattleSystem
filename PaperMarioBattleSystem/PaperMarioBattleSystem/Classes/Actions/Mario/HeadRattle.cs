@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
 
             DamageInfo.Statuses = new StatusChanceHolder[] { new StatusChanceHolder(100d, new ConfusedStatus(2)) };
 
-            SetMoveSequence(new HammerSequence(this));
+            SetMoveSequence(new HammerSequence(this, 0));
             actionCommand = new HammerCommand(MoveSequence, 4, 1000d);
         }
     }

@@ -178,6 +178,8 @@ namespace PaperMarioBattleSystem
             this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PiercingBlow, BadgeGlobals.BadgeFilterType.UnEquipped));
             this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DDownJump, BadgeGlobals.BadgeFilterType.UnEquipped));
 
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerSmash, BadgeGlobals.BadgeFilterType.UnEquipped));
+            this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.MegaSmash, BadgeGlobals.BadgeFilterType.UnEquipped));
             this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.QuakeHammer, BadgeGlobals.BadgeFilterType.UnEquipped));
 
             //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Jumpman, BadgeGlobals.BadgeFilterType.UnEquipped));

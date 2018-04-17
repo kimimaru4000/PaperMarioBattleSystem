@@ -15,7 +15,13 @@ namespace PaperMarioBattleSystem
         protected double SlamWaitDur = 400d;
         protected double StylishWaitDur = 700d;
         protected float WalkDuration = 1000f;
-        protected int DamageMod = 1;
+        protected int FinalDamage = 0;
+
+        /// <summary>
+        /// How much damage should be added to the final Hammer damage whether the Action Command was successfully completed or not.
+        /// This is primarily used for other Hammer abilities (Ex. Power Smash adds a base +2 to the final Hammer damage).
+        /// </summary>
+        protected int FinalDamageAddition = 0;
 
         /// <summary>
         /// The number of lights lit at which the hammer windup animation's speed increases
@@ -26,20 +32,22 @@ namespace PaperMarioBattleSystem
         protected string WindupAnimName = AnimationGlobals.MarioBattleAnimations.HammerWindupName;
         protected string SlamAnimName = AnimationGlobals.MarioBattleAnimations.HammerSlamName;
 
-        public HammerSequence(MoveAction moveAction) : base(moveAction)
+        public HammerSequence(MoveAction moveAction, int finalDamageAddition) : base(moveAction)
         {
-            
+            FinalDamageAddition = finalDamageAddition;
         }
 
         protected override void CommandSuccess()
         {
-            DamageMod *= 2;
+            FinalDamage = (BaseDamage * 2) + FinalDamageAddition;
 
             ChangeSequenceBranch(SequenceBranch.Success);
         }
 
         protected override void CommandFailed()
         {
+            FinalDamage = BaseDamage + FinalDamageAddition;
+
             ChangeSequenceBranch(SequenceBranch.Failed);
         }
 
@@ -113,7 +121,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(SlamAnimName, true);
-                    InteractionResult[] interactions = AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, Action.DamageProperties, false);
+                    InteractionResult[] interactions = AttemptDamage(FinalDamage, EntitiesAffected, Action.DamageProperties, false);
 
                     //Show the command result if you hit
                     if (interactions[0] != null && interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
@@ -139,7 +147,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(SlamAnimName, true);
-                    AttemptDamage(BaseDamage * DamageMod, EntitiesAffected, Action.DamageProperties, false);
+                    AttemptDamage(FinalDamage, EntitiesAffected, Action.DamageProperties, false);
                     CurSequenceAction = new WaitForAnimationSeqAction(SlamAnimName);
                     break;
                 case 1:

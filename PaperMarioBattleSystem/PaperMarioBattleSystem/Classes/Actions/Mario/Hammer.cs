@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
 
             DamageInfo = new DamageData(baseDamage, Elements.Normal, false, ContactTypes.SideDirect, ContactProperties.WeaponDirect, null, DamageEffects.None);
 
-            SetMoveSequence(new HammerSequence(this));
+            SetMoveSequence(new HammerSequence(this, 0));
             actionCommand = new HammerCommand(MoveSequence, 4, 500d);
         }
     }

@@ -20,6 +20,16 @@ namespace PaperMarioBattleSystem
             AutoSelectSingle = true;
 
             BattleActions.Add(new Hammer());
+
+            int powerSmashCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PowerSmash);
+            if (powerSmashCount > 0)
+            {
+                BattleActions.Add(new PowerSmashAction(powerSmashCount));
+            }
+            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.MegaSmash) > 0)
+            {
+                BattleActions.Add(new MegaSmashAction());
+            }
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PiercingBlow) > 0)
             {
                 BattleActions.Add(new PiercingBlowAction());

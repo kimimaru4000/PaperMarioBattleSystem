@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class QuakeHammerSequence : HammerSequence
     {
-        public QuakeHammerSequence(MoveAction moveAction) : base(moveAction)
+        public QuakeHammerSequence(MoveAction moveAction) : base(moveAction, 0)
         {
             WalkDuration = 500f;
         }

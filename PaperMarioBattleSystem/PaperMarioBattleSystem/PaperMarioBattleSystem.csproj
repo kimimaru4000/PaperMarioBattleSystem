@@ -116,9 +116,11 @@
     <Compile Include="Classes\Actions\Mario\HeadRattle.cs" />
     <Compile Include="Classes\Actions\Mario\IceSmash.cs" />
     <Compile Include="Classes\Actions\Mario\Jump.cs" />
+    <Compile Include="Classes\Actions\Mario\MegaSmashAction.cs" />
     <Compile Include="Classes\Actions\Mario\Multibounce.cs" />
     <Compile Include="Classes\Actions\Mario\PiercingBlowAction.cs" />
     <Compile Include="Classes\Actions\Mario\PowerBounce.cs" />
+    <Compile Include="Classes\Actions\Mario\PowerSmashAction.cs" />
     <Compile Include="Classes\Actions\Mario\QuakeHammerAction.cs" />
     <Compile Include="Classes\Actions\Mario\TornadoJump.cs" />
     <Compile Include="Classes\Actions\MenuAction.cs" />
@@ -270,6 +272,7 @@
     <Compile Include="Classes\Collectibles\Badges\LuckyStartBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MegaRushBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MegaRushPBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\MegaSmashBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\MultibounceBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PeekabooBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PiercingBlowBadge.cs" />
@@ -278,6 +281,7 @@
     <Compile Include="Classes\Collectibles\Badges\PowerPlusBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PowerRushBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PowerRushPBadge.cs" />
+    <Compile Include="Classes\Collectibles\Badges\PowerSmashBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PrettyLuckyBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\PrettyLuckyPBadge.cs" />
     <Compile Include="Classes\Collectibles\Badges\QuakeHammerBadge.cs" />
@@ -423,8 +427,10 @@
     <Compile Include="Classes\Sequences\Koops\ShellShieldSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\HammerSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\JumpSequence.cs" />
+    <Compile Include="Classes\Sequences\Mario\MegaSmashSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\MultibounceSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\PowerBounceSequence.cs" />
+    <Compile Include="Classes\Sequences\Mario\PowerSmashSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\QuakeHammerSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\TornadoJumpSequence.cs" />
     <Compile Include="Classes\Sequences\NoSequence.cs" />

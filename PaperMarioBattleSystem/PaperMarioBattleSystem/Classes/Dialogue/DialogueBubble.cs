@@ -443,10 +443,21 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /* Text Rendering Idea:
+           -Render each character separately
+           -This will allow us to change the color of individual characters inside color tags
+           -This allows us to offset character positions for shaky and wavy text
+           -This allows for variations for noise text and much more
+           -Looks to be overall more flexible and make it easier to implement new text features
+
+            -This may also allow us to batch as much text together as possible
+        */
+
         public void DrawText()
         {
             if (stringBuilder.Length > 0)
             {
+                //SpriteRenderer.Instance.uiBatch.DrawStringChars(AssetManager.Instance.TTYDFont, stringBuilder, 0, stringBuilder.Length, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .95f);
                 SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, stringBuilder, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, 1f, .95f);
             }
         }

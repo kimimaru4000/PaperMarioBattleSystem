@@ -184,6 +184,9 @@ namespace PaperMarioBattleSystem
 
             Inventory.Instance.AddBadge(new LuckyStartBadge());
 
+            Inventory.Instance.AddBadge(new PowerSmashBadge());
+            Inventory.Instance.AddBadge(new PowerSmashBadge());
+            Inventory.Instance.AddBadge(new MegaSmashBadge());
             Inventory.Instance.AddBadge(new QuakeHammerBadge());
             Inventory.Instance.AddBadge(new TimingTutorBadge());
 
@@ -353,10 +356,6 @@ namespace PaperMarioBattleSystem
             //Clear the lists
             BattleEntities.Clear();
             ChargedEntities.Clear();
-
-            //BattleManager.Instance.Draw();
-            //BattleUIManager.Instance.Draw();
-            //BattleObjManager.Instance.Draw();
         }
 
         /// <summary>

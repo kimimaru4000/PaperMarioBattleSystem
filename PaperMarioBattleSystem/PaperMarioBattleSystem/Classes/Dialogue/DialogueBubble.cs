@@ -180,6 +180,14 @@ namespace PaperMarioBattleSystem
             IsDone = false;
         }
 
+        /// <summary>
+        /// Marks the Dialogue Bubble as finished so it can be closed.
+        /// </summary>
+        public void Close()
+        {
+            IsDone = true;
+        }
+
         public void Update()
         {
             //Return if done
@@ -289,7 +297,7 @@ namespace PaperMarioBattleSystem
             //If this is the last text in the bubble, mark it as done
             if (CurArrayIndex >= TextArray.Length)
             {
-                IsDone = true;
+                Close();
             }
             //Move onto the next set of text
             else
@@ -418,16 +426,6 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        /// <summary>
-        /// Returns the Dialogue Bubble's position relative to another position.
-        /// </summary>
-        /// <param name="position">The position.</param>
-        /// <returns>A Vector2 containing the difference between the position and the Dialogue Bubble's position.</returns>
-        public Vector2 GetRelativePos(in Vector2 position)
-        {
-            return position - Position;
-        }
-
         public void Draw()
         {
             SpriteRenderer.Instance.DrawUI(BubbleImage.Tex, Position, BubbleImage.SourceRect, Color.White, 0f, Vector2.Zero, Scale, false, false, .9f);
@@ -450,15 +448,15 @@ namespace PaperMarioBattleSystem
            -This allows for variations for noise text and much more
            -Looks to be overall more flexible and make it easier to implement new text features
 
-            -This may also allow us to batch as much text together as possible
+           -This may also allow us to batch as much text together as possible
         */
 
         public void DrawText()
         {
             if (stringBuilder.Length > 0)
             {
-                //SpriteRenderer.Instance.uiBatch.DrawStringChars(AssetManager.Instance.TTYDFont, stringBuilder, 0, stringBuilder.Length, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .95f);
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, stringBuilder, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, 1f, .95f);
+                SpriteRenderer.Instance.uiBatch.DrawStringChars(AssetManager.Instance.TTYDFont, stringBuilder, Vector2.Zero, 0, stringBuilder.Length, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .95f);
+                //SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, stringBuilder, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, 1f, .95f);
             }
         }
     }

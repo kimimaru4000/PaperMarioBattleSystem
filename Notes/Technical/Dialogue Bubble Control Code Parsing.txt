@@ -1,0 +1,66 @@
+Dialogue Bubble Control Code Parsing (4/18/18)
+----------------------------------------------
+Dialogue Bubbles have a set of control codes which dictate several things, including how certain text in the bubbles behave. This document deals with handling these control codes to replicate the behavior from TTYD. Since PM's control codes aren't well-documented, seem to share a lot of similarities with TTYD, and can be implemented within TTYD's system, I'm not concerned with looking further into them.
+
+See the "Dialogue_Data (TTYD).txt" file in the "Data Documents" folder for all the control codes and what they do.
+
+The basic idea is this. The control codes are very similar to HTML tags, so we can convert their inputs to HTML attributes and use an HTML parser to handle getting all the data. I've looked into several options, and this is what I came up with:
+
+Use the HtmlAgilityPack library. It's lightweight, doesn't require a strict HTML syntax, and has managed to parse everything I put into it so far.
+
+Adjust the control codes to have proper HTML attributes
+=======================================================
+-Use a name called "value" for most attributes
+-Ex. "<col 77aadd88>Test stuff</col>" becomes "<col value="77aadd88">Test stuff</col>"
+-Change the "col" tag to "color". HtmlAgilityPack has trouble obtaining the inner text of "col" elements, possibly because it's expecting a table. The new name is also clearer.
+-We can get the stream position in an HtmlNode with StreamPosition
+
+Additional things:
+-Nodes with raw text have "#text" as their node name
+-Comment tags have "#comment" as their node name
+-The root document node has "#document" as its node name
+
+There's no way to combine message modifiers, such as <boss>, so the last one encountered should be the one used for the bubble. See the "Dialogue Bubble Control Code Notes" document for more information.
+
+Parsing Implementation
+----------------------
+We can have strings defining the various text modifiers we're looking for:
+
+public const string ColorMod = "color";
+public const string DynamicMod = "dynamic";
+public const string ShakeMod = "shake";
+public const string WaveMod = "wave";
+
+Then we add a class/struct that contains all information about text in a range and which effects are applied:
+
+public class BubbleTextData
+{
+    int StartIndex;
+    int EndIndex;
+    Color color = Color.Black;
+    float DynamicSize = 1f;
+    bool Shake = false;
+    bool Wave = false;
+}
+
+The StartIndex and EndIndex are the start and end indices, respectively, in the StringBuilder to render characters in this range with the effects. I wrote a SpriteBatch extension method called DrawStringChars() that allows us to render individual characters.
+
+An HtmlDocument InnerText property gets us the entire string without any of the tags applied.
+
+When parsing, do the following:
+
+1. Create a new HtmlDocument and load the string in as HTML with HtmlDocument.LoadHtml()
+2. Get a list of all child nodes with HtmlDocument.DocumentNode.ChildNodes.ToList()
+3. Go through all nodes in the list. The Name tells us if it's a tag or not. Add each Node encountered to a new list
+4. When encountering a node with "#text" as its name, check its StreamPosition in relation to the nodes in the current list
+   4a. If it's between the Node's StreamPosition and the Node's EndNode StreamPosition, apply the effects to it
+   4b. If it's after the EndNode's StreamPosition, remove that Node from the list
+   4c. Get the index of the text Node's contents in the InnerText of the root HtmlDocument with IndexOf(). This is the StartIndex. The EndIndex will be StartIndex + the length of the text string.
+5. Ignore all nodes with "#document" and "#comment" as their names
+
+When rendering wavy text, each character should be offset by a global value.
+When rendering shaky text, each character should be offset by a random value within a global range.
+
+When viewing previous text, turn the color grey and remove all effects, such as shake and wave.
+
+Some details may be missing from this implementation, but this is the high-level overview. This document will be updated as the implementation comes along.

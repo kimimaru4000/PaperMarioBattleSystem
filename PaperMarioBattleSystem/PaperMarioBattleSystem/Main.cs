@@ -285,7 +285,7 @@ namespace PaperMarioBattleSystem
             //This conditional is for enabling frame advance debugging
             if (Debug.DebugPaused == false || Debug.AdvanceNextFrame == true)
                 MainUpdate(gameTime);
-
+            
             PostUpdate(gameTime);
         }
 

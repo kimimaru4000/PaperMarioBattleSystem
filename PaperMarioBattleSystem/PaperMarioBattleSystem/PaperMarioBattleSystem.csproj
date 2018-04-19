@@ -334,6 +334,7 @@
     <Compile Include="Classes\Global\ContentGlobals.cs" />
     <Compile Include="Classes\Global\CrashHandler.cs" />
     <Compile Include="Classes\Global\Debug.cs" />
+    <Compile Include="Classes\Global\DialogueGlobals.cs" />
     <Compile Include="Classes\Global\EntityGlobals.cs" />
     <Compile Include="Classes\Global\Enumerations.cs" />
     <Compile Include="Classes\Global\Extensions.cs" />
@@ -527,6 +528,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.8.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.8.0\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\DesktopGL\MonoGame.Framework.dll</HintPath>
     </Reference>
@@ -535,6 +539,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Icon.ico" />
@@ -780,6 +785,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <MonoGameContentReference Include="Content\PMContent.mgcb" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Audio\Music\" />

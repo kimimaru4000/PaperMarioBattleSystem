@@ -631,6 +631,7 @@ namespace PaperMarioBattleSystem
         /// <param name="spriteBatch">The SpriteBatch to use to render the characters.</param>
         /// <param name="font">The SpriteFont to get the characters from.</param>
         /// <param name="text">The StringBuilder containing the text to render.</param>
+        /// <param name="startOffset">The starting offset to render the characters. This can be used to pick up where another string left off.</param>
         /// <param name="startIndex">The starting character index in the StringBuilder.</param>
         /// <param name="endIndex">The ending character index in the StringBuilder.</param>
         /// <param name="position">The position to start rendering the characters.</param>
@@ -641,12 +642,14 @@ namespace PaperMarioBattleSystem
         /// <param name="effects">The SpriteEffects to render the characters in.</param>
         /// <param name="layerDepth">The depth to render the characters in.</param>
         /// <returns>A Vector2 containing the offset calculated when rendering the characters.</returns>
-        public static Vector2 DrawStringChars(this SpriteBatch spriteBatch, SpriteFont font, StringBuilder text, int startIndex, int endIndex,
-            Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth)
+        public static Vector2 DrawStringChars(this SpriteBatch spriteBatch, SpriteFont font, StringBuilder text, Vector2 startOffset, 
+            int startIndex, int endIndex, Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects,
+            float layerDepth)
         {
-            Vector2 offset = Vector2.Zero;
-            bool firstGlyphOfLine = true;
+            Vector2 offset = startOffset;
+            bool firstGlyphOfLine = (offset.X == 0f);
 
+            //Return immediately if the indices are invalid
             if (startIndex < 0 || endIndex > text.Length)
                 return offset;
 
@@ -693,7 +696,7 @@ namespace PaperMarioBattleSystem
                 Vector2 p = offset;
                 p.X += glyph.Cropping.X;
                 p.Y += glyph.Cropping.Y;
-                
+
                 //Add the position passed in to obtain the final position to render this character
                 p += position;
 
@@ -705,6 +708,31 @@ namespace PaperMarioBattleSystem
             }
 
             return offset;
+        }
+
+        /// <summary>
+        /// Draws individual characters in a StringBuilder within a range. This returns the offset calculated while drawing all characters,
+        /// which can be used to get the correct position of the next character.
+        /// <para>This is a near replica of MonoGame's DrawString() method, with adjustments and more comments.</para>
+        /// <para>Source: https://github.com/MonoGame/MonoGame/blob/develop/MonoGame.Framework/Graphics/SpriteBatch.cs#L931 </para>
+        /// </summary>
+        /// <param name="spriteBatch">The SpriteBatch to use to render the characters.</param>
+        /// <param name="font">The SpriteFont to get the characters from.</param>
+        /// <param name="text">The StringBuilder containing the text to render.</param>
+        /// <param name="startIndex">The starting character index in the StringBuilder.</param>
+        /// <param name="endIndex">The ending character index in the StringBuilder.</param>
+        /// <param name="position">The position to start rendering the characters.</param>
+        /// <param name="color">The color to render the characters in.</param>
+        /// <param name="rotation">The rotation to render the characters in.</param>
+        /// <param name="origin">The origin to render the characters with.</param>
+        /// <param name="scale">The scale to render the characters in.</param>
+        /// <param name="effects">The SpriteEffects to render the characters in.</param>
+        /// <param name="layerDepth">The depth to render the characters in.</param>
+        /// <returns>A Vector2 containing the offset calculated when rendering the characters.</returns>
+        public static Vector2 DrawStringChars(this SpriteBatch spriteBatch, SpriteFont font, StringBuilder text, int startIndex, int endIndex,
+            Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth)
+        {
+            return DrawStringChars(spriteBatch, font, text, Vector2.Zero, startIndex, endIndex, position, color, rotation, origin, scale, effects, layerDepth);
         }
 
         #endregion

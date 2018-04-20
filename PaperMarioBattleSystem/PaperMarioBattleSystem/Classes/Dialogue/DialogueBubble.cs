@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using static PaperMarioBattleSystem.DialogueGlobals;
 
 namespace PaperMarioBattleSystem
 {
@@ -82,6 +83,8 @@ namespace PaperMarioBattleSystem
 
         public RasterizerState BubbleRasterizerState { get; private set; } = null;
 
+        private List<BubbleTextData> BubbleData = new List<BubbleTextData>();
+
         public DialogueBubble()
         {
             TimeBetweenCharacters = DefaultTimeBetweenChars;
@@ -126,6 +129,8 @@ namespace PaperMarioBattleSystem
 
             TextArray = textArray;
             Text = TextArray[CurArrayIndex];
+
+            BubbleData = DialogueGlobals.ParseText(Text, out Text);
         }
 
         /// <summary>
@@ -441,21 +446,46 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        /* Text Rendering Idea:
-           -Render each character separately
-           -This will allow us to change the color of individual characters inside color tags
-           -This allows us to offset character positions for shaky and wavy text
-           -This allows for variations for noise text and much more
-           -Looks to be overall more flexible and make it easier to implement new text features
-
-           -This may also allow us to batch as much text together as possible
-        */
-
         public void DrawText()
         {
             if (stringBuilder.Length > 0)
             {
-                SpriteRenderer.Instance.uiBatch.DrawStringChars(AssetManager.Instance.TTYDFont, stringBuilder, Vector2.Zero, 0, stringBuilder.Length, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .95f);
+                //Get the glyphs for the font
+                //NOTE: Ideally cache this earlier on
+                Dictionary<char, SpriteFont.Glyph> glyphs = AssetManager.Instance.TTYDFont.GetGlyphs();
+
+                Vector2 offset = Vector2.Zero;
+
+                //Go through all the data and render the text
+                for (int i = 0; i < BubbleData.Count; i++)
+                {
+                    BubbleTextData bdata = BubbleData[i];
+                    Vector2 basePos = Position + new Vector2(10, 5f + TextYOffset);
+                
+                    for (int j = bdata.StartIndex; j < bdata.EndIndex && j < stringBuilder.Length; j++)
+                    {
+                        Vector2 finalPos = basePos;
+                
+                        //Handle shaky text
+                        if (bdata.Shake == true)
+                        {
+                            finalPos += DialogueGlobals.GetShakyTextOffset(new Vector2(1));
+                        }
+                
+                        //Handle wavy text
+                        if (bdata.Wave == true)
+                        {
+                            finalPos += DialogueGlobals.GetWavyTextOffset(j * TimeBetweenCharacters, new Vector2(2));
+                        }
+                
+                        //Render the character
+                        offset = SpriteRenderer.Instance.uiBatch.DrawCharacter(AssetManager.Instance.TTYDFont, stringBuilder[j], glyphs, offset, finalPos, bdata.TextColor, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .95f);
+                    }
+                
+                    //offset = SpriteRenderer.Instance.uiBatch.DrawStringChars(AssetManager.Instance.TTYDFont, stringBuilder, offset, bdata.StartIndex, bdata.EndIndex, finalPos, bdata.TextColor, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .95f);
+                }
+
+                //SpriteRenderer.Instance.uiBatch.DrawStringChars(AssetManager.Instance.TTYDFont, stringBuilder, Vector2.Zero, 0, stringBuilder.Length, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .95f);
                 //SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, stringBuilder, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, 1f, .95f);
             }
         }

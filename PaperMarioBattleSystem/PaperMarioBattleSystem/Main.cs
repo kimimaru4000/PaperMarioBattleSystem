@@ -269,7 +269,8 @@ namespace PaperMarioBattleSystem
 
             if (Input.GetKeyDown(Keys.Y))
             {
-                DialogueManager.Instance.CreateBubble(new string[] { "<wave>Hello</wave> <color value=\"FFFF0000\">World!</color>" });//new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!", "test more" }, null);
+                string thing = "<wave>Hello</wave> <color value=\"FFFF0000\">World!</color> <scale value=\"1.3\">This</scale> <scale value=\".7\">is a </scale><shake>t</shake>est\nI ho<wave><shake><color value=\"FF0000FF\">pe you</color></shake></wave> enjoy it!";
+                DialogueManager.Instance.CreateBubble(new string[] { thing });//new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!", "test more" }, null);
             }
         }
 

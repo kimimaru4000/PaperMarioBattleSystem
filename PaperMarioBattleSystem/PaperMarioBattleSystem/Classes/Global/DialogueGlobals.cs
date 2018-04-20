@@ -57,6 +57,11 @@ namespace PaperMarioBattleSystem
         public const string WaveMod = "wave";
 
         /// <summary>
+        /// The string representing the scale text modifier.
+        /// </summary>
+        public const string ScaleMod = "scale";
+
+        /// <summary>
         /// Tells if the string is the color text modifier.
         /// </summary>
         /// <param name="text">The string to test.</param>
@@ -97,13 +102,24 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Tells if the string is the scale text modifier.
+        /// </summary>
+        /// <param name="text">The string to test.</param>
+        /// <returns>true if so, otherwise false.</returns>
+        public static bool IsScaleMod(in string text)
+        {
+            return (text == ScaleMod);
+        }
+
+        /// <summary>
         /// Tells if the string is a valid text modifier.
         /// </summary>
         /// <param name="text">The string to test.</param>
         /// <returns>true if so, otherwise false.</returns>
         public static bool IsValidModifier(in string text)
         {
-            return (IsColorMod(text) == true || IsDynamicMod(text) == true || IsShakeMod(text) == true || IsWaveMod(text) == true);
+            return (IsColorMod(text) == true || IsDynamicMod(text) == true || IsShakeMod(text) == true || IsWaveMod(text) == true)
+                || IsScaleMod(text) == true;
         }
 
         /// <summary>
@@ -146,6 +162,7 @@ namespace PaperMarioBattleSystem
             public float DynamicSize = 1f;
             public bool Shake = false;
             public bool Wave = false;
+            public Vector2 Scale = Vector2.One;
         }
 
         #endregion
@@ -204,28 +221,8 @@ namespace PaperMarioBattleSystem
                         //Check if the node is inside this modifier
                         if (node.StreamPosition > startPos && node.StreamPosition < endPos)
                         {
-                            string name = mod.Name;
-
                             //It is, so apply effects
-                            if (IsColorMod(name) == true)
-                            {
-                                //Get color as hex
-                                string color = mod.Attributes[0].Value;
-
-                                uint result = uint.Parse(color, System.Globalization.NumberStyles.HexNumber);
-
-                                curBubbleData.TextColor = new Color(result);
-                            }
-                            else if (IsDynamicMod(name) == true)
-                            {
-                                //Parse the result as a float
-                                if (float.TryParse(mod.Attributes[0].Value, out float result) == true)
-                                {
-                                    curBubbleData.DynamicSize = result;
-                                }
-                            }
-                            else if (IsShakeMod(name) == true) curBubbleData.Shake = true;
-                            else if (IsWaveMod(name) == true) curBubbleData.Wave = true;
+                            HandleModifierType(mod, curBubbleData);
                         }
                         //It's out of range; remove this mod
                         else
@@ -247,6 +244,39 @@ namespace PaperMarioBattleSystem
                 for (int i = 0; i < node.ChildNodes.Count; i++)
                 {
                     VisitNode(root, node.ChildNodes[i], ref curBubbleData, activeModifiers, bubbleData);
+                }
+            }
+        }
+
+        private static void HandleModifierType(HtmlNode mod, BubbleTextData curBubbleData)
+        {
+            string modName = mod.Name;
+
+            if (IsColorMod(modName) == true)
+            {
+                //Get color as hex
+                string color = mod.Attributes[0].Value;
+
+                uint result = uint.Parse(color, System.Globalization.NumberStyles.HexNumber);
+
+                curBubbleData.TextColor = new Color(result);
+            }
+            else if (IsDynamicMod(modName) == true)
+            {
+                //Parse the result as a float
+                if (float.TryParse(mod.Attributes[0].Value, out float result) == true)
+                {
+                    curBubbleData.DynamicSize = result;
+                }
+            }
+            else if (IsShakeMod(modName) == true) curBubbleData.Shake = true;
+            else if (IsWaveMod(modName) == true) curBubbleData.Wave = true;
+            else if (IsScaleMod(modName) == true)
+            {
+                //Parse the scale result as a float
+                if (float.TryParse(mod.Attributes[0].Value, out float result) == true)
+                {
+                    curBubbleData.Scale = new Vector2(result);
                 }
             }
         }

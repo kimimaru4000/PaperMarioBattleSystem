@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
         private const float TextScrollSpeed = -4f;
         private const float FastTextScrollSpeed = -12f;
 
-        public readonly float YMoveAmount = 0f;
+        public float YMoveAmount { get; private set; } = 0f;
 
         //NOTE: Start with string arrays to get it working, but eventually we may want a single chunk of text with the command controls
         //We'll see as it goes - arrays are nice since they separate the dialogue
@@ -83,6 +83,16 @@ namespace PaperMarioBattleSystem
 
         public RasterizerState BubbleRasterizerState { get; private set; } = null;
 
+        /// <summary>
+        /// The font the Dialogue Bubble renders text with.
+        /// </summary>
+        private SpriteFont BubbleFont = null;
+
+        /// <summary>
+        /// The font's glyphs.
+        /// </summary>
+        private Dictionary<char, SpriteFont.Glyph> FontGlyphs = null;
+
         private List<BubbleTextData> BubbleData = new List<BubbleTextData>();
 
         public DialogueBubble()
@@ -91,8 +101,6 @@ namespace PaperMarioBattleSystem
 
             ProgressTextStar = new ProgressDialogueStar();
             ProgressTextStar.Disabled = true;
-
-            YMoveAmount = AssetManager.Instance.TTYDFont.LineSpacing * 4f;
 
             LoadGraphics();
 
@@ -109,6 +117,9 @@ namespace PaperMarioBattleSystem
 
             BubbleImage = null;
             Speaker = null;
+
+            BubbleData = null;
+            FontGlyphs = null;
         }
 
         private void LoadGraphics()
@@ -131,6 +142,18 @@ namespace PaperMarioBattleSystem
             Text = TextArray[CurArrayIndex];
 
             BubbleData = DialogueGlobals.ParseText(Text, out Text);
+        }
+
+        /// <summary>
+        /// Sets the font to use for the Dialogue Bubble.
+        /// </summary>
+        /// <param name="spriteFont">The SpriteFont to use.</param>
+        public void SetFont(SpriteFont spriteFont)
+        {
+            BubbleFont = spriteFont;
+            FontGlyphs = BubbleFont.GetGlyphs();
+
+            YMoveAmount = BubbleFont.LineSpacing * 4f;
         }
 
         /// <summary>
@@ -450,10 +473,6 @@ namespace PaperMarioBattleSystem
         {
             if (stringBuilder.Length > 0)
             {
-                //Get the glyphs for the font
-                //NOTE: Ideally cache this earlier on
-                Dictionary<char, SpriteFont.Glyph> glyphs = AssetManager.Instance.TTYDFont.GetGlyphs();
-
                 Vector2 offset = Vector2.Zero;
 
                 //Go through all the data and render the text
@@ -465,7 +484,8 @@ namespace PaperMarioBattleSystem
                     for (int j = bdata.StartIndex; j < bdata.EndIndex && j < stringBuilder.Length; j++)
                     {
                         Vector2 finalPos = basePos;
-                
+                        Vector2 scale = bdata.Scale;
+
                         //Handle shaky text
                         if (bdata.Shake == true)
                         {
@@ -479,7 +499,7 @@ namespace PaperMarioBattleSystem
                         }
                 
                         //Render the character
-                        offset = SpriteRenderer.Instance.uiBatch.DrawCharacter(AssetManager.Instance.TTYDFont, stringBuilder[j], glyphs, offset, finalPos, bdata.TextColor, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .95f);
+                        offset = SpriteRenderer.Instance.uiBatch.DrawCharacter(AssetManager.Instance.TTYDFont, stringBuilder[j], FontGlyphs, offset, finalPos, bdata.TextColor, 0f, Vector2.Zero, scale, SpriteEffects.None, .95f);
                     }
                 
                     //offset = SpriteRenderer.Instance.uiBatch.DrawStringChars(AssetManager.Instance.TTYDFont, stringBuilder, offset, bdata.StartIndex, bdata.EndIndex, finalPos, bdata.TextColor, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .95f);

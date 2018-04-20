@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
@@ -65,10 +66,23 @@ namespace PaperMarioBattleSystem
         /// <param name="speaker">An optional BattleEntity that is set as the designated speaker of the Dialogue Bubble.</param>
         public void CreateBubble(string[] textArray, BattleEntity speaker)
         {
+            CreateBubble(textArray, AssetManager.Instance.TTYDFont, speaker);
+        }
+
+        /// <summary>
+        /// Creates a Dialogue Bubble with a set of text.
+        /// If a Dialogue Bubble already exists, the current one will be reset.
+        /// </summary>
+        /// <param name="textArray">An array of strings containing the text for the Dialogue Bubble to print.</param>
+        /// <param name="spriteFont">The SpriteFont for the Dialogue Bubble to use when printing text.</param>
+        /// <param name="speaker">An optional BattleEntity that is set as the designated speaker of the Dialogue Bubble.</param>
+        public void CreateBubble(string[] textArray, SpriteFont spriteFont, BattleEntity speaker)
+        {
             if (DialogBubble == null)
                 DialogBubble = new DialogueBubble();
 
             DialogBubble.Reset();
+            DialogBubble.SetFont(spriteFont);
             DialogBubble.SetText(textArray);
             DialogBubble.AttachSpeaker(speaker);
         }

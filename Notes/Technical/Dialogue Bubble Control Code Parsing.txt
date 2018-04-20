@@ -64,3 +64,28 @@ When rendering shaky text, each character should be offset by a random value wit
 When viewing previous text, turn the color grey and remove all effects, such as shake and wave.
 
 Some details may be missing from this implementation, but this is the high-level overview. This document will be updated as the implementation comes along.
+
+Update (4/19/18)
+----------------
+<color>, <shake>, <wave>, and <scale> have been implemented and work very well! The way parsing works now broke rendering other text when progressing the Dialogue Bubble to the next set of text. Since we need the <p> control code for that anyway, let's get into the message modifiers.
+
+To recap, here's what we have:
+
+-A StringBuilder that adds each character to it as it goes.
+-A List<BubbleTextData> that tells which parts of the text should be rendered with which effects. No matter the size of the string, if we put it into the parser, it will generate the data we need to have the text modifiers work.
+-The indices of all the text modifiers applies to the control code-less version of the string. For example, the shake effect in "Hello <shake>World!</shake>" applies from index 6 through 11.
+
+With this we can achieve a wide variety of text effects, some of which we currently have. The next step is to handle message modifiers, which affect the bubble's behavior.
+
+The modifiers we should tackle first are the following:
+
+<k> or <key> - Waits for a button press before progressing. This is only inserted at the end of bubble sections in TTYD, but it can actually be placed anywhere.
+<p> - Begins a new paragraph, which moves the current text up and starts printing the next set of text after the <p>.
+
+One way to go about this is implement Message Routines. While a Message Routine is going on, the dialogue bubble halts printing text until the routine is finished.
+
+For <k> or <key>, we would have a routine that checks for input before continuing.
+For <p>, we would have a routine that scrolls the text up.
+
+I'll write up more about how to define and implement these when I've thought about it more thoroughly.
+

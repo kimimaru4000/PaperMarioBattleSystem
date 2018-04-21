@@ -1,0 +1,20 @@
+Implemented Dialogue Bubble Control Codes (4/20/18)
+---------------------------------------------------
+This document notes the Dialogue Bubble control codes currently implemented, their attributes, and example usage.
+
+<color></color> - Changes the color of enclosed text to the specified hex value
+Attributes: value = "(hexcode)"
+Example: "<color value="FF0000FF">hi</color>
+
+<shake></shake> - Shakes enclosed text
+Example: "<shake>hi</shake>"
+
+<wave></wave> - Waves enclosed text around in a circle
+Example: "<wave>hi</wave>
+
+<scale></scale> - Scales enclosed text by the specified float value
+Attributes: value="(float value)"
+Example: "<scale value=\"1.3\">hi</scale>"
+
+<clear> - Causes the Dialogue Bubble to not render the bubble and render only its text 
+Example: "Hi there <clear>"

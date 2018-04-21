@@ -115,3 +115,83 @@ To finish up the rendering offset, we need to track how many new lines we've enc
 
 We can do this by counting the new lines in each text we encounter and storing the total number of new lines. When finding text, count the number of new lines in it, then set the current BubbleTextData's NewLineCount to the total. Upon finding a paragraph tag, add the current new line count to the total.
 
+Message Routines
+----------------
+Let's focus on the following control codes, which require routines:
+-<wait>
+-<k>/<key>
+-<p>
+
+Let's cover what they do:
+
+<wait %d> - Waits the specified number of milliseconds.
+<k> or <key> - Waits for input.
+<p> - Scrolls to the next paragraph.
+
+We need to specify at which point these routines start and have the Dialogue Bubble perform and finish them before printing the next character.
+
+An example of the <k>, or <key>, routine would be something like this:
+
+public void UpdateRoutine()
+{
+    if (Input.GetKeyDown(KeyPress) == true)
+    {
+        FinishRoutine();
+    }
+}
+
+How do we specify when to start performing these? To start, I think we need to track the character index that they start at. For example, look at the following string:
+
+"Hello<k>Friend!"
+
+"Hello" starts at index 0 and ends at index 5. Afterwards, we encounter a <k> tag. We should start the input after "Hello," so I think it makes sense to use the EndIndex of the previous BubbleTextData. In this case, the key input would start at index 5.
+
+However, look at the following:
+
+"Hello<k><p>Friend!"
+
+Barring the lack of new lines, this is how TTYD handles the vast majority of its dialogue bubbles. Since control codes are omitted from the final text, both the <k> and <p> would start at index 5. <k> would be found first, then <p> would be found. Since this is completely valid, we need to handle it. I think we should do it with the following data structure:
+
+Dictionary<int, List<HtmlNode>> MessageRoutines
+
+This should be added to BubbleData.
+
+By adding the index as the key and the control code node into a list of HtmlNodes, we have all the information to do what the dialogue demands in the order specified. The information also includes any attributes that the control code has.
+
+Implementing Message Routines
+-----------------------------
+Each frame, we should check if the MessageRoutines dictionary at CurTextIndex has any message routines. If so, pass the list into a new method that will handle instantiating classes with logic based on the nodes. Then, mark that we added routines; this will prevent us from always adding them and never progressing. Clear the mark flag next time text is progressed.
+
+The instances of the classes should be put into a Queue. The one at the front of the Queue will update, and when done, be removed from the queue. Once the queue is empty, the Dialogue Bubble will proceed onto the next character.
+
+The classes should be similar to other systems we already have, such as Battle Events:
+
+-Create a base MessageRoutine class:
+
+public abstract class MessageRoutine : IUpdateable, ICleanup
+{
+    private DialogueBubble DBubble = null;
+    public bool Complete { get; private set; }
+ 
+    protected MessageRoutine(DialogueBubble bubble)
+    {
+        DBubble = bubble;
+    }
+    
+    public virtual void CleanUp()
+    {
+    }
+    
+    public abstract void OnStart();
+    public abstract void OnEnd();
+    public abstract void Update();
+}
+
+Access to the DialogueBubble will allow MessageRoutines to do a lot more than if they don't have it.
+
+-Create derived classes with their own logic.
+
+We can even have the scrolling code be a MessageRoutine. This would allow us to simply make <p> add a scrolling routine, which will handle everything already.
+
+Try this out and see how it works!
+

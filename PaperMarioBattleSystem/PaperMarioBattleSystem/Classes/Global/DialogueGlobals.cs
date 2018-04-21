@@ -255,21 +255,10 @@ namespace PaperMarioBattleSystem
                     {
                         activeModifiers.Add(node);
                     }
-
-                    //If it's paragraph tag, increment the current paragraph index
-                    if (IsParagraphTag(node.Name) == true)
+                    //Otherwise, it may be a message modifier, so handle it
+                    else
                     {
-                        bubbleData.MaxParagraphIndex++;
-
-                        //Add the current newline count and reset it
-                        prevNewLineCount += curNewLineCount;
-                        curNewLineCount = 0;
-                    }
-
-                    //If it's a clear tag, mark to not render the bubble itself
-                    if (IsClearTag(node.Name) == true)
-                    {
-                        bubbleData.Clear = true;
+                        HandleMessageModifier(node, bubbleData, ref prevNewLineCount, ref curNewLineCount);
                     }
                 }
                 //It's a text node; see where it lies
@@ -366,6 +355,25 @@ namespace PaperMarioBattleSystem
                 {
                     curBubbleTextData.Scale = new Vector2(result);
                 }
+            }
+        }
+
+        private static void HandleMessageModifier(HtmlNode msgMod, BubbleData bubbleData, ref int prevNewLineCount, ref int curNewLineCount)
+        {
+            //If it's paragraph tag, increment the current paragraph index
+            if (IsParagraphTag(msgMod.Name) == true)
+            {
+                bubbleData.MaxParagraphIndex++;
+
+                //Add the current newline count and reset it
+                prevNewLineCount += curNewLineCount;
+                curNewLineCount = 0;
+            }
+
+            //If it's a clear tag, mark to not render the bubble itself
+            if (IsClearTag(msgMod.Name) == true)
+            {
+                bubbleData.Clear = true;
             }
         }
 

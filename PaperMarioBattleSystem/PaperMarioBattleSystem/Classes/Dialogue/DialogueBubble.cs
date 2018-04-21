@@ -47,12 +47,6 @@ namespace PaperMarioBattleSystem
         private int CurTextIndex = 0;
         private int MaxArrayIndex = 0;
 
-        /// <summary>
-        /// Tracks the number of new lines in the current text.
-        /// This helps determine how many new lines to use to offset the next set of text.
-        /// </summary>
-        private int NewLineCount = 0;
-
         private CroppedTexture2D BubbleImage = null;
 
         /// <summary>
@@ -108,6 +102,8 @@ namespace PaperMarioBattleSystem
             //This lets us use the ScissorRectangle to clip any text outside the textbox
             BubbleRasterizerState = new RasterizerState();
             BubbleRasterizerState.ScissorTestEnable = true;
+
+            YMoveAmount = Scale.Y;
         }
 
         public void CleanUp()
@@ -153,7 +149,7 @@ namespace PaperMarioBattleSystem
             BubbleFont = spriteFont;
             FontGlyphs = BubbleFont.GetGlyphs();
 
-            YMoveAmount = Scale.Y;//BubbleFont.LineSpacing * 4f;
+            //YMoveAmount = BubbleFont.LineSpacing * 4f;
         }
 
         /// <summary>
@@ -197,7 +193,6 @@ namespace PaperMarioBattleSystem
             MaxArrayIndex = 0;
             TextYOffset = 0f;
             OffsetToScroll = 0f;
-            NewLineCount = 0;
 
             SpeakerEndTalk();
             Speaker = null;
@@ -255,12 +250,6 @@ namespace PaperMarioBattleSystem
 
             stringBuilder.Append(curChar);
             CurTextIndex++;
-
-            //If we encounter a new line, increment the new line count
-            if (curChar == '\n')
-            {
-                NewLineCount++;
-            }
         }
 
         /// <summary>
@@ -333,20 +322,11 @@ namespace PaperMarioBattleSystem
                 //Move the text up
                 OffsetToScroll -= YMoveAmount;
 
-                //int diff = 4 - NewLineCount;
-                //
-                ////Append new lines to offset the next set of text that will be printed
-                //if (diff > 0)
-                //{
-                //    stringBuilder.Append(new String('\n', diff));
-                //}
-
                 //Set text to the new value and reset the text index so it can print
                 Text = TextArray[CurArrayIndex];
 
                 CurTextIndex = 0;
                 ElapsedTime = 0d;
-                NewLineCount = 0;
             }
         }
 

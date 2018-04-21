@@ -89,3 +89,29 @@ For <p>, we would have a routine that scrolls the text up.
 
 I'll write up more about how to define and implement these when I've thought about it more thoroughly.
 
+Update (4/20/18)
+----------------
+We can handle <p> with an int field called ParagraphIndex. Here's how it'd work:
+                                           --------------
+-Each BubbleTextData has a ParagraphIndex field
+-While parsing, when a <p> is encountered, we increment a counter tracking the current ParagraphIndex
+-When setting text modifiers, the ParagraphIndex is set to the current counter
+
+We can render the text at ((position - TextYOffset) + (ParagraphIndex * YMoveAmount)). This allows us to scroll and offset paragraphs.
+
+We also need to keep track of the max ParagraphIndex to determine when a Dialogue Bubble should end. We can use the following structure to hold information about the Dialogue Bubble itself:
+
+public class BubbleData
+{
+    int MaxParagraphIndex;
+    List<BubbleTextData> TextData;
+}
+
+This allows us to expand this class with other data, such as dialogue bubble styles for <kanban> and similar modifiers, and much more.
+
+To finish up the rendering offset, we need to track how many new lines we've encountered up until the current paragraph so we can offset it by that many. This will ensure that, regardless if there are 1 or 4 lines in the current bubble, the next one will start its text at the same location.
+
+-Add a new field in BubbleTextData called NewLineCount.
+
+We can do this by counting the new lines in each text we encounter and storing the total number of new lines. When finding text, count the number of new lines in it, then set the current BubbleTextData's NewLineCount to the total. Upon finding a paragraph tag, add the current new line count to the total.
+

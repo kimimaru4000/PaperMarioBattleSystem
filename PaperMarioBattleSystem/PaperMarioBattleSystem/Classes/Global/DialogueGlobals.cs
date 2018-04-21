@@ -34,6 +34,25 @@ namespace PaperMarioBattleSystem
             return (text == HtmlTextNode.HtmlNodeTypeNameComment || text == HtmlTextNode.HtmlNodeTypeNameDocument);
         }
 
+        #region Bubble Functionality
+
+        /// <summary>
+        /// The string representing the paragraph tag.
+        /// </summary>
+        public const string NewParagraphTag = "p";
+
+        /// <summary>
+        /// Tells if the string is a paragraph tag.
+        /// </summary>
+        /// <param name="text">The string to test.</param>
+        /// <returns>true if so, otherwise false.</returns>
+        public static bool IsParagraphTag(in string text)
+        {
+            return (text == NewParagraphTag);
+        }
+
+        #endregion
+
         #region Text Modifiers
 
         /// <summary>
@@ -149,13 +168,45 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Message Modifiers
+
+        /// <summary>
+        /// The string representing the clear tag.
+        /// </summary>
+        public const string ClearTag = "clear";
+
+        /// <summary>
+        /// Tells if the string is a clear tag.
+        /// </summary>
+        /// <param name="text">The string to test.</param>
+        /// <returns>true if so, otherwise false.</returns>
+        public static bool IsClearTag(in string text)
+        {
+            return (text == ClearTag);
+        }
+
+        #endregion
+
         #region Classes
+
+        /// <summary>
+        /// Represents data for a Dialogue Bubble.
+        /// </summary>
+        public class BubbleData
+        {
+            public int MaxParagraphIndex = 0;
+            public List<BubbleTextData> TextData = new List<BubbleTextData>();
+
+            public bool Clear = false;
+        }
 
         /// <summary>
         /// Represents Text Modifier data for a Dialogue Bubble.
         /// </summary>
         public class BubbleTextData
         {
+            public int ParagraphIndex = 0;
+            public int NewLineCount = 0;
             public int StartIndex = 0;
             public int EndIndex = 0;
             public Color TextColor = Color.Black;
@@ -169,24 +220,27 @@ namespace PaperMarioBattleSystem
 
         #region Parsing Methods
 
-        public static List<BubbleTextData> ParseText(in string bubbleText, out string nonHtmlOutput)
+        public static BubbleData ParseText(in string bubbleText, out string nonHtmlOutput)
         {
             HtmlDocument doc = new HtmlDocument();
             doc.LoadHtml(bubbleText);
 
-            BubbleTextData curBubbleData = new BubbleTextData();
-            List<BubbleTextData> bubbleData = new List<BubbleTextData>();
+            BubbleData bubbleData = new BubbleData();
+            BubbleTextData curBubbleTextData = new BubbleTextData();
             List<HtmlNode> activeModifiers = new List<HtmlNode>();
+            int prevNewLineCount = 0;
+            int curNewLineCount = 0;
 
-            VisitNode(doc.DocumentNode, doc.DocumentNode, ref curBubbleData, activeModifiers, bubbleData);
+            VisitNode(doc.DocumentNode, doc.DocumentNode, ref curBubbleTextData, activeModifiers, bubbleData, ref prevNewLineCount,
+                ref curNewLineCount);
 
             nonHtmlOutput = doc.DocumentNode.InnerText;
 
             return bubbleData;
         }
 
-        private static void VisitNode(HtmlNode root, HtmlNode node, ref BubbleTextData curBubbleData, List<HtmlNode> activeModifiers,
-            List<BubbleTextData> bubbleData)
+        private static void VisitNode(HtmlNode root, HtmlNode node, ref BubbleTextData curBubbleTextData, List<HtmlNode> activeModifiers,
+            BubbleData bubbleData, ref int prevNewLineCount, ref int curNewLineCount)
         {
             if (node == null) return;
 
@@ -196,19 +250,46 @@ namespace PaperMarioBattleSystem
                 //If it's not a text node, check what it is 
                 if (IsTextNode(node.Name) == false)
                 {
-                    //If it's a valid modifier, add this node to the list
-                    //Start up a new bubble data too
+                    //If it's a valid text modifier, add this node to the list
                     if (IsValidModifier(node.Name) == true)
                     {
                         activeModifiers.Add(node);
+                    }
+
+                    //If it's paragraph tag, increment the current paragraph index
+                    if (IsParagraphTag(node.Name) == true)
+                    {
+                        bubbleData.MaxParagraphIndex++;
+
+                        //Add the current newline count and reset it
+                        prevNewLineCount += curNewLineCount;
+                        curNewLineCount = 0;
+                    }
+
+                    //If it's a clear tag, mark to not render the bubble itself
+                    if (IsClearTag(node.Name) == true)
+                    {
+                        bubbleData.Clear = true;
                     }
                 }
                 //It's a text node; see where it lies
                 else
                 {
+                    //Start searching from the last index from the last bubble text
+                    //This prevents same text from being found earlier, causing the start and end indices to be incorrect
+                    //An example that this problem fixes is: "Hello World! \n e \ntest2\n<p>test"
+                    //The earlier "test" from "test2" would have been found in the later "test" but no longer does since we start later
+                    int searchIndex = 0;
+                    if (bubbleData.TextData.Count > 0)
+                    {
+                        searchIndex = bubbleData.TextData[bubbleData.TextData.Count - 1].EndIndex;
+                    }
+
                     //Set start and end indices
-                    curBubbleData.StartIndex = root.InnerText.IndexOf(node.InnerText);
-                    curBubbleData.EndIndex = curBubbleData.StartIndex + node.InnerText.Length;
+                    curBubbleTextData.StartIndex = root.InnerText.IndexOf(node.InnerText, searchIndex);
+                    curBubbleTextData.EndIndex = curBubbleTextData.StartIndex + node.InnerText.Length;
+
+                    //Debug.Log($"\"{node.InnerText}\" with start: {curBubbleTextData.StartIndex} and end: {curBubbleTextData.EndIndex}");
 
                     //Apply all attributes
                     for (int i = 0; i < activeModifiers.Count; i++)
@@ -222,7 +303,7 @@ namespace PaperMarioBattleSystem
                         if (node.StreamPosition > startPos && node.StreamPosition < endPos)
                         {
                             //It is, so apply effects
-                            HandleModifierType(mod, curBubbleData);
+                            HandleModifierType(mod, curBubbleTextData);
                         }
                         //It's out of range; remove this mod
                         else
@@ -232,9 +313,16 @@ namespace PaperMarioBattleSystem
                         }
                     }
 
+                    //Track the current new line count
+                    curNewLineCount += node.InnerText.Count(IsNewLineChar);
+
+                    //Set the paragraph index and add the new line count from all previous paragraphs
+                    curBubbleTextData.ParagraphIndex = bubbleData.MaxParagraphIndex;
+                    curBubbleTextData.NewLineCount = prevNewLineCount;
+
                     //Add the bubble data and start a new one
-                    bubbleData.Add(curBubbleData);
-                    curBubbleData = new BubbleTextData();
+                    bubbleData.TextData.Add(curBubbleTextData);
+                    curBubbleTextData = new BubbleTextData();
                 }
             }
 
@@ -243,12 +331,12 @@ namespace PaperMarioBattleSystem
             {
                 for (int i = 0; i < node.ChildNodes.Count; i++)
                 {
-                    VisitNode(root, node.ChildNodes[i], ref curBubbleData, activeModifiers, bubbleData);
+                    VisitNode(root, node.ChildNodes[i], ref curBubbleTextData, activeModifiers, bubbleData, ref prevNewLineCount, ref curNewLineCount);
                 }
             }
         }
 
-        private static void HandleModifierType(HtmlNode mod, BubbleTextData curBubbleData)
+        private static void HandleModifierType(HtmlNode mod, BubbleTextData curBubbleTextData)
         {
             string modName = mod.Name;
 
@@ -259,26 +347,36 @@ namespace PaperMarioBattleSystem
 
                 uint result = uint.Parse(color, System.Globalization.NumberStyles.HexNumber);
 
-                curBubbleData.TextColor = new Color(result);
+                curBubbleTextData.TextColor = new Color(result);
             }
             else if (IsDynamicMod(modName) == true)
             {
                 //Parse the result as a float
                 if (float.TryParse(mod.Attributes[0].Value, out float result) == true)
                 {
-                    curBubbleData.DynamicSize = result;
+                    curBubbleTextData.DynamicSize = result;
                 }
             }
-            else if (IsShakeMod(modName) == true) curBubbleData.Shake = true;
-            else if (IsWaveMod(modName) == true) curBubbleData.Wave = true;
+            else if (IsShakeMod(modName) == true) curBubbleTextData.Shake = true;
+            else if (IsWaveMod(modName) == true) curBubbleTextData.Wave = true;
             else if (IsScaleMod(modName) == true)
             {
                 //Parse the scale result as a float
                 if (float.TryParse(mod.Attributes[0].Value, out float result) == true)
                 {
-                    curBubbleData.Scale = new Vector2(result);
+                    curBubbleTextData.Scale = new Vector2(result);
                 }
             }
+        }
+
+        /// <summary>
+        /// Tells if a character is a newline.
+        /// </summary>
+        /// <param name="c">The character to test.</param>
+        /// <returns>true if the character is the newline character, '\n', otherwise false.</returns>
+        private static bool IsNewLineChar(char c)
+        {
+            return (c == '\n');
         }
 
         #endregion

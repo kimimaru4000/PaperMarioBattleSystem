@@ -93,7 +93,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private Dictionary<char, SpriteFont.Glyph> FontGlyphs = null;
 
-        private List<BubbleTextData> BubbleData = new List<BubbleTextData>();
+        private BubbleData DBubbleData = null;
 
         public DialogueBubble()
         {
@@ -118,7 +118,7 @@ namespace PaperMarioBattleSystem
             BubbleImage = null;
             Speaker = null;
 
-            BubbleData = null;
+            DBubbleData = null;
             FontGlyphs = null;
         }
 
@@ -141,7 +141,7 @@ namespace PaperMarioBattleSystem
             TextArray = textArray;
             Text = TextArray[CurArrayIndex];
 
-            BubbleData = DialogueGlobals.ParseText(Text, out Text);
+            DBubbleData = DialogueGlobals.ParseText(Text, out Text);
         }
 
         /// <summary>
@@ -153,7 +153,7 @@ namespace PaperMarioBattleSystem
             BubbleFont = spriteFont;
             FontGlyphs = BubbleFont.GetGlyphs();
 
-            YMoveAmount = BubbleFont.LineSpacing * 4f;
+            YMoveAmount = Scale.Y;//BubbleFont.LineSpacing * 4f;
         }
 
         /// <summary>
@@ -333,13 +333,13 @@ namespace PaperMarioBattleSystem
                 //Move the text up
                 OffsetToScroll -= YMoveAmount;
 
-                int diff = 4 - NewLineCount;
-
-                //Append new lines to offset the next set of text that will be printed
-                if (diff > 0)
-                {
-                    stringBuilder.Append(new String('\n', diff));
-                }
+                //int diff = 4 - NewLineCount;
+                //
+                ////Append new lines to offset the next set of text that will be printed
+                //if (diff > 0)
+                //{
+                //    stringBuilder.Append(new String('\n', diff));
+                //}
 
                 //Set text to the new value and reset the text index so it can print
                 Text = TextArray[CurArrayIndex];
@@ -456,6 +456,9 @@ namespace PaperMarioBattleSystem
 
         public void Draw()
         {
+            //Handle the <clear> tag, which renders only the text
+            if (DBubbleData.Clear == true) return;
+
             SpriteRenderer.Instance.DrawUI(BubbleImage.Tex, Position, BubbleImage.SourceRect, Color.White, 0f, Vector2.Zero, Scale, false, false, .9f);
             //SpriteRenderer.Instance.DrawUISliced(BubbleImage, new Rectangle((int)Position.X, (int)Position.Y, (int)BubbleSize.X, (int)BubbleSize.Y), Color.White, .9f);
 
@@ -474,16 +477,18 @@ namespace PaperMarioBattleSystem
             if (stringBuilder.Length > 0)
             {
                 Vector2 offset = Vector2.Zero;
+                Vector2 basePos = Position + new Vector2(10, 5f + TextYOffset);
 
                 //Go through all the data and render the text
-                for (int i = 0; i < BubbleData.Count; i++)
+                for (int i = 0; i < DBubbleData.TextData.Count; i++)
                 {
-                    BubbleTextData bdata = BubbleData[i];
-                    Vector2 basePos = Position + new Vector2(10, 5f + TextYOffset);
+                    BubbleTextData bdata = DBubbleData.TextData[i];
                 
                     for (int j = bdata.StartIndex; j < bdata.EndIndex && j < stringBuilder.Length; j++)
                     {
-                        Vector2 finalPos = basePos;
+                        Vector2 finalPos = basePos + new Vector2(0, (bdata.ParagraphIndex * YMoveAmount));
+                        finalPos.Y -= (bdata.NewLineCount * BubbleFont.LineSpacing);
+
                         Vector2 scale = bdata.Scale;
 
                         //Handle shaky text

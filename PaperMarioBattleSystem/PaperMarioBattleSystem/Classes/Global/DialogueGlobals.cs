@@ -211,6 +211,11 @@ namespace PaperMarioBattleSystem
         public const string ShortKeyTag = "k";
 
         /// <summary>
+        /// The string representing the wait tag.
+        /// </summary>
+        public const string WaitKeyTag = "wait";
+
+        /// <summary>
         /// Tells if the string is a key tag.
         /// </summary>
         /// <param name="text">The string to test.</param>
@@ -221,6 +226,16 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Tells if the string is a wait tag.
+        /// </summary>
+        /// <param name="text">The string to test.</param>
+        /// <returns>true if so, otherwise false.</returns>
+        public static bool IsWaitTag(in string text)
+        {
+            return (text == WaitKeyTag);
+        }
+
+        /// <summary>
         /// Tells if the string is a valid message routine.
         /// <para>Note that Paragraph tags are message modifiers in addition to message routines.</para>
         /// </summary>
@@ -228,7 +243,7 @@ namespace PaperMarioBattleSystem
         /// <returns>true if so, otherwise false.</returns>
         public static bool IsMessageRoutine(in string text)
         {
-            return (IsParagraphTag(text) == true || IsKeyTag(text) == true);
+            return (IsParagraphTag(text) == true || IsKeyTag(text) == true || IsWaitTag(text) == true);
         }
 
         #endregion

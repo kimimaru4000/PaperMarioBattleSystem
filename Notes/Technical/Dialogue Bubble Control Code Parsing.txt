@@ -209,6 +209,6 @@ In the InputRoutine, check for input regarding going back a text box. If you can
 
 The state of the routines would be preserved this way. This would also make it so you can stack them; if you wish to go back another paragraph, the same thing would apply.
 
-Since we're using a Queue, we can't do this. Instead, we can use a Stack and add all the Message Routines in backwards. This will allow us the last one to go in to be updated.
+Since we're using a Queue, we can't do this. Instead, we can use a Stack and add all the Message Routines in backwards. This will allow the last one put in to be updated first.
 
 Try this out and see how it works.

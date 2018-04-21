@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using static PaperMarioBattleSystem.DialogueGlobals;
 
 namespace PaperMarioBattleSystem
 {
@@ -27,22 +29,34 @@ namespace PaperMarioBattleSystem
                 DBubble.CurParagraphIndex--;
                 
                 //When going back a paragraph, adjust all the previous text to be grey and lose some effects, such as shake and wave
+                for (int i = 0; i < DBubble.DBubbleData.TextData.Count; i++)
+                {
+                    BubbleTextData bData = DBubble.DBubbleData.TextData[i];
+                    if (bData.ParagraphIndex == DBubble.CurParagraphIndex)
+                    {
+                        bData.TextColor = Color.Gray;
+                        bData.Shake = false;
+                        bData.Wave = false;
+                    }
+                }
             }
             else if (DBubble.TextYOffset > OffsetToScroll)
             {
                 DBubble.CurParagraphIndex++;
             }
+
+            DBubble.SpeakerEndTalk();
         }
 
         public override void OnEnd()
         {
-            
+            DBubble.TextYOffset = OffsetToScroll;
         }
 
         public override void Update()
         {
             //Speed up scrolling
-            if (Input.GetKeyDown(Microsoft.Xna.Framework.Input.Keys.O) == true)
+            if (Input.GetKeyDown(DialogueBubble.ProgressionButton) == true)
             {
                 CurScrollSpeed = DialogueBubble.FastTextScrollSpeed;
             }

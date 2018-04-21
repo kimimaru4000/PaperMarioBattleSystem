@@ -13,17 +13,28 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// A dialogue bubble. It shows what characters are saying over time.
+    /// <para>Text for these bubbles involve control codes that have a variety of modifiers that apply a wide range of effects.
+    /// See <see cref="DialogueGlobals"/> and/or documentation for the modifiers and their tags and attributes.</para>
     /// </summary>
-    /// <remarks>NOTE: Look at the control codes in the PM games for the dialogue bubbles.
-    /// Implementation will come down the road, but knowing them will be incredibly useful.
-    /// 
-    /// Look into HTML or XML parsers that might help with this, as the control codes follow a similar syntax.</remarks>
     public class DialogueBubble : IPosition, IScalable, IUpdateable, IDrawable, ICleanup
     {
-        public const double DefaultTimeBetweenChars = 34d;
+        public const double DefaultTimeBetweenChars = 25d;
         public const float TextScrollSpeed = -4f;
         public const float FastTextScrollSpeed = -12f;
 
+        /// <summary>
+        /// The button to press to go to the previous paragraph.
+        /// </summary>
+        public const Keys PreviousParagraphButton = Keys.I;
+
+        /// <summary>
+        /// The button to press to progress past an input prompt.
+        /// </summary>
+        public const Keys ProgressionButton = Keys.O;
+
+        /// <summary>
+        /// The amount to move the text when going up or down a paragraph.
+        /// </summary>
         public float YMoveAmount { get; private set; } = 0f;
 
         /// <summary>
@@ -34,7 +45,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// How long to wait in between each displayed character.
         /// </summary>
-        public double TimeBetweenCharacters = 100d;
+        public double TimeBetweenCharacters = DefaultTimeBetweenChars;
 
         public readonly StringBuilder stringBuilder = new StringBuilder();
 
@@ -79,10 +90,10 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The Message Routines to invoke.
         /// </summary>
-        private Queue<MessageRoutine> MessageRoutines = new Queue<MessageRoutine>();
+        private Stack<MessageRoutine> MessageRoutines = new Stack<MessageRoutine>();
         private bool AddedRoutines = false;
 
-        private BubbleData DBubbleData = null;
+        public BubbleData DBubbleData { get; private set; } = null;
 
         public double ElapsedTime = 0d;
 
@@ -144,8 +155,6 @@ namespace PaperMarioBattleSystem
         {
             BubbleFont = spriteFont;
             FontGlyphs = BubbleFont.GetGlyphs();
-
-            //YMoveAmount = BubbleFont.LineSpacing * 4f;
         }
 
         /// <summary>
@@ -209,66 +218,90 @@ namespace PaperMarioBattleSystem
             //Return if done
             if (IsDone == true) return;
 
-            //if (IsScrolling == true)
-            //{
-            //    HandleScrollText();
-            //}
-            //else
+            //Check for adding Message Routines for this text index
+            if (AddedRoutines == false)
             {
-                if (AddedRoutines == false)
+                CheckAndParseMessageRoutines(CurTextIndex);
+
+                AddedRoutines = true;
+            }
+           
+            //If we have no message routines, continue as normal
+            if (MessageRoutines.Count == 0)
+            {
+                //If we're done printing, close the dialogue bubble
+                if (DonePrintingText == true)
                 {
-                    CheckAndParseMessageRoutines(CurTextIndex);
-
-                    AddedRoutines = true;
-
-                    if (MessageRoutines.Count > 0)
-                        MessageRoutines.Peek().OnStart();
+                    SpeakerEndTalk();
+                    Close();
                 }
+                //Otherwise keep printing
                 else
                 {
-                    if (MessageRoutines.Count == 0)
+                    //If the user inputs the progress button, skip ahead
+                    if (Input.GetKeyDown(ProgressionButton) == true)
                     {
-                        //If we're done printing, close the dialogue bubble
-                        if (DonePrintingText == true)
-                        {
-                            SpeakerEndTalk();
-                            Close();
-                        }
-                        //Otherwise keep printing
-                        else
-                        {
-                            HandlePrintText();
-                        }
+                        PrintRemaining();
+                        ElapsedTime = 0d;
                     }
+                    //Otherwise, continue like normal
                     else
                     {
-                        if (MessageRoutines.Peek().Complete == true)
-                        {
-                            MessageRoutines.Peek().OnEnd();
-                            MessageRoutines.Peek().CleanUp();
-
-                            MessageRoutines.Dequeue();
-                            if (MessageRoutines.Count > 0)
-                                MessageRoutines.Peek().OnStart();
-                        }
-                        else
-                        {
-                            MessageRoutines.Peek().Update();
-                        }
+                        HandlePrintText();
                     }
                 }
             }
+            else
+            {
+                //If the current Message Routine has completed,
+                if (MessageRoutines.Peek().Complete == true)
+                {
+                    //And and cleanup the current one
+                    MessageRoutines.Peek().OnEnd();
+                    MessageRoutines.Peek().CleanUp();
 
-            //HandleInput();
+                    //Remove it from the stack and set elapsed time to 0
+                    MessageRoutines.Pop();
 
-            //Handle disabling of the progress star
-            //ProgressTextStar.Disabled = (CurTextIndex < Text.Length || OffsetToScroll != TextYOffset);
+                    ElapsedTime = 0d;
+                }
+                else
+                {
+                    //Start if not started
+                    if (MessageRoutines.Peek().HasStarted == false)
+                    {
+                        MessageRoutines.Peek().OnStart();
+                        MessageRoutines.Peek().HasStarted = true;
+                    }
 
+                    //Update the current routine
+                    MessageRoutines.Peek().Update();
+                }
+            }
+
+            //Update the progress star if disabled
             if (ProgressTextStar.Disabled == false)
                 ProgressTextStar.Update();
         }
 
         #region Functional Methods
+
+        /// <summary>
+        /// Handles progressing text by printing it after the designated time.
+        /// </summary>
+        private void HandlePrintText()
+        {
+            SpeakerStartTalk();
+            ElapsedTime += Time.ElapsedMilliseconds;
+
+            //If we should print a new character in the text, do so
+            if (ElapsedTime >= TimeBetweenCharacters)
+            {
+                PrintNextCharacter();
+
+                ElapsedTime = 0d;
+            }
+        }
 
         /// <summary>
         /// Prints the next character to the dialogue bubble.
@@ -284,7 +317,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Prints the remaining characters in the current set of text in the dialogue bubble.
+        /// Prints the remaining characters in the dialogue bubble until a Message Routine is added.
         /// </summary>
         private void PrintRemaining()
         {
@@ -293,31 +326,21 @@ namespace PaperMarioBattleSystem
 
             for (int i = 0; i < remainingCount; i++)
             {
+                //Check for message routines
+                //Break if we add one
+                if (AddedRoutines == false)
+                {
+                    CheckAndParseMessageRoutines(CurTextIndex);
+
+                    //We added a routine, so mark that we added it and break
+                    if (MessageRoutines.Count > 0)
+                    {
+                        AddedRoutines = true;
+                        break;
+                    }
+                }
+
                 PrintNextCharacter();
-            }
-        }
-
-        #endregion
-
-        #region Input Methods
-
-        private void HandlePrintText()
-        {
-            SpeakerStartTalk();
-            ElapsedTime += Time.ElapsedMilliseconds;
-
-            //If we should print a new character in the text, do so
-            if (ElapsedTime >= TimeBetweenCharacters)
-            {
-                PrintNextCharacter();
-
-                ElapsedTime = 0d;
-
-                //if (DonePrintingText == true)
-                //{
-                //    //Stop the speaker from talking
-                //    SpeakerEndTalk();
-                //}
             }
         }
 
@@ -336,7 +359,8 @@ namespace PaperMarioBattleSystem
 
             List<HtmlNode> routines = DBubbleData.MessageRoutines[curTextIndex];
 
-            for (int i = 0; i < routines.Count; i++)
+            //Since we're using a stack, put them in backwards
+            for (int i = routines.Count - 1; i >= 0; i--)
             {
                 ParseMessageRoutine(routines[i]);
             }
@@ -348,7 +372,7 @@ namespace PaperMarioBattleSystem
 
             if (DialogueGlobals.IsKeyTag(tag) == true)
             {
-                InputRoutine inputRoutine = new InputRoutine(this, Keys.O);
+                InputRoutine inputRoutine = new InputRoutine(this, PreviousParagraphButton, ProgressionButton);
                 AddMessageRoutine(inputRoutine);
             }
 
@@ -357,11 +381,24 @@ namespace PaperMarioBattleSystem
                 ScrollRoutine scrollRoutine = new ScrollRoutine(this, TextYOffset - YMoveAmount);
                 AddMessageRoutine(scrollRoutine);
             }
+
+            if (DialogueGlobals.IsWaitTag(tag) == true)
+            {
+                double waitDur = 0d;
+
+                if (double.TryParse(routine.Attributes[0].Value, out double result) == true)
+                {
+                    waitDur = result;
+                }
+
+                WaitRoutine waitRoutine = new WaitRoutine(this, waitDur);
+                AddMessageRoutine(waitRoutine);
+            }
         }
 
-        private void AddMessageRoutine(MessageRoutine routine)
+        public void AddMessageRoutine(MessageRoutine routine)
         {
-            MessageRoutines.Enqueue(routine);
+            MessageRoutines.Push(routine);
         }
 
         #endregion
@@ -372,7 +409,6 @@ namespace PaperMarioBattleSystem
             if (DBubbleData.Clear == true) return;
 
             SpriteRenderer.Instance.DrawUI(BubbleImage.Tex, Position, BubbleImage.SourceRect, Color.White, 0f, Vector2.Zero, Scale, false, false, .9f);
-            //SpriteRenderer.Instance.DrawUISliced(BubbleImage, new Rectangle((int)Position.X, (int)Position.Y, (int)BubbleSize.X, (int)BubbleSize.Y), Color.White, .9f);
 
             if (ProgressTextStar.Disabled == false)
             {
@@ -418,12 +454,7 @@ namespace PaperMarioBattleSystem
                         //Render the character
                         offset = SpriteRenderer.Instance.uiBatch.DrawCharacter(AssetManager.Instance.TTYDFont, stringBuilder[j], FontGlyphs, offset, finalPos, bdata.TextColor, 0f, Vector2.Zero, scale, SpriteEffects.None, .95f);
                     }
-                
-                    //offset = SpriteRenderer.Instance.uiBatch.DrawStringChars(AssetManager.Instance.TTYDFont, stringBuilder, offset, bdata.StartIndex, bdata.EndIndex, finalPos, bdata.TextColor, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .95f);
                 }
-
-                //SpriteRenderer.Instance.uiBatch.DrawStringChars(AssetManager.Instance.TTYDFont, stringBuilder, Vector2.Zero, 0, stringBuilder.Length, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, Vector2.One, SpriteEffects.None, .95f);
-                //SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, stringBuilder, Position + new Vector2(10, 5f + TextYOffset), Color.Black, 0f, Vector2.Zero, 1f, .95f);
             }
         }
     }

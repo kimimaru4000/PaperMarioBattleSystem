@@ -12,11 +12,13 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class InputRoutine : MessageRoutine
     {
-        private Keys ButtonToPress;
+        private Keys PreviousButton;
+        private Keys ProgressButton;
 
-        public InputRoutine(DialogueBubble bubble, Keys buttonToPress) : base(bubble)
+        public InputRoutine(DialogueBubble bubble, Keys previousButton, Keys progressButton) : base(bubble)
         {
-            ButtonToPress = buttonToPress;
+            PreviousButton = previousButton;
+            ProgressButton = progressButton;
         }
 
         public override void OnStart()
@@ -32,16 +34,29 @@ namespace PaperMarioBattleSystem
 
         public override void Update()
         {
-            //We should allow going back here
-            //If so, we want to add the following to the front of the MessageRoutine Queue (which might need to be a list) in this order:
-            //1. A ScrollRoutine that goes up
-            //2. An InputRoutine
-            //3. A ScrollRoutine that goes down
+            //If you can go back, check for input
+            if (DBubble.CurParagraphIndex > 0)
+            {
+                //Go back
+                if (Input.GetKeyDown(DialogueBubble.PreviousParagraphButton) == true)
+                {
+                    OnEnd();
+                    HasStarted = false;
 
-            //This would make it so you can stack them; if you wish to go back again, the same thing would apply
-            //In addition, when you go back down to the paragraph this particular InputRoutine is on, everything would be the same
+                    //Add scroll routine for going down to this offset
+                    DBubble.AddMessageRoutine(new ScrollRoutine(DBubble, DBubble.TextYOffset));
 
-            if (Input.GetKeyDown(ButtonToPress) == true)
+                    //Add an input routine
+                    DBubble.AddMessageRoutine(new InputRoutine(DBubble, PreviousButton, ProgressButton));
+
+                    //Add scroll routine for going up
+                    DBubble.AddMessageRoutine(new ScrollRoutine(DBubble, DBubble.TextYOffset + DBubble.YMoveAmount));
+
+                    return;
+                }
+            }
+
+            if (Input.GetKeyDown(ProgressButton) == true)
             {
                 Complete = true;
             }

@@ -17,6 +17,11 @@ namespace PaperMarioBattleSystem
         protected DialogueBubble DBubble { get; private set; } = null;
 
         /// <summary>
+        /// Whether the routine has started or not.
+        /// </summary>
+        public bool HasStarted = false;
+
+        /// <summary>
         /// Whether the routine is complete or not.
         /// </summary>
         public bool Complete { get; protected set; }

@@ -170,8 +170,8 @@ The classes should be similar to other systems we already have, such as Battle E
 
 public abstract class MessageRoutine : IUpdateable, ICleanup
 {
-    private DialogueBubble DBubble = null;
-    public bool Complete { get; private set; }
+    protected DialogueBubble DBubble { get; private set; }= null;
+    public bool Complete { get; protected set; }
  
     protected MessageRoutine(DialogueBubble bubble)
     {
@@ -195,3 +195,20 @@ We can even have the scrolling code be a MessageRoutine. This would allow us to 
 
 Try this out and see how it works!
 
+Update (4/21/18)
+----------------
+The Message Routine approach has been implemented and works great!
+
+The next thing we can do is implement going back a paragraph. It would be as simple as this:
+
+In the InputRoutine, check for input regarding going back a text box. If you can go back (if ParagraphIndex > 0), then add the following MessageRoutines:
+
+1. A ScrollRoutine that goes up
+2. An InputRoutine
+3. A ScrollRoutine that goes down
+
+The state of the routines would be preserved this way. This would also make it so you can stack them; if you wish to go back another paragraph, the same thing would apply.
+
+Since we're using a Queue, we can't do this. Instead, we can use a Stack and add all the Message Routines in backwards. This will allow us the last one to go in to be updated.
+
+Try this out and see how it works.

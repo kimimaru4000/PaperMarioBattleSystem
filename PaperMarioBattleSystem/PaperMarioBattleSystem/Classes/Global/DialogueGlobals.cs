@@ -135,7 +135,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="text">The string to test.</param>
         /// <returns>true if so, otherwise false.</returns>
-        public static bool IsValidModifier(in string text)
+        public static bool IsTextModifier(in string text)
         {
             return (IsColorMod(text) == true || IsDynamicMod(text) == true || IsShakeMod(text) == true || IsWaveMod(text) == true)
                 || IsScaleMod(text) == true;
@@ -185,6 +185,52 @@ namespace PaperMarioBattleSystem
             return (text == ClearTag);
         }
 
+        /// <summary>
+        /// Tells if the string is a valid message modifier.
+        /// <para>Note that Paragraph tags are message modifiers in addition to message routines.</para>
+        /// </summary>
+        /// <param name="text">The string to test.</param>
+        /// <returns>true if so, otherwise false.</returns>
+        public static bool IsMessageModifier(in string text)
+        {
+            return (IsParagraphTag(text) == true || IsClearTag(text) == true);
+        }
+
+        #endregion
+
+        #region Message Routines
+
+        /// <summary>
+        /// The string representing the key tag.
+        /// </summary>
+        public const string KeyTag = "key";
+
+        /// <summary>
+        /// A shortened version of the key tag that is functionally identical.
+        /// </summary>
+        public const string ShortKeyTag = "k";
+
+        /// <summary>
+        /// Tells if the string is a key tag.
+        /// </summary>
+        /// <param name="text">The string to test.</param>
+        /// <returns>true if so, otherwise false.</returns>
+        public static bool IsKeyTag(in string text)
+        {
+            return (text == ShortKeyTag || text == KeyTag);
+        }
+
+        /// <summary>
+        /// Tells if the string is a valid message routine.
+        /// <para>Note that Paragraph tags are message modifiers in addition to message routines.</para>
+        /// </summary>
+        /// <param name="text">The string to test.</param>
+        /// <returns>true if so, otherwise false.</returns>
+        public static bool IsMessageRoutine(in string text)
+        {
+            return (IsParagraphTag(text) == true || IsKeyTag(text) == true);
+        }
+
         #endregion
 
         #region Classes
@@ -196,6 +242,7 @@ namespace PaperMarioBattleSystem
         {
             public int MaxParagraphIndex = 0;
             public List<BubbleTextData> TextData = new List<BubbleTextData>();
+            public Dictionary<int, List<HtmlNode>> MessageRoutines = new Dictionary<int, List<HtmlNode>>();
 
             public bool Clear = false;
         }
@@ -251,14 +298,35 @@ namespace PaperMarioBattleSystem
                 if (IsTextNode(node.Name) == false)
                 {
                     //If it's a valid text modifier, add this node to the list
-                    if (IsValidModifier(node.Name) == true)
+                    if (IsTextModifier(node.Name) == true)
                     {
                         activeModifiers.Add(node);
                     }
-                    //Otherwise, it may be a message modifier, so handle it
                     else
                     {
-                        HandleMessageModifier(node, bubbleData, ref prevNewLineCount, ref curNewLineCount);
+                        //It may be a message modifier, so handle it
+                        if (IsMessageModifier(node.Name) == true)
+                        {
+                            HandleMessageModifier(node, bubbleData, ref prevNewLineCount, ref curNewLineCount);
+                        }
+                        
+                        //It may be a message routine, so handle it
+                        if (IsMessageRoutine(node.Name) == true)
+                        {
+                            //The start index of the routine is at the end of the previous bubble
+                            int routineStartIndex = 0;
+                            if (bubbleData.TextData.Count > 0)
+                                routineStartIndex = bubbleData.TextData[bubbleData.TextData.Count - 1].EndIndex;
+                            
+                            //Add the key if it doesn't exist
+                            if (bubbleData.MessageRoutines.ContainsKey(routineStartIndex) == false)
+                            {
+                                bubbleData.MessageRoutines.Add(routineStartIndex, new List<HtmlNode>());
+                            }
+
+                            //Add this routine
+                            bubbleData.MessageRoutines[routineStartIndex].Add(node);
+                        }
                     }
                 }
                 //It's a text node; see where it lies

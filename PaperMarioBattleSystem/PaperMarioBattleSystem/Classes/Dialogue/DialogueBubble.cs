@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using HtmlAgilityPack;
 using static PaperMarioBattleSystem.DialogueGlobals;
 
 namespace PaperMarioBattleSystem
@@ -20,14 +21,10 @@ namespace PaperMarioBattleSystem
     public class DialogueBubble : IPosition, IScalable, IUpdateable, IDrawable, ICleanup
     {
         public const double DefaultTimeBetweenChars = 34d;
-        private const float TextScrollSpeed = -4f;
-        private const float FastTextScrollSpeed = -12f;
+        public const float TextScrollSpeed = -4f;
+        public const float FastTextScrollSpeed = -12f;
 
         public float YMoveAmount { get; private set; } = 0f;
-
-        //NOTE: Start with string arrays to get it working, but eventually we may want a single chunk of text with the command controls
-        //We'll see as it goes - arrays are nice since they separate the dialogue
-        private string[] TextArray = null;
 
         /// <summary>
         /// The text in the dialogue bubble.
@@ -41,29 +38,21 @@ namespace PaperMarioBattleSystem
 
         public readonly StringBuilder stringBuilder = new StringBuilder();
 
-        private double ElapsedTime = 0d;
-
-        private int CurArrayIndex = 0;
         private int CurTextIndex = 0;
-        private int MaxArrayIndex = 0;
+        public int CurParagraphIndex = 0;
 
         private CroppedTexture2D BubbleImage = null;
 
         /// <summary>
         /// The star to indicate the end of text.
         /// </summary>
-        private ProgressDialogueStar ProgressTextStar = null;
+        public readonly ProgressDialogueStar ProgressTextStar = null;
 
         public Vector2 Position { get; set; } = new Vector2(100, 100);
         public Vector2 Scale { get; set; } = new Vector2(400, 95);
 
-        private float TextYOffset = 0f;
-        private float OffsetToScroll = 0f;
-
-        private float CurScrollSpeed = TextScrollSpeed;
-
-        private bool IsScrolling => (OffsetToScroll != TextYOffset);
-        private bool DonePrintingCurText => (CurTextIndex >= Text.Length);
+        public float TextYOffset = 0f;
+        private bool DonePrintingText => (CurTextIndex >= Text.Length);
 
         /// <summary>
         /// Tells whether the dialogue bubble completed all of its text or not.
@@ -87,7 +76,15 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private Dictionary<char, SpriteFont.Glyph> FontGlyphs = null;
 
+        /// <summary>
+        /// The Message Routines to invoke.
+        /// </summary>
+        private Queue<MessageRoutine> MessageRoutines = new Queue<MessageRoutine>();
+        private bool AddedRoutines = false;
+
         private BubbleData DBubbleData = null;
+
+        public double ElapsedTime = 0d;
 
         public DialogueBubble()
         {
@@ -129,13 +126,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Resets the Dialogue Bubble and sets new text for it.
         /// </summary>
-        /// <param name="textArray">An array of strings containing the text for the Dialogue Bubble to print.</param>
-        public void SetText(string[] textArray)
+        /// <param name="text">A string containing the text for the Dialogue Bubble to parse and print.</param>
+        public void SetText(string text)
         {
             Reset();
 
-            TextArray = textArray;
-            Text = TextArray[CurArrayIndex];
+            Text = text;
 
             DBubbleData = DialogueGlobals.ParseText(Text, out Text);
         }
@@ -164,7 +160,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Makes the speaker play its talking animation if it's not doing so already.
         /// </summary>
-        private void SpeakerStartTalk()
+        public void SpeakerStartTalk()
         {
             if (Speaker != null && Speaker.AnimManager.CurrentAnim.Key != AnimationGlobals.TalkName)
                 Speaker.AnimManager.PlayAnimation(AnimationGlobals.TalkName);
@@ -173,7 +169,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Makes the speaker end its talking animation by going into its idle animation.
         /// </summary>
-        private void SpeakerEndTalk()
+        public void SpeakerEndTalk()
         {
             if (Speaker != null && Speaker.AnimManager.CurrentAnim.Key == AnimationGlobals.TalkName)
                 Speaker.AnimManager.PlayAnimation(Speaker.GetIdleAnim());
@@ -184,21 +180,18 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void Reset()
         {
-            CurScrollSpeed = TextScrollSpeed;
-
-            TextArray = null;
             Text = string.Empty;
             CurTextIndex = 0;
-            CurArrayIndex = 0;
-            MaxArrayIndex = 0;
+            CurParagraphIndex = 0;
             TextYOffset = 0f;
-            OffsetToScroll = 0f;
+
+            MessageRoutines.Clear();
+            AddedRoutines = false;
 
             SpeakerEndTalk();
             Speaker = null;
 
             stringBuilder.Clear();
-            ElapsedTime = 0d;
 
             IsDone = false;
         }
@@ -216,30 +209,66 @@ namespace PaperMarioBattleSystem
             //Return if done
             if (IsDone == true) return;
 
-            if (IsScrolling == true)
+            //if (IsScrolling == true)
+            //{
+            //    HandleScrollText();
+            //}
+            //else
             {
-                HandleScrollText();
-            }
-            else
-            {
-                HandlePrintText();
+                if (AddedRoutines == false)
+                {
+                    CheckAndParseMessageRoutines(CurTextIndex);
+
+                    AddedRoutines = true;
+
+                    if (MessageRoutines.Count > 0)
+                        MessageRoutines.Peek().OnStart();
+                }
+                else
+                {
+                    if (MessageRoutines.Count == 0)
+                    {
+                        //If we're done printing, close the dialogue bubble
+                        if (DonePrintingText == true)
+                        {
+                            SpeakerEndTalk();
+                            Close();
+                        }
+                        //Otherwise keep printing
+                        else
+                        {
+                            HandlePrintText();
+                        }
+                    }
+                    else
+                    {
+                        if (MessageRoutines.Peek().Complete == true)
+                        {
+                            MessageRoutines.Peek().OnEnd();
+                            MessageRoutines.Peek().CleanUp();
+
+                            MessageRoutines.Dequeue();
+                            if (MessageRoutines.Count > 0)
+                                MessageRoutines.Peek().OnStart();
+                        }
+                        else
+                        {
+                            MessageRoutines.Peek().Update();
+                        }
+                    }
+                }
             }
 
-            HandleInput();
+            //HandleInput();
 
             //Handle disabling of the progress star
-            ProgressTextStar.Disabled = (CurTextIndex < Text.Length || OffsetToScroll != TextYOffset);
+            //ProgressTextStar.Disabled = (CurTextIndex < Text.Length || OffsetToScroll != TextYOffset);
 
             if (ProgressTextStar.Disabled == false)
                 ProgressTextStar.Update();
         }
 
         #region Functional Methods
-
-        private void SetScrollSpeed(float speed)
-        {
-            CurScrollSpeed = speed;
-        }
 
         /// <summary>
         /// Prints the next character to the dialogue bubble.
@@ -250,6 +279,8 @@ namespace PaperMarioBattleSystem
 
             stringBuilder.Append(curChar);
             CurTextIndex++;
+
+            AddedRoutines = false;
         }
 
         /// <summary>
@@ -266,170 +297,71 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        /// <summary>
-        /// Scrolls to the previous text in the dialogue bubble, if it exists.
-        /// </summary>
-        private void ScrollPrevious()
-        {
-            //Subtract index
-            CurArrayIndex--;
-
-            //Scroll back up
-            OffsetToScroll += YMoveAmount;
-
-            //Set text and text index
-            Text = TextArray[CurArrayIndex];
-            CurTextIndex = Text.Length;
-
-            //Reset scroll speed
-            SetScrollSpeed(TextScrollSpeed);
-        }
-
-        /// <summary>
-        /// Scrolls to the next text in the dialogue bubble.
-        /// If there is no more text, marks the dialogue bubble as done.
-        /// </summary>
-        private void ScrollNext()
-        {
-            //Increment array index
-            CurArrayIndex++;
-
-            //Reset scroll speed
-            SetScrollSpeed(TextScrollSpeed);
-
-            //If we haven't been to this text yet, set that we just visited it
-            if (CurArrayIndex > MaxArrayIndex)
-            {
-                MaxArrayIndex = CurArrayIndex;
-            }
-            //We have been to this text; it's all already there, so simply scroll to it
-            else
-            {
-                OffsetToScroll -= YMoveAmount;
-                Text = TextArray[CurArrayIndex];
-                CurTextIndex = Text.Length;
-                return;
-            }
-
-            //If this is the last text in the bubble, mark it as done
-            if (CurArrayIndex >= TextArray.Length)
-            {
-                Close();
-            }
-            //Move onto the next set of text
-            else
-            {
-                //Move the text up
-                OffsetToScroll -= YMoveAmount;
-
-                //Set text to the new value and reset the text index so it can print
-                Text = TextArray[CurArrayIndex];
-
-                CurTextIndex = 0;
-                ElapsedTime = 0d;
-            }
-        }
-
-        /// <summary>
-        /// Handles scrolling the text up or down based on what <see cref="OffsetToScroll"/> is set to.
-        /// </summary>
-        private void HandleScrollText()
-        {
-            //Scroll text upwards or downwards depending on the new scroll value to go to
-            if (TextYOffset < OffsetToScroll)
-            {
-                //Scroll up
-                TextYOffset -= CurScrollSpeed;
-                if (TextYOffset > OffsetToScroll)
-                {
-                    TextYOffset = OffsetToScroll;
-                }
-            }
-            else
-            {
-                //Scroll down
-                TextYOffset += CurScrollSpeed;
-                if (TextYOffset < OffsetToScroll)
-                {
-                    TextYOffset = OffsetToScroll;
-                }
-            }
-        }
-
         #endregion
 
         #region Input Methods
 
         private void HandlePrintText()
         {
-            //If we're not done printing the text, keep going
-            if (DonePrintingCurText == false)
+            SpeakerStartTalk();
+            ElapsedTime += Time.ElapsedMilliseconds;
+
+            //If we should print a new character in the text, do so
+            if (ElapsedTime >= TimeBetweenCharacters)
             {
-                SpeakerStartTalk();
-                ElapsedTime += Time.ElapsedMilliseconds;
+                PrintNextCharacter();
 
-                //If we should print a new character in the text, do so
-                if (ElapsedTime >= TimeBetweenCharacters)
-                {
-                    PrintNextCharacter();
+                ElapsedTime = 0d;
 
-                    ElapsedTime = 0d;
-
-                    if (DonePrintingCurText == true)
-                    {
-                        SpeakerEndTalk();
-                    }
-                }
+                //if (DonePrintingText == true)
+                //{
+                //    //Stop the speaker from talking
+                //    SpeakerEndTalk();
+                //}
             }
         }
 
-        private void HandleInput()
-        {
-            HandleProgressText();
+        #endregion
 
-            if (IsScrolling == false)
-                HandlePreviousText();
-        }
+        #region Message Routine Parsing
 
-        private void HandlePreviousText()
+        /// <summary>
+        /// Checks for message routines at the specified text index.
+        /// All found routines are parsed into instances and added to the <see cref="MessageRoutines"/> queue.
+        /// </summary>
+        /// <param name="curTextIndex">The index in the dialogue string to check for message routines.</param>
+        private void CheckAndParseMessageRoutines(int curTextIndex)
         {
-            //Go back to previous text
-            if (Input.GetKeyDown(Keys.I) == true)
+            if (DBubbleData.MessageRoutines.ContainsKey(curTextIndex) == false) return;
+
+            List<HtmlNode> routines = DBubbleData.MessageRoutines[curTextIndex];
+
+            for (int i = 0; i < routines.Count; i++)
             {
-                //Don't allow going back to the previous text if we're on the last one or the current text didn't finish printing
-                if (CurArrayIndex > 0 && CurTextIndex >= Text.Length)
-                {
-                    ScrollPrevious();
-                }
+                ParseMessageRoutine(routines[i]);
             }
         }
 
-        private void HandleProgressText()
+        private void ParseMessageRoutine(in HtmlNode routine)
         {
-            //Handle skipping through text with a button input
-            if (Input.GetKeyDown(Keys.O) == true)
+            string tag = routine.Name;
+
+            if (DialogueGlobals.IsKeyTag(tag) == true)
             {
-                //If we're scrolling, pressing the button only increases the scroll speed
-                if (IsScrolling == true)
-                {
-                    SetScrollSpeed(FastTextScrollSpeed);
-                    return;
-                }
-
-                //We're not done printing
-                if (CurTextIndex < Text.Length)
-                {
-                    PrintRemaining();
-                    SpeakerEndTalk();
-
-                    ElapsedTime = 0d;
-                }
-                //We're done printing - progress
-                else
-                {
-                    ScrollNext();
-                }
+                InputRoutine inputRoutine = new InputRoutine(this, Keys.O);
+                AddMessageRoutine(inputRoutine);
             }
+
+            if (DialogueGlobals.IsParagraphTag(tag) == true)
+            {
+                ScrollRoutine scrollRoutine = new ScrollRoutine(this, TextYOffset - YMoveAmount);
+                AddMessageRoutine(scrollRoutine);
+            }
+        }
+
+        private void AddMessageRoutine(MessageRoutine routine)
+        {
+            MessageRoutines.Enqueue(routine);
         }
 
         #endregion

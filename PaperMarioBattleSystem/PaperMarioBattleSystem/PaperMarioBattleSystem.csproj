@@ -322,6 +322,9 @@
     <Compile Include="Classes\Collectibles\Items\VoltShroom.cs" />
     <Compile Include="Classes\CollisionShapes\CollisionRect.cs" />
     <Compile Include="Classes\Dialogue\DialogueBubble.cs" />
+    <Compile Include="Classes\Dialogue\MessageRoutines\InputRoutine.cs" />
+    <Compile Include="Classes\Dialogue\MessageRoutines\MessageRoutine.cs" />
+    <Compile Include="Classes\Dialogue\MessageRoutines\ScrollRoutine.cs" />
     <Compile Include="Classes\Dialogue\ProgressDialogueStar.cs" />
     <Compile Include="Classes\ExtendedTypes\NineSlicedTexture2D.cs" />
     <Compile Include="Classes\ExtendedTypes\CroppedTexture2D.cs" />

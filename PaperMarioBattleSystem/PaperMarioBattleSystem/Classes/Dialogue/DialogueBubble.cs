@@ -95,7 +95,9 @@ namespace PaperMarioBattleSystem
 
         public BubbleData DBubbleData { get; private set; } = null;
 
-        public double ElapsedTime = 0d;
+        private double LastCharPrintTime = 0d;
+        private double ElapsedTextTime = 0d;
+        private double ElapsedCharPrintTime = 0d;
 
         public DialogueBubble()
         {
@@ -194,6 +196,8 @@ namespace PaperMarioBattleSystem
             CurParagraphIndex = 0;
             TextYOffset = 0f;
 
+            LastCharPrintTime = ElapsedTextTime = ElapsedCharPrintTime = 0d;
+
             MessageRoutines.Clear();
             AddedRoutines = false;
 
@@ -242,7 +246,7 @@ namespace PaperMarioBattleSystem
                     if (Input.GetKeyDown(ProgressionButton) == true)
                     {
                         PrintRemaining();
-                        ElapsedTime = 0d;
+                        ElapsedCharPrintTime = 0d;
                     }
                     //Otherwise, continue like normal
                     else
@@ -263,7 +267,7 @@ namespace PaperMarioBattleSystem
                     //Remove it from the stack and set elapsed time to 0
                     MessageRoutines.Pop();
 
-                    ElapsedTime = 0d;
+                    ElapsedCharPrintTime = 0d;
                 }
                 else
                 {
@@ -282,6 +286,9 @@ namespace PaperMarioBattleSystem
             //Update the progress star if disabled
             if (ProgressTextStar.Disabled == false)
                 ProgressTextStar.Update();
+
+            //Update text time
+            ElapsedTextTime += Time.ElapsedMilliseconds;
         }
 
         #region Functional Methods
@@ -292,14 +299,14 @@ namespace PaperMarioBattleSystem
         private void HandlePrintText()
         {
             SpeakerStartTalk();
-            ElapsedTime += Time.ElapsedMilliseconds;
+            ElapsedCharPrintTime += Time.ElapsedMilliseconds;
 
             //If we should print a new character in the text, do so
-            if (ElapsedTime >= TimeBetweenCharacters)
+            if (ElapsedCharPrintTime >= TimeBetweenCharacters)
             {
                 PrintNextCharacter();
 
-                ElapsedTime = 0d;
+                ElapsedCharPrintTime = 0d;
             }
         }
 
@@ -314,6 +321,8 @@ namespace PaperMarioBattleSystem
             CurTextIndex++;
 
             AddedRoutines = false;
+
+            LastCharPrintTime = ElapsedTextTime;
         }
 
         /// <summary>
@@ -394,6 +403,19 @@ namespace PaperMarioBattleSystem
                 WaitRoutine waitRoutine = new WaitRoutine(this, waitDur);
                 AddMessageRoutine(waitRoutine);
             }
+
+            if (DialogueGlobals.IsSpeedTag(tag) == true)
+            {
+                double timeBetween = DefaultTimeBetweenChars;
+
+                if (double.TryParse(routine.Attributes[0].Value, out double result) == true)
+                {
+                    timeBetween = result;
+                }
+
+                SpeedRoutine speedRoutine = new SpeedRoutine(this, timeBetween);
+                AddMessageRoutine(speedRoutine);
+            }
         }
 
         public void AddMessageRoutine(MessageRoutine routine)
@@ -439,6 +461,28 @@ namespace PaperMarioBattleSystem
 
                         Vector2 scale = bdata.Scale;
 
+                        //For dynamic text, the current printed character should finish in the designated time
+                        //LastCharPrintTime updates when printing the next character
+                        //So say it prints a new character after 2 frames - we would have to offset it by that time
+                        //To do this, we have to calculate how many frames it takes to print a character
+                        //Then, offset the time by that value * ElapsedMilliseconds
+                        if (bdata.DynamicSize.HasValue == true)
+                        {
+                            int indexDiff = (CurTextIndex - 1) - j;
+                            int frameDiff = (int)Math.Ceiling(TimeBetweenCharacters / Time.ElapsedMilliseconds);
+                            //Even if the time is 0, it still takes at least 1 frame to print the next character
+                            if (frameDiff == 0)
+                                frameDiff = 1;
+
+                            double frameTimeOffset = frameDiff * Time.ElapsedMilliseconds;
+                            double dynamicTimeOffset = ElapsedTextTime - (LastCharPrintTime - (indexDiff * frameTimeOffset));
+
+                            if (dynamicTimeOffset < DialogueGlobals.DynamicScaleTime)
+                            {
+                                scale = DialogueGlobals.GetDynamicTextSize(dynamicTimeOffset, bdata.DynamicSize.Value, bdata.Scale);
+                            }
+                        }
+
                         //Handle shaky text
                         if (bdata.Shake == true)
                         {
@@ -448,7 +492,7 @@ namespace PaperMarioBattleSystem
                         //Handle wavy text
                         if (bdata.Wave == true)
                         {
-                            finalPos += DialogueGlobals.GetWavyTextOffset(j * TimeBetweenCharacters, new Vector2(2));
+                            finalPos += DialogueGlobals.GetWavyTextOffset(ElapsedTextTime, j * Time.ElapsedMilliseconds, new Vector2(2));
                         }
                 
                         //Render the character

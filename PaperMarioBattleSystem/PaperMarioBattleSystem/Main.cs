@@ -267,12 +267,20 @@ namespace PaperMarioBattleSystem
 
             DialogueManager.Instance.Update();
 
-            if (Input.GetKeyDown(Keys.Y))
+            /*if (Input.GetKeyDown(Keys.Y))
             {
-                string thing = "<wave>Hello</wave> <color value=\"FFFF0000\">World!</color> <key><p>\n<scale value=\"1.3\">This</scale> <scale value=\".7\">is a </scale><shake>t</shake>est\nI ho<wave><shake><color value=\"FF0000FF\">pe you</color></shake></wave> enjoy it!\n<k><p>Thank you <color value=\"FFFF0000\">very much</color>\n<wait value=\"800\"><p>for lo<wave>ok</wave>ing!<k>";
+                //string thing = "<dynamic value=\"2\"><wave>Hello</wave> <color value=\"FFFF0000\">World!</color> <key><p>\n<scale value=\"1.3\">This</scale> <speed value=\"500\"><scale value=\".7\">is a </scale><shake>t</shake>est\n<speed value=\"25\">I ho<wave><shake><color value=\"FF0000FF\">pe you</color></shake></wave> enjoy it!\n<k><p>Thank you <color value=\"FFFF0000\">very much</color>\n<wait value=\"800\"><p>for lo<wave>ok</wave>ing!<k></dynamic>";
                 //string thing2 = "Hello World! \n e \ntest2\n<p>test";
-                DialogueManager.Instance.CreateBubble(thing);//new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!", "test more" }, null);
-            }
+                
+                //Thorough test of Dialogue Bubble features
+                string thing3 = "<wave>Hello</wave> <color value=\"FFFF0000\">World!\n</color><key><p><shake>Shaky</shake> text <shake>a</shake>nd <wave><color value=\"FF0000FF\">wa</color>vy</wave> " +
+                    "text a<wave>r</wave>e\n<speed value=\"250\"><dynamic value=\"2\">COOL!\n</dynamic><k><p><speed value=\"25\">Let's <wait value=\"500\"><wave><shake><scale value=\"1.6\"><dynamic value=\".3\">" +
+                    "<color value=\"ffffbf00\">co</color><color value=\"ff003ce7\">mb</color><color value=\"ff008000\">ine</color> </dynamic></scale>them!</shake></wave>\n<k><p>" +
+                    "<speed value=\"0\">Print really fast <key><speed value=\"25\">and now <speed value=\"300\">really\nslow!<speed value=\"25\">\n<k><p>" +
+                    "<dynamic value=\"2.5\">Dynamic <scale value=\".8\">text</scale></dynamic> <dynamic value=\"3\"><scale value=\"1.5\">is</dynamic> also<wait value=\"300\"></scale><dynamic value=\"2\"> pretty\n<color value=\"ffff00ff\">awesome!</color></dynamic><k>";
+
+                DialogueManager.Instance.CreateBubble(thing3);//new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!", "test more" }, null);
+            }*/
         }
 
         /// <summary>

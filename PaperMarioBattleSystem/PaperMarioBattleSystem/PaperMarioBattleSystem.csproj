@@ -325,6 +325,7 @@
     <Compile Include="Classes\Dialogue\MessageRoutines\InputRoutine.cs" />
     <Compile Include="Classes\Dialogue\MessageRoutines\MessageRoutine.cs" />
     <Compile Include="Classes\Dialogue\MessageRoutines\ScrollRoutine.cs" />
+    <Compile Include="Classes\Dialogue\MessageRoutines\SpeedRoutine.cs" />
     <Compile Include="Classes\Dialogue\MessageRoutines\WaitRoutine.cs" />
     <Compile Include="Classes\Dialogue\ProgressDialogueStar.cs" />
     <Compile Include="Classes\ExtendedTypes\NineSlicedTexture2D.cs" />

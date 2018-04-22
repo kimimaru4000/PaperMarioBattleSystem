@@ -66,6 +66,11 @@ namespace PaperMarioBattleSystem
         public const string DynamicMod = "dynamic";
 
         /// <summary>
+        /// The time it takes for dynamic text to scale to its final value.
+        /// </summary>
+        public const double DynamicScaleTime = (8d / 60d) * Time.MsPerS;
+
+        /// <summary>
         /// The string representing the shake text modifier.
         /// </summary>
         public const string ShakeMod = "shake";
@@ -144,13 +149,14 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets the positional offset for wavy text.
         /// </summary>
+        /// <param name="timeVal">The time value to use. Can be <see cref="Time.ActiveMilliseconds"/> or another timer.</param>
         /// <param name="timeOffset">The time offset. This is usually the time between rendering each character in a dialogue bubble.</param>
         /// <param name="amount">The max amount to offset.</param>
         /// <returns>A Vector2 containing the offset for wavy text.</returns>
-        public static Vector2 GetWavyTextOffset(double timeOffset, Vector2 amount)
+        public static Vector2 GetWavyTextOffset(double timeVal, double timeOffset, in Vector2 amount)
         {
             //Wavy text goes clockwise
-            double time = (Time.ActiveMilliseconds + timeOffset) / 75d;
+            double time = (timeVal + timeOffset) / 75d;
             return new Vector2((float)Math.Cos(time) * amount.X, (float)Math.Sin(time) * amount.Y);
         }
 
@@ -159,11 +165,25 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="amount">The max amount to offset.</param>
         /// <returns>A Vector2 containing the offset for wavy text.</returns>
-        public static Vector2 GetShakyTextOffset(Vector2 amount)
+        public static Vector2 GetShakyTextOffset(in Vector2 amount)
         {
             float x = (float)GeneralGlobals.Randomizer.RandomDouble(-amount.X, amount.X);
             float y = (float)GeneralGlobals.Randomizer.RandomDouble(-amount.Y, amount.Y);
             return new Vector2(x, y);
+        }
+
+        /// <summary>
+        /// Gets the size for dynamic text.
+        /// </summary>
+        /// <param name="timeOffset">The time offset. This is often the difference between when the character was printed and the current time.</param>
+        /// <param name="dynamicScale">The scale of the dynamic modifier.</param>
+        /// <param name="endingScale">The ending scale of the text.</param>
+        /// <returns>A Vector2 containing hte size for dynamic text.</returns>
+        public static Vector2 GetDynamicTextSize(in double timeOffset, in Vector2 dynamicScale, in Vector2 endingScale)
+        {
+            Vector2 scale = Interpolation.Interpolate(dynamicScale, endingScale, timeOffset / DynamicScaleTime, Interpolation.InterpolationTypes.Linear);
+
+            return scale;
         }
 
         #endregion
@@ -213,7 +233,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The string representing the wait tag.
         /// </summary>
-        public const string WaitKeyTag = "wait";
+        public const string WaitTag = "wait";
+
+        /// <summary>
+        /// The string representing the speed tag.
+        /// </summary>
+        public const string SpeedTag = "speed";
 
         /// <summary>
         /// Tells if the string is a key tag.
@@ -232,7 +257,17 @@ namespace PaperMarioBattleSystem
         /// <returns>true if so, otherwise false.</returns>
         public static bool IsWaitTag(in string text)
         {
-            return (text == WaitKeyTag);
+            return (text == WaitTag);
+        }
+
+        /// <summary>
+        /// Tells if the string is a speed tag.
+        /// </summary>
+        /// <param name="text">The string to test.</param>
+        /// <returns>true if so, otherwise false.</returns>
+        public static bool IsSpeedTag(in string text)
+        {
+            return (text == SpeedTag);
         }
 
         /// <summary>
@@ -243,7 +278,7 @@ namespace PaperMarioBattleSystem
         /// <returns>true if so, otherwise false.</returns>
         public static bool IsMessageRoutine(in string text)
         {
-            return (IsParagraphTag(text) == true || IsKeyTag(text) == true || IsWaitTag(text) == true);
+            return (IsParagraphTag(text) == true || IsKeyTag(text) == true || IsWaitTag(text) == true || IsSpeedTag(text) == true);
         }
 
         #endregion
@@ -272,7 +307,7 @@ namespace PaperMarioBattleSystem
             public int StartIndex = 0;
             public int EndIndex = 0;
             public Color TextColor = Color.Black;
-            public float DynamicSize = 1f;
+            public Vector2? DynamicSize = null;
             public bool Shake = false;
             public bool Wave = false;
             public Vector2 Scale = Vector2.One;
@@ -426,7 +461,7 @@ namespace PaperMarioBattleSystem
                 //Parse the result as a float
                 if (float.TryParse(mod.Attributes[0].Value, out float result) == true)
                 {
-                    curBubbleTextData.DynamicSize = result;
+                    curBubbleTextData.DynamicSize = new Vector2(result);
                 }
             }
             else if (IsShakeMod(modName) == true) curBubbleTextData.Shake = true;

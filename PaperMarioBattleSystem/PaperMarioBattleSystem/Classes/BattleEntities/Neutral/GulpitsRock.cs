@@ -124,14 +124,11 @@ namespace PaperMarioBattleSystem
             return new string[] { "N/A" };
         }
 
-        public string[] GetTattleDescription()
+        public string GetTattleDescription()
         {
             //The tattle is the same whether it's a small or a big rock
-            return new string[]
-            {
-                "These are Gulpits' Rocks. Gulpits\ngulp them and then spit 'em at\npeople.\nThere are two sizes of rocks.",
-                "The big rocks do more damage\nthan the small rocks do.\n...Big surprise, huh?"
-            };
+            return "These are Gulpits' Rocks. Gulpits\ngulp them and then spit 'em at\npeople.\nThere are two sizes of rocks.\n<k><p>" +
+                   "The big rocks do more damage\nthan the small rocks do.\n...Big surprise, huh?<p>";
         }
 
         #endregion

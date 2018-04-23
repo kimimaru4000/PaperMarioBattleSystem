@@ -212,3 +212,7 @@ The state of the routines would be preserved this way. This would also make it s
 Since we're using a Queue, we can't do this. Instead, we can use a Stack and add all the Message Routines in backwards. This will allow the last one put in to be updated first.
 
 Try this out and see how it works.
+
+Update (4/22/18)
+----------------
+Everything works great, and a lot of control codes have been implemented! This document will be updated if anything new arises.

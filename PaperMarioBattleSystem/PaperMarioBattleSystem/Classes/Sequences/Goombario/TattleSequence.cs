@@ -160,20 +160,15 @@ namespace PaperMarioBattleSystem
                     break;
                 case 2:
                     //NOTE: Show dialogue bubble coming from Goombario/Goombella along with the enemy's Tattle log entry (with image and stats)
-                    string[] tattleDescriptions = TattledEntity.GetTattleDescription();
+                    string tattleDescription = TattledEntity.GetTattleDescription();
 
-                    string tattle = "Tattle Description:";
+                    string tattle = "Tattle Description:\n" + tattleDescription;
 
-                    //For now log it in the console
-                    for (int i = 0; i < tattleDescriptions.Length; i++)
-                    {
-                        tattle += $"\n{tattleDescriptions[i]}";
-                    }
-
-                    Console.WriteLine(tattle);
+                    //Log it
+                    Debug.Log(tattle);
 
                     //Create the dialogue bubble
-                    DialogueManager.Instance.CreateBubble(tattleDescriptions, User);
+                    DialogueManager.Instance.CreateBubble(tattleDescription, User);
                     CurSequenceAction = new WaitForDialogueSeqAction(DialogueManager.Instance.CurDialogueBubble);
                     break;
                 //case 3:

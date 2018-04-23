@@ -78,14 +78,11 @@ namespace PaperMarioBattleSystem
             };
         }
 
-        public string[] GetTattleDescription()
+        public string GetTattleDescription()
         {
-            return new string[]
-            {
-                "That's a Mini-Yux. A creature made to protect a Yux, it can split into two. Max HP is 1, Attack is 0, and Defense is 0." +
-                "These twerps are the reason you sometimes can't do any damage to the main Yux." +
-                "They're a pain, but you HAVE to beat them before the Yux. Flurrie's pretty effective..."
-            };
+            return "That's a Mini-Yux. A creature made to protect a Yux, it can split into two. Max HP is 1, Attack is 0, and Defense is 0.\n<k><p>" +
+                   "These twerps are the reason you sometimes can't do any damage to the main Yux.\n<k><p>" +
+                   "They're a pain, but you HAVE to beat them before the Yux. Flurrie's pretty effective...<k>";
         }
 
         #endregion

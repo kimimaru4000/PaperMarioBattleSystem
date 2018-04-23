@@ -18,8 +18,19 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class DialogueBubble : IPosition, IScalable, IUpdateable, IDrawable, ICleanup
     {
+        /// <summary>
+        /// The default time between printing characters.
+        /// </summary>
         public const double DefaultTimeBetweenChars = 25d;
+
+        /// <summary>
+        /// The base text scrolling speed when going up or down a new paragraph.
+        /// </summary>
         public const float TextScrollSpeed = -4f;
+
+        /// <summary>
+        /// The faster text scrolling speed when going up or down a new paragraph.
+        /// </summary>
         public const float FastTextScrollSpeed = -12f;
 
         /// <summary>
@@ -38,7 +49,7 @@ namespace PaperMarioBattleSystem
         public float YMoveAmount { get; private set; } = 0f;
 
         /// <summary>
-        /// The text in the dialogue bubble.
+        /// The full text in the dialogue bubble.
         /// </summary>
         private string Text = string.Empty;
 
@@ -47,11 +58,23 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public double TimeBetweenCharacters = DefaultTimeBetweenChars;
 
+        /// <summary>
+        /// The StringBuilder adding the characters in the dialogue that will be rendered.
+        /// </summary>
         public readonly StringBuilder stringBuilder = new StringBuilder();
 
+        /// <summary>
+        /// The current character index that will be printed in the text.
+        /// </summary>
         private int CurTextIndex = 0;
+        /// <summary>
+        /// 
+        /// </summary>
         public int CurParagraphIndex = 0;
 
+        /// <summary>
+        /// The bubble graphic for the Dialogue Bubble.
+        /// </summary>
         private CroppedTexture2D BubbleImage = null;
 
         /// <summary>
@@ -62,7 +85,14 @@ namespace PaperMarioBattleSystem
         public Vector2 Position { get; set; } = new Vector2(100, 100);
         public Vector2 Scale { get; set; } = new Vector2(400, 95);
 
+        /// <summary>
+        /// The Y offset for the text. This is set when scrolling up or down a new paragraph.
+        /// </summary>
         public float TextYOffset = 0f;
+
+        /// <summary>
+        /// Whether all text is done printing or not.
+        /// </summary>
         private bool DonePrintingText => (CurTextIndex >= Text.Length);
 
         /// <summary>
@@ -75,6 +105,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public BattleEntity Speaker { get; private set; } = null;
 
+        /// <summary>
+        /// The RasterizerState for the Dialogue Bubble.
+        /// This enables the ScissorRectangle to clip text outside of the bubble.
+        /// </summary>
         public RasterizerState BubbleRasterizerState { get; private set; } = null;
 
         /// <summary>
@@ -91,12 +125,30 @@ namespace PaperMarioBattleSystem
         /// The Message Routines to invoke.
         /// </summary>
         private Stack<MessageRoutine> MessageRoutines = new Stack<MessageRoutine>();
+
+        /// <summary>
+        /// 
+        /// </summary>
         private bool AddedRoutines = false;
 
+        /// <summary>
+        /// The data that the Dialogue Bubble uses to render text.
+        /// </summary>
         public BubbleData DBubbleData { get; private set; } = null;
 
+        /// <summary>
+        /// The last time a character was printed.
+        /// </summary>
         private double LastCharPrintTime = 0d;
+
+        /// <summary>
+        /// The elapsed time for the dialogue bubble.
+        /// </summary>
         private double ElapsedTextTime = 0d;
+
+        /// <summary>
+        /// The elapsed time that tracks when the next character should be printed.
+        /// </summary>
         private double ElapsedCharPrintTime = 0d;
 
         public DialogueBubble()
@@ -196,6 +248,7 @@ namespace PaperMarioBattleSystem
             CurParagraphIndex = 0;
             TextYOffset = 0f;
 
+            TimeBetweenCharacters = DefaultTimeBetweenChars;
             LastCharPrintTime = ElapsedTextTime = ElapsedCharPrintTime = 0d;
 
             MessageRoutines.Clear();
@@ -205,6 +258,7 @@ namespace PaperMarioBattleSystem
             Speaker = null;
 
             stringBuilder.Clear();
+            ProgressTextStar.Disabled = true;
 
             IsDone = false;
         }
@@ -375,6 +429,10 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Parses a Message Routine from data.
+        /// </summary>
+        /// <param name="routine">The HtmlNode with the Message Routine data.</param>
         private void ParseMessageRoutine(in HtmlNode routine)
         {
             string tag = routine.Name;
@@ -417,7 +475,11 @@ namespace PaperMarioBattleSystem
                 AddMessageRoutine(speedRoutine);
             }
         }
-
+        
+        /// <summary>
+        /// Adds a Message Routine to the Message Routine stack.
+        /// </summary>
+        /// <param name="routine">The Message Routine to add.</param>
         public void AddMessageRoutine(MessageRoutine routine)
         {
             MessageRoutines.Push(routine);
@@ -425,6 +487,9 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        /// <summary>
+        /// Draws the Dialogue Bubble's image and end-of-text star.
+        /// </summary>
         public void Draw()
         {
             //Handle the <clear> tag, which renders only the text
@@ -442,12 +507,15 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Draws the Dialogue Bubble's text.
+        /// </summary>
         public void DrawText()
         {
             if (stringBuilder.Length > 0)
             {
                 Vector2 offset = Vector2.Zero;
-                Vector2 basePos = Position + new Vector2(10, 5f + TextYOffset);
+                Vector2 basePos = Position + new Vector2(5f, 5f + TextYOffset);
 
                 //Go through all the data and render the text
                 for (int i = 0; i < DBubbleData.TextData.Count; i++)

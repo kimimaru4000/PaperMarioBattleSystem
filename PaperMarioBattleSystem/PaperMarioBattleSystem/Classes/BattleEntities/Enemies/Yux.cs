@@ -326,14 +326,11 @@ namespace PaperMarioBattleSystem
             };
         }
 
-        public string[] GetTattleDescription()
+        public string GetTattleDescription()
         {
-            return new string[]
-            {
-                "That's a Yux. Says here it's a creature created in the X-Naut labs." +
-                "Max HP is 3, Attack is 2, and Defense is 0. According to this, attacks and" +
-                "items won't affect it if it has Mini-Yux around it. So, if any Mini-Yux appear, take those out first. Duh!"
-            };
+            return "That's a Yux. Says here it's a creature created in the X-Naut labs.\n<k><p>" +
+                   "Max HP is 3, Attack is 2, and Defense is 0. According to this, attacks and\n<k><p>" +
+                   "items won't affect it if it has Mini-Yux around it. So, if any Mini-Yux appear, take those out first. Duh!<k>";
         }
 
         #endregion

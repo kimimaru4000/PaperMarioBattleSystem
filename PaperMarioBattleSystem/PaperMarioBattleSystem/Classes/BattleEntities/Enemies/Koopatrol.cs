@@ -96,17 +96,14 @@ namespace PaperMarioBattleSystem
             };
         }
 
-        public new string[] GetTattleDescription()
+        public new string GetTattleDescription()
         {
-            return new string[]
-            {
-                "That's a Koopatrol.\nA Koopa Troopa who protects\nhimself with spiked armor.",
-                $"Max HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack},\nand Defense is {BattleStats.BaseDefense}.",
-                "It attacks with its shell and\nwith its head, then sometimes\ncharges up for a fierce move.",
-                "Plus, if you take too long to\nwin, it'll call reinforcements.\nYeah, sorta gnarly, huh?",
-                "It's one of the worst of\nBowser's guys. Koopa Troopas\ndream of being Koopatrols.",
-                "...Hey, and by the way, what\ndo you think Bowser's doing\nnow, anyway? Eating?"
-            };
+            return "That's a Koopatrol.\nA Koopa Troopa who protects\nhimself with spiked armor.\n<k><p>" +
+                   $"Max HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack},\nand Defense is {BattleStats.BaseDefense}.\n<k><p>" +
+                   "It attacks with its shell and\nwith its head, then sometimes\ncharges up for a fierce move.\n<k><p>" +
+                   "Plus, if you take too long to\nwin, it'll call reinforcements.\nYeah, sorta gnarly, huh?\n<k><p>" +
+                   "It's one of the worst of\nBowser's guys. Koopa Troopas\ndream of being Koopatrols.\n<k><p>" +
+                   "...Hey, and by the way, what\ndo you think Bowser's doing\nnow, anyway? Eating?<k>";
         }
 
         #endregion

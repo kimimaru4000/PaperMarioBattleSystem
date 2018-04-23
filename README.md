@@ -8,11 +8,13 @@ An open source recreation of the turn-based battle system from the first two Pap
 * Items
 * Badges
 * Battle Menus
+* Dialogue Bubbles
 * Move Sequences (what happens when you perform a move)
 
 Note that visual features (smoothness of movement, UI, etc.) are not being prioritized at the moment. The current focus is implementing the core systems found in the Paper Mario games in a flexible and extensible manner.
 
-You can find an ~6 minute video showcasing many of the battle system's features [here](https://1drv.ms/v/s!AoVfzuXWGWSwi6FUJxn_8mUD5d3QSw). 
+You can find an ~6 minute video showcasing many of the battle system's features [here](https://1drv.ms/v/s!AoVfzuXWGWSwi6FUJxn_8mUD5d3QSw).
+You can also find a short video displaying the dialogue system [here](https://1drv.ms/v/s!AoVfzuXWGWSwi6Ix05m1gYyaE7-vQw).
 
 ## Getting Started
 You will need MonoGame 3.7 and Visual Studio 2017, but MonoDevelop, Xamarin Studio, and earlier versions of Visual Studio may work as well. The project targets DesktopGL and .NET 4.7.

@@ -63,14 +63,11 @@ namespace PaperMarioBattleSystem
             };
         }
 
-        public string[] GetTattleDescription()
+        public string GetTattleDescription()
         {
-            return new string[]
-            {
-                "That's a Goomba. Umm... Yeah, I'm one of those, in case you hadn't noticed.",
-                "Ahem... It says here: \"Goombas are underlings of underlings.\" ...That is totally rude!",
-                $"Their maximum HP is {BattleStats.MaxHP}. They have an Attack power of {BattleStats.BaseAttack} and a Defense of {BattleStats.BaseDefense}."
-            };
+            return "That's a Goomba. Umm... Yeah, I'm one of those, in case you hadn't noticed.\n<k><p>" +
+                   "Ahem... It says here: \"Goombas are underlings of underlings.\" ...That is totally rude!\n<k><p>" +
+                   $"Their maximum HP is {BattleStats.MaxHP}. They have an Attack power of {BattleStats.BaseAttack} and a Defense of {BattleStats.BaseDefense}.<k>";
         }
 
         #endregion

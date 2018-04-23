@@ -109,14 +109,11 @@ namespace PaperMarioBattleSystem
             };
         }
 
-        public string[] GetTattleDescription()
+        public string GetTattleDescription()
         {
-            return new string[]
-            {
-                "That's a Koopa Troopa. They've been around forever! Gotta respect the longevity!",
-                "Their shells are hard, but flip them over and their Defense drops to zero.",
-                "And you know how to flip them over, right? Just jump on their heads!"
-            };
+            return "That's a Koopa Troopa. They've been around forever! Gotta respect the longevity!\n<k><p>" +
+                "Their shells are hard, but flip them over and their Defense drops to zero.\n<k><p>" +
+                "And you know how to flip them over, right? Just jump on their heads!<k>";
         }
 
         #endregion

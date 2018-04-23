@@ -29,7 +29,7 @@ namespace PaperMarioBattleSystem
         /// The table that contains all the Tattle descriptions the player has recorded.
         /// The key is the enemy name while the value is their Tattle description, which is the in-battle description.
         /// </summary>
-        private static readonly Dictionary<string, string[]> TattleDescriptionTable = new Dictionary<string, string[]>();
+        private static readonly Dictionary<string, string> TattleDescriptionTable = new Dictionary<string, string>();
 
         static TattleDatabase()
         {
@@ -88,8 +88,8 @@ namespace PaperMarioBattleSystem
         /// Gets the Tattle Description corresponding to an enemy.
         /// </summary>
         /// <param name="enemyName">The name of the enemy.</param>
-        /// <returns>A string[] array of the enemy's in-battle Tattle Description entry if it exists in the table, otherwise null</returns>
-        public static string[] GetTattleDescription(string enemyName)
+        /// <returns>A string of the enemy's in-battle Tattle Description entry if it exists in the table, otherwise null</returns>
+        public static string GetTattleDescription(string enemyName)
         {
             if (HasTattleDescription(enemyName) == false)
                 return null;
@@ -144,8 +144,8 @@ namespace PaperMarioBattleSystem
         /// Adds a Tattle Description for a particular enemy if it doesn't exist.
         /// </summary>
         /// <param name="enemyName">The name of the enemy.</param>
-        /// <param name="descriptionEntry">The description associated with the enemy. Each entry in the array is separated by a new line.</param>
-        public static void AddTattleDescriptionEntry(string enemyName, string[] descriptionEntry)
+        /// <param name="descriptionEntry">The description associated with the enemy.</param>
+        public static void AddTattleDescriptionEntry(string enemyName, string descriptionEntry)
         {
             if (HasTattleDescription(enemyName) == true)
                 return;

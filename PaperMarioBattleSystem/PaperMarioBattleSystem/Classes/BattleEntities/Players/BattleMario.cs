@@ -275,13 +275,10 @@ namespace PaperMarioBattleSystem
             return new string[] { "N/A" };
         }
 
-        public string[] GetTattleDescription()
+        public string GetTattleDescription()
         {
-            return new string[]
-            {
-                "It's Mario, silly!\nHe's here to save Princess\nPeach, who was kidnapped by\nBowser. Remember?",
-                "He fights until the bitter end,\nno matter what enemies attack."
-            };
+            return "It's Mario, silly!\nHe's here to save Princess\nPeach, who was kidnapped by\nBowser. Remember?\n<k><p>" +
+                   "He fights until the bitter end,\nno matter what enemies attack.<k>";
         }
 
         #endregion

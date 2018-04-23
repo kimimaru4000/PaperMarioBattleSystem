@@ -26,9 +26,8 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// The in-battle description of the BattleEntity. This is shown when using Tattle on the BattleEntity.
-        /// <para>Each entry in the array correlates to a different set of text in the dialogue box (not yet implemented - will be changed when it is).</para>
         /// </summary>
-        /// <returns>A string[] array whose length correlates to the number of entries in the dialogue box.</returns>
-        string[] GetTattleDescription();
+        /// <returns>A string formatted to work with a dialogue bubble.</returns>
+        string GetTattleDescription();
     }
 }

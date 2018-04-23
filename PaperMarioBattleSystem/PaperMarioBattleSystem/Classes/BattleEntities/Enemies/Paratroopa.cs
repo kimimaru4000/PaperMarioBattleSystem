@@ -113,18 +113,15 @@ namespace PaperMarioBattleSystem
             };
         }
 
-        public new string[] GetTattleDescription()
+        public new string GetTattleDescription()
         {
             if (WingedBehavior.Grounded == true) return base.GetTattleDescription();
 
-            return new string[]
-            {
-                "That's a Koopa Paratroopa. Well, umm... It's basically a Koopa Troopa with wings.",
-                $"Max HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.",
-                "I kinda hate that this guy gets to fly. Of course, you can stomp on him and he'll plunge down and be a plain Koopa Troopa.",
-                "Yeah, do that, and he's ours! Stomp again to flip him, and his arms and legs are useless!",
-                "Oops! Sorry, that's not true. It looks like he can still wiggle them around a bit..."
-            };
+            return "That's a Koopa Paratroopa. Well, umm... It's basically a Koopa Troopa with wings.\n<k><p>" +
+                   $"Max HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.\n<k><p>" +
+                   "I kinda hate that this guy gets to fly. Of course, you can stomp on him and he'll plunge down and be a plain Koopa Troopa.\n<k><p>" +
+                   "Yeah, do that, and he's ours! Stomp again to flip him, and his arms and legs are useless!\n<k><p>" +
+                   "Oops! Sorry, that's not true. It looks like he can still wiggle them around a bit...<k>";
         }
 
         #endregion

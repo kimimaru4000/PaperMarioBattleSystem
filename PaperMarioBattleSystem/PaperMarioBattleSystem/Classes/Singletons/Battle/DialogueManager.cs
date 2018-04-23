@@ -48,28 +48,28 @@ namespace PaperMarioBattleSystem
             DialogBubble?.CleanUp();
         }
 
-        /// <summary>
-        /// Creates a Dialogue Bubble from an array of text.
-        /// This is method is only for compatibility with current Tattles, which use an array of strings.
-        /// </summary>
-        /// <param name="textArray">The array of text.</param>
-        public void CreateBubble(string[] textArray, BattleEntity speaker)
-        {
-            string text = string.Empty;
-
-            for (int i = 0; i < textArray.Length; i++)
-            {
-                text += textArray[i] + "\n<k>";
-
-                //Add the paragraph tag before the 
-                if (i != (textArray.Length - 1))
-                {
-                    text += "<p>";
-                }
-            }
-
-            CreateBubble(text, speaker);
-        }
+        ///// <summary>
+        ///// Creates a Dialogue Bubble from an array of text.
+        ///// This is method is only for compatibility with current Tattles, which use an array of strings.
+        ///// </summary>
+        ///// <param name="textArray">The array of text.</param>
+        //public void CreateBubble(string[] textArray, BattleEntity speaker)
+        //{
+        //    string text = string.Empty;
+        //
+        //    for (int i = 0; i < textArray.Length; i++)
+        //    {
+        //        text += textArray[i] + "\n<k>";
+        //
+        //        //Add the paragraph tag before the 
+        //        if (i != (textArray.Length - 1))
+        //        {
+        //            text += "<p>";
+        //        }
+        //    }
+        //
+        //    CreateBubble(text, speaker);
+        //}
 
         /// <summary>
         /// Creates a Dialogue Bubble with text.

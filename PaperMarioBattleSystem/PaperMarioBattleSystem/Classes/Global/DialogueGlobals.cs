@@ -14,6 +14,11 @@ namespace PaperMarioBattleSystem
     public static class DialogueGlobals
     {
         /// <summary>
+        /// The HtmlDocument object used to parse Dialogue Bubble text.
+        /// </summary>
+        private static readonly HtmlDocument HTMLDoc = new HtmlDocument();
+
+        /// <summary>
         /// Tells if a string is a text node.
         /// </summary>
         /// <param name="text">The string to test.</param>
@@ -315,27 +320,61 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        /// <summary>
+        /// Removes Dialogue Bubble control codes from a string.
+        /// </summary>
+        /// <param name="text">The string to remove control codes from.</param>
+        /// <returns>A string without Dialogue Bubble control codes.</returns>
+        public static string RemoveControlCodesFromText(in string text)
+        {
+            //If the parsed text is not the same as the text passed in, load in the text as HTML
+            if (HTMLDoc.ParsedText != text)
+                HTMLDoc.LoadHtml(text);
+
+            //Return the inner text
+            return HTMLDoc.DocumentNode.InnerText;
+        }
+
         #region Parsing Methods
 
+        /// <summary>
+        /// Parses text for a Dialogue Bubble, reading in control codes and converting them to text modifiers, message modifiers, and message routines.
+        /// </summary>
+        /// <param name="bubbleText">The string containing the text for the Dialogue Bubble.</param>
+        /// <param name="nonHtmlOutput">A string that will be the <paramref name="bubbleText"/> returned without control codes.</param>
+        /// <returns>A new BubbleData with all the necessary data for a Dialogue Bubble to function.</returns>
         public static BubbleData ParseText(in string bubbleText, out string nonHtmlOutput)
         {
-            HtmlDocument doc = new HtmlDocument();
-            doc.LoadHtml(bubbleText);
-
+            //Load in the text as HTML
+            HTMLDoc.LoadHtml(bubbleText);
+            
+            //Initialize data that we need for parsing
             BubbleData bubbleData = new BubbleData();
             BubbleTextData curBubbleTextData = new BubbleTextData();
             List<HtmlNode> activeModifiers = new List<HtmlNode>();
             int prevNewLineCount = 0;
             int curNewLineCount = 0;
 
-            VisitNode(doc.DocumentNode, doc.DocumentNode, ref curBubbleTextData, activeModifiers, bubbleData, ref prevNewLineCount,
+            //Visit the first node, which is the root of the HTML document
+            VisitNode(HTMLDoc.DocumentNode, HTMLDoc.DocumentNode, ref curBubbleTextData, activeModifiers, bubbleData, ref prevNewLineCount,
                 ref curNewLineCount);
 
-            nonHtmlOutput = doc.DocumentNode.InnerText;
+            //Set the output without control codes
+            nonHtmlOutput = HTMLDoc.DocumentNode.InnerText;
 
             return bubbleData;
         }
 
+        /// <summary>
+        /// Visits an HtmlNode and handles it. This is part of Dialogue Bubble parsing.
+        /// </summary>
+        /// <param name="root">The root node; this should be the HtmlDocument's DocumentNode.</param>
+        /// <param name="node">The current node being visited.</param>
+        /// <param name="curBubbleTextData">The current BubbleTextData.</param>
+        /// <param name="activeModifiers">The currently active text modifiers.</param>
+        /// <param name="bubbleData">The BubbleData.</param>
+        /// <param name="prevNewLineCount">The new line count up until this paragraph.</param>
+        /// <param name="curNewLineCount">The current number of new lines in this paragraph.</param>
         private static void VisitNode(HtmlNode root, HtmlNode node, ref BubbleTextData curBubbleTextData, List<HtmlNode> activeModifiers,
             BubbleData bubbleData, ref int prevNewLineCount, ref int curNewLineCount)
         {
@@ -443,6 +482,11 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Handles text modifiers by parsing them into data.
+        /// </summary>
+        /// <param name="mod">An HtmlNode representing the text modifier.</param>
+        /// <param name="curBubbleTextData">The current BubbleTextData.</param>
         private static void HandleModifierType(HtmlNode mod, BubbleTextData curBubbleTextData)
         {
             string modName = mod.Name;
@@ -476,6 +520,13 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Handles message modifiers by parsing them into data.
+        /// </summary>
+        /// <param name="msgMod">An HtmlNode representing the message modifier.</param>
+        /// <param name="bubbleData">The BubbleData.</param>
+        /// <param name="prevNewLineCount">The new line count up until this paragraph.</param>
+        /// <param name="curNewLineCount">The current number of new lines in this paragraph.</param>
         private static void HandleMessageModifier(HtmlNode msgMod, BubbleData bubbleData, ref int prevNewLineCount, ref int curNewLineCount)
         {
             //If it's paragraph tag, increment the current paragraph index

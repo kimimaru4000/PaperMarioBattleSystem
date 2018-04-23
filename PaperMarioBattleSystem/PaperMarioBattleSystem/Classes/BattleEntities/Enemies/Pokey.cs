@@ -124,16 +124,13 @@ namespace PaperMarioBattleSystem
             };
         }
 
-        public string[] GetTattleDescription()
+        public string GetTattleDescription()
         {
-            return new string[]
-            {
-                "That's a Pokey. It's a cactus ghoul that's got nasty spines all over its body.",
-                $"Max HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.",
-                "Look at those spines... Those would TOTALLY hurt. If you stomp on it, you'll regret it.",
-                "Pokeys attack by lobbing parts of their bodies and by charging at you...",
-                "They can even call friends in for help, so be quick about taking them out."
-            };
+            return "That's a Pokey. It's a cactus ghoul that's got nasty spines all over its body.\n<k><p>" +
+                   $"Max HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.\n<k><p>" +
+                   "Look at those spines... Those would TOTALLY hurt. If you stomp on it, you'll regret it.\n<k><p>" +
+                   "Pokeys attack by lobbing parts of their bodies and by charging at you...\n<k><p>" +
+                   "They can even call friends in for help, so be quick about taking them out.<k>";
         }
 
         #endregion

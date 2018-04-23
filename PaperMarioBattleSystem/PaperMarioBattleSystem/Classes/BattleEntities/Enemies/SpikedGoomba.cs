@@ -51,15 +51,12 @@ namespace PaperMarioBattleSystem
             };
         }
 
-        public new string[] GetTattleDescription()
+        public new string GetTattleDescription()
         {
-            return new string[]
-            {
-                "That's a Spiky Goomba. ...A spiky-headed Goomba. What a creative name.",
-                "That spike is super-pointy, so it's better to hit it with a hammer than jump on it.",
-                $"Maximum HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.",
-                "The addition of the spike means you'll hurt your feet if you jump on it. Duh!"
-            };
+            return "That's a Spiky Goomba. ...A spiky-headed Goomba. What a creative name.\n<k><p>" +
+                   "That spike is super-pointy, so it's better to hit it with a hammer than jump on it.\n<k><p>" +
+                   $"Maximum HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.\n<k><p>" +
+                   "The addition of the spike means you'll hurt your feet if you jump on it. Duh!<k>";
         }
 
         #endregion

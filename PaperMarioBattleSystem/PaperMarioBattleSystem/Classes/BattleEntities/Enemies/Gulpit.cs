@@ -74,17 +74,14 @@ namespace PaperMarioBattleSystem
             return new string[] { "N/A" };
         }
 
-        public string[] GetTattleDescription()
+        public string GetTattleDescription()
         {
-            return new string[]
-            {
-                "This is a Gulpit.\nWhoa! Gulpits look pretty\nburly, don't they?",
-                "Max HP: 12, Attack Power: 2,\nDefense Power: 0",
-                "Gulpits attack by picking rocks\nup in their mouths and then\nspitting 'em back out.",
-                "The bigger the rock they spit,\nthe more damage you'll take.",
-                "Big rocks take 7 HP in damage,\nand small ones take 5 HP.",
-                "They can't do much damage\nwithout ammo, so you should\nconcentrate on the rocks first."
-            };
+            return "This is a Gulpit.\nWhoa! Gulpits look pretty\nburly, don't they?\n<k><p>" +
+                   "Max HP: 12, Attack Power: 2,\nDefense Power: 0\n<k><p>" +
+                   "Gulpits attack by picking rocks\nup in their mouths and then\nspitting 'em back out.\n<k><p>" +
+                   "The bigger the rock they spit,\nthe more damage you'll take.\n<k><p>" +
+                   "Big rocks take 7 HP in damage,\nand small ones take 5 HP.\n<k><p>" +
+                   "They can't do much damage\nwithout ammo, so you should\nconcentrate on the rocks first.<k>";
         }
 
         #endregion

@@ -246,79 +246,52 @@ namespace PaperMarioBattleSystem
             return new string[] { "N/A" };
         }
 
-        public string[] GetTattleDescription()
+        public string GetTattleDescription()
         {
             //Return a different Tattle for each Partner the Duplighost is disguised as
             switch (PartnerTypeDisguise)
             {
                 default:
-                    return new string[]
-                    {
-                        "This is a Duplighost.\nDuplighosts disguise themselves\nas members of our party.",
-                        "Max HP: 15, Attack Power: 4,\nDefense Power: 0",
-                        "They love to attack in disguise.",
-                        "It seems like they're generally\nstronger fighters when they're\nnot disguised, though."
-                    };
+                    return "This is a Duplighost.\nDuplighosts disguise themselves\nas members of our party.\n<k><p>" +
+                           "Max HP: 15, Attack Power: 4,\nDefense Power: 0\n<k><p>" +
+                           "They love to attack in disguise.\n<k><p>" +
+                           "It seems like they're generally\nstronger fighters when they're\nnot disguised, though.<k>";
                 case Enumerations.PartnerTypes.Goombario:
-                    return new string[]
-                    {
-                        "It's a Duplighost disguised as me.",
-                        "Max HP: 15 It'll do Headbonk and Tattle. That looks nothing like me.",
-                        "Does it? No! Seriously, though, does it? Mario? Hello?",
-                        "Look, I've been working out like crazy trying to get in shape for adventuring. There's just no way I'm that pudgy!"
-                    };
+                    return "It's a Duplighost disguised as me.\n<k><p>" +
+                           "Max HP: 15 It'll do Headbonk and Tattle. That looks nothing like me.\n<k><p>" +
+                           "Does it? No! Seriously, though, does it? Mario? Hello?\n<k><p>" +
+                           "Look, I've been working out like crazy trying to get in shape for adventuring. There's just no way I'm that pudgy!<k>";
                 case Enumerations.PartnerTypes.Kooper:
-                    return new string[]
-                    {
-                        "It's a Duplighost disguised as Kooper.",
-                        "Max HP: 15 This imposter almost looks better than the original! Ha! Its disguise is pretty much perfect.",
-                        "Its attack power is exactly the same as the character it's imitating. It's probably not very difficult for this Duplighost",
-                        "to disguise itself as Kooper. After all, our pal is pretty unusual looking. It'll attack us with its shell, just like the regular Kooper.",
-                        "You'll have the best luck beating it if you flip it."
-                    };
+                    return "It's a Duplighost disguised as Kooper.\n<k><p>" +
+                           "Max HP: 15 This imposter almost looks better than the original! Ha! Its disguise is pretty much perfect.\n<k><p>" +
+                           "Its attack power is exactly the same as the character it's imitating. It's probably not very difficult for this Duplighost\n<k><p>" +
+                           "to disguise itself as Kooper. After all, our pal is pretty unusual looking. It'll attack us with its shell, just like the regular Kooper.\n<k><p>" +
+                           "You'll have the best luck beating it if you flip it.<k>";
                 case Enumerations.PartnerTypes.Bombette:
-                    return new string[]
-                    {
-                        "It's a Duplighost disguised as Bombette.",
-                        "Max HP: 15 Its disguise is pretty much perfect. Its attack power is exactly the same as Bombette's.",
-                        "You should be careful even though she looks cute."
-                    };
+                    return "It's a Duplighost disguised as Bombette.\n<k><p>" +
+                           "Max HP: 15 Its disguise is pretty much perfect. Its attack power is exactly the same as Bombette's.\n<k><p>" +
+                           "You should be careful even though she looks cute.<k>";
                 case Enumerations.PartnerTypes.Parakarry:
-                    return new string[]
-                    {
-                        "It's a Duplighost disguised as Parakarry.",
-                        "Max HP: 15 He looks even more intelligent as an enemy. Its disguise is pretty much perfect.",
-                        "Its attack power is exactly the same as Parakarry's. Don't underestimate him, Mario. He looks pretty serious."
-                    };
+                    return "It's a Duplighost disguised as Parakarry.\n<k><p>" +
+                           "Max HP: 15 He looks even more intelligent as an enemy. Its disguise is pretty much perfect.\n<k><p>" +
+                           "Its attack power is exactly the same as Parakarry's. Don't underestimate him, Mario. He looks pretty serious.<k>";
                 case Enumerations.PartnerTypes.Bow:
-                    return new string[]
-                    {
-                        "It's a Duplighost disguised as Bow.",
-                        "Max HP: 15 Its disguise is pretty much perfect. Its attack power is exactly the same as Bow's.",
-                        "Look, you've seen her in action. Do you really want to know what a Smack attack feels like?"
-                    };
+                    return "It's a Duplighost disguised as Bow.\n<k><p>" +
+                           "Max HP: 15 Its disguise is pretty much perfect. Its attack power is exactly the same as Bow's.\n<k><p>" +
+                           "Look, you've seen her in action. Do you really want to know what a Smack attack feels like?<k>";
                 case Enumerations.PartnerTypes.Watt:
-                    return new string[]
-                    {
-                        "It's a Duplighost disguised as Watt.",
-                        "Max HP: 15 Its disguise is pretty much perfect. Its attack power is exactly the same as the character it's imitating.",
-                        "You know how Watt is shocking? Same goes for this Duplighost."
-                    };
+                    return "It's a Duplighost disguised as Watt.\n<k><p>" +
+                           "Max HP: 15 Its disguise is pretty much perfect. Its attack power is exactly the same as the character it's imitating.\n<k><p>" +
+                           "You know how Watt is shocking? Same goes for this Duplighost.<k>";
                 case Enumerations.PartnerTypes.Sushie:
-                    return new string[]
-                    {
-                        "It's a Duplighost disguised as Sushie.",
-                        "Max HP: 15 Its face looks even grouchier than the real thing! Its disguise is pretty much perfect.",
-                        "Its attack power is exactly the same as Sushie's. I'm glad we have Sushie on our side. She's intimidating!",
-                        "I wonder if this imposter is meddlesome as well..."
-                    };
+                    return "It's a Duplighost disguised as Sushie.\n<k><p>" +
+                           "Max HP: 15 Its face looks even grouchier than the real thing! Its disguise is pretty much perfect.\n<k><p>" +
+                           "Its attack power is exactly the same as Sushie's. I'm glad we have Sushie on our side. She's intimidating!\n<k><p>" +
+                           "I wonder if this imposter is meddlesome as well...<k>";
                 case Enumerations.PartnerTypes.Lakilester:
-                    return new string[]
-                    {
-                        "It's a Duplighost disguised as Lakilester.",
-                        "Max HP: 15 It's hard to take him seriously. Its disguise is pretty much perfect.",
-                        "Its attack power is exactly the same as Lakilester's. It's tough to dodge his Spiny Flip, so pay attention."
-                    };
+                    return "It's a Duplighost disguised as Lakilester.\n<k><p>" +
+                           "Max HP: 15 It's hard to take him seriously. Its disguise is pretty much perfect.\n<k><p>" +
+                           "Its attack power is exactly the same as Lakilester's. It's tough to dodge his Spiny Flip, so pay attention.<k>";
             }
         }
 

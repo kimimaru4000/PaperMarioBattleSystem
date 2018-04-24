@@ -527,7 +527,16 @@ namespace PaperMarioBattleSystem
             AddEntities(new BattleEntity[] { Partner }, null, false);
 
             //Set the new Partner to use the same max number of turns all Partners have this phase cycle
-            Partner.SetMaxTurns(BattlePartner.PartnerMaxTurns);
+            //The only exceptions are if the new partner doesn't move at all (Ex. Goompa) or is immobile
+            //In this case, set its max turn count to 0
+            if (Partner.BaseTurns > 0 && Partner.IsImmobile() == false)
+            {
+                Partner.SetMaxTurns(BattlePartner.PartnerMaxTurns);
+            }
+            else
+            {
+                Partner.SetMaxTurns(0);
+            }
 
             //If the entity swapping out partners is the old one increment the turn count for the new partner,
             //as the old one's turn count will be incremented after the action is finished

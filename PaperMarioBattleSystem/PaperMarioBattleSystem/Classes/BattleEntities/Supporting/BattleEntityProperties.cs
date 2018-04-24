@@ -954,7 +954,6 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Sets the BattleEntity's vulnerability to DamageEffects.
-        /// <para>IMPORTANT: Make sure the BattleEntity implements the interfaces associated with each effect it's vulnerable to.</para>
         /// </summary>
         /// <param name="damageEffects">The DamageEffects value to set. This is a bit field.</param>
         public void SetVulnerableDamageEffects(DamageEffects damageEffects)
@@ -1150,7 +1149,7 @@ namespace PaperMarioBattleSystem
             {
                 return default(T);
             }
-
+            
             return (T)AdditionalProperties[property];
         }
 

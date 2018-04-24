@@ -111,7 +111,7 @@ namespace PaperMarioBattleSystem
 
             //Create Mini-Yuxes when the phase ends (they do this before Bobbery Bombs go in the actual games)
             //If the Yux is immobile or dead, don't do anything
-            if (IsDead == true || EntityProperties.HasAdditionalProperty(AdditionalProperty.Immobile) == true)
+            if (IsDead == true || this.IsImmobile() == true)
                 return;
 
             const double moveTime = 800d;

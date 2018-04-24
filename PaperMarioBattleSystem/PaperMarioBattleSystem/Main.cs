@@ -94,6 +94,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void InitializeInventory()
         {
+            Inventory.Instance.partnerInventory.AddPartner(new Goompa());
             Inventory.Instance.partnerInventory.AddPartner(new Goombario());
             Inventory.Instance.partnerInventory.AddPartner(new Kooper());
             Inventory.Instance.partnerInventory.AddPartner(new Bow());

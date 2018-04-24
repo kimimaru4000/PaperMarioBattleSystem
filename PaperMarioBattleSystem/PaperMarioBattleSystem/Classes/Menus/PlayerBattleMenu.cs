@@ -212,9 +212,7 @@ namespace PaperMarioBattleSystem
             if (otherPlayer == null)
                 return false;
 
-            int immobile = otherPlayer.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.Immobile);
-
-            return (otherPlayer.UsedTurn == false && otherPlayer.IsDead == false && immobile <= 0);
+            return (otherPlayer.UsedTurn == false && otherPlayer.IsDead == false && otherPlayer.IsImmobile() == false);
         }
     }
 }

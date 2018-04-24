@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
 
         public override BattleEntity User => actionUser;
 
-        public bool CommandEnabled => (actionCommand != null && UserImmobile == false && EnableActionCommand == true);
+        public bool CommandEnabled => (actionCommand != null && EnableActionCommand == true && UserImmobile == false);
         public bool IsSuccessful => (PrevCommandTimer >= Time.ActiveMilliseconds);
 
         //NOTE: Ideally, check the CommandResult instead of the timer - not super important right now, though
@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Tells if the user of the DefensiveAction is Immobile.
         /// </summary>
-        protected bool UserImmobile => (User != null && User.EntityProperties.HasAdditionalProperty(AdditionalProperty.Immobile) == true);
+        protected bool UserImmobile => (User != null && User.IsImmobile() == true);
 
         protected BattleEntity actionUser = null;
 

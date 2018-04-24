@@ -74,7 +74,22 @@ namespace PaperMarioBattleSystem
 
         public void SetHeldCollectible(Collectible heldCollectible)
         {
+            //Unequip the current badge held, if one is held
+            if (HeldCollectible?.CollectibleType == Enumerations.CollectibleTypes.Badge)
+            {
+                Badge heldBadge = (Badge)HeldCollectible;
+                heldBadge.UnEquip();
+            }
+
+            //Set the collectible
             HeldCollectible = heldCollectible;
+
+            //Equip the held Badge, if one is held
+            if (HeldCollectible?.CollectibleType == Enumerations.CollectibleTypes.Badge)
+            {
+                Badge heldBadge = (Badge)HeldCollectible;
+                heldBadge.Equip(this);
+            }
         }
     }
 }

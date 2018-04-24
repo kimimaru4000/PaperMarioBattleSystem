@@ -24,16 +24,23 @@ namespace PaperMarioBattleSystem
 
             Name = NewPartner.Name;
 
-            Rectangle sourceRect = new Rectangle(30 + (((int)NewPartner.PartnerType - 1) * 32), 886, 32, 32);
+            CroppedTexture2D partnerIcon = null;
 
-            //Pretty hackish for now; show the disabled icon instead if the Partner is the current one out
-            if (NewPartner == BattleManager.Instance.GetPartner())
+            //Icons exist only for any regular partners
+            //Don't display anything for temporary or unused partners
+            if (NewPartner.PartnerType <= Enumerations.PartnerTypes.MsMowz)
             {
-                sourceRect.Y += 32;
-            }
+                Rectangle sourceRect = new Rectangle(30 + (((int)NewPartner.PartnerType - 1) * 32), 886, 32, 32);
 
-            CroppedTexture2D partnerIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
-                sourceRect);
+                //Pretty hackish for now; show the disabled icon instead if the Partner is the current one out
+                if (NewPartner == BattleManager.Instance.GetPartner())
+                {
+                    sourceRect.Y += 32;
+                }
+
+                partnerIcon = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png"),
+                    sourceRect);
+            }
 
             MoveInfo = new MoveActionData(partnerIcon, NewPartner.PartnerDescription, Enumerations.MoveResourceTypes.FP, 0,
                 Enumerations.CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.Single,

@@ -178,6 +178,7 @@
     <Compile Include="Classes\BattleEntities\Players\BattlePlayer.cs" />
     <Compile Include="Classes\BattleEntities\Players\Bow.cs" />
     <Compile Include="Classes\BattleEntities\Players\Goombario.cs" />
+    <Compile Include="Classes\BattleEntities\Players\Goompa.cs" />
     <Compile Include="Classes\BattleEntities\Players\Kooper.cs" />
     <Compile Include="Classes\BattleEntities\Players\Watt.cs" />
     <Compile Include="Classes\BattleEntities\Supporting\AttackFXManager.cs" />
@@ -567,6 +568,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Characters\Goombario.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Characters\Goompa.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Characters\Kooper.png">

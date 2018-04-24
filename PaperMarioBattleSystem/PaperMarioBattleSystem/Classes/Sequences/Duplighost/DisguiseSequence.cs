@@ -100,6 +100,18 @@ namespace PaperMarioBattleSystem
                             DuplighostRef.PaybackCopied = wattPayback;
                             DuplighostRef.EntityProperties.AddPayback(wattPayback);
                         }
+                        //Do an Easter Egg by replicating PM's glitchy behavior when Duplighosts disguise as Goompa
+                        //Kill off the Duplighost, and set Mario to its position
+                        else if (DuplighostRef.PartnerTypeDisguise == Enumerations.PartnerTypes.Goompa)
+                        {
+                            //Make sure Mario is in battle (he should be!)
+                            if (BattleManager.Instance.GetMario() != null)
+                            {
+                                BattleManager.Instance.GetMario().Position = DuplighostRef.Position;
+                            }
+
+                            DuplighostRef.Die();
+                        }
                     }
 
                     //If copying a Flippable BattleEntity, copy its Flippable behavior

@@ -86,7 +86,7 @@ namespace PaperMarioBattleSystem
                     AllyAffected.EntityProperties.SuppressStatuses(Enumerations.StatusSuppressionTypes.TurnCount, Enumerations.StatusTypes.Invisible);
 
                     //The ally assumes the Guard position if it's not immobile
-                    if (AllyAffected.EntityProperties.HasAdditionalProperty(Enumerations.AdditionalProperty.Immobile) == false)
+                    if (AllyAffected.IsImmobile() == false)
                         AllyAffected.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName);
 
                     //This half of the sequence ends here

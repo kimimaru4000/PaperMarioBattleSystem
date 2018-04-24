@@ -269,6 +269,16 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Tells if the BattleEntity is Immobile or not.
+        /// </summary>
+        /// <param name="entity">The BattleEntity to check for being Immobile.</param>
+        /// <returns>true if the BattleEntity has the Immobile AdditionalProperty, otherwise false.</returns>
+        public static bool IsImmobile(this BattleEntity entity)
+        {
+            return (entity.EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.Immobile) > 0);
+        }
+
+        /// <summary>
         /// A helper method for adding and removing Status Effect immunities.
         /// All other fields on the BattleEntity's StatusProperties are preserved.
         /// </summary>

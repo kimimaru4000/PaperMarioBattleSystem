@@ -534,6 +534,13 @@ namespace PaperMarioBattleSystem
                         //So say it prints a new character after 2 frames - we would have to offset it by that time
                         //To do this, we have to calculate how many frames it takes to print a character
                         //Then, offset the time by that value * ElapsedMilliseconds
+
+                        /*NOTE: Minor bug - if dynamic text proceeds a key press that isn't followed by a paragraph,
+                        even after the dynamic text finished, the next character printed causes it to rescale based on the next printed
+                        character time being updated
+
+                        We also need to change this to mimick how TTYD does it. That is, each character individually scales on its own,
+                        so if you skip through the text, each character will still be scaling*/
                         if (bdata.DynamicSize.HasValue == true)
                         {
                             int indexDiff = (CurTextIndex - 1) - j;

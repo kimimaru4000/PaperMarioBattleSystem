@@ -236,35 +236,6 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.ClearMenuStack();
         }
 
-        /*public override int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
-        {
-            //NOTE: This isn't entity-specific right now, so it technically doesn't work properly.
-            //For example, if a Partner had Mario's Jump, it could use Power Bounce if Mario had
-            //the Badge equipped even if the Partner didn't.
-
-            //NOTE 2: The problem is that all Active Badges are in the same list, and it's impossible
-            //to differentiate Badges that only affect Mario from ones that affect both Mario and his Partner
-            //without finding the Badge first. I feel there needs to be a new approach to how this is handled.
-
-            BadgeGlobals.BadgeTypes newBadgeType = badgeType;
-
-            //Find the non-Partner version of the Badge
-            BadgeGlobals.BadgeTypes? tempBadgeType = BadgeGlobals.GetNonPartnerBadgeType(badgeType);
-            if (tempBadgeType != null)
-            {
-                newBadgeType = tempBadgeType.Value;
-            }
-            else
-            {
-                //If there is no non-Partner version, get the Badge and check if it affects Mario
-                Badge badge = Inventory.Instance.GetBadge(newBadgeType, BadgeGlobals.BadgeFilterType.Equipped);
-                //If the Badge isn't equipped or doesn't affect Both or Mario, none are equipped to Mario
-                if (badge == null || badge.AffectedType == BadgeGlobals.AffectedTypes.Partner) return 0;
-            }
-
-            return Inventory.Instance.GetActiveBadgeCount(newBadgeType);
-        }*/
-
         //Mario can be tattled by Duplighosts disguised as Goombario
         #region Tattle Information
 

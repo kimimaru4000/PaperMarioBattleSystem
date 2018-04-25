@@ -73,6 +73,26 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Confusion Handlers
+
+        /// <summary>
+        /// A delegate handling how the BattleEntity gets affected by the Confused status.
+        /// The BattleEntity may perform a different action and/or target different entities.
+        /// </summary>
+        /// <param name="action">The MoveAction originally used.</param>
+        /// <param name="targets">The original set of BattleEntities to target.</param>
+        /// <returns>An ActionHolder with a new BattleAction to perform and/or a different target list.</returns>
+        protected delegate BattleGlobals.ActionHolder ConfusionDelegate(MoveAction action, BattleEntity[] targets);
+
+        /// <summary>
+        /// The handler to use when determining Confusion's effects.
+        /// This allows BattleEntities to handle Confusion however they want.
+        /// It defaults to <see cref="BaseConfusionHandler(MoveAction, BattleEntity[])"/>.
+        /// </summary>
+        protected ConfusionDelegate ConfusionHandler = null;
+
+        #endregion
+
         /// <summary>
         /// Various unique properties belonging to the BattleEntity
         /// </summary>
@@ -196,6 +216,7 @@ namespace PaperMarioBattleSystem
         {
             EntityProperties = new BattleEntityProperties(this);
             AnimManager = new ObjAnimManager(this);
+            ConfusionHandler = BaseConfusionHandler;
         }
 
         protected BattleEntity(Stats stats) : this()
@@ -872,106 +893,122 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Determines if the BattleEntity gets affected by the Confused status, if it has it.
-        /// If the BattleEntity is affected, it may perform a different action or target different entities with its original one.
+        /// The base confusion handler.
+        /// It covers a broad set of actions, targeting allies if the action deals damage and targeting enemies if the action heals.
         /// </summary>
         /// <param name="action">The BattleAction originally used.</param>
         /// <param name="targets">The original set of BattleEntities to target</param>
         /// <returns>An ActionHolder with a new BattleAction to perform or a different target list if the entity was affected by Confused.
         /// If not affected, the originals of each will be returned.</returns>
-        private BattleGlobals.ActionHolder HandleConfusion(MoveAction action, params BattleEntity[] targets)
+        protected BattleGlobals.ActionHolder BaseConfusionHandler(MoveAction action, BattleEntity[] targets)
         {
             MoveAction actualAction = action;
             BattleEntity[] actualTargets = targets;
 
-            //Check for Confusion's effects and change actions or targets depending on what happens
-            int percent = EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.ConfusionPercent);
+            int changeTargets = 0;
 
-            //See if Confusion should take effect
-            if (UtilityGlobals.TestRandomCondition(percent) == true)
+            //Don't give a chance to change targets if the action doesn't have targets
+            if (targets != null && targets.Length > 0)
             {
-                Debug.Log($"{Name} is affected by Confusion and will do something unpredictable!");
+                changeTargets = GeneralGlobals.Randomizer.Next(0, 2);
+            }
+            
+            //Custom can target anything and may have a wide range of effects, so simply do nothing
+            //This puts us on the safe side since targeting an incorrect BattleEntity with a Custom move may cause unintended behavior
+            //For example, Tattle expects an ITattleableEntity, so it would throw an exception if it targeted anything else
+            if (UtilityGlobals.MoveAffectionTypesHasFlag(actualAction.MoveProperties.MoveAffectionType, MoveAffectionTypes.Custom))
+            {
+                changeTargets = 0;
+                actualAction = new NoAction();
+            }
 
-                //int changeAction = 0;
-                //Check if the action can target entities to see if we should change targets
-                //if (actualAction.MoveProperties.TargetsEntity == true)
-                //{
-                //    //Get the opposite type of entities to target
-                //    //Items targets enemies, but attacks target allies
-                //    EntityTypes oppositeType = actualAction.MoveProperties.EntityType;
-                //    if (oppositeType == EntityTypes.Player) oppositeType = EntityTypes.Enemy;
-                //    else if (oppositeType == EntityTypes.Enemy) oppositeType = EntityTypes.Player;
-                //}
+            //Change to an ally
+            /*Steps:
+              1. If the action deals damage, mark a flag to attack an ally. If it heals, say to target an enemy
+              2. If the action targets the first entity, find the adjacent entities. If not, find all entities
+              3. Filter by heights based on who the action can target
+              4. Filter out dead entities
+              5. If the action targets everyone, go with the remaining list. Otherwise, choose a random entity to target
+              6. If there are no entities to target after all the filtering, make the entity do nothing*/
+            if (changeTargets == 1)
+            {
+                bool targetAlly = true;
 
-                int changeTargets = 0;
-
-                //Don't give a chance to change targets if the action doesn't have targets
-                //NOTE: This means we'll need to handle changing actions first, as not all actions target something
-                if (targets != null && targets.Length > 0) changeTargets = GeneralGlobals.Randomizer.Next(0, 2);
-
-                //NOTE: Find a way to make it so we can control what happens based on the type of action.
-                //For example, if Tattle was used, it doesn't target anyone else.
-                //If you use a Healing item, it uses it on the opposing side, whereas if you use an attack it uses it on an ally.
-
-                //Change to an ally
-                /*Steps:
-                  1. If the action hits the first entity, find the adjacent allies. If not, find all allies
-                  2. Filter by heights based on what the action can hit
-                  3. Filter out dead allies
-                  4. If the action hits everyone, go with the remaining list. Otherwise, choose a random ally to attack
-                  5. If there are no allies to attack after all the filtering, make the entity do nothing*/
-                if (changeTargets == 1)
+                //If the action deals damage, attempt to target an ally
+                if (actualAction.DealsDamage == true)
                 {
-                    List<BattleEntity> allies = new List<BattleEntity>();
+                    targetAlly = true;
+                }
+                //Tell it to not to target an ally if the action heals
+                else if (actualAction.Heals == true)
+                {
+                    targetAlly = false;
+                }
 
-                    //If this action targets only the first player/enemy, look for adjacent allies
-                    if (actualAction.MoveProperties.SelectionType == TargetSelectionMenu.EntitySelectionType.First)
-                    {
-                        Debug.Log($"{Name} is looking for valid adjacent allies to attack!");
+                List<BattleEntity> newTargets = new List<BattleEntity>();
 
-                        //Find adjacent allies and filter out all non-ally entities
-                        BattleManager.Instance.GetAdjacentEntities(allies, this);
-                        allies.RemoveAll((adjacent) => adjacent.EntityType != EntityType);
-                    }
+                //If this action targets only the first player/enemy, look for adjacent entities
+                if (actualAction.MoveProperties.SelectionType == TargetSelectionMenu.EntitySelectionType.First)
+                {
+                    Debug.Log($"{Name} is looking for valid adjacent allies to attack!");
+
+                    //Find adjacent allies and filter out all non-ally entities
+                    BattleManager.Instance.GetAdjacentEntities(newTargets, this);
+
+                    if (targetAlly == true)
+                        newTargets.RemoveAll((adjacent) => adjacent.EntityType != EntityType);
                     else
+                        newTargets.RemoveAll((adjacent) => adjacent.EntityType == EntityType);
+                }
+                else
+                {
+                    //Neutral BattleEntities should target allies regardless, as they have no enemies
+                    if (targetAlly == true || EntityType == EntityTypes.Neutral)
                     {
                         //Find all allies
-                        BattleManager.Instance.GetEntityAllies(allies, this);
-                    }
-
-                    //Filter by heights
-                    BattleManager.Instance.FilterEntitiesByHeights(allies, actualAction.MoveProperties.HeightsAffected);
-
-                    //Filter dead entities
-                    BattleManager.Instance.FilterDeadEntities(allies);
-
-                    //Choose a random ally to attack if the action only targets one entity
-                    if (allies.Count > 0 && actualAction.MoveProperties.SelectionType != TargetSelectionMenu.EntitySelectionType.All)
-                    {
-                        int randTarget = GeneralGlobals.Randomizer.Next(0, allies.Count);
-                        BattleEntity target = allies[randTarget];
-                        allies.Clear();
-                        allies.Add(target);
-
-                        Debug.Log($"{Name} is choosing to attack ally {allies[0].Name} in Confusion!");
-                    }
-
-                    //If you can't attack any allies, do nothing
-                    if (allies.Count == 0)
-                    {
-                        actualAction = new NoAction();
-
-                        Debug.Log($"{Name} did nothing as there either are no allies to attack or they're not in range!");
+                        BattleManager.Instance.GetEntityAllies(newTargets, this);
                     }
                     else
                     {
-                        //Set the actual targets to be the set of allies
-                        actualTargets = allies.ToArray();
-
-                        //Disable action commands when attacking allies from Confusion, if the action has an Action Command
-                        if (actualAction.HasActionCommand == true)
-                            actualAction.EnableActionCommand = false;
+                        BattleManager.Instance.GetEntities(newTargets, this.GetOpposingEntityType(), null);
                     }
+                }
+
+                //Filter by heights
+                BattleManager.Instance.FilterEntitiesByHeights(newTargets, actualAction.MoveProperties.HeightsAffected);
+
+                //Filter dead entities
+                BattleManager.Instance.FilterDeadEntities(newTargets);
+
+                //Choose a random target to attack if the action only targets one entity
+                if (newTargets.Count > 0 && actualAction.MoveProperties.SelectionType != TargetSelectionMenu.EntitySelectionType.All)
+                {
+                    int randTarget = GeneralGlobals.Randomizer.Next(0, newTargets.Count);
+                    BattleEntity target = newTargets[randTarget];
+                    newTargets.Clear();
+                    newTargets.Add(target);
+
+                    if (targetAlly == true)
+                        Debug.Log($"{Name} will attack {newTargets[0].Name} in Confusion!");
+                    else
+                        Debug.Log($"{Name} will heal {newTargets[0].Name} in Confusion!");
+                }
+
+                //If you can't target anyone, do nothing
+                if (newTargets.Count == 0)
+                {
+                    actualAction = new NoAction();
+
+                    Debug.Log($"{Name} did nothing as there's either no one to attack or they're not in range!");
+                }
+                else
+                {
+                    //Set the actual targets to be the set of new targets
+                    actualTargets = newTargets.ToArray();
+
+                    //Disable action commands when attacking allies from Confusion, if the action has an Action Command
+                    if (actualAction.HasActionCommand == true)
+                        actualAction.EnableActionCommand = false;
                 }
             }
 
@@ -995,9 +1032,18 @@ namespace PaperMarioBattleSystem
             //Check for Confused and handle it appropriately
             if (ignoreConfusion == false && EntityProperties.HasAdditionalProperty(AdditionalProperty.ConfusionPercent) == true)
             {
-                BattleGlobals.ActionHolder holder = HandleConfusion(action, targets);
-                actualAction = holder.Action;
-                actualTargets = holder.Targets;
+                //Test if we should enter confusion
+                int percent = EntityProperties.GetAdditionalProperty<int>(AdditionalProperty.ConfusionPercent);
+
+                //See if Confusion should take effect
+                if (UtilityGlobals.TestRandomCondition(percent) == true)
+                {
+                    Debug.Log($"{Name} is affected by Confusion and will do something unpredictable!");
+
+                    BattleGlobals.ActionHolder holder = ConfusionHandler(action, targets);
+                    actualAction = holder.Action;
+                    actualTargets = holder.Targets;
+                }
             }
 
             PreviousAction = actualAction;

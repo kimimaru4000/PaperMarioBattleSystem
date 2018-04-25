@@ -65,9 +65,9 @@ namespace PaperMarioBattleSystem
 
         public string GetTattleDescription()
         {
-            return "That's a Goomba. Umm... Yeah, I'm one of those, in case you hadn't noticed.\n<k><p>" +
-                   "Ahem... It says here: \"Goombas are underlings of underlings.\" ...That is totally rude!\n<k><p>" +
-                   $"Their maximum HP is {BattleStats.MaxHP}. They have an Attack power of {BattleStats.BaseAttack} and a Defense of {BattleStats.BaseDefense}.<k>";
+            return "That's a Goomba.\n<wait value=\"250\">Umm... <wait value=\"100\">Yeah, I'm one of those,\nin case you hadn't noticed.\n<k><p>" +
+                   "Ahem... <wait value=\"100\">It says here: \"Goombas\nare underlings of underlings.\"\n<wait value=\"300\">...That is totally rude!\n<k><p>" +
+                   "Their maximum HP is 2. <wait value=\"100\">They\nhave an Attack power of 1\nand a Defense of 0.<k>";
         }
 
         #endregion

@@ -1,0 +1,109 @@
+Paper Mario Dialog System Documentation
+Written by Justin Aquadro
+
++----------------------------------------------------------------------------------------
+| PM1 Character Table (In Hex)
++----+--------------+----+--------------+----+--------------+----+-----------------------
+| 00 | Music Note   | 40 | `            | 80 | ì            | C0 |    
+| 01 | !            | 41 | a            | 81 | í            | C1 | 
+| 02 | "            | 42 | b            | 82 | î            | C2 | 
+| 03 | #            | 43 | c            | 83 | ï            | C3 | 
+| 04 | $            | 44 | d            | 84 | ñ            | C4 | 
+| 05 | %            | 45 | e            | 85 | ò            | C5 | 
+| 06 | &            | 46 | f            | 86 | ó            | C6 | 
+| 07 | '            | 47 | g            | 87 | ô            | C7 | 
+| 08 | (            | 48 | h            | 88 | ö            | C8 | 
+| 09 | )            | 49 | i            | 89 | ù            | C9 | 
+| 0A | *            | 4A | j            | 8A | ú            | CA | 
+| 0B | +            | 4B | k            | 8B | û            | CB | 
+| 0C | ,            | 4C | l            | 8C | ü            | CC | 
+| 0D | _            | 4D | m            | 8D | ¡            | CD | 
+| 0E | .            | 4E | n            | 8E | ¿            | CE | 
+| 0F | /            | 4F | o            | 8F | ª            | CF | 
+| 10 | 0            | 50 | p            | 90 | Heart        | D0 | 
+| 11 | 1            | 51 | q            | 91 | Star         | D1 | 
+| 12 | 2            | 52 | r            | 92 | UP Arrow     | D2 | 
+| 13 | 3            | 53 | s            | 93 | DN Arrow     | D3 | 
+| 14 | 4            | 54 | t            | 94 | LT Arrow     | D4 | 
+| 15 | 5            | 55 | u            | 95 | RT Arrow     | D5 | 
+| 16 | 6            | 56 | v            | 96 | O Nought     | D6 | 
+| 17 | 7            | 57 | w            | 97 | X Cross      | D7 | 
+| 18 | 8            | 58 | x            | 98 | A Button     | D8 | 
+| 19 | 9            | 59 | y            | 99 | B Button     | D9 | 
+| 1A | :            | 5A | z            | 9A | L Button     | DA | 
+| 1B | ;            | 5B | {            | 9B | R Button     | DB | 
+| 1C | <            | 5C | |            | 9C | Z Button     | DC | 
+| 1D | =            | 5D | }            | 9D | C UP Button  | DD | 
+| 1E | >            | 5E | ~            | 9E | C DN Button  | DE | 
+| 1F | ?            | 5F | °            | 9F | C LT Button  | DF | 
+| 20 | @            | 60 | À            | A0 | C RT Button  | E0 | 
+| 21 | A            | 61 | Á            | A1 | START Button | E1 | 
+| 22 | B            | 62 | Â            | A2 | NULL         | E2 | 
+| 23 | C            | 63 | Ä            | A3 | NULL         | E3 | 
+| 24 | D            | 64 | Ç            | A4 | NULL         | E4 | 
+| 25 | E            | 65 | È            | A5 | NULL         | E5 | 
+| 26 | F            | 66 | É            | A6 | NULL         | E6 | 
+| 27 | G            | 67 | Ê            | A7 | NULL         | E7 | 
+| 28 | H            | 68 | Ë            | A8 | 16 Chr Tab   | E8 | 
+| 29 | I            | 69 | Ì            | A9 | 6 Chr Tab    | E9 | 
+| 2A | J            | 6A | Í            | AA |              | EA | 
+| 2B | K            | 6B | Î            | AB |              | EB | 
+| 2C | L            | 6C | Ï            | AC |              | EC | 
+| 2D | M            | 6D | Ñ            | AD |              | ED | 
+| 2E | N            | 6E | Ò            | AE |              | EE | 
+| 2F | O            | 6F | Ó            | AF |              | EF | 
+| 30 | P            | 70 | Ô            | B0 |              | F0 | LINE BREAK
+| 31 | Q            | 71 | Ö            | B1 |              | F1 | 
+| 32 | R            | 72 | Ù            | B2 |              | F2 | 
+| 33 | S            | 73 | Ú            | B3 |              | F3 | 
+| 34 | T            | 74 | Û            | B4 |              | F4 | 
+| 35 | U            | 75 | Ü            | B5 |              | F5 | 
+| 36 | V            | 76 | ß            | B6 |              | F6 | 
+| 37 | W            | 77 | à            | B7 |              | F7 | SPACE
+| 38 | X            | 78 | á            | B8 |              | F8 | 
+| 39 | Y            | 79 | â            | B9 |              | F9 | 
+| 3A | Z            | 7A | ä            | BA |              | FA | 
+| 3B | (            | 7B | ç            | BB |              | FB | Next Bubble in Speech
+| 3C | ¥            | 7C | è            | BC |              | FC | Start of Character Speech*
+| 3D | )            | 7D | é            | BD |              | FD | End of Character Speech
+| 3E | ^            | 7E | ê            | BE |              | FE | 
+| 3F | _            | 7F | ë            | BF |              | FF | Function Call*
++----+--------------+----+--------------+----+--------------+----+------------------------------
+* Takes arguments
+
+BREAKDOWN OF FUNCTION CALLS
+Function calls structured as "0xFF <function> <arg1> <arg2> <arg3> ..."
+Different functions have different numbers of arguments which follow immediately after in the text.
+
++-----+------+----------------------------------+------------------------------------------------
+| FID	| ARGS | EFFECT					| ARG DETAILS
++-----+------+----------------------------------+------------------------------------------------
+| 05	| 1	 | Change Text Color			| [1] Color value.  See separate chart
+| 09	| 0	 | Write remaining text all at once |
+|	|	 | or up to a cancel point		|
+| 0A	| 0	 | Cancel point for text writing	|
+| 0B	| 1	 | Adjust Font Kerning			| [1] Space Value
+| 0C	| 1	 | Auto-scroll dialog			| [1] Number lines to scroll up.
+| 0D	| 2	 | Change Font Size			| [1] Character Height
+|	|	 |						| [2] Character Width
+| 0E	| 0	 | Return Font Size to Normal		|
+| 0F	| 2	 | Change Text Print Speed		| [1] Speed Value
+|	|	 |						| [2] Number characters to print at once
+| 10	| 2	 | Space text right from left edge	| [1,2] 2-byte value, pixels from window edge.
+| 15	| 1	 | Display loaded graphic*		| [1] Graphic Value
+| 17	| 2	 | Display Icon				| [1,2] 2-byte value of icon (items, badges, etc)
+| 18	| 6	 | Display loaded graphic*		| [1] Graphic Value
+|	|	 |						| [2] Unknown (possibly part of 2-byte value with [1])
+|	|	 |						| [3] Horizontal Placement
+|	|	 |						| [4] Vertical Placement
+|	|	 |						| [5] Background Style (00=None, 01=Orange Box)
+|	|	 |						| [6] Transparency value
+| 24	| 0	 | Remember current text color	|
+| 25	| 0	 | Restore memorized text color	|
+| 26	| 1	 | Start text effect**			| [1] Effect value.  See separate chart
+| 27	| 1	 | Cancel text effect			| [1] Effect value.  See separate chart
+| 2E	| 1	 | Change Speech Volume			| [1] Volume Value (00=Normal, 01=Loud)
+| 2F	| 1	 | Change Talking Sound Effect	| [1] Sound Value (01=Normal, 02=Star)
++-----+------+----------------------------------+--------------------------------------------------
+* Graphics are loaded outside of the text system
+** Some text effects carry additional arguments

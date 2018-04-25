@@ -67,8 +67,9 @@ namespace PaperMarioBattleSystem
         /// The current character index that will be printed in the text.
         /// </summary>
         private int CurTextIndex = 0;
+        
         /// <summary>
-        /// 
+        /// The current paragraph index.
         /// </summary>
         public int CurParagraphIndex = 0;
 
@@ -127,7 +128,7 @@ namespace PaperMarioBattleSystem
         private Stack<MessageRoutine> MessageRoutines = new Stack<MessageRoutine>();
 
         /// <summary>
-        /// 
+        /// Tells whether Message Routines were already checked and added for this character index.
         /// </summary>
         private bool AddedRoutines = false;
 
@@ -139,7 +140,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The last time a character was printed.
         /// </summary>
-        private double LastCharPrintTime = 0d;
+        //private double LastCharPrintTime = 0d;
 
         /// <summary>
         /// The elapsed time for the dialogue bubble.
@@ -150,6 +151,13 @@ namespace PaperMarioBattleSystem
         /// The elapsed time that tracks when the next character should be printed.
         /// </summary>
         private double ElapsedCharPrintTime = 0d;
+
+        /// <summary>
+        /// Tracks the time each character was printed.
+        /// Times are set to <see cref="ElapsedTextTime"/> when the character at <see cref="CurTextIndex"/> is printed.
+        /// <para>NOTE: See if this can be better on memory.</para>
+        /// </summary>
+        private double[] CharPrintTimes = null;
 
         public DialogueBubble()
         {
@@ -178,6 +186,8 @@ namespace PaperMarioBattleSystem
 
             DBubbleData = null;
             FontGlyphs = null;
+
+            CharPrintTimes = null;
         }
 
         private void LoadGraphics()
@@ -199,6 +209,9 @@ namespace PaperMarioBattleSystem
             Text = text;
 
             DBubbleData = DialogueGlobals.ParseText(Text, out Text);
+
+            if (CharPrintTimes == null || (CharPrintTimes != null && CharPrintTimes.Length != Text.Length))
+                CharPrintTimes = new double[Text.Length];
         }
 
         /// <summary>
@@ -249,7 +262,9 @@ namespace PaperMarioBattleSystem
             TextYOffset = 0f;
 
             TimeBetweenCharacters = DefaultTimeBetweenChars;
-            LastCharPrintTime = ElapsedTextTime = ElapsedCharPrintTime = 0d;
+            ElapsedTextTime = 0d;
+            ElapsedCharPrintTime = 0d;
+            //LastCharPrintTime = 0d;
 
             MessageRoutines.Clear();
             AddedRoutines = false;
@@ -311,12 +326,14 @@ namespace PaperMarioBattleSystem
             }
             else
             {
+                MessageRoutine curMsgRoutine = MessageRoutines.Peek();
+
                 //If the current Message Routine has completed,
-                if (MessageRoutines.Peek().Complete == true)
+                if (curMsgRoutine.Complete == true)
                 {
                     //And and cleanup the current one
-                    MessageRoutines.Peek().OnEnd();
-                    MessageRoutines.Peek().CleanUp();
+                    curMsgRoutine.OnEnd();
+                    curMsgRoutine.CleanUp();
 
                     //Remove it from the stack and set elapsed time to 0
                     MessageRoutines.Pop();
@@ -326,14 +343,14 @@ namespace PaperMarioBattleSystem
                 else
                 {
                     //Start if not started
-                    if (MessageRoutines.Peek().HasStarted == false)
+                    if (curMsgRoutine.HasStarted == false)
                     {
-                        MessageRoutines.Peek().OnStart();
-                        MessageRoutines.Peek().HasStarted = true;
+                        curMsgRoutine.OnStart();
+                        curMsgRoutine.HasStarted = true;
                     }
 
                     //Update the current routine
-                    MessageRoutines.Peek().Update();
+                    curMsgRoutine.Update();
                 }
             }
 
@@ -372,11 +389,12 @@ namespace PaperMarioBattleSystem
             char curChar = Text[CurTextIndex];
 
             stringBuilder.Append(curChar);
+            CharPrintTimes[CurTextIndex] = ElapsedTextTime;
             CurTextIndex++;
 
             AddedRoutines = false;
 
-            LastCharPrintTime = ElapsedTextTime;
+            //LastCharPrintTime = ElapsedTextTime;
         }
 
         /// <summary>
@@ -529,28 +547,11 @@ namespace PaperMarioBattleSystem
 
                         Vector2 scale = bdata.Scale;
 
-                        //For dynamic text, the current printed character should finish in the designated time
-                        //LastCharPrintTime updates when printing the next character
-                        //So say it prints a new character after 2 frames - we would have to offset it by that time
-                        //To do this, we have to calculate how many frames it takes to print a character
-                        //Then, offset the time by that value * ElapsedMilliseconds
-
-                        /*NOTE: Minor bug - if dynamic text proceeds a key press that isn't followed by a paragraph,
-                        even after the dynamic text finished, the next character printed causes it to rescale based on the next printed
-                        character time being updated
-
-                        We also need to change this to mimick how TTYD does it. That is, each character individually scales on its own,
-                        so if you skip through the text, each character will still be scaling*/
+                        //Handle dynamic text
                         if (bdata.DynamicSize.HasValue == true)
                         {
-                            int indexDiff = (CurTextIndex - 1) - j;
-                            int frameDiff = (int)Math.Ceiling(TimeBetweenCharacters / Time.ElapsedMilliseconds);
-                            //Even if the time is 0, it still takes at least 1 frame to print the next character
-                            if (frameDiff == 0)
-                                frameDiff = 1;
-
-                            double frameTimeOffset = frameDiff * Time.ElapsedMilliseconds;
-                            double dynamicTimeOffset = ElapsedTextTime - (LastCharPrintTime - (indexDiff * frameTimeOffset));
+                            //Get the time difference between now and when this character was printed
+                            double dynamicTimeOffset = ElapsedTextTime - CharPrintTimes[j];
 
                             if (dynamicTimeOffset < DialogueGlobals.DynamicScaleTime)
                             {
@@ -563,7 +564,7 @@ namespace PaperMarioBattleSystem
                         {
                             finalPos += DialogueGlobals.GetShakyTextOffset(new Vector2(1));
                         }
-                
+                        
                         //Handle wavy text
                         if (bdata.Wave == true)
                         {

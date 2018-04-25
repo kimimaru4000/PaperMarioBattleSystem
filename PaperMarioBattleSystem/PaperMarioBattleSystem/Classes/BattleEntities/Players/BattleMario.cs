@@ -92,6 +92,9 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.InjuredName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(117, 512, 31, 42), 1000d, new Vector2(0, -1)),
                 new Animation.Frame(new Rectangle(117, 561, 31, 41), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.ConfusedName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(117, 512, 31, 42), 1000d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(117, 561, 31, 41), 1000d)));
 
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.SuperguardName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(392, 335, 42, 45), 700d)));

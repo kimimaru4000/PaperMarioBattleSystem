@@ -22,6 +22,8 @@ namespace PaperMarioBattleSystem
         public override void OnStart()
         {
             ElapsedTime = 0d;
+
+            DBubble.SpeakerEndTalk();
         }
 
         public override void OnEnd()

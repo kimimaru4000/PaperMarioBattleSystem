@@ -117,11 +117,11 @@ namespace PaperMarioBattleSystem
         {
             if (WingedBehavior.Grounded == true) return base.GetTattleDescription();
 
-            return "That's a Koopa Paratroopa. Well, umm... It's basically a Koopa Troopa with wings.\n<k><p>" +
-                   $"Max HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.\n<k><p>" +
-                   "I kinda hate that this guy gets to fly. Of course, you can stomp on him and he'll plunge down and be a plain Koopa Troopa.\n<k><p>" +
-                   "Yeah, do that, and he's ours! Stomp again to flip him, and his arms and legs are useless!\n<k><p>" +
-                   "Oops! Sorry, that's not true. It looks like he can still wiggle them around a bit...<k>";
+            return "That's a Koopa Paratroopa.\n<wait value=\"250\">Well, umm<wait value=\"10\">.<wait value=\"10\">.<wait value=\"10\">.<wait value=\"300\"> It's basically\na Koopa Troopa with wings.\n<k><p>" +
+                   "Max HP is 4, Attack is 2, and\nDefense is 1.<wait value=\"300\"> I kinda hate\nthat this guy gets to fly.\n<k><p>" +
+                   "Of course, you can stomp on\nhim and he'll plunge down\nand be a plain Koopa Troopa.\n<k><p>" +
+                   "Yeah, do that, and he's ours!\n<wait value=\"250\">Stomp again to flip him, and\n<wait value=\"250\">his arms and legs are useless!\n<k><p>" +
+                   "<dynamic value=\"3\">Oops!</dynamic><wait value=\"100\"> Sorry, that's not true.\n<wait value=\"300\">It looks like he can still\nwiggle them around a bit...<k>";
         }
 
         #endregion

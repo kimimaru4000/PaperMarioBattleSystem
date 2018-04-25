@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -21,6 +22,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private Item RevivalItem = null;
 
+        private UICroppedTexture2D RevivalItemShown = null;
+
         public RevivedBattleEvent(double waitDuration, BattleEntity revivedEntity, Item revivalItem) : base(waitDuration)
         {
             RevivedEntity = revivedEntity;
@@ -29,26 +32,63 @@ namespace PaperMarioBattleSystem
             IsUnique = true;
         }
 
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            //Show the item over the BattleEntity's head
+            if (RevivalItem.Icon != null || RevivalItem.Icon.Tex != null)
+            {
+                RevivalItemShown = new UICroppedTexture2D(RevivalItem.Icon.Copy());
+                RevivalItemShown.Position = Camera.Instance.SpriteToUIPos(RevivedEntity.Position + new Vector2(0, -20));
+
+                BattleUIManager.Instance.AddUIElement(RevivalItemShown);
+            }
+        }
+
         protected override void OnEnd()
         {
             base.OnEnd();
 
+            //Remove the item over the BattleEntity's head
+            if (RevivalItemShown != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(RevivalItemShown);
+                RevivalItemShown = null;
+            }
+
             //Get revival data from the item
             IRevivalItem revivalData = RevivalItem as IRevivalItem;
-            if (revivalData != null && revivalData.RevivalHPRestored > 0)
+            if (revivalData != null)
             {
+                //If the revival item heals 0 or fewer HP, log a warning
+                if (revivalData.RevivalHPRestored <= 0)
+                {
+                    Debug.LogWarning($"{RevivalItem.Name} heals 0 or fewer HP, so the BattleEntity won't actually be revived!");
+                }
+
+                //Heal HP
                 RevivedEntity.HealHP(revivalData.RevivalHPRestored);
 
                 //Play the idle animation
                 RevivedEntity.AnimManager.PlayAnimation(RevivedEntity.GetIdleAnim());
 
                 //Remove the item
-                //NOTE: For now just handle players and remove from the inventory - enemies will need to remove their held items
-                Inventory.Instance.RemoveItem(RevivalItem);
+                //For players, remove it from the inventory
+                if (RevivedEntity.EntityType == Enumerations.EntityTypes.Player)
+                {
+                    Inventory.Instance.RemoveItem(RevivalItem);
+                }
+                //It has to be an enemy, so remove its held item
+                else
+                {
+                    BattleEnemy revivedEnemy = (BattleEnemy)RevivedEntity;
+                    revivedEnemy.SetHeldCollectible(null);
+                }
             }
             else
             {
-                Debug.LogError($"{RevivalItem.Name} does not implement {nameof(IRevivalItem)} or heals 0 or less HP, so the BattleEntity can't be revived!");
+                Debug.LogError($"{RevivalItem.Name} does not implement {nameof(IRevivalItem)}, so the BattleEntity can't be revived!");
             }
 
             //Clear references

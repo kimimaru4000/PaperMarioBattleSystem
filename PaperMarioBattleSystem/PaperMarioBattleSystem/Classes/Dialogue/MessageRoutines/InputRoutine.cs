@@ -24,6 +24,7 @@ namespace PaperMarioBattleSystem
         public override void OnStart()
         {
             DBubble.ProgressTextStar.Disabled = false;
+            DBubble.ProgressTextStar.Reset();
             DBubble.SpeakerEndTalk();
         }
 

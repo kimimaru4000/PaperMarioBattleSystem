@@ -16,17 +16,17 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// How long it takes the star to rotate.
         /// </summary>
-        private const double RotateTime = 600d;
+        private const double RotateTime = 400d;
 
         /// <summary>
         /// The minimum rotation value, in degrees, of the star.
         /// </summary>
-        private const float MinRotation = -30f;
+        private const float MinRotation = -25f;
 
         /// <summary>
         /// The maximum rotation value, in degrees, of the star.
         /// </summary>
-        private const float MaxRotation = 30f;
+        private const float MaxRotation = 25f;
 
         /// <summary>
         /// The minimum scale of the star.
@@ -53,27 +53,29 @@ namespace PaperMarioBattleSystem
 
             Graphic = new CroppedTexture2D(tex, new Rectangle(393, 403, 60, 58));
 
-            Scale = MaxScale;
-            Rotation = 0;
+            Reset();
+        }
 
-            ElapsedTime = RotateTime / 2d;
+        public void Reset()
+        {
+            //Set the time to this value so that the star starts off moving rotating counter-clockwise like in TTYD
+            ElapsedTime = RotateTime * 1.5d;
+            Rotation = 0f;
+            Scale = MaxScale;
         }
 
         public void Update()
         {
             /* The ProgressTextStar does the following:
-              1. Rotates back and forth about 30 degrees from 0
+              1. Rotates back and forth about 25 degrees from 0
               2. Scales down and up very slightly when rotating away from and towards 0, respectively
              */
 
             ElapsedTime += Time.ElapsedMilliseconds;
 
-            Scale = Interpolation.Interpolate(MinScale, MaxScale, UtilityGlobals.PingPong(ElapsedTime * 2, RotateTime) / RotateTime, Interpolation.InterpolationTypes.Linear);
-
-            float minRot = UtilityGlobals.ToRadians(MinRotation);
-            float maxRot = UtilityGlobals.ToRadians(MaxRotation);
-
-            Rotation = UtilityGlobals.PingPong(ElapsedTime / RotateTime, minRot, maxRot);
+            //Scale twice as fast, as it should be at max scale with a rotation of 0 and min scale when fully rotated in either direction
+            Scale = Interpolation.Interpolate(MinScale, MaxScale, UtilityGlobals.PingPong((ElapsedTime * 2) / RotateTime, 1), Interpolation.InterpolationTypes.Linear);
+            Rotation = UtilityGlobals.ToRadians(Interpolation.Interpolate(MinRotation, MaxRotation, UtilityGlobals.PingPong(ElapsedTime / RotateTime, 1), Interpolation.InterpolationTypes.Linear));
         }
     }
 }

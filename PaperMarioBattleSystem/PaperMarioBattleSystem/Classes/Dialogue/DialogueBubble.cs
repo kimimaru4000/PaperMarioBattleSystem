@@ -570,7 +570,7 @@ namespace PaperMarioBattleSystem
                         {
                             finalPos += DialogueGlobals.GetWavyTextOffset(ElapsedTextTime, j * Time.ElapsedMilliseconds, new Vector2(2));
                         }
-                
+                        
                         //Render the character
                         offset = SpriteRenderer.Instance.uiBatch.DrawCharacter(AssetManager.Instance.TTYDFont, stringBuilder[j], FontGlyphs, offset, finalPos, bdata.TextColor, 0f, Vector2.Zero, scale, SpriteEffects.None, .95f);
                     }

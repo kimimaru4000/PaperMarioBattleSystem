@@ -400,9 +400,9 @@
     <Compile Include="Classes\Menus\PartnerBattleMenu.cs" />
     <Compile Include="Classes\Menus\PlayerBattleMenu.cs" />
     <Compile Include="Classes\Menus\TargetSelectionMenu.cs" />
+    <Compile Include="Classes\SequenceActions\FollowSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\MoveAmountMultipleSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\MoveAmountSeqAction.cs" />
-    <Compile Include="Classes\SequenceActions\MoveToFollowSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\MoveToSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\SequenceAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForAnimationSeqAction.cs" />

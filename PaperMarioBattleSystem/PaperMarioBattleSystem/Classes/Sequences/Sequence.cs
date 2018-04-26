@@ -78,9 +78,16 @@ namespace PaperMarioBattleSystem
         protected SequenceBranch CurBranch { get; private set; } = SequenceBranch.Start;
 
         /// <summary>
-        /// The current SequenceAction being performed
+        /// The current, main SequenceAction being performed. When this is finished, it moves onto the next step of the current branch.
         /// </summary>
         protected SequenceAction CurSequenceAction { get; set; } = null;
+
+        /// <summary>
+        /// A side set of SequenceActions that can be performed in addition to the <see cref="CurSequenceAction"/>.
+        /// They don't halt the current step of the sequence and can carry over into new steps and branches.
+        /// They're removed upon completion.
+        /// </summary>
+        private List<SequenceAction> SideSequenceActions = null;
 
         /// <summary>
         /// A value denoting if we should jump to a particular branch or not after the sequence progresses.
@@ -196,6 +203,13 @@ namespace PaperMarioBattleSystem
 
             OnEnd();
 
+            //Remove side actions
+            if (SideSequenceActions != null)
+            {
+                SideSequenceActions.Clear();
+                SideSequenceActions = null;
+            }
+
             EntitiesAffected = null;
 
             if (User == BattleManager.Instance.EntityTurn)
@@ -290,6 +304,31 @@ namespace PaperMarioBattleSystem
             {
                 BattleObjManager.Instance.AddBattleObject(new StylishIndicatorVFX(User, CurStylishData));
             }
+        }
+
+        /// <summary>
+        /// Adds another SequenceAction to perform on the side.
+        /// </summary>
+        /// <param name="sideSeqAction">The SequenceAction to add.</param>
+        /// <param name="order">The order to insert the SequenceAction at. If less than 0, it will add it to the end of the list.</param>
+        protected void AddSideSeqAction(SequenceAction sideSeqAction, int order = -1)
+        {
+            if (SideSequenceActions == null)
+            {
+                SideSequenceActions = new List<SequenceAction>();
+            }
+
+            if (order < 0)
+            {
+                SideSequenceActions.Add(sideSeqAction);
+            }
+            else
+            {
+                SideSequenceActions.Insert(order, sideSeqAction);
+            }
+
+            //Start the SequenceAction
+            sideSeqAction.Start();
         }
 
         /// <summary>
@@ -583,6 +622,20 @@ namespace PaperMarioBattleSystem
                 UpdateStylishMove();
 
                 CurSequenceAction.Update();
+                //Update all side sequence actions after the main one
+                if (SideSequenceActions != null)
+                {
+                    for (int i = SideSequenceActions.Count - 1; i >= 0; i--)
+                    {
+                        SideSequenceActions[i].Update();
+                        if (SideSequenceActions[i].IsDone == true)
+                        {
+                            SideSequenceActions.RemoveAt(i);
+                        }
+                    }
+                }
+
+                //Progress when the main sequence action is finished
                 if (CurSequenceAction.IsDone == true)
                 {
                     ProgressSequence(1);

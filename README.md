@@ -17,7 +17,7 @@ You can find an ~6 minute video showcasing many of the battle system's features 
 You can also find a short video displaying the dialogue system [here](https://1drv.ms/v/s!AoVfzuXWGWSwi6Ix05m1gYyaE7-vQw).
 
 ## Getting Started
-You will need MonoGame 3.7 and Visual Studio 2017, but MonoDevelop, Xamarin Studio, and earlier versions of Visual Studio may work as well. The project targets DesktopGL and .NET 4.7.
+You will need at least MonoGame 3.7.0.1129 and Visual Studio 2017, but MonoDevelop, Xamarin Studio, and earlier versions of Visual Studio may work as well. The project targets DesktopGL and .NET 4.7.
 
 Previously, OSX and Linux builds were made with the Ruge Deploy Tool (https://github.com/MetaSmug/MonoGame.Ruge.DeployTool) using the DeployToolSettings.dt config file in the repository. However, Monogame 3.6 introduced new core libraries that the tool no longer works with. Some options being looked at for cross-platform builds are mkbundle, MonoKickstart, and .NET Core. This will be updated with instructions once a solution has been tested and confirmed.
 

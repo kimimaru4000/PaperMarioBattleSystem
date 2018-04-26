@@ -9,6 +9,13 @@ Confused
 --------
 When a Confused player (Ex. Mario or his Partner) takes an action when Confused, it'll switch to that action's category. For example, if Mario used Defend and Confused made him use Hammer instead, the cursor will be on the Hammer move category at the start of his next turn.
 
+Confused has a 50% chance of affecting a character.
+
+Sleep
+-----
+When a character afflicted with Sleep takes damage, that character has a 50% chance of waking up.
+
+
 Stone
 -----
 Suppresses the following Status Effects in the following ways:

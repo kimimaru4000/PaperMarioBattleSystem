@@ -169,7 +169,7 @@ namespace PaperMarioBattleSystem
         /// Gets the positional offset for shaky text.
         /// </summary>
         /// <param name="amount">The max amount to offset.</param>
-        /// <returns>A Vector2 containing the offset for wavy text.</returns>
+        /// <returns>A Vector2 containing the offset for shaky text.</returns>
         public static Vector2 GetShakyTextOffset(in Vector2 amount)
         {
             float x = (float)GeneralGlobals.Randomizer.RandomDouble(-amount.X, amount.X);

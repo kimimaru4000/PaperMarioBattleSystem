@@ -271,9 +271,10 @@ namespace PaperMarioBattleSystem
 
         public static void DebugBattle()
         {
-            //Default to Players - if holding 0, switch to Enemies
+            //Default to Players - if holding 0, switch to Enemies, and if holding 9, switch to Neutral
             Enumerations.EntityTypes entityType = Enumerations.EntityTypes.Player;
             if (Input.GetKey(Keys.D0, DebugKeyboard) == true) entityType = Enumerations.EntityTypes.Enemy;
+            else if (Input.GetKey(Keys.D9, DebugKeyboard) == true) entityType = Enumerations.EntityTypes.Neutral;
 
             int turnCount = 3;
 
@@ -690,7 +691,7 @@ namespace PaperMarioBattleSystem
             FPSCounter.Draw();
 
             //Memory usage
-            Vector2 memBasePos = new Vector2(0, 70);
+            Vector2 memBasePos = new Vector2(250, 570);
             SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Managed Mem: {Math.Round(GC.GetTotalMemory(false) / 1024f / 1024f, 2)} MB", memBasePos, Color.White, 0f, Vector2.Zero, 1f, .1f);
 
             //Camera info

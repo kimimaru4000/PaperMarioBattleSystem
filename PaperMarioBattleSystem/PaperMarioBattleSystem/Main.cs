@@ -512,7 +512,7 @@ namespace PaperMarioBattleSystem
                 BattleManager.Instance.EntityTurn.PreviousAction?.Draw();
 
                 //Show current turn debug text
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Current turn: {BattleManager.Instance.EntityTurn.Name}", new Vector2(250, 10), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Current turn: {BattleManager.Instance.EntityTurn.Name}", new Vector2(250, 4), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
             }
         }
 

@@ -115,9 +115,9 @@ namespace PaperMarioBattleSystem
                 color = Color.Green;
             }
 
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 100), color, .7f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 150), color, .7f);
 
-            Vector2 startPos = new Vector2(250, 180);
+            Vector2 startPos = new Vector2(250, 230);
             Vector2 barStartPos = startPos + new Vector2(-30, 0f);
 
             Vector2 barScale = new Vector2(130, 1f);

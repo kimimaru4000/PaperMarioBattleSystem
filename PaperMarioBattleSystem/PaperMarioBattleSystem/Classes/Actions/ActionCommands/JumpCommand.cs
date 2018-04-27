@@ -85,7 +85,7 @@ namespace PaperMarioBattleSystem
                 color = Color.Green;
             }
 
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 100), color, .7f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 150), color, .7f);
         }
     }
 }

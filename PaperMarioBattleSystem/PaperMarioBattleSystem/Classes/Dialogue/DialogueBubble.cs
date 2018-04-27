@@ -83,7 +83,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public readonly ProgressDialogueStar ProgressTextStar = null;
 
-        public Vector2 Position { get; set; } = new Vector2(100, 100);
+        public Vector2 Position { get; set; } = new Vector2(200, 140);
         public Vector2 Scale { get; set; } = new Vector2(400, 95);
 
         /// <summary>

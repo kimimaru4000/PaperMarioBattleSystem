@@ -711,7 +711,7 @@ namespace PaperMarioBattleSystem
             //Debug stylish success range
             if (CurStylishData != null && CurStylishData.WithinRange == true)
             {
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, "STYLISH: YES", new Vector2(300f, 100f), Color.DeepPink, .6f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, "STYLISH: YES", new Vector2(300f, 150f), Color.DeepPink, .6f);
             }
         }
 

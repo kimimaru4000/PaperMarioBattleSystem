@@ -13,8 +13,7 @@ Confused has a 50% chance of affecting a character.
 
 Sleep
 -----
-When a character afflicted with Sleep takes damage, that character has a 50% chance of waking up.
-
+When a character afflicted with Sleep takes damage greater than 0, that character has a 50% chance of waking up.
 
 Stone
 -----

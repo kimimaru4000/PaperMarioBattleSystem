@@ -127,6 +127,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool AutoCompleteStylish = false;
 
+        /// <summary>
+        /// The number of Sequence Actions currently being performed on the side.
+        /// </summary>
+        public int SideSeqActionCount => (SideSequenceActions == null ? 0 : SideSequenceActions.Count);
+
         #endregion
 
         protected Sequence(MoveAction moveAction)

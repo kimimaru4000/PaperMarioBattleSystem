@@ -410,6 +410,7 @@
     <Compile Include="Classes\SequenceActions\WaitForCommandSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitForDialogueSeqAction.cs" />
     <Compile Include="Classes\SequenceActions\WaitSeqAction.cs" />
+    <Compile Include="Classes\SequenceActions\WaitSideActionsCompleteSeqAction.cs" />
     <Compile Include="Classes\Sequences\Bobbery Bomb\BlinkFasterSequence.cs" />
     <Compile Include="Classes\Sequences\Bobbery\BombSquadSequence.cs" />
     <Compile Include="Classes\Sequences\Bow\OuttaSightSecondHalfSequence.cs" />

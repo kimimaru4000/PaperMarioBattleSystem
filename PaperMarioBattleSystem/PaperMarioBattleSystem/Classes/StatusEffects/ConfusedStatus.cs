@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
     public sealed class ConfusedStatus : StatusEffect
     {
         /// <summary>
-        /// The chance of the BattleEntity doing something other than what it intended when it's Confused
+        /// The chance of the BattleEntity doing something other than what it intended to do when it's Confused.
         /// </summary>
         private int ConfusionPercent = 50;
 

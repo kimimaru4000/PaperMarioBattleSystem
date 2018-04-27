@@ -664,12 +664,13 @@ namespace PaperMarioBattleSystem
         /// <param name="color">The color to render the character in.</param>
         /// <param name="rotation">The rotation to render the character in.</param>
         /// <param name="origin">The origin to render the character with.</param>
-        /// <param name="scale">The scale to render the character in.</param>
+        /// <param name="curScale">The scale to render the character in.</param>
+        /// <param name="finalScale">The final scale the character will be. This value is used for improving the offset.</param>
         /// <param name="effects">The SpriteEffects to render the character in.</param>
         /// <param name="layerDepth">The depth to render the character in.</param>
         /// <returns>A Vector2 containing the offset calculated when rendering the character.</returns>
         public static Vector2 DrawCharacter(this SpriteBatch spriteBatch, SpriteFont font, char c, Dictionary<char, SpriteFont.Glyph> glyphs,
-            Vector2 startOffset, Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects,
+            Vector2 startOffset, Vector2 position, Color color, float rotation, Vector2 origin, Vector2 curScale, Vector2 finalScale, SpriteEffects effects,
             float layerDepth)
         {
             Vector2 offset = startOffset;
@@ -704,22 +705,22 @@ namespace PaperMarioBattleSystem
             //Add the left side bearing and the spacing
             else
             {
-                offset.X += (font.Spacing * scale.X) + glyph.LeftSideBearing;
+                offset.X += (font.Spacing * finalScale.X) + glyph.LeftSideBearing;
             }
 
             //Add the cropping
             Vector2 p = offset;
-            p.X += glyph.Cropping.X * scale.X;
-            p.Y += glyph.Cropping.Y * scale.Y;
+            p.X += glyph.Cropping.X * finalScale.X;
+            p.Y += glyph.Cropping.Y * finalScale.Y;
 
             //Add the position passed in to obtain the final position to render this character
             p += position;
 
             //Render the character using the font's texture, the character's bounds in the font, and the other information passed in
-            spriteBatch.Draw(font.Texture, p, glyph.BoundsInTexture, color, rotation, origin, scale, effects, layerDepth);
+            spriteBatch.Draw(font.Texture, p, glyph.BoundsInTexture, color, rotation, origin, curScale, effects, layerDepth);
 
             //Add the character's width with its right side bearing for the next character
-            offset.X += (glyph.Width * scale.X) + glyph.RightSideBearing;
+            offset.X += (glyph.Width * finalScale.X) + glyph.RightSideBearing;
 
             return offset;
         }
@@ -739,13 +740,14 @@ namespace PaperMarioBattleSystem
         /// <param name="color">The color to render the characters in.</param>
         /// <param name="rotation">The rotation to render the characters in.</param>
         /// <param name="origin">The origin to render the characters with.</param>
-        /// <param name="scale">The scale to render the characters in.</param>
+        /// <param name="curScale">The scale to render the characters in.</param>
+        /// <param name="finalScale">The final scale the characters will be. This value is used for improving the offset.</param>
         /// <param name="effects">The SpriteEffects to render the characters in.</param>
         /// <param name="layerDepth">The depth to render the characters in.</param>
         /// <returns>A Vector2 containing the offset calculated when rendering the characters.</returns>
         public static Vector2 DrawStringChars(this SpriteBatch spriteBatch, SpriteFont font, StringBuilder text,
             Dictionary<char, SpriteFont.Glyph> glyphs, Vector2 startOffset, int startIndex, int endIndex, Vector2 position, Color color,
-            float rotation, Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth)
+            float rotation, Vector2 origin, Vector2 curScale, Vector2 finalScale, SpriteEffects effects, float layerDepth)
         {
             Vector2 offset = startOffset;
             bool firstGlyphOfLine = (offset.X == 0f);
@@ -759,53 +761,7 @@ namespace PaperMarioBattleSystem
                 if (i >= text.Length) return offset;
                 
                 //Draw the character
-                offset = DrawCharacter(spriteBatch, font, text[i], glyphs, offset, position, color, rotation, origin, scale, effects, layerDepth);
-
-                //On carriage return, simply continue
-                /*if (c == '\r')
-                    continue;
-
-                //If we encounter a newline, reset the X offset and go down by the line spacing
-                if (c == '\n')
-                {
-                    offset.X = 0;
-                    offset.Y += font.LineSpacing;
-                    firstGlyphOfLine = true;
-                    continue;
-                }
-
-                //If this character can't be rendered, exit
-                if (glyphs.ContainsKey(c) == false)
-                    continue;
-
-                SpriteFont.Glyph glyph = glyphs[c];
-
-                //The first character on a line might have a negative left side bearing
-                //In this scenario, offset the text to the right so that the text does not hang off the left side of its rectangle
-                if (firstGlyphOfLine)
-                {
-                    offset.X = Math.Max(glyph.LeftSideBearing, 0);
-                    firstGlyphOfLine = false;
-                }
-                //Add the left side bearing and the spacing
-                else
-                {
-                    offset.X += font.Spacing + glyph.LeftSideBearing;
-                }
-
-                //Add the cropping
-                Vector2 p = offset;
-                p.X += glyph.Cropping.X;
-                p.Y += glyph.Cropping.Y;
-
-                //Add the position passed in to obtain the final position to render this character
-                p += position;
-
-                //Render the character using the font's texture, the character's bounds in the font, and the other information passed in
-                spriteBatch.Draw(font.Texture, p, glyph.BoundsInTexture, color, rotation, origin, scale, effects, layerDepth);
-
-                //Add the character's width with its right side bearing for the next character
-                offset.X += glyph.Width + glyph.RightSideBearing;*/
+                offset = DrawCharacter(spriteBatch, font, text[i], glyphs, offset, position, color, rotation, origin, curScale, finalScale, effects, layerDepth);
             }
 
             return offset;
@@ -825,15 +781,16 @@ namespace PaperMarioBattleSystem
         /// <param name="color">The color to render the characters in.</param>
         /// <param name="rotation">The rotation to render the characters in.</param>
         /// <param name="origin">The origin to render the characters with.</param>
-        /// <param name="scale">The scale to render the characters in.</param>
+        /// <param name="curScale">The scale to render the characters in.</param>
+        /// <param name="finalScale">The final scale the characters will be. This value is used for improving the offset.</param>
         /// <param name="effects">The SpriteEffects to render the characters in.</param>
         /// <param name="layerDepth">The depth to render the characters in.</param>
         /// <returns>A Vector2 containing the offset calculated when rendering the characters.</returns>
         public static Vector2 DrawStringChars(this SpriteBatch spriteBatch, SpriteFont font, StringBuilder text,
             Dictionary<char, SpriteFont.Glyph> glyphs, int startIndex, int endIndex, Vector2 position, Color color, float rotation,
-            Vector2 origin, Vector2 scale, SpriteEffects effects, float layerDepth)
+            Vector2 origin, Vector2 curScale, Vector2 finalScale, SpriteEffects effects, float layerDepth)
         {
-            return DrawStringChars(spriteBatch, font, text, glyphs, Vector2.Zero, startIndex, endIndex, position, color, rotation, origin, scale, effects, layerDepth);
+            return DrawStringChars(spriteBatch, font, text, glyphs, Vector2.Zero, startIndex, endIndex, position, color, rotation, origin, curScale, finalScale, effects, layerDepth);
         }
 
         #endregion

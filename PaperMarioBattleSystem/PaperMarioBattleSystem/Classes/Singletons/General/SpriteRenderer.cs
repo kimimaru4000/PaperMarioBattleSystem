@@ -165,15 +165,13 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Toggles full screen.
+        /// Sets the game to be windowed or full screen.
         /// </summary>
         /// <param name="fullScreen">Whether to set full screen or not.</param>
-        public void ToggleFullscreen(bool fullScreen)
+        public void SetFullscreen(bool fullScreen)
         {
-            //Internally, ToggleFullScreen() in GraphicsDeviceManager sets IsFullScreen to the opposite value
-            //To get the desired result, we set it to the opposite here
-            graphicsDeviceManager.IsFullScreen = !fullScreen;
-            graphicsDeviceManager.ToggleFullScreen();
+            graphicsDeviceManager.IsFullScreen = fullScreen;
+            graphicsDeviceManager.ApplyChanges();
         }
 
         /// <summary>

@@ -331,7 +331,7 @@ namespace PaperMarioBattleSystem
                     "text a<wave>r</wave>e\n<speed value=\"250\"><dynamic value=\"2\">COOL!\n</dynamic><k><p><speed value=\"25\">Let's <wait value=\"500\"><wave><shake><scale value=\"1.6\"><dynamic value=\".3\">" +
                     "<color value=\"ffffbf00\">co</color><color value=\"ff003ce7\">mb</color><color value=\"ff008000\">ine</color> </dynamic></scale>them!</shake></wave>\n<k><p>" +
                     "<speed value=\"0\">Print really fast <key><speed value=\"25\">and now <speed value=\"300\">really\nslow!<speed value=\"25\">\n<k><p>" +
-                    "<dynamic value=\"2.5\">Dynamic <scale value=\".8\">text</scale></dynamic> <dynamic value=\"3\"><scale value=\"1.5\">is</dynamic> also<wait value=\"300\"></scale><dynamic value=\"2\"> pretty\n<color value=\"ffff00ff\">awesome!</color></dynamic><k>";
+                    "<dynamic value=\"2.5\">Dynamic <scale value=\".8\">text</scale></dynamic> <scale value=\"1.5\"><dynamic value=\"3\">is</dynamic> also<wait value=\"300\"></scale><dynamic value=\"2\"> pretty\n<color value=\"ffff00ff\">awesome!</color></dynamic><k>";
 
                 DialogueManager.Instance.CreateBubble(thing3);//new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!", "test more" }, null);
             }*/

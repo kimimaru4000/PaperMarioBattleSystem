@@ -532,8 +532,12 @@ namespace PaperMarioBattleSystem
         {
             if (stringBuilder.Length > 0)
             {
+                //This origin value looks pretty good for dynamic and scaled text
+                //Important to note is it needs to be the same for all characters, since each one is a different size in the font texture
+                Vector2 origin = new Vector2(8, 10);
+
                 Vector2 offset = Vector2.Zero;
-                Vector2 basePos = Position + new Vector2(5f, 5f + TextYOffset);
+                Vector2 basePos = Position + new Vector2(5f + origin.X, 5f + origin.Y + TextYOffset);
 
                 //Go through all the data and render the text
                 for (int i = 0; i < DBubbleData.TextData.Count; i++)
@@ -570,9 +574,9 @@ namespace PaperMarioBattleSystem
                         {
                             finalPos += DialogueGlobals.GetWavyTextOffset(ElapsedTextTime, j * Time.ElapsedMilliseconds, new Vector2(2));
                         }
-                        
+
                         //Render the character
-                        offset = SpriteRenderer.Instance.uiBatch.DrawCharacter(AssetManager.Instance.TTYDFont, stringBuilder[j], FontGlyphs, offset, finalPos, bdata.TextColor, 0f, Vector2.Zero, scale, SpriteEffects.None, .95f);
+                        offset = SpriteRenderer.Instance.uiBatch.DrawCharacter(AssetManager.Instance.TTYDFont, stringBuilder[j], FontGlyphs, offset, finalPos, bdata.TextColor, 0f, origin, scale, bdata.Scale, SpriteEffects.None, .95f);
                     }
                 }
             }

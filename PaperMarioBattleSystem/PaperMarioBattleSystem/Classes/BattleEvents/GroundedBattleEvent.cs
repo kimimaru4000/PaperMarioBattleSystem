@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// Handles moving a winged BattleEntity down.
-    /// This moves it down and sets its BattlePosition to the new position; it doesn't set its HeightState.
+    /// This moves it down and sets its BattlePosition to the new position, also setting its HeightState.
     /// </summary>
     public sealed class GroundedBattleEvent : BattleEvent
     {
@@ -48,6 +48,9 @@ namespace PaperMarioBattleSystem
 
             Entity.SetBattlePosition(GroundedPos);
             Entity.Position = GroundedPos;
+
+            //Change HeightState
+            Entity.ChangeHeightState(Enumerations.HeightStates.Grounded);
 
             if (Entity.IsDead == false)
                 Entity.AnimManager.PlayAnimation(Entity.GetIdleAnim());

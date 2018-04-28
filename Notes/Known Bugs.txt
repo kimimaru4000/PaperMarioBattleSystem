@@ -25,9 +25,11 @@ Replication:
 3. Use Power Bounce and perform it successfully at least 2 times
 4. On the third attack, observe how the Paratroopa will take more damage
 
-Cause: To replicate the behavior where the Paratroopa goes from Winged to Flipped when attacked twice in the air, it internally flips itself after taking damage while grounded. It's set to grounded when taking damage that removes wings once in the air, so the second hit flips it, causing it to lose its Defense.
+Cause: To replicate the behavior where the Paratroopa goes from Winged to Flipped when attacked twice in the air, it internally flips itself after taking damage while grounded. It's set to grounded when taking damage that removes wings in the air, so the second hit flips it, causing it to lose its Defense.
 
-Possible fix: Implement flipping as a Battle Event that occurs after the Grounded event. This way, it can go from grounded to flipped without losing Defense.
+Possible fix(es): Changing its HeightState to grounded after landing fixes the Defense issue, but it does not flip the Paratroopa if it has been attacked 2+ times. We need to tell the Paratroopa to flip itself in this case after it lands. A new Battle Event that simply calls HandleFlipped() on an IFlippableEntity's IFlippableBehavior should do the trick. If the Paratroopa has been attacked at least 2 times with a move that flips it, queue this new Battle Event.
+
+* FIXED!
 
 Life Shrooms are ignored if all BattleEntities of a specific type are defeated at once (4/27/18)
 ------------------------------------------------------------------------------------------------
@@ -36,6 +38,8 @@ Replication:
 2. Defeat them both with Art Attack
 3. Both will play their death animations, and the Goomba's revival event will start. However, it has no effect since the Goomba is already removed from battle by the time it starts
 
-Cause: DeathBattleEvent calls BattleManager.HandleEntityDeaths() if a revival event does not occur. In this case, the Paratroopa is calling it when both are dead. Since the Revival event didn't get a chance to start yet, both are removed.
+Cause: DeathBattleEvent calls BattleManager.HandleEntityDeaths() if a revival event does not occur. In this case, the Paratroopa is calling it when both are dead. Since the Revival event didn't get a chance to start yet, both the Goomba and Paratroopa are removed from battle.
 
-Possible fix: HandleEntityDeaths() and its containing methods were written a while ago and could use some refactoring. As this instance demonstrates, there's no reason to check for removing all dead BattleEntities when only one dies. Instead, we should remove just the ones that make the call. This way, only the Paratroopa would be removed from battle and the Goomba would revive as it should.
+Possible fix(es): HandleEntityDeaths() and its containing methods were written a while ago and could use some refactoring. As this instance demonstrates, there's no reason to check for removing all dead BattleEntities when only one dies. Instead, we should remove just the ones that make the call. This way, only the Paratroopa would be removed from battle and the Goomba would revive as it should.
+
+* FIXED!

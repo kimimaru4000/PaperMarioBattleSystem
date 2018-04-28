@@ -194,6 +194,7 @@
     <Compile Include="Classes\BattleEvents\DamagedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DeathBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DetonateBobberyBombBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\FlippedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\FrightBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\GroundedBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\HealFPBattleEvent.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -12,6 +13,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class ParatroopaFlippedBehavior : KoopaFlippedBehavior
     {
+        private int NumTimesHit = 0;
+
         public ParatroopaFlippedBehavior(BattleEntity entity, int flippedTurns, Enumerations.DamageEffects flippedOnEffects, int defenseLoss)
             : base(entity, flippedTurns, flippedOnEffects, defenseLoss)
         {
@@ -20,10 +23,27 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDamageTaken(InteractionHolder damageInfo)
         {
-            //If the Paratroopa is still in the air, it can't be flipped
-            if (Entity.HeightState != Enumerations.HeightStates.Grounded) return;
+            //If it's on the ground, act like a normal Koopa
+            if (Entity.HeightState == Enumerations.HeightStates.Grounded)
+            {
+                base.OnDamageTaken(damageInfo);
+                return;
+            }
 
-            base.OnDamageTaken(damageInfo);
+            //If the Paratroopa is in the air, it can't be flipped
+            //Track how many times it was hit: if hit at least 2 times, queue a Battle Event to flip it after it lands
+            if (NumTimesHit < 2 && UtilityGlobals.DamageEffectHasFlag(FlippedOnEffects, damageInfo.DamageEffect) == true)
+            {
+                NumTimesHit++;
+
+                if (NumTimesHit >= 2)
+                {
+                    //Queue the event
+                    BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
+                        new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                        new FlippedBattleEvent(Entity as IFlippableEntity));
+                }
+            }
         }
 
         public override IFlippableBehavior CopyBehavior(BattleEntity entity)

@@ -138,7 +138,7 @@ namespace PaperMarioBattleSystem
         public EntityTypes CurEntityPhase => PhaseOrder[Phase];
 
         /// <summary>
-        /// The current state of the battle
+        /// The current state of the battle.
         /// </summary>
         public BattleState State { get; private set; } = BattleState.Init;
 
@@ -169,17 +169,17 @@ namespace PaperMarioBattleSystem
         private BattleEntity BackPlayer => FindEntityFromBattleIndex(EntityTypes.Player, 1, false);
 
         /// <summary>
-        /// Mario reference
+        /// Mario reference.
         /// </summary>
         private BattleMario Mario = null;
 
         /// <summary>
-        /// Partner reference
+        /// Partner reference.
         /// </summary>
         private BattlePartner Partner = null;
 
         /// <summary>
-        /// The number of enemies alive
+        /// The number of enemies alive.
         /// </summary>
         private int EnemiesAlive
         {
@@ -193,19 +193,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        /// <summary>
-        /// Helper property showing the max number of enemies
-        /// </summary>
-        private int MaxEnemies => 5;//Enemies.Capacity;
-
-        /// <summary>
-        /// Helper property telling whether enemy spots are available or not
-        /// </summary>
-        public bool EnemySpotsAvailable => (EnemiesAlive < MaxEnemies);
-
         private BattleManager()
         {
-            //SoundManager.Instance.SoundVolume = 0f;
+            
         }
 
         public void CleanUp()
@@ -597,12 +587,12 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Called when an entity dies to update the battle state and remove dead entities.
+        /// Called when a BattleEntity dies to remove it and update the battle state.
         /// Called in <see cref="DeathBattleEvent"/>.
         /// </summary>
-        public void HandleEntityDeaths()
+        public void HandleEntityDeath(BattleEntity deadEntity)
         {
-            CheckDeadEntities();
+            HandleDeadEntity(deadEntity);
             UpdateBattleState();
         }
 
@@ -631,11 +621,13 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Checks for dead entities and handles them accordingly
+        /// Handles a dead BattleEntity.
+        /// Non-players are removed from battle, and Players are handled differently.
         /// </summary>
-        private void CheckDeadEntities()
+        private void HandleDeadEntity(BattleEntity deadEntity)
         {
-            if (Partner?.IsDead == true)
+            //Check if the dead BattleEntity is the Partner
+            if (deadEntity == Partner)
             {
                 //If the Partner died and is in front, switch places with Mario
                 if (Partner == FrontPlayer)
@@ -648,47 +640,16 @@ namespace PaperMarioBattleSystem
                     //Switch Mario in front
                     SwitchToTurn(PlayerTypes.Mario);
                 }
-                
-                //NOTE: Don't play this animation again if the Partner is still dead
-                //Partner.PlayAnimation(AnimationGlobals.DeathName);
+
             }
 
-            //NOTE: Find the best way to iterate through the dictionary while allowing modification
-            //For now, get all the EntityTypes enum values, find all dead entities of that type, then remove them
-            EntityTypes[] entityTypes = UtilityGlobals.GetEnumValues<EntityTypes>();
+            //Players don't get removed from battle through normal death
+            //Partners can be removed via a Status Effect that forces them out of battle, such as Fright or Gale Force
+            //Mario's death results in a Game Over, which is checked when updating the battle state
+            if (deadEntity.EntityType == EntityTypes.Player) return;
 
-            for (int i = 0; i < entityTypes.Length; i++)
-            {
-                //Players don't get removed from battle through normal death
-                //Partners can be removed via a Status Effect that forces them out of battle, such as Fright or Gale Force
-                //Mario's death results in a Game Over, which is checked when updating the battle state
-                if (entityTypes[i] == EntityTypes.Player)
-                {
-                    continue;
-                }
-
-                //Get a new list so we can simply remove from it instead of adding into a new list
-                List<BattleEntity> deadEntities = GetEntitiesList(entityTypes[i], null);
-                if (deadEntities != null)
-                {
-                    //Remove all alive entities from this list
-                    for (int j = 0; j < deadEntities.Count; j++)
-                    {
-                        if (deadEntities[j].IsDead == false)
-                        {
-                            deadEntities.RemoveAt(j);
-                            j--;
-                        }
-                    }
-
-                    //We should remove these dead entities
-                    if (deadEntities.Count > 0)
-                    {
-                        //Remove entities from battle
-                        RemoveEntities(deadEntities, true);
-                    }
-                }
-            }
+            //Remove this BattleEntity from battle
+            RemoveEntities(new BattleEntity[] { deadEntity }, true);
         }
 
         /// <summary>
@@ -713,9 +674,6 @@ namespace PaperMarioBattleSystem
 
             SwitchingPhase = true;
         }
-
-        /*NOTE: When adding enemies or other entities in-battle,
-         * make sure to check for certain conditions (Ex. max number of enemies) first*/
 
         /// <summary>
         /// Adds a set of BattleEntities to battle.

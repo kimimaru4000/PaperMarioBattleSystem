@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class Goompa : BattlePartner
     {
-        public Goompa() : base(new PartnerStats(PartnerGlobals.PartnerRanks.Normal, 50, 0, 0))
+        public Goompa() : base(new PartnerStats(PartnerGlobals.PartnerRanks.Normal, 5, 0, 0))
         {
             Name = "Goompa";
             PartnerDescription = "Goombario's wise grandpa.";

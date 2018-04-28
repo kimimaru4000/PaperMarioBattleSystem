@@ -78,8 +78,8 @@ namespace PaperMarioBattleSystem
             }
             else
             {
-                //Check for deaths
-                BattleManager.Instance.HandleEntityDeaths();
+                //Handle death
+                BattleManager.Instance.HandleEntityDeath(Entity);
             }
         }
 

@@ -82,9 +82,6 @@ namespace PaperMarioBattleSystem
                 Entity.EntityProperties.SetVulnerableDamageEffects(GroundedEntity.EntityProperties.GetVulnerableDamageEffects());
             }
 
-            //Change HeightState
-            Entity.ChangeHeightState(Enumerations.HeightStates.Grounded);
-
             //Queue the BattleEvent to move the entity down
             BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },

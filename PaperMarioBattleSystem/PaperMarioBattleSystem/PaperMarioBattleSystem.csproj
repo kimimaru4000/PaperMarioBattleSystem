@@ -527,6 +527,7 @@
     <Compile Include="Classes\VFXElements\BlinkVFX.cs" />
     <Compile Include="Classes\VFXElements\DamageStarVFX.cs" />
     <Compile Include="Classes\VFXElements\RallyWinkHeartVFX.cs" />
+    <Compile Include="Classes\VFXElements\SleepZVFX.cs" />
     <Compile Include="Classes\VFXElements\StylishIndicatorVFX.cs" />
     <Compile Include="Classes\VFXElements\StylishMoveVFX.cs" />
     <Compile Include="Classes\VFXElements\VFXElement.cs" />

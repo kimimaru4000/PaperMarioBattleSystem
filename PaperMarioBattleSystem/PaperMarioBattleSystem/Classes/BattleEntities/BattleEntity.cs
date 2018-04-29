@@ -138,13 +138,14 @@ namespace PaperMarioBattleSystem
         public Color TintColor { get; set;  } = Color.White;
 
         /// <summary>
-        /// The entity's battle index, assigned from the BattleManager. If it's less than 0, the BattleEntity is not in battle.
+        /// The entity's battle index, assigned from the BattleManager. If it's less than or equal to <see cref="BattleGlobals.InvalidBattleIndex"/>,
+        /// the BattleEntity is not in battle.
         /// <para>This indicates its relation to BattleEntities of the same EntityType.
         /// BattleEntities with higher battle indices are behind ones with lower battle indices.</para>
         /// <para>In most cases, it also corresponds to its position from the left side of the stage and
         /// its reference index in its entity list.</para>
         /// </summary>
-        public int BattleIndex { get; private set; } = -1;
+        public int BattleIndex { get; private set; } = BattleGlobals.InvalidBattleIndex;
 
         /// <summary>
         /// The entity's current position
@@ -227,7 +228,7 @@ namespace PaperMarioBattleSystem
 
         public virtual void CleanUp()
         {
-            BattleIndex = -1;
+            SetBattleIndex(BattleGlobals.InvalidBattleIndex, false);
 
             EntityProperties.CleanUp();
 

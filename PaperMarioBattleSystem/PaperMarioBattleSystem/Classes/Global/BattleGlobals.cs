@@ -42,8 +42,11 @@ namespace PaperMarioBattleSystem
 
         #region Constants
 
+        /// <summary>
+        /// Anything below or equal to this value is an invalid Battle Index.
+        /// </summary>
+        public const int InvalidBattleIndex = -1;
         public const int DefaultTurnCount = 1;
-        public const int MaxEnemies = 5;
 
         public const int MinDamage = 0;
         public const int MaxDamage = 99;
@@ -243,8 +246,8 @@ namespace PaperMarioBattleSystem
         /// Tells if a BattleIndex is valid.
         /// </summary>
         /// <param name="battleIndex">The BattleIndex to test for validity.</param>
-        /// <returns>true if <paramref name="battleIndex"/> is greater than or equal to 0, otherwise false.</returns>
-        public static bool IsValidBattleIndex(int battleIndex) => (battleIndex >= 0);
+        /// <returns>true if <paramref name="battleIndex"/> is greater than <see cref="InvalidBattleIndex"/>, otherwise false.</returns>
+        public static bool IsValidBattleIndex(int battleIndex) => (battleIndex > InvalidBattleIndex);
 
         #endregion
     }

@@ -509,6 +509,9 @@ namespace PaperMarioBattleSystem
             Partner.SetBattleIndex(oldPartner.BattleIndex);
             Partner.SetBattlePosition(oldPartner.BattlePosition + offset);
 
+            //State the old Partner is out of battle
+            oldPartner.SetBattleIndex(BattleGlobals.InvalidBattleIndex);
+
             //Set flip state
             Partner.SpriteFlip = oldPartner.SpriteFlip;
 
@@ -729,7 +732,7 @@ namespace PaperMarioBattleSystem
                 }
 
                 //Set battle index and start battle for the entity if it should
-                entity.SetBattleIndex(battleIndex);
+                entity.SetBattleIndex(battleIndex, false);
 
                 if (initialize == true)
                 {

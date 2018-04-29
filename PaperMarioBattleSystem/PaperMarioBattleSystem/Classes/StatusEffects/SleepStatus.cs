@@ -22,6 +22,8 @@ namespace PaperMarioBattleSystem
 
         private const double WakeUpEffectDur = 1000d;
 
+        private SleepZVFX SleepVFX = null;
+
         public SleepStatus(int duration) : base(duration)
         {
             StatusType = Enumerations.StatusTypes.Sleep;
@@ -36,7 +38,17 @@ namespace PaperMarioBattleSystem
         {
             base.OnAfflict();
 
+            EntityAfflicted.DamageTakenEvent -= OnEntityDamaged;
             EntityAfflicted.DamageTakenEvent += OnEntityDamaged;
+
+            BattleManager.Instance.EntityAddedEvent -= OnEntityAdded;
+            BattleManager.Instance.EntityAddedEvent += OnEntityAdded;
+
+            BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
+            BattleManager.Instance.EntityRemovedEvent += OnEntityRemoved;
+
+            //Add the sleep VFX
+            AddSleepVFX();
         }
 
         protected override void OnEnd()
@@ -44,6 +56,11 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             EntityAfflicted.DamageTakenEvent -= OnEntityDamaged;
+            BattleManager.Instance.EntityAddedEvent -= OnEntityAdded;
+            BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
+
+            //Remove the sleep VFX
+            RemoveSleepVFX();
         }
 
         private void OnEntityDamaged(InteractionHolder damageInfo)
@@ -54,7 +71,7 @@ namespace PaperMarioBattleSystem
             //Test if the Entity afflicted with sleep should wake up
             if (UtilityGlobals.TestRandomCondition(WakeUpChance) == true)
             {
-                Debug.Log($"{EntityAfflicted.Name} woke up while taking damage!");
+                Debug.Log($"{EntityAfflicted.Name} woke up when taking damage!");
 
                 EntityAfflicted.DamageTakenEvent -= OnEntityDamaged;
 
@@ -63,6 +80,40 @@ namespace PaperMarioBattleSystem
 
                 //Remove the status
                 EntityAfflicted.RemoveStatus(StatusType, true, false);
+            }
+        }
+
+        private void OnEntityAdded(BattleEntity battleEntity)
+        {
+            if (battleEntity != EntityAfflicted) return;
+            
+            //If added to battle but not cleaned up beforehand (Ex. Partners), add the sleep VFX back
+            AddSleepVFX();
+        }
+
+        private void OnEntityRemoved(BattleEntity battleEntity)
+        {
+            if (battleEntity != EntityAfflicted) return;
+
+            //If removed from battle but not cleaned up (Ex. Partners), remove the sleep VFX
+            RemoveSleepVFX();
+        }
+
+        private void AddSleepVFX()
+        {
+            if (SleepVFX == null)
+            {
+                SleepVFX = new SleepZVFX(EntityAfflicted);
+                BattleObjManager.Instance.AddBattleObject(SleepVFX);
+            }
+        }
+
+        private void RemoveSleepVFX()
+        {
+            if (SleepVFX != null)
+            {
+                BattleObjManager.Instance.RemoveBattleObject(SleepVFX);
+                SleepVFX = null;
             }
         }
 

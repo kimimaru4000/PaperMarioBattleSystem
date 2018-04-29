@@ -44,3 +44,33 @@ The result is that no matter which frame is displayed, the colors sampled from t
 5B. If it does have an alpha value, we now need to use both colors to get the final color. Multiply the Charge texture color we sampled with (chargeAlpha * input.Color.a). This gets us a color scaled with both the Charge alpha and the object's own alpha, which was passed through the SpriteBatch.
 
   5B1. Finally, return the base color times the object's color added to the color we calculated. (color * input.Color) takes into account the object's tint, and we simply add the Charge color onto that to get the final result.
+  
+Sleep
+=====
+The Sleep shader mimics the 'Z's that show up near a character afflicted with Sleep in TTYD.
+
+High-level Overview
+-------------------
+The 'Z's move back and forth in a wavy motion. To do this, pixels in the 'Z' sample pixels ahead or behind in the X based on their Y value. This causes it to do the wavy motion.
+
+Detailed
+--------
+Variables:
+
+sampler s0; - The sampler for the rendered object. It's automatically loaded into the shader
+float2 textureSize; - The size of the texture
+
+float shiftTime; - The time used when shifting the 'Z'. This is set to RenderingGlobals.SleepShaderShiftOffset, which is the current active game time divided by -184. The negative value causes it to move in the direction TTYD's does
+
+float intensity; - The intensity of the shift. This is scaled by the Y texcoord sampled and used to calculate the final shift
+float moveAmtX; - The max amount of pixels in the X to sample from. After the shift is calculated, it's scaled by this value 
+
+Steps:
+
+1. Calculate the texel size with textureSize, which is simply (1 / textureSize.x) and (1 / textureSize.y)
+
+2. Calculate the shift, which is the cos of shiftTime added to (the current Y texcoord scaled by the intensity), then multiplied by moveAmtX
+
+3. Sample the color of the pixel at the texcoord + (the X texel size multiplied by the shift)
+
+4. Return the color multiplied by input.Color, which is the current color of the object passed through the SpriteBatch

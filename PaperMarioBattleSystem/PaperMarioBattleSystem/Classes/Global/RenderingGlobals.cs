@@ -37,5 +37,11 @@ namespace PaperMarioBattleSystem
                 return (UtilityGlobals.PingPong(Time.ActiveMilliseconds / 1000f, .9f));
             }
         }
+
+        /// <summary>
+        /// Gets the current global offset of the Sleep shader's shift.
+        /// </summary>
+        /// <remarks>We divide by a negative value to make it wave in the opposite direction.</remarks>
+        public static float SleepShaderShiftOffset => (float)(Time.ActiveMilliseconds / -184f);
     }
 }

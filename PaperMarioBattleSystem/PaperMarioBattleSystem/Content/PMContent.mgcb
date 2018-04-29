@@ -187,6 +187,12 @@
 /processorParam:DebugMode=Auto
 /build:Shaders/Poison.fx
 
+#begin Shaders/Sleep.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Sleep.fx
+
 #begin SpriteFonts/PM Font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

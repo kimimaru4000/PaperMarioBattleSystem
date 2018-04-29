@@ -23,20 +23,35 @@ namespace PaperMarioBattleSystem
         private float BaseScale = .4f;
         private float ScaleIncrease = .1f;
 
-        private CroppedTexture2D ZGraphic = null;
-
         private double MaxAlphaTime = 1500d;
         private double AlphaTimePerChar = 0d;
         private double ElapsedTime = 0d;
+
+        private CroppedTexture2D ZGraphic = null;
+        private Effect SleepShader = null;
 
         public SleepZVFX(BattleEntity entityOn)
         {
             EntityOn = entityOn;
 
-            ZGraphic = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"),
-                new Rectangle(393, 350, 30, 38));
-
             AlphaTimePerChar = MaxAlphaTime / (double)NumZs;
+
+            int valAround = 3;
+            Rectangle baseRect = new Rectangle(393, 350, 30, 38);
+            baseRect.X -= valAround;
+            baseRect.Y -= valAround;
+            baseRect.Width += (valAround * 2);
+            baseRect.Height += (valAround * 2);
+
+            Debug.Log(baseRect);
+
+            Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
+            ZGraphic = new CroppedTexture2D(tex, baseRect);
+
+            SleepShader = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Sleep");
+            SleepShader.Parameters["textureSize"].SetValue(new Vector2(tex.Width, tex.Height));
+            SleepShader.Parameters["intensity"].SetValue(220f);
+            SleepShader.Parameters["moveAmtX"].SetValue((float)valAround - 1);
         }
 
         public override void CleanUp()
@@ -52,10 +67,22 @@ namespace PaperMarioBattleSystem
 
         public override void Draw()
         {
+            //NOTE: Batch this somewhere eventually; may require more flexible rendering
+            //This works for now, though
+            SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
+
             float alpha = 1f;
             
             for (int i = 0; i < NumZs; i++)
             {
+                //Start a new batch for each 'Z', as each has slightly different timing
+                SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, SleepShader, Camera.Instance.Transform);
+
+                //The shift amount is on a global timer
+                //However, each 'Z's cycle is offset by a small amount
+                float shiftTimeVal = RenderingGlobals.SleepShaderShiftOffset + (i * (float)Time.ElapsedMilliseconds);
+                SleepShader.Parameters["shiftTime"].SetValue(shiftTimeVal);
+
                 //Calculate the alpha of this 'Z'
                 double timeVal = (i + 1) * AlphaTimePerChar;
                 if (ElapsedTime < timeVal)
@@ -70,7 +97,11 @@ namespace PaperMarioBattleSystem
 
                 SpriteRenderer.Instance.Draw(ZGraphic.Tex, EntityOn.Position + InitOffset + (ZOffset * i), ZGraphic.SourceRect, Color.White * alpha,
                     0f, Vector2.Zero, BaseScale + (ScaleIncrease * i), false, false, .5f);
+
+                SpriteRenderer.Instance.EndBatch(SpriteRenderer.Instance.spriteBatch);
             }
+
+            SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.Transform);
         }
     }
 }

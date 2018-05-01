@@ -104,9 +104,9 @@ namespace PaperMarioBattleSystem
         {
             if (WingedBehavior.Grounded == true) return base.GetTattleDescription();
 
-            return "That's a Paragoomba. Basically a Goomba with wings. I'm jealous!\n<k><p>" +
-                   $"Maximum HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.\n<k><p>" +
-                   "You can't hammer it while it's flying, but rough it up and it'll totally plummet!<k>";
+            return "That's a Paragoomba.\n<wait value=\"250\">Basically a Goomba with\nwings.<wait value=\"300\"> I'm jealous!\n<k><p>" +
+                   "Maximum HP is 2, Attack is 1,\nand Defense is 0.\n<k><p>" +
+                   "You can't hammer it while it's\nflying, but rough it up and\nit'll totally plummet!<k>";
         }
 
         #endregion

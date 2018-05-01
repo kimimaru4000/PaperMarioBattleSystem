@@ -39,7 +39,10 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(68, 1056, 31, 48), 30d)));
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(596, 554, 42, 44), 1000d)));
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(57, 1022, 53, 26), 1000d)));
-            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.DangerName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(228, 918, 29, 51), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.DangerName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(545, 699, 35, 45), 720d),
+                new Animation.Frame(new Rectangle(544, 748, 36, 44), 220d, new Vector2(0, 1)),
+                new Animation.Frame(new Rectangle(543, 797, 37, 43), 720d, new Vector2(0, 2))));
 
             AnimManager.AddAnimation(AnimationGlobals.JumpStartName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(442, 65, 38, 45), 250d)));
@@ -117,6 +120,8 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(497, 643, 37, 50), 70d),
                 new Animation.Frame(new Rectangle(496, 699, 38, 49), 70d),
                 new Animation.Frame(new Rectangle(497, 643, 37, 50), 750d)));
+            AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.ListenName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(548, 901, 30, 51), 100d)));
 
             #endregion
         }

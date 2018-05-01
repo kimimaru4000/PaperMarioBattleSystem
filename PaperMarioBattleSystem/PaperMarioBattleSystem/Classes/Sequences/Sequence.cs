@@ -736,14 +736,14 @@ namespace PaperMarioBattleSystem
             if (entities == null || entities.Length == 0)
             {
                 Debug.LogWarning($"{nameof(entities)} is null or empty in {nameof(AttemptDamage)} for Action {Name}!");
-                return new InteractionResult[0];
+                return Array.Empty<InteractionResult>();
             }
 
             //Ensure the MoveAction associated with this sequence supports damage
             if (Action.DealsDamage == false)
             {
                 Debug.LogError($"Attempting to deal damage when {Action.Name} does not support it, as {nameof(Action.DamageProperties)} is null");
-                return new InteractionResult[0];
+                return Array.Empty<InteractionResult>();
             }
 
             int totalDamage = isTotalDamage == true ? damage : GetTotalDamage(damage);

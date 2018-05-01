@@ -258,33 +258,6 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        //public override void Draw()
-        //{
-        //    SpriteRenderer.Instance.EndDrawing(SpriteRenderer.Instance.spriteBatch);
-        //
-        //    Effect chargeEffect = new EffectMaterial(AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Charge"));
-        //
-        //    Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}ChargeShaderTex.png");
-        //    Texture2D spriteSheet = AnimManager.SpriteSheet;
-        //
-        //    Vector2 dimensionRatio = new Vector2(tex.Width, tex.Height) / new Vector2(spriteSheet.Width, spriteSheet.Height);
-        //
-        //    chargeEffect.Parameters["chargeTex"].SetValue(tex);
-        //    chargeEffect.Parameters["chargeAlpha"].SetValue((float)(UtilityGlobals.PingPong(Time.ActiveMilliseconds / 1000f, .9f)));
-        //    chargeEffect.Parameters["objColor"].SetValue(TintColor.ToVector4());
-        //    chargeEffect.Parameters["chargeOffset"].SetValue(new Vector2(0f, ((float)Time.ActiveMilliseconds % 1000f) / 1000f));
-        //    chargeEffect.Parameters["chargeTexRatio"].SetValue(dimensionRatio.Y);
-        //    chargeEffect.Parameters["objFrameOffset"].SetValue(spriteSheet.GetTexCoordsAt(AnimManager.CurrentAnim.CurFrame.DrawRegion));
-        //
-        //    SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, chargeEffect, Camera.Instance.Transform);
-        //
-        //    base.Draw();
-        //
-        //    SpriteRenderer.Instance.EndDrawing(SpriteRenderer.Instance.spriteBatch);
-        //
-        //    SpriteRenderer.Instance.BeginDrawing(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.Transform);
-        //}
-
         #region Event Handlers
 
         private void OnMiniYuxDamageTaken(InteractionHolder damageInfo)
@@ -328,9 +301,10 @@ namespace PaperMarioBattleSystem
 
         public string GetTattleDescription()
         {
-            return "That's a Yux. Says here it's a creature created in the X-Naut labs.\n<k><p>" +
-                   "Max HP is 3, Attack is 2, and Defense is 0. According to this, attacks and\n<k><p>" +
-                   "items won't affect it if it has Mini-Yux around it. So, if any Mini-Yux appear, take those out first. Duh!<k>";
+            return "That's a Yux.\n<wait value=\"250\">Says here it's a creature\ncreated in the X-Naut labs.\n<k><p>" +
+                   "Max HP is 3, Attack is 2,\nand Defense is 0.\n<k><p>" +
+                   "According to this, attacks\nand items won't affect it if\nit has Mini-Yux around it.\n<k><p>" +
+                   "So, if any Mini-Yux appear,\ntake those out first. <wait value=\"250\">Duh!<k>";
         }
 
         #endregion

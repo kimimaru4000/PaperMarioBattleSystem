@@ -53,10 +53,10 @@ namespace PaperMarioBattleSystem
 
         public new string GetTattleDescription()
         {
-            return "That's a Spiky Goomba. ...A spiky-headed Goomba. What a creative name.\n<k><p>" +
-                   "That spike is super-pointy, so it's better to hit it with a hammer than jump on it.\n<k><p>" +
-                   $"Maximum HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.\n<k><p>" +
-                   "The addition of the spike means you'll hurt your feet if you jump on it. Duh!<k>";
+            return "That's a Spiky Goomba.\n<wait value=\"250\">...A spiky-headed Goomba.\n<wait value=\"250\">What a creative name.\n<k><p>" +
+                   "That spike is super-pointy, so\nit's better to hit it with a\nhammer than jump on it.\n<k><p>" +
+                   "Maximum HP is 2, Attack is 2,\nand Defense is 0.\n<k><p>" +
+                   "The addition of the spike\nmeans you'll hurt your feet\nif you jump on it. <wait value=\"100\">Duh!<k>";
         }
 
         #endregion

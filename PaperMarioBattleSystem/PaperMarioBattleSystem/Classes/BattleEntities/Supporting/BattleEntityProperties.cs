@@ -308,7 +308,7 @@ namespace PaperMarioBattleSystem
         /// <returns>true if an Element Override of the Element exists for the PhysicalAttribute, otherwise false.</returns>
         public bool HasElementOverride(PhysicalAttributes attribute, Elements element)
         {
-            return (HasElementOverride(attribute) == true && ElementOverrides[attribute].ContainsKey(element));
+            return (HasElementOverride(attribute) == true && ElementOverrides[attribute].ContainsKey(element) == true);
         }
 
         /// <summary>
@@ -348,7 +348,7 @@ namespace PaperMarioBattleSystem
         {
             if (HasElementOverride(physAttribute) == false)
             {
-                return new Elements[0];
+                return Array.Empty<Elements>();
             }
 
             return ElementOverrides[physAttribute].Keys.ToArray();
@@ -408,7 +408,7 @@ namespace PaperMarioBattleSystem
             //Return an empty array if no exceptions exist for this type of contact
             if (ContactExceptions.ContainsKey(contactType) == false)
             {
-                return new PhysicalAttributes[0];
+                return Array.Empty<PhysicalAttributes>();
             }
 
             return ContactExceptions[contactType].ToArray();
@@ -472,13 +472,14 @@ namespace PaperMarioBattleSystem
             WeaknessHolder weaknessHolder = default(WeaknessHolder);
 
             //Get the total Weakness
-            Weaknesses[element].ForEach((weakness) =>
+            List<WeaknessHolder> weaknesses = Weaknesses[element];
+            for (int i = 0; i < weaknesses.Count; i++)
             {
-                weaknessHolder.Value += weakness.Value;
+                weaknessHolder.Value += weaknesses[i].Value;
                 //Stronger WeaknessTypes are prioritized
-                if (weakness.WeaknessType > weaknessHolder.WeaknessType)
-                    weaknessHolder.WeaknessType = weakness.WeaknessType;
-            });
+                if (weaknesses[i].WeaknessType > weaknessHolder.WeaknessType)
+                    weaknessHolder.WeaknessType = weaknesses[i].WeaknessType;
+            }
 
             return weaknessHolder;
         }
@@ -551,13 +552,14 @@ namespace PaperMarioBattleSystem
             ResistanceHolder resistanceHolder = default(ResistanceHolder);
 
             //Get the total resistance
-            Resistances[element].ForEach((resistance) =>
+            List<ResistanceHolder> resistances = Resistances[element];
+            for (int i = 0; i < resistances.Count; i++)
             {
-                resistanceHolder.Value += resistance.Value;
+                resistanceHolder.Value += resistances[i].Value;
                 //Stronger ResistanceTypes are prioritized
-                if (resistance.ResistanceType > resistanceHolder.ResistanceType)
-                    resistanceHolder.ResistanceType = resistance.ResistanceType;
-            });
+                if (resistances[i].ResistanceType > resistanceHolder.ResistanceType)
+                    resistanceHolder.ResistanceType = resistances[i].ResistanceType;
+            }
 
             return resistanceHolder;
         }
@@ -630,10 +632,11 @@ namespace PaperMarioBattleSystem
             StrengthHolder strengthHolder = default(StrengthHolder);
 
             //Get the total strength
-            Strengths[physAttribute].ForEach((strength) =>
+            List<StrengthHolder> strengths = Strengths[physAttribute];
+            for (int i = 0; i < strengths.Count; i++)
             {
-                strengthHolder.Value += strength.Value;
-            });
+                strengthHolder.Value += strengths[i].Value;
+            }
 
             return strengthHolder;
         }
@@ -1032,54 +1035,16 @@ namespace PaperMarioBattleSystem
         public PaybackHolder GetPayback(params PaybackHolder[] additionalPaybacks)
         {
             //Gather all the entity's Paybacks in the list
-            List<PaybackHolder> allPaybacks = new List<PaybackHolder>(Paybacks);
+            List<PaybackHolder> allPaybacks = Paybacks;
 
             //Add any additional Paybacks
             if (additionalPaybacks != null && additionalPaybacks.Length > 0)
             {
+                allPaybacks = new List<PaybackHolder>(Paybacks);
                 allPaybacks.AddRange(additionalPaybacks);
             }
 
             return PaybackHolder.CombinePaybacks(allPaybacks);
-
-            /*//Initialize default values
-            PaybackTypes totalType = PaybackTypes.Constant;
-            Elements totalElement = Elements.Normal;
-            int totalDamage = 0;
-            List<StatusChanceHolder> totalStatuses = new List<StatusChanceHolder>();
-
-            //Go through all the Paybacks and add them up
-            for (int i = 0; i < allPaybacks.Count; i++)
-            {
-                PaybackHolder paybackHolder = allPaybacks[i];
-
-                //If there's a Half or Full Payback, upgrade the current one from Half to Full if it's currently Half
-                if (paybackHolder.PaybackType != PaybackTypes.Constant)
-                {
-                    //If there are at least two Half Paybacks, upgrade it to Full
-                    if (totalType == PaybackTypes.Half && paybackHolder.PaybackType == PaybackTypes.Half)
-                        totalType = PaybackTypes.Full;
-                    else if (totalType != PaybackTypes.Full)
-                        totalType = paybackHolder.PaybackType;
-                }
-
-                //Check for a higher priority Element
-                if (paybackHolder.Element > totalElement)
-                    totalElement = paybackHolder.Element;
-
-                //Add up all the damage
-                totalDamage += paybackHolder.Damage;
-
-                //Add in all the StatusEffects - note that StatusEffects with the same StatusType will increase the chance of
-                //that StatusEffect being inflicted, as the first one may not succeed in being inflicted depending on the BattleEntity
-                if (paybackHolder.StatusesInflicted != null && paybackHolder.StatusesInflicted.Length > 0)
-                {
-                    totalStatuses.AddRange(paybackHolder.StatusesInflicted);
-                }
-            }
-
-            //Return the final Payback
-            return new PaybackHolder(totalType, totalElement, totalDamage, totalStatuses.ToArray());*/
         }
 
         /// <summary>
@@ -1145,12 +1110,19 @@ namespace PaperMarioBattleSystem
         /// <returns>The value corresponding to the property passed in. If no value was found, returns the default value of type T.</returns>
         public T GetAdditionalProperty<T>(AdditionalProperty property)
         {
-            if (HasAdditionalProperty(property) == false)
+            if (AdditionalProperties.TryGetValue(property, out object val) == true)
             {
-                return default(T);
+                return (T)val;
             }
-            
-            return (T)AdditionalProperties[property];
+
+            return default(T);
+
+            //if (HasAdditionalProperty(property) == false)
+            //{
+            //    return default(T);
+            //}
+            //
+            //return (T)AdditionalProperties[property];
         }
 
         #endregion

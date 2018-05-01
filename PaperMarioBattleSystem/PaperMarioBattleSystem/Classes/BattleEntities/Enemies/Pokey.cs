@@ -126,11 +126,11 @@ namespace PaperMarioBattleSystem
 
         public string GetTattleDescription()
         {
-            return "That's a Pokey. It's a cactus ghoul that's got nasty spines all over its body.\n<k><p>" +
-                   $"Max HP is {BattleStats.MaxHP}, Attack is {BattleStats.BaseAttack}, and Defense is {BattleStats.BaseDefense}.\n<k><p>" +
-                   "Look at those spines... Those would TOTALLY hurt. If you stomp on it, you'll regret it.\n<k><p>" +
-                   "Pokeys attack by lobbing parts of their bodies and by charging at you...\n<k><p>" +
-                   "They can even call friends in for help, so be quick about taking them out.<k>";
+            return "That's a Pokey.\n<wait value=\"250\">It's a cactus ghoul that's got\nnasty spines all over its body.\n<k><p>" +
+                   "Max HP is 4, Attack is 3,\nand Defense is 0.\n<k><p>" +
+                   "Look at those spines... <wait value=\"250\">Those\nwould TOTALLY hurt.<wait value=\"250\"> If you\nstomp on it, you'll regret it.\n<k><p>" +
+                   "Pokeys attack by lobbing\nparts of their bodies and by\ncharging at you...\n<k><p>" +
+                   "They can even call friends in\nfor help, so be quick about\ntaking them out.<k>";
         }
 
         #endregion

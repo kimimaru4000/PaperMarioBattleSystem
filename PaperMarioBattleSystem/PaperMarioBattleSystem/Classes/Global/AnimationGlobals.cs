@@ -66,6 +66,8 @@ namespace PaperMarioBattleSystem
             public const string MapLiftName = "MapLift";
             public const string SweetTreatReadyThrowName = "SweetTreatReadyThrow";
             public const string SweetTreatThrowName = "SweetTreatThrow";
+
+            public const string ListenName = "Listen";
         }
 
         /// <summary>

@@ -1247,11 +1247,8 @@ namespace PaperMarioBattleSystem
                 }
                 else if (entity == FrontPlayer)
                 {
-                    //NOTE: The dead check is being removed for consistency with other methods
-                    //if (BackPlayer.IsDead == false)
-                    //{
+                    //Add the player in the back
                     adjacentEntities.Add(BackPlayer);
-                    //}
 
                     //Add the next enemy
                     BattleEntity nextEnemy = FindEntityFromBattleIndex(EntityTypes.Enemy, 0);
@@ -1308,7 +1305,7 @@ namespace PaperMarioBattleSystem
             //No BattleEntities are in this list, so nothing can be returned
             if (AllEntities.ContainsKey(entityType) == false)
             {
-                return new int[0];
+                return Array.Empty<int>();
             }
 
             List<int> gaps = new List<int>();

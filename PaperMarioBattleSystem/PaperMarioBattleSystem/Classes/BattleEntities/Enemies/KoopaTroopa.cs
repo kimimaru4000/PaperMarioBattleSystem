@@ -111,9 +111,9 @@ namespace PaperMarioBattleSystem
 
         public string GetTattleDescription()
         {
-            return "That's a Koopa Troopa. They've been around forever! Gotta respect the longevity!\n<k><p>" +
-                "Their shells are hard, but flip them over and their Defense drops to zero.\n<k><p>" +
-                "And you know how to flip them over, right? Just jump on their heads!<k>";
+            return "That's a Koopa Troopa.\n<wait value=\"250\">They've been around forever!\n<wait value=\"100\">Gotta respect the longevity!\n<k><p>" +
+                "Their shells are hard, but\nflip them over and their\nDefense drops to zero.\n<k><p>" +
+                "And you know how to flip\nthem over, right?<wait value=\"250\"> Just jump\non their heads!<k>";
         }
 
         #endregion

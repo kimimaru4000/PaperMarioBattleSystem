@@ -38,16 +38,11 @@ namespace PaperMarioBattleSystem
         /// The Battle Entities that act as light sources.
         /// They are coupled with their light radii.
         /// </summary>
-        private List<LightSourceHolder> LightSources = new List<LightSourceHolder>();
-
-        //Test texture to represent 
-        private Texture2D CircleTex = null;
+        public readonly List<LightSourceHolder> LightSources = new List<LightSourceHolder>();
 
         public BattleDarknessObj()
         {
             Initialize();
-
-            CircleTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Circle.png");
 
             ListenToEntityEvents();
         }
@@ -58,8 +53,6 @@ namespace PaperMarioBattleSystem
 
             NonLightSources.Clear();
             LightSources.Clear();
-
-            CircleTex = null;
 
             base.CleanUp();
         }
@@ -205,26 +198,6 @@ namespace PaperMarioBattleSystem
             CheckUpdates();
         }
 
-        public override void Draw()
-        {
-            //Render a circle to show the light source's radius
-            //We use a texture since drawing a circle manually is very slow
-            Vector2 circleSize = new Vector2(CircleTex.Width, CircleTex.Height);
-            Color color = Color.White * .5f;
-
-            for (int i = 0; i < LightSources.Count; i++)
-            {
-                double radius = LightSources[i].LightRadius;
-                double diameter = radius * 2d;
-
-                //Use the diameter in the scale, since the radius is only half
-                Vector2 scale = new Vector2((float)(diameter / circleSize.X), (float)(diameter / circleSize.Y));
-
-                //Debug.DebugDrawHollowCircle(new Circle(LightSources[i].Entity.BattlePosition, radius), color, 1f, false);
-                SpriteRenderer.Instance.Draw(CircleTex, LightSources[i].Entity.BattlePosition, null, color, 0f, circleSize.Halve(), scale, false, false, 1f);
-            }
-        }
-
         private bool IsLightSource(BattleEntity entity)
         {
             if (entity == null) return false;
@@ -291,7 +264,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private class LightSourceHolder
+        public class LightSourceHolder
         {
             public BattleEntity Entity;
             public double LightRadius;

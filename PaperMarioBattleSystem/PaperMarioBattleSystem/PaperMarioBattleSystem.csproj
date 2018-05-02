@@ -468,6 +468,7 @@
     <Compile Include="Classes\Singletons\Battle\BattleObjManager.cs" />
     <Compile Include="Classes\Singletons\Battle\BattleUIManager.cs" />
     <Compile Include="Classes\Singletons\Battle\DialogueManager.cs" />
+    <Compile Include="Classes\Singletons\Battle\LightingManager.cs" />
     <Compile Include="Classes\Singletons\General\AssetManager.cs" />
     <Compile Include="Classes\Singletons\General\Camera.cs" />
     <Compile Include="Classes\Singletons\General\Inventory.cs" />
@@ -561,10 +562,16 @@
     <Content Include="Content\Shaders\DialogueBubbleText.fx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Shaders\Lighting.fx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Shaders\Poison.fx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Shaders\ShaderTextures\ChargeShaderTex.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Shaders\ShaderTextures\LightMask.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Shaders\Sleep.fx" />

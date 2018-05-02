@@ -267,6 +267,9 @@ namespace PaperMarioBattleSystem
         {
             graphics.PreparingDeviceSettings -= OnPreparingDeviceSettings;
 
+            if (LightingManager.HasInstance == true)
+                LightingManager.Instance.CleanUp();
+
             AssetManager.Instance.CleanUp();
             SoundManager.Instance.CleanUp();
             SpriteRenderer.Instance.CleanUp();
@@ -391,6 +394,13 @@ namespace PaperMarioBattleSystem
         {
             Time.UpdateFrames();
 
+            //Create a lightmap before drawing the scene, if we should
+            //This is for Dark battles
+            if (LightingManager.HasInstance == true)
+            {
+                LightingManager.Instance.CreateLightMap();
+            }
+
             //Set up drawing to the render target
             SpriteRenderer.Instance.SetupDrawing();
         }
@@ -406,12 +416,22 @@ namespace PaperMarioBattleSystem
 
             BattleManager.Instance.GetAllBattleEntities(BattleEntities, null);
 
+            //NOTE: These can be optimized to minimize GPU state change. We might also want to directly use the depth buffer so
+            //that depth is preserved among objects rendered with different shaders (Ex. Charged BattleEntities)
+            //This is not high priority, since this is just a demonstration of how to use the system
+
             //Potentially both
             RenderBattleObjects();
             RenderBattleInfo();
 
             //Sprite
             RenderBattleEntities(BattleEntities);
+
+            //Render the generated lightmap for Dark battles, if it exists
+            if (LightingManager.HasInstance == true)
+            {
+                LightingManager.Instance.RenderLightMap();
+            }
 
             //UI
             RenderStatusInfo(BattleEntities);

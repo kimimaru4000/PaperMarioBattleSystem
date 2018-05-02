@@ -252,7 +252,9 @@ namespace PaperMarioBattleSystem
             //Check for the battle setting and add darkness if so
             if (Properties.BattleSetting == BattleSettings.Dark)
             {
-                BattleObjManager.Instance.AddBattleObject(new BattleDarknessObj());
+                BattleDarknessObj battleDarkness = new BattleDarknessObj();
+                LightingManager.Instance.Initialize(battleDarkness);
+                BattleObjManager.Instance.AddBattleObject(battleDarkness);
             }
 
             //Add the HP bar manager

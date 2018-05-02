@@ -100,7 +100,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Whether drawing for the frame started or not.
         /// </summary>
-        private bool StartedDrawing = false;
+        public bool StartedDrawing { get; private set; } = false;
 
         private SpriteRenderer()
         {
@@ -172,27 +172,6 @@ namespace PaperMarioBattleSystem
         {
             graphicsDeviceManager.IsFullScreen = fullScreen;
             graphicsDeviceManager.ApplyChanges();
-        }
-
-        /// <summary>
-        /// Replaces the main RenderTarget with a new one of a different size.
-        /// Don't call this until the RenderTarget is cleared from the GraphicsDevice.
-        /// </summary>
-        /// <param name="newWidth">The new width of the RenderTarget.</param>
-        /// <param name="newHeight">The new height of the RenderTarget.</param>
-        private void ReplaceMainRenderTarget(int newWidth, int newHeight)
-        {
-            FinalRenderTarget = null;
-
-            MainRenderTarget?.Dispose();
-            MainRenderTarget = null;
-            PPRenderTarget?.Dispose();
-            PPRenderTarget = null;
-
-            MainRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, newWidth, newHeight);
-            PPRenderTarget = new RenderTarget2D(graphicsDeviceManager.GraphicsDevice, newWidth, newHeight);
-
-            FinalRenderTarget = MainRenderTarget;
         }
 
         /// <summary>

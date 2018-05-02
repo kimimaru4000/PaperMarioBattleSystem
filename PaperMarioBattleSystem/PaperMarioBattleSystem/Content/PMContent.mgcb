@@ -181,6 +181,12 @@
 /processorParam:DebugMode=Auto
 /build:Shaders/DialogueBubbleText.fx
 
+#begin Shaders/Lighting.fx
+/importer:EffectImporter
+/processor:EffectProcessor
+/processorParam:DebugMode=Auto
+/build:Shaders/Lighting.fx
+
 #begin Shaders/Poison.fx
 /importer:EffectImporter
 /processor:EffectProcessor

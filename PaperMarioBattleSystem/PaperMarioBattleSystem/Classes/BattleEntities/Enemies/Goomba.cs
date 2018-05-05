@@ -42,6 +42,8 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(129, 73, 28, 30), 150d, new Vector2(0, -2)),
                 new Animation.Frame(new Rectangle(67, 107, 26, 28), 100d),
                 new Animation.Frame(new Rectangle(99, 75, 28, 28), 150d)));
+            AnimManager.AddAnimation(AnimationGlobals.JumpStartName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(99, 107, 26, 28), 400d)));
         }
 
         public override void TurnUpdate()

@@ -25,7 +25,6 @@ namespace PaperMarioBattleSystem
 
         public Enumerations.DamageEffects GroundedOnEffects { get; set; } = Enumerations.DamageEffects.RemovesWings;
 
-        protected Vector2 WingOffset = Vector2.Zero;
         protected Rectangle WingRectRegion = Rectangle.Empty;
 
         public ParagoombaWingedBehavior(BattleEntity entity, int groundedTurns, Enumerations.DamageEffects groundedOnEffects, BattleEntity groundedEntity)
@@ -35,7 +34,6 @@ namespace PaperMarioBattleSystem
             GroundedOnEffects = groundedOnEffects;
             GroundedEntity = groundedEntity;
 
-            WingOffset = new Vector2(-4, -1);
             WingRectRegion = new Rectangle(3, 166, 41, 18);
 
             Entity.DamageTakenEvent -= OnDamageTaken;
@@ -82,15 +80,15 @@ namespace PaperMarioBattleSystem
                 Entity.EntityProperties.SetVulnerableDamageEffects(GroundedEntity.EntityProperties.GetVulnerableDamageEffects());
             }
 
-            //Queue the BattleEvent to move the entity down
-            BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
-                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                new GroundedBattleEvent(Entity, new Vector2(Entity.BattlePosition.X, BattleManager.Instance.EnemyStartPos.Y)));
-
             //Queue the BattleEvent to remove the wings
             BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                 new RemoveWingsBattleEvent(this, Entity));
+
+            //Queue the BattleEvent to move the entity down
+            BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
+                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                new GroundedBattleEvent(Entity, new Vector2(Entity.BattlePosition.X, BattleManager.Instance.EnemyStartPos.Y)));
 
             //Remove the damage event, since we don't need it anymore
             Entity.DamageTakenEvent -= OnDamageTaken;
@@ -98,6 +96,13 @@ namespace PaperMarioBattleSystem
 
         public virtual void RemoveWings()
         {
+            Vector2 wingPos = Entity.Position;
+            Animation hurtAnim = Entity.AnimManager.GetAnimation(AnimationGlobals.HurtName);
+            if (hurtAnim != null)
+            {
+                wingPos = hurtAnim.CurChildFrame.GetDrawnPosition(Entity.Position, Entity.SpriteFlip);
+            }
+
             //Remove the wings from the hurt and death animations
             Animation[] animations = Entity.AnimManager.GetAnimations(AnimationGlobals.HurtName, AnimationGlobals.DeathName);
 
@@ -112,7 +117,7 @@ namespace PaperMarioBattleSystem
             CroppedTexture2D wingSprite = new CroppedTexture2D(spriteSheet, WingRectRegion);
 
             //Put the wings in the same spot as they were in the Paragoomba's last animation
-            WingsDisappearVFX wingsDisappear = new WingsDisappearVFX(wingSprite, Entity.BattlePosition + WingOffset,
+            WingsDisappearVFX wingsDisappear = new WingsDisappearVFX(wingSprite, wingPos,
                 Entity.EntityType != Enumerations.EntityTypes.Enemy, .1f - .01f, 500d, 500d, (1d / 30d) * Time.MsPerS);
 
             BattleObjManager.Instance.AddBattleObject(wingsDisappear);

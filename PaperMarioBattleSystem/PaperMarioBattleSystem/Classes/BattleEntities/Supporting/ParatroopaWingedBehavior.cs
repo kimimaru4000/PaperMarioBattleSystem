@@ -13,7 +13,6 @@ namespace PaperMarioBattleSystem
         public ParatroopaWingedBehavior(BattleEntity entity, int groundedTurns, Enumerations.DamageEffects groundedOnEffects, BattleEntity groundedEntity)
             : base(entity, groundedTurns, groundedOnEffects, groundedEntity)
         {
-            WingOffset = new Vector2(-1, 2);
             WingRectRegion = new Rectangle(66, 190, 45, 26);
         }
     }

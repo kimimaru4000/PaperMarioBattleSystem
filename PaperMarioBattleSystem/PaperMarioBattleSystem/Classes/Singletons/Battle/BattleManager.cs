@@ -89,9 +89,9 @@ namespace PaperMarioBattleSystem
 
         //Starting positions
         public readonly Vector2 MarioPos = new Vector2(-150, 100);
-        public readonly Vector2 PartnerPos = new Vector2(-190, 100);
+        public readonly Vector2 PartnerPos = new Vector2(-200, 100);
         public readonly Vector2 EnemyStartPos = new Vector2(150, 125);
-        public readonly int PositionXDiff = 30;
+        public readonly int PositionXDiff = 50;
         
         //These are general values used by most entities in the air or on the ceiling
         //The entity can still configure how high it goes on its own if needed

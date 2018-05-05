@@ -78,7 +78,32 @@ namespace PaperMarioBattleSystem
         public bool IsPlaying => (Finished == false && Paused == false);
 
         protected int MaxFrameIndex => MaxFrames - 1;
-        public ref readonly Frame CurFrame => ref Frames[CurFrameNum];
+
+        /// <summary>
+        /// Returns the animation frame at a particular index.
+        /// If the frame doesn't exist at the index, an exception is thrown.
+        /// </summary>
+        /// <param name="index">The index to retrive the animation frame.</param>
+        /// <returns>The animation frame at the specified index.</returns>
+        public ref readonly Frame GetFrame(int index) => ref Frames[index];
+
+        /// <summary>
+        /// Returns the current animation frame.
+        /// </summary>
+        public ref readonly Frame CurFrame => ref GetFrame(CurFrameNum);
+
+        /// <summary>
+        /// Returns the child animation frame at a particular index.
+        /// If the child frame doesn't exist at the index, an exception is thrown.
+        /// </summary>
+        /// <param name="index">The index to retrive the child animation frame.</param>
+        /// <returns>The child animation frame at the specified index.</returns>
+        public ref readonly Frame GetChildFrame(int index) => ref ChildFrames[index];
+
+        /// <summary>
+        /// Returns the current child animation frame.
+        /// </summary>
+        public ref readonly Frame CurChildFrame => ref GetChildFrame(CurFrameNum);
 
         protected double ElapsedFrameTime => (Time.ActiveMilliseconds - PrevFrameTimer);
         protected double TrueCurFrameDuration => (CurFrame.Duration * (Speed <= 0f ? 0f : (1f / Speed)));
@@ -301,6 +326,22 @@ namespace PaperMarioBattleSystem
             /// </summary>
             public float DepthOffset;
 
+            /// <summary>
+            /// Gets the final drawn position of the animation frame.
+            /// </summary>
+            /// <param name="position">The original position to draw the animation frame at.</param>
+            /// <param name="flipped">Whether the frame is flipped horizontally or not.</param>
+            /// <returns>A Vector2 containing the final drawn position of the animation frame.</returns>
+            public Vector2 GetDrawnPosition(in Vector2 position, in bool flipped)
+            {
+                Vector2 realOffset = PosOffset;
+                if (flipped == true)
+                    realOffset.X = -realOffset.X;
+                Vector2 realPos = position + realOffset;
+
+                return realPos;
+            }
+
             public Frame(Rectangle drawRegion, double duration)
             {
                 DrawRegion = drawRegion;
@@ -321,7 +362,7 @@ namespace PaperMarioBattleSystem
 
             public void Draw(Texture2D spriteSheet, Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipped, float layer, bool uibatch)
             {
-                Vector2 realPos = position + PosOffset;
+                Vector2 realPos = GetDrawnPosition(position, flipped);
                 float realLayer = layer + DepthOffset;
 
                 if (uibatch == true)

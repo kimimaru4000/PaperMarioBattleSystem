@@ -34,15 +34,15 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(228, 918, 29, 51), 1000d)));
             AnimManager.AddAnimation(AnimationGlobals.RunningName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(228, 918, 29, 51), 30d),
-                new Animation.Frame(new Rectangle(228, 861, 29, 49), 30d),
+                new Animation.Frame(new Rectangle(228, 918, 29, 51), 30d, new Vector2(1, 1)),
+                new Animation.Frame(new Rectangle(228, 861, 29, 49), 30d, new Vector2(1, 0)),
                 new Animation.Frame(new Rectangle(68, 1056, 31, 48), 30d)));
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(596, 554, 42, 44), 1000d)));
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(57, 1022, 53, 26), 1000d)));
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.DangerName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(545, 699, 35, 45), 720d),
-                new Animation.Frame(new Rectangle(544, 748, 36, 44), 220d, new Vector2(0, 1)),
-                new Animation.Frame(new Rectangle(543, 797, 37, 43), 720d, new Vector2(0, 2))));
+                new Animation.Frame(new Rectangle(544, 748, 36, 44), 220d, new Vector2(-1, 1)),
+                new Animation.Frame(new Rectangle(543, 797, 37, 43), 720d, new Vector2(-1, 1))));
 
             AnimManager.AddAnimation(AnimationGlobals.JumpStartName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(442, 65, 38, 45), 250d)));
@@ -50,17 +50,17 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(394, 803, 31, 49), 100d)));
             AnimManager.AddAnimation(AnimationGlobals.JumpFallingName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(394, 859, 31, 49), 100d),
-                new Animation.Frame(new Rectangle(394, 916, 31, 48), 100d)));
+                new Animation.Frame(new Rectangle(394, 916, 31, 48), 100d, new Vector2(0, 1))));
 
             AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerPickupName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(173, 664, 30, 49), 100d),
-                new Animation.Frame(new Rectangle(174, 607, 29, 50), 100d),
-                new Animation.Frame(new Rectangle(340, 421, 32, 46), 200d)));
+                new Animation.Frame(new Rectangle(340, 421, 32, 46), 200d, new Vector2(0, 0)),
+                new Animation.Frame(new Rectangle(173, 664, 30, 49), 100d, new Vector2(1, -2)),
+                new Animation.Frame(new Rectangle(174, 607, 29, 50), 100d, new Vector2(3, -2))));
             AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerWindupName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(341, 9, 36, 50), 150d),
-                new Animation.Frame(new Rectangle(341, 64, 38, 50), 150d)));
+                new Animation.Frame(new Rectangle(341, 64, 38, 50), 150d, new Vector2(1, -1))));
             AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.HammerSlamName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(334, 319, 42, 50), 200d),
+                new Animation.Frame(new Rectangle(334, 319, 42, 50), 200d, new Vector2(2, -1)),
                 new Animation.Frame(new Rectangle(340, 166, 32, 44), 300d)));
             AnimManager.AddAnimation(AnimationGlobals.VictoryName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(447, 281, 42, 50), 100d),
@@ -74,7 +74,7 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.SpikedTipHurtName, new LoopAnimation(spriteSheet, 10,
                 new Animation.Frame(new Rectangle(393, 450, 38, 52), 30d),
-                new Animation.Frame(new Rectangle(393, 385, 38, 55), 30d)));
+                new Animation.Frame(new Rectangle(393, 385, 38, 55), 30d, new Vector2(0, 1))));
 
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(402, 569, 34, 51), 30d)));
@@ -86,17 +86,17 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.StoneName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(66, 859, 35, 41), 0d)));
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.DizzyName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(117, 512, 31, 42), 1000d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(117, 512, 31, 42), 1000d),
                 new Animation.Frame(new Rectangle(117, 561, 31, 41), 1000d)));
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.SleepName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(288, 908, 31, 44), 800d, new Vector2(0, -2)),
+                new Animation.Frame(new Rectangle(288, 908, 31, 44), 800d, new Vector2(0, -1)),
                 new Animation.Frame(new Rectangle(288, 957, 31, 43), 500d, new Vector2(0, -1)),
                 new Animation.Frame(new Rectangle(288, 1006, 31, 42), 800d)));
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.InjuredName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(117, 512, 31, 42), 1000d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(117, 512, 31, 42), 1000d),
                 new Animation.Frame(new Rectangle(117, 561, 31, 41), 1000d)));
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.ConfusedName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(117, 512, 31, 42), 1000d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(117, 512, 31, 42), 1000d),
                 new Animation.Frame(new Rectangle(117, 561, 31, 41), 1000d)));
 
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.SuperguardName, new Animation(spriteSheet,
@@ -113,18 +113,24 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.StoneCapPutOnName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(500, 584, 37, 50), 70d),
-                new Animation.Frame(new Rectangle(497, 643, 37, 50), 70d),
-                new Animation.Frame(new Rectangle(496, 699, 38, 49), 70d),
-                new Animation.Frame(new Rectangle(497, 643, 37, 50), 70d),
+                new Animation.Frame(new Rectangle(497, 643, 37, 50), 70d, new Vector2(0, 1)),
+                new Animation.Frame(new Rectangle(496, 699, 38, 49), 70d, new Vector2(-1, 0)),
+                new Animation.Frame(new Rectangle(497, 643, 37, 50), 70d, new Vector2(0, 1)),
                 new Animation.Frame(new Rectangle(498, 755, 36, 49), 70d),
-                new Animation.Frame(new Rectangle(497, 643, 37, 50), 70d),
-                new Animation.Frame(new Rectangle(496, 699, 38, 49), 70d),
-                new Animation.Frame(new Rectangle(497, 643, 37, 50), 750d)));
+                new Animation.Frame(new Rectangle(497, 643, 37, 50), 70d, new Vector2(0, 1)),
+                new Animation.Frame(new Rectangle(496, 699, 38, 49), 70d, new Vector2(-1, 0)),
+                new Animation.Frame(new Rectangle(497, 643, 37, 50), 750d, new Vector2(0, 1))));
             AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.ListenName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(548, 901, 30, 51), 100d)));
-
+            
             #endregion
         }
+
+        /*NOTE: ADD FUNCTION FOR DEFINING ANIMATIONS
+         *NOTE: ADD FUNCTION FOR DEFINING ANIMATIONS
+         *NOTE: ADD FUNCTION FOR DEFINING ANIMATIONS
+         *NOTE: ADD FUNCTION FOR DEFINING ANIMATIONS
+         */
 
         public override void CleanUp()
         {

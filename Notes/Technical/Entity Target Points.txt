@@ -1,0 +1,47 @@
+Entity Target Points (5/2/18)
+-----------------------------
+In the PM games, certain enemies, mostly bosses, have multiple target points.
+
+For example, Kent C. Koopa initially has only one target point - himself. However, when you flip him over, you can now target his Shell (him), which has 3 Defense, or his tail, which has 0 Defense.
+
+Another example is Hooktail: when you use Jump on Hooktail, Mario targets her nose, and when you use Hammer, Mario targets her foot.
+
+Finally, another unique example is Grodus. Most single-hit moves can target Grodus' Scepter, and when the Scepter is attacked, Grodus' next spell will fail. Unlike the previous examples, attacks damaging the Scepter won't deal damage to Grodus himself.
+
+The important thing to note is these all relate to a single entity. The Light Bulb on the Toy Tank may look like a different target point, but it's actually a separate BattleEntity. This document deals only with multiple target points on the same BattleEntity.
+
+Overview
+--------
+List of PM and TTYD enemies with multiple target points; differences between target points will be noted:
+
+PM
+==
+-Sky Guy; body, red balloon, orange balloon, green balloon - when all balloons are popped, turns into a normal Shy Guy
+-Big Lantern Ghost; body, Lantern (name: Lantern - is a light source that's invincible and increases light radius when hit)
+-Kent C. Koopa; body (6 Defense, 3 when flipped), tail (only targetable when flipped, 0 Defense)
+
+TTYD
+====
+-Hooktail; nose (jump), foot (jump, hammer)
+-Gloomtail; nose (jump), foot (jump, hammer)
+-Bonetail; nose (jump), foot (jump, hammer)
+-Cortez; head (jump), bone pile (jump, hammer)
+-Magnus Von Grapple; body (jump), foot (jump, hammer)
+-Magnus Von Grapple 2.0; body (jump), foot (jump, hammer)
+-Sir Grodus; body, scepter (no damage to Grodus - causes next spell to fail)
+
+Testing
+-------
+Gloomtail 
+=========
+-Quake Hammer can target only Gloomtail's nose
+-Multi-hit moves target only Gloomtail's nose
+-Shade Fist cannot target Gloomtail's foot
+-Art Attack can damage both target points; it's required to deal 3 damage to Gloomtail. However, hurtboxes are different from target points so this may not be relevant
+
+Grodus
+======
+-Fire Drive can target both Grodus and his Scepter
+-Attacking the Scepter shows the damage dealt, though no damage is dealt to Grodus
+-The Scepter has the same Defense as Grodus
+-If you deal 0 damage to the Scepter, it won't cause Grodus' next spell to fail

@@ -336,10 +336,12 @@ namespace PaperMarioBattleSystem
                     "<speed value=\"0\">Print really fast <key><speed value=\"25\">and now <speed value=\"300\">really\nslow!<speed value=\"25\">\n<k><p>" +
                     "<dynamic value=\"2.5\">Dynamic <scale value=\".8\">text</scale></dynamic> <scale value=\"1.5\"><dynamic value=\"3\">is</dynamic> also<wait value=\"300\"></scale><dynamic value=\"2\"> pretty\n<color value=\"ffff00ff\">awesome!</color></dynamic><k>";
 
-                DialogueManager.Instance.CreateBubble(thing3);//new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!", "test more" }, null);
+                //string thing4 = "test...\n\n<scale value=\"3\">     KABOOM!</scale><k>";
+
+                DialogueManager.Instance.CreateBubble(thing3, AssetManager.Instance.TTYDFont, null);//new string[] { "Hello World!", "This is a test!", "Not too shabby...\nwhat?\nOh well, let's continue working\non this!", "test more" }, null);
             }*/
         }
-
+        
         /// <summary>
         /// Allows the game to run logic such as updating the world,
         /// checking for collisions, gathering input, and playing audio.

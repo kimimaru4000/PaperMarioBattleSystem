@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.WingedIdleName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(129, 45, 27, 28), 200d),
-                new Animation.Frame(new Rectangle(1, 7, 27, 30), 200d)));
+                new Animation.Frame(new Rectangle(1, 7, 27, 30), 200d, new Vector2(0, 1))));
             AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(129, 45, 27, 28), 100d),
                 new Animation.Frame(new Rectangle(1, 7, 27, 30), 100d)));
@@ -42,24 +42,24 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(33, 89, 27, 30), 1000d)));
 
-            //Wings (for the first idle frame, at least) are offset (-7, -1 (or left 7, up 1)) from the Paragoomba's body
+            //Wings are offset from the Paragoomba's body
             //Both Wings for each frame are in a single cropped texture
             //The wings are rendered underneath the Paragoomba's body
 
             AnimManager.AddAnimationChildFrames(AnimationGlobals.WingedBattleAnimations.WingedIdleName,
-                new Animation.Frame(new Rectangle(3, 166, 41, 18), 200d, new Vector2(-7, -1), -.01f),
-                new Animation.Frame(new Rectangle(50, 161, 41, 14), 200d, new Vector2(-7, 13), -.01f));
+                new Animation.Frame(new Rectangle(3, 166, 41, 18), 200d, new Vector2(0, -6), -.01f),
+                new Animation.Frame(new Rectangle(50, 161, 41, 14), 200d, new Vector2(0, 6), -.01f));
             AnimManager.AddAnimationChildFrames(AnimationGlobals.WingedBattleAnimations.FlyingName,
-                new Animation.Frame(new Rectangle(3, 166, 41, 18), 100d, new Vector2(-7, -1), -.01f),
-                new Animation.Frame(new Rectangle(50, 161, 41, 14), 100d, new Vector2(-7, 13), -.01f));
+                new Animation.Frame(new Rectangle(3, 166, 41, 18), 100d, new Vector2(0, -6), -.01f),
+                new Animation.Frame(new Rectangle(50, 161, 41, 14), 100d, new Vector2(0, 6), -.01f));
             AnimManager.AddAnimationChildFrames(AnimationGlobals.HurtName,
-                new Animation.Frame(new Rectangle(3, 166, 41, 18), 80d, new Vector2(-4, -1), -.01f),
-                new Animation.Frame(new Rectangle(3, 166, 41, 18), 80d, new Vector2(-4, -1), -.01f));
+                new Animation.Frame(new Rectangle(3, 166, 41, 18), 80d, new Vector2(3, -5), -.01f),
+                new Animation.Frame(new Rectangle(3, 166, 41, 18), 80d, new Vector2(3, -5), -.01f));
             AnimManager.AddAnimationChildFrames(AnimationGlobals.DeathName,
-                new Animation.Frame(new Rectangle(3, 166, 41, 18), 1000d, new Vector2(-4, -1), -.01f));
+                new Animation.Frame(new Rectangle(3, 166, 41, 18), 100d, new Vector2(3, -5), -.01f));
 
             AnimManager.AddAnimationChildFrames(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName,
-                new Animation.Frame(new Rectangle(120, 121, 31, 21), 1000d, new Vector2(-1, -9), -.01f));
+                new Animation.Frame(new Rectangle(120, 121, 31, 21), 1000d, new Vector2(1, -13), -.01f));
         }
 
         public override void CleanUp()

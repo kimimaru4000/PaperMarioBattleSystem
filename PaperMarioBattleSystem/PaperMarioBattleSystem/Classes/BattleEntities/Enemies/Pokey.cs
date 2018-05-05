@@ -59,7 +59,7 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.IdleName, new ReverseAnimation(null, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(33, 65, 30, 30), 200d),
                 new Animation.Frame(new Rectangle(97, 65, 30, 30), 200d),
-                new Animation.Frame(new Rectangle(65, 66, 30, 29), 200d, new Vector2(0, 1))));
+                new Animation.Frame(new Rectangle(65, 66, 30, 29), 200d, new Vector2(0, -1))));
             //AnimManager.AddAnimationChildFrame(AnimationGlobals.IdleName)
         }
 
@@ -185,8 +185,10 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < VisualSegments.Count; i++)
             {
                 Vector2 pos = Position;
+                pos.Y -= (float)Math.Ceiling((curFrame.DrawRegion.Height - SegmentHeight) / 2f);
                 pos.Y += (i * (Scale.Y * SegmentHeight)) + ((curFrame.PosOffset.Y + curFrame.DrawRegion.Height) * Scale.Y);
-                SpriteRenderer.Instance.Draw(VisualSegments[i].Tex, pos, VisualSegments[i].SourceRect, TintColor, 0f, Vector2.Zero, Scale, EntityType == Enumerations.EntityTypes.Player, false, .09f);
+
+                SpriteRenderer.Instance.Draw(VisualSegments[i].Tex, pos, VisualSegments[i].SourceRect, TintColor, 0f, new Vector2(.5f, .5f), Scale, EntityType == Enumerations.EntityTypes.Player, false, .09f);
             }
         }
     }

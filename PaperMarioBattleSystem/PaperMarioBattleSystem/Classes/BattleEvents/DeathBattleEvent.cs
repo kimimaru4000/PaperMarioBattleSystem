@@ -17,6 +17,8 @@ namespace PaperMarioBattleSystem
         private BattleEntity Entity = null;
         private Animation DeathAnim = null;
         private bool OverrideRevival = false;
+        private float CurRotation = 0f;
+        private float RotateAmount = 10f;
 
         public DeathBattleEvent(BattleEntity entity, bool overrideRevival)
         {
@@ -39,6 +41,8 @@ namespace PaperMarioBattleSystem
         {
             base.OnEnd();
             BattleUIManager.Instance.UnsuppressMenus();
+
+            Entity.Rotation = 0f;
 
             //Handle the entity dying on its turn
             if (Entity.IsTurn == true)
@@ -66,11 +70,6 @@ namespace PaperMarioBattleSystem
 
             if (revivalItem != null)
             {
-                //NOTE: In TTYD if both Mario and his Partner die at the same time, it'll use up only one Life Shroom
-                //The current behavior performs that; however, if an entity dies before another's revival event is finished,
-                //the one being revived will still be removed from battle since it's still dead.
-                //This will have to be revised in some way to work properly
-
                 //Queue the revival event with the same priority as death so it occurs immediately
                 BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Death,
                     new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
@@ -102,13 +101,21 @@ namespace PaperMarioBattleSystem
 
             if (DeathAnim.Finished == true)
             {
-                //Play death sound if it's an enemy
-                if (Entity.EntityType == Enumerations.EntityTypes.Enemy)
-                {
-                    SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyDeath);
-                }
+                //NOTE: Implement the rotation after setting center origins so it looks better
+                //CurRotation += RotateAmount;
+                //
+                //Entity.Rotation = UtilityGlobals.ToRadians(CurRotation);
 
-                End();
+                //if (CurRotation >= 360f)
+                //{
+                    //Play death sound if it's an enemy
+                    if (Entity.EntityType == Enumerations.EntityTypes.Enemy)
+                    {
+                        SoundManager.Instance.PlaySound(SoundManager.Sound.EnemyDeath);
+                    }
+
+                    End();
+                //}
             }
         }
 

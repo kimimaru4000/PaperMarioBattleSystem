@@ -43,10 +43,10 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(56, 4, 32, 48), 100d, new Vector2(0, -2)),
                 new Animation.Frame(new Rectangle(56, 4, 32, 48), 100d, new Vector2(0, -1))));
             AnimManager.AddAnimationChildFrames(AnimationGlobals.WingedBattleAnimations.WingedIdleName,
-                new Animation.Frame(new Rectangle(72, 156, 19, 27), 100d, new Vector2(25, -4)),
-                new Animation.Frame(new Rectangle(104, 220, 23, 23), 100d, new Vector2(25, 4)),
-                new Animation.Frame(new Rectangle(40, 219, 18, 28), 100d, new Vector2(25, 16)),
-                new Animation.Frame(new Rectangle(248, 190, 21, 23), 100d, new Vector2(25, 13)));
+                new Animation.Frame(new Rectangle(72, 156, 19, 27), 100d, new Vector2(19, -13)),
+                new Animation.Frame(new Rectangle(104, 220, 23, 23), 100d, new Vector2(21, -8)),
+                new Animation.Frame(new Rectangle(40, 219, 18, 28), 100d, new Vector2(19, 8)),
+                new Animation.Frame(new Rectangle(248, 190, 21, 23), 100d, new Vector2(20, 1)));
 
             //NOTE: Incomplete wing frames; the wings on the left of the Paratroopa will require more work to get in due to the way the wings are stored
 
@@ -67,8 +67,8 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(200, 3, 36, 43), 250d)));
             //NOTE: Not accurate - in PM, it looks like the wings are rotated slightly to match the Paratroopa's pose in its hurt animation
             AnimManager.AddAnimationChildFrames(AnimationGlobals.HurtName,
-                new Animation.Frame(new Rectangle(66, 190, 45, 26), 250d, new Vector2(-1, 2), -.01f),
-                new Animation.Frame(new Rectangle(66, 190, 45, 26), 250d, new Vector2(-1, 2), -.01f));
+                new Animation.Frame(new Rectangle(66, 190, 45, 26), 250d, new Vector2(3, -6), -.01f),
+                new Animation.Frame(new Rectangle(66, 190, 45, 26), 250d, new Vector2(3, -6), -.01f));
         }
 
         protected override void SetFlippedBehavior()

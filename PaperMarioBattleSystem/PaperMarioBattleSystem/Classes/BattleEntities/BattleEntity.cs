@@ -96,12 +96,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Various unique properties belonging to the BattleEntity
         /// </summary>
-        public readonly BattleEntityProperties EntityProperties = null;
+        public BattleEntityProperties EntityProperties { get; private set; } = null;
 
         /// <summary>
         /// The BattleEntity's animation manager.
         /// </summary>
-        public readonly ObjAnimManager AnimManager = null;
+        public ObjAnimManager AnimManager { get; private set; } = null;
 
         /// <summary>
         /// The HeightState of the entity
@@ -160,20 +160,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The position the entity is rendered at.
         /// </summary>
-        public Vector2 DrawnPosition
-        {
-            get
-            {
-                //NOTE: This has a chance at being inaccurate if the entity is drawn with a different origin (this doesn't happen as of this comment)
-                Vector2 pos = Position;
-                if (AnimManager.CurrentAnim != null)
-                {
-                    pos += (AnimManager.CurrentAnim.CurFrame.DrawRegion.GetCenterOrigin() + AnimManager.CurrentAnim.CurFrame.PosOffset);
-                }
-
-                return pos;
-            }
-        }
+        public Vector2 DrawnPosition => AnimManager.CurrentAnim.CurFrame.GetDrawnPosition(Position, SpriteFlip);
 
         public float Rotation { get; set; } = 0f;
         public Vector2 Scale { get; set; } = Vector2.One;
@@ -1142,7 +1129,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void DrawEntity()
         {
-            AnimManager.CurrentAnim?.Draw(Position, TintColor, Rotation, Vector2.Zero, Scale, SpriteFlip, Layer);
+            AnimManager.CurrentAnim?.Draw(Position, TintColor, Rotation, new Vector2(.5f, .5f), Scale, SpriteFlip, Layer);
         }
 
         /// <summary>
@@ -1150,36 +1137,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void DrawOther()
         {
-            //Draw Status Effect icons on the BattleEntity
-            //You can't see the icons unless it's Mario or his Partner's turn and they're not in a Sequence
-            /*if (BattleManager.Instance.ShouldShowPlayerTurnUI == true)
-            {
-                Vector2 statusIconPos = new Vector2(Position.X + 10, Position.Y - 40);
-                StatusEffect[] statuses = EntityProperties.GetStatuses();
-                int index = 0;
-
-                for (int i = 0; i < statuses.Length; i++)
-                {
-                    StatusEffect status = statuses[i];
-                    CroppedTexture2D texture = status.StatusIcon;
-
-                    //Don't draw the status if it doesn't have an icon or if it's Icon suppressed
-                    if (texture == null || texture.Tex == null || status.IsSuppressed(StatusSuppressionTypes.Icon) == true)
-                    {
-                        continue;
-                    }
-
-                    float yOffset = ((index + 1) * StatusGlobals.IconYOffset);
-                    Vector2 iconPos = Camera.Instance.SpriteToUIPos(new Vector2(statusIconPos.X, statusIconPos.Y - yOffset));
-
-                    float depth = .35f - (index * .01f);
-                    float turnStringDepth = depth + .0001f;
-
-                    status.DrawStatusInfo(iconPos, depth, turnStringDepth);
-
-                    index++;
-                }
-            }*/
+            
         }
     }
 }

@@ -121,7 +121,7 @@ namespace PaperMarioBattleSystem
             if (HeldCollectible != null && HeldCollectible.Icon != null && HeldCollectible.Icon.Tex != null)
             {
                 //The position offset might need to be adjusted; for now this should work for a lot of enemies
-                SpriteRenderer.Instance.Draw(HeldCollectible.Icon.Tex, new Vector2(Position.X + 14, Position.Y + 6), HeldCollectible.Icon.SourceRect,
+                SpriteRenderer.Instance.Draw(HeldCollectible.Icon.Tex, new Vector2(Position.X + 6, Position.Y), HeldCollectible.Icon.SourceRect,
                     Color.White, false, false, Layer - .001f);
             }
         }

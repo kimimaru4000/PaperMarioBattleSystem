@@ -132,7 +132,7 @@ namespace PaperMarioBattleSystem
         {
             //Save a draw call if the alpha is 0
             if (TintColor.A > 0f)
-                SpriteRenderer.Instance.Draw(Wings.Tex, DrawPos, Wings.SourceRect, TintColor, Flip, false, Layer);
+                SpriteRenderer.Instance.Draw(Wings.Tex, DrawPos, Wings.SourceRect, TintColor, new Vector2(.5f, .5f), Flip, false, Layer);
         }
     }
 }

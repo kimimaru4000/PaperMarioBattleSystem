@@ -576,7 +576,7 @@ namespace PaperMarioBattleSystem
                         }
 
                         //Render the character
-                        offset = SpriteRenderer.Instance.uiBatch.DrawCharacter(AssetManager.Instance.TTYDFont, stringBuilder[j], FontGlyphs, offset, finalPos, bdata.TextColor, 0f, origin, scale, bdata.Scale, SpriteEffects.None, .95f);
+                        offset = SpriteRenderer.Instance.uiBatch.DrawCharacter(BubbleFont, stringBuilder[j], FontGlyphs, offset, finalPos, bdata.TextColor, 0f, origin, scale, bdata.Scale, SpriteEffects.None, .95f);
                     }
                 }
             }

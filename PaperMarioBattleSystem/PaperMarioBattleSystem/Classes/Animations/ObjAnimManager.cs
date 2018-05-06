@@ -146,7 +146,7 @@ namespace PaperMarioBattleSystem
 
             if (Animations.ContainsKey(animName) == true)
             {
-                Debug.LogWarning($"{GetName} already has an animation called \"{animName}\" and will be replaced");
+                //Debug.LogWarning($"{GetName} already has an animation called \"{animName}\" and will be replaced");
 
                 //Clear the current animation reference if it is the animation being removed
                 Animation prevAnim = Animations[animName];

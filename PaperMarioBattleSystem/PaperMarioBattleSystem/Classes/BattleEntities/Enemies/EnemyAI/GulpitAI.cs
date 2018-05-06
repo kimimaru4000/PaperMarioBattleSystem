@@ -25,14 +25,15 @@ namespace PaperMarioBattleSystem
             int chosenIndex = -1;
 
             //Get all Neutral entities
-            BattleEntity[] neutralEntities = BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Neutral, Enumerations.HeightStates.Grounded);
-            for (int i = 0; i < neutralEntities.Length; i++)
+            BattleManager.Instance.GetEntities(usableEntities, Enumerations.EntityTypes.Neutral, Enumerations.HeightStates.Grounded);
+            for (int i = 0; i < usableEntities.Count; i++)
             {
-                IUsableEntity usableEntity = neutralEntities[i] as IUsableEntity;
-                //Add to the list if this entity is usable
-                if (usableEntity != null)
+                IUsableEntity usableEntity = usableEntities[i] as IUsableEntity;
+                //Remove from the list if this entity is not usable
+                if (usableEntity == null)
                 {
-                    usableEntities.Add(neutralEntities[i]);
+                    usableEntities.RemoveAt(i);
+                    i--;
                 }
             }
 

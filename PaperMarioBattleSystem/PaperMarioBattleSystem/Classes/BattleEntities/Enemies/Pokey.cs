@@ -53,14 +53,7 @@ namespace PaperMarioBattleSystem
 
             #endregion
 
-            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Pokey.png");
-            AnimManager.SetSpriteSheet(spriteSheet);
-
-            AnimManager.AddAnimation(AnimationGlobals.IdleName, new ReverseAnimation(null, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(33, 65, 30, 30), 200d),
-                new Animation.Frame(new Rectangle(97, 65, 30, 30), 200d),
-                new Animation.Frame(new Rectangle(65, 66, 30, 29), 200d, new Vector2(0, -1))));
-            //AnimManager.AddAnimationChildFrame(AnimationGlobals.IdleName)
+            LoadAnimations();
         }
 
         public override void CleanUp()
@@ -74,6 +67,18 @@ namespace PaperMarioBattleSystem
                 VisualSegments.Clear();
                 VisualSegments = null;
             }
+        }
+
+        public override void LoadAnimations()
+        {
+            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Pokey.png");
+            AnimManager.SetSpriteSheet(spriteSheet);
+
+            AnimManager.AddAnimation(AnimationGlobals.IdleName, new ReverseAnimation(null, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(33, 65, 30, 30), 200d),
+                new Animation.Frame(new Rectangle(97, 65, 30, 30), 200d),
+                new Animation.Frame(new Rectangle(65, 66, 30, 29), 200d, new Vector2(0, -1))));
+            //AnimManager.AddAnimationChildFrame(AnimationGlobals.IdleName)
         }
 
         protected virtual void SetSegmentBehavior()

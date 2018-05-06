@@ -229,6 +229,15 @@ namespace PaperMarioBattleSystem
             StatusRemovedEvent = null;
         }
 
+        /// <summary>
+        /// Loads a BattleEntity's animations.
+        /// <para>This is public to allow for easier debugging through reloading animations.</para>
+        /// </summary>
+        public virtual void LoadAnimations()
+        {
+
+        }
+
         #region Damage Handling
 
         /*

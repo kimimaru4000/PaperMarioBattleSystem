@@ -22,6 +22,11 @@ namespace PaperMarioBattleSystem
             //Goompa doesn't take turns
             BaseTurns = -99;
 
+            LoadAnimations();
+        }
+
+        public override void LoadAnimations()
+        {
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Characters/Goompa.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 

@@ -27,6 +27,11 @@ namespace PaperMarioBattleSystem
 
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Dizzy, new StatusPropertyHolder(120d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Blown, new StatusPropertyHolder(110d, 0));
+        }
+
+        public override void LoadAnimations()
+        {
+            base.LoadAnimations();
 
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Paratroopa.png");
             AnimManager.SetSpriteSheet(spriteSheet);

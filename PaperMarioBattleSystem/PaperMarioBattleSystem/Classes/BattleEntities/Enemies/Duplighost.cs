@@ -59,6 +59,32 @@ namespace PaperMarioBattleSystem
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Tiny, new StatusPropertyHolder(75, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Blown, new StatusPropertyHolder(70, 0));
 
+            LoadAnimations();
+
+            //Copy animations into its original set
+            OrigAnimations = new ObjAnimManager(this);
+            Animation[] allAnims = AnimManager.GetAllAnimations();
+            for (int i = 0; i < allAnims.Length; i++)
+            {
+                Animation anim = allAnims[i];
+                OrigAnimations.AddAnimation(anim.Key, anim);
+            }
+
+            //Subscribe to its own StatusInflicted event
+            StatusInflictedEvent -= OnStatusInflicted;
+            StatusInflictedEvent += OnStatusInflicted;
+        }
+
+        public override void CleanUp()
+        {
+            StatusInflictedEvent -= OnStatusInflicted;
+            RemoveDisguise();
+
+            base.CleanUp();
+        }
+
+        public override void LoadAnimations()
+        {
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Duplighost.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
@@ -99,27 +125,6 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.DizzyName, dizzyAnim);
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.ConfusedName, dizzyAnim);
-
-            //Copy animations into its original set
-            OrigAnimations = new ObjAnimManager(this);
-            Animation[] allAnims = AnimManager.GetAllAnimations();
-            for (int i = 0; i < allAnims.Length; i++)
-            {
-                Animation anim = allAnims[i];
-                OrigAnimations.AddAnimation(anim.Key, anim);
-            }
-
-            //Subscribe to its own StatusInflicted event
-            StatusInflictedEvent -= OnStatusInflicted;
-            StatusInflictedEvent += OnStatusInflicted;
-        }
-
-        public override void CleanUp()
-        {
-            StatusInflictedEvent -= OnStatusInflicted;
-            RemoveDisguise();
-
-            base.CleanUp();
         }
 
         public override string GetIdleAnim()

@@ -35,6 +35,11 @@ namespace PaperMarioBattleSystem
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Blown, new StatusPropertyHolder(90d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.KO, new StatusPropertyHolder(100d, 0));
 
+            LoadAnimations();
+        }
+
+        public override void LoadAnimations()
+        {
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/KoopaTroopa.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 

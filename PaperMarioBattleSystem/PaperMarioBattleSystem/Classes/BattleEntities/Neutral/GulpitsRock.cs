@@ -50,6 +50,11 @@ namespace PaperMarioBattleSystem
             //If the rock is big, make it deal more damage than the small one
             UsableValue = (BigRock == true) ? BigRockAdditionalDamage : SmallRockAdditionalDamage;
 
+            LoadAnimations();
+        }
+
+        public override void LoadAnimations()
+        {
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Gulpit.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
@@ -86,7 +91,7 @@ namespace PaperMarioBattleSystem
                 startPos.Y += 15f;
 
             //Set battle position
-            Vector2 battlepos = startPos + new Vector2((BattleManager.Instance.PositionXDiff / 2) * BattleIndex, 0);
+            Vector2 battlepos = startPos + new Vector2((BattleManager.Instance.PositionXDiff / 3) * BattleIndex, 0);
 
             SetBattlePosition(battlepos);
             Position = BattlePosition;

@@ -16,6 +16,11 @@ namespace PaperMarioBattleSystem
             PartnerDescription = "He can Headbonk on enemies!";
             PartnerType = Enumerations.PartnerTypes.Goombario;
 
+            LoadAnimations();
+        }
+
+        public override void LoadAnimations()
+        {
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Characters/Goombario.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 

@@ -40,6 +40,11 @@ namespace PaperMarioBattleSystem
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Blown, new StatusPropertyHolder(100, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.KO, new StatusPropertyHolder(100, 0));
 
+            LoadAnimations();
+        }
+
+        public override void LoadAnimations()
+        {
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Yux.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 

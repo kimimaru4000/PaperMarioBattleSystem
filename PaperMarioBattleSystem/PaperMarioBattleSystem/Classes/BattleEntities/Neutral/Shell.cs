@@ -42,21 +42,7 @@ namespace PaperMarioBattleSystem
 
             AddStatusImmunities();
 
-            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Neutral/ShellShieldShell.png");
-            AnimManager.SetSpriteSheet(spriteSheet);
-
-            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.FullHealthStateName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(7, 3, 186, 130), 1000d)));
-
-            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.MildlyDamagedStateName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(7, 153, 186, 130), 1000d)));
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.ShellBattleAnimations.MildlyDamagedStateName,
-                new Animation.Frame(new Rectangle(217, 4, 13, 47), 1000d, new Vector2(44, 1)));
-
-            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.SeverelyDamagedStateName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(7, 153, 186, 130), 1000d)));
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.ShellBattleAnimations.SeverelyDamagedStateName,
-                new Animation.Frame(new Rectangle(242, 4, 42, 98), 1000d, new Vector2(36, 1)));
+            LoadAnimations();
 
             Scale = new Vector2(.5f, .5f);
             Layer = .15f;
@@ -76,6 +62,25 @@ namespace PaperMarioBattleSystem
             RemoveEntityDefending();
 
             base.CleanUp();
+        }
+
+        public override void LoadAnimations()
+        {
+            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Neutral/ShellShieldShell.png");
+            AnimManager.SetSpriteSheet(spriteSheet);
+
+            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.FullHealthStateName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(7, 3, 186, 130), 1000d)));
+
+            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.MildlyDamagedStateName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(7, 153, 186, 130), 1000d)));
+            AnimManager.AddAnimationChildFrames(AnimationGlobals.ShellBattleAnimations.MildlyDamagedStateName,
+                new Animation.Frame(new Rectangle(217, 4, 13, 47), 1000d, new Vector2(44, 1)));
+
+            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.SeverelyDamagedStateName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(7, 153, 186, 130), 1000d)));
+            AnimManager.AddAnimationChildFrames(AnimationGlobals.ShellBattleAnimations.SeverelyDamagedStateName,
+                new Animation.Frame(new Rectangle(242, 4, 42, 98), 1000d, new Vector2(36, 1)));
         }
 
         public override string GetIdleAnim()

@@ -64,11 +64,7 @@ namespace PaperMarioBattleSystem
             EntityProperties.AddStatusProperty(StatusTypes.Blown, new StatusPropertyHolder(90, 0));
             EntityProperties.AddStatusProperty(StatusTypes.KO, new StatusPropertyHolder(95, 0));
 
-            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Yux.png");
-            AnimManager.SetSpriteSheet(spriteSheet);
-
-            AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(45, 50, 187, 189), 1000d)));
+            LoadAnimations();
         }
 
         public override void CleanUp()
@@ -88,6 +84,15 @@ namespace PaperMarioBattleSystem
                 MiniYuxes.RemoveAt(i);
                 i--;
             }
+        }
+
+        public override void LoadAnimations()
+        {
+            Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Yux.png");
+            AnimManager.SetSpriteSheet(spriteSheet);
+
+            AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(45, 50, 187, 189), 1000d)));
         }
 
         /// <summary>

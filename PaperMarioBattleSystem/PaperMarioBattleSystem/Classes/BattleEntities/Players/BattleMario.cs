@@ -27,8 +27,16 @@ namespace PaperMarioBattleSystem
 
             MStats = marioStats;
 
-            #region Initialize Animations
+            LoadAnimations();
+        }
 
+        public override void CleanUp()
+        {
+            BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
+        }
+
+        public override void LoadAnimations()
+        {
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Characters/Mario.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
@@ -122,19 +130,6 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(497, 643, 37, 50), 750d, new Vector2(0, 1))));
             AnimManager.AddAnimation(AnimationGlobals.MarioBattleAnimations.ListenName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(548, 901, 30, 51), 100d)));
-            
-            #endregion
-        }
-
-        /*NOTE: ADD FUNCTION FOR DEFINING ANIMATIONS
-         *NOTE: ADD FUNCTION FOR DEFINING ANIMATIONS
-         *NOTE: ADD FUNCTION FOR DEFINING ANIMATIONS
-         *NOTE: ADD FUNCTION FOR DEFINING ANIMATIONS
-         */
-
-        public override void CleanUp()
-        {
-            BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
         }
 
         public override void OnBattleStart()

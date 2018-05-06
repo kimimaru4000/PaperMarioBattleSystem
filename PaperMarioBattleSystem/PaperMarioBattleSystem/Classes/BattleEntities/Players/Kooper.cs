@@ -23,6 +23,18 @@ namespace PaperMarioBattleSystem
 
             FlippedBehavior = new KoopaFlippedBehavior(this, 2, EntityProperties.GetVulnerableDamageEffects(), BattleStats.BaseDefense);
 
+            LoadAnimations();
+        }
+
+        public override void CleanUp()
+        {
+            base.CleanUp();
+
+            FlippedBehavior?.CleanUp();
+        }
+
+        public override void LoadAnimations()
+        {
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Characters/Kooper.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
@@ -61,13 +73,6 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.ShelledBattleAnimations.FlippedName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(69, 221, 53, 26), 350d),
                 new Animation.Frame(new Rectangle(5, 218, 54, 28), 350d)));
-        }
-
-        public override void CleanUp()
-        {
-            base.CleanUp();
-
-            FlippedBehavior?.CleanUp();
         }
 
         protected sealed override BattleMenu GetMainBattleMenu()

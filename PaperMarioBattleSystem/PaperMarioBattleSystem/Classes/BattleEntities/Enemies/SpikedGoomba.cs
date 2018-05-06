@@ -20,6 +20,11 @@ namespace PaperMarioBattleSystem
                 Enumerations.Elements.Sharp, new Enumerations.ContactTypes[] { Enumerations.ContactTypes.TopDirect },
                 new Enumerations.ContactProperties[] { Enumerations.ContactProperties.None },
                 Enumerations.ContactResult.Failure, Enumerations.ContactResult.Failure, 1, null));
+        }
+
+        public override void LoadAnimations()
+        {
+            base.LoadAnimations();
 
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/SpikedGoomba.png");
             AnimManager.SetSpriteSheet(spriteSheet);

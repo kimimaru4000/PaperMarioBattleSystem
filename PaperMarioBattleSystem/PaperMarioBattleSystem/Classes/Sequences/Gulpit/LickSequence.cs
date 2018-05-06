@@ -22,6 +22,8 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
+                    User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
+
                     //Move to the entity
                     CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], EntitiesAffected[0].EntityType != Enumerations.EntityTypes.Player), WalkDur);
                     ChangeSequenceBranch(SequenceBranch.Main);

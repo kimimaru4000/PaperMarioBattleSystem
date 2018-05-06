@@ -940,7 +940,7 @@ namespace PaperMarioBattleSystem
         /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
         /// If null, will include entities of all height states.</param>
         /// <returns>All BattleEntities in battle matching the height states specified.</returns>
-        public BattleEntity[] GetAllEntities(params HeightStates[] heightStates)
+        public BattleEntity[] GetAllBattleEntities(params HeightStates[] heightStates)
         {
             List<BattleEntity> allentities = GetAllEntitiesList();
 

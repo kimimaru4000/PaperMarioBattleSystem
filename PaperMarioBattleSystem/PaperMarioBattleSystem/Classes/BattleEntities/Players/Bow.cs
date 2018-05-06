@@ -18,6 +18,11 @@ namespace PaperMarioBattleSystem
 
             ChangeHeightState(Enumerations.HeightStates.Airborne);
 
+            LoadAnimations();
+        }
+
+        public override void LoadAnimations()
+        {
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Characters/Bow.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 

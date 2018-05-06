@@ -68,6 +68,9 @@ namespace PaperMarioBattleSystem
                     //Show the used entity going inside its mouth; make invisible for now
                     EntityUsed.TintColor = Color.Transparent;
 
+                    EntityUsed.Layer = User.Layer + .0001f;
+                    AddSideSeqAction(new MoveToSeqAction(EntityUsed, User.Position + new Vector2(-18, -3), User.AnimManager.CurrentAnim.CurFrame.Duration));
+
                     CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.GulpitBattleAnimations.SpitRockName);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;

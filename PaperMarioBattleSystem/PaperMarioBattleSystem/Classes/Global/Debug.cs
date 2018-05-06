@@ -245,9 +245,9 @@ namespace PaperMarioBattleSystem
                 DebugUnitTests();
             }
 
-            //Damage Mario
             if (Input.GetKey(Keys.Tab, DebugKeyboard) == true)
             {
+                //Damage Mario
                 if (Input.GetKeyDown(Keys.H) == true)
                 {
                     //Make sure we damage the Shell instead if it's over Mario
@@ -258,6 +258,20 @@ namespace PaperMarioBattleSystem
                     }
 
                     entity.TakeDamage(Enumerations.Elements.Normal, 1, true);
+                }
+                //Reload all animations
+                //This can break Sequences that rely on animation timings
+                else if (Input.GetKeyDown(Keys.R) == true)
+                {
+                    Debug.Log("Reloading all BattleEntity animations. Things may break if in a Sequence!");
+
+                    List<BattleEntity> entities = new List<BattleEntity>();
+                    BattleManager.Instance.GetAllBattleEntities(entities, null);
+
+                    for (int i = 0; i < entities.Count; i++)
+                    {
+                        entities[i].LoadAnimations();
+                    }
                 }
             }
 

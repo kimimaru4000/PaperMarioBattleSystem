@@ -42,6 +42,11 @@ namespace PaperMarioBattleSystem
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Blown, new StatusPropertyHolder(70d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.KO, new StatusPropertyHolder(95d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Electrified, new StatusPropertyHolder(80d, 0));
+        }
+
+        public override void LoadAnimations()
+        {
+            base.LoadAnimations();
 
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Koopatrol.png");
             AnimManager.SetSpriteSheet(spriteSheet);

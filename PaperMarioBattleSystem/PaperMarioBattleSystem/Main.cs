@@ -29,7 +29,7 @@ namespace PaperMarioBattleSystem
         /// The event invoked when the window regains focus. This is invoked at the start of the update loop.
         /// </summary>
         public event OnRegainedFocus RegainedFocusEvent = null;
-
+        
         /// <summary>
         /// Tells if the game window was focused at the start of the update loop.
         /// </summary>
@@ -96,17 +96,17 @@ namespace PaperMarioBattleSystem
             //FOR TESTING
             InitializeInventory();
 
-            Goomba goomba = new Goomba();
-            goomba.SetHeldCollectible(new LifeShroom());
-
-            Paratroopa paraTroopa = new Paratroopa();
-            paraTroopa.SetHeldCollectible(new DefendPlusBadge());
+            //Goomba goomba = new Goomba();
+            //goomba.SetHeldCollectible(new LifeShroom());
+            //
+            //Paratroopa paraTroopa = new Paratroopa();
+            //paraTroopa.SetHeldCollectible(new DefendPlusBadge());
 
             //Initialize the BattleManager
             BattleManager.Instance.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEntity>() { goomba, paraTroopa });
+                new List<BattleEntity>() { new Gulpit(), new GulpitsRock(false), new GulpitsRock(true), new GulpitsRock(false), new GulpitsRock(true), new GulpitsRock(false) });
 
             //Start the battle
             BattleManager.Instance.StartBattle();

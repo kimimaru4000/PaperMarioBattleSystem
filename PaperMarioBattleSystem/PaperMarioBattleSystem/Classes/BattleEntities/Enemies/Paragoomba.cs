@@ -24,6 +24,18 @@ namespace PaperMarioBattleSystem
             AIBehavior = new ParagoombaAI(this);
 
             ChangeHeightState(Enumerations.HeightStates.Airborne);
+        }
+
+        public override void CleanUp()
+        {
+            base.CleanUp();
+
+            WingedBehavior?.CleanUp();
+        }
+
+        public override void LoadAnimations()
+        {
+            base.LoadAnimations();
 
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Paragoomba.png");
             AnimManager.SetSpriteSheet(spriteSheet);
@@ -60,13 +72,6 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimationChildFrames(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName,
                 new Animation.Frame(new Rectangle(120, 121, 31, 21), 1000d, new Vector2(1, -13), -.01f));
-        }
-
-        public override void CleanUp()
-        {
-            base.CleanUp();
-
-            WingedBehavior?.CleanUp();
         }
 
         public override void OnBattleStart()

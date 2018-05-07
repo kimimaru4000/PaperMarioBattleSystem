@@ -48,10 +48,11 @@ namespace PaperMarioBattleSystem
 
         protected override void OnPhaseCycleStart()
         {
-            //NOTE: With the Status Order changed, this now works even if the BattleEntity has 0 turns
-            //FIX THIS and try to make it order-agnostic
-            EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
-            Debug.Log($"{StatusType} set MaxTurns to {EntityAfflicted.BaseTurns + AdditionalTurns} for {EntityAfflicted.Name}");
+            if (EntityAfflicted.MaxTurns > 0)
+            {
+                Debug.Log($"{StatusType} set MaxTurns to {EntityAfflicted.BaseTurns + AdditionalTurns} for {EntityAfflicted.Name}");
+                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
+            }
             ProgressTurnCount();
         }
 
@@ -67,7 +68,10 @@ namespace PaperMarioBattleSystem
         {
             if (statusSuppressionType == Enumerations.StatusSuppressionTypes.Effects)
             {
-                EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
+                if (EntityAfflicted.MaxTurns > 0)
+                {
+                    EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns + AdditionalTurns);
+                }
             }
         }
 

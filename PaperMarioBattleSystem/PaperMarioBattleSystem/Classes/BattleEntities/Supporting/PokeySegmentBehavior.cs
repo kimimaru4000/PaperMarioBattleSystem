@@ -67,7 +67,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        protected virtual void OnDamageTaken(InteractionHolder damageInfo)
+        protected virtual void OnDamageTaken(in InteractionHolder damageInfo)
         {
             if (Entity.IsDead == true || damageInfo.Hit == false) return;
 

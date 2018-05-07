@@ -49,7 +49,7 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(97, 48, 29, 27), 80d),
                 new Animation.Frame(new Rectangle(98, 89, 27, 26), 80d)));
-            AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(98, 89, 27, 26), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(98, 89, 27, 26), 300d)));
 
             AnimManager.AddAnimation(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(33, 89, 27, 30), 1000d)));

@@ -41,7 +41,11 @@ namespace PaperMarioBattleSystem
         /// The max number of frames in the animation
         /// </summary>
         protected int MaxFrames = 1;
-        protected int CurFrameNum = 0;
+
+        /// <summary>
+        /// The current frame in the animation.
+        /// </summary>
+        public int CurFrameNum { get; protected set; } = 0;
 
         /// <summary>
         /// Whether the animation is complete or not. This is a separate value to maximize flexibility
@@ -77,7 +81,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool IsPlaying => (Finished == false && Paused == false);
 
-        protected int MaxFrameIndex => MaxFrames - 1;
+        /// <summary>
+        /// The last valid frame index in the animation.
+        /// </summary>
+        public int MaxFrameIndex => MaxFrames - 1;
 
         /// <summary>
         /// Returns the animation frame at a particular index.

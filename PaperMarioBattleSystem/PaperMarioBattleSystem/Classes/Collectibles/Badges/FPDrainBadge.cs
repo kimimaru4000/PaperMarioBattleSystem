@@ -55,7 +55,7 @@ namespace PaperMarioBattleSystem
             QueuedHeal = false;
         }
 
-        private void OnDamagedEntity(InteractionHolder damageInfo)
+        private void OnDamagedEntity(in InteractionHolder damageInfo)
         {
             //FP Drain doesn't take effect if damaging with Payback or if the damage dealt is 0
             if (damageInfo.IsPaybackDamage == true || damageInfo.TotalDamage == 0 || QueuedHeal == true)

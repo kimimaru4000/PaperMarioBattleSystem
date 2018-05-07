@@ -44,13 +44,13 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public event TurnEnded TurnEndEvent = null;
 
-        public delegate void DamageTaken(InteractionHolder damageInfo);
+        public delegate void DamageTaken(in InteractionHolder damageInfo);
         /// <summary>
         /// The event invoked when the BattleEntity takes damage. This is invoked after all other logic when taking damage.
         /// </summary>
         public event DamageTaken DamageTakenEvent = null;
 
-        public delegate void DealtDamage(InteractionHolder damageInfo);
+        public delegate void DealtDamage(in InteractionHolder damageInfo);
         /// <summary>
         /// The event invoked when the BattleEntity damages another BattleEntity.
         /// This is invoked after all other logic when damaging the BattleEntity.
@@ -166,6 +166,7 @@ namespace PaperMarioBattleSystem
         public Vector2 Scale { get; set; } = Vector2.One;
         public bool SpriteFlip { get; set; } = false;
         public float Layer { get; set; } = .1f;
+        public readonly Vector2 Origin = new Vector2(.5f, .5f);
 
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
@@ -254,7 +255,7 @@ namespace PaperMarioBattleSystem
         /// <para>This also is called when dealing Payback damage.</para>
         /// </summary>
         /// <param name="damageInfo">The InteractionHolder containing the entity to damage and all other interaction data.</param>
-        public void DamageEntity(InteractionHolder damageInfo)
+        public void DamageEntity(in InteractionHolder damageInfo)
         {
             damageInfo.Entity.TakeDamage(damageInfo);
 
@@ -269,7 +270,7 @@ namespace PaperMarioBattleSystem
         /// and heals for <see cref="ElementInteractionResult.Heal"/>.</para>
         /// </summary>
         /// <param name="damageResult">The InteractionHolder containing the result of a damage interaction.</param>
-        protected virtual void HandleDamageResult(InteractionHolder damageResult)
+        protected virtual void HandleDamageResult(in InteractionHolder damageResult)
         {
             Elements element = damageResult.DamageElement;
             int damage = damageResult.TotalDamage;
@@ -328,7 +329,7 @@ namespace PaperMarioBattleSystem
         /// Handles inflicting Status Effects on the BattleEntity after receiving damage.
         /// </summary>
         /// <param name="damageResult">The InteractionHolder containing the result of a damage interaction.</param>
-        protected virtual void HandleStatusAffliction(InteractionHolder damageResult)
+        protected virtual void HandleStatusAffliction(in InteractionHolder damageResult)
         {
             StatusChanceHolder[] statusesInflicted = damageResult.StatusesInflicted;
 
@@ -355,7 +356,7 @@ namespace PaperMarioBattleSystem
         /// Makes the entity take damage from an attack, factoring in stats such as defense, weaknesses, and resistances.
         /// </summary>
         /// <param name="damageResult">The InteractionHolder containing the result of a damage interaction.</param>
-        public void TakeDamage(InteractionHolder damageResult)
+        public void TakeDamage(in InteractionHolder damageResult)
         {
             int damage = damageResult.TotalDamage;
             Elements element = damageResult.DamageElement;
@@ -400,8 +401,8 @@ namespace PaperMarioBattleSystem
         /// Performs entity-specific logic when taking damage.
         /// This is called after damage has been dealt but before the damage taken event.
         /// </summary>
-        /// <param name="damageInfo"></param>
-        protected virtual void OnTakeDamage(InteractionHolder damageInfo)
+        /// <param name="damageInfo">The InteractionHolder containing the entity to damage and all other interaction data.</param>
+        protected virtual void OnTakeDamage(in InteractionHolder damageInfo)
         {
 
         }
@@ -612,7 +613,7 @@ namespace PaperMarioBattleSystem
 
             BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Death,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                new DeathBattleEvent(this, IsInBattle == false));
+                new DeathBattleEvent(this, IsInBattle == false, EntityType == EntityTypes.Enemy));
         }
 
         /// <summary>
@@ -1138,7 +1139,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void DrawEntity()
         {
-            AnimManager.CurrentAnim?.Draw(Position, TintColor, Rotation, new Vector2(.5f, .5f), Scale, SpriteFlip, Layer);
+            AnimManager.CurrentAnim?.Draw(Position, TintColor, Rotation, Origin, Scale, SpriteFlip, Layer);
         }
 
         /// <summary>

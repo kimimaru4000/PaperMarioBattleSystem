@@ -44,7 +44,7 @@ namespace PaperMarioBattleSystem
             EntityEquipped.DamageTakenEvent -= HealFP;
         }
 
-        private void HealFP(InteractionHolder damageInfo)
+        private void HealFP(in InteractionHolder damageInfo)
         {
             //The entity doesn't recover FP if dead (TEST THIS) or if the damage dealt was 0 or less
             if (EntityEquipped.IsDead == false && damageInfo.TotalDamage > 0)

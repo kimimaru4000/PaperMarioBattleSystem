@@ -38,6 +38,7 @@ namespace PaperMarioBattleSystem
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(AnimationGlobals.DuplighostBattleAnimations.DisguiseName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.DuplighostBattleAnimations.DisguiseName);
 
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;

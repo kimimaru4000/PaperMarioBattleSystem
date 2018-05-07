@@ -78,7 +78,6 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(33, 65, 30, 30), 200d),
                 new Animation.Frame(new Rectangle(97, 65, 30, 30), 200d),
                 new Animation.Frame(new Rectangle(65, 66, 30, 29), 200d, new Vector2(0, -1))));
-            //AnimManager.AddAnimationChildFrame(AnimationGlobals.IdleName)
         }
 
         protected virtual void SetSegmentBehavior()
@@ -107,11 +106,6 @@ namespace PaperMarioBattleSystem
                 SetBattlePosition(pos);
                 Position = pos;
             }
-        }
-
-        protected override void OnTakeDamage(InteractionHolder damageInfo)
-        {
-            base.OnTakeDamage(damageInfo);
         }
 
         #region Tattle Info

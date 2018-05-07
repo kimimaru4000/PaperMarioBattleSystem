@@ -116,7 +116,11 @@ namespace PaperMarioBattleSystem
                     }
 
                     BattleObjManager.Instance.AddBattleObject(HeartVFX);
-                    EntitiesAffected[0].AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName);
+
+                    if (EntitiesAffected[0].IsImmobile() == false)
+                    {
+                        EntitiesAffected[0].AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName);
+                    }
 
                     CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.GoombellaBattleAnimations.WinkName);
                     break;
@@ -141,7 +145,10 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new WaitForBattleEventSeqAction(msgEvent);
                     break;
                 case 3:
-                    EntitiesAffected[0].AnimManager.PlayAnimation(EntitiesAffected[0].GetIdleAnim());
+                    if (EntitiesAffected[0].IsImmobile() == false)
+                    {
+                        EntitiesAffected[0].AnimManager.PlayAnimation(EntitiesAffected[0].GetIdleAnim());
+                    }
                     HeartVFX.FadeOut();
                     CurSequenceAction = new WaitSeqAction(0d);
 

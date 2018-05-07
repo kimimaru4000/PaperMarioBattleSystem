@@ -18,6 +18,14 @@ namespace PaperMarioBattleSystem
             
         }
 
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            //Play the hurt animation
+            Entities[0].AnimManager.PlayAnimation(AnimationGlobals.HurtName);
+        }
+
         protected override void OnEnd()
         {
             base.OnEnd();

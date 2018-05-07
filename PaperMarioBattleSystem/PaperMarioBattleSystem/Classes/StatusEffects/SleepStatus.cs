@@ -63,7 +63,7 @@ namespace PaperMarioBattleSystem
             RemoveSleepVFX();
         }
 
-        private void OnEntityDamaged(InteractionHolder damageInfo)
+        private void OnEntityDamaged(in InteractionHolder damageInfo)
         {
             //Attacks that miss or deal less than 1 damage can't wake up BattleEntities
             if (damageInfo.Hit == false || damageInfo.TotalDamage <= 0) return;

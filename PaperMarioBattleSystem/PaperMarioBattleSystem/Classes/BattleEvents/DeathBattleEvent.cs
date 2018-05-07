@@ -14,17 +14,23 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class DeathBattleEvent : BattleEvent
     {
+        private const float MaxRotation = 720f;
+
         private BattleEntity Entity = null;
         private Animation DeathAnim = null;
         private bool OverrideRevival = false;
-        private float CurRotation = 0f;
-        private float RotateAmount = 10f;
 
-        public DeathBattleEvent(BattleEntity entity, bool overrideRevival)
+        private bool PerformRotation = false;
+        private float CurRotation = 0f;
+        private float RotateAmount = 15f;
+
+        public DeathBattleEvent(BattleEntity entity, bool overrideRevival, bool doRotation)
         {
             Entity = entity;
             DeathAnim = Entity.AnimManager.GetAnimation(AnimationGlobals.DeathName);
             OverrideRevival = overrideRevival;
+
+            PerformRotation = doRotation;
 
             IsUnique = true;
         }
@@ -101,13 +107,21 @@ namespace PaperMarioBattleSystem
 
             if (DeathAnim.Finished == true)
             {
-                //NOTE: Implement the rotation after setting center origins so it looks better
-                //CurRotation += RotateAmount;
-                //
-                //Entity.Rotation = UtilityGlobals.ToRadians(CurRotation);
+                //End after the death animation if we shouldn't perform the rotation
+                if (PerformRotation == false)
+                {
+                    End();
+                    return;
+                }
 
-                //if (CurRotation >= 360f)
-                //{
+                //Perform the rotation
+                CurRotation += RotateAmount;
+                
+                Entity.Rotation = UtilityGlobals.ToRadians(CurRotation);
+
+                //End after rotating a certain amount
+                if (CurRotation >= MaxRotation)
+                {
                     //Play death sound if it's an enemy
                     if (Entity.EntityType == Enumerations.EntityTypes.Enemy)
                     {
@@ -115,7 +129,7 @@ namespace PaperMarioBattleSystem
                     }
 
                     End();
-                //}
+                }
             }
         }
 

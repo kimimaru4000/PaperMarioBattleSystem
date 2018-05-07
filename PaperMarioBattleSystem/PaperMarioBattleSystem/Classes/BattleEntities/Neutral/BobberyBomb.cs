@@ -76,7 +76,7 @@ namespace PaperMarioBattleSystem
             base.OnBattleStart();
         }
 
-        protected override void OnTakeDamage(InteractionHolder damageInfo)
+        protected override void OnTakeDamage(in InteractionHolder damageInfo)
         {
             base.OnTakeDamage(damageInfo);
         

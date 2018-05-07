@@ -147,7 +147,7 @@ namespace PaperMarioBattleSystem
             GroundedEntity = null;
         }
 
-        private void OnDamageTaken(InteractionHolder damageInfo)
+        private void OnDamageTaken(in InteractionHolder damageInfo)
         {
             if (Entity.IsDead == true || damageInfo.Hit == false) return;
 

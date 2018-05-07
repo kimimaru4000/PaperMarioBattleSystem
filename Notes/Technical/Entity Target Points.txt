@@ -37,7 +37,7 @@ Gloomtail
 -Quake Hammer can target only Gloomtail's nose
 -Multi-hit moves target only Gloomtail's nose
 -Shade Fist cannot target Gloomtail's foot
--Art Attack can damage both target points; it's required to deal 3 damage to Gloomtail. However, hurtboxes are different from target points so this may not be relevant
+-Art Attack can damage both target points; it's required to deal 3 damage to Gloomtail. However, hurtboxes are different from target points, so this may not be relevant
 
 Grodus
 ======
@@ -45,3 +45,38 @@ Grodus
 -Attacking the Scepter shows the damage dealt, though no damage is dealt to Grodus
 -The Scepter has the same Defense as Grodus
 -If you deal 0 damage to the Scepter, it won't cause Grodus' next spell to fail
+-If you damage Grodus' Scepter before he's supposed to buff himself with Dodgy and/or Payback, the spells will still fail
+
+Possible Implementation (5/6/18)
+--------------------------------
+We can create new BattleEntities for each target point. This would enable them to have their own unique stats and attributes. When the parts take damage, they can redirect their damage to their attached BattleEntity if necessary.
+
+For example, the Big Lantern Ghost's Lantern might work like this:
+
+-A new BattleEntity called Lantern
+-Has its BattlePosition set right next to the Big Lantern Ghost where the Lantern graphic is (or have its own animations and follow)
+-Is Invincible and is a LightSource
+-When hit, increases light radius
+
+Another example - Grodus's Scepter:
+
+-References Grodus' BattleStats
+-When hit, damage is dealt and shown, but no damage is dealt (by overriding HandleDamageResult())
+-When hit, it tells Grodus to fail his next spell
+
+This should work for most, if not all, target points in the PM games. The challenging aspect regards the targeting system.
+
+To demonstrate what I mean, let's look at the dragon family - Hooktail, Gloomtail, and Bonetail:
+
+-Ground moves like Hammer target only their feet
+-Jump can target their nose and feet
+-Quake Hammer targets only their nose
+
+There's a discrepancy here. Hammer targets only Ground enemies, Quake Hammer targets Ground and Ceiling enemies, and Jump targets Ground and Airborne enemies. However, in order to target what they do for the dragon family, the following needs to hold true:
+
+-The feet need to be Grounded
+-The noses need to be Airborne
+-The noses need to be Ceiling
+-The feet need to be Airborne
+
+Continue testing and see if there are any other discrepancies with target points.

@@ -91,37 +91,37 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.IdleName, new LoopAnimation(null, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(4, 4, 51, 43), 110d),
                 new Animation.Frame(new Rectangle(196, 101, 51, 42), 110d, new Vector2(0, 1)),
-                new Animation.Frame(new Rectangle(260, 98, 50, 45), 110d, new Vector2(0, -2)),
-                new Animation.Frame(new Rectangle(324, 97, 50, 46), 110d, new Vector2(0, -3))));
+                new Animation.Frame(new Rectangle(260, 98, 50, 45), 110d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(324, 97, 50, 46), 110d, new Vector2(0, -1))));
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(null,
-                new Animation.Frame(new Rectangle(1, 151, 50, 40), 110d),
-                new Animation.Frame(new Rectangle(65, 151, 51, 39), 110d, new Vector2(0, 1))));
+                new Animation.Frame(new Rectangle(1, 151, 50, 40), 110d, new Vector2(0, 2)),
+                new Animation.Frame(new Rectangle(65, 151, 51, 39), 110d, new Vector2(0, 2))));
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(null,
-                new Animation.Frame(new Rectangle(1, 151, 50, 40), 1000d)));
+                new Animation.Frame(new Rectangle(1, 151, 50, 40), 300d, new Vector2(0, 2))));
             AnimManager.AddAnimation(AnimationGlobals.RunningName, new ReverseAnimation(null, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(4, 98, 52, 45), 60d),
-                new Animation.Frame(new Rectangle(68, 98, 51, 45), 60d),
-                new Animation.Frame(new Rectangle(132, 100, 50, 43), 60d, new Vector2(0, 1))));
+                new Animation.Frame(new Rectangle(4, 98, 52, 45), 60d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(68, 98, 51, 45), 60d, new Vector2(0, -1)),
+                new Animation.Frame(new Rectangle(132, 100, 50, 43), 60d)));
 
             AnimManager.AddAnimation(AnimationGlobals.DuplighostBattleAnimations.HeadbuttStartName, new Animation(null,
-                new Animation.Frame(new Rectangle(195, 149, 51, 42), 1000d)));
+                new Animation.Frame(new Rectangle(195, 149, 51, 42), 1000d, new Vector2(0, 1))));
             AnimManager.AddAnimation(AnimationGlobals.DuplighostBattleAnimations.HeadbuttName, new LoopAnimation(null, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(5, 198, 47, 37), 110d),
-                new Animation.Frame(new Rectangle(69, 197, 47, 39), 110d, new Vector2(0, 1))));
+                new Animation.Frame(new Rectangle(5, 198, 47, 37), 110d, new Vector2(0, 3)),
+                new Animation.Frame(new Rectangle(69, 197, 47, 39), 110d, new Vector2(0, 2))));
 
             AnimManager.AddAnimation(AnimationGlobals.DuplighostBattleAnimations.DisguiseStartName, new Animation(null,
                 new Animation.Frame(new Rectangle(67, 251, 52, 44), 110d),
-                new Animation.Frame(new Rectangle(193, 244, 51, 51), 110d, new Vector2(0, -7))));
-            AnimManager.AddAnimation(AnimationGlobals.DuplighostBattleAnimations.DisguiseName, new LoopAnimation(null, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(129, 247, 51, 48), 110d),
-                new Animation.Frame(new Rectangle(257, 248, 51, 47), 110d, new Vector2(0, 1))));
+                new Animation.Frame(new Rectangle(193, 244, 51, 51), 110d, new Vector2(0, -4))));
+            AnimManager.AddAnimation(AnimationGlobals.DuplighostBattleAnimations.DisguiseName, new LoopAnimation(null, 5,
+                new Animation.Frame(new Rectangle(129, 247, 51, 48), 110d, new Vector2(0, -2)),
+                new Animation.Frame(new Rectangle(257, 248, 51, 47), 110d, new Vector2(0, -2))));
 
             //Use the same animation for Confused since Confused isn't in PM
             LoopAnimation dizzyAnim = new LoopAnimation(null, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(132, 198, 52, 41), 110d),
-                new Animation.Frame(new Rectangle(196, 198, 52, 41), 110d),
-                new Animation.Frame(new Rectangle(260, 198, 52, 41), 110d),
-                new Animation.Frame(new Rectangle(324, 198, 52, 41), 110d));
+                new Animation.Frame(new Rectangle(132, 198, 52, 41), 110d, new Vector2(0, 1)),
+                new Animation.Frame(new Rectangle(196, 198, 52, 41), 110d, new Vector2(0, 1)),
+                new Animation.Frame(new Rectangle(260, 198, 52, 41), 110d, new Vector2(0, 1)),
+                new Animation.Frame(new Rectangle(324, 198, 52, 41), 110d, new Vector2(0, 1)));
 
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.DizzyName, dizzyAnim);
             AnimManager.AddAnimation(AnimationGlobals.StatusBattleAnimations.ConfusedName, dizzyAnim);
@@ -135,7 +135,7 @@ namespace PaperMarioBattleSystem
             return base.GetIdleAnim();
         }
 
-        protected override void OnTakeDamage(InteractionHolder damageInfo)
+        protected override void OnTakeDamage(in InteractionHolder damageInfo)
         {
             //Return if not disguised
             if (IsDisguised == false)

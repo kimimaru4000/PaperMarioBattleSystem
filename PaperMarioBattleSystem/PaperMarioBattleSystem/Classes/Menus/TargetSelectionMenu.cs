@@ -144,15 +144,30 @@ namespace PaperMarioBattleSystem
         {
             for (int i = 0; i < Targets.Length; i++)
             {
-                Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[i].Position + new Vector2(0, -20));
-                Cursor.Draw(pos, Color.White, 0f, Vector2.Zero, Vector2.One, false, .3f);
+                DrawAtTarget(Targets[i]);
+                //Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[i].Position + new Vector2(0, -20));
+                //Cursor.Draw(pos, Color.White, 0f, Vector2.Zero, Vector2.One, false, .3f);
             }
         }
 
         private void DrawSingle()
         {
-            Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[CurSelection].Position + new Vector2(0, -20));
-            Cursor.Draw(pos, Color.White, 0f, Vector2.Zero, Vector2.One, false, .3f);
+            //Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[CurSelection].Position + new Vector2(0, -30));
+            //Cursor.Draw(pos, Color.White, 0f, new Vector2(0f, 1f), Vector2.One, false, .3f);
+            DrawAtTarget(Targets[CurSelection]);
+        }
+
+        private void DrawAtTarget(BattleEntity target)
+        {
+            //Draw the cursor slightly above the target
+            Vector2 pos = Camera.Instance.SpriteToUIPos(target.Position + new Vector2(0, -10));
+            if (target.AnimManager.CurrentAnim != null && target.AnimManager.CurrentAnim.MaxFrameIndex >= 0)
+            {
+                //Offset upwards by half of the height of the target's first animation
+                pos.Y -= target.AnimManager.CurrentAnim.GetFrame(0).DrawRegion.Size.Y / 2;
+            }
+
+            Cursor.Draw(pos, Color.White, 0f, new Vector2(0f, 1f), Vector2.One, false, .3f);
         }
     }
 }

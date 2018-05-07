@@ -114,7 +114,7 @@ namespace PaperMarioBattleSystem
             //For example, Shady Koopas can attack when flipped, so they can choose to do so at the start of their turns
         }
 
-        protected virtual void OnDamageTaken(InteractionHolder damageInfo)
+        protected virtual void OnDamageTaken(in InteractionHolder damageInfo)
         {
             if (Entity.IsDead == true || damageInfo.Hit == false) return;
 

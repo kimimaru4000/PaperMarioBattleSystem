@@ -71,7 +71,7 @@ namespace PaperMarioBattleSystem
             PotentialSounds.Remove(sound);
         }
 
-        private void OnEntityDealtDamage(InteractionHolder damageInfo)
+        private void OnEntityDealtDamage(in InteractionHolder damageInfo)
         {
             //Attack FX badges don't take effect if damaging with Payback
             if (damageInfo.IsPaybackDamage == true || damageInfo.ContactType == Enumerations.ContactTypes.None)

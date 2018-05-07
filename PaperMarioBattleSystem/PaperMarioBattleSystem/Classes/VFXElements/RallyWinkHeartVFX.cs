@@ -130,7 +130,7 @@ namespace PaperMarioBattleSystem
 
         public override void Draw()
         {
-            SpriteRenderer.Instance.Draw(HeartTex.Tex, Position, HeartTex.SourceRect, TintColor, false, false, Layer);
+            SpriteRenderer.Instance.Draw(HeartTex.Tex, Position, HeartTex.SourceRect, TintColor, new Vector2(.5f, .5f), false, false, Layer);
         }
     }
 }

@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
 
         }
 
-        protected override void OnDamageTaken(InteractionHolder damageInfo)
+        protected override void OnDamageTaken(in InteractionHolder damageInfo)
         {
             //If it's on the ground, act like a normal Koopa
             if (Entity.HeightState == Enumerations.HeightStates.Grounded)

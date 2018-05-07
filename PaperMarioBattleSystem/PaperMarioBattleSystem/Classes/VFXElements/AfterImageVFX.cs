@@ -180,13 +180,13 @@ namespace PaperMarioBattleSystem
                 //Render based on the animation setting
                 if (AnimSetting == AfterImageAnimSetting.Current)
                 {
-                    Entity.AnimManager.CurrentAnim.Draw(PrevEntityStates[posIndex].Position, color, Entity.Rotation, Vector2.Zero, Entity.Scale,
+                    Entity.AnimManager.CurrentAnim.Draw(PrevEntityStates[posIndex].Position, color, Entity.Rotation, Entity.Origin, Entity.Scale,
                         Entity.SpriteFlip, .09f);
                 }
                 else if (AnimSetting == AfterImageAnimSetting.Previous)
                 {
                     PrevEntityStates[posIndex].AnimFrame.Draw(Entity.AnimManager.SpriteSheet, PrevEntityStates[posIndex].Position,
-                        color, Entity.Rotation, Vector2.Zero, Entity.Scale, Entity.SpriteFlip, .09f, false);
+                        color, Entity.Rotation, Entity.Origin, Entity.Scale, Entity.SpriteFlip, .09f, false);
                 }
             }
         }

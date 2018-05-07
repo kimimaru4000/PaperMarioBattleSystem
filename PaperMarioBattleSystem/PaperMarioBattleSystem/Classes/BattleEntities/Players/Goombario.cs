@@ -35,9 +35,9 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(129, 46, 30, 33), 100d)));
 
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.ChoosingActionName, new Animation(spriteSheet,
-            new Animation.Frame(new Rectangle(2, 46, 26, 33), 1000d, new Vector2(0, -3))));
+            new Animation.Frame(new Rectangle(2, 46, 26, 33), 1000d, new Vector2(0, -2))));
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.DangerChoosingActionName, new Animation(spriteSheet,
-            new Animation.Frame(new Rectangle(2, 46, 26, 33), 1000d, new Vector2(0, -3))));
+            new Animation.Frame(new Rectangle(2, 46, 26, 33), 1000d, new Vector2(0, -2))));
 
             AnimManager.AddAnimation(AnimationGlobals.JumpStartName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(130, 5, 28, 31), 400d)));
@@ -68,7 +68,7 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.TalkName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(67, 89, 26, 30), 32d),
                 new Animation.Frame(new Rectangle(3, 88, 26, 31), 32d, new Vector2(0, -1)),
-                new Animation.Frame(new Rectangle(67, 46, 26, 33), 32d, new Vector2(0, -3))));
+                new Animation.Frame(new Rectangle(67, 46, 26, 33), 32d, new Vector2(0, -2))));
         }
 
         protected sealed override BattleMenu GetMainBattleMenu()

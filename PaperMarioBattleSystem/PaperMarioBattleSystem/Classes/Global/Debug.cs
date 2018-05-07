@@ -273,6 +273,17 @@ namespace PaperMarioBattleSystem
                         entities[i].LoadAnimations();
                     }
                 }
+                //Reverse flip state of all entities
+                else if (Input.GetKeyDown(Keys.F) == true)
+                {
+                    List<BattleEntity> entities = new List<BattleEntity>();
+                    BattleManager.Instance.GetAllBattleEntities(entities, null);
+
+                    for (int i = 0; i < entities.Count; i++)
+                    {
+                        entities[i].SpriteFlip = !entities[i].SpriteFlip;
+                    }
+                }
             }
 
             //If a pause is eventually added that can be performed normally, put a check for it in here to

@@ -92,7 +92,7 @@ namespace PaperMarioBattleSystem
             AnimManager.SetSpriteSheet(spriteSheet);
 
             AnimManager.AddAnimation(AnimationGlobals.IdleName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(45, 50, 187, 189), 1000d)));
+                new Animation.Frame(new Rectangle(45, 50, 187, 189), 300d)));
         }
 
         /// <summary>
@@ -265,7 +265,7 @@ namespace PaperMarioBattleSystem
 
         #region Event Handlers
 
-        private void OnMiniYuxDamageTaken(InteractionHolder damageInfo)
+        private void OnMiniYuxDamageTaken(in InteractionHolder damageInfo)
         {
             //NOTE: This should happen after the Mini-Yuxes finish their death animations so the shield stays up until they're gone
 

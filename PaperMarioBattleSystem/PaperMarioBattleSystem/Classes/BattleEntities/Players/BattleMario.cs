@@ -111,7 +111,7 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(392, 335, 42, 45), 700d)));
 
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(449, 222, 40, 53), 700d)));
+                new Animation.Frame(new Rectangle(449, 222, 40, 53), 700d, new Vector2(3, 0))));
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.StarWishName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(398, 516, 29, 48), 1300d)));
 

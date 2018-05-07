@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(146, 164, 71, 59), 200d),
                 new Animation.Frame(new Rectangle(480, 7, 70, 64), 200d)));
             AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(480, 7, 70, 64), 1000d)));
+                new Animation.Frame(new Rectangle(480, 7, 70, 64), 500d)));
 
             AnimManager.AddAnimation(AnimationGlobals.GulpitBattleAnimations.LickName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(370, 155, 70, 68), 300d),
@@ -62,11 +62,11 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(449, 226, 105, 69), 300d),
                 new Animation.Frame(new Rectangle(37, 1, 68, 78), 300d)));
             AnimManager.AddAnimation(AnimationGlobals.GulpitBattleAnimations.SpitRockName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(246, 305, 83, 62), 200d, new Vector2(0, 4)),
-                new Animation.Frame(new Rectangle(8, 298, 96, 69), 200d, new Vector2(-7, 0)),
-                new Animation.Frame(new Rectangle(151, 297, 65, 70), 200d, new Vector2(8, 0)),
-                new Animation.Frame(new Rectangle(41, 224, 63, 71), 1000d, new Vector2(9, -1)),
-                new Animation.Frame(new Rectangle(148, 4, 69, 67), 300d, new Vector2(7, 1))));
+                new Animation.Frame(new Rectangle(246, 305, 83, 62), 200d, new Vector2(-9, 4)),
+                new Animation.Frame(new Rectangle(8, 298, 96, 69), 200d, new Vector2(-16, 0)),
+                new Animation.Frame(new Rectangle(151, 297, 65, 70), 200d, new Vector2(-1, 0)),
+                new Animation.Frame(new Rectangle(41, 224, 63, 71), 1000d, new Vector2(1, -1)),
+                new Animation.Frame(new Rectangle(148, 4, 69, 67), 300d, new Vector2(-2, 1))));
         }
 
         #region Tattle Information

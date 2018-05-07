@@ -31,17 +31,19 @@ namespace PaperMarioBattleSystem
 
             AnimManager.AddAnimation(AnimationGlobals.IdleName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(34, 153, 28, 39), 1000d),
-                new Animation.Frame(new Rectangle(67, 152, 26, 40), 150d, new Vector2(0, -1)),
-                new Animation.Frame(new Rectangle(67, 110, 26, 42), 1000d, new Vector2(0, -3))));
+                new Animation.Frame(new Rectangle(67, 152, 26, 40), 150d),
+                new Animation.Frame(new Rectangle(67, 110, 26, 42), 1000d, new Vector2(0, -1))));
             AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(32, 68, 31, 36), 500d),
-                new Animation.Frame(new Rectangle(128, 108, 31, 36), 500d)));
-            AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(128, 108, 31, 36), 1000d)));
+                new Animation.Frame(new Rectangle(32, 68, 31, 36), 80d),
+                new Animation.Frame(new Rectangle(128, 108, 31, 36), 80d)));
+            AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(128, 108, 31, 36), 300d)));
 
             AnimManager.AddAnimation(AnimationGlobals.RunningName, new ReverseAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(98, 153, 29, 39), 150d),
                 new Animation.Frame(new Rectangle(34, 153, 28, 39), 100d),
-                new Animation.Frame(new Rectangle(34, 110, 30, 42), 150d)));
+                new Animation.Frame(new Rectangle(34, 110, 30, 42), 150d, new Vector2(0, -1))));
+            AnimManager.AddAnimation(AnimationGlobals.JumpStartName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(98, 113, 28, 39), 400d)));
         }
 
         #region Tattle Information

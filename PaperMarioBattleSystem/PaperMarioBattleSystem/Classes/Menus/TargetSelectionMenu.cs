@@ -160,12 +160,7 @@ namespace PaperMarioBattleSystem
         private void DrawAtTarget(BattleEntity target)
         {
             //Draw the cursor slightly above the target
-            Vector2 pos = Camera.Instance.SpriteToUIPos(target.Position + new Vector2(0, -10));
-            if (target.AnimManager.CurrentAnim != null && target.AnimManager.CurrentAnim.MaxFrameIndex >= 0)
-            {
-                //Offset upwards by half of the height of the target's first animation
-                pos.Y -= target.AnimManager.CurrentAnim.GetFrame(0).DrawRegion.Size.Y / 2;
-            }
+            Vector2 pos = Camera.Instance.SpriteToUIPos(target.GetDrawnPosAbove(new Vector2(0, -10)));
 
             Cursor.Draw(pos, Color.White, 0f, new Vector2(0f, 1f), Vector2.One, false, .3f);
         }

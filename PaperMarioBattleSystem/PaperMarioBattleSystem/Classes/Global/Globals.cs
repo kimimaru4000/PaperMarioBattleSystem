@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public enum ElementInteractionResult
     {
-        Damage, KO, Heal
+        Damage = 0, KO = 1, Heal = 2
     }
 
     /// <summary>
@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public enum WeaknessTypes
     {
-        None, PlusDamage, KO
+        None = 0, PlusDamage = 1, KO = 2
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public enum ResistanceTypes
     {
-        None, MinusDamage, NoDamage, Heal
+        None = 0, MinusDamage = 1, NoDamage = 2, Heal = 3
     }
 
     /// <summary>

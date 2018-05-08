@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
         /// Gets the values for an Enum of a particular type in an array and caches it.
         /// </summary>
         /// <typeparam name="T">The Enum type.</typeparam>
-        public static class GetValues<T>
+        public static class GetValues<T> where T: Enum
         {
             /// <summary>
             /// The cached enum array containing all the values for the Enum type.
@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
         /// Gets the names for an Enum of a particular type in an array and caches it.
         /// </summary>
         /// <typeparam name="T">The Enum type.</typeparam>
-        public static class GetNames<T>
+        public static class GetNames<T> where T: Enum
         {
             /// <summary>
             /// The cached string array containing all the names in the Enum type.

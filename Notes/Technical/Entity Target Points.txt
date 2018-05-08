@@ -16,7 +16,7 @@ List of PM and TTYD enemies with multiple target points; differences between tar
 
 PM
 ==
--Sky Guy; body, red balloon, orange balloon, green balloon - when all balloons are popped, turns into a normal Shy Guy
+-Sky Guy; body, Balloon (name: Balloon - when Balloon is popped, turns the Sky Guy into a normal Shy Guy)
 -Big Lantern Ghost; body, Lantern (name: Lantern - is a light source that's invincible and increases light radius when hit)
 -Kent C. Koopa; body (6 Defense, 3 when flipped), tail (only targetable when flipped, 0 Defense)
 
@@ -47,6 +47,27 @@ Grodus
 -If you deal 0 damage to the Scepter, it won't cause Grodus' next spell to fail
 -If you damage Grodus' Scepter before he's supposed to buff himself with Dodgy and/or Payback, the spells will still fail
 
+Sky Guy
+=======
+-All three balloon graphics are represented by the single Balloon
+-Dealing 0 damage to the Balloon does not pop it
+-The Balloon pops when it receives at least 1 damage. When that happens, the Sky Guy turns into a normal Shy Guy
+-The Balloon is always after the Sky Guy in the targeting order
+
+-Power Shock can target the Balloon. Trying to inflict Paralyzed on it always fails
+-Shell Shot can target the Balloon
+-Multi-hit moves, including Multibounce, cannot target the Balloon
+-Air Lift cannot target the Balloon
+-The Balloon cannot be Tattled
+
+-Pebble cannot target the Balloon
+-Thunder Bolt cannot target the Ballon
+-Dusty Hammer cannot target the Balloon
+-Shooting Star cannot target the Balloon
+-Egg Missile cannot target the Balloon
+
+-No damaging items can target the Balloon
+
 Possible Implementation (5/6/18)
 --------------------------------
 We can create new BattleEntities for each target point. This would enable them to have their own unique stats and attributes. When the parts take damage, they can redirect their damage to their attached BattleEntity if necessary.
@@ -61,7 +82,7 @@ For example, the Big Lantern Ghost's Lantern might work like this:
 Another example - Grodus's Scepter:
 
 -References Grodus' BattleStats
--When hit, damage is dealt and shown, but no damage is dealt (by overriding HandleDamageResult())
+-When hit, the damage dealt is shown, but no damage is actually dealt (by overriding HandleDamageResult())
 -When hit, it tells Grodus to fail his next spell
 
 This should work for most, if not all, target points in the PM games. The challenging aspect regards the targeting system.

@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
         public BattleItem[] GetItemSet()
         {
             //NOTE: Not all of these items are in the PM set; this is just for testing until we get them in
-            return new BattleItem[] { new Mushroom(), new HoneySyrup(), new ShootingStar(), new StoneCap() };
+            return new BattleItem[] { new Mushroom(), new SuperShroom(), new FireFlower(), new StoneCap(), new DizzyDial(), new ThunderRage(), new HurtPebble() };
         }
 
         public Mystery()

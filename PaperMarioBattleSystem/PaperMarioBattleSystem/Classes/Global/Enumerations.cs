@@ -143,7 +143,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public enum Elements
         {
-            Invalid, Normal, Sharp, Water, Fire, Electric, Ice, Poison, Explosion, Star
+            Invalid, Normal, Gulp, Sharp, Water, Fire, Electric, Ice, Poison, Explosion, Star
         }
 
         /// <summary>
@@ -172,7 +172,7 @@ namespace PaperMarioBattleSystem
           Confirmed - Spiked enemies get hurt when jumping on other Spiked enemies*/
         public enum PhysicalAttributes
         {
-            None, Flying, Electrified, Poisonous, Spiked, Icy, Fiery, Explosive, Starry
+            None = 0, Flying = 1, Electrified = 2, Poisonous = 3, Spiked = 4, Icy = 5, Fiery = 6, Explosive = 6, Starry = 8
         }
 
         /// <summary>

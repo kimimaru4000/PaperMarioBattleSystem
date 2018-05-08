@@ -40,6 +40,7 @@ namespace PaperMarioBattleSystem
             if (itemAction.ItemUsed.Icon != null || itemAction.ItemUsed.Icon.Tex != null)
             {
                 ItemShown = new UICroppedTexture2D(itemAction.ItemUsed.Icon.Copy());
+                ItemShown.Origin = new Vector2(.5f, .5f);
             }
         }
 
@@ -68,7 +69,7 @@ namespace PaperMarioBattleSystem
                 case 1:
                     if (ItemShown != null)
                     {
-                        ItemShown.Position = Camera.Instance.SpriteToUIPos(User.Position + new Vector2(0, -20));
+                        ItemShown.Position = Camera.Instance.SpriteToUIPos(User.GetDrawnPosAbove(new Vector2(0, -20)));
                         BattleUIManager.Instance.AddUIElement(ItemShown);
                     }
 

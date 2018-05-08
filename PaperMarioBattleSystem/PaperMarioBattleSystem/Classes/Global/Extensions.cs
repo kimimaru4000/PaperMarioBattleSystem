@@ -420,6 +420,26 @@ namespace PaperMarioBattleSystem
             return EntityGlobals.CombinedHaveAdditionalProperty(BattleManager.Instance.GetEntities(battleEntity.EntityType, null), property);
         }
 
+        /// <summary>
+        /// Gets a position above the BattleEntity using the first frame of its current animation.
+        /// </summary>
+        /// <param name="battleEntity">The BattleEntity.</param>
+        /// <param name="positionAbove">A Vector2 containing the position above the BattleEntity.</param>
+        /// <returns>A Vector2 containing the position above the BattleEntity.</returns>
+        public static Vector2 GetDrawnPosAbove(this BattleEntity battleEntity, in Vector2 positionAbove)
+        {
+            if (battleEntity == null) return Vector2.Zero;
+
+            Vector2 pos = battleEntity.Position + positionAbove;
+            if (battleEntity.AnimManager.CurrentAnim != null && battleEntity.AnimManager.CurrentAnim.MaxFrameIndex >= 0)
+            {
+                //Offset upwards by half of the height of the BattleEntity's first animation
+                pos.Y -= battleEntity.AnimManager.CurrentAnim.GetFrame(0).DrawRegion.Size.Y / 2;
+            }
+
+            return pos;
+        }
+
         #endregion
 
         #region BattlePlayer Extensions

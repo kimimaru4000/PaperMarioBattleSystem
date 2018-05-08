@@ -100,7 +100,7 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEntity>() { new Duplighost() });
+                new List<BattleEntity>() { new Duplighost(), new Duplighost() });
 
             //Start the battle
             BattleManager.Instance.StartBattle();
@@ -233,14 +233,14 @@ namespace PaperMarioBattleSystem
 
             //Items
             Inventory.Instance.AddItem(new Mushroom());
-            Inventory.Instance.AddItem(new HoneySyrup());
-            Inventory.Instance.AddItem(new Mushroom());
-            Inventory.Instance.AddItem(new ShootingStar());
-            Inventory.Instance.AddItem(new SleepySheep());
+            Inventory.Instance.AddItem(new HurtPebble());
+            Inventory.Instance.AddItem(new SuperShroom());
+            Inventory.Instance.AddItem(new ThunderRage());
+            Inventory.Instance.AddItem(new ThunderBolt());
             Inventory.Instance.AddItem(new LifeShroom());
-            Inventory.Instance.AddItem(new TastyTonic());
+            Inventory.Instance.AddItem(new FireFlower());
             Inventory.Instance.AddItem(new VoltShroom());
-            Inventory.Instance.AddItem(new Mystery());
+            Inventory.Instance.AddItem(new DizzyDial());
             Inventory.Instance.AddItem(new StoneCap());
         }
 

@@ -54,11 +54,12 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// The types of entities a MoveAction affects.
+        /// The types of BattleEntities a MoveAction affects.
         /// <para>None causes the MoveAction to occur immediately.
         /// Self targets the user of the MoveAction.
         /// Ally targets all entities that are allies of the user.
-        /// Enemy targets all entities that are enemies of the user.</para>
+        /// Other targets other types of entities in battle.
+        /// Custom targets a set of entities based on the move's conditions.</para>
         /// <para>This is a bit field.</para>
         /// </summary>
         [Flags]

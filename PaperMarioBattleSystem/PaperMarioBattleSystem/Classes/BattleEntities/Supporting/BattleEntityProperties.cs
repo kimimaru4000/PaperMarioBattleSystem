@@ -85,6 +85,19 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected readonly Dictionary<MoveCategories, int> DisabledMoveCategories = new Dictionary<MoveCategories, int>();
 
+        /// <summary>
+        /// A delegate describing a custom targeting method.
+        /// If true, the BattleEntity should remain in the target set, and if false, the BattleEntity should be excluded from the target set.
+        /// </summary>
+        /// <param name="moveAction">The MoveAction targeting this BattleEntity.</param>
+        /// <returns>true if the BattleEntity should remain in the target set and false if the BattleEntity should be excluded from the target set.</returns>
+        public delegate bool CustomTarget(in MoveAction moveAction);
+
+        /// <summary>
+        /// The custom targeting method to use. It defaults to null.
+        /// </summary>
+        public CustomTarget CustomTargeting { get; private set; } = null;
+
         #region Badge Fields
 
         /// <summary>
@@ -135,6 +148,8 @@ namespace PaperMarioBattleSystem
             }
 
             EquippedBadgeCounts.Clear();
+
+            CustomTargeting = null;
         }
 
         #region Physical Attribute Methods
@@ -1277,6 +1292,19 @@ namespace PaperMarioBattleSystem
             if (EquippedBadgeCounts.ContainsKey(badgeType) == false) return 0;
 
             return EquippedBadgeCounts[badgeType];
+        }
+
+        #endregion
+
+        #region Custom Target Methods
+
+        /// <summary>
+        /// Sets the value of the custom targeting delegate.
+        /// </summary>
+        /// <param name="customTargeting">The CustomTarget method to use.</param>
+        public void SetCustomTargeting(CustomTarget customTargeting)
+        {
+            CustomTargeting = customTargeting;
         }
 
         #endregion

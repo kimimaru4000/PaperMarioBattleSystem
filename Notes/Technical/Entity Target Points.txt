@@ -123,3 +123,29 @@ Update (5/8/18)
 ---------------
 Sky Guys are in; implementing the Balloon was painless. Next we should focus on allowing some way for BattleEntities to customize which moves they can be targeted by.
 
+Update (5/9/18)
+---------------
+We can think about the dragon family and Cortez targeting discrepancies another way. Take Cortez for example:
+
+-His head and Bone Pile are both Grounded
+-His Jewel is Airborne
+
+With this, now it means that the Bone Pile would be targeted by Quake Hammer and that the Jewel and Bone Pile would be targeted by Multibounce and other multi-hit moves. This would mean that certain parts just need to be untargetable by certain moves.
+
+We can try the following to allow this. In BattleEntityProperties, add the following:
+
+-public delegate bool CustomTarget(in MoveAction moveAction)
+-public CustomTarget CustomTargeting { get; private set; }
+-public void SetCustomTargeting(CustomTarget customTargeting)
+
+The CustomTarget delegate would be called in MoveAction.GetEntitiesMoveAffects() for each BattleEntity in the affected set.
+
+If true, it continues on like normal, and if false, it excludes it from the set it would normally be included in. 
+
+Thus, this can be used to disallow the Jewel and Bone Pile from being affected by multi-hit moves and stop Cortez's head from getting hit by Hammer-like moves (Grounded, first selection).
+
+We currently have something to test this on: the Sky Guy Balloon. Try it out on that and see what happens.
+
+Important to note is this does not allow a BattleEntity to override being untargetable by a move; it only allows BattleEntities to opt out of being targeted. Based on my testing, it shouldn't be needed. If it eventually is, then the entirety of MoveAction.GetEntitiesMoveAffects() may need to be revised.
+
+Update: So far it's working very well! I think this gives us everything we need, but we'll see in due time with more custom use-cases. This will be updated if any issues arise.

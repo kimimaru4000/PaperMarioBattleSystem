@@ -477,6 +477,10 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <returns>The BattleEntities the move affects based on its MoveAffectionType and the HeightStates it can target.
         /// If None, an empty array is returned.</returns>
+        /* NOTE: Refactor this to be static and make the instance version call the static one.
+         * It should work for any MoveProperties and Custom method.
+         * This will fix secondary attacks, such as Tornado Jump's aerial one, from not filtering properly.
+         */
         public BattleEntity[] GetEntitiesMoveAffects()
         {
             List<BattleEntity> entities = new List<BattleEntity>();
@@ -539,10 +543,23 @@ namespace PaperMarioBattleSystem
             //Filter out untargetable BattleEntities
             BattleManager.Instance.FilterEntitiesByTargetable(entities);
 
-            //Set to the true targets in the event something is defending them
-            for (int i = 0; i < entities.Count; i++)
+            //If the BattleEntity has a custom targeting method and shouldn't be targeted, remove it
+            //Otherwise, set to the true target in the event something is defending it
+            for (int i = entities.Count - 1; i >= 0; i--)
             {
-                entities[i] = entities[i].GetTrueTarget();
+                //Check for a custom targeting method
+                bool? targetVal = entities[i].EntityProperties.CustomTargeting?.Invoke(this);
+
+                //If it returns false, remove the BattleEntity from the list
+                if (targetVal == false)
+                {
+                    entities.RemoveAt(i);
+                    continue;
+                }
+                else
+                {
+                    entities[i] = entities[i].GetTrueTarget();
+                }
             }
 
             return entities.ToArray();

@@ -27,6 +27,8 @@ namespace PaperMarioBattleSystem
                 EntityProperties.AddStatusProperty(statusTypes[i], new StatusPropertyHolder(0d, 0, 1));
             }
 
+            EntityProperties.SetCustomTargeting(CustomTargeting);
+
             LoadAnimations();
         }
 
@@ -41,6 +43,20 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimationChildFrames(AnimationGlobals.IdleName,
                 new Animation.Frame(new Rectangle(13, 259, 2, 31), 200d, new Vector2(0, 18), -.0001f),
                 new Animation.Frame(new Rectangle(13, 259, 2, 31), 200d, new Vector2(0, 19), -.0001f));
+        }
+
+        private bool CustomTargeting(in MoveAction moveAction)
+        {
+            //The Balloon isn't targeted by multi-target moves
+            if (moveAction.MoveProperties.SelectionType == TargetSelectionMenu.EntitySelectionType.All) return false;
+
+            //The Balloon cannot be targeted by Latch moves such as Air Lift
+            if (moveAction.DealsDamage == true && moveAction.DamageProperties.ContactType == Enumerations.ContactTypes.Latch) return false;
+
+            //The Balloon cannot be targeted by items at all
+            if (moveAction is ItemAction) return false;
+
+            return true;
         }
     }
 }

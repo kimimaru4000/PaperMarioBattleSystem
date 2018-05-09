@@ -25,7 +25,7 @@ TTYD
 -Hooktail; nose (jump), foot (jump, hammer)
 -Gloomtail; nose (jump), foot (jump, hammer)
 -Bonetail; nose (jump), foot (jump, hammer)
--Cortez; head (jump), bone pile (jump, hammer)
+-Cortez; head (jump), Bone Pile (name: Bone Pile - jump, hammer), Jewel (second form only; -2 Defense, jump)
 -Magnus Von Grapple; body (jump), foot (jump, hammer)
 -Magnus Von Grapple 2.0; body (jump), foot (jump, hammer)
 -Sir Grodus; body, scepter (no damage to Grodus - causes next spell to fail)
@@ -38,6 +38,17 @@ Gloomtail
 -Multi-hit moves target only Gloomtail's nose
 -Shade Fist cannot target Gloomtail's foot
 -Art Attack can damage both target points; it's required to deal 3 damage to Gloomtail. However, hurtboxes are different from target points, so this may not be relevant
+-Tattle can target only Gloomtail's nose
+
+Cortez
+======
+-Targeting rules are the mostly the same as Gloomtail's for the first two forms, regarding Cortez's head and the Bone Pile. The Bone Pile has its own name: "Bone Pile"
+-The Bone Pile is top-spiky
+-Kiss Thief targets the Bone Pile, but will stop at Cortez's head. When successfully performed, Ms. Mowz will quickly jump offscreen to the Bone Pile to steal the item
+-All Status Effects inflicted on Cortez will show at the Bone Pile
+-In his second form, the Jewel target point isn't available until Cortez opens up the bones protecting it
+-Attacking the Bone Pile in Cortez's second form causes him to readjust himself each time it's hit until the Jewel is available to target
+-Tornado Jump's aerial attack does not damage any of Cortez's target points (aside from the weapons, which are entirely separate entities)
 
 Grodus
 ======
@@ -101,3 +112,14 @@ There's a discrepancy here. Hammer targets only Ground enemies, Quake Hammer tar
 -The feet need to be Airborne
 
 Continue testing and see if there are any other discrepancies with target points.
+
+Update (5/8/18)
+---------------
+After more testing and observations, it seems like the multiple target points themselves will be easy to implement as Helper BattleEntities. Finding consistent logic among targeting Grodus' Scepter, the dragon family's nose and feet, and Cortez's head and Bone Pile has proven to be challenging - in all honesty, I don't think the current system can support them as is. We can likely keep it as is but allow for entity-specific adjustments in some form.
+
+I think it's best to focus on that later. For now, try implementing Sky Guys and their Balloons to confirm that the current system does indeed work for multiple target points.
+
+Update (5/8/18)
+---------------
+Sky Guys are in; implementing the Balloon was painless. Next we should focus on allowing some way for BattleEntities to customize which moves they can be targeted by.
+

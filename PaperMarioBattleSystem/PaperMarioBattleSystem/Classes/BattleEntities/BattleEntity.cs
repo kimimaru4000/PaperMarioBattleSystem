@@ -94,7 +94,7 @@ namespace PaperMarioBattleSystem
         #endregion
 
         /// <summary>
-        /// Various unique properties belonging to the BattleEntity
+        /// Various unique properties belonging to the BattleEntity.
         /// </summary>
         public BattleEntityProperties EntityProperties { get; private set; } = null;
 
@@ -203,7 +203,7 @@ namespace PaperMarioBattleSystem
 
         private BattleEntity()
         {
-            EntityProperties = new BattleEntityProperties(this);
+            SetEntityProperties(new BattleEntityProperties(this));
             AnimManager = new ObjAnimManager(this);
             ConfusionHandler = BaseConfusionHandler;
         }
@@ -237,6 +237,19 @@ namespace PaperMarioBattleSystem
         public virtual void LoadAnimations()
         {
 
+        }
+
+        /// <summary>
+        /// Sets the properties of this BattleEntity.
+        /// </summary>
+        /// <remarks>By default, all BattleEntities have a new set of properties, which suffices for the vast majority of cases.
+        /// However, there may be some situations that require referencing another set of properties.
+        /// For example, target points sharing properties with the main entity, or swapping among sets of properties without losing information.
+        /// </remarks>
+        /// <param name="entityProperties">The BattleEntityProperties to set.</param>
+        protected void SetEntityProperties(BattleEntityProperties entityProperties)
+        {
+            EntityProperties = entityProperties;
         }
 
         #region Damage Handling

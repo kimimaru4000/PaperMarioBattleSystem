@@ -215,6 +215,8 @@ namespace PaperMarioBattleSystem
             EntityRemovedEvent = null;
             BattleTurnStartedEvent = null;
             BattleTurnEndedEvent = null;
+
+            instance = null;
         }
 
         /// <summary>

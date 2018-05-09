@@ -168,6 +168,9 @@
     <Compile Include="Classes\BattleEntities\Enemies\Paragoomba.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Paratroopa.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Pokey.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\ShyGuy.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\SkyGuy.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\SkyGuyBalloon.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\SpikedGoomba.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Yux.cs" />
     <Compile Include="Classes\BattleEntities\Neutral\BobberyBomb.cs" />
@@ -189,6 +192,7 @@
     <Compile Include="Classes\BattleEntities\Supporting\ParatroopaFlippedBehavior.cs" />
     <Compile Include="Classes\BattleEntities\Supporting\ParatroopaWingedBehavior.cs" />
     <Compile Include="Classes\BattleEntities\Supporting\PokeySegmentBehavior.cs" />
+    <Compile Include="Classes\BattleEntities\Supporting\SkyGuyWingedBehavior.cs" />
     <Compile Include="Classes\BattleEvents\BattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\BlownAwayBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\DamagedBattleEvent.cs" />
@@ -630,6 +634,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Enemies\Pokey.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Enemies\ShyGuy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Sprites\Enemies\SkyGuy.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Sprites\Enemies\SpikedGoomba.png">

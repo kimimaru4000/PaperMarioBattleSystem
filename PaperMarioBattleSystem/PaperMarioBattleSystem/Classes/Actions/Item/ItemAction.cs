@@ -141,7 +141,7 @@ namespace PaperMarioBattleSystem
             {
                 int damage = damageItem != null ? damageItem.Damage : 0;
                 Elements element = damageItem != null ? damageItem.Element : Elements.Normal;
-                StatusChanceHolder[] statuses = statusInflicting != null ? statusInflicting.StatusesInflicted : null;
+                StatusChanceHolder[] statuses = statusInflicting?.StatusesInflicted;
                 DamageEffects damageEffects = damageEffectItem != null ? damageEffectItem.InducedDamageEffects : DamageEffects.None;
 
                 DamageInfo = new DamageData(damage, element, true, ContactTypes.None, ContactProperties.Ranged, statuses, damageEffects);
@@ -152,7 +152,7 @@ namespace PaperMarioBattleSystem
             {
                 int hpHealed = hpHealing != null ? hpHealing.HPRestored : 0;
                 int fpHealed = fpHealing != null ? fpHealing.FPRestored : 0;
-                StatusTypes[] statusesHealed = statusHealing != null ? statusHealing.StatusesHealed : null;
+                StatusTypes[] statusesHealed = statusHealing?.StatusesHealed;
 
                 HealingInfo = new HealingData(hpHealed, fpHealed, statusesHealed);
             }

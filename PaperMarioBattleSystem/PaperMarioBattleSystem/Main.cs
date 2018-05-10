@@ -233,7 +233,7 @@ namespace PaperMarioBattleSystem
 
             //Items
             Inventory.Instance.AddItem(new Mushroom());
-            Inventory.Instance.AddItem(new HurtPebble());
+            Inventory.Instance.AddItem(new Mystery());
             Inventory.Instance.AddItem(new SuperShroom());
             Inventory.Instance.AddItem(new ThunderRage());
             Inventory.Instance.AddItem(new ThunderBolt());

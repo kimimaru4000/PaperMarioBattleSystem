@@ -21,6 +21,7 @@ namespace PaperMarioBattleSystem
         }
 
         private ReverseAnimation Cursor = null;
+        private NineSlicedTexture2D NameImage = null;
 
         private BattleEntity[] Targets = null;
 
@@ -40,6 +41,8 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(49, 5, 20, 20), 110d),
                 new Animation.Frame(new Rectangle(75, 5, 22, 16), 110d),
                 new Animation.Frame(new Rectangle(105, 5, 21, 16), 110d));
+            NameImage = new NineSlicedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"),
+                new Rectangle(457, 812, 32, 16), 7, 6, 7, 9);
 
             //Both games wrap the cursor
             WrapCursor = true;
@@ -130,14 +133,24 @@ namespace PaperMarioBattleSystem
 
         public override void Draw()
         {
+            string name = "All";
+
             if (SelectionType == EntitySelectionType.Single || SelectionType == EntitySelectionType.First)
             {
                 DrawSingle();
+                name = Targets[CurSelection].Name;
             }
             else if (SelectionType == EntitySelectionType.All)
             {
                 DrawAll();
             }
+
+            //Show who is being selected in the header
+            Vector2 location = new Vector2(170, 220);
+            Vector2 size = AssetManager.Instance.TTYDFont.MeasureString(name);
+            Vector2 buffer = new Vector2(5f, 5f);
+            SpriteRenderer.Instance.DrawUISliced(NameImage, new Rectangle((int)location.X, (int)location.Y, (int)size.X + ((int)buffer.X * 2), (int)(size.Y / 1.5f) + ((int)buffer.Y * 2)), Color.Blue, .31f);
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, name, location + buffer, Color.White, 0f, Vector2.Zero, 1f, .32f);
         }
 
         private void DrawAll()
@@ -145,15 +158,11 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < Targets.Length; i++)
             {
                 DrawAtTarget(Targets[i]);
-                //Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[i].Position + new Vector2(0, -20));
-                //Cursor.Draw(pos, Color.White, 0f, Vector2.Zero, Vector2.One, false, .3f);
             }
         }
 
         private void DrawSingle()
         {
-            //Vector2 pos = Camera.Instance.SpriteToUIPos(Targets[CurSelection].Position + new Vector2(0, -30));
-            //Cursor.Draw(pos, Color.White, 0f, new Vector2(0f, 1f), Vector2.One, false, .3f);
             DrawAtTarget(Targets[CurSelection]);
         }
 

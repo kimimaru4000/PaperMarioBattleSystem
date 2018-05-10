@@ -23,11 +23,11 @@ namespace PaperMarioBattleSystem
         private int SuccessfulButtons = 0;
 
         private BattleEntity[] CurTargets = null;
-        private TornadoJump TJAction = null;
+        private MoveAction TJAction = null;
 
-        public TornadoJumpSequence(MoveAction moveAction) : base(moveAction)
+        public TornadoJumpSequence(MoveAction moveAction, MoveAction tjAction) : base(moveAction)
         {
-
+            TJAction = tjAction;
         }
 
         protected override void OnStart()
@@ -35,7 +35,6 @@ namespace PaperMarioBattleSystem
             base.OnStart();
 
             CurTargets = EntitiesAffected;
-            TJAction = Action as TornadoJump;
 
             DamageMod = 1;
             SecondPart = false;
@@ -88,7 +87,7 @@ namespace PaperMarioBattleSystem
                         //Update the current targets on the second part
                         if (TJAction != null)
                         {
-                            CurTargets = TJAction.GetAerialTargets;
+                            CurTargets = TJAction.GetEntitiesMoveAffects();
                         }
                         else
                         {
@@ -153,14 +152,14 @@ namespace PaperMarioBattleSystem
 
                         //Make sure the action used for this sequence is Tornado Jump
                         //If not, default to base damage and base targets
-                        if (TJAction != null)
+                        if (TJAction != null && TJAction.DealsDamage == true)
                         {
-                            aerialDamage = TJAction.AerialDamage.Damage;
-                            aerialDamageInfo = TJAction.AerialDamage;
+                            aerialDamage = TJAction.DamageProperties.Damage;
+                            aerialDamageInfo = TJAction.DamageProperties;
                         }
                         else
                         {
-                            Debug.LogWarning($"{Action.Name} is not of type {nameof(TornadoJump)} in {nameof(TornadoJumpSequence)}!");
+                            Debug.LogWarning($"{Action.Name}'s second part is not defined or does not deal damage!");
                         }
 
                         InteractionResult[] targetsHit = AttemptDamage(aerialDamage, CurTargets, aerialDamageInfo, true);

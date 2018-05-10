@@ -477,9 +477,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <returns>The BattleEntities the move affects based on its MoveAffectionType and the HeightStates it can target.
         /// If None, an empty array is returned.</returns>
-        /* NOTE: Refactor this to be static and make the instance version call the static one.
-         * It should work for any MoveProperties and Custom method.
-         * This will fix secondary attacks, such as Tornado Jump's aerial one, from not filtering properly.
+        /* NOTE: We eventually may want this to be static and make the instance version call the static one.
+         * This would allow filtering just from data without requiring an instance.
          */
         public BattleEntity[] GetEntitiesMoveAffects()
         {

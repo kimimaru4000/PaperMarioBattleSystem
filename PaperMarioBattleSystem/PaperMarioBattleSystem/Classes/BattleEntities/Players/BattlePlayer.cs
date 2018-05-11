@@ -31,15 +31,15 @@ namespace PaperMarioBattleSystem
 
             if (PlayerType == PlayerTypes.Mario)
             {
-                battlepos = BattleManager.Instance.MarioPos;
+                battlepos = BattleGlobals.MarioPos;
             }
             else if (PlayerType == PlayerTypes.Partner)
             {
-                battlepos = BattleManager.Instance.PartnerPos;
+                battlepos = BattleGlobals.PartnerPos;
             }
 
-            if (HeightState == HeightStates.Airborne) battlepos.Y -= BattleManager.Instance.AirborneY;
-            else if (HeightState == HeightStates.Ceiling) battlepos.Y -= BattleManager.Instance.CeilingY;
+            if (HeightState == HeightStates.Airborne) battlepos.Y -= BattleGlobals.AirborneY;
+            else if (HeightState == HeightStates.Ceiling) battlepos.Y -= BattleGlobals.CeilingY;
 
             SetBattlePosition(battlepos);
             Position = BattlePosition;

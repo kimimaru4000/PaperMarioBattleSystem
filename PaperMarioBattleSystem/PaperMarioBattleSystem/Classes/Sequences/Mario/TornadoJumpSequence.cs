@@ -91,7 +91,7 @@ namespace PaperMarioBattleSystem
                         }
                         else
                         {
-                            Debug.LogWarning($"{Action.Name} is not of type {nameof(TornadoJump)} in {nameof(TornadoJumpSequence)}!");
+                            Debug.LogWarning($"{Action.Name} is not of type {nameof(TornadoJumpAction)} in {nameof(TornadoJumpSequence)}!");
                         }
 
                         //Target the entities here

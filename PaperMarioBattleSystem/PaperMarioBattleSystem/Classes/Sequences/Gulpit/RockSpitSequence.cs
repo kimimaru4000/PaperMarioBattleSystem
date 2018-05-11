@@ -57,7 +57,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     //Go in front of the entity
                     //bool approachFromLeft = User.BattlePosition.X < EntityUsed.BattlePosition.X;
-                    Vector2 position = BattleManager.Instance.GetPositionInFront(EntityUsed, false);
+                    Vector2 position = BattleManagerUtils.GetPositionInFront(EntityUsed, false);
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
 
                     CurSequenceAction = new MoveToSeqAction(position, WalkDur);
@@ -90,7 +90,7 @@ namespace PaperMarioBattleSystem
 
                     //Make the used entity fly towards the target
                     EntityUsed.TintColor = PrevUsedTintColor;
-                    CurSequenceAction = new MoveToSeqAction(EntityUsed, BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], false), WalkDur / 2d);
+                    CurSequenceAction = new MoveToSeqAction(EntityUsed, BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], false), WalkDur / 2d);
                     break;
                 case 1:
                     //When hitting, it should eventually fly off after recoiling if a rock, or if it's like a bomb then explode

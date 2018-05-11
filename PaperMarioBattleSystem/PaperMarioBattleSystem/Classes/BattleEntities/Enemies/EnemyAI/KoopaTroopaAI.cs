@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The MoveAction to perform.
         /// </summary>
-        protected virtual MoveAction ActionPerformed => new ShellToss();
+        protected virtual MoveAction ActionPerformed => new ShellTossAction();
 
         public KoopaTroopaAI(KoopaTroopa koopatroopa) : base(koopatroopa)
         {

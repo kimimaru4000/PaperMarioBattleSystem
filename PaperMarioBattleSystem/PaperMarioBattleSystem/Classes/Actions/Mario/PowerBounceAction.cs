@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
-    public sealed class PowerBounce : Jump
+    public sealed class PowerBounceAction : JumpAction
     {
-        public PowerBounce()
+        public PowerBounceAction()
         {
             Name = "Power Bounce";
             MoveInfo.Icon.SetRect(new Rectangle(939, 136, 24, 21));

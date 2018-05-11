@@ -12,9 +12,9 @@ namespace PaperMarioBattleSystem
     /// The Defend action.
     /// Mario or his Partner assumes the Guard stance and has their Defense boosted by 1 until their next turn.
     /// </summary>
-    public sealed class Defend : MoveAction
+    public sealed class DefendAction : MoveAction
     {
-        public Defend()
+        public DefendAction()
         {
             Name = "Defend";
 

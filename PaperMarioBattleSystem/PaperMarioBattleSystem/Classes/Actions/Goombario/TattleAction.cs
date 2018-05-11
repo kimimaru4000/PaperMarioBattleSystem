@@ -11,9 +11,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Goombario's Tattle action.
     /// </summary>
-    public sealed class Tattle : MoveAction
+    public sealed class TattleAction : MoveAction
     {
-        public Tattle(bool isGoombella)
+        public TattleAction(bool isGoombella)
         {
             Name = "Tattle";
 

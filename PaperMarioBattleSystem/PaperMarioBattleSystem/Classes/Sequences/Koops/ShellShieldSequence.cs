@@ -98,7 +98,7 @@ namespace PaperMarioBattleSystem
                     //Remove the Shell and take it out of battle
                     //NOTE: This can be problematic if the BattleEntity is something other than the previous Shell!
                     BattleEntity prevShell = EntitiesAffected[0].EntityProperties.GetAdditionalProperty<BattleEntity>(Enumerations.AdditionalProperty.DefendedByEntity);
-                    BattleManager.Instance.RemoveEntities(new BattleEntity[] { prevShell }, true);
+                    BattleManager.Instance.RemoveEntity(prevShell, true);
 
                     CurSequenceAction = new WaitSeqAction(0d);
 

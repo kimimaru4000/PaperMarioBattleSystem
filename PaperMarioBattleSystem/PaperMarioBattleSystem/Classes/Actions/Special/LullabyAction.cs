@@ -10,9 +10,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Lullaby action. Mamar puts all enemies to sleep at the cost of 1 SP.
     /// </summary>
-    public sealed class Lullaby : SpecialMoveAction
+    public sealed class LullabyAction : SpecialMoveAction
     {
-        public Lullaby()
+        public LullabyAction()
         {
             Name = "Lullaby";
 

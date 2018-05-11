@@ -10,9 +10,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Yoshi's Mini-Egg move.
     /// </summary>
-    public sealed class MiniEgg : MoveAction
+    public sealed class MiniEggAction : MoveAction
     {
-        public MiniEgg()
+        public MiniEggAction()
         {
             Name = "Mini-Egg";
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 46, 22, 22)),

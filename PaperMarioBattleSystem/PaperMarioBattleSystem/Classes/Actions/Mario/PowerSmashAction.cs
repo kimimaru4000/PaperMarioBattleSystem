@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Mario's Power Smash action.
     /// </summary>
-    public sealed class PowerSmashAction : Hammer
+    public sealed class PowerSmashAction : HammerAction
     {
         public PowerSmashAction(int numEquipped)
         {

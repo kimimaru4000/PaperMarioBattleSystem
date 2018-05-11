@@ -46,9 +46,9 @@ namespace PaperMarioBattleSystem
             base.OnBattleStart();
 
             //Set battle position
-            Vector2 battlepos = BattleManager.Instance.EnemyStartPos + new Vector2(BattleManager.Instance.PositionXDiff * BattleIndex, 0);
-            if (HeightState == Enumerations.HeightStates.Airborne) battlepos.Y -= BattleManager.Instance.AirborneY;
-            else if (HeightState == Enumerations.HeightStates.Ceiling) battlepos.Y -= BattleManager.Instance.CeilingY;
+            Vector2 battlepos = BattleGlobals.EnemyStartPos + new Vector2(BattleGlobals.PositionXDiff * BattleIndex, 0);
+            if (HeightState == Enumerations.HeightStates.Airborne) battlepos.Y -= BattleGlobals.AirborneY;
+            else if (HeightState == Enumerations.HeightStates.Ceiling) battlepos.Y -= BattleGlobals.CeilingY;
 
             SetBattlePosition(battlepos);
             Position = BattlePosition;

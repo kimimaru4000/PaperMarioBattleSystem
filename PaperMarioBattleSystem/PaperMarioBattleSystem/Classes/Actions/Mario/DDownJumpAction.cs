@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The action for D-Down Jump.
     /// </summary>
-    public sealed class DDownJumpAction : Jump
+    public sealed class DDownJumpAction : JumpAction
     {
         public DDownJumpAction()
         {

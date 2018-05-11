@@ -11,9 +11,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Bow's Outta Sight action.
     /// </summary>
-    public sealed class OuttaSight : MoveAction
+    public sealed class OuttaSightAction : MoveAction
     {
-        public OuttaSight()
+        public OuttaSightAction()
         {
             Name = "Outta Sight";
 

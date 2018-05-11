@@ -12,13 +12,13 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Vivian's Veil action.
     /// </summary>
-    public sealed class Veil : MoveAction
+    public sealed class VeilAction : MoveAction
     {
         private const int NumCommandButtons = 5;
         private const double ActionCommandTime = 5000d;
         private readonly Keys[] ValidCommandButtons = new Keys[] { Keys.Z, Keys.X };
 
-        public Veil()
+        public VeilAction()
         {
             Name = "Veil";
 

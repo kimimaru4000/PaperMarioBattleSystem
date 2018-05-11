@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Mario's Mega Smash action.
     /// </summary>
-    public sealed class MegaSmashAction : Hammer
+    public sealed class MegaSmashAction : HammerAction
     {
         public MegaSmashAction()
         {

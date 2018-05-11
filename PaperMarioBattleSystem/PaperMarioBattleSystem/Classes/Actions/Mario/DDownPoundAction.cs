@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The action for D-Down Pound.
     /// </summary>
-    public sealed class DDownPoundAction : Hammer
+    public sealed class DDownPoundAction : HammerAction
     {
         public DDownPoundAction()
         {

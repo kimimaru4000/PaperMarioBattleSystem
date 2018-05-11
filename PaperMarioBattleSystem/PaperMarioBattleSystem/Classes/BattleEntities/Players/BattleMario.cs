@@ -266,7 +266,7 @@ namespace PaperMarioBattleSystem
         private void OnEntityRemoved(BattleEntity entity)
         {
             //If the Partner was removed, set Mario's BattleIndex to 0
-            if (BattleIndex > 0 && BattleManager.Instance.GetPartner() == null)
+            if (BattleIndex > 0 && BattleManager.Instance.Partner == null)
             {
                 SetBattleIndex(0, false);
             }

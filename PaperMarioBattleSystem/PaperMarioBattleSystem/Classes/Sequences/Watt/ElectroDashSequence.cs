@@ -75,7 +75,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    Vector2 pos = new Vector2(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType == Enumerations.EntityTypes.Player).X, User.Position.Y);
+                    Vector2 pos = new Vector2(BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType == Enumerations.EntityTypes.Player).X, User.Position.Y);
 
                     StartActionCommandInput();
                     CurSequenceAction = new MoveToSeqAction(pos, MoveDur);
@@ -143,13 +143,13 @@ namespace PaperMarioBattleSystem
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
 
                     //When Watt misses Electro Dash, she goes in a downwards arc to around where the next enemy slot would be
-                    Vector2 destPos = BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], EntitiesAffected[0].EntityType == Enumerations.EntityTypes.Player);
+                    Vector2 destPos = BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], EntitiesAffected[0].EntityType == Enumerations.EntityTypes.Player);
                     Vector2 curDest = User.Position + new Vector2(UtilityGlobals.DifferenceDivided(destPos.X, User.Position.X, 2f), MissHeight);
 
                     CurSequenceAction = new MoveToSeqAction(curDest, MissMoveDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 1:
-                    destPos = BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], EntitiesAffected[0].EntityType == Enumerations.EntityTypes.Player);
+                    destPos = BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], EntitiesAffected[0].EntityType == Enumerations.EntityTypes.Player);
                     curDest = User.Position + new Vector2(UtilityGlobals.DifferenceDivided(destPos.X, User.Position.X, 2f), -MissHeight);
 
                     CurSequenceAction = new MoveToSeqAction(curDest, MissMoveDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);

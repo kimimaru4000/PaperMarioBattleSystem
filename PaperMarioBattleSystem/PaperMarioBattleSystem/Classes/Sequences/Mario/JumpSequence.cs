@@ -46,7 +46,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    Vector2 frontPos = BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontmostBattleEntity(CurTarget.EntityType, null), User.EntityType != EntityTypes.Enemy);
+                    Vector2 frontPos = BattleManagerUtils.GetPositionInFront(BattleManager.Instance.GetFrontmostBattleEntity(CurTarget.EntityType, null), User.EntityType != EntityTypes.Enemy);
                     frontPos.Y = User.Position.Y;
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
@@ -151,14 +151,14 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     //Do a little bounce at the end
-                    Vector2 endPos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
+                    Vector2 endPos = BattleManagerUtils.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
                     Vector2 moveAmt = new Vector2(UtilityGlobals.DifferenceDivided(endPos.X, User.Position.X, 2f), -(JumpHeight / 2f));
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpRisingName);
                     CurSequenceAction = new MoveAmountSeqAction(moveAmt, JumpDuration / 2f, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 1:
-                    endPos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
+                    endPos = BattleManagerUtils.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
 
                     moveAmt = new Vector2(UtilityGlobals.DifferenceDivided(endPos.X, User.Position.X, 2f), (JumpHeight / 2f));
 
@@ -218,7 +218,7 @@ namespace PaperMarioBattleSystem
                     if (User.EntityType != EntityTypes.Player)
                         offset.X = -offset.X;
 
-                    Vector2 pos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType != EntityTypes.Player) + offset;
+                    Vector2 pos = BattleManagerUtils.GetPositionInFront(CurTarget, User.EntityType != EntityTypes.Player) + offset;
                     CurSequenceAction = new MoveToSeqAction(pos, WalkDuration / 4d);
                     break;
                 case 1:
@@ -229,13 +229,13 @@ namespace PaperMarioBattleSystem
                     break;
                 case 3:
                     //Do the same bounce as the end sequence, except keep playing the same animation
-                    Vector2 endPos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
+                    Vector2 endPos = BattleManagerUtils.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
                     Vector2 moveAmt = new Vector2(UtilityGlobals.DifferenceDivided(endPos.X, User.Position.X, 2f), -(JumpHeight / 2f));
 
                     CurSequenceAction = new MoveAmountSeqAction(moveAmt, JumpDuration / 2f, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 4:
-                    endPos = BattleManager.Instance.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
+                    endPos = BattleManagerUtils.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
 
                     moveAmt = new Vector2(UtilityGlobals.DifferenceDivided(endPos.X, User.Position.X, 2f), (JumpHeight / 2f));
 

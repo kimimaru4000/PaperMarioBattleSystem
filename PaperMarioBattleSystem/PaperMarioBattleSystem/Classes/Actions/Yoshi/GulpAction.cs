@@ -12,9 +12,9 @@ namespace PaperMarioBattleSystem
     /// Yoshi's Gulp action.
     /// Yoshi eats one enemy and spits it out at the enemy behind it. This move is the only one that can hurt Iron Clefts.
     /// </summary>
-    public sealed class Gulp : MoveAction
+    public sealed class GulpAction : MoveAction
     {
-        public Gulp()
+        public GulpAction()
         {
             Name = "Gulp";
 

@@ -148,7 +148,7 @@ namespace PaperMarioBattleSystem
                     break;
                 case 1:
                     //Remove the BattleEntity from battle and kill it
-                    BattleManager.Instance.RemoveEntities(new BattleEntity[] { EntitiesAffected[0] }, true);
+                    BattleManager.Instance.RemoveEntity(EntitiesAffected[0], true);
                     EntitiesAffected[0].Die();
 
                     ChangeSequenceBranch(SequenceBranch.End);

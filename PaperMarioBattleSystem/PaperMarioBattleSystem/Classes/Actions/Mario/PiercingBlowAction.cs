@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The action for Piercing Blow.
     /// </summary>
-    public sealed class PiercingBlowAction : Hammer
+    public sealed class PiercingBlowAction : HammerAction
     {
         public PiercingBlowAction()
         {

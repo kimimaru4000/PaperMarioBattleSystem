@@ -251,11 +251,7 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKeyDown(Keys.H) == true)
                 {
                     //Make sure we damage the Shell instead if it's over Mario
-                    BattleEntity entity = BattleManager.Instance.GetMario();
-                    if (entity.EntityProperties.HasAdditionalProperty(Enumerations.AdditionalProperty.DefendedByEntity) == true)
-                    {
-                        entity = entity.EntityProperties.GetAdditionalProperty<BattleEntity>(Enumerations.AdditionalProperty.DefendedByEntity);
-                    }
+                    BattleEntity entity = BattleManager.Instance.Mario.GetTrueTarget();
 
                     entity.TakeDamage(Enumerations.Elements.Normal, 1, true);
                 }

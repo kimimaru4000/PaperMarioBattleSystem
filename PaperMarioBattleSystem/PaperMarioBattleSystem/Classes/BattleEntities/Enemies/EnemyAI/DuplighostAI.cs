@@ -35,11 +35,11 @@ namespace PaperMarioBattleSystem
                 int randVal = GeneralGlobals.Randomizer.Next(0, 2);
 
                 //Ensure there's a Partner to copy
-                bool partnerExists = (BattleManager.Instance.GetPartner() != null);
+                bool partnerExists = (BattleManager.Instance.Partner != null);
 
                 if (randVal == 0 && partnerExists == true)
                 {
-                    duplighost.StartAction(new DisguiseAction(), false, BattleManager.Instance.GetPartner().GetTrueTarget());
+                    duplighost.StartAction(new DisguiseAction(), false, BattleManager.Instance.Partner.GetTrueTarget());
                 }
                 else
                 {
@@ -53,13 +53,13 @@ namespace PaperMarioBattleSystem
                     int rand = GeneralGlobals.Randomizer.Next(0, 2);
 
                     if (rand == 0)
-                        duplighost.StartAction(new Bonk(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
+                        duplighost.StartAction(new BonkAction(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
                     else
-                        duplighost.StartAction(new Tattle(false), false, BattleManager.Instance.GetMario());
+                        duplighost.StartAction(new TattleAction(false), false, BattleManager.Instance.Mario);
                 }
                 else if (duplighost.PartnerTypeDisguise == PartnerTypes.Kooper)
                 {
-                    duplighost.StartAction(new ShellToss(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
+                    duplighost.StartAction(new ShellTossAction(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
                 }
                 else if (duplighost.PartnerTypeDisguise == PartnerTypes.Watt)
                 {

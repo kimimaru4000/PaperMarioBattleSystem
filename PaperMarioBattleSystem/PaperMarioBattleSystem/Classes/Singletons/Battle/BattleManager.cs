@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Handles turns in battle
     /// <para>This is a Singleton</para>
     /// </summary>
-    public class BattleManager : IUpdateable, /*IDrawable,*/ ICleanup
+    public class BattleManager : IUpdateable, ICleanup
     {
         #region Singleton Fields
 
@@ -87,18 +87,6 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public BattleProperties Properties { get; private set; } = default(BattleProperties);
 
-        //Starting positions
-        public readonly Vector2 MarioPos = new Vector2(-150, 100);
-        public readonly Vector2 PartnerPos = new Vector2(-200, 100);
-        public readonly Vector2 EnemyStartPos = new Vector2(150, 125);
-        public readonly int PositionXDiff = 50;
-        
-        //These are general values used by most entities in the air or on the ceiling
-        //The entity can still configure how high it goes on its own if needed
-        //In that case, make sure to update the entity's BattlePosition as well
-        public readonly int AirborneY = 40;
-        public readonly int CeilingY = 100;
-
         /// <summary>
         /// How many phase cycles (finished the phase order) passed.
         /// </summary>
@@ -171,27 +159,17 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Mario reference.
         /// </summary>
-        private BattleMario Mario = null;
+        public BattleMario Mario { get; private set; } = null;
 
         /// <summary>
         /// Partner reference.
         /// </summary>
-        private BattlePartner Partner = null;
+        public BattlePartner Partner { get; private set; } = null;
 
         /// <summary>
         /// The number of enemies alive.
         /// </summary>
-        private int EnemiesAlive
-        {
-            get
-            {
-                List<BattleEntity> enemies = GetEntitiesList(EntityTypes.Enemy);
-                if (enemies != null)
-                    return enemies.Count;
-
-                return 0;
-            }
-        }
+        private int EnemiesAlive => GetEntitiesCount(EntityTypes.Enemy);
 
         private BattleManager()
         {
@@ -310,6 +288,8 @@ namespace PaperMarioBattleSystem
                 }
             }
 
+            //NOTE: We need a way to halt the current BattleEntity's turn
+            //For example, if Merlee's spell starts after Mario selects his move, we have to stop until the animation is done
             if (State == BattleState.Turn)
             {
                 EntityTurn.TurnUpdate();
@@ -318,20 +298,6 @@ namespace PaperMarioBattleSystem
             //Update all BattleEntities
             UpdateEntities();
         }
-
-        /*public void Draw()
-        {
-            //Draw all BattleEntities
-            DrawEntities();
-            
-            //Draw the action the current BattleEntity is performing
-            if (EntityTurn != null)
-            {
-                EntityTurn.PreviousAction?.Draw();
-            }
-            
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Current turn: {EntityTurn.Name}", new Vector2(250, 10), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
-        }*/
 
         private void UpdateEntities()
         {
@@ -520,8 +486,8 @@ namespace PaperMarioBattleSystem
             Partner.SpriteFlip = oldPartner.SpriteFlip;
 
             //Remove the old partner from the entity dictionary and add the new one
-            RemoveEntities(new BattleEntity[] { oldPartner }, false);
-            AddEntities(new BattleEntity[] { Partner }, null, false);
+            RemoveEntity(oldPartner, false);
+            AddEntity(Partner, null, false);
 
             //Set the new Partner to use the same max number of turns all Partners have this phase cycle
             //The only exceptions are if the new partner doesn't move at all (Ex. Goompa) or is immobile
@@ -656,7 +622,7 @@ namespace PaperMarioBattleSystem
             if (deadEntity.EntityType == EntityTypes.Player) return;
 
             //Remove this BattleEntity from battle
-            RemoveEntities(new BattleEntity[] { deadEntity }, true);
+            RemoveEntity(deadEntity, true);
         }
 
         /// <summary>
@@ -683,6 +649,66 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Adds a BattleEntity to battle.
+        /// </summary>
+        /// <param name="battleEntity">The BattleEntity to add.</param>
+        /// <param name="battleIndex">An int containing the BattleIndex to add the BattleEntity at.
+        /// <para>If the value is null, the BattleManager will assign the lowest available BattleIndex.</para></param>
+        /// <param name="initialize">Whether to initialize the BattleEntity or not. Regardless of the value, it assigns a BattleIndex.
+        /// If the BattleEntity has first joined battle, this should be true.
+        /// This should be false in cases where the BattleEntities have been removed and re-added to battle, such as switching Partners.</param>
+        public void AddEntity(BattleEntity battleEntity, int? battleIndex, bool initialize)
+        {
+            //Check for a null BattleEntity
+            if (battleEntity == null)
+            {
+                Debug.LogError($"Can't add BattleEntity to battle because it is null!");
+                return;
+            }
+
+            EntityTypes entityType = battleEntity.EntityType;
+
+            //Get the existing list to add this BattleEntity to
+            List<BattleEntity> entityList = GetEntitiesList(entityType);
+
+            //If no list exists for this EntityType, add one
+            if (entityList == null)
+            {
+                entityList = new List<BattleEntity>();
+                AllEntities.Add(entityType, entityList);
+            }
+
+            //Add the BattleEntity to the list
+            entityList.Add(battleEntity);
+
+            //Check to assign the BattleIndex from the value passed in
+            int finalBattleIndex = battleIndex ?? BattleGlobals.InvalidBattleIndex;
+
+            //If the BattleIndex isn't valid, find the lowest available one for this EntityType
+            if (BattleGlobals.IsValidBattleIndex(finalBattleIndex) == false)
+            {
+                finalBattleIndex = FindLowestAvailableBattleIndex(entityType);
+            }
+
+            //Set the battle index and start battle for the BattleEntity if it should
+            battleEntity.SetBattleIndex(finalBattleIndex, false);
+
+            if (initialize == true)
+            {
+                battleEntity.OnBattleStart();
+            }
+
+            //Increment BattleEntity count when added
+            TotalEntityCount++;
+
+            //Sort the list
+            SortEntityList(entityType);
+
+            //Invoke the entity added event
+            EntityAddedEvent?.Invoke(battleEntity);
+        }
+
+        /// <summary>
         /// Adds a set of BattleEntities to battle.
         /// </summary>
         /// <param name="battleEntities">An <see cref="IList{T}"/> of BattleEntities to add.</param>
@@ -690,8 +716,8 @@ namespace PaperMarioBattleSystem
         /// <para>If the IList is null, the value at the IList index is less than 0, or the IList index is out of the <paramref name="battleEntities"/>
         /// IList range, the BattleManager will assign the lowest available BattleIndex.</para></param>
         /// <param name="initialize">Whether to initialize the entities or not. Regardless of the value, it assigns a BattleIndex.
-        /// If the entities have first joined battle, this should be true.
-        /// This should be false in cases where entities have been removed and re-added to battle, such as switching Partners.</param>
+        /// If the BattleEntities have first joined battle, this should be true.
+        /// This should be false in cases where BattleEntities have been removed and re-added to battle, such as switching Partners.</param>
         public void AddEntities(IList<BattleEntity> battleEntities, IList<int> battleIndices, bool initialize)
         {
             //Don't add a null or empty list
@@ -704,62 +730,81 @@ namespace PaperMarioBattleSystem
             //Add the BattleEntities
             for (int i = 0; i < battleEntities.Count; i++)
             {
-                BattleEntity entity = battleEntities[i];
-
-                //Don't add null BattleEntities
-                if (entity == null)
-                {
-                    Debug.LogError($"Not adding null BattleEntity at index {i}");
-                    continue;
-                }
-
-                EntityTypes entityType = entity.EntityType;
-
-                //If no entry exists for this EntityType, add one
-                if (AllEntities.ContainsKey(entityType) == false)
-                {
-                    AllEntities.Add(entityType, new List<BattleEntity>());
-                }
-
-                AllEntities[entityType].Add(entity);
-
-                //Check to assign the BattleIndex from the list passed in
-                int battleIndex = -1;
+                //Check for a valid index
+                int? index = null;
                 if (battleIndices != null && i < battleIndices.Count)
-                {
-                    battleIndex = battleIndices[i];
-                }
-                //If the BattleIndex isn't valid, find the lowest available one for this EntityType
-                if (BattleGlobals.IsValidBattleIndex(battleIndex) == false)
-                {
-                    battleIndex = FindLowestAvailableBattleIndex(entityType);
-                }
+                    index = battleIndices[i];
 
-                //Set battle index and start battle for the entity if it should
-                entity.SetBattleIndex(battleIndex, false);
-
-                if (initialize == true)
-                {
-                    entity.OnBattleStart();
-                }
-
-                //Increment BattleEntity count when added
-                TotalEntityCount++;
-
-                //Sort the list
-                SortEntityList(entityType);
-
-                //Invoke the entity added event
-                EntityAddedEvent?.Invoke(entity);
+                AddEntity(battleEntities[i], index, initialize);
             }
+        }
+
+        /// <summary>
+        /// Removes a BattleEntity from battle.
+        /// </summary>
+        /// <param name="battleEntity">The BattleEntity to remove.</param>
+        /// <param name="cleanUp">Whether to clean up the BattleEntity or not when removed from battle.
+        /// This should be true if the BattleEntity is permanently removed from battle.
+        /// In temporary cases, such as switching Partners, it would be preferable to set this to false.</param>
+        public void RemoveEntity(BattleEntity battleEntity, bool cleanUp)
+        {
+            //Check for a null BattleEntity
+            if (battleEntity == null)
+            {
+                Debug.LogError($"Can't remove BattleEntity from battle because it is null!");
+                return;
+            }
+
+            EntityTypes entityType = battleEntity.EntityType;
+
+            //Get the existing list to remove this BattleEntity from
+            List<BattleEntity> entityList = GetEntitiesList(entityType);
+
+            //If no BattleEntities of this type are present, there's nothing to remove
+            if (entityList == null)
+            {
+                Debug.LogError($"Can't remove BattleEntity of type {entityType} since it's not in battle!");
+                return;
+            }
+
+            bool removed = entityList.Remove(battleEntity);
+
+            //If there are no more BattleEntities left for this EntityType, remove the entry
+            if (entityList.Count == 0)
+            {
+                AllEntities.Remove(entityType);
+            }
+
+            //Clean up the BattleEntity if it should be cleaned up
+            if (cleanUp == true)
+            {
+                battleEntity.CleanUp();
+
+                //Clear these references if the BattleEntity removed is Mario or his Partner
+                if (battleEntity == Mario)
+                {
+                    Mario = null;
+                }
+                if (battleEntity == Partner)
+                {
+                    Partner = null;
+                }
+            }
+
+            //Decrement BattleEntity count when removed
+            if (removed == true)
+                TotalEntityCount--;
+
+            //Invoke the entity removed event
+            EntityRemovedEvent?.Invoke(battleEntity);
         }
 
         /// <summary>
         /// Removes a set of BattleEntities from battle.
         /// </summary>
         /// <param name="battleEntities">An <see cref="IList{T}"/> of BattleEntities to remove.</param>
-        /// <param name="cleanUp">Whether to clean up the entities or not when removed from battle.
-        /// This should be true if the entities are permanently removed from battle.
+        /// <param name="cleanUp">Whether to clean up the BattleEntities or not when removed from battle.
+        /// This should be true if the BattleEntities are permanently removed from battle.
         /// In temporary cases, such as switching Partners, it would be preferable to set this to false.</param>
         public void RemoveEntities(IList<BattleEntity> battleEntities, bool cleanUp)
         {
@@ -773,54 +818,7 @@ namespace PaperMarioBattleSystem
             //Remove all specified entities from the list
             for (int i = 0; i < battleEntities.Count; i++)
             {
-                BattleEntity entity = battleEntities[i];
-
-                //Check for null entries
-                if (entity == null)
-                {
-                    Debug.LogError($"Not removing null BattleEntity at index {i}");
-                    continue;
-                }
-
-                EntityTypes entityType = entity.EntityType;
-
-                //If no entities of this type are present, there's nothing to remove
-                if (AllEntities.ContainsKey(entityType) == false)
-                {
-                    Debug.LogError($"Can't remove BattleEntities of type {entityType} since they're not in battle!");
-                    continue;
-                }
-
-                bool removed = AllEntities[entityType].Remove(entity);
-
-                //If there are no more entities left for this EntityType, remove the entry
-                if (AllEntities[entityType].Count == 0)
-                {
-                    AllEntities.Remove(entityType);
-                }
-
-                //Clean up the entity if it should be cleaned up
-                if (cleanUp == true)
-                {
-                    entity.CleanUp();
-
-                    //Clear these references if the BattleEntity removed is Mario or his Partner
-                    if (entity == Mario)
-                    {
-                        Mario = null;
-                    }
-                    if (entity == Partner)
-                    {
-                        Partner = null;
-                    }
-                }
-
-                //Decrement BattleEntity count when removed
-                if (removed == true)
-                    TotalEntityCount--;
-
-                //Invoke the entity removed event
-                EntityRemovedEvent?.Invoke(entity);
+                RemoveEntity(battleEntities[i], cleanUp);
             }
         }
 
@@ -865,7 +863,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Returns all entities of a specified EntityType in a list.
+        /// Returns all BattleEntities of a specified EntityType in a list.
         /// The returned list is the same reference found in the <see cref="AllEntities"/> dictionary.
         /// This method is used internally in the BattleManager.
         /// <para>NOTE: Be very careful with this list; modifying it outside of the appropriate methods may result in mismatched data.</para>
@@ -876,18 +874,15 @@ namespace PaperMarioBattleSystem
         {
             List<BattleEntity> entities = null;
 
-            //Check if we have any BattleEntities of this type available
-            if (AllEntities.ContainsKey(entityType) == true)
-            {
-                //Get the current list
-                entities = AllEntities[entityType];
-            }
+            //Get the current list
+            //It will be null if there are no BattleEntities of this EntityType in the dictionary
+            AllEntities.TryGetValue(entityType, out entities);
 
             return entities;
         }
 
         /// <summary>
-        /// Returns all entities of a specified EntityType in a new list.
+        /// Returns all BattleEntities of a specified EntityType in a new list.
         /// This method is used internally in the BattleManager to allow for easy manipulation of the returned list.
         /// </summary>
         /// <param name="entityType">The EntityType of entities to return.</param>
@@ -907,7 +902,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Filter by height states
-            FilterEntitiesByHeights(entities, heightStates);
+            BattleManagerUtils.FilterEntitiesByHeights(entities, heightStates);
 
             return entities;
         }
@@ -924,11 +919,12 @@ namespace PaperMarioBattleSystem
             EntityTypes[] entityTypes = UtilityGlobals.GetEnumValues<EntityTypes>();
             for (int i = 0; i < entityTypes.Length; i++)
             {
-                List<BattleEntity> existingList = GetEntitiesList(entityTypes[i]);
-                if (existingList != null)
-                {
-                    count += existingList.Count;
-                }
+                count += GetEntitiesCount(entityTypes[i]);
+                //List<BattleEntity> existingList = GetEntitiesList(entityTypes[i]);
+                //if (existingList != null)
+                //{
+                //    count += existingList.Count;
+                //}
             }
 
             return count;
@@ -947,7 +943,7 @@ namespace PaperMarioBattleSystem
             List<BattleEntity> allentities = GetAllEntitiesList();
 
             //Filter by height states
-            FilterEntitiesByHeights(allentities, heightStates);
+            BattleManagerUtils.FilterEntitiesByHeights(allentities, heightStates);
 
             return allentities.ToArray();
         }
@@ -966,11 +962,11 @@ namespace PaperMarioBattleSystem
                 entityList.CopyFromList(entities.Value);
             }
 
-            FilterEntitiesByHeights(entityList, heightStates);
+            BattleManagerUtils.FilterEntitiesByHeights(entityList, heightStates);
         }
 
         /// <summary>
-        /// Returns the number of BattleEntities of the specified EntityType are participating in battle.
+        /// Returns the number of BattleEntities of the specified EntityType participating in battle.
         /// </summary>
         /// <param name="entityType">The EntityType of BattleEntities to return the count for.</param>
         /// <returns>The number of BattleEntities in battle of the particular EntityType.</returns>
@@ -984,7 +980,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Returns all entities of a specified EntityType in an array.
+        /// Returns all entities of a specified EntityType in a new array.
         /// </summary>
         /// <param name="entityType">The EntityType of BattleEntities to return.</param>
         /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
@@ -1008,7 +1004,7 @@ namespace PaperMarioBattleSystem
             List<BattleEntity> entList = GetEntitiesList(entityType);
             entityList.CopyFromList(entList);
 
-            FilterEntitiesByHeights(entityList, heightStates);
+            BattleManagerUtils.FilterEntitiesByHeights(entityList, heightStates);
         }
 
         /// <summary>
@@ -1026,14 +1022,21 @@ namespace PaperMarioBattleSystem
             return entities.ToArray();
         }
 
-        public BattleMario GetMario()
+        /// <summary>
+        /// Adds all entities of a specified EntityType in a supplied List in reverse order.
+        /// Entities in the back are the first elements in the List. This method generates no garbage.
+        /// </summary>
+        /// <param name="entityList">The List to add the BattleEntities to.</param>
+        /// <param name="entityType">The EntityType of BattleEntities to return.</param>
+        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
+        /// If null, will include entities of all height states.</param>
+        /// <returns>Entities matching the EntityType and height states specified, in reverse.</returns>
+        public void GetEntitiesReversed(List<BattleEntity> entityList, EntityTypes entityType, params HeightStates[] heightStates)
         {
-            return Mario;
-        }
+            List<BattleEntity> entList = GetEntitiesList(entityType);
+            entityList.CopyFromListReverse(entList);
 
-        public BattlePartner GetPartner()
-        {
-            return Partner;
+            BattleManagerUtils.FilterEntitiesByHeights(entityList, heightStates);
         }
 
         public BattleEntity GetFrontPlayer()
@@ -1044,130 +1047,6 @@ namespace PaperMarioBattleSystem
         public BattleEntity GetBackPlayer()
         {
             return BackPlayer;
-        }
-
-        /// <summary>
-        /// Filters a set of entities by specified height states. This method is called internally by the BattleManager.
-        /// </summary>
-        /// <param name="entities">The list of entities to filter. This list is modified directly.</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null or empty, will return the entities passed in</param>
-        public void FilterEntitiesByHeights(List<BattleEntity> entities, params HeightStates[] heightStates)
-        {
-            //Return immediately if either input is null
-            if (entities == null || heightStates == null || heightStates.Length == 0) return;
-
-            for (int i = 0; i < entities.Count; i++)
-            {
-                BattleEntity entity = entities[i];
-
-                //Remove the entity if it wasn't in any of the height states passed in
-                if (heightStates.Contains(entity.HeightState) == false)
-                {
-                    entities.RemoveAt(i);
-                    i--;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Filters a set of entities by specified height states
-        /// </summary>
-        /// <param name="entities">The array of entities to filter</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null or empty, will return the entities passed in</param>
-        /// <returns>An array of BattleEntities filtered by HeightStates</returns>
-        public BattleEntity[] FilterEntitiesByHeights(BattleEntity[] entities, params HeightStates[] heightStates)
-        {
-            if (entities == null || entities.Length == 0 || heightStates == null || heightStates.Length == 0) return entities;
-
-            List<BattleEntity> filteredEntities = new List<BattleEntity>(entities);
-            FilterEntitiesByHeights(filteredEntities, heightStates);
-
-            return filteredEntities.ToArray();
-        }
-
-        /// <summary>
-        /// Filters out BattleEntities marked as Untargetable from a set of BattleEntities.
-        /// This method is called internally by the BattleManager.
-        /// </summary>
-        /// <param name="entities">The list of BattleEntities to filter. The list is modified directly.</param>
-        public void FilterEntitiesByTargetable(List<BattleEntity> entities)
-        {
-            //Return if the list is null
-            if (entities == null) return;
-
-            for (int i = 0; i < entities.Count; i++)
-            {
-                BattleEntity entity = entities[i];
-
-                //Check if the entity has the Untargetable additional property
-                bool untargetable = entity.EntityProperties.HasAdditionalProperty(AdditionalProperty.Untargetable);
-
-                //If it's untargetable, remove it
-                if (untargetable == true)
-                {
-                    entities.RemoveAt(i);
-                    i--;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Filters out BattleEntities marked as Untargetable from a set of BattleEntities.
-        /// </summary>
-        /// <param name="entities">The array of BattleEntities to filter.</param>
-        /// <returns>An array of BattleEntities filtered by untargetable.</returns>
-        public BattleEntity[] FilterEntitiesByTargetable(BattleEntity[] entities)
-        {
-            if (entities == null || entities.Length == 0) return entities;
-
-            List<BattleEntity> filteredEntities = new List<BattleEntity>(entities);
-            FilterEntitiesByTargetable(filteredEntities);
-
-            return filteredEntities.ToArray();
-        }
-
-        /// <summary>
-        /// Filters out dead BattleEntities from a set.
-        /// </summary>
-        /// <param name="entities">The BattleEntities to filter.</param>
-        /// <returns>An array of all the alive BattleEntities.</returns>
-        public BattleEntity[] FilterDeadEntities(BattleEntity[] entities)
-        {
-            if (entities == null || entities.Length == 0) return entities;
-
-            List<BattleEntity> aliveEntities = new List<BattleEntity>(entities);
-            FilterDeadEntities(aliveEntities);
-
-            //for (int i = 0; i < aliveEntities.Count; i++)
-            //{
-            //    if (aliveEntities[i].IsDead == true)
-            //    {
-            //        aliveEntities.RemoveAt(i);
-            //        i--;
-            //    }
-            //}
-
-            return aliveEntities.ToArray();
-        }
-
-        /// <summary>
-        /// Filters out dead BattleEntities from a set.
-        /// </summary>
-        /// <param name="entities">The BattleEntities to filter.</param>
-        public void FilterDeadEntities(List<BattleEntity> entities)
-        {
-            if (entities == null || entities.Count == 0) return;
-
-            for (int i = 0; i < entities.Count; i++)
-            {
-                if (entities[i].IsDead == true)
-                {
-                    entities.RemoveAt(i);
-                    i--;
-                }
-            }
         }
 
         /// <summary>
@@ -1304,36 +1183,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="entityType">The type of BattleEntity to find the gaps for.</param>
         /// <returns>An int array containing the Battle Indices that have been skipped over. If none are found, an empty array.</returns>
-        private int[] FindBattleIndexGaps(EntityTypes entityType)
+        public int[] FindBattleIndexGaps(EntityTypes entityType)
         {
-            //No BattleEntities are in this list, so nothing can be returned
-            if (AllEntities.ContainsKey(entityType) == false)
-            {
-                return Array.Empty<int>();
-            }
-
-            List<int> gaps = new List<int>();
-            int prevIndex = -1;
-
-            List<BattleEntity> entities = AllEntities[entityType];
-            for (int i = 0; i < entities.Count; i++)
-            {
-                int battleIndex = entities[i].BattleIndex;
-
-                //Look for gaps in the index; if the difference is 2 or greater, then
-                //the values in between prevIndex and battleIndex are gaps
-                int diffIndex = battleIndex - prevIndex;
-
-                for (int j = 1; j < diffIndex; j++)
-                {
-                    gaps.Add(prevIndex + j);
-                }
-
-                //Set previous index for comparison with the next BattleEntity
-                prevIndex = battleIndex;
-            }
-
-            return gaps.ToArray();
+            return BattleManagerUtils.FindBattleIndexGaps(GetEntitiesList(entityType));
         }
 
         /// <summary>
@@ -1344,8 +1196,10 @@ namespace PaperMarioBattleSystem
         /// If no BattleEntities of the specified type are in battle, -1 will be returned.</returns>
         private int FindLowestAvailableBattleIndex(EntityTypes entityType)
         {
+            List<BattleEntity> entities = GetEntitiesList(entityType);
+
             //No BattleEntities are in this list, so nothing can be returned
-            if (AllEntities.ContainsKey(entityType) == false)
+            if (entities == null || entities.Count == 0)
             {
                 return -1;
             }
@@ -1353,7 +1207,6 @@ namespace PaperMarioBattleSystem
             int prevIndex = -1;
             int highestIndex = -1;
 
-            List<BattleEntity> entities = AllEntities[entityType];
             for (int i = 0; i < entities.Count; i++)
             {
                 int battleIndex = entities[i].BattleIndex;
@@ -1390,13 +1243,10 @@ namespace PaperMarioBattleSystem
         /// <returns></returns>
         private BattleEntity FindEntityFromBattleIndex(EntityTypes entityType, int startIndex, bool backwards = false)
         {
-            //No BattleEntities are in this list, so nothing can be returned
-            if (AllEntities.ContainsKey(entityType) == false)
-            {
-                return null;
-            }
-
             List<BattleEntity> entities = GetEntitiesList(entityType);
+
+            //No BattleEntities are in this list, so nothing can be returned
+            if (entities == null) return null;
 
             //Search forwards
             if (backwards == false)
@@ -1424,32 +1274,6 @@ namespace PaperMarioBattleSystem
             }
 
             return null;
-        }
-
-        /// <summary>
-        /// Gets the position in front of an entity's battle position
-        /// </summary>
-        /// <param name="entity">The entity to get the position in front of</param>
-        /// <param name="fromLeftSide">Whether the front refers to the left side of the BattleEntity.</param>
-        /// <returns>A Vector2 with the position in front of the entity</returns>
-        public Vector2 GetPositionInFront(BattleEntity entity, bool fromLeftSide)
-        {
-            Vector2 xdiff = new Vector2(PositionXDiff, 0f);
-            if (fromLeftSide == true) xdiff.X = -xdiff.X;
-
-            return (entity.BattlePosition + xdiff);
-        }
-
-        /// <summary>
-        /// Tells whether one BattleEntity is in front of another.
-        /// </summary>
-        /// <param name="behindEntity">The BattleEntity that is supposedly behind <paramref name="frontEntity"/>.</param>
-        /// <param name="frontEntity">The BattleEntity that is supposedly in front of <paramref name="behindEntity"/>.</param>
-        /// <returns></returns>
-        public bool IsEntityInFrontOf(BattleEntity behindEntity, BattleEntity frontEntity)
-        {
-            //Compare BattleIndex - the entity behind will have a higher BattleIndex
-            return (behindEntity.BattleIndex > frontEntity.BattleIndex);
         }
 
         /// <summary>
@@ -1500,4 +1324,201 @@ namespace PaperMarioBattleSystem
 
         #endregion
     }
+
+    #region Battle Manager Utilities
+
+    /// <summary>
+    /// Various utilities for the BattleManager.
+    /// </summary>
+    public static class BattleManagerUtils
+    {
+        /// <summary>
+        /// Filters a set of entities by specified height states. This method is called internally by the BattleManager.
+        /// </summary>
+        /// <param name="entities">The list of entities to filter. This list is modified directly.</param>
+        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
+        /// If null or empty, will return the entities passed in</param>
+        public static void FilterEntitiesByHeights(List<BattleEntity> entities, params HeightStates[] heightStates)
+        {
+            //Return immediately if either input is null
+            if (entities == null || heightStates == null || heightStates.Length == 0) return;
+
+            for (int i = 0; i < entities.Count; i++)
+            {
+                BattleEntity entity = entities[i];
+
+                //Remove the entity if it wasn't in any of the height states passed in
+                if (heightStates.Contains(entity.HeightState) == false)
+                {
+                    entities.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Filters a set of entities by specified height states
+        /// </summary>
+        /// <param name="entities">The array of entities to filter</param>
+        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
+        /// If null or empty, will return the entities passed in</param>
+        /// <returns>An array of BattleEntities filtered by HeightStates</returns>
+        public static BattleEntity[] FilterEntitiesByHeights(BattleEntity[] entities, params HeightStates[] heightStates)
+        {
+            if (entities == null || entities.Length == 0 || heightStates == null || heightStates.Length == 0) return entities;
+
+            List<BattleEntity> filteredEntities = new List<BattleEntity>(entities);
+            FilterEntitiesByHeights(filteredEntities, heightStates);
+
+            return filteredEntities.ToArray();
+        }
+
+        /// <summary>
+        /// Filters out BattleEntities marked as Untargetable from a set of BattleEntities.
+        /// This method is called internally by the BattleManager.
+        /// </summary>
+        /// <param name="entities">The list of BattleEntities to filter. The list is modified directly.</param>
+        public static void FilterEntitiesByTargetable(List<BattleEntity> entities)
+        {
+            //Return if the list is null
+            if (entities == null) return;
+
+            for (int i = 0; i < entities.Count; i++)
+            {
+                BattleEntity entity = entities[i];
+
+                //Check if the entity has the Untargetable additional property
+                bool untargetable = entity.EntityProperties.HasAdditionalProperty(AdditionalProperty.Untargetable);
+
+                //If it's untargetable, remove it
+                if (untargetable == true)
+                {
+                    entities.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Filters out BattleEntities marked as Untargetable from a set of BattleEntities.
+        /// </summary>
+        /// <param name="entities">The array of BattleEntities to filter.</param>
+        /// <returns>An array of BattleEntities filtered by untargetable.</returns>
+        public static BattleEntity[] FilterEntitiesByTargetable(BattleEntity[] entities)
+        {
+            if (entities == null || entities.Length == 0) return entities;
+
+            List<BattleEntity> filteredEntities = new List<BattleEntity>(entities);
+            FilterEntitiesByTargetable(filteredEntities);
+
+            return filteredEntities.ToArray();
+        }
+
+        /// <summary>
+        /// Filters out dead BattleEntities from a set.
+        /// </summary>
+        /// <param name="entities">The BattleEntities to filter.</param>
+        /// <returns>An array of all the alive BattleEntities.</returns>
+        public static BattleEntity[] FilterDeadEntities(BattleEntity[] entities)
+        {
+            if (entities == null || entities.Length == 0) return entities;
+
+            List<BattleEntity> aliveEntities = new List<BattleEntity>(entities);
+            FilterDeadEntities(aliveEntities);
+
+            return aliveEntities.ToArray();
+        }
+
+        /// <summary>
+        /// Filters out dead BattleEntities from a set.
+        /// </summary>
+        /// <param name="entities">The BattleEntities to filter.</param>
+        public static void FilterDeadEntities(List<BattleEntity> entities)
+        {
+            if (entities == null || entities.Count == 0) return;
+
+            for (int i = 0; i < entities.Count; i++)
+            {
+                if (entities[i].IsDead == true)
+                {
+                    entities.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets the position in front of an entity's battle position
+        /// </summary>
+        /// <param name="entity">The entity to get the position in front of</param>
+        /// <param name="fromLeftSide">Whether the front refers to the left side of the BattleEntity.</param>
+        /// <returns>A Vector2 with the position in front of the entity</returns>
+        public static Vector2 GetPositionInFront(BattleEntity entity, bool fromLeftSide)
+        {
+            Vector2 xdiff = new Vector2(PositionXDiff, 0f);
+            if (fromLeftSide == true) xdiff.X = -xdiff.X;
+
+            return (entity.BattlePosition + xdiff);
+        }
+
+        /// <summary>
+        /// Tells whether one BattleEntity is in front of another.
+        /// <para>If the BattleEntities being compared are of different <see cref="EntityTypes"/>, then this may not be accurate.</para>
+        /// </summary>
+        /// <param name="behindEntity">The BattleEntity that is supposedly behind <paramref name="frontEntity"/>.</param>
+        /// <param name="frontEntity">The BattleEntity that is supposedly in front of <paramref name="behindEntity"/>.</param>
+        /// <returns>true if <paramref name="behindEntity"/> has a higher BattleIndex than <paramref name="frontEntity"/>, otherwise false.</returns>
+        public static bool IsEntityInFrontOf(BattleEntity behindEntity, BattleEntity frontEntity)
+        {
+            //Compare BattleIndex - the entity behind will have a higher BattleIndex
+            return (behindEntity.BattleIndex > frontEntity.BattleIndex);
+        }
+
+        /// <summary>
+        /// Finds all BattleIndex gaps in a list of BattleEntities.
+        /// <para>If the BattleEntities in the list are of different <see cref="EntityTypes"/>, then this may not be accurate.</para>
+        /// </summary>
+        /// <param name="entities">The BattleEntities to find the gaps for.</param>
+        /// <returns>An int array containing the Battle Indices that have been skipped over. If none are found, an empty array.</returns>
+        public static int[] FindBattleIndexGaps(List<BattleEntity> entities)
+        {
+            //No BattleEntities are in this list, so nothing can be returned
+            if (entities == null || entities.Count == 0)
+            {
+                return Array.Empty<int>();
+            }
+
+            List<int> gaps = null;
+            int prevIndex = -1;
+
+            for (int i = 0; i < entities.Count; i++)
+            {
+                int battleIndex = entities[i].BattleIndex;
+
+                //Look for gaps in the index; if the difference is 2 or greater, then
+                //the values in between prevIndex and battleIndex are gaps
+                int diffIndex = battleIndex - prevIndex;
+
+                for (int j = 1; j < diffIndex; j++)
+                {
+                    //Initialize if null
+                    if (gaps == null)
+                        gaps = new List<int>();
+
+                    gaps.Add(prevIndex + j);
+                }
+
+                //Set previous index for comparison with the next BattleEntity
+                prevIndex = battleIndex;
+            }
+
+            //Return empty array if there are no gaps
+            if (gaps == null || gaps.Count == 0)
+                return Array.Empty<int>();
+            //Otherwise, return the gaps in a new array
+            else return gaps.ToArray();
+        }
+    }
+
+    #endregion
 }

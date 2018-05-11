@@ -507,6 +507,23 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Copies an <see cref="IList{T}"/> of elements to the <see cref="List{T}"/> in reverse order.
+        /// </summary>
+        /// <typeparam name="T">The type of elements in the List and IList.</typeparam>
+        /// <param name="list">The <see cref="List{T}"/>to copy elements to.</param>
+        /// <param name="elementsToCopy">The elements to copy to the <see cref="List{T}"/> in reverse order.</param>
+        public static void CopyFromListReverse<T>(this List<T> list, in IList<T> elementsToCopy)
+        {
+            //Return if null
+            if (elementsToCopy == null) return;
+
+            for (int i = elementsToCopy.Count - 1; i >= 0; i--)
+            {
+                list.Add(elementsToCopy[i]);
+            }
+        }
+
         #endregion
 
         #region Dictionary Extensions

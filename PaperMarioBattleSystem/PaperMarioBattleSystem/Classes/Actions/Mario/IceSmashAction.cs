@@ -11,9 +11,9 @@ namespace PaperMarioBattleSystem
     /// Mario's Ice Smash action.
     /// It's identical to Hammer except it deals Ice damage, can freeze enemies, and has a slightly longer Action Command.
     /// </summary>
-    public sealed class IceSmash : Hammer
+    public sealed class IceSmashAction : HammerAction
     {
-        public IceSmash()
+        public IceSmashAction()
         {
             Name = "Ice Smash";
             MoveInfo.Icon.SetRect(new Rectangle(891, 430, 40, 40));

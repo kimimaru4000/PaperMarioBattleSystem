@@ -24,10 +24,10 @@ namespace PaperMarioBattleSystem
 
             for (int i = 0; i < partners.Length; i++)
             {
-                ChangePartner partnerChange = new ChangePartner(partners[i]);
+                ChangePartnerAction partnerChange = new ChangePartnerAction(partners[i]);
 
                 //If this partner is the current one out in battle, disable the option
-                if (partners[i] == BattleManager.Instance.GetPartner())
+                if (partners[i] == BattleManager.Instance.Partner)
                 {
                     partnerChange.Disabled = true;
                     partnerChange.DisabledString = $"{partners[i].Name} is already out!";

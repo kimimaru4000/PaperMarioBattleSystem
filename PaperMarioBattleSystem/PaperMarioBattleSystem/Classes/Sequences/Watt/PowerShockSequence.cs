@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
 
-                    Vector2 pos = BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType == Enumerations.EntityTypes.Player);
+                    Vector2 pos = BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType == Enumerations.EntityTypes.Player);
                     CurSequenceAction = new MoveToSeqAction(pos, MoveDur);
 
                     ChangeSequenceBranch(SequenceBranch.Main);

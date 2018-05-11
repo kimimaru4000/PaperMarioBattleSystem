@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace PaperMarioBattleSystem
 {
-    public sealed class Multibounce : Jump
+    public sealed class MultibounceAction : JumpAction
     {
-        public Multibounce()
+        public MultibounceAction()
         {
             Name = "Multibounce";
 

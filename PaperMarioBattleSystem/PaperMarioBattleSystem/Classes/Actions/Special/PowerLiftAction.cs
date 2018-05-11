@@ -11,11 +11,11 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Power Lift action. Move the cursor on a 3x3 grid to hit the red and blue arrows to boost Attack and Defense.
     /// </summary>
-    public sealed class PowerLift : SpecialMoveAction
+    public sealed class PowerLiftAction : SpecialMoveAction
     {
         private const double ActionCommandTime = 15000d;
         
-        public PowerLift()
+        public PowerLiftAction()
         {
             Name = "Power Lift";
 

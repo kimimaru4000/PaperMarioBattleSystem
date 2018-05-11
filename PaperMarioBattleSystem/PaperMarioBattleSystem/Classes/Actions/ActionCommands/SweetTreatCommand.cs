@@ -131,7 +131,7 @@ namespace PaperMarioBattleSystem
 
             //Define the spawner
             Vector2 startPos = new Vector2(500, 15);
-            Vector2 endPos = new Vector2(startPos.X, BattleManager.Instance.PartnerPos.Y + 350f);
+            Vector2 endPos = new Vector2(startPos.X, BattleGlobals.PartnerPos.Y + 350f);
 
             RestoreTypes[] restoreTypes = null;
             int[] restoreTypeCounts = null;

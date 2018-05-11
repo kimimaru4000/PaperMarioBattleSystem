@@ -128,7 +128,7 @@ namespace PaperMarioBattleSystem
             base.OnBattleStart();
 
             //Show the Shell's HP, which can only be viewed with the Peekaboo Badge since it can't be tattled (in the actual games, at least)
-            if (BattleManager.Instance.GetMario().GetPartyEquippedBadgeCount(BadgeGlobals.BadgeTypes.Peekaboo) > 0)
+            if (BattleManager.Instance.Mario.GetPartyEquippedBadgeCount(BadgeGlobals.BadgeTypes.Peekaboo) > 0)
             {
                 this.AddShowHPProperty();
             }

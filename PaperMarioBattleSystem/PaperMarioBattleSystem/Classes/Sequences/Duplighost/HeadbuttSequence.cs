@@ -68,7 +68,7 @@ namespace PaperMarioBattleSystem
                 case 1:
                     AttemptDamage(Action.DamageProperties.Damage, EntitiesAffected[0], Action.DamageProperties, false);
 
-                    Vector2 pos = BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType == Enumerations.EntityTypes.Player);
+                    Vector2 pos = BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType == Enumerations.EntityTypes.Player);
                     CurSequenceAction = new MoveToSeqAction(pos, MoveDur / 2d, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     break;
                 case 2:

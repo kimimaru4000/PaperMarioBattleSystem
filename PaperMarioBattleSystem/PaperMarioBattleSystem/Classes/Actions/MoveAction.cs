@@ -540,7 +540,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Filter out untargetable BattleEntities
-            BattleManager.Instance.FilterEntitiesByTargetable(entities);
+            BattleManagerUtils.FilterEntitiesByTargetable(entities);
 
             //If the BattleEntity has a custom targeting method and shouldn't be targeted, remove it
             //Otherwise, set to the true target in the event something is defending it

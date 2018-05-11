@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
         {
             if (paragoomba.WingedBehavior.Grounded == false)
             {
-                Enemy.StartAction(new DiveKick(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
+                Enemy.StartAction(new DiveKickAction(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
             }
             else
             {

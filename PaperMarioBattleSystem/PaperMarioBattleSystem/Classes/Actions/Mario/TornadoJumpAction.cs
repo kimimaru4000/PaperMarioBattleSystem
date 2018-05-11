@@ -14,12 +14,12 @@ namespace PaperMarioBattleSystem
     /// <para>The first part is a single normal jump, when if successful, does double the damage of a normal jump, then
     /// goes into the second part. The second part has the player press 3 random buttons in order to damage all midair enemies.</para>
     /// </summary>
-    public sealed class TornadoJump : MoveAction
+    public sealed class TornadoJumpAction : MoveAction
     {
         //The second part of Tornado Jump
         private MoveAction TornadoJumpSecondPart = null;
 
-        public TornadoJump()
+        public TornadoJumpAction()
         {
             Name = "Tornado Jump";
 

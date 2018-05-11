@@ -12,12 +12,12 @@ namespace PaperMarioBattleSystem
     /// <para>I'm not sure on the damage specifics, but it seems like every 33% of the hurtbox you cover increases damage by 1,
     /// starting at 1. Fully circling an enemy's hurtbox deals 3 damage.</para>
     /// </summary>
-    public sealed class ArtAttack : SpecialMoveAction
+    public sealed class ArtAttackAction : SpecialMoveAction
     {
         private readonly double StartingDrawTime = 20000d;
         private readonly Vector2 StartingDrawLoc = Vector2.Zero;
 
-        public ArtAttack()
+        public ArtAttackAction()
         {
             Name = "Art Attack";
 

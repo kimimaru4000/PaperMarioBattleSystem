@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
             List<BattleEntity> behindEntities = new List<BattleEntity>();
 
             BattleManager.Instance.GetEntitiesBehind(behindEntities, EntitiesAffected[0]);
-            BattleManager.Instance.FilterEntitiesByHeights(behindEntities, Action.MoveProperties.HeightsAffected);
+            BattleManagerUtils.FilterEntitiesByHeights(behindEntities, Action.MoveProperties.HeightsAffected);
 
             //Store the reference to the behind entity and tell it it's being targeted
             if (behindEntities.Count > 0)
@@ -60,7 +60,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(BattleManager.Instance.GetFrontPlayer(), User.EntityType != Enumerations.EntityTypes.Player), WalkDuration / 4f);
+                    CurSequenceAction = new MoveToSeqAction(BattleManagerUtils.GetPositionInFront(BattleManager.Instance.GetFrontPlayer(), User.EntityType != Enumerations.EntityTypes.Player), WalkDuration / 4f);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -75,7 +75,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     StartActionCommandInput();
-                    CurSequenceAction = new MoveToSeqAction(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), WalkDuration);
                     break;
                 default:
                     PrintInvalidSequence();

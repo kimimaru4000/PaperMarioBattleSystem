@@ -10,9 +10,9 @@ namespace PaperMarioBattleSystem
     /// Mario's Head Rattle action.
     /// It's identical to Hammer except it can confuse enemies and has a slightly longer Action Command.
     /// </summary>
-    public sealed class HeadRattle : Hammer
+    public sealed class HeadRattleAction : HammerAction
     {
-        public HeadRattle()
+        public HeadRattleAction()
         {
             Name = "Head Rattle";
             MoveInfo.ResourceCost = 2;

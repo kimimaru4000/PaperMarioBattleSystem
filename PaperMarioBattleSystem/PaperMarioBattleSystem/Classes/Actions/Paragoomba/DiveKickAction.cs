@@ -10,9 +10,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A Paragoomba's Dive Kick attack.
     /// </summary>
-    public class DiveKick : MoveAction
+    public class DiveKickAction : MoveAction
     {
-        public DiveKick()
+        public DiveKickAction()
         {
             Name = "Dive Kick";
 

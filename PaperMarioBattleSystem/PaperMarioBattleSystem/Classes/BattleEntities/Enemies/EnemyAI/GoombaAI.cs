@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
 
         public override void PerformAction()
         {
-            Enemy.StartAction(new Jump(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
+            Enemy.StartAction(new JumpAction(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
         }
     }
 }

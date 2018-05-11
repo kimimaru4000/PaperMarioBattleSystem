@@ -10,9 +10,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The Refresh action. Eldstar restores 5 HP and FP to Mario at the cost of 1 SP.
     /// </summary>
-    public sealed class Refresh : SpecialMoveAction
+    public sealed class RefreshAction : SpecialMoveAction
     {
-        public Refresh()
+        public RefreshAction()
         {
             Name = "Refresh";
 

@@ -986,10 +986,10 @@ namespace PaperMarioBattleSystem
                 }
 
                 //Filter by heights
-                BattleManager.Instance.FilterEntitiesByHeights(newTargets, actualAction.MoveProperties.HeightsAffected);
+                BattleManagerUtils.FilterEntitiesByHeights(newTargets, actualAction.MoveProperties.HeightsAffected);
 
                 //Filter dead entities
-                BattleManager.Instance.FilterDeadEntities(newTargets);
+                BattleManagerUtils.FilterDeadEntities(newTargets);
 
                 //Choose a random target to attack if the action only targets one entity
                 if (newTargets.Count > 0 && actualAction.MoveProperties.SelectionType != TargetSelectionMenu.EntitySelectionType.All)

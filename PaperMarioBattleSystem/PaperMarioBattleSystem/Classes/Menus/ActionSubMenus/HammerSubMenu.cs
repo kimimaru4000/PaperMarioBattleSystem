@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
             Position = new Vector2(230, 150);
             AutoSelectSingle = true;
 
-            BattleActions.Add(new Hammer());
+            BattleActions.Add(new HammerAction());
 
             int powerSmashCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PowerSmash);
             if (powerSmashCount > 0)
@@ -36,11 +36,11 @@ namespace PaperMarioBattleSystem
             }
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.HeadRattle) > 0)
             {
-                BattleActions.Add(new HeadRattle());
+                BattleActions.Add(new HeadRattleAction());
             }
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.IceSmash) > 0)
             {
-                BattleActions.Add(new IceSmash());
+                BattleActions.Add(new IceSmashAction());
             }
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DDownPound) > 0)
             {

@@ -19,8 +19,8 @@ namespace PaperMarioBattleSystem
             Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
 
             //Get Jump and Hammer battle textures based on Mario's equipment
-            CroppedTexture2D jump = new CroppedTexture2D(tex, GetTexRectForBootLevel(BattleManager.Instance.GetMario().MStats.BootLevel));
-            CroppedTexture2D hammer = new CroppedTexture2D(tex, GetTexRectForHammerLevel(BattleManager.Instance.GetMario().MStats.HammerLevel));
+            CroppedTexture2D jump = new CroppedTexture2D(tex, GetTexRectForBootLevel(BattleManager.Instance.Mario.MStats.BootLevel));
+            CroppedTexture2D hammer = new CroppedTexture2D(tex, GetTexRectForHammerLevel(BattleManager.Instance.Mario.MStats.HammerLevel));
 
             CroppedTexture2D starPower = new CroppedTexture2D(tex, new Rectangle(182, 812, 24, 24));
 

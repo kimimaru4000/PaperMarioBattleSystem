@@ -186,7 +186,7 @@ namespace PaperMarioBattleSystem
                 ChangeHeightState(HeightStates.Grounded);
 
                 //Move the Duplighost back down
-                SetBattlePosition(BattlePosition + new Vector2(0f, BattleManager.Instance.AirborneY));
+                SetBattlePosition(BattlePosition + new Vector2(0f, BattleGlobals.AirborneY));
                 if (PreviousAction?.MoveSequence.InSequence == false)
                 {
                     Position = BattlePosition;

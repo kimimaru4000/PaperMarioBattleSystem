@@ -8,7 +8,7 @@ using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
-    public class QuakeHammerAction : Hammer
+    public class QuakeHammerAction : HammerAction
     {
         private int BaseDamage = 1;
         private int DamageScalePerBadge = 1;

@@ -88,7 +88,7 @@ namespace PaperMarioBattleSystem
             //Queue the BattleEvent to move the entity down
             BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                new GroundedBattleEvent(Entity, new Vector2(Entity.BattlePosition.X, BattleManager.Instance.EnemyStartPos.Y)));
+                new GroundedBattleEvent(Entity, new Vector2(Entity.BattlePosition.X, BattleGlobals.EnemyStartPos.Y)));
 
             //Remove the damage event, since we don't need it anymore
             Entity.DamageTakenEvent -= OnDamageTaken;

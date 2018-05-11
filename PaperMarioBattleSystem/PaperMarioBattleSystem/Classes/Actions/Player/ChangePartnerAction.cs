@@ -11,14 +11,14 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The ChangePartner MoveAction.
     /// </summary>
-    public sealed class ChangePartner : MoveAction
+    public sealed class ChangePartnerAction : MoveAction
     {
         /// <summary>
         /// The new Partner to switch to.
         /// </summary>
         private BattlePartner NewPartner = null;
 
-        public ChangePartner(BattlePartner newPartner)
+        public ChangePartnerAction(BattlePartner newPartner)
         {
             NewPartner = newPartner;
 
@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
                 Rectangle sourceRect = new Rectangle(30 + (((int)NewPartner.PartnerType - 1) * 32), 886, 32, 32);
 
                 //Pretty hackish for now; show the disabled icon instead if the Partner is the current one out
-                if (NewPartner == BattleManager.Instance.GetPartner())
+                if (NewPartner == BattleManager.Instance.Partner)
                 {
                     sourceRect.Y += 32;
                 }

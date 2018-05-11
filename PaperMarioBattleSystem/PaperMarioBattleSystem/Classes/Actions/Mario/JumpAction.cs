@@ -11,9 +11,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Mario's Jump action
     /// </summary>
-    public class Jump : MoveAction
+    public class JumpAction : MoveAction
     {
-        public Jump()
+        public JumpAction()
         {
             Name = "Jump";
 

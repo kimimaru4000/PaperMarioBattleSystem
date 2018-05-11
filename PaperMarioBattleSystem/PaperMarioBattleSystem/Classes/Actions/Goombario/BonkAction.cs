@@ -10,9 +10,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Goombario's Bonk action
     /// </summary>
-    public sealed class Bonk : Jump
+    public sealed class BonkAction : JumpAction
     {
-        public Bonk()
+        public BonkAction()
         {
             Name = "Bonk";
             MoveInfo.Description = "Headbonk an enemy.";

@@ -46,8 +46,8 @@ namespace PaperMarioBattleSystem
 
         public void Draw()
         {
-            BattleMario mario = BattleManager.Instance.GetMario();
-            BattlePartner partner = BattleManager.Instance.GetPartner();
+            BattleMario mario = BattleManager.Instance.Mario;
+            BattlePartner partner = BattleManager.Instance.Partner;
 
             if (mario != null)
             {

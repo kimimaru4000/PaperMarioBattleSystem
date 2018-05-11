@@ -12,9 +12,9 @@ namespace PaperMarioBattleSystem
     /// <para>The amount regained can be increased with Deep Focus Badges.
     /// Partners can also use this move with the Group Focus Badge, but Deep Focus doesn't increase the amount they gain when using it.</para>
     /// </summary>
-    public sealed class Focus : SpecialMoveAction
+    public sealed class FocusAction : SpecialMoveAction
     {
-        public Focus()
+        public FocusAction()
         {
             Name = "Focus";
 

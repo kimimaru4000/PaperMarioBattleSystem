@@ -106,9 +106,9 @@ namespace PaperMarioBattleSystem
                         else if (DuplighostRef.PartnerTypeDisguise == Enumerations.PartnerTypes.Goompa)
                         {
                             //Make sure Mario is in battle (he should be!)
-                            if (BattleManager.Instance.GetMario() != null)
+                            if (BattleManager.Instance.Mario != null)
                             {
-                                BattleManager.Instance.GetMario().Position = DuplighostRef.Position;
+                                BattleManager.Instance.Mario.Position = DuplighostRef.Position;
                             }
 
                             DuplighostRef.Die();
@@ -129,7 +129,7 @@ namespace PaperMarioBattleSystem
                     if (entityDisguised.HeightState == Enumerations.HeightStates.Airborne)
                     {
                         DuplighostRef.ChangeHeightState(entityDisguised.HeightState);
-                        DuplighostRef.SetBattlePosition(DuplighostRef.BattlePosition - new Vector2(0f, BattleManager.Instance.AirborneY));
+                        DuplighostRef.SetBattlePosition(DuplighostRef.BattlePosition - new Vector2(0f, BattleGlobals.AirborneY));
                         DuplighostRef.Position = DuplighostRef.BattlePosition;
                     }
 

@@ -19,12 +19,12 @@ namespace PaperMarioBattleSystem
             Name = "Special";
             Position = new Vector2(230, 150);
 
-            BattleActions.Add(new Focus());
+            BattleActions.Add(new FocusAction());
             BattleActions.Add(new SweetTreatAction());
-            BattleActions.Add(new Refresh());
-            BattleActions.Add(new Lullaby());
-            BattleActions.Add(new PowerLift());
-            BattleActions.Add(new ArtAttack());
+            BattleActions.Add(new RefreshAction());
+            BattleActions.Add(new LullabyAction());
+            BattleActions.Add(new PowerLiftAction());
+            BattleActions.Add(new ArtAttackAction());
 
             if (BattleActions.Count == 0)
             {

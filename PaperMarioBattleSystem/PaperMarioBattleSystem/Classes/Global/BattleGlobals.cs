@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -65,6 +66,22 @@ namespace PaperMarioBattleSystem
         public const int InfiniteSuccessionAttacks = 0;
 
         public const string NoRunMessage = "Can't flee this fight!";
+
+        #endregion
+
+        #region Other Fields
+
+        //Starting positions
+        public static readonly Vector2 MarioPos = new Vector2(-150, 100);
+        public static readonly Vector2 PartnerPos = new Vector2(-200, 100);
+        public static readonly Vector2 EnemyStartPos = new Vector2(150, 125);
+        public static readonly int PositionXDiff = 50;
+
+        //These are general values used by most entities in the air or on the ceiling
+        //The entity can still configure how high it goes on its own if needed
+        //In that case, make sure to update the entity's BattlePosition as well
+        public static readonly int AirborneY = 40;
+        public static readonly int CeilingY = 100;
 
         #endregion
 
@@ -134,7 +151,6 @@ namespace PaperMarioBattleSystem
             /// The type and amount of damage dealt to the attacker.
             /// If none, set to null.
             /// </summary>
-            //public ElementDamageHolder? ElementHolder { get; private set; }
             public StatusGlobals.PaybackHolder? Payback { get; private set; }
 
             public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect,
@@ -144,13 +160,12 @@ namespace PaperMarioBattleSystem
             }
 
             public DefensiveActionHolder(int damage, StatusChanceHolder[] statuses, Enumerations.DamageEffects damageEffect,
-                Enumerations.DefensiveActionTypes defensiveActionType, StatusGlobals.PaybackHolder? payback)//ElementDamageHolder? elementHolder)
+                Enumerations.DefensiveActionTypes defensiveActionType, StatusGlobals.PaybackHolder? payback)
             {
                 Damage = damage;
                 Statuses = statuses;
                 DamageEffect = damageEffect;
                 DefensiveActionType = defensiveActionType;
-                //ElementHolder = elementHolder;
                 Payback = payback;
             }
         }

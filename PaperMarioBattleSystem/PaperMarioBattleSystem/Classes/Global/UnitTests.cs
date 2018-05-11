@@ -109,7 +109,7 @@ namespace PaperMarioBattleSystem
                 Debug.Assert(mario.EntityProperties.HasPayback());
                 Debug.Assert(mario.EntityProperties.HasPhysAttributes(true, Enumerations.PhysicalAttributes.Electrified));
 
-                int damage = new ShellToss().DamageProperties.Damage + koopa.BattleStats.TotalAttack;
+                int damage = new ShellTossAction().DamageProperties.Damage + koopa.BattleStats.TotalAttack;
 
                 InteractionParamHolder paramHolder = new InteractionParamHolder(koopa, mario, damage, Enumerations.Elements.Normal, false,
                     Enumerations.ContactTypes.SideDirect, Enumerations.ContactProperties.Protected, null, Enumerations.DamageEffects.None, false,

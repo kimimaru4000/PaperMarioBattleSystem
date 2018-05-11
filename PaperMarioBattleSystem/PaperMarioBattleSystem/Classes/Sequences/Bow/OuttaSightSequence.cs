@@ -156,7 +156,7 @@ namespace PaperMarioBattleSystem
             AllyAffected.TurnStartEvent -= AllyAffectedTurnStartHandler;
             EntityUsing.TurnStartEvent -= OnUserTurnStart;
 
-            Debug.Log($"Starting second phase of {nameof(OuttaSight)} for {EntityUsing.Name}!");
+            Debug.Log($"Starting second phase of {nameof(OuttaSightAction)} for {EntityUsing.Name}!");
 
             //Clear the menu stack as the action will be selected automatically
             BattleUIManager.Instance.ClearMenuStack();
@@ -177,7 +177,7 @@ namespace PaperMarioBattleSystem
         //This allows commands like Defend to end on the ally's next turn even if it can't move yet
         private void AllyAffectedTurnStartHandler()
         {
-            Debug.Log($"Skipped {AllyAffected.Name}'s turn for {nameof(OuttaSight)} as it's being protected by {EntityUsing.Name}!");
+            Debug.Log($"Skipped {AllyAffected.Name}'s turn for {nameof(OuttaSightAction)} as it's being protected by {EntityUsing.Name}!");
 
             //Clear the menu stack - the ally can't move yet
             BattleUIManager.Instance.ClearMenuStack();

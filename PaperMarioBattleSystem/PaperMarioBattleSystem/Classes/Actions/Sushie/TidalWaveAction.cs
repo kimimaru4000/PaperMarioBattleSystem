@@ -11,9 +11,9 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Sushie's Tidal Wave attack
     /// </summary>
-    public class TidalWave : MoveAction
+    public class TidalWaveAction : MoveAction
     {
-        public TidalWave()
+        public TidalWaveAction()
         {
             Name = "Tidal Wave";
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 75, 22, 22)),

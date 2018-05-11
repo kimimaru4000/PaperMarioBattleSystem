@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName);
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy).X, User.BattlePosition.Y), 700d);
+                    CurSequenceAction = new MoveToSeqAction(new Vector2(BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy).X, User.BattlePosition.Y), 700d);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -39,7 +39,7 @@ namespace PaperMarioBattleSystem
                 //Go back to your battle position
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName);
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(BattleManager.Instance.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy).X, User.BattlePosition.Y), 500d);
+                    CurSequenceAction = new MoveToSeqAction(new Vector2(BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy).X, User.BattlePosition.Y), 500d);
                     break;
                 case 1:
                     CurSequenceAction = new MoveToSeqAction(User.BattlePosition, 400d);

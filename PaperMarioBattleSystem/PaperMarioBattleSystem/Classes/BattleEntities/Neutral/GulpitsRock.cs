@@ -91,7 +91,7 @@ namespace PaperMarioBattleSystem
                 startPos.Y += 15f;
 
             //Set battle position
-            Vector2 battlepos = startPos + new Vector2((BattleManager.Instance.PositionXDiff / 3) * BattleIndex, 0);
+            Vector2 battlepos = startPos + new Vector2((BattleGlobals.PositionXDiff / 3) * BattleIndex, 0);
 
             SetBattlePosition(battlepos);
             Position = BattlePosition;

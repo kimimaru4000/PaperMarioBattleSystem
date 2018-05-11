@@ -18,18 +18,18 @@ namespace PaperMarioBattleSystem
             Position = new Vector2(230, 150);
             AutoSelectSingle = true;
 
-            BattleActions.Add(new Jump());
+            BattleActions.Add(new JumpAction());
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PowerBounce) > 0)
             {
-                BattleActions.Add(new PowerBounce());
+                BattleActions.Add(new PowerBounceAction());
             }
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.Multibounce) > 0)
             {
-                BattleActions.Add(new Multibounce());
+                BattleActions.Add(new MultibounceAction());
             }
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.TornadoJump) > 0)
             {
-                BattleActions.Add(new TornadoJump());
+                BattleActions.Add(new TornadoJumpAction());
             }
             if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DDownJump) > 0)
             {

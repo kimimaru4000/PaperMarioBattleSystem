@@ -29,10 +29,10 @@ namespace PaperMarioBattleSystem
             //If no Partner is available (removed from battle or don't have one) then don't add the change partner action
             //Additionally, if only one partner is avaiable then don't add it either
             //This mimics TTYD behavior if you either have no Partner or if it's removed from battle via Gale Force or Fright
-            bool addChangePartner = (BattleManager.Instance.GetPartner() != null && Inventory.Instance.partnerInventory.GetPartnerCount() > 1);
+            bool addChangePartner = (BattleManager.Instance.Partner != null && Inventory.Instance.partnerInventory.GetPartnerCount() > 1);
             if (addChangePartner == true)
             {
-                Rectangle sourceRect = new Rectangle(30 + (((int)BattleManager.Instance.GetPartner().PartnerType - 1) * 32), 886, 32, 32);
+                Rectangle sourceRect = new Rectangle(30 + (((int)BattleManager.Instance.Partner.PartnerType - 1) * 32), 886, 32, 32);
 
                 BattleActions.Add(new MenuAction("Change Partner", new CroppedTexture2D(battleTex, sourceRect),
                     "Change your current partner.", //costDisplayType, 
@@ -57,7 +57,7 @@ namespace PaperMarioBattleSystem
             #endregion
 
             //Defend action
-            BattleActions.Add(new Defend());
+            BattleActions.Add(new DefendAction());
 
             //Do nothing action
             BattleActions.Add(new NoAction());

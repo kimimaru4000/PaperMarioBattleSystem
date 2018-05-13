@@ -21,6 +21,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Sky Guy";
 
+            AIBehavior = new DefaultEnemyAI(this);
             WingedBehavior = new SkyGuyWingedBehavior(this);
 
             ChangeHeightState(Enumerations.HeightStates.Airborne);

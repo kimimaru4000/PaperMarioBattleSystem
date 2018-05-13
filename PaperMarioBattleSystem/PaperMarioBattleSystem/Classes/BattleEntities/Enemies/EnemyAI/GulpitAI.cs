@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
                 action = new RockSpitAction(usableEntities[chosenIndex]);
             else action = new LickAction();
 
-            Enemy.StartAction(action, false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
+            Enemy.StartAction(action, false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
         }
     }
 }

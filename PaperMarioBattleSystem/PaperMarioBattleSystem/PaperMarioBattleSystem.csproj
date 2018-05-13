@@ -126,6 +126,7 @@
     <Compile Include="Classes\Actions\MenuAction.cs" />
     <Compile Include="Classes\Actions\MessageAction.cs" />
     <Compile Include="Classes\Actions\MoveAction.cs" />
+    <Compile Include="Classes\Actions\New\SwapMarioPartnerAction.cs" />
     <Compile Include="Classes\Actions\NoAction.cs" />
     <Compile Include="Classes\Actions\Paragoomba\DiveKickAction.cs" />
     <Compile Include="Classes\Actions\Parakarry\AirLiftAction.cs" />
@@ -160,6 +161,7 @@
     <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\KoopatrolAI.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\KoopaTroopaAI.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\ParagoombaAI.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\ShyGuyAI.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Goomba.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Gulpit.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Koopatrol.cs" />
@@ -214,6 +216,7 @@
     <Compile Include="Classes\BattleEvents\ShootBobberyBombBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\SortEntityListBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\StatusEndedBattleEvent.cs" />
+    <Compile Include="Classes\BattleEvents\SwapPartnerBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\SwapPositionBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitBattleEvent.cs" />
     <Compile Include="Classes\BattleEvents\WaitForAnimBattleEvent.cs" />
@@ -452,6 +455,7 @@
     <Compile Include="Classes\Sequences\Mario\PowerSmashSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\QuakeHammerSequence.cs" />
     <Compile Include="Classes\Sequences\Mario\TornadoJumpSequence.cs" />
+    <Compile Include="Classes\Sequences\New\SwapMarioPartnerSequence.cs" />
     <Compile Include="Classes\Sequences\NoSequence.cs" />
     <Compile Include="Classes\Sequences\Paragoomba\DiveKickSequence.cs" />
     <Compile Include="Classes\Sequences\Parakarry\AirLiftSequence.cs" />
@@ -685,6 +689,10 @@
     <Content Include="Content\UI\RedRoundedRect.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="C:\Program Files %28x86%29\MonoGame\v3.0\Assemblies\DesktopGL\x64\libopenal.so.1">
+      <Link>x64\libopenal.so.1</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="C:\Program Files (x86)\MonoGame\v3.0\Assemblies\DesktopGL\x86\SDL2.dll">
       <Link>x86\SDL2.dll</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

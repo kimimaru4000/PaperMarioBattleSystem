@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
                 }
                 else
                 {
-                    duplighost.StartAction(new HeadbuttAction(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
+                    duplighost.StartAction(new HeadbuttAction(), false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
                 }
             }
             else
@@ -53,21 +53,21 @@ namespace PaperMarioBattleSystem
                     int rand = GeneralGlobals.Randomizer.Next(0, 2);
 
                     if (rand == 0)
-                        duplighost.StartAction(new BonkAction(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
+                        duplighost.StartAction(new BonkAction(), false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
                     else
                         duplighost.StartAction(new TattleAction(false), false, BattleManager.Instance.Mario);
                 }
                 else if (duplighost.PartnerTypeDisguise == PartnerTypes.Kooper)
                 {
-                    duplighost.StartAction(new ShellTossAction(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
+                    duplighost.StartAction(new ShellTossAction(), false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
                 }
                 else if (duplighost.PartnerTypeDisguise == PartnerTypes.Watt)
                 {
-                    duplighost.StartAction(new ElectroDashAction(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
+                    duplighost.StartAction(new ElectroDashAction(), false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
                 }
                 else
                 {
-                    duplighost.StartAction(new HeadbuttAction(), false, BattleManager.Instance.GetFrontPlayer().GetTrueTarget());
+                    duplighost.StartAction(new HeadbuttAction(), false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
                 }
             }
 

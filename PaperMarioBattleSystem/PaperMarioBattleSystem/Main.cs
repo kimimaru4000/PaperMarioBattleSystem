@@ -102,6 +102,26 @@ namespace PaperMarioBattleSystem
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
                 new List<BattleEntity>() { new ShyGuy(), new SkyGuy() });
 
+            //Initialize helper objects
+            //Check for the battle setting and add darkness if so
+            if (BattleManager.Instance.Properties.BattleSetting == BattleGlobals.BattleSettings.Dark)
+            {
+                BattleDarknessObj battleDarkness = new BattleDarknessObj();
+                LightingManager.Instance.Initialize(battleDarkness);
+                BattleObjManager.Instance.AddBattleObject(battleDarkness);
+            }
+
+            //Add the HP bar manager
+            BattleObjManager.Instance.AddBattleObject(new HPBarManagerObj());
+
+            //If you can't run from battle, show a message at the start saying so
+            if (BattleManager.Instance.Properties.Runnable == false)
+            {
+                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
+                    new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
+                    new MessageBattleEvent(BattleGlobals.NoRunMessage, MessageBattleEvent.DefaultWaitDuration));
+            }
+
             //Start the battle
             BattleManager.Instance.StartBattle();
 

@@ -149,12 +149,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The player in the Front.
         /// </summary>
-        private BattleEntity FrontPlayer => FindEntityFromBattleIndex(EntityTypes.Player, 0, true);
+        public BattleEntity FrontPlayer => FindEntityFromBattleIndex(EntityTypes.Player, 0, true);
 
         /// <summary>
         /// The player in the Back.
         /// </summary>
-        private BattleEntity BackPlayer => FindEntityFromBattleIndex(EntityTypes.Player, 1, false);
+        public BattleEntity BackPlayer => FindEntityFromBattleIndex(EntityTypes.Player, 1, false);
 
         /// <summary>
         /// Mario reference.
@@ -186,9 +186,6 @@ namespace PaperMarioBattleSystem
             //Remove all entities
             RemoveEntities(removedEntities, true);
 
-            Mario = null;
-            Partner = null;
-
             EntityAddedEvent = null;
             EntityRemovedEvent = null;
             BattleTurnStartedEvent = null;
@@ -209,8 +206,8 @@ namespace PaperMarioBattleSystem
             Properties = properties;
 
             //Mario always starts out in the front, and the Partner always starts out in the back
-            Mario = mario;
-            Partner = partner;
+            SetMario(mario);
+            SetPartner(partner);
 
             //Add all entities at once
             List<BattleEntity> addedEntities = new List<BattleEntity>();
@@ -227,25 +224,6 @@ namespace PaperMarioBattleSystem
 
             //Add and initialize all entities
             AddEntities(addedEntities, null, true);
-
-            //Initialize helper objects
-            //Check for the battle setting and add darkness if so
-            if (Properties.BattleSetting == BattleSettings.Dark)
-            {
-                BattleDarknessObj battleDarkness = new BattleDarknessObj();
-                LightingManager.Instance.Initialize(battleDarkness);
-                BattleObjManager.Instance.AddBattleObject(battleDarkness);
-            }
-
-            //Add the HP bar manager
-            BattleObjManager.Instance.AddBattleObject(new HPBarManagerObj());
-
-            //If you can't run from battle, show a message at the start saying so
-            if (Properties.Runnable == false)
-            {
-                battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message, new BattleState[] { BattleState.Turn },
-                    new MessageBattleEvent(BattleGlobals.NoRunMessage, MessageBattleEvent.DefaultWaitDuration));
-            }
 
             Phase = StartingPhase;
 
@@ -307,18 +285,6 @@ namespace PaperMarioBattleSystem
                 for (int i = 0; i < entityList.Count; i++)
                 {
                     entityList[i].Update();
-                }
-            }
-        }
-
-        private void DrawEntities()
-        {
-            foreach (KeyValuePair<EntityTypes, List<BattleEntity>> entityPairs in AllEntities)
-            {
-                List<BattleEntity> entityList = entityPairs.Value;
-                for (int i = 0; i < entityList.Count; i++)
-                {
-                    entityList[i].Draw();
                 }
             }
         }
@@ -452,70 +418,21 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Swaps out Mario's current Partner for a different one.
+        /// Sets the Mario reference. Make sure to remove the old one from battle first if it exists.
         /// </summary>
-        /// <param name="newPartner">The new BattlePartner to take part in battle.</param>
-        public void SwapPartner(BattlePartner newPartner)
+        /// <param name="mario">A BattleMario to act as the new Mario.</param>
+        public void SetMario(BattleMario mario)
         {
-            BattlePartner oldPartner = Partner;
+            Mario = mario;
+        }
 
-            Partner = newPartner;
-
-            Vector2 offset = Vector2.Zero;
-
-            //If the old Partner was airborne and the new one isn't, move the new one down
-            if (oldPartner.HeightState == HeightStates.Airborne && Partner.HeightState != HeightStates.Airborne)
-            {
-                offset.Y += AirborneY;
-            }
-            //Otherwise, if the old Partner wasn't airborne and the new one is, move the new one up
-            else if (oldPartner.HeightState != HeightStates.Airborne && Partner.HeightState == HeightStates.Airborne)
-            {
-                offset.Y -= AirborneY;
-            }
-
-            //Set positions to the old ones
-            Partner.Position = oldPartner.Position;
-            Partner.SetBattleIndex(oldPartner.BattleIndex);
-            Partner.SetBattlePosition(oldPartner.BattlePosition + offset);
-
-            //State the old Partner is out of battle
-            oldPartner.SetBattleIndex(BattleGlobals.InvalidBattleIndex);
-
-            //Set flip state
-            Partner.SpriteFlip = oldPartner.SpriteFlip;
-
-            //Remove the old partner from the entity dictionary and add the new one
-            RemoveEntity(oldPartner, false);
-            AddEntity(Partner, null, false);
-
-            //Set the new Partner to use the same max number of turns all Partners have this phase cycle
-            //The only exceptions are if the new partner doesn't move at all (Ex. Goompa) or is immobile
-            //In this case, set its max turn count to 0
-            if (Partner.BaseTurns > 0 && Partner.IsImmobile() == false)
-            {
-                Partner.SetMaxTurns(BattlePartner.PartnerMaxTurns);
-            }
-            else
-            {
-                Partner.SetMaxTurns(0);
-            }
-
-            //If the entity swapping out partners is the old one increment the turn count for the new partner,
-            //as the old one's turn count will be incremented after the action is finished
-            if (EntityTurn == oldPartner)
-            {
-                Partner.SetTurnsUsed(oldPartner.TurnsUsed + 1);
-            }
-            //Otherwise, the entity swapping out partners must be Mario, so set the new Partner's turn count to the old one's
-            //(or an enemy via an attack, but none of those attacks exist in the PM games...I'm hinting at a new attack idea :P)
-            else
-            {
-                Partner.SetTurnsUsed(oldPartner.TurnsUsed);
-            }
-
-            //Swap Partner badges with the new Partner
-            BattlePartner.SwapPartnerBadges(oldPartner, Partner);
+        /// <summary>
+        /// Sets the Partner reference. Make sure to remove the old one from battle first if it exists.
+        /// </summary>
+        /// <param name="partner">A BattlePartner to act as the new Partner.</param>
+        public void SetPartner(BattlePartner partner)
+        {
+            Partner = partner;
         }
 
         public void TurnStart()
@@ -783,11 +700,11 @@ namespace PaperMarioBattleSystem
                 //Clear these references if the BattleEntity removed is Mario or his Partner
                 if (battleEntity == Mario)
                 {
-                    Mario = null;
+                    SetMario(null);
                 }
                 if (battleEntity == Partner)
                 {
-                    Partner = null;
+                    SetPartner(null);
                 }
             }
 
@@ -1037,16 +954,6 @@ namespace PaperMarioBattleSystem
             entityList.CopyFromListReverse(entList);
 
             BattleManagerUtils.FilterEntitiesByHeights(entityList, heightStates);
-        }
-
-        public BattleEntity GetFrontPlayer()
-        {
-            return FrontPlayer;
-        }
-
-        public BattleEntity GetBackPlayer()
-        {
-            return BackPlayer;
         }
 
         /// <summary>

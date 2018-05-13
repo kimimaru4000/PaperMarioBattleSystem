@@ -17,6 +17,8 @@ namespace PaperMarioBattleSystem
         {
             Name = "Shy Guy";
 
+            AIBehavior = new ShyGuyAI(this);
+
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Sleep, new StatusPropertyHolder(70d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Stop, new StatusPropertyHolder(90d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Dizzy, new StatusPropertyHolder(90d, 0));

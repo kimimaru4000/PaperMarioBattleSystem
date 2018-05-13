@@ -75,10 +75,8 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
-            //If there's no AI, make it do nothing
-            if (AIBehavior == null) StartAction(new NoAction(), true, null);
             //Make the enemy perform an action on its turn
-            else AIBehavior.PerformAction();
+            AIBehavior.PerformAction();
         }
 
         public override Item GetItemOfType(Item.ItemTypes itemTypes)

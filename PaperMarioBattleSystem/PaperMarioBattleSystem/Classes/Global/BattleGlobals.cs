@@ -36,7 +36,7 @@ namespace PaperMarioBattleSystem
         public enum BattleEventPriorities
         {
             Message = 0, Stage = 500, YuxArrange = 600, BobberyBomb = 750, Status = 1000,
-            HealHP = 1250, HealFP = 1251, Dialogue = 1500, Fright = 1700, BlownAway = 1800, Death = 2000, Damage = 2500
+            HealHP = 1250, HealFP = 1251, Dialogue = 1500, Fright = 1700, BlownAway = 1800, Death = 2000, Damage = 2500, SwapPartner = 3000
         }
 
         #endregion

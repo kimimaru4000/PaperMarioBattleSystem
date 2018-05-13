@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
             if (moveAction.DealsDamage == true && moveAction.DamageProperties.ContactType == Enumerations.ContactTypes.Latch) return false;
 
             //The Balloon cannot be targeted by items at all
-            if (moveAction is ItemAction) return false;
+            if (moveAction.MoveCategory == Enumerations.MoveCategories.Item) return false;
 
             return true;
         }

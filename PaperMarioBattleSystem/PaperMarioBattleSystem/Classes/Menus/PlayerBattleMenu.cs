@@ -116,8 +116,8 @@ namespace PaperMarioBattleSystem
             else if (Input.GetKeyDown(Keys.Z)) OnConfirm();
             else if (Input.GetKeyDown(Keys.C))
             {
-                BattleEntity otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.GetFrontPlayer()
-                    ? BattleManager.Instance.GetBackPlayer() : BattleManager.Instance.GetFrontPlayer();
+                BattleEntity otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.FrontPlayer
+                    ? BattleManager.Instance.BackPlayer : BattleManager.Instance.FrontPlayer;
 
                 //Don't switch if the back player is dead
                 if (CanSwitch() == true)
@@ -130,8 +130,8 @@ namespace PaperMarioBattleSystem
                     BattleManager.Instance.EntityTurn.SetTurnsUsed(BattleManager.Instance.EntityTurn.TurnsUsed - 1);
                     BattleManager.Instance.TurnEnd();
 
-                    BattleEntity back = BattleManager.Instance.GetBackPlayer();
-                    BattleEntity front = BattleManager.Instance.GetFrontPlayer();
+                    BattleEntity back = BattleManager.Instance.BackPlayer;
+                    BattleEntity front = BattleManager.Instance.FrontPlayer;
 
                     //Queue a Battle Event to swap the current positions of Mario and his Partner
                     //Since we updated the references earlier, their new positions are their own battle positions
@@ -206,8 +206,8 @@ namespace PaperMarioBattleSystem
         /// <returns>true if Mario or his Partner hasn't used up all of his or her turns and isn't dead, otherwise false.</returns>
         private bool CanSwitch()
         {
-            BattleEntity otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.GetFrontPlayer()
-                    ? BattleManager.Instance.GetBackPlayer() : BattleManager.Instance.GetFrontPlayer();
+            BattleEntity otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.FrontPlayer
+                    ? BattleManager.Instance.BackPlayer : BattleManager.Instance.FrontPlayer;
 
             if (otherPlayer == null)
                 return false;

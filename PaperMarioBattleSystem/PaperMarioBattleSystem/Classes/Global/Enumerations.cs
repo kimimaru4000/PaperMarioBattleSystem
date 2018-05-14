@@ -173,7 +173,7 @@ namespace PaperMarioBattleSystem
           Confirmed - Spiked enemies get hurt when jumping on other Spiked enemies*/
         public enum PhysicalAttributes
         {
-            None = 0, Flying = 1, Electrified = 2, Poisonous = 3, Spiked = 4, Icy = 5, Fiery = 6, Explosive = 6, Starry = 8
+            None = 0, Flying = 1, Electrified = 2, Poisonous = 3, Spiked = 4, Icy = 5, Fiery = 6, Explosive = 7, Starry = 8
         }
 
         /// <summary>

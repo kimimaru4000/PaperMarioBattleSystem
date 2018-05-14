@@ -136,6 +136,12 @@ namespace PaperMarioBattleSystem
         public BattleEntity EntityTurn { get; private set; } = null;
 
         /// <summary>
+        /// Tells whether the current BattleEntity's turn is halted from being updated or not.
+        /// <para>This has several use-cases. For example, Merlee's spell starts after Mario selects his move, and Mario's turn is halted until the animation is done.</para>
+        /// </summary>
+        public bool HaltedTurn { get; private set; } = false;
+
+        /// <summary>
         /// The total number of BattleEntities in battle.
         /// </summary>
         public int TotalEntityCount { get; private set; } = 0;
@@ -266,9 +272,8 @@ namespace PaperMarioBattleSystem
                 }
             }
 
-            //NOTE: We need a way to halt the current BattleEntity's turn
-            //For example, if Merlee's spell starts after Mario selects his move, we have to stop until the animation is done
-            if (State == BattleState.Turn)
+            //Update the current turn if we should
+            if (State == BattleState.Turn && HaltedTurn == false)
             {
                 EntityTurn.TurnUpdate();
             }
@@ -368,6 +373,22 @@ namespace PaperMarioBattleSystem
 
             //Find out who should go now
             FindNextEntityTurn();
+        }
+
+        /// <summary>
+        /// Halts the current BattleEntity's turn from updating.
+        /// </summary>
+        public void HaltTurn()
+        {
+            HaltedTurn = true;
+        }
+
+        /// <summary>
+        /// Resumes the current BattleEntity's turn.
+        /// </summary>
+        public void ResumeTurn()
+        {
+            HaltedTurn = false;
         }
 
         /// <summary>

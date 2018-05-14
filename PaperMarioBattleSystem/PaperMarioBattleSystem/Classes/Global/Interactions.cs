@@ -422,7 +422,7 @@ namespace PaperMarioBattleSystem
 
                 //Get paybacks - account for the defensive action's Payback
                 List<PaybackHolder> victimPaybacks = new List<PaybackHolder>();
-                victimPaybacks.AddRange(victim.EntityProperties.GetAllPaybacks());
+                victim.EntityProperties.GetAllPaybacks(victimPaybacks);
 
                 //Account for the Defensive Action's Payback
                 //NOTE: If we decide we want to make this override the Victim's payback, simply exclude any of its other paybacks in this case

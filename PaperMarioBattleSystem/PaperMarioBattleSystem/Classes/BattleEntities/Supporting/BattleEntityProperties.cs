@@ -179,20 +179,23 @@ namespace PaperMarioBattleSystem
         /// <param name="physicalAttribute">The physical attribute to remove</param>
         public void RemovePhysAttribute(PhysicalAttributes physicalAttribute)
         {
-            if (PhysAttributes.ContainsKey(physicalAttribute) == false)
+            int attributeNum = -1;
+            if (PhysAttributes.TryGetValue(physicalAttribute, out attributeNum) == false)
             {
                 Debug.LogWarning($"Cannot remove physical attribute {physicalAttribute} because {Entity.Name} does not have it!");
                 return;
             }
 
-            PhysAttributes[physicalAttribute]--;
-            if (PhysAttributes[physicalAttribute] <= 0)
+            attributeNum--;
+
+            if (attributeNum <= 0)
             {
                 PhysAttributes.Remove(physicalAttribute);
                 Debug.Log($"Removed the physical attribute {physicalAttribute} from {Entity.Name}'s existing attributes!");
             }
             else
             {
+                PhysAttributes[physicalAttribute] = attributeNum;
                 Debug.Log($"Decremented the physical attribute {physicalAttribute} for {Entity.Name}!");
             }
         }
@@ -241,7 +244,21 @@ namespace PaperMarioBattleSystem
         /// <returns>An array of all PhysicalAttributes the BattleEntity has, with higher PhysicalAttribute values first.</returns>
         public PhysicalAttributes[] GetAllPhysAttributes()
         {
+            if (PhysAttributes.Keys.Count == 0) return Array.Empty<PhysicalAttributes>();
+
             return PhysAttributes.Keys.ToArray();
+        }
+
+        /// <summary>
+        /// Adds all PhysicalAttributes the BattleEntity has into a supplied list.
+        /// </summary>
+        /// <param name="physAttrList">The list to add the BattleEntity's PhysicalAttributes to.</param>
+        public void GetAllPhysAttributes(List<PhysicalAttributes> physAttrList)
+        {
+            foreach (PhysicalAttributes physAttribute in PhysAttributes.Keys)
+            {
+                physAttrList.Add(physAttribute);
+            }
         }
 
         #endregion
@@ -255,21 +272,24 @@ namespace PaperMarioBattleSystem
         /// <param name="element">The Element to add for this PhysicalAttribute</param>
         public void AddElementOverride(PhysicalAttributes attribute, Elements element)
         {
+            SortedDictionary<Elements, int> elementOverride = GetElementOverride(attribute);
+
             //Add a new entry if one doesn't exist
-            if (HasElementOverride(attribute) == false)
+            if (elementOverride == null)
             {
-                ElementOverrides.Add(attribute, new SortedDictionary<Elements, int>(new ElementGlobals.ElementComparer()));
+                elementOverride = new SortedDictionary<Elements, int>(new ElementGlobals.ElementComparer());
+                ElementOverrides.Add(attribute, elementOverride);
             }
 
             //If we don't have an override for this PhysicalAttribute with this Element, add one
-            if (ElementOverrides[attribute].ContainsKey(element) == false)
+            if (elementOverride.ContainsKey(element) == false)
             {
-                ElementOverrides[attribute].Add(element, 1);
+                elementOverride.Add(element, 1);
             }
             //Increment the count otherwise
             else
             {
-                ElementOverrides[attribute][element] += 1;
+                elementOverride[element] += 1;
             }
 
             Debug.Log($"Added a(n) {element} override to {Entity.Name} for the {attribute} PhysicalAttribute!");
@@ -282,26 +302,34 @@ namespace PaperMarioBattleSystem
         /// <param name="element">The Element to remove for the Element Override</param>
         public void RemoveElementOverride(PhysicalAttributes attribute, Elements element)
         {
-            if (HasElementOverride(attribute) == false || ElementOverrides[attribute].ContainsKey(element) == false)
+            SortedDictionary<Elements, int> elementOverride = GetElementOverride(attribute);
+            int elementOverrideVal = -1;
+
+            if (elementOverride == null || elementOverride.TryGetValue(element, out elementOverrideVal) == false)
             {
                 Debug.LogWarning($"{Entity.Name} does not contain an element override for the {attribute} PhysicalAttribute and thus cannot remove one!");
                 return;
             }
 
             //Decrement the count for the Element on this PhysicalAttribute
-            ElementOverrides[attribute][element]--;
+            elementOverrideVal--;
             Debug.Log($"Decremented a(n) {element} override from {Entity.Name} for the {attribute} PhysicalAttribute!");
-            if (ElementOverrides[attribute][element] <= 0)
+
+            if (elementOverrideVal <= 0)
             {
-                ElementOverrides[attribute].Remove(element);
+                elementOverride.Remove(element);
                 Debug.Log($"Removed the element {element} for the {attribute} PhysicalAttribute from {Entity.Name}'s Element Overrides!");
 
                 //If no Elements are remaining for this PhysicalAttribute, remove the Element Override
-                if (ElementOverrides[attribute].Count <= 0)
+                if (elementOverride.Count <= 0)
                 {
                     ElementOverrides.Remove(attribute);
                     Debug.Log($"Removed element override for the {attribute} PhysicalAttribute on {Entity.Name}");
                 }
+            }
+            else
+            {
+                elementOverride[element] = elementOverrideVal;
             }
         }
 
@@ -323,7 +351,8 @@ namespace PaperMarioBattleSystem
         /// <returns>true if an Element Override of the Element exists for the PhysicalAttribute, otherwise false.</returns>
         public bool HasElementOverride(PhysicalAttributes attribute, Elements element)
         {
-            return (HasElementOverride(attribute) == true && ElementOverrides[attribute].ContainsKey(element) == true);
+            SortedDictionary<Elements, int> elementOverride = GetElementOverride(attribute);
+            return (elementOverride != null && elementOverride.ContainsKey(element) == true);
         }
 
         /// <summary>
@@ -339,16 +368,17 @@ namespace PaperMarioBattleSystem
             {
                 PhysicalAttributes physAttribute = victimAttributes[i];
 
-                if (HasElementOverride(physAttribute) == true)
+                SortedDictionary<Elements, int> elementOverride = GetElementOverride(physAttribute);
+                if (elementOverride != null)
                 {
                     //NOTE: I'm not happy with the overall performance of this, but it's definitely better than
                     //not allowing more Elements or their counts for each override
 
                     //Return the first one since they're sorted
-                    Elements[] elementsForOverride = GetElementsForOverride(physAttribute);
+                    Elements[] elementsForOverride = GetElementsForOverride(elementOverride, physAttribute);
                     Elements element = elementsForOverride[0];
 
-                    return new ElementOverrideHolder(element, ElementOverrides[physAttribute][element]);
+                    return new ElementOverrideHolder(element, elementOverride[element]);
                 }
             }
 
@@ -358,15 +388,40 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Returns all Elements of an Element Override the BattleEntity has for a particular PhysicalAttribute.
         /// </summary>
+        /// <param name="physAttribute">The PhysicalAttribute to get the Element Overrides for.</param>
         /// <returns>An array of all Elements of the Element Override the BattleEntity has for the PhysicalAttribute, with higher Element values first.</returns>
         protected Elements[] GetElementsForOverride(PhysicalAttributes physAttribute)
         {
-            if (HasElementOverride(physAttribute) == false)
+            return GetElementsForOverride(GetElementOverride(physAttribute), physAttribute);
+        }
+
+        /// <summary>
+        /// Returns all Elements of an Element Override the BattleEntity has for a particular PhysicalAttribute.
+        /// </summary>
+        /// <param name="elementOverride">The Element Override dictionary to look with.</param>
+        /// <param name="physAttribute">The PhysicalAttribute to get the Element Overrides for.</param>
+        /// <returns>An array of all Elements of the Element Override the BattleEntity has for the PhysicalAttribute, with higher Element values first.</returns>
+        protected Elements[] GetElementsForOverride(SortedDictionary<Elements, int> elementOverride, PhysicalAttributes physAttribute)
+        {
+            if (elementOverride == null || elementOverride.Keys.Count == 0)
             {
                 return Array.Empty<Elements>();
             }
 
-            return ElementOverrides[physAttribute].Keys.ToArray();
+            return elementOverride.Keys.ToArray();
+        }
+
+        /// <summary>
+        /// Gets the Element Override dictionary associated with a particular PhysicalAttribute. This method is internal.
+        /// </summary>
+        /// <param name="physAttribute">The PhysicalAttribute to get the Element Overrides for.</param>
+        /// <returns>A SortedDictionary containing the Element Overrides.</returns>
+        private SortedDictionary<Elements, int> GetElementOverride(PhysicalAttributes physAttribute)
+        {
+            SortedDictionary<Elements, int> elementOverride = null;
+            ElementOverrides.TryGetValue(physAttribute, out elementOverride);
+
+            return elementOverride;
         }
 
         #endregion
@@ -380,53 +435,74 @@ namespace PaperMarioBattleSystem
         /// <param name="physAttribute"></param>
         public void AddContactException(ContactTypes contactType, PhysicalAttributes physAttribute)
         {
+            List<PhysicalAttributes> physAttrList = null;
+
             //Add a new key if one doesn't exist
-            if (ContactExceptions.ContainsKey(contactType) == false)
+            if (ContactExceptions.TryGetValue(contactType, out physAttrList) == false)
             {
-                ContactExceptions.Add(contactType, new List<PhysicalAttributes>());
+                physAttrList = new List<PhysicalAttributes>();
+                ContactExceptions.Add(contactType, physAttrList);
             }
 
             //Add to the list
-            ContactExceptions[contactType].Add(physAttribute);
+            physAttrList.Add(physAttribute);
 
             Debug.Log($"Added contact exception on {Entity.Name} for the {physAttribute} PhysicalAttribute during {contactType} contact!");
         }
 
         public void RemoveContactException(ContactTypes contactType, PhysicalAttributes physAttribute)
         {
-            if (ContactExceptions.ContainsKey(contactType) == false)
+            List<PhysicalAttributes> physAttrList = null;
+
+            if (ContactExceptions.TryGetValue(contactType, out physAttrList) == false)
             {
                 Debug.LogError($"Cannot remove {physAttribute} from the exception list on {Entity.Name} for {contactType} because no list exists!");
                 return;
             }
 
-            bool removed = ContactExceptions[contactType].Remove(physAttribute);
+            bool removed = physAttrList.Remove(physAttribute);
             if (removed == true)
             {
                 Debug.Log($"Removed {physAttribute} attribute exception on {Entity.Name} for {contactType} contact!");
             }
 
             //If there are no PhysicalAttributes in the exceptions list for this ContactType, remove the key
-            if (ContactExceptions[contactType].Count == 0)
+            if (physAttrList.Count == 0)
             {
                 ContactExceptions.Remove(contactType);
             }
         }
 
         /// <summary>
-        /// Returns a set of PhysicalAttributes to ignore when the BattleEntity makes contact
+        /// Returns a set of PhysicalAttributes to ignore when the BattleEntity makes contact.
         /// </summary>
-        /// <param name="contactType">The type of contact this BattleEntity made</param>
-        /// <returns>An array of PhysicalAttributes this BattleEntity can ignore when making contact, otherwise an empty array</returns>
+        /// <param name="contactType">The type of contact this BattleEntity made.</param>
+        /// <returns>An array of PhysicalAttributes this BattleEntity can ignore when making contact, otherwise an empty array.</returns>
         public PhysicalAttributes[] GetContactExceptions(ContactTypes contactType)
         {
+            List<PhysicalAttributes> physAttrList = null;
+
             //Return an empty array if no exceptions exist for this type of contact
-            if (ContactExceptions.ContainsKey(contactType) == false)
+            if (ContactExceptions.TryGetValue(contactType, out physAttrList) == false || physAttrList.Count == 0)
             {
                 return Array.Empty<PhysicalAttributes>();
             }
 
-            return ContactExceptions[contactType].ToArray();
+            return physAttrList.ToArray();
+        }
+
+        /// <summary>
+        /// Adds a set of PhysicalAttributes to ignore when the BattleEntity makes contact into a supplied list.
+        /// </summary>
+        /// <param name="physAttributeList">The list to add the PhysicalAttributes to.</param>
+        /// <param name="contactType">The type of contact this BattleEntity made.</param>
+        public void GetContactExceptions(List<PhysicalAttributes> physAttributeList, ContactTypes contactType)
+        {
+            List<PhysicalAttributes> physAttrList = null;
+            if (ContactExceptions.TryGetValue(contactType, out physAttrList) == true)
+            {
+                physAttributeList.CopyFromList(physAttrList);
+            }
         }
 
         #endregion
@@ -440,12 +516,14 @@ namespace PaperMarioBattleSystem
         /// <param name="weaknessHolder">The data for the Weakness</param>
         public void AddWeakness(Elements element, in WeaknessHolder weaknessHolder)
         {
-            if (HasWeakness(element) == false)
+            List<WeaknessHolder> weaknessList = null;
+            if (Weaknesses.TryGetValue(element, out weaknessList) == false)
             {
-                Weaknesses.Add(element, new List<WeaknessHolder>());
+                weaknessList = new List<WeaknessHolder>();
+                Weaknesses.Add(element, weaknessList);
             }
 
-            Weaknesses[element].Add(weaknessHolder);
+            weaknessList.Add(weaknessHolder);
             Debug.Log($"Added {weaknessHolder.WeaknessType} Weakness to {Entity.Name} for the {element} Element!");
         }
 
@@ -455,14 +533,15 @@ namespace PaperMarioBattleSystem
         /// <param name="element">The Element the BattleEntity is weak to</param>
         public void RemoveWeakness(Elements element, in WeaknessHolder weakness)
         {
-            if (HasWeakness(element) == false)
+            List<WeaknessHolder> weaknessList = null;
+            if (Weaknesses.TryGetValue(element, out weaknessList) == false)
             {
                 Debug.LogWarning($"{Entity.Name} does not have a weakness for {element}");
                 return;
             }
 
-            bool removed = Weaknesses[element].Remove(weakness);
-            if (Weaknesses[element].Count == 0)
+            bool removed = weaknessList.Remove(weakness);
+            if (weaknessList.Count == 0)
             {
                 Weaknesses.Remove(element);
             }
@@ -478,7 +557,8 @@ namespace PaperMarioBattleSystem
         /// <returns>A copy of the WeaknessHolder associated with the element if found, otherwise default weakness data</returns>
         public WeaknessHolder GetWeakness(Elements element)
         {
-            if (HasWeakness(element) == false)
+            List<WeaknessHolder> weaknesses = null;
+            if (Weaknesses.TryGetValue(element, out weaknesses) == false)
             {
                 //Debug.Log($"{Name} does not have a weakness for {element}");
                 return WeaknessHolder.Default;
@@ -487,7 +567,6 @@ namespace PaperMarioBattleSystem
             WeaknessHolder weaknessHolder = default(WeaknessHolder);
 
             //Get the total Weakness
-            List<WeaknessHolder> weaknesses = Weaknesses[element];
             for (int i = 0; i < weaknesses.Count; i++)
             {
                 weaknessHolder.Value += weaknesses[i].Value;
@@ -520,12 +599,14 @@ namespace PaperMarioBattleSystem
         ///<param name="resistanceHolder">The data for the Resistance</param>
         public void AddResistance(Elements element, in ResistanceHolder resistanceHolder)
         {
-            if (HasResistance(element) == false)
+            List<ResistanceHolder> resistanceList = null;
+            if (Resistances.TryGetValue(element, out resistanceList) == false)
             {
-                Resistances.Add(element, new List<ResistanceHolder>());
+                resistanceList = new List<ResistanceHolder>();
+                Resistances.Add(element, resistanceList);
             }
 
-            Resistances[element].Add(resistanceHolder);
+            resistanceList.Add(resistanceHolder);
             Debug.Log($"Added {resistanceHolder.ResistanceType} Resistance to {Entity.Name} for the {element} Element!");
         }
 
@@ -535,14 +616,15 @@ namespace PaperMarioBattleSystem
         /// <param name="element">The Element the BattleEntity is resistant to</param>
         public void RemoveResistance(Elements element, in ResistanceHolder resistanceHolder)
         {
-            if (HasResistance(element) == false)
+            List<ResistanceHolder> resistanceList = null;
+            if (Resistances.TryGetValue(element, out resistanceList) == false)
             {
                 Debug.LogWarning($"{Entity.Name} does not have a resistance for {element}");
                 return;
             }
 
-            bool removed = Resistances[element].Remove(resistanceHolder);
-            if (Resistances[element].Count == 0)
+            bool removed = resistanceList.Remove(resistanceHolder);
+            if (resistanceList.Count == 0)
             {
                 Resistances.Remove(element);
             }
@@ -558,7 +640,9 @@ namespace PaperMarioBattleSystem
         /// <returns>A copy of the ResistanceHolder associated with the element if found, otherwise default resistance data</returns>
         public ResistanceHolder GetResistance(Elements element)
         {
-            if (HasResistance(element) == false)
+            List<ResistanceHolder> resistances = null;
+
+            if (Resistances.TryGetValue(element, out resistances) == false)
             {
                 //Debug.Log($"{Entity.Name} does not have a resistance for {element}");
                 return ResistanceHolder.Default;
@@ -567,7 +651,6 @@ namespace PaperMarioBattleSystem
             ResistanceHolder resistanceHolder = default(ResistanceHolder);
 
             //Get the total resistance
-            List<ResistanceHolder> resistances = Resistances[element];
             for (int i = 0; i < resistances.Count; i++)
             {
                 resistanceHolder.Value += resistances[i].Value;
@@ -600,12 +683,14 @@ namespace PaperMarioBattleSystem
         ///<param name="strengthHolder">The data for the Strength.</param>
         public void AddStrength(PhysicalAttributes physAttribute, in StrengthHolder strengthHolder)
         {
-            if (HasStrength(physAttribute) == false)
+            List<StrengthHolder> strengthList = null;
+            if (Strengths.TryGetValue(physAttribute, out strengthList) == false)
             {
-                Strengths.Add(physAttribute, new List<StrengthHolder>());
+                strengthList = new List<StrengthHolder>();
+                Strengths.Add(physAttribute, strengthList);
             }
 
-            Strengths[physAttribute].Add(strengthHolder);
+            strengthList.Add(strengthHolder);
             Debug.Log($"Added strength value of {strengthHolder.Value} to {Entity.Name} for the {physAttribute} PhysicalAttribute!");
         }
 
@@ -615,14 +700,15 @@ namespace PaperMarioBattleSystem
         /// <param name="physAttribute">The PhysicalAttribute the BattleEntity is strong against.</param>
         public void RemoveStrength(PhysicalAttributes physAttribute, in StrengthHolder strengthHolder)
         {
-            if (HasStrength(physAttribute) == false)
+            List<StrengthHolder> strengthList = null;
+            if (Strengths.TryGetValue(physAttribute, out strengthList) == false)
             {
                 Debug.LogWarning($"{Entity.Name} does not have a strength for {physAttribute}");
                 return;
             }
 
-            bool removed = Strengths[physAttribute].Remove(strengthHolder);
-            if (Strengths[physAttribute].Count == 0)
+            bool removed = strengthList.Remove(strengthHolder);
+            if (strengthList.Count == 0)
             {
                 Strengths.Remove(physAttribute);
             }
@@ -638,7 +724,9 @@ namespace PaperMarioBattleSystem
         /// <returns>A copy of the StrengthHolder associated with the element if found, otherwise default strength data.</returns>
         private StrengthHolder GetStrength(PhysicalAttributes physAttribute)
         {
-            if (HasStrength(physAttribute) == false)
+            List<StrengthHolder> strengths = null;
+
+            if (Strengths.TryGetValue(physAttribute, out strengths) == false)
             {
                 //Debug.Log($"{Entity.Name} does not have a strength for {physAttribute}");
                 return StrengthHolder.Default;
@@ -647,7 +735,6 @@ namespace PaperMarioBattleSystem
             StrengthHolder strengthHolder = default(StrengthHolder);
 
             //Get the total strength
-            List<StrengthHolder> strengths = Strengths[physAttribute];
             for (int i = 0; i < strengths.Count; i++)
             {
                 strengthHolder.Value += strengths[i].Value;
@@ -716,13 +803,14 @@ namespace PaperMarioBattleSystem
         /// <param name="status">The StatusEffect to afflict the entity with</param>
         public void AfflictStatus(StatusEffect status)
         {
+            StatusEffect refreshedStatus = GetStatus(status.StatusType);
+
             //If the entity already has this StatusEffect, refresh its properties with the new properties.
             //By default, the duration is refreshed.
             //We don't remove the status then reafflict it because that would end it. With a status like Frozen,
             //it would deal damage to the entity when being removed and we don't want that
-            if (HasStatus(status.StatusType) == true)
+            if (refreshedStatus != null)
             {
-                StatusEffect refreshedStatus = GetStatus(status.StatusType);
                 refreshedStatus.Refresh(status);
 
                 string refreshedTurnMessage = refreshedStatus.Duration.ToString();
@@ -731,6 +819,7 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
+            //Copy the StatusEffect
             StatusEffect newStatus = status.Copy();
 
             //Add the status then afflict it
@@ -751,14 +840,14 @@ namespace PaperMarioBattleSystem
         /// <returns>The StatusEffect removed from the BattleEntity.</returns>
         public StatusEffect RemoveStatus(StatusTypes statusType)
         {
+            StatusEffect status = GetStatus(statusType);
+            
             //Don't do anything if the entity doesn't have this status
-            if (HasStatus(statusType) == false)
+            if (status == null)
             {
                 Debug.Log($"{Entity.Name} is not currently afflicted with the {statusType} Status!");
                 return null;
             }
-
-            StatusEffect status = Statuses[statusType];
 
             //End the status then remove it
             status.End();
@@ -801,12 +890,10 @@ namespace PaperMarioBattleSystem
         /// <returns>null if the entity isn't afflicted with the StatusEffect, otherwise the StatusEffect it's afflicted with.</returns>
         private StatusEffect GetStatus(StatusTypes statusType)
         {
-            if (HasStatus(statusType) == true)
-            {
-                return Statuses[statusType];
-            }
+            StatusEffect status = null;
+            Statuses.TryGetValue(statusType, out status);
 
-            return null;
+            return status;
         }
 
         /// <summary>
@@ -815,7 +902,21 @@ namespace PaperMarioBattleSystem
         /// <returns>An array of StatusEffects in order of Priority. If no StatusEffects are on the entity, it'll return an empty array.</returns>
         public StatusEffect[] GetStatuses()
         {
+            if (Statuses.Values.Count == 0) return Array.Empty<StatusEffect>();
+
             return Statuses.Values.ToArray();
+        }
+
+        /// <summary>
+        /// Adds all StatusEffects the entity is afflicted with, in order of Priority, into a supplied list.
+        /// </summary>
+        /// <param name="statusList">The List to add the StatusEffects to.</param>
+        public void GetStatuses(List<StatusEffect> statusList)
+        {
+            foreach (StatusEffect status in Statuses.Values)
+            {
+                statusList.Add(status);
+            }
         }
 
         /// <summary>
@@ -929,12 +1030,13 @@ namespace PaperMarioBattleSystem
         /// <returns>The StatusPropertyHolder corresponding to the specified StatusType. If there is no entry, returns a default one</returns>
         public StatusPropertyHolder GetStatusProperty(StatusTypes statusType)
         {
-            if (HasStatusProperty(statusType) == false)
+            StatusPropertyHolder statusProperty;
+            if (StatusProperties.TryGetValue(statusType, out statusProperty) == false)
             {
                 return StatusPropertyHolder.Default;
             }
 
-            return StatusProperties[statusType];
+            return statusProperty;
         }
 
         /// <summary>
@@ -1039,7 +1141,18 @@ namespace PaperMarioBattleSystem
         /// <returns>An array of PaybackHolders with the Paybacks the BattleEntity has.</returns>
         public PaybackHolder[] GetAllPaybacks()
         {
+            if (Paybacks.Count == 0) return Array.Empty<PaybackHolder>();
+
             return Paybacks.ToArray();
+        }
+
+        /// <summary>
+        /// Adds all of the BattleEntity's individual Paybacks to a supplied list.
+        /// </summary>
+        /// <param name="paybackList">The list of Paybacks to add to.</param>
+        public void GetAllPaybacks(List<PaybackHolder> paybackList)
+        {
+            paybackList.CopyFromList(Paybacks);
         }
 
         /// <summary>
@@ -1099,12 +1212,12 @@ namespace PaperMarioBattleSystem
         /// <param name="property">The AdditionalProperty to remove.</param>
         public void RemoveAdditionalProperty(AdditionalProperty property)
         {
-            if (HasAdditionalProperty(property) == true)
+            bool removed = AdditionalProperties.Remove(property);
+
+            if (removed == true)
             {
                 Debug.Log($"Removed the {property} property on {Entity.Name}!");
             }
-
-            AdditionalProperties.Remove(property);
         }
 
         /// <summary>
@@ -1131,13 +1244,6 @@ namespace PaperMarioBattleSystem
             }
 
             return default(T);
-
-            //if (HasAdditionalProperty(property) == false)
-            //{
-            //    return default(T);
-            //}
-            //
-            //return (T)AdditionalProperties[property];
         }
 
         #endregion
@@ -1166,15 +1272,14 @@ namespace PaperMarioBattleSystem
         /// <param name="category">The type of moves to enable.</param>
         public void EnableMoveCategory(MoveCategories category)
         {
-            if (DisabledMoveCategories.ContainsKey(category) == false)
+            int newVal = -1;
+            if (DisabledMoveCategories.TryGetValue(category, out newVal) == false)
             {
                 Debug.LogWarning($"{category} moves are not currently disabled for {Entity.Name}!");
                 return;
             }
 
-            int newVal = DisabledMoveCategories[category] - 1;
-
-            DisabledMoveCategories[category] = newVal;
+            newVal -= 1;
             
             if (newVal <= 0)
             {
@@ -1184,6 +1289,8 @@ namespace PaperMarioBattleSystem
             }
             else
             {
+                DisabledMoveCategories[category] = newVal;
+
                 Debug.Log($"Enabled {category} moves for {Entity.Name}. Total disables remaining: {newVal}");
             }
         }
@@ -1204,7 +1311,21 @@ namespace PaperMarioBattleSystem
         /// <returns>An array of MoveCategories that are disabled. If none are disabled, an empty array is returned.</returns>
         public MoveCategories[] GetDisabledMoveCategories()
         {
+            if (DisabledMoveCategories.Keys.Count == 0) return Array.Empty<MoveCategories>();
+
             return DisabledMoveCategories.Keys.ToArray();
+        }
+
+        /// <summary>
+        /// Gets all of the entity's currently disabled MoveCategories.
+        /// </summary>
+        /// <returns>An array of MoveCategories that are disabled. If none are disabled, an empty array is returned.</returns>
+        public void GetDisabledMoveCategories(List<MoveCategories> moveCategoryList)
+        {
+            foreach (MoveCategories moveCategory in DisabledMoveCategories.Keys)
+            {
+                moveCategoryList.Add(moveCategory);
+            }
         }
 
         #endregion
@@ -1255,9 +1376,10 @@ namespace PaperMarioBattleSystem
             if (removed == true)
             {
                 //Update the Badge count by subtracting one
-                if (EquippedBadgeCounts.ContainsKey(badge.BadgeType) == true)
+                int newBadgeCount = -1;
+                if (EquippedBadgeCounts.TryGetValue(badge.BadgeType, out newBadgeCount) == true)
                 {
-                    int newBadgeCount = EquippedBadgeCounts[badge.BadgeType] - 1;
+                    newBadgeCount -= 1;
 
                     //If no more Badges of this type are equipped, remove the entry
                     if (newBadgeCount <= 0)
@@ -1283,15 +1405,25 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Adds all equipped Badges on this BattleEntity into a supplied list.
+        /// </summary>
+        /// <param name="badgeList">The list to add the equipped Badges to.</param>
+        public void GetEquippedBadges(List<Badge> badgeList)
+        {
+            badgeList.CopyFromList(EquippedBadges);
+        }
+
+        /// <summary>
         /// Returns the number of equipped Badges of a particular BadgeType on the BattleEntity.
         /// </summary>
         /// <param name="badgeType">The BadgeType to get the equipped count for.</param>
         /// <returns>The number of Badges of this BadgeType equipped to the BattleEntity.</returns>
         public int GetEquippedBadgeCount(BadgeGlobals.BadgeTypes badgeType)
         {
-            if (EquippedBadgeCounts.ContainsKey(badgeType) == false) return 0;
+            int newBadgeCount = 0;
+            if (EquippedBadgeCounts.TryGetValue(badgeType, out newBadgeCount) == false) return 0;
 
-            return EquippedBadgeCounts[badgeType];
+            return newBadgeCount;
         }
 
         #endregion

@@ -557,15 +557,17 @@ namespace PaperMarioBattleSystem
             //Ignore if we shouldn't show this UI
             if (BattleManager.Instance.ShouldShowPlayerTurnUI == true && UtilityGlobals.IListIsNullOrEmpty(allEntities) == false)
             {
+                List<StatusEffect> statuses = (allEntities.Count == 0) ? null : new List<StatusEffect>();
+
                 for (int i = 0; i < allEntities.Count; i++)
                 {
                     BattleEntity entity = allEntities[i];
 
                     Vector2 statusIconPos = new Vector2(entity.Position.X + 10, entity.Position.Y - 40);
-                    StatusEffect[] statuses = entity.EntityProperties.GetStatuses();
+                    entity.EntityProperties.GetStatuses(statuses);
                     int index = 0;
 
-                    for (int j = 0; j < statuses.Length; j++)
+                    for (int j = 0; j < statuses.Count; j++)
                     {
                         StatusEffect status = statuses[j];
                         CroppedTexture2D texture = status.StatusIcon;
@@ -586,6 +588,8 @@ namespace PaperMarioBattleSystem
 
                         index++;
                     }
+
+                    statuses.Clear();
                 }
             }
         }

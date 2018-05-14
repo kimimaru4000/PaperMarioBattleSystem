@@ -392,53 +392,6 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Switches Mario and his Partner's battle positions and battle indices.
-        /// <para>The actual players' positions are not changed here but in a Battle Event.
-        /// See <see cref="SwapPositionBattleEvent"/>.</para>
-        /// </summary>
-        /// <param name="frontPlayer"></param>
-        /// <param name="backPlayer"></param>
-        private void SwitchPlayers(BattlePlayer frontPlayer, BattlePlayer backPlayer)
-        {
-            BattleEntity curFront = FrontPlayer;
-            BattleEntity curBack = BackPlayer;
-
-            Vector2 frontBattlePosition = curFront.BattlePosition;
-            Vector2 backBattlePosition = curBack.BattlePosition;
-
-            int frontBattleIndex = curFront.BattleIndex;
-            int backBattleIndex = curBack.BattleIndex;
-
-            //Swap positions
-            curFront.SetBattlePosition(new Vector2(backBattlePosition.X, frontBattlePosition.Y));
-            curBack.SetBattlePosition(new Vector2(frontBattlePosition.X, backBattlePosition.Y));
-
-            //Swap BattleIndex; the lists will be automatically sorted
-            curFront.SetBattleIndex(backBattleIndex);
-            curBack.SetBattleIndex(frontBattleIndex);
-        }
-
-        /// <summary>
-        /// Switches Mario and his Partner's positions in battle.
-        /// </summary>
-        /// <param name="playerType">The PlayerTypes to switch to - either Mario or the Partner.</param>
-        public void SwitchToTurn(PlayerTypes playerType)
-        {
-            if (playerType == PlayerTypes.Partner)
-            {
-                //Put the Partner in front and Mario in the back
-                SwitchPlayers(Partner, Mario);
-            }
-            else
-            {
-                //Put Mario in front and the Partner in the back
-                SwitchPlayers(Mario, Partner);
-            }
-
-            SoundManager.Instance.PlaySound(SoundManager.Sound.SwitchPartner);
-        }
-
-        /// <summary>
         /// Sets the Mario reference. Make sure to remove the old one from battle first if it exists.
         /// </summary>
         /// <param name="mario">A BattleMario to act as the new Mario.</param>
@@ -542,14 +495,13 @@ namespace PaperMarioBattleSystem
             {
                 //If the Partner died and is in front, switch places with Mario
                 if (Partner == FrontPlayer)
-                {
+                {                    
+                    //Switch Mario in front
+                    BattleManagerUtils.SwapEntityBattlePosAndIndex(Mario, Partner, true);
+
                     //Queue the event to switch Mario with his Partner
                     battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Stage, new BattleState[] { BattleState.Turn, BattleState.TurnEnd },
-                        new SwapPositionBattleEvent(FrontPlayer, BackPlayer,
-                        new Vector2(BackPlayer.BattlePosition.X, FrontPlayer.BattlePosition.Y), new Vector2(FrontPlayer.BattlePosition.X, BackPlayer.BattlePosition.Y), 500f));
-
-                    //Switch Mario in front
-                    SwitchToTurn(PlayerTypes.Mario);
+                        new SwapPositionBattleEvent(FrontPlayer, BackPlayer, FrontPlayer.BattlePosition, BackPlayer.BattlePosition, 500f));
                 }
 
             }
@@ -1263,10 +1215,11 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Filters a set of entities by specified height states. This method is called internally by the BattleManager.
         /// </summary>
+        /// <typeparam name="T">A BattleEntity or derived type.</typeparam>
         /// <param name="entities">The list of entities to filter. This list is modified directly.</param>
         /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
         /// If null or empty, will return the entities passed in</param>
-        public static void FilterEntitiesByHeights(List<BattleEntity> entities, params HeightStates[] heightStates)
+        public static void FilterEntitiesByHeights<T>(List<T> entities, params HeightStates[] heightStates) where T: BattleEntity
         {
             //Return immediately if either input is null
             if (entities == null || heightStates == null || heightStates.Length == 0) return;
@@ -1287,15 +1240,16 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Filters a set of entities by specified height states
         /// </summary>
+        /// <typeparam name="T">A BattleEntity or derived type.</typeparam>
         /// <param name="entities">The array of entities to filter</param>
         /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
         /// If null or empty, will return the entities passed in</param>
         /// <returns>An array of BattleEntities filtered by HeightStates</returns>
-        public static BattleEntity[] FilterEntitiesByHeights(BattleEntity[] entities, params HeightStates[] heightStates)
+        public static T[] FilterEntitiesByHeights<T>(T[] entities, params HeightStates[] heightStates) where T: BattleEntity
         {
             if (entities == null || entities.Length == 0 || heightStates == null || heightStates.Length == 0) return entities;
 
-            List<BattleEntity> filteredEntities = new List<BattleEntity>(entities);
+            List<T> filteredEntities = new List<T>(entities);
             FilterEntitiesByHeights(filteredEntities, heightStates);
 
             return filteredEntities.ToArray();
@@ -1305,8 +1259,9 @@ namespace PaperMarioBattleSystem
         /// Filters out BattleEntities marked as Untargetable from a set of BattleEntities.
         /// This method is called internally by the BattleManager.
         /// </summary>
+        /// <typeparam name="T">A BattleEntity or derived type.</typeparam>
         /// <param name="entities">The list of BattleEntities to filter. The list is modified directly.</param>
-        public static void FilterEntitiesByTargetable(List<BattleEntity> entities)
+        public static void FilterEntitiesByTargetable<T>(List<T> entities) where T: BattleEntity
         {
             //Return if the list is null
             if (entities == null) return;
@@ -1330,13 +1285,14 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Filters out BattleEntities marked as Untargetable from a set of BattleEntities.
         /// </summary>
+        /// <typeparam name="T">A BattleEntity or derived type.</typeparam>
         /// <param name="entities">The array of BattleEntities to filter.</param>
         /// <returns>An array of BattleEntities filtered by untargetable.</returns>
-        public static BattleEntity[] FilterEntitiesByTargetable(BattleEntity[] entities)
+        public static T[] FilterEntitiesByTargetable<T>(T[] entities) where T: BattleEntity
         {
             if (entities == null || entities.Length == 0) return entities;
 
-            List<BattleEntity> filteredEntities = new List<BattleEntity>(entities);
+            List<T> filteredEntities = new List<T>(entities);
             FilterEntitiesByTargetable(filteredEntities);
 
             return filteredEntities.ToArray();
@@ -1345,13 +1301,14 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Filters out dead BattleEntities from a set.
         /// </summary>
+        /// <typeparam name="T">A BattleEntity or derived type.</typeparam>
         /// <param name="entities">The BattleEntities to filter.</param>
         /// <returns>An array of all the alive BattleEntities.</returns>
-        public static BattleEntity[] FilterDeadEntities(BattleEntity[] entities)
+        public static T[] FilterDeadEntities<T>(T[] entities) where T : BattleEntity
         {
             if (entities == null || entities.Length == 0) return entities;
 
-            List<BattleEntity> aliveEntities = new List<BattleEntity>(entities);
+            List<T> aliveEntities = new List<T>(entities);
             FilterDeadEntities(aliveEntities);
 
             return aliveEntities.ToArray();
@@ -1360,8 +1317,9 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Filters out dead BattleEntities from a set.
         /// </summary>
+        /// <typeparam name="T">A BattleEntity or derived type.</typeparam>
         /// <param name="entities">The BattleEntities to filter.</param>
-        public static void FilterDeadEntities(List<BattleEntity> entities)
+        public static void FilterDeadEntities<T>(List<T> entities) where T : BattleEntity
         {
             if (entities == null || entities.Count == 0) return;
 
@@ -1406,9 +1364,10 @@ namespace PaperMarioBattleSystem
         /// Finds all BattleIndex gaps in a list of BattleEntities.
         /// <para>If the BattleEntities in the list are of different <see cref="EntityTypes"/>, then this may not be accurate.</para>
         /// </summary>
+        /// <typeparam name="T">A BattleEntity or derived type.</typeparam>
         /// <param name="entities">The BattleEntities to find the gaps for.</param>
         /// <returns>An int array containing the Battle Indices that have been skipped over. If none are found, an empty array.</returns>
-        public static int[] FindBattleIndexGaps(List<BattleEntity> entities)
+        public static int[] FindBattleIndexGaps<T>(List<T> entities) where T: BattleEntity
         {
             //No BattleEntities are in this list, so nothing can be returned
             if (entities == null || entities.Count == 0)
@@ -1445,6 +1404,42 @@ namespace PaperMarioBattleSystem
                 return Array.Empty<int>();
             //Otherwise, return the gaps in a new array
             else return gaps.ToArray();
+        }
+
+        /// <summary>
+        /// Swaps the BattleIndex and BattlePosition of two BattleEntities.
+        /// <para>This is intended for BattleEntities of the same EntityType.
+        /// Swapping BattleEntities of different EntityTypes may produce undesirable behavior.</para>
+        /// </summary>
+        /// <param name="firstEntity">The first BattleEntity to swap.</param>
+        /// <param name="secondEntity">The second BattleEntity to swap.</param>
+        /// <param name="preserveHeight">Whether to preserve the height of each BattleEntity or not.
+        /// If true, BattleEntities will only swap X values of their BattlePositions.</param>
+        public static void SwapEntityBattlePosAndIndex(BattleEntity firstEntity, BattleEntity secondEntity, bool preserveHeight)
+        {
+            //Store values
+            Vector2 firstBattlePosition = firstEntity.BattlePosition;
+            Vector2 secondBattlePosition = secondEntity.BattlePosition;
+
+            int firstBattleIndex = firstEntity.BattleIndex;
+            int secondBattleIndex = secondEntity.BattleIndex;
+
+            //Swap positions
+            //If we preserve height, use the BattleEntity's own Y
+            if (preserveHeight == true)
+            {
+                firstEntity.SetBattlePosition(new Vector2(secondBattlePosition.X, firstBattlePosition.Y));
+                secondEntity.SetBattlePosition(new Vector2(firstBattlePosition.X, secondBattlePosition.Y));
+            }
+            else
+            {
+                firstEntity.SetBattlePosition(secondBattlePosition);
+                secondEntity.SetBattlePosition(firstBattlePosition);
+            }
+
+            //Swap BattleIndex; the lists will be automatically sorted
+            firstEntity.SetBattleIndex(secondBattleIndex, true);
+            secondEntity.SetBattleIndex(firstBattleIndex, true);
         }
     }
 

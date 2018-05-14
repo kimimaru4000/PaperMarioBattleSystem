@@ -26,11 +26,18 @@ namespace PaperMarioBattleSystem
             {
                 ChangePartnerAction partnerChange = new ChangePartnerAction(partners[i]);
 
-                //If this partner is the current one out in battle, disable the option
-                if (partners[i] == BattleManager.Instance.Partner)
+                //If this Partner is the current one out in battle or is dead, disable the option to select it
+                if (partners[i] == BattleManager.Instance.Partner || partners[i].IsDead == true)
                 {
                     partnerChange.Disabled = true;
-                    partnerChange.DisabledString = $"{partners[i].Name} is already out!";
+                    if (partners[i].IsDead == false)
+                    {
+                        partnerChange.DisabledString = $"{partners[i].Name} is already out!";
+                    }
+                    else
+                    {
+                        partnerChange.DisabledString = $"{partners[i].Name} is unable to battle!";
+                    }
                 }
 
                 BattleActions.Add(partnerChange);

@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class MarioBattleMenu : PlayerBattleMenu
     {
-        public MarioBattleMenu() : base(Enumerations.PlayerTypes.Mario)
+        public MarioBattleMenu()
         {
             Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
 

@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
         private CroppedTexture2D HPBar = null;
         private CroppedTexture2D HPBarFill = null;
 
-        private Vector2 HPBarOffset = new Vector2(-5, 40);
+        private Vector2 HPBarOffset = new Vector2(0, 20);
         private Vector2 FillOffset = new Vector2(2, 2);
         private float HPBarWidth = 33f;
         private Vector2 HPTextOffset = Vector2.Zero;
@@ -82,7 +82,8 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < HPShownEntities.Count; i++)
             {
                 //Check if the entities should no longer have their HP shown
-                if (HPShownEntities[i].EntityProperties.HasAdditionalProperty(Enumerations.AdditionalProperty.ShowHP) == false)
+                if (HPShownEntities[i].EntityProperties.HasAdditionalProperty(Enumerations.AdditionalProperty.ShowHP) == false
+                    || HPShownEntities[i].EntityProperties.HasAdditionalProperty(Enumerations.AdditionalProperty.NeverShowHP) == true)
                 {
                     //Add them to the not shown list
                     NoHPEntities.Add(HPShownEntities[i]);
@@ -103,7 +104,8 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < NoHPEntities.Count; i++)
             {
                 //Check if the entities should now have their HP shown
-                if (NoHPEntities[i].EntityProperties.HasAdditionalProperty(Enumerations.AdditionalProperty.ShowHP) == true)
+                if (NoHPEntities[i].EntityProperties.HasAdditionalProperty(Enumerations.AdditionalProperty.ShowHP) == true
+                    && NoHPEntities[i].EntityProperties.HasAdditionalProperty(Enumerations.AdditionalProperty.NeverShowHP) == false)
                 {
                     //Add them to the HP shown list
                     HPShownEntities.Add(NoHPEntities[i]);
@@ -127,12 +129,13 @@ namespace PaperMarioBattleSystem
                 float hpRatio = entity.CurHP / (float)entity.BattleStats.MaxHP;
                 Vector2 fillScale = new Vector2((int)(HPBarWidth * hpRatio), 1f);
 
-                Vector2 hpBarPos = entity.Position + HPBarOffset;
+                Vector2 hpBarPos = Camera.Instance.SpriteToUIPos(entity.GetDrawnPosBelow(HPBarOffset));
+                Vector2 hpBarOrigin = HPBar.SourceRect.Value.GetCenterOrigin();
 
-                SpriteRenderer.Instance.Draw(HPBar.Tex, hpBarPos, HPBar.SourceRect, Color.White, false, false, .2f);
-                SpriteRenderer.Instance.Draw(HPBarFill.Tex, hpBarPos + FillOffset, HPBarFill.SourceRect, Color.White, 0f, Vector2.Zero, fillScale, false, false, .21f);
+                SpriteRenderer.Instance.DrawUI(HPBar.Tex, hpBarPos, HPBar.SourceRect, Color.White, hpBarOrigin, false, false, .2f, true);
+                SpriteRenderer.Instance.DrawUI(HPBarFill.Tex, hpBarPos - hpBarOrigin + FillOffset, HPBarFill.SourceRect, Color.White, 0f, Vector2.Zero, fillScale, false, false, .21f);
 
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, entity.CurHP.ToString(), hpBarPos + HPTextOffset, Color.White, 0f, new Vector2(1f, 0f), 1f, .2f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, entity.CurHP.ToString(), hpBarPos - hpBarOrigin + HPTextOffset, Color.White, 0f, new Vector2(1f, 0f), 1f, .2f);
             }
         }
 

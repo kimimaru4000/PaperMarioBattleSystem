@@ -47,8 +47,6 @@ namespace PaperMarioBattleSystem
 
         protected List<ActionButton> ActionButtons = new List<ActionButton>();
 
-        protected PlayerTypes PlayerType { get; private set; } = PlayerTypes.Mario;
-
         /// <summary>
         /// The position of the menu.
         /// This is set to the current entity's battle position.
@@ -62,10 +60,8 @@ namespace PaperMarioBattleSystem
 
         private bool Initialized = false;
 
-        protected PlayerBattleMenu(PlayerTypes playerType) : base(MenuTypes.Horizontal)
+        protected PlayerBattleMenu() : base(MenuTypes.Horizontal)
         {
-            PlayerType = playerType;
-
             Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
 
             SwitchIcon = new CroppedTexture2D(battleGFX, new Rectangle(651, 13, 78, 30));
@@ -116,31 +112,34 @@ namespace PaperMarioBattleSystem
             else if (Input.GetKeyDown(Keys.Z)) OnConfirm();
             else if (Input.GetKeyDown(Keys.C))
             {
-                BattleEntity otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.FrontPlayer
-                    ? BattleManager.Instance.BackPlayer : BattleManager.Instance.FrontPlayer;
-
                 //Don't switch if the back player is dead
                 if (CanSwitch() == true)
                 {
+                    BattleEntity front = BattleManager.Instance.FrontPlayer;
+                    BattleEntity back = BattleManager.Instance.BackPlayer;
+
                     //Switch turns with Mario or the Partner
                     //This updates the front and back player battle indices and their battle positions
-                    BattleManager.Instance.SwitchToTurn(PlayerType == PlayerTypes.Partner ? PlayerTypes.Mario : PlayerTypes.Partner);
+                    BattleManagerUtils.SwapEntityBattlePosAndIndex(front, back, true);
 
-                    //Decrement the current entity's turns used and end its turn. This keeps that entity's number of turns the same
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.SwitchPartner);
+
+                    //Decrement the current entity's turns used and end its turn to start the front entity's turn
+                    //This keeps that entity's number of turns the same
                     BattleManager.Instance.EntityTurn.SetTurnsUsed(BattleManager.Instance.EntityTurn.TurnsUsed - 1);
                     BattleManager.Instance.TurnEnd();
-
-                    BattleEntity back = BattleManager.Instance.BackPlayer;
-                    BattleEntity front = BattleManager.Instance.FrontPlayer;
 
                     //Queue a Battle Event to swap the current positions of Mario and his Partner
                     //Since we updated the references earlier, their new positions are their own battle positions
                     BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Stage,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                        new SwapPositionBattleEvent(back, front, back.BattlePosition, front.BattlePosition, 500f));
+                        new SwapPositionBattleEvent(front, back, front.BattlePosition, back.BattlePosition, 500f));
                 }
                 else
                 {
+                    BattleEntity otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.FrontPlayer
+                    ? BattleManager.Instance.BackPlayer : BattleManager.Instance.FrontPlayer;
+
                     if (otherPlayer != null)
                     {
                         Debug.LogError($"{otherPlayer.Name} used all of his/her turns or is dead, so turns cannot be swapped with him/her.");

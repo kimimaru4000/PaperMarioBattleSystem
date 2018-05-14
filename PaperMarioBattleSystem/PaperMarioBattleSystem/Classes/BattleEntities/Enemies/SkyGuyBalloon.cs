@@ -20,6 +20,9 @@ namespace PaperMarioBattleSystem
 
             ChangeHeightState(Enumerations.HeightStates.Airborne);
 
+            //Never show the Balloon's HP
+            this.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NeverShowHP, 1);
+
             //The Balloon is immune to every Status Effect
             Enumerations.StatusTypes[] statusTypes = UtilityGlobals.GetEnumValues<Enumerations.StatusTypes>();
             for (int i = 0; i < statusTypes.Length; i++)

@@ -440,6 +440,26 @@ namespace PaperMarioBattleSystem
             return pos;
         }
 
+        /// <summary>
+        /// Gets a position below the BattleEntity using the first frame of its current animation.
+        /// </summary>
+        /// <param name="battleEntity">The BattleEntity.</param>
+        /// <param name="positionBelow">A Vector2 containing the position below the BattleEntity.</param>
+        /// <returns>A Vector2 containing the position below the BattleEntity.</returns>
+        public static Vector2 GetDrawnPosBelow(this BattleEntity battleEntity, in Vector2 positionBelow)
+        {
+            if (battleEntity == null) return Vector2.Zero;
+
+            Vector2 pos = battleEntity.Position + positionBelow;
+            if (battleEntity.AnimManager.CurrentAnim != null && battleEntity.AnimManager.CurrentAnim.MaxFrameIndex >= 0)
+            {
+                //Offset downwards by half of the height of the BattleEntity's first animation
+                pos.Y += battleEntity.AnimManager.CurrentAnim.GetFrame(0).DrawRegion.Size.Y / 2;
+            }
+
+            return pos;
+        }
+
         #endregion
 
         #region BattlePlayer Extensions

@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
         protected ActionSubMenu PartnerSubMenu { get; private set; } = null;
         protected PartnerTypes PartnerType { get; private set; } = PartnerTypes.None;
 
-        public PartnerBattleMenu(ActionSubMenu partnerSubMenu, PartnerTypes partnerType) : base(PlayerTypes.Partner)
+        public PartnerBattleMenu(ActionSubMenu partnerSubMenu, PartnerTypes partnerType)
         {
             PartnerSubMenu = partnerSubMenu;
             PartnerType = partnerType;

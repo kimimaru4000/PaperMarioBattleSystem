@@ -100,7 +100,7 @@ namespace PaperMarioBattleSystem
             BattleManager.Instance.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEntity>() { new ShyGuy(), new SkyGuy() });
+                new List<BattleEntity>() { new KoopaTroopa(), new SkyGuy() });
 
             //Initialize helper objects
             //Check for the battle setting and add darkness if so
@@ -257,7 +257,7 @@ namespace PaperMarioBattleSystem
             Inventory.Instance.AddItem(new SuperShroom());
             Inventory.Instance.AddItem(new ThunderRage());
             Inventory.Instance.AddItem(new ThunderBolt());
-            Inventory.Instance.AddItem(new LifeShroom());
+            Inventory.Instance.AddItem(new TastyTonic());
             Inventory.Instance.AddItem(new FireFlower());
             Inventory.Instance.AddItem(new VoltShroom());
             Inventory.Instance.AddItem(new DizzyDial());

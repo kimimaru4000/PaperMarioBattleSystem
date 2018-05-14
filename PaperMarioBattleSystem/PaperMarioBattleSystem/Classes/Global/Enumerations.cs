@@ -8,13 +8,16 @@ namespace PaperMarioBattleSystem
 {
     public static class Enumerations
     {
+        /// <summary>
+        /// The types of BattleEntities.
+        /// </summary>
         public enum EntityTypes
         {
             Player, Enemy, Neutral
         }
 
         /// <summary>
-        /// The types of playable characters
+        /// The types of playable characters.
         /// </summary>
         public enum PlayerTypes
         {
@@ -22,7 +25,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// The types of partners in the game
+        /// The types of partners.
         /// </summary>
         public enum PartnerTypes
         {
@@ -36,7 +39,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// The types of Collectibles in the game
+        /// The types of Collectibles.
         /// </summary>
         public enum CollectibleTypes
         {
@@ -140,7 +143,7 @@ namespace PaperMarioBattleSystem
         //}
 
         /// <summary>
-        /// The types of damage elements
+        /// The types of damage elements.
         /// </summary>
         public enum Elements
         {
@@ -266,6 +269,12 @@ namespace PaperMarioBattleSystem
             /// <para>Use an integer for the value so removing Peekaboo doesn't remove this property from enemies if they have been tattled.</para>
             /// </summary>
             ShowHP,
+
+            /// <summary>
+            /// Tells that this BattleEntity should never have its HP shown despite the value of <see cref="ShowHP"/>.
+            /// <para>This should have an integer as the value, as it may potentially be modified in multiple locations.</para>
+            /// </summary>
+            NeverShowHP,
 
             /// <summary>
             /// Tells that this BattleEntity is, in general, not targetable.

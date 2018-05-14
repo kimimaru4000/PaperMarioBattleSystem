@@ -64,6 +64,9 @@ namespace PaperMarioBattleSystem
                         //Remove the current Partner from being selected
                         allPartners.Remove(BattleManager.Instance.Partner);
 
+                        //Filter out all dead Partners
+                        BattleManagerUtils.FilterDeadEntities(allPartners);
+
                         //If there's another Partner available, choose it
                         if (allPartners.Count != 0)
                         {
@@ -78,8 +81,7 @@ namespace PaperMarioBattleSystem
                     }
 
                     CurSequenceAction = new WaitSeqAction(0d);
-                    EndSequence();
-                    //ChangeSequenceBranch(SequenceBranch.End);
+                    ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:
                     PrintInvalidSequence();

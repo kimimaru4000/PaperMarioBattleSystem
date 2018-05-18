@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PaperMarioBattleSystem
+namespace PaperMarioBattleSystem.Utilities
 {
     /// <summary>
     /// Enum utility class.

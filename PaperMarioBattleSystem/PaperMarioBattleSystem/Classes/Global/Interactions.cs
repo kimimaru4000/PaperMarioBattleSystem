@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using static PaperMarioBattleSystem.Enumerations;
 using static PaperMarioBattleSystem.StatusGlobals;
+using PaperMarioBattleSystem.Utilities;
 
 namespace PaperMarioBattleSystem
 {

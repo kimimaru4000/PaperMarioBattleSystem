@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Content;
 using static PaperMarioBattleSystem.Enumerations;
+using PaperMarioBattleSystem.Utilities;
 
 namespace PaperMarioBattleSystem
 {

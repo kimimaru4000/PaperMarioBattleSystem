@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using static PaperMarioBattleSystem.Enumerations;
 using static PaperMarioBattleSystem.BadgeGlobals;
+using PaperMarioBattleSystem.Utilities;
 
 namespace PaperMarioBattleSystem
 {

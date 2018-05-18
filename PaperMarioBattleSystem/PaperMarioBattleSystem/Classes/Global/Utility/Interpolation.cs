@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
-namespace PaperMarioBattleSystem
+namespace PaperMarioBattleSystem.Utilities
 {
     /// <summary>
     /// A class containing useful interpolation methods.

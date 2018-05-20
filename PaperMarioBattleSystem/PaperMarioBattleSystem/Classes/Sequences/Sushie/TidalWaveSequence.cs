@@ -14,15 +14,34 @@ namespace PaperMarioBattleSystem
         public float WalkDuration = 700f;
         public int AdditionalDamage = 0;
 
+        private TidalWaveActionCommandUI TidalWaveUI = null;
+
         public TidalWaveSequence(MoveAction moveAction) : base(moveAction)
         {
             
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            {
+                TidalWaveUI = new TidalWaveActionCommandUI(actionCommand as TidalWaveCommand);
+                BattleUIManager.Instance.AddUIElement(TidalWaveUI);
+            }
         }
 
         protected override void OnEnd()
         {
             base.OnEnd();
             AdditionalDamage = 0;
+
+            if (TidalWaveUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(TidalWaveUI);
+                TidalWaveUI = null;
+            }
         }
 
         protected override void CommandSuccess()

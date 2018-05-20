@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
         /// The current value based on the StartRange, EndRange, and amount the bar is filled.
         /// </summary>
         /// <returns>An integer between StartValue (inclusive) and EndValue (inclusive).</returns>
-        protected int CurrentValue
+        public int CurrentValue
         {
             get
             {
@@ -77,8 +77,8 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            base.OnDraw();
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, CurrentValue.ToString(), new Vector2(355, 150), Color.White, .71f);
+            //base.OnDraw();
+            //SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, CurrentValue.ToString(), new Vector2(355, 150), Color.White, .71f);
         }
     }
 }

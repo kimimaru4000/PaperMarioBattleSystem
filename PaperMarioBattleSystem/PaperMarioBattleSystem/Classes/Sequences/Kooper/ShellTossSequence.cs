@@ -16,9 +16,33 @@ namespace PaperMarioBattleSystem
         private float SpinMoveDuration = 1000f;
         private int DamageMod = 1;
 
+        private HammerActionCommandUI ShellTossUI = null;
+
         public ShellTossSequence(MoveAction moveAction) : base(moveAction)
         {
             
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.DrawActionCommandInfo == true)
+            {
+                ShellTossUI = new HammerActionCommandUI(actionCommand as HammerCommand);
+                BattleUIManager.Instance.AddUIElement(ShellTossUI);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (ShellTossUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(ShellTossUI);
+                ShellTossUI = null;
+            }
         }
 
         protected override void CommandSuccess()

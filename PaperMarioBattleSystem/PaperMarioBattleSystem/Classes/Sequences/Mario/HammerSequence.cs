@@ -29,6 +29,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected int LitWindupSpeed = 3;
 
+        protected HammerActionCommandUI HammerUI = null;
+
         protected string PickupAnimName = AnimationGlobals.MarioBattleAnimations.HammerPickupName;
         protected string WindupAnimName = AnimationGlobals.MarioBattleAnimations.HammerWindupName;
         protected string SlamAnimName = AnimationGlobals.MarioBattleAnimations.HammerSlamName;
@@ -36,6 +38,35 @@ namespace PaperMarioBattleSystem
         public HammerSequence(MoveAction moveAction, int finalDamageAddition) : base(moveAction)
         {
             FinalDamageAddition = finalDamageAddition;
+        }
+
+        protected virtual void SetupHammerUI()
+        {
+            HammerUI = new HammerActionCommandUI(actionCommand as HammerCommand);
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.DrawActionCommandInfo == true)
+                SetupHammerUI();
+
+            if (HammerUI != null)
+            {
+                BattleUIManager.Instance.AddUIElement(HammerUI);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (HammerUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(HammerUI);
+                HammerUI = null;
+            }
         }
 
         protected override void CommandSuccess()

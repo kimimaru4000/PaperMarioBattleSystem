@@ -29,6 +29,8 @@ namespace PaperMarioBattleSystem
 
         private Shell ShellCreated = null;
 
+        private ShellShieldActionCommandUI ShellShieldUI = null;
+
         public ShellShieldSequence(MoveAction moveAction, int maxShellHP) : base(moveAction)
         {
             ShellMaxHP = maxShellHP;
@@ -39,6 +41,12 @@ namespace PaperMarioBattleSystem
             base.OnStart();
 
             ShellCreated = null;
+
+            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            {
+                ShellShieldUI = new ShellShieldActionCommandUI(actionCommand as ShellShieldCommand);
+                BattleUIManager.Instance.AddUIElement(ShellShieldUI);
+            }
         }
 
         protected override void OnEnd()
@@ -46,6 +54,12 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             ShellCreated = null;
+
+            if (ShellShieldUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(ShellShieldUI);
+                ShellShieldUI = null;
+            }
         }
 
         //Do nothing for success or failure, as only the HP for the Shell, which is received from the response, changes

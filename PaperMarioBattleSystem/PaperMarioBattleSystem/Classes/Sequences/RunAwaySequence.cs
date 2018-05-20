@@ -18,9 +18,22 @@ namespace PaperMarioBattleSystem
 
         private bool Succeeded = false;
 
+        private RunAwayActionCommandUI RunUI = null;
+
         public RunAwaySequence(MoveAction moveAction) : base(moveAction)
         {
 
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.DrawActionCommandInfo == true)
+            {
+                RunUI = new RunAwayActionCommandUI(actionCommand as RunAwayCommand);
+                BattleUIManager.Instance.AddUIElement(RunUI);
+            }
         }
 
         protected override void OnEnd()
@@ -28,6 +41,12 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             Succeeded = false;
+
+            if (RunUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(RunUI);
+                RunUI = null;
+            }
         }
 
         protected override void SequenceStartBranch()

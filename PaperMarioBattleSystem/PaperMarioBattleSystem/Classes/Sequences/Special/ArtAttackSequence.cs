@@ -17,6 +17,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private ActionCommandGlobals.ArtAttackResponse Response = default(ActionCommandGlobals.ArtAttackResponse);
 
+        private ArtAttackActionCommandUI ArtAttackUI = null;
+
         public ArtAttackSequence(MoveAction moveAction) : base(moveAction)
         {
 
@@ -25,6 +27,23 @@ namespace PaperMarioBattleSystem
         protected override void OnStart()
         {
             base.OnStart();
+
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
+            {
+                ArtAttackUI = new ArtAttackActionCommandUI(actionCommand as ArtAttackCommand);
+                BattleUIManager.Instance.AddUIElement(ArtAttackUI);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (ArtAttackUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(ArtAttackUI);
+                ArtAttackUI = null;
+            }
         }
 
         public override void OnCommandResponse(in object response)

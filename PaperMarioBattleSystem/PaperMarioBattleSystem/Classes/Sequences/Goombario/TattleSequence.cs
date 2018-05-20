@@ -25,6 +25,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private TattleRenderObj TattleBox = null;
 
+        private TattleActionCommandUI TattleUI = null;
+
         public TattleSequence(MoveAction moveAction) : base(moveAction)
         {
             
@@ -35,6 +37,12 @@ namespace PaperMarioBattleSystem
             base.OnStart();
 
             TattledEntity = (ITattleableEntity)EntitiesAffected[0];
+
+            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            {
+                TattleUI = new TattleActionCommandUI(actionCommand as TattleCommand);
+                BattleUIManager.Instance.AddUIElement(TattleUI);
+            }
         }
 
         protected override void OnEnd()
@@ -49,6 +57,12 @@ namespace PaperMarioBattleSystem
             }
 
             TattledEntity = null;
+
+            if (TattleUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(TattleUI);
+                TattleUI = null;
+            }
         }
 
         protected override void SequenceStartBranch()

@@ -14,6 +14,8 @@ namespace PaperMarioBattleSystem
         public double WalkDuration = 4000f;
         private BattleEntity BehindEntity = null;
 
+        private GulpActionCommandUI GulpUI = null;
+
         public GulpSequence(MoveAction moveAction) : base(moveAction)
         {
             
@@ -35,6 +37,12 @@ namespace PaperMarioBattleSystem
                 BehindEntity = behindEntities[0];
                 BehindEntity.TargetForMove(User);
             }
+
+            if (Action.DrawActionCommandInfo && Action.HasActionCommand == true)
+            {
+                GulpUI = new GulpActionCommandUI(actionCommand as GulpCommand);
+                BattleUIManager.Instance.AddUIElement(GulpUI);
+            }
         }
 
         protected override void OnEnd()
@@ -42,6 +50,12 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             BehindEntity?.StopTarget();
+
+            if (GulpUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(GulpUI);
+                GulpUI = null;
+            }
         }
 
         protected override void CommandSuccess()

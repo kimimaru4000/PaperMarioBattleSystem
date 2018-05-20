@@ -14,22 +14,22 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class TornadoJumpCommand : JumpCommand
     {
-        private enum Steps
+        public enum Steps
         {
             Jump, Tornado
         }
 
         private const int TornadoButtonCount = 3;
 
-        private Steps Step = Steps.Jump;
+        public Steps Step { get; private set; } = Steps.Jump;
 
         private Keys[] PossibleButtons = new Keys[] { Keys.Z, Keys.X, Keys.C };
-        private Keys[] ButtonsToPress = null;
+        public Keys[] ButtonsToPress { get; private set; } = null;
 
-        private int ButtonIndex = 0;
+        public int ButtonIndex { get; private set; } = 0;
 
         private double TornadoTime = 0d;
-        private double TornadoEndTime = 0d;
+        public double TornadoEndTime { get; private set; } = 0d;
 
         public TornadoJumpCommand(IActionCommandHandler commandAction, float totalRange, float leniency, double tornadoTime)
             : base(commandAction, totalRange, leniency)
@@ -74,27 +74,27 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            if (Step == Steps.Jump)
-            {
-                base.OnDraw();
-            }
-            else
-            {
-                Vector2 startDrawLoc = new Vector2(250, 150);
-                int xPosDiff = 20;
-
-                //Show the buttons to press; if the button was pressed, show it black
-                for (int i = 0; i < ButtonsToPress.Length; i++)
-                {
-                    Keys button = ButtonsToPress[i];
-                    Color buttonColor = Color.White;
-                    if (ButtonIndex > i) buttonColor = Color.Black;
-
-                    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startDrawLoc + new Vector2(xPosDiff * i, 0), buttonColor, .7f);
-                }
-
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Math.Round(TornadoEndTime - Time.ActiveMilliseconds, 2).ToString(), startDrawLoc + new Vector2(0, -20), Color.White, .7f);
-            }
+            //if (Step == Steps.Jump)
+            //{
+            //    base.OnDraw();
+            //}
+            //else
+            //{
+            //    Vector2 startDrawLoc = new Vector2(250, 150);
+            //    int xPosDiff = 20;
+            //
+            //    //Show the buttons to press; if the button was pressed, show it black
+            //    for (int i = 0; i < ButtonsToPress.Length; i++)
+            //    {
+            //        Keys button = ButtonsToPress[i];
+            //        Color buttonColor = Color.White;
+            //        if (ButtonIndex > i) buttonColor = Color.Black;
+            //
+            //        SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startDrawLoc + new Vector2(xPosDiff * i, 0), buttonColor, .7f);
+            //    }
+            //
+            //    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Math.Round(TornadoEndTime - Time.ActiveMilliseconds, 2).ToString(), startDrawLoc + new Vector2(0, -20), Color.White, .7f);
+            //}
         }
 
         private void JumpActionCommand()

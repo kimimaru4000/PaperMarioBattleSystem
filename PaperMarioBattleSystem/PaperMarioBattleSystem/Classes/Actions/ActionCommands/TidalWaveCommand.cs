@@ -15,11 +15,11 @@ namespace PaperMarioBattleSystem
         /// The total duration of the command. It ends when it reaches this time
         /// </summary>
         private double TotalDuration = 3500d;
-        private double StartTime = 0d;
-        private int InputLimit = 14;
+        public double StartTime { get; private set; } = 0d;
+        public int InputLimit { get; private set; }= 14;
 
-        private List<Keys> ButtonsPressed = null;
-        private Keys NextButtonToPress = Keys.None;
+        public List<Keys> ButtonsPressed { get; private set; } = null;
+        public Keys NextButtonToPress { get; private set; } = Keys.None;
 
         private Keys[] PossibleButtons = new Keys[] { Keys.Z, Keys.X, Keys.C };
 
@@ -112,26 +112,26 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            base.OnDraw();
-
-            Vector2 startDrawLoc = new Vector2(250, 150);
-            int xPosDiff = 20;
-            Vector2 nextPos = startDrawLoc + new Vector2(xPosDiff * ButtonsPressed.Count, 0);
-
-            //Show the buttons pressed
-            for (int i = 0; i < ButtonsPressed.Count; i++)
-            {
-                Keys button = ButtonsPressed[i];
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startDrawLoc + new Vector2(xPosDiff * i, 0), Color.Black, .7f);
-            }
-
-            //Show the button that should be pressed next, unless the input limit was reached
-            if (ButtonsPressed.Count < InputLimit)
-            {
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, NextButtonToPress.ToString(), nextPos, Color.White, .7f);
-            }
-
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Math.Round(StartTime - Time.ActiveMilliseconds, 2).ToString(), startDrawLoc + new Vector2(0, -20), Color.White, .7f);
+            //base.OnDraw();
+            //
+            //Vector2 startDrawLoc = new Vector2(250, 150);
+            //int xPosDiff = 20;
+            //Vector2 nextPos = startDrawLoc + new Vector2(xPosDiff * ButtonsPressed.Count, 0);
+            //
+            ////Show the buttons pressed
+            //for (int i = 0; i < ButtonsPressed.Count; i++)
+            //{
+            //    Keys button = ButtonsPressed[i];
+            //    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startDrawLoc + new Vector2(xPosDiff * i, 0), Color.Black, .7f);
+            //}
+            //
+            ////Show the button that should be pressed next, unless the input limit was reached
+            //if (ButtonsPressed.Count < InputLimit)
+            //{
+            //    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, NextButtonToPress.ToString(), nextPos, Color.White, .7f);
+            //}
+            //
+            //SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Math.Round(StartTime - Time.ActiveMilliseconds, 2).ToString(), startDrawLoc + new Vector2(0, -20), Color.White, .7f);
         }
     }
 }

@@ -17,8 +17,8 @@ namespace PaperMarioBattleSystem
     {
         private double DecelerationRate = .03f;
 
-        private double CurCursorVal = 0f;
-        private float BarScale = 100f;
+        public double CurCursorVal { get; private set; } = 0f;
+        //private float BarScale = 100f;
 
         /// <summary>
         /// The time it takes the cursor to move across the bar one time.
@@ -100,16 +100,16 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            Vector2 barPos = new Vector2(250, 150);
-            Vector2 barScale = new Vector2(BarScale, 1f);
-
-            DrawBar(barPos, barScale);
-            DrawBarFill(barPos + new Vector2(0f, 5f), new Vector2(barScale.X, 18f));
-
-            //Draw the cursor
-            //Regardless of MaxBarValue, needs to be rendered within the range
-            float barValScaleFactor = BarScale / (float)MaxBarValue;
-            SpriteRenderer.Instance.DrawUI(MovingCursor.Tex, barPos + new Vector2((float)CurCursorVal * barValScaleFactor, 0f), MovingCursor.SourceRect, Color.White, 0f, new Vector2(.5f, 1f), Vector2.One, false, false, .4f);
+            //Vector2 barPos = new Vector2(250, 150);
+            //Vector2 barScale = new Vector2(BarScale, 1f);
+            //
+            //DrawBar(barPos, barScale);
+            //DrawBarFill(barPos + new Vector2(0f, 5f), new Vector2(barScale.X, 18f));
+            //
+            ////Draw the cursor
+            ////Regardless of MaxBarValue, needs to be rendered within the range
+            //float barValScaleFactor = BarScale / (float)MaxBarValue;
+            //SpriteRenderer.Instance.DrawUI(MovingCursor.Tex, barPos + new Vector2((float)CurCursorVal * barValScaleFactor, 0f), MovingCursor.SourceRect, Color.White, 0f, new Vector2(.5f, 1f), Vector2.One, false, false, .4f);
         }
     }
 }

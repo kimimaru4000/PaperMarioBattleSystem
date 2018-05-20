@@ -19,7 +19,10 @@ You can also find a short video displaying the dialogue system [here](https://1d
 ## Getting Started
 You will need at least MonoGame 3.7.0.1129 and Visual Studio 2017, but MonoDevelop, Xamarin Studio, and earlier versions of Visual Studio may work as well. The project targets DesktopGL and .NET 4.7.1, and it uses the latest C# version.
 
-Previously, OSX and Linux builds were made with the Ruge Deploy Tool (https://github.com/MetaSmug/MonoGame.Ruge.DeployTool). However, Monogame 3.6 introduced new core libraries that the tool no longer works with. Some options being looked at for cross-platform builds are mkbundle, MonoKickstart, and .NET Core. This will be updated with instructions once a solution has been tested and confirmed.
+## Builds
+Cross-platform builds can be made using Mono's [mkbundle](http://www.mono-project.com/docs/tools+libraries/tools/mkbundle/). You can find a great tutorial for setting up and using this tool on Windows [here](https://dotnetcoretutorials.com/2018/03/22/bundling-mono-with-a-net-executable-using-mkbundle-on-windows/). Something overlooked in the tutorial is that you will need to extract the runtime you want to build for. To do so, rename the runtime file's extension to ".zip" or something similar and then extract it.
+
+For non-Windows builds to run, you may need to comment out code involving the System.Windows.Forms namespace. The only code in the project using System.Windows.Forms is the debug functions that take screenshots and dump logs, so it doesn't affect the battle system itself.
 
 ## Contributing
 Feel free to submit a pull request with details on your changes. Please make sure that your code has been tested and is well-commented. Also feel free to open an issue if you encounter a bug or behavior that seems like a bug.

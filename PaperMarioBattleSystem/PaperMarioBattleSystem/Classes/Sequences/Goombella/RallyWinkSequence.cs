@@ -21,6 +21,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private RallyWinkHeartVFX HeartVFX = null;
 
+        private RallyWinkActionCommandUI RallyWinkUI = null;
+
         public RallyWinkSequence(MoveAction moveAction) : base(moveAction)
         {
 
@@ -31,6 +33,12 @@ namespace PaperMarioBattleSystem
             base.OnStart();
 
             HeartVFX = new RallyWinkHeartVFX(EntitiesAffected[0].Position, WaitDur, WaitDur, .6f);
+
+            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            {
+                RallyWinkUI = new RallyWinkActionCommandUI(actionCommand as RallyWinkCommand);
+                BattleUIManager.Instance.AddUIElement(RallyWinkUI);
+            }
         }
 
         protected override void OnEnd()
@@ -45,6 +53,12 @@ namespace PaperMarioBattleSystem
             }
 
             HeartVFX = null;
+
+            if (RallyWinkUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(RallyWinkUI);
+                RallyWinkUI = null;
+            }
         }
 
         protected override void SequenceStartBranch()

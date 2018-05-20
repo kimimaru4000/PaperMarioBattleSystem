@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
 
         protected CommandRank RankToSend = CommandRank.Nice;
 
-        protected bool WithinRange
+        public bool WithinRange
         {
             get
             {
@@ -75,17 +75,17 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            base.OnDraw();
-
-            string text = "NO!";
-            Color color = Color.Red;
-            if (WithinRange == true)
-            {
-                text = "OKAY!";
-                color = Color.Green;
-            }
-
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 150), color, .7f);
+            //base.OnDraw();
+            //
+            //string text = "NO!";
+            //Color color = Color.Red;
+            //if (WithinRange == true)
+            //{
+            //    text = "OKAY!";
+            //    color = Color.Green;
+            //}
+            //
+            //SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 150), color, .7f);
         }
     }
 }

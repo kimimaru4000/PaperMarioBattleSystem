@@ -105,30 +105,30 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            base.OnDraw();
-
-            string text = "NO!";
-            Color color = Color.Red;
-            if (AllLightsFilled)
-            {
-                text = "OKAY!";
-                color = Color.Green;
-            }
-
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 150), color, .7f);
-
-            Vector2 startPos = new Vector2(250, 230);
-            Vector2 barStartPos = startPos + new Vector2(-30, 0f);
-
-            Vector2 barScale = new Vector2(130, 1f);
-
-            //Draw the bar
-            SpriteRenderer.Instance.DrawUI(LightBarEnd.Tex, barStartPos, LightBarEnd.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), Vector2.One, false, false, .69f);
-            SpriteRenderer.Instance.DrawUI(LightBarMiddle.Tex, barStartPos + new Vector2((int)(LightBarEnd.WidthHeightToVector2().X / 2), 0f), LightBarMiddle.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), barScale, false, false, .69f);
-            SpriteRenderer.Instance.DrawUI(LightBarEnd.Tex, barStartPos + new Vector2(barScale.X + (int)(LightBarEnd.WidthHeightToVector2().X - 1), 0f), LightBarEnd.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), Vector2.One, true, false, .69f);
-
-            //Draw the lights
-            DrawLights(startPos, 0, true);
+            //base.OnDraw();
+            //
+            //string text = "NO!";
+            //Color color = Color.Red;
+            //if (AllLightsFilled)
+            //{
+            //    text = "OKAY!";
+            //    color = Color.Green;
+            //}
+            //
+            //SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 150), color, .7f);
+            //
+            //Vector2 startPos = new Vector2(250, 230);
+            //Vector2 barStartPos = startPos + new Vector2(-30, 0f);
+            //
+            //Vector2 barScale = new Vector2(130, 1f);
+            //
+            ////Draw the bar
+            //SpriteRenderer.Instance.DrawUI(LightBarEnd.Tex, barStartPos, LightBarEnd.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), Vector2.One, false, false, .69f);
+            //SpriteRenderer.Instance.DrawUI(LightBarMiddle.Tex, barStartPos + new Vector2((int)(LightBarEnd.WidthHeightToVector2().X / 2), 0f), LightBarMiddle.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), barScale, false, false, .69f);
+            //SpriteRenderer.Instance.DrawUI(LightBarEnd.Tex, barStartPos + new Vector2(barScale.X + (int)(LightBarEnd.WidthHeightToVector2().X - 1), 0f), LightBarEnd.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), Vector2.One, true, false, .69f);
+            //
+            ////Draw the lights
+            //DrawLights(startPos, 0, true);
         }
     }
 }

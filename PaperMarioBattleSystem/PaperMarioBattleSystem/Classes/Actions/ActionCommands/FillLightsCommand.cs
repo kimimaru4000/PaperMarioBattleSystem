@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The max number of lights to fill
         /// </summary>
-        protected int MaxLights = 4;
+        public int MaxLights = 4;
 
         /// <summary>
         /// The time between each light being lit
@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The number of lights filled
         /// </summary>
-        protected int LightsFilled = 0;
+        public int LightsFilled = 0;
         protected double PrevLightTime = 0d;
 
         protected CroppedTexture2D UnlitLight = null;
@@ -65,7 +65,7 @@ namespace PaperMarioBattleSystem
             PrevLightTime = Time.ActiveMilliseconds + TimeBetweenLights;
         }
 
-        public void DrawLights(Vector2 startPos, float distBetweenLights, bool lastLightBig)
+        /*public void DrawLights(Vector2 startPos, float distBetweenLights, bool lastLightBig)
         {
             //Make sure this distance is always positive
             distBetweenLights = Math.Abs(distBetweenLights);
@@ -93,6 +93,6 @@ namespace PaperMarioBattleSystem
 
                 SpriteRenderer.Instance.DrawUI(light.Tex, newpos, light.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), newScale, false, false, .7f);
             }
-        }
+        }*/
     }
 }

@@ -19,6 +19,8 @@ namespace PaperMarioBattleSystem
         //However, Power Plus P will increase Yoshi's Attack, causing the eggs to do more damage
         private int EggDamage = 1;
 
+        private TimedLightActionCommandUI MiniEggUI = null;
+
         public MiniEggSequence(MoveAction moveAction) : base(moveAction)
         {
 
@@ -27,6 +29,23 @@ namespace PaperMarioBattleSystem
         protected override void OnStart()
         {
             EggDamage = GetTotalDamage(1);
+
+            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            {
+                MiniEggUI = new TimedLightActionCommandUI(actionCommand as TimedLightCommand);
+                BattleUIManager.Instance.AddUIElement(MiniEggUI);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (MiniEggUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(MiniEggUI);
+                MiniEggUI = null;
+            }
         }
 
         //Do nothing for success or failure, as only the number of eggs thrown, which is received from the response, changes

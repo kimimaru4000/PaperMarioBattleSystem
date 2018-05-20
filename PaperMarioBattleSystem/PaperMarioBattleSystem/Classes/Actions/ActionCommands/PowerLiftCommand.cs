@@ -32,32 +32,32 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The number of Attack selections required to boost your Attack by 1.
         /// </summary>
-        private const int AttackBoostReq = 5;
+        public const int AttackBoostReq = 5;
 
         /// <summary>
         /// The number of Defense selections required to boost your Defense by 1.
         /// </summary>
-        private const int DefenseBoostReq = 5;
+        public const int DefenseBoostReq = 5;
 
         /// <summary>
         /// The number of Attack boosts obtained.
         /// </summary>
-        private int AttackBoosts = 0;
+        public int AttackBoosts { get; private set; } = 0;
 
         /// <summary>
         /// The number of Defense boosts obtained.
         /// </summary>
-        private int DefenseBoosts = 0;
+        public int DefenseBoosts { get; private set; } = 0;
 
         /// <summary>
         /// The number of Attack icons selected.
         /// </summary>
-        private int AttackSelections = 0;
+        public int AttackSelections { get; private set; } = 0;
 
         /// <summary>
         /// The numbber of Defense icons selected.
         /// </summary>
-        private int DefenseSelections = 0;
+        public int DefenseSelections { get; private set; } = 0;
 
         /// <summary>
         /// The total time the Attack/Defense boost display arrows spend in the blinking interval after gaining a boost.
@@ -72,29 +72,30 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The last time an Attack boost was obtained.
         /// </summary>
-        private double LastAttackBoost = 0d;
+        public double LastAttackBoost { get; private set; } = 0d;
 
         /// <summary>
         /// The last time a Defense boost was obtained.
         /// </summary>
-        private double LastDefenseBoost = 0d;
+        public double LastDefenseBoost { get; private set; } = 0d;
 
-        private int NumColumns = 3;
-        private int NumRows = 3;
-        private Vector2 LiftGridCellSize = new Vector2(26, 24);
-        private Vector2 LiftGridSpacing = new Vector2(52, 48);
+        public int NumColumns { get; private set; } = 3;
+        public int NumRows { get; private set; } = 3;
+        public Vector2 LiftGridCellSize { get; private set; } = new Vector2(26, 24);
+        public Vector2 LiftGridSpacing { get; private set; } = new Vector2(52, 48);
 
         /// <summary>
         /// How long Power Lift lasts.
         /// </summary>
-        private double CommandTime = 15000d;
-        private double ElapsedCommandTime = 0d;
+        public double CommandTime { get; private set; } = 15000d;
+        public double ElapsedCommandTime { get; private set; } = 0d;
 
         private double CursorSpeedDur = 150d;
         private Vector2 PrevCursorPos = Vector2.Zero;
-        private Vector2 CurrentCursorPos { get => Cursor.Position; set => Cursor.Position = value; }
+        public Vector2 CurrentCursorPos { get; private set; } = Vector2.Zero;
         private Vector2 DestinationCursorPos = Vector2.Zero;
-        private Color CursorColor = Color.White;
+        public Color CursorColor { get; private set; } = Color.White;
+        private Color NormalColor = Color.White;
         private Color MovingColor = Color.Blue;
         private Color SelectedColor = Color.Red;
         private double ElapsedMoveTime = 0d;
@@ -114,6 +115,8 @@ namespace PaperMarioBattleSystem
         private UIFourPiecedTex Cursor = null;
         private int CurColumn = 0;
         private int CurRow = 0;
+        private int DestColumn = 0;
+        private int DestRow = 0;
 
         private double IconFadeTime = 500d;
         private double IconStayTime = 2300d;
@@ -131,7 +134,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The internal grid used for tracking the icons.
         /// </summary>
-        private PowerLiftIconElement[][] IconGrid = null;
+        public PowerLiftIconElement[][] IconGrid { get; private set; } = null;
 
         /// <summary>
         /// Tells whether the player can select an arrow with the cursor.
@@ -166,15 +169,19 @@ namespace PaperMarioBattleSystem
             //Set up the grid
             SetUpGrid();
 
-            BattleUIManager.Instance.AddUIElement(PowerLiftGrid);
-            BattleUIManager.Instance.AddUIElement(Cursor);
+            //BattleUIManager.Instance.AddUIElement(PowerLiftGrid);
+            //BattleUIManager.Instance.AddUIElement(Cursor);
 
             //Center the cursor in the middle
-            CurColumn = PowerLiftGrid.Columns / 2;
-            CurRow = PowerLiftGrid.Rows / 2;
+            CurColumn = NumColumns / 2;
+            CurRow = NumRows / 2;
+
+            DestColumn = CurColumn;
+            DestRow = CurRow;
 
             int centerIndex = PowerLiftGrid.GetIndex(CurColumn, CurRow);
             PrevCursorPos = CurrentCursorPos = DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(centerIndex);
+            Cursor.Position = CurrentCursorPos;
         }
 
         public override void EndInput()
@@ -185,16 +192,20 @@ namespace PaperMarioBattleSystem
             SelectedIcon = true;
             IsPoisoned = false;
 
-            BattleUIManager.Instance.RemoveUIElement(PowerLiftGrid);
-            BattleUIManager.Instance.RemoveUIElement(Cursor);
+            //BattleUIManager.Instance.RemoveUIElement(PowerLiftGrid);
+            //BattleUIManager.Instance.RemoveUIElement(Cursor);
 
-            CurColumn = CurRow = 0;
+            CurColumn = CurRow = DestColumn = DestRow = 0;
 
             AttackBoosts = DefenseBoosts = 0;
             LastAttackBoost = LastDefenseBoost = 0d;
             PrevCreationTime = 0d;
 
-            UtilityGlobals.ClearJaggedArray(ref IconGrid);
+            for (int i = 0; i < IconGrid.Length; i++)
+            {
+                IconGrid[i] = null;
+            }
+
             IconGrid = null;
 
             PowerLiftGrid.ClearGrid();
@@ -226,7 +237,11 @@ namespace PaperMarioBattleSystem
             PowerLiftGrid.Spacing = LiftGridSpacing;
 
             //Initialize the icon grid
-            UtilityGlobals.InitializeJaggedArray(ref IconGrid, PowerLiftGrid.Columns, PowerLiftGrid.Rows);
+            IconGrid = new PowerLiftIconElement[NumColumns][];
+            for (int i = 0; i < IconGrid.Length; i++)
+            {
+                IconGrid[i] = new PowerLiftIconElement[NumRows];
+            }
         }
 
         protected override void ReadInput()
@@ -262,6 +277,7 @@ namespace PaperMarioBattleSystem
                 //Wait a frame after having just selected an icon (this matches the behavior in the game)
                 if (SelectedIcon == true)
                 {
+                    CursorColor = NormalColor;
                     Cursor.TintColor = CursorColor;
                     SelectedIcon = false;
                     return;
@@ -294,12 +310,19 @@ namespace PaperMarioBattleSystem
 
                 //Lerp to the destination
                 CurrentCursorPos = Vector2.Lerp(PrevCursorPos, DestinationCursorPos, (float)(ElapsedMoveTime / speed));
+                Cursor.Position = CurrentCursorPos;
 
                 //We're done moving to our destination
                 if (ElapsedMoveTime >= speed)
                 {
-                    Cursor.TintColor = CursorColor;
+                    CurColumn = DestColumn;
+                    CurRow = DestRow;
+
+                    CursorColor = NormalColor;
                     CurrentCursorPos = DestinationCursorPos;
+
+                    Cursor.TintColor = CursorColor;
+                    Cursor.Position = CurrentCursorPos;
                 }
             }
         }
@@ -329,21 +352,23 @@ namespace PaperMarioBattleSystem
             //Check if we moved at all and make sure we're in bounds
             if (newCol != CurColumn && newCol >= 0 && newCol < PowerLiftGrid.Columns)
             {
-                CurColumn = newCol;
+                DestColumn = newCol;
 
                 PrevCursorPos = CurrentCursorPos;
-                DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(PowerLiftGrid.GetIndex(CurColumn, CurRow));
-                Cursor.TintColor = MovingColor;
+                DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(PowerLiftGrid.GetIndex(DestColumn, CurRow));
+                CursorColor = MovingColor;
+                Cursor.TintColor = CursorColor;
 
                 ElapsedMoveTime = 0d;
             }
             else if (newRow != CurRow && newRow >= 0 && newRow < PowerLiftGrid.Rows)
             {
-                CurRow = newRow;
+                DestRow = newRow;
 
                 PrevCursorPos = CurrentCursorPos;
-                DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(PowerLiftGrid.GetIndex(CurColumn, CurRow));
-                Cursor.TintColor = MovingColor;
+                DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(PowerLiftGrid.GetIndex(CurColumn, DestRow));
+                CursorColor = MovingColor;
+                Cursor.TintColor = CursorColor;
 
                 ElapsedMoveTime = 0d;
             }
@@ -396,7 +421,8 @@ namespace PaperMarioBattleSystem
             }
 
             //Pressing A to select causes the cursor to turn red for 1 frame even if you don't hit an icon
-            Cursor.TintColor = SelectedColor;
+            CursorColor = SelectedColor;
+            Cursor.TintColor = CursorColor;
             SelectedIcon = true;
         }
 
@@ -517,25 +543,25 @@ namespace PaperMarioBattleSystem
         protected override void OnDraw()
         {
             //Draw the grid
-            for (int i = 0; i < IconGrid.Length; i++)
-            {
-                for (int j = 0; j < IconGrid[i].Length; j++)
-                {
-                    PowerLiftIconElement iconElement = IconGrid[i][j];
-
-                    //Draw the icon elements
-                    if (iconElement != null)
-                    {
-                        iconElement.Draw();
-                    }
-                }
-            }
-
-            //Draw the boosts
-            DrawBoosts();
-
-            //Draw time remaining (debug)
-            SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Math.Round(CommandTime - ElapsedCommandTime, 0).ToString(), new Vector2(250, 130), Color.White, .7f);
+            //for (int i = 0; i < IconGrid.Length; i++)
+            //{
+            //    for (int j = 0; j < IconGrid[i].Length; j++)
+            //    {
+            //        PowerLiftIconElement iconElement = IconGrid[i][j];
+            //
+            //        //Draw the icon elements
+            //        if (iconElement != null)
+            //        {
+            //            iconElement.Draw();
+            //        }
+            //    }
+            //}
+            //
+            ////Draw the boosts
+            //DrawBoosts();
+            //
+            ////Draw time remaining (debug)
+            //SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Math.Round(CommandTime - ElapsedCommandTime, 0).ToString(), new Vector2(250, 130), Color.White, .7f);
         }
 
         private void DrawBoosts()

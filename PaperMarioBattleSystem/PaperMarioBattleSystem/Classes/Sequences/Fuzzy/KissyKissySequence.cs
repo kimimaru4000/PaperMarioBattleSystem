@@ -24,9 +24,22 @@ namespace PaperMarioBattleSystem
 
         private bool IsInfinite => (MaxAttacks <= BattleGlobals.InfiniteSuccessionAttacks);
 
+        private FillBarActionCommandUI<MashButtonCommand> KissyKissyUI = null;
+
         public KissyKissySequence(MoveAction moveAction, int numAttacks) : base(moveAction)
         {
             MaxAttacks = NumAttacks = numAttacks;
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.DrawActionCommandInfo == true && Action.HasActionCommand == true)
+            {
+                KissyKissyUI = new FillBarActionCommandUI<MashButtonCommand>(actionCommand as MashButtonCommand, new Vector2(250, 150), new Vector2(100f, 1f), null);
+                BattleUIManager.Instance.AddUIElement(KissyKissyUI);
+            }
         }
 
         protected override void OnEnd()
@@ -35,6 +48,12 @@ namespace PaperMarioBattleSystem
 
             Missed = false;
             Interrupted = false;
+
+            if (KissyKissyUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(KissyKissyUI);
+                KissyKissyUI = null;
+            }
         }
 
         protected override bool OnMiss()

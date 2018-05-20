@@ -19,12 +19,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The value the success range starts
         /// </summary>
-        private double SuccessStartValue = 0d;
+        public double SuccessStartValue { get; private set; } = 0d;
 
         /// <summary>
         /// The amount of time the light is lit up for the success to be valid
         /// </summary>
-        private double SuccessRange = 0d;
+        public double SuccessRange { get; private set; } = 0d;
 
         /// <summary>
         /// How much faster or slower to progress the bar
@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
         private CroppedTexture2D UnlitLight = null;
         private CroppedTexture2D LitLight = null;
 
-        private bool WithinRange => (CurBarValue >= SuccessStartValue && CurBarValue < MaxBarValue);
+        public bool WithinRange => (CurBarValue >= SuccessStartValue && CurBarValue < MaxBarValue);
 
         public GulpCommand(IActionCommandHandler commandAction, double totalDuration, double successRange, double speedScale, Keys buttonToHold) : base(commandAction, totalDuration)
         {
@@ -117,7 +117,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            base.OnDraw();
+            /*base.OnDraw();
 
             string text = "NO!";
             Color color = Color.Red;
@@ -147,7 +147,7 @@ namespace PaperMarioBattleSystem
             DrawBar(barStartPos, barScale, SuccessStartValue);
             DrawBarFill(barStartPos + new Vector2(0f, 5f), new Vector2(barScale.X, 18f), SuccessStartValue);
 
-            SpriteRenderer.Instance.DrawUI(light.Tex, lightStartPos + new Vector2((diff / 2) - BarEnd.WidthHeightToVector2().X, 12f), light.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), 1f, false, false, .8f);
+            SpriteRenderer.Instance.DrawUI(light.Tex, lightStartPos + new Vector2((diff / 2) - BarEnd.WidthHeightToVector2().X, 12f), light.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), 1f, false, false, .8f);*/
         }
     }
 }

@@ -10,6 +10,8 @@ namespace PaperMarioBattleSystem
     {
         private int DamageDealt = 0;
 
+        private MashButtonRangeActionCommandUI WindBreathUI = null;
+
         public WindBreathSequence(MoveAction moveAction) : base(moveAction)
         {
 
@@ -20,6 +22,12 @@ namespace PaperMarioBattleSystem
             base.OnStart();
 
             DamageDealt = 0;
+
+            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            {
+                WindBreathUI = new MashButtonRangeActionCommandUI(actionCommand as MashButtonRangeCommand);
+                BattleUIManager.Instance.AddUIElement(WindBreathUI);
+            }
         }
 
         protected override void OnEnd()
@@ -27,6 +35,12 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             DamageDealt = 0;
+
+            if (WindBreathUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(WindBreathUI);
+                WindBreathUI = null;
+            }
         }
 
         public override void OnCommandResponse(in object response)

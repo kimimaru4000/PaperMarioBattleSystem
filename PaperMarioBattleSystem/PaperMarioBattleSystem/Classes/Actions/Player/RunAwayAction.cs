@@ -10,7 +10,7 @@ using static PaperMarioBattleSystem.Enumerations;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Runs away from battle, ending it immediately.
+    /// Runs away from battle, ending the battle immediately.
     /// <para>Unless Runaway Pay is equipped, all Star Points accumulated during battle are lost when running.</para>
     /// </summary>
     public sealed class RunAwayAction : MoveAction

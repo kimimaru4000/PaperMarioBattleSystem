@@ -17,11 +17,11 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class ShellShieldCommand : ActionCommand
     {
-        protected float CurBarVal = 0f;
+        public float CurBarVal { get; protected set; } = 0f;
 
         protected float BarScale = 100f;
         protected float MinBarVal = 0f;
-        protected float MaxBarVal = 100f;
+        public float MaxBarVal { get; protected set; } = 100f;
 
         //How long it takes the cursor to move from one end of the bar to the other.
         protected double CursorTime = 200d;
@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
         protected CroppedTexture2D BarEnd = null;
         protected CroppedTexture2D BarMiddle = null;
 
-        protected BarRangeData[] BarRanges = null;
+        public BarRangeData[] BarRanges { get; protected set; } = null;
 
         /// <summary>
         /// The time to do the Action Command.
@@ -70,13 +70,13 @@ namespace PaperMarioBattleSystem
                 Debug.LogError($"{nameof(BarRanges)} is null or empty, so the command cannot be completed properly. Please input valid data!");
             }
 
-            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
-            MovingCursor = new CroppedTexture2D(battleGFX, new Rectangle(498, 304, 46, 38));
-
-            BarEnd = new CroppedTexture2D(battleGFX, new Rectangle(514, 245, 6, 28));
-            BarMiddle = new CroppedTexture2D(battleGFX, new Rectangle(530, 245, 1, 28));
-
-            Box = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
+            //Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
+            //MovingCursor = new CroppedTexture2D(battleGFX, new Rectangle(498, 304, 46, 38));
+            //
+            //BarEnd = new CroppedTexture2D(battleGFX, new Rectangle(514, 245, 6, 28));
+            //BarMiddle = new CroppedTexture2D(battleGFX, new Rectangle(530, 245, 1, 28));
+            //
+            //Box = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Box.png");
         }
 
         public override void EndInput()
@@ -154,35 +154,35 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            base.OnDraw();
-
-            Vector2 drawPos = new Vector2(150, 200);
-
-            //Draw the bars
-            //Draw the middle
-            SpriteRenderer.Instance.DrawUI(BarMiddle.Tex, drawPos, BarMiddle.SourceRect, Color.White, 0f, Vector2.Zero, new Vector2(BarScale, 1f), false, false, .39f);
-
-            //Draw the ends
-            SpriteRenderer.Instance.DrawUI(BarEnd.Tex, drawPos - new Vector2(BarEnd.SourceRect.Value.Width, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, false, false, .39f);
-            SpriteRenderer.Instance.DrawUI(BarEnd.Tex, drawPos + new Vector2(BarScale, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, true, false, .39f);
-
-            //Draw the cursor
-            //Regardless of MaxBarVal, needs to be rendered within the range
-            float barValScaleFactor = BarScale / MaxBarVal;
-            SpriteRenderer.Instance.DrawUI(MovingCursor.Tex, drawPos + new Vector2(CurBarVal * barValScaleFactor, 0f), MovingCursor.SourceRect, Color.White, 0f, new Vector2(.5f, 1f), Vector2.One, false, false, .4f);
-
-            //Draw the values of the bar sections
-            if (BarRanges != null)
-            {
-                for (int i = 0; i < BarRanges.Length; i++)
-                {
-                    BarRangeData barRange = BarRanges[i];
-                    Vector2 scale = new Vector2((barRange.EndBarVal - barRange.StartBarVal) * barValScaleFactor, 18f);
-
-                    Vector2 pos = new Vector2(drawPos.X + (barRange.StartBarVal * barValScaleFactor), drawPos.Y + 5f);
-                    SpriteRenderer.Instance.DrawUI(Box, pos, null, barRange.SegmentColor, 0f, Vector2.Zero, scale, false, false, .41f);
-                }
-            }
+            //base.OnDraw();
+            //
+            //Vector2 drawPos = new Vector2(150, 200);
+            //
+            ////Draw the bars
+            ////Draw the middle
+            //SpriteRenderer.Instance.DrawUI(BarMiddle.Tex, drawPos, BarMiddle.SourceRect, Color.White, 0f, Vector2.Zero, new Vector2(BarScale, 1f), false, false, .39f);
+            //
+            ////Draw the ends
+            //SpriteRenderer.Instance.DrawUI(BarEnd.Tex, drawPos - new Vector2(BarEnd.SourceRect.Value.Width, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, false, false, .39f);
+            //SpriteRenderer.Instance.DrawUI(BarEnd.Tex, drawPos + new Vector2(BarScale, 0f), BarEnd.SourceRect, Color.White, 0f, Vector2.Zero, Vector2.One, true, false, .39f);
+            //
+            ////Draw the cursor
+            ////Regardless of MaxBarVal, needs to be rendered within the range
+            //float barValScaleFactor = BarScale / MaxBarVal;
+            //SpriteRenderer.Instance.DrawUI(MovingCursor.Tex, drawPos + new Vector2(CurBarVal * barValScaleFactor, 0f), MovingCursor.SourceRect, Color.White, 0f, new Vector2(.5f, 1f), Vector2.One, false, false, .4f);
+            //
+            ////Draw the values of the bar sections
+            //if (BarRanges != null)
+            //{
+            //    for (int i = 0; i < BarRanges.Length; i++)
+            //    {
+            //        BarRangeData barRange = BarRanges[i];
+            //        Vector2 scale = new Vector2((barRange.EndBarVal - barRange.StartBarVal) * barValScaleFactor, 18f);
+            //
+            //        Vector2 pos = new Vector2(drawPos.X + (barRange.StartBarVal * barValScaleFactor), drawPos.Y + 5f);
+            //        SpriteRenderer.Instance.DrawUI(Box, pos, null, barRange.SegmentColor, 0f, Vector2.Zero, scale, false, false, .41f);
+            //    }
+            //}
         }
     }
 }

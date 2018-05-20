@@ -26,6 +26,8 @@ namespace PaperMarioBattleSystem
 
         private float ScaleVal = .000001f;
 
+        private MultiButtonActionCommandUI VeilUI = null;
+
         public VeilSequence(MoveAction moveAction) : base(moveAction)
         {
 
@@ -37,6 +39,23 @@ namespace PaperMarioBattleSystem
 
             EntityUsing = User;
             AllyAffected = EntitiesAffected[0];
+
+            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            {
+                VeilUI = new MultiButtonActionCommandUI(actionCommand as MultiButtonCommand);
+                BattleUIManager.Instance.AddUIElement(VeilUI);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (VeilUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(VeilUI);
+                VeilUI = null;
+            }
         }
 
         protected override void SequenceStartBranch()

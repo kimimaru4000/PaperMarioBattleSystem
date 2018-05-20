@@ -18,10 +18,34 @@ namespace PaperMarioBattleSystem
         private int BombCount = 3;
 
         private double WaitDur = 400d;
-        
+
+        private BombSquadActionCommandUI BombSquadUI = null;
+
         public BombSquadSequence(MoveAction moveAction, int bombCount) : base(moveAction)
         {
             BombCount = bombCount;
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            {
+                BombSquadUI = new BombSquadActionCommandUI(actionCommand as BombSquadCommand);
+                BattleUIManager.Instance.AddUIElement(BombSquadUI);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (BombSquadUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(BombSquadUI);
+                BombSquadUI = null;
+            }
         }
 
         public override void OnCommandResponse(in object response)

@@ -117,7 +117,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The Lines to draw.
         /// </summary>
-        private readonly List<Line> Lines = new List<Line>();
+        public readonly List<Line> Lines = new List<Line>();
 
         /// <summary>
         /// The texture to display the lines.
@@ -330,7 +330,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            for (int i = 0; i < Lines.Count; i++)
+            /*for (int i = 0; i < Lines.Count; i++)
             {
                 Line line = Lines[i];
                 float angle = line.GetLineAngle(false);
@@ -345,7 +345,7 @@ namespace PaperMarioBattleSystem
                 AdjustLineOffset(line, ref scale, ref position);
 
                 SpriteRenderer.Instance.DrawUI(LineTexture, position, null, LineColor, angle, origin, scale, false, false, .8f);
-            }
+            }*/
         }
 
         /// <summary>

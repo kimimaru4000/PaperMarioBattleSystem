@@ -24,9 +24,22 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private double SuccessPercentage = 0d;
 
+        private FillBarActionCommandUI<AirLiftCommand> AirLiftUI = null;
+
         public AirLiftSequence(MoveAction moveAction) : base(moveAction)
         {
 
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.DrawActionCommandInfo == true)
+            {
+                AirLiftUI = new FillBarActionCommandUI<AirLiftCommand>(actionCommand as AirLiftCommand, new Vector2(250, 150), new Vector2(100f, 1f), null);
+                BattleUIManager.Instance.AddUIElement(AirLiftUI);
+            }
         }
 
         protected override void OnEnd()
@@ -34,6 +47,12 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             SuccessPercentage = 0d;
+
+            if (AirLiftUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(AirLiftUI);
+                AirLiftUI = null;
+            }
         }
 
         protected override void CommandSuccess()

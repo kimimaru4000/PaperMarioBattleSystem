@@ -22,6 +22,8 @@ namespace PaperMarioBattleSystem
         public virtual int DamageDealt => BaseDamage;
         public virtual BattleEntity CurTarget => EntitiesAffected[0];
 
+        protected JumpActionCommandUI<JumpCommand> JumpUI = null;
+
         protected float XDiffOverTwo => UtilityGlobals.DifferenceDivided(CurTarget.Position.X, User.Position.X, 2f);
 
         protected ActionCommand.CommandRank SentRank = ActionCommand.CommandRank.Nice;
@@ -31,9 +33,37 @@ namespace PaperMarioBattleSystem
             
         }
 
+        protected virtual void SetupJumpUI()
+        {
+            JumpUI = new JumpActionCommandUI<JumpCommand>(actionCommand as JumpCommand);
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+                SetupJumpUI();
+
+            if (JumpUI != null)
+            {
+                BattleUIManager.Instance.AddUIElement(JumpUI);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (JumpUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(JumpUI);
+                JumpUI = null;
+            }
+        }
+
         protected override void CommandSuccess()
         {
-            //Show "NICE" here or something
             ChangeSequenceBranch(SequenceBranch.Success);
         }
 

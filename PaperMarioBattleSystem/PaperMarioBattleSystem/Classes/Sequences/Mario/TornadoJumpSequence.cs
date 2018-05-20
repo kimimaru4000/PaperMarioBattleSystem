@@ -26,9 +26,16 @@ namespace PaperMarioBattleSystem
         private BattleEntity[] CurTargets = null;
         private MoveAction TJAction = null;
 
+        private TornadoJumpActionCommandUI TornadoJumpUI = null;
+
         public TornadoJumpSequence(MoveAction moveAction, MoveAction tjAction) : base(moveAction)
         {
             TJAction = tjAction;
+        }
+
+        protected override void SetupJumpUI()
+        {
+            
         }
 
         protected override void OnStart()
@@ -39,6 +46,12 @@ namespace PaperMarioBattleSystem
 
             DamageMod = 1;
             SecondPart = false;
+
+            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            {
+                TornadoJumpUI = new TornadoJumpActionCommandUI(actionCommand as TornadoJumpCommand);
+                BattleUIManager.Instance.AddUIElement(TornadoJumpUI);
+            }
         }
 
         protected override void OnEnd()
@@ -60,6 +73,12 @@ namespace PaperMarioBattleSystem
 
             DamageMod = 1;
             SecondPart = false;
+
+            if (TornadoJumpUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(TornadoJumpUI);
+                TornadoJumpUI = null;
+            }
         }
 
         protected override void CommandSuccess()

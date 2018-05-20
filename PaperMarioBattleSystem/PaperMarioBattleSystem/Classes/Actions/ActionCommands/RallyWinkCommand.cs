@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The buttons to press during the Action Command.
         /// </summary>
-        protected Keys[] ButtonsToPress = null;
+        public Keys[] ButtonsToPress { get; protected set; } = null;
 
         /// <summary>
         /// The time it takes to switch buttons.
@@ -52,7 +52,7 @@ namespace PaperMarioBattleSystem
 
         private double ElapsedCommandTime = 0d;
 
-        protected Keys CurButton => ButtonsToPress[CurButtonIndex];
+        public Keys CurButton => ButtonsToPress[CurButtonIndex];
 
         ActionCommandGlobals.BarRangeData SuccessRange = default(ActionCommandGlobals.BarRangeData);
 
@@ -143,22 +143,22 @@ namespace PaperMarioBattleSystem
 
         protected override void OnDraw()
         {
-            base.OnDraw();
-
-            Vector2 startPos = new Vector2(250, 200);
-
-            DrawBar(startPos, BarScale);
-            DrawBarFill(startPos + new Vector2(0f, 5f), new Vector2(BarScale.X, 18f));
-
-            //Show the buttons you're supposed to press, with the current button highlighted
-            for (int i = 0; i < ButtonsToPress.Length; i++)
-            {
-                Keys button = ButtonsToPress[i];
-                Color color = Color.Black;
-                if (button == CurButton) color = Color.White;
-
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startPos + new Vector2(i * 15, -30f), color, .5f);
-            }
+            //base.OnDraw();
+            //
+            //Vector2 startPos = new Vector2(250, 200);
+            //
+            //DrawBar(startPos, BarScale);
+            //DrawBarFill(startPos + new Vector2(0f, 5f), new Vector2(BarScale.X, 18f));
+            //
+            ////Show the buttons you're supposed to press, with the current button highlighted
+            //for (int i = 0; i < ButtonsToPress.Length; i++)
+            //{
+            //    Keys button = ButtonsToPress[i];
+            //    Color color = Color.Black;
+            //    if (button == CurButton) color = Color.White;
+            //
+            //    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startPos + new Vector2(i * 15, -30f), color, .5f);
+            //}
         }
     }
 }

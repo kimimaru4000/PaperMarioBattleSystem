@@ -39,27 +39,30 @@ namespace PaperMarioBattleSystem
 
         private Vector2 StartPosition = Vector2.Zero;
         private double CircleRadius = 60d;
-        private double CursorAngle = 90d;
+        public double CursorAngle { get; private set; } = 90d;
 
         private Vector2 BaseThrowVelocity = new Vector2(5f, 5f);
 
         private UIFourPiecedTex Cursor = null;
         private UIFourPiecedTex ThrownCursor = null;
 
+        public Vector2 CursorPosition { get; private set; } = Vector2.Zero;
+        public float CursorRotation { get; private set; } = 0f;
+
         private Vector2 CursorThrownPosition = Vector2.Zero;
         private double CursorMoveSpeed = 1.5d;
-        private double CursorRotSpeed = .25d;
+        public double CursorRotSpeed { get; private set; } = .25d;
 
         private const double MaxCursorAngle = 0d;
         private const double MinCursorAngle = -90d;
 
         private double ElapsedTime = 0d;
         private double LastBombThrowTime = 0d;
-        private double ThrownCursorTime = 0d;
+        public double ThrownCursorTime { get; private set; } = 0d;
 
         private Keys ButtonToPress = Keys.Z;
 
-        private bool AllBombsThrown => (NumBombsThrown >= BombCount);
+        public bool AllBombsThrown => (NumBombsThrown >= BombCount);
 
         public BombSquadCommand(IActionCommandHandler commandHandler, int bombCount) : base(commandHandler)
         {
@@ -78,12 +81,13 @@ namespace PaperMarioBattleSystem
             LastBombThrowTime = ElapsedTime + AutomaticThrowTime;
             CursorAngle = MinCursorAngle;
 
+            CursorPosition = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
+
             Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
-
             CroppedTexture2D croppedTex2D = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
-
             Cursor = new UIFourPiecedTex(croppedTex2D, croppedTex2D.WidthHeightToVector2(), .5f, Color.White);
-            Cursor.Position = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
+
+            Cursor.Position = CursorPosition;
         }
 
         public override void EndInput()
@@ -123,7 +127,7 @@ namespace PaperMarioBattleSystem
             else
             {
                 //If we threw all the bombs, end the command with a success once the thrown cursor disappears
-                if (AllBombsThrown == true && ThrownCursor == null)
+                if (AllBombsThrown == true && ElapsedTime >= ThrownCursorTime)
                 {
                     OnComplete(CommandResults.Success);
                     return;
@@ -145,7 +149,7 @@ namespace PaperMarioBattleSystem
             ThrownCursorTime = ElapsedTime + ThrownCursorDur;
 
             //Show a grey cursor indicating this is where the bomb was thrown for 1 second
-            CursorThrownPosition = Cursor.Position;
+            CursorThrownPosition = CursorPosition;
             ThrownCursor = Cursor.Copy();
             ThrownCursor.Depth -= .01f;
             ThrownCursor.TintColor = Color.Gray;
@@ -163,20 +167,23 @@ namespace PaperMarioBattleSystem
                 CursorMoveSpeed = -CursorMoveSpeed;
             }
 
-            Cursor.Position = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
-            Cursor.Rotation = (float)(-ElapsedTime * UtilityGlobals.ToRadians(CursorRotSpeed));
+            CursorPosition = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
+            CursorRotation = (float)(-ElapsedTime * UtilityGlobals.ToRadians(CursorRotSpeed));
+
+            Cursor.Position = CursorPosition;
+            Cursor.Rotation = CursorRotation;
         }
 
         protected override void OnDraw()
         {
-            if (AllBombsThrown == false)
-            {
-                Cursor.Draw();
-            }
+            //if (AllBombsThrown == false)
+            //{
+            //    Cursor.Draw();
+            //}
 
             //Debug.DebugDrawLine(StartPosition, Cursor.Position, Color.Red, .8f, 2, true);
 
-            ThrownCursor?.Draw();
+            //ThrownCursor?.Draw();
         }
     }
 }

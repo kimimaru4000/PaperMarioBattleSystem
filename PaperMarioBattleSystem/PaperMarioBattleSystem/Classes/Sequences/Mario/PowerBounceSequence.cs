@@ -64,7 +64,11 @@ namespace PaperMarioBattleSystem
                     base.SequenceSuccessBranch();
                     break;
                 case 1:
-        
+
+                    //NOTE: This is currently incorrect
+                    //If you have 1 Attack and deal 0 damage on a Koopa Troopa then flip it, subsequent hits should do 1 damage
+                    //Right now they'd do 0
+
                     //Check the damage dealt
                     InteractionResult[] interactions = AttemptDamage(DamageDealt, EntitiesAffected, Action.DamageProperties, true);
 

@@ -23,8 +23,32 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private ActionCommandGlobals.PowerLiftResponse Response = default(ActionCommandGlobals.PowerLiftResponse);
 
+        private PowerLiftActionCommandUI PowerLiftUI = null;
+
         public PowerLiftSequence(MoveAction moveAction) : base(moveAction)
         {
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
+            {
+                PowerLiftUI = new PowerLiftActionCommandUI(actionCommand as PowerLiftCommand);
+                BattleUIManager.Instance.AddUIElement(PowerLiftUI);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (PowerLiftUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(PowerLiftUI);
+                PowerLiftUI = null;
+            }
         }
 
         public override void OnCommandResponse(in object response)

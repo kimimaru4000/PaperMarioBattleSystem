@@ -28,12 +28,13 @@ namespace PaperMarioBattleSystem
             Success, Failure
         }
 
-        public bool AcceptingInput { get; protected set; } = false;
+        public bool AcceptingInput { get; private set; } = false;
         public IActionCommandHandler Handler { get; private set; } = null;
 
         /// <summary>
         /// Whether the Action Command should automatically be successfully performed or not.
-        /// <para>This may not always work, as the absolute success of some commands may be arbitrary (Ex. Art Attack, Bomb Squad).</para>
+        /// <para>Since each action command is different, this will need to be manually implemented in each one.
+        /// This may not always work, as the absolute success of some commands may be arbitrary (Ex. Art Attack, Bomb Squad).</para>
         /// </summary>
         public bool AutoComplete = false;
 
@@ -52,8 +53,6 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="values">Any values passed to the ActionCommand just as it starts.
         /// An example includes the BattleEntity's position for the Tattle cursor.</param>
-        /// <remarks>Load any textures for the Action Command here instead of in the constructor.
-        /// This prevents unnecessary loading, as the textures won't be used if the Action Command isn't started anyway.</remarks>
         public virtual void StartInput(params object[] values)
         {
             AcceptingInput = true;

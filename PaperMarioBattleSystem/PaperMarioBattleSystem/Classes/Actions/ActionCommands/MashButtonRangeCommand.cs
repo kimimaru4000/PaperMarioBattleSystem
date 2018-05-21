@@ -74,11 +74,5 @@ namespace PaperMarioBattleSystem
                 FillBar(AmountPerPress, true);
             }
         }
-
-        protected override void OnDraw()
-        {
-            //base.OnDraw();
-            //SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, CurrentValue.ToString(), new Vector2(355, 150), Color.White, .71f);
-        }
     }
 }

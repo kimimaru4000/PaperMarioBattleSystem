@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PaperMarioBattleSystem.Utilities;
 
@@ -18,14 +17,11 @@ namespace PaperMarioBattleSystem
         private double DecelerationRate = .03f;
 
         public double CurCursorVal { get; private set; } = 0f;
-        //private float BarScale = 100f;
 
         /// <summary>
         /// The time it takes the cursor to move across the bar one time.
         /// </summary>
         private double CursorMoveTime = 400d;
-
-        private CroppedTexture2D MovingCursor = null;
 
         private double RandTimeOffset = 0d;
 
@@ -40,10 +36,6 @@ namespace PaperMarioBattleSystem
         public override void StartInput(params object[] values)
         {
             base.StartInput(values);
-
-            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
-
-            MovingCursor = new CroppedTexture2D(battleGFX, new Rectangle(498, 304, 46, 38));
 
             //Start the cursor at a random point on the bar
             RandTimeOffset = GeneralGlobals.Randomizer.NextDouble() * (CursorMoveTime * 2);
@@ -84,32 +76,12 @@ namespace PaperMarioBattleSystem
                     FillBar(AmountPerPress, true);
                 }
             }
-            else
-            {
-                //Interpolate the color of the bar
-                float colorVal = UtilityGlobals.PingPong(ElapsedTime / 300f, .3f, 1f);
-                BarFillColor = new Color(colorVal, colorVal, colorVal, 1f);
-            }
         }
 
         private void UpdateCursorVal()
         {
             //Move the cursor
             CurCursorVal = UtilityGlobals.PingPong((ElapsedTime + RandTimeOffset) / (CursorMoveTime / MaxBarValue), MaxBarValue);
-        }
-
-        protected override void OnDraw()
-        {
-            //Vector2 barPos = new Vector2(250, 150);
-            //Vector2 barScale = new Vector2(BarScale, 1f);
-            //
-            //DrawBar(barPos, barScale);
-            //DrawBarFill(barPos + new Vector2(0f, 5f), new Vector2(barScale.X, 18f));
-            //
-            ////Draw the cursor
-            ////Regardless of MaxBarValue, needs to be rendered within the range
-            //float barValScaleFactor = BarScale / (float)MaxBarValue;
-            //SpriteRenderer.Instance.DrawUI(MovingCursor.Tex, barPos + new Vector2((float)CurCursorVal * barValScaleFactor, 0f), MovingCursor.SourceRect, Color.White, 0f, new Vector2(.5f, 1f), Vector2.One, false, false, .4f);
         }
     }
 }

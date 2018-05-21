@@ -109,29 +109,5 @@ namespace PaperMarioBattleSystem
                 OnComplete(CommandResults.Failure);
             }
         }
-
-        protected override void OnDraw()
-        {
-            //base.OnDraw();
-            //
-            //Vector2 startDrawLoc = new Vector2(250, 150);
-            //int xPosDiff = 20;
-            //Vector2 nextPos = startDrawLoc + new Vector2(xPosDiff * ButtonsPressed.Count, 0);
-            //
-            ////Show the buttons pressed
-            //for (int i = 0; i < ButtonsPressed.Count; i++)
-            //{
-            //    Keys button = ButtonsPressed[i];
-            //    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startDrawLoc + new Vector2(xPosDiff * i, 0), Color.Black, .7f);
-            //}
-            //
-            ////Show the button that should be pressed next, unless the input limit was reached
-            //if (ButtonsPressed.Count < InputLimit)
-            //{
-            //    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, NextButtonToPress.ToString(), nextPos, Color.White, .7f);
-            //}
-            //
-            //SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Math.Round(StartTime - Time.ActiveMilliseconds, 2).ToString(), startDrawLoc + new Vector2(0, -20), Color.White, .7f);
-        }
     }
 }

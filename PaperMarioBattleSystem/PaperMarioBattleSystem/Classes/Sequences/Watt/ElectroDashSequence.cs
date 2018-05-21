@@ -23,9 +23,33 @@ namespace PaperMarioBattleSystem
         private double MissMoveDur = 300d;
         private double MissWaitDur = 500d;
 
+        private GulpActionCommandUI ElectroDashUI = null;
+
         public ElectroDashSequence(MoveAction moveAction) : base(moveAction)
         {
 
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
+            {
+                ElectroDashUI = new GulpActionCommandUI(actionCommand as GulpCommand);
+                BattleUIManager.Instance.AddUIElement(ElectroDashUI);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (ElectroDashUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(ElectroDashUI);
+                ElectroDashUI = null;
+            }
         }
 
         protected override bool OnMiss()

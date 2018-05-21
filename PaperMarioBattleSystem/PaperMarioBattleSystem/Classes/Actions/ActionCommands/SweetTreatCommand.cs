@@ -25,14 +25,14 @@ namespace PaperMarioBattleSystem
 
         protected bool StarReady = false;
 
-        protected Vector2 StartPosition = Vector2.Zero;
+        public Vector2 StartPosition { get; protected set; } = Vector2.Zero;
         protected Vector2 StarThrowVelocity = new Vector2(6f, 6f);
 
-        protected double CircleRadius = 60d;
-        protected double CursorAngle = 90d;
+        public double CircleRadius { get; protected set; } = 60d;
+        public double CursorAngle { get; protected set; } = 90d;
 
         protected double CursorMoveSpeed = 1d;
-        protected double CursorRotSpeed = .25d;
+        public double CursorRotSpeed { get; protected set; } = .25d;
 
         protected const double MaxCursorAngle = -5d;
         protected const double MinCursorAngle = -75d;
@@ -44,27 +44,18 @@ namespace PaperMarioBattleSystem
 
         protected double PrevThrow = 0d;
 
-        protected double ElapsedTime = 0d;
-
-        protected UIFourPiecedTex Cursor = null;
-
-        protected UICroppedTexture2D MarioHPIcon = null;
-        protected UICroppedTexture2D PartnerHPIcon = null;
-        protected UICroppedTexture2D FPIcon = null;
-        protected UIText MarioHPText = null;
-        protected UIText PartnerHPText = null;
-        protected UIText FPText = null;
+        public double ElapsedTime { get; protected set; } = 0d;
 
         /// <summary>
         /// The list of stars thrown during the action command.
         /// </summary>
-        protected List<SweetTreatThrownStar> StarsThrown = new List<SweetTreatThrownStar>();
+        public readonly List<SweetTreatThrownStar> StarsThrown = new List<SweetTreatThrownStar>();
 
         /// <summary>
         /// The response sent to the Sequence.
         /// This is added to as the player hits more healing icons.
         /// </summary>
-        protected SweetTreatResponse HealingResponse = default(SweetTreatResponse);
+        public SweetTreatResponse HealingResponse = default(SweetTreatResponse);
 
         /// <summary>
         /// Tells if you can throw a star or not.
@@ -91,45 +82,6 @@ namespace PaperMarioBattleSystem
 
             CursorAngle = MinCursorAngle;
 
-            //Define the UI to display
-            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
-
-            CroppedTexture2D croppedTex2D = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
-            Cursor = new UIFourPiecedTex(croppedTex2D, croppedTex2D.WidthHeightToVector2(), .5f, Color.White);
-
-            MarioHPIcon = new UICroppedTexture2D(new CroppedTexture2D(battleGFX, new Rectangle(324, 407, 61, 58)));
-            FPIcon = new UICroppedTexture2D(new CroppedTexture2D(battleGFX, new Rectangle(179, 416, 40, 39)));
-
-            MarioHPText = new UIText("0", Color.Black);
-            FPText = new UIText("0", Color.Black);
-
-            //Set UI properties
-            MarioHPIcon.Position = MarioHPText.Position = StartPosition + new Vector2(-10, -45);
-            FPIcon.Position = FPText.Position = StartPosition + new Vector2(-45, -95);
-
-            MarioHPText.Position += new Vector2(0f, 10f);
-            FPText.Position += new Vector2(0f, 10f);
-
-            if (entitiesAffected > 1)
-            {
-                PartnerHPIcon = new UICroppedTexture2D(new CroppedTexture2D(battleGFX, new Rectangle(324, 407, 61, 58)));
-                PartnerHPText = new UIText("0", Color.Black);
-
-                PartnerHPIcon.Position = PartnerHPText.Position = StartPosition + new Vector2(-80, -45);
-                PartnerHPText.Position += new Vector2(0f, 10f);
-                PartnerHPIcon.Origin = PartnerHPText.Origin = new Vector2(.5f, .5f);
-                PartnerHPIcon.Depth = .6f;
-                PartnerHPText.Depth = .61f;
-            }
-
-            MarioHPIcon.Depth = FPIcon.Depth = .6f;
-            MarioHPText.Depth = FPText.Depth = .61f;
-
-            MarioHPIcon.Origin = FPIcon.Origin = MarioHPText.Origin = FPText.Origin = new Vector2(.5f, .5f);
-
-            //Set cursor position
-            Cursor.Position = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
-
             //Define the spawner
             Vector2 startPos = new Vector2(500, 15);
             Vector2 endPos = new Vector2(startPos.X, BattleGlobals.PartnerPos.Y + 350f);
@@ -149,19 +101,6 @@ namespace PaperMarioBattleSystem
 
             IconSpawner = new SweetTreatElementSpawner(4, 40f, 5000d, 750d, startPos, endPos, restoreTypes, restoreTypeCounts);
 
-            //Add the cursor and other UI elements
-            BattleUIManager.Instance.AddUIElement(Cursor);
-            BattleUIManager.Instance.AddUIElement(MarioHPIcon);
-            BattleUIManager.Instance.AddUIElement(FPIcon);
-            BattleUIManager.Instance.AddUIElement(MarioHPText);
-            BattleUIManager.Instance.AddUIElement(FPText);
-
-            if (entitiesAffected > 1)
-            {
-                BattleUIManager.Instance.AddUIElement(PartnerHPIcon);
-                BattleUIManager.Instance.AddUIElement(PartnerHPText);
-            }
-
             HealingResponse = default(SweetTreatResponse);
         }
 
@@ -178,23 +117,6 @@ namespace PaperMarioBattleSystem
                 StarsThrown.RemoveAt(i);
                 i--;
             }
-
-            //Remove any UI we added
-            BattleUIManager.Instance.RemoveUIElement(Cursor);
-            BattleUIManager.Instance.RemoveUIElement(MarioHPIcon);
-            BattleUIManager.Instance.RemoveUIElement(PartnerHPIcon);
-            BattleUIManager.Instance.RemoveUIElement(FPIcon);
-            BattleUIManager.Instance.RemoveUIElement(MarioHPText);
-            BattleUIManager.Instance.RemoveUIElement(PartnerHPText);
-            BattleUIManager.Instance.RemoveUIElement(FPText);
-
-            Cursor = null;
-            MarioHPIcon = null;
-            PartnerHPIcon = null;
-            FPIcon = null;
-            MarioHPText = null;
-            PartnerHPText = null;
-            FPText = null;
 
             IconSpawner.CleanUp();
             IconSpawner = null;
@@ -261,7 +183,6 @@ namespace PaperMarioBattleSystem
             SweetTreatThrownStar star = new SweetTreatThrownStar(StartPosition, curVelocity);
 
             StarsThrown.Add(star);
-            BattleUIManager.Instance.AddUIElement(star);
         }
 
         protected void UpdateCursor()
@@ -273,9 +194,6 @@ namespace PaperMarioBattleSystem
             {
                 CursorMoveSpeed = -CursorMoveSpeed;
             }
-
-            Cursor.Position = UtilityGlobals.GetPointAroundCircle(new Circle(StartPosition, CircleRadius), CursorAngle, true);
-            Cursor.Rotation = (float)(-ElapsedTime * UtilityGlobals.ToRadians(CursorRotSpeed));
         }
 
         protected void UpdateThrownStars()
@@ -283,10 +201,11 @@ namespace PaperMarioBattleSystem
             //Check if the stars collided with anything
             for (int i = 0; i < StarsThrown.Count; i++)
             {
+                StarsThrown[i].Update();
+
                 //Make sure the star doesn't go past the designated X value
                 if (StarsThrown[i].Position.X >= StarMaxX)
                 {
-                    BattleUIManager.Instance.RemoveUIElement(StarsThrown[i]);
                     StarsThrown.RemoveAt(i);
                     i--;
 
@@ -301,7 +220,6 @@ namespace PaperMarioBattleSystem
                     //Remove the star and icon
                     IconSpawner.RemoveElement((SweetTreatRestorationElement)collisionResponse.Value.ResponseObj);
 
-                    BattleUIManager.Instance.RemoveUIElement(StarsThrown[i]);
                     StarsThrown.RemoveAt(i);
                     i--;
 
@@ -334,13 +252,6 @@ namespace PaperMarioBattleSystem
                 default:
                     break;
             }
-
-            MarioHPText.Text = HealingResponse.MarioHPRestored.ToString();
-            if (PartnerHPText != null)
-            {
-                PartnerHPText.Text = HealingResponse.PartnerHPRestored.ToString();
-            }
-            FPText.Text = HealingResponse.FPRestored.ToString();
         }
     }
 }

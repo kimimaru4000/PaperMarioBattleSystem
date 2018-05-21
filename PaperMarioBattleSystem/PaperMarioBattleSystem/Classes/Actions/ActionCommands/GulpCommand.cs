@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace PaperMarioBattleSystem
@@ -37,9 +36,6 @@ namespace PaperMarioBattleSystem
 
         private bool StartedHolding = false;
 
-        private CroppedTexture2D UnlitLight = null;
-        private CroppedTexture2D LitLight = null;
-
         public bool WithinRange => (CurBarValue >= SuccessStartValue && CurBarValue < MaxBarValue);
 
         public GulpCommand(IActionCommandHandler commandAction, double totalDuration, double successRange, double speedScale, Keys buttonToHold) : base(commandAction, totalDuration)
@@ -54,22 +50,9 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput(values);
 
-            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
-
-            UnlitLight = new CroppedTexture2D(battleGFX, new Rectangle(390, 298, 44, 44));
-            LitLight = new CroppedTexture2D(battleGFX, new Rectangle(341, 297, 44, 46));
-
             SuccessStartValue = MaxBarValue - SuccessRange;
 
             EndTime = Time.ActiveMilliseconds + MaxBarValue;
-        }
-
-        public override void EndInput()
-        {
-            base.EndInput();
-
-            UnlitLight = null;
-            LitLight = null;
         }
 
         protected override void ReadInput()
@@ -113,41 +96,6 @@ namespace PaperMarioBattleSystem
                     OnComplete(CommandResults.Failure);
                 }
             }
-        }
-
-        protected override void OnDraw()
-        {
-            /*base.OnDraw();
-
-            string text = "NO!";
-            Color color = Color.Red;
-            CroppedTexture2D light = UnlitLight;
-            if (WithinRange == true)
-            {
-                text = "OKAY!";
-                color = Color.Green;
-                light = LitLight;
-            }
-
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, text, new Vector2(300, 150), color, .7f);
-
-            Vector2 barScale = new Vector2(100f, 1f);
-            Vector2 startPos = new Vector2(250, 200);
-            Vector2 barStartPos = new Vector2(startPos.X, startPos.Y - (barScale.Y / 2f));
-
-            //Get the start and end ranges
-            float startScale = (float)(SuccessStartValue / MaxBarValue) * barScale.X;
-            float endScale = barScale.X;
-
-            Vector2 lightStartPos = startPos + new Vector2((int)startScale, 0f);
-            Vector2 lightEndPos = startPos + new Vector2((int)endScale, 0f);
-
-            int diff = (int)(lightEndPos.X - startPos.X);
-
-            DrawBar(barStartPos, barScale, SuccessStartValue);
-            DrawBarFill(barStartPos + new Vector2(0f, 5f), new Vector2(barScale.X, 18f), SuccessStartValue);
-
-            SpriteRenderer.Instance.DrawUI(light.Tex, lightStartPos + new Vector2((diff / 2) - BarEnd.WidthHeightToVector2().X, 12f), light.SourceRect, Color.White, 0f, new Vector2(.5f, .5f), 1f, false, false, .8f);*/
         }
     }
 }

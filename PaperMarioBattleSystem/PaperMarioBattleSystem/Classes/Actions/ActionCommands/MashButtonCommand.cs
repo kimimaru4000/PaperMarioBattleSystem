@@ -70,14 +70,5 @@ namespace PaperMarioBattleSystem
                 }
             }
         }
-
-        protected override void OnDraw()
-        {
-            //Vector2 barPos = new Vector2(250, 150);
-            //Vector2 barScale = new Vector2(100f, 1f);
-            //
-            //DrawBar(barPos, barScale);
-            //DrawBarFill(barPos + new Vector2(0f, 5f), new Vector2(barScale.X, 18f));
-        }
     }
 }

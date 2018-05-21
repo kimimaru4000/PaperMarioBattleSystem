@@ -173,17 +173,5 @@ namespace PaperMarioBattleSystem
             Cursor.Position = CursorPosition;
             Cursor.Rotation = CursorRotation;
         }
-
-        protected override void OnDraw()
-        {
-            //if (AllBombsThrown == false)
-            //{
-            //    Cursor.Draw();
-            //}
-
-            //Debug.DebugDrawLine(StartPosition, Cursor.Position, Color.Red, .8f, 2, true);
-
-            //ThrownCursor?.Draw();
-        }
     }
 }

@@ -410,8 +410,6 @@ namespace PaperMarioBattleSystem
                     SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont,
                     $"Command: {Name} performed by {User.Name}",
                     new Vector2(RenderingGlobals.BaseResolutionWidth / 2, 50f), Color.Black, 0f, new Vector2(.5f, .5f), 1.1f, .9f);
-
-                    actionCommand?.Draw();
                 }
 
                 MoveSequence.Draw();

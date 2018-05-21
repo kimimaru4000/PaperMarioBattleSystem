@@ -130,7 +130,13 @@ namespace PaperMarioBattleSystem
 
         public bool RemoveUIElement(UIElement uiElement)
         {
-            return BattleUIElements.Remove(uiElement);
+            bool removed = BattleUIElements.Remove(uiElement);
+            if (removed == true)
+            {
+                uiElement?.CleanUp();
+            }
+
+            return removed;
         }
 
         /// <summary>

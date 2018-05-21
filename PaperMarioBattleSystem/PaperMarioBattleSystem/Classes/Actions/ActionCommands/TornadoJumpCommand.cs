@@ -72,31 +72,6 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        protected override void OnDraw()
-        {
-            //if (Step == Steps.Jump)
-            //{
-            //    base.OnDraw();
-            //}
-            //else
-            //{
-            //    Vector2 startDrawLoc = new Vector2(250, 150);
-            //    int xPosDiff = 20;
-            //
-            //    //Show the buttons to press; if the button was pressed, show it black
-            //    for (int i = 0; i < ButtonsToPress.Length; i++)
-            //    {
-            //        Keys button = ButtonsToPress[i];
-            //        Color buttonColor = Color.White;
-            //        if (ButtonIndex > i) buttonColor = Color.Black;
-            //
-            //        SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startDrawLoc + new Vector2(xPosDiff * i, 0), buttonColor, .7f);
-            //    }
-            //
-            //    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Math.Round(TornadoEndTime - Time.ActiveMilliseconds, 2).ToString(), startDrawLoc + new Vector2(0, -20), Color.White, .7f);
-            //}
-        }
-
         private void JumpActionCommand()
         {
             //Failure if it wasn't pressed in time

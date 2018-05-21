@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     //NOTE: In TTYD, the icons are on top of a 3D model of the Gold Star
     //We'll just have the icons only for now
-    public sealed class PowerLiftIconElement : IUpdateable, IDrawable, ITintable
+    public sealed class PowerLiftIconElement : IUpdateable, ITintable, IScalable
     {
         /// <summary>
         /// The states of the icon element.
@@ -37,27 +37,24 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private IconElementStates IconElementState = IconElementStates.FadeIn;
 
-        private Vector2 Position = Vector2.Zero;
-        private float Depth = 0f;
+        public float Depth = 0f;
 
-        private CroppedTexture2D CroppedTex = null;
+        private Color OrigColor = Color.White;
+
+        public Color TintColor { get; set; } = Color.White;
+
+        public Vector2 Scale { get; set; } = Vector2.One;
 
         /// <summary>
         /// The elapsed time shared for the FadeIn, Stay, and FadeOut states.
         /// </summary>
         private double ElapsedTime = 0d;
 
-        private Color OrigColor = Color.White;
-
-        public Color TintColor { get; set; } = Color.White;
-
         public bool IsDone => (IconElementState == IconElementStates.Done);
 
-        public PowerLiftIconElement(PowerLiftCommand.PowerLiftIcons powerLiftIcon, Vector2 position, double iconFadeTime, double iconStayTime, float depth)
+        public PowerLiftIconElement(PowerLiftCommand.PowerLiftIcons powerLiftIcon, double iconFadeTime, double iconStayTime, float depth)
         {
             PowerliftIcon = powerLiftIcon;
-
-            Position = position;
 
             IconFadeTime = iconFadeTime;
             IconStayTime = iconStayTime;
@@ -69,24 +66,21 @@ namespace PaperMarioBattleSystem
 
         private void Initialize()
         {
-            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
-
             switch (PowerliftIcon)
             {
                 case PowerLiftCommand.PowerLiftIcons.Poison:
-                    CroppedTex = new CroppedTexture2D(battleGFX, new Rectangle(90, 270, 106, 108));
+                    TintColor *= 0f;
+                    Scale = new Vector2(.7f);
                     break;
                 case PowerLiftCommand.PowerLiftIcons.Attack:
                     OrigColor = TintColor = Color.Red;
                     TintColor *= 0f;
-                    goto default;
+                    break;
                 case PowerLiftCommand.PowerLiftIcons.Defense:
                     OrigColor = TintColor = Color.Blue;
                     TintColor *= 0f;
-                    goto default;
+                    break;
                 default:
-                    //By default select the arrow
-                    CroppedTex = new CroppedTexture2D(battleGFX, new Rectangle(5, 353, 50, 61));
                     break;
             }
         }
@@ -159,11 +153,6 @@ namespace PaperMarioBattleSystem
                 IconElementState = IconElementStates.Done;
                 ElapsedTime = 0d;
             }
-        }
-
-        public void Draw()
-        {
-            SpriteRenderer.Instance.DrawUI(CroppedTex.Tex, Position, CroppedTex.SourceRect, TintColor, new Vector2(.5f, .5f), false, false, Depth);
         }
     }
 }

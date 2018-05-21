@@ -15,9 +15,33 @@ namespace PaperMarioBattleSystem
         private double MoveDur = 600d;
         private double MissWaitDur = 500d;
 
+        private FillBarActionCommandUI<MashButtonCommand> PowerShockUI = null;
+
         public PowerShockSequence(MoveAction moveAction) : base(moveAction)
         {
+            
+        }
 
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
+            {
+                PowerShockUI = new FillBarActionCommandUI<MashButtonCommand>(actionCommand as MashButtonCommand, new Vector2(250, 150), new Vector2(100f, 1f), null);
+                BattleUIManager.Instance.AddUIElement(PowerShockUI);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (PowerShockUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(PowerShockUI);
+                PowerShockUI = null;
+            }
         }
 
         protected override void SequenceStartBranch()

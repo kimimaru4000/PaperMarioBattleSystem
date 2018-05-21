@@ -15,9 +15,33 @@ namespace PaperMarioBattleSystem
 
         protected ActionCommandGlobals.SweetTreatResponse Response = default(ActionCommandGlobals.SweetTreatResponse);
 
+        protected SweetTreatActionCommandUI SweetTreatUI = null;
+
         public SweetTreatSequence(MoveAction moveAction) : base(moveAction)
         {
             
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
+            {
+                SweetTreatUI = new SweetTreatActionCommandUI(actionCommand as SweetTreatCommand, EntitiesAffected.Length > 1);
+                BattleUIManager.Instance.AddUIElement(SweetTreatUI);
+            }
+        }
+
+        protected override void OnEnd()
+        {
+            base.OnEnd();
+
+            if (SweetTreatUI != null)
+            {
+                BattleUIManager.Instance.RemoveUIElement(SweetTreatUI);
+                SweetTreatUI = null;
+            }
         }
 
         public override void OnCommandResponse(in object response)

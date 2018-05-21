@@ -122,18 +122,5 @@ namespace PaperMarioBattleSystem
                 ReadInput();
             }
         }
-
-        public void Draw()
-        {
-            if (AcceptingInput == true)
-            {
-                OnDraw();
-            }
-        }
-
-        protected virtual void OnDraw()
-        {
-
-        }
     }
 }

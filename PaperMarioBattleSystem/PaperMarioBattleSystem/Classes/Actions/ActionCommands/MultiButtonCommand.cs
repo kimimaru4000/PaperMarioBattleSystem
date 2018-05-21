@@ -143,28 +143,5 @@ namespace PaperMarioBattleSystem
                 ButtonSequence[i] = ValidSequenceButtons[randButtonIndex];
             }
         }
-
-        protected override void OnDraw()
-        {
-            //base.OnDraw();
-            //
-            //Vector2 startDrawLoc = new Vector2(250, 150);
-            //int xPosDiff = 20;
-            //
-            ////Show the buttons pressed
-            //for (int i = 0; i < ButtonSequence.Length; i++)
-            //{
-            //    Keys button = ButtonSequence[i];
-            //    Color color = Color.White;
-            //    //If the button was pressed already, show it black
-            //    if (i < CurButtonIndex)
-            //        color = Color.Black;
-            //
-            //    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startDrawLoc + new Vector2(xPosDiff * i, 0), color, .7f);
-            //}
-            //
-            ////Show time remaining
-            //SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Math.Round(InputDuration - ElapsedTime, 2).ToString(), startDrawLoc + new Vector2(0, -20), Color.White, .7f);
-        }
     }
 }

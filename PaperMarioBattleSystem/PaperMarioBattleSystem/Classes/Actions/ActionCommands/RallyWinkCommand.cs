@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using PaperMarioBattleSystem.Utilities;
 
@@ -121,13 +120,6 @@ namespace PaperMarioBattleSystem
                         DecelerationRate = 0d;
                 }
             }
-            else
-            {
-                //Interpolate the color of the bar
-                //Interpolate the color of the bar
-                float colorVal = UtilityGlobals.PingPong(ElapsedCommandTime / 300f, .3f, 1f);
-                BarFillColor = new Color(colorVal, colorVal, colorVal, 1f);
-            }
 
             ElapsedCommandTime += Time.ElapsedMilliseconds;
 
@@ -139,26 +131,6 @@ namespace PaperMarioBattleSystem
 
                 PrevButtonSwitchTime = Time.ActiveMilliseconds + ButtonSwitchTime;
             }
-        }
-
-        protected override void OnDraw()
-        {
-            //base.OnDraw();
-            //
-            //Vector2 startPos = new Vector2(250, 200);
-            //
-            //DrawBar(startPos, BarScale);
-            //DrawBarFill(startPos + new Vector2(0f, 5f), new Vector2(BarScale.X, 18f));
-            //
-            ////Show the buttons you're supposed to press, with the current button highlighted
-            //for (int i = 0; i < ButtonsToPress.Length; i++)
-            //{
-            //    Keys button = ButtonsToPress[i];
-            //    Color color = Color.Black;
-            //    if (button == CurButton) color = Color.White;
-            //
-            //    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, button.ToString(), startPos + new Vector2(i * 15, -30f), color, .5f);
-            //}
         }
     }
 }

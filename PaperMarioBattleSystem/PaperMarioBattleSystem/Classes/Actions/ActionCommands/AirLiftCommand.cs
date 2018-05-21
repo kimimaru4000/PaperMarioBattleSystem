@@ -76,12 +76,6 @@ namespace PaperMarioBattleSystem
                     FillBar(AmountPerPress, true);
                 }
             }
-            else
-            {
-                //Interpolate the color of the bar
-                float colorVal = UtilityGlobals.PingPong(ElapsedTime / 300f, .3f, 1f);
-                BarFillColor = new Color(colorVal, colorVal, colorVal, 1f);
-            }
         }
     }
 }

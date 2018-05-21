@@ -14,7 +14,6 @@ namespace PaperMarioBattleSystem
     /// Move the cursor across the 3x3 grid and select the red and blue arrows to boost your stats.
     /// Hitting a Poison Mushroom halves the cursor's speed for a short time.
     /// </summary>
-    //NOTE: Clean this up - the code is pretty good performance-wise, but it can be more readable after trimming and commenting it
     public sealed class PowerLiftCommand : ActionCommand
     {
         #region Enums
@@ -90,33 +89,22 @@ namespace PaperMarioBattleSystem
         public double CommandTime { get; private set; } = 15000d;
         public double ElapsedCommandTime { get; private set; } = 0d;
 
-        private double CursorSpeedDur = 150d;
-        private Vector2 PrevCursorPos = Vector2.Zero;
-        public Vector2 CurrentCursorPos { get; private set; } = Vector2.Zero;
-        private Vector2 DestinationCursorPos = Vector2.Zero;
+        public double CursorSpeedDur { get; private set; } = 150d;
         public Color CursorColor { get; private set; } = Color.White;
         private Color NormalColor = Color.White;
         private Color MovingColor = Color.Blue;
         private Color SelectedColor = Color.Red;
-        private double ElapsedMoveTime = 0d;
+        public double ElapsedMoveTime { get; private set; } = 0d;
 
-        private double PoisonSpeedDur = 500d;
+        public double PoisonSpeedDur { get; private set; } = 500d;
         private double PoisonDur = 2000d;
         private double ElapsedPoisonTime = 0d;
-        private bool IsPoisoned = false;
+        public bool IsPoisoned { get; private set; } = false;
 
-        private CroppedTexture2D BigCursor = null;
-        private CroppedTexture2D SmallCursor = null;
-        private CroppedTexture2D ArrowIcon = null;
-        private CroppedTexture2D BarEdge = null;
-        private CroppedTexture2D Bar = null;
-        private CroppedTexture2D BarFill = null;
-
-        private UIFourPiecedTex Cursor = null;
-        private int CurColumn = 0;
-        private int CurRow = 0;
-        private int DestColumn = 0;
-        private int DestRow = 0;
+        public int CurColumn { get; private set; } = 0;
+        public int CurRow { get; private set; } = 0;
+        public int DestColumn { get; private set; } = 0;
+        public int DestRow { get; private set; } = 0;
 
         private double IconFadeTime = 500d;
         private double IconStayTime = 2300d;
@@ -127,12 +115,7 @@ namespace PaperMarioBattleSystem
         private bool SelectedIcon = false;
 
         /// <summary>
-        /// The grid used for laying out the objects.
-        /// </summary>
-        private UIGrid PowerLiftGrid = null;
-
-        /// <summary>
-        /// The internal grid used for tracking the icons.
+        /// The grid used for tracking the icons.
         /// </summary>
         public PowerLiftIconElement[][] IconGrid { get; private set; } = null;
 
@@ -140,7 +123,7 @@ namespace PaperMarioBattleSystem
         /// Tells whether the player can select an arrow with the cursor.
         /// The cursor cannot select while it is moving to another spot on the grid.
         /// </summary>
-        private bool CanSelect => (CurrentCursorPos == DestinationCursorPos);
+        public bool CanSelect => (CurColumn == DestColumn && CurRow == DestRow);
 
         public PowerLiftCommand(IActionCommandHandler commandHandler, double commandTime) : base(commandHandler)
         {
@@ -151,17 +134,6 @@ namespace PaperMarioBattleSystem
         {
             base.StartInput(values);
 
-            Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleGFX.png");
-
-            BigCursor = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
-            SmallCursor = new CroppedTexture2D(battleGFX, new Rectangle(10, 330, 13, 12));//new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/DebugAssets/BoxOutline2.png"), null);
-            ArrowIcon = new CroppedTexture2D(battleGFX, new Rectangle(5, 353, 50, 61));
-            BarEdge = new CroppedTexture2D(battleGFX, new Rectangle(514, 245, 7, 28));
-            Bar = new CroppedTexture2D(battleGFX, new Rectangle(530, 245, 1, 28));
-            BarFill = new CroppedTexture2D(battleGFX, new Rectangle(541, 255, 1, 1));
-
-            Cursor = new UIFourPiecedTex(BigCursor, BigCursor.WidthHeightToVector2(), .6f, CursorColor);
-
             ElapsedCommandTime = ElapsedPoisonTime = 0d;
             SelectedIcon = false;
             IsPoisoned = false;
@@ -169,19 +141,12 @@ namespace PaperMarioBattleSystem
             //Set up the grid
             SetUpGrid();
 
-            //BattleUIManager.Instance.AddUIElement(PowerLiftGrid);
-            //BattleUIManager.Instance.AddUIElement(Cursor);
-
             //Center the cursor in the middle
             CurColumn = NumColumns / 2;
             CurRow = NumRows / 2;
 
             DestColumn = CurColumn;
             DestRow = CurRow;
-
-            int centerIndex = PowerLiftGrid.GetIndex(CurColumn, CurRow);
-            PrevCursorPos = CurrentCursorPos = DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(centerIndex);
-            Cursor.Position = CurrentCursorPos;
         }
 
         public override void EndInput()
@@ -191,9 +156,6 @@ namespace PaperMarioBattleSystem
             ElapsedCommandTime = ElapsedPoisonTime = 0d;
             SelectedIcon = true;
             IsPoisoned = false;
-
-            //BattleUIManager.Instance.RemoveUIElement(PowerLiftGrid);
-            //BattleUIManager.Instance.RemoveUIElement(Cursor);
 
             CurColumn = CurRow = DestColumn = DestRow = 0;
 
@@ -207,35 +169,10 @@ namespace PaperMarioBattleSystem
             }
 
             IconGrid = null;
-
-            PowerLiftGrid.ClearGrid();
-            PowerLiftGrid = null;
         }
 
         private void SetUpGrid()
         {
-            //Create the grid
-            PowerLiftGrid = new UIGrid(NumColumns, NumRows, LiftGridCellSize);
-
-            //Populate the grid based on how many columns and rows it has
-            int totalSize = PowerLiftGrid.MaxElementsInGrid;
-            for (int i = 0; i < totalSize; i++)
-            {
-                //Small cursors are on the grid
-                PowerLiftGrid.AddGridElement(new UIFourPiecedTex(SmallCursor.Copy(), SmallCursor.WidthHeightToVector2(), .5f, Color.White));
-            }
-
-            //Although the grid is drawn on the UI layer, we center it using the sprite layer's (0, 0) position for ease
-            PowerLiftGrid.Position = Camera.Instance.SpriteToUIPos(Vector2.Zero);
-            PowerLiftGrid.ChangeGridPivot(UIGrid.GridPivots.Center);
-            //PowerLiftGrid.ChangeElementPivot(UIGrid.GridPivots.Center);
-
-            Vector2 paddingSize = LiftGridCellSize / 2;
-
-            PowerLiftGrid.ChangeGridPadding(0, (int)paddingSize.X, 0, (int)paddingSize.Y);
-
-            PowerLiftGrid.Spacing = LiftGridSpacing;
-
             //Initialize the icon grid
             IconGrid = new PowerLiftIconElement[NumColumns][];
             for (int i = 0; i < IconGrid.Length; i++)
@@ -278,7 +215,6 @@ namespace PaperMarioBattleSystem
                 if (SelectedIcon == true)
                 {
                     CursorColor = NormalColor;
-                    Cursor.TintColor = CursorColor;
                     SelectedIcon = false;
                     return;
                 }
@@ -309,8 +245,7 @@ namespace PaperMarioBattleSystem
                 }
 
                 //Lerp to the destination
-                CurrentCursorPos = Vector2.Lerp(PrevCursorPos, DestinationCursorPos, (float)(ElapsedMoveTime / speed));
-                Cursor.Position = CurrentCursorPos;
+                //CurrentCursorPos = Vector2.Lerp(PrevCursorPos, DestinationCursorPos, (float)(ElapsedMoveTime / speed));
 
                 //We're done moving to our destination
                 if (ElapsedMoveTime >= speed)
@@ -319,10 +254,7 @@ namespace PaperMarioBattleSystem
                     CurRow = DestRow;
 
                     CursorColor = NormalColor;
-                    CurrentCursorPos = DestinationCursorPos;
-
-                    Cursor.TintColor = CursorColor;
-                    Cursor.Position = CurrentCursorPos;
+                    //CurrentCursorPos = DestinationCursorPos;
                 }
             }
         }
@@ -350,25 +282,17 @@ namespace PaperMarioBattleSystem
             }
 
             //Check if we moved at all and make sure we're in bounds
-            if (newCol != CurColumn && newCol >= 0 && newCol < PowerLiftGrid.Columns)
+            if (newCol != CurColumn && newCol >= 0 && newCol < NumColumns)
             {
                 DestColumn = newCol;
-
-                PrevCursorPos = CurrentCursorPos;
-                DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(PowerLiftGrid.GetIndex(DestColumn, CurRow));
                 CursorColor = MovingColor;
-                Cursor.TintColor = CursorColor;
 
                 ElapsedMoveTime = 0d;
             }
-            else if (newRow != CurRow && newRow >= 0 && newRow < PowerLiftGrid.Rows)
+            else if (newRow != CurRow && newRow >= 0 && newRow < NumRows)
             {
                 DestRow = newRow;
-
-                PrevCursorPos = CurrentCursorPos;
-                DestinationCursorPos = PowerLiftGrid.GetPositionAtIndex(PowerLiftGrid.GetIndex(CurColumn, DestRow));
                 CursorColor = MovingColor;
-                Cursor.TintColor = CursorColor;
 
                 ElapsedMoveTime = 0d;
             }
@@ -415,14 +339,12 @@ namespace PaperMarioBattleSystem
                         IconGrid[CurColumn][CurRow] = null;
                         break;
                     default:
-
                         break;
                 }
             }
 
             //Pressing A to select causes the cursor to turn red for 1 frame even if you don't hit an icon
             CursorColor = SelectedColor;
-            Cursor.TintColor = CursorColor;
             SelectedIcon = true;
         }
 
@@ -478,6 +400,7 @@ namespace PaperMarioBattleSystem
 
         private void HandleIconCreation()
         {
+            //Check if we surpassed the creation time
             if (Time.ActiveMilliseconds >= PrevCreationTime)
             {
                 GridIndexHolder nextIndex = FindRandomAvailableGridIndex();
@@ -533,128 +456,10 @@ namespace PaperMarioBattleSystem
         {
             //Choose a random icon among Poison Mushrooms, Attack, and Defense
             int randIcon = GeneralGlobals.Randomizer.Next((int)PowerLiftIcons.Poison, (int)PowerLiftIcons.Defense + 1);
-            Vector2 position = PowerLiftGrid.GetPositionAtIndex(PowerLiftGrid.GetIndex(gridCol, gridRow));
 
             //Create the icon element
-            PowerLiftIconElement element = new PowerLiftIconElement((PowerLiftIcons)randIcon, position, IconFadeTime, IconStayTime, .45f);
+            PowerLiftIconElement element = new PowerLiftIconElement((PowerLiftIcons)randIcon, IconFadeTime, IconStayTime, .45f);
             IconGrid[gridCol][gridRow] = element;
-        }
-
-        protected override void OnDraw()
-        {
-            //Draw the grid
-            //for (int i = 0; i < IconGrid.Length; i++)
-            //{
-            //    for (int j = 0; j < IconGrid[i].Length; j++)
-            //    {
-            //        PowerLiftIconElement iconElement = IconGrid[i][j];
-            //
-            //        //Draw the icon elements
-            //        if (iconElement != null)
-            //        {
-            //            iconElement.Draw();
-            //        }
-            //    }
-            //}
-            //
-            ////Draw the boosts
-            //DrawBoosts();
-            //
-            ////Draw time remaining (debug)
-            //SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, Math.Round(CommandTime - ElapsedCommandTime, 0).ToString(), new Vector2(250, 130), Color.White, .7f);
-        }
-
-        private void DrawBoosts()
-        {
-            //Set up variables
-            int cellSize = (int)(PowerLiftGrid.CellSize.Y);
-            Vector2 arrowScale = new Vector2(.75f, .65f);
-            Vector2 barScale = new Vector2(80, 1);
-
-            //Depth values
-            float arrowDepth = .4f;
-            float barDepth = .41f;
-            float barFillDepth = .42f;
-            float boostTextDepth = .43f;
-
-            float attackArrowY = PowerLiftGrid.Position.Y - cellSize;
-            float defenseArrowY = PowerLiftGrid.Position.Y + cellSize;
-
-            Vector2 fillScaleOffset = new Vector2(4, 18);
-
-            bool drawAttackArrow = true;
-            bool drawDefenseArrow = true;
-
-            #region Arrow Blinking Interval Logic
-
-            //See if the arrows should blink
-            //First check if we recently obtained an Attack and/or Defense boost
-            const double blinkTimesTwo = ArrowBlinkInterval * 2d;
-            double attackBlink = LastAttackBoost + ArrowBlinkTotalTime;
-            double defenseBlink = LastDefenseBoost + ArrowBlinkTotalTime;
-
-            //We recently obtained an Attack boost
-            if (attackBlink > Time.ActiveMilliseconds)
-            {
-                //Get the difference in time, then mod it with 2 times the interval (first half is the blinking, second half is visible)
-                double timeDiff = Time.ActiveMilliseconds - LastAttackBoost;
-                double attackBlinkMod = timeDiff % blinkTimesTwo;
-
-                //We're at the blinking part of the interval, so don't draw the arrow
-                if (attackBlinkMod < ArrowBlinkInterval)
-                {
-                    drawAttackArrow = false;
-                }
-            }
-
-            //We recently obtained a Defense boost
-            if (defenseBlink > Time.ActiveMilliseconds)
-            {
-                //Get the difference in time, then mod it with 2 times the interval (first half is the blinking, second half is visible)
-                double timeDiff = Time.ActiveMilliseconds - LastDefenseBoost;
-                double defenseBlinkMod = timeDiff % blinkTimesTwo;
-
-                //We're at the blinking part of the interval, so don't draw the arrow
-                if (defenseBlinkMod < ArrowBlinkInterval)
-                {
-                    drawDefenseArrow = false;
-                }
-            }
-
-            #endregion
-
-            //Draw the stat arrows - Attack is on top while Defense is on the bottom
-            if (drawAttackArrow == true)
-            {
-                SpriteRenderer.Instance.DrawUI(ArrowIcon.Tex, new Vector2(50, attackArrowY), ArrowIcon.SourceRect, Color.Red, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth);
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"+{AttackBoosts}", new Vector2(50, attackArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth);
-            }
-
-            if (drawDefenseArrow == true)
-            {
-                SpriteRenderer.Instance.DrawUI(ArrowIcon.Tex, new Vector2(50, defenseArrowY), ArrowIcon.SourceRect, Color.Blue, 0f, Vector2.Zero, arrowScale, false, false, arrowDepth);
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"+{DefenseBoosts}", new Vector2(50, defenseArrowY + 15f), Color.White, 0f, Vector2.Zero, 1f, boostTextDepth);
-            }
-
-            //Draw the bars - one for each stat arrow
-            //Attack bar
-            Vector2 attackBarPos = new Vector2(110, attackArrowY + 5);
-            float attackFillScale = AttackSelections / (float)AttackBoostReq;
-
-            SpriteRenderer.Instance.DrawUI(BarEdge.Tex, attackBarPos, BarEdge.SourceRect, Color.White, false, false, barDepth);
-            SpriteRenderer.Instance.DrawUI(Bar.Tex, attackBarPos + new Vector2(BarEdge.SourceRect.Value.Width, 0f), Bar.SourceRect, Color.White, 0f, Vector2.Zero, barScale, false, false, barDepth);
-            SpriteRenderer.Instance.DrawUI(BarEdge.Tex, attackBarPos + new Vector2(barScale.X + BarEdge.SourceRect.Value.Width, 0f), BarEdge.SourceRect, Color.White, true, false, barDepth, true);
-            SpriteRenderer.Instance.DrawUI(BarFill.Tex, attackBarPos + new Vector2(5f, 5f), BarFill.SourceRect, Color.Pink, 0f, Vector2.Zero, new Vector2(attackFillScale * (barScale.X + fillScaleOffset.X), fillScaleOffset.Y), false, false, barFillDepth);
-
-            //Defense bar
-            Vector2 defenseBarPos = new Vector2(110, defenseArrowY + 5);
-            float defenseFillScale = DefenseSelections / (float)DefenseBoostReq;
-            Color defenseFillColor = new Color(50, 170, 255);
-
-            SpriteRenderer.Instance.DrawUI(BarEdge.Tex, defenseBarPos, BarEdge.SourceRect, Color.White, false, false, barDepth);
-            SpriteRenderer.Instance.DrawUI(Bar.Tex, defenseBarPos + new Vector2(BarEdge.SourceRect.Value.Width, 0f), Bar.SourceRect, Color.White, 0f, Vector2.Zero, barScale, false, false, barDepth);
-            SpriteRenderer.Instance.DrawUI(BarEdge.Tex, defenseBarPos + new Vector2(barScale.X + BarEdge.SourceRect.Value.Width, 0f), BarEdge.SourceRect, Color.White, true, false, barDepth);
-            SpriteRenderer.Instance.DrawUI(BarFill.Tex, defenseBarPos + new Vector2(5f, 5f), BarFill.SourceRect, defenseFillColor, 0f, Vector2.Zero, new Vector2(defenseFillScale * (barScale.X + fillScaleOffset.X), fillScaleOffset.Y), false, false, barFillDepth);
         }
 
         /// <summary>

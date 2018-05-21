@@ -511,7 +511,7 @@ namespace PaperMarioBattleSystem
                 case GridPivots.BottomCenter: return new Vector2(colCenter, rowBottom);
                 case GridPivots.BottomRight: return new Vector2(colRight, rowBottom);
                 case GridPivots.UpperLeft:
-                default: return new Vector2(0f, 0f);
+                default: return Vector2.Zero;
             }
         }
 
@@ -539,7 +539,7 @@ namespace PaperMarioBattleSystem
                 case GridPivots.BottomCenter: return new Vector2(xMid, yBottom);
                 case GridPivots.BottomRight: return new Vector2(xRight, yBottom);
                 case GridPivots.UpperLeft:
-                default: return new Vector2(0f, 0f);
+                default: return Vector2.Zero;
             }
         }
 

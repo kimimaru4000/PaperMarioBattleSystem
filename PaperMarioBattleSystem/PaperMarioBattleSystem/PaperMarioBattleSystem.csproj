@@ -541,6 +541,7 @@
     <Compile Include="Classes\UIElements\ActionCommandUI\RallyWinkActionCommandUI.cs" />
     <Compile Include="Classes\UIElements\ActionCommandUI\RunAwayActionCommandUI.cs" />
     <Compile Include="Classes\UIElements\ActionCommandUI\ShellShieldActionCommandUI.cs" />
+    <Compile Include="Classes\UIElements\ActionCommandUI\SweetTreatActionCommandUI.cs" />
     <Compile Include="Classes\UIElements\ActionCommandUI\TattleActionCommandUI.cs" />
     <Compile Include="Classes\UIElements\ActionCommandUI\TidalWaveActionCommandUI.cs" />
     <Compile Include="Classes\UIElements\ActionCommandUI\TimedLightActionCommandUI.cs" />

@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
                 BehindEntity.TargetForMove(User);
             }
 
-            if (Action.DrawActionCommandInfo && Action.HasActionCommand == true)
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 GulpUI = new GulpActionCommandUI(actionCommand as GulpCommand);
                 BattleUIManager.Instance.AddUIElement(GulpUI);

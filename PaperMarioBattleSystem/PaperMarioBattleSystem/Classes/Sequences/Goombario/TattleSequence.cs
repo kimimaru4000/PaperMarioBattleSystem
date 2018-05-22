@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
 
             TattledEntity = (ITattleableEntity)EntitiesAffected[0];
 
-            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 TattleUI = new TattleActionCommandUI(actionCommand as TattleCommand);
                 BattleUIManager.Instance.AddUIElement(TattleUI);

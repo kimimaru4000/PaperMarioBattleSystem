@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
             DamageMod = 1;
             SecondPart = false;
 
-            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 TornadoJumpUI = new TornadoJumpActionCommandUI(actionCommand as TornadoJumpCommand);
                 BattleUIManager.Instance.AddUIElement(TornadoJumpUI);

@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
 
             HeartVFX = new RallyWinkHeartVFX(EntitiesAffected[0].Position, WaitDur, WaitDur, .6f);
 
-            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 RallyWinkUI = new RallyWinkActionCommandUI(actionCommand as RallyWinkCommand);
                 BattleUIManager.Instance.AddUIElement(RallyWinkUI);

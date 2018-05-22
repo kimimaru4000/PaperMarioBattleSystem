@@ -426,49 +426,49 @@ namespace PaperMarioBattleSystem
         /// <param name="alphaMod">The alpha value of the color. This is less than 1 if this MoveAction isn't currently selected on the menu.</param>
         /// <param name="iconXOffset">The X offset to display the move's icon.</param>
         /// <param name="resourceCostXOffset">The X offset to display the move's resource cost.</param>
-        public virtual void DrawMenuInfo(Vector2 position, Color color, Color textColor, float alphaMod, float iconXOffset, float resourceCostXOffset)
-        {
-            //Draw icon
-            if (MoveInfo.Icon != null && MoveInfo.Icon.Tex != null)
-            {
-                SpriteRenderer.Instance.DrawUI(MoveInfo.Icon.Tex, position - new Vector2(iconXOffset, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f);
-            }
-
-            //Draw name
-            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, position, textColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
-
-            //Show cost if the move costs anything
-            if ((CostsFP == true || CostsSP == true) && MoveProperties.CostDisplayType != CostDisplayTypes.Hidden)
-            {
-                Color fpColor = textColor;
-
-                //If the resource cost was lowered, show it a bluish-gray color (This feature is from PM)
-                //Keep it gray if the move is disabled for any reason
-                if (Disabled == false && MoveProperties.CostDisplayType == CostDisplayTypes.Special)
-                {
-                    Color blueGray = SpecialCaseColor;
-                    fpColor = blueGray;
-                }
-
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, GetCostString(), position + new Vector2(resourceCostXOffset, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
-            }
-        }
+        //public virtual void DrawMenuInfo(Vector2 position, Color color, Color textColor, float alphaMod, float iconXOffset, float resourceCostXOffset)
+        //{
+        //    //Draw icon
+        //    if (MoveInfo.Icon != null && MoveInfo.Icon.Tex != null)
+        //    {
+        //        SpriteRenderer.Instance.DrawUI(MoveInfo.Icon.Tex, position - new Vector2(iconXOffset, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f);
+        //    }
+        //
+        //    //Draw name
+        //    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, position, textColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+        //
+        //    //Show cost if the move costs anything
+        //    if ((CostsFP == true || CostsSP == true) && MoveProperties.CostDisplayType != CostDisplayTypes.Hidden)
+        //    {
+        //        Color fpColor = textColor;
+        //
+        //        //If the resource cost was lowered, show it a bluish-gray color (This feature is from PM)
+        //        //Keep it gray if the move is disabled for any reason
+        //        if (Disabled == false && MoveProperties.CostDisplayType == CostDisplayTypes.Special)
+        //        {
+        //            Color blueGray = SpecialCaseColor;
+        //            fpColor = blueGray;
+        //        }
+        //
+        //        SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, GetCostString(), position + new Vector2(resourceCostXOffset, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+        //    }
+        //}
 
         /// <summary>
         /// Gets the cost of the MoveAction. This is the FP cost for most moves and SP cost for Special Moves.
         /// </summary>
         /// <returns>A string of the cost to use the action.</returns>
-        public virtual string GetCostString()
-        {
-            if (MoveProperties.ResourceType == MoveResourceTypes.FP)
-            {
-                return $"{MoveProperties.ResourceCost} FP";
-            }
-            else
-            {
-                return $"{MoveProperties.ResourceCost / StarPowerGlobals.SPUPerStarPower} SP";
-            }
-        }
+        //public string GetCostString()
+        //{
+        //    if (MoveProperties.ResourceType == MoveResourceTypes.FP)
+        //    {
+        //        return $"{MoveProperties.ResourceCost} FP";
+        //    }
+        //    else
+        //    {
+        //        return $"{MoveProperties.ResourceCost / StarPowerGlobals.SPUPerStarPower} SP";
+        //    }
+        //}
 
         /// <summary>
         /// Gets the set of BattleEntities that this move affects.

@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
             EntityUsing = User;
             AllyAffected = EntitiesAffected[0];
 
-            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 VeilUI = new MultiButtonActionCommandUI(actionCommand as MultiButtonCommand);
                 BattleUIManager.Instance.AddUIElement(VeilUI);

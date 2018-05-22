@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnStart();
 
-            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 BombSquadUI = new BombSquadActionCommandUI(actionCommand as BombSquadCommand);
                 BattleUIManager.Instance.AddUIElement(BombSquadUI);

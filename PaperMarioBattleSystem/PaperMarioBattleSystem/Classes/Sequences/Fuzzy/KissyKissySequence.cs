@@ -35,7 +35,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnStart();
 
-            if (Action.DrawActionCommandInfo == true && Action.HasActionCommand == true)
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 KissyKissyUI = new FillBarActionCommandUI<MashButtonCommand>(actionCommand as MashButtonCommand, new Vector2(250, 150), new Vector2(100f, 1f), null);
                 BattleUIManager.Instance.AddUIElement(KissyKissyUI);

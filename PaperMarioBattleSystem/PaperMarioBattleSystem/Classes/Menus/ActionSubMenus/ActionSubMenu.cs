@@ -164,7 +164,7 @@ namespace PaperMarioBattleSystem
                 if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) alphaMod = MoveAction.UnselectedAlpha;
 
                 //Draw all information including name and FP cost
-                moveAction.DrawMenuInfo(pos, color, textColor, alphaMod, IconXOffset, ResourceCostXOffset);
+                DrawMoveActionInfo(moveAction, pos, color, textColor, alphaMod);
             }
 
             //Show description window at the bottom
@@ -186,6 +186,47 @@ namespace PaperMarioBattleSystem
             Vector2 fontSize = AssetManager.Instance.TTYDFont.MeasureString(Name);
             Vector2 diff = new Vector2((HeaderSize.X - fontSize.X) / 2, ((HeaderSize.Y - fontSize.Y) / 2) + (fontSize.Y / 4));
             SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, headerPos + diff, Color.White, 0f, Vector2.Zero, 1f, .43f);
+        }
+
+        private void DrawMoveActionInfo(in MoveAction moveAction, in Vector2 position, in Color color, in Color textColor, in float alphaMod)
+        {
+            //Draw icon
+            CroppedTexture2D moveIcon = moveAction.MoveProperties.Icon;
+            if (moveIcon != null && moveIcon.Tex != null)
+            {
+                SpriteRenderer.Instance.DrawUI(moveIcon.Tex, position - new Vector2(IconXOffset, 0), moveIcon.SourceRect, color * alphaMod, false, false, .39f);
+            }
+
+            //Draw name
+            SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, moveAction.Name, position, textColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+
+            //Show cost if the move costs anything
+            if ((moveAction.CostsFP == true || moveAction.CostsSP == true) && moveAction.MoveProperties.CostDisplayType != Enumerations.CostDisplayTypes.Hidden)
+            {
+                Color fpColor = textColor;
+
+                //If the resource cost was lowered, show it a bluish-gray color (This feature is from PM)
+                //Keep it gray if the move is disabled for any reason
+                if (moveAction.Disabled == false && moveAction.MoveProperties.CostDisplayType == Enumerations.CostDisplayTypes.Special)
+                {
+                    Color blueGray = MoveAction.SpecialCaseColor;
+                    fpColor = blueGray;
+                }
+
+                string costString = null;
+
+                //Display the resource cost
+                if (moveAction.MoveProperties.ResourceType == Enumerations.MoveResourceTypes.FP)
+                {
+                    costString = $"{moveAction.MoveProperties.ResourceCost} FP";
+                }
+                else
+                {
+                    costString = $"{moveAction.MoveProperties.ResourceCost / StarPowerGlobals.SPUPerStarPower} SP";
+                }
+
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, costString, position + new Vector2(ResourceCostXOffset, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
+            }
         }
     }
 }

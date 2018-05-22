@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
         {
             EggDamage = GetTotalDamage(1);
 
-            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 MiniEggUI = new TimedLightActionCommandUI(actionCommand as TimedLightCommand);
                 BattleUIManager.Instance.AddUIElement(MiniEggUI);

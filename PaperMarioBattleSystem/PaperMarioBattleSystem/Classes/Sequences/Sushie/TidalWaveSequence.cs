@@ -25,7 +25,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnStart();
 
-            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 TidalWaveUI = new TidalWaveActionCommandUI(actionCommand as TidalWaveCommand);
                 BattleUIManager.Instance.AddUIElement(TidalWaveUI);

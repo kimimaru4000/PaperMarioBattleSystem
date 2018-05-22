@@ -69,18 +69,18 @@ namespace PaperMarioBattleSystem
         {
             if (Entity == null || StylishData == null) return;
 
-            //Draw this a bit in front and above the entity
-            Vector2 offset = new Vector2(40, -40f);
-
-            //For non-players, show it to the left
-            if (Entity.EntityType != Enumerations.EntityTypes.Player)
-                offset.X = -offset.X;
-
-            Vector2 drawPos = Entity.Position + offset;
-
             //If we're within range, show the indicator
             if (StylishData.WithinRange == true)
             {
+                //Draw this a bit in front and above the entity
+                Vector2 offset = new Vector2(40, -40f);
+
+                //For non-players, show it to the left
+                if (Entity.EntityType != Enumerations.EntityTypes.Player)
+                    offset.X = -offset.X;
+
+                Vector2 drawPos = Entity.Position + offset;
+            
                 SpriteRenderer.Instance.Draw(Indicator.Tex, drawPos, Indicator.SourceRect, Color.Red, false, false, .95f);
 
                 Rectangle posAndSize = new Rectangle((int)drawPos.X - 10, (int)drawPos.Y - 2, 34, 34);

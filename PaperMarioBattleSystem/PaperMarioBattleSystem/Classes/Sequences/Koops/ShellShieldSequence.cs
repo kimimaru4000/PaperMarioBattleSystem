@@ -42,7 +42,7 @@ namespace PaperMarioBattleSystem
 
             ShellCreated = null;
 
-            if (Action.HasActionCommand == true && Action.DrawActionCommandInfo == true)
+            if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 ShellShieldUI = new ShellShieldActionCommandUI(actionCommand as ShellShieldCommand);
                 BattleUIManager.Instance.AddUIElement(ShellShieldUI);

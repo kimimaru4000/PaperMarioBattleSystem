@@ -11,8 +11,8 @@ using PaperMarioBattleSystem.Utilities;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Defines all types of interactions that exist among BattleEntities.
-    /// <para>This includes Element-PhysicalAttribute interactions, ContactType-PhysicalAttribute interactions, and more.</para>
+    /// Defines all types of interactions that exist among BattleEntities and provides methods for handling them.
+    /// This includes the damage formula.
     /// </summary>
     public static class Interactions
     {

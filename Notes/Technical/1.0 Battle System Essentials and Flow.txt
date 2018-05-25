@@ -1,0 +1,125 @@
+1.0 Battle System Essentials and Flow (5/22/18)
+-----------------------------------------------
+While I've been working on the 1.0 release, I've been separating unrelated things, such as graphics and input, from the core aspects of the battle system as much as possible.
+
+I want to revisit that and break down what the battle system actually needs to function, as well as go through the thoughts in my head about how to do a 1.0 release. The reason for making this document is that I fear that my plans for the 1.0 release will result in something too stripped down that won't actually resemble Paper Mario, and it will instead rely on this project as an example for making it like Paper Mario.
+
+BattleManager
+-------------
+Undoubtedly, the BattleManager is the core of the battle system. It holds and manages all the BattleEntities and is the authority on determining who goes next. Aside from the test victory methods referencing the BattleUIManager and animations, the BattleManager is independent and serves its purpose very well.
+
+Since the BattleManager is a Singleton, there's no way to have two different battles going on at once, or halting one battle and starting a completely different one. This situation never happens in the Paper Mario games, but I feel changing it into an instance would better allow projects to use the system how they want instead of being locked to a single instance. A lot of code relies on the BattleManager's Singleton reference, and we may be able to resolve most of them by having a BattleManager reference in each BattleEntity. This way, each BattleEntity knows which BattleManager they belong to.
+
+Whether this will be done or not is up in the air, but that's what I feel we may eventually need to do.
+
+BattleEntity
+------------
+BattleEntities are the purpose of the battle system. BattleEntities fight against each other, performing actions that deal damage, inflict Status Effects, and more. Right now, BattleEntities handle rendering themselves.
+
+My main issues with BattleEntity right now are the animations and additional fields/properties they have that are unrelated to the core system. Position is important for many Sequences, but Scale and TintColor are simply for rendering. However, this is pretty minor.
+
+The animations use the Animation classes in the project; other projects will likely want to use their own, as well as their own ways of rendering instead of SpriteRenderer. I'm unsure what to do with these at the moment.
+
+MoveAction
+----------
+MoveActions are any actions selectable through a menu. Anything a BattleEntity performs on its turn is a MoveAction. Aside from the CroppedTexture2D reference in MoveActionData, MoveActions themselves are free of graphics. The base BattleAction class that MoveAction derives from has a User property that references the BattleManager's Singleton, which will be a problem when creating MoveActions if the BattleManager is no longer a Singleton, as most MoveActions use it in their constructors.
+
+Another potential issue is the OnMenuSelected() method, which brings up the target selection menu in most cases.
+
+Sequence
+--------
+Sequences are what the BattleEntity does on its turn and are tied to MoveActions. Sequences are meant to be derived from, as they're often specific to each move. Right now the only issues I see are ShowCommandRankVFX() playing a sound and creating an object to play VFX, and SetStylishData() creating an object to play VFX.
+
+SequenceAction
+--------------
+SequenceActions are specific actions that occur during Sequences. When the main SequenceAction is finished, the Sequence will move onto its next step. I don't see any issues with them at the moment.
+
+ActionCommand
+-------------
+ActionCommands are inputs the player can perform to influence the Sequence. After separating the draw code from them, they now work on their own without graphics. ReadInput() is open enough to allow for many different types of input systems to work.
+
+I don't have any problems with ActionCommand as is. A few things that might be useful to add are direct responses when an ActionCommand starts and ends. Right now you can't tell when it starts from outside, and if you want to see when it ends, you have to handle both OnCommandSuccess() and OnCommandFailed().
+
+Collectible
+-----------
+Collectibles, such as Items and Badges, can be used for a variety of effects. Items are used in battle, and Badges are equipped to BattleEntities to affect them in some way, often beneficial. The only reliance on graphics is the Icon property in Collectible.
+
+These are pretty robust and I think they're good as is. The only thing I'm uncomfortable with at the moment is the Lucky Star key item, which enables ActionCommands for Mario and his Partners. There isn't anything wrong with needing the item; the issue lies in that it doesn't have anything special to tell you that ActionCommands should be enabled or not. The same would likely apply to the Strange Sack key item if implemented. Even so, this is still very minor.
+
+StatusEffect
+------------
+StatusEffects affect BattleEntities in many ways. They are versatile, with some taking effect when being inflicted and others performing effects such as dealing damage every phase cycle. Aside from a DrawStatusInfo() method, and StatusIcon property, they stand on their own. Some derived StatusEffects also add graphics and play sounds.
+
+StatusEffects work really well right now, and the only challenge when creating them is having them act independent of their status orders, especially for turn-related Status Effects. Aside from the aforementioned problems, they're good to go.
+
+BattleEvent
+-----------
+BattleEvents do certain things at certain BattleStates. While they're going on, the BattleManager is halted from starting the next BattleEntity's turn.
+
+These are pretty versatile and serve their purpose well. To this day I am still not 100% comfortable with their implementation, but they've covered all cases I've thrown at them so far, and I have yet to find a way to actually improve them.
+
+Interactions
+------------
+The Interactions class handles all damage-related interactions between BattleEntities. It contains the damage formula and various methods to determine what happens based on the move used and a BattleEntity's properties.
+
+I'm very content with how it is right now. Everything interaction-related is routed through here, and it's accessible from anywhere. I see no issues.
+
+More Thoughts
+-------------
+This is pretty much what the Battle System boils down to. What I'd like is for anyone to be able to import it and use it from the get-go while being able to customize and extend it fairly well.
+
+The source code is there, but I don't feel you should have to touch it to customize basic things. On top of that, it would be convenient to have a DLL, possibly via NuGet, if you don't want to build from source or have all the source files in your project. With this in mind, the aim is to allow developers freedom in how they want to implement it. This is why I'm emphasizing separating rendering, sounds, and etc. Instead of having systems for these that other developers likely won't use anyway, it's best to let them do this how they want so the Battle System works for them, not against them.
+
+Furthermore, the Battle System being built on top of MonoGame isn't an issue to me. One reason is, if the battle system allows for the aforementioned flexibility, then porting it to other frameworks and languages should be fairly straightforward since there isn't any rendering, sound, or other code that would need to be ported. In addition, creating my own data types, such as Vector2, would be more work for no gain, as even those working in MonoGame wouldn't be able to use it seamlessly right off the bat.
+
+Potential Approach
+------------------
+With those in mind, I'll outline an approach I've been thinking of. I'll find out how feasible it actually is.
+
+1. Create an IBattleEntity interface. This interface contains necessary methods and properties for battles to flow.
+
+This would include the following properties:
+-EntityProperties
+-HeightState
+-HealthState
+-BattleStats
+-BaseTurns
+-TurnsUsed
+-MaxTurns
+-BattleIndex
+-Position
+-BattlePosition
+-EntityType
+-PreviousAction
+-Targeter - debating this
+
+And the following methods:
+-OnBattleStart()
+-OnPhaseCycleStart()
+-OnPhaseStart()
+-OnPhaseEnd()
+-StartTurn()
+-EndTurn()
+-TurnUpdate()
+-SetBattleIndex(int, bool = true)
+-TargetForMove(BattleEntity) - debating this
+-StopTarget() - debating this
+-Update()
+-GetDefensiveActionResult(int, StatusChanceHolder[], DamageEffects, DefensiveActionTypes) - debating this
+-TakeDamage(in InteractionHolder)
+-Die()
+-ChangeHeightState(HeightStates)
+-DamageEntity(in InteractionHolder) - debating this
+
+2. BattleManager turns into BattleManager<T> where T : IBattleEntity
+
+This would allow you to use your own class that implements IBattleEntity and have access to all of its own unique fields properties in the given BattleManager.
+
+My concern with this would be for other classes that reference BattleEntities, such as BattleActions, Sequences, SequenceActions, BattleEvents, and more.
+
+Should they be similarly generic? If you were to create an instance without deriving, how would you do so? new MoveAction<BattleEntity>("Test") may be passable.
+
+
+
+
+

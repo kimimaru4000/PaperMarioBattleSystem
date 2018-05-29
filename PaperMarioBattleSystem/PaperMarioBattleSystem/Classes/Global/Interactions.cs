@@ -46,13 +46,18 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The list of steps for the Damage Calculation formula.
         /// </summary>
-        private static List<DamageCalcStep> DamageCalculationSteps = null;
+        private static readonly List<DamageCalcStep> DamageCalculationSteps = new List<DamageCalcStep>();
+
+        /// <summary>
+        /// The number of steps in the Damage Calculation.
+        /// </summary>
+        public static int DamageCalculationStepCount => DamageCalculationSteps.Count;
 
         #endregion
 
         static Interactions()
         {
-            InitializeDamageFormulaSteps();
+            GetDefaultDamageFormula(DamageCalculationSteps);
         }
 
         #region Contact Methods
@@ -138,6 +143,70 @@ namespace PaperMarioBattleSystem
 
         #region Damage Calculation Initialization
 
+        /// <summary>
+        /// Sets the damage formula.
+        /// </summary>
+        /// <param name="damageCalcSteps">The DamageCalcSteps involved in the damage formula.</param>
+        public static void SetDamageFormula(List<DamageCalcStep> damageCalcSteps)
+        {
+            DamageCalculationSteps.Clear();
+            DamageCalculationSteps.CopyFromList(damageCalcSteps);
+        }
+
+        /// <summary>
+        /// Adds a damage step to the damage formula.
+        /// </summary>
+        /// <param name="damageStep">The DamageCalcStep to add.</param>
+        /// <param name="index">The index to insert the damage step at. If less than 0, it will be added to the end of the list.</param>
+        public static void AddDamageStep(DamageCalcStep damageStep, int index = -1)
+        {
+            if (index < 0)
+            {
+                DamageCalculationSteps.Add(damageStep);
+            }
+            else
+            {
+                DamageCalculationSteps.Insert(index, damageStep);
+            }
+        }
+
+        /// <summary>
+        /// Removes a damage step from the damage formula.
+        /// </summary>
+        /// <param name="damageStep">The DamageCalcStep to remove.</param>
+        /// <returns>true if the damage step was removed, otherwise false.</returns>
+        public static bool RemoveDamageStep(DamageCalcStep damageStep)
+        {
+            return DamageCalculationSteps.Remove(damageStep);
+        }
+
+        /// <summary>
+        /// Removes a damage step from the damage formula at the specified index.
+        /// </summary>
+        /// <param name="damageStep">The index of the damage step to remove.</param>
+        public static void RemoveDamageStep(int index)
+        {
+            DamageCalculationSteps.RemoveAt(index);
+        }
+
+        /// <summary>
+        /// Adds the current damage formula to a supplied list.
+        /// </summary>
+        /// <param name="damageCalcSteps">The list to add the current damage formula to.</param>
+        public static void GetDamageFormula(List<DamageCalcStep> damageCalcSteps)
+        {
+            damageCalcSteps.CopyFromList(DamageCalculationSteps);
+        }
+
+        /// <summary>
+        /// Returns a new list containing the current damage formula.
+        /// </summary>
+        /// <returns>A new <see cref="List{T}"/> containing the current damage formula.</returns>
+        public static List<DamageCalcStep> GetDamageFormula()
+        {
+            return new List<DamageCalcStep>(DamageCalculationSteps);
+        }
+
         /* Damage Calculation Order:
          * Victim:
          * -------
@@ -165,33 +234,47 @@ namespace PaperMarioBattleSystem
          * 7. Clamp the damage: Min = 0, Max = 99
          */
 
-        private static void InitializeDamageFormulaSteps()
+        /// <summary>
+        /// Adds the default damage formula to a supplied list.
+        /// </summary>
+        /// <param name="damageCalcSteps">The list to add the default damage formula to.</param>
+        public static void GetDefaultDamageFormula(List<DamageCalcStep> damageCalcSteps)
         {
-            DamageCalculationSteps = new List<DamageCalcStep>();
-
             //Victim steps
-            DamageCalculationSteps.Add(new InitStep());
-            DamageCalculationSteps.Add(new ElementOverrideStep());
-            DamageCalculationSteps.Add(new VictimAttackerStrengthStep());
-            DamageCalculationSteps.Add(new VictimElementDamageStep());
-            DamageCalculationSteps.Add(new VictimDamageReductionStep());
-            DamageCalculationSteps.Add(new VictimCheckHitStep());
-            DamageCalculationSteps.Add(new VictimDefensiveStep());
-            DamageCalculationSteps.Add(new ContactResultStep());
-            //DamageCalculationSteps.Add(new VictimDamageEffectStep());
-            DamageCalculationSteps.Add(new VictimDoublePainStep());
-            DamageCalculationSteps.Add(new VictimLastStandStep());
-            DamageCalculationSteps.Add(new ClampVictimDamageStep());
-            DamageCalculationSteps.Add(new VictimFilteredStatusStep());
-            DamageCalculationSteps.Add(new VictimCheckInvincibleStep());
-            DamageCalculationSteps.Add(new VictimCheckContactResultStep());
+            damageCalcSteps.Add(new InitStep());
+            damageCalcSteps.Add(new ElementOverrideStep());
+            damageCalcSteps.Add(new VictimAttackerStrengthStep());
+            damageCalcSteps.Add(new VictimElementDamageStep());
+            damageCalcSteps.Add(new VictimDamageReductionStep());
+            damageCalcSteps.Add(new VictimCheckHitStep());
+            damageCalcSteps.Add(new VictimDefensiveStep());
+            damageCalcSteps.Add(new ContactResultStep());
+            damageCalcSteps.Add(new VictimDoublePainStep());
+            damageCalcSteps.Add(new VictimLastStandStep());
+            damageCalcSteps.Add(new ClampVictimDamageStep());
+            damageCalcSteps.Add(new VictimFilteredStatusStep());
+            damageCalcSteps.Add(new VictimCheckInvincibleStep());
+            damageCalcSteps.Add(new VictimCheckContactResultStep());
 
             //Attacker steps
-            DamageCalculationSteps.Add(new AttackerPaybackDamageStep());
-            DamageCalculationSteps.Add(new ClampAttackerDamageStep());
-            DamageCalculationSteps.Add(new AttackerFilteredStatusStep());
-            DamageCalculationSteps.Add(new AttackerCheckInvincibleStep());
-            DamageCalculationSteps.Add(new AttackerCheckContactResultStep());
+            damageCalcSteps.Add(new AttackerPaybackDamageStep());
+            damageCalcSteps.Add(new ClampAttackerDamageStep());
+            damageCalcSteps.Add(new AttackerFilteredStatusStep());
+            damageCalcSteps.Add(new AttackerCheckInvincibleStep());
+            damageCalcSteps.Add(new AttackerCheckContactResultStep());
+        }
+
+        /// <summary>
+        /// Returns a new list containing the default damage formula.
+        /// </summary>
+        /// <returns>A new <see cref="List{T}"/> containing the default damage formula.</returns>
+        public static List<DamageCalcStep> GetDefaultDamageFormula()
+        {
+            List<DamageCalcStep> defaultDamageFormula = new List<DamageCalcStep>();
+
+            GetDefaultDamageFormula(defaultDamageFormula);
+
+            return defaultDamageFormula;
         }
 
         #endregion
@@ -374,7 +457,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The base class for steps in the total damage calculation.
         /// </summary>
-        private abstract class DamageCalcStep
+        public abstract class DamageCalcStep
         {
             /// <summary>
             /// The current InteractionResult at each step.
@@ -396,7 +479,7 @@ namespace PaperMarioBattleSystem
             protected abstract void OnCalculate(in InteractionParamHolder damageInfo);
         }
 
-        private sealed class InitStep : DamageCalcStep
+        public sealed class InitStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -412,7 +495,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private sealed class ContactResultStep : DamageCalcStep
+        public sealed class ContactResultStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -439,7 +522,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private sealed class ElementOverrideStep : DamageCalcStep
+        public sealed class ElementOverrideStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -471,7 +554,7 @@ namespace PaperMarioBattleSystem
         /// <para>This is done outside <see cref="GetElementalDamage"/> because it is adds directly to the damage and
         /// should not be applied again during the <see cref="AttackerPaybackDamageStep"/>.</para>
         /// </summary>
-        private sealed class VictimAttackerStrengthStep : DamageCalcStep
+        public sealed class VictimAttackerStrengthStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -480,7 +563,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private sealed class VictimElementDamageStep : DamageCalcStep
+        public sealed class VictimElementDamageStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -492,7 +575,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private sealed class VictimDamageReductionStep : DamageCalcStep
+        public sealed class VictimDamageReductionStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -500,7 +583,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private sealed class VictimCheckHitStep : DamageCalcStep
+        public sealed class VictimCheckHitStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -513,7 +596,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The Victim's final UNSCALED damage is calculated in this step.
         /// </summary>
-        private sealed class VictimDefensiveStep : DamageCalcStep
+        public sealed class VictimDefensiveStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -567,7 +650,7 @@ namespace PaperMarioBattleSystem
         // <summary>
         // Filters out DamageEffects caused by the move depending on whether the BattleEntity is vulnerable to them or not.
         // </summary>
-        /*private sealed class VictimDamageEffectStep : DamageCalcStep
+        /*public sealed class VictimDamageEffectStep : DamageCalcStep
         {
             protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
             {
@@ -610,7 +693,7 @@ namespace PaperMarioBattleSystem
             }
         }*/
 
-        private sealed class VictimDoublePainStep : DamageCalcStep
+        public sealed class VictimDoublePainStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -621,7 +704,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private sealed class VictimLastStandStep : DamageCalcStep
+        public sealed class VictimLastStandStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -638,7 +721,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private sealed class ClampVictimDamageStep : DamageCalcStep
+        public sealed class ClampVictimDamageStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -648,7 +731,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private sealed class VictimFilteredStatusStep : DamageCalcStep
+        public sealed class VictimFilteredStatusStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -657,7 +740,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private sealed class VictimCheckInvincibleStep : DamageCalcStep
+        public sealed class VictimCheckInvincibleStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -674,7 +757,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Final Victim step - ALL Victim damage information is known after this.
         /// </summary>
-        private sealed class VictimCheckContactResultStep : DamageCalcStep
+        public sealed class VictimCheckContactResultStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -687,7 +770,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private sealed class AttackerPaybackDamageStep : DamageCalcStep
+        public sealed class AttackerPaybackDamageStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -726,7 +809,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private class ClampAttackerDamageStep : DamageCalcStep
+        public class ClampAttackerDamageStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -735,7 +818,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private class AttackerFilteredStatusStep : DamageCalcStep
+        public class AttackerFilteredStatusStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -744,7 +827,7 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        private class AttackerCheckInvincibleStep : DamageCalcStep
+        public class AttackerCheckInvincibleStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
@@ -761,7 +844,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Final Attacker step - ALL Attacker damage information is known after this.
         /// </summary>
-        private sealed class AttackerCheckContactResultStep : DamageCalcStep
+        public sealed class AttackerCheckContactResultStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {

@@ -13,44 +13,44 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class HammerSubMenu : ActionSubMenu
     {
-        public HammerSubMenu()
+        public HammerSubMenu(BattleEntity user) : base(user)
         {
             Name = "Hammer";
             Position = new Vector2(230, 150);
             AutoSelectSingle = true;
 
-            BattleActions.Add(new HammerAction());
+            BattleActions.Add(new HammerAction(User));
 
-            int powerSmashCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PowerSmash);
+            int powerSmashCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PowerSmash);
             if (powerSmashCount > 0)
             {
-                BattleActions.Add(new PowerSmashAction(powerSmashCount));
+                BattleActions.Add(new PowerSmashAction(User, powerSmashCount));
             }
-            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.MegaSmash) > 0)
+            if (User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.MegaSmash) > 0)
             {
-                BattleActions.Add(new MegaSmashAction());
+                BattleActions.Add(new MegaSmashAction(User));
             }
-            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PiercingBlow) > 0)
+            if (User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PiercingBlow) > 0)
             {
-                BattleActions.Add(new PiercingBlowAction());
+                BattleActions.Add(new PiercingBlowAction(User));
             }
-            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.HeadRattle) > 0)
+            if (User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.HeadRattle) > 0)
             {
-                BattleActions.Add(new HeadRattleAction());
+                BattleActions.Add(new HeadRattleAction(User));
             }
-            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.IceSmash) > 0)
+            if (User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.IceSmash) > 0)
             {
-                BattleActions.Add(new IceSmashAction());
+                BattleActions.Add(new IceSmashAction(User));
             }
-            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DDownPound) > 0)
+            if (User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DDownPound) > 0)
             {
-                BattleActions.Add(new DDownPoundAction());
+                BattleActions.Add(new DDownPoundAction(User));
             }
 
-            int quakeCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.QuakeHammer);
+            int quakeCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.QuakeHammer);
             if (quakeCount > 0)
             {
-                BattleActions.Add(new QuakeHammerAction(quakeCount));
+                BattleActions.Add(new QuakeHammerAction(User, quakeCount));
             }
         }
     }

@@ -59,12 +59,12 @@ namespace PaperMarioBattleSystem
                 case 0:
                     //Move back up
                     //NOTE: Move the ally as well - this needs to be added in
-                    CurSequenceAction = new MoveToSeqAction(User.Position - new Vector2(0f, 25f), MoveTime);
+                    CurSequenceAction = new MoveToSeqAction(User, User.Position - new Vector2(0f, 25f), MoveTime);
 
                     break;
                 case 1:
                     //Make the user move back to its battle position
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, MoveTime);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, MoveTime);
 
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;

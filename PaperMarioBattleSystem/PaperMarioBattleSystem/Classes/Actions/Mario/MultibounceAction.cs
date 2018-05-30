@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
 {
     public sealed class MultibounceAction : JumpAction
     {
-        public MultibounceAction()
+        public MultibounceAction(BattleEntity user) : base(user)
         {
             Name = "Multibounce";
 

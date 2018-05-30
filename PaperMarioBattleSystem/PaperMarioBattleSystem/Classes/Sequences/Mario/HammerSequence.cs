@@ -119,11 +119,11 @@ namespace PaperMarioBattleSystem
                     Vector2 pos = BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy);
                     pos.Y = User.Position.Y;
 
-                    CurSequenceAction = new MoveToSeqAction(pos, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User, pos, WalkDuration);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(PickupAnimName, true);
-                    CurSequenceAction = new WaitForAnimationSeqAction(PickupAnimName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, PickupAnimName);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -159,7 +159,7 @@ namespace PaperMarioBattleSystem
                     if (interactions[0] != null && interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
                         ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
 
-                    CurSequenceAction = new WaitForAnimationSeqAction(SlamAnimName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, SlamAnimName);
                     break;
                 case 1:
                     SetStylishData(0d, SlamWaitDur, 0);
@@ -180,7 +180,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(SlamAnimName, true);
                     AttemptDamage(FinalDamage, EntitiesAffected, Action.DamageProperties, false);
-                    CurSequenceAction = new WaitForAnimationSeqAction(SlamAnimName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, SlamAnimName);
                     break;
                 case 1:
                     SetStylishData(0d, SlamWaitDur, 0);
@@ -200,7 +200,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim(), true);
@@ -238,7 +238,7 @@ namespace PaperMarioBattleSystem
                         moveAmount.X = -moveAmount.X;
                     }
 
-                    CurSequenceAction = new MoveAmountSeqAction(moveAmount, SlamWaitDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
+                    CurSequenceAction = new MoveAmountSeqAction(User, moveAmount, SlamWaitDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 1:
                     //Move back a bit
@@ -252,7 +252,7 @@ namespace PaperMarioBattleSystem
                     //Add the second Stylish Move for Hammer
                     SetStylishData(100d, SlamWaitDur, 1);
 
-                    CurSequenceAction = new MoveAmountSeqAction(moveAmount, SlamWaitDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+                    CurSequenceAction = new MoveAmountSeqAction(User, moveAmount, SlamWaitDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

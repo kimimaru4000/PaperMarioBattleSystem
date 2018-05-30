@@ -71,7 +71,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.GoombellaBattleAnimations.TattleStartName);
-                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.GoombellaBattleAnimations.TattleStartName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.GoombellaBattleAnimations.TattleStartName);
                     break;
                 case 1:
                     CurSequenceAction = new WaitSeqAction(WaitTime);
@@ -221,7 +221,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.GoombellaBattleAnimations.TattleFailName);
-                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.GoombellaBattleAnimations.TattleFailName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.GoombellaBattleAnimations.TattleFailName);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

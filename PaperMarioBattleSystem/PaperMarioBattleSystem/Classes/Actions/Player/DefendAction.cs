@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class DefendAction : MoveAction
     {
-        public DefendAction()
+        public DefendAction(BattleEntity user) : base(user)
         {
             Name = "Defend";
 
@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
                 "Defend this turn.", Enumerations.MoveResourceTypes.FP, 0, Enumerations.CostDisplayTypes.Shown,
                 Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.Single, false, null);
 
-            SetMoveSequence(new DefendSequence(this, BattleManager.Instance.EntityTurn, 1));
+            SetMoveSequence(new DefendSequence(this, 1));
             actionCommand = null;
         }
     }

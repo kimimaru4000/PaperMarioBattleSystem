@@ -18,6 +18,11 @@ namespace PaperMarioBattleSystem
     public class ActionSubMenu : BattleMenu, INameable
     {
         /// <summary>
+        /// The user of this ActionSubMenu.
+        /// </summary>
+        public BattleEntity User { get; private set; } = null;
+
+        /// <summary>
         /// The name of the SubMenu.
         /// </summary>
         public string Name { get; set; } = string.Empty;
@@ -61,8 +66,10 @@ namespace PaperMarioBattleSystem
 
         protected override int LastSelection => BattleActions.Count - 1;
 
-        protected ActionSubMenu() : base(MenuTypes.Vertical)
+        protected ActionSubMenu(BattleEntity user) : base(MenuTypes.Vertical)
         {
+            User = user;
+
             BoxMenu = new TextBox(new Vector2(SpriteRenderer.Instance.WindowCenter.X, SpriteRenderer.Instance.WindowCenter.Y + 220f), new Vector2(320f, 80f), null);
             BoxMenu.SetText(string.Empty);
 
@@ -78,7 +85,7 @@ namespace PaperMarioBattleSystem
             MenuBG = new NineSlicedTexture2D(battleGFX, new Rectangle(485, 846, 16, 16), 8, 8, 8, 8);
         }
 
-        public ActionSubMenu(string name, params MoveAction[] battleActions) : this()
+        public ActionSubMenu(BattleEntity user, string name, params MoveAction[] battleActions) : this(user)
         {
             Name = name;
             BattleActions.AddRange(battleActions);

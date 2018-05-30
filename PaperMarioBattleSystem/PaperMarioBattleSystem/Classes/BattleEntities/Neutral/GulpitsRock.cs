@@ -103,7 +103,7 @@ namespace PaperMarioBattleSystem
             //In the event a Gulpit's Rock does start its turn, simply do nothing
             base.OnTurnStart();
 
-            StartAction(new NoAction(), false, null);
+            StartAction(new NoAction(this), false, null);
         }
 
         public override Item GetItemOfType(Item.ItemTypes itemTypes)

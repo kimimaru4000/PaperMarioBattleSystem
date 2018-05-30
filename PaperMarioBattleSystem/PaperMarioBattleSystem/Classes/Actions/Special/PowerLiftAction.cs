@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     {
         private const double ActionCommandTime = 15000d;
         
-        public PowerLiftAction()
+        public PowerLiftAction(BattleEntity user) : base(user)
         {
             Name = "Power Lift";
 

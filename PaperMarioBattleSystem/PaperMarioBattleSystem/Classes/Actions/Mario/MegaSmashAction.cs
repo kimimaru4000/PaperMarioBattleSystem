@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class MegaSmashAction : HammerAction
     {
-        public MegaSmashAction()
+        public MegaSmashAction(BattleEntity user) : base(user)
         {
             Name = "Mega Smash";
 

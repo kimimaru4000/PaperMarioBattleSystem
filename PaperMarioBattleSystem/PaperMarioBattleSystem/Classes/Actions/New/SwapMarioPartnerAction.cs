@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class SwapMarioPartnerAction : MoveAction
     {
-        public SwapMarioPartnerAction()
+        public SwapMarioPartnerAction(BattleEntity user) : base(user)
         {
             Name = "Swap Partner Attack";
 

@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class JumpAction : MoveAction
     {
-        public JumpAction()
+        public JumpAction(BattleEntity user) : base(user)
         {
             Name = "Jump";
 

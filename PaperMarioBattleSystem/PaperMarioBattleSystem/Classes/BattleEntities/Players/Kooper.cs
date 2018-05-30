@@ -77,7 +77,7 @@ namespace PaperMarioBattleSystem
 
         protected sealed override BattleMenu GetMainBattleMenu()
         {
-            return new PartnerBattleMenu(new KooperSubMenu(), Enumerations.PartnerTypes.Kooper);
+            return new PartnerBattleMenu(this, new KooperSubMenu(this), Enumerations.PartnerTypes.Kooper);
         }
 
         public override void OnTurnStart()
@@ -88,7 +88,7 @@ namespace PaperMarioBattleSystem
             {
                 //Make Kooper do a NoAction instead of directly ending his turn
                 BattleUIManager.Instance.ClearMenuStack();
-                StartAction(new NoAction(), true, null);
+                StartAction(new NoAction(this), true, null);
             }
         }
 

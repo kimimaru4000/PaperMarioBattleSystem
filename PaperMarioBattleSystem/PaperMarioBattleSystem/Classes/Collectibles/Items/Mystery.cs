@@ -23,8 +23,6 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class Mystery : BattleItem
     {
-        public override ItemAction ActionAssociated => new MysteryAction(this);
-
         public override Sequence SequencePerformed => new MysterySequence(null);
 
         /// <summary>
@@ -50,6 +48,11 @@ namespace PaperMarioBattleSystem
             
             SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
             MoveAffectionType = Enumerations.MoveAffectionTypes.Self;
+        }
+
+        public override ItemAction GetActionAssociated(BattleEntity user)
+        {
+            return new MysteryAction(user, this);
         }
     }
 }

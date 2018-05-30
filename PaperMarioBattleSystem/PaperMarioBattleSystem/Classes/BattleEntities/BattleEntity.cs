@@ -219,6 +219,9 @@ namespace PaperMarioBattleSystem
         {
             SetBattleIndex(BattleGlobals.InvalidBattleIndex, false);
 
+            PreviousAction?.SetUser(null);
+            PreviousAction = null;
+
             EntityProperties.CleanUp();
 
             HealthStateChangedEvent = null;
@@ -835,7 +838,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public void EndTurn()
         {
-            if (this != BattleManager.Instance.EntityTurn)
+            if (IsTurn == false)
             {
                 Debug.LogError($"Attempting to end the turn of {Name} when it's not their turn!");
                 return;
@@ -931,7 +934,7 @@ namespace PaperMarioBattleSystem
             if (UtilityGlobals.MoveAffectionTypesHasFlag(actualAction.MoveProperties.MoveAffectionType, MoveAffectionTypes.Custom))
             {
                 changeTargets = 0;
-                actualAction = new NoAction();
+                actualAction = new NoAction(this);
             }
 
             //Change to an ally
@@ -1009,7 +1012,7 @@ namespace PaperMarioBattleSystem
                 //If you can't target anyone, do nothing
                 if (newTargets.Count == 0)
                 {
-                    actualAction = new NoAction();
+                    actualAction = new NoAction(this);
 
                     Debug.Log($"{Name} did nothing as there's either no one to attack or they're not in range!");
                 }

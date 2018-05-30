@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public BattleItem ItemUsed { get; protected set; } = null;
 
-        public ItemAction(BattleItem item)
+        public ItemAction(BattleEntity user, BattleItem item) : base(user)
         {
             ItemUsed = item;
 

@@ -13,12 +13,10 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class TacticsSubMenu : ActionSubMenu
     {
-        public TacticsSubMenu()
+        public TacticsSubMenu(BattleEntity user) : base(user)
         {
             Name = "Tactics";
             Position = new Vector2(230, 150);
-
-            BattleEntity entity = BattleManager.Instance.EntityTurn;
 
             //int quickChangeCount = entity.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.QuickChange);
             //Enumerations.CostDisplayTypes costDisplayType = Enumerations.CostDisplayTypes.Shown;
@@ -34,21 +32,21 @@ namespace PaperMarioBattleSystem
             {
                 Rectangle sourceRect = new Rectangle(30 + (((int)BattleManager.Instance.Partner.PartnerType - 1) * 32), 886, 32, 32);
 
-                BattleActions.Add(new MenuAction("Change Partner", new CroppedTexture2D(battleTex, sourceRect),
+                BattleActions.Add(new MenuAction(User, "Change Partner", new CroppedTexture2D(battleTex, sourceRect),
                     "Change your current partner.", //costDisplayType, 
-                    new ChangePartnerSubMenu()));
+                    new ChangePartnerSubMenu(User)));
             }
 
             #region Charge Menu
 
             //Charge action if the Charge or Charge P Badge is equipped
-            int chargeCount = entity.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.Charge);
+            int chargeCount = User.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.Charge);
             if (chargeCount > 0)
             {
                 //Charge starts out at 2 then increases by 1 for each additional Badge
                 int chargeAmount = 2 + (chargeCount - 1);
 
-                BattleActions.Add(new MoveAction("Charge", new MoveActionData(new CroppedTexture2D(battleTex, new Rectangle(623, 807, 40, 40)),
+                BattleActions.Add(new MoveAction(User, "Charge", new MoveActionData(new CroppedTexture2D(battleTex, new Rectangle(623, 807, 40, 40)),
                     "Save up strength to power up\nyour next attack",
                     Enumerations.MoveResourceTypes.FP, chargeCount, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None,
                     TargetSelectionMenu.EntitySelectionType.Single, false, null), new ChargeSequence(null, chargeAmount)));
@@ -57,13 +55,13 @@ namespace PaperMarioBattleSystem
             #endregion
 
             //Defend action
-            BattleActions.Add(new DefendAction());
+            BattleActions.Add(new DefendAction(User));
 
             //Do nothing action
-            BattleActions.Add(new NoAction());
+            BattleActions.Add(new NoAction(User));
 
             //Run away action
-            BattleActions.Add(new RunAwayAction());
+            BattleActions.Add(new RunAwayAction(User));
         }
     }
 }

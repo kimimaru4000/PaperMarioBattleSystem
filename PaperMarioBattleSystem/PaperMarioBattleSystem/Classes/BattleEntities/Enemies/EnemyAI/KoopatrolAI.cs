@@ -48,7 +48,7 @@ namespace PaperMarioBattleSystem
                     //Summon another Koopatrol
                     if (koopatrolsList.Count < minCountSummon)
                     {
-                        return new SummonKoopatrolAction();
+                        return new SummonKoopatrolAction(Enemy);
                     }
                 }
 

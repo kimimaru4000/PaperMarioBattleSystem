@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class DisguiseAction : MoveAction
     {
-        public DisguiseAction()
+        public DisguiseAction(BattleEntity user) : base(user)
         {
             Name = "Disguise";
 

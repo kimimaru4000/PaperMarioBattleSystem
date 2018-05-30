@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class ElectroDashAction : MoveAction
     {
-        public ElectroDashAction()
+        public ElectroDashAction(BattleEntity user) : base(user)
         {
             Name = "Electro Dash";
 

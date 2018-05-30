@@ -68,7 +68,7 @@ namespace PaperMarioBattleSystem
 
                     movePosition.X -= 25;
 
-                    CurSequenceAction = new MoveToSeqAction(movePosition, MoveTime);
+                    CurSequenceAction = new MoveToSeqAction(User, movePosition, MoveTime);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -108,7 +108,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     //Move down
                     //NOTE: Move the ally as well - this needs to be added in
-                    CurSequenceAction = new MoveToSeqAction(EntityUsing.Position + new Vector2(0f, 25f), MoveTime);
+                    CurSequenceAction = new MoveToSeqAction(User, EntityUsing.Position + new Vector2(0f, 25f), MoveTime);
 
                     break;
                 case 1:
@@ -150,7 +150,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     //The user goes back to its battle position when failing and ends the sequence
-                    CurSequenceAction = new MoveToSeqAction(EntityUsing.BattlePosition, MoveTime);
+                    CurSequenceAction = new MoveToSeqAction(User, EntityUsing.BattlePosition, MoveTime);
 
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
@@ -197,7 +197,7 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.ClearMenuStack();
 
             //Immediately start the second half of the sequence
-            MoveAction veilSecondHalf = new MoveAction("Veil Second Half",
+            MoveAction veilSecondHalf = new MoveAction(User, "Veil Second Half",
                 new MoveActionData(null, "Second half of Veil", Enumerations.MoveResourceTypes.FP, 0,
                 Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.First,
                 false, null), new VeilSecondHalfSequence(null, ScaleVal));
@@ -218,7 +218,7 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.ClearMenuStack();
 
             //Make the ally do nothing on each of its turns
-            AllyAffected.StartAction(new NoAction(), true, null);
+            AllyAffected.StartAction(new NoAction(AllyAffected), true, null);
         }
     }
 }

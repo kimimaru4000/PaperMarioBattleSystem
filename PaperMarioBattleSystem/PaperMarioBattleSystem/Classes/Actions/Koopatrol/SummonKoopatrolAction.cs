@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class SummonKoopatrolAction : MoveAction
     {
-        public SummonKoopatrolAction()
+        public SummonKoopatrolAction(BattleEntity user) : base(user)
         {
             Name = "Summon Koopatrol";
 

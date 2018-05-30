@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
         private const double ActionCommandTime = 5000d;
         private readonly Keys[] ValidCommandButtons = new Keys[] { Keys.Z, Keys.X };
 
-        public VeilAction()
+        public VeilAction(BattleEntity user) : base(user)
         {
             Name = "Veil";
 

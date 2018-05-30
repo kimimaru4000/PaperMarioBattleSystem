@@ -15,32 +15,37 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class SpecialMoveAction : MoveAction
     {
-        protected SpecialMoveAction()
+        protected SpecialMoveAction(BattleEntity user) : base(user)
         {
             
         }
 
-        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence) : base(name, moveProperties, moveSequence)
+        public SpecialMoveAction(BattleEntity user, string name, MoveActionData moveProperties, Sequence moveSequence)
+            : base(user, name, moveProperties, moveSequence)
         {
 
         }
 
-        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, HealingData healingData) : base(name, moveProperties, moveSequence, healingData)
-        {
-            
-        }
-
-        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actionCommand, HealingData healingData) : base(name, moveProperties, moveSequence, actionCommand, healingData)
+        public SpecialMoveAction(BattleEntity user, string name, MoveActionData moveProperties, Sequence moveSequence, HealingData healingData)
+            : base(user, name, moveProperties, moveSequence, healingData)
         {
             
         }
 
-        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, DamageData damageInfo) : base(name, moveProperties, moveSequence, damageInfo)
+        public SpecialMoveAction(BattleEntity user, string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actionCommand, HealingData healingData)
+            : base(user, name, moveProperties, moveSequence, actionCommand, healingData)
+        {
+            
+        }
+
+        public SpecialMoveAction(BattleEntity user, string name, MoveActionData moveProperties, Sequence moveSequence, DamageData damageInfo)
+            : base(user, name, moveProperties, moveSequence, damageInfo)
         {
           
         }
 
-        public SpecialMoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actionCommand, DamageData damageInfo) : base(name, moveProperties, moveSequence, actionCommand, damageInfo)
+        public SpecialMoveAction(BattleEntity user, string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actionCommand, DamageData damageInfo)
+            : base(user, name, moveProperties, moveSequence, actionCommand, damageInfo)
         {
             
         }

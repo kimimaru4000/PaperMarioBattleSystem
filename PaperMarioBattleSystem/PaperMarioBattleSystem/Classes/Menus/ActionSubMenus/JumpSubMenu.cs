@@ -12,28 +12,28 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class JumpSubMenu : ActionSubMenu
     {
-        public JumpSubMenu()
+        public JumpSubMenu(BattleEntity user) : base(user)
         {
             Name = "Jump";
             Position = new Vector2(230, 150);
             AutoSelectSingle = true;
 
-            BattleActions.Add(new JumpAction());
-            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PowerBounce) > 0)
+            BattleActions.Add(new JumpAction(User));
+            if (User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.PowerBounce) > 0)
             {
-                BattleActions.Add(new PowerBounceAction());
+                BattleActions.Add(new PowerBounceAction(User));
             }
-            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.Multibounce) > 0)
+            if (User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.Multibounce) > 0)
             {
-                BattleActions.Add(new MultibounceAction());
+                BattleActions.Add(new MultibounceAction(User));
             }
-            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.TornadoJump) > 0)
+            if (User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.TornadoJump) > 0)
             {
-                BattleActions.Add(new TornadoJumpAction());
+                BattleActions.Add(new TornadoJumpAction(User));
             }
-            if (BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DDownJump) > 0)
+            if (User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.DDownJump) > 0)
             {
-                BattleActions.Add(new DDownJumpAction());
+                BattleActions.Add(new DDownJumpAction(User));
             }
         }
     }

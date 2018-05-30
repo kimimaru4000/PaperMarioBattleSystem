@@ -77,7 +77,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
 
-                    CurSequenceAction = new MoveToSeqAction(EntitiesAffected[0].Position + new Vector2(0f, -10f), MoveDur, Interpolation.InterpolationTypes.QuadInOut, Interpolation.InterpolationTypes.Linear);
+                    CurSequenceAction = new MoveToSeqAction(User, EntitiesAffected[0].Position + new Vector2(0f, -10f), MoveDur, Interpolation.InterpolationTypes.QuadInOut, Interpolation.InterpolationTypes.Linear);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -93,7 +93,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
 
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, EndMoveDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.Linear);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, EndMoveDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.Linear);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());
@@ -163,7 +163,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     //Move offscreen
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(RenderingGlobals.BaseResolutionWidth + 100f, User.Position.Y - 50), LiftMoveDur);
+                    CurSequenceAction = new MoveToSeqAction(User, new Vector2(RenderingGlobals.BaseResolutionWidth + 100f, User.Position.Y - 50), LiftMoveDur);
                     AddSideSeqAction(new FollowSeqAction(EntitiesAffected[0], User, LiftMoveDur, new Vector2(0f, 10f)));
                     break;
                 case 1:
@@ -187,7 +187,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -10f), FailMoveDur);
+                    CurSequenceAction = new MoveAmountSeqAction(User, new Vector2(0f, -10f), FailMoveDur);
                     break;
                 case 1:
                     CurSequenceAction = new WaitSeqAction(FailWaitDur);

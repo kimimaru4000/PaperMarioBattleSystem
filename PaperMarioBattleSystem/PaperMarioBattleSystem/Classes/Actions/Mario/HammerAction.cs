@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class HammerAction : MoveAction
     {
-        public HammerAction()
+        public HammerAction(BattleEntity user) : base(user)
         {
             Name = "Hammer";
 

@@ -67,7 +67,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     //Make the user move back to its battle position
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, MoveTime);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, MoveTime);
 
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;

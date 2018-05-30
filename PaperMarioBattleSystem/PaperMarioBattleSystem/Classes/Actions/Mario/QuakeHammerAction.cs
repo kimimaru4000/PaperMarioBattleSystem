@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
         private int BaseDamage = 1;
         private int DamageScalePerBadge = 1;
 
-        public QuakeHammerAction(int numBadges)
+        public QuakeHammerAction(BattleEntity user, int numBadges) : base(user)
         {
             Name = "Quake Hammer";
 

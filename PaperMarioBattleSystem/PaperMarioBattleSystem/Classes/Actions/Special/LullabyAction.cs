@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class LullabyAction : SpecialMoveAction
     {
-        public LullabyAction()
+        public LullabyAction(BattleEntity user) : base(user)
         {
             Name = "Lullaby";
 

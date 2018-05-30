@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
 {
     public sealed class PowerBounceAction : JumpAction
     {
-        public PowerBounceAction()
+        public PowerBounceAction(BattleEntity user) : base(user)
         {
             Name = "Power Bounce";
             MoveInfo.Icon.SetRect(new Rectangle(939, 136, 24, 21));

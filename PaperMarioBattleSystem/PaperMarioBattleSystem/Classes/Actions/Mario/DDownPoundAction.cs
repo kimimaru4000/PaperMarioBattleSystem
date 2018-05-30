@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class DDownPoundAction : HammerAction
     {
-        public DDownPoundAction()
+        public DDownPoundAction(BattleEntity user) : base(user)
         {
             Name = "D-Down Pound";
 

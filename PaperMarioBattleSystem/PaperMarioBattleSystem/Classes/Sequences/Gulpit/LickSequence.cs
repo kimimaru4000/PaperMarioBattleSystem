@@ -25,7 +25,7 @@ namespace PaperMarioBattleSystem
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
 
                     //Move to the entity
-                    CurSequenceAction = new MoveToSeqAction(BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], EntitiesAffected[0].EntityType != Enumerations.EntityTypes.Player), WalkDur);
+                    CurSequenceAction = new MoveToSeqAction(User, BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], EntitiesAffected[0].EntityType != Enumerations.EntityTypes.Player), WalkDur);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -42,7 +42,7 @@ namespace PaperMarioBattleSystem
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
 
                     //Go back to your battle position
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDur);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, WalkDur);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());
@@ -61,7 +61,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.GulpitBattleAnimations.LickName);
-                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.GulpitBattleAnimations.LickName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.GulpitBattleAnimations.LickName);
                     break;
                 case 1:
                     //Deal damage and end

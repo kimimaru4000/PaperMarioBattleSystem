@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         private double CommandTime = 3500d;
         private Keys ButtonToPress = Keys.Z;
 
-        public AirLiftAction()
+        public AirLiftAction(BattleEntity user) : base(user)
         {
             Name = "Air Lift";
 

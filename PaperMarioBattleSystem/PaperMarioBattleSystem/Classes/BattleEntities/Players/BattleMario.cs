@@ -214,7 +214,7 @@ namespace PaperMarioBattleSystem
 
         protected sealed override BattleMenu GetMainBattleMenu()
         {
-            return new MarioBattleMenu();
+            return new MarioBattleMenu(this);
         }
 
         public sealed override StarPowerBase GetStarPower(StarPowerGlobals.StarPowerTypes starPowerType)

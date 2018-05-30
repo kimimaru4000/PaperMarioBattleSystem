@@ -103,7 +103,7 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.ClearMenuStack();
 
             //Immediately start using the item
-            ItemAction itemChosenAction = ItemChosen.ActionAssociated;
+            ItemAction itemChosenAction = ItemChosen.GetActionAssociated(User);
 
             //Special case: if the item chosen is a Mystery, initialize it
             //We can't do this earlier in Initialize, otherwise we run into an infinite loop

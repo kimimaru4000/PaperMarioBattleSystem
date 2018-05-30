@@ -64,7 +64,7 @@ namespace PaperMarioBattleSystem
                     Vector2 pos = BattleManagerUtils.GetPositionInFront(BattleManager.Instance.FrontPlayer, User.EntityType != Enumerations.EntityTypes.Player);
                     pos.Y = User.BattlePosition.Y;
 
-                    CurSequenceAction = new MoveToSeqAction(pos, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User, pos, WalkDuration);
                     break;
                 case 1:
                     if (ItemShown != null)
@@ -97,7 +97,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());

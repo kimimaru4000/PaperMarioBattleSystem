@@ -23,10 +23,14 @@ namespace PaperMarioBattleSystem
 
         private Vector2 Position = new Vector2(230, 150);
 
-        private List<BattleMenuOption> MenuOptions = new List<BattleMenuOption>(); 
+        private List<BattleMenuOption> MenuOptions = new List<BattleMenuOption>();
 
-        public CancelDipMenu() : base(MenuTypes.Vertical)
+        private BattleEntity User = null;
+
+        public CancelDipMenu(BattleEntity user) : base(MenuTypes.Vertical)
         {
+            User = user;
+
             MenuOptions.Add(new BattleMenuOption("Yes", OnChooseYes));
             MenuOptions.Add(new BattleMenuOption("No", OnChooseNo));
         }
@@ -46,11 +50,11 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.ClearMenuStack();
 
             //Remove any remaining item turns from the BattleEntity and make it do nothing if it no longer wants to use items
-            BattleManager.Instance.EntityTurn.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.DipItemTurns);
+            User.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.DipItemTurns);
 
             //Make the entity perform the NoAction
             //It does this instead of directly ending the entity's turn since choosing not to use an item is affected by Confusion
-            BattleManager.Instance.EntityTurn.StartAction(new NoAction(), false, null);
+            User.StartAction(new NoAction(User), false, null);
         }
 
         private void OnChooseNo()

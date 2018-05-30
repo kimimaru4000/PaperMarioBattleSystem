@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class BonkAction : JumpAction
     {
-        public BonkAction()
+        public BonkAction(BattleEntity user) : base(user)
         {
             Name = "Bonk";
             MoveInfo.Description = "Headbonk an enemy.";

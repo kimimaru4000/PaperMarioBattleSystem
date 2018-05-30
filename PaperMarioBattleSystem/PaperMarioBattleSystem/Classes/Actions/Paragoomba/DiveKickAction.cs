@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class DiveKickAction : MoveAction
     {
-        public DiveKickAction()
+        public DiveKickAction(BattleEntity user) : base(user)
         {
             Name = "Dive Kick";
 

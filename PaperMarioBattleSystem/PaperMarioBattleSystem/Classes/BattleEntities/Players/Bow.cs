@@ -61,7 +61,7 @@ namespace PaperMarioBattleSystem
 
         protected override BattleMenu GetMainBattleMenu()
         {
-            return new PartnerBattleMenu(new BowSubMenu(), Enumerations.PartnerTypes.Bow);
+            return new PartnerBattleMenu(this, new BowSubMenu(this), Enumerations.PartnerTypes.Bow);
         }
 
         public override void OnTurnEnd()

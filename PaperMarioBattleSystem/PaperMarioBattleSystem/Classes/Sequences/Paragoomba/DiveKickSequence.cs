@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName);
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy).X, User.BattlePosition.Y), 700d);
+                    CurSequenceAction = new MoveToSeqAction(User, new Vector2(BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy).X, User.BattlePosition.Y), 700d);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -39,10 +39,10 @@ namespace PaperMarioBattleSystem
                 //Go back to your battle position
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName);
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy).X, User.BattlePosition.Y), 500d);
+                    CurSequenceAction = new MoveToSeqAction(User, new Vector2(BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy).X, User.BattlePosition.Y), 500d);
                     break;
                 case 1:
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, 400d);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, 400d);
                     break;
                 case 2:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());
@@ -63,15 +63,15 @@ namespace PaperMarioBattleSystem
                     User.AnimManager.PlayAnimation(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName);
 
                     //Move up a bit before swooping down
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -25f), 350d);
+                    CurSequenceAction = new MoveAmountSeqAction(User, new Vector2(0f, -25f), 350d);
                     break;
                 case 1:
                     //Move back down
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, 25f), 350d);
+                    CurSequenceAction = new MoveAmountSeqAction(User, new Vector2(0f, 25f), 350d);
                     break;
                 case 2:
                     //Swoop in
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(EntitiesAffected[0].Position.X, User.Position.Y - 10), 500d);
+                    CurSequenceAction = new MoveToSeqAction(User, new Vector2(EntitiesAffected[0].Position.X, User.Position.Y - 10), 500d);
 
                     //Here's likely where you'd check for an action command's input if this were to have one - it'd be like Jump
                     break;

@@ -12,11 +12,11 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class BowSubMenu : ActionSubMenu
     {
-        public BowSubMenu()
+        public BowSubMenu(BattleEntity user) : base(user)
         {
             Name = "Abilities";
             Position = new Vector2(210, 150);
-            BattleActions = new List<MoveAction>() { new OuttaSightAction(), new VeilAction() };
+            BattleActions = new List<MoveAction>() { new OuttaSightAction(User), new VeilAction(User) };
         }
     }
 }

@@ -144,40 +144,45 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        protected MoveAction()
+        protected MoveAction(BattleEntity user) : base(user)
         {
             
         }
 
-        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence)
+        public MoveAction(BattleEntity user, string name, MoveActionData moveProperties, Sequence moveSequence) : this(user)
         {
             Name = name;
             MoveInfo = moveProperties;
             SetMoveSequence(moveSequence);
         }
 
-        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actioncommand) : this(name, moveProperties, moveSequence)
+        public MoveAction(BattleEntity user, string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actioncommand)
+            : this(user, name, moveProperties, moveSequence)
         {
             actionCommand = actioncommand;
             actionCommand.SetHandler(MoveSequence);
         }
 
-        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, DamageData damageInfo) : this(name, moveProperties, moveSequence)
+        public MoveAction(BattleEntity user, string name, MoveActionData moveProperties, Sequence moveSequence, DamageData damageInfo)
+            : this(user, name, moveProperties, moveSequence)
         {
             DamageInfo = damageInfo;
         }
 
-        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actioncommand, DamageData damageInfo) : this(name, moveProperties, moveSequence, actioncommand)
+        public MoveAction(BattleEntity user, string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actioncommand, DamageData damageInfo)
+            : this(user, name, moveProperties, moveSequence, actioncommand)
         {
             DamageInfo = damageInfo;
         }
 
-        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, HealingData healingInfo) : this(name, moveProperties, moveSequence)
+        public MoveAction(BattleEntity user, string name, MoveActionData moveProperties, Sequence moveSequence, HealingData healingInfo)
+            : this(user, name, moveProperties, moveSequence)
         {
             HealingInfo = healingInfo;
         }
 
-        public MoveAction(string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actionCommand, HealingData healingInfo) : this(name, moveProperties, moveSequence, actionCommand)
+        public MoveAction(BattleEntity user, string name, MoveActionData moveProperties, Sequence moveSequence, ActionCommand actionCommand, HealingData healingInfo)
+            : this(user, name, moveProperties, moveSequence, actionCommand)
         {
             HealingInfo = HealingInfo;
         }

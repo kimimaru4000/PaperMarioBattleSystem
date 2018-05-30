@@ -194,7 +194,7 @@ namespace PaperMarioBattleSystem
                         }
 
                         User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
-                        CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.Linear);
+                        CurSequenceAction = new MoveAmountSeqAction(User, new Vector2(0f, JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.Linear);
                         ChangeSequenceBranch(SequenceBranch.End);
 
                         SequenceStep = 1;
@@ -218,7 +218,7 @@ namespace PaperMarioBattleSystem
                     else
                     {
                         User.AnimManager.PlayAnimation(AnimationGlobals.MarioBattleAnimations.TornadoJumpFailName);
-                        CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.MarioBattleAnimations.TornadoJumpFailName);
+                        CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.MarioBattleAnimations.TornadoJumpFailName);
                     }
                     break;
                 case 1:
@@ -229,7 +229,7 @@ namespace PaperMarioBattleSystem
                     else
                     {
                         User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
-                        CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+                        CurSequenceAction = new MoveAmountSeqAction(User, new Vector2(0f, JumpHeight), JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                         ChangeSequenceBranch(SequenceBranch.End);
 
                         SequenceStep = 1;

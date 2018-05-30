@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     {
         protected Animation Anim = null;
 
-        public WaitForAnimationSeqAction(string animName)
+        public WaitForAnimationSeqAction(BattleEntity entity, string animName) : base(entity)
         {
             Anim = Entity.AnimManager.GetAnimation(animName);
         }

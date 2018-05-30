@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class PiercingBlowAction : HammerAction
     {
-        public PiercingBlowAction()
+        public PiercingBlowAction(BattleEntity user) : base(user)
         {
             Name = "Piercing Blow";
 

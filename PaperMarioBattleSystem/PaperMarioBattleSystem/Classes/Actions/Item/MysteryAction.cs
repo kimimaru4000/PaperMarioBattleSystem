@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public List<BattleItem> RevisedItemSet = new List<BattleItem>();
 
-        public MysteryAction(BattleItem item) : base(item)
+        public MysteryAction(BattleEntity user, BattleItem item) : base(user, item)
         {
             
         }
@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
             {
                 for (int i = 0; i < mysteryItems.Length; i++)
                 {
-                    ItemAction itemAction = mysteryItems[i].ActionAssociated;
+                    ItemAction itemAction = mysteryItems[i].GetActionAssociated(User);
                     
                     //If the item can target anyone, then add it to the revised set
                     BattleEntity[] entities = itemAction.GetEntitiesMoveAffects();

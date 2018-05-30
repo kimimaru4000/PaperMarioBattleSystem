@@ -9,11 +9,11 @@ namespace PaperMarioBattleSystem
 {
     public class GoombarioSubMenu : ActionSubMenu
     {
-        public GoombarioSubMenu()
+        public GoombarioSubMenu(BattleEntity user) : base(user)
         {
             Name = "Abilities";
             Position = new Vector2(210, 150);
-            BattleActions = new List<MoveAction> { new BonkAction(), new TattleAction(true), new TidalWaveAction(), new GulpAction(), new MiniEggAction(), new BombSquadAction(3, 3), new RallyWinkAction(), new AirLiftAction() };
+            BattleActions = new List<MoveAction> { new BonkAction(User), new TattleAction(User, true), new TidalWaveAction(User), new GulpAction(User), new MiniEggAction(User), new BombSquadAction(User, 3, 3), new RallyWinkAction(User), new AirLiftAction(User) };
         }
     }
 }

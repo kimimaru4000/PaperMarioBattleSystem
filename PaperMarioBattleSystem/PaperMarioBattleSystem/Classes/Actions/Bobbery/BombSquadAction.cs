@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private int BombDamage = 3;
 
-        public BombSquadAction(int bombCount, int bombDamage)
+        public BombSquadAction(BattleEntity user, int bombCount, int bombDamage) : base(user)
         {
             Name = "Bomb Squad";
 

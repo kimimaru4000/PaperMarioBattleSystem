@@ -16,7 +16,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The MoveAction to perform.
         /// </summary>
-        protected virtual MoveAction ActionPerformed => new ShellTossAction();
+        protected virtual MoveAction ActionPerformed => new ShellTossAction(Enemy);
 
         public KoopaTroopaAI(KoopaTroopa koopatroopa) : base(koopatroopa)
         {
@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
             }
             else
             {
-                koopaTroopa.StartAction(new NoAction(), true, null);
+                koopaTroopa.StartAction(new NoAction(Enemy), true, null);
             }
         }
     }

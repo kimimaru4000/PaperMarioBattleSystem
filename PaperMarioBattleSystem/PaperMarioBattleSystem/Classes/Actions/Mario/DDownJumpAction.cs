@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class DDownJumpAction : JumpAction
     {
-        public DDownJumpAction()
+        public DDownJumpAction(BattleEntity user) : base(user)
         {
             Name = "D-Down Jump";
 

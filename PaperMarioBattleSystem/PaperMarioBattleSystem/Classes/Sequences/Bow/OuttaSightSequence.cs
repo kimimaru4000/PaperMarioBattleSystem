@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
                     movePosition.X -= 15;
                     movePosition.Y = User.Position.Y;
 
-                    CurSequenceAction = new MoveToSeqAction(movePosition, MoveTime);
+                    CurSequenceAction = new MoveToSeqAction(User, movePosition, MoveTime);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -162,7 +162,7 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.ClearMenuStack();
 
             //Immediately start the second half of the sequence
-            MoveAction outtaSightSecondHalf = new MoveAction("Outta Sight Second Half",
+            MoveAction outtaSightSecondHalf = new MoveAction(User, "Outta Sight Second Half",
                 new MoveActionData(null, "Second half of Outta Sight", Enumerations.MoveResourceTypes.FP, 0,
                 Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.First,
                 false, null), new OuttaSightSecondHalfSequence(null, AlphaVal));
@@ -183,7 +183,7 @@ namespace PaperMarioBattleSystem
             BattleUIManager.Instance.ClearMenuStack();
 
             //Make the ally do nothing on each of its turns
-            AllyAffected.StartAction(new NoAction(), true, null);
+            AllyAffected.StartAction(new NoAction(AllyAffected), true, null);
             AllyAffected.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.GuardName);
         }
     }

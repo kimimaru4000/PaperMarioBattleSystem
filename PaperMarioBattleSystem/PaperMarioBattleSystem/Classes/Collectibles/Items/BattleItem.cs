@@ -40,13 +40,6 @@ namespace PaperMarioBattleSystem
         public HeightStates[] HeightsAffected { get; protected set; } = null;
 
         /// <summary>
-        /// The ItemAction associated with the item.
-        /// By default, it is the base <see cref="ItemAction"/>.
-        /// <para>This returns a new instance of the action.</para>
-        /// </summary>
-        public virtual ItemAction ActionAssociated => new ItemAction(this);
-
-        /// <summary>
         /// The Sequence that this Item performs when used in battle.
         /// By default, it uses the base <see cref="ItemSequence"/>.
         /// <para>This returns a new instance of the sequence.</para>
@@ -56,6 +49,16 @@ namespace PaperMarioBattleSystem
         public BattleItem()
         {
             
+        }
+
+        /// <summary>
+        /// Gets the ItemAction associated with the item.
+        /// By default, it is the base <see cref="ItemAction"/>.
+        /// <para>This returns a new instance of the action.</para>
+        /// </summary>
+        public virtual ItemAction GetActionAssociated(BattleEntity user)
+        {
+            return new ItemAction(user, this);
         }
     }
 }

@@ -30,13 +30,14 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private double MessageDuration = MessageBattleEvent.DefaultWaitDuration;
 
-        public MessageAction(string name, Texture2D icon, string description, int messagePriority, string message)
-            : this(name, icon, description, messagePriority, message, MessageBattleEvent.DefaultWaitDuration)
+        public MessageAction(BattleEntity user, string name, Texture2D icon, string description, int messagePriority, string message)
+            : this(user, name, icon, description, messagePriority, message, MessageBattleEvent.DefaultWaitDuration)
         {
 
         }
 
-        public MessageAction(string name, Texture2D icon, string description, int messagePriority, string message, double messageDuration)
+        public MessageAction(BattleEntity user, string name, Texture2D icon, string description, int messagePriority, string message, double messageDuration)
+            : base(user)
         {
             Name = name;
 

@@ -45,7 +45,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, MoveDur);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, MoveDur);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());
@@ -64,13 +64,13 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.DuplighostBattleAnimations.HeadbuttName);
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(EntitiesAffected[0].Position.X, EntitiesAffected[0].Position.Y + YHeight), MoveDur);
+                    CurSequenceAction = new MoveToSeqAction(User, new Vector2(EntitiesAffected[0].Position.X, EntitiesAffected[0].Position.Y + YHeight), MoveDur);
                     break;
                 case 1:
                     AttemptDamage(Action.DamageProperties.Damage, EntitiesAffected[0], Action.DamageProperties, false);
 
                     Vector2 pos = BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType == Enumerations.EntityTypes.Player);
-                    CurSequenceAction = new MoveToSeqAction(pos, MoveDur / 2d, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+                    CurSequenceAction = new MoveToSeqAction(User, pos, MoveDur / 2d, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     break;
                 case 2:
                     User.AnimManager.PlayAnimation(AnimationGlobals.IdleName);

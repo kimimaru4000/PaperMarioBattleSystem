@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
 
         public override void PerformAction()
         {
-            Enemy.StartAction(new NoAction(), true, null);
+            Enemy.StartAction(new NoAction(Enemy), true, null);
         }
     }
 }

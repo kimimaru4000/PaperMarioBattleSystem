@@ -16,7 +16,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class NoAction : MoveAction
     {
-        public NoAction()
+        public NoAction(BattleEntity user) : base(user)
         {
             Name = "Do Nothing";
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(182, 844, 24, 24)),

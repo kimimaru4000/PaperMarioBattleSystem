@@ -136,7 +136,7 @@ namespace PaperMarioBattleSystem
                         EntitiesAffected[0].AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName);
                     }
 
-                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.GoombellaBattleAnimations.WinkName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.GoombellaBattleAnimations.WinkName);
                     break;
                 case 1:
                     //Wait a little bit
@@ -182,7 +182,7 @@ namespace PaperMarioBattleSystem
                     //Play the wink animation, add the heart (and particles at a later time), and play the sound
                     User.AnimManager.PlayAnimation(AnimationGlobals.GoombellaBattleAnimations.WinkName, true);
 
-                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.GoombellaBattleAnimations.WinkName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.GoombellaBattleAnimations.WinkName);
                     break;
                 case 1:
                     //Wait a little bit

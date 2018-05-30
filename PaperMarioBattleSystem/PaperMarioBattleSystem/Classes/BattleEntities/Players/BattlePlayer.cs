@@ -75,7 +75,7 @@ namespace PaperMarioBattleSystem
             int itemTurns = EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.DipItemTurns);
             if (itemTurns > 0)
             {
-                BattleUIManager.Instance.PushMenu(new ItemSubMenu(1, 0, true));
+                BattleUIManager.Instance.PushMenu(new ItemSubMenu(this, 1, 0, true));
             }
             else
             {

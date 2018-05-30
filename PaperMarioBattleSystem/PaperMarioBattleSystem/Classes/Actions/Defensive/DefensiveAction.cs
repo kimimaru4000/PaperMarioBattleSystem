@@ -17,8 +17,6 @@ namespace PaperMarioBattleSystem
         public ActionCommand actionCommand { get; set; } = null;
         public bool EnableActionCommand { get; set; } = false;
 
-        public override BattleEntity User => actionUser;
-
         public bool CommandEnabled => (actionCommand != null && EnableActionCommand == true && UserImmobile == false);
         public bool IsSuccessful => (PrevCommandTimer >= Time.ActiveMilliseconds);
 
@@ -36,8 +34,6 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected bool UserImmobile => (User != null && User.IsImmobile() == true);
 
-        protected BattleEntity actionUser = null;
-
         /// <summary>
         /// The amount of time a successful ActionCommand is valid for
         /// </summary>
@@ -54,9 +50,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected StatusTypes[] AllowedStatuses = null;
 
-        protected DefensiveAction(BattleEntity user)
+        protected DefensiveAction(BattleEntity user) : base(user)
         {
-            actionUser = user;
+
         }
 
         public virtual void OnCommandSuccess()

@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class BlinkFasterAction : MoveAction
     {
-        public BlinkFasterAction(string animName, float speedVal)
+        public BlinkFasterAction(BattleEntity user, string animName, float speedVal) : base(user)
         {
             Name = "Blink Faster";
 

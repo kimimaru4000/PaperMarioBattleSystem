@@ -24,15 +24,24 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// The user of this action.
-        /// Aside from Defensive Actions, it will be the entity whose turn it currently is
+        /// Aside from Defensive Actions, it will often be the entity whose turn it currently is.
         /// </summary>
-        public virtual BattleEntity User => BattleManager.Instance.EntityTurn;
+        public BattleEntity User { get; private set; } = null;
 
         #endregion
 
-        protected BattleAction()
+        protected BattleAction(BattleEntity user)
         {
-            
+            SetUser(user);
+        }
+
+        /// <summary>
+        /// Sets the BattleEntity performing the BattleAction.
+        /// </summary>
+        /// <param name="user">The BattleEntity performing the BattleAction.</param>
+        public void SetUser(BattleEntity user)
+        {
+            User = user;
         }
 
         public virtual void Update()

@@ -79,15 +79,15 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     //Move to the opponent
-                    CurSequenceAction = new MoveToSeqAction(BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), MoveTime);
+                    CurSequenceAction = new MoveToSeqAction(User, BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), MoveTime);
                     break;
                 case 1:
                     //Jump up to their height
-                    CurSequenceAction = new MoveToSeqAction(EntitiesAffected[0].BattlePosition + new Vector2(0f, 10f), JumpTime);
+                    CurSequenceAction = new MoveToSeqAction(User, EntitiesAffected[0].BattlePosition + new Vector2(0f, 10f), JumpTime);
                     break;
                 case 2:
                     //Fall down and latch
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, -10f), JumpTime);
+                    CurSequenceAction = new MoveAmountSeqAction(User, new Vector2(0f, -10f), JumpTime);
                     break;
                 case 3:
                     //Override defensive actions as the latching shouldn't be guardable
@@ -188,7 +188,7 @@ namespace PaperMarioBattleSystem
 
                     //The entity goes back to its battle position
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, MoveTime);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, MoveTime);
                     break;
                 case 1:
                     EndSequence();

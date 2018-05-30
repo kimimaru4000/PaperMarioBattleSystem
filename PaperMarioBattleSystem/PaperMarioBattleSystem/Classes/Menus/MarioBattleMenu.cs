@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class MarioBattleMenu : PlayerBattleMenu
     {
-        public MarioBattleMenu()
+        public MarioBattleMenu(BattleEntity user) : base(user)
         {
             Texture2D tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
 
@@ -25,11 +25,11 @@ namespace PaperMarioBattleSystem
             CroppedTexture2D starPower = new CroppedTexture2D(tex, new Rectangle(182, 812, 24, 24));
 
             ActionButtons.Add(new ActionButton("Jump", jump,
-                Enumerations.MoveCategories.Jump, new JumpSubMenu()));
+                Enumerations.MoveCategories.Jump, new JumpSubMenu(user)));
             ActionButtons.Add(new ActionButton("Hammer", hammer,
-                Enumerations.MoveCategories.Hammer, new HammerSubMenu()));
+                Enumerations.MoveCategories.Hammer, new HammerSubMenu(user)));
             ActionButtons.Add(new ActionButton("Special", starPower,
-                Enumerations.MoveCategories.Special, new SpecialSubMenu()));
+                Enumerations.MoveCategories.Special, new SpecialSubMenu(user)));
 
             Initialize(2);
         }

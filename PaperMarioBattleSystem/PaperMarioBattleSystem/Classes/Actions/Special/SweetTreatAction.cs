@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class SweetTreatAction : SpecialMoveAction
     {
-        public SweetTreatAction()
+        public SweetTreatAction(BattleEntity user) : base(user)
         {
             Name = "Sweet Treat";
 

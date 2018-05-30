@@ -56,14 +56,11 @@ namespace PaperMarioBattleSystem
 
         public void Initialize()
         {
-            if (SubMenu != null)
-            {
-                SubMenu.MoveCategory = Category;
-                SubMenu.Initialize();
-            }
+            SubMenu.MoveCategory = Category;
+            SubMenu.Initialize();
 
             //Check if the button should be disabled
-            Disabled = BattleManager.Instance.EntityTurn.EntityProperties.IsMoveCategoryDisabled(Category);
+            Disabled = SubMenu.User.EntityProperties.IsMoveCategoryDisabled(Category);
         }
 
         /// <summary>
@@ -97,7 +94,7 @@ namespace PaperMarioBattleSystem
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                         new MessageBattleEvent(disabledString, MessageBattleEvent.DefaultWaitDuration));
 
-                    Debug.LogError($"All {Category} moves are currently disabled for {BattleManager.Instance.EntityTurn.Name}!");
+                    Debug.LogError($"All {Category} moves are currently disabled for {SubMenu.User.Name}!");
                 }
             }
             else

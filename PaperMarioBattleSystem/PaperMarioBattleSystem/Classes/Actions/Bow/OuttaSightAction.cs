@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class OuttaSightAction : MoveAction
     {
-        public OuttaSightAction()
+        public OuttaSightAction(BattleEntity user) : base(user)
         {
             Name = "Outta Sight";
 

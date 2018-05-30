@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
         protected ActionSubMenu PartnerSubMenu { get; private set; } = null;
         protected PartnerTypes PartnerType { get; private set; } = PartnerTypes.None;
 
-        public PartnerBattleMenu(ActionSubMenu partnerSubMenu, PartnerTypes partnerType)
+        public PartnerBattleMenu(BattleEntity user, ActionSubMenu partnerSubMenu, PartnerTypes partnerType) : base(user)
         {
             PartnerSubMenu = partnerSubMenu;
             PartnerType = partnerType;
@@ -28,10 +28,10 @@ namespace PaperMarioBattleSystem
             ActionButtons.Add(new ActionButton("Abilities", partnerIcon, MoveCategories.Partner, PartnerSubMenu));
 
             //Add Focus to the Partner battle menu if the Group Focus badge is equipped
-            int groupFocusCount = BattleManager.Instance.EntityTurn.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.GroupFocus);
+            int groupFocusCount = User.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.GroupFocus);
             if (groupFocusCount > 0)
             {
-                ActionSubMenu focusMenu = new ActionSubMenu("Focus", new FocusAction());
+                ActionSubMenu focusMenu = new ActionSubMenu(user, "Focus", new FocusAction(user));
                 focusMenu.AutoSelectSingle = true;
 
                 CroppedTexture2D starPower = new CroppedTexture2D(abilityTex, new Rectangle(182, 812, 24, 24));

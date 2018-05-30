@@ -140,7 +140,7 @@ namespace PaperMarioBattleSystem
             //In the event the Shell does start its turn, simply do nothing
             base.OnTurnStart();
 
-            StartAction(new NoAction(), false, null);
+            StartAction(new NoAction(this), false, null);
         }
 
         protected override void OnDeath()

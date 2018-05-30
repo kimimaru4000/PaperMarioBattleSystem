@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class ChangePartnerSubMenu : ActionSubMenu
     {
-        public ChangePartnerSubMenu()
+        public ChangePartnerSubMenu(BattleEntity user) : base(user)
         {
             Name = "Change Partner";
             Position = new Vector2(230, 150);
@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
 
             for (int i = 0; i < partners.Length; i++)
             {
-                ChangePartnerAction partnerChange = new ChangePartnerAction(partners[i]);
+                ChangePartnerAction partnerChange = new ChangePartnerAction(User, partners[i]);
 
                 //If this Partner is the current one out in battle or is dead, disable the option to select it
                 if (partners[i] == BattleManager.Instance.Partner || partners[i].IsDead == true)

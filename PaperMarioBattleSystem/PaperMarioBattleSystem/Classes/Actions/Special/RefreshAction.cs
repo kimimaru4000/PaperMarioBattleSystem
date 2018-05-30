@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class RefreshAction : SpecialMoveAction
     {
-        public RefreshAction()
+        public RefreshAction(BattleEntity user) : base(user)
         {
             Name = "Refresh";
 

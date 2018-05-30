@@ -20,13 +20,18 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The BattleEntity the SequenceAction affects.
         /// </summary>
-        public BattleEntity Entity { get; protected set; } = BattleManager.Instance.EntityTurn;
+        public BattleEntity Entity { get; protected set; } = null;
 
         public bool IsDone => Done;
 
         protected SequenceAction()
         {
+            
+        }
 
+        protected SequenceAction(BattleEntity entity)
+        {
+            Entity = entity;
         }
 
         protected SequenceAction(double duration)

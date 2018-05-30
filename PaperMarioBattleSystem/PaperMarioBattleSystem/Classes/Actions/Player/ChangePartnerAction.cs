@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private BattlePartner NewPartner = null;
 
-        public ChangePartnerAction(BattlePartner newPartner)
+        public ChangePartnerAction(BattleEntity user, BattlePartner newPartner) : base(user)
         {
             NewPartner = newPartner;
 

@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
         /// <param name="dipTurnCount">The number of item turns. This is used for Double/Triple Dip.</param>
         /// <param name="fpCost">The amount of FP it costs to use an item. This is used for Double/Triple Dip.</param>
         /// <param name="isRootMenu">Tells if the ItemSubMenu is the root menu. This is only true if Double/Triple Dip is used.</param>
-        public ItemSubMenu(int dipTurnCount, int fpCost, bool isRootMenu = false)
+        public ItemSubMenu(BattleEntity user, int dipTurnCount, int fpCost, bool isRootMenu = false) : base(user)
         {
             Name = "Items";
             Position = new Vector2(230, 150);
@@ -56,7 +56,7 @@ namespace PaperMarioBattleSystem
                 BattleItem item = (BattleItem)usableItems[i];
 
                 //Set item properties
-                ItemAction newItemAction = item.ActionAssociated;
+                ItemAction newItemAction = item.GetActionAssociated(User);
                 newItemAction.SetDipFPCost(FPCost);
                 //Set the item turn count
                 if (dipTurnCount > 1)
@@ -73,7 +73,7 @@ namespace PaperMarioBattleSystem
                 //and brings you back to the menu. This happens even with Double Dip and Triple Dip, essentially forcing you
                 //to stop using items.
 
-                MessageAction noItems = new MessageAction("No Items", null, "You have no items.",
+                MessageAction noItems = new MessageAction(User, "No Items", null, "You have no items.",
                     (int)BattleGlobals.BattleEventPriorities.Message, "You can't select that!");
                 BattleActions.Add(noItems);
             }
@@ -95,13 +95,13 @@ namespace PaperMarioBattleSystem
             else
             {
                 //Push the CancelDipMenu
-                BattleUIManager.Instance.PushMenu(new CancelDipMenu());
+                BattleUIManager.Instance.PushMenu(new CancelDipMenu(User));
             }
         }
 
         private void SetEntityDipTurnCount()
         {
-            BattleManager.Instance.EntityTurn.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.DipItemTurns, DipTurnCount);
+            User.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.DipItemTurns, DipTurnCount);
         }
     }
 }

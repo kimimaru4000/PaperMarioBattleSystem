@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class RockSpitAction : MoveAction
     {
-        public RockSpitAction(BattleEntity entityUsed)
+        public RockSpitAction(BattleEntity user, BattleEntity entityUsed) : base(user)
         {
             Name = "Rock Spit";
 

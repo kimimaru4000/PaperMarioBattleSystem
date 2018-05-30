@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class TattleAction : MoveAction
     {
-        public TattleAction(bool isGoombella)
+        public TattleAction(BattleEntity user, bool isGoombella) : base(user)
         {
             Name = "Tattle";
 

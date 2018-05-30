@@ -23,11 +23,11 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(BattleManagerUtils.GetPositionInFront(User, User.EntityType != Enumerations.EntityTypes.Player), WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User, BattleManagerUtils.GetPositionInFront(User, User.EntityType != Enumerations.EntityTypes.Player), WalkDuration);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(PickupAnimName, true);
-                    CurSequenceAction = new WaitForAnimationSeqAction(PickupAnimName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, PickupAnimName);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:

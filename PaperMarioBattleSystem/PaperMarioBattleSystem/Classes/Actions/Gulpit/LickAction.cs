@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class LickAction : MoveAction
     {
-        public LickAction()
+        public LickAction(BattleEntity user) : base(user)
         {
             Name = "Lick";
             MoveInfo = new MoveActionData(null, "Lick the enemy.", Enumerations.MoveResourceTypes.FP, 0, Enumerations.CostDisplayTypes.Shown,

@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         private readonly double StartingDrawTime = 20000d;
         private readonly Vector2 StartingDrawLoc = Vector2.Zero;
 
-        public ArtAttackAction()
+        public ArtAttackAction(BattleEntity user) : base(user)
         {
             Name = "Art Attack";
 

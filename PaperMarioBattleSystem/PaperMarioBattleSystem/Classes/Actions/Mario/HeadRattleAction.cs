@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class HeadRattleAction : HammerAction
     {
-        public HeadRattleAction()
+        public HeadRattleAction(BattleEntity user) : base(user)
         {
             Name = "Head Rattle";
             MoveInfo.ResourceCost = 2;

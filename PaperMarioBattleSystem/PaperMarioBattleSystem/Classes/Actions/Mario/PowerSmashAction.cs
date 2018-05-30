@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class PowerSmashAction : HammerAction
     {
-        public PowerSmashAction(int numEquipped)
+        public PowerSmashAction(BattleEntity user, int numEquipped) : base(user)
         {
             Name = "Power Smash";
 

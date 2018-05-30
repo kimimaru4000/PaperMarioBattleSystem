@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class ShellTossAction : MoveAction
     {
-        public ShellTossAction()
+        public ShellTossAction(BattleEntity user) : base(user)
         {
             Name = "Shell Toss";
 

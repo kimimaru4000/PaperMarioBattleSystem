@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private ActionSubMenu SubMenu = null;
 
-        public MenuAction(string name, CroppedTexture2D icon, string description, ActionSubMenu subMenu)
+        public MenuAction(BattleEntity user, string name, CroppedTexture2D icon, string description, ActionSubMenu subMenu) : base(user)
         {
             Name = name;
             MoveInfo = new MoveActionData(icon, description, MoveResourceTypes.FP, 0, CostDisplayTypes.Shown, MoveAffectionTypes.None,
@@ -37,7 +37,8 @@ namespace PaperMarioBattleSystem
         /// <param name="description"></param>
         /// <param name="fpCost"></param>
         /// <param name="subMenu"></param>
-        public MenuAction(string name, CroppedTexture2D icon, string description, int fpCost, ActionSubMenu subMenu) : this(name, icon, description, subMenu)
+        public MenuAction(BattleEntity user, string name, CroppedTexture2D icon, string description, int fpCost, ActionSubMenu subMenu)
+            : this(user, name, icon, description, subMenu)
         {
             MoveInfo.ResourceCost = fpCost;
         }

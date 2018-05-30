@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class TidalWaveAction : MoveAction
     {
-        public TidalWaveAction()
+        public TidalWaveAction(BattleEntity user) : base(user)
         {
             Name = "Tidal Wave";
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 75, 22, 22)),

@@ -119,7 +119,7 @@ namespace PaperMarioBattleSystem
             //Blink faster on the first turn
             if (TurnsTaken <= 1)
             {
-                StartAction(new BlinkFasterAction(AnimationGlobals.IdleName, 1.6f), true, null);
+                StartAction(new BlinkFasterAction(this, AnimationGlobals.IdleName, 1.6f), true, null);
             }
             //Explode on the second turn
             else
@@ -135,7 +135,7 @@ namespace PaperMarioBattleSystem
 
                 Detonated = true;
 
-                StartAction(new NoAction(), true, null);
+                StartAction(new NoAction(this), true, null);
             }
         }
 

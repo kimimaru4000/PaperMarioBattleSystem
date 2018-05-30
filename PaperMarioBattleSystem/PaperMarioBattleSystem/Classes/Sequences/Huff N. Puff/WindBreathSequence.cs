@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.HuffNPuffBattleAnimations.InhaleName);
-                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.HuffNPuffBattleAnimations.InhaleName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.HuffNPuffBattleAnimations.InhaleName);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(AnimationGlobals.HuffNPuffBattleAnimations.ExhaleName);

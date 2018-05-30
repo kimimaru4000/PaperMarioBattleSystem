@@ -33,14 +33,9 @@ namespace PaperMarioBattleSystem
 
         protected Interpolation.InterpolationTypes YInterpolation = Interpolation.InterpolationTypes.Linear;
 
-        public MoveToSeqAction(Vector2 destination, double duration,
-            Interpolation.InterpolationTypes xInterpolation = Interpolation.InterpolationTypes.Linear,
-            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear) : base(duration)
+        protected MoveToSeqAction(BattleEntity entity, double duration) : base(entity, duration)
         {
-            MoveEnd = destination;
 
-            XInterpolation = xInterpolation;
-            YInterpolation = yInterpolation;
         }
 
         public MoveToSeqAction(BattleEntity entity, Vector2 destination, double duration,
@@ -51,11 +46,6 @@ namespace PaperMarioBattleSystem
 
             XInterpolation = xInterpolation;
             YInterpolation = yInterpolation;
-        }
-
-        protected MoveToSeqAction(double duration) : base(duration)
-        {
-            
         }
 
         protected override void OnStart()

@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class RunAwayAction : MoveAction
     {
-        public RunAwayAction()
+        public RunAwayAction(BattleEntity user) : base(user)
         {
             Name = "Run Away";
 

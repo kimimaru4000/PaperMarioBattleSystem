@@ -17,8 +17,8 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class KissyKissyAction : MoveAction
     {
-        public KissyKissyAction(bool hasActionCommand, int numAttacks, int damagePerAttack, Elements damageElement,
-            bool piercing, bool sideDirect, HeightStates[] heightsAffected)
+        public KissyKissyAction(BattleEntity user, bool hasActionCommand, int numAttacks, int damagePerAttack, Elements damageElement,
+            bool piercing, bool sideDirect, HeightStates[] heightsAffected) : base(user)
         {
             Name = "Kissy-Kissy";
 

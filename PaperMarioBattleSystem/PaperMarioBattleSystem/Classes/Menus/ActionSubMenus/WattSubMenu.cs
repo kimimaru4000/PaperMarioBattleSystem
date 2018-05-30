@@ -12,11 +12,11 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class WattSubMenu : ActionSubMenu
     {
-        public WattSubMenu()
+        public WattSubMenu(BattleEntity user) : base(user)
         {
             Name = "Abilities";
             Position = new Vector2(210, 150);
-            BattleActions = new List<MoveAction>() { new ElectroDashAction(), new PowerShockAction() };
+            BattleActions = new List<MoveAction>() { new ElectroDashAction(User), new PowerShockAction(User) };
         }
     }
 }

@@ -61,8 +61,12 @@ namespace PaperMarioBattleSystem
 
         private bool Initialized = false;
 
-        protected PlayerBattleMenu() : base(MenuTypes.Horizontal)
+        protected BattleEntity User { get; private set; } = null;
+
+        protected PlayerBattleMenu(BattleEntity user) : base(MenuTypes.Horizontal)
         {
+            User = user;
+
             Texture2D battleGFX = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
 
             SwitchIcon = new CroppedTexture2D(battleGFX, new Rectangle(651, 13, 78, 30));
@@ -70,12 +74,12 @@ namespace PaperMarioBattleSystem
             CroppedTexture2D tacticsButton = new CroppedTexture2D(battleGFX, new Rectangle(146, 844, 24, 24));
             CroppedTexture2D itemsButton = new CroppedTexture2D(battleGFX, new Rectangle(146, 812, 24, 24));
 
-            ActionButtons.Add(new ActionButton("Tactics", tacticsButton, MoveCategories.Tactics, new TacticsSubMenu()));
+            ActionButtons.Add(new ActionButton("Tactics", tacticsButton, MoveCategories.Tactics, new TacticsSubMenu(User)));
 
             ActionSubMenu itemMenu = null;
             if (CheckUseDipMenu() == false)
-                itemMenu = new ItemSubMenu(1, 0);
-            else itemMenu = new ItemDipSubMenu();
+                itemMenu = new ItemSubMenu(user, 1, 0);
+            else itemMenu = new ItemDipSubMenu(User);
 
             ActionButtons.Add(new ActionButton("Items", itemsButton, MoveCategories.Item, itemMenu));
         }
@@ -86,7 +90,7 @@ namespace PaperMarioBattleSystem
         /// <param name="startingSelection">The menu item to start the menu selected on.</param>
         protected void Initialize(int startingSelection)
         {
-            Position = BattleManager.Instance.EntityTurn.BattlePosition;
+            Position = User.BattlePosition;
 
             ChangeSelection(startingSelection);
 
@@ -127,7 +131,7 @@ namespace PaperMarioBattleSystem
 
                     //Decrement the current entity's turns used and end its turn to start the front entity's turn
                     //This keeps that entity's number of turns the same
-                    BattleManager.Instance.EntityTurn.SetTurnsUsed(BattleManager.Instance.EntityTurn.TurnsUsed - 1);
+                    User.SetTurnsUsed(User.TurnsUsed - 1);
                     BattleManager.Instance.TurnEnd();
 
                     //Queue a Battle Event to swap the current positions of Mario and his Partner
@@ -138,7 +142,7 @@ namespace PaperMarioBattleSystem
                 }
                 else
                 {
-                    BattleEntity otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.FrontPlayer
+                    BattleEntity otherPlayer = (User == BattleManager.Instance.FrontPlayer)
                     ? BattleManager.Instance.BackPlayer : BattleManager.Instance.FrontPlayer;
 
                     if (otherPlayer != null)
@@ -194,8 +198,8 @@ namespace PaperMarioBattleSystem
         /// <returns>true if the BattleEntity using this menu has at least one Double Dip or Triple Dip Badge equipped.</returns>
         private bool CheckUseDipMenu()
         {
-            int doubleDipCount = BattleManager.Instance.EntityTurn.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.DoubleDip);
-            int tripleDipCount = BattleManager.Instance.EntityTurn.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.TripleDip);
+            int doubleDipCount = User.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.DoubleDip);
+            int tripleDipCount = User.GetEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.TripleDip);
 
             return (doubleDipCount > 0 || tripleDipCount > 0);
         }
@@ -206,7 +210,7 @@ namespace PaperMarioBattleSystem
         /// <returns>true if Mario or his Partner hasn't used up all of his or her turns and isn't dead, otherwise false.</returns>
         private bool CanSwitch()
         {
-            BattleEntity otherPlayer = BattleManager.Instance.EntityTurn == BattleManager.Instance.FrontPlayer
+            BattleEntity otherPlayer = (User == BattleManager.Instance.FrontPlayer)
                     ? BattleManager.Instance.BackPlayer : BattleManager.Instance.FrontPlayer;
 
             if (otherPlayer == null)

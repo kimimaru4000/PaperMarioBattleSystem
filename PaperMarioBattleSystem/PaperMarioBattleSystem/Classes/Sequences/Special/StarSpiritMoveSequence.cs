@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
                     //NOTE: Mario moves up a tiny bit when he's in the front, I haven't confirmed how it works in the back yet
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(AnimationGlobals.PlayerBattleAnimations.StarSpecialName);

@@ -84,7 +84,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
 
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, EndMoveDur);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, EndMoveDur);
                     break;
                 case 1:
                     EndSequence();
@@ -103,7 +103,7 @@ namespace PaperMarioBattleSystem
                     Vector2 pos = new Vector2(BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType == Enumerations.EntityTypes.Player).X, User.Position.Y);
 
                     StartActionCommandInput();
-                    CurSequenceAction = new MoveToSeqAction(pos, MoveDur);
+                    CurSequenceAction = new MoveToSeqAction(User, pos, MoveDur);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(AnimationGlobals.WattBattleAnimations.WattElectricChargeName);
@@ -121,7 +121,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(EntitiesAffected[0].BattlePosition.X, User.Position.Y), 200d);
+                    CurSequenceAction = new MoveToSeqAction(User, new Vector2(EntitiesAffected[0].BattlePosition.X, User.Position.Y), 200d);
                     break;
                 case 1:
                     InteractionResult[] result = AttemptDamage(Action.DamageProperties.Damage, EntitiesAffected[0], Action.DamageProperties, false);
@@ -145,7 +145,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    CurSequenceAction = new MoveToSeqAction(new Vector2(EntitiesAffected[0].BattlePosition.X, User.Position.Y), 200d);
+                    CurSequenceAction = new MoveToSeqAction(User, new Vector2(EntitiesAffected[0].BattlePosition.X, User.Position.Y), 200d);
                     break;
                 case 1:
                     //Failing deals only one damage
@@ -171,13 +171,13 @@ namespace PaperMarioBattleSystem
                     Vector2 destPos = BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], EntitiesAffected[0].EntityType == Enumerations.EntityTypes.Player);
                     Vector2 curDest = User.Position + new Vector2(UtilityGlobals.DifferenceDivided(destPos.X, User.Position.X, 2f), MissHeight);
 
-                    CurSequenceAction = new MoveToSeqAction(curDest, MissMoveDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
+                    CurSequenceAction = new MoveToSeqAction(User, curDest, MissMoveDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 1:
                     destPos = BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], EntitiesAffected[0].EntityType == Enumerations.EntityTypes.Player);
                     curDest = User.Position + new Vector2(UtilityGlobals.DifferenceDivided(destPos.X, User.Position.X, 2f), -MissHeight);
 
-                    CurSequenceAction = new MoveToSeqAction(curDest, MissMoveDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+                    CurSequenceAction = new MoveToSeqAction(User, curDest, MissMoveDur, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     break;
                 case 2:
                     User.AnimManager.PlayAnimation(AnimationGlobals.IdleName);

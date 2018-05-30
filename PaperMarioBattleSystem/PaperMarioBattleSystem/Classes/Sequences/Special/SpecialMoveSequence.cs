@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDuration);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, WalkDuration);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());

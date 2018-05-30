@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class FocusAction : SpecialMoveAction
     {
-        public FocusAction()
+        public FocusAction(BattleEntity user) : base(user)
         {
             Name = "Focus";
 

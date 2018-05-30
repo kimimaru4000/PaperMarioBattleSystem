@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class IceSmashAction : HammerAction
     {
-        public IceSmashAction()
+        public IceSmashAction(BattleEntity user) : base(user)
         {
             Name = "Ice Smash";
             MoveInfo.Icon.SetRect(new Rectangle(891, 430, 40, 40));

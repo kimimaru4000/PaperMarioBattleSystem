@@ -101,7 +101,7 @@ namespace PaperMarioBattleSystem
 
         protected override BattleMenu GetMainBattleMenu()
         {
-            return new PartnerBattleMenu(new WattSubMenu(), PartnerTypes.Watt);
+            return new PartnerBattleMenu(this, new WattSubMenu(this), PartnerTypes.Watt);
         }
 
         public override void OnTurnEnd()

@@ -25,7 +25,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.KoopatrolBattleAnimations.SummonKoopatrolName);
 
-                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.KoopatrolBattleAnimations.SummonKoopatrolName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.KoopatrolBattleAnimations.SummonKoopatrolName);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:

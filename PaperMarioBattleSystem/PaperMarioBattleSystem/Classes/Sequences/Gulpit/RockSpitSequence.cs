@@ -60,7 +60,7 @@ namespace PaperMarioBattleSystem
                     Vector2 position = BattleManagerUtils.GetPositionInFront(EntityUsed, false);
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
 
-                    CurSequenceAction = new MoveToSeqAction(position, WalkDur);
+                    CurSequenceAction = new MoveToSeqAction(User, position, WalkDur);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(AnimationGlobals.GulpitBattleAnimations.SpitRockName);
@@ -71,7 +71,7 @@ namespace PaperMarioBattleSystem
                     EntityUsed.Layer = User.Layer + .0001f;
                     AddSideSeqAction(new MoveToSeqAction(EntityUsed, User.Position + new Vector2(-18, -3), User.AnimManager.CurrentAnim.CurFrame.Duration));
 
-                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.GulpitBattleAnimations.SpitRockName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.GulpitBattleAnimations.SpitRockName);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -117,7 +117,7 @@ namespace PaperMarioBattleSystem
                     //Go back to your battle position
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
 
-                    CurSequenceAction = new MoveToSeqAction(User.BattlePosition, WalkDur);
+                    CurSequenceAction = new MoveToSeqAction(User, User.BattlePosition, WalkDur);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());

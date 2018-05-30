@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
         //The second part of Tornado Jump
         private MoveAction TornadoJumpSecondPart = null;
 
-        public TornadoJumpAction()
+        public TornadoJumpAction(BattleEntity user) : base(user)
         {
             Name = "Tornado Jump";
 
@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
             //Second part
             //The second part's damage is Piercing, starts as 2, and cannot be increased with Power Plus, All Or Nothing, or P-Up, D-Down
             //Equipping a 2nd badge increases the FP cost from 3 to 6 and increases the damage of the Jump by 1 and the air attack by 2
-            TornadoJumpSecondPart = new MoveAction(string.Empty, new MoveActionData(null, string.Empty, MoveResourceTypes.FP, 0f, CostDisplayTypes.Shown,
+            TornadoJumpSecondPart = new MoveAction(User, string.Empty, new MoveActionData(null, string.Empty, MoveResourceTypes.FP, 0f, CostDisplayTypes.Shown,
                 MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.All, false, new HeightStates[] { HeightStates.Hovering, HeightStates.Airborne },
                 new EntityTypes[] { EntityTypes.Enemy }), new NoSequence(TornadoJumpSecondPart),
                 new DamageData(2, Elements.Normal, true, ContactTypes.None, ContactProperties.Ranged, null, DamageEffects.None));

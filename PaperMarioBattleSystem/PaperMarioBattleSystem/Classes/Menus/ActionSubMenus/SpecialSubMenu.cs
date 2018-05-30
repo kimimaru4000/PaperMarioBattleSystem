@@ -14,21 +14,21 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class SpecialSubMenu : ActionSubMenu
     {
-        public SpecialSubMenu()
+        public SpecialSubMenu(BattleEntity user) : base(user)
         {
             Name = "Special";
             Position = new Vector2(230, 150);
 
-            BattleActions.Add(new FocusAction());
-            BattleActions.Add(new SweetTreatAction());
-            BattleActions.Add(new RefreshAction());
-            BattleActions.Add(new LullabyAction());
-            BattleActions.Add(new PowerLiftAction());
-            BattleActions.Add(new ArtAttackAction());
+            BattleActions.Add(new FocusAction(User));
+            BattleActions.Add(new SweetTreatAction(User));
+            BattleActions.Add(new RefreshAction(User));
+            BattleActions.Add(new LullabyAction(User));
+            BattleActions.Add(new PowerLiftAction(User));
+            BattleActions.Add(new ArtAttackAction(User));
 
             if (BattleActions.Count == 0)
             {
-                MessageAction noSpecials = new MessageAction("No Specials", null, "No Special Moves are available.",
+                MessageAction noSpecials = new MessageAction(User, "No Specials", null, "No Special Moves are available.",
                     (int)BattleGlobals.BattleEventPriorities.Message, "You can't select that!");
 
                 BattleActions.Add(noSpecials);

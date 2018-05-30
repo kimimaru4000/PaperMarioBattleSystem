@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class WindBreathAction : MoveAction
     {
-        public WindBreathAction(int minDamage, int maxDamage)
+        public WindBreathAction(BattleEntity user, int minDamage, int maxDamage) : base(user)
         {
             Name = "Wind Breath";
 

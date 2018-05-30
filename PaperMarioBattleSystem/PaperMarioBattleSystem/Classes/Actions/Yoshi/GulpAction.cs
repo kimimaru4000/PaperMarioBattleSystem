@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class GulpAction : MoveAction
     {
-        public GulpAction()
+        public GulpAction(BattleEntity user) : base(user)
         {
             Name = "Gulp";
 

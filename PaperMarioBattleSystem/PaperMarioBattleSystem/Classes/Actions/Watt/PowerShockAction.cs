@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         private double CommandTime = 5000d;
         private Keys ButtonToPress = Keys.Z;
 
-        public PowerShockAction()
+        public PowerShockAction(BattleEntity user) : base(user)
         {
             Name = "Power Shock";
 

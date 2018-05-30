@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class MiniEggAction : MoveAction
     {
-        public MiniEggAction()
+        public MiniEggAction(BattleEntity user) : base(user)
         {
             Name = "Mini-Egg";
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 46, 22, 22)),

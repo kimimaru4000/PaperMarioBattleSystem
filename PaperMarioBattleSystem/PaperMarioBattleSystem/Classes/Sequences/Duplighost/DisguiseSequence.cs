@@ -34,11 +34,11 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.DuplighostBattleAnimations.DisguiseStartName);
-                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.DuplighostBattleAnimations.DisguiseStartName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.DuplighostBattleAnimations.DisguiseStartName);
                     break;
                 case 1:
                     User.AnimManager.PlayAnimation(AnimationGlobals.DuplighostBattleAnimations.DisguiseName);
-                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.DuplighostBattleAnimations.DisguiseName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.DuplighostBattleAnimations.DisguiseName);
 
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;

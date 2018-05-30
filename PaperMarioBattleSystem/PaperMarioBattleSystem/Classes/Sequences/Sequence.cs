@@ -218,7 +218,7 @@ namespace PaperMarioBattleSystem
 
             EntitiesAffected = null;
 
-            if (User == BattleManager.Instance.EntityTurn)
+            if (User.IsTurn == true)
             {
                 BattleManager.Instance.TurnEnd();
             }
@@ -458,13 +458,13 @@ namespace PaperMarioBattleSystem
                         moveX = -moveX;
 
                     Vector2 pos = User.Position + new Vector2(moveX, -moveY);
-                    CurSequenceAction = new MoveToSeqAction(pos, time / 2d);
+                    CurSequenceAction = new MoveToSeqAction(User, pos, time / 2d);
                     break;
                 case 1:
-                    CurSequenceAction = new WaitForAnimationSeqAction(AnimationGlobals.HurtName);
+                    CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.HurtName);
                     break;
                 case 2:
-                    CurSequenceAction = new MoveAmountSeqAction(new Vector2(0f, moveY), time, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+                    CurSequenceAction = new MoveAmountSeqAction(User, new Vector2(0f, moveY), time, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

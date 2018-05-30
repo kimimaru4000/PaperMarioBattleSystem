@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class RallyWinkAction : MoveAction
     {
-        public RallyWinkAction()
+        public RallyWinkAction(BattleEntity user) : base(user)
         {
             Name = "Rally Wink";
 

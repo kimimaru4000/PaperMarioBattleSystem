@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class HeadbuttAction : MoveAction
     {
-        public HeadbuttAction()
+        public HeadbuttAction(BattleEntity user) : base(user)
         {
             Name = "Headbutt";
 

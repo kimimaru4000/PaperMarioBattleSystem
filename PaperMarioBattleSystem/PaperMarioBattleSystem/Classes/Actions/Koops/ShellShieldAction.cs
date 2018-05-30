@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
         private double CommandTime = 5000d;
         private double CursorTime = 200d;
 
-        public ShellShieldAction()
+        public ShellShieldAction(BattleEntity user) : base(user)
         {
             Name = "Shell Shield";
 

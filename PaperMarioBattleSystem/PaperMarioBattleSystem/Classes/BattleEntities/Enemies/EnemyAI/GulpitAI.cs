@@ -47,8 +47,8 @@ namespace PaperMarioBattleSystem
             //Otherwise, use Lick
             MoveAction action = null;
             if (chosenIndex >= 0)
-                action = new RockSpitAction(usableEntities[chosenIndex]);
-            else action = new LickAction();
+                action = new RockSpitAction(Enemy, usableEntities[chosenIndex]);
+            else action = new LickAction(Enemy);
 
             Enemy.StartAction(action, false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
         }

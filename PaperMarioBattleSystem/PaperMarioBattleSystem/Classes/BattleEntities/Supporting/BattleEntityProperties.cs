@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The BattleEntity these properties are for
         /// </summary>
-        protected BattleEntity Entity = null;
+        protected readonly BattleEntity Entity = null;
 
         /// <summary>
         /// The physical attributes the entity possesses. When added, they are sorted in decreasing order.
@@ -151,7 +151,6 @@ namespace PaperMarioBattleSystem
             EquippedBadgeCounts.Clear();
 
             CustomTargeting = null;
-            Entity = null;
         }
 
         #region Physical Attribute Methods

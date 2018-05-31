@@ -25,7 +25,7 @@ namespace PaperMarioBattleSystem
             int chosenIndex = -1;
 
             //Get all Neutral entities
-            BattleManager.Instance.GetEntities(usableEntities, Enumerations.EntityTypes.Neutral, Enumerations.HeightStates.Grounded);
+            Enemy.BManager.GetEntities(usableEntities, Enumerations.EntityTypes.Neutral, Enumerations.HeightStates.Grounded);
             for (int i = 0; i < usableEntities.Count; i++)
             {
                 IUsableEntity usableEntity = usableEntities[i] as IUsableEntity;
@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
                 action = new RockSpitAction(Enemy, usableEntities[chosenIndex]);
             else action = new LickAction(Enemy);
 
-            Enemy.StartAction(action, false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
+            Enemy.StartAction(action, false, Enemy.BManager.FrontPlayer.GetTrueTarget());
         }
     }
 }

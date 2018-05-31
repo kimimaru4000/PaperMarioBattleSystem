@@ -106,9 +106,9 @@ namespace PaperMarioBattleSystem
                         else if (DuplighostRef.PartnerTypeDisguise == Enumerations.PartnerTypes.Goompa)
                         {
                             //Make sure Mario is in battle (he should be!)
-                            if (BattleManager.Instance.Mario != null)
+                            if (User.BManager.Mario != null)
                             {
-                                BattleManager.Instance.Mario.Position = DuplighostRef.Position;
+                                User.BManager.Mario.Position = DuplighostRef.Position;
                             }
 
                             DuplighostRef.Die();

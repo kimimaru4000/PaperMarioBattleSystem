@@ -22,8 +22,12 @@ namespace PaperMarioBattleSystem
         private CroppedTexture2D FPIcon = null;
         private CroppedTexture2D StarPowerIcon = null;
 
-        public BattleHUD()
+        private BattleManager BManager = null;
+
+        public BattleHUD(BattleManager bManager)
         {
+            SetBattleManager(bManager);
+
             Texture2D hudTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleHUD.png");
 
             HPBanner = new CroppedTexture2D(hudTex, new Rectangle(358, 9, 166, 30));
@@ -39,6 +43,11 @@ namespace PaperMarioBattleSystem
             StarPowerIcon = new CroppedTexture2D(hudTex, new Rectangle(102, 40, 40, 39));
         }
 
+        public void SetBattleManager(BattleManager bManager)
+        {
+            BManager = bManager;
+        }
+
         public void Update()
         {
 
@@ -46,8 +55,10 @@ namespace PaperMarioBattleSystem
 
         public void Draw()
         {
-            BattleMario mario = BattleManager.Instance.Mario;
-            BattlePartner partner = BattleManager.Instance.Partner;
+            if (BManager == null) return;
+
+            BattleMario mario = BManager.Mario;
+            BattlePartner partner = BManager.Partner;
 
             if (mario != null)
             {

@@ -11,9 +11,11 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class EntityListenerObj : BattleObject
     {
-        protected EntityListenerObj()
-        {
+        protected BattleManager BManager = null;
 
+        protected EntityListenerObj(BattleManager bManager)
+        {
+            BManager = bManager;
         }
 
         /// <summary>
@@ -21,22 +23,19 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected void ListenToEntityEvents()
         {
-            BattleManager.Instance.EntityAddedEvent -= EntityAdded;
-            BattleManager.Instance.EntityAddedEvent += EntityAdded;
+            BManager.EntityAddedEvent -= EntityAdded;
+            BManager.EntityAddedEvent += EntityAdded;
 
-            BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;
-            BattleManager.Instance.EntityRemovedEvent += EntityRemoved;
+            BManager.EntityRemovedEvent -= EntityRemoved;
+            BManager.EntityRemovedEvent += EntityRemoved;
         }
 
         public override void CleanUp()
         {
             base.CleanUp();
 
-            if (BattleManager.HasInstance == true)
-            {
-                BattleManager.Instance.EntityAddedEvent -= EntityAdded;
-                BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;
-            }
+            BManager.EntityAddedEvent -= EntityAdded;
+            BManager.EntityRemovedEvent -= EntityRemoved;
         }
 
         /// <summary>

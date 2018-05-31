@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public readonly List<LightSourceHolder> LightSources = new List<LightSourceHolder>();
 
-        public BattleDarknessObj()
+        public BattleDarknessObj(BattleManager bManager) : base(bManager)
         {
             Initialize();
 
@@ -60,7 +60,7 @@ namespace PaperMarioBattleSystem
         private void Initialize()
         {
             //Add all entities, then call the checker
-            BattleManager.Instance.GetAllBattleEntities(NonLightSources, null);
+            BManager.GetAllBattleEntities(NonLightSources, null);
 
             CheckUpdates();
             RecalculateTargets();

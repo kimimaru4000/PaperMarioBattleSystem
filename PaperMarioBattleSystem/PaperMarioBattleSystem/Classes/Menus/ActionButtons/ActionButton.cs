@@ -90,7 +90,7 @@ namespace PaperMarioBattleSystem
                     //NOTE: Find a way to get the correct message when the action can't be selected
                     string disabledString = $"Your {Category} moves are disabled!";
 
-                    BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
+                    SubMenu.User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                         new MessageBattleEvent(disabledString, MessageBattleEvent.DefaultWaitDuration));
 

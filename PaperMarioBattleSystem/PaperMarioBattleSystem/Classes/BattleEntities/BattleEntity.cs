@@ -95,6 +95,11 @@ namespace PaperMarioBattleSystem
         #endregion
 
         /// <summary>
+        /// The BattleManager the BattleEntity belongs to.
+        /// </summary>
+        public BattleManager BManager { get; private set; } = null;
+
+        /// <summary>
         /// Various unique properties belonging to the BattleEntity.
         /// </summary>
         public BattleEntityProperties EntityProperties { get; private set; } = null;
@@ -191,14 +196,14 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool IsInDanger => (HealthState == HealthStates.Danger || HealthState == HealthStates.Peril);
         public bool IsDead => HealthState == HealthStates.Dead;
-        public bool IsTurn => (BattleManager.Instance.EntityTurn == this);
+        public bool IsTurn => (BManager.EntityTurn == this);
 
         public bool UsedTurn => (TurnsUsed >= MaxTurns || IsDead == true);
 
         /// <summary>
         /// Tells if the BattleEntity is currently in battle.
         /// </summary>
-        public bool IsInBattle => BattleGlobals.IsValidBattleIndex(BattleIndex);
+        public bool IsInBattle => (BManager != null && BattleGlobals.IsValidBattleIndex(BattleIndex));
 
         protected readonly List<DefensiveAction> DefensiveActions = new List<DefensiveAction>();
 
@@ -217,6 +222,7 @@ namespace PaperMarioBattleSystem
 
         public virtual void CleanUp()
         {
+            SetBattleManager(null);
             SetBattleIndex(BattleGlobals.InvalidBattleIndex, false);
 
             PreviousAction?.SetUser(null);
@@ -305,7 +311,7 @@ namespace PaperMarioBattleSystem
                     //If the entity took damage during their sequence, it's an interruption, and this event should not occur
                     if (damage > 0 && (IsTurn == false || PreviousAction?.MoveSequence.InSequence == false))
                     {
-                        BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage,
+                        BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage,
                             new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                             new DamagedBattleEvent(this));
 
@@ -443,7 +449,7 @@ namespace PaperMarioBattleSystem
             //Show a battle message when the status is afflicted, provided the message isn't empty
             if (showMessage == true && string.IsNullOrEmpty(statusEffect.AfflictedMessage) == false)
             {
-                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + statusEffect.Priority,
+                BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + statusEffect.Priority,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(statusEffect.AfflictedMessage, 2000d));
             }
         }
@@ -472,14 +478,14 @@ namespace PaperMarioBattleSystem
             //Show a battle message when the status is removed, provided the message isn't empty
             if (showMessage == true && string.IsNullOrEmpty(status.RemovedMessage) == false)
             {
-                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + status.Priority,
+                BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + status.Priority,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(status.RemovedMessage, 2000d));
             }
 
             //Queue a battle event for the status removal
             if (queueBattleEvent == true)
             {
-                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status + status.Priority,
+                BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status + status.Priority,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new StatusEndedBattleEvent(this));
             }
         }
@@ -628,9 +634,14 @@ namespace PaperMarioBattleSystem
             //NOTE: The death event occurs for standard enemies like Goombas during their sequence if it was interrupted
             //I'm not sure about bosses yet, so that'll need to be tested
 
-            BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Death,
-                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
-                new DeathBattleEvent(this, IsInBattle == false, EntityType == EntityTypes.Enemy));
+            //Start the event only if the BattleEntity is in battle
+            //If the BattleEntity isn't in battle, there's no way to start the event, so ignore it
+            if (IsInBattle == true)
+            {
+                BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Death,
+                    new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                    new DeathBattleEvent(this, IsInBattle == false, EntityType == EntityTypes.Enemy));
+            }
         }
 
         /// <summary>
@@ -886,6 +897,18 @@ namespace PaperMarioBattleSystem
         #endregion
 
         /// <summary>
+        /// Sets the BattleManager the BattleEntity belongs to.
+        /// This is typically only called by BattleManagers themselves when adding and removing BattleEntities.
+        /// <para>When transferring BattleEntities between battles, make sure to remove them from one battle before adding them to the other.
+        /// If a BattleEntity technically stays in battle but is inactive (Ex. Partners), it's recommended to keep the BattleManager reference.</para>
+        /// </summary>
+        /// <param name="bManager">The BattleManager the BattleEntity is apart of.</param>
+        public void SetBattleManager(BattleManager bManager)
+        {
+            BManager = bManager;
+        }
+
+        /// <summary>
         /// Sets the BattleIndex for the BattleEntity.
         /// </summary>
         /// <param name="battleIndex">The new BattleIndex of the BattleEntity.</param>
@@ -898,7 +921,7 @@ namespace PaperMarioBattleSystem
             //Tell the BattleManager to sort the list for this type of BattleEntity
             if (autoSort == true)
             {
-                BattleManager.Instance.SortEntityList(EntityType);
+                BManager.SortEntityList(EntityType);
             }
         }
 
@@ -968,7 +991,7 @@ namespace PaperMarioBattleSystem
                     Debug.Log($"{Name} is looking for valid adjacent allies to attack!");
 
                     //Find adjacent allies and filter out all non-ally entities
-                    BattleManager.Instance.GetAdjacentEntities(newTargets, this);
+                    BManager.GetAdjacentEntities(newTargets, this);
 
                     if (targetAlly == true)
                         newTargets.RemoveAll((adjacent) => adjacent.EntityType != EntityType);
@@ -981,11 +1004,11 @@ namespace PaperMarioBattleSystem
                     if (targetAlly == true || EntityType == EntityTypes.Neutral)
                     {
                         //Find all allies
-                        BattleManager.Instance.GetEntityAllies(newTargets, this);
+                        BManager.GetEntityAllies(newTargets, this);
                     }
                     else
                     {
-                        BattleManager.Instance.GetEntities(newTargets, this.GetOpposingEntityType(), null);
+                        BManager.GetEntities(newTargets, this.GetOpposingEntityType(), null);
                     }
                 }
 

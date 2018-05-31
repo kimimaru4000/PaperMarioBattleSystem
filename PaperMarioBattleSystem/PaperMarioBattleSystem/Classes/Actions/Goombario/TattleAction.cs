@@ -64,7 +64,7 @@ namespace PaperMarioBattleSystem
 
                 for (int i = 0; i < MoveProperties.OtherEntTypes.Length; i++)
                 {
-                    BattleManager.Instance.GetEntities(entities, MoveProperties.OtherEntTypes[i], null);
+                    User.BManager.GetEntities(entities, MoveProperties.OtherEntTypes[i], null);
 
                     for (int j = 0; j < entities.Count; j++)
                     {

@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
                     const int minCountSummon = 2;
 
                     List<BattleEntity> koopatrolsList = new List<BattleEntity>();
-                    BattleManager.Instance.GetEntityAllies(koopatrolsList, Enemy, Enemy.HeightState);
+                    Enemy.BManager.GetEntityAllies(koopatrolsList, Enemy, Enemy.HeightState);
 
                     Type koopatrolType = Enemy.GetType();
                     for (int i = 0; i < koopatrolsList.Count; i++)

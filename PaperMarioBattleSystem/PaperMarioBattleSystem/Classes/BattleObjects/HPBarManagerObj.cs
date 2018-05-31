@@ -31,15 +31,15 @@ namespace PaperMarioBattleSystem
         private float HPBarWidth = 33f;
         private Vector2 HPTextOffset = Vector2.Zero;
 
-        public HPBarManagerObj()
+        public HPBarManagerObj(BattleManager bManager) : base(bManager)
         {
             Initialize();
 
             //Subscribe to the events
             ListenToEntityEvents();
 
-            BattleManager.Instance.BattleTurnEndedEvent -= OnBattleTurnEnded;
-            BattleManager.Instance.BattleTurnEndedEvent += OnBattleTurnEnded;
+            BManager.BattleTurnEndedEvent -= OnBattleTurnEnded;
+            BManager.BattleTurnEndedEvent += OnBattleTurnEnded;
         }
 
         public override void CleanUp()
@@ -52,16 +52,13 @@ namespace PaperMarioBattleSystem
 
             base.CleanUp();
 
-            if (BattleManager.HasInstance == true)
-            {
-                BattleManager.Instance.BattleTurnEndedEvent -= OnBattleTurnEnded;
-            }
+            BManager.BattleTurnEndedEvent -= OnBattleTurnEnded;
         }
 
         private void Initialize()
         {
             //Add all existing entities
-            BattleManager.Instance.GetAllBattleEntities(NoHPEntities, null);
+            BManager.GetAllBattleEntities(NoHPEntities, null);
 
             CheckShowEntityHP();
 
@@ -120,7 +117,7 @@ namespace PaperMarioBattleSystem
         public override void Draw()
         {
             //Don't render the HP bars if the UI shouldn't show up
-            if (BattleManager.Instance.ShouldShowPlayerTurnUI == false) return;
+            if (BManager.ShouldShowPlayerTurnUI == false) return;
 
             //Render the HP bars
             for (int i = 0; i < HPShownEntities.Count; i++)

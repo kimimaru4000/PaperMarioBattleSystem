@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
 
         public override void PerformAction()
         {
-            Enemy.StartAction(new SwapMarioPartnerAction(Enemy), true, BattleManager.Instance.FrontPlayer);
+            Enemy.StartAction(new SwapMarioPartnerAction(Enemy), true, Enemy.BManager.FrontPlayer);
         }
     }
 }

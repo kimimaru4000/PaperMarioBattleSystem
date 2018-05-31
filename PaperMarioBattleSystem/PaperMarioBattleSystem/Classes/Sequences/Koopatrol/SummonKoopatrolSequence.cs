@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     //Summon another Koopatrol
                     Koopatrol koopatrol = new Koopatrol();
-                    BattleManager.Instance.AddEntities(new BattleEntity[] { koopatrol }, null, true);
+                    User.BManager.AddEntity(koopatrol, null, true);
 
                     //Set the new Koopatrol's used turns to 0, as they cannot go right after being summoned
                     koopatrol.SetTurnsUsed(koopatrol.MaxTurns);

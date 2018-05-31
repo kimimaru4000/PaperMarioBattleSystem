@@ -62,7 +62,7 @@ namespace PaperMarioBattleSystem
                 //Otherwise end its turn
                 else
                 {
-                    BattleManager.Instance.TurnEnd();
+                    Entity.BManager.TurnEnd();
                 }
             }
 
@@ -78,14 +78,14 @@ namespace PaperMarioBattleSystem
             if (revivalItem != null)
             {
                 //Queue the revival event with the same priority as death so it occurs immediately
-                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Death,
+                Entity.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Death,
                     new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                     new RevivedBattleEvent(1000d, Entity, revivalItem));
             }
             else
             {
                 //Handle death
-                BattleManager.Instance.HandleEntityDeath(Entity);
+                Entity.BManager.HandleEntityDeath(Entity);
             }
         }
 

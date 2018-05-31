@@ -48,6 +48,8 @@ namespace PaperMarioBattleSystem
         //A list of Charged BattleEntities for rendering
         private List<BattleEntity> ChargedEntities = null;
 
+        private BattleManager battleManager = null;
+
         public Main()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -98,37 +100,40 @@ namespace PaperMarioBattleSystem
             InitializeInventory();
 
             //Initialize the BattleManager
-            BattleManager.Instance.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
+            battleManager = new BattleManager();
+            battleManager.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEntity>() { new Goomba(), new SkyGuy() });
+                new List<BattleEntity>() { new Duplighost(), new SkyGuy() });
+
+            BattleUIManager.Instance.battleHUD.SetBattleManager(battleManager);
 
             //Initialize helper objects
             //Check for the battle setting and add darkness if so
-            if (BattleManager.Instance.Properties.BattleSetting == BattleGlobals.BattleSettings.Dark)
+            if (battleManager.Properties.BattleSetting == BattleGlobals.BattleSettings.Dark)
             {
-                BattleDarknessObj battleDarkness = new BattleDarknessObj();
+                BattleDarknessObj battleDarkness = new BattleDarknessObj(battleManager);
                 LightingManager.Instance.Initialize(battleDarkness);
                 BattleObjManager.Instance.AddBattleObject(battleDarkness);
             }
 
             //Add the HP bar manager
-            BattleObjManager.Instance.AddBattleObject(new HPBarManagerObj());
+            BattleObjManager.Instance.AddBattleObject(new HPBarManagerObj(battleManager));
 
             //If you can't run from battle, show a message at the start saying so
-            if (BattleManager.Instance.Properties.Runnable == false)
+            if (battleManager.Properties.Runnable == false)
             {
-                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
+                battleManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
                     new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
                     new MessageBattleEvent(BattleGlobals.NoRunMessage, MessageBattleEvent.DefaultWaitDuration));
             }
 
             //Start the battle
-            BattleManager.Instance.StartBattle();
+            battleManager.StartBattle();
 
             //Initialize the lists with a capacity equal to the current number of BattleEntities in battle
-            BattleEntities = new List<BattleEntity>(BattleManager.Instance.TotalEntityCount);
-            ChargedEntities = new List<BattleEntity>(BattleManager.Instance.TotalEntityCount);
+            BattleEntities = new List<BattleEntity>(battleManager.TotalEntityCount);
+            ChargedEntities = new List<BattleEntity>(battleManager.TotalEntityCount);
             
             base.Initialize();
 
@@ -290,7 +295,8 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.CleanUp();
             BattleUIManager.Instance.CleanUp();
             BattleObjManager.Instance.CleanUp();
-            BattleManager.Instance.CleanUp();
+            battleManager.CleanUp();
+            battleManager = null;
 
             crashHandler.CleanUp();
 
@@ -324,7 +330,7 @@ namespace PaperMarioBattleSystem
             WasFocused = focused;
 
             Time.UpdateTime(gameTime);
-            Debug.DebugUpdate();
+            Debug.DebugUpdate(battleManager);
         }
 
         /// <summary>
@@ -333,7 +339,7 @@ namespace PaperMarioBattleSystem
         /// <param name="gameTime">Provides a snapshot of timing values</param>
         private void MainUpdate(GameTime gameTime)
         {
-            BattleManager.Instance.Update();
+            battleManager.Update();
             BattleUIManager.Instance.Update();
             BattleObjManager.Instance.Update();
 
@@ -429,9 +435,9 @@ namespace PaperMarioBattleSystem
         private void MainDraw(GameTime gameTime)
         {
             //Don't render if the battle didn't start yet
-            if (BattleManager.Instance.State == BattleManager.BattleState.Init) return;
+            if (battleManager.State == BattleManager.BattleState.Init) return;
 
-            BattleManager.Instance.GetAllBattleEntities(BattleEntities, null);
+            battleManager.GetAllBattleEntities(BattleEntities, null);
 
             //NOTE: These can be optimized to minimize GPU state change. We might also want to directly use the depth buffer so
             //that depth is preserved among objects rendered with different shaders (Ex. Charged BattleEntities)
@@ -544,19 +550,19 @@ namespace PaperMarioBattleSystem
         private void RenderBattleInfo()
         {
             //Draw the action the current BattleEntity is performing
-            if (BattleManager.Instance.EntityTurn != null)
+            if (battleManager.EntityTurn != null)
             {
-                BattleManager.Instance.EntityTurn.PreviousAction?.Draw();
+                battleManager.EntityTurn.PreviousAction?.Draw();
 
                 //Show current turn debug text
-                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Current turn: {BattleManager.Instance.EntityTurn.Name}", new Vector2(250, 4), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
+                SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Current turn: {battleManager.EntityTurn.Name}", new Vector2(250, 4), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
             }
         }
 
         private void RenderStatusInfo(IList<BattleEntity> allEntities)
         {
             //Ignore if we shouldn't show this UI
-            if (BattleManager.Instance.ShouldShowPlayerTurnUI == true && UtilityGlobals.IListIsNullOrEmpty(allEntities) == false)
+            if (battleManager.ShouldShowPlayerTurnUI == true && UtilityGlobals.IListIsNullOrEmpty(allEntities) == false)
             {
                 List<StatusEffect> statuses = (allEntities.Count == 0) ? null : new List<StatusEffect>();
 

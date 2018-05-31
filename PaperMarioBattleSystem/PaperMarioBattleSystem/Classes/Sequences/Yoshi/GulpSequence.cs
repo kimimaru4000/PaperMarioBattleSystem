@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
             //Check if there is a BattleEntity behind the one eaten and if it can be hit by this move
             List<BattleEntity> behindEntities = new List<BattleEntity>();
 
-            BattleManager.Instance.GetEntitiesBehind(behindEntities, EntitiesAffected[0]);
+            User.BManager.GetEntitiesBehind(behindEntities, EntitiesAffected[0]);
             BattleManagerUtils.FilterEntitiesByHeights(behindEntities, Action.MoveProperties.HeightsAffected);
 
             //Store the reference to the behind entity and tell it it's being targeted
@@ -74,7 +74,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(User, BattleManagerUtils.GetPositionInFront(BattleManager.Instance.FrontPlayer,
+                    CurSequenceAction = new MoveToSeqAction(User, BattleManagerUtils.GetPositionInFront(User.BManager.FrontPlayer,
                         User.EntityType != Enumerations.EntityTypes.Player), WalkDuration / 4f);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;

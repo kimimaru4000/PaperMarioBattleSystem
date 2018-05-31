@@ -150,7 +150,7 @@ namespace PaperMarioBattleSystem
                         TattleDatabase.AddTattleDescriptionEntry(entityName, TattledEntity.GetTattleDescription());
 
                         //Mark the enemies to show their HP
-                        BattleEntity[] entities = BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Enemy, null);
+                        BattleEntity[] entities = User.BManager.GetEntities(Enumerations.EntityTypes.Enemy, null);
                         for (int i = 0; i < entities.Length; i++)
                         {
                             if (entities[i].Name == entityName)

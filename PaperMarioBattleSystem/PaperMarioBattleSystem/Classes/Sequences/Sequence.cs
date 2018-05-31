@@ -220,11 +220,11 @@ namespace PaperMarioBattleSystem
 
             if (User.IsTurn == true)
             {
-                BattleManager.Instance.TurnEnd();
+                User.BManager.TurnEnd();
             }
             else
             {
-                Debug.LogError($"{User.Name} is not {BattleManager.Instance.EntityTurn.Name}, whose turn it currently is");
+                Debug.LogError($"{User.Name} is not {User.BManager.EntityTurn.Name}, whose turn it currently is");
             }
         }
 

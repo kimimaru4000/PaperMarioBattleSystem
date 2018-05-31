@@ -28,13 +28,13 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            BattleManager.Instance.EntityAddedEvent -= OnEntityEnteredBattle;
-            BattleManager.Instance.EntityAddedEvent += OnEntityEnteredBattle;
+            EntityEquipped.BManager.EntityAddedEvent -= OnEntityEnteredBattle;
+            EntityEquipped.BManager.EntityAddedEvent += OnEntityEnteredBattle;
         }
 
         protected override void OnUnequip()
         {
-            BattleManager.Instance.EntityAddedEvent -= OnEntityEnteredBattle;
+            EntityEquipped.BManager.EntityAddedEvent -= OnEntityEnteredBattle;
         }
 
         private StatusEffect[] GetPossibleGrantedStatuses()
@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
             //If so, grant it one of the Status Effects
             if (EntityEquipped == entity)
             {
-                BattleManager.Instance.EntityAddedEvent -= OnEntityEnteredBattle;
+                EntityEquipped.BManager.EntityAddedEvent -= OnEntityEnteredBattle;
 
                 //Get the statuses and choose a random one
                 StatusEffect[] statuses = GetPossibleGrantedStatuses();

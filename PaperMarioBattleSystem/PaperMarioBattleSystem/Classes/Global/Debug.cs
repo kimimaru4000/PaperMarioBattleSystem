@@ -144,7 +144,7 @@ namespace PaperMarioBattleSystem
                 LogAssert();
         }
 
-        public static void DebugUpdate()
+        public static void DebugUpdate(BattleManager bManager)
         {
             #if DEBUG
                 //Toggle debug
@@ -237,7 +237,7 @@ namespace PaperMarioBattleSystem
             //Battle Debug
             if (Input.GetKey(Keys.RightShift, DebugKeyboard) == true)
             {
-                DebugBattle();
+                DebugBattle(bManager);
             }
 
             //Unit Tests
@@ -252,7 +252,7 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKeyDown(Keys.H) == true)
                 {
                     //Make sure we damage the Shell instead if it's over Mario
-                    BattleEntity entity = BattleManager.Instance.Mario.GetTrueTarget();
+                    BattleEntity entity = bManager.Mario.GetTrueTarget();
 
                     entity.TakeDamage(Enumerations.Elements.Normal, 1, true);
                 }
@@ -263,7 +263,7 @@ namespace PaperMarioBattleSystem
                     Debug.Log("Reloading all BattleEntity animations. Things may break if in a Sequence!");
 
                     List<BattleEntity> entities = new List<BattleEntity>();
-                    BattleManager.Instance.GetAllBattleEntities(entities, null);
+                    bManager.GetAllBattleEntities(entities, null);
 
                     for (int i = 0; i < entities.Count; i++)
                     {
@@ -274,7 +274,7 @@ namespace PaperMarioBattleSystem
                 else if (Input.GetKeyDown(Keys.F) == true)
                 {
                     List<BattleEntity> entities = new List<BattleEntity>();
-                    BattleManager.Instance.GetAllBattleEntities(entities, null);
+                    bManager.GetAllBattleEntities(entities, null);
 
                     for (int i = 0; i < entities.Count; i++)
                     {
@@ -291,7 +291,7 @@ namespace PaperMarioBattleSystem
             Input.UpdateInputState(ref DebugKeyboard);
         }
 
-        public static void DebugBattle()
+        public static void DebugBattle(BattleManager bManager)
         {
             //Default to Players - if holding 0, switch to Enemies, and if holding 9, switch to Neutral
             Enumerations.EntityTypes entityType = Enumerations.EntityTypes.Player;
@@ -319,7 +319,7 @@ namespace PaperMarioBattleSystem
                 //Disable Special moves
                 else if (Input.GetKeyDown(Keys.S, DebugKeyboard) == true) status = new NoSkillsStatus(Enumerations.MoveCategories.Special, turnCount);
 
-                if (status != null) DebugInflictStatus(status, entityType);
+                if (status != null) DebugInflictStatus(bManager, status, entityType);
             }
             //Inflict Poison, Payback, or Paralyzed
             else if (Input.GetKeyDown(Keys.P, DebugKeyboard) == true)
@@ -330,7 +330,7 @@ namespace PaperMarioBattleSystem
                 else if (Input.GetKey(Keys.Z, DebugKeyboard) == true) status = new ParalyzedStatus(turnCount);
                 else status = new PoisonStatus(turnCount);
 
-                DebugInflictStatus(status, entityType);
+                DebugInflictStatus(bManager, status, entityType);
             }
             //Inflict Invisible or Injured
             else if (Input.GetKeyDown(Keys.I, DebugKeyboard) == true)
@@ -339,12 +339,12 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKey(Keys.J, DebugKeyboard) == true) status = new InjuredStatus(turnCount);
                 else status = new InvisibleStatus(turnCount);
 
-                DebugInflictStatus(status, entityType);
+                DebugInflictStatus(bManager, status, entityType);
             }
             //Inflict Electrified
             else if (Input.GetKeyDown(Keys.E, DebugKeyboard) == true)
             {
-                DebugInflictStatus(new ElectrifiedStatus(turnCount), entityType);
+                DebugInflictStatus(bManager, new ElectrifiedStatus(turnCount), entityType);
             }
             //Inflict Fast, Frozen, FPRegen, or Fright
             else if (Input.GetKeyDown(Keys.F, DebugKeyboard) == true)
@@ -356,7 +356,7 @@ namespace PaperMarioBattleSystem
                 else if (Input.GetKey(Keys.I, DebugKeyboard) == true) status = new FrightStatus();
                 else status = new FastStatus(turnCount);
 
-                DebugInflictStatus(status, entityType);
+                DebugInflictStatus(bManager, status, entityType);
             }
             //Inflict Dizzy or Dodgy
             else if (Input.GetKeyDown(Keys.D, DebugKeyboard) == true)
@@ -365,7 +365,7 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKey(Keys.O, DebugKeyboard) == true) status = new DodgyStatus(turnCount);
                 else status = new DizzyStatus(turnCount);
 
-                DebugInflictStatus(status, entityType);
+                DebugInflictStatus(bManager, status, entityType);
             }
             //Inflict Sleep, Stone, Slow, or Stop
             else if (Input.GetKeyDown(Keys.S, DebugKeyboard) == true)
@@ -378,7 +378,7 @@ namespace PaperMarioBattleSystem
                 else if (Input.GetKey(Keys.P, DebugKeyboard) == true) status = new StopStatus(turnCount);
                 else status = new SleepStatus(turnCount);
 
-                DebugInflictStatus(status, entityType);
+                DebugInflictStatus(bManager, status, entityType);
             }
             //Inflict Confused or Charged
             else if (Input.GetKeyDown(Keys.C, DebugKeyboard) == true)
@@ -387,7 +387,7 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKey(Keys.H, DebugKeyboard) == true) status = new ChargedStatus(1);
                 else status = new ConfusedStatus(turnCount);
 
-                DebugInflictStatus(status, entityType);
+                DebugInflictStatus(bManager, status, entityType);
             }
             //Inflict Burn or Blown
             else if (Input.GetKeyDown(Keys.B, DebugKeyboard) == true)
@@ -395,13 +395,13 @@ namespace PaperMarioBattleSystem
                 if (Input.GetKey(Keys.L, DebugKeyboard) == true) status = new BlownStatus();
                 else status = new BurnStatus(turnCount);
 
-                DebugInflictStatus(status, entityType);
+                DebugInflictStatus(bManager, status, entityType);
             }
             //Inflict Tiny
             else if (Input.GetKeyDown(Keys.T, DebugKeyboard) == true)
             {
                 status = new TinyStatus(turnCount);
-                DebugInflictStatus(status, entityType);
+                DebugInflictStatus(bManager, status, entityType);
             }
             //Inflict Huge or HPRegen
             else if (Input.GetKeyDown(Keys.H, DebugKeyboard) == true)
@@ -412,20 +412,20 @@ namespace PaperMarioBattleSystem
                 else if (Input.GetKey(Keys.O, DebugKeyboard) == true) status = new HoldFastStatus(turnCount);
                 else status = new HugeStatus(turnCount);
 
-                DebugInflictStatus(status, entityType);
+                DebugInflictStatus(bManager, status, entityType);
             }
             //Inflict Allergic
             else if (Input.GetKeyDown(Keys.A, DebugKeyboard) == true)
             {
                 status = new AllergicStatus(turnCount);
-                DebugInflictStatus(status, entityType);
+                DebugInflictStatus(bManager, status, entityType);
             }
         }
 
-        private static void DebugInflictStatus(StatusEffect status, Enumerations.EntityTypes entityType)
+        private static void DebugInflictStatus(BattleManager bManager, StatusEffect status, Enumerations.EntityTypes entityType)
         {
-            BattleEntity[] entities = BattleManager.Instance.GetEntities(entityType, null);
-
+            BattleEntity[] entities = bManager.GetEntities(entityType, null);
+            
             for (int i = 0; i < entities.Length; i++)
             {
                 entities[i].EntityProperties.AfflictStatus(status);

@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
             //If it's flipped, don't do anything
             if (koopaTroopa.FlippedBehavior.Flipped == false)
             {
-                koopaTroopa.StartAction(ActionPerformed, false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
+                koopaTroopa.StartAction(ActionPerformed, false, Enemy.BManager.FrontPlayer.GetTrueTarget());
             }
             else
             {

@@ -493,7 +493,7 @@ namespace PaperMarioBattleSystem
             //Check for adding allies
             if (UtilityGlobals.MoveAffectionTypesHasFlag(MoveProperties.MoveAffectionType, MoveAffectionTypes.Ally) == true)
             {
-                entities.AddRange(BattleManager.Instance.GetEntities(User.EntityType, MoveProperties.HeightsAffected));
+                entities.AddRange(User.BManager.GetEntities(User.EntityType, MoveProperties.HeightsAffected));
                 addedAllies = true;
             }
             
@@ -523,7 +523,7 @@ namespace PaperMarioBattleSystem
                     for (int i = 0; i < MoveProperties.OtherEntTypes.Length; i++)
                     {
                         EntityTypes otherType = MoveProperties.OtherEntTypes[i];
-                        entities.AddRange(BattleManager.Instance.GetEntities(otherType, MoveProperties.HeightsAffected));
+                        entities.AddRange(User.BManager.GetEntities(otherType, MoveProperties.HeightsAffected));
                     }
                 }
                 else

@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
 
         public override void CleanUp()
         {
-            BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
+            BManager.EntityRemovedEvent -= OnEntityRemoved;
         }
 
         public override void LoadAnimations()
@@ -134,8 +134,8 @@ namespace PaperMarioBattleSystem
 
         public override void OnBattleStart()
         {
-            BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
-            BattleManager.Instance.EntityRemovedEvent += OnEntityRemoved;
+            BManager.EntityRemovedEvent -= OnEntityRemoved;
+            BManager.EntityRemovedEvent += OnEntityRemoved;
 
             //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.SpikeShield, BadgeGlobals.BadgeFilterType.UnEquipped));
             //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.IcePower, BadgeGlobals.BadgeFilterType.UnEquipped));
@@ -233,7 +233,7 @@ namespace PaperMarioBattleSystem
 
             //Gain Star Spirit Star Power every phase cycle
             //Exclude the phase cycle that starts the battle
-            if (BattleManager.Instance.PhaseCycleCount > 0)
+            if (BManager.PhaseCycleCount > 0)
             {
                 MStats.SSStarPower.GainStarPower(StarPowerGlobals.StarSpiritSPUPerTurn);
             }
@@ -266,7 +266,7 @@ namespace PaperMarioBattleSystem
         private void OnEntityRemoved(BattleEntity entity)
         {
             //If the Partner was removed, set Mario's BattleIndex to 0
-            if (BattleIndex > 0 && BattleManager.Instance.Partner == null)
+            if (BattleIndex > 0 && BManager.Partner == null)
             {
                 SetBattleIndex(0, false);
             }

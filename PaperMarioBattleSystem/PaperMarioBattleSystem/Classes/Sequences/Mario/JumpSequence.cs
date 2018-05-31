@@ -77,7 +77,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    Vector2 frontPos = BattleManagerUtils.GetPositionInFront(BattleManager.Instance.GetFrontmostBattleEntity(CurTarget.EntityType, null), User.EntityType != EntityTypes.Enemy);
+                    Vector2 frontPos = BattleManagerUtils.GetPositionInFront(User.BManager.GetFrontmostBattleEntity(CurTarget.EntityType, null), User.EntityType != EntityTypes.Enemy);
                     frontPos.Y = User.Position.Y;
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);

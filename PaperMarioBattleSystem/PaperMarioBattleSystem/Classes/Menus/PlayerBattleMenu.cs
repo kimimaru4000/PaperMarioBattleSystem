@@ -120,8 +120,8 @@ namespace PaperMarioBattleSystem
                 //Don't switch if the back player is dead
                 if (CanSwitch() == true)
                 {
-                    BattleEntity front = BattleManager.Instance.FrontPlayer;
-                    BattleEntity back = BattleManager.Instance.BackPlayer;
+                    BattleEntity front = User.BManager.FrontPlayer;
+                    BattleEntity back = User.BManager.BackPlayer;
 
                     //Switch turns with Mario or the Partner
                     //This updates the front and back player battle indices and their battle positions
@@ -132,18 +132,18 @@ namespace PaperMarioBattleSystem
                     //Decrement the current entity's turns used and end its turn to start the front entity's turn
                     //This keeps that entity's number of turns the same
                     User.SetTurnsUsed(User.TurnsUsed - 1);
-                    BattleManager.Instance.TurnEnd();
+                    User.BManager.TurnEnd();
 
                     //Queue a Battle Event to swap the current positions of Mario and his Partner
                     //Since we updated the references earlier, their new positions are their own battle positions
-                    BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Stage,
+                    User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Stage,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                         new SwapPositionBattleEvent(front, back, front.BattlePosition, back.BattlePosition, 500f));
                 }
                 else
                 {
-                    BattleEntity otherPlayer = (User == BattleManager.Instance.FrontPlayer)
-                    ? BattleManager.Instance.BackPlayer : BattleManager.Instance.FrontPlayer;
+                    BattleEntity otherPlayer = (User == User.BManager.FrontPlayer)
+                    ? User.BManager.BackPlayer : User.BManager.FrontPlayer;
 
                     if (otherPlayer != null)
                     {
@@ -210,8 +210,8 @@ namespace PaperMarioBattleSystem
         /// <returns>true if Mario or his Partner hasn't used up all of his or her turns and isn't dead, otherwise false.</returns>
         private bool CanSwitch()
         {
-            BattleEntity otherPlayer = (User == BattleManager.Instance.FrontPlayer)
-                    ? BattleManager.Instance.BackPlayer : BattleManager.Instance.FrontPlayer;
+            BattleEntity otherPlayer = (User == User.BManager.FrontPlayer)
+                    ? User.BManager.BackPlayer : User.BManager.FrontPlayer;
 
             if (otherPlayer == null)
                 return false;

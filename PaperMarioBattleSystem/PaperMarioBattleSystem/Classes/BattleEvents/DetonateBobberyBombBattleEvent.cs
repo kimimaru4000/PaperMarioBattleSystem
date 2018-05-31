@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
 
             //Damage everyone
             List<BattleEntity> entities = new List<BattleEntity>();
-            BattleManager.Instance.GetAllBattleEntities(entities, AffectedHeightStates);
+            Bomb.BManager.GetAllBattleEntities(entities, AffectedHeightStates);
             entities.Remove(Bomb);
 
             for (int i = 0; i < entities.Count; i++)

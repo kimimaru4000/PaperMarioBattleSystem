@@ -73,7 +73,7 @@ namespace PaperMarioBattleSystem
 
             //Add the Balloon to battle
             Balloon = new SkyGuyBalloon(Layer - .0001f);
-            BattleManager.Instance.AddEntities(new BattleEntity[] { Balloon }, null, true);
+            BManager.AddEntity(Balloon, null, true);
 
             Balloon.Position = Position + new Vector2(2, -40);
             Balloon.SetBattlePosition(Balloon.Position);

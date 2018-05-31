@@ -46,7 +46,7 @@ namespace PaperMarioBattleSystem
 
         private TargetSelectionMenu SelectionMenu = null;
 
-        private BattleHUD battleHUD = null;
+        public BattleHUD battleHUD { get; private set; }= null;
 
         /// <summary>
         /// The BattleMenu at the top of the stack
@@ -64,7 +64,7 @@ namespace PaperMarioBattleSystem
         {
             BattleMenus = new Stack<BattleMenu>();
             SelectionMenu = new TargetSelectionMenu();
-            battleHUD = new BattleHUD();
+            battleHUD = new BattleHUD(null);
         }
 
         public void CleanUp()

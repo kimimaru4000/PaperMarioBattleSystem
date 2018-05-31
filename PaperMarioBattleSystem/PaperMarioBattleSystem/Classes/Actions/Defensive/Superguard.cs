@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
             int newDamage = 0;
             StatusChanceHolder[] newStatuses = FilterStatuses(statusEffects);
 
-            BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage,
+            User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage,
                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
                 new WaitForAnimBattleEvent(User, AnimationGlobals.PlayerBattleAnimations.SuperguardName, true));
 

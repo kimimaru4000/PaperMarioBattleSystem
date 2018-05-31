@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
                 if (NumTimesHit >= 2)
                 {
                     //Queue the event
-                    BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
+                    Entity.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                         new FlippedBattleEvent(Entity as IFlippableEntity));
                 }

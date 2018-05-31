@@ -62,7 +62,7 @@ namespace PaperMarioBattleSystem
                         Inventory.Instance.partnerInventory.GetAllPartners(allPartners);
 
                         //Remove the current Partner from being selected
-                        allPartners.Remove(BattleManager.Instance.Partner);
+                        allPartners.Remove(User.BManager.Partner);
 
                         //Filter out all dead Partners
                         BattleManagerUtils.FilterDeadEntities(allPartners);
@@ -72,9 +72,9 @@ namespace PaperMarioBattleSystem
                         {
                             int randIndex = GeneralGlobals.Randomizer.Next(0, allPartners.Count);
 
-                            SwapPartnerBattleEvent swapPartnerBattleEvent = new SwapPartnerBattleEvent(BattleManager.Instance.Partner, allPartners[randIndex],
+                            SwapPartnerBattleEvent swapPartnerBattleEvent = new SwapPartnerBattleEvent(User.BManager.Partner, allPartners[randIndex],
                                 300d, 300d);
-                            BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.SwapPartner,
+                            User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.SwapPartner,
                                 new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
                                 swapPartnerBattleEvent);
                         }

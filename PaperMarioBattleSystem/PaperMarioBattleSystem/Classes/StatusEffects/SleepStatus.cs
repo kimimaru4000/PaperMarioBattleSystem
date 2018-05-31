@@ -42,11 +42,11 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.DamageTakenEvent -= OnEntityDamaged;
             EntityAfflicted.DamageTakenEvent += OnEntityDamaged;
 
-            BattleManager.Instance.EntityAddedEvent -= OnEntityAdded;
-            BattleManager.Instance.EntityAddedEvent += OnEntityAdded;
+            EntityAfflicted.BManager.EntityAddedEvent -= OnEntityAdded;
+            EntityAfflicted.BManager.EntityAddedEvent += OnEntityAdded;
 
-            BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
-            BattleManager.Instance.EntityRemovedEvent += OnEntityRemoved;
+            EntityAfflicted.BManager.EntityRemovedEvent -= OnEntityRemoved;
+            EntityAfflicted.BManager.EntityRemovedEvent += OnEntityRemoved;
 
             //Add the sleep VFX
             AddSleepVFX();
@@ -57,8 +57,8 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             EntityAfflicted.DamageTakenEvent -= OnEntityDamaged;
-            BattleManager.Instance.EntityAddedEvent -= OnEntityAdded;
-            BattleManager.Instance.EntityRemovedEvent -= OnEntityRemoved;
+            EntityAfflicted.BManager.EntityAddedEvent -= OnEntityAdded;
+            EntityAfflicted.BManager.EntityRemovedEvent -= OnEntityRemoved;
 
             //Remove the sleep VFX
             RemoveSleepVFX();

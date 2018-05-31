@@ -36,9 +36,14 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool HasBattleEvents => (BattleEvents.Count > 0);
 
-        public BattleEventManager()
-        {
+        /// <summary>
+        /// The BattleManager this BattleEventManager is for.
+        /// </summary>
+        private BattleManager BManager = null;
 
+        public BattleEventManager(BattleManager bManager)
+        {
+            BManager = bManager;
         }
 
         /// <summary>
@@ -70,7 +75,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Add the Battle Event directly if the current state is the state to add it in
-            if (battleStates.Contains(BattleManager.Instance.State) == true)
+            if (battleStates.Contains(BManager.State) == true)
             {
                 AddBattleEvent(priority, battleEvent);
             }
@@ -229,7 +234,7 @@ namespace PaperMarioBattleSystem
             for (int i = 0; i < PendingBattleEvents.Count; i++)
             {
                 //Check if the states match
-                if (PendingBattleEvents[i].States.Contains(BattleManager.Instance.State))
+                if (PendingBattleEvents[i].States.Contains(BManager.State))
                 {
                     //Add the event and remove it from the pending list
                     AddBattleEvent(PendingBattleEvents[i].Priority, PendingBattleEvents[i].PendingBattleEvent);

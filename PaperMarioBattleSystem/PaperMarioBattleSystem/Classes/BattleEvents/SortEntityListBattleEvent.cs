@@ -11,10 +11,12 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class SortEntityListBattleEvent : BattleEvent
     {
+        private BattleManager BManager = null;
         private Enumerations.EntityTypes EntityTypeToSort;
 
-        public SortEntityListBattleEvent(Enumerations.EntityTypes entityType)
+        public SortEntityListBattleEvent(BattleManager bManager, Enumerations.EntityTypes entityType)
         {
+            BManager = bManager;
             EntityTypeToSort = entityType;
         }
 
@@ -23,7 +25,9 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             //Sort the list for this EntityType
-            BattleManager.Instance.SortEntityList(EntityTypeToSort);
+            BManager.SortEntityList(EntityTypeToSort);
+
+            BManager = null;
         }
 
         protected override void OnUpdate()

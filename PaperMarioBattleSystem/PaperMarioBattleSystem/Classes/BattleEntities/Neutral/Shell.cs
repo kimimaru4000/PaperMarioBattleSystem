@@ -49,8 +49,8 @@ namespace PaperMarioBattleSystem
             Layer = .15f;
 
             //Subscribe to the removed event so we can remove the protection and clear the entity reference if it's removed
-            BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;
-            BattleManager.Instance.EntityRemovedEvent += EntityRemoved;
+            BManager.EntityRemovedEvent -= EntityRemoved;
+            BManager.EntityRemovedEvent += EntityRemoved;
 
             //Play the idle anim
             AnimManager.PlayAnimation(GetIdleAnim());
@@ -58,7 +58,7 @@ namespace PaperMarioBattleSystem
 
         public override void CleanUp()
         {
-            BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;
+            BManager.EntityRemovedEvent -= EntityRemoved;
 
             RemoveEntityDefending();
 
@@ -129,7 +129,7 @@ namespace PaperMarioBattleSystem
             base.OnBattleStart();
 
             //Show the Shell's HP, which can only be viewed with the Peekaboo Badge since it can't be tattled (in the actual games, at least)
-            if (BattleManager.Instance.Mario.GetPartyEquippedBadgeCount(BadgeGlobals.BadgeTypes.Peekaboo) > 0)
+            if (BManager.Mario.GetPartyEquippedBadgeCount(BadgeGlobals.BadgeTypes.Peekaboo) > 0)
             {
                 this.AddShowHPProperty();
             }
@@ -150,7 +150,7 @@ namespace PaperMarioBattleSystem
             //Add a Battle Event to end the protection and play the animation of the Shell breaking at the end of the turn
             if (SentDeathBattleEvent == false)
             {
-                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status - 1,
+                BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status - 1,
                     new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
                     new ShellBreakBattleEvent(this));
 
@@ -181,7 +181,7 @@ namespace PaperMarioBattleSystem
                 RemoveEntityDefending();
 
                 //Unsubscribe from this event
-                BattleManager.Instance.EntityRemovedEvent -= EntityRemoved;
+                BManager.EntityRemovedEvent -= EntityRemoved;
 
                 //Kill the Shell if it's not already dead
                 if (IsDead == false)

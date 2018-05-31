@@ -78,7 +78,7 @@ namespace PaperMarioBattleSystem
                     //End the battle if we succeeded in running
                     if (Succeeded == true)
                     {
-                        BattleManager.Instance.EndBattle();
+                        User.BManager.EndBattle();
                     }
 
                     EndSequence();

@@ -113,7 +113,7 @@ namespace PaperMarioBattleSystem
                     //Remove the Shell and take it out of battle
                     //NOTE: This can be problematic if the BattleEntity is something other than the previous Shell!
                     BattleEntity prevShell = EntitiesAffected[0].EntityProperties.GetAdditionalProperty<BattleEntity>(Enumerations.AdditionalProperty.DefendedByEntity);
-                    BattleManager.Instance.RemoveEntity(prevShell, true);
+                    User.BManager.RemoveEntity(prevShell, true);
 
                     CurSequenceAction = new WaitSeqAction(0d);
 
@@ -147,7 +147,7 @@ namespace PaperMarioBattleSystem
 
                     //Tell the Shell to defend the target and add the Shell to battle
                     ShellCreated.SetEntityToDefend(EntitiesAffected[0]);
-                    BattleManager.Instance.AddEntities(new BattleEntity[] { ShellCreated }, null, true);
+                    User.BManager.AddEntities(new BattleEntity[] { ShellCreated }, null, true);
 
                     CurSequenceAction = new WaitSeqAction(WaitDur / 2d);
                     break;

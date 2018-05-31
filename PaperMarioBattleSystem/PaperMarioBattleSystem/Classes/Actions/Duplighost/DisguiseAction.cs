@@ -25,7 +25,7 @@ namespace PaperMarioBattleSystem
 
         protected override BattleEntity[] GetCustomAffectedEntities()
         {
-            BattlePartner partner = BattleManager.Instance.Partner;
+            BattlePartner partner = User.BManager.Partner;
             if (partner == null) return null;
 
             return new BattleEntity[] { partner };

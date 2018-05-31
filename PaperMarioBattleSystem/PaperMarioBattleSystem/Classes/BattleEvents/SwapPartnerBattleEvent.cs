@@ -42,7 +42,7 @@ namespace PaperMarioBattleSystem
         protected override void OnStart()
         {
             StartPos = OldPartner.BattlePosition;
-            EndPos = BattleManager.Instance.Mario.BattlePosition;
+            EndPos = OldPartner.BManager.Mario.BattlePosition;
         }
 
         protected override void OnEnd()
@@ -100,11 +100,11 @@ namespace PaperMarioBattleSystem
         {
             //Remove the old partner from battle, set the new Partner reference, then add the new Partner to battle
             //This order ensures that the Partner reference is correct for the EntityRemovedEvent and the EntityAddedEvent
-            BattleManager.Instance.RemoveEntity(OldPartner, false);
+            OldPartner.BManager.RemoveEntity(OldPartner, false);
 
-            BattleManager.Instance.SetPartner(NewPartner);
+            OldPartner.BManager.SetPartner(NewPartner);
 
-            BattleManager.Instance.AddEntity(NewPartner, null, false);
+            OldPartner.BManager.AddEntity(NewPartner, null, false);
 
             //Position offset
             Vector2 offset = Vector2.Zero;

@@ -339,7 +339,7 @@ namespace PaperMarioBattleSystem
         public static BattleEntity GetTrueTarget(this BattleEntity battleEntity)
         {
             //The BattleEntity defending is active only on phases other than the entity's phase
-            if (BattleManager.Instance.CurEntityPhase != battleEntity.EntityType)
+            if (battleEntity.BManager.CurEntityPhase != battleEntity.EntityType)
             {
                 //Check if we have a defender and return it if so
                 BattleEntity defendedByEntity = battleEntity.EntityProperties.GetAdditionalProperty<BattleEntity>(AdditionalProperty.DefendedByEntity);
@@ -393,7 +393,7 @@ namespace PaperMarioBattleSystem
         {
             if (battleEntity == null) return 0;
 
-            return EntityGlobals.GetCombinedEquippedBadgeCount(BattleManager.Instance.GetEntities(battleEntity.EntityType, null), badgeType);
+            return EntityGlobals.GetCombinedEquippedBadgeCount(battleEntity.BManager.GetEntities(battleEntity.EntityType, null), badgeType);
         }
 
         /// <summary>
@@ -406,7 +406,7 @@ namespace PaperMarioBattleSystem
         {
             if (battleEntity == null) return 0;
 
-            return EntityGlobals.GetCombinedEquippedNPBadgeCount(BattleManager.Instance.GetEntities(battleEntity.EntityType, null), badgeType);
+            return EntityGlobals.GetCombinedEquippedNPBadgeCount(battleEntity.BManager.GetEntities(battleEntity.EntityType, null), badgeType);
         }
 
         /// <summary>
@@ -418,7 +418,7 @@ namespace PaperMarioBattleSystem
         {
             if (battleEntity == null) return false;
 
-            return EntityGlobals.CombinedHaveAdditionalProperty(BattleManager.Instance.GetEntities(battleEntity.EntityType, null), property);
+            return EntityGlobals.CombinedHaveAdditionalProperty(battleEntity.BManager.GetEntities(battleEntity.EntityType, null), property);
         }
 
         /// <summary>

@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Returns Mario's FP for BattlePartners, as they share the same FP pool for Mario.
         /// </summary>
-        public override int CurFP => BattleManager.Instance.Mario.BattleStats.FP;
+        public override int CurFP => (IsInBattle == false || BManager.Mario == null) ? 0 : BManager.Mario.BattleStats.FP;
 
         /// <summary>
         /// Partners and Mario add to Mario's FP pool.
@@ -39,7 +39,7 @@ namespace PaperMarioBattleSystem
         /// <param name="fp"></param>
         public override void HealFP(int fp)
         {
-            BattleMario mario = BattleManager.Instance.Mario;
+            BattleMario mario = BManager.Mario;
             mario.HealFP(fp);
         }
 
@@ -48,19 +48,19 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public override void LoseFP(int fp)
         {
-            BattleMario mario = BattleManager.Instance.Mario;
+            BattleMario mario = BManager.Mario;
             mario.LoseFP(fp);
         }
 
         public override void RaiseMaxFP(int fp)
         {
-            BattleMario mario = BattleManager.Instance.Mario;
+            BattleMario mario = BManager.Mario;
             mario.RaiseMaxFP(fp);
         }
 
         public override void LowerMaxFP(int fp)
         {
-            BattleMario mario = BattleManager.Instance.Mario;
+            BattleMario mario = BManager.Mario;
             mario.LowerMaxFP(fp);
         }
 
@@ -89,7 +89,7 @@ namespace PaperMarioBattleSystem
 
         public sealed override StarPowerBase GetStarPower(StarPowerGlobals.StarPowerTypes starPowerType)
         {
-            return BattleManager.Instance.Mario.MStats.GetStarPowerFromType(starPowerType);
+            return BManager.Mario.MStats.GetStarPowerFromType(starPowerType);
         }
 
         /// <summary>

@@ -168,7 +168,7 @@ namespace PaperMarioBattleSystem
                 MiniYuxes.Add(miniYux);
 
                 //Add the Mini-Yux to battle with the same BattleIndex as the Yux
-                BattleManager.Instance.AddEntities(new BattleEntity[] { miniYux }, new int[] { BattleIndex }, true);
+                BManager.AddEntity(miniYux, BattleIndex, true);
 
                 createdAny = true;
             }
@@ -187,7 +187,7 @@ namespace PaperMarioBattleSystem
                 //If we didn't have any Mini-Yuxes, don't do anything
                 if (existingMinis != null)
                 {
-                    BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.YuxArrange + 1,
+                    BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.YuxArrange + 1,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                         new MoveWithAfterImagesBattleEvent(existingMinis, posArray, moveTime, new AfterImageVFX(null, 4, 3, .5f,
                         AfterImageVFX.AfterImageAlphaSetting.Constant, AfterImageVFX.AfterImageAnimSetting.Current),
@@ -210,11 +210,11 @@ namespace PaperMarioBattleSystem
                 }
 
                 //Re-sort the enemy list since their positions have changed
-                BattleManager.Instance.SortEntityList(EntityType);
+                BManager.SortEntityList(EntityType);
 
                 //Queue a lower-priority battle event for the Mini-Yuxes to go to their battle positions after the initial event is done
                 //Include after-images here as well
-                BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.YuxArrange,
+                BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.YuxArrange,
                     new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
                     new MoveWithAfterImagesBattleEvent(MiniYuxes.ToArray(), battlePosArray, moveTime, new AfterImageVFX(null, 4, 3, .5f,
                     AfterImageVFX.AfterImageAlphaSetting.Constant, AfterImageVFX.AfterImageAnimSetting.Current),

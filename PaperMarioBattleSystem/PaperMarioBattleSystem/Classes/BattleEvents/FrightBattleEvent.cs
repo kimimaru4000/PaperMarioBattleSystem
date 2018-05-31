@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             //Remove the BattleEntity first
-            BattleManager.Instance.RemoveEntity(Entity, true);
+            Entity.BManager.RemoveEntity(Entity, true);
             Entity.Die();
         }
 

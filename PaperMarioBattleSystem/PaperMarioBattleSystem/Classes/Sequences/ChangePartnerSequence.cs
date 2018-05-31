@@ -24,9 +24,9 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    SwapPartnerBattleEvent swapPartnerBattleEvent = new SwapPartnerBattleEvent(BattleManager.Instance.Partner, NewPartner, 300d, 300d);
+                    SwapPartnerBattleEvent swapPartnerBattleEvent = new SwapPartnerBattleEvent(User.BManager.Partner, NewPartner, 300d, 300d);
 
-                    BattleManager.Instance.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.SwapPartner,
+                    User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.SwapPartner,
                         new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
                         swapPartnerBattleEvent);
 

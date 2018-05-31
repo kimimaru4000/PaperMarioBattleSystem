@@ -11,32 +11,10 @@ using PaperMarioBattleSystem.Utilities;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Handles turns in battle
-    /// <para>This is a Singleton</para>
+    /// Handles all aspects regarding turn-based battles. It manages the BattleEntities taking part in battle.
     /// </summary>
     public class BattleManager : IUpdateable, ICleanup
     {
-        #region Singleton Fields
-
-        public static BattleManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new BattleManager();
-                }
-
-                return instance;
-            }
-        }
-
-        public static bool HasInstance => (instance != null);
-
-        private static BattleManager instance = null;
-
-        #endregion
-
         #region Events
 
         public delegate void OnEntityAdded(BattleEntity battleEntity);
@@ -81,7 +59,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The BattleManager's event manager.
         /// </summary>
-        public BattleEventManager battleEventManager { get; private set; } = new BattleEventManager();
+        public BattleEventManager battleEventManager { get; private set; } = null;
 
         /// <summary>
         /// The battle's properties.
@@ -178,9 +156,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private int EnemiesAlive => GetEntitiesCount(EntityTypes.Enemy);
 
-        private BattleManager()
+        public BattleManager()
         {
-            
+            battleEventManager = new BattleEventManager(this);
         }
 
         public void CleanUp()
@@ -197,8 +175,6 @@ namespace PaperMarioBattleSystem
             EntityRemovedEvent = null;
             BattleTurnStartedEvent = null;
             BattleTurnEndedEvent = null;
-
-            instance = null;
         }
 
         /// <summary>
@@ -580,6 +556,9 @@ namespace PaperMarioBattleSystem
             {
                 finalBattleIndex = FindLowestAvailableBattleIndex(entityType);
             }
+
+            //Set the Battle Manager associated with the BattleEntity to this one
+            battleEntity.SetBattleManager(this);
 
             //Set the battle index and start battle for the BattleEntity if it should
             battleEntity.SetBattleIndex(finalBattleIndex, false);

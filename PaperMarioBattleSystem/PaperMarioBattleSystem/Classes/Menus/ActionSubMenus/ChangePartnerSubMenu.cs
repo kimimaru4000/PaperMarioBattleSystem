@@ -27,7 +27,7 @@ namespace PaperMarioBattleSystem
                 ChangePartnerAction partnerChange = new ChangePartnerAction(User, partners[i]);
 
                 //If this Partner is the current one out in battle or is dead, disable the option to select it
-                if (partners[i] == BattleManager.Instance.Partner || partners[i].IsDead == true)
+                if (partners[i] == User.BManager.Partner || partners[i].IsDead == true)
                 {
                     partnerChange.Disabled = true;
                     if (partners[i].IsDead == false)

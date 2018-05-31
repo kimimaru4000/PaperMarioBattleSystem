@@ -35,15 +35,15 @@ namespace PaperMarioBattleSystem
                 int randVal = GeneralGlobals.Randomizer.Next(0, 2);
 
                 //Ensure there's a Partner to copy
-                bool partnerExists = (BattleManager.Instance.Partner != null);
+                bool partnerExists = (Enemy.BManager.Partner != null);
 
                 if (randVal == 0 && partnerExists == true)
                 {
-                    duplighost.StartAction(new DisguiseAction(duplighost), false, BattleManager.Instance.Partner.GetTrueTarget());
+                    duplighost.StartAction(new DisguiseAction(duplighost), false, Enemy.BManager.Partner.GetTrueTarget());
                 }
                 else
                 {
-                    duplighost.StartAction(new HeadbuttAction(duplighost), false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
+                    duplighost.StartAction(new HeadbuttAction(duplighost), false, Enemy.BManager.FrontPlayer.GetTrueTarget());
                 }
             }
             else
@@ -53,21 +53,21 @@ namespace PaperMarioBattleSystem
                     int rand = GeneralGlobals.Randomizer.Next(0, 2);
 
                     if (rand == 0)
-                        duplighost.StartAction(new BonkAction(duplighost), false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
+                        duplighost.StartAction(new BonkAction(duplighost), false, Enemy.BManager.FrontPlayer.GetTrueTarget());
                     else
-                        duplighost.StartAction(new TattleAction(duplighost, false), false, BattleManager.Instance.Mario);
+                        duplighost.StartAction(new TattleAction(duplighost, false), false, Enemy.BManager.Mario);
                 }
                 else if (duplighost.PartnerTypeDisguise == PartnerTypes.Kooper)
                 {
-                    duplighost.StartAction(new ShellTossAction(duplighost), false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
+                    duplighost.StartAction(new ShellTossAction(duplighost), false, Enemy.BManager.FrontPlayer.GetTrueTarget());
                 }
                 else if (duplighost.PartnerTypeDisguise == PartnerTypes.Watt)
                 {
-                    duplighost.StartAction(new ElectroDashAction(duplighost), false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
+                    duplighost.StartAction(new ElectroDashAction(duplighost), false, Enemy.BManager.FrontPlayer.GetTrueTarget());
                 }
                 else
                 {
-                    duplighost.StartAction(new HeadbuttAction(duplighost), false, BattleManager.Instance.FrontPlayer.GetTrueTarget());
+                    duplighost.StartAction(new HeadbuttAction(duplighost), false, Enemy.BManager.FrontPlayer.GetTrueTarget());
                 }
             }
 

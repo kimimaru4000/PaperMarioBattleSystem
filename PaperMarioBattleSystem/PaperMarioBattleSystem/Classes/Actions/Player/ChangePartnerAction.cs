@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
                 Rectangle sourceRect = new Rectangle(30 + (((int)NewPartner.PartnerType - 1) * 32), 886, 32, 32);
 
                 //Pretty hackish for now; show the disabled icon instead if the Partner is the current one out
-                if (NewPartner == BattleManager.Instance.Partner)
+                if (NewPartner == User.BManager.Partner)
                 {
                     sourceRect.Y += 32;
                 }

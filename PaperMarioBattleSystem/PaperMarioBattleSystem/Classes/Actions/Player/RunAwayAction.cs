@@ -30,12 +30,12 @@ namespace PaperMarioBattleSystem
         public override void OnMenuSelected()
         {
             //In TTYD, all allies run and play the same animations at the same time, so pass them in
-            ActionStart(BattleManager.Instance.GetEntities(User.EntityType, null));
+            ActionStart(User.BManager.GetEntities(User.EntityType, null));
         }
 
         public override void Initialize()
         {
-            if (BattleManager.Instance.Properties.Runnable == false)
+            if (User.BManager.Properties.Runnable == false)
             {
                 Disabled = true;
                 DisabledString = "Can't select that!";

@@ -25,11 +25,11 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            BattleManager.Instance.EntityAddedEvent -= OnEntityAdded;
-            BattleManager.Instance.EntityAddedEvent += OnEntityAdded;
+            EntityEquipped.BManager.EntityAddedEvent -= OnEntityAdded;
+            EntityEquipped.BManager.EntityAddedEvent += OnEntityAdded;
 
             //For all current enemies, show their HP
-            BattleEntity[] enemies = BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Enemy, null);
+            BattleEntity[] enemies = EntityEquipped.BManager.GetEntities(Enumerations.EntityTypes.Enemy, null);
             for (int i = 0; i < enemies.Length; i++)
             {
                 AddShowHPProperty(enemies[i]);
@@ -38,10 +38,10 @@ namespace PaperMarioBattleSystem
 
         protected override void OnUnequip()
         {
-            BattleManager.Instance.EntityAddedEvent -= OnEntityAdded;
-
+            EntityEquipped.BManager.EntityAddedEvent -= OnEntityAdded;
+            
             //For all current enemies, remove showing their HP (unless tattled, which will handle itself)
-            BattleEntity[] enemies = BattleManager.Instance.GetEntities(Enumerations.EntityTypes.Enemy, null);
+            BattleEntity[] enemies = EntityEquipped.BManager.GetEntities(Enumerations.EntityTypes.Enemy, null);
             for (int i = 0; i < enemies.Length; i++)
             {
                 RemoveShowHPProperty(enemies[i]);

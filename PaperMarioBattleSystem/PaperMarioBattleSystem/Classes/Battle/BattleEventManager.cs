@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
         /// <param name="priority">The priority the Battle Event has. Must be greater than or equal to 0.</param>
         /// <param name="battleStates">The BattleStates the Battle Event takes effect in. If none are specified, the event isn't added.</param>
         /// <param name="battleEvent">The Battle Event to add.</param>
-        public void QueueBattleEvent(int priority, BattleManager.BattleState[] battleStates, BattleEvent battleEvent)
+        public void QueueBattleEvent(int priority, BattleGlobals.BattleState[] battleStates, BattleEvent battleEvent)
         {
             if (priority < 0)
             {

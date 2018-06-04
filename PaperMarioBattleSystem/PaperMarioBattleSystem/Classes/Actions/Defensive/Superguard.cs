@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
             StatusChanceHolder[] newStatuses = FilterStatuses(statusEffects);
 
             User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage,
-                new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
+                new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn },
                 new WaitForAnimBattleEvent(User, AnimationGlobals.PlayerBattleAnimations.SuperguardName, true));
 
             BattleObjManager.Instance.AddBattleObject(new ActionCommandVFX(ActionCommand.CommandRank.Great, User.Position, new Vector2(-15, -15)));

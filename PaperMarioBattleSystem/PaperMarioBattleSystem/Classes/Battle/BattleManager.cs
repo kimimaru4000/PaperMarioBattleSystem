@@ -47,15 +47,6 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        #region Enumerations
-
-        public enum BattleState
-        {
-            Init, Turn, TurnEnd, Done
-        }
-
-        #endregion
-
         /// <summary>
         /// The BattleManager's event manager.
         /// </summary>

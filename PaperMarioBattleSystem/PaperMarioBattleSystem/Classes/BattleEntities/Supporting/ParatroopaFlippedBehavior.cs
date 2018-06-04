@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
                 {
                     //Queue the event
                     Entity.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
-                        new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                        new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                         new FlippedBattleEvent(Entity as IFlippableEntity));
                 }
             }

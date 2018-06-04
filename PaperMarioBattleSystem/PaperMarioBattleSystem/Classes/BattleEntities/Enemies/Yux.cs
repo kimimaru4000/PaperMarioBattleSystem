@@ -188,7 +188,7 @@ namespace PaperMarioBattleSystem
                 if (existingMinis != null)
                 {
                     BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.YuxArrange + 1,
-                        new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                        new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                         new MoveWithAfterImagesBattleEvent(existingMinis, posArray, moveTime, new AfterImageVFX(null, 4, 3, .5f,
                         AfterImageVFX.AfterImageAlphaSetting.Constant, AfterImageVFX.AfterImageAnimSetting.Current),
                         Interpolation.InterpolationTypes.QuadInOut, Interpolation.InterpolationTypes.QuadInOut));
@@ -215,7 +215,7 @@ namespace PaperMarioBattleSystem
                 //Queue a lower-priority battle event for the Mini-Yuxes to go to their battle positions after the initial event is done
                 //Include after-images here as well
                 BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.YuxArrange,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                     new MoveWithAfterImagesBattleEvent(MiniYuxes.ToArray(), battlePosArray, moveTime, new AfterImageVFX(null, 4, 3, .5f,
                     AfterImageVFX.AfterImageAlphaSetting.Constant, AfterImageVFX.AfterImageAnimSetting.Current),
                     Interpolation.InterpolationTypes.QuadInOut, Interpolation.InterpolationTypes.QuadInOut));

@@ -75,7 +75,7 @@ namespace PaperMarioBattleSystem
                             SwapPartnerBattleEvent swapPartnerBattleEvent = new SwapPartnerBattleEvent(User.BManager.Partner, allPartners[randIndex],
                                 300d, 300d);
                             User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.SwapPartner,
-                                new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
+                                new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn },
                                 swapPartnerBattleEvent);
                         }
                     }

@@ -120,6 +120,26 @@ My concern with this would be for other classes that reference BattleEntities, s
 Should they be similarly generic? If you were to create an instance without deriving, how would you do so? new MoveAction<BattleEntity>("Test") may be passable.
 
 
+Update (6/3/18)
+---------------
+The BattleManager has been made instance-based, so now nothing references it as a Singleton. I think the next step is to simply go for the IBattleEntity interface mentioned above and see how it works.
 
+UPDATE:
 
+After attempting to implement it, I find it odd. The biggest thing I noticed is, not only does it make the code more cumbersome to work with, but you're also unable to move BattleEntities between battles if the BattleManagers are of different types (Ex. BattleManager<BattleEntity> vs. BattleManager<BattlePlayer>). This goes against what I initially wanted by making the BattleManager no longer a Singleton, and I didn't feel good about it while implementing it.
+
+The 1.0 Release should be simple and functional, yet flexible. It should be robust without needing to modify the source code. Let's nail down what's concerning me the most and why:
+
+-Most of the remaining Singletons: SpriteRenderer, AssetManager, BattleUIManager, BattleObjManager, SoundManager
+  -Developers might not want to use these implementations, and they should be able to use their own
+-Input
+  -Developers should be able to use their own
+-Animations
+  -Developers should be able to use their own Animation system. The current one isn't robust for anything complex, like skeletal animations
+-Debug
+  -Developers would want to use their own testing tools
+
+I feel it would be best for the 1.0 Release to focus on MonoGame projects, as that's what the battle system is built in. Porting to other frameworks and languages is never trivial for large codebases, and there are so many different ones it's impossible to account for them all. If someone wishes to port it to a language and/or framework of choice, the source code is available to do so.
+
+With this in mind, now we need to make it so importing it to a project is as easy as possible; it should act as a part of a game rather than a whole game. I will think about how to handle the classes mentioned above so I can realize this goal.
 

@@ -124,7 +124,7 @@ namespace PaperMarioBattleSystem
             if (battleManager.Properties.Runnable == false)
             {
                 battleManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.Turn },
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn },
                     new MessageBattleEvent(BattleGlobals.NoRunMessage, MessageBattleEvent.DefaultWaitDuration));
             }
 
@@ -435,7 +435,7 @@ namespace PaperMarioBattleSystem
         private void MainDraw(GameTime gameTime)
         {
             //Don't render if the battle didn't start yet
-            if (battleManager.State == BattleManager.BattleState.Init) return;
+            if (battleManager.State == BattleGlobals.BattleState.Init) return;
 
             battleManager.GetAllBattleEntities(BattleEntities, null);
 

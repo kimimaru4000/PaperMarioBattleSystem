@@ -66,12 +66,12 @@ namespace PaperMarioBattleSystem
 
             //Queue the BattleEvent to remove the wings
             Entity.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
-                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                 new RemoveWingsBattleEvent(this, Entity));
 
             //Queue the BattleEvent to move the entity down
             Entity.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
-                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                 new GroundedBattleEvent(Entity, new Vector2(Entity.BattlePosition.X, BattleGlobals.EnemyStartPos.Y)));
         }
 

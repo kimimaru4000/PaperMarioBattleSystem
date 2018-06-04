@@ -67,7 +67,7 @@ namespace PaperMarioBattleSystem
             if (Entity.IsDead == false)
             {
                 Entity.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 2,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                     new PlayAnimBattleEvent(Entity, Entity.GetIdleAnim(), false));
             }
 

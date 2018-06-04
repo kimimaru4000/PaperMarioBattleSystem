@@ -40,6 +40,14 @@ namespace PaperMarioBattleSystem
             HealHP = 1250, HealFP = 1251, Dialogue = 1500, Fright = 1700, BlownAway = 1800, Death = 2000, Damage = 2500, SwapPartner = 3000
         }
 
+        /// <summary>
+        /// The various states in battle.
+        /// </summary>
+        public enum BattleState
+        {
+            Init, Turn, TurnEnd, Done
+        }
+
         #endregion
 
         #region Constants
@@ -178,10 +186,10 @@ namespace PaperMarioBattleSystem
         public struct PendingBattleEventHolder
         {
             public int Priority { get; private set; }
-            public BattleManager.BattleState[] States { get; private set; }
+            public BattleGlobals.BattleState[] States { get; private set; }
             public BattleEvent PendingBattleEvent { get; private set; }
 
-            public PendingBattleEventHolder(int priority, BattleManager.BattleState[] battleStates, BattleEvent battleEvent)
+            public PendingBattleEventHolder(int priority, BattleGlobals.BattleState[] battleStates, BattleEvent battleEvent)
             {
                 Priority = priority;
                 States = battleStates;

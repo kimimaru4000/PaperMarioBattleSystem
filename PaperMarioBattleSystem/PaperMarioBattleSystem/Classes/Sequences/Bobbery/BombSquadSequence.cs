@@ -63,7 +63,7 @@ namespace PaperMarioBattleSystem
             //Add a battle event to shoot the bomb out
             //NOTE: Some values are temporary (Ex. ground position)
             User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.BobberyBomb - 1,
-                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                 new ShootBobberyBombBattleEvent(bobberyBomb, bombSquadResponse.ThrowVelocity,
                 bombSquadResponse.Gravity, BattleGlobals.PartnerPos.Y + 1));
         }

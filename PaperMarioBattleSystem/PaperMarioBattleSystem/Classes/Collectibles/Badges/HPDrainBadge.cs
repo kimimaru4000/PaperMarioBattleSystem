@@ -65,7 +65,7 @@ namespace PaperMarioBattleSystem
 
             //Queue a Battle Event to heal HP after your turn is over
             EntityEquipped.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.HealHP,
-                new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
+                new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd },
                 new HealHPBattleEvent(EntityEquipped, 1));
 
             //Mark that the heal is queued

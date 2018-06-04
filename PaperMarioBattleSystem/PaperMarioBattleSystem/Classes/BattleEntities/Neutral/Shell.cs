@@ -151,7 +151,7 @@ namespace PaperMarioBattleSystem
             if (SentDeathBattleEvent == false)
             {
                 BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status - 1,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd },
                     new ShellBreakBattleEvent(this));
 
                 SentDeathBattleEvent = true;

@@ -146,7 +146,7 @@ namespace PaperMarioBattleSystem
             {
                 //Remove disguise through a Battle Event
                 BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd },
                     new RemoveDisguiseBattleEvent(this));
             }
         }
@@ -158,7 +158,7 @@ namespace PaperMarioBattleSystem
             {
                 //Remove disguise through a Battle Event
                 BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage - 1,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd },
                     new RemoveDisguiseBattleEvent(this));
             }
         }

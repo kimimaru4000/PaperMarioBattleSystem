@@ -95,7 +95,7 @@ namespace PaperMarioBattleSystem
 
                     //Queue the event
                     BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.BobberyBomb,
-                        new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                        new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                         detonateEvent);
 
                     Detonated = true;
@@ -130,7 +130,7 @@ namespace PaperMarioBattleSystem
 
                 //Queue the event
                 BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.BobberyBomb,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd },
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd },
                     detonateEvent);
 
                 Detonated = true;

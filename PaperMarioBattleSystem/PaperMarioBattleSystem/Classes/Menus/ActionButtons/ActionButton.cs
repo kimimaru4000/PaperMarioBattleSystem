@@ -91,7 +91,7 @@ namespace PaperMarioBattleSystem
                     string disabledString = $"Your {Category} moves are disabled!";
 
                     SubMenu.User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
-                        new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                        new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                         new MessageBattleEvent(disabledString, MessageBattleEvent.DefaultWaitDuration));
 
                     Debug.LogError($"All {Category} moves are currently disabled for {SubMenu.User.Name}!");

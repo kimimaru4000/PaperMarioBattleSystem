@@ -39,7 +39,7 @@ namespace PaperMarioBattleSystem
         {
             //Remove entities afflicted with Fright
             EntityAfflicted.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Fright,
-                new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                 new FrightBattleEvent(EntityAfflicted, FrightSpeed, FrightRunTime));
         }
 

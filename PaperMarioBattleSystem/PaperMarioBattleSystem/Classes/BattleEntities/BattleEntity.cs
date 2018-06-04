@@ -312,7 +312,7 @@ namespace PaperMarioBattleSystem
                     if (damage > 0 && (IsTurn == false || PreviousAction?.MoveSequence.InSequence == false))
                     {
                         BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage,
-                            new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                            new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                             new DamagedBattleEvent(this));
 
                         //Play the damaged sound
@@ -450,7 +450,7 @@ namespace PaperMarioBattleSystem
             if (showMessage == true && string.IsNullOrEmpty(statusEffect.AfflictedMessage) == false)
             {
                 BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + statusEffect.Priority,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(statusEffect.AfflictedMessage, 2000d));
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new MessageBattleEvent(statusEffect.AfflictedMessage, 2000d));
             }
         }
 
@@ -479,14 +479,14 @@ namespace PaperMarioBattleSystem
             if (showMessage == true && string.IsNullOrEmpty(status.RemovedMessage) == false)
             {
                 BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + status.Priority,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new MessageBattleEvent(status.RemovedMessage, 2000d));
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new MessageBattleEvent(status.RemovedMessage, 2000d));
             }
 
             //Queue a battle event for the status removal
             if (queueBattleEvent == true)
             {
                 BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status + status.Priority,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.TurnEnd }, new StatusEndedBattleEvent(this));
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new StatusEndedBattleEvent(this));
             }
         }
 
@@ -639,7 +639,7 @@ namespace PaperMarioBattleSystem
             if (IsInBattle == true)
             {
                 BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Death,
-                    new BattleManager.BattleState[] { BattleManager.BattleState.Turn, BattleManager.BattleState.TurnEnd },
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
                     new DeathBattleEvent(this, IsInBattle == false, EntityType == EntityTypes.Enemy));
             }
         }

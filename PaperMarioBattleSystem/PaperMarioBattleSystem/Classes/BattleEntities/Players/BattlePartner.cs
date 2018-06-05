@@ -64,7 +64,7 @@ namespace PaperMarioBattleSystem
             mario.LowerMaxFP(fp);
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
             this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ChargeP, BadgeGlobals.BadgeFilterType.UnEquipped));
             this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaverP, BadgeGlobals.BadgeFilterType.UnEquipped));
@@ -76,7 +76,7 @@ namespace PaperMarioBattleSystem
             //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped));
             //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Peekaboo, BadgeGlobals.BadgeFilterType.UnEquipped));
             
-            base.OnBattleStart();
+            base.OnEnteredBattle();
         }
 
         public override void OnPhaseCycleStart()

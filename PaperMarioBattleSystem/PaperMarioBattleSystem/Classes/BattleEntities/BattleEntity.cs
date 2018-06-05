@@ -707,10 +707,10 @@ namespace PaperMarioBattleSystem
         #endregion
 
         /// <summary>
-        /// What occurs when the battle is started for the entity.
-        /// <para>This is called when the entity is first added to the battle.</para>
+        /// What occurs when the BattleEntity enters a battle.
+        /// <para>This is called when the BattleEntity is added to a battle.</para>
         /// </summary>
-        public virtual void OnBattleStart()
+        public virtual void OnEnteredBattle()
         {
             //By default, set the direction the BattleEntity is facing to be right for players and left for everything else
             SpriteFlip = (EntityType == EntityTypes.Player);

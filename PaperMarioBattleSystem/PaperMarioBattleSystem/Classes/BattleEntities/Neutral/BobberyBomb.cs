@@ -71,9 +71,9 @@ namespace PaperMarioBattleSystem
             SparkAnimation.Pause();
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
-            base.OnBattleStart();
+            base.OnEnteredBattle();
         }
 
         protected override void OnTakeDamage(in InteractionHolder damageInfo)

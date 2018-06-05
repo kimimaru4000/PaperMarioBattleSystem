@@ -21,9 +21,9 @@ namespace PaperMarioBattleSystem
             DefensiveActions.Add(new Guard(this));
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
-            base.OnBattleStart();
+            base.OnEnteredBattle();
 
             //Set battle position
             //Players follow the same BattleIndex rules, but their positions are from right to left instead of left to right

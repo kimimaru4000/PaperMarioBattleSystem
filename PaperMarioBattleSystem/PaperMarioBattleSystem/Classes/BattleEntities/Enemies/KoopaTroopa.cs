@@ -85,9 +85,9 @@ namespace PaperMarioBattleSystem
             FlippedBehavior?.CleanUp();
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
-            base.OnBattleStart();
+            base.OnEnteredBattle();
 
             SetFlippedBehavior();
         }

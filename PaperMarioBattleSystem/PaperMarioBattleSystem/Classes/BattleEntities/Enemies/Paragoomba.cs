@@ -74,9 +74,9 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(120, 121, 31, 21), 1000d, new Vector2(1, -13), -.01f));
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
-            base.OnBattleStart();
+            base.OnEnteredBattle();
 
             WingedBehavior = new ParagoombaWingedBehavior(this, -1, EntityProperties.GetVulnerableDamageEffects(), new Goomba());
 

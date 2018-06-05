@@ -41,9 +41,9 @@ namespace PaperMarioBattleSystem
             SetHeldCollectible(null);
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
-            base.OnBattleStart();
+            base.OnEnteredBattle();
 
             //Set battle position
             Vector2 battlepos = BattleGlobals.EnemyStartPos + new Vector2(BattleGlobals.PositionXDiff * BattleIndex, 0);

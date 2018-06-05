@@ -52,7 +52,7 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(300, 14, 52, 48), 1000d)));
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
             //The Mini-Yux's BattlePosition is set by the Yux, so do everything aside from that
 

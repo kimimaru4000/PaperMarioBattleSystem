@@ -48,6 +48,14 @@ namespace PaperMarioBattleSystem
             Init, Turn, TurnEnd, Done
         }
 
+        /// <summary>
+        /// The types of battle results.
+        /// </summary>
+        public enum BattleResults
+        {
+            Victory, GameOver, Other
+        }
+
         #endregion
 
         #region Constants

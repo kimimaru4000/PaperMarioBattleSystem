@@ -81,9 +81,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
-            base.OnBattleStart();
+            base.OnEnteredBattle();
 
             Vector2 startPos = new Vector2(-20, 85);
 

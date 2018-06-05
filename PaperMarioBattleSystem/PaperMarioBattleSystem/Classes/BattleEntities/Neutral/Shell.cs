@@ -124,9 +124,9 @@ namespace PaperMarioBattleSystem
             Debug.Log($"The Shell started defending {EntityDefending.Name}!");
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
-            base.OnBattleStart();
+            base.OnEnteredBattle();
 
             //Show the Shell's HP, which can only be viewed with the Peekaboo Badge since it can't be tattled (in the actual games, at least)
             if (BManager.Mario.GetPartyEquippedBadgeCount(BadgeGlobals.BadgeTypes.Peekaboo) > 0)

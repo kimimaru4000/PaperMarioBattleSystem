@@ -67,9 +67,9 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(98, 1, 43, 30), 200d, new Vector2(0, -1))));
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
-            base.OnBattleStart();
+            base.OnEnteredBattle();
 
             //Add the Balloon to battle
             Balloon = new SkyGuyBalloon(Layer - .0001f);

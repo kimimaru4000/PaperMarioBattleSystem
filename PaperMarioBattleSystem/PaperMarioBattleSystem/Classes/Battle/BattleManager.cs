@@ -45,6 +45,20 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public event OnBattleTurnEnd BattleTurnEndedEvent = null;
 
+        public delegate void OnBattleStart();
+        /// <summary>
+        /// The event invoked when the battle is started.
+        /// <para>This is invoked right before switching to the starting phase.</para>
+        /// </summary>
+        public event OnBattleStart BattleStartedEvent = null;
+
+        public delegate void OnBattleEnd(BattleResults battleResult);
+        /// <summary>
+        /// The event invoked when the battle is ended.
+        /// <para>This is invoked right after the BattleState has been changed to Done.</para>
+        /// </summary>
+        public event OnBattleEnd BattleEndedEvent = null;
+
         #endregion
 
         /// <summary>
@@ -160,6 +174,8 @@ namespace PaperMarioBattleSystem
             EntityRemovedEvent = null;
             BattleTurnStartedEvent = null;
             BattleTurnEndedEvent = null;
+            BattleStartedEvent = null;
+            BattleEndedEvent = null;
         }
 
         /// <summary>
@@ -203,8 +219,6 @@ namespace PaperMarioBattleSystem
         {
             //Don't do anything until the battle starts
             if (State == BattleState.Init) return;
-
-            //NOTE: Create a general way to halt turns in battle in place of these hardcoded event checks
 
             //Update battle events if there are any
             if (battleEventManager.HasBattleEvents == true)
@@ -262,6 +276,9 @@ namespace PaperMarioBattleSystem
         public void StartBattle()
         {
             ChangeBattleState(BattleState.TurnEnd);
+
+            BattleStartedEvent?.Invoke();
+
             SwitchingPhase = true;
             SwitchPhase(Phase);
         }
@@ -269,9 +286,11 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Ends the Battle
         /// </summary>
-        public void EndBattle()
+        public void EndBattle(BattleResults battleResult)
         {
             ChangeBattleState(BattleState.Done);
+
+            BattleEndedEvent?.Invoke(battleResult);
         }
 
         /// <summary>
@@ -430,14 +449,14 @@ namespace PaperMarioBattleSystem
         {
             if (Mario == null || Mario.IsDead == true)
             {
-                EndBattle();
+                EndBattle(BattleResults.GameOver);
                 Debug.Log("GAME OVER");
 
                 BattleUIManager.Instance.ClearMenuStack();
             }
             else if (EnemiesAlive <= 0)
             {
-                EndBattle();
+                EndBattle(BattleResults.Victory);
                 Mario?.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
                 Partner?.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
                 Debug.Log("VICTORY");
@@ -550,7 +569,7 @@ namespace PaperMarioBattleSystem
 
             if (initialize == true)
             {
-                battleEntity.OnBattleStart();
+                battleEntity.OnEnteredBattle();
             }
 
             //Increment BattleEntity count when added
@@ -704,14 +723,9 @@ namespace PaperMarioBattleSystem
             List<BattleEntity> allEntities = new List<BattleEntity>();
 
             //Add all BattleEntities
-            EntityTypes[] entityTypes = UtilityGlobals.GetEnumValues<EntityTypes>();
-            for (int i = 0; i < entityTypes.Length; i++)
+            foreach (List<BattleEntity> entities in AllEntities.Values)
             {
-                List<BattleEntity> existingList = GetEntitiesList(entityTypes[i]);
-                if (existingList != null)
-                {
-                    allEntities.AddRange(existingList);
-                }
+                allEntities.CopyFromList(entities);
             }
 
             return allEntities;
@@ -751,10 +765,7 @@ namespace PaperMarioBattleSystem
             List<BattleEntity> entitiesOfType = GetEntitiesList(entityType);
 
             //Add the BattleEntities in the internal list into the new list
-            if (entitiesOfType != null)
-            {
-                entities.AddRange(entitiesOfType);
-            }
+            entities.CopyFromList(entitiesOfType);
 
             //Filter by height states
             BattleManagerUtils.FilterEntitiesByHeights(entities, heightStates);
@@ -771,10 +782,9 @@ namespace PaperMarioBattleSystem
             int count = 0;
 
             //Get all BattleEntities
-            EntityTypes[] entityTypes = UtilityGlobals.GetEnumValues<EntityTypes>();
-            for (int i = 0; i < entityTypes.Length; i++)
+            foreach(EntityTypes entityType in AllEntities.Keys)
             {
-                count += GetEntitiesCount(entityTypes[i]);
+                count += GetEntitiesCount(entityType);
             }
 
             return count;
@@ -807,9 +817,9 @@ namespace PaperMarioBattleSystem
         public void GetAllBattleEntities(List<BattleEntity> entityList, params HeightStates[] heightStates)
         {
             //Add all the BattleEntities to the existing list
-            foreach(KeyValuePair<EntityTypes, List<BattleEntity>> entities in AllEntities)
+            foreach(List<BattleEntity> entities in AllEntities.Values)
             {
-                entityList.CopyFromList(entities.Value);
+                entityList.CopyFromList(entities);
             }
 
             BattleManagerUtils.FilterEntitiesByHeights(entityList, heightStates);
@@ -1034,7 +1044,7 @@ namespace PaperMarioBattleSystem
         /// <param name="entityType">The type of BattleEntities to find a Battle Index for.</param>
         /// <returns>An integer representing the next available Battle Index.
         /// If no BattleEntities of the specified type are in battle, -1 will be returned.</returns>
-        private int FindLowestAvailableBattleIndex(EntityTypes entityType)
+        public int FindLowestAvailableBattleIndex(EntityTypes entityType)
         {
             List<BattleEntity> entities = GetEntitiesList(entityType);
 
@@ -1080,8 +1090,8 @@ namespace PaperMarioBattleSystem
         /// <param name="startIndex">The BattleIndex to start searching from.</param>
         /// <param name="backwards">Whether to search backwards or not.
         /// If true, will find a BattleEntity with a BattleIndex less than or equal to <paramref name="startIndex"/>.</param>
-        /// <returns></returns>
-        private BattleEntity FindEntityFromBattleIndex(EntityTypes entityType, int startIndex, bool backwards = false)
+        /// <returns>The BattleEntity found from the starting BattleIndex, otherwise null.</returns>
+        public BattleEntity FindEntityFromBattleIndex(EntityTypes entityType, int startIndex, bool backwards = false)
         {
             List<BattleEntity> entities = GetEntitiesList(entityType);
 

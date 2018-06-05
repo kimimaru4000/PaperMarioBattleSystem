@@ -88,9 +88,9 @@ namespace PaperMarioBattleSystem
             WingedBehavior?.CleanUp();
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
-            base.OnBattleStart();
+            base.OnEnteredBattle();
 
             WingedBehavior = new ParatroopaWingedBehavior(this, -1, Enumerations.DamageEffects.RemovesWings, new KoopaTroopa());
 

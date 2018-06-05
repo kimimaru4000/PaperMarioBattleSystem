@@ -132,7 +132,7 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(548, 901, 30, 51), 100d)));
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
             BManager.EntityRemovedEvent -= OnEntityRemoved;
             BManager.EntityRemovedEvent += OnEntityRemoved;
@@ -209,7 +209,7 @@ namespace PaperMarioBattleSystem
 
             //BattleObjManager.Instance.AddBattleObject(new AfterImageVFX(this, 4, 4, .2f, AfterImageVFX.AfterImageAlphaSetting.FadeOff, AfterImageVFX.AfterImageAnimSetting.Current));
 
-            base.OnBattleStart();
+            base.OnEnteredBattle();
         }
 
         protected sealed override BattleMenu GetMainBattleMenu()

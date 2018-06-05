@@ -86,9 +86,9 @@ namespace PaperMarioBattleSystem
             SegmentBehavior = new PokeySegmentBehavior(this, 3, Enumerations.DamageEffects.RemovesSegment);
         }
 
-        public override void OnBattleStart()
+        public override void OnEnteredBattle()
         {
-            base.OnBattleStart();
+            base.OnEnteredBattle();
 
             SetSegmentBehavior();
 

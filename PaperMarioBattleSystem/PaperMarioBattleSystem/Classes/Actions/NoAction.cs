@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
             Name = "Do Nothing";
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(182, 844, 24, 24)),
                 "Do nothing this turn.", Enumerations.MoveResourceTypes.FP, 0,
-                Enumerations.CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.Single,
+                Enumerations.CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.None, Enumerations.EntitySelectionType.Single,
                 false, null);
 
             SetMoveSequence(new NoSequence(this));

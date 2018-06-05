@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(743, 10, 39, 37)),
                 "Run from battle.", MoveResourceTypes.FP, 0, CostDisplayTypes.Hidden, MoveAffectionTypes.None,
-                TargetSelectionMenu.EntitySelectionType.First, false, null, null);
+                Enumerations.EntitySelectionType.First, false, null, null);
 
             SetMoveSequence(new RunAwaySequence(this));
             actionCommand = new RunAwayCommand(MoveSequence, 100d, 8d, .4d, 400d, 3500d, Keys.Z);

@@ -84,55 +84,44 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets Mario's Danger status value based on his current HealthState.
         /// </summary>
-        /// <param name="partner">Mario.</param>
+        /// <param name="entity">A BattleEntity representing Mario.</param>
         /// <returns>A float of Mario's Danger status value.</returns>
-        private static float GetMarioDangerStatusValue(BattleMario mario)
+        private static float GetMarioDangerStatusValue(BattleEntity entity)
         {
-            if (mario == null)
-            {
-                Debug.LogError($"{nameof(mario)} is null, which should never happen");
-                return NormalMod;
-            }
-
-            Enumerations.HealthStates marioHealthState = mario.HealthState;
+            Enumerations.HealthStates? marioHealthState = entity?.HealthState;
 
             switch (marioHealthState)
             {
-                case Enumerations.HealthStates.Normal:
-                    return NormalMod;
                 case Enumerations.HealthStates.Danger:
                     return MarioDangerMod;
                 case Enumerations.HealthStates.Peril:
                 case Enumerations.HealthStates.Dead:
-                default:
                     return MarioPerilMod;
+                case Enumerations.HealthStates.Normal:
+                default:
+                    return NormalMod;
             }
         }
 
         /// <summary>
         /// Gets a Partner's Danger status value based on its current HealthState.
         /// </summary>
-        /// <param name="partner">Mario's Partner.</param>
+        /// <param name="entity">A BattleEntity representing Mario's Partner.</param>
         /// <returns>A float of the Partner's Danger status value.</returns>
-        private static float GetPartnerDangerStatusValue(BattlePartner partner)
+        private static float GetPartnerDangerStatusValue(BattleEntity entity)
         {
-            if (partner == null)
-            {
-                return NormalMod;
-            }
-
-            Enumerations.HealthStates partnerHealthState = partner.HealthState;
+            Enumerations.HealthStates? partnerHealthState = entity?.HealthState;
 
             switch (partnerHealthState)
             {
-                case Enumerations.HealthStates.Normal:
-                    return NormalMod;
                 case Enumerations.HealthStates.Danger:
                     return PartnerDangerMod;
                 case Enumerations.HealthStates.Peril:
                 case Enumerations.HealthStates.Dead:
-                default:
                     return PartnerPerilMod;
+                case Enumerations.HealthStates.Normal:
+                default:
+                    return NormalMod;
             }
         }
 
@@ -140,13 +129,15 @@ namespace PaperMarioBattleSystem
         /// Gets the total Danger status value for Mario and his Partner based on their HealthStates.
         /// This is factored in when calculating the amount of Crystal Star Star Power gained from an attack.
         /// </summary>
+        /// <param name="mario">A BattleEntity representing Mario.</param>
+        /// <param name="partner">A BattleEntity representing Mario's Partner.</param>
         /// <returns>A float of the Danger status value based on the HealthStates of both Mario and his Partner.</returns>
-        public static float GetDangerStatusValue(BattleMario mario, BattlePartner partner)
+        public static float GetDangerStatusValue(BattleEntity mario, BattleEntity partner)
         {
             float marioDangerStatusValue = GetMarioDangerStatusValue(mario);
             float partnerDangerStatusValue = GetPartnerDangerStatusValue(partner);
 
-            return marioDangerStatusValue * partnerDangerStatusValue;
+            return (marioDangerStatusValue * partnerDangerStatusValue);
         }
 
         #endregion

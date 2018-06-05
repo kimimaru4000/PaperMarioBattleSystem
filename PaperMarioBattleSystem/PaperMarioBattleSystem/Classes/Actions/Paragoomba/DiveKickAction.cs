@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
             Name = "Dive Kick";
 
             MoveInfo = new MoveActionData(null, "Dive Kick a foe.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
-                MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single, true, null, User.GetOpposingEntityType());
+                MoveAffectionTypes.Other, Enumerations.EntitySelectionType.Single, true, null, User.GetOpposingEntityType());
 
             DamageInfo = new DamageData(1, Elements.Normal, false, ContactTypes.SideDirect, ContactProperties.None, null, DamageEffects.None);
 

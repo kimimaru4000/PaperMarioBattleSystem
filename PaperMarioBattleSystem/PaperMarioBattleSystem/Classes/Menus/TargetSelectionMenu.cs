@@ -15,11 +15,6 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class TargetSelectionMenu : BattleMenu
     {
-        public enum EntitySelectionType
-        {
-            Single, All, First
-        }
-
         private ReverseAnimation Cursor = null;
         private NineSlicedTexture2D NameImage = null;
 

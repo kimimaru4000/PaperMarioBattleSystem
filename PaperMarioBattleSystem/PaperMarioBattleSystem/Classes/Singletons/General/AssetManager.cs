@@ -138,13 +138,9 @@ namespace PaperMarioBattleSystem
             string realTexPath = texturePath.Insert(0, Content.RootDirectory + "/");
 
             //Return the cached texture if we have it
-            if (RawTextures.ContainsKey(realTexPath) == true)
+            if (RawTextures.TryGetValue(realTexPath, out tex) == false)
             {
-                tex = RawTextures[realTexPath];
-            }
-            else
-            {
-                //Load the raw texture
+                //We don't, so try to load the raw texture
                 try
                 {
                     using (FileStream fileStream = new FileStream(realTexPath, FileMode.Open))
@@ -175,13 +171,9 @@ namespace PaperMarioBattleSystem
             string realSoundPath = soundPath.Insert(0, Content.RootDirectory + "/");
 
             //Return the cached sound if we have it
-            if (RawSounds.ContainsKey(realSoundPath) == true)
+            if (RawSounds.TryGetValue(realSoundPath, out sound) == false)
             {
-                sound = RawSounds[realSoundPath];
-            }
-            else
-            {
-                //Load the raw sound
+                //We don't, so try to load the raw sound
                 try
                 {
                     using (FileStream fileStream = new FileStream(realSoundPath, FileMode.Open))

@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 14, 22, 22)),
                 "Throw three bombs that\nwill explode one turn later.", MoveResourceTypes.FP, 3,
-                CostDisplayTypes.Shown, MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.All, false,
+                CostDisplayTypes.Shown, MoveAffectionTypes.Other, Enumerations.EntitySelectionType.All, false,
                 new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering, HeightStates.Airborne }, User.GetOpposingEntityType());
 
             DamageInfo = new DamageData(BombDamage, Elements.Explosion, false, ContactTypes.None, ContactProperties.Ranged, null, DamageEffects.None);

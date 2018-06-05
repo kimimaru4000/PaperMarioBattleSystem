@@ -46,7 +46,7 @@ namespace PaperMarioBattleSystem
             //Classify Mystery as any type of battle item so it shows up in the item menu
             ItemType = ItemTypes.Damage | ItemTypes.Healing | ItemTypes.Status;
             
-            SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
+            SelectionType = Enumerations.EntitySelectionType.Single;
             MoveAffectionType = Enumerations.MoveAffectionTypes.Self;
         }
 

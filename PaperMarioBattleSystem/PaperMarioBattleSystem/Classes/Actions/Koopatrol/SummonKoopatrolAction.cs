@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
             Name = "Summon Koopatrol";
 
             MoveInfo = new MoveActionData(null, "Summon an ally Koopatrol.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
-                MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.First, false, null, null);
+                MoveAffectionTypes.None, Enumerations.EntitySelectionType.First, false, null, null);
 
             SetMoveSequence(new SummonKoopatrolSequence(this));
         }

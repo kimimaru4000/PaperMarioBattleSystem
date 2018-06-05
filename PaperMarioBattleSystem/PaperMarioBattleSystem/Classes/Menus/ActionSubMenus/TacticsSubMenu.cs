@@ -49,7 +49,7 @@ namespace PaperMarioBattleSystem
                 BattleActions.Add(new MoveAction(User, "Charge", new MoveActionData(new CroppedTexture2D(battleTex, new Rectangle(623, 807, 40, 40)),
                     "Save up strength to power up\nyour next attack",
                     Enumerations.MoveResourceTypes.FP, chargeCount, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None,
-                    TargetSelectionMenu.EntitySelectionType.Single, false, null), new ChargeSequence(null, chargeAmount)));
+                    Enumerations.EntitySelectionType.Single, false, null), new ChargeSequence(null, chargeAmount)));
             }
 
             #endregion

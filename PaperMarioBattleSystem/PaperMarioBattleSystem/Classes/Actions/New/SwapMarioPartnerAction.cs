@@ -16,7 +16,7 @@ namespace PaperMarioBattleSystem
             Name = "Swap Partner Attack";
 
             MoveInfo = new MoveActionData(null, "Swaps out Mario's Partner if possible.", Enumerations.MoveResourceTypes.FP,
-                0f, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single,
+                0f, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other, Enumerations.EntitySelectionType.Single,
                 false, null, new Enumerations.EntityTypes[] { Enumerations.EntityTypes.Enemy });
             DamageInfo = new DamageData(1, Enumerations.Elements.Normal, false, Enumerations.ContactTypes.None, Enumerations.ContactProperties.Ranged,
                 null, Enumerations.DamageEffects.None);

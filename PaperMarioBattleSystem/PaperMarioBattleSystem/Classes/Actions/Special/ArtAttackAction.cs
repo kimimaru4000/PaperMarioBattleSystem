@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(202, 987, 39, 36)),
                 "Draw around the enemy as many times as you can!", Enumerations.MoveResourceTypes.SSSP,
-                400, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.All,
+                400, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other, Enumerations.EntitySelectionType.All,
                 false, null, Enumerations.EntityTypes.Enemy);
             DamageInfo = new DamageData(1, Enumerations.Elements.Star, true, Enumerations.ContactTypes.None, Enumerations.ContactProperties.Ranged, null, true, false,
                 Enumerations.DefensiveActionTypes.None, Enumerations.DamageEffects.None);

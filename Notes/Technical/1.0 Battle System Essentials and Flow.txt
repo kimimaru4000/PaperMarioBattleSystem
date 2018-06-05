@@ -143,3 +143,13 @@ I feel it would be best for the 1.0 Release to focus on MonoGame projects, as th
 
 With this in mind, now we need to make it so importing it to a project is as easy as possible; it should act as a part of a game rather than a whole game. I will think about how to handle the classes mentioned above so I can realize this goal.
 
+Update (6/4/18)
+---------------
+I'm not quite sure what to do right now. Other projects would have their own way of doing things that is drastically different. For example, one project can be using an ECS (Entity Component System), and this battle system most likely wouldn't work for it without modification.
+
+Right now the battle system is looking more like an engine than a separate, standalone component that you can easily insert. I'll give an example of what I could possibly do but showcase the cons that would make the system much more cumbersome to use:
+
+-Create an IBattleEntity interface. This will be used in-place of BattleEntity everywhere in the system, and does not contain an ObjAnimManager.
+-A developer implements this interface in a BattleEntity class that does have an ObjAnimManager. They would have to cast to BattleEntity in a Sequence each time they want to play an animation since IBattleEntity doesn't have an ObjAnimManager.
+
+The SpriteRenderer, AssetManager, SoundManager, and Debug classes would be tied to a particular engine and aren't related to the battle system. I think at the very least, having the BattleUIManager and BattleObjManager tied to a BattleManager, thus being instance-based, would be a step forward since you would be able to have battle menus and objects to be unique to each battle.

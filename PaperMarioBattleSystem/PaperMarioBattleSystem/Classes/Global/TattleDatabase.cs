@@ -45,10 +45,10 @@ namespace PaperMarioBattleSystem
         /// <returns>A Texture2D of the enemy's Tattle image if it exists in the table, otherwise null</returns>
         public static Texture2D GetTattleImage(string enemyName)
         {
-            if (HasTattleImage(enemyName) == false)
-                return null;
+            Texture2D tex = null;
+            TattleImageTable.TryGetValue(enemyName, out tex);
 
-            return TattleImageTable[enemyName];
+            return tex;
         }
 
         /// <summary>
@@ -68,10 +68,10 @@ namespace PaperMarioBattleSystem
         /// <returns>A string[] array of the enemy's Tattle Log entry if it exists in the table, otherwise null</returns>
         public static string[] GetTattleLog(string enemyName)
         {
-            if (HasTattleLog(enemyName) == false)
-                return null;
+            string[] log = null;
+            TattleLogTable.TryGetValue(enemyName, out log);
 
-            return TattleLogTable[enemyName];
+            return log;
         }
 
         /// <summary>
@@ -91,10 +91,10 @@ namespace PaperMarioBattleSystem
         /// <returns>A string of the enemy's in-battle Tattle Description entry if it exists in the table, otherwise null</returns>
         public static string GetTattleDescription(string enemyName)
         {
-            if (HasTattleDescription(enemyName) == false)
-                return null;
+            string description = null;
+            TattleDescriptionTable.TryGetValue(enemyName, out description);
 
-            return TattleDescriptionTable[enemyName];
+            return description;
         }
 
         /// <summary>
@@ -122,7 +122,6 @@ namespace PaperMarioBattleSystem
                 return;
 
             TattleImageTable.Add(enemyName, enemyImage);
-
             Debug.Log($"Added Tattle Image entry for {enemyName}!");
         }
 

@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(26, 989, 40, 31)),
                 "", MoveResourceTypes.SSSP, 100, CostDisplayTypes.Shown, MoveAffectionTypes.Self | MoveAffectionTypes.Ally, 
-                TargetSelectionMenu.EntitySelectionType.All, false, null);
+                Enumerations.EntitySelectionType.All, false, null);
 
             HealingInfo = new HealingData(0, 0, GetStatusesCured());
 

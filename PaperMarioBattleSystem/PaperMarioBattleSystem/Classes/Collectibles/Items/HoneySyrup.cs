@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
 
             FPRestored = 5;
 
-            SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
+            SelectionType = Enumerations.EntitySelectionType.Single;
             MoveAffectionType = Enumerations.MoveAffectionTypes.Self | Enumerations.MoveAffectionTypes.Ally;
         }
     }

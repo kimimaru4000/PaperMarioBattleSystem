@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(null, description, Enumerations.MoveResourceTypes.FP, 0,
                 Enumerations.CostDisplayTypes.Hidden, Enumerations.MoveAffectionTypes.None,
-                TargetSelectionMenu.EntitySelectionType.Single, false, null);
+                Enumerations.EntitySelectionType.Single, false, null);
 
             //This MoveSequence isn't ever used, but one needs to be set
             SetMoveSequence(new NoSequence(this));

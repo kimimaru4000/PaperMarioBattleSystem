@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
             Texture2D battleTex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
             MoveInfo = new MoveActionData(new CroppedTexture2D(battleTex, new Rectangle(580, 815, 32, 32)),
                 "Defend this turn.", Enumerations.MoveResourceTypes.FP, 0, Enumerations.CostDisplayTypes.Shown,
-                Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.Single, false, null);
+                Enumerations.MoveAffectionTypes.None, Enumerations.EntitySelectionType.Single, false, null);
 
             SetMoveSequence(new DefendSequence(this, 1));
             actionCommand = null;

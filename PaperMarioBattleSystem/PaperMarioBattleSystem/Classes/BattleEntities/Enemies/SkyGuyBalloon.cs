@@ -52,7 +52,7 @@ namespace PaperMarioBattleSystem
         private bool CustomTargeting(in MoveAction moveAction)
         {
             //The Balloon isn't targeted by multi-target moves
-            if (moveAction.MoveProperties.SelectionType == TargetSelectionMenu.EntitySelectionType.All) return false;
+            if (moveAction.MoveProperties.SelectionType == Enumerations.EntitySelectionType.All) return false;
 
             //The Balloon cannot be targeted by Latch moves such as Air Lift
             if (moveAction.DealsDamage == true && moveAction.DamageProperties.ContactType == Enumerations.ContactTypes.Latch) return false;

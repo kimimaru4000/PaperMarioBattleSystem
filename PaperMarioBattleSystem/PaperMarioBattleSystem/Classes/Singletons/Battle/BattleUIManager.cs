@@ -74,13 +74,13 @@ namespace PaperMarioBattleSystem
             instance = null;
         }
 
-        public void StartTargetSelection(TargetSelectionMenu.OnSelection onSelection, TargetSelectionMenu.EntitySelectionType selectionType, params BattleEntity[] targets)
+        public void StartTargetSelection(TargetSelectionMenu.OnSelection onSelection, Enumerations.EntitySelectionType selectionType, params BattleEntity[] targets)
         {
             PushMenu(SelectionMenu);
             SelectionMenu.StartSelection(onSelection, selectionType, targets);
         }
 
-        public void StartTargetSelection(TargetSelectionMenu.OnSelection onSelection, TargetSelectionMenu.EntitySelectionType selectionType, int startIndex, params BattleEntity[] targets)
+        public void StartTargetSelection(TargetSelectionMenu.OnSelection onSelection, Enumerations.EntitySelectionType selectionType, int startIndex, params BattleEntity[] targets)
         {
             PushMenu(SelectionMenu);
             SelectionMenu.StartSelection(onSelection, selectionType, startIndex, targets);

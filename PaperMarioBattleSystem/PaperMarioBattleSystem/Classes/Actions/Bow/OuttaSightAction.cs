@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 14, 22, 22)),
                 "Make Mario transparent so he\ncan avoid enemy attacks.", MoveResourceTypes.FP, 2, CostDisplayTypes.Shown,
-                MoveAffectionTypes.Ally, TargetSelectionMenu.EntitySelectionType.Single, true, null);
+                MoveAffectionTypes.Ally, Enumerations.EntitySelectionType.Single, true, null);
 
             SetMoveSequence(new OuttaSightSequence(this));
 

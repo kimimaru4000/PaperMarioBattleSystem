@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
         {
             Name = "Lick";
             MoveInfo = new MoveActionData(null, "Lick the enemy.", Enumerations.MoveResourceTypes.FP, 0, Enumerations.CostDisplayTypes.Shown,
-                Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single, true,
+                Enumerations.MoveAffectionTypes.Other, Enumerations.EntitySelectionType.Single, true,
                 new Enumerations.HeightStates[] { Enumerations.HeightStates.Grounded }, User.GetOpposingEntityType());
 
             DamageInfo = new DamageData(0, Enumerations.Elements.Normal, false, Enumerations.ContactTypes.SideDirect, Enumerations.ContactProperties.None, null, false, true,

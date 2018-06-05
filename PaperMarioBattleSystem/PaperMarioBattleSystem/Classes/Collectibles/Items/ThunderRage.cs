@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
 
             Icon.SetRect(new Rectangle(403, 136, 25, 25));
 
-            SelectionType = TargetSelectionMenu.EntitySelectionType.All;
+            SelectionType = Enumerations.EntitySelectionType.All;
         }
     }
 }

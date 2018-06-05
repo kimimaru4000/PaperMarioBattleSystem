@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(216, 845, 22, 22)),
                 "Whack an enemy with your Hammer.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
-                MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.First, true,
+                MoveAffectionTypes.Other, Enumerations.EntitySelectionType.First, true,
                 new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering }, User.GetOpposingEntityType(), EntityTypes.Neutral);
 
             //The base damage for Hammer is Mario's current Hammer level

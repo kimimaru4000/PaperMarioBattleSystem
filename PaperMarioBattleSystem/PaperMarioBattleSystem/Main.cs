@@ -552,7 +552,7 @@ namespace PaperMarioBattleSystem
             //Draw the action the current BattleEntity is performing
             if (battleManager.EntityTurn != null)
             {
-                battleManager.EntityTurn.PreviousAction?.Draw();
+                battleManager.EntityTurn.LastAction?.Draw();
 
                 //Show current turn debug text
                 SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, $"Current turn: {battleManager.EntityTurn.Name}", new Vector2(250, 4), Color.White, 0f, Vector2.Zero, 1.3f, .2f);
@@ -562,7 +562,7 @@ namespace PaperMarioBattleSystem
         private void RenderStatusInfo(IList<BattleEntity> allEntities)
         {
             //Ignore if we shouldn't show this UI
-            if (battleManager.ShouldShowPlayerTurnUI == true && UtilityGlobals.IListIsNullOrEmpty(allEntities) == false)
+            if (battleManager.ShouldShowPlayerTurnUI() == true && UtilityGlobals.IListIsNullOrEmpty(allEntities) == false)
             {
                 List<StatusEffect> statuses = (allEntities.Count == 0) ? null : new List<StatusEffect>();
 

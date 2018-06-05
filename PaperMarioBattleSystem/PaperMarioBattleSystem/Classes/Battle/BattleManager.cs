@@ -63,12 +63,6 @@ namespace PaperMarioBattleSystem
         public int PhaseCycleCount { get; private set; } = -1;
 
         /// <summary>
-        /// Whether certain UI, such as Status Effect icons and enemy HP, should show up or not.
-        /// This UI shows up only when the Player is choosing an action.
-        /// </summary>
-        public bool ShouldShowPlayerTurnUI => (EntityTurn?.EntityType == EntityTypes.Player && EntityTurn.PreviousAction?.MoveSequence.InSequence != true);
-
-        /// <summary>
         /// The phase order in battle.
         /// BattleEntities of these types go in this order.
         /// </summary>

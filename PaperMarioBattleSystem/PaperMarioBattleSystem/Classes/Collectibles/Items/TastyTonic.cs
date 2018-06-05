@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
                                                  StatusTypes.Dizzy, StatusTypes.Confused, StatusTypes.Frozen, StatusTypes.Burn,
                                                  StatusTypes.Slow, StatusTypes.Sleep, StatusTypes.Stop };
 
-            SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
+            SelectionType = Enumerations.EntitySelectionType.Single;
             MoveAffectionType = Enumerations.MoveAffectionTypes.Self | Enumerations.MoveAffectionTypes.Ally;
         }
     }

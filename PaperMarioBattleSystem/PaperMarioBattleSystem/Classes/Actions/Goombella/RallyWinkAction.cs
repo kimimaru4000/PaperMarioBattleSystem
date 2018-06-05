@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 75, 22, 22)),
                 "Wink at Mario to give him the\ncourage for an extra attack.", MoveResourceTypes.FP, 4, CostDisplayTypes.Shown, MoveAffectionTypes.Ally,
-                TargetSelectionMenu.EntitySelectionType.Single, false, null, null);
+                Enumerations.EntitySelectionType.Single, false, null, null);
 
             //Rally Wink has damage data for a failed Action Command
             //It's used to show the move is ineffective

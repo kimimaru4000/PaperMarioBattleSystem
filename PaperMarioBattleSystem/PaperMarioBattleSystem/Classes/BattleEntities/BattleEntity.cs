@@ -177,9 +177,9 @@ namespace PaperMarioBattleSystem
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
         /// <summary>
-        /// The previous BattleAction the entity used
+        /// The last MoveAction the BattleEntity performed.
         /// </summary>
-        public MoveAction PreviousAction { get; protected set; } = null;
+        public MoveAction LastAction { get; protected set; } = null;
 
         /// <summary>
         /// The BattleEntity targeting this one.
@@ -225,8 +225,8 @@ namespace PaperMarioBattleSystem
             SetBattleManager(null);
             SetBattleIndex(BattleGlobals.InvalidBattleIndex, false);
 
-            PreviousAction?.SetUser(null);
-            PreviousAction = null;
+            LastAction?.SetUser(null);
+            LastAction = null;
 
             EntityProperties.CleanUp();
 
@@ -309,7 +309,7 @@ namespace PaperMarioBattleSystem
                     Debug.Log($"{Name} was hit with {damage} {element} " + (piercing ? "piercing" : "non-piercing") + " damage!");
 
                     //If the entity took damage during their sequence, it's an interruption, and this event should not occur
-                    if (damage > 0 && (IsTurn == false || PreviousAction?.MoveSequence.InSequence == false))
+                    if (damage > 0 && (IsTurn == false || LastAction?.MoveSequence.InSequence == false))
                     {
                         BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Damage,
                             new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
@@ -396,9 +396,9 @@ namespace PaperMarioBattleSystem
             //If this entity received damage during its action sequence, it has been interrupted
             //The null check is necessary in the event that a StatusEffect that deals damage at the start of the phase, such as Poison,
             //is inflicted at the start of the battle before any entity has moved
-            if (damage > 0 && IsTurn == true && PreviousAction?.MoveSequence.InSequence == true)
+            if (damage > 0 && IsTurn == true && LastAction?.MoveSequence.InSequence == true)
             {
-                PreviousAction.MoveSequence.StartInterruption(element);
+                LastAction.MoveSequence.StartInterruption(element);
             }
 
             //Perform entity-specific logic to react to taking damage
@@ -856,7 +856,7 @@ namespace PaperMarioBattleSystem
             }
 
             //End the action
-            PreviousAction?.OnActionEnded();
+            LastAction?.OnActionEnded();
 
             OnTurnEnd();
 
@@ -872,7 +872,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public virtual void TurnUpdate()
         {
-            PreviousAction?.Update();
+            LastAction?.Update();
         }
 
         /// <summary>
@@ -986,7 +986,7 @@ namespace PaperMarioBattleSystem
                 List<BattleEntity> newTargets = new List<BattleEntity>();
 
                 //If this action targets only the first player/enemy, look for adjacent entities
-                if (actualAction.MoveProperties.SelectionType == TargetSelectionMenu.EntitySelectionType.First)
+                if (actualAction.MoveProperties.SelectionType == EntitySelectionType.First)
                 {
                     Debug.Log($"{Name} is looking for valid adjacent allies to attack!");
 
@@ -1019,7 +1019,7 @@ namespace PaperMarioBattleSystem
                 BattleManagerUtils.FilterDeadEntities(newTargets);
 
                 //Choose a random target to attack if the action only targets one entity
-                if (newTargets.Count > 0 && actualAction.MoveProperties.SelectionType != TargetSelectionMenu.EntitySelectionType.All)
+                if (newTargets.Count > 0 && actualAction.MoveProperties.SelectionType != EntitySelectionType.All)
                 {
                     int randTarget = GeneralGlobals.Randomizer.Next(0, newTargets.Count);
                     BattleEntity target = newTargets[randTarget];
@@ -1084,11 +1084,11 @@ namespace PaperMarioBattleSystem
                 }
             }
 
-            PreviousAction = actualAction;
+            LastAction = actualAction;
 
             //Start the action
-            PreviousAction.OnActionStarted();
-            PreviousAction.StartSequence(actualTargets);
+            LastAction.OnActionStarted();
+            LastAction.StartSequence(actualTargets);
         }
 
         /// <summary>

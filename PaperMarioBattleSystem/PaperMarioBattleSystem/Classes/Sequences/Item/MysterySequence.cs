@@ -114,8 +114,8 @@ namespace PaperMarioBattleSystem
             //2. If it targets allies, only use it on the entity using it
             //3. If it targets enemies, use it on the first enemy if it targets only one, otherwise use it on all enemies
             List<BattleEntity> entitiesAffected = new List<BattleEntity>(itemChosenAction.GetEntitiesMoveAffects());
-            if (itemChosenAction.MoveProperties.SelectionType == TargetSelectionMenu.EntitySelectionType.Single
-                || itemChosenAction.MoveProperties.SelectionType == TargetSelectionMenu.EntitySelectionType.First)
+            if (itemChosenAction.MoveProperties.SelectionType == Enumerations.EntitySelectionType.Single
+                || itemChosenAction.MoveProperties.SelectionType == Enumerations.EntitySelectionType.First)
             {
                 //If this selects the first or a single entity and it's an ally, make sure it always targets the entity using the Mystery
                 //Examples include a Mushroom or Honey Syrup

@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
         {
             Name = name;
             MoveInfo = new MoveActionData(icon, description, MoveResourceTypes.FP, 0, CostDisplayTypes.Shown, MoveAffectionTypes.None,
-                TargetSelectionMenu.EntitySelectionType.Single, false, null);
+                Enumerations.EntitySelectionType.Single, false, null);
 
             SubMenu = subMenu;
         }

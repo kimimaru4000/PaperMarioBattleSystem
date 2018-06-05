@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
             Name = "Headbutt";
 
             MoveInfo = new MoveActionData(null, "Headbutt into the enemy.", MoveResourceTypes.FP, 0f, CostDisplayTypes.Shown,
-                MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.Single, true, null, User.GetOpposingEntityType());
+                MoveAffectionTypes.Other, Enumerations.EntitySelectionType.Single, true, null, User.GetOpposingEntityType());
 
             DamageInfo = new DamageData(4, Elements.Normal, false, ContactTypes.SideDirect, ContactProperties.None, null, false, true,
                 DefensiveActionTypes.None, DamageEffects.None);

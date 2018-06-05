@@ -89,14 +89,6 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Kooper-specific battle animations.
-        /// </summary>
-        public static class KooperBattleAnimations
-        {
-
-        }
-
-        /// <summary>
         /// Koops-specific battle animations.
         /// </summary>
         public static class KoopsBattleAnimations

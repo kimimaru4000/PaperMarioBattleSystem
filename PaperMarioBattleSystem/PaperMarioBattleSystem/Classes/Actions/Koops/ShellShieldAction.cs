@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 46, 22, 22)),
                 "Protect Mario from attacks\nwith a giant shell.", Enumerations.MoveResourceTypes.FP, 4, Enumerations.CostDisplayTypes.Shown,
-                Enumerations.MoveAffectionTypes.Ally, TargetSelectionMenu.EntitySelectionType.Single, false, null);
+                Enumerations.MoveAffectionTypes.Ally, Enumerations.EntitySelectionType.Single, false, null);
 
             SetMoveSequence(new ShellShieldSequence(this, MaxShellHP));
             actionCommand = new ShellShieldCommand(MoveSequence, BarScale, MaxBarVal, CommandTime, CursorTime, GetCommandRangeData());

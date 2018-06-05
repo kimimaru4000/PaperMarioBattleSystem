@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(216, 845, 22, 22)),
                 "Shoot yourself at an enemy.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
-                MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.First, true,
+                MoveAffectionTypes.Other, Enumerations.EntitySelectionType.First, true,
                 new HeightStates[] { HeightStates.Grounded, HeightStates.Hovering }, User.GetOpposingEntityType(), EntityTypes.Neutral);
 
             DamageInfo = new DamageData(1, Elements.Normal, false, ContactTypes.SideDirect, ContactProperties.Protected, null, DamageEffects.RemovesSegment);

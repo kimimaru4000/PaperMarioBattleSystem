@@ -55,9 +55,9 @@ namespace PaperMarioBattleSystem
             if (Entity.IsTurn == true)
             {
                 //If in the middle of a sequence, end it
-                if (Entity.PreviousAction != null && Entity.PreviousAction.MoveSequence.InSequence == true)
+                if (Entity.LastAction != null && Entity.LastAction.MoveSequence.InSequence == true)
                 {
-                    Entity.PreviousAction.MoveSequence.EndSequence();
+                    Entity.LastAction.MoveSequence.EndSequence();
                 }
                 //Otherwise end its turn
                 else

@@ -327,9 +327,10 @@ namespace PaperMarioBattleSystem
         /// <returns>The Priority value corresponding to the StatusType if it has an entry, otherwise 0</returns>
         public static int GetStatusPriority(Enumerations.StatusTypes statusType)
         {
-            if (StatusOrder.ContainsKey(statusType) == false) return 0;
+            int order = 0;
+            StatusOrder.TryGetValue(statusType, out order);
 
-            return StatusOrder[statusType];
+            return order;
         }
 
         /// <summary>

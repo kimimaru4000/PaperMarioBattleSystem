@@ -100,7 +100,7 @@ namespace PaperMarioBattleSystem
             }
 
             //This is hacky for now - fix this once we have priorities for idle animations
-            if (PreviousAction?.Name == "Defend")
+            if (LastAction?.Name == "Defend")
                 return AnimationGlobals.PlayerBattleAnimations.GuardName;
 
             return base.GetIdleAnim();

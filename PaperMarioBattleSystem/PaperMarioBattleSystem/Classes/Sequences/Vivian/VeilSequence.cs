@@ -199,7 +199,7 @@ namespace PaperMarioBattleSystem
             //Immediately start the second half of the sequence
             MoveAction veilSecondHalf = new MoveAction(User, "Veil Second Half",
                 new MoveActionData(null, "Second half of Veil", Enumerations.MoveResourceTypes.FP, 0,
-                Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.First,
+                Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None, Enumerations.EntitySelectionType.First,
                 false, null), new VeilSecondHalfSequence(null, ScaleVal));
 
             //Start the second half of the sequence

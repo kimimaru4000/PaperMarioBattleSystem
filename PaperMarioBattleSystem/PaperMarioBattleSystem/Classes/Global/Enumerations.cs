@@ -76,6 +76,14 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// The types of ways to target BattleEntities.
+        /// </summary>
+        public enum EntitySelectionType
+        {
+            Single, All, First
+        }
+
+        /// <summary>
         /// The types of resources that MoveActions can require.
         /// </summary>
         public enum MoveResourceTypes

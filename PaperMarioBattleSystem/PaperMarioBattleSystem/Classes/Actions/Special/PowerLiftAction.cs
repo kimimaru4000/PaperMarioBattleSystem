@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(158, 987, 40, 37)),
                 "Briefly increases your party's\nAttack and Defense power.", Enumerations.MoveResourceTypes.SSSP,
-                300, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Self | Enumerations.MoveAffectionTypes.Ally, TargetSelectionMenu.EntitySelectionType.All, false, null);
+                300, Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Self | Enumerations.MoveAffectionTypes.Ally, Enumerations.EntitySelectionType.All, false, null);
 
             SetMoveSequence(new PowerLiftSequence(this));
             actionCommand = new PowerLiftCommand(MoveSequence, ActionCommandTime);

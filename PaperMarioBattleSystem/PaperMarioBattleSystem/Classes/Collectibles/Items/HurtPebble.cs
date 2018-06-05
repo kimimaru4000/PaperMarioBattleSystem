@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
             Damage = 1;
             Element = Enumerations.Elements.Normal;
 
-            SelectionType = TargetSelectionMenu.EntitySelectionType.First;
+            SelectionType = Enumerations.EntitySelectionType.First;
             MoveAffectionType = Enumerations.MoveAffectionTypes.Self;
         }
     }

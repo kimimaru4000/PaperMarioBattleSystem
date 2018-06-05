@@ -465,7 +465,7 @@ namespace PaperMarioBattleSystem
         public float ResourceCost;
         public Enumerations.CostDisplayTypes CostDisplayType;
         public Enumerations.MoveAffectionTypes MoveAffectionType;
-        public TargetSelectionMenu.EntitySelectionType SelectionType;
+        public Enumerations.EntitySelectionType SelectionType;
         public bool UsesCharge;
         public Enumerations.HeightStates[] HeightsAffected;
 
@@ -477,7 +477,7 @@ namespace PaperMarioBattleSystem
 
         public MoveActionData(CroppedTexture2D icon, string description, Enumerations.MoveResourceTypes resourceType,
             float resourceCost, Enumerations.CostDisplayTypes costDisplayType, Enumerations.MoveAffectionTypes moveAffectionType,
-            TargetSelectionMenu.EntitySelectionType selectionType, bool usesCharge, Enumerations.HeightStates[] heightsAffected,
+            Enumerations.EntitySelectionType selectionType, bool usesCharge, Enumerations.HeightStates[] heightsAffected,
             params Enumerations.EntityTypes[] otherEntTypes)
         {
             Icon = icon;
@@ -1198,10 +1198,5 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
-    }
-
-    public static class AudioGlobals
-    {
-        
     }
 }

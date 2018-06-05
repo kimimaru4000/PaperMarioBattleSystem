@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
             Name = "Disguise";
 
             MoveInfo = new MoveActionData(null, "Disguise as one of Mario's Partners.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown,
-                MoveAffectionTypes.Custom, TargetSelectionMenu.EntitySelectionType.Single, false, null, null);
+                MoveAffectionTypes.Custom, Enumerations.EntitySelectionType.Single, false, null, null);
 
             SetMoveSequence(new DisguiseSequence(this));
             actionCommand = null;

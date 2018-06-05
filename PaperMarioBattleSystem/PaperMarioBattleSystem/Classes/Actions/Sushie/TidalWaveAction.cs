@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
             Name = "Tidal Wave";
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(874, 75, 22, 22)),
                 "A surge of water hits all enemies.", Enumerations.MoveResourceTypes.FP, 6,
-                Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.All,
+                Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.Other, Enumerations.EntitySelectionType.All,
                 true, null, User.GetOpposingEntityType());
 
             DamageInfo = new DamageData(0, Enumerations.Elements.Water, false, Enumerations.ContactTypes.None, Enumerations.ContactProperties.Ranged, null, 

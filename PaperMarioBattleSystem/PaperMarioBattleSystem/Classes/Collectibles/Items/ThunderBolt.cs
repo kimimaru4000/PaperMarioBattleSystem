@@ -29,7 +29,7 @@ namespace PaperMarioBattleSystem
             Damage = 5;
             Element = Elements.Electric;
 
-            SelectionType = TargetSelectionMenu.EntitySelectionType.Single;
+            SelectionType = Enumerations.EntitySelectionType.Single;
             MoveAffectionType = MoveAffectionTypes.Other;
             OtherEntTypes = new EntityTypes[] { EntityTypes.Enemy };
         }

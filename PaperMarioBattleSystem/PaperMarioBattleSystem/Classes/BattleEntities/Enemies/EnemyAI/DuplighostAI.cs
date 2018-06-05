@@ -72,11 +72,11 @@ namespace PaperMarioBattleSystem
             }
 
             //Duplighosts Auto-complete Action Commands
-            if (duplighost.PreviousAction != null && duplighost.PreviousAction.HasActionCommand == true)
+            if (duplighost.LastAction != null && duplighost.LastAction.HasActionCommand == true)
             {
-                duplighost.PreviousAction.DrawActionCommandInfo = false;
-                duplighost.PreviousAction.EnableActionCommand = true;
-                duplighost.PreviousAction.actionCommand.AutoComplete = true;
+                duplighost.LastAction.DrawActionCommandInfo = false;
+                duplighost.LastAction.EnableActionCommand = true;
+                duplighost.LastAction.actionCommand.AutoComplete = true;
             }
         }
     }

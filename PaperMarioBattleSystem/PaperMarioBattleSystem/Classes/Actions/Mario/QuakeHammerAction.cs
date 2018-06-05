@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
 
             MoveInfo = new MoveActionData(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"), new Rectangle(907, 102, 23, 24)),
                 "Slightly damage all ground\nenemies.", MoveResourceTypes.FP, 3 /*2 FP in PM*/, CostDisplayTypes.Shown,
-                MoveAffectionTypes.Other, TargetSelectionMenu.EntitySelectionType.All, true,
+                MoveAffectionTypes.Other, Enumerations.EntitySelectionType.All, true,
                 new HeightStates[] { HeightStates.Grounded, HeightStates.Ceiling }, User.GetOpposingEntityType());
 
             //Scale by the number of badges the move has

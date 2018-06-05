@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
             Name = "Blink Faster";
 
             MoveInfo = new MoveActionData(null, "Blink faster to indicate you're detonating!", Enumerations.MoveResourceTypes.FP, 0,
-                Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.Single,
+                Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None, Enumerations.EntitySelectionType.Single,
                 false, null, null);
 
             SetMoveSequence(new BlinkFasterSequence(this, animName, speedVal));

@@ -164,7 +164,7 @@ namespace PaperMarioBattleSystem
             //Immediately start the second half of the sequence
             MoveAction outtaSightSecondHalf = new MoveAction(User, "Outta Sight Second Half",
                 new MoveActionData(null, "Second half of Outta Sight", Enumerations.MoveResourceTypes.FP, 0,
-                Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None, TargetSelectionMenu.EntitySelectionType.First,
+                Enumerations.CostDisplayTypes.Shown, Enumerations.MoveAffectionTypes.None, Enumerations.EntitySelectionType.First,
                 false, null), new OuttaSightSecondHalfSequence(null, AlphaVal));
 
             //Start the second half of the sequence

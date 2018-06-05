@@ -117,7 +117,7 @@ namespace PaperMarioBattleSystem
         public override void Draw()
         {
             //Don't render the HP bars if the UI shouldn't show up
-            if (BManager.ShouldShowPlayerTurnUI == false) return;
+            if (BManager.ShouldShowPlayerTurnUI() == false) return;
 
             //Render the HP bars
             for (int i = 0; i < HPShownEntities.Count; i++)

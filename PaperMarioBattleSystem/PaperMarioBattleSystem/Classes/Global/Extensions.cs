@@ -852,5 +852,18 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
+
+        #region BattleManager Extensions
+
+        /// <summary>
+        /// Whether certain UI, such as Status Effect icons and enemy HP, should show up or not.
+        /// This UI shows up only when the Player is choosing an action.
+        /// </summary>
+        public static bool ShouldShowPlayerTurnUI(this BattleManager battleManager)
+        {
+            return (battleManager.EntityTurn?.EntityType == EntityTypes.Player && battleManager.EntityTurn.LastAction?.MoveSequence.InSequence != true);
+        }
+
+        #endregion
     }
 }

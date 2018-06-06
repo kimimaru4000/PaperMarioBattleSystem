@@ -16,12 +16,6 @@ namespace PaperMarioBattleSystem
         private int DamageValue = 0;
         private int Bounces = 0;
         
-        /// <summary>
-        /// Whether to decrease Power Bounce's damage or not.
-        /// If the damage dealt was 1, this will be set to true to continue dealing 1 damage.
-        /// </summary>
-        private bool StopDecreasing = false;
-        
         public override int DamageDealt => DamageValue;
         
         public PowerBounceSequence(MoveAction moveAction) : base(moveAction)
@@ -35,8 +29,6 @@ namespace PaperMarioBattleSystem
         
             DamageValue = GetTotalDamage(BaseDamage);
             Bounces = 0;
-        
-            StopDecreasing = false;
         }
         
         protected override void OnEnd()
@@ -44,8 +36,6 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
         
             Bounces = 0;
-        
-            StopDecreasing = false;
         }
         
         protected override void CommandSuccess()
@@ -65,9 +55,25 @@ namespace PaperMarioBattleSystem
                     break;
                 case 1:
 
-                    //NOTE: This is currently incorrect
-                    //If you have 1 Attack and deal 0 damage on a Koopa Troopa then flip it, subsequent hits should do 1 damage
-                    //Right now they'd do 0
+                    /* NOTE: There's a minor bug with this caused by an edge case.
+                     * 1. Exactly 1 damage is dealt to the victim, and the DamageValue is 1
+                     * 2. The victim has a Weakness to the move used or the attacker has a Strength against at least one of the
+                     * victim's PhysicalAttributes
+                     * 3. The victim is hit with the move and has its Defense lowered
+                     * 4. The result is the next hit's damage was not lowered and thus does 1 more damage than it should
+                     * 
+                     * This is easy to replicate by having Mario use Power Bounce on a standing Koopa Troopa that has a +1 Weakness to Normal.
+                     * He will deal 1 damage to the Koopa Troopa, then on the next jump when the Koopa is flipped, he'll deal 2 damage
+                     * rather than 1.
+                     * 
+                     * No enemies in the PM games that lose Defense on hit are weak to anything, so there's no way to observe how
+                     * they handle the behavior. The current code should handle every case except this, so I feel it's not a big issue.
+                     * 
+                     * One potential way to fix this would be to manually calculate the total damage with the full interaction
+                     * while observing changes in the victim's Defense. Then, adjust the DamageValue accordingly to ensure the proper
+                     * amount of damage is dealt. With so many potential factors (Ex. making Power Bounce inflict statuses), it may be even
+                     * more complex than this.
+                     */
 
                     //Check the damage dealt
                     InteractionResult[] interactions = AttemptDamage(DamageDealt, EntitiesAffected, Action.DamageProperties, true);
@@ -82,13 +88,11 @@ namespace PaperMarioBattleSystem
                         ShowCommandRankVFX(HighestCommandRank, CurTarget.Position);
                     }
 
-                    //If the total damage dealt was 1, stop decreasing the damage to keep it doing 1
-                    if (StopDecreasing == false && damage == 1)
-                        StopDecreasing = true;
-        
-                    //Only decrease the value if we're not at 1 damage
-                    if (StopDecreasing == false)
-                        DamageValue = UtilityGlobals.Clamp(DamageValue - 1, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
+                    //If the attack's damage or the total damage dealt is greater than one, decrease the attack's damage by 1
+                    //This ensures that we keep decreasing until the damage dealt is 1
+                    //If the damage dealt is 0, it'll remain that way
+                    if (DamageValue > 1 || damage > 1)
+                        DamageValue--;
         
                     //Repeat the sequence if the player is under the Power Bounce cap
                     if (Bounces < BattleGlobals.MaxPowerBounces)

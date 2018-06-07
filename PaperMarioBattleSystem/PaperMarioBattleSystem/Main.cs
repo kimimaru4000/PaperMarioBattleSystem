@@ -535,7 +535,7 @@ namespace PaperMarioBattleSystem
                     chargeEffect.Parameters["chargeAlpha"].SetValue(RenderingGlobals.ChargeShaderAlphaVal);
                     chargeEffect.Parameters["chargeOffset"].SetValue(new Vector2(0f, RenderingGlobals.ChargeShaderTexOffset));
                     chargeEffect.Parameters["chargeTexRatio"].SetValue(dimensionRatio.Y);
-                    chargeEffect.Parameters["objFrameOffset"].SetValue(spriteSheet.GetTexCoordsAt(chargedEntity.AnimManager.CurrentAnim.CurFrame.DrawRegion));
+                    chargeEffect.Parameters["objFrameOffset"].SetValue(spriteSheet.GetTexCoordsAt(chargedEntity.AnimManager.GetAnimation<Animation>(chargedEntity.AnimManager.CurrentAnim.Key).CurFrame.DrawRegion));
 
                     //Render with the shader
                     SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, chargeEffect, Camera.Instance.Transform);

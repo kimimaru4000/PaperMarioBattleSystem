@@ -41,10 +41,11 @@ namespace PaperMarioBattleSystem
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/SkyGuy.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
-            AnimManager.AddAnimation(AnimationGlobals.IdleName, new LoopAnimation(null, AnimationGlobals.InfiniteLoop,
+            LoopAnimation idle = new LoopAnimation(null, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(117, 256, 34, 35), 200d),
-                new Animation.Frame(new Rectangle(163, 263, 38, 37), 200d)));
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.IdleName,
+                new Animation.Frame(new Rectangle(163, 263, 38, 37), 200d));
+            AnimManager.AddAnimation(AnimationGlobals.IdleName, idle);
+            idle.SetChildFrames(
                 new Animation.Frame(new Rectangle(13, 259, 2, 31), 200d, new Vector2(0, 18), -.0001f),
                 new Animation.Frame(new Rectangle(13, 259, 2, 31), 200d, new Vector2(0, 19), -.0001f));
         }

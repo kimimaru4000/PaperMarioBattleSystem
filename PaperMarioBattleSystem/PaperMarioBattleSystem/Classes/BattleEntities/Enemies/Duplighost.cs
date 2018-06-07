@@ -63,10 +63,10 @@ namespace PaperMarioBattleSystem
 
             //Copy animations into its original set
             OrigAnimations = new ObjAnimManager(this);
-            Animation[] allAnims = AnimManager.GetAllAnimations();
+            IAnimation[] allAnims = AnimManager.GetAllAnimations();
             for (int i = 0; i < allAnims.Length; i++)
             {
-                Animation anim = allAnims[i];
+                IAnimation anim = allAnims[i];
                 OrigAnimations.AddAnimation(anim.Key, anim);
             }
 
@@ -234,10 +234,10 @@ namespace PaperMarioBattleSystem
         {
             AnimManager.ClearAllAnimations();
 
-            Animation[] allAnims = objAnimManager.GetAllAnimations();
+            IAnimation[] allAnims = objAnimManager.GetAllAnimations();
             for (int i = 0; i < allAnims.Length; i++)
             {
-                Animation anim = allAnims[i];
+                IAnimation anim = allAnims[i];
                 AnimManager.AddAnimation(anim.Key, anim);
             }
         }

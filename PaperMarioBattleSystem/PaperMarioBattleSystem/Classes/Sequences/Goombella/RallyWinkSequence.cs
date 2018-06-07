@@ -69,7 +69,7 @@ namespace PaperMarioBattleSystem
                     string animName = AnimationGlobals.RunningName;
 
                     //Make the run animation slower
-                    Animation runAnim = User.AnimManager.GetAnimation(animName);
+                    Animation runAnim = User.AnimManager.GetAnimation<Animation>(animName);
                     runAnim?.SetSpeed(.5f);
                     
                     User.AnimManager.PlayAnimation(animName, true);

@@ -110,7 +110,7 @@ namespace PaperMarioBattleSystem
                     if (CommandEnabled == true)
                     {
                         //Send in their actual draw position
-                        actionCommand.StartInput(EntitiesAffected[0].DrawnPosition);
+                        actionCommand.StartInput(EntitiesAffected[0].Position);
                     }
                     else
                     {
@@ -135,7 +135,7 @@ namespace PaperMarioBattleSystem
                     }
 
                     //Create the tattle box and add it so it updates
-                    TattleBox = new TattleRenderObj(Camera.Instance.SpriteToUIPos(EntitiesAffected[0].DrawnPosition));
+                    TattleBox = new TattleRenderObj(Camera.Instance.SpriteToUIPos(EntitiesAffected[0].Position));
                     BattleObjManager.Instance.AddBattleObject(TattleBox);
 
                     string entityName = EntitiesAffected[0].Name;

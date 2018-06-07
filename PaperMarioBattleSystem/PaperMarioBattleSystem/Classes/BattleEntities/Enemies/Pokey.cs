@@ -178,7 +178,7 @@ namespace PaperMarioBattleSystem
         {
             base.DrawEntity();
 
-            Animation.Frame curFrame = AnimManager.CurrentAnim.CurFrame;
+            Animation.Frame curFrame = (AnimManager.CurrentAnim as Animation).CurFrame;
 
             //Draw the visual segments
             for (int i = 0; i < VisualSegments.Count; i++)

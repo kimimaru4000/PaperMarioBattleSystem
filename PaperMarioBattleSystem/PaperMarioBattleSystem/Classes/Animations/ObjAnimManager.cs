@@ -39,17 +39,17 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The animations, referred to by string.
         /// </summary>
-        protected readonly Dictionary<string, Animation> Animations = new Dictionary<string, Animation>();
+        protected readonly Dictionary<string, IAnimation> Animations = new Dictionary<string, IAnimation>();
 
         /// <summary>
         /// The previous animation that has been played.
         /// </summary>
-        public Animation PreviousAnim { get; private set; } = null;
+        public IAnimation PreviousAnim { get; private set; } = null;
 
         /// <summary>
         /// The current animation being played.
         /// </summary>
-        public Animation CurrentAnim { get; private set; } = null;
+        public IAnimation CurrentAnim { get; private set; } = null;
 
         protected virtual string GetName => (NamedObj == null) ? "N/A" : NamedObj.Name;
 
@@ -105,7 +105,7 @@ namespace PaperMarioBattleSystem
             else if (setSpriteSheetOptions == SetSpriteSheetOptions.ReplaceSame)
             {
                 //Get all animations
-                Animation[] animations = GetAllAnimations();
+                IAnimation[] animations = GetAllAnimations();
                 for (int i = 0; i < animations.Length; i++)
                 {
                     //Replace all Animation SpriteSheets with the new one if they're the same as the previous
@@ -119,7 +119,7 @@ namespace PaperMarioBattleSystem
             else if (setSpriteSheetOptions == SetSpriteSheetOptions.ReplaceAll)
             {
                 //Get all animations
-                Animation[] animations = GetAllAnimations();
+                IAnimation[] animations = GetAllAnimations();
 
                 //Replace all Animation SpriteSheets with the new one
                 for (int i = 0; i < animations.Length; i++)
@@ -135,7 +135,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="animName">The name of the animation.</param>
         /// <param name="anim">The animation reference.</param>
-        public void AddAnimation(string animName, Animation anim)
+        public void AddAnimation(string animName, IAnimation anim)
         {
             //Return if trying to add null animation
             if (anim == null)
@@ -149,7 +149,7 @@ namespace PaperMarioBattleSystem
                 //Debug.LogWarning($"{GetName} already has an animation called \"{animName}\" and will be replaced");
 
                 //Clear the current animation reference if it is the animation being removed
-                Animation prevAnim = Animations[animName];
+                IAnimation prevAnim = Animations[animName];
                 if (CurrentAnim == prevAnim)
                 {
                     CurrentAnim = null;
@@ -158,7 +158,7 @@ namespace PaperMarioBattleSystem
                 Animations.Remove(animName);
             }
 
-            anim.SetKey(animName);
+            anim.Key = animName;
 
             //Set the Animation's SpriteSheet to this one if it's not defined
             //If an Animation needs to use a different SpriteSheet for its animations, this won't stop it
@@ -178,18 +178,21 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets an animation by name.
         /// </summary>
+        /// <typeparam name="T">The Type of the animation, implementing IAnimation.</typeparam>
         /// <param name="animName">The name of the animation.</param>
         /// <returns>An animation if found, otherwise null.</returns>
-        public Animation GetAnimation(string animName)
+        public T GetAnimation<T>(string animName) where T: IAnimation
         {
+            IAnimation anim = null;
+
             //If animation cannot be found
-            if (Animations.ContainsKey(animName) == false)
+            if (Animations.TryGetValue(animName, out anim) == false)
             {
                 Debug.LogError($"Cannot find animation called \"{animName}\" for {GetName} to play");
-                return null;
+                return default(T);
             }
 
-            return Animations[animName];
+            return (T)anim;
         }
 
         /// <summary>
@@ -197,13 +200,13 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="animNames">The names of the animations.</param>
         /// <returns>An array of animations. If none were found, an empty array.</returns>
-        public Animation[] GetAnimations(params string[] animNames)
+        public T[] GetAnimations<T>(params string[] animNames) where T: IAnimation
         {
-            List<Animation> animations = new List<Animation>();
+            List<T> animations = new List<T>();
 
             for (int i = 0; i < animNames.Length; i++)
             {
-                Animation anim = GetAnimation(animNames[i]);
+                T anim = GetAnimation<T>(animNames[i]);
                 if (anim != null) animations.Add(anim);
             }
 
@@ -214,37 +217,9 @@ namespace PaperMarioBattleSystem
         /// Gets all animations.
         /// </summary>
         /// <returns>An array of all the animations.</returns>
-        public Animation[] GetAllAnimations()
+        public IAnimation[] GetAllAnimations()
         {
-            return GetAnimations(Animations.Keys.ToArray());
-        }
-
-        /// <summary>
-        /// Sets the child frames for an animation to render.
-        /// </summary>
-        /// <param name="animName">The name of the animation.</param>
-        /// <param name="frames">The Frames to set as the Animation's child frames.</param>
-        public void AddAnimationChildFrames(string animName, params Animation.Frame[] frames)
-        {
-            Animation anim = GetAnimation(animName);
-
-            //The error message is in the previous method so simply return
-            if (anim == null) return;
-
-            anim.SetChildFrames(frames);
-        }
-
-        /// <summary>
-        /// Gets the length of all frames in an animation.
-        /// </summary>
-        /// <param name="animName">The name of the animation.</param>
-        /// <returns>A double with the total length of all frames in the animation. 0 if the animation doesn't exist.</returns>
-        public double GetAnimationFrameLength(string animName)
-        {
-            Animation anim = GetAnimation(animName);
-            if (anim == null) return 0d;
-
-            return anim.GetTotalFrameLength();
+            return GetAnimations<IAnimation>(Animations.Keys.ToArray());
         }
 
         /// <summary>
@@ -253,22 +228,20 @@ namespace PaperMarioBattleSystem
         /// <param name="animName">The name of the animation to play.</param>
         /// <param name="resetPrevious">If true, resets the previous animation that was playing, if any.
         /// This will also reset its speed.</param>
-        public void PlayAnimation(string animName, bool resetPrevious = false, Animation.AnimFinish onFinish = null)
+        public void PlayAnimation(string animName, bool resetPrevious = false)
         {
-            Animation animToPlay = GetAnimation(animName);
+            IAnimation animToPlay = GetAnimation<IAnimation>(animName);
 
             //If animation cannot be found, return
             if (animToPlay == null)
             {
-                //Call the delegate
-                onFinish?.Invoke();
                 return;
             }
 
             //Reset the previous animation if specified
             if (resetPrevious == true)
             {
-                CurrentAnim?.Reset(true);
+                CurrentAnim?.Reset();
             }
 
             //Set previous animation
@@ -276,7 +249,7 @@ namespace PaperMarioBattleSystem
 
             //Play animation
             CurrentAnim = animToPlay;
-            CurrentAnim.Play(onFinish);
+            CurrentAnim.Play();
         }
 
         /// <summary>

@@ -87,7 +87,7 @@ namespace PaperMarioBattleSystem
         {
             if ((int)response == LitWindupSpeed)
             {
-                Animation windupAnim = User.AnimManager.GetAnimation(WindupAnimName);
+                Animation windupAnim = User.AnimManager.GetAnimation<Animation>(WindupAnimName);
                 windupAnim?.SetSpeed(2f);
             }
         }

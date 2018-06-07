@@ -375,6 +375,7 @@
     <Compile Include="Classes\Global\Utility\Interpolation.cs" />
     <Compile Include="Classes\Global\Line.cs" />
     <Compile Include="Classes\Global\Utility\UtilityGlobals.cs" />
+    <Compile Include="Classes\Interfaces\IAnimation.cs" />
     <Compile Include="Classes\Interfaces\ICleanup.cs" />
     <Compile Include="Classes\Interfaces\ICollisionHandler.cs" />
     <Compile Include="Classes\Interfaces\ICollisionShape.cs" />

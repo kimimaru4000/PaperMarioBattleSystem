@@ -84,7 +84,7 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.ShelledBattleAnimations.ShellSpinName, true);
 
-                    double animLength = User.AnimManager.GetAnimationFrameLength(AnimationGlobals.ShelledBattleAnimations.ShellSpinName);
+                    double animLength = User.AnimManager.GetAnimation<Animation>(AnimationGlobals.ShelledBattleAnimations.ShellSpinName).GetTotalFrameLength();
 
                     StartActionCommandInput();
                     CurSequenceAction = new WaitForCommandSeqAction(animLength, actionCommand, CommandEnabled);
@@ -100,7 +100,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.AnimManager.GetAnimation(AnimationGlobals.ShelledBattleAnimations.ShellSpinName)?.SetSpeed(3f);
+                    User.AnimManager.GetAnimation<Animation>(AnimationGlobals.ShelledBattleAnimations.ShellSpinName)?.SetSpeed(3f);
                     CurSequenceAction = new MoveToSeqAction(User, BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), SpinMoveDuration);
                     break;
                 case 1:
@@ -122,7 +122,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    User.AnimManager.GetAnimation(AnimationGlobals.ShelledBattleAnimations.ShellSpinName)?.SetSpeed(2f);
+                    User.AnimManager.GetAnimation<Animation>(AnimationGlobals.ShelledBattleAnimations.ShellSpinName)?.SetSpeed(2f);
                     CurSequenceAction = new MoveToSeqAction(User, BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), SpinMoveDuration);
                     break;
                 case 1:

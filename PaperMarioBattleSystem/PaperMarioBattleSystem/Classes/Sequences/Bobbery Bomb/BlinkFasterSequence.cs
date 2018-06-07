@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
             AnimName = animName;
             SpeedValue = speedVal;
 
-            Anim = User.AnimManager.GetAnimation(AnimName);
+            Anim = User.AnimManager.GetAnimation<Animation>(AnimName);
         }
 
         protected override void SequenceStartBranch()

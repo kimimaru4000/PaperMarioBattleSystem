@@ -163,11 +163,6 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public Vector2 BattlePosition { get; protected set; } = Vector2.Zero;
 
-        /// <summary>
-        /// The position the entity is rendered at.
-        /// </summary>
-        public Vector2 DrawnPosition => AnimManager.CurrentAnim.CurFrame.GetDrawnPosition(Position, SpriteFlip);
-
         public float Rotation { get; set; } = 0f;
         public Vector2 Scale { get; set; } = Vector2.One;
         public bool SpriteFlip { get; set; } = false;
@@ -222,13 +217,14 @@ namespace PaperMarioBattleSystem
 
         public virtual void CleanUp()
         {
-            SetBattleManager(null);
             SetBattleIndex(BattleGlobals.InvalidBattleIndex, false);
 
             LastAction?.SetUser(null);
             LastAction = null;
 
             EntityProperties.CleanUp();
+
+            SetBattleManager(null);
 
             HealthStateChangedEvent = null;
             PhaseCycleStartEvent = null;
@@ -1179,7 +1175,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void DrawEntity()
         {
-            AnimManager.CurrentAnim?.Draw(Position, TintColor, Rotation, Origin, Scale, SpriteFlip, Layer);
+            AnimManager.GetAnimation<Animation>(AnimManager.CurrentAnim.Key)?.Draw(Position, TintColor, Rotation, Origin, Scale, SpriteFlip, Layer);
         }
 
         /// <summary>

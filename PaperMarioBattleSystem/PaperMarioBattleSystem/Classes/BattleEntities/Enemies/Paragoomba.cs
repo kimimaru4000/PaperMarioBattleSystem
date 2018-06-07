@@ -40,38 +40,40 @@ namespace PaperMarioBattleSystem
             Texture2D spriteSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.SpriteRoot}/Enemies/Paragoomba.png");
             AnimManager.SetSpriteSheet(spriteSheet);
 
-            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.WingedIdleName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+            LoopAnimation wingedIdle = new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(129, 45, 27, 28), 200d),
-                new Animation.Frame(new Rectangle(1, 7, 27, 30), 200d, new Vector2(0, 1))));
-            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+                new Animation.Frame(new Rectangle(1, 7, 27, 30), 200d, new Vector2(0, 1)));
+            LoopAnimation flyingName = new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(129, 45, 27, 28), 100d),
-                new Animation.Frame(new Rectangle(1, 7, 27, 30), 100d)));
-            AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
+                new Animation.Frame(new Rectangle(1, 7, 27, 30), 100d));
+            Animation hurtName = new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(97, 48, 29, 27), 80d),
-                new Animation.Frame(new Rectangle(98, 89, 27, 26), 80d)));
-            AnimManager.AddAnimation(AnimationGlobals.DeathName, new Animation(spriteSheet, new Animation.Frame(new Rectangle(98, 89, 27, 26), 300d)));
+                new Animation.Frame(new Rectangle(98, 89, 27, 26), 80d));
+            Animation deathName = new Animation(spriteSheet, new Animation.Frame(new Rectangle(98, 89, 27, 26), 300d));
+            Animation diveKickName = new Animation(spriteSheet, new Animation.Frame(new Rectangle(33, 89, 27, 30), 1000d));
 
-            AnimManager.AddAnimation(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(33, 89, 27, 30), 1000d)));
+            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.WingedIdleName, wingedIdle);
+            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName, flyingName);
+            AnimManager.AddAnimation(AnimationGlobals.HurtName, hurtName);
+            AnimManager.AddAnimation(AnimationGlobals.DeathName, deathName);
+            AnimManager.AddAnimation(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName, diveKickName);
 
             //Wings are offset from the Paragoomba's body
             //Both Wings for each frame are in a single cropped texture
             //The wings are rendered underneath the Paragoomba's body
 
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.WingedBattleAnimations.WingedIdleName,
+            wingedIdle.SetChildFrames(
                 new Animation.Frame(new Rectangle(3, 166, 41, 18), 200d, new Vector2(0, -6), -.01f),
                 new Animation.Frame(new Rectangle(50, 161, 41, 14), 200d, new Vector2(0, 6), -.01f));
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.WingedBattleAnimations.FlyingName,
+            flyingName.SetChildFrames(
                 new Animation.Frame(new Rectangle(3, 166, 41, 18), 100d, new Vector2(0, -6), -.01f),
                 new Animation.Frame(new Rectangle(50, 161, 41, 14), 100d, new Vector2(0, 6), -.01f));
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.HurtName,
+            hurtName.SetChildFrames(
                 new Animation.Frame(new Rectangle(3, 166, 41, 18), 80d, new Vector2(3, -5), -.01f),
                 new Animation.Frame(new Rectangle(3, 166, 41, 18), 80d, new Vector2(3, -5), -.01f));
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.DeathName,
-                new Animation.Frame(new Rectangle(3, 166, 41, 18), 100d, new Vector2(3, -5), -.01f));
+            deathName.SetChildFrames(new Animation.Frame(new Rectangle(3, 166, 41, 18), 100d, new Vector2(3, -5), -.01f));
 
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.ParagoombaBattleAnimations.DiveKickName,
-                new Animation.Frame(new Rectangle(120, 121, 31, 21), 1000d, new Vector2(1, -13), -.01f));
+            diveKickName.SetChildFrames(new Animation.Frame(new Rectangle(120, 121, 31, 21), 1000d, new Vector2(1, -13), -.01f));
         }
 
         public override void OnEnteredBattle()

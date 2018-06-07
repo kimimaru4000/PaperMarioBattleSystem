@@ -40,14 +40,16 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.ParatroopaBattleAnimations.ShellShotName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(2, 222, 28, 25), 1000d)));
 
-            //This animation uses the same rectangle for every frame. However, the wings are different on those frames and the
-            //Paratroopa has varying heights on each frame
-            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.WingedIdleName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+            LoopAnimation wingedIdle = new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(56, 4, 32, 48), 100d),
                 new Animation.Frame(new Rectangle(56, 4, 32, 48), 100d, new Vector2(0, -1)),
                 new Animation.Frame(new Rectangle(56, 4, 32, 48), 100d, new Vector2(0, -2)),
-                new Animation.Frame(new Rectangle(56, 4, 32, 48), 100d, new Vector2(0, -1))));
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.WingedBattleAnimations.WingedIdleName,
+                new Animation.Frame(new Rectangle(56, 4, 32, 48), 100d, new Vector2(0, -1)));
+
+            //This animation uses the same rectangle for every frame. However, the wings are different on those frames and the
+            //Paratroopa has varying heights on each frame
+            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.WingedIdleName, wingedIdle);
+            wingedIdle.SetChildFrames(
                 new Animation.Frame(new Rectangle(72, 156, 19, 27), 100d, new Vector2(19, -13)),
                 new Animation.Frame(new Rectangle(104, 220, 23, 23), 100d, new Vector2(21, -8)),
                 new Animation.Frame(new Rectangle(40, 219, 18, 28), 100d, new Vector2(19, 8)),
@@ -56,22 +58,24 @@ namespace PaperMarioBattleSystem
             //NOTE: Incomplete wing frames; the wings on the left of the Paratroopa will require more work to get in due to the way the wings are stored
 
             //Same story with this one
-            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName, new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
+            LoopAnimation flyingName = new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
                 new Animation.Frame(new Rectangle(103, 4, 33, 51), 80d),
                 new Animation.Frame(new Rectangle(103, 4, 33, 51), 80d, new Vector2(0, -1)),
                 new Animation.Frame(new Rectangle(103, 4, 33, 51), 80d, new Vector2(0, -2)),
-                new Animation.Frame(new Rectangle(103, 4, 33, 51), 80d, new Vector2(0, -1))));
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.WingedBattleAnimations.FlyingName,
+                new Animation.Frame(new Rectangle(103, 4, 33, 51), 80d, new Vector2(0, -1)));
+            AnimManager.AddAnimation(AnimationGlobals.WingedBattleAnimations.FlyingName, flyingName);
+            flyingName.SetChildFrames(
                 new Animation.Frame(new Rectangle(72, 156, 19, 27), 80d, new Vector2(26, -4)),
                 new Animation.Frame(new Rectangle(104, 220, 23, 23), 80d, new Vector2(26, 4)),
                 new Animation.Frame(new Rectangle(40, 219, 18, 28), 80d, new Vector2(26, 16)),
                 new Animation.Frame(new Rectangle(248, 190, 21, 23), 80d, new Vector2(26, 13)));
 
-            AnimManager.AddAnimation(AnimationGlobals.HurtName, new Animation(spriteSheet,
+            Animation hurtName = new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(5, 59, 39, 44), 250d),
-                new Animation.Frame(new Rectangle(200, 3, 36, 43), 250d)));
+                new Animation.Frame(new Rectangle(200, 3, 36, 43), 250d));
+            AnimManager.AddAnimation(AnimationGlobals.HurtName, hurtName);
             //NOTE: Not accurate - in PM, it looks like the wings are rotated slightly to match the Paratroopa's pose in its hurt animation
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.HurtName,
+            hurtName.SetChildFrames(
                 new Animation.Frame(new Rectangle(66, 190, 45, 26), 250d, new Vector2(3, -6), -.01f),
                 new Animation.Frame(new Rectangle(66, 190, 45, 26), 250d, new Vector2(3, -6), -.01f));
         }

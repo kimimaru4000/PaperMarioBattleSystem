@@ -13,22 +13,18 @@ namespace PaperMarioBattleSystem
     /// The base class for sprite animation.
     /// It plays an animation forwards once, stopping on the last frame.
     /// </summary>
-    public class Animation : IUpdateable
+    public class Animation : IAnimation
     {
-        /// <summary>
-        /// The definition to denote delegates that are called when the Animation is finished
-        /// </summary>
-        public delegate void AnimFinish();
-
         /// <summary>
         /// The key for the animation. This is set when it is added to a BattleEntity's animation dictionary
         /// </summary>
-        public string Key { get; private set; } = string.Empty;
+        public string Key { get; set; } = string.Empty;
 
         /// <summary>
         /// The sprite sheet containing the sprites to be used in the animation
         /// </summary>
-        public Texture2D SpriteSheet = null;
+        public Texture2D SpriteSheet { get; set; } = null;
+
         protected Frame[] Frames = null;
 
         /// <summary>
@@ -69,11 +65,6 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool Paused { get; private set; } = false;
         private double PausedTime = 0d;
-
-        /// <summary>
-        /// A delegate to be called when the Animation is finished. This delegate is only called once
-        /// </summary>
-        protected AnimFinish OnFinish = null;
 
         public bool Finished => AnimDone;
 
@@ -171,12 +162,10 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Plays the animation from the start
         /// </summary>
-        public void Play(AnimFinish onFinish = null)
+        public void Play()
         {
             Reset();
             Resume();
-
-            OnFinish = onFinish;
         }
 
         /// <summary>
@@ -205,20 +194,13 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Resets the animation to the start
         /// </summary>
-        /// <param name="resetSpeed">If true, resets the Animation's speed to its default value</param>
-        public void Reset(bool resetSpeed = false)
+        public void Reset()
         {
             AnimDone = false;
             CurFrameNum = 0;
             PausedTime = 0d;
             ResetFrameDur();
-            OnFinish = null;
-
-            //Reset the animation's speed if specified
-            if (resetSpeed == true)
-            {
-                ResetSpeed();
-            }
+            ResetSpeed();
 
             DerivedReset();
         }
@@ -235,9 +217,6 @@ namespace PaperMarioBattleSystem
         {
             CurFrameNum = MaxFrameIndex;
             AnimDone = true;
-
-            OnFinish?.Invoke();
-            OnFinish = null;
         }
 
         /// <summary>

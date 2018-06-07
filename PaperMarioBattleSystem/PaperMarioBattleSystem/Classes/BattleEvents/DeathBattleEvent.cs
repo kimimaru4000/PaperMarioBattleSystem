@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
         private const float MaxRotation = 720f;
 
         private BattleEntity Entity = null;
-        private Animation DeathAnim = null;
+        private IAnimation DeathAnim = null;
         private bool OverrideRevival = false;
 
         private bool PerformRotation = false;
@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
         public DeathBattleEvent(BattleEntity entity, bool overrideRevival, bool doRotation)
         {
             Entity = entity;
-            DeathAnim = Entity.AnimManager.GetAnimation(AnimationGlobals.DeathName);
+            DeathAnim = Entity.AnimManager.GetAnimation<IAnimation>(AnimationGlobals.DeathName);
             OverrideRevival = overrideRevival;
 
             PerformRotation = doRotation;

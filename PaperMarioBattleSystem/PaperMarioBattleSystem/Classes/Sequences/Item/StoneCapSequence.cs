@@ -24,7 +24,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     EntitiesAffected[0].AnimManager.PlayAnimation(AnimationGlobals.MarioBattleAnimations.StoneCapPutOnName);
-                    CurSequenceAction = new WaitForAnimationSeqAction(EntitiesAffected[0].AnimManager.GetAnimation(AnimationGlobals.MarioBattleAnimations.StoneCapPutOnName));
+                    CurSequenceAction = new WaitForAnimationSeqAction(EntitiesAffected[0].AnimManager.GetAnimation<IAnimation>(AnimationGlobals.MarioBattleAnimations.StoneCapPutOnName));
                     break;
                 default:
                     base.SequenceMainBranch();

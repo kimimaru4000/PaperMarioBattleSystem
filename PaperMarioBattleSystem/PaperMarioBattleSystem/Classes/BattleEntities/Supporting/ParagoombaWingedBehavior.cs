@@ -98,14 +98,14 @@ namespace PaperMarioBattleSystem
         public virtual void RemoveWings()
         {
             Vector2 wingPos = Entity.Position;
-            Animation hurtAnim = Entity.AnimManager.GetAnimation(AnimationGlobals.HurtName);
+            Animation hurtAnim = Entity.AnimManager.GetAnimation<Animation>(AnimationGlobals.HurtName);
             if (hurtAnim != null)
             {
                 wingPos = hurtAnim.CurChildFrame.GetDrawnPosition(Entity.Position, Entity.SpriteFlip);
             }
 
             //Remove the wings from the hurt and death animations
-            Animation[] animations = Entity.AnimManager.GetAnimations(AnimationGlobals.HurtName, AnimationGlobals.DeathName);
+            Animation[] animations = Entity.AnimManager.GetAnimations<Animation>(AnimationGlobals.HurtName, AnimationGlobals.DeathName);
 
             //Clear all child frames with wings
             for (int i = 0; i < animations.Length; i++)

@@ -95,7 +95,7 @@ namespace PaperMarioBattleSystem
                     Entity.AnimManager.PlayAnimation(AnimationGlobals.RunningName, true);
 
                     //Speed up the animation to make it look like the BattleEntity is running in panic
-                    Animation anim = Entity.AnimManager.GetAnimation(AnimationGlobals.RunningName);
+                    Animation anim = Entity.AnimManager.GetAnimation<Animation>(AnimationGlobals.RunningName);
                     anim?.SetSpeed(3f);
 
                     Entity.SpriteFlip = true;

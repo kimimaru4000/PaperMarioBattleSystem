@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     public class WaitForAnimBattleEvent : BattleEvent
     {
         protected BattleEntity Entity = null;
-        protected Animation Anim = null;
+        protected IAnimation Anim = null;
         protected bool PlayIdleOnEnd = true;
         private string AnimName = string.Empty;
 
@@ -21,7 +21,7 @@ namespace PaperMarioBattleSystem
         {
             Entity = entity;
             AnimName = animName;
-            Anim = Entity.AnimManager.GetAnimation(AnimName);
+            Anim = Entity.AnimManager.GetAnimation<IAnimation>(AnimName);
             PlayIdleOnEnd = playIdleOnEnd;
 
             IsUnique = true;

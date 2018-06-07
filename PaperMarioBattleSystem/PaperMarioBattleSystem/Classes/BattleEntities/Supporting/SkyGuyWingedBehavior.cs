@@ -100,10 +100,10 @@ namespace PaperMarioBattleSystem
 
             //Copy all of the grounded entity's animations, as Sky Guys have completely unique animations
             Entity.AnimManager.ClearAllAnimations();
-            Animation[] allAnims = GroundedEntity.AnimManager.GetAllAnimations();
+            IAnimation[] allAnims = GroundedEntity.AnimManager.GetAllAnimations();
             for (int i = 0; i < allAnims.Length; i++)
             {
-                Animation anim = allAnims[i];
+                IAnimation anim = allAnims[i];
                 Entity.AnimManager.AddAnimation(anim.Key, anim);
             }
 

@@ -134,7 +134,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Add the most recent position and animation frame at the front of the list
-            PrevEntityStates.Insert(0, new AfterImageState(Entity.Position, Entity.AnimManager.CurrentAnim.CurFrame));
+            PrevEntityStates.Insert(0, new AfterImageState(Entity.Position, Entity.AnimManager.GetAnimation<Animation>(Entity.AnimManager.CurrentAnim.Key).CurFrame));
 
             if (TotalDuration >= 0)
             {
@@ -169,7 +169,7 @@ namespace PaperMarioBattleSystem
                 //If the anim setting is Previous, don't render if the draw region also is the same (indicating it's the same animation frame)
                 if (PrevEntityStates[posIndex].Position == Entity.Position &&
                     (AnimSetting == AfterImageAnimSetting.Current || (AnimSetting == AfterImageAnimSetting.Previous
-                    && PrevEntityStates[posIndex].AnimFrame.DrawRegion == Entity.AnimManager.CurrentAnim.CurFrame.DrawRegion)))
+                    && PrevEntityStates[posIndex].AnimFrame.DrawRegion == Entity.AnimManager.GetAnimation<Animation>(Entity.AnimManager.CurrentAnim.Key).CurFrame.DrawRegion)))
                 {
                      continue;
                 }
@@ -180,7 +180,7 @@ namespace PaperMarioBattleSystem
                 //Render based on the animation setting
                 if (AnimSetting == AfterImageAnimSetting.Current)
                 {
-                    Entity.AnimManager.CurrentAnim.Draw(PrevEntityStates[posIndex].Position, color, Entity.Rotation, Entity.Origin, Entity.Scale,
+                    Entity.AnimManager.GetCurrentAnim<Animation>()?.Draw(PrevEntityStates[posIndex].Position, color, Entity.Rotation, Entity.Origin, Entity.Scale,
                         Entity.SpriteFlip, .09f);
                 }
                 else if (AnimSetting == AfterImageAnimSetting.Previous)

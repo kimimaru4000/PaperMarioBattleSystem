@@ -432,10 +432,11 @@ namespace PaperMarioBattleSystem
             if (battleEntity == null) return Vector2.Zero;
 
             Vector2 pos = battleEntity.Position + positionAbove;
-            if (battleEntity.AnimManager.CurrentAnim != null && battleEntity.AnimManager.CurrentAnim.MaxFrameIndex >= 0)
+            Animation anim = battleEntity.AnimManager.GetCurrentAnim<Animation>();
+            if (anim != null && anim.MaxFrameIndex >= 0)
             {
                 //Offset upwards by half of the height of the BattleEntity's first animation
-                pos.Y -= battleEntity.AnimManager.CurrentAnim.GetFrame(0).DrawRegion.Size.Y / 2;
+                pos.Y -= anim.GetFrame(0).DrawRegion.Size.Y / 2;
             }
 
             return pos;
@@ -452,10 +453,11 @@ namespace PaperMarioBattleSystem
             if (battleEntity == null) return Vector2.Zero;
 
             Vector2 pos = battleEntity.Position + positionBelow;
-            if (battleEntity.AnimManager.CurrentAnim != null && battleEntity.AnimManager.CurrentAnim.MaxFrameIndex >= 0)
+            Animation anim = battleEntity.AnimManager.GetCurrentAnim<Animation>();
+            if (anim != null && anim.MaxFrameIndex >= 0)
             {
                 //Offset downwards by half of the height of the BattleEntity's first animation
-                pos.Y += battleEntity.AnimManager.CurrentAnim.GetFrame(0).DrawRegion.Size.Y / 2;
+                pos.Y += anim.GetFrame(0).DrawRegion.Size.Y / 2;
             }
 
             return pos;
@@ -862,6 +864,21 @@ namespace PaperMarioBattleSystem
         public static bool ShouldShowPlayerTurnUI(this BattleManager battleManager)
         {
             return (battleManager.EntityTurn?.EntityType == EntityTypes.Player && battleManager.EntityTurn.LastAction?.MoveSequence.InSequence != true);
+        }
+
+        #endregion
+
+        #region ObjAnimManager Extensions
+
+        /// <summary>
+        /// Gets the current animation being played as a Type implementing IAnimation.
+        /// </summary>
+        /// <typeparam name="T">The Type of the animation, implementing IAnimation.</typeparam>
+        /// <param name="objAnimManager">The ObjAnimManager to get the current animation from.</param>
+        /// <returns>The current animation as Type <typeparamref name="T"/> if found, otherwise null.</returns>
+        public static T GetCurrentAnim<T>(this ObjAnimManager objAnimManager) where T : IAnimation
+        {
+            return objAnimManager.GetAnimation<T>(objAnimManager.CurrentAnim?.Key);
         }
 
         #endregion

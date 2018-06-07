@@ -13,14 +13,14 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class WaitForAnimationSeqAction : SequenceAction
     {
-        protected Animation Anim = null;
+        protected IAnimation Anim = null;
 
         public WaitForAnimationSeqAction(BattleEntity entity, string animName) : base(entity)
         {
-            Anim = Entity.AnimManager.GetAnimation(animName);
+            Anim = Entity.AnimManager.GetAnimation<IAnimation>(animName);
         }
 
-        public WaitForAnimationSeqAction(Animation anim)
+        public WaitForAnimationSeqAction(IAnimation anim)
         {
             Anim = anim;
         }

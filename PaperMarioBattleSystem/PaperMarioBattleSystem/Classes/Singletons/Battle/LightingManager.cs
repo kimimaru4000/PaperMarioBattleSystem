@@ -137,7 +137,7 @@ namespace PaperMarioBattleSystem
             //Do this by drawing the light mask texture where the lit BattleEntities are at a scale on par with their diameters
             for (int i = 0; i < BattleDarkness.LightSources.Count; i++)
             {
-                Vector2 entPos = BattleDarkness.LightSources[i].Entity.DrawnPosition;
+                Vector2 entPos = BattleDarkness.LightSources[i].Entity.Position;
                 double diameter = BattleDarkness.LightSources[i].LightRadius * 2d;
 
                 //Divide the diameter by the texture size of the light mask so that it's the same size regardless of the light mask used

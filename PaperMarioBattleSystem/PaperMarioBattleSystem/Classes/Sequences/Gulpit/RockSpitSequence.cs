@@ -69,7 +69,7 @@ namespace PaperMarioBattleSystem
                     EntityUsed.TintColor = Color.Transparent;
 
                     EntityUsed.Layer = User.Layer + .0001f;
-                    AddSideSeqAction(new MoveToSeqAction(EntityUsed, User.Position + new Vector2(-18, -3), User.AnimManager.CurrentAnim.CurFrame.Duration));
+                    AddSideSeqAction(new MoveToSeqAction(EntityUsed, User.Position + new Vector2(-18, -3), User.AnimManager.GetCurrentAnim<Animation>().CurFrame.Duration));
 
                     CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.GulpitBattleAnimations.SpitRockName);
                     ChangeSequenceBranch(SequenceBranch.Main);

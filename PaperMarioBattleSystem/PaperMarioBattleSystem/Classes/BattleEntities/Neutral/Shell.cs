@@ -48,10 +48,6 @@ namespace PaperMarioBattleSystem
             Scale = new Vector2(.5f, .5f);
             Layer = .15f;
 
-            //Subscribe to the removed event so we can remove the protection and clear the entity reference if it's removed
-            BManager.EntityRemovedEvent -= EntityRemoved;
-            BManager.EntityRemovedEvent += EntityRemoved;
-
             //Play the idle anim
             AnimManager.PlayAnimation(GetIdleAnim());
         }
@@ -73,15 +69,13 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.FullHealthStateName, new Animation(spriteSheet,
                 new Animation.Frame(new Rectangle(7, 3, 186, 130), 1000d)));
 
-            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.MildlyDamagedStateName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(7, 153, 186, 130), 1000d)));
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.ShellBattleAnimations.MildlyDamagedStateName,
-                new Animation.Frame(new Rectangle(217, 4, 13, 47), 1000d, new Vector2(44, 1)));
+            Animation mildlyDamaged = new Animation(spriteSheet, new Animation.Frame(new Rectangle(7, 153, 186, 130), 1000d));
+            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.MildlyDamagedStateName, mildlyDamaged);
+            mildlyDamaged.SetChildFrames(new Animation.Frame(new Rectangle(217, 4, 13, 47), 1000d, new Vector2(0, -19)));
 
-            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.SeverelyDamagedStateName, new Animation(spriteSheet,
-                new Animation.Frame(new Rectangle(7, 153, 186, 130), 1000d)));
-            AnimManager.AddAnimationChildFrames(AnimationGlobals.ShellBattleAnimations.SeverelyDamagedStateName,
-                new Animation.Frame(new Rectangle(242, 4, 42, 98), 1000d, new Vector2(36, 1)));
+            Animation severelyDamaged = new Animation(spriteSheet, new Animation.Frame(new Rectangle(7, 153, 186, 130), 1000d));
+            AnimManager.AddAnimation(AnimationGlobals.ShellBattleAnimations.SeverelyDamagedStateName, severelyDamaged);
+            severelyDamaged.SetChildFrames(new Animation.Frame(new Rectangle(242, 4, 42, 98), 1000d, new Vector2(0, -5)));
         }
 
         public override string GetIdleAnim()
@@ -127,6 +121,10 @@ namespace PaperMarioBattleSystem
         public override void OnEnteredBattle()
         {
             base.OnEnteredBattle();
+
+            //Subscribe to the removed event so we can remove the protection and clear the entity reference if it's removed
+            BManager.EntityRemovedEvent -= EntityRemoved;
+            BManager.EntityRemovedEvent += EntityRemoved;
 
             //Show the Shell's HP, which can only be viewed with the Peekaboo Badge since it can't be tattled (in the actual games, at least)
             if (BManager.Mario.GetPartyEquippedBadgeCount(BadgeGlobals.BadgeTypes.Peekaboo) > 0)

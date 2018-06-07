@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
         private float MoveDuration = 500f;
 
         //NOTE: See if we can get this to work with the DamagedBattleEvent
-        private Animation HurtAnim = null;
+        private IAnimation HurtAnim = null;
 
         public GroundedBattleEvent(BattleEntity entity, Vector2 groundedPos)
         {
@@ -34,7 +34,7 @@ namespace PaperMarioBattleSystem
         {
             base.OnStart();
 
-            HurtAnim = Entity.AnimManager.GetAnimation(AnimationGlobals.HurtName);
+            HurtAnim = Entity.AnimManager.GetAnimation<IAnimation>(AnimationGlobals.HurtName);
             Entity.AnimManager.PlayAnimation(AnimationGlobals.HurtName);
             
             StartPos = Entity.BattlePosition;

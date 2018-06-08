@@ -71,7 +71,7 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(67, 46, 26, 33), 32d, new Vector2(0, -2))));
         }
 
-        protected sealed override BattleMenu GetMainBattleMenu()
+        protected sealed override InputMenu GetMainBattleMenu()
         {
             return new PartnerBattleMenu(this, new GoombarioSubMenu(this), Enumerations.PartnerTypes.Goombario);
         }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PaperMarioBattleSystem.Extensions;
 
 namespace PaperMarioBattleSystem
 {
@@ -35,34 +36,34 @@ namespace PaperMarioBattleSystem
         #endregion
 
         /// <summary>
-        /// Tells whether the Battle Menus are suppressed or not.
+        /// Tells whether the Input Menus are suppressed or not.
         /// When suppressed, they won't update or draw.
         /// </summary>
-        private bool SuppressBattleMenus = false;
+        private bool SuppressInputMenus = false;
 
         private List<UIElement> BattleUIElements = new List<UIElement>();
 
-        private Stack<BattleMenu> BattleMenus = null;
+        private Stack<InputMenu> InputMenus = null;
 
         private TargetSelectionMenu SelectionMenu = null;
 
         public BattleHUD battleHUD { get; private set; }= null;
 
         /// <summary>
-        /// The BattleMenu at the top of the stack
+        /// The InputMenu at the top of the stack.
         /// </summary>
-        public BattleMenu TopMenu
+        public InputMenu TopMenu
         {
             get
             {
-                if (BattleMenus.Count == 0) return null;
-                return BattleMenus.Peek();
+                if (InputMenus.Count == 0) return null;
+                return InputMenus.Peek();
             }            
         }
 
         private BattleUIManager()
         {
-            BattleMenus = new Stack<BattleMenu>();
+            InputMenus = new Stack<InputMenu>();
             SelectionMenu = new TargetSelectionMenu();
             battleHUD = new BattleHUD(null);
         }
@@ -86,31 +87,31 @@ namespace PaperMarioBattleSystem
             SelectionMenu.StartSelection(onSelection, selectionType, startIndex, targets);
         }
 
-        #region Battle Menu Stack
+        #region Input Menu Stack
 
-        public void PushMenu(BattleMenu menu)
+        public void PushMenu(InputMenu menu)
         {
-            BattleMenus.Push(menu);
+            InputMenus.Push(menu);
         }
 
-        public BattleMenu PopMenu()
+        public InputMenu PopMenu()
         {
-            return BattleMenus.Pop();
+            return InputMenus.Pop();
         }
 
         public void ClearMenuStack()
         {
-            BattleMenus.Clear();
+            InputMenus.Clear();
         }
 
         public void SuppressMenus()
         {
-            SuppressBattleMenus = true;
+            SuppressInputMenus = true;
         }
 
         public void UnsuppressMenus()
         {
-            SuppressBattleMenus = false;
+            SuppressInputMenus = false;
         }
 
         #endregion
@@ -163,7 +164,7 @@ namespace PaperMarioBattleSystem
 
         public void Update()
         {
-            if (SuppressBattleMenus == false)
+            if (SuppressInputMenus == false)
             {
                 TopMenu?.Update();
             }
@@ -178,7 +179,7 @@ namespace PaperMarioBattleSystem
         {
             battleHUD.Draw();
 
-            if (SuppressBattleMenus == false)
+            if (SuppressInputMenus == false)
             {
                 TopMenu?.Draw();
             }

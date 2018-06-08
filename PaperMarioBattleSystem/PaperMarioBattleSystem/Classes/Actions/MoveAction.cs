@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using static PaperMarioBattleSystem.TargetSelectionMenu;
-using static PaperMarioBattleSystem.Enumerations;
 using PaperMarioBattleSystem.Utilities;
+using PaperMarioBattleSystem.Extensions;
+using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {

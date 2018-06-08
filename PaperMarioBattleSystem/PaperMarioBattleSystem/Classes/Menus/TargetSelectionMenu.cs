@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PaperMarioBattleSystem.Extensions;
 using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
@@ -13,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The target selection menu when performing an action
     /// </summary>
-    public class TargetSelectionMenu : BattleMenu
+    public class TargetSelectionMenu : InputMenu
     {
         private ReverseAnimation Cursor = null;
         private NineSlicedTexture2D NameImage = null;

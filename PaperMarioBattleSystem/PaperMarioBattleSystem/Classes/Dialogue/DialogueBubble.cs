@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using HtmlAgilityPack;
+using PaperMarioBattleSystem.Extensions;
 using static PaperMarioBattleSystem.DialogueGlobals;
 
 namespace PaperMarioBattleSystem

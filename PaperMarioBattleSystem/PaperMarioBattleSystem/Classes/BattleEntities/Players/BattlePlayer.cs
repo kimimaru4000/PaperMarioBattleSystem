@@ -112,10 +112,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets the BattleMenu the BattlePlayer uses at the start of its turn.
+        /// Gets the InputMenu the BattlePlayer uses at the start of its turn.
         /// </summary>
         /// <returns></returns>
-        protected abstract BattleMenu GetMainBattleMenu();
+        protected abstract InputMenu GetMainBattleMenu();
 
         /// <summary>
         /// Gets the BattlePlayer's Star Power.

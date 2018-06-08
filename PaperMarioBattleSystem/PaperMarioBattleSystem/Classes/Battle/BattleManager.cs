@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework;
 using static PaperMarioBattleSystem.Enumerations;
 using static PaperMarioBattleSystem.BattleGlobals;
 using PaperMarioBattleSystem.Utilities;
+using PaperMarioBattleSystem.Extensions;
 
 namespace PaperMarioBattleSystem
 {

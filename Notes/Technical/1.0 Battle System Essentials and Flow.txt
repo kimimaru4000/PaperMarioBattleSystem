@@ -153,3 +153,22 @@ Right now the battle system is looking more like an engine than a separate, stan
 -A developer implements this interface in a BattleEntity class that does have an ObjAnimManager. They would have to cast to BattleEntity in a Sequence each time they want to play an animation since IBattleEntity doesn't have an ObjAnimManager.
 
 The SpriteRenderer, AssetManager, SoundManager, and Debug classes would be tied to a particular engine and aren't related to the battle system. I think at the very least, having the BattleUIManager and BattleObjManager tied to a BattleManager, thus being instance-based, would be a step forward since you would be able to have battle menus and objects to be unique to each battle.
+
+
+Update (6/7/18)
+---------------
+We've managed to further abstract animations via the IAnimation interface. The ObjAnimManager's retrieval methods are also generic, constrained to IAnimation, which makes obtaining a specific Animation type rather painless. I think we can cross this off the list!
+
+Next I have ideas for abstracting out a few other aspects of the system. The next focus is BattleMenus; here's the plan:
+
+1. Remove all input and draw code from BattleMenu
+2. Create an InputMenu class, which derives from BattleMenu. Put all the previous input code in here, and make it implement IDrawable
+3. Have every other menu derive from InputMenu, and have the BattleUIManager have a stack of InputMenus instead of BattleMenus
+
+This allows BattleMenu to remain a general-purpose menu that would work for any use-case.
+
+After this is done, the next focus should be StatusEffect.
+
+Finally, let's outline a strategy regarding the entire 1.0 Release. We can add all the base, core classes required for the Battle System to function inside a new PaperMarioBattleSystem.Core namespace. Everything else involved with the Paper Mario part (Main, SpriteRenderer, etc.) can go into a new PaperMarioBattleSystem.Game namespace.
+
+The hope with this is to be able to just build and modify the Core namespace and keep the game part untouched. When making a NuGet or similar package, developers can simply import the Core namespace and start implementing the battle system however they want! If they want to build off the Game part too, they'll be able to do that as well. Extensions can go into an Extensions namespace; this way, they can use extensions with just the Core part of the system if desired.

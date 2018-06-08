@@ -73,7 +73,7 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(163, 122, 26, 37), 32d, new Vector2(0, -2))));
         }
 
-        protected override BattleMenu GetMainBattleMenu()
+        protected override InputMenu GetMainBattleMenu()
         {
             //Goompa doesn't have a submenu since he doesn't move
             //However, one nice idea can be to let him only use Tactics, Items, and Focus - though, most of the time he'd be doing nothing

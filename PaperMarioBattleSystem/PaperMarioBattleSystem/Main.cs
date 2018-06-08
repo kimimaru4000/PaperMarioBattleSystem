@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using MonoGame;
 using MonoGame.Utilities;
 using PaperMarioBattleSystem.Utilities;
+using PaperMarioBattleSystem.Extensions;
 
 namespace PaperMarioBattleSystem
 {

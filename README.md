@@ -1,5 +1,5 @@
 # PaperMarioBattleSystem
-An open source recreation of the turn-based battle system from the first two Paper Mario games. The goal is to create a modular, flexible battle system that is easily customizable and can be added to game projects with minimal effort.
+An open source recreation of the turn-based battle system from the first two Paper Mario games. The goal is to create a modular, flexible battle system that is customizable and can be used in game projects.
 
 ## Features
 * Turn-based Battles
@@ -24,8 +24,11 @@ Cross-platform builds can be made using Mono's [mkbundle](http://www.mono-projec
 
 For non-Windows builds to run, you may need to comment out code involving the System.Windows.Forms namespace. The only code in the project using System.Windows.Forms is the debug functions that take screenshots and dump logs, so it doesn't affect the battle system itself.
 
+## Dependencies
+* [HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack) - for parsing Control Codes in Dialogue Bubbles.
+
 ## Contributing
-Feel free to submit a pull request with details on your changes. Please make sure that your code has been tested and is well-commented. Also feel free to open an issue if you encounter a bug or behavior that seems like a bug.
+Feel free to submit a pull request with details on your changes. Please make sure that your code has been tested and is well-commented. Also feel free to open an issue if you encounter a bug or behavior that you believe is a bug.
 
 ## Author(s)
 * **Thomas Deeb (aka Kimimaru)**

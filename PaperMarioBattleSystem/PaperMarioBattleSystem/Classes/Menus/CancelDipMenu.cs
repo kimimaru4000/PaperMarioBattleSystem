@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// Choosing Yes ends the entity's turn and clears the menu stack.
     /// Choosing No goes back to the Item menu.</para>
     /// </summary>
-    public sealed class CancelDipMenu : BattleMenu
+    public sealed class CancelDipMenu : InputMenu
     {
         protected override int LastSelection
         {

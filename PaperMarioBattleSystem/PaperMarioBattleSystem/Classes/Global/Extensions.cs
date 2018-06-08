@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Content;
 using static PaperMarioBattleSystem.Enumerations;
 using PaperMarioBattleSystem.Utilities;
 
-namespace PaperMarioBattleSystem
+namespace PaperMarioBattleSystem.Extensions
 {
     /// <summary>
     /// A class for defining Extension Methods

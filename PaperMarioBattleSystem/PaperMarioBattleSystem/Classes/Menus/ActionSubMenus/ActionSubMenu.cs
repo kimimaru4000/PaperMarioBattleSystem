@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using PaperMarioBattleSystem.Extensions;
 
 namespace PaperMarioBattleSystem
 {
@@ -15,7 +16,7 @@ namespace PaperMarioBattleSystem
     /// This is only used by the player
     /// <para>All ActionSubMenus have the "SubMenu" suffix</para>
     /// </summary>
-    public class ActionSubMenu : BattleMenu, INameable
+    public class ActionSubMenu : InputMenu, INameable
     {
         /// <summary>
         /// The user of this ActionSubMenu.

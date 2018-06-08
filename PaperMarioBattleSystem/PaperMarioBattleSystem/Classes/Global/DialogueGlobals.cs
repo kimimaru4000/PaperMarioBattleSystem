@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using HtmlAgilityPack;
 using PaperMarioBattleSystem.Utilities;
+using PaperMarioBattleSystem.Extensions;
 
 namespace PaperMarioBattleSystem
 {

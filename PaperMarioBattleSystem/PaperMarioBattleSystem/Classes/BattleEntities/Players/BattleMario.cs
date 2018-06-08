@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using PaperMarioBattleSystem.Extensions;
 
 namespace PaperMarioBattleSystem
 {
@@ -212,7 +213,7 @@ namespace PaperMarioBattleSystem
             base.OnEnteredBattle();
         }
 
-        protected sealed override BattleMenu GetMainBattleMenu()
+        protected sealed override InputMenu GetMainBattleMenu()
         {
             return new MarioBattleMenu(this);
         }

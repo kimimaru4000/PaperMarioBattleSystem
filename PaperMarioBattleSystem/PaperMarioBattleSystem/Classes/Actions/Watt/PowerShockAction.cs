@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using PaperMarioBattleSystem.Extensions;
 using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem

@@ -59,7 +59,7 @@ namespace PaperMarioBattleSystem
             AnimManager.AddAnimation(AnimationGlobals.PlayerBattleAnimations.DangerChoosingActionName, new Animation(null, new Animation.Frame(new Rectangle(151, 4, 39, 33), 1000d)));
         }
 
-        protected override BattleMenu GetMainBattleMenu()
+        protected override InputMenu GetMainBattleMenu()
         {
             return new PartnerBattleMenu(this, new BowSubMenu(this), Enumerations.PartnerTypes.Bow);
         }

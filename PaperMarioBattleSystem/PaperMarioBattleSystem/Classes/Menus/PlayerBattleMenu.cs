@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using static PaperMarioBattleSystem.Enumerations;
 using PaperMarioBattleSystem.Utilities;
+using PaperMarioBattleSystem.Extensions;
 
 namespace PaperMarioBattleSystem
 {
@@ -15,7 +16,7 @@ namespace PaperMarioBattleSystem
     /// The base BattleMenu for both Mario and his Partners. It displays all the available actions in a wheel like in the first Paper Mario.
     /// <para>They share Strategies/Tactics and Item commands.</para>
     /// </summary>
-    public abstract class PlayerBattleMenu : BattleMenu
+    public abstract class PlayerBattleMenu : InputMenu
     {
         /// <summary>
         /// The radius of the wheel.

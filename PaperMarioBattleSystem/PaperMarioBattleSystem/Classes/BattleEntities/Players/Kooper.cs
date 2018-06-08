@@ -75,7 +75,7 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(5, 218, 54, 28), 350d)));
         }
 
-        protected sealed override BattleMenu GetMainBattleMenu()
+        protected sealed override InputMenu GetMainBattleMenu()
         {
             return new PartnerBattleMenu(this, new KooperSubMenu(this), Enumerations.PartnerTypes.Kooper);
         }

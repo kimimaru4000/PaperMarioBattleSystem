@@ -99,7 +99,7 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(150, 189, 34, 33), 150d, new Vector2(-1, 0))));
         }
 
-        protected override BattleMenu GetMainBattleMenu()
+        protected override InputMenu GetMainBattleMenu()
         {
             return new PartnerBattleMenu(this, new WattSubMenu(this), PartnerTypes.Watt);
         }

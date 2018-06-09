@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// The Burn Status Effect.
     /// The entity takes 1 HP in Fire damage at the start of each phase cycle
     /// </summary>
-    public sealed class BurnStatus : StatusEffect
+    public sealed class BurnStatus : MessageEventStatus
     {
         private int FireDamage = 1;
 
@@ -35,16 +35,18 @@ namespace PaperMarioBattleSystem
             if (EntityAfflicted.EntityProperties.HasStatus(Enumerations.StatusTypes.Frozen) == true)
             {
                 Debug.Log($"{StatusType} was inflicted on an entity afflicted with {Enumerations.StatusTypes.Frozen}, negating both effects!");
-                EntityAfflicted.RemoveStatus(Enumerations.StatusTypes.Frozen, true, false);
+                EntityAfflicted.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Frozen);
 
                 //Also remove Burn, as these two statuses negate each other
-                EntityAfflicted.RemoveStatus(Enumerations.StatusTypes.Burn, true, false);
+                EntityAfflicted.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Burn);
             }
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
-
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

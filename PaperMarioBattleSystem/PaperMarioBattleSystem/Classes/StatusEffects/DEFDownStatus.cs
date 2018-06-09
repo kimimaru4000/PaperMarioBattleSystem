@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// The DEFDown Status Effect.
     /// The entity's Defense is reduced by a certain value until it ends.
     /// </summary>
-    public class DEFDownStatus : StatusEffect
+    public class DEFDownStatus : MessageEventStatus
     {
         /// <summary>
         /// The amount to reduce the entity's Defense by.
@@ -36,11 +36,15 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             EntityAfflicted.LowerDefense(DefenseValue);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
             EntityAfflicted.RaiseDefense(DefenseValue);
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

@@ -10,7 +10,7 @@ namespace PaperMarioBattleSystem
     /// The KO Status Effect.
     /// Entities afflicted with it instantly die.
     /// </summary>
-    public class KOStatus : StatusEffect
+    public class KOStatus : MessageEventStatus
     {
         public KOStatus()
         {

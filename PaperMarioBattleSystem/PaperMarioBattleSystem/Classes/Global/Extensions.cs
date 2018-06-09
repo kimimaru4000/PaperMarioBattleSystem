@@ -313,8 +313,8 @@ namespace PaperMarioBattleSystem.Extensions
         /// <para>This applies only to Players and Enemies.
         /// Neutral and other types of BattleEntities will simply return their own EntityTypes.</para>
         /// </summary>
-        /// <param name="battleEntity"></param>
-        /// <returns></returns>
+        /// <param name="battleEntity">The BattleEntity.</param>
+        /// <returns>Enemy for Players, Player for Enemies, and the BattleEntity's own EntityType for any other type.</returns>
         public static EntityTypes GetOpposingEntityType(this BattleEntity battleEntity)
         {
             //If this is a Player, return Enemy

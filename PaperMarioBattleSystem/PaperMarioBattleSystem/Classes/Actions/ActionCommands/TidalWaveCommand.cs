@@ -57,7 +57,7 @@ namespace PaperMarioBattleSystem
         /// <returns>The next button to press for the command</returns>
         private Keys GetNextButton()
         {
-            int buttonIndex = GeneralGlobals.Randomizer.Next(0, PossibleButtons.Length);
+            int buttonIndex = RandomGlobals.Randomizer.Next(0, PossibleButtons.Length);
             return PossibleButtons[buttonIndex];
         }
 

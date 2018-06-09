@@ -15,6 +15,24 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public class BattleEntityProperties : ICleanup
     {
+        #region Delegates and Events
+
+        public delegate void StatusInflicted(StatusEffect statusEffect);
+        /// <summary>
+        /// The event invoked when inflicting a BattleEntity with a Status Effect.
+        /// This is invoked after the Status Effect is actually inflicted.
+        /// </summary>
+        public event StatusInflicted StatusInflictedEvent = null;
+
+        public delegate void StatusRemoved(StatusEffect statusEffect);
+        /// <summary>
+        /// The event invoked when a Status Effect is removed from a BattleEntity.
+        /// This is invoked after the Status Effect is actually removed.
+        /// </summary>
+        public event StatusRemoved StatusRemovedEvent = null;
+
+        #endregion
+
         /// <summary>
         /// The BattleEntity these properties are for
         /// </summary>
@@ -152,6 +170,9 @@ namespace PaperMarioBattleSystem
             EquippedBadgeCounts.Clear();
 
             CustomTargeting = null;
+
+            StatusInflictedEvent = null;
+            StatusRemovedEvent = null;
         }
 
         #region Physical Attribute Methods
@@ -815,6 +836,9 @@ namespace PaperMarioBattleSystem
             {
                 refreshedStatus.Refresh(status);
 
+                //Invoke the status inflicted event, passing in the status inflicted with
+                StatusInflictedEvent?.Invoke(status);
+
                 string refreshedTurnMessage = refreshedStatus.Duration.ToString();
                 if (refreshedStatus.IsInfinite == true) refreshedTurnMessage = "Infinite";
                 Debug.Log($"{status.StatusType} Status on {Entity.Name} was refreshed with a duration of {refreshedTurnMessage}!");
@@ -828,6 +852,9 @@ namespace PaperMarioBattleSystem
             Statuses.Add(newStatus.StatusType, newStatus);
             newStatus.SetEntity(Entity);
             newStatus.Afflict();
+
+            //Invoke the status inflicted event, passing in the status inflicted with
+            StatusInflictedEvent?.Invoke(status);
 
             string turnMessage = newStatus.TotalDuration.ToString();
             if (newStatus.IsInfinite == true) turnMessage = "Infinite";
@@ -855,6 +882,9 @@ namespace PaperMarioBattleSystem
             status.End();
             status.ClearEntity();
             Statuses.Remove(statusType);
+
+            //Invoke the status removed event
+            StatusRemovedEvent?.Invoke(status);
 
             string turnMessage = status.TotalDuration.ToString();
             if (status.IsInfinite == true) turnMessage = "Infinite";

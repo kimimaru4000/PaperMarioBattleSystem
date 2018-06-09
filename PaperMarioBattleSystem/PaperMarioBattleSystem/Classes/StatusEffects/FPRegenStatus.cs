@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// The FPRegen Status Effect.
     /// The entity heals an amount of FP each turn until it ends.
     /// </summary>
-    public sealed class FPRegenStatus : StatusEffect
+    public sealed class FPRegenStatus : MessageEventStatus
     {
         /// <summary>
         /// The amount of FP to heal each turn.
@@ -45,12 +45,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
-
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

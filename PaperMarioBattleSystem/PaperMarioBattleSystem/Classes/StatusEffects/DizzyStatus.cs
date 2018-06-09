@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// The Dizzy Status Effect.
     /// The entity's Accuracy decreases until it ends
     /// </summary>
-    public sealed class DizzyStatus : StatusEffect
+    public sealed class DizzyStatus : MessageEventStatus
     {
         private double AccuracyValue = .5d;
         private CroppedTexture2D DizzyIcon = null;
@@ -37,11 +37,15 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             EntityAfflicted.AddAccuracyMod(AccuracyValue);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
             EntityAfflicted.RemoveAccuracyMod(AccuracyValue);
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

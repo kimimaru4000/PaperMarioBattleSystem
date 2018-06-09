@@ -163,7 +163,7 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            int randColRow = GeneralGlobals.Randomizer.Next(0, ColumnRows);
+            int randColRow = RandomGlobals.Randomizer.Next(0, ColumnRows);
 
             float valAdd = randColRow * ColumnRowDiffVal;
 
@@ -204,7 +204,7 @@ namespace PaperMarioBattleSystem
             if (DoneSpawning == true || AllowedRestorationTypes == null || AllowedRestorationTypes.Count == 0)
                 return RestoreTypes.None;
 
-            int randVal = GeneralGlobals.Randomizer.Next(0, AllowedRestorationTypes.Count);
+            int randVal = RandomGlobals.Randomizer.Next(0, AllowedRestorationTypes.Count);
 
             return AllowedRestorationTypes[randVal];
         }

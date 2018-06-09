@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     /// The Allergic Status Effect.
     /// The Entity afflicted cannot be inflicted with any new Status Effects.
     /// </summary>
-    public sealed class AllergicStatus : StatusEffect
+    public sealed class AllergicStatus : MessageEventStatus
     {
         private CroppedTexture2D AllergicIcon = null;
 
@@ -39,12 +39,16 @@ namespace PaperMarioBattleSystem
         {
             //Make the entity immune to all StatusEffects
             HandleStatusImmunities(true);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
             //Remove the StatusEffect immunities
             HandleStatusImmunities(false);
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

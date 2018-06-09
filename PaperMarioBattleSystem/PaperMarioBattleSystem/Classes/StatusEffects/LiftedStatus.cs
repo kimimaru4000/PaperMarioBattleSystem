@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// <para>This Status Effect isn't technically used, as it correlates to Parakarry's Air Lift move, which handles removing the enemy from battle.
     /// However, its percentage of being afflicted on the victim determines if the move is successful or not.</para>
     /// </summary>
-    public abstract class LiftedStatus : StatusEffect
+    public abstract class LiftedStatus : MessageEventStatus
     {
         public LiftedStatus()
         {

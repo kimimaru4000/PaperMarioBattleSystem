@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// <para>The MoveCategory disabled should always be one that isn't currently disabled.
     /// This Status Effect also refreshes differently than other Status Effects due to its nature (you can't remove a skill twice).</para>
     /// </summary>
-    public sealed class NoSkillsStatus : StatusEffect
+    public sealed class NoSkillsStatus : MessageEventStatus
     {
         /// <summary>
         /// The MoveCategory to disable.
@@ -37,8 +37,6 @@ namespace PaperMarioBattleSystem
             CategoryDisabled = categoryDisabled;
 
             AfflictedMessage = GetMessageFromCategory(CategoryDisabled);
-
-            //NoSkills doesn't play the end event
             ShouldQueueEndEvent = false;
         }
 
@@ -73,6 +71,9 @@ namespace PaperMarioBattleSystem
                 //Display an error message if trying to disable a move category that NoSkills has already disabled
                 Debug.LogError($"Moves cannot be disabled multiple times by NoSkills. Not refreshing {noSkills.CategoryDisabled} moves' disabled duration");
             }
+
+            AfflictedMessage = GetMessageFromCategory(noSkills.CategoryDisabled);
+            ShowAfflictedMessage();
         }
 
         protected override void OnAfflict()
@@ -80,6 +81,8 @@ namespace PaperMarioBattleSystem
             //Disable the move category
             CategoriesDisabled.Add(CategoryDisabled, TotalDuration);
             EntityAfflicted.EntityProperties.DisableMoveCategory(CategoryDisabled);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
@@ -89,6 +92,8 @@ namespace PaperMarioBattleSystem
             {
                 EntityAfflicted.EntityProperties.EnableMoveCategory(moveCategory.Key);
             }
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

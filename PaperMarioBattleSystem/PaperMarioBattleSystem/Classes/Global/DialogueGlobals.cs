@@ -174,8 +174,8 @@ namespace PaperMarioBattleSystem
         /// <returns>A Vector2 containing the offset for shaky text.</returns>
         public static Vector2 GetShakyTextOffset(in Vector2 amount)
         {
-            float x = (float)GeneralGlobals.Randomizer.RandomDouble(-amount.X, amount.X);
-            float y = (float)GeneralGlobals.Randomizer.RandomDouble(-amount.Y, amount.Y);
+            float x = (float)RandomGlobals.Randomizer.RandomDouble(-amount.X, amount.X);
+            float y = (float)RandomGlobals.Randomizer.RandomDouble(-amount.Y, amount.Y);
             return new Vector2(x, y);
         }
 

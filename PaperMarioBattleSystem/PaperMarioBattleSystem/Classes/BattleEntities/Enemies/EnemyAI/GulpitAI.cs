@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
             //Choose a random entity out of the ones we found
             if (usableEntities.Count > 0)
             {
-                chosenIndex = GeneralGlobals.Randomizer.Next(0, usableEntities.Count);
+                chosenIndex = RandomGlobals.Randomizer.Next(0, usableEntities.Count);
             }
 
             //If we found and chose a usable entity, use Rock Spit with the entity

@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
     /// The Electrified Status Effect.
     /// This grants the Electrified PhysicalAttribute to the entity, causing direct contact from non-Electrified entities to hurt the attacker.
     /// </summary>
-    public sealed class ElectrifiedStatus : StatusEffect
+    public sealed class ElectrifiedStatus : MessageEventStatus
     {
         private readonly PaybackHolder ElectrifiedPayback = new PaybackHolder(PaybackTypes.Constant, PhysicalAttributes.Electrified,
             Elements.Electric, new ContactTypes[] { ContactTypes.Latch, ContactTypes.SideDirect, ContactTypes.TopDirect }, 
@@ -48,12 +48,16 @@ namespace PaperMarioBattleSystem
         {
             EntityAfflicted.EntityProperties.AddPhysAttribute(Enumerations.PhysicalAttributes.Electrified);
             EntityAfflicted.EntityProperties.AddPayback(ElectrifiedPayback);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
             EntityAfflicted.EntityProperties.RemovePhysAttribute(Enumerations.PhysicalAttributes.Electrified);
             EntityAfflicted.EntityProperties.RemovePayback(ElectrifiedPayback);
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

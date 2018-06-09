@@ -172,3 +172,23 @@ After this is done, the next focus should be StatusEffect.
 Finally, let's outline a strategy regarding the entire 1.0 Release. We can add all the base, core classes required for the Battle System to function inside a new PaperMarioBattleSystem.Core namespace. Everything else involved with the Paper Mario part (Main, SpriteRenderer, etc.) can go into a new PaperMarioBattleSystem.Game namespace.
 
 The hope with this is to be able to just build and modify the Core namespace and keep the game part untouched. When making a NuGet or similar package, developers can simply import the Core namespace and start implementing the battle system however they want! If they want to build off the Game part too, they'll be able to do that as well. Extensions can go into an Extensions namespace; this way, they can use extensions with just the Core part of the system if desired.
+
+
+Update (6/8/18)
+---------------
+Let's try to separate the Game part of the StatusEffect code from its core functionality.
+
+The base StatusEffect class overall looks great and works well with EntityProperties. The idea is, inflict a StatusEffect through the BattleEntity's BattleEntityProperties, and it'll wear off after some time (or some other case, in the case of Charged), in which it's also removed through BattleEntityProperties.
+
+However, there are a few problems right now. BattleEntity has wrapper methods AfflictStatus() and RemoveStatus(). While alone this would be fine, the issue is the MessageBattleEvent for displaying the StatusEffect's AfflictedMessage and RemovedMessage. It uses TextBox and the BattleUIManager, both of which I want to exclude out of the Core namespace.
+
+The wrapper methods are called within BattleEntity in HandleStatusAffliction(), which is called in TakeDamage(). We need to find a way to easily handle this type of behavior.
+
+BattleEntity has StatusInflictedEvent and StatusRemovedEvent, but since most of that is handled in BattleEntityProperties, we probably should move them there. So say we do that: now how do we get it to reliably display a message when a StatusEffect is inflicted from outside BattleEntity? The goal is to remove the MessageBattleEvent from inside BattleEntity. 
+
+The PM games only play the status ending jump when a Status Effect is finished from turn count. Right now there's no way to check if the StatusEffect was ended prematurely or not. Once we do that, we should probably just implement this logic manually in each derived status for max flexibility. The same can happen for the MessageBattleEvent.
+
+We can make the Ended property in StatusEffect a public property with a private setter. Then, we can rename IsFinished to TurnsFinished and no longer set TurnsPassed to TotalDuration in the base End() method. This way, when a StatusEffect ends prematurely, it can check for that by checking the TurnsFinished property and act accordingly.
+
+This ties this logic to the derived StatusEffects, but I feel that's better than keeping it in the base. If a developer wants more control over it, they can create a class deriving from StatusEffect that handles this functionality and create new StatusEffects deriving from that one.
+

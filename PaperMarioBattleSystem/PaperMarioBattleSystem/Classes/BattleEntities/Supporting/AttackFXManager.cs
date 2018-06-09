@@ -87,7 +87,7 @@ namespace PaperMarioBattleSystem
             }
 
             //Choose a random sound from the list to play
-            int index = GeneralGlobals.Randomizer.Next(0, SoundCount);
+            int index = RandomGlobals.Randomizer.Next(0, SoundCount);
 
             //Play the sound at the index
             SoundManager.Instance.PlaySound(PotentialSounds[index]);

@@ -70,7 +70,7 @@ namespace PaperMarioBattleSystem
                         //If there's another Partner available, choose it
                         if (allPartners.Count != 0)
                         {
-                            int randIndex = GeneralGlobals.Randomizer.Next(0, allPartners.Count);
+                            int randIndex = RandomGlobals.Randomizer.Next(0, allPartners.Count);
 
                             SwapPartnerBattleEvent swapPartnerBattleEvent = new SwapPartnerBattleEvent(User.BManager.Partner, allPartners[randIndex],
                                 300d, 300d);

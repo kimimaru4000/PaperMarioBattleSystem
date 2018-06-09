@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// The HPRegen Status Effect.
     /// The entity heals an amount of HP each turn until it ends.
     /// </summary>
-    public sealed class HPRegenStatus : StatusEffect
+    public sealed class HPRegenStatus : MessageEventStatus
     {
         /// <summary>
         /// The amount of HP to heal each turn.
@@ -45,12 +45,12 @@ namespace PaperMarioBattleSystem
 
         protected override void OnAfflict()
         {
-            
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
-            
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

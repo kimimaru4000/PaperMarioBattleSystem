@@ -164,7 +164,7 @@ namespace PaperMarioBattleSystem
 
         private void ThrowEgg()
         {
-            int rand = GeneralGlobals.Randomizer.Next(0, EntitiesAffected.Length);
+            int rand = RandomGlobals.Randomizer.Next(0, EntitiesAffected.Length);
             BattleEntity target = EntitiesAffected[rand];
             AttemptDamage(EggDamage, target, Action.DamageProperties, true);
         }

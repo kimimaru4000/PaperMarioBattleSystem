@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
     public abstract class StatusEffect : ICopyable<StatusEffect>
     {
         /// <summary>
-        /// Alignments for StatusEffects indicating how they affect the afflicted BattleEntity
+        /// Alignments for StatusEffects indicating how they affect the afflicted BattleEntity.
         /// </summary>
         public enum StatusAlignments
         {
@@ -27,39 +27,39 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// The type of StatusEffect this is
+        /// The type of StatusEffect this is.
         /// </summary>
         public StatusTypes StatusType { get; protected set; } = StatusTypes.None;
 
         /// <summary>
-        /// The alignment of the StatusEffect
+        /// The alignment of the StatusEffect.
         /// </summary>
         public StatusAlignments Alignment { get; protected set; } = StatusAlignments.Neutral;
 
         /// <summary>
-        /// The duration of the StatusEffect, in turns
+        /// The duration of the StatusEffect, in turns.
         /// </summary>
         public int Duration { get; protected set; } = 1;
 
         /// <summary>
-        /// The additional duration of the StatusEffect based on an entity's StatusProperties, in turns.
+        /// The additional duration of the StatusEffect based on a BattleEntity's StatusProperties, in turns.
         /// This is automatically set when the StatusEffect is assigned a BattleEntity reference.
         /// </summary>
         public int AdditionalDuration { get; protected set; } = 0;
 
         /// <summary>
-        /// The current number of turns the StatusEffect has been in effect
+        /// The current number of turns the StatusEffect has been in effect.
         /// </summary>
         public int TurnsPassed { get; private set; } = 0;
 
         /// <summary>
         /// The priority of the StatusEffect.
-        /// StatusEffects with higher priorities have higher Priority values and affect the BattleEntity sooner
+        /// StatusEffects with higher Priority values affect the BattleEntity sooner.
         /// </summary>
         public int Priority => StatusGlobals.GetStatusPriority(StatusType);
 
         /// <summary>
-        /// The BattleEntity afflicted with the StatusEffect
+        /// The BattleEntity afflicted with the StatusEffect.
         /// </summary>
         public BattleEntity EntityAfflicted { get; private set; } = null;
 
@@ -69,7 +69,7 @@ namespace PaperMarioBattleSystem
         private readonly Dictionary<StatusSuppressionTypes, int> SuppressionStates = new Dictionary<StatusSuppressionTypes, int>();
 
         /// <summary>
-        /// The total duration of the StatusEffect, which is the sum of both the base Duration and the AdditionalDuration
+        /// The total duration of the StatusEffect, which is the sum of both the base Duration and the AdditionalDuration.
         /// </summary>
         public int TotalDuration
         {
@@ -83,33 +83,25 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Tells whether the StatusEffect already ended or not.
         /// </summary>
-        private bool Ended = false;
-
-        /// <summary>
-        /// The Battle Message shown when a BattleEntity is afflicted with the StatusEffect.
-        /// </summary>
-        public string AfflictedMessage { get; protected set; } = string.Empty;
-
-        /// <summary>
-        /// The Battle Message shown when the StatusEffect is removed from the BattleEntity.
-        /// </summary>
-        public string RemovedMessage { get; protected set; } = string.Empty;
-
-        /// <summary>
-        /// Says whether this Status Effect should tell the BattleEntity afflicted with it to queue the <see cref="StatusEndedBattleEvent"/> when it ends by turn count. 
-        /// </summary>
-        protected bool ShouldQueueEndEvent = true;
+        public bool Ended { get; private set; } = false;
 
         /// <summary>
         /// The icon of the StatusEffect.
         /// </summary>
         public CroppedTexture2D StatusIcon { get; protected set; } = null;
 
+        /// <summary>
+        /// Tells if the Status Effect lasts indefinitely and won't end by turn count.
+        /// </summary>
         public bool IsInfinite => (Duration <= InfiniteDuration);
-        public bool IsFinished => (IsInfinite == false && TurnsPassed >= TotalDuration);
 
         /// <summary>
-        /// Sets the BattleEntity that is afflicted with this StatusEffect and factors in the entity's StatusProperties for this StatusEffect.
+        /// Tells if the Status Effect is finished through turn count.
+        /// </summary>
+        public bool IsTurnFinished => (IsInfinite == false && TurnsPassed >= TotalDuration);
+
+        /// <summary>
+        /// Sets the BattleEntity that is afflicted with this StatusEffect and factors in the BattleEntity's StatusProperties for this StatusEffect.
         /// </summary>
         /// <param name="entity">The BattleEntity to afflict with this StatusEffect.</param>
         public void SetEntity(BattleEntity entity)
@@ -121,7 +113,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Clears the BattleEntity afflicted with this StatusEffect
+        /// Clears the BattleEntity afflicted with this StatusEffect.
         /// </summary>
         public void ClearEntity()
         {
@@ -141,7 +133,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Increments the number of turns the StatusEffect has been active and removes it from the entity afflicted when finished
+        /// Increments the number of turns the StatusEffect has been active and removes it from the BattleEntity afflicted when finished
         /// </summary>
         private void IncrementTurns()
         {
@@ -159,9 +151,9 @@ namespace PaperMarioBattleSystem
                 }
             }
 
-            //Print this message if we somehow reached this method when the StatusEffect was already done
+            //Print this message if we somehow reached this method when the StatusEffect was already done by turn count
             //Don't return because we still want to remove it
-            if (IsFinished == true)
+            if (IsTurnFinished == true)
             {
                 Debug.LogError($"Attempting to increment turns for {StatusType} on entity {EntityAfflicted.Name} when it's already finished!");
             }
@@ -173,14 +165,14 @@ namespace PaperMarioBattleSystem
             }
 
             //When the StatusEffect is finished, remove it
-            if (IsFinished == true)
+            if (IsTurnFinished == true)
             {
-                EntityAfflicted.RemoveStatus(StatusType, true, ShouldQueueEndEvent);
+                EntityAfflicted.EntityProperties.RemoveStatus(StatusType);
             }
         }
 
         /// <summary>
-        /// Applies the StatusEffect's initial affliction logic to the entity
+        /// Applies the StatusEffect's initial affliction logic to the BattleEntity.
         /// </summary>
         public void Afflict()
         {
@@ -189,7 +181,7 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Immediately ends the StatusEffect.
-        /// This does not remove it from the entity
+        /// This does not remove it from the BattleEntity.
         /// </summary>
         public void End()
         {
@@ -200,13 +192,11 @@ namespace PaperMarioBattleSystem
             FullyUnsuppress();
             Ended = true;
 
-            TurnsPassed = TotalDuration;
-
             OnEnd();
         }
 
         /// <summary>
-        /// Applies the StatusEffect's effects to the entity at the start of the phase cycle
+        /// Applies the StatusEffect's effects to the BattleEntity at the start of the phase cycle
         /// </summary>
         public void PhaseCycleStart()
         {
@@ -229,12 +219,12 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What the StatusEffect does to the entity when it's applied
+        /// What the StatusEffect does to the BattleEntity when it's applied
         /// </summary>
         protected abstract void OnAfflict();
 
         /// <summary>
-        /// What the StatusEffect does to the entity when it wears off
+        /// What the StatusEffect does to the BattleEntity when it wears off
         /// </summary>
         protected abstract void OnEnd();
 
@@ -244,27 +234,27 @@ namespace PaperMarioBattleSystem
         protected abstract void OnPhaseCycleStart();
 
         /// <summary>
-        /// What the StatusEffect does to the entity when it's suppressed in a particular way.
+        /// What the StatusEffect does to the BattleEntity when it's suppressed in a particular way.
         /// </summary>
         /// <param name="statusSuppressionType">The type of suppression.</param>
         protected abstract void OnSuppress(StatusSuppressionTypes statusSuppressionType);
 
         /// <summary>
-        /// What the StatusEffect does to the entity when it's unsuppressed in a particular way.
+        /// What the StatusEffect does to the BattleEntity when it's unsuppressed in a particular way.
         /// </summary>
         /// <param name="statusSuppressionType">The type of suppression.</param>
         protected abstract void OnUnsuppress(StatusSuppressionTypes statusSuppressionType);
 
         /// <summary>
-        /// Returns a new instance of this StatusEffect with the same properties
+        /// Returns a new instance of this StatusEffect with the same properties.
         /// </summary>
         /// <returns>A deep copy of this StatusEffect</returns>
         public abstract StatusEffect Copy();
 
         /// <summary>
-        /// Suppresses the Status Effect in a particular way.
+        /// Suppresses the StatusEffect in a particular way.
         /// </summary>
-        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the Status Effect should be suppressed.</param>
+        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the StatusEffect should be suppressed.</param>
         public void Suppress(StatusSuppressionTypes statusSuppressionType)
         {
             //If this Status Effect isn't suppressed this way, add a new entry
@@ -284,9 +274,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Unsuppresses the Status Effect in a particular way.
+        /// Unsuppresses the StatusEffect in a particular way.
         /// </summary>
-        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the Status Effect should be unsuppressed.</param>
+        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the StatusEffect should be unsuppressed.</param>
         public void Unsuppress(StatusSuppressionTypes statusSuppressionType)
         {
             //If this Status Effect isn't suppressed in this way, there's nothing to unsuppress, so return
@@ -314,18 +304,18 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells whether the Status Effect is suppressed in a certain way or not.
+        /// Tells whether the StatusEffect is suppressed in a certain way or not.
         /// </summary>
-        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the Status Effect is suppressed.</param>
-        /// <returns>true if the Status Effect is suppressed in this way, otherwise false.</returns>
+        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the StatusEffect is suppressed.</param>
+        /// <returns>true if the StatusEffect is suppressed in this way, otherwise false.</returns>
         public bool IsSuppressed(StatusSuppressionTypes statusSuppressionType)
         {
             return SuppressionStates.ContainsKey(statusSuppressionType);
         }
 
         /// <summary>
-        /// Fully unsuppresses the Status Effect.
-        /// <para>This is called when the Status Effect is ended to ensure it ends properly.</para>
+        /// Fully unsuppresses the StatusEffect.
+        /// <para>This is called when the StatusEffect is ended to ensure it ends properly.</para>
         /// </summary>
         private void FullyUnsuppress()
         {
@@ -343,7 +333,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Draws information about the Status Effect, including its icon and turn count.
+        /// Draws information about the StatusEffect, including its icon and turn count.
         /// </summary>
         /// <param name="iconPos">The position to draw the StatusEffect's information.</param>
         /// <param name="depth">The rendering depth to draw the StatusEffect's information at.</param>

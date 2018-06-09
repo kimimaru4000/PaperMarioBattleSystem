@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
             if (duplighost.PartnerTypeDisguise == PartnerTypes.None)
             {
                 //For testing, say that it's a 50% chance of disguising and headbutting
-                int randVal = GeneralGlobals.Randomizer.Next(0, 2);
+                int randVal = RandomGlobals.Randomizer.Next(0, 2);
 
                 //Ensure there's a Partner to copy
                 bool partnerExists = (Enemy.BManager.Partner != null);
@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
             {
                 if (duplighost.PartnerTypeDisguise == PartnerTypes.Goombario)
                 {
-                    int rand = GeneralGlobals.Randomizer.Next(0, 2);
+                    int rand = RandomGlobals.Randomizer.Next(0, 2);
 
                     if (rand == 0)
                         duplighost.StartAction(new BonkAction(duplighost), false, Enemy.BManager.FrontPlayer.GetTrueTarget());

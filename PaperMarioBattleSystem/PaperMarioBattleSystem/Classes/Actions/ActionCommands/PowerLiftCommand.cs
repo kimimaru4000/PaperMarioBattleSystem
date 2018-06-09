@@ -409,7 +409,7 @@ namespace PaperMarioBattleSystem
                     CreateNextIconElement(nextIndex.Column, nextIndex.Row);
                 }
 
-                PrevCreationTime = Time.ActiveMilliseconds + IconCreationTimes[GeneralGlobals.Randomizer.Next(0, IconCreationTimes.Length)];
+                PrevCreationTime = Time.ActiveMilliseconds + IconCreationTimes[RandomGlobals.Randomizer.Next(0, IconCreationTimes.Length)];
             }
         }
 
@@ -443,7 +443,7 @@ namespace PaperMarioBattleSystem
             else
             {
                 //Get a random value and return it
-                int randSpot = GeneralGlobals.Randomizer.Next(0, availableSpots.Count);
+                int randSpot = RandomGlobals.Randomizer.Next(0, availableSpots.Count);
 
                 return availableSpots[randSpot];
             }
@@ -455,7 +455,7 @@ namespace PaperMarioBattleSystem
         private void CreateNextIconElement(int gridCol, int gridRow)
         {
             //Choose a random icon among Poison Mushrooms, Attack, and Defense
-            int randIcon = GeneralGlobals.Randomizer.Next((int)PowerLiftIcons.Poison, (int)PowerLiftIcons.Defense + 1);
+            int randIcon = RandomGlobals.Randomizer.Next((int)PowerLiftIcons.Poison, (int)PowerLiftIcons.Defense + 1);
 
             //Create the icon element
             PowerLiftIconElement element = new PowerLiftIconElement((PowerLiftIcons)randIcon, IconFadeTime, IconStayTime, .45f);

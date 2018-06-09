@@ -22,7 +22,7 @@ namespace PaperMarioBattleSystem
      *  ending their turn.
      * Enemies may attack each other, or use healing moves or items on Mario and/or his partner. If an enemy is alone and attempts to attack an
      *  ally in confusion (or it cannot reach its ally), it simply does nothing.*/
-    public sealed class ConfusedStatus : StatusEffect
+    public sealed class ConfusedStatus : MessageEventStatus
     {
         /// <summary>
         /// The chance of the BattleEntity doing something other than what it intended to do when it's Confused.
@@ -45,11 +45,15 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
             EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.ConfusionPercent, ConfusionPercent, false);
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// Entities afflicted with it are blown out of battle and removed, essentially dying.
     /// <para>This Status Effect is inflicted with Flurrie's Gale Force move and Lakilester's Hurricane move.</para>
     /// </summary>
-    public sealed class BlownStatus : StatusEffect
+    public sealed class BlownStatus : MessageEventStatus
     {
         /// <summary>
         /// The time it takes for BattleEntities afflicted with Blown to move offscreen.

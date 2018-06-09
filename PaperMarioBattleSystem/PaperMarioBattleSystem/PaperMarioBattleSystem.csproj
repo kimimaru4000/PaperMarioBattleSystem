@@ -512,6 +512,7 @@
     <Compile Include="Classes\StatusEffects\HoldFastStatus.cs" />
     <Compile Include="Classes\StatusEffects\HPRegenStatus.cs" />
     <Compile Include="Classes\StatusEffects\HugeStatus.cs" />
+    <Compile Include="Classes\StatusEffects\MessageEventStatus.cs" />
     <Compile Include="Classes\StatusEffects\StopStatus.cs" />
     <Compile Include="Classes\StatusEffects\InjuredStatus.cs" />
     <Compile Include="Classes\StatusEffects\InvisibleStatus.cs" />

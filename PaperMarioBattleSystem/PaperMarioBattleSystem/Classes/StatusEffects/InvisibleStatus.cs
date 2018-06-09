@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// The Invisible Status Effect.
     /// The entity becomes transparent and its Evasion is set to the max value until it ends.
     /// </summary>
-    public sealed class InvisibleStatus : StatusEffect
+    public sealed class InvisibleStatus : MessageEventStatus
     {
         /// <summary>
         /// The Evasion modifier, which is set to 0.
@@ -41,6 +41,8 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.AddEvasionMod(EvasionValue);
 
             EntityAfflicted.TintColor = EntityAfflicted.TintColor.CeilingMult(AlphaValue);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
@@ -50,6 +52,8 @@ namespace PaperMarioBattleSystem
             Color color = EntityAfflicted.TintColor;
             float val = (1 / AlphaValue);
             EntityAfflicted.TintColor *= val;
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

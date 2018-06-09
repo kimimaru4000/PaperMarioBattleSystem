@@ -160,7 +160,7 @@ namespace PaperMarioBattleSystem
 
             for (int i = 0; i < ButtonsToPress.Length; i++)
             {
-                int index = GeneralGlobals.Randomizer.Next(TornadoButtonCount);
+                int index = RandomGlobals.Randomizer.Next(TornadoButtonCount);
                 ButtonsToPress[i] = PossibleButtons[index];
             }
         }

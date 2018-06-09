@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// The Fright Status Effect.
     /// Entities afflicted with it run out of battle in fear and are removed from battle, essentially dying.
     /// </summary>
-    public sealed class FrightStatus : StatusEffect
+    public sealed class FrightStatus : MessageEventStatus
     {
         /// <summary>
         /// How long BattleEntities afflicted with Fright run.

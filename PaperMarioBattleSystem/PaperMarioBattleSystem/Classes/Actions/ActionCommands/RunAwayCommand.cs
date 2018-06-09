@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
             base.StartInput(values);
 
             //Start the cursor at a random point on the bar
-            RandTimeOffset = GeneralGlobals.Randomizer.NextDouble() * (CursorMoveTime * 2);
+            RandTimeOffset = RandomGlobals.Randomizer.NextDouble() * (CursorMoveTime * 2);
             UpdateCursorVal();
         }
 

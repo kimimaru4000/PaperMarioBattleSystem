@@ -55,7 +55,7 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     //NOTE: For now simply choose a random item and exclude the roulette until we get this working
-                    int randItemIndex = GeneralGlobals.Randomizer.Next(0, MysteryItemSet.Count);
+                    int randItemIndex = RandomGlobals.Randomizer.Next(0, MysteryItemSet.Count);
                     ItemChosen = MysteryItemSet[randItemIndex];
 
                     Debug.Log($"Chose {ItemChosen.Name} to use for the Mystery!");

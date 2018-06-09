@@ -59,20 +59,6 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public event DealtDamage DealtDamageEvent = null;
 
-        public delegate void StatusInflicted(StatusEffect statusEffect);
-        /// <summary>
-        /// The event invoked when the BattleEntity is inflicted with a Status Effect.
-        /// This is invoked after the Status Effect is actually inflicted.
-        /// </summary>
-        public event StatusInflicted StatusInflictedEvent = null;
-
-        public delegate void StatusRemoved(StatusEffect statusEffect);
-        /// <summary>
-        /// The event invoked when a Status Effect is removed from the BattleEntity.
-        /// This is invoked after the Status Effect is actually removed.
-        /// </summary>
-        public event StatusRemoved StatusRemovedEvent = null;
-
         #endregion
 
         #region Confusion Handlers
@@ -233,8 +219,6 @@ namespace PaperMarioBattleSystem
             TurnEndEvent = null;
             DamageTakenEvent = null;
             DealtDamageEvent = null;
-            StatusInflictedEvent = null;
-            StatusRemovedEvent = null;
         }
 
         /// <summary>
@@ -358,7 +342,7 @@ namespace PaperMarioBattleSystem
             {
                 for (int i = 0; i < statusesInflicted.Length; i++)
                 {
-                    AfflictStatus(statusesInflicted[i].Status, true);
+                    EntityProperties.AfflictStatus(statusesInflicted[i].Status);
                 }
             }
         }
@@ -428,64 +412,6 @@ namespace PaperMarioBattleSystem
         }
 
         #endregion
-
-        /// <summary>
-        /// Afflicts the BattleEntity with a StatusEffect.
-        /// <para>This wraps around the method in <see cref="BattleEntityProperties"/>. It calls the <see cref="StatusInflictedEvent"/> and handles the Battle Message.</para>
-        /// <para>In most cases, this method should be used. If you wish to bypass all of these, directly call the method in <see cref="BattleEntityProperties"/> instead.</para>
-        /// </summary>
-        /// <param name="status">The StatusEffect to afflict the BattleEntity with</param>
-        /// <param name="showMessage">Whether to show the StatusEffect's AfflictedMessage as a Battle Message when it is afflicted.</param>
-        public void AfflictStatus(StatusEffect statusEffect, bool showMessage)
-        {
-            EntityProperties.AfflictStatus(statusEffect);
-
-            //Invoke the status inflicted event
-            StatusInflictedEvent?.Invoke(statusEffect);
-
-            //Show a battle message when the status is afflicted, provided the message isn't empty
-            if (showMessage == true && string.IsNullOrEmpty(statusEffect.AfflictedMessage) == false)
-            {
-                BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + statusEffect.Priority,
-                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new MessageBattleEvent(statusEffect.AfflictedMessage, 2000d));
-            }
-        }
-
-        /// <summary>
-        /// Ends and removes a StatusEffect on the BattleEntity.
-        /// <para>This wraps around the method in <see cref="BattleEntityProperties"/>. It calls the <see cref="StatusRemovedEvent"/> and handles the Battle Message.</para>
-        /// <para>In most cases, this method should be used. If you wish to bypass all of these, directly call the method in <see cref="BattleEntityProperties"/> instead.</para>
-        /// </summary>
-        /// <param name="statusType">The StatusTypes of the StatusEffect to remove.</param>
-        /// <param name="showMessage">Whether to show the StatusEffect's RemovedMessage as a Battle Message when it is removed.</param>
-        /// <param name="queueBattleEvent">Whether to queue up the <see cref="StatusEndedBattleEvent"/> or not.</param>
-        /// <returns>The StatusEffect removed from the BattleEntity.</returns>
-        public void RemoveStatus(StatusTypes statusType, bool showMessage, bool queueBattleEvent)
-        {
-            StatusEffect status = EntityProperties.RemoveStatus(statusType);
-
-            //This is null only if the BattleEntity wasn't afflicted with the Status Effect to begin with
-            //If the Status Effect wasn't removed, then just return
-            if (status == null)
-                return;
-
-            //Invoke the status removed event
-            StatusRemovedEvent?.Invoke(status);
-
-            //Show a battle message when the status is removed, provided the message isn't empty
-            if (showMessage == true && string.IsNullOrEmpty(status.RemovedMessage) == false)
-            {
-                BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + status.Priority,
-                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new MessageBattleEvent(status.RemovedMessage, 2000d));
-            }
-
-            //Queue a battle event for the status removal
-            if (queueBattleEvent == true)
-            {
-                BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status + status.Priority,
-                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new StatusEndedBattleEvent(this));
-            }
-        }
 
         #region Stat Manipulations
 
@@ -945,7 +871,7 @@ namespace PaperMarioBattleSystem
             //Don't give a chance to change targets if the action doesn't have targets
             if (targets != null && targets.Length > 0)
             {
-                changeTargets = GeneralGlobals.Randomizer.Next(0, 2);
+                changeTargets = RandomGlobals.Randomizer.Next(0, 2);
             }
             
             //Custom can target anything and may have a wide range of effects, so simply do nothing
@@ -1018,7 +944,7 @@ namespace PaperMarioBattleSystem
                 //Choose a random target to attack if the action only targets one entity
                 if (newTargets.Count > 0 && actualAction.MoveProperties.SelectionType != EntitySelectionType.All)
                 {
-                    int randTarget = GeneralGlobals.Randomizer.Next(0, newTargets.Count);
+                    int randTarget = RandomGlobals.Randomizer.Next(0, newTargets.Count);
                     BattleEntity target = newTargets[randTarget];
                     newTargets.Clear();
                     newTargets.Add(target);
@@ -1176,7 +1102,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected virtual void DrawEntity()
         {
-            AnimManager.GetAnimation<Animation>(AnimManager.CurrentAnim.Key)?.Draw(Position, TintColor, Rotation, Origin, Scale, SpriteFlip, Layer);
+            AnimManager.GetCurrentAnim<Animation>()?.Draw(Position, TintColor, Rotation, Origin, Scale, SpriteFlip, Layer);
         }
 
         /// <summary>

@@ -45,7 +45,7 @@ namespace PaperMarioBattleSystem
         {
             if (EntityEquipped.EntityProperties.HasStatus(Enumerations.StatusTypes.Electrified) == false)
             {
-                EntityEquipped.AfflictStatus(new ElectrifiedStatus(StatusGlobals.InfiniteDuration), false);
+                EntityEquipped.EntityProperties.AfflictStatus(new ElectrifiedStatus(StatusGlobals.InfiniteDuration));
             }
         }
 
@@ -56,7 +56,7 @@ namespace PaperMarioBattleSystem
         {
             if (EntityEquipped.EntityProperties.HasStatus(Enumerations.StatusTypes.Electrified) == true)
             {
-                EntityEquipped.RemoveStatus(Enumerations.StatusTypes.Electrified, true, true);
+                EntityEquipped.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Electrified);
             }
         }
     }

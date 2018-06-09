@@ -823,9 +823,9 @@ namespace PaperMarioBattleSystem
     #endregion
 
     /// <summary>
-    /// Class for general global values and references
+    /// Class for Random global values and references.
     /// </summary>
-    public static class GeneralGlobals
+    public static class RandomGlobals
     {
         /// <summary>
         /// The value that is used in random conditions. If this is less than the result, it returns true.
@@ -836,9 +836,6 @@ namespace PaperMarioBattleSystem
         /// Random reference for generating pseudo-random numbers.
         /// </summary>
         public static readonly Random Randomizer = new Random();
-
-        public static double GenerateRandomDouble() => (Randomizer.NextDouble() * RandomConditionVal);
-        public static int GenerateRandomInt() => Randomizer.Next(RandomConditionVal);
     }
 
     /// <summary>

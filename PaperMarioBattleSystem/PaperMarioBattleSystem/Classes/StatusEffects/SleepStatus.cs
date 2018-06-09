@@ -80,7 +80,7 @@ namespace PaperMarioBattleSystem
                 BattleObjManager.Instance.AddBattleObject(new StylishIndicatorVFX(EntityAfflicted, new Sequence.StylishData(0d, WakeUpEffectDur, 0)));
 
                 //Remove the status
-                EntityAfflicted.RemoveStatus(StatusType, true, false);
+                EntityAfflicted.EntityProperties.RemoveStatus(StatusType);
             }
         }
 

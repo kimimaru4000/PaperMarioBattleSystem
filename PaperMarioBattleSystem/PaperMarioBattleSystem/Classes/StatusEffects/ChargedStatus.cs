@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// The entity stores power for the next attack.
     /// <para>This StatusEffect does not end over time. It ends when the entity afflicted uses a move that can expend the charge.</para>
     /// </summary>
-    public sealed class ChargedStatus : StatusEffect
+    public sealed class ChargedStatus : MessageEventStatus
     {
         /// <summary>
         /// The amount of total damage stored in the charge.
@@ -42,11 +42,15 @@ namespace PaperMarioBattleSystem
             TotalChargeDamage = UtilityGlobals.Clamp(TotalChargeDamage, BattleGlobals.MinDamage, BattleGlobals.MaxDamage);
 
             EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage, TotalChargeDamage);
+
+            ShowAfflictedMessage();
         }
 
         protected override void OnAfflict()
         {
             EntityAfflicted.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.ChargedDamage, TotalChargeDamage);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()

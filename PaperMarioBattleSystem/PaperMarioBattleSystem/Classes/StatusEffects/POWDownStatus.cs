@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// The POWDown Status Effect.
     /// The entity's Attack is reduced by a certain value until it ends.
     /// </summary>
-    public class POWDownStatus : StatusEffect
+    public class POWDownStatus : MessageEventStatus
     {
         /// <summary>
         /// The amount to reduce the entity's Attack by.
@@ -36,11 +36,15 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             EntityAfflicted.LowerAttack(AttackValue);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
             EntityAfflicted.RaiseAttack(AttackValue);
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

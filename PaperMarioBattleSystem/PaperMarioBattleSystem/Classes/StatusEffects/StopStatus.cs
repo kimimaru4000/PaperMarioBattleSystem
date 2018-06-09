@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
     /// Entities afflicted with this cannot move until it wears off.
     /// <para>Mario and his Partner cannot Guard or Superguard when afflicted with this Status Effect.</para>
     /// </summary>
-    public class StopStatus : StatusEffect
+    public class StopStatus : MessageEventStatus
     {
         public StopStatus(int duration)
         {
@@ -39,6 +39,8 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.AddIntAdditionalProperty(Enumerations.AdditionalProperty.Immobile, 1);
 
             Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
@@ -51,6 +53,8 @@ namespace PaperMarioBattleSystem
 
             //Remove the Immobile property after getting its count
             EntityAfflicted.SubtractIntAdditionalProperty(Enumerations.AdditionalProperty.Immobile, 1);
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()
@@ -58,7 +62,7 @@ namespace PaperMarioBattleSystem
             ProgressTurnCount();
             if (IsSuppressed(Enumerations.StatusSuppressionTypes.Effects) == false)
             {
-                if (IsFinished == false)
+                if (IsTurnFinished == false)
                 {
                     EntityAfflicted.SetMaxTurns(0);
                     Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");

@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// The DEFUp Status Effect.
     /// The entity's Defense is raised by a certain value until it ends.
     /// </summary>
-    public class DEFUpStatus : StatusEffect
+    public class DEFUpStatus : MessageEventStatus
     {
         /// <summary>
         /// The amount to raise the entity's Defense by.
@@ -36,11 +36,15 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             EntityAfflicted.RaiseDefense(DefenseValue);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
             EntityAfflicted.LowerDefense(DefenseValue);
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

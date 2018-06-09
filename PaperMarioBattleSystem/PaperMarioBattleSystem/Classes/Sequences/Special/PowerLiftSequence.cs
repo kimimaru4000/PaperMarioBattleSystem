@@ -88,13 +88,13 @@ namespace PaperMarioBattleSystem
                         //Inflict POWUp if we have Attack boosted
                         if (Response.AttackBoosted > 0)
                         {
-                            entity.AfflictStatus(new POWUpStatus(Response.AttackBoosted, TurnsBoosted), true);
+                            entity.EntityProperties.AfflictStatus(new POWUpStatus(Response.AttackBoosted, TurnsBoosted));
                         }
 
                         //Inflict DEFUp if we have Defense boosted
                         if (Response.DefenseBoosted > 0)
                         {
-                            entity.AfflictStatus(new DEFUpStatus(Response.DefenseBoosted, TurnsBoosted), true);
+                            entity.EntityProperties.AfflictStatus(new DEFUpStatus(Response.DefenseBoosted, TurnsBoosted));
                         }
                     }
                     ChangeSequenceBranch(SequenceBranch.End);

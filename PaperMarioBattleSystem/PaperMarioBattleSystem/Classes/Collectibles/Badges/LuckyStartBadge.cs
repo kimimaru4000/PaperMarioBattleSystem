@@ -58,14 +58,14 @@ namespace PaperMarioBattleSystem
 
                 //Get the statuses and choose a random one
                 StatusEffect[] statuses = GetPossibleGrantedStatuses();
-                int randStatus = GeneralGlobals.Randomizer.Next(0, statuses.Length);
+                int randStatus = RandomGlobals.Randomizer.Next(0, statuses.Length);
 
                 //Despite the badge's effects, the Status Effect isn't guaranteed to be inflicted
                 //If you have Feeling Fine equipped in TTYD and get Electrified with Lucky Start,
                 //it's not inflicted yet the "LUCKY" text is displayed and the sound plays
                 if (EntityEquipped.EntityProperties.TryAfflictStatus(100d, statuses[randStatus]) == true)
                 {
-                    EntityEquipped.AfflictStatus(statuses[randStatus], true);
+                    EntityEquipped.EntityProperties.AfflictStatus(statuses[randStatus]);
                 }
             }
         }

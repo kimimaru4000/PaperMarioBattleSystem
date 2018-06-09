@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     /// Entities afflicted with this can move only once every two phase cycles.
     /// <para>Mario and his Partner can still Guard and Superguard when afflicted with this Status Effect</para>
     /// </summary>
-    public sealed class SlowStatus : StatusEffect
+    public sealed class SlowStatus : MessageEventStatus
     {
         private bool PreventMovement = true;
 
@@ -36,6 +36,8 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.SetMaxTurns(0);
             EntityAfflicted.SetTurnsUsed(EntityAfflicted.MaxTurns);
             Debug.Log($"{StatusType} set MaxTurns to 0 for {EntityAfflicted.Name}");
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
@@ -45,6 +47,8 @@ namespace PaperMarioBattleSystem
                 EntityAfflicted.SetMaxTurns(EntityAfflicted.BaseTurns);
                 Debug.Log($"{StatusType} set MaxTurns to {EntityAfflicted.BaseTurns} for {EntityAfflicted.Name}");
             }
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()
@@ -53,7 +57,7 @@ namespace PaperMarioBattleSystem
 
             if (IsSuppressed(Enumerations.StatusSuppressionTypes.Effects) == false)
             {
-                if (IsFinished == false)
+                if (IsTurnFinished == false)
                 {
                     //If the entity shouldn't move this turn, set its max turns to 0
                     if (PreventMovement == true)

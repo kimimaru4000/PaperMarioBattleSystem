@@ -71,13 +71,13 @@ namespace PaperMarioBattleSystem
             }
 
             //Subscribe to its own StatusInflicted event
-            StatusInflictedEvent -= OnStatusInflicted;
-            StatusInflictedEvent += OnStatusInflicted;
+            EntityProperties.StatusInflictedEvent -= OnStatusInflicted;
+            EntityProperties.StatusInflictedEvent += OnStatusInflicted;
         }
 
         public override void CleanUp()
         {
-            StatusInflictedEvent -= OnStatusInflicted;
+            EntityProperties.StatusInflictedEvent -= OnStatusInflicted;
             RemoveDisguise();
 
             base.CleanUp();

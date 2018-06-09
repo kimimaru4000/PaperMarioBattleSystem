@@ -133,13 +133,13 @@ namespace PaperMarioBattleSystem
         protected virtual void GenerateButtonSequence()
         {
             //Get the number of buttons to be in the sequence
-            int buttonsInSequence = GeneralGlobals.Randomizer.Next(MinButtons, MaxButtons + 1);
+            int buttonsInSequence = RandomGlobals.Randomizer.Next(MinButtons, MaxButtons + 1);
             ButtonSequence = new Keys[buttonsInSequence];
 
             //Go through the number of buttons and assign a random button out of the valid ones
             for (int i = 0; i < ButtonSequence.Length; i++)
             {
-                int randButtonIndex = GeneralGlobals.Randomizer.Next(0, ValidSequenceButtons.Length);
+                int randButtonIndex = RandomGlobals.Randomizer.Next(0, ValidSequenceButtons.Length);
                 ButtonSequence[i] = ValidSequenceButtons[randButtonIndex];
             }
         }

@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// The Dodgy Status Effect.
     /// The entity's Evasion increases until it ends.
     /// </summary>
-    public class DodgyStatus : StatusEffect
+    public class DodgyStatus : MessageEventStatus
     {
         /// <summary>
         /// The Evasion modifier.
@@ -35,11 +35,15 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             EntityAfflicted.AddEvasionMod(EvasionValue);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
             EntityAfflicted.RemoveEvasionMod(EvasionValue);
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

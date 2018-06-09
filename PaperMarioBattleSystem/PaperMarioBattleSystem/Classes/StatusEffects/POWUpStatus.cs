@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// The POWUp Status Effect.
     /// The entity's Attack is raised by a certain value until it ends.
     /// </summary>
-    public class POWUpStatus : StatusEffect
+    public class POWUpStatus : MessageEventStatus
     {
         /// <summary>
         /// The amount to raise the entity's Attack by.
@@ -36,11 +36,15 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             EntityAfflicted.RaiseAttack(AttackValue);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
             EntityAfflicted.LowerAttack(AttackValue);
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// The Poison Status Effect.
     /// The entity takes 1 HP in Poison damage at the start of each phase cycle
     /// </summary>
-    public sealed class PoisonStatus : StatusEffect
+    public sealed class PoisonStatus : MessageEventStatus
     {
         private int PoisonDamage = 1;
 
@@ -35,12 +35,16 @@ namespace PaperMarioBattleSystem
         protected override void OnAfflict()
         {
             EntityAfflicted.TintColor = new Color((int)Math.Ceiling(EntityAfflicted.TintColor.R * RedTint), EntityAfflicted.TintColor.G, (int)Math.Ceiling(EntityAfflicted.TintColor.B * BlueTint), EntityAfflicted.TintColor.A);
+
+            base.OnAfflict();
         }
 
         protected override void OnEnd()
         {
             Color color = EntityAfflicted.TintColor;
             EntityAfflicted.TintColor = new Color((int)(color.R * (1f / RedTint)), color.G, (int)(color.B * (1f / BlueTint)), color.A);
+
+            base.OnEnd();
         }
 
         protected override void OnPhaseCycleStart()

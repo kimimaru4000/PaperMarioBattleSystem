@@ -28,8 +28,6 @@ namespace PaperMarioBattleSystem
                 new Rectangle(604, 107, 38, 46));
 
             AfflictedMessage = "Frozen! Movement will be\nimpossible for a while!";
-
-            //Frozen doesn't play the end event
             ShouldQueueEndEvent = false;
         }
 
@@ -63,10 +61,10 @@ namespace PaperMarioBattleSystem
             if (EntityAfflicted.EntityProperties.HasStatus(Enumerations.StatusTypes.Burn) == true)
             {
                 Debug.Log($"{StatusType} was inflicted on an entity afflicted with {Enumerations.StatusTypes.Burn}, negating both effects!");
-                EntityAfflicted.RemoveStatus(Enumerations.StatusTypes.Burn, true, false);
+                EntityAfflicted.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Burn);
 
                 //Also remove Frozen, as these two statuses negate each other
-                EntityAfflicted.RemoveStatus(Enumerations.StatusTypes.Frozen, true, false);
+                EntityAfflicted.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Frozen);
             }
         }
 

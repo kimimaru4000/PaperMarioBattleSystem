@@ -165,7 +165,7 @@ namespace PaperMarioBattleSystem
         private void AddStatusImmunities()
         {
             //The Shell is immune to all Status Effects
-            StatusTypes[] statuses = UtilityGlobals.GetEnumValues<StatusTypes>();
+            StatusTypes[] statuses = EnumUtility.GetValues<StatusTypes>.EnumValues;
             for (int i = 0; i < statuses.Length; i++)
             {
                 this.AddRemoveStatusImmunity(statuses[i], true);

@@ -114,7 +114,7 @@ namespace PaperMarioBattleSystem
         private void SetStatusProperties()
         {
             //Gulpits' Rocks are immune to all Status Effects
-            StatusTypes[] statustypes = UtilityGlobals.GetEnumValues<StatusTypes>();
+            StatusTypes[] statustypes = EnumUtility.GetValues<StatusTypes>.EnumValues;
             for (int i = 0; i < statustypes.Length; i++)
             {
                 EntityProperties.AddStatusProperty(statustypes[i], new StatusPropertyHolder(0d, 0, 1));

@@ -67,8 +67,10 @@ namespace PaperMarioBattleSystem
             LEmblem = 100, WEmblem = 101, SlowGo = 102,
             AttackFXA = 103, AttackFXB = 104, AttackFXC = 105, AttackFXD = 106, AttackFXE = 107,
             AttackFXR = 108, AttackFXY = 109, AttackFXG = 110, AttackFXP = 111,
-            //Unused & Beta Badges
+            
+            //Unused Badges
             AttackFXF = 112, AngersPower = 113, RightOn = 114
+            
             //New badges
         }
 
@@ -84,7 +86,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Filter options for finding Badges
+        /// Filter options for finding Badges.
         /// </summary>
         public enum BadgeFilterType
         {
@@ -145,6 +147,66 @@ namespace PaperMarioBattleSystem
 
             if (success == true) return pBadgeType;
             return null;
+        }
+
+        #endregion
+
+        #region Badge Sort Methods
+
+        /// <summary>
+        /// A Comparison method used to sort Badges by their Type Numbers
+        /// </summary>
+        /// <param name="badge1">The first Badge to compare</param>
+        /// <param name="badge2">The second Badge to compare</param>
+        /// <returns>-1 if badge1 has a lower TypeNumber, 1 if badge2 has a lower TypeNumber, 0 if they have the same TypeNumber</returns>
+        public static int BadgeTypeNumberSort(Badge badge1, Badge badge2)
+        {
+            if (badge1 == null && badge2 == null) return 0;
+            if (badge1 == null) return 1;
+            if (badge2 == null) return -1;
+
+            if (badge1.TypeNumber < badge2.TypeNumber)
+                return -1;
+            if (badge1.TypeNumber > badge2.TypeNumber)
+                return 1;
+
+            return 0;
+        }
+
+        /// <summary>
+        /// A Comparison method used to sort Badges alphabetically (ABC)
+        /// </summary>
+        /// <param name="badge1">The first Badge to compare</param>
+        /// <param name="badge2">The second Badge to compare</param>
+        /// <returns>-1 if badge1 has a lower alphabetical value, 1 if badge2 has a lower alphabetical value, 0 if they have the same alphabetical value</returns>
+        public static int BadgeAlphabeticalSort(Badge badge1, Badge badge2)
+        {
+            if (badge1 == null && badge2 == null) return 0;
+            if (badge1 == null) return 1;
+            if (badge2 == null) return -1;
+
+            return string.Compare(badge1.Name, badge2.Name, StringComparison.CurrentCulture);
+        }
+
+        /// <summary>
+        /// A Comparison method used to sort Badges by BP cost (BP Needed)
+        /// </summary>
+        /// <param name="badge1">The first Badge to compare</param>
+        /// <param name="badge2">The second Badge to compare</param>
+        /// <returns>-1 if badge1 has a lower BP cost, 1 if badge2 has a lower BP cost, 0 if they have the same BP cost and TypeNumber</returns>
+        public static int BadgeBPSort(Badge badge1, Badge badge2)
+        {
+            if (badge1 == null && badge2 == null) return 0;
+            if (badge1 == null) return 1;
+            if (badge2 == null) return -1;
+
+            if (badge1.BPCost < badge2.BPCost)
+                return -1;
+            if (badge1.BPCost > badge2.BPCost)
+                return 1;
+
+            //Resort to their TypeNumbers if they have the same BP cost
+            return BadgeTypeNumberSort(badge1, badge2);
         }
 
         #endregion

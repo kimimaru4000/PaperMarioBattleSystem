@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
             this.AddIntAdditionalProperty(Enumerations.AdditionalProperty.NeverShowHP, 1);
 
             //The Balloon is immune to every Status Effect
-            Enumerations.StatusTypes[] statusTypes = UtilityGlobals.GetEnumValues<Enumerations.StatusTypes>();
+            Enumerations.StatusTypes[] statusTypes = EnumUtility.GetValues<Enumerations.StatusTypes>.EnumValues;
             for (int i = 0; i < statusTypes.Length; i++)
             {
                 EntityProperties.AddStatusProperty(statusTypes[i], new StatusPropertyHolder(0d, 0, 1));

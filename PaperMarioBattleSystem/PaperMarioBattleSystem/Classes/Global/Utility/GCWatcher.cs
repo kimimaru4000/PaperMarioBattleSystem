@@ -12,11 +12,19 @@ namespace PaperMarioBattleSystem
     public static class GCWatcher
     {
         private static int NumberOfPasses = 0;
-        private static long StartMemory = 0;
-        private static long EndMemory = 0;
-        private static long MemoryDifference = 0;
-        private static long TotalMemoryAllocatedInTheBlock = 0;
-        private static long TotalMemoryFreedInTheBlock = 0;
+        private static long StartMemory = 0L;
+        private static long EndMemory = 0L;
+        private static long MemoryDifference = 0L;
+
+        /// <summary>
+        /// How much memory was allocated in the block. This value is updated after calling <see cref="Stop"/>.
+        /// </summary>
+        public static long TotalMemoryAllocatedInTheBlock { get; private set; } = 0L;
+
+        /// <summary>
+        /// How much memory was freed in the block. This value is updated after calling <see cref="Stop"/>.
+        /// </summary>
+        public static long TotalMemoryFreedInTheBlock { get; private set; } = 0L;
 
         /// <summary>
         /// Starts the watcher.
@@ -60,22 +68,6 @@ namespace PaperMarioBattleSystem
             MemoryDifference = 0;
             TotalMemoryAllocatedInTheBlock = 0;
             TotalMemoryFreedInTheBlock = 0;
-        }
-
-        /// <summary>
-        /// Returns how much memory was allocated in the block. This value is updated after calling <see cref="Stop"/>.
-        /// </summary>
-        public static long GetTotalMemoryAllocatedInTheBlock()
-        {
-            return TotalMemoryAllocatedInTheBlock;
-        }
-
-        /// <summary>
-        /// Returns how much memory was freed in the block. This value is updated after calling <see cref="Stop"/>.
-        /// </summary>
-        public static long GetTotalMemoryFreedInTheBlock()
-        {
-            return TotalMemoryFreedInTheBlock;
         }
     }
 }

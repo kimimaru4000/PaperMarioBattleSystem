@@ -252,9 +252,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Adds a Badge to the Player's Inventory
+        /// Adds a Badge to the Player's Inventory.
         /// </summary>
-        /// <param name="badge">The Badge to add</param>
+        /// <param name="badge">The Badge to add.</param>
         public void AddBadge(Badge badge)
         {
             if (badge == null)
@@ -282,9 +282,9 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Removes a Badge from the Player's Inventory.
-        /// If the Badge is active, it also unequips the Badge and removes it from the active Badge list
+        /// If the Badge is active, it also unequips the Badge and removes it from the active Badge list.
         /// </summary>
-        /// <param name="badge">The Badge to remove</param>
+        /// <param name="badge">The Badge to remove.</param>
         public void RemoveBadge(Badge badge)
         {
             if (badge == null)
@@ -293,7 +293,8 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            if (HasBadgeType(badge.BadgeType) == false)
+            int count = 0;
+            if (AllBadgeCounts.TryGetValue(badge.BadgeType, out count) == false)
             {
                 Debug.LogWarning($"Badge of type {badge.BadgeType} cannot be removed because it doesn't exist in the Inventory!");
                 return;
@@ -301,10 +302,16 @@ namespace PaperMarioBattleSystem
 
             //Remove from the all badges list
             AllBadges.Remove(badge);
-            AllBadgeCounts[badge.BadgeType]--;
-            if (AllBadgeCounts[badge.BadgeType] <= 0)
+            
+            count--;
+            
+            if (count <= 0)
             {
                 AllBadgeCounts.Remove(badge.BadgeType);
+            }
+            else
+            {
+                AllBadgeCounts[badge.BadgeType] = count;
             }
 
             //Remove from active badges if it's active, and unequip it
@@ -318,55 +325,57 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Finds the first instance of a Badge with a particular BadgeType
+        /// Finds the first instance of a Badge with a particular BadgeType.
         /// </summary>
-        /// <param name="badgeType">The BadgeType of the Badge</param>
-        /// <param name="badgeFilter">The filter for finding the Badge</param>
-        /// <returns>null if no Badge was found, otherwise the first Badge matching the parameters</returns>
+        /// <param name="badgeType">The BadgeType of the Badge.</param>
+        /// <param name="badgeFilter">The filter for finding the Badge.</param>
+        /// <returns>null if no Badge was found, otherwise the first Badge matching the parameters.</returns>
         public Badge GetBadge(BadgeTypes badgeType, BadgeFilterType badgeFilter)
         {
-            if (HasBadgeType(badgeType) == false) return null;
-        
-            //Look through all Badges
-            if (badgeFilter == BadgeFilterType.All)
+            if (HasBadgeType(badgeType) == true)
             {
-                return AllBadges.Find((badge) => badge.BadgeType == badgeType);
-            }
-            //Look through all equipped Badges
-            else if (badgeFilter == BadgeFilterType.Equipped)
-            {
-                return GetActiveBadge(badgeType);
-            }
-            //Look through all unequipped Badges
-            else if (badgeFilter == BadgeFilterType.UnEquipped)
-            {
-                return AllBadges.Find((badge) => (badge.BadgeType == badgeType && badge.Equipped == false));
+                //Look through all Badges
+                if (badgeFilter == BadgeFilterType.All)
+                {
+                    return AllBadges.Find((badge) => badge.BadgeType == badgeType);
+                }
+                //Look through all equipped Badges
+                else if (badgeFilter == BadgeFilterType.Equipped)
+                {
+                    return GetActiveBadge(badgeType);
+                }
+                //Look through all unequipped Badges
+                else if (badgeFilter == BadgeFilterType.UnEquipped)
+                {
+                    return AllBadges.Find((badge) => (badge.BadgeType == badgeType && badge.Equipped == false));
+                }
             }
 
             return null;
         }
 
         /// <summary>
-        /// Finds all instances of a Badge with a particular BadgeType
+        /// Finds all instances of a Badge with a particular BadgeType.
         /// </summary>
-        /// <param name="badgeType">The BadgeType of the Badges</param>
-        /// <param name="badgeFilter">The filter for finding the Badges</param>
-        /// <returns>A list of all Badges matching the parameters, and an empty list if none were found</returns>
+        /// <param name="badgeType">The BadgeType of the Badges.</param>
+        /// <param name="badgeFilter">The filter for finding the Badges.</param>
+        /// <returns>A list of all Badges matching the parameters, and an empty list if none were found.</returns>
         public List<Badge> GetBadges(BadgeTypes badgeType, BadgeFilterType badgeFilter)
         {
-            if (HasBadgeType(badgeType) == false) return new List<Badge>();
-
-            if (badgeFilter == BadgeFilterType.All)
+            if (HasBadgeType(badgeType) == true)
             {
-                return AllBadges.FindAll((badge) => badge.BadgeType == badgeType);
-            }
-            else if (badgeFilter == BadgeFilterType.Equipped)
-            {
-                return GetActiveBadges(badgeType);
-            }
-            else if (badgeFilter == BadgeFilterType.UnEquipped)
-            {
-                return AllBadges.FindAll((badge) => (badge.BadgeType == badgeType && badge.Equipped == false));
+                if (badgeFilter == BadgeFilterType.All)
+                {
+                    return AllBadges.FindAll((badge) => badge.BadgeType == badgeType);
+                }
+                else if (badgeFilter == BadgeFilterType.Equipped)
+                {
+                    return GetActiveBadges(badgeType);
+                }
+                else if (badgeFilter == BadgeFilterType.UnEquipped)
+                {
+                    return AllBadges.FindAll((badge) => (badge.BadgeType == badgeType && badge.Equipped == false));
+                }
             }
 
             return new List<Badge>();
@@ -375,20 +384,21 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets the number of Badges of a particular BadgeType in the Player's Inventory.
         /// </summary>
-        /// <param name="badgeType">The BadgeType to find</param>
-        /// <returns>The number of Badges of the BadgeType in the Player's Inventory</returns>
+        /// <param name="badgeType">The BadgeType to find.</param>
+        /// <returns>The number of Badges of the BadgeType in the Player's Inventory.</returns>
         public int GetBadgeCount(BadgeTypes badgeType)
         {
-            if (HasBadgeType(badgeType) == false) return 0;
+            int count = 0;
+            AllBadgeCounts.TryGetValue(badgeType, out count);
 
-            return AllBadgeCounts[badgeType];
+            return count;
         }
 
         /// <summary>
-        /// Tells whether the Player owns a Badge of a particular BadgeType or not
+        /// Tells whether the Player owns a Badge of a particular BadgeType or not.
         /// </summary>
-        /// <param name="badgeType">The BadgeType</param>
-        /// <returns>true if the Player owns a Badge of the BadgeType, false if not</returns>
+        /// <param name="badgeType">The BadgeType.</param>
+        /// <returns>true if the Player owns a Badge of the BadgeType, false if not.</returns>
         public bool HasBadgeType(BadgeTypes badgeType)
         {
             return AllBadgeCounts.ContainsKey(badgeType);
@@ -464,10 +474,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Finds the first instance of an active Badge with a particular BadgeType
+        /// Finds the first instance of an active Badge with a particular BadgeType.
         /// </summary>
-        /// <param name="badgeType">The BadgeType of the Badge</param>
-        /// <returns>null if no Badge was found, otherwise the first active Badge matching the BadgeType</returns>
+        /// <param name="badgeType">The BadgeType of the Badge.</param>
+        /// <returns>null if no Badge was found, otherwise the first active Badge matching the BadgeType.</returns>
         private Badge GetActiveBadge(BadgeTypes badgeType)
         {
             if (IsBadgeTypeActive(badgeType) == false) return null;
@@ -476,10 +486,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Finds all instances of active Badges with a particular BadgeType
+        /// Finds all instances of active Badges with a particular BadgeType.
         /// </summary>
-        /// <param name="badgeType">The BadgeType of the Badges</param>
-        /// <returns>A list of all active Badges of the BadgeType, and an empty list if none were found</returns>
+        /// <param name="badgeType">The BadgeType of the Badges.</param>
+        /// <returns>A list of all active Badges of the BadgeType, and an empty list if none were found.</returns>
         private List<Badge> GetActiveBadges(BadgeTypes badgeType)
         {
             if (IsBadgeTypeActive(badgeType) == false) return new List<Badge>();
@@ -490,20 +500,21 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets the number of active Badges of a particular BadgeType the Player has equipped.
         /// </summary>
-        /// <param name="badgeType">The BadgeType to find</param>
-        /// <returns>The number of active Badges of the BadgeType</returns>
+        /// <param name="badgeType">The BadgeType to find.</param>
+        /// <returns>The number of active Badges of the BadgeType.</returns>
         public int GetActiveBadgeCount(BadgeTypes badgeType)
         {
-            if (IsBadgeTypeActive(badgeType) == false) return 0;
+            int count = 0;
+            ActiveBadgeCounts.TryGetValue(badgeType, out count);
 
-            return ActiveBadgeCounts[badgeType];
+            return count;
         }
 
         /// <summary>
-        /// Tells whether the Player has an active Badge of a particular type
+        /// Tells whether the Player has an active Badge of a particular type.
         /// </summary>
-        /// <param name="badgeType">The BadgeType</param>
-        /// <returns>true if the Player owns the Badge and the Badge is active, false otherwise</returns>
+        /// <param name="badgeType">The BadgeType.</param>
+        /// <returns>true if the Player owns the Badge and the Badge is active, false otherwise.</returns>
         public bool IsBadgeTypeActive(BadgeTypes badgeType)
         {
             return ActiveBadgeCounts.ContainsKey(badgeType);
@@ -517,66 +528,6 @@ namespace PaperMarioBattleSystem
         public List<Badge> GetActiveBadgesOnEntity(BattleEntity battleEntity)
         {
             return ActiveBadges.FindAll((badge) => badge.EntityEquipped == battleEntity);
-        }
-
-        #endregion
-
-        #region Static Badge Sort Methods
-
-        /// <summary>
-        /// A Comparison method used to sort Badges by their Type Numbers
-        /// </summary>
-        /// <param name="badge1">The first Badge to compare</param>
-        /// <param name="badge2">The second Badge to compare</param>
-        /// <returns>-1 if badge1 has a lower TypeNumber, 1 if badge2 has a lower TypeNumber, 0 if they have the same TypeNumber</returns>
-        public static int BadgeTypeNumberSort(Badge badge1, Badge badge2)
-        {
-            if (badge1 == null && badge2 == null) return 0;
-            if (badge1 == null) return 1;
-            if (badge2 == null) return -1;
-
-            if (badge1.TypeNumber < badge2.TypeNumber)
-                return -1;
-            if (badge1.TypeNumber > badge2.TypeNumber)
-                return 1;
-
-            return 0;
-        }
-
-        /// <summary>
-        /// A Comparison method used to sort Badges alphabetically (ABC)
-        /// </summary>
-        /// <param name="badge1">The first Badge to compare</param>
-        /// <param name="badge2">The second Badge to compare</param>
-        /// <returns>-1 if badge1 has a lower alphabetical value, 1 if badge2 has a lower alphabetical value, 0 if they have the same alphabetical value</returns>
-        public static int BadgeAlphabeticalSort(Badge badge1, Badge badge2)
-        {
-            if (badge1 == null && badge2 == null) return 0;
-            if (badge1 == null) return 1;
-            if (badge2 == null) return -1;
-
-            return string.Compare(badge1.Name, badge2.Name, StringComparison.CurrentCulture);
-        }
-
-        /// <summary>
-        /// A Comparison method used to sort Badges by BP cost (BP Needed)
-        /// </summary>
-        /// <param name="badge1">The first Badge to compare</param>
-        /// <param name="badge2">The second Badge to compare</param>
-        /// <returns>-1 if badge1 has a lower BP cost, 1 if badge2 has a lower BP cost, 0 if they have the same BP cost and TypeNumber</returns>
-        public static int BadgeBPSort(Badge badge1, Badge badge2)
-        {
-            if (badge1 == null && badge2 == null) return 0;
-            if (badge1 == null) return 1;
-            if (badge2 == null) return -1;
-
-            if (badge1.BPCost < badge2.BPCost)
-                return -1;
-            if (badge1.BPCost > badge2.BPCost)
-                return 1;
-
-            //Resort to their TypeNumbers if they have the same BP cost
-            return BadgeTypeNumberSort(badge1, badge2);
         }
 
         #endregion
@@ -659,44 +610,40 @@ namespace PaperMarioBattleSystem
             }
 
             /// <summary>
-            /// Goes down the list of all defined Partners and places all that are in the party in the supplied list.
+            /// Adds all Partners in the party to the supplied list.
             /// </summary>
             /// <param name="partnerList">The list of Partners to fill.</param>
             public void GetAllPartners(List<BattlePartner> partnerList)
             {
-                PartnerTypes[] partnerTypes = UtilityGlobals.GetEnumValues<PartnerTypes>();
-
-                for (int i = 0; i < partnerTypes.Length; i++)
+                foreach (BattlePartner partner in Partners.Values)
                 {
-                    BattlePartner partner = GetPartner(partnerTypes[i]);
                     if (partner != null)
                     {
-                        partnerList.Add(GetPartner(partnerTypes[i]));
+                        partnerList.Add(partner);
                     }
                 }
             }
 
             /// <summary>
-            /// Goes down the list of all defined Partners and finds all that are in the party.
+            /// Returns all Partners in the party.
             /// If none are in the party, an empty array is returned.
             /// </summary>
             /// <returns>An array of BattlePartners in the party. An empty array if no BattlePartners exist in the party.</returns>
             public BattlePartner[] GetAllPartners()
             {
+                //Return an empty array if there are no Partners
+                if (Partners.Count == 0) return Array.Empty<BattlePartner>();
+
                 List<BattlePartner> battlePartners = new List<BattlePartner>();
                 GetAllPartners(battlePartners);
                 
-                //Return an empty array if there are no Partners in the list
-                if (battlePartners == null || battlePartners.Count == 0)
-                    return Array.Empty<BattlePartner>();
-                else
-                    return battlePartners.ToArray();
+                return battlePartners.ToArray();
             }
 
             /// <summary>
             /// Returns how many Partners are in the party.
             /// </summary>
-            /// <returns>An int representing the number of Partners in the paryt.</returns>
+            /// <returns>An int representing the number of Partners in the party.</returns>
             public int GetPartnerCount()
             {
                 return Partners.Count;

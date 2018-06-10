@@ -134,7 +134,7 @@ namespace PaperMarioBattleSystem
                 float colorAlpha = (MaxScale.X) == 0 ? 0f : (CurScale.X / MaxScale.X);
 
                 //Center the text
-                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, Position + new Vector2(0f, 0f), Color.Black * colorAlpha, 0f, new Vector2(.5f, .85f), 1f, depth + .01f);
+                SpriteRenderer.Instance.DrawText(AssetManager.Instance.TTYDFont, text, Position, Color.Black * colorAlpha, 0f, new Vector2(.5f, .85f), 1f, depth + .01f);
             }
         }
     }

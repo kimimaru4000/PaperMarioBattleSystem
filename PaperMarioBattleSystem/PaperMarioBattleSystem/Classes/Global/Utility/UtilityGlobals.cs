@@ -359,16 +359,6 @@ namespace PaperMarioBattleSystem.Utilities
         }
 
         /// <summary>
-        /// Returns a cached array containing all the values of an Enum type.
-        /// </summary>
-        /// <typeparam name="T">The Enum type.</typeparam>
-        /// <returns>An array containing all the values of an Enum type.</returns>
-        public static T[] GetEnumValues<T>() where T: Enum
-        {
-            return EnumUtility.GetValues<T>.EnumValues;
-        }
-
-        /// <summary>
         /// Indicates whether an <see cref="IList{T}"/> is null or empty.
         /// </summary>
         /// <typeparam name="T">The Type of the elements in the IList.</typeparam>

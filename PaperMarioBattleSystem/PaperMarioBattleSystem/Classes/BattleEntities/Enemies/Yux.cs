@@ -105,7 +105,7 @@ namespace PaperMarioBattleSystem
         protected void AddRemoveImmunities(bool immune)
         {
             //Yuxes become immune to all Status Effects with the shield on
-            StatusTypes[] allStatusTypes = UtilityGlobals.GetEnumValues<StatusTypes>();
+            StatusTypes[] allStatusTypes = EnumUtility.GetValues<StatusTypes>.EnumValues;
             for (int i = 0; i < allStatusTypes.Length; i++)
             {
                 this.AddRemoveStatusImmunity(allStatusTypes[i], immune);

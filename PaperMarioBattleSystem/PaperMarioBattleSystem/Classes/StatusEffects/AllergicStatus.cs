@@ -109,7 +109,7 @@ namespace PaperMarioBattleSystem
         private void HandleStatusImmunities(bool immune)
         {
             //Get all statuses and add or remove the immunity
-            StatusTypes[] allStatusTypes = UtilityGlobals.GetEnumValues<StatusTypes>();
+            StatusTypes[] allStatusTypes = EnumUtility.GetValues<StatusTypes>.EnumValues;
 
             for (int i = 0; i < allStatusTypes.Length; i++)
             {

@@ -257,8 +257,10 @@ namespace PaperMarioBattleSystem
         /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the StatusEffect should be suppressed.</param>
         public void Suppress(StatusSuppressionTypes statusSuppressionType)
         {
+            int value = 0;
+
             //If this Status Effect isn't suppressed this way, add a new entry
-            if (IsSuppressed(statusSuppressionType) == false)
+            if (SuppressionStates.TryGetValue(statusSuppressionType, out value) == false)
             {
                 SuppressionStates.Add(statusSuppressionType, 0);
 
@@ -267,9 +269,9 @@ namespace PaperMarioBattleSystem
             }
 
             //Add to the number of times this Status Effect is suppressed in this way
-            SuppressionStates[statusSuppressionType]++;
+            value++;
+            SuppressionStates[statusSuppressionType] = value;
 
-            int value = SuppressionStates[statusSuppressionType];
             Debug.Log($"Status {StatusType} was suppressed by {statusSuppressionType} on {EntityAfflicted.Name} {value} time(s)!");
         }
 
@@ -279,25 +281,29 @@ namespace PaperMarioBattleSystem
         /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the StatusEffect should be unsuppressed.</param>
         public void Unsuppress(StatusSuppressionTypes statusSuppressionType)
         {
+            int value = 0;
+
             //If this Status Effect isn't suppressed in this way, there's nothing to unsuppress, so return
-            if (IsSuppressed(statusSuppressionType) == false)
+            if (SuppressionStates.TryGetValue(statusSuppressionType, out value) == false)
             {
                 Debug.LogWarning($"{StatusType} on {EntityAfflicted.Name} is not {statusSuppressionType} suppressed, so it cannot be unsuppressed!");
                 return;
             }
 
             //Subtract from the number of times this Status Effect is suppressed in this way
-            SuppressionStates[statusSuppressionType]--;
-
-            int value = SuppressionStates[statusSuppressionType];
+            value--;
 
             //Check if this Status Effect should no longer be suppressed in this way
-            if (SuppressionStates[statusSuppressionType] <= 0)
+            if (value <= 0)
             {
                 SuppressionStates.Remove(statusSuppressionType);
 
                 //Tell this Status Effect to unsuppress itself in this way
                 OnUnsuppress(statusSuppressionType);
+            }
+            else
+            {
+                SuppressionStates[statusSuppressionType] = value;
             }
 
             Debug.Log($"Status {StatusType} was unsuppressed by {statusSuppressionType} on {EntityAfflicted.Name}. {value} suppressions of this type remain!");
@@ -319,6 +325,9 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void FullyUnsuppress()
         {
+            //Don't do anything if nothing is suppressed
+            if (SuppressionStates.Keys.Count == 0) return;
+
             StatusSuppressionTypes[] suppressionTypes = SuppressionStates.Keys.ToArray();
             for (int i = 0; i < suppressionTypes.Length; i++)
             {

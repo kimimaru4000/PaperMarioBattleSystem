@@ -800,18 +800,18 @@ namespace PaperMarioBattleSystem
         #region Status Effect Methods
 
         /// <summary>
-        /// Attempts to afflict the entity with a StatusEffect based on its properties and status percentage for the StatusEffect.
+        /// Returns whether the BattleEntity would be afflicted with a StatusEffect based on its properties and status percentage for the StatusEffect.
         /// </summary>
         /// <param name="inflictionChance">The chance of inflicting the StatusEffect.</param>
-        /// <param name="status">The StatusEffect to afflict the entity with.</param>
-        /// <returns>true if the StatusEffect was successfully afflicted, false otherwise.</returns>
-        public bool TryAfflictStatus(double inflictionChance, StatusEffect status)
+        /// <param name="statusType">The StatusType to try to afflict the BattleEntity with.</param>
+        /// <returns>true if the StatusEffect should be afflicted, false otherwise.</returns>
+        public bool TryAfflictStatus(double inflictionChance, StatusTypes statusType)
         {
-            StatusPropertyHolder statusProperty = GetStatusProperty(status.StatusType);
+            StatusPropertyHolder statusProperty = GetStatusProperty(statusType);
             //If the entity is immune to this particular StatusEffect, don't allow it to be inflicted
             if (statusProperty.IsImmune == true)
             {
-                Debug.Log($"{Entity.Name} is immune to {status.StatusType}!");
+                Debug.Log($"{Entity.Name} is immune to {statusType}!");
                 return false;
             }
 

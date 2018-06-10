@@ -36,6 +36,11 @@ namespace PaperMarioBattleSystem
         public static bool DebugEnabled { get; private set; } = false;
         public static bool LogsEnabled { get; private set; } = false;
 
+        /// <summary>
+        /// Whether to store logs made in the <see cref="LogDump"/>. This defaults to true.
+        /// </summary>
+        public static bool StoreLogs = true;
+
         public static bool DebugPaused { get; private set; } = false;
         public static bool AdvanceNextFrame { get; private set; } = false;
 
@@ -60,17 +65,12 @@ namespace PaperMarioBattleSystem
             #endif
         }
 
-        private static void ToggleDebug()
+        public static void ToggleDebug()
         {
-            #if DEBUG
-                DebugEnabled = !DebugEnabled;
-            //Failsafe
-            #else
-                DebugEnabled = false;
-            #endif
+            DebugEnabled = !DebugEnabled;
         }
 
-        private static void ToggleLogs()
+        public static void ToggleLogs()
         {
             LogsEnabled = !LogsEnabled;
         }
@@ -105,9 +105,12 @@ namespace PaperMarioBattleSystem
 
         private static void DebugWriteLine(string value)
         {
-            //Write to the log dump
-            LogDump.Append(value);
-            LogDump.Append("\n");
+            //Write to the log dump if we should
+            if (StoreLogs == true)
+            {
+                LogDump.Append(value);
+                LogDump.Append("\n");
+            }
 
             WriteLine(value);
         }

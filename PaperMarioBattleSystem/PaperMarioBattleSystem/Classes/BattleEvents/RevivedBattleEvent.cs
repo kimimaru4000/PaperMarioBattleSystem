@@ -49,7 +49,7 @@ namespace PaperMarioBattleSystem
                 RevivalItemShown = new UICroppedTexture2D(RevivalItem.Icon.Copy());
                 RevivalItemShown.Position = Camera.Instance.SpriteToUIPos(RevivedEntity.Position + new Vector2(0, -20));
 
-                BattleUIManager.Instance.AddUIElement(RevivalItemShown);
+                RevivedEntity.BManager.battleUIManager.AddUIElement(RevivalItemShown);
             }
         }
 
@@ -60,7 +60,7 @@ namespace PaperMarioBattleSystem
             //Remove the item over the BattleEntity's head
             if (RevivalItemShown != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(RevivalItemShown);
+                RevivedEntity.BManager.battleUIManager.RemoveUIElement(RevivalItemShown);
                 RevivalItemShown = null;
             }
 

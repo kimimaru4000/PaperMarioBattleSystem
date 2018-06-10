@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 VeilUI = new MultiButtonActionCommandUI(actionCommand as MultiButtonCommand);
-                BattleUIManager.Instance.AddUIElement(VeilUI);
+                User.BManager.battleUIManager.AddUIElement(VeilUI);
             }
         }
 
@@ -53,7 +53,7 @@ namespace PaperMarioBattleSystem
 
             if (VeilUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(VeilUI);
+                User.BManager.battleUIManager.RemoveUIElement(VeilUI);
                 VeilUI = null;
             }
         }
@@ -194,7 +194,7 @@ namespace PaperMarioBattleSystem
             Debug.Log($"Starting second phase of {nameof(VeilAction)} for {EntityUsing.Name}!");
 
             //Clear the menu stack as the action will be selected automatically
-            BattleUIManager.Instance.ClearMenuStack();
+            User.BManager.battleUIManager.ClearMenuStack();
 
             //Immediately start the second half of the sequence
             MoveAction veilSecondHalf = new MoveAction(User, "Veil Second Half",
@@ -215,7 +215,7 @@ namespace PaperMarioBattleSystem
             Debug.Log($"Skipped {AllyAffected.Name}'s turn for {nameof(VeilAction)} as it's being protected by {EntityUsing.Name}!");
 
             //Clear the menu stack - the ally can't move yet
-            BattleUIManager.Instance.ClearMenuStack();
+            AllyAffected.BManager.battleUIManager.ClearMenuStack();
 
             //Make the ally do nothing on each of its turns
             AllyAffected.StartAction(new NoAction(AllyAffected), true, null);

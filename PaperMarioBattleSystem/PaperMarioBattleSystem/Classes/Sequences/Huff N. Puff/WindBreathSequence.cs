@@ -26,7 +26,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 WindBreathUI = new MashButtonRangeActionCommandUI(actionCommand as MashButtonRangeCommand);
-                BattleUIManager.Instance.AddUIElement(WindBreathUI);
+                User.BManager.battleUIManager.AddUIElement(WindBreathUI);
             }
         }
 
@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
 
             if (WindBreathUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(WindBreathUI);
+                User.BManager.battleUIManager.RemoveUIElement(WindBreathUI);
                 WindBreathUI = null;
             }
         }

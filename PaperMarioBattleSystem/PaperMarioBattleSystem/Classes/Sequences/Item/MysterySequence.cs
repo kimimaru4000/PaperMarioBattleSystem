@@ -100,7 +100,7 @@ namespace PaperMarioBattleSystem
             Debug.Log($"Using {ItemChosen.Name} for {EntityUsing.Name}, which was received via Mystery!");
 
             //Clear the menu stack as the action will be selected automatically
-            BattleUIManager.Instance.ClearMenuStack();
+            EntityUsing.BManager.battleUIManager.ClearMenuStack();
 
             //Immediately start using the item
             ItemAction itemChosenAction = ItemChosen.GetActionAssociated(User);

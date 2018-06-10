@@ -80,7 +80,7 @@ namespace PaperMarioBattleSystem
                     }
                     else
                     {
-                        BattleUIManager.Instance.PushMenu(SubMenu);
+                        SubMenu.User.BManager.battleUIManager.PushMenu(SubMenu);
                     }
 
                     SoundManager.Instance.PlaySound(SoundManager.Sound.MenuSelect);
@@ -92,7 +92,7 @@ namespace PaperMarioBattleSystem
 
                     SubMenu.User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
                         new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
-                        new MessageBattleEvent(disabledString, MessageBattleEvent.DefaultWaitDuration));
+                        new MessageBattleEvent(SubMenu.User.BManager.battleUIManager, disabledString, MessageBattleEvent.DefaultWaitDuration));
 
                     Debug.LogError($"All {Category} moves are currently disabled for {SubMenu.User.Name}!");
                 }

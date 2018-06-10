@@ -57,7 +57,7 @@ namespace PaperMarioBattleSystem
         {
             if (SubMenu != null)
             {
-                BattleUIManager.Instance.PushMenu(SubMenu);
+                User.BManager.battleUIManager.PushMenu(SubMenu);
             }
             else
             {

@@ -20,13 +20,13 @@ namespace PaperMarioBattleSystem
         protected override void OnStart()
         {
             base.OnStart();
-            BattleUIManager.Instance.SuppressMenus();
+            Entity.BManager.battleUIManager.SuppressMenus();
         }
 
         protected override void OnEnd()
         {
             base.OnEnd();
-            BattleUIManager.Instance.UnsuppressMenus();
+            Entity.BManager.battleUIManager.UnsuppressMenus();
         }
 
         protected override void OnUpdate()

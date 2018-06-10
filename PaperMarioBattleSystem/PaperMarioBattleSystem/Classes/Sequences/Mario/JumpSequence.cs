@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
 
             if (JumpUI != null)
             {
-                BattleUIManager.Instance.AddUIElement(JumpUI);
+                User.BManager.battleUIManager.AddUIElement(JumpUI);
             }
         }
 
@@ -57,7 +57,7 @@ namespace PaperMarioBattleSystem
 
             if (JumpUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(JumpUI);
+                User.BManager.battleUIManager.RemoveUIElement(JumpUI);
                 JumpUI = null;
             }
         }

@@ -77,7 +77,7 @@ namespace PaperMarioBattleSystem
                 EntityAfflicted.DamageTakenEvent -= OnEntityDamaged;
 
                 //Show the little exclamation icon indicating the BattleEntity woke up - it's the same one for stylish data
-                BattleObjManager.Instance.AddBattleObject(new StylishIndicatorVFX(EntityAfflicted, new Sequence.StylishData(0d, WakeUpEffectDur, 0)));
+                EntityAfflicted.BManager.battleObjManager.AddBattleObject(new StylishIndicatorVFX(EntityAfflicted, new Sequence.StylishData(0d, WakeUpEffectDur, 0)));
 
                 //Remove the status
                 EntityAfflicted.EntityProperties.RemoveStatus(StatusType);
@@ -105,7 +105,7 @@ namespace PaperMarioBattleSystem
             if (SleepVFX == null)
             {
                 SleepVFX = new SleepZVFX(EntityAfflicted);
-                BattleObjManager.Instance.AddBattleObject(SleepVFX);
+                EntityAfflicted.BManager.battleObjManager.AddBattleObject(SleepVFX);
             }
         }
 
@@ -113,7 +113,7 @@ namespace PaperMarioBattleSystem
         {
             if (SleepVFX != null)
             {
-                BattleObjManager.Instance.RemoveBattleObject(SleepVFX);
+                EntityAfflicted.BManager.battleObjManager.RemoveBattleObject(SleepVFX);
                 SleepVFX = null;
             }
         }

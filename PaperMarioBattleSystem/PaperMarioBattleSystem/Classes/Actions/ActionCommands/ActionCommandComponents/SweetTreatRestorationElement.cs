@@ -37,6 +37,8 @@ namespace PaperMarioBattleSystem
 
         private double ElapsedTime = 0d;
 
+        private BattleUIManager BUIManager = null;
+
         /// <summary>
         /// Tells if the restoration element is done moving.
         /// </summary>
@@ -56,8 +58,10 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public SweetTreatRestorationElement(RestoreTypes restorationType, double movementDur, Vector2 startPosition, Vector2 endPosition)
+        public SweetTreatRestorationElement(BattleUIManager bUIManager, RestoreTypes restorationType, double movementDur, Vector2 startPosition, Vector2 endPosition)
         {
+            BUIManager = bUIManager;
+
             RestorationType = restorationType;
             MovementDur = movementDur;
 
@@ -166,7 +170,7 @@ namespace PaperMarioBattleSystem
         /// <param name="collisionResponse">The collision data.</param>
         public void HandleCollision(CollisionResponseHolder collisionResponse)
         {
-            BattleUIManager.Instance.RemoveUIElement(this);
+            BUIManager.RemoveUIElement(this);
         }
 
         public CollisionResponseHolder GetCollisionResponse(ICollisionHandler collisionObject)

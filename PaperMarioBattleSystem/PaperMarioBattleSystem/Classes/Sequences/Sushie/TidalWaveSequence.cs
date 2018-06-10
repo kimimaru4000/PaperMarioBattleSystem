@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 TidalWaveUI = new TidalWaveActionCommandUI(actionCommand as TidalWaveCommand);
-                BattleUIManager.Instance.AddUIElement(TidalWaveUI);
+                User.BManager.battleUIManager.AddUIElement(TidalWaveUI);
             }
         }
 
@@ -39,7 +39,7 @@ namespace PaperMarioBattleSystem
 
             if (TidalWaveUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(TidalWaveUI);
+                User.BManager.battleUIManager.RemoveUIElement(TidalWaveUI);
                 TidalWaveUI = null;
             }
         }

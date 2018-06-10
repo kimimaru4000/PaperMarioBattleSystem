@@ -307,7 +307,7 @@ namespace PaperMarioBattleSystem
             //If this action targets an entity, bring up the target selection menu
             if (MoveProperties.MoveAffectionType != MoveAffectionTypes.None)
             {
-                BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, GetEntitiesMoveAffects());
+                User.BManager.battleUIManager.StartTargetSelection(ActionStart, MoveProperties.SelectionType, GetEntitiesMoveAffects());
             }
             //Otherwise, simply start the action
             else
@@ -322,7 +322,7 @@ namespace PaperMarioBattleSystem
         /// <param name="targets"></param>
         protected void ActionStart(BattleEntity[] targets)
         {
-            BattleUIManager.Instance.ClearMenuStack();
+            User.BManager.battleUIManager.ClearMenuStack();
             User.StartAction(this, false, targets);
         }
 

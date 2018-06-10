@@ -122,7 +122,7 @@ namespace PaperMarioBattleSystem
             WingsDisappearVFX wingsDisappear = new WingsDisappearVFX(wingSprite, wingPos,
                 Entity.EntityType != Enumerations.EntityTypes.Enemy, .1f - .01f, 500d, 500d, (1d / 30d) * Time.MsPerS);
 
-            BattleObjManager.Instance.AddBattleObject(wingsDisappear);
+            Entity.BManager.battleObjManager.AddBattleObject(wingsDisappear);
 
             //Copy the StatusProperties from the grounded entity
             //This happens here, as winged entities use their own status tables until they've been grounded

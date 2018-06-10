@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 TornadoJumpUI = new TornadoJumpActionCommandUI(actionCommand as TornadoJumpCommand);
-                BattleUIManager.Instance.AddUIElement(TornadoJumpUI);
+                User.BManager.battleUIManager.AddUIElement(TornadoJumpUI);
             }
         }
 
@@ -76,7 +76,7 @@ namespace PaperMarioBattleSystem
 
             if (TornadoJumpUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(TornadoJumpUI);
+                User.BManager.battleUIManager.RemoveUIElement(TornadoJumpUI);
                 TornadoJumpUI = null;
             }
         }

@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
             if (string.IsNullOrEmpty(RemovedMessage) == false)
             {
                 EntityAfflicted.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + Priority,
-                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new MessageBattleEvent(RemovedMessage, 2000d));
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new MessageBattleEvent(EntityAfflicted.BManager.battleUIManager, RemovedMessage, 2000d));
             }
 
             //Queue a battle event for the status removal
@@ -63,7 +63,7 @@ namespace PaperMarioBattleSystem
             if (string.IsNullOrEmpty(AfflictedMessage) == false)
             {
                 EntityAfflicted.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + Priority,
-                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new MessageBattleEvent(AfflictedMessage, 2000d));
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new MessageBattleEvent(EntityAfflicted.BManager.battleUIManager, AfflictedMessage, 2000d));
             }
         }
     }

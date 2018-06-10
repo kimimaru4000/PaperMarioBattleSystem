@@ -33,8 +33,8 @@ namespace PaperMarioBattleSystem
             ShellRef.RemoveEntityDefending();
 
             //Start the animation in a BattleObject
-            ShellBreakAnimObj breakAnim = new ShellBreakAnimObj(ShellRef.Position, 2000d, (float)UtilityGlobals.ToRadians(25d), 750d);
-            BattleObjManager.Instance.AddBattleObject(breakAnim);
+            ShellBreakAnimObj breakAnim = new ShellBreakAnimObj(ShellRef.BManager.battleObjManager, ShellRef.Position, 2000d, (float)UtilityGlobals.ToRadians(25d), 750d);
+            ShellRef.BManager.battleObjManager.AddBattleObject(breakAnim);
 
             End();
         }

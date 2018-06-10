@@ -11,30 +11,10 @@ using PaperMarioBattleSystem.Extensions;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Manages UI during battle
-    /// <para>This is a Singleton</para>
+    /// Manages UI during battle.
     /// </summary>
     public class BattleUIManager : IUpdateable, IDrawable, ICleanup
     {
-        #region Singleton Fields
-
-        public static BattleUIManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new BattleUIManager();
-                }
-
-                return instance;
-            }
-        }
-
-        private static BattleUIManager instance = null;
-
-        #endregion
-
         /// <summary>
         /// Tells whether the Input Menus are suppressed or not.
         /// When suppressed, they won't update or draw.
@@ -61,18 +41,16 @@ namespace PaperMarioBattleSystem
             }            
         }
 
-        private BattleUIManager()
+        public BattleUIManager()
         {
             InputMenus = new Stack<InputMenu>();
-            SelectionMenu = new TargetSelectionMenu();
+            SelectionMenu = new TargetSelectionMenu(this);
             battleHUD = new BattleHUD(null);
         }
 
         public void CleanUp()
         {
             SelectionMenu = null;
-
-            instance = null;
         }
 
         public void StartTargetSelection(TargetSelectionMenu.OnSelection onSelection, Enumerations.EntitySelectionType selectionType, params BattleEntity[] targets)

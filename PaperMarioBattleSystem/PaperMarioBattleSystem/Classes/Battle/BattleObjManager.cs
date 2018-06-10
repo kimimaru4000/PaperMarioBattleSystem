@@ -11,35 +11,15 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Handles any non-BattleEntity objects in battle.
     /// This can be used for anything ranging from a collision checker to a visual that needs to be rendered.
-    /// <para>This is a Singleton.</para>
     /// </summary>
     public class BattleObjManager : IUpdateable, IDrawable, ICleanup
     {
-        #region Singleton Fields
-
-        public static BattleObjManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new BattleObjManager();
-                }
-
-                return instance;
-            }
-        }
-
-        private static BattleObjManager instance = null;
-
-        #endregion
-
         /// <summary>
         /// The list of BattleObjects.
         /// </summary>
         private readonly List<BattleObject> BattleObjects = new List<BattleObject>();
 
-        private BattleObjManager()
+        public BattleObjManager()
         {
 
         }
@@ -47,8 +27,6 @@ namespace PaperMarioBattleSystem
         public void CleanUp()
         {
             ClearAllBattleObjects();
-
-            instance = null;
         }
 
         /// <summary>

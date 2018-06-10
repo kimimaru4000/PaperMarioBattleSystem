@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
 
             if (ItemShown != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(ItemShown);
+                User.BManager.battleUIManager.RemoveUIElement(ItemShown);
             }
         }
 
@@ -71,7 +71,7 @@ namespace PaperMarioBattleSystem
                     if (ItemShown != null)
                     {
                         ItemShown.Position = Camera.Instance.SpriteToUIPos(User.GetDrawnPosAbove(new Vector2(0, -20)));
-                        BattleUIManager.Instance.AddUIElement(ItemShown);
+                        User.BManager.battleUIManager.AddUIElement(ItemShown);
                     }
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.GetItemName, false);
@@ -80,7 +80,7 @@ namespace PaperMarioBattleSystem
                 case 2:
                     if (ItemShown != null)
                     {
-                        BattleUIManager.Instance.RemoveUIElement(ItemShown);
+                        User.BManager.battleUIManager.RemoveUIElement(ItemShown);
                     }
 
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());

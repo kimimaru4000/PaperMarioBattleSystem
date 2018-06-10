@@ -30,7 +30,7 @@ namespace PaperMarioBattleSystem
             if (Action.DrawActionCommandInfo == true)
             {
                 ShellTossUI = new HammerActionCommandUI(actionCommand as HammerCommand);
-                BattleUIManager.Instance.AddUIElement(ShellTossUI);
+                User.BManager.battleUIManager.AddUIElement(ShellTossUI);
             }
         }
 
@@ -40,7 +40,7 @@ namespace PaperMarioBattleSystem
 
             if (ShellTossUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(ShellTossUI);
+                User.BManager.battleUIManager.RemoveUIElement(ShellTossUI);
                 ShellTossUI = null;
             }
         }

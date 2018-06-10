@@ -31,7 +31,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 ArtAttackUI = new ArtAttackActionCommandUI(actionCommand as ArtAttackCommand);
-                BattleUIManager.Instance.AddUIElement(ArtAttackUI);
+                User.BManager.battleUIManager.AddUIElement(ArtAttackUI);
             }
         }
 
@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
 
             if (ArtAttackUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(ArtAttackUI);
+                User.BManager.battleUIManager.RemoveUIElement(ArtAttackUI);
                 ArtAttackUI = null;
             }
         }

@@ -615,8 +615,12 @@ namespace PaperMarioBattleSystem
             /// <param name="partnerList">The list of Partners to fill.</param>
             public void GetAllPartners(List<BattlePartner> partnerList)
             {
-                foreach (BattlePartner partner in Partners.Values)
+                //Add them in the order they are defined in the PartnerTypes enum
+                PartnerTypes[] partnerTypes = EnumUtility.GetValues<PartnerTypes>.EnumValues;
+                for (int i = 0; i < partnerTypes.Length; i++)
                 {
+                    BattlePartner partner = GetPartner(partnerTypes[i]);
+
                     if (partner != null)
                     {
                         partnerList.Add(partner);

@@ -27,8 +27,11 @@ namespace PaperMarioBattleSystem
         protected EntitySelectionType SelectionType = EntitySelectionType.Single;
         protected override int LastSelection => Targets.Length - 1;
 
-        public TargetSelectionMenu() : base(MenuTypes.Horizontal)
+        private BattleUIManager BUIManager = null;
+
+        public TargetSelectionMenu(BattleUIManager bUIManager) : base(MenuTypes.Horizontal)
         {
+            BUIManager = bUIManager;
             Texture2D cursorSheet = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Cursor.png");
 
             Cursor = new ReverseAnimation(cursorSheet, AnimationGlobals.InfiniteLoop, true,
@@ -112,9 +115,9 @@ namespace PaperMarioBattleSystem
             Selection = null;
             SelectionType = EntitySelectionType.Single;
 
-            if (BattleUIManager.Instance.TopMenu != null)
+            if (BUIManager.TopMenu != null)
             {
-                BattleUIManager.Instance.PopMenu();
+                BUIManager.PopMenu();
             }
 
             Cursor.Reset();

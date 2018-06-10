@@ -54,7 +54,7 @@ namespace PaperMarioBattleSystem
 
             if (HammerUI != null)
             {
-                BattleUIManager.Instance.AddUIElement(HammerUI);
+                User.BManager.battleUIManager.AddUIElement(HammerUI);
             }
         }
 
@@ -64,7 +64,7 @@ namespace PaperMarioBattleSystem
 
             if (HammerUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(HammerUI);
+                User.BManager.battleUIManager.RemoveUIElement(HammerUI);
                 HammerUI = null;
             }
         }

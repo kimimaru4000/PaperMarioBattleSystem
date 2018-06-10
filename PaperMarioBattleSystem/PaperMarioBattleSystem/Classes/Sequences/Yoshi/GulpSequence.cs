@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 GulpUI = new GulpActionCommandUI(actionCommand as GulpCommand);
-                BattleUIManager.Instance.AddUIElement(GulpUI);
+                User.BManager.battleUIManager.AddUIElement(GulpUI);
             }
         }
 
@@ -53,7 +53,7 @@ namespace PaperMarioBattleSystem
 
             if (GulpUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(GulpUI);
+                User.BManager.battleUIManager.RemoveUIElement(GulpUI);
                 GulpUI = null;
             }
         }

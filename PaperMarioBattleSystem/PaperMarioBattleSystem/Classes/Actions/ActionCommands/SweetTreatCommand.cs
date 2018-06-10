@@ -57,14 +57,16 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public SweetTreatResponse HealingResponse = default(SweetTreatResponse);
 
+        private BattleUIManager BUIManager = null;
+
         /// <summary>
         /// Tells if you can throw a star or not.
         /// </summary>
         protected bool CanThrowStar => (Time.ActiveMilliseconds >= PrevThrow);
 
-        public SweetTreatCommand(IActionCommandHandler commandHandler) : base(commandHandler)
+        public SweetTreatCommand(IActionCommandHandler commandHandler, BattleUIManager bUIManager) : base(commandHandler)
         {
-            
+            BUIManager = bUIManager;
         }
 
         public override void StartInput(params object[] values)
@@ -99,7 +101,7 @@ namespace PaperMarioBattleSystem
                 restoreTypeCounts = new int[] { 7, 7, 6, 2 };
             }
 
-            IconSpawner = new SweetTreatElementSpawner(4, 40f, 5000d, 750d, startPos, endPos, restoreTypes, restoreTypeCounts);
+            IconSpawner = new SweetTreatElementSpawner(BUIManager, 4, 40f, 5000d, 750d, startPos, endPos, restoreTypes, restoreTypeCounts);
 
             HealingResponse = default(SweetTreatResponse);
         }
@@ -113,7 +115,6 @@ namespace PaperMarioBattleSystem
             //Clean up any remaining stars
             for (int i = 0; i < StarsThrown.Count; i++)
             {
-                BattleUIManager.Instance.RemoveUIElement(StarsThrown[i]);
                 StarsThrown.RemoveAt(i);
                 i--;
             }
@@ -122,6 +123,8 @@ namespace PaperMarioBattleSystem
             IconSpawner = null;
 
             HealingResponse = default(SweetTreatResponse);
+
+            BUIManager = null;
         }
 
         protected override void ReadInput()
@@ -180,7 +183,7 @@ namespace PaperMarioBattleSystem
             //Throw the star and send it off with the current velocity
             Vector2 curVelocity = new Vector2(StarThrowVelocity.X * (float)Math.Cos(angleRadians), StarThrowVelocity.Y * (float)Math.Sin(angleRadians));
 
-            SweetTreatThrownStar star = new SweetTreatThrownStar(StartPosition, curVelocity);
+            SweetTreatThrownStar star = new SweetTreatThrownStar(BUIManager, StartPosition, curVelocity);
 
             StarsThrown.Add(star);
         }

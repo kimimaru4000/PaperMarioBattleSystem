@@ -32,7 +32,7 @@ namespace PaperMarioBattleSystem
             if (Action.DrawActionCommandInfo == true)
             {
                 RunUI = new RunAwayActionCommandUI(actionCommand as RunAwayCommand);
-                BattleUIManager.Instance.AddUIElement(RunUI);
+                User.BManager.battleUIManager.AddUIElement(RunUI);
             }
         }
 
@@ -44,7 +44,7 @@ namespace PaperMarioBattleSystem
 
             if (RunUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(RunUI);
+                User.BManager.battleUIManager.RemoveUIElement(RunUI);
                 RunUI = null;
             }
         }

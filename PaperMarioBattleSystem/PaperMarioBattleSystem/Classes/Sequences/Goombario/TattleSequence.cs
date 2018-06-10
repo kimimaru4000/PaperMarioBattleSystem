@@ -42,7 +42,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 TattleUI = new TattleActionCommandUI(actionCommand as TattleCommand);
-                BattleUIManager.Instance.AddUIElement(TattleUI);
+                User.BManager.battleUIManager.AddUIElement(TattleUI);
             }
         }
 
@@ -52,7 +52,7 @@ namespace PaperMarioBattleSystem
 
             if (TattleBox != null)
             {
-                BattleObjManager.Instance.RemoveBattleObject(TattleBox);
+                User.BManager.battleObjManager.RemoveBattleObject(TattleBox);
 
                 TattleBox = null;
             }
@@ -61,7 +61,7 @@ namespace PaperMarioBattleSystem
 
             if (TattleUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(TattleUI);
+                User.BManager.battleUIManager.RemoveUIElement(TattleUI);
                 TattleUI = null;
             }
         }
@@ -137,7 +137,7 @@ namespace PaperMarioBattleSystem
 
                     //Create the tattle box and add it so it updates
                     TattleBox = new TattleRenderObj(Camera.Instance.SpriteToUIPos(EntitiesAffected[0].Position));
-                    BattleObjManager.Instance.AddBattleObject(TattleBox);
+                    User.BManager.battleObjManager.AddBattleObject(TattleBox);
 
                     string entityName = EntitiesAffected[0].Name;
 
@@ -186,10 +186,6 @@ namespace PaperMarioBattleSystem
                     DialogueManager.Instance.CreateBubble(tattleDescription, User);
                     CurSequenceAction = new WaitForDialogueSeqAction(DialogueManager.Instance.CurDialogueBubble);
                     break;
-                //case 3:
-                //    //Wait
-                //    CurSequenceAction = new WaitSeqAction(ShowWait);
-                //    break;
                 case 3:
                     //Close the tattle box
                     TattleBox.Close(WindowOpenCloseTime);
@@ -204,7 +200,7 @@ namespace PaperMarioBattleSystem
                     break;
                 case 5:
                     //Remove the tattle box
-                    BattleObjManager.Instance.RemoveBattleObject(TattleBox);
+                    User.BManager.battleObjManager.RemoveBattleObject(TattleBox);
                     TattleBox = null;
 
                     CurSequenceAction = new WaitSeqAction(0d);

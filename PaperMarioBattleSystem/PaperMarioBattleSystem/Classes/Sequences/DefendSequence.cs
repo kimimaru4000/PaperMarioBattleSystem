@@ -57,7 +57,7 @@ namespace PaperMarioBattleSystem
                     //Show the Battle Event
                     User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
                         new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
-                        new MessageBattleEvent("Defense will be boosted\nthis turn!", MessageDur));
+                        new MessageBattleEvent(User.BManager.battleUIManager, "Defense will be boosted\nthis turn!", MessageDur));
 
                     Debug.Log($"Raised Defense for {User.Name} after using the Defend action!");
 

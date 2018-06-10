@@ -124,7 +124,7 @@ namespace PaperMarioBattleSystem
             base.OnBackOut();
 
             SoundManager.Instance.PlaySound(SoundManager.Sound.MenuBackOut);
-            BattleUIManager.Instance.PopMenu();
+            User.BManager.battleUIManager.PopMenu();
         }
 
         protected override void OnConfirm()
@@ -144,7 +144,7 @@ namespace PaperMarioBattleSystem
 
                 User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
                     new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn, BattleGlobals.BattleState.TurnEnd },
-                    new MessageBattleEvent(disabledString, MessageBattleEvent.DefaultWaitDuration));
+                    new MessageBattleEvent(User.BManager.battleUIManager, disabledString, MessageBattleEvent.DefaultWaitDuration));
 
                 Debug.LogError($"{BattleActions[CurSelection].Name} is disabled: {disabledString}");
             }
@@ -169,7 +169,7 @@ namespace PaperMarioBattleSystem
                 Vector2 pos = Position + new Vector2(0, i * YSpacing);
                 Color color = moveAction.Disabled == false ? MoveAction.EnabledColor : MoveAction.DisabledColor;
                 Color textColor = moveAction.Disabled == false ? MoveAction.TextEnabledColor : MoveAction.TextDisabledColor;
-                if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) alphaMod = MoveAction.UnselectedAlpha;
+                if (CurSelection != i || User.BManager.battleUIManager.TopMenu != this) alphaMod = MoveAction.UnselectedAlpha;
 
                 //Draw all information including name and FP cost
                 DrawMoveActionInfo(moveAction, pos, color, textColor, alphaMod);

@@ -66,7 +66,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnStart()
         {
-            BattleUIManager.Instance.SuppressMenus();
+            FirstEntity.BManager.battleUIManager.SuppressMenus();
 
             FirstStartPos = FirstEntity.Position;
             SecondStartPos = SecondEntity.Position;
@@ -82,7 +82,7 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEnd()
         {
-            BattleUIManager.Instance.UnsuppressMenus();
+            FirstEntity.BManager.battleUIManager.UnsuppressMenus();
 
             FirstEntity.Position = FirstEndPos;
             SecondEntity.Position = SecondEndPos;

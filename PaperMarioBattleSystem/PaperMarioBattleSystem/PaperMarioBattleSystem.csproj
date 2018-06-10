@@ -344,10 +344,9 @@
     <Compile Include="Classes\Dialogue\MessageRoutines\SpeedRoutine.cs" />
     <Compile Include="Classes\Dialogue\MessageRoutines\WaitRoutine.cs" />
     <Compile Include="Classes\Dialogue\ProgressDialogueStar.cs" />
-    <Compile Include="Classes\ExtendedTypes\NineSlicedTexture2D.cs" />
-    <Compile Include="Classes\ExtendedTypes\CroppedTexture2D.cs" />
-    <Compile Include="Classes\ExtendedTypes\SlicedTexture2D.cs" />
-    <Compile Include="Classes\General\Transform.cs" />
+    <Compile Include="Classes\Graphics\NineSlicedTexture2D.cs" />
+    <Compile Include="Classes\Graphics\CroppedTexture2D.cs" />
+    <Compile Include="Classes\Graphics\SlicedTexture2D.cs" />
     <Compile Include="Classes\Global\AnimationGlobals.cs" />
     <Compile Include="Classes\Global\BadgeGlobals.cs" />
     <Compile Include="Classes\Global\BattleGlobals.cs" />
@@ -392,7 +391,6 @@
     <Compile Include="Classes\Interfaces\ISpinnableBehavior.cs" />
     <Compile Include="Classes\Interfaces\ITattleableEntity.cs" />
     <Compile Include="Classes\Interfaces\ITintable.cs" />
-    <Compile Include="Classes\Interfaces\ITransformable.cs" />
     <Compile Include="Classes\Interfaces\IUpdateable.cs" />
     <Compile Include="Classes\Interfaces\IUsableEntity.cs" />
     <Compile Include="Classes\Interfaces\IWingedBehavior.cs" />
@@ -482,10 +480,10 @@
     <Compile Include="Classes\Sequences\Yoshi\MiniEggSequence.cs" />
     <Compile Include="Classes\Battle\BattleEventManager.cs" />
     <Compile Include="Classes\Battle\BattleManager.cs" />
-    <Compile Include="Classes\Singletons\Battle\BattleObjManager.cs" />
-    <Compile Include="Classes\Singletons\Battle\BattleUIManager.cs" />
+    <Compile Include="Classes\Battle\BattleObjManager.cs" />
+    <Compile Include="Classes\Battle\BattleUIManager.cs" />
     <Compile Include="Classes\Singletons\Battle\DialogueManager.cs" />
-    <Compile Include="Classes\Singletons\Battle\LightingManager.cs" />
+    <Compile Include="Classes\Graphics\LightingManager.cs" />
     <Compile Include="Classes\Singletons\General\AssetManager.cs" />
     <Compile Include="Classes\Singletons\General\Camera.cs" />
     <Compile Include="Classes\Singletons\General\Inventory.cs" />
@@ -600,9 +598,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Shaders\Lighting.fx">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Shaders\Poison.fx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Shaders\ShaderTextures\ChargeShaderTex.png">
@@ -855,6 +850,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Classes\General\" />
     <Folder Include="Content\Audio\Music\" />
   </ItemGroup>
   <ItemGroup>

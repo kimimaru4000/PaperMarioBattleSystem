@@ -36,7 +36,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 PowerLiftUI = new PowerLiftActionCommandUI(actionCommand as PowerLiftCommand);
-                BattleUIManager.Instance.AddUIElement(PowerLiftUI);
+                User.BManager.battleUIManager.AddUIElement(PowerLiftUI);
             }
         }
 
@@ -46,7 +46,7 @@ namespace PaperMarioBattleSystem
 
             if (PowerLiftUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(PowerLiftUI);
+                User.BManager.battleUIManager.RemoveUIElement(PowerLiftUI);
                 PowerLiftUI = null;
             }
         }

@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
             if (Action.DrawActionCommandInfo == true)
             {
                 AirLiftUI = new FillBarActionCommandUI<AirLiftCommand>(actionCommand as AirLiftCommand, new Vector2(250, 150), new Vector2(100f, 1f), null);
-                BattleUIManager.Instance.AddUIElement(AirLiftUI);
+                User.BManager.battleUIManager.AddUIElement(AirLiftUI);
             }
         }
 
@@ -50,7 +50,7 @@ namespace PaperMarioBattleSystem
 
             if (AirLiftUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(AirLiftUI);
+                User.BManager.battleUIManager.RemoveUIElement(AirLiftUI);
                 AirLiftUI = null;
             }
         }

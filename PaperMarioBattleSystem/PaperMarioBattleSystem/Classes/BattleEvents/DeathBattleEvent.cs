@@ -39,7 +39,7 @@ namespace PaperMarioBattleSystem
         protected override void OnStart()
         {
             base.OnStart();
-            BattleUIManager.Instance.SuppressMenus();
+            Entity.BManager.battleUIManager.SuppressMenus();
 
             Entity.AnimManager.PlayAnimation(AnimationGlobals.DeathName, true);
         }
@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
         protected override void OnEnd()
         {
             base.OnEnd();
-            BattleUIManager.Instance.UnsuppressMenus();
+            Entity.BManager.battleUIManager.UnsuppressMenus();
 
             Entity.Rotation = 0f;
 

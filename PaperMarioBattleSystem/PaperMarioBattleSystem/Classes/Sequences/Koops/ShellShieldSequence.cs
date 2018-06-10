@@ -45,7 +45,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 ShellShieldUI = new ShellShieldActionCommandUI(actionCommand as ShellShieldCommand);
-                BattleUIManager.Instance.AddUIElement(ShellShieldUI);
+                User.BManager.battleUIManager.AddUIElement(ShellShieldUI);
             }
         }
 
@@ -57,7 +57,7 @@ namespace PaperMarioBattleSystem
 
             if (ShellShieldUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(ShellShieldUI);
+                User.BManager.battleUIManager.RemoveUIElement(ShellShieldUI);
                 ShellShieldUI = null;
             }
         }

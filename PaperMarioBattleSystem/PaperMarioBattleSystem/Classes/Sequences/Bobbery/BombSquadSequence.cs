@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 BombSquadUI = new BombSquadActionCommandUI(actionCommand as BombSquadCommand);
-                BattleUIManager.Instance.AddUIElement(BombSquadUI);
+                User.BManager.battleUIManager.AddUIElement(BombSquadUI);
             }
         }
 
@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
 
             if (BombSquadUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(BombSquadUI);
+                User.BManager.battleUIManager.RemoveUIElement(BombSquadUI);
                 BombSquadUI = null;
             }
         }

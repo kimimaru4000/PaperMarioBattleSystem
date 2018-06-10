@@ -29,7 +29,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 PowerShockUI = new FillBarActionCommandUI<MashButtonCommand>(actionCommand as MashButtonCommand, new Vector2(250, 150), new Vector2(100f, 1f), null);
-                BattleUIManager.Instance.AddUIElement(PowerShockUI);
+                User.BManager.battleUIManager.AddUIElement(PowerShockUI);
             }
         }
 
@@ -39,7 +39,7 @@ namespace PaperMarioBattleSystem
 
             if (PowerShockUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(PowerShockUI);
+                User.BManager.battleUIManager.RemoveUIElement(PowerShockUI);
                 PowerShockUI = null;
             }
         }

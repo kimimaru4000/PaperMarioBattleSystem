@@ -51,6 +51,8 @@ namespace PaperMarioBattleSystem
 
         private BattleManager battleManager = null;
 
+        private LightingManager lightingManager = null;
+
         public Main()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -105,28 +107,31 @@ namespace PaperMarioBattleSystem
             battleManager.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEntity>() { new Duplighost(), new SkyGuy() });
-
-            BattleUIManager.Instance.battleHUD.SetBattleManager(battleManager);
+                new List<BattleEntity>() { new Pokey(), new SkyGuy() });
 
             //Initialize helper objects
             //Check for the battle setting and add darkness if so
             if (battleManager.Properties.BattleSetting == BattleGlobals.BattleSettings.Dark)
             {
                 BattleDarknessObj battleDarkness = new BattleDarknessObj(battleManager);
-                LightingManager.Instance.Initialize(battleDarkness);
-                BattleObjManager.Instance.AddBattleObject(battleDarkness);
+
+                //Initialize the lighting manager for dark battles
+                lightingManager = new LightingManager(battleDarkness, 
+                    AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Lighting"),
+                    AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}LightMask.png"));
+
+                battleManager.battleObjManager.AddBattleObject(battleDarkness);
             }
 
             //Add the HP bar manager
-            BattleObjManager.Instance.AddBattleObject(new HPBarManagerObj(battleManager));
+            battleManager.battleObjManager.AddBattleObject(new HPBarManagerObj(battleManager));
 
             //If you can't run from battle, show a message at the start saying so
             if (battleManager.Properties.Runnable == false)
             {
                 battleManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
                     new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn },
-                    new MessageBattleEvent(BattleGlobals.NoRunMessage, MessageBattleEvent.DefaultWaitDuration));
+                    new MessageBattleEvent(battleManager.battleUIManager, BattleGlobals.NoRunMessage, MessageBattleEvent.DefaultWaitDuration));
             }
 
             //Start the battle
@@ -288,14 +293,12 @@ namespace PaperMarioBattleSystem
         {
             graphics.PreparingDeviceSettings -= OnPreparingDeviceSettings;
 
-            if (LightingManager.HasInstance == true)
-                LightingManager.Instance.CleanUp();
+            lightingManager?.CleanUp();
+            lightingManager = null;
 
             AssetManager.Instance.CleanUp();
             SoundManager.Instance.CleanUp();
             SpriteRenderer.Instance.CleanUp();
-            BattleUIManager.Instance.CleanUp();
-            BattleObjManager.Instance.CleanUp();
             battleManager.CleanUp();
             battleManager = null;
 
@@ -341,8 +344,8 @@ namespace PaperMarioBattleSystem
         private void MainUpdate(GameTime gameTime)
         {
             battleManager.Update();
-            BattleUIManager.Instance.Update();
-            BattleObjManager.Instance.Update();
+            battleManager.battleUIManager.Update();
+            battleManager.battleObjManager.Update();
 
             DialogueManager.Instance.Update();
 
@@ -420,10 +423,7 @@ namespace PaperMarioBattleSystem
 
             //Create a lightmap before drawing the scene, if we should
             //This is for Dark battles
-            if (LightingManager.HasInstance == true)
-            {
-                LightingManager.Instance.CreateLightMap();
-            }
+            lightingManager?.CreateLightMap();
 
             //Set up drawing to the render target
             SpriteRenderer.Instance.SetupDrawing();
@@ -452,10 +452,7 @@ namespace PaperMarioBattleSystem
             RenderBattleEntities(BattleEntities);
 
             //Render the generated lightmap for Dark battles, if it exists
-            if (LightingManager.HasInstance == true)
-            {
-                LightingManager.Instance.RenderLightMap();
-            }
+            lightingManager?.RenderLightMap();
 
             //UI
             RenderStatusInfo(BattleEntities);
@@ -604,7 +601,7 @@ namespace PaperMarioBattleSystem
 
         private void RenderUI()
         {
-            BattleUIManager.Instance.Draw();
+            battleManager.battleUIManager.Draw();
 
             DialogueBubble bubble = DialogueManager.Instance.CurDialogueBubble;
 
@@ -636,7 +633,7 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.spriteBatch, BlendState.AlphaBlend, null, null, Camera.Instance.Transform);
             SpriteRenderer.Instance.BeginBatch(SpriteRenderer.Instance.uiBatch, BlendState.AlphaBlend, SamplerState.PointClamp, null, null);
 
-            BattleObjManager.Instance.Draw();
+            battleManager.battleObjManager.Draw();
         }
 
         #endregion

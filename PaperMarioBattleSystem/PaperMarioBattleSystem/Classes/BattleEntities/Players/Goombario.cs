@@ -84,7 +84,7 @@ namespace PaperMarioBattleSystem
         public override void OnTurnEnd()
         {
             base.OnTurnEnd();
-            BattleUIManager.Instance.ClearMenuStack();
+            BManager.battleUIManager.ClearMenuStack();
         }
     }
 }

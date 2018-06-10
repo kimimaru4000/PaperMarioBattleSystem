@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 KissyKissyUI = new FillBarActionCommandUI<MashButtonCommand>(actionCommand as MashButtonCommand, new Vector2(250, 150), new Vector2(100f, 1f), null);
-                BattleUIManager.Instance.AddUIElement(KissyKissyUI);
+                User.BManager.battleUIManager.AddUIElement(KissyKissyUI);
             }
         }
 
@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
 
             if (KissyKissyUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(KissyKissyUI);
+                User.BManager.battleUIManager.RemoveUIElement(KissyKissyUI);
                 KissyKissyUI = null;
             }
         }

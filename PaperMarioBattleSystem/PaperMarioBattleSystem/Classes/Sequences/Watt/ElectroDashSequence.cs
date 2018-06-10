@@ -37,7 +37,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 ElectroDashUI = new GulpActionCommandUI(actionCommand as GulpCommand);
-                BattleUIManager.Instance.AddUIElement(ElectroDashUI);
+                User.BManager.battleUIManager.AddUIElement(ElectroDashUI);
             }
         }
 
@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
 
             if (ElectroDashUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(ElectroDashUI);
+                User.BManager.battleUIManager.RemoveUIElement(ElectroDashUI);
                 ElectroDashUI = null;
             }
         }

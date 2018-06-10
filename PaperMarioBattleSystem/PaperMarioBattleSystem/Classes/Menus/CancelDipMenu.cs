@@ -47,7 +47,7 @@ namespace PaperMarioBattleSystem
 
         private void OnChooseYes()
         {
-            BattleUIManager.Instance.ClearMenuStack();
+            User.BManager.battleUIManager.ClearMenuStack();
 
             //Remove any remaining item turns from the BattleEntity and make it do nothing if it no longer wants to use items
             User.EntityProperties.RemoveAdditionalProperty(Enumerations.AdditionalProperty.DipItemTurns);
@@ -60,7 +60,7 @@ namespace PaperMarioBattleSystem
         private void OnChooseNo()
         {
             //This menu would be at the top, so pop it
-            BattleUIManager.Instance.PopMenu();
+            User.BManager.battleUIManager.PopMenu();
         }
 
         public override void Draw()
@@ -74,7 +74,7 @@ namespace PaperMarioBattleSystem
                 float alphaMod = 1f;
                 Vector2 pos = Position + new Vector2(75, (i + 2) * 20);
 
-                if (CurSelection != i || BattleUIManager.Instance.TopMenu != this) alphaMod *= .7f;
+                if (CurSelection != i || User.BManager.battleUIManager.TopMenu != this) alphaMod *= .7f;
 
                 SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, MenuOptions[i].Option, pos, Color.White * alphaMod, .7f);
             }

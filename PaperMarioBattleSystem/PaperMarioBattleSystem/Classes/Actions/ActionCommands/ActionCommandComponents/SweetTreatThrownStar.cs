@@ -16,6 +16,8 @@ namespace PaperMarioBattleSystem
     {
         public Vector2 Speed = Vector2.Zero;
 
+        private BattleUIManager BUIManager = null;
+
         /// <summary>
         /// Gets the collision rectangle of the star.
         /// </summary>
@@ -30,8 +32,10 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        public SweetTreatThrownStar(Vector2 startPosition, Vector2 speed)
+        public SweetTreatThrownStar(BattleUIManager bUIManager, Vector2 startPosition, Vector2 speed)
         {
+            BUIManager = bUIManager;
+
             Position = startPosition;
             Origin = new Vector2(.5f, .5f);
 
@@ -50,7 +54,7 @@ namespace PaperMarioBattleSystem
 
         public void HandleCollision(CollisionResponseHolder collisionResponse)
         {
-            BattleUIManager.Instance.RemoveUIElement(this);
+            BUIManager.RemoveUIElement(this);
         }
 
         public override void Update()

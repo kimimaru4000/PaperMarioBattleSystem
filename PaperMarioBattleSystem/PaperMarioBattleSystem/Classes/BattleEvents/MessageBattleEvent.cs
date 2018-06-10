@@ -22,8 +22,12 @@ namespace PaperMarioBattleSystem
         private TextBox BattleTextBox = null;
         private string BattleMessage = string.Empty;
 
-        public MessageBattleEvent(string battleMessage, double waitDuration) : base(waitDuration)
+        private BattleUIManager BUIManager = null;
+
+        public MessageBattleEvent(BattleUIManager bUIManager, string battleMessage, double waitDuration) : base(waitDuration)
         {
+            BUIManager = bUIManager;
+
             BattleMessage = battleMessage;
             BattleTextBox = new TextBox(SpriteRenderer.Instance.WindowCenter, new Vector2(100, 50), BattleMessage);
             BattleTextBox.ScaleToText(AssetManager.Instance.TTYDFont);
@@ -35,16 +39,18 @@ namespace PaperMarioBattleSystem
         {
             base.OnStart();
 
-            BattleUIManager.Instance.SuppressMenus();
-            BattleUIManager.Instance.AddUIElement(BattleTextBox);
+            BUIManager.SuppressMenus();
+            BUIManager.AddUIElement(BattleTextBox);
         }
 
         protected override void OnEnd()
         {
             base.OnEnd();
 
-            BattleUIManager.Instance.UnsuppressMenus();
-            BattleUIManager.Instance.RemoveUIElement(BattleTextBox);
+            BUIManager.UnsuppressMenus();
+            BUIManager.RemoveUIElement(BattleTextBox);
+
+            BUIManager = null;
         }
 
         public override bool AreContentsEqual(BattleEvent other)

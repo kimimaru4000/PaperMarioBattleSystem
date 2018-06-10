@@ -309,7 +309,7 @@ namespace PaperMarioBattleSystem
             //If we should show Stylish Move timings, send out an object to show it
             if (User.PartyHasAdditionalProperty(AdditionalProperty.ShowStylishTimings) == true)
             {
-                BattleObjManager.Instance.AddBattleObject(new StylishIndicatorVFX(User, CurStylishData));
+                User.BManager.battleObjManager.AddBattleObject(new StylishIndicatorVFX(User, CurStylishData));
             }
         }
 
@@ -597,7 +597,7 @@ namespace PaperMarioBattleSystem
         /// <param name="commandRank">The CommandRank result of the Action Command.</param>
         protected void ShowCommandRankVFX(ActionCommand.CommandRank commandRank, Vector2 position)
         {
-            BattleObjManager.Instance.AddBattleObject(new ActionCommandVFX(commandRank, position, new Vector2(-15f, -15f)));
+            User.BManager.battleObjManager.AddBattleObject(new ActionCommandVFX(commandRank, position, new Vector2(-15f, -15f)));
             SoundManager.Instance.PlaySound(SoundManager.Sound.ActionCommandSuccess);
         }
 
@@ -685,7 +685,7 @@ namespace PaperMarioBattleSystem
                         HandleStylishMove(index);
 
                         //Play the VFX and have it head towards the user's position
-                        BattleObjManager.Instance.AddBattleObject(new StylishMoveVFX(User.Position));
+                        User.BManager.battleObjManager.AddBattleObject(new StylishMoveVFX(User.Position));
                     }
                 }
             }

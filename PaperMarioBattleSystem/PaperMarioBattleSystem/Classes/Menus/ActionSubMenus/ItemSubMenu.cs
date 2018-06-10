@@ -95,7 +95,7 @@ namespace PaperMarioBattleSystem
             else
             {
                 //Push the CancelDipMenu
-                BattleUIManager.Instance.PushMenu(new CancelDipMenu(User));
+                User.BManager.battleUIManager.PushMenu(new CancelDipMenu(User));
             }
         }
 

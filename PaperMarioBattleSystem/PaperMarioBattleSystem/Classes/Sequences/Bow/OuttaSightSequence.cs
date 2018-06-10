@@ -160,7 +160,7 @@ namespace PaperMarioBattleSystem
             Debug.Log($"Starting second phase of {nameof(OuttaSightAction)} for {EntityUsing.Name}!");
 
             //Clear the menu stack as the action will be selected automatically
-            BattleUIManager.Instance.ClearMenuStack();
+            EntityUsing.BManager.battleUIManager.ClearMenuStack();
 
             //Immediately start the second half of the sequence
             MoveAction outtaSightSecondHalf = new MoveAction(User, "Outta Sight Second Half",
@@ -181,7 +181,7 @@ namespace PaperMarioBattleSystem
             Debug.Log($"Skipped {AllyAffected.Name}'s turn for {nameof(OuttaSightAction)} as it's being protected by {EntityUsing.Name}!");
 
             //Clear the menu stack - the ally can't move yet
-            BattleUIManager.Instance.ClearMenuStack();
+            User.BManager.battleUIManager.ClearMenuStack();
 
             //Make the ally do nothing on each of its turns
             AllyAffected.StartAction(new NoAction(AllyAffected), true, null);

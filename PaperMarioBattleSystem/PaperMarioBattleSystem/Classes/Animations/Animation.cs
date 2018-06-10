@@ -313,22 +313,6 @@ namespace PaperMarioBattleSystem
             /// </summary>
             public float DepthOffset;
 
-            /// <summary>
-            /// Gets the final drawn position of the animation frame.
-            /// </summary>
-            /// <param name="position">The original position to draw the animation frame at.</param>
-            /// <param name="flipped">Whether the frame is flipped horizontally or not.</param>
-            /// <returns>A Vector2 containing the final drawn position of the animation frame.</returns>
-            public Vector2 GetDrawnPosition(in Vector2 position, in bool flipped)
-            {
-                Vector2 realOffset = PosOffset;
-                if (flipped == true)
-                    realOffset.X = -realOffset.X;
-                Vector2 realPos = position + realOffset;
-
-                return realPos;
-            }
-
             public Frame(Rectangle drawRegion, double duration)
             {
                 DrawRegion = drawRegion;
@@ -345,6 +329,22 @@ namespace PaperMarioBattleSystem
             public Frame (Rectangle drawRegion, double duration, Vector2 posOffset, float depthOffset) : this(drawRegion, duration, posOffset)
             {
                 DepthOffset = depthOffset;
+            }
+
+            /// <summary>
+            /// Gets the final drawn position of the animation frame.
+            /// </summary>
+            /// <param name="position">The original position to draw the animation frame at.</param>
+            /// <param name="flipped">Whether the frame is flipped horizontally or not.</param>
+            /// <returns>A Vector2 containing the final drawn position of the animation frame.</returns>
+            public Vector2 GetDrawnPosition(in Vector2 position, in bool flipped)
+            {
+                Vector2 realOffset = PosOffset;
+                if (flipped == true)
+                    realOffset.X = -realOffset.X;
+                Vector2 realPos = position + realOffset;
+
+                return realPos;
             }
 
             public void Draw(Texture2D spriteSheet, Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipped, float layer, bool uibatch)

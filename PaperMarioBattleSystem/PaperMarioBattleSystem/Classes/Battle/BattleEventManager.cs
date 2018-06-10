@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// Manages BattleEvents.
     /// </summary>
-    public sealed class BattleEventManager
+    public sealed class BattleEventManager : ICleanup
     {
         /// <summary>
         /// The current Battle Events taking place. These are completed before the next BattleEntity's turn takes place.
@@ -44,6 +44,12 @@ namespace PaperMarioBattleSystem
         public BattleEventManager(BattleManager bManager)
         {
             BManager = bManager;
+        }
+
+        public void CleanUp()
+        {
+            PendingBattleEvents.Clear();
+            BattleEvents.Clear();
         }
 
         /// <summary>

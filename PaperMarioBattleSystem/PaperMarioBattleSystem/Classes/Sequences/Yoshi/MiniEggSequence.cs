@@ -33,7 +33,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 MiniEggUI = new TimedLightActionCommandUI(actionCommand as TimedLightCommand);
-                BattleUIManager.Instance.AddUIElement(MiniEggUI);
+                User.BManager.battleUIManager.AddUIElement(MiniEggUI);
             }
         }
 
@@ -43,7 +43,7 @@ namespace PaperMarioBattleSystem
 
             if (MiniEggUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(MiniEggUI);
+                User.BManager.battleUIManager.RemoveUIElement(MiniEggUI);
                 MiniEggUI = null;
             }
         }

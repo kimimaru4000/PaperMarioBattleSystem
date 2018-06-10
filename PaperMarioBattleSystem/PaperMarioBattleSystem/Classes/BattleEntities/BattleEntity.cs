@@ -306,7 +306,7 @@ namespace PaperMarioBattleSystem
                     }
 
                     //Show the star indicating damage
-                    BattleObjManager.Instance.AddBattleObject(new DamageStarVFX(damage, Position + (EntityType == EntityTypes.Player ? new Vector2(-40, -35) : new Vector2(50, -35))));
+                    BManager.battleObjManager.AddBattleObject(new DamageStarVFX(damage, Position + (EntityType == EntityTypes.Player ? new Vector2(-40, -35) : new Vector2(50, -35))));
 
                     //Lose HP
                     LoseHP(damage);
@@ -547,7 +547,6 @@ namespace PaperMarioBattleSystem
         {
             BattleStats.HP = 0;
             UpdateHealthState();
-            //AnimManager.PlayAnimation(AnimationGlobals.DeathName, true);
 
             //Remove all StatusEffects on the entity
             EntityProperties.RemoveAllStatuses();

@@ -11,31 +11,9 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// Handles lighting for Dark battles.
-    /// <para>This is a Singleton.</para>
     /// </summary>
     public sealed class LightingManager : ICleanup
     {
-        #region Singleton Fields
-
-        public static LightingManager Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new LightingManager();
-                }
-
-                return instance;
-            }
-        }
-
-        public static bool HasInstance => (instance != null);
-
-        private static LightingManager instance = null;
-
-        #endregion
-
         /// <summary>
         /// The darkness object for Dark battles.
         /// </summary>
@@ -68,16 +46,18 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private bool Initialized = false;
 
-        private LightingManager()
+        public LightingManager(BattleDarknessObj battleDarkness, Effect lightingShader, Texture2D lightMask)
         {
-
+            Initialize(battleDarkness, lightingShader, lightMask);
         }
 
         /// <summary>
         /// Initializes the LightingManager.
         /// </summary>
         /// <param name="battleDarkness">The battle darkness object.</param>
-        public void Initialize(BattleDarknessObj battleDarkness)
+        /// <param name="lightingShader">The shader to use for the lighting.</param>
+        /// <param name="lightMask">A Texture2D representing the light.</param>
+        public void Initialize(BattleDarknessObj battleDarkness, Effect lightingShader, Texture2D lightMask)
         {
             if (Initialized == true)
             {
@@ -89,8 +69,8 @@ namespace PaperMarioBattleSystem
             LightMap = new RenderTarget2D(SpriteRenderer.Instance.graphicsDeviceManager.GraphicsDevice, RenderingGlobals.BaseResolutionWidth, RenderingGlobals.BaseResolutionHeight);
             ScreenCopy = new RenderTarget2D(SpriteRenderer.Instance.graphicsDeviceManager.GraphicsDevice, RenderingGlobals.BaseResolutionWidth, RenderingGlobals.BaseResolutionHeight);
 
-            LightingShader = AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Lighting");
-            LightMask = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}LightMask.png");
+            LightingShader = lightingShader;
+            LightMask = lightMask;
 
             Initialized = true;
         }
@@ -109,8 +89,6 @@ namespace PaperMarioBattleSystem
             BattleDarkness = null;
 
             Initialized = false;
-
-            instance = null;
         }
 
         /// <summary>

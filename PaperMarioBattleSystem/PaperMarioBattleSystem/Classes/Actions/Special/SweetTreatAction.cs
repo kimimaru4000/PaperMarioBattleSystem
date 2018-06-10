@@ -25,7 +25,7 @@ namespace PaperMarioBattleSystem
             HealingInfo = new HealingData(0, 0, GetStatusesCured());
 
             SetMoveSequence(new SweetTreatSequence(this));
-            actionCommand = new SweetTreatCommand(MoveSequence);
+            actionCommand = new SweetTreatCommand(MoveSequence, User.BManager.battleUIManager);
         }
 
         protected StatusTypes[] GetStatusesCured()

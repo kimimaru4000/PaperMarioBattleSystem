@@ -192,3 +192,13 @@ We can make the Ended property in StatusEffect a public property with a private 
 
 This ties this logic to the derived StatusEffects, but I feel that's better than keeping it in the base. If a developer wants more control over it, they can create a class deriving from StatusEffect that handles this functionality and create new StatusEffects deriving from that one.
 
+Update (6/9/18)
+---------------
+The Core and Game namespace plan won't work out as well as I thought. It doesn't make sense to not have BattlePlayer, BattlePartner, BattleMario, and BattleEnemy available for use in the battle system. I think it's best to see how people use this first and then figure out how to proceed. Hopefully (with some help, ideally), we can eventually form a core API with what's available.
+
+With that said, to finish up the release I think we need to do the following at the bare minimum:
+
+1. BattleUIManager should no longer be a Singleton and should be a field inside the BattleManager. This will allow multiple battles to work better, as each one would be consolidated within each battle.
+2. BattleObjManager should also no longer be a Singleton and be a field inside the BattleManager for the same reasons as the BattleUIManager.
+
+To carry out these changes, some other classes will need to be modified. For example, the MessageBattleEvent will need a reference to the BattleUIManager it needs to suppress its menus. For the most part, these should be minor. Afterwards, I suppose just perform another cleanup and optimization pass, and 1.0 should be good to go!

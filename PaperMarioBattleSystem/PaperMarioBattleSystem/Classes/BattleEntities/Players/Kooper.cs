@@ -87,7 +87,7 @@ namespace PaperMarioBattleSystem
             if (FlippedBehavior.Flipped == true)
             {
                 //Make Kooper do a NoAction instead of directly ending his turn
-                BattleUIManager.Instance.ClearMenuStack();
+                BManager.battleUIManager.ClearMenuStack();
                 StartAction(new NoAction(this), true, null);
             }
         }
@@ -95,7 +95,7 @@ namespace PaperMarioBattleSystem
         public override void OnTurnEnd()
         {
             base.OnTurnEnd();
-            BattleUIManager.Instance.ClearMenuStack();
+            BManager.battleUIManager.ClearMenuStack();
         }
 
         public override string GetIdleAnim()

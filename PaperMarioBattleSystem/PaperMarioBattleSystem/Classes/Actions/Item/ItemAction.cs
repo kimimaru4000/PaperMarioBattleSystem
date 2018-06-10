@@ -49,7 +49,7 @@ namespace PaperMarioBattleSystem
             int startIndex = 0;
 
             //Bring up the target selection menu
-            BattleUIManager.Instance.StartTargetSelection(ActionStart, MoveProperties.SelectionType, startIndex, entities);
+            User.BManager.battleUIManager.StartTargetSelection(ActionStart, MoveProperties.SelectionType, startIndex, entities);
         }
 
         public sealed override void OnActionStarted()

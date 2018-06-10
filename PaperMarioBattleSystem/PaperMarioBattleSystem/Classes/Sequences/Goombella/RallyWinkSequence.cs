@@ -38,7 +38,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 RallyWinkUI = new RallyWinkActionCommandUI(actionCommand as RallyWinkCommand);
-                BattleUIManager.Instance.AddUIElement(RallyWinkUI);
+                User.BManager.battleUIManager.AddUIElement(RallyWinkUI);
             }
         }
 
@@ -57,7 +57,7 @@ namespace PaperMarioBattleSystem
 
             if (RallyWinkUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(RallyWinkUI);
+                User.BManager.battleUIManager.RemoveUIElement(RallyWinkUI);
                 RallyWinkUI = null;
             }
         }
@@ -130,7 +130,7 @@ namespace PaperMarioBattleSystem
                         ShowCommandRankVFX(HighestCommandRank, EntitiesAffected[0].Position);
                     }
 
-                    BattleObjManager.Instance.AddBattleObject(HeartVFX);
+                    User.BManager.battleObjManager.AddBattleObject(HeartVFX);
 
                     if (EntitiesAffected[0].IsImmobile() == false)
                     {
@@ -151,7 +151,7 @@ namespace PaperMarioBattleSystem
                         EntitiesAffected[0].SetTurnsUsed(EntitiesAffected[0].TurnsUsed - 1);
                     }
 
-                    MessageBattleEvent msgEvent = new MessageBattleEvent(SuccessMessage, 2000d);
+                    MessageBattleEvent msgEvent = new MessageBattleEvent(User.BManager.battleUIManager, SuccessMessage, 2000d);
 
                     //Show the message
                     User.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,

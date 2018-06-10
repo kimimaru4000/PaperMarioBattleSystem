@@ -76,6 +76,11 @@ namespace PaperMarioBattleSystem
         private double ElapsedTime = 0d;
 
         /// <summary>
+        /// The BattleUIManager used for updating and rendering the elements.
+        /// </summary>
+        private BattleUIManager BUIManager = null;
+
+        /// <summary>
         /// Tells if the spawner spawns the elements vertically or not.
         /// </summary>
         protected bool IsVertical => (StartSpawnPos.X == EndSpawnPos.X);
@@ -93,6 +98,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Constructor
         /// </summary>
+        /// <param name="bUIManager">The BattleUIManager.</param>
         /// <param name="columnRows">The number of columns or rows to spawn elements on.</param>
         /// <param name="columnRowDiffVal">The X or Y position difference between each column or row.</param>
         /// <param name="movementDur">How long it takes the elements to move. This also represents how long they're on screen.</param>
@@ -101,9 +107,11 @@ namespace PaperMarioBattleSystem
         /// <param name="endSpawnPos">The end position of the elements.</param>
         /// <param name="allowedRestorationTypes">The restoration types the spawner will create.</param>
         /// <param name="restorationTypeCounts">The counts for each restoration type. Define them in the same order as the permitted restoration types.</param>
-        public SweetTreatElementSpawner(int columnRows, float columnRowDiffVal, double movementDur, double timeBetweenElements,
+        public SweetTreatElementSpawner(BattleUIManager bUIManager, int columnRows, float columnRowDiffVal, double movementDur, double timeBetweenElements,
             Vector2 startSpawnPos, Vector2 endSpawnPos, IList<RestoreTypes> allowedRestorationTypes, IList<int> restorationTypeCounts)
         {
+            BUIManager = bUIManager;
+
             ColumnRows = columnRows;
             ColumnRowDiffVal = columnRowDiffVal;
             MovementDur = movementDur;
@@ -121,7 +129,7 @@ namespace PaperMarioBattleSystem
         {
             for (int i = 0; i < RestorationElements.Count; i++)
             {
-                BattleUIManager.Instance.RemoveUIElement(RestorationElements[i]);
+                BUIManager.RemoveUIElement(RestorationElements[i]);
                 RestorationElements.RemoveAt(i);
                 i--;
             }
@@ -134,7 +142,7 @@ namespace PaperMarioBattleSystem
         {
             if (restorationElement == null) return;
 
-            BattleUIManager.Instance.RemoveUIElement(restorationElement);
+            BUIManager.RemoveUIElement(restorationElement);
             RestorationElements.Remove(restorationElement);
         }
 
@@ -181,11 +189,11 @@ namespace PaperMarioBattleSystem
                 endPos.Y += valAdd;
             }
 
-            SweetTreatRestorationElement element = new SweetTreatRestorationElement(restoreType, MovementDur, startPos, endPos);
+            SweetTreatRestorationElement element = new SweetTreatRestorationElement(BUIManager, restoreType, MovementDur, startPos, endPos);
 
             RestorationElements.Add(element);
 
-            BattleUIManager.Instance.AddUIElement(element);
+            BUIManager.AddUIElement(element);
 
             //Remove from this element
             RestorationTypeTracker[restoreType]--;
@@ -229,7 +237,7 @@ namespace PaperMarioBattleSystem
             {
                 if (RestorationElements[i].DoneMoving == true)
                 {
-                    BattleUIManager.Instance.RemoveUIElement(RestorationElements[i]);
+                    BUIManager.RemoveUIElement(RestorationElements[i]);
 
                     RestorationElements.RemoveAt(i);
                     i--;

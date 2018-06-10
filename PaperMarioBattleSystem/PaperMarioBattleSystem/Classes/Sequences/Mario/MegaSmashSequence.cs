@@ -35,7 +35,7 @@ namespace PaperMarioBattleSystem
                 AfterImages.Update();
             }
 
-            BattleObjManager.Instance.AddBattleObject(AfterImages);
+            User.BManager.battleObjManager.AddBattleObject(AfterImages);
         }
 
         protected override void OnEnd()
@@ -72,7 +72,7 @@ namespace PaperMarioBattleSystem
         {
             if (AfterImages != null)
             {
-                BattleObjManager.Instance.RemoveBattleObject(AfterImages);
+                User.BManager.battleObjManager.RemoveBattleObject(AfterImages);
                 AfterImages = null;
             }
         }

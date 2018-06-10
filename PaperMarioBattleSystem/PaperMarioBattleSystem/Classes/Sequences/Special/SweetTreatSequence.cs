@@ -29,7 +29,7 @@ namespace PaperMarioBattleSystem
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {
                 SweetTreatUI = new SweetTreatActionCommandUI(actionCommand as SweetTreatCommand, EntitiesAffected.Length > 1);
-                BattleUIManager.Instance.AddUIElement(SweetTreatUI);
+                User.BManager.battleUIManager.AddUIElement(SweetTreatUI);
             }
         }
 
@@ -39,7 +39,7 @@ namespace PaperMarioBattleSystem
 
             if (SweetTreatUI != null)
             {
-                BattleUIManager.Instance.RemoveUIElement(SweetTreatUI);
+                User.BManager.battleUIManager.RemoveUIElement(SweetTreatUI);
                 SweetTreatUI = null;
             }
         }

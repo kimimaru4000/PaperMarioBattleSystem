@@ -31,8 +31,12 @@ namespace PaperMarioBattleSystem
         private Vector2 LeftHalfPosOffset = Vector2.Zero;
         private Vector2 RightHalfPosOffset = Vector2.Zero;
 
-        public ShellBreakAnimObj(Vector2 position, double animDuration, float maxRotationVal, double rotationTime)
+        private BattleObjManager BObjManager = null;
+
+        public ShellBreakAnimObj(BattleObjManager bObjManager, Vector2 position, double animDuration, float maxRotationVal, double rotationTime)
         {
+            BObjManager = bObjManager;
+
             Position = position;
             AnimDuration = animDuration;
             MaxRotation = maxRotationVal;
@@ -58,6 +62,8 @@ namespace PaperMarioBattleSystem
             ShellRightHalf = null;
 
             LeftHalfPosOffset = RightHalfPosOffset = Vector2.Zero;
+
+            BObjManager = null;
         }
 
         public override void Update()
@@ -70,7 +76,7 @@ namespace PaperMarioBattleSystem
                 if (ElapsedRotationTime >= RotationTime)
                 {
                     //Start the blinking with the remaining animation time
-                    BattleObjManager.Instance.AddBattleObject(new BlinkVFX(this, 0f, 34d, AnimDuration - ElapsedTime));
+                    BObjManager.AddBattleObject(new BlinkVFX(this, 0f, 34d, AnimDuration - ElapsedTime));
 
                     ElapsedRotationTime = RotationTime;
                 }

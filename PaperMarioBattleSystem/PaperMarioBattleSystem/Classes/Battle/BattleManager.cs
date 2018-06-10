@@ -68,6 +68,16 @@ namespace PaperMarioBattleSystem
         public BattleEventManager battleEventManager { get; private set; } = null;
 
         /// <summary>
+        /// The BattleManager's UI manager.
+        /// </summary>
+        public BattleUIManager battleUIManager { get; private set; } = null;
+
+        /// <summary>
+        /// The BattleManager's battle object manager.
+        /// </summary>
+        public BattleObjManager battleObjManager { get; private set; } = null;
+
+        /// <summary>
         /// The battle's properties.
         /// </summary>
         public BattleProperties Properties { get; private set; } = default(BattleProperties);
@@ -159,10 +169,17 @@ namespace PaperMarioBattleSystem
         public BattleManager()
         {
             battleEventManager = new BattleEventManager(this);
+            battleUIManager = new BattleUIManager();
+            battleUIManager.battleHUD.SetBattleManager(this);
+            battleObjManager = new BattleObjManager();
         }
 
         public void CleanUp()
         {
+            battleEventManager.CleanUp();
+            battleUIManager.CleanUp();
+            battleObjManager.CleanUp();
+
             State = BattleState.Done;
 
             //Remove and cleanup all BattleEntities in battle
@@ -453,7 +470,7 @@ namespace PaperMarioBattleSystem
                 EndBattle(BattleResults.GameOver);
                 Debug.Log("GAME OVER");
 
-                BattleUIManager.Instance.ClearMenuStack();
+                battleUIManager.ClearMenuStack();
             }
             else if (EnemiesAlive <= 0)
             {
@@ -462,7 +479,7 @@ namespace PaperMarioBattleSystem
                 Partner?.AnimManager.PlayAnimation(AnimationGlobals.VictoryName);
                 Debug.Log("VICTORY");
 
-                BattleUIManager.Instance.ClearMenuStack();
+                battleUIManager.ClearMenuStack();
             }
         }
 

@@ -12,6 +12,6 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public interface IPosition
     {
-        Vector2 Position { get; }
+        Vector2 Position { get; set; }
     }
 }

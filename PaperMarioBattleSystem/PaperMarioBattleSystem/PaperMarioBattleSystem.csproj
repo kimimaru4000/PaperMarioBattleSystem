@@ -133,6 +133,7 @@
     <Compile Include="Classes\Actions\Player\ChangePartnerAction.cs" />
     <Compile Include="Classes\Actions\Player\DefendAction.cs" />
     <Compile Include="Classes\Actions\Player\RunAwayAction.cs" />
+    <Compile Include="Classes\Actions\Pokey\BodyThrowAction.cs" />
     <Compile Include="Classes\Actions\Special\ArtAttackAction.cs" />
     <Compile Include="Classes\Actions\Special\FocusAction.cs" />
     <Compile Include="Classes\Actions\Special\LullabyAction.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\KoopatrolAI.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\KoopaTroopaAI.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\ParagoombaAI.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\PokeyAI.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\ShyGuyAI.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Goomba.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Gulpit.cs" />
@@ -428,6 +430,7 @@
     <Compile Include="Classes\SequenceActions\WaitSideActionsCompleteSeqAction.cs" />
     <Compile Include="Classes\Sequences\Bobbery Bomb\BlinkFasterSequence.cs" />
     <Compile Include="Classes\Sequences\Bobbery\BombSquadSequence.cs" />
+    <Compile Include="Classes\Sequences\BodyThrowSequence.cs" />
     <Compile Include="Classes\Sequences\Bow\OuttaSightSecondHalfSequence.cs" />
     <Compile Include="Classes\Sequences\Bow\OuttaSightSequence.cs" />
     <Compile Include="Classes\Sequences\ChangePartnerSequence.cs" />

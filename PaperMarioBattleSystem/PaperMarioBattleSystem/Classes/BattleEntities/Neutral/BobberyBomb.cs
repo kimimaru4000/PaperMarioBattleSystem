@@ -28,13 +28,15 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private bool Detonated = false;
 
-        private Rectangle GetHitbox => new Rectangle((int)Position.X - 15, (int)Position.Y - 60, 80, 140);
+        private Rectangle GetHitbox => new Rectangle((int)Position.X - (int)(40f * Scale.X), (int)Position.Y - (int)(200f * Scale.Y), (int)(80f * Scale.X), (int)(240f * Scale.Y));
 
         public BobberyBomb(int damage) : base(new Stats(0, 1, 0, damage, 0))
         {
             Name = "Bobbery Bomb";
 
             EntityType = EntityTypes.Neutral;
+
+            Scale = new Vector2(.5f, .5f);
 
             //Explosions cause the bombs to detonate (only possible from other Bobbery Bombs in the actual games)
             EntityProperties.AddWeakness(Elements.Explosion, new WeaknessHolder(WeaknessTypes.KO, 0));
@@ -60,13 +62,10 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(62, 1, 65, 68), bombFrameRate),
                 new Animation.Frame(new Rectangle(62, 72, 65, 68), bombFrameRate)));
 
-            //Offset the spark animation so we can play it in the same position as the bombs
-            Vector2 sparkOffset = new Vector2(16, -68 / 4);
-
             SparkAnimation = new LoopAnimation(spriteSheet, AnimationGlobals.InfiniteLoop,
-                new Animation.Frame(new Rectangle(0, 0, 32, 24), sparkFrameRate, sparkOffset),
-                new Animation.Frame(new Rectangle(0, 24, 32, 24), sparkFrameRate, sparkOffset),
-                new Animation.Frame(new Rectangle(0, 48, 32, 24), sparkFrameRate, sparkOffset));
+                new Animation.Frame(new Rectangle(0, 0, 32, 24), sparkFrameRate),
+                new Animation.Frame(new Rectangle(0, 24, 32, 24), sparkFrameRate),
+                new Animation.Frame(new Rectangle(0, 48, 32, 24), sparkFrameRate));
 
             //Pause the spark animation until we're ready to play it
             SparkAnimation.Pause();
@@ -170,7 +169,7 @@ namespace PaperMarioBattleSystem
 
             //Draw the spark animation if it's playing
             if (SparkAnimation.IsPlaying == true)
-                SparkAnimation.Draw(Position - AnimManager.GetCurrentAnim<Animation>().CurFrame.DrawRegion.GetCenterOrigin(), TintColor, Rotation, Vector2.Zero, Vector2.One, false, .11f);
+                SparkAnimation.Draw(Position - new Vector2(0f, ((AnimManager.GetCurrentAnim<Animation>().CurFrame.DrawRegion.Height / 2) * Scale.Y) + 2), TintColor, Rotation, Origin, Scale, false, .11f);
 
             //DrawHitbox();
         }

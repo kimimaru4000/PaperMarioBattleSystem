@@ -9,11 +9,16 @@ using PaperMarioBattleSystem.Utilities;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// A SequenceAction that moves a BattleEntity to a desired location over the Duration.
-    /// An example would be a position on the screen, such as (350, 400)
+    /// A SequenceAction that moves an IPosition to a desired location over the Duration.
+    /// An example would be a position on the screen, such as (350, 400).
     /// </summary>
     public class MoveToSeqAction : SequenceAction
     {
+        /// <summary>
+        /// An object that can be positioned.
+        /// </summary>
+        protected IPosition PositionableObj = null;
+
         /// <summary>
         /// The start position of the BattleEntity.
         /// </summary>
@@ -33,14 +38,14 @@ namespace PaperMarioBattleSystem
 
         protected Interpolation.InterpolationTypes YInterpolation = Interpolation.InterpolationTypes.Linear;
 
-        protected MoveToSeqAction(BattleEntity entity, double duration) : base(entity, duration)
+        protected MoveToSeqAction(IPosition positionableObj, double duration) : base(duration)
         {
-
+            PositionableObj = positionableObj;
         }
 
-        public MoveToSeqAction(BattleEntity entity, Vector2 destination, double duration,
+        public MoveToSeqAction(IPosition positionableObj, Vector2 destination, double duration,
             Interpolation.InterpolationTypes xInterpolation = Interpolation.InterpolationTypes.Linear,
-            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear) : base(entity, duration)
+            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear) : this(positionableObj, duration)
         {
             MoveEnd = destination;
 
@@ -50,14 +55,14 @@ namespace PaperMarioBattleSystem
 
         protected override void OnStart()
         {
-            MoveStart = Entity.Position;
+            MoveStart = PositionableObj.Position;
 
             ElapsedTime = 0f;
         }
 
         protected override void OnEnd()
         {
-            Entity.Position = MoveEnd;
+            PositionableObj.Position = MoveEnd;
 
             ElapsedTime = 0f;
         }
@@ -75,7 +80,7 @@ namespace PaperMarioBattleSystem
             ElapsedTime += (float)Time.ElapsedMilliseconds;
 
             //Interpolate to get the position and scale by the total duration
-            Entity.Position = Interpolation.Interpolate(MoveStart, MoveEnd, ElapsedTime / (float)Duration, XInterpolation, YInterpolation);
+            PositionableObj.Position = Interpolation.Interpolate(MoveStart, MoveEnd, ElapsedTime / (float)Duration, XInterpolation, YInterpolation);
 
             //End after the designated amount of time has passed
             if (ElapsedTime >= Duration)

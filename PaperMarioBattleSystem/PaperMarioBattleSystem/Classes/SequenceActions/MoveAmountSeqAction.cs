@@ -17,9 +17,9 @@ namespace PaperMarioBattleSystem
     {
         private Vector2 MoveAmount = Vector2.Zero;
 
-        public MoveAmountSeqAction(BattleEntity entity, Vector2 amount, double duration, 
+        public MoveAmountSeqAction(IPosition positionableObj, Vector2 amount, double duration, 
             Interpolation.InterpolationTypes xInterpolation = Interpolation.InterpolationTypes.Linear,
-            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear) : base(entity, duration)
+            Interpolation.InterpolationTypes yInterpolation = Interpolation.InterpolationTypes.Linear) : base(positionableObj, duration)
         {
             MoveAmount = amount;
 

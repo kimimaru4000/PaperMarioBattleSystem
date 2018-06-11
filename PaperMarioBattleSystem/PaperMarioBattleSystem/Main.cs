@@ -107,7 +107,7 @@ namespace PaperMarioBattleSystem
             battleManager.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
                 new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal)),
                 Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario),
-                new List<BattleEntity>() { new Pokey(), new SkyGuy() });
+                new List<BattleEntity>() { new Goomba(), new Paratroopa(), new Pokey() });
 
             //Initialize helper objects
             //Check for the battle setting and add darkness if so

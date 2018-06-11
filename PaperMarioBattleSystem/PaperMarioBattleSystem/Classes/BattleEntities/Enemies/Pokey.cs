@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using PaperMarioBattleSystem.Extensions;
 
 namespace PaperMarioBattleSystem
 {
@@ -23,11 +24,13 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected List<CroppedTexture2D> VisualSegments = new List<CroppedTexture2D>();
 
+        public CroppedTexture2D SegmentTex { get; private set; } = null;
+
         public Pokey() : base(new Stats(11, 4, 0, 2, 0))
         {
             Name = "Pokey";
 
-            AIBehavior = new GoombaAI(this);
+            AIBehavior = new PokeyAI(this);
 
             #region Entity Property Setup
 
@@ -54,6 +57,8 @@ namespace PaperMarioBattleSystem
             #endregion
 
             LoadAnimations();
+
+            SegmentTex = new CroppedTexture2D(AnimManager.SpriteSheet, new Rectangle(99, 38, 28, 23));
         }
 
         public override void CleanUp()
@@ -67,6 +72,8 @@ namespace PaperMarioBattleSystem
                 VisualSegments.Clear();
                 VisualSegments = null;
             }
+
+            SegmentTex = null;
         }
 
         public override void LoadAnimations()
@@ -97,7 +104,7 @@ namespace PaperMarioBattleSystem
             //Add the visual segments
             for (int i = 0; i < SegmentBehavior.CurSegmentCount; i++)
             {
-                VisualSegments.Add(new CroppedTexture2D(AnimManager.SpriteSheet, new Rectangle(99, 38, 28, 23)));
+                VisualSegments.Add(SegmentTex);
                 pos.Y -= SegmentHeight;
             }
 
@@ -155,7 +162,7 @@ namespace PaperMarioBattleSystem
                     int absDiff = -diff;
                     for (int i = 0; i < absDiff; i++)
                     {
-                        VisualSegments.Add(new CroppedTexture2D(AnimManager.SpriteSheet, new Rectangle(99, 38, 28, 23)));
+                        VisualSegments.Add(SegmentTex);
                     }
                 }
 
@@ -178,16 +185,22 @@ namespace PaperMarioBattleSystem
         {
             base.DrawEntity();
 
-            Animation.Frame curFrame = (AnimManager.CurrentAnim as Animation).CurFrame;
+            //Animation.Frame curFrame = AnimManager.GetCurrentAnim<Animation>().CurFrame;
+
+            //NOTE: For now do this so the Pokey doesn't oddly look like its body parts move up during its idle animation
+            //Ideally, we'd have a new type of animation better suited for Pokeys, which would no longer require that we render these individually
+            const int drawHeight = 30;
 
             //Draw the visual segments
             for (int i = 0; i < VisualSegments.Count; i++)
             {
                 Vector2 pos = Position;
-                pos.Y -= (float)Math.Ceiling((curFrame.DrawRegion.Height - SegmentHeight) / 2f);
-                pos.Y += (i * (Scale.Y * SegmentHeight)) + ((curFrame.PosOffset.Y + curFrame.DrawRegion.Height) * Scale.Y);
+                //pos.Y -= (float)Math.Ceiling((curFrame.DrawRegion.Height - SegmentHeight) / 2f);
+                //pos.Y += (i * (Scale.Y * SegmentHeight)) + ((curFrame.PosOffset.Y + curFrame.DrawRegion.Height) * Scale.Y);
+                pos.Y -= (float)Math.Ceiling((drawHeight - SegmentHeight) / 2f);
+                pos.Y += (i * (Scale.Y * SegmentHeight)) + (drawHeight * Scale.Y);
 
-                SpriteRenderer.Instance.Draw(VisualSegments[i].Tex, pos, VisualSegments[i].SourceRect, TintColor, 0f, new Vector2(.5f, .5f), Scale, EntityType == Enumerations.EntityTypes.Player, false, .09f);
+                SpriteRenderer.Instance.Draw(VisualSegments[i].Tex, pos, VisualSegments[i].SourceRect, TintColor, 0f, new Vector2(.5f, .5f), Scale, SpriteFlip, false, .09f);
             }
         }
     }

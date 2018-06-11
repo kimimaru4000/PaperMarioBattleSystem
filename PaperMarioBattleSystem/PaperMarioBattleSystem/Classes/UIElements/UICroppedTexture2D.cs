@@ -10,15 +10,15 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// A UIElement that holds a <see cref="CroppedTexture2D"/>.
     /// </summary>
-    public class UICroppedTexture2D : PosUIElement, ITintable
+    public class UICroppedTexture2D : PosUIElement, IRotatable, IScalable, ITintable
     {
         public CroppedTexture2D CroppedTex2D = null;
         public bool FlipX = false;
         public bool FlipY = false;
-        public float Rotation = 0f;
+        public float Rotation { get; set; } = 0f;
         public float Depth = 0f;
         public Vector2 Origin = Vector2.Zero;
-        public Vector2 Scale = Vector2.One;
+        public Vector2 Scale { get; set; } = Vector2.One;
         public Color TintColor { get; set; } = Color.White;
 
         protected UICroppedTexture2D()

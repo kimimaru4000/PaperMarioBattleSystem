@@ -41,7 +41,7 @@ namespace PaperMarioBattleSystem
         private double CircleRadius = 60d;
         public double CursorAngle { get; private set; } = 90d;
 
-        private Vector2 BaseThrowVelocity = new Vector2(5f, 5f);
+        private Vector2 BaseThrowVelocity = new Vector2(6f, 6f);
 
         private UIFourPiecedTex Cursor = null;
         private UIFourPiecedTex ThrownCursor = null;

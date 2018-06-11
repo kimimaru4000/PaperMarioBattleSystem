@@ -97,13 +97,13 @@ namespace PaperMarioBattleSystem
         public ObjAnimManager AnimManager { get; private set; } = null;
 
         /// <summary>
-        /// The HeightState of the entity
+        /// The HeightState of the BattleEntity.
         /// </summary>
         public HeightStates HeightState { get; private set; } = HeightStates.Grounded;
 
         /// <summary>
-        /// The HealthState of the entity.
-        /// This can apply to any entity, but only Mario and his Partners utilize Danger and Peril
+        /// The HealthState of the BattleEntity.
+        /// This can apply to any BattleEntity, but only Mario and his Partners utilize Danger and Peril.
         /// </summary>
         public HealthStates HealthState { get; private set; } = HealthStates.Normal;
 
@@ -112,17 +112,17 @@ namespace PaperMarioBattleSystem
         public virtual int CurFP => BattleStats.FP;
 
         /// <summary>
-        /// The base number of turns the BattleEntity has in each of its phases
+        /// The base number of turns the BattleEntity has in each of its phases.
         /// </summary>
         public int BaseTurns { get; protected set; } = BattleGlobals.DefaultTurnCount;
 
         /// <summary>
-        /// The number of turns the BattleEntity used in this phase
+        /// The number of turns the BattleEntity used in this phase.
         /// </summary>
         public int TurnsUsed { get; protected set; } = 0;
 
         /// <summary>
-        /// The current max number of turns the BattleEntity has in this phase
+        /// The current max number of turns the BattleEntity has in this phase.
         /// </summary>
         public int MaxTurns { get; protected set; } = BattleGlobals.DefaultTurnCount;
 
@@ -131,8 +131,8 @@ namespace PaperMarioBattleSystem
         public Color TintColor { get; set;  } = Color.White;
 
         /// <summary>
-        /// The entity's battle index, assigned from the BattleManager. If it's less than or equal to <see cref="BattleGlobals.InvalidBattleIndex"/>,
-        /// the BattleEntity is not in battle.
+        /// The BattleEntity's battle index, assigned from the BattleManager.
+        /// If it's less than or equal to <see cref="BattleGlobals.InvalidBattleIndex"/>, the BattleEntity is not considered in battle.
         /// <para>This indicates its relation to BattleEntities of the same EntityType.
         /// BattleEntities with higher battle indices are behind ones with lower battle indices.</para>
         /// <para>In most cases, it also corresponds to its position from the left side of the stage and
@@ -141,12 +141,12 @@ namespace PaperMarioBattleSystem
         public int BattleIndex { get; private set; } = BattleGlobals.InvalidBattleIndex;
 
         /// <summary>
-        /// The entity's current position
+        /// The BattleEntity's current position.
         /// </summary>
         public Vector2 Position { get; set; } = Vector2.Zero;
 
         /// <summary>
-        /// The entity's battle position. The entity goes back to this after each action
+        /// The BattleEntity's battle position. The BattleEntity goes back to this after each action.
         /// </summary>
         public Vector2 BattlePosition { get; protected set; } = Vector2.Zero;
 
@@ -258,7 +258,7 @@ namespace PaperMarioBattleSystem
         /// This should only be called if damage actually hits.
         /// <para>This also is called when dealing Payback damage.</para>
         /// </summary>
-        /// <param name="damageInfo">The InteractionHolder containing the entity to damage and all other interaction data.</param>
+        /// <param name="damageInfo">The InteractionHolder containing the BattleEntity to damage and all other interaction data.</param>
         public void DamageEntity(in InteractionHolder damageInfo)
         {
             damageInfo.Entity.TakeDamage(damageInfo);
@@ -348,7 +348,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Entity-specific logic for handling DamageEffects.
+        /// BattleEntity-specific logic for handling DamageEffects.
         /// </summary>
         /// <param name="damageEffects">The bit field of DamageEffects.</param>
         protected virtual void HandleDamageEffects(DamageEffects damageEffects)
@@ -357,7 +357,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Makes the entity take damage from an attack, factoring in stats such as defense, weaknesses, and resistances.
+        /// Makes the BattleEntity take damage from an attack.
         /// </summary>
         /// <param name="damageResult">The InteractionHolder containing the result of a damage interaction.</param>
         public void TakeDamage(in InteractionHolder damageResult)
@@ -390,8 +390,8 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Makes the entity take damage from an attack, factoring in stats such as defense, weaknesses, and resistances.
-        /// <para>This method is a shorthand for inflicting simple damage such as Poison damage every turn from a Status Effect</para>
+        /// Makes the BattleEntity take damage from an attack.
+        /// <para>This method is a shorthand for inflicting simple damage such as Poison damage every turn from a StatusEffect.</para>
         /// </summary>
         /// <param name="element">The element to damage the entity with</param>
         /// <param name="damage">The damage to deal to the entity</param>
@@ -402,10 +402,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Performs entity-specific logic when taking damage.
+        /// Performs BattleEntity-specific logic when taking damage.
         /// This is called after damage has been dealt but before the damage taken event.
         /// </summary>
-        /// <param name="damageInfo">The InteractionHolder containing the entity to damage and all other interaction data.</param>
+        /// <param name="damageInfo">The InteractionHolder containing the BattleEntity to damage and all other interaction data.</param>
         protected virtual void OnTakeDamage(in InteractionHolder damageInfo)
         {
 
@@ -541,7 +541,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Kills the entity instantly
+        /// Kills the BattleEntity instantly.
         /// </summary>
         public void Die()
         {
@@ -567,7 +567,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Performs entity-specific logic on death
+        /// Performs BattleEntity-specific logic on death.
         /// </summary>
         protected virtual void OnDeath()
         {
@@ -575,7 +575,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Updates the entity's health state based on its current HP
+        /// Updates the BattleEntity's health state based on its current HP.
         /// </summary>
         protected void UpdateHealthState()
         {
@@ -609,9 +609,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What occurs when an entity changes HealthStates
+        /// What occurs when an BattleEntity changes HealthStates
         /// </summary>
-        /// <param name="newHealthState">The new HealthState of the entity</param>
+        /// <param name="newHealthState">The new HealthState of the BattleEntity.</param>
         protected virtual void OnHealthStateChange(HealthStates newHealthState)
         {
 
@@ -641,7 +641,7 @@ namespace PaperMarioBattleSystem
         #region Damage Related
 
         /// <summary>
-        /// Checks if the entity's attempt to hit another entity is successful based on the entity's Accuracy and the victim's Evasion.
+        /// Checks if the BattleEntity's attempt to hit another BattleEntity is successful based on the BattleEntity's Accuracy and the victim's Evasion.
         /// </summary>
         /// <param name="victim">The entity trying to evade.</param>
         /// <returns>true if the entity hits and the victim doesn't evade, otherwise false.</returns>
@@ -690,7 +690,7 @@ namespace PaperMarioBattleSystem
         #region Turn Methods
 
         /// <summary>
-        /// What happens at the start of the phase cycle
+        /// What happens at the start of the phase cycle.
         /// </summary>
         public virtual void OnPhaseCycleStart()
         {
@@ -714,7 +714,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What happens at the start of the entity's phase
+        /// What happens at the start of the BattleEntity's phase.
         /// </summary>
         public virtual void OnPhaseStart()
         {
@@ -722,11 +722,17 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What happens at the end of the entity's phase
+        /// What happens at the end of the BattleEntity's phase.
         /// </summary>
         public virtual void OnPhaseEnd()
         {
             Debug.Log($"Ended phase for {Name}");
+
+            //Start all DefensiveAction inputs when the BattleEntity's phase ends
+            for (int i = 0; i < DefensiveActions.Count; i++)
+            {
+                DefensiveActions[i].actionCommand.StartInput();
+            }
         }
 
         /// <summary>
@@ -858,7 +864,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="action">The BattleAction originally used.</param>
         /// <param name="targets">The original set of BattleEntities to target</param>
-        /// <returns>An ActionHolder with a new BattleAction to perform or a different target list if the entity was affected by Confused.
+        /// <returns>An ActionHolder with a new BattleAction to perform or a different target list if the BattleEntity was affected by Confused.
         /// If not affected, the originals of each will be returned.</returns>
         protected BattleGlobals.ActionHolder BaseConfusionHandler(MoveAction action, BattleEntity[] targets)
         {
@@ -1050,7 +1056,7 @@ namespace PaperMarioBattleSystem
         /// Gets the first item of a particular ItemType that the BattleEntity has.
         /// </summary>
         /// <param name="itemTypes">The ItemType enum value. If an item has any of these values, it will be returned.</param>
-        /// <returns></returns>
+        /// <returns>An Item that the BattleEntity has matching the ItemType enum value, otherwise null.</returns>
         public abstract Item GetItemOfType(Item.ItemTypes itemTypes);
 
         #endregion
@@ -1074,7 +1080,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Used for update logic that applies to the entity regardless of whether it is its turn or not
+        /// Used for update logic that applies to the BattleEntity regardless of whether it is its turn or not.
         /// </summary>
         public virtual void Update()
         {

@@ -43,10 +43,11 @@ namespace PaperMarioBattleSystem
             CroppedTexture2D croppedTex2D = new CroppedTexture2D(battleGFX, new Rectangle(14, 273, 46, 46));
             Cursor = new UIFourPiecedTex(croppedTex2D, croppedTex2D.WidthHeightToVector2(), .5f, Color.White);
 
-            MarioHPIcon = new UICroppedTexture2D(new CroppedTexture2D(battleGFX, new Rectangle(324, 407, 61, 58)));
+            MarioHPIcon = new UICroppedTexture2D(new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleHUD.png"),
+                new Rectangle(2, 38, 45, 41)));
             FPIcon = new UICroppedTexture2D(new CroppedTexture2D(battleGFX, new Rectangle(179, 416, 40, 39)));
 
-            MarioHPText = new UIText("0", Color.Black);
+            MarioHPText = new UIText("0", Color.White);
             FPText = new UIText("0", Color.Black);
 
             //Set UI properties
@@ -59,7 +60,7 @@ namespace PaperMarioBattleSystem
             if (ShowPartnerInfo == true)
             {
                 PartnerHPIcon = new UICroppedTexture2D(new CroppedTexture2D(battleGFX, new Rectangle(324, 407, 61, 58)));
-                PartnerHPText = new UIText("0", Color.Black);
+                PartnerHPText = new UIText("0", Color.White);
 
                 PartnerHPIcon.Position = PartnerHPText.Position = ActionCmd.StartPosition + new Vector2(-80, -45);
                 PartnerHPText.Position += new Vector2(0f, 10f);

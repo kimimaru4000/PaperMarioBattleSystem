@@ -76,38 +76,48 @@ namespace PaperMarioBattleSystem
         {
             Position = StartPosition;
 
-            CroppedTex2D = new CroppedTexture2D(AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png"),
-                        new Rectangle(228, 413, 40, 40));
+            Texture2D tex = null;
+            Rectangle? rect = null;
 
             //Get the correct icon based on the RestoreTypes
             switch (RestorationType)
             {
                 case RestoreTypes.MarioHP:
-                    CroppedTex2D.SetRect(new Rectangle(135, 415, 36, 40));
+                    tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleHUD.png");
+                    rect = new Rectangle(2, 38, 45, 41);
                     break;
                 case RestoreTypes.BigMarioHP:
-                    CroppedTex2D.SetRect(new Rectangle(135, 415, 36, 40));
+                    tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleHUD.png");
+                    rect = new Rectangle(2, 38, 45, 41);
                     Scale = new Vector2(2f, 2f);
                     break;
                 case RestoreTypes.PartnerHP:
-                    CroppedTex2D.SetRect(new Rectangle(84, 414, 40, 38));
+                    tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
+                    rect = new Rectangle(324, 407, 61, 58);
+                    Scale = new Vector2(.6f, .6f);
                     break;
                 case RestoreTypes.BigPartnerHP:
-                    CroppedTex2D.SetRect(new Rectangle(84, 414, 40, 38));
-                    Scale = new Vector2(2f, 2f);
+                    tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
+                    rect = new Rectangle(324, 407, 61, 58);
+                    Scale = new Vector2(1.2f, 1.2f);
                     break;
                 case RestoreTypes.FP:
-                    CroppedTex2D.SetRect(new Rectangle(179, 416, 40, 39));
+                    tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleHUD.png");
+                    rect = new Rectangle(56, 42, 34, 37);
                     break;
                 case RestoreTypes.BigFP:
-                    CroppedTex2D.SetRect(new Rectangle(179, 416, 40, 39));
+                    tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.UIRoot}/Battle/BattleHUD.png");
+                    rect = new Rectangle(56, 42, 34, 37);
                     Scale = new Vector2(2f, 2f);
                     break;
                 case RestoreTypes.PoisonMushroom:
                 default:
-                    CroppedTex2D.SetRect(new Rectangle(228, 413, 40, 40));
+                    tex = AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.BattleGFX}.png");
+                    rect = new Rectangle(228, 413, 40, 40);
                     break;
             }
+
+            CroppedTex2D = new CroppedTexture2D(tex, rect);
         }
 
         /// <summary>
@@ -148,7 +158,7 @@ namespace PaperMarioBattleSystem
             //This is a UI element, so always render it on the UI layer
             SpriteRenderer.Instance.DrawUI(CroppedTex2D.Tex, Position, CroppedTex2D.SourceRect, TintColor, Rotation, new Vector2(.5f, .5f), Scale, FlipX, FlipY, Depth);
 
-            Debug.DebugDrawHollowRect(IconRect, Color.Red, .9f, 1, true);
+            //Debug.DebugDrawHollowRect(IconRect, Color.Red, .9f, 1, true);
         }
 
         #region Interface Implementations

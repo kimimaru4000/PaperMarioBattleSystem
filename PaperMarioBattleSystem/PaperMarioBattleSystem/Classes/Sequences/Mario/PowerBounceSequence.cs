@@ -37,11 +37,20 @@ namespace PaperMarioBattleSystem
         
             Bounces = 0;
         }
-        
+
+        protected override void CommandFailed()
+        {
+            base.CommandFailed();
+
+            XDiffOverTwo = 0f;
+        }
+
         protected override void CommandSuccess()
         {
             base.CommandSuccess();
-        
+
+            XDiffOverTwo = 0f;
+
             Bounces++;
             SentRank = (ActionCommand.CommandRank)UtilityGlobals.Clamp((int)HighestCommandRank + 1, (int)ActionCommand.CommandRank.NiceM2, (int)ActionCommand.CommandRank.Excellent);
         }
@@ -80,12 +89,17 @@ namespace PaperMarioBattleSystem
 
                     int damage = 0;
                     if (interactions[0] != null)
+                    {
                         damage = interactions[0].VictimResult.TotalDamage;
 
-                    //Show VFX for the highest command rank
-                    if (interactions[0] != null && interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
-                    {
-                        ShowCommandRankVFX(HighestCommandRank, CurTarget.Position);
+                        if (interactions[0].WasVictimHit == true && interactions[0].WasAttackerHit == false)
+                        {
+
+                            ShowCommandRankVFX(HighestCommandRank, CurTarget.Position);
+
+                            //Set Stylish data
+                            SetStylishData(200d, 600d, 0);
+                        }
                     }
 
                     //If the attack's damage or the total damage dealt is greater than one, decrease the attack's damage by 1

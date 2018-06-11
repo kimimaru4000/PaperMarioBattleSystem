@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
@@ -74,8 +75,10 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName);
-                    CurSequenceAction = new MoveToSeqAction(User, BattleManagerUtils.GetPositionInFront(User.BManager.FrontPlayer,
-                        User.EntityType != Enumerations.EntityTypes.Player), WalkDuration / 4f);
+
+                    Vector2 pos = BattleManagerUtils.GetPositionInFront(User.BManager.FrontPlayer, User.EntityType != Enumerations.EntityTypes.Player);
+
+                    CurSequenceAction = new MoveToSeqAction(User, pos, WalkDuration / 4f);
                     ChangeSequenceBranch(SequenceBranch.Main);
                     break;
                 default:
@@ -90,7 +93,11 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     StartActionCommandInput();
-                    CurSequenceAction = new MoveToSeqAction(User, BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), WalkDuration);
+
+                    Vector2 pos = BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy);
+                    pos.Y = User.Position.Y;
+
+                    CurSequenceAction = new MoveToSeqAction(User, pos, WalkDuration);
                     break;
                 default:
                     PrintInvalidSequence();

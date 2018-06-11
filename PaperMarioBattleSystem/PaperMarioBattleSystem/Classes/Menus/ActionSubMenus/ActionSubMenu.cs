@@ -70,6 +70,7 @@ namespace PaperMarioBattleSystem
         protected ActionSubMenu(BattleEntity user) : base(MenuTypes.Vertical)
         {
             User = user;
+            WrapCursor = true;
 
             BoxMenu = new TextBox(new Vector2(SpriteRenderer.Instance.WindowCenter.X, SpriteRenderer.Instance.WindowCenter.Y + 220f), new Vector2(320f, 80f), null);
             BoxMenu.SetText(string.Empty);

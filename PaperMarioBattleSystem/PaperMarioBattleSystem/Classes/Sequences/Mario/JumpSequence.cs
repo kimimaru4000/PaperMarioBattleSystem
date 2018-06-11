@@ -24,7 +24,10 @@ namespace PaperMarioBattleSystem
 
         protected JumpActionCommandUI<JumpCommand> JumpUI = null;
 
-        protected float XDiffOverTwo => UtilityGlobals.DifferenceDivided(CurTarget.Position.X, User.Position.X, 2f);
+        /// <summary>
+        /// Half the positional difference between the user and the target.
+        /// </summary>
+        protected float XDiffOverTwo = 0f;
 
         protected ActionCommand.CommandRank SentRank = ActionCommand.CommandRank.Nice;
 
@@ -89,6 +92,9 @@ namespace PaperMarioBattleSystem
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpStartName);
                     CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.JumpStartName);
                     ChangeSequenceBranch(SequenceBranch.Main);
+
+                    //Store the jump distance
+                    XDiffOverTwo = UtilityGlobals.DifferenceDivided(CurTarget.Position.X, User.Position.X, 2f);
                     break;
                 default:
                     PrintInvalidSequence();
@@ -101,7 +107,7 @@ namespace PaperMarioBattleSystem
             switch (SequenceStep)
             {
                 case 0:
-                    Vector2 posTo = User.Position + new Vector2(XDiffOverTwo, -JumpHeight);
+                    Vector2 posTo = User.Position + new Vector2(XDiffOverTwo, -JumpHeight + (CurTarget.Position.Y - User.Position.Y));
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpRisingName);
                     CurSequenceAction = new MoveToSeqAction(User, posTo, JumpDuration, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
@@ -189,9 +195,11 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new MoveAmountSeqAction(User, moveAmt, JumpDuration / 2f, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadOut);
                     break;
                 case 1:
+                    float moveDiffY = User.Position.Y - User.BattlePosition.Y;
+
                     endPos = BattleManagerUtils.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player);
 
-                    moveAmt = new Vector2(UtilityGlobals.DifferenceDivided(endPos.X, User.Position.X, 2f), (JumpHeight / 2f));
+                    moveAmt = new Vector2(UtilityGlobals.DifferenceDivided(endPos.X, User.Position.X, 2f), /*(JumpHeight / 2f)*/ -moveDiffY);
 
                     User.AnimManager.PlayAnimation(AnimationGlobals.JumpFallingName);
                     CurSequenceAction = new MoveAmountSeqAction(User, moveAmt, JumpDuration / 2f, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
@@ -245,11 +253,11 @@ namespace PaperMarioBattleSystem
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.SpikedTipHurtName, true);
 
-                    Vector2 offset = new Vector2(-50, -JumpHeight);
+                    Vector2 offset = new Vector2(0, -JumpHeight);
                     if (User.EntityType != EntityTypes.Player)
                         offset.X = -offset.X;
 
-                    Vector2 pos = BattleManagerUtils.GetPositionInFront(CurTarget, User.EntityType != EntityTypes.Player) + offset;
+                    Vector2 pos = BattleManagerUtils.GetPositionInFront(CurTarget, User.EntityType == EntityTypes.Player) + offset;
                     CurSequenceAction = new MoveToSeqAction(User, pos, WalkDuration / 4d);
                     break;
                 case 1:

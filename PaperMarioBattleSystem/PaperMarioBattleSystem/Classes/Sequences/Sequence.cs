@@ -446,13 +446,16 @@ namespace PaperMarioBattleSystem
         protected void BaseInterruptionHandler()
         {
             float moveX = -20f;
-            float moveY = 70f;
+            float moveY = 100f;
 
             double time = 500d;
 
             switch (SequenceStep)
             {
                 case 0:
+                    //Play the damaged sound
+                    SoundManager.Instance.PlaySound(SoundManager.Sound.Damaged);
+
                     User.AnimManager.PlayAnimation(AnimationGlobals.HurtName, true);
 
                     if (User.EntityType != EntityTypes.Player)
@@ -465,7 +468,7 @@ namespace PaperMarioBattleSystem
                     CurSequenceAction = new WaitForAnimationSeqAction(User, AnimationGlobals.HurtName);
                     break;
                 case 2:
-                    CurSequenceAction = new MoveAmountSeqAction(User, new Vector2(0f, moveY), time, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
+                    CurSequenceAction = new MoveAmountSeqAction(User, new Vector2(0f, User.BattlePosition.Y - User.Position.Y), time, Interpolation.InterpolationTypes.Linear, Interpolation.InterpolationTypes.QuadIn);
                     ChangeSequenceBranch(SequenceBranch.End);
                     break;
                 default:

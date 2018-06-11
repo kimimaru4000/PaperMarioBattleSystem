@@ -105,7 +105,12 @@ namespace PaperMarioBattleSystem
 
             OldPartner.BManager.SetPartner(NewPartner);
 
-            OldPartner.BManager.AddEntity(NewPartner, null, false);
+            //Swap Partner badges with the new Partner
+            BattlePartner.SwapPartnerBadges(OldPartner, NewPartner);
+
+            //Important: Set to initialize the new Partner
+            //This way, certain Badge properties, such as autocompleting Defensive Actions, can carry over
+            OldPartner.BManager.AddEntity(NewPartner, null, true);
 
             //Position offset
             Vector2 offset = Vector2.Zero;
@@ -156,9 +161,6 @@ namespace PaperMarioBattleSystem
             {
                 NewPartner.SetTurnsUsed(OldPartner.TurnsUsed);
             }
-
-            //Swap Partner badges with the new Partner
-            BattlePartner.SwapPartnerBadges(OldPartner, NewPartner);
         }
     }
 }

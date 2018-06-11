@@ -65,14 +65,14 @@ namespace PaperMarioBattleSystem
             #endif
         }
 
-        public static void ToggleDebug()
+        public static void ToggleDebug(bool enabled)
         {
-            DebugEnabled = !DebugEnabled;
+            DebugEnabled = enabled;
         }
 
-        public static void ToggleLogs()
+        public static void ToggleLogs(bool enabled)
         {
-            LogsEnabled = !LogsEnabled;
+            LogsEnabled = enabled;
         }
 
         private static string GetStackInfo(int skipFrames)
@@ -150,13 +150,11 @@ namespace PaperMarioBattleSystem
 
         public static void DebugUpdate(BattleManager bManager)
         {
-            #if DEBUG
-                //Toggle debug
-                if (Input.GetKey(Keys.LeftControl, DebugKeyboard) && Input.GetKeyDown(Keys.D, DebugKeyboard))
-                {
-                    ToggleDebug();
-                }
-            #endif
+            //Toggle debug
+            if (Input.GetKey(Keys.LeftControl, DebugKeyboard) && Input.GetKeyDown(Keys.D, DebugKeyboard))
+            {
+                ToggleDebug(!DebugEnabled);
+            }
 
             //Return if debug isn't enabled
             if (DebugEnabled == false)
@@ -188,7 +186,7 @@ namespace PaperMarioBattleSystem
                 //Toggle logs
                 else if (Input.GetKeyDown(Keys.L, DebugKeyboard))
                 {
-                    ToggleLogs();
+                    ToggleLogs(!LogsEnabled);
                 }
                 //Take screenshot
                 else if (Input.GetKeyDown(Keys.S, DebugKeyboard))

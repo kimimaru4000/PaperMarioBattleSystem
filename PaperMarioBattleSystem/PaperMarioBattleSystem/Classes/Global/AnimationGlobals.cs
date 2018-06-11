@@ -68,6 +68,7 @@ namespace PaperMarioBattleSystem
             public const string SweetTreatThrowName = "SweetTreatThrow";
 
             public const string ListenName = "Listen";
+            public const string TasteBadName = "TasteBad";
         }
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Yoshi-specific battle animations
+        /// Yoshi-specific battle animations.
         /// </summary>
         public static class YoshiBattleAnimations
         {

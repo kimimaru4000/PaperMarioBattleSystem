@@ -66,7 +66,7 @@ namespace PaperMarioBattleSystem
         {
             base.Draw();
 
-            Debug.DebugDrawHollowRect(CollRect, Color.Blue, .8f, 1, true);
+            //Debug.DebugDrawHollowRect(CollRect, Color.Blue, .8f, 1, true);
         }
     }
 }

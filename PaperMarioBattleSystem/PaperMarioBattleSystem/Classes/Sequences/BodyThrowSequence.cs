@@ -168,8 +168,11 @@ namespace PaperMarioBattleSystem
 
         public override void StartInterruption(Enumerations.Elements element)
         {
-            //Simply don't do anything on an interruption
+            //Simply don't do anything else on an interruption but play a sound
             //It's expected that the attacker can get hit here due to a Superguard flinging back the segment
+
+            //Play the damaged sound
+            SoundManager.Instance.PlaySound(SoundManager.Sound.Damaged);
         }
     }
 }

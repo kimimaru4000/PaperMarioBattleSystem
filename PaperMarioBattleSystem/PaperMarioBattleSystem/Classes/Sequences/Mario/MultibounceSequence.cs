@@ -61,18 +61,20 @@ namespace PaperMarioBattleSystem
 
                         //Set Stylish data
                         SetStylishData(200d, 600d, 0);
-                    }
 
-                    //Restart with the next target
-                    if (NextTargetIndex < EntitiesAffected.Length)
-                    {
-                        CurrentTargetIndex = NextTargetIndex;
-                        ChangeSequenceBranch(SequenceBranch.Main);
-                    }
-                    //Otherwise end it since we're on the last target
-                    else
-                    {
-                        ChangeSequenceBranch(SequenceBranch.End);
+                        //Restart with the next target
+                        if (NextTargetIndex < EntitiesAffected.Length)
+                        {
+                            CurrentTargetIndex = NextTargetIndex;
+                            ChangeSequenceBranch(SequenceBranch.Main);
+
+                            XDiffOverTwo = UtilityGlobals.DifferenceDivided(CurTarget.Position.X, User.Position.X, 2f);
+                        }
+                        //Otherwise end it since we're on the last target
+                        else
+                        {
+                            ChangeSequenceBranch(SequenceBranch.End);
+                        }
                     }
                     break;
                 default:

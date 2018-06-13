@@ -1,0 +1,710 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class TextBox
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class TextBox
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.TextBox">
+  
+  
+  <h1 id="PaperMarioBattleSystem_TextBox" data-uid="PaperMarioBattleSystem.TextBox" class="text-break">Class TextBox
+  </h1>
+  <div class="markdown level0 summary"><p>A textbox that shows text</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PaperMarioBattleSystem.UIElement.html">UIElement</a></div>
+    <div class="level2"><a class="xref" href="PaperMarioBattleSystem.PosUIElement.html">PosUIElement</a></div>
+    <div class="level3"><span class="xref">TextBox</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IPosition.html">IPosition</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.PosUIElement.html#PaperMarioBattleSystem_PosUIElement_Position">PosUIElement.Position</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.UIElement.html#PaperMarioBattleSystem_UIElement_CleanUp">UIElement.CleanUp()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_TextBox_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TextBox : PosUIElement, IUpdateable, IDrawable, ICleanup, IPosition</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox__ctor.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L52">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TextBox__ctor_" data-uid="PaperMarioBattleSystem.TextBox.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_TextBox__ctor" data-uid="PaperMarioBattleSystem.TextBox.#ctor">TextBox()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TextBox()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox__ctor_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Vector2_System_String_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.%23ctor(Microsoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Vector2%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L57">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TextBox__ctor_" data-uid="PaperMarioBattleSystem.TextBox.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_TextBox__ctor_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Vector2_System_String_" data-uid="PaperMarioBattleSystem.TextBox.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.String)">TextBox(Vector2, Vector2, String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TextBox(Vector2 position, Vector2 size, string text)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">size</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_BoxColor.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.BoxColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L30">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_TextBox_BoxColor" data-uid="PaperMarioBattleSystem.TextBox.BoxColor">BoxColor</h4>
+  <div class="markdown level1 summary"><p>The Color of the textbox</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color BoxColor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_DefaultBufferRoom.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.DefaultBufferRoom%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L20">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_TextBox_DefaultBufferRoom" data-uid="PaperMarioBattleSystem.TextBox.DefaultBufferRoom">DefaultBufferRoom</h4>
+  <div class="markdown level1 summary"><p>The default buffer room used when fitting the TextBox to text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Vector2 DefaultBufferRoom</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_Image.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.Image%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L50">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_TextBox_Image" data-uid="PaperMarioBattleSystem.TextBox.Image">Image</h4>
+  <div class="markdown level1 summary"><p>The image for the textbox</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Texture2D Image</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_Layer.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.Layer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L45">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_TextBox_Layer" data-uid="PaperMarioBattleSystem.TextBox.Layer">Layer</h4>
+  <div class="markdown level1 summary"><p>The layer of the textbox</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Layer</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_Size.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.Size%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L25">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_TextBox_Size" data-uid="PaperMarioBattleSystem.TextBox.Size">Size</h4>
+  <div class="markdown level1 summary"><p>The size of the textbox</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 Size</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_TextColor.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.TextColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L35">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_TextBox_TextColor" data-uid="PaperMarioBattleSystem.TextBox.TextColor">TextColor</h4>
+  <div class="markdown level1 summary"><p>The Color of the text displayed in the textbox</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color TextColor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_Text.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.Text%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L40">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TextBox_Text_" data-uid="PaperMarioBattleSystem.TextBox.Text*"></a>
+  <h4 id="PaperMarioBattleSystem_TextBox_Text" data-uid="PaperMarioBattleSystem.TextBox.Text">Text</h4>
+  <div class="markdown level1 summary"><p>The text displayed in the textbox</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Text { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_Draw.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.Draw%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L117">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TextBox_Draw_" data-uid="PaperMarioBattleSystem.TextBox.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_TextBox_Draw" data-uid="PaperMarioBattleSystem.TextBox.Draw">Draw()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Draw()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.UIElement.html#PaperMarioBattleSystem_UIElement_Draw">UIElement.Draw()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_ScaleToText_Microsoft_Xna_Framework_Graphics_SpriteFont_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.ScaleToText(Microsoft.Xna.Framework.Graphics.SpriteFont)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L84">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TextBox_ScaleToText_" data-uid="PaperMarioBattleSystem.TextBox.ScaleToText*"></a>
+  <h4 id="PaperMarioBattleSystem_TextBox_ScaleToText_Microsoft_Xna_Framework_Graphics_SpriteFont_" data-uid="PaperMarioBattleSystem.TextBox.ScaleToText(Microsoft.Xna.Framework.Graphics.SpriteFont)">ScaleToText(SpriteFont)</h4>
+  <div class="markdown level1 summary"><p>Scales the TextBox to fit its current text, with some buffer room.
+<p>The default buffer room is used.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ScaleToText(SpriteFont font)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">font</span></td>
+        <td><p>The font to scale by.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_ScaleToText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.ScaleToText(Microsoft.Xna.Framework.Graphics.SpriteFont%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L95">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TextBox_ScaleToText_" data-uid="PaperMarioBattleSystem.TextBox.ScaleToText*"></a>
+  <h4 id="PaperMarioBattleSystem_TextBox_ScaleToText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_" data-uid="PaperMarioBattleSystem.TextBox.ScaleToText(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String)">ScaleToText(SpriteFont, String)</h4>
+  <div class="markdown level1 summary"><p>Scales the TextBox to fit a particular string, with some buffer room.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ScaleToText(SpriteFont font, string text)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">font</span></td>
+        <td><p>The font to scale by.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>The text to use to scale.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_ScaleToText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.ScaleToText(Microsoft.Xna.Framework.Graphics.SpriteFont%2CSystem.String%2CMicrosoft.Xna.Framework.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L106">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TextBox_ScaleToText_" data-uid="PaperMarioBattleSystem.TextBox.ScaleToText*"></a>
+  <h4 id="PaperMarioBattleSystem_TextBox_ScaleToText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_" data-uid="PaperMarioBattleSystem.TextBox.ScaleToText(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2)">ScaleToText(SpriteFont, String, Vector2)</h4>
+  <div class="markdown level1 summary"><p>Scales the TextBox to fit a particular string, with a designated amount of buffer room.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ScaleToText(SpriteFont font, string text, Vector2 bufferRoom)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">font</span></td>
+        <td><p>The font to scale by.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>The text to use to scale.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">bufferRoom</span></td>
+        <td><p>The amount of buffer room on each side.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_SetPosition_Microsoft_Xna_Framework_Vector2_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.SetPosition(Microsoft.Xna.Framework.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L69">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TextBox_SetPosition_" data-uid="PaperMarioBattleSystem.TextBox.SetPosition*"></a>
+  <h4 id="PaperMarioBattleSystem_TextBox_SetPosition_Microsoft_Xna_Framework_Vector2_" data-uid="PaperMarioBattleSystem.TextBox.SetPosition(Microsoft.Xna.Framework.Vector2)">SetPosition(Vector2)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetPosition(Vector2 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_SetSize_Microsoft_Xna_Framework_Vector2_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.SetSize(Microsoft.Xna.Framework.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L64">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TextBox_SetSize_" data-uid="PaperMarioBattleSystem.TextBox.SetSize*"></a>
+  <h4 id="PaperMarioBattleSystem_TextBox_SetSize_Microsoft_Xna_Framework_Vector2_" data-uid="PaperMarioBattleSystem.TextBox.SetSize(Microsoft.Xna.Framework.Vector2)">SetSize(Vector2)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetSize(Vector2 size)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">size</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_SetText_System_String_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.SetText(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L74">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TextBox_SetText_" data-uid="PaperMarioBattleSystem.TextBox.SetText*"></a>
+  <h4 id="PaperMarioBattleSystem_TextBox_SetText_System_String_" data-uid="PaperMarioBattleSystem.TextBox.SetText(System.String)">SetText(String)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetText(string text)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox_Update.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L112">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TextBox_Update_" data-uid="PaperMarioBattleSystem.TextBox.Update*"></a>
+  <h4 id="PaperMarioBattleSystem_TextBox_Update" data-uid="PaperMarioBattleSystem.TextBox.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Update()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.UIElement.html#PaperMarioBattleSystem_UIElement_Update">UIElement.Update()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IPosition.html">IPosition</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TextBox.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TextBox%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/TextBox.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

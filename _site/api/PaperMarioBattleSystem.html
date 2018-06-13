@@ -1,0 +1,2387 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Namespace PaperMarioBattleSystem
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Namespace PaperMarioBattleSystem
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem">
+  
+  <h1 id="PaperMarioBattleSystem" data-uid="PaperMarioBattleSystem" class="text-break">Namespace PaperMarioBattleSystem
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="markdown level0 remarks"></div>
+    <h3 id="classes">Classes
+  </h3>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionButton.html">ActionButton</a></h4>
+      <section><p>A button representing the main actions during battle. This includes battle actions like Jump, Hammer, etc.
+This is only used by the player</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommand.html">ActionCommand</a></h4>
+      <section><p>Inputs the player must register at specific times during a BattleAction in battle.
+ActionCommands can be attached to any BattleAction.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommandGlobals.html">ActionCommandGlobals</a></h4>
+      <section><p>Class for global values dealing with Action Commands.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommandUI-1.html">ActionCommandUI&lt;T&gt;</a></h4>
+      <section><p>The base class for UI involving Action Commands.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommandVFX.html">ActionCommandVFX</a></h4>
+      <section><p>A visual effect for showing a successful Action Command.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionSubMenu.html">ActionSubMenu</a></h4>
+      <section><p>A menu for the MoveActions relating to an ActionMenu. For example, any Jump actions would be in the ActionSubMenu for Jump.
+ActionSubMenus can lead to more ActionSubMenus, as is the case with &quot;Change Partner&quot;
+This is only used by the player
+<p>All ActionSubMenus have the &quot;SubMenu&quot; suffix</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AfterImageVFX.html">AfterImageVFX</a></h4>
+      <section><p>Leaves after-images behind a BattleEntity.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AirLiftAction.html">AirLiftAction</a></h4>
+      <section><p>Parakarry&apos;s Air Lift move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AirLiftCommand.html">AirLiftCommand</a></h4>
+      <section><p>The Action Command for Parakarry&apos;s Air Lift move.
+It&apos;s harder to perform depending on the enemy&apos;s percentage of being afflicted with the Lifted StatusEffect.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AirLiftSequence.html">AirLiftSequence</a></h4>
+      <section><p>The Sequence for Parakarry&apos;s Air Lift move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AllergicStatus.html">AllergicStatus</a></h4>
+      <section><p>The Allergic Status Effect.
+The Entity afflicted cannot be inflicted with any new Status Effects.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AllOrNothingBadge.html">AllOrNothingBadge</a></h4>
+      <section><p>The All or Nothing Badge - If the Action Command is performed successfully, increases damage by 1, otherwise no damage is dealt</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Animation.html">Animation</a></h4>
+      <section><p>The base class for sprite animation.
+It plays an animation forwards once, stopping on the last frame.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.html">AnimationGlobals</a></h4>
+      <section><p>Class for global values dealing with Animations</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.DuplighostBattleAnimations.html">AnimationGlobals.DuplighostBattleAnimations</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.GoombarioBattleAnimations.html">AnimationGlobals.GoombarioBattleAnimations</a></h4>
+      <section><p>Goombario-specific battle animations.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.GoombellaBattleAnimations.html">AnimationGlobals.GoombellaBattleAnimations</a></h4>
+      <section><p>Goombella-specific battle animations.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.GulpitBattleAnimations.html">AnimationGlobals.GulpitBattleAnimations</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.HuffNPuffBattleAnimations.html">AnimationGlobals.HuffNPuffBattleAnimations</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.KoopatrolBattleAnimations.html">AnimationGlobals.KoopatrolBattleAnimations</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.KoopsBattleAnimations.html">AnimationGlobals.KoopsBattleAnimations</a></h4>
+      <section><p>Koops-specific battle animations.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.MarioBattleAnimations.html">AnimationGlobals.MarioBattleAnimations</a></h4>
+      <section><p>Mario-specific battle animations</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.ParagoombaBattleAnimations.html">AnimationGlobals.ParagoombaBattleAnimations</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.ParakarryBattleAnimations.html">AnimationGlobals.ParakarryBattleAnimations</a></h4>
+      <section><p>Parakarry-specific battle animations.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.ParatroopaBattleAnimations.html">AnimationGlobals.ParatroopaBattleAnimations</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.PlayerBattleAnimations.html">AnimationGlobals.PlayerBattleAnimations</a></h4>
+      <section><p>Battle animations specific to playable characters</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.ShellBattleAnimations.html">AnimationGlobals.ShellBattleAnimations</a></h4>
+      <section><p>Animations for the Shell Shield Shell.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.ShelledBattleAnimations.html">AnimationGlobals.ShelledBattleAnimations</a></h4>
+      <section><p>Animations for Shelled BattleEntities.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.StatusBattleAnimations.html">AnimationGlobals.StatusBattleAnimations</a></h4>
+      <section><p>Status Effect-related animations in battle</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.WattBattleAnimations.html">AnimationGlobals.WattBattleAnimations</a></h4>
+      <section><p>Watt-specific battle animations.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.WingedBattleAnimations.html">AnimationGlobals.WingedBattleAnimations</a></h4>
+      <section><p>Animations for Winged BattleEntities.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AnimationGlobals.YoshiBattleAnimations.html">AnimationGlobals.YoshiBattleAnimations</a></h4>
+      <section><p>Yoshi-specific battle animations.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ArtAttackAction.html">ArtAttackAction</a></h4>
+      <section><p>The Art Attack action. Use the Ruby Star&apos;s trail to draw around enemies and deal damage to them.
+<p>I&apos;m not sure on the damage specifics, but it seems like every 33% of the hurtbox you cover increases damage by 1,
+starting at 1. Fully circling an enemy&apos;s hurtbox deals 3 damage.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ArtAttackActionCommandUI.html">ArtAttackActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ArtAttackCommand.html">ArtAttackCommand</a></h4>
+      <section><p>Move the star around to draw. Draw around enemies to damage them based on how much of their hurtbox is covered.
+<p>This is likely the most complex Action Command in the entire Paper Mario series.
+It only increases the Command Rank when you encircle all enemies with it, even if they&apos;re dead from the attack.</p>
+<p>Overlapping another line while it doesn&apos;t close causes it to clear the drawing. The color of the lines cycle
+constantly.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ArtAttackSequence.html">ArtAttackSequence</a></h4>
+      <section><p>The Sequence for the Art Attack move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AssetManager.html">AssetManager</a></h4>
+      <section><p>Helps manage content
+<p>This is a Singleton</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXABadge.html">AttackFXABadge</a></h4>
+      <section><p>The Attack FX A Badge - Changes the sounds of Mario&apos;s attacks to the sound of a whistle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXBadge.html">AttackFXBadge</a></h4>
+      <section><p>The base class for Attack FX Badges.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXBBadge.html">AttackFXBBadge</a></h4>
+      <section><p>The Attack FX B Badge - Changes the sounds of Mario&apos;s attacks to the sound of a slide whistle or mouse&apos;s squeak.
+<p>There is a different Attack FX B in each PM game. There&apos;s a parameter in the constructor telling which to use.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXCBadge.html">AttackFXCBadge</a></h4>
+      <section><p>The Attack FX C Badge - Changes the sounds of Mario&apos;s attacks to the sound of a mechanical noise.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXDBadge.html">AttackFXDBadge</a></h4>
+      <section><p>The Attack FX D Badge - Changes the sounds of Mario&apos;s attacks to the sound of a bell.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXEBadge.html">AttackFXEBadge</a></h4>
+      <section><p>The Attack FX E Badge - Changes the sounds of Mario&apos;s attacks to the sound of a Yoshi.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXFBadge.html">AttackFXFBadge</a></h4>
+      <section><p>The Attack FX F Badge - Changes the sounds of Mario&apos;s attacks to the sound of laughing flowers.
+<p>This is an unused Badge in PM.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXGBadge.html">AttackFXGBadge</a></h4>
+      <section><p>The Attack FX G Badge - Changes the sounds of Mario&apos;s attacks to the sound of a giggle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXManager.html">AttackFXManager</a></h4>
+      <section><p>Manages playing sounds associated with the Attack FX badges when a BattleEntity deals damage.
+<p>More of the same Attack FX Badge will increase the chances of the sound associated with it playing.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXPBadge.html">AttackFXPBadge</a></h4>
+      <section><p>The Attack FX P Badge - Changes the sounds of Mario&apos;s attacks to the sound of a Bowser roar.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXRBadge.html">AttackFXRBadge</a></h4>
+      <section><p>The Attack FX R Badge - Changes the sounds of Mario&apos;s attacks to the sound of a cricket.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AttackFXYBadge.html">AttackFXYBadge</a></h4>
+      <section><p>The Attack FX Y Badge - Changes the sounds of Mario&apos;s attacks to the sound of a dull bell.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Badge.html">Badge</a></h4>
+      <section><p>The base class for all Badges.
+<p>&quot;P&quot; Badges should derive from their regular counterparts and will only need to update their BPCost, BadgeType, and AffectedType.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BadgeGlobals.html">BadgeGlobals</a></h4>
+      <section><p>Class for global values dealing with Badges</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleAction.html">BattleAction</a></h4>
+      <section><p>An action that is performed by a BattleEntity in battle</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleDarknessObj.html">BattleDarknessObj</a></h4>
+      <section><p>An object associated with darkness in battle. It handles marking BattleEntities as targetable and untargetable when there
+are light sources present.
+<p>In the PM games, Mario and his Partner are always targetable in darkness. As such, this doesn&apos;t handle Players.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleDarknessObj.LightSourceHolder.html">BattleDarknessObj.LightSourceHolder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEnemy.html">BattleEnemy</a></h4>
+      <section><p>Enemies in battle</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></h4>
+      <section><p>Any fighter that takes part in battle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntityProperties.html">BattleEntityProperties</a></h4>
+      <section><p>Handles numerous BattleEntity properties like weaknesses/resistances to certain Elements, and more.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEvent.html">BattleEvent</a></h4>
+      <section><p>The base class for Battle Events.
+Battle Events take over entity turns and must finish before the next entity can go.
+They have a priority value, with higher priorities taking precedence over lower priority events.
+<p>Examples of Battle Events include Battle Messages, entities dying or taking damage, dialogue, and Status Effect animations.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEventManager.html">BattleEventManager</a></h4>
+      <section><p>Manages BattleEvents.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.html">BattleGlobals</a></h4>
+      <section><p>Class for global values dealing with Battles</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleHUD.html">BattleHUD</a></h4>
+      <section><p>The HUD shown during Battle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleItem.html">BattleItem</a></h4>
+      <section><p>The base class for items used in battle.
+When making an item used in battle, derive from this instead of the Item base.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleManager.html">BattleManager</a></h4>
+      <section><p>Handles all aspects regarding turn-based battles. It manages the BattleEntities taking part in battle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleManagerUtils.html">BattleManagerUtils</a></h4>
+      <section><p>Various utilities for the BattleManager.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleMario.html">BattleMario</a></h4>
+      <section><p>Mario in battle</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleMenu.html">BattleMenu</a></h4>
+      <section><p>The base class for all battle menus.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleMenu.BattleMenuOption.html">BattleMenu.BattleMenuOption</a></h4>
+      <section><p>A class for a generic menu option. It contains a text string and a delegate.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleObject.html">BattleObject</a></h4>
+      <section><p>The base class for BattleObjects, or any non-BattleEntity.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleObjManager.html">BattleObjManager</a></h4>
+      <section><p>Handles any non-BattleEntity objects in battle.
+This can be used for anything ranging from a collision checker to a visual that needs to be rendered.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattlePartner.html">BattlePartner</a></h4>
+      <section><p>Mario&apos;s partners in battle</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattlePlayer.html">BattlePlayer</a></h4>
+      <section><p>The base class for playable characters in battle (Ex. Mario and his Partners)</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleUIManager.html">BattleUIManager</a></h4>
+      <section><p>Manages UI during battle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BlinkFasterAction.html">BlinkFasterAction</a></h4>
+      <section><p>The action performed by Bobbery&apos;s Bombs to indicate that they&apos;re closer to detonating.
+It speeds up their idle animations.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BlinkFasterSequence.html">BlinkFasterSequence</a></h4>
+      <section><p>The Sequence for the Bobbery Bombs&apos; Blink Faster action.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BlinkVFX.html">BlinkVFX</a></h4>
+      <section><p>Makes an <a class="xref" href="PaperMarioBattleSystem.ITintable.html">ITintable</a> object blink at certain speed for a certain amount of time.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BlownAwayBattleEvent.html">BlownAwayBattleEvent</a></h4>
+      <section><p>A BattleEvent for when a BattleEntity is blown away via Gale Force or Hurricane.
+The BattleEntity is removed from battle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BlownStatus.html">BlownStatus</a></h4>
+      <section><p>The Blown Status Effect.
+Entities afflicted with it are blown out of battle and removed, essentially dying.
+<p>This Status Effect is inflicted with Flurrie&apos;s Gale Force move and Lakilester&apos;s Hurricane move.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BobberyBomb.html">BobberyBomb</a></h4>
+      <section><p>Bobbery&apos;s Bombs created in his Bomb Squad move.
+They&apos;re untargetable neutral entities that explode after a number of phase cycles, dealing explosive damage to those in their range.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BodyThrowAction.html">BodyThrowAction</a></h4>
+      <section><p>Pokey&apos;s Body Throw move; throw a body part at the target to damage it.
+The body part can be Superguarded and returned back at the Pokey for full damage.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BodyThrowSequence.html">BodyThrowSequence</a></h4>
+      <section><p>The sequence for Pokey&apos;s Body Throw move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BombSquadAction.html">BombSquadAction</a></h4>
+      <section><p>Bobbery&apos;s Bomb Squad move. Throw 3 Bobbery Bombs on the field, which will explode after a couple of turns to damage enemies.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BombSquadActionCommandUI.html">BombSquadActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BombSquadCommand.html">BombSquadCommand</a></h4>
+      <section><p>Press A to throw bombs at a trajectory determined by the cursor&apos;s position.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BombSquadSequence.html">BombSquadSequence</a></h4>
+      <section><p>The Sequence for Bobbery&apos;s Bomb Squad.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BonkAction.html">BonkAction</a></h4>
+      <section><p>Goombario&apos;s Bonk action</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BonkSequence.html">BonkSequence</a></h4>
+      <section><p>The Sequence for Goombario&apos;s Bonk.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Bow.html">Bow</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BowSubMenu.html">BowSubMenu</a></h4>
+      <section><p>A Submenu for Bow&apos;s Abilities.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BumpAttackBadge.html">BumpAttackBadge</a></h4>
+      <section><p>The Bump Attack Badge - Allows Mario to automatically win battles with weaker enemies when touching them on the field.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BurnStatus.html">BurnStatus</a></h4>
+      <section><p>The Burn Status Effect.
+The entity takes 1 HP in Fire damage at the start of each phase cycle</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Camera.html">Camera</a></h4>
+      <section><p>The game camera. It pans, rotates, and zooms at specified moments.
+<p>This is a Singleton for now</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CancelDipMenu.html">CancelDipMenu</a></h4>
+      <section><p>The menu shown when attempting to cancel Double or Triple Dip.
+<p>Two options are presented: Yes and No.
+Choosing Yes ends the entity&apos;s turn and clears the menu stack.
+Choosing No goes back to the Item menu.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ChangePartnerAction.html">ChangePartnerAction</a></h4>
+      <section><p>The ChangePartner MoveAction.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ChangePartnerSequence.html">ChangePartnerSequence</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ChangePartnerSubMenu.html">ChangePartnerSubMenu</a></h4>
+      <section><p>The menu that shows Mario&apos;s list of partners.
+You can select one to change to.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ChargeBadge.html">ChargeBadge</a></h4>
+      <section><p>The Charge Badge - Adds the Charge action to Mario&apos;s Tactics menu</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ChargedStatus.html">ChargedStatus</a></h4>
+      <section><p>The Charged Status Effect.
+The entity stores power for the next attack.
+<p>This StatusEffect does not end over time. It ends when the entity afflicted uses a move that can expend the charge.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ChargePBadge.html">ChargePBadge</a></h4>
+      <section><p>The Charge P Badge - Adds the Charge action to the Partner&apos;s Tactics menu</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ChargeSequence.html">ChargeSequence</a></h4>
+      <section><p>The Sequence for Charge</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ChillOutBadge.html">ChillOutBadge</a></h4>
+      <section><p>The Chill Out Badge - Makes Mario immune to First Strikes.
+<p>If an enemy hits Mario on the field with this equipped, the battle starts as if the enemy didn&apos;t hit Mario.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CloseCallBadge.html">CloseCallBadge</a></h4>
+      <section><p>The Close Call Badge - Increases Mario&apos;s Evasion by 33% (30% in PM) when he&apos;s in Danger or Peril.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CloseCallPBadge.html">CloseCallPBadge</a></h4>
+      <section><p>The Close Call P Badge - Increases Partner&apos;s Evasion by 33% when he or she is in Danger or Peril.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CloudNineStatus.html">CloudNineStatus</a></h4>
+      <section><p>The Cloud Nine Status Effect.
+The entity&apos;s Evasion is raised by a certain amount until it ends.
+<p>This Status Effect is inflicted with Lakilester&apos;s Cloud Nine move.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Collectible.html">Collectible</a></h4>
+      <section><p>The base class for all types of Collectibles</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CollisionTracker-2.html">CollisionTracker&lt;T, U&gt;</a></h4>
+      <section><p>An object that tracks collisions among a group of <a class="xref" href="PaperMarioBattleSystem.ICollisionHandler.html">ICollisionHandler</a> objects.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ConfusedStatus.html">ConfusedStatus</a></h4>
+      <section><p>The Confused Status Effect.
+The BattleEntity afflicted has a 50% chance of doing something other than what it was intended or told to do.
+<p>There is a slight pause before the BattleEntity does something different.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ContentGlobals.html">ContentGlobals</a></h4>
+      <section><p>Class for global values dealing with loading and unloading content</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CrashHandler.html">CrashHandler</a></h4>
+      <section><p>Handles crashes through unhandled exceptions.
+<p>This currently works only for debug builds if a debugger is not attached.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a></h4>
+      <section><p>A Texture2D with a rectangle designating the portion of the Texture2D to render.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CrystalStarMoveSequence.html">CrystalStarMoveSequence</a></h4>
+      <section><p>The base sequence for Crystal Star moves.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CrystalStarPower.html">CrystalStarPower</a></h4>
+      <section><p>Star Power granted by Crystal Stars that can be used by Mario.
+This is the TTYD Star Power. This Star Power is gained from your battle performance, as determined by the Audience.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DamagedBattleEvent.html">DamagedBattleEvent</a></h4>
+      <section><p>A BattleEvent that plays the character&apos;s damaged animation.
+<p>This event doesn&apos;t occur when the entity is damaged during its own Sequence, as Sequence interruptions handle that.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DamageDodgeBadge.html">DamageDodgeBadge</a></h4>
+      <section><p>The Damage Dodge Badge - Adds 1 to Mario&apos;s Defense when successfully performing a Guard.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DamageDodgePBadge.html">DamageDodgePBadge</a></h4>
+      <section><p>The Damage Dodge P Badge - Adds 1 to Partner&apos;s Defense when successfully performing a Guard.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DamageStarVFX.html">DamageStarVFX</a></h4>
+      <section><p>Displays a star and the amount of damage dealt inside. The star scales to its max size over time, then stays onscreen briefly.
+<p>If the damage is 0, the star&apos;s scale will be very small to indicate no damage.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DDownJumpAction.html">DDownJumpAction</a></h4>
+      <section><p>The action for D-Down Jump.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DDownJumpBadge.html">DDownJumpBadge</a></h4>
+      <section><p>The D-Down Jump Badge - Gives Mario the ability to use D-Down Jump.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DDownPoundAction.html">DDownPoundAction</a></h4>
+      <section><p>The action for D-Down Pound.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DDownPoundBadge.html">DDownPoundBadge</a></h4>
+      <section><p>The D-Down Pound Badge - Gives Mario the ability to use D-Down Pound.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DeathBattleEvent.html">DeathBattleEvent</a></h4>
+      <section><p>A BattleEvent that plays the entity&apos;s death animation.
+After the animation, if the entity has a Life Shroom, it will then queue a revive event.
+<p>If it&apos;s an Enemy, it&apos;ll give Star Points and be removed from battle.
+If it&apos;s Mario, the battle ends.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Debug.html">Debug</a></h4>
+      <section><p>Static class for debugging</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Debug.DebugGlobals.html">Debug.DebugGlobals</a></h4>
+      <section><p>Global values regarding debugging.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DeepFocusBadge.html">DeepFocusBadge</a></h4>
+      <section><p>The Deep Focus Badge - Gives Mario more Star Power when using Focus.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DefaultEnemyAI.html">DefaultEnemyAI</a></h4>
+      <section><p>The default Enemy AI behavior; do nothing.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DEFDownStatus.html">DEFDownStatus</a></h4>
+      <section><p>The DEFDown Status Effect.
+The entity&apos;s Defense is reduced by a certain value until it ends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DefendAction.html">DefendAction</a></h4>
+      <section><p>The Defend action.
+Mario or his Partner assumes the Guard stance and has their Defense boosted by 1 until their next turn.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DefendPlusBadge.html">DefendPlusBadge</a></h4>
+      <section><p>The Defend Plus Badge - Increases Defense by 1</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DefendSequence.html">DefendSequence</a></h4>
+      <section><p>The Sequence for the Defend action.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DefensiveAction.html">DefensiveAction</a></h4>
+      <section><p>The base class for Defensive Actions BattleEntities can perform in battle.
+<p>A Defensive Action is defined as one that can be done when it&apos;s not the BattleEntity&apos;s turn.
+In the first two Paper Mario games, the only Defensive Actions are Guard and Superguard.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DEFUpStatus.html">DEFUpStatus</a></h4>
+      <section><p>The DEFUp Status Effect.
+The entity&apos;s Defense is raised by a certain value until it ends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.html">DetonateBobberyBombBattleEvent</a></h4>
+      <section><p>A Battle Event when Bobbery Bombs are detonated.
+They damage all BattleEntities around them, including other Bobbery Bombs.
+<p>This is a Battle Event because this occurs after some other events (Ex. Status Effects)
+and after another bomb takes explosive damage, causing it to detonate earlier than usual.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DialogueBubble.html">DialogueBubble</a></h4>
+      <section><p>A dialogue bubble. It shows what characters are saying over time.
+<p>Text for these bubbles involve control codes that have a variety of modifiers that apply a wide range of effects.
+See <a class="xref" href="PaperMarioBattleSystem.DialogueGlobals.html">DialogueGlobals</a> and/or documentation for the modifiers and their tags and attributes.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DialogueGlobals.html">DialogueGlobals</a></h4>
+      <section><p>Global values relating to dialogue.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DialogueGlobals.BubbleData.html">DialogueGlobals.BubbleData</a></h4>
+      <section><p>Represents data for a Dialogue Bubble.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DialogueGlobals.BubbleTextData.html">DialogueGlobals.BubbleTextData</a></h4>
+      <section><p>Represents Text Modifier data for a Dialogue Bubble.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DialogueManager.html">DialogueManager</a></h4>
+      <section><p>Handles dialogue with dialogue bubbles.
+<p>This is a Singleton</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DisguiseAction.html">DisguiseAction</a></h4>
+      <section><p>Duplighost&apos;s Disguise move. It disguises as one of Mario&apos;s Partners.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DisguiseSequence.html">DisguiseSequence</a></h4>
+      <section><p>The Sequence for a Duplighost&apos;s Disguise move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DiveKickAction.html">DiveKickAction</a></h4>
+      <section><p>A Paragoomba&apos;s Dive Kick attack.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DiveKickSequence.html">DiveKickSequence</a></h4>
+      <section><p>The Sequence for a Paragoomba&apos;s Dive Kick move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DizzyAttackBadge.html">DizzyAttackBadge</a></h4>
+      <section><p>The Dizzy Attack Badge - Allows Mario to inflict Dizzy on the first enemy in battle if he Spin Dashes into it on the field.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DizzyDial.html">DizzyDial</a></h4>
+      <section><p>The Dizzy Dial item. It inflicts enemies with Dizzy.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DizzyStatus.html">DizzyStatus</a></h4>
+      <section><p>The Dizzy Status Effect.
+The entity&apos;s Accuracy decreases until it ends</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DodgyStatus.html">DodgyStatus</a></h4>
+      <section><p>The Dodgy Status Effect.
+The entity&apos;s Evasion increases until it ends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DoubleDipBadge.html">DoubleDipBadge</a></h4>
+      <section><p>The Double Dip Badge - Allows Mario to use two items in one turn.
+<p>If two of these are equipped, it allows Mario to use Triple Dip, which allows three items to be used in one turn.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DoubleDipPBadge.html">DoubleDipPBadge</a></h4>
+      <section><p>The Double Dip P Badge - Allows Mario&apos;s Partner to use two items in one turn.
+<p>If two of these are equipped, it allows Mario&apos;s Partner to use Triple Dip, which allows three items to be used in one turn.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DoublePainBadge.html">DoublePainBadge</a></h4>
+      <section><p>The Double Pain Badge - The BattleEntity wearing this takes 2x more damage from attacks targeting it.
+Stacking multiple of this increases the damage multiplier by 1 (Ex. having 2 equipped results in taking 3x more damage).
+<p>This does not affect Payback damage.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Duplighost.html">Duplighost</a></h4>
+      <section><p>A Duplighost. It can disguise as Mario&apos;s active Partner and use its moves.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DuplighostAI.html">DuplighostAI</a></h4>
+      <section><p>Duplighost enemy AI.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ElectrifiedStatus.html">ElectrifiedStatus</a></h4>
+      <section><p>The Electrified Status Effect.
+This grants the Electrified PhysicalAttribute to the entity, causing direct contact from non-Electrified entities to hurt the attacker.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ElectroDashAction.html">ElectroDashAction</a></h4>
+      <section><p>Watt&apos;s Electro Dash move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ElectroDashSequence.html">ElectroDashSequence</a></h4>
+      <section><p>The Sequence for Watt&apos;s Electro Dash.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ElementGlobals.html">ElementGlobals</a></h4>
+      <section><p>Class for global values dealing with Elements.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ElementGlobals.ElementComparer.html">ElementGlobals.ElementComparer</a></h4>
+      <section><p>Compares Elements by their values.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.EnemyAIBehavior.html">EnemyAIBehavior</a></h4>
+      <section><p>The base class for enemy AI behavior.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.EntityGlobals.html">EntityGlobals</a></h4>
+      <section><p>Class for global helpers for dealing with BattleEntities.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.EntityListenerObj.html">EntityListenerObj</a></h4>
+      <section><p>A BattleObject that listens to BattleEntities being added or removed from battle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.html">Enumerations</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.EquipmentGlobals.html">EquipmentGlobals</a></h4>
+      <section><p>Class for global values dealing with general equipment</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FastStatus.html">FastStatus</a></h4>
+      <section><p>The Fast Status Effect.
+Entities afflicted with this can move an additional turn each phase cycle it&apos;s active</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FeelingFineBadge.html">FeelingFineBadge</a></h4>
+      <section><p>The Feeling Fine Badge - Makes Mario immune to most negative StatusEffects.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FeelingFinePBadge.html">FeelingFinePBadge</a></h4>
+      <section><p>The Feeling Fine P Badge - Makes Partners immune to most negative StatusEffects.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FillBarActionCommandUI-1.html">FillBarActionCommandUI&lt;T&gt;</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FillBarCommand.html">FillBarCommand</a></h4>
+      <section><p>A base class for Action Commands that involve filling up a bar</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FillLightsActionCommandUI.html">FillLightsActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FillLightsCommand.html">FillLightsCommand</a></h4>
+      <section><p>A base class for Action Commands that involve lighting lights.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FireFlower.html">FireFlower</a></h4>
+      <section><p>The Fire Flower item. It deals 3 Fire damage to all enemies.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FireShieldBadge.html">FireShieldBadge</a></h4>
+      <section><p>The Fire Shield Badge - Allows contact with Fiery entities and decreases received Fire damage by 1</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FirstAttackBadge.html">FirstAttackBadge</a></h4>
+      <section><p>The First Attack Badge - Allows Mario to automatically win battles with weaker enemies when performing a First Strike on the field.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FlippedBattleEvent.html">FlippedBattleEvent</a></h4>
+      <section><p>Handles flipping a flippable BattleEntity.
+This is used in cases where flipping immediately produces undesirable behavior.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FlowerSaverBadge.html">FlowerSaverBadge</a></h4>
+      <section><p>The Flower Saver Badge - Reduces the FP cost of Mario&apos;s moves by 1, to a minimum of 1.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FlowerSaverPBadge.html">FlowerSaverPBadge</a></h4>
+      <section><p>The Flower Saver P Badge - Reduces the FP cost of Partner moves by 1, to a minimum of 1.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FocusAction.html">FocusAction</a></h4>
+      <section><p>The Focus action. Mario regains some Star Spirit Star Power.
+<p>The amount regained can be increased with Deep Focus Badges.
+Partners can also use this move with the Group Focus Badge, but Deep Focus doesn&apos;t increase the amount they gain when using it.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FocusSequence.html">FocusSequence</a></h4>
+      <section><p>The Sequence for the Focus move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FollowSeqAction.html">FollowSeqAction</a></h4>
+      <section><p>A SequenceAction that makes one BattleEntity follow another with an offset for a specified amount of time.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FPDrainBadge.html">FPDrainBadge</a></h4>
+      <section><p>The FP Drain Badge - Reduces Mario&apos;s Attack by 1 and recovers 1 FP after damaging one or more enemies.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FPPlusBadge.html">FPPlusBadge</a></h4>
+      <section><p>The FP Plus Badge - Raises Mario&apos;s Max FP by 5.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FPRegenStatus.html">FPRegenStatus</a></h4>
+      <section><p>The FPRegen Status Effect.
+The entity heals an amount of FP each turn until it ends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FPSCounter.html">FPSCounter</a></h4>
+      <section><p>FPS Counter that displays the FPS</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FrightBattleEvent.html">FrightBattleEvent</a></h4>
+      <section><p>A BattleEvent for when a BattleEntity is frightened via Spook, a Fright Jar, or a Fright Mask.
+The BattleEntity is removed from battle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FrightStatus.html">FrightStatus</a></h4>
+      <section><p>The Fright Status Effect.
+Entities afflicted with it run out of battle in fear and are removed from battle, essentially dying.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.FrozenStatus.html">FrozenStatus</a></h4>
+      <section><p>The Frozen Status Effect.
+Entities afflicted with this cannot move until it ends, in which the entity will take 1 Ice damage.
+If the entity is afflicted with Burn while it is Frozen, both effects will negate each other.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GCWatcher.html">GCWatcher</a></h4>
+      <section><p>A static class for watching GC activity within any range of code.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Goomba.html">Goomba</a></h4>
+      <section><p>The standard Goomba enemy</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GoombaAI.html">GoombaAI</a></h4>
+      <section><p>Goomba enemy AI.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Goombario.html">Goombario</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GoombarioSubMenu.html">GoombarioSubMenu</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Goompa.html">Goompa</a></h4>
+      <section><p>Goompa, Mario&apos;s first partner. He can&apos;t move and doesn&apos;t have any attacks.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GroundedBattleEvent.html">GroundedBattleEvent</a></h4>
+      <section><p>Handles moving a winged BattleEntity down.
+This moves it down and sets its BattlePosition to the new position, also setting its HeightState.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GroupFocusBadge.html">GroupFocusBadge</a></h4>
+      <section><p>The Group Focus Badge - Allows Mario&apos;s Partners to use Focus.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Guard.html">Guard</a></h4>
+      <section><p>Mario&apos;s Guard action when being attacked.
+It&apos;s unique in that it reduces the damage Piercing attacks do</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GuardCommand.html">GuardCommand</a></h4>
+      <section><p>The action command for Guard.
+<p>The result is not known until the attack hits. As such, this action command&apos;s responses aid in determining the result</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GulpAction.html">GulpAction</a></h4>
+      <section><p>Yoshi&apos;s Gulp action.
+Yoshi eats one enemy and spits it out at the enemy behind it. This move is the only one that can hurt Iron Clefts.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GulpActionCommandUI.html">GulpActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GulpCommand.html">GulpCommand</a></h4>
+      <section><p>Hold R until the light lights up.
+<p>The amount the bar increases is based on elapsed time and the speed scale.
+The MaxBarValue represents the total duration of the Action Command.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Gulpit.html">Gulpit</a></h4>
+      <section><p>A Gulpit. It uses Gulpits&apos; Rocks as an attack.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GulpitAI.html">GulpitAI</a></h4>
+      <section><p>Gulpit enemy AI.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GulpitsRock.html">GulpitsRock</a></h4>
+      <section><p>A Gulpit&apos;s Rock. It is a neutral entity that is used by Gulpit in its Rock Spit move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.GulpSequence.html">GulpSequence</a></h4>
+      <section><p>The Sequence for Yoshi&apos;s Gulp.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HammerAction.html">HammerAction</a></h4>
+      <section><p>Mario&apos;s Hammer action</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HammerActionCommandUI.html">HammerActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HammerCommand.html">HammerCommand</a></h4>
+      <section><p>Hold Left until the fourth light lights up</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HammermanBadge.html">HammermanBadge</a></h4>
+      <section><p>The Hammerman Badge - Removes Mario&apos;s ability to use Jump, but boosts the Attack of all Hammer moves by 1.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HammerSequence.html">HammerSequence</a></h4>
+      <section><p>The Sequence for Mario&apos;s Hammer move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HammerSubMenu.html">HammerSubMenu</a></h4>
+      <section><p>The SubMenu for all Hammer attacks</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HeadbuttAction.html">HeadbuttAction</a></h4>
+      <section><p>Duplighost&apos;s Headbutt move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HeadbuttSequence.html">HeadbuttSequence</a></h4>
+      <section><p>The Sequence for Duplighost&apos;s Headbutt move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HeadRattleAction.html">HeadRattleAction</a></h4>
+      <section><p>Mario&apos;s Head Rattle action.
+It&apos;s identical to Hammer except it can confuse enemies and has a slightly longer Action Command.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HeadRattleBadge.html">HeadRattleBadge</a></h4>
+      <section><p>The Head Rattle Badge - Gives Mario the ability to use Head Rattle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HealFPBattleEvent.html">HealFPBattleEvent</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HealHPBattleEvent.html">HealHPBattleEvent</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HealthStateBadge.html">HealthStateBadge</a></h4>
+      <section><p>Any type of badge that depends on the equipped BattleEntity&apos;s HealthState.
+This abstract class handles all non-badge specific logic.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HoldFastStatus.html">HoldFastStatus</a></h4>
+      <section><p>The Hold Fast Status Effect.
+When direct contact is made with the entity afflicted, the attacker receives half the damage dealt in Explosive damage.
+<p>This Status Effect is inflicted with Bobbery&apos;s Hold Fast move.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HoneySyrup.html">HoneySyrup</a></h4>
+      <section><p>The most basic FP restoring item. It restores 5 FP.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HPBarManagerObj.html">HPBarManagerObj</a></h4>
+      <section><p>An object that manages rendering HP bars for BattleEntities with a <a class="xref" href="PaperMarioBattleSystem.Enumerations.AdditionalProperty.html#PaperMarioBattleSystem_Enumerations_AdditionalProperty_ShowHP">ShowHP</a> property.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HPDrainBadge.html">HPDrainBadge</a></h4>
+      <section><p>The HP Drain Badge - Reduces Mario&apos;s Attack by 1 and recovers 1 HP after damaging one or more enemies.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HPDrainPBadge.html">HPDrainPBadge</a></h4>
+      <section><p>The HP Drain P Badge - Reduces Partner&apos;s Attack by 1 and recovers 1 HP after damaging one or more enemies.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HPPlusBadge.html">HPPlusBadge</a></h4>
+      <section><p>The HP Plus Badge - Raises Mario&apos;s Max HP by 5.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HPPlusPBadge.html">HPPlusPBadge</a></h4>
+      <section><p>The HP Plus P Badge - Raises Partner&apos;s Max HP by 5.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HPRegenStatus.html">HPRegenStatus</a></h4>
+      <section><p>The HPRegen Status Effect.
+The entity heals an amount of HP each turn until it ends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HugeStatus.html">HugeStatus</a></h4>
+      <section><p>The Huge Status Effect.
+The entity grows and has its Attack raised by 2 until it ends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HurtPebble.html">HurtPebble</a></h4>
+      <section><p>A special Pebble item that deals 1 damage to the user. This appears only in PM&apos;s Mystery? list.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IcePowerBadge.html">IcePowerBadge</a></h4>
+      <section><p>The Ice Power Badge - Increases Attack and Defense against Fiery entities and Fire attacks by 1 and allows contact with them
+<p>This is the TTYD version of this Badge.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IceSmashAction.html">IceSmashAction</a></h4>
+      <section><p>Mario&apos;s Ice Smash action.
+It&apos;s identical to Hammer except it deals Ice damage, can freeze enemies, and has a slightly longer Action Command.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IceSmashBadge.html">IceSmashBadge</a></h4>
+      <section><p>The Ice Smash Badge - Gives Mario the ability to use Ice Smash.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.InjuredStatus.html">InjuredStatus</a></h4>
+      <section><p>The Injured Status Effect.
+Entities afflicted with this can&apos;t move until it ends.
+<p>This Status Effect is inflicted when Partners take damage in the original Paper Mario.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Input.html">Input</a></h4>
+      <section><p>Static class for handling input</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.InputMenu.html">InputMenu</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.InputRoutine.html">InputRoutine</a></h4>
+      <section><p>A MessageRoutine that waits for input.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.InteractionResult.html">InteractionResult</a></h4>
+      <section><p>The final result of an interaction, containing InteractionHolders for both the attacker and victim</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.html">Interactions</a></h4>
+      <section><p>Defines all types of interactions that exist among BattleEntities and provides methods for handling them.
+This includes the damage formula.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.AttackerCheckContactResultStep.html">Interactions.AttackerCheckContactResultStep</a></h4>
+      <section><p>Final Attacker step - ALL Attacker damage information is known after this.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.AttackerCheckInvincibleStep.html">Interactions.AttackerCheckInvincibleStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.AttackerFilteredStatusStep.html">Interactions.AttackerFilteredStatusStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.AttackerPaybackDamageStep.html">Interactions.AttackerPaybackDamageStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.ClampAttackerDamageStep.html">Interactions.ClampAttackerDamageStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.ClampVictimDamageStep.html">Interactions.ClampVictimDamageStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.ContactResultStep.html">Interactions.ContactResultStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.DamageCalcStep.html">Interactions.DamageCalcStep</a></h4>
+      <section><p>The base class for steps in the total damage calculation.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.ElementOverrideStep.html">Interactions.ElementOverrideStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.InitStep.html">Interactions.InitStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimAttackerStrengthStep.html">Interactions.VictimAttackerStrengthStep</a></h4>
+      <section><p>Factors in the Attacker&apos;s total <a class="xref" href="PaperMarioBattleSystem.StrengthHolder.html">StrengthHolder</a> on the Victim.
+<p>This is done outside <span class="xref">PaperMarioBattleSystem.Interactions.GetElementalDamage(PaperMarioBattleSystem.BattleEntity,PaperMarioBattleSystem.Enumerations.Elements,System.Int32)</span> because it is adds directly to the damage and
+should not be applied again during the <a class="xref" href="PaperMarioBattleSystem.Interactions.AttackerPaybackDamageStep.html">Interactions.AttackerPaybackDamageStep</a>.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimCheckContactResultStep.html">Interactions.VictimCheckContactResultStep</a></h4>
+      <section><p>Final Victim step - ALL Victim damage information is known after this.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimCheckHitStep.html">Interactions.VictimCheckHitStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimCheckInvincibleStep.html">Interactions.VictimCheckInvincibleStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimDamageReductionStep.html">Interactions.VictimDamageReductionStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimDefensiveStep.html">Interactions.VictimDefensiveStep</a></h4>
+      <section><p>The Victim&apos;s final UNSCALED damage is calculated in this step.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimDoublePainStep.html">Interactions.VictimDoublePainStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimElementDamageStep.html">Interactions.VictimElementDamageStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimFilteredStatusStep.html">Interactions.VictimFilteredStatusStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimLastStandStep.html">Interactions.VictimLastStandStep</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Inventory.html">Inventory</a></h4>
+      <section><p>The Player&apos;s inventory</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Inventory.PartnerInventory.html">Inventory.PartnerInventory</a></h4>
+      <section><p>The inventory for Mario&apos;s Partners.
+This tells which Partners Mario currently has available.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.InvisibleStatus.html">InvisibleStatus</a></h4>
+      <section><p>The Invisible Status Effect.
+The entity becomes transparent and its Evasion is set to the max value until it ends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ISpyBadge.html">ISpyBadge</a></h4>
+      <section><p>The I Spy Badge - Alerts Mario when he&apos;s close to a hidden Star Piece panel.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Item.html">Item</a></h4>
+      <section><p>The base class for all types of Items</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ItemAction.html">ItemAction</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ItemDipSubMenu.html">ItemDipSubMenu</a></h4>
+      <section><p>The menu shown after selecting Items when the BattleEntity has the Double and/or Triple Dip Badge equipped.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ItemSequence.html">ItemSequence</a></h4>
+      <section><p>The base Sequence for Items. The Start for each item sequence is the same (the entity moves up then holds the item over their head).
+<p>Items do not have Action Commands in PM or TTYD, so the default behavior is to not consider them.
+However, they can be added if desired in derived classes.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ItemSubMenu.html">ItemSubMenu</a></h4>
+      <section><p>The menu that shows Mario&apos;s list of Items.
+You can select one to use.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.JumpAction.html">JumpAction</a></h4>
+      <section><p>Mario&apos;s Jump action</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.JumpActionCommandUI-1.html">JumpActionCommandUI&lt;T&gt;</a></h4>
+      <section><p>The UI for Jump&apos;s Action Command.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.JumpCommand.html">JumpCommand</a></h4>
+      <section><p>Press the jump button once before Mario almost hits the enemy</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.JumpmanBadge.html">JumpmanBadge</a></h4>
+      <section><p>The Jumpman Badge - Removes Mario&apos;s ability to use Hammer, but boosts the Attack of all Jump moves by 1.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.JumpSequence.html">JumpSequence</a></h4>
+      <section><p>The Sequence for Mario&apos;s Jump move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.JumpSubMenu.html">JumpSubMenu</a></h4>
+      <section><p>The Jump submenu for all Jump attacks</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.KissyKissyAction.html">KissyKissyAction</a></h4>
+      <section><p>The Kissy-Kissy attack used by Fuzzies, Swoopulas, Blooper Babies and more enemies.
+It damages Mario or his Partner, also healing the user for the damage dealt.
+Misses and interruptions occur in the sequence when the enemy latches onto its opponent right before the move starts.
+<p>This move has a lot of parameters and has an Action Command when being used by an enemy.
+The Action Command is performed by the player to end the attack early.</p>
+<p>If there is no Action Command, the attack can be guarded, and the move should stop after a number of attacks otherwise it will softlock.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.KissyKissySequence.html">KissyKissySequence</a></h4>
+      <section><p>The Sequence for the Kissy-Kissy move.
+<p>Before latching on, the user will deal 0 damage to check for interruptions or a miss.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.KoopaFlippedBehavior.html">KoopaFlippedBehavior</a></h4>
+      <section><p>Behavior for handling Koopa Troopas being flipped.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Koopatrol.html">Koopatrol</a></h4>
+      <section><p>A Koopatrol. They&apos;re powerful armored Koopas.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.KoopatrolAI.html">KoopatrolAI</a></h4>
+      <section><p>Koopatrol enemy AI.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.KoopatrolFlippedBehavior.html">KoopatrolFlippedBehavior</a></h4>
+      <section><p>Behavior for handling Koopatrols being flipped.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.KoopaTroopa.html">KoopaTroopa</a></h4>
+      <section><p>A Koopa Troopa</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.KoopaTroopaAI.html">KoopaTroopaAI</a></h4>
+      <section><p>Koopa Troopa enemy AI.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Kooper.html">Kooper</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.KooperSubMenu.html">KooperSubMenu</a></h4>
+      <section><p>Submenu for Kooper&apos;s Abilities.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.KOStatus.html">KOStatus</a></h4>
+      <section><p>The KO Status Effect.
+Entities afflicted with it instantly die.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LastStandBadge.html">LastStandBadge</a></h4>
+      <section><p>Last Stand - Cuts the damage Mario takes in half (rounded up) when in Danger or Peril.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LEmblemBadge.html">LEmblemBadge</a></h4>
+      <section><p>The L Emblem Badge - Changes Mario&apos;s clothes to Luigi&apos;s.
+<p>When combined with the <a class="xref" href="PaperMarioBattleSystem.WEmblemBadge.html">WEmblemBadge</a>, Mario&apos;s clothes turn into Waluigi&apos;s.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LickAction.html">LickAction</a></h4>
+      <section><p>Gulpit&apos;s Lick move. It performs this if no Gulpits&apos; Rocks are available.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LickSequence.html">LickSequence</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LifeShroom.html">LifeShroom</a></h4>
+      <section><p>A Life Shroom. It revives a BattleEntity that dies, healing 10 HP.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LiftedStatus.html">LiftedStatus</a></h4>
+      <section><p>The Lifted Status Effect.
+Entities afflicted with it are lifted out of battle, essentially dying.
+<p>This Status Effect isn&apos;t technically used, as it correlates to Parakarry&apos;s Air Lift move, which handles removing the enemy from battle.
+However, its percentage of being afflicted on the victim determines if the move is successful or not.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LightingManager.html">LightingManager</a></h4>
+      <section><p>Handles lighting for Dark battles.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LoopAnimation.html">LoopAnimation</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LuckyDayBadge.html">LuckyDayBadge</a></h4>
+      <section><p>The Lucky Day Badge - Increases Mario&apos;s Evasion by 25% (20% in PM). Evasion is stacked multiplicatively.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LuckyStar.html">LuckyStar</a></h4>
+      <section><p>The Lucky Star key item. It allows Mario and his Partner to perform Action Commands.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LuckyStartBadge.html">LuckyStartBadge</a></h4>
+      <section><p>The Lucky Start Badge - Grants Mario a positive Status Effect at the start of battle for 3 turns.
+<p>The Status Effects that can be granted are: HPRegen (+2), FPRegen (+2 FP), Electrified, Dodgy.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LullabyAction.html">LullabyAction</a></h4>
+      <section><p>The Lullaby action. Mamar puts all enemies to sleep at the cost of 1 SP.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.LullabySequence.html">LullabySequence</a></h4>
+      <section><p>The Sequence for the Lullaby move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Main.html">Main</a></h4>
+      <section><p>This is the main type for your game.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MarioBattleMenu.html">MarioBattleMenu</a></h4>
+      <section><p>Mario&apos;s battle menu. It contains Strategies, Items, Jump, Hammer, and Star Spirits</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MarioStats.html">MarioStats</a></h4>
+      <section><p>Stats for Mario.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MashButtonCommand.html">MashButtonCommand</a></h4>
+      <section><p>Mash a button to fill the bar.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MashButtonRangeActionCommandUI.html">MashButtonRangeActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MashButtonRangeCommand.html">MashButtonRangeCommand</a></h4>
+      <section><p>Mash a button to fill the bar as much as you can in the time allotted.
+There is a range of values evenly distributed across the bar.
+The end result will be a value based on how much of the bar is filled when the Action Command ends.
+<p>For attacks such as Huff N. Puff&apos;s Wind Breath, the start value should be higher than the end value so filling the bar
+decreases the damage dealt.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MegaRushBadge.html">MegaRushBadge</a></h4>
+      <section><p>The Mega Rush Badge - Increases Mario&apos;s Attack by 5 (4 in PM) when in Peril.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MegaRushPBadge.html">MegaRushPBadge</a></h4>
+      <section><p>The Mega Rush P Badge - Increases Partner&apos;s Attack by 5 when in Peril.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MegaSmashAction.html">MegaSmashAction</a></h4>
+      <section><p>Mario&apos;s Mega Smash action.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MegaSmashBadge.html">MegaSmashBadge</a></h4>
+      <section><p>The Mega Smash Badge - Gives Mario the ability to use Mega Smash.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MegaSmashSequence.html">MegaSmashSequence</a></h4>
+      <section><p>The Sequence for Mario&apos;s Mega Smash move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MenuAction.html">MenuAction</a></h4>
+      <section><p>A type of MoveAction used only in ActionSubMenus to bring up other ActionSubMenus.
+<p>This doesn&apos;t have a Sequence, so attempting to start it as an actual MoveAction will throw an error.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MessageAction.html">MessageAction</a></h4>
+      <section><p>A MoveAction that queues a Battle Message when selected.
+<p>This is often used for temporary moves placed in menus if no valid moves exist in that menu.
+An example includes the &quot;No Items&quot; move in the Item menu if the entity has no items.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MessageBattleEvent.html">MessageBattleEvent</a></h4>
+      <section><p>A Battle Message.
+It shows up to mention important battle-related information, such as not being able to flee or the consequences of a Status Effect.
+It disappears after a certain amount of time.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MessageEventStatus.html">MessageEventStatus</a></h4>
+      <section><p>A StatusEffect that handles showing messages when afflicted or removed and queuing a <a class="xref" href="PaperMarioBattleSystem.StatusEndedBattleEvent.html">StatusEndedBattleEvent</a> when appropriate.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MessageRoutine.html">MessageRoutine</a></h4>
+      <section><p>The base class for Message Routines for Dialogue Bubbles.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MiniEggAction.html">MiniEggAction</a></h4>
+      <section><p>Yoshi&apos;s Mini-Egg move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MiniEggSequence.html">MiniEggSequence</a></h4>
+      <section><p>The Sequence for Yoshi&apos;s Mini-Egg.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MiniYux.html">MiniYux</a></h4>
+      <section><p>A Mini-Yux. It is created by a Yux, which the Mini-Yux protects with a shield that makes it invincible.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MoveAction.html">MoveAction</a></h4>
+      <section><p>A type of BattleAction selectable from a BattleMenu.
+They have sequences that the BattleEntity performs.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MoveAmountMultipleSeqAction.html">MoveAmountMultipleSeqAction</a></h4>
+      <section><p>A SequenceAction that moves multiple BattleEntities a certain amount over time.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MoveAmountSeqAction.html">MoveAmountSeqAction</a></h4>
+      <section><p>A SequenceAction that moves a BattleEntity a relative amount over the Duration.
+An example would be relative to the entity&apos;s current position, such as (50, -12)</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MoveToBattleEvent.html">MoveToBattleEvent</a></h4>
+      <section><p>A Battle Event for moving BattleEntities to desired positions in a certain amount of time.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MoveToSeqAction.html">MoveToSeqAction</a></h4>
+      <section><p>A SequenceAction that moves an IPosition to a desired location over the Duration.
+An example would be a position on the screen, such as (350, 400).</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MoveWithAfterImagesBattleEvent.html">MoveWithAfterImagesBattleEvent</a></h4>
+      <section><p>A Battle Event for moving BattleEntities to desired positions in a certain amount of time.
+This adds after-images to the BattleEntities during the movement.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MultibounceAction.html">MultibounceAction</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MultibounceBadge.html">MultibounceBadge</a></h4>
+      <section><p>The Multibounce Badge - Gives Mario the ability to use Multibounce</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MultibounceSequence.html">MultibounceSequence</a></h4>
+      <section><p>The Sequence for Multibounce.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MultiButtonActionCommandUI.html">MultiButtonActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MultiButtonCommand.html">MultiButtonCommand</a></h4>
+      <section><p>Press a random sequence of buttons in the correct order within the time limit.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Mushroom.html">Mushroom</a></h4>
+      <section><p>The most basic item. It restores 5 HP.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Mystery.html">Mystery</a></h4>
+      <section><p>The Mystery item. It uses a random item.
+<p>This chooses the set of random items from PM:
+{ Mushroom,
+Super Shroom,
+Fire Flower,
+Stone Cap,
+Dizzy Dial,
+Thunder Rage,
+Pebble (falls down on Mario) }
+</p>
+<p>If an item in question cannot be used (Ex. dark battles), it is removed from the roulette!</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MysteryAction.html">MysteryAction</a></h4>
+      <section><p>The MoveAction for the Mystery Item.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MysterySequence.html">MysterySequence</a></h4>
+      <section><p>The Sequence for the Mystery item.
+Show a single-line slot which selects a random item out of a set, then perform that item&apos;s Sequence.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.NineSlicedTexture2D.html">NineSlicedTexture2D</a></h4>
+      <section><p>A 9-sliced Texture2D. It produces a set of source rectangles that slice the Texture2D into 9 slices, which can be used for rendering.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.NoAction.html">NoAction</a></h4>
+      <section><p>A BattleAction that causes the BattleEntity to do nothing.
+<p>This is used when Mario or his Partner take the &quot;Do Nothing&quot; action and when entities are unable to attack an ally
+because it has no allies remaining or the move can&apos;t reach the ally.</p>
+<p>This is also the recommended method of skipping turns in many circumstances (Ex. a flipped Koopa).
+Instead of ending the turn directly, have the BattleEntity perform a NoAction.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.NoSequence.html">NoSequence</a></h4>
+      <section><p>A Sequence that causes the BattleEntity to do nothing.
+<p>This is used when Mario or his Partner take the &quot;Do Nothing&quot; action and when entities are unable to attack an ally
+because it has no allies remaining or the move can&apos;t reach the ally.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.NoSkillsStatus.html">NoSkillsStatus</a></h4>
+      <section><p>The NoSkills Status Effect.
+The entity has MoveCategories disabled for a number of turns.
+<p>The MoveCategory disabled should always be one that isn&apos;t currently disabled.
+This Status Effect also refreshes differently than other Status Effects due to its nature (you can&apos;t remove a skill twice).</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ObjAnimManager.html">ObjAnimManager</a></h4>
+      <section><p>An animation manager for objects.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.OuttaSightAction.html">OuttaSightAction</a></h4>
+      <section><p>Bow&apos;s Outta Sight action.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.OuttaSightSecondHalfSequence.html">OuttaSightSecondHalfSequence</a></h4>
+      <section><p>The second half of Bow&apos;s Outta Sight Sequence.
+<p>This occurs at the start of Bow&apos;s next turn through an event in Outta Sight.
+It should not be assigned to an action added to a menu.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.OuttaSightSequence.html">OuttaSightSequence</a></h4>
+      <section><p>The first half of the Sequence for Bow&apos;s Outta Sight move.
+<p>With regards to turn count, this will function identically to Veil because we&apos;re using TTYD&apos;s partner system.
+In PM, partners always move to the back at the start of the enemy phase which caused its behavior in that game.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Paragoomba.html">Paragoomba</a></h4>
+      <section><p>A Paragoomba - A Goomba with wings.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ParagoombaAI.html">ParagoombaAI</a></h4>
+      <section><p>Paragoomba enemy AI.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ParagoombaWingedBehavior.html">ParagoombaWingedBehavior</a></h4>
+      <section><p>Behavior for handling Paragoombas losing their wings.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ParalyzedStatus.html">ParalyzedStatus</a></h4>
+      <section><p>The Paralyzed Status Effect.
+Entities afflicted with this cannot move until it ends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Paratroopa.html">Paratroopa</a></h4>
+      <section><p>A Paratroopa - A Koopa Troopa with wings.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ParatroopaFlippedBehavior.html">ParatroopaFlippedBehavior</a></h4>
+      <section><p>Behavior for flipping Paratroopas.
+They can only be flipped after landing.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ParatroopaWingedBehavior.html">ParatroopaWingedBehavior</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PartnerBattleMenu.html">PartnerBattleMenu</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PartnerGlobals.html">PartnerGlobals</a></h4>
+      <section><p>Class for global values dealing with Partners.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PartnerStats.html">PartnerStats</a></h4>
+      <section><p>Stats for Mario&apos;s Partners.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PaybackStatus.html">PaybackStatus</a></h4>
+      <section><p>The Payback Status Effect.
+When direct contact is made with the entity afflicted, the attacker receives half the damage dealt in a specific Element
+and can be inflicted with one or more StatusEffects.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PeekabooBadge.html">PeekabooBadge</a></h4>
+      <section><p>The Peekaboo Badge - Allows Mario and his Partner to see enemy HP.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PhysAttributeGlobals.html">PhysAttributeGlobals</a></h4>
+      <section><p>Class for global values dealing with PhysicalAttributes.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PhysAttributeGlobals.PhysAttributeComparer.html">PhysAttributeGlobals.PhysAttributeComparer</a></h4>
+      <section><p>Compares PhysicalAttributes by their values.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PiercingBlowAction.html">PiercingBlowAction</a></h4>
+      <section><p>The action for Piercing Blow.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PiercingBlowBadge.html">PiercingBlowBadge</a></h4>
+      <section><p>The Piercing Blow Badge - Gives Mario the ability to use Piercing Blow.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PityFlowerBadge.html">PityFlowerBadge</a></h4>
+      <section><p>The Pity Flower Badge - Has a 30% chance of recovering 1 FP after taking damage.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PlayAnimBattleEvent.html">PlayAnimBattleEvent</a></h4>
+      <section><p>A Battle Event that makes a BattleEntity play an animation.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PlayerBattleMenu.html">PlayerBattleMenu</a></h4>
+      <section><p>The base BattleMenu for both Mario and his Partners. It displays all the available actions in a wheel like in the first Paper Mario.
+<p>They share Strategies/Tactics and Item commands.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PoisonStatus.html">PoisonStatus</a></h4>
+      <section><p>The Poison Status Effect.
+The entity takes 1 HP in Poison damage at the start of each phase cycle</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Pokey.html">Pokey</a></h4>
+      <section><p>A Pokey enemy. It has 3 segments.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PokeyAI.html">PokeyAI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PokeySegmentBehavior.html">PokeySegmentBehavior</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PosUIElement.html">PosUIElement</a></h4>
+      <section><p>A UIElement with a Position.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.POWDownStatus.html">POWDownStatus</a></h4>
+      <section><p>The POWDown Status Effect.
+The entity&apos;s Attack is reduced by a certain value until it ends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerBounceAction.html">PowerBounceAction</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerBounceBadge.html">PowerBounceBadge</a></h4>
+      <section><p>The Power Bounce Badge - Gives Mario the ability to use Power Bounce</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerBounceSequence.html">PowerBounceSequence</a></h4>
+      <section><p>The Sequence for PowerBounce.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerLiftAction.html">PowerLiftAction</a></h4>
+      <section><p>The Power Lift action. Move the cursor on a 3x3 grid to hit the red and blue arrows to boost Attack and Defense.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerLiftActionCommandUI.html">PowerLiftActionCommandUI</a></h4>
+      <section><p>Handles the UI aspect of Power Lift.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerLiftCommand.html">PowerLiftCommand</a></h4>
+      <section><p>Move the cursor across the 3x3 grid and select the red and blue arrows to boost your stats.
+Hitting a Poison Mushroom halves the cursor&apos;s speed for a short time.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerLiftIconElement.html">PowerLiftIconElement</a></h4>
+      <section><p>An element corresponding to an icon for the <a class="xref" href="PaperMarioBattleSystem.PowerLiftCommand.html">PowerLiftCommand</a>.
+<p>The element fades in for a duration, stays on screen, then fades out.
+If the player selects the icon at all when it is present, it disappears.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerLiftSequence.html">PowerLiftSequence</a></h4>
+      <section><p>The sequence for the Power Lift move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerPlusBadge.html">PowerPlusBadge</a></h4>
+      <section><p>The Power Plus Badge - Increases Attack by 1</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerRushBadge.html">PowerRushBadge</a></h4>
+      <section><p>The Power Rush Badge - Increases Mario&apos;s Attack by 2 when in Danger or Peril.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerRushPBadge.html">PowerRushPBadge</a></h4>
+      <section><p>The Power Rush P Badge - Increases Partner&apos;s Attack by 2 when in Danger or Peril.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerShockAction.html">PowerShockAction</a></h4>
+      <section><p>Watt&apos;s Power Shock move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerShockSequence.html">PowerShockSequence</a></h4>
+      <section><p>The Sequence for Watt&apos;s Power Shock move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerSmashAction.html">PowerSmashAction</a></h4>
+      <section><p>Mario&apos;s Power Smash action.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerSmashBadge.html">PowerSmashBadge</a></h4>
+      <section><p>The Power Smash Badge - Gives Mario the ability to use Power Smash.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerSmashSequence.html">PowerSmashSequence</a></h4>
+      <section><p>The Sequence for Mario&apos;s Power Smash move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.POWUpStatus.html">POWUpStatus</a></h4>
+      <section><p>The POWUp Status Effect.
+The entity&apos;s Attack is raised by a certain value until it ends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PrettyLuckyBadge.html">PrettyLuckyBadge</a></h4>
+      <section><p>The Pretty Lucky Badge - Increases Mario&apos;s Evasion by 10%. Evasion is stacked multiplicatively.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PrettyLuckyPBadge.html">PrettyLuckyPBadge</a></h4>
+      <section><p>The Pretty Lucky P Badge - Increases Partner&apos;s Evasion by 10%. Evasion is stacked multiplicatively.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Program.html">Program</a></h4>
+      <section><p>The main class.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ProgressDialogueStar.html">ProgressDialogueStar</a></h4>
+      <section><p>The star that denotes the end of text in a dialogue bubble.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.QuakeHammerAction.html">QuakeHammerAction</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.QuakeHammerBadge.html">QuakeHammerBadge</a></h4>
+      <section><p>The Quake Hammer Badge - Gives Mario the ability to use Quake Hammer.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.QuakeHammerSequence.html">QuakeHammerSequence</a></h4>
+      <section><p>The Sequence for Quake Hammer</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.QuickChangeBadge.html">QuickChangeBadge</a></h4>
+      <section><p>The Quick Change Badge - Allows Mario or his Partner to switch Partners without using up a turn</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RallyWinkAction.html">RallyWinkAction</a></h4>
+      <section><p>Goombella&apos;s Rally Wink action.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RallyWinkActionCommandUI.html">RallyWinkActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RallyWinkCommand.html">RallyWinkCommand</a></h4>
+      <section><p>Mash the buttons to fill the bar up to a certain value in a certain amount of time.
+The buttons you have to press alternate every now and then.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RallyWinkHeartVFX.html">RallyWinkHeartVFX</a></h4>
+      <section><p>The heart that shows up after successfully performing Rally Wink.
+It fades in, then fades out after the text box is dismissed.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RallyWinkSequence.html">RallyWinkSequence</a></h4>
+      <section><p>The Sequence for Goombella&apos;s Rally Wink.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RandomGlobals.html">RandomGlobals</a></h4>
+      <section><p>Class for Random global values and references.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RefreshAction.html">RefreshAction</a></h4>
+      <section><p>The Refresh action. Eldstar restores 5 HP and FP to Mario at the cost of 1 SP.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RefreshSequence.html">RefreshSequence</a></h4>
+      <section><p>The Sequence for the Refresh move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RemoveDisguiseBattleEvent.html">RemoveDisguiseBattleEvent</a></h4>
+      <section><p>A Battle Event for removing a Duplighost&apos;s disguise.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RemoveWingsBattleEvent.html">RemoveWingsBattleEvent</a></h4>
+      <section><p>A BattleEvent that removes an <a class="xref" href="PaperMarioBattleSystem.IWingedBehavior.html">IWingedBehavior</a>&apos;s wings when it stops being targeted.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RenderingGlobals.html">RenderingGlobals</a></h4>
+      <section><p>Class for global values dealing with rendering</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ReturnPostageBadge.html">ReturnPostageBadge</a></h4>
+      <section><p>The Return Postage Badge - Grants Mario Payback.
+<p>This directly grants Payback rather than inflicting the Payback Status. As such, it can stack with the status.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ReverseAnimation.html">ReverseAnimation</a></h4>
+      <section><p>A loopable animation that plays the animation forwards then backwards to complete a loop</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RevivedBattleEvent.html">RevivedBattleEvent</a></h4>
+      <section><p>A BattleEvent that plays when a BattleEntity is being revived.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RightOnBadge.html">RightOnBadge</a></h4>
+      <section><p>The Right On! Badge - Causes most Action Commands and all Stylish Moves to automatically be successfully performed.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RockSpitAction.html">RockSpitAction</a></h4>
+      <section><p>Gulpit&apos;s Rock Spit move. It eats a usable BattleEntity (such as a Gulpit&apos;s Rock) and spits it out at an enemy.
+<p>The BattleEntity used in the attack dies and is removed from battle.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RockSpitSequence.html">RockSpitSequence</a></h4>
+      <section><p>The Sequence for Gulpit&apos;s Rock Spit move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RunAwayAction.html">RunAwayAction</a></h4>
+      <section><p>Runs away from battle, ending the battle immediately.
+<p>Unless Runaway Pay is equipped, all Star Points accumulated during battle are lost when running.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RunAwayActionCommandUI.html">RunAwayActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RunAwayCommand.html">RunAwayCommand</a></h4>
+      <section><p>Mash the button to fill the bar to get it further than the cursor.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RunawayPayBadge.html">RunawayPayBadge</a></h4>
+      <section><p>The Ruanway Pay Badge - Mario gains any Star Points he earned in battle when running away.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RunAwaySequence.html">RunAwaySequence</a></h4>
+      <section><p>The sequence for the Run Away action.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ScrollRoutine.html">ScrollRoutine</a></h4>
+      <section><p>Scrolls the Dialogue Bubble&apos;s text.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Sequence.html">Sequence</a></h4>
+      <section><p>A Sequence used in a MoveAction.
+<p>Sequences define a series of step-by-step actions that are performed for a particular move.
+For example, for Mario&apos;s Hammer, the Sequence would play Mario&apos;s run animation, move Mario up to the enemy, start the Action Command, then damage the enemy based on the result.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Sequence.StylishData.html">Sequence.StylishData</a></h4>
+      <section><p>Holds data regarding Stylish Moves.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SequenceAction.html">SequenceAction</a></h4>
+      <section><p>An action that occurs over time during a BattleAction.
+This can be used to do about anything to the BattleEntity performing the action.
+Examples include moving, waiting, playing an animation, and more</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Shell.html">Shell</a></h4>
+      <section><p>The Shell in Koops&apos; Shell Shield move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShellBreakAnimObj.html">ShellBreakAnimObj</a></h4>
+      <section><p>The animation for the Shell Shield Shell breaking.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShellBreakBattleEvent.html">ShellBreakBattleEvent</a></h4>
+      <section><p>A Battle Event when the Shell Shield Shell is broken. The Shell ends its protection.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShellShieldAction.html">ShellShieldAction</a></h4>
+      <section><p>Koops&apos; Shell Shield action.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShellShieldActionCommandUI.html">ShellShieldActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShellShieldCommand.html">ShellShieldCommand</a></h4>
+      <section><p>Press A to stop the cursor moving back and forth across the bar.
+Aim for the middle for the best result.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShellShieldSequence.html">ShellShieldSequence</a></h4>
+      <section><p>The Sequence for Koops&apos; Shell Shield.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShellTossAction.html">ShellTossAction</a></h4>
+      <section><p>Kooper&apos;s Shell Toss action.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShellTossSequence.html">ShellTossSequence</a></h4>
+      <section><p>The Sequence for Kooper&apos;s Shell Toss.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShootBobberyBombBattleEvent.html">ShootBobberyBombBattleEvent</a></h4>
+      <section><p>A Battle Event that shoots a Bobbery Bomb with a velocity.
+The bomb stops when it hits the ground.
+<p>This is used in Bobbery&apos;s Bomb Squad sequence.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShootingStar.html">ShootingStar</a></h4>
+      <section><p>The Shooting Star item. It deals 6 Star damage to all enemies.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShyGuy.html">ShyGuy</a></h4>
+      <section><p>A Shy Guy.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ShyGuyAI.html">ShyGuyAI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SimplifierBadge.html">SimplifierBadge</a></h4>
+      <section><p>The Simplifier Badge - Makes Action Commands easier for Mario and his Partner to perform but lowers the final Action Command value</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SkyGuy.html">SkyGuy</a></h4>
+      <section><p>The Sky Guy enemy. It&apos;s airborne, but if you pop its balloon, it falls to the ground and turns into a normal Shy Guy.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SkyGuyBalloon.html">SkyGuyBalloon</a></h4>
+      <section><p>The Balloon for Sky Guys. When defeated, it pops, turning the Sky Guy into a normal Shy Guy.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SkyGuyWingedBehavior.html">SkyGuyWingedBehavior</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SleepStatus.html">SleepStatus</a></h4>
+      <section><p>The Sleep Status Effect.
+Entities afflicted with this cannot move until it ends.
+There is a 50% chance that the entity will wake up and end this status when it is attacked.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SleepySheep.html">SleepySheep</a></h4>
+      <section><p>The Sleepy Sheep item. It inflicts Sleep on all enemies.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SleepZVFX.html">SleepZVFX</a></h4>
+      <section><p>The &apos;Z&apos;s that show up slightly above a character when the character is asleep.
+<p>Three increasingly larger &apos;Z&apos;s fade in, one at a time, in approximately 1.5 seconds.
+A shader is applied to make them wavy.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SlicedTexture2D.html">SlicedTexture2D</a></h4>
+      <section><p>Represents a Texture2D sliced into several regions.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SlowGoBadge.html">SlowGoBadge</a></h4>
+      <section><p>The Slow Go Badge - Prevents Mario from running in the field.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SlowStatus.html">SlowStatus</a></h4>
+      <section><p>The Slow Status Effect.
+Entities afflicted with this can move only once every two phase cycles.
+<p>Mario and his Partner can still Guard and Superguard when afflicted with this Status Effect</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SortEntityListBattleEvent.html">SortEntityListBattleEvent</a></h4>
+      <section><p>A BattleEvent that tells the BattleManager to sort the list corresponding to a particular EntityType.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SoundManager.html">SoundManager</a></h4>
+      <section><p>Handles all audio playback
+<p>This is a Singleton</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpecialMoveAction.html">SpecialMoveAction</a></h4>
+      <section><p>The base class for Special Moves, which use up Star Power.
+<p>Special Moves are unaffected by All Or Nothing; make sure AllOrNothingAffected is false when defining damage data.</p>
+<p>Note that all Crystal Star Special Moves can hit entities with the Invisible Status Effect.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpecialMoveSequence.html">SpecialMoveSequence</a></h4>
+      <section><p>The base Sequence for all Special Moves.
+<p>The starts of Star Spirit and Crystal Star Special Moves are different, 
+so they will need to be done in separate derived classes.</p>
+<p>Special Move Sequences do not have any Stylish moves.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpecialSubMenu.html">SpecialSubMenu</a></h4>
+      <section><p>The menu that shows Special Moves, if they are available.
+<p>We can put both Star Spirit and Crystal Star Special Moves in this menu.
+Selecting one would bring up another menu with the respective set of Special Moves available.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpeedRoutine.html">SpeedRoutine</a></h4>
+      <section><p>A routine that sets the time it takes to print characters.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpeedySpinBadge.html">SpeedySpinBadge</a></h4>
+      <section><p>The Speedy Spin Badge - Increases the speed of Mario&apos;s spin dash.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpikedGoomba.html">SpikedGoomba</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpikeShieldBadge.html">SpikeShieldBadge</a></h4>
+      <section><p>The Spike Shield Badge - Allows jumping on spiked entities</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpinAttackBadge.html">SpinAttackBadge</a></h4>
+      <section><p>The Spin Attack Badge - Causes Mario&apos;s spin dash to instantly defeat weaker enemies on the field.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpriteRenderer.html">SpriteRenderer</a></h4>
+      <section><p>Handles all rendering
+<p>This is a Singleton</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StarPowerBase.html">StarPowerBase</a></h4>
+      <section><p>The base class for the two different types of Star Power found in the Paper Mario games (Star Spirits, Crystal Stars).</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StarPowerGlobals.html">StarPowerGlobals</a></h4>
+      <section><p>Class for global values dealing with StarPower.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StarSpiritMoveSequence.html">StarSpiritMoveSequence</a></h4>
+      <section><p>The base sequence for Star Spirit moves.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StarSpiritPower.html">StarSpiritPower</a></h4>
+      <section><p>Star Power granted by the Star Spirits that can be used by Mario.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Stats.html">Stats</a></h4>
+      <section><p>A class containing the main stats in the game.
+Enemies have internal levels, likely related to Star Point gain.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StatusEffect.html">StatusEffect</a></h4>
+      <section><p>The base class for Status Effects.
+<p>Status Effects increment a turn at the start of each phase cycle.
+Status Effects that take effect each turn also occur at the start of each phase cycle</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StatusEndedBattleEvent.html">StatusEndedBattleEvent</a></h4>
+      <section><p>A BattleEvent for Status Effects ending.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StatusGlobals.html">StatusGlobals</a></h4>
+      <section><p>Class for global values dealing with StatusEffects</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StatusGlobals.StatusComparer.html">StatusGlobals.StatusComparer</a></h4>
+      <section><p>Compares StatusEffects by their priorities.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StatusGlobals.StatusTypeComparer.html">StatusGlobals.StatusTypeComparer</a></h4>
+      <section><p>Compares StatusTypes by their priorities.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StoneCap.html">StoneCap</a></h4>
+      <section><p>The Stone Cap item. It inflicts Stone for 3 turns on an ally.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StoneCapSequence.html">StoneCapSequence</a></h4>
+      <section><p>The Sequence for the Stone Cap.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StoneStatus.html">StoneStatus</a></h4>
+      <section><p>The Stone Status Effect.
+The entity afflicted with it is immobilized and immune to damage and negative StatusEffects.
+The entity also has several StatusEffects suppressed in several ways until it ends.
+<p>This has a Positive Alignment because entities that attack an entity afflicted with this basically waste their turns.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StopStatus.html">StopStatus</a></h4>
+      <section><p>The Stop Status Effect.
+Entities afflicted with this cannot move until it wears off.
+<p>Mario and his Partner cannot Guard or Superguard when afflicted with this Status Effect.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StylishIndicatorVFX.html">StylishIndicatorVFX</a></h4>
+      <section><p>VFX for an indicator showing that a Stylish Move can be performed.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StylishMoveVFX.html">StylishMoveVFX</a></h4>
+      <section><p>VFX for performing a Stylish Move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SummonKoopatrolAction.html">SummonKoopatrolAction</a></h4>
+      <section><p>Used by Koopatrols to summon more Koopatrols.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SummonKoopatrolSequence.html">SummonKoopatrolSequence</a></h4>
+      <section><p>The sequence for summoning a Koopatrol.
+<p>NOTE: The PM version puts the new Koopatrol in the lowest available index.
+The TTYD version puts the new Koopatrol directly in front of the one that summoned it; if the front isn&apos;t possible, it&apos;s put behind.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Superguard.html">Superguard</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SuperguardCommand.html">SuperguardCommand</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SuperShroom.html">SuperShroom</a></h4>
+      <section><p>A Super Shroom. It restores 10 HP.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SwapMarioPartnerAction.html">SwapMarioPartnerAction</a></h4>
+      <section><p>A move that deals damage and swaps out Mario&apos;s Partner. This can be used by an enemy.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SwapMarioPartnerSequence.html">SwapMarioPartnerSequence</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SwapPartnerBattleEvent.html">SwapPartnerBattleEvent</a></h4>
+      <section><p>A BattleEvent that swaps out Mario&apos;s current Partner with a different one.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SwapPositionBattleEvent.html">SwapPositionBattleEvent</a></h4>
+      <section><p>A BattleEvent that swaps the position of two BattleEntities over time.
+This is used when swapping Mario and his Partner&apos;s turn.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatAction.html">SweetTreatAction</a></h4>
+      <section><p>The Sweet Treat action. Throw stars at the icons to restore HP and FP, and avoid the Poison Mushrooms.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatActionCommandUI.html">SweetTreatActionCommandUI</a></h4>
+      <section><p>Handles the UI for Sweet Treat.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatCommand.html">SweetTreatCommand</a></h4>
+      <section><p>Hold Left to ready a star and release to throw it. Hit the icons to heal HP and FP.
+Hitting a Poison Mushroom makes you unable to throw stars for a short time.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatElementSpawner.html">SweetTreatElementSpawner</a></h4>
+      <section><p>Handles spawning elements in Sweet Treat.
+The elements correspond to HP, FP, or Poison Mushrooms.
+<p>The spawner randomly chooses from the <a class="xref" href="PaperMarioBattleSystem.SweetTreatElementSpawner.html#PaperMarioBattleSystem_SweetTreatElementSpawner_AllowedRestorationTypes">AllowedRestorationTypes</a> list, but it will not go over the specified count for each.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatGlobals.html">SweetTreatGlobals</a></h4>
+      <section><p>Global values dealing with Sweet Treat.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatRestorationElement.html">SweetTreatRestorationElement</a></h4>
+      <section><p>An element correlating to an icon for the <a class="xref" href="PaperMarioBattleSystem.SweetTreatCommand.html">SweetTreatCommand</a>.
+<p>The icon moves down from the top of the screen and disappears when it hits the stage.
+If hit by the thrown star, it performs its effect and disappears.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatSequence.html">SweetTreatSequence</a></h4>
+      <section><p>The Sequence for Sweet Treat.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatThrownStar.html">SweetTreatThrownStar</a></h4>
+      <section><p>The star you throw in Sweet Treat.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TacticsSubMenu.html">TacticsSubMenu</a></h4>
+      <section><p>The various miscellaneous actions available to Mario and his Partner.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TargetSelectionMenu.html">TargetSelectionMenu</a></h4>
+      <section><p>The target selection menu when performing an action</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TastyTonic.html">TastyTonic</a></h4>
+      <section><p>The Tasty Tonic item. It removes a lot of statuses such as Poison and Tiny on Mario.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TattleAction.html">TattleAction</a></h4>
+      <section><p>Goombario&apos;s Tattle action.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TattleActionCommandUI.html">TattleActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TattleCommand.html">TattleCommand</a></h4>
+      <section><p>Press A when the cursor is near the middle of the big circle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TattleDatabase.html">TattleDatabase</a></h4>
+      <section><p>The player&apos;s database for Tattles.
+It gets populated as the player Tattles more enemies.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TattleRenderObj.html">TattleRenderObj</a></h4>
+      <section><p>The object rendering the box and a portion of the screen during a PM Tattle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TattleSequence.html">TattleSequence</a></h4>
+      <section><p>Goombario and Goombella&apos;s Tattle sequence.
+<p>Goombario&apos;s Tattle does not have an Action Command. If the Action Command is disabled this will always succeed.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TextBox.html">TextBox</a></h4>
+      <section><p>A textbox that shows text</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ThunderBolt.html">ThunderBolt</a></h4>
+      <section><p>The Thunder Bolt item. It deals 5 Electric damage to an enemy.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ThunderRage.html">ThunderRage</a></h4>
+      <section><p>The Thunder Rage item. It deals 5 Electric damage to all enemies.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TidalWaveAction.html">TidalWaveAction</a></h4>
+      <section><p>Sushie&apos;s Tidal Wave attack</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TidalWaveActionCommandUI.html">TidalWaveActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TidalWaveCommand.html">TidalWaveCommand</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TidalWaveSequence.html">TidalWaveSequence</a></h4>
+      <section><p>The Sequence for Sushie&apos;s Tidal Wave.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Time.html">Time</a></h4>
+      <section><p>Handles all time</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TimedLightActionCommandUI.html">TimedLightActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TimedLightCommand.html">TimedLightCommand</a></h4>
+      <section><p>An Action Command for timed lights. As the bar fills up, press a button when the lights are lit.
+One move that uses this is Yoshi&apos;s Mini-Egg.
+<p>The bar fills over time. As such, the values passed in should be time-based. Lights are spaced out across the bar according to the LightDistribution used.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TimingTutorBadge.html">TimingTutorBadge</a></h4>
+      <section><p>The Timing Tutor Badge - teaches the timing of Stylish Moves by showing a &quot;!&quot; above the character&apos;s head when they should press A.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TinyStatus.html">TinyStatus</a></h4>
+      <section><p>The Tiny Status Effect.
+The entity shrinks and has its Attack reduced by 2 until it ends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TornadoJumpAction.html">TornadoJumpAction</a></h4>
+      <section><p>Mario&apos;s Tornado Jump action.
+Tornado Jump is unique in that it has two parts to it with different Action Commands and Sequences.
+<p>The first part is a single normal jump, when if successful, does double the damage of a normal jump, then
+goes into the second part. The second part has the player press 3 random buttons in order to damage all midair enemies.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TornadoJumpActionCommandUI.html">TornadoJumpActionCommandUI</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TornadoJumpBadge.html">TornadoJumpBadge</a></h4>
+      <section><p>The Tornado Jump Badge - Gives Mario the ability to use Tornado Jump</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TornadoJumpCommand.html">TornadoJumpCommand</a></h4>
+      <section><p>Press the jump button once before Mario almost hits the enemy.
+If successful, press the 3 buttons shown in order to damage all aerial enemies.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TornadoJumpSequence.html">TornadoJumpSequence</a></h4>
+      <section><p>The Sequence for Mario&apos;s Tornado Jump move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TripleDipBadge.html">TripleDipBadge</a></h4>
+      <section><p>The Triple Dip Badge - Allows Mario to use three items in one turn.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TurboChargeStatus.html">TurboChargeStatus</a></h4>
+      <section><p>The Turbo Charge Status Effect.
+The entity&apos;s Attack is raised by 1.
+<p>This Status Effect is inflicted with Watt&apos;s Turbo Charge move.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UICroppedTexture2D.html">UICroppedTexture2D</a></h4>
+      <section><p>A UIElement that holds a <a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a>.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UIElement.html">UIElement</a></h4>
+      <section><p>The base class for all types of UI Elements.
+UI Elements are handled in the <a class="xref" href="PaperMarioBattleSystem.BattleUIManager.html">BattleUIManager</a>.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UIFourPiecedTex.html">UIFourPiecedTex</a></h4>
+      <section><p>A UIElement that holds a <a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a>, which is drawn in 4 pieces.
+<p>This is for graphics that constitute 1/4 of a whole.
+This class assumes the graphic is the upper-left piece and rotates the other pieces according to draw them combined (Ex. top-left of &quot;+&quot; sign image).</p>
+<p>Place their pivots in the center to allow them to be rotated as one.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UIGrid.html">UIGrid</a></h4>
+      <section><p>A grid holding <a class="xref" href="PaperMarioBattleSystem.PosUIElement.html">PosUIElement</a>s.
+<p>By default the grid repositions the elements when it is modified in some way (Ex. Rows, Columns, CellSize).
+To change this behavior, set <a class="xref" href="PaperMarioBattleSystem.UIGrid.html#PaperMarioBattleSystem_UIGrid_AutomaticReposition">AutomaticReposition</a> to false.
+In this case, the grid will need to be manually repositioned with <a class="xref" href="PaperMarioBattleSystem.UIGrid.html#PaperMarioBattleSystem_UIGrid_RepositionGridElements">RepositionGridElements()</a> after changes have been made.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UIStackedTex.html">UIStackedTex</a></h4>
+      <section><p>A UIElement containing <a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a>s overlaid on top of one another.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UIText.html">UIText</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UnitTests.html">UnitTests</a></h4>
+      <section><p>A class for conducting unit tests.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UnitTests.BadgeUnitTests.html">UnitTests.BadgeUnitTests</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UnitTests.InteractionUnitTests.html">UnitTests.InteractionUnitTests</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UnitTests.StatusUnitTests.html">UnitTests.StatusUnitTests</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UnsimplifierBadge.html">UnsimplifierBadge</a></h4>
+      <section><p>The Unsimplifier Badge - Makes Action Commands harder for Mario and his Partner to perform but raises the final Action Command value</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.VeilAction.html">VeilAction</a></h4>
+      <section><p>Vivian&apos;s Veil action.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.VeilSecondHalfSequence.html">VeilSecondHalfSequence</a></h4>
+      <section><p>The second half of Vivian&apos;s Veil Sequence.
+<p>This occurs at the start of Vivian&apos;s next turn through an event in Veil.
+It should not be assigned to an action added to a menu.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.VeilSequence.html">VeilSequence</a></h4>
+      <section><p>The first half of the Sequence for Vivian&apos;s Veil move.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.VFXElement.html">VFXElement</a></h4>
+      <section><p>The base class for all types of VFXElements.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.VoltShroom.html">VoltShroom</a></h4>
+      <section><p>The Volt Shroom item. It inflicts Electrified for 5 turns on an ally.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WaitBattleEvent.html">WaitBattleEvent</a></h4>
+      <section><p>A Battle Event that simply waits for a specific amount of time.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WaitForAnimationSeqAction.html">WaitForAnimationSeqAction</a></h4>
+      <section><p>A SequenceAction that waits for an animation to finish before proceeding.
+Do not use this for animations that loop infinitely, as this will never end
+<p>Make sure to play the animation for the BattleEntity before waiting on this.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WaitForAnimBattleEvent.html">WaitForAnimBattleEvent</a></h4>
+      <section><p>A BattleEvent plays an animation for the character and waits for it to finish.
+Do not use this for animations that loop infinitely, as it will never end.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WaitForBattleEventSeqAction.html">WaitForBattleEventSeqAction</a></h4>
+      <section><p>A SequenceAction that waits for a BattleEvent to complete.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WaitForCommandSeqAction.html">WaitForCommandSeqAction</a></h4>
+      <section><p>Causes the entity to wait for the action command&apos;s result before proceeding in the action sequence.
+A fallback time is required if commands aren&apos;t enabled, in which this sequence will end after this time</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WaitForDialogueSeqAction.html">WaitForDialogueSeqAction</a></h4>
+      <section><p>A SequenceAction that waits for dialogue to finish.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WaitRoutine.html">WaitRoutine</a></h4>
+      <section><p>A routine that waits an amount of time.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WaitSeqAction.html">WaitSeqAction</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WaitSideActionsCompleteSeqAction.html">WaitSideActionsCompleteSeqAction</a></h4>
+      <section><p>A SequenceAction that waits for all SequenceActions being performed on the side to complete.
+This should be used for the main SequenceAction.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WaterBlockStatus.html">WaterBlockStatus</a></h4>
+      <section><p>The Water Block Status Effect.
+The entity&apos;s Defense is raised by 1 and it gains a +1 Resistance to Fire moves.
+<p>This Status Effect is inflicted with Sushie&apos;s Water Block move.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Watt.html">Watt</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WattSubMenu.html">WattSubMenu</a></h4>
+      <section><p>A Submenu for Watt&apos;s Abilities.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WEmblemBadge.html">WEmblemBadge</a></h4>
+      <section><p>The W Emblem Badge - Changes Mario&apos;s clothes to Wario&apos;s.
+<p>When combined with the <a class="xref" href="PaperMarioBattleSystem.LEmblemBadge.html">LEmblemBadge</a>, Mario&apos;s clothes turn into Waluigi&apos;s.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WindBreathAction.html">WindBreathAction</a></h4>
+      <section><p>Huff N. Puff&apos;s Wind Breath action.
+It deals 2-7 damage to Mario depending on how well the player performed the Action Command to reduce the damage it deals.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WindBreathSequence.html">WindBreathSequence</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WingsDisappearVFX.html">WingsDisappearVFX</a></h4>
+      <section><p>VFX showing an <a class="xref" href="PaperMarioBattleSystem.IWingedBehavior.html">IWingedBehavior</a>&apos;s wings disappearing when it has been grounded.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Yux.html">Yux</a></h4>
+      <section><p>A Yux. They create 1 Mini-Yux per turn up to a max of 2; Mini-Yuxes put a shield around them that makes them invincible.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ZapTapBadge.html">ZapTapBadge</a></h4>
+      <section><p>The Zap Tap Badge - When equipped, makes Mario Electrified.</p>
+</section>
+    <h3 id="structs">Structs
+  </h3>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommandGlobals.ArtAttackResponse.html">ActionCommandGlobals.ArtAttackResponse</a></h4>
+      <section><p>A struct holding information Art Attack&apos;s Action Command sends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommandGlobals.BarRangeData.html">ActionCommandGlobals.BarRangeData</a></h4>
+      <section><p>Defines the range in a bar and the value and CommandRank associated with that range.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommandGlobals.BombSquadResponse.html">ActionCommandGlobals.BombSquadResponse</a></h4>
+      <section><p>A struct holding information Bomb Squad&apos;s Action Command sends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommandGlobals.PowerLiftResponse.html">ActionCommandGlobals.PowerLiftResponse</a></h4>
+      <section><p>A struct holding information Power Lift&apos;s Action Command sends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommandGlobals.ShellShieldResponse.html">ActionCommandGlobals.ShellShieldResponse</a></h4>
+      <section><p>A struct holding information Shell Shield&apos;s Action Command sends.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommandGlobals.SweetTreatResponse.html">ActionCommandGlobals.SweetTreatResponse</a></h4>
+      <section><p>A struct holding information Sweet Treat and Sweet Feast&apos;s Action Commands send.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Animation.Frame.html">Animation.Frame</a></h4>
+      <section><p>An animation frame</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.ActionHolder.html">BattleGlobals.ActionHolder</a></h4>
+      <section><p>Holds information about a MoveAction being used and the BattleEntities it targets</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.BattleProperties.html">BattleGlobals.BattleProperties</a></h4>
+      <section><p>Holds information containing various properties for battle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.DefensiveActionHolder.html">BattleGlobals.DefensiveActionHolder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.PendingBattleEventHolder.html">BattleGlobals.PendingBattleEventHolder</a></h4>
+      <section><p>Holds a pending Battle Event with its priority and the Battle States it should be added in.
+The fields in this struct are immutable.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Circle.html">Circle</a></h4>
+      <section><p>A structure representing a Circle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CollisionRect.html">CollisionRect</a></h4>
+      <section><p>A collision rectangle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CollisionResponseHolder.html">CollisionResponseHolder</a></h4>
+      <section><p>Holds immutable data about a collision.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ContactResultInfo.html">ContactResultInfo</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DamageData.html">DamageData</a></h4>
+      <section><p>Holds data regarding damage.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ElementDamageHolder.html">ElementDamageHolder</a></h4>
+      <section><p>Holds immutable data for elemental damage</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ElementOverrideHolder.html">ElementOverrideHolder</a></h4>
+      <section><p>Holds immutable data for an Element Override.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.HealingData.html">HealingData</a></h4>
+      <section><p>Holds data regarding healing, including HP, FP, and Status Effects.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.InteractionHolder.html">InteractionHolder</a></h4>
+      <section><p>Holds data for the result of a damage interaction.
+It includes the BattleEntity that got damaged, the amount and type of damage dealt, the Status Effects inflicted, and more.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.InteractionParamHolder.html">InteractionParamHolder</a></h4>
+      <section><p>Holds the required data for initiating a damage interaction.
+This is passed to methods that involve calculating damage interactions.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Line.html">Line</a></h4>
+      <section><p>Describes a 2D-line, which consists of two points.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.MoveActionData.html">MoveActionData</a></h4>
+      <section><p>Holds properties of a MoveAction.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ResistanceHolder.html">ResistanceHolder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StatusChanceHolder.html">StatusChanceHolder</a></h4>
+      <section><p>Holds immutable data regarding a chance at inflicting a particular StatusEffect.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.html">StatusGlobals.ConfusionHolder</a></h4>
+      <section><p>Holds information about Confusion</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StatusGlobals.PaybackHolder.html">StatusGlobals.PaybackHolder</a></h4>
+      <section><p>Holds information about Payback damage</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StatusPropertyHolder.html">StatusPropertyHolder</a></h4>
+      <section><p>Holds immutable data for a StatusProperty.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StrengthHolder.html">StrengthHolder</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatGlobals.RestoreBehaviorData.html">SweetTreatGlobals.RestoreBehaviorData</a></h4>
+      <section><p>Holds immutable data regarding a RestoreBehavior and a value.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TimedLightCommand.LightData.html">TimedLightCommand.LightData</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UIGrid.Padding.html">UIGrid.Padding</a></h4>
+      <section><p>Padding used for the grid.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WeaknessHolder.html">WeaknessHolder</a></h4>
+      <section></section>
+    <h3 id="interfaces">Interfaces
+  </h3>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IActionCommand.html">IActionCommand</a></h4>
+      <section><p>An interface for BattleActions that utilize ActionCommands.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IActionCommandHandler.html">IActionCommandHandler</a></h4>
+      <section><p>An interface for BattleActions that handle ActionCommands.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IAnimation.html">IAnimation</a></h4>
+      <section><p>A general interface for animations.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a></h4>
+      <section><p>An interface for objects that perform cleanup logic.
+This is where they can clear events and other data.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ICollisionHandler.html">ICollisionHandler</a></h4>
+      <section><p>An interface for objects that handle collisions.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ICollisionShape.html">ICollisionShape</a></h4>
+      <section><p>An interface for a collision shape.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ICopyable-1.html">ICopyable&lt;T&gt;</a></h4>
+      <section><p>An interface for objects that can be copied.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IDamageEffectItem.html">IDamageEffectItem</a></h4>
+      <section><p>An interface for any Item that has <a class="xref" href="PaperMarioBattleSystem.Enumerations.DamageEffects.html">Enumerations.DamageEffects</a>.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IDamagingItem.html">IDamagingItem</a></h4>
+      <section><p>An interface for any item that can damage enemies.
+All item damage is Piercing and doesn&apos;t make any contact.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IDisableable.html">IDisableable</a></h4>
+      <section><p>An interface for anything that can be disabled.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a></h4>
+      <section><p>An interface for any object with a Draw method.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IFlippableBehavior.html">IFlippableBehavior</a></h4>
+      <section><p>An interface for any object that handles flipping.
+<p>Examples include Koopa Troopas and Clefts.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IFlippableEntity.html">IFlippableEntity</a></h4>
+      <section><p>An interface for a BattleEntity that can be flipped and has a flippable behavior.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IFPHealingItem.html">IFPHealingItem</a></h4>
+      <section><p>An interface for any Item that can restore FP.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IHPHealingItem.html">IHPHealingItem</a></h4>
+      <section><p>An interface for any Item that can restore HP.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.INameable.html">INameable</a></h4>
+      <section><p>An interface for objects with names.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IPosition.html">IPosition</a></h4>
+      <section><p>An interface for any objects with a position.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IRevivalItem.html">IRevivalItem</a></h4>
+      <section><p>An interface for any Item that can revive.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IRotatable.html">IRotatable</a></h4>
+      <section><p>An interface for any object that can be rotated.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IScalable.html">IScalable</a></h4>
+      <section><p>An interface for any type of object that can be scaled.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ISegmentBehavior.html">ISegmentBehavior</a></h4>
+      <section><p>An interface for handling objects with segments.
+<p>Examples include Pokeys and Shy Stacks.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ISegmentEntity.html">ISegmentEntity</a></h4>
+      <section><p>An interface for a BattleEntity with segments and has a segment behavior.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ISpinnableBehavior.html">ISpinnableBehavior</a></h4>
+      <section><p>An interface for objects that can be spun for a unique effect.
+<p>The only known example is Kent C. Koopa, who drops 6 coins when hitting his tail with Spin Smash.
+As Super Hammer and Ultra Hammer are TTYD&apos;s versions of Spin Smash, they would also likely spin him out.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IStatusHealingItem.html">IStatusHealingItem</a></h4>
+      <section><p>An interface for any item that heals Status Effects.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IStatusInflictingItem.html">IStatusInflictingItem</a></h4>
+      <section><p>An interface for any item that inflicts Status Effects.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ITattleableEntity.html">ITattleableEntity</a></h4>
+      <section><p>An interface for any BattleEntity that can be tattled.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ITintable.html">ITintable</a></h4>
+      <section><p>An interface for any object that can have a color tint.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a></h4>
+      <section><p>An interface for any object with an Update method.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IUsableEntity.html">IUsableEntity</a></h4>
+      <section><p>An interface for a BattleEntity that is usable by another BattleEntity in some way.
+<p>Examples include Gulpits&apos; Rocks being usable by Gulpits.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IWingedBehavior.html">IWingedBehavior</a></h4>
+      <section><p>An interface for any Winged object that can be knocked to the ground.
+<p>Examples include Paragoombas and Stilt Guys.
+Parakarry is excluded, as he cannot be knocked to the ground.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.IWingedEntity.html">IWingedEntity</a></h4>
+      <section><p>An interface for a BattleEntity that has wings and has a winged behavior.</p>
+</section>
+    <h3 id="enums">Enums
+  </h3>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommand.CommandRank.html">ActionCommand.CommandRank</a></h4>
+      <section><p>Indicates how well the player performed the Action Command.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ActionCommand.CommandResults.html">ActionCommand.CommandResults</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AfterImageVFX.AfterImageAlphaSetting.html">AfterImageVFX.AfterImageAlphaSetting</a></h4>
+      <section><p>Types of alpha settings for after-images.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.AfterImageVFX.AfterImageAnimSetting.html">AfterImageVFX.AfterImageAnimSetting</a></h4>
+      <section><p>Types of animation settings for after-images.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BadgeGlobals.AffectedTypes.html">BadgeGlobals.AffectedTypes</a></h4>
+      <section><p>Who the Badge affects.
+<p>For Players, Self refers to Mario, and Partner refers to Partners.
+Both is for Badges such as Simplifier and Unsimplifier that affect both Mario and Partners.
+For Enemies, all types affect the Enemy equipped.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BadgeGlobals.BadgeFilterType.html">BadgeGlobals.BadgeFilterType</a></h4>
+      <section><p>Filter options for finding Badges.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BadgeGlobals.BadgeTypes.html">BadgeGlobals.BadgeTypes</a></h4>
+      <section><p>The various types of Badges (what the actual Badges are).
+<p>The values are defined by each Badge type&apos;s Type Number.
+If Badges exist in the same spot and aren&apos;t in both games, Badges with lower alphabetical values will be placed first.
+In cases where one Badge is before another Badge in one game and after that Badge in the other game, the Badge is grouped
+with similar Badges around it.</p>
+<p>If adding brand new badges, put them at the bottom.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.BattleEventPriorities.html">BattleGlobals.BattleEventPriorities</a></h4>
+      <section><p>Priority values for various types of Battle Events.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.BattleResults.html">BattleGlobals.BattleResults</a></h4>
+      <section><p>The types of battle results.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.BattleSettings.html">BattleGlobals.BattleSettings</a></h4>
+      <section><p>The settings battles can take place in.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.BattleState.html">BattleGlobals.BattleState</a></h4>
+      <section><p>The various states in battle.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleMenu.MenuTypes.html">BattleMenu.MenuTypes</a></h4>
+      <section><p>The type of menu this is. The Other value indicates that the menu has its own style.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CollisionShapeTypes.html">CollisionShapeTypes</a></h4>
+      <section><p>The types of collision shapes.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.DamageStarVFX.StarState.html">DamageStarVFX.StarState</a></h4>
+      <section><p>The types of StarStates for the damage star.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Debug.DebugLogTypes.html">Debug.DebugLogTypes</a></h4>
+      <section><p>The types of Debug logs.
+<p>This is a bit field.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ElementInteractionResult.html">ElementInteractionResult</a></h4>
+      <section><p>The result of elemental damage dealt on an entity based on its weaknesses and/or resistances</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.AdditionalProperty.html">Enumerations.AdditionalProperty</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.CollectibleTypes.html">Enumerations.CollectibleTypes</a></h4>
+      <section><p>The types of Collectibles.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.ContactProperties.html">Enumerations.ContactProperties</a></h4>
+      <section><p>Properties complementing ContactTypes. They tell more information about the contact that occurred.
+<p>None means no special properties or protection.
+Ranged means the attack is ranged (Ex. Gus&apos; Spear Throw, Earth Tremor).
+WeaponDirect means the attack is performed directly with something attached to or held by the attacker, but not the attacker itself (Ex. Hammer, Gulp, Gus&apos; Spear Charge).
+Protected means the attacker is protected in some form (Ex. Koopa Shell; Shell Toss).
+</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.ContactResult.html">Enumerations.ContactResult</a></h4>
+      <section><p>The result of a ContactType and the PhysicalAttributes of an entity.
+A Failure indicates that the action backfired.
+PartialSuccess indicates that damage is dealt and the attacker suffers a backfire.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.ContactTypes.html">Enumerations.ContactTypes</a></h4>
+      <section><p>The type of contact actions will make on entities.
+<p>None is no contact at all (Ex. Hammer Throw, Star Storm).
+Latch is direct contact used to start an attack (Ex. Fuzzy&apos;s Kissy-Kissy, first part of Kiss Thief).
+TopDirect is direct contact from the top (Ex. Jump).
+SideDirect is direct contact from the side (Ex. Hammer).</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.CostDisplayTypes.html">Enumerations.CostDisplayTypes</a></h4>
+      <section><p>The display types of MoveAction resources.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.DamageEffects.html">Enumerations.DamageEffects</a></h4>
+      <section><p>The effects a damage-dealing move can have on a BattleEntity.
+This enum is a bit field, so handle it with bitwise operations.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.DefensiveActionTypes.html">Enumerations.DefensiveActionTypes</a></h4>
+      <section><p>The types of DefensiveActions that exist.
+This enum is a bit field, so handle it with bitwise operations.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.Elements.html">Enumerations.Elements</a></h4>
+      <section><p>The types of damage elements.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.EntitySelectionType.html">Enumerations.EntitySelectionType</a></h4>
+      <section><p>The types of ways to target BattleEntities.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.EntityTypes.html">Enumerations.EntityTypes</a></h4>
+      <section><p>The types of BattleEntities.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.HealthStates.html">Enumerations.HealthStates</a></h4>
+      <section><p>The state of health an entity can be in.
+<p>Danger occurs when the entity has 2-5 HP remaining.
+Peril occurs when the entity has exactly 1 HP remaining.
+Dead occurs when the entity has 0 HP remaining.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a></h4>
+      <section><p>The main height states an entity can be in.
+Some moves may or may not be able to hit entities in certain height states.
+<p>Hovering means that the entity is right above the ground and can be hit by most, but not all, ground moves.
+Quake Hammer cannot hit Hovering entities. Tornado Jump&apos;s secondary attack will hit Hovering entities.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.MoveAffectionTypes.html">Enumerations.MoveAffectionTypes</a></h4>
+      <section><p>The types of BattleEntities a MoveAction affects.
+<p>None causes the MoveAction to occur immediately.
+Self targets the user of the MoveAction.
+Ally targets all entities that are allies of the user.
+Other targets other types of entities in battle.
+Custom targets a set of entities based on the move&apos;s conditions.</p>
+<p>This is a bit field.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.MoveCategories.html">Enumerations.MoveCategories</a></h4>
+      <section><p>The root-level categories of moves.
+<p>In the PM games, Tactics, Special, and Enemy moves are never disabled outside of tutorials.
+Be extra careful if you want to disable those.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.MoveResourceTypes.html">Enumerations.MoveResourceTypes</a></h4>
+      <section><p>The types of resources that MoveActions can require.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.PartnerTypes.html">Enumerations.PartnerTypes</a></h4>
+      <section><p>The types of partners.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.PhysicalAttributes.html">Enumerations.PhysicalAttributes</a></h4>
+      <section><p>The physical attributes assigned to entities.
+These determine if an attack can target a particular entity, or whether there is an advantage
+or disadvantage to using a particular attack on an entity with a particular physical attribute.</p>
+<p>Winged does not mean that the entity is Airborne. Flying entities, such as Ruff Puffs,
+can still be damaged by ground moves if they hover at ground level.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.PlayerTypes.html">Enumerations.PlayerTypes</a></h4>
+      <section><p>The types of playable characters.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.StatusSuppressionTypes.html">Enumerations.StatusSuppressionTypes</a></h4>
+      <section><p>The types of ways Status Effects can be suppressed.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Enumerations.StatusTypes.html">Enumerations.StatusTypes</a></h4>
+      <section><p>The types of StatusEffects BattleEntities can be afflicted with</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.EquipmentGlobals.BootLevels.html">EquipmentGlobals.BootLevels</a></h4>
+      <section><p>The types of Boot levels for Mario.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.EquipmentGlobals.HammerLevels.html">EquipmentGlobals.HammerLevels</a></h4>
+      <section><p>The types of Hammer levels for Mario.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Item.ItemCategories.html">Item.ItemCategories</a></h4>
+      <section><p>The categories of items available.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Item.ItemTypes.html">Item.ItemTypes</a></h4>
+      <section><p>The types of items available.
+This enum is a bit field, so handle it with bitwise operations.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ObjAnimManager.SetSpriteSheetOptions.html">ObjAnimManager.SetSpriteSheetOptions</a></h4>
+      <section><p>Options when setting the <a class="xref" href="PaperMarioBattleSystem.ObjAnimManager.html">ObjAnimManager</a>&apos;s SpriteSheet.
+<p>
+None does not replace any Animation SpriteSheets.
+ReplaceSame replaces all Animation SpriteSheets with the current SpriteSheet reference to the new one.
+ReplaceAll replaces all Animation SpriteSheets with the new one.
+</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PartnerGlobals.PartnerRanks.html">PartnerGlobals.PartnerRanks</a></h4>
+      <section><p>The Ranks for Partners.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PartnerGlobals.YoshiColors.html">PartnerGlobals.YoshiColors</a></h4>
+      <section><p>The colors Yoshi can be.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.PowerLiftCommand.PowerLiftIcons.html">PowerLiftCommand.PowerLiftIcons</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.RallyWinkHeartVFX.HeartStates.html">RallyWinkHeartVFX.HeartStates</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ResistanceTypes.html">ResistanceTypes</a></h4>
+      <section><p>The ways to handle resistances</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Sequence.SequenceBranch.html">Sequence.SequenceBranch</a></h4>
+      <section><p>Values for each branch of a sequence.
+Sequences switch branches based on what happens.
+<p>The None branch is only used to indicate whether to jump to a certain branch after the sequence updates.
+The most common use-case is switching to the Interruption branch</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SoundManager.Sound.html">SoundManager.Sound</a></h4>
+      <section><p>Enum for Sound IDs</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StarPowerGlobals.StarPowerTypes.html">StarPowerGlobals.StarPowerTypes</a></h4>
+      <section><p>The types of Star Power.
+<p>PM has the Star Spirits, and TTYD has the Crystal Stars.</p></p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StatusEffect.StatusAlignments.html">StatusEffect.StatusAlignments</a></h4>
+      <section><p>Alignments for StatusEffects indicating how they affect the afflicted BattleEntity.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.StatusGlobals.PaybackTypes.html">StatusGlobals.PaybackTypes</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatElementSpawner.RestoreDistributionTypes.html">SweetTreatElementSpawner.RestoreDistributionTypes</a></h4>
+      <section><p>The type of distribution to use when spawning restoration types.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatGlobals.RestoreBehavior.html">SweetTreatGlobals.RestoreBehavior</a></h4>
+      <section><p>The behaviors for the RestoreTypes.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SweetTreatGlobals.RestoreTypes.html">SweetTreatGlobals.RestoreTypes</a></h4>
+      <section><p>The types of restoration used in Sweet Treat and Sweet Feast.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TattleRenderObj.States.html">TattleRenderObj.States</a></h4>
+      <section><p>The states of the tattle box.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TimedLightCommand.LightDistributions.html">TimedLightCommand.LightDistributions</a></h4>
+      <section><p>How to distribute the lights.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TornadoJumpCommand.Steps.html">TornadoJumpCommand.Steps</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.UIGrid.GridPivots.html">UIGrid.GridPivots</a></h4>
+      <section><p>The types of pivots for the grid.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.WeaknessTypes.html">WeaknessTypes</a></h4>
+      <section><p>The ways to handle weaknesses</p>
+</section>
+    <h3 id="delegates">Delegates
+  </h3>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntity.ConfusionDelegate.html">BattleEntity.ConfusionDelegate</a></h4>
+      <section><p>A delegate handling how the BattleEntity gets affected by the Confused status.
+The BattleEntity may perform a different action and/or target different entities.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntity.DamageTaken.html">BattleEntity.DamageTaken</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntity.DealtDamage.html">BattleEntity.DealtDamage</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntity.HealthStateChanged.html">BattleEntity.HealthStateChanged</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntity.PhaseCycleStarted.html">BattleEntity.PhaseCycleStarted</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntity.TurnEnded.html">BattleEntity.TurnEnded</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntity.TurnStarted.html">BattleEntity.TurnStarted</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntityProperties.CustomTarget.html">BattleEntityProperties.CustomTarget</a></h4>
+      <section><p>A delegate describing a custom targeting method.
+If true, the BattleEntity should remain in the target set, and if false, the BattleEntity should be excluded from the target set.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntityProperties.StatusInflicted.html">BattleEntityProperties.StatusInflicted</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleEntityProperties.StatusRemoved.html">BattleEntityProperties.StatusRemoved</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleManager.OnBattleEnd.html">BattleManager.OnBattleEnd</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleManager.OnBattleStart.html">BattleManager.OnBattleStart</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleManager.OnBattleTurnEnd.html">BattleManager.OnBattleTurnEnd</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleManager.OnBattleTurnStart.html">BattleManager.OnBattleTurnStart</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleManager.OnEntityAdded.html">BattleManager.OnEntityAdded</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleManager.OnEntityRemoved.html">BattleManager.OnEntityRemoved</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.BattleMenu.BattleMenuOption.OnSelect.html">BattleMenu.BattleMenuOption.OnSelect</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.CollisionTracker-2.CollisionHandler.html">CollisionTracker&lt;T, U&gt;.CollisionHandler</a></h4>
+      <section><p>A delegate for handling collisions.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimMissInteraction.html">Interactions.VictimMissInteraction</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.ItemAction.ItemUsedDelegate.html">ItemAction.ItemUsedDelegate</a></h4>
+      <section><p>Delegate for determining what happens if an item is used.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Main.OnLostFocus.html">Main.OnLostFocus</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Main.OnRegainedFocus.html">Main.OnRegainedFocus</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Sequence.InterruptionDelegate.html">Sequence.InterruptionDelegate</a></h4>
+      <section><p>A delegate for handling the sequence interruption branch.
+It should follow the same conventions as the other branches.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.Sequence.StylishDelegate.html">Sequence.StylishDelegate</a></h4>
+      <section><p>A delegate for handling Stylish Moves that require their own sequences.
+It should follow the same conventions as the other branches.</p>
+</section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpriteRenderer.ConcludedDrawing.html">SpriteRenderer.ConcludedDrawing</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpriteRenderer.FullyConcludedDrawing.html">SpriteRenderer.FullyConcludedDrawing</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.SpriteRenderer.OnWindowSizeChanged.html">SpriteRenderer.OnWindowSizeChanged</a></h4>
+      <section></section>
+      <h4><a class="xref" href="PaperMarioBattleSystem.TargetSelectionMenu.OnSelection.html">TargetSelectionMenu.OnSelection</a></h4>
+      <section></section>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

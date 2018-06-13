@@ -1,0 +1,422 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class BattleEventManager
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class BattleEventManager
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.BattleEventManager">
+  
+  
+  <h1 id="PaperMarioBattleSystem_BattleEventManager" data-uid="PaperMarioBattleSystem.BattleEventManager" class="text-break">Class BattleEventManager
+  </h1>
+  <div class="markdown level0 summary"><p>Manages BattleEvents.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">BattleEventManager</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_BattleEventManager_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class BattleEventManager : ICleanup</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEventManager__ctor_PaperMarioBattleSystem_BattleManager_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEventManager.%23ctor(PaperMarioBattleSystem.BattleManager)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleEventManager.cs/#L44">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEventManager__ctor_" data-uid="PaperMarioBattleSystem.BattleEventManager.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEventManager__ctor_PaperMarioBattleSystem_BattleManager_" data-uid="PaperMarioBattleSystem.BattleEventManager.#ctor(PaperMarioBattleSystem.BattleManager)">BattleEventManager(BattleManager)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BattleEventManager(BattleManager bManager)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleManager.html">BattleManager</a></td>
+        <td><span class="parametername">bManager</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEventManager_BattleEvents.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEventManager.BattleEvents%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleEventManager.cs/#L20">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_BattleEventManager_BattleEvents" data-uid="PaperMarioBattleSystem.BattleEventManager.BattleEvents">BattleEvents</h4>
+  <div class="markdown level1 summary"><p>The current Battle Events taking place. These are completed before the next BattleEntity&apos;s turn takes place.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Dictionary&lt;int, List&lt;BattleEvent&gt;&gt; BattleEvents</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.Int32</span>, <span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PaperMarioBattleSystem.BattleEvent.html">BattleEvent</a>&gt;&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEventManager_PendingBattleEvents.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEventManager.PendingBattleEvents%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleEventManager.cs/#L26">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_BattleEventManager_PendingBattleEvents" data-uid="PaperMarioBattleSystem.BattleEventManager.PendingBattleEvents">PendingBattleEvents</h4>
+  <div class="markdown level1 summary"><p>The pending Battle Events waiting to be added.
+They are added once the Battle State matches the state they should be added in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly List&lt;BattleGlobals.PendingBattleEventHolder&gt; PendingBattleEvents</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PaperMarioBattleSystem.BattleGlobals.PendingBattleEventHolder.html">BattleGlobals.PendingBattleEventHolder</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEventManager_CurHighestPriority.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEventManager.CurHighestPriority%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleEventManager.cs/#L32">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEventManager_CurHighestPriority_" data-uid="PaperMarioBattleSystem.BattleEventManager.CurHighestPriority*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEventManager_CurHighestPriority" data-uid="PaperMarioBattleSystem.BattleEventManager.CurHighestPriority">CurHighestPriority</h4>
+  <div class="markdown level1 summary"><p>The current, highest priority of Battle Events taking place.
+Once these are all done, the next highest priority of Battle Events is found and takes place.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CurHighestPriority { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEventManager_HasBattleEvents.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEventManager.HasBattleEvents%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleEventManager.cs/#L37">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEventManager_HasBattleEvents_" data-uid="PaperMarioBattleSystem.BattleEventManager.HasBattleEvents*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEventManager_HasBattleEvents" data-uid="PaperMarioBattleSystem.BattleEventManager.HasBattleEvents">HasBattleEvents</h4>
+  <div class="markdown level1 summary"><p>Tells if there are Battle Events.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool HasBattleEvents { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEventManager_AddPendingEvents.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEventManager.AddPendingEvents%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleEventManager.cs/#L238">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEventManager_AddPendingEvents_" data-uid="PaperMarioBattleSystem.BattleEventManager.AddPendingEvents*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEventManager_AddPendingEvents" data-uid="PaperMarioBattleSystem.BattleEventManager.AddPendingEvents">AddPendingEvents()</h4>
+  <div class="markdown level1 summary"><p>Adds pending Battle Events if the BattleState is the state that matches the state they&apos;re added in.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddPendingEvents()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEventManager_CleanUp.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEventManager.CleanUp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleEventManager.cs/#L49">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEventManager_CleanUp_" data-uid="PaperMarioBattleSystem.BattleEventManager.CleanUp*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEventManager_CleanUp" data-uid="PaperMarioBattleSystem.BattleEventManager.CleanUp">CleanUp()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CleanUp()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEventManager_QueueBattleEvent_System_Int32_PaperMarioBattleSystem_BattleGlobals_BattleState___PaperMarioBattleSystem_BattleEvent_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEventManager.QueueBattleEvent(System.Int32%2CPaperMarioBattleSystem.BattleGlobals.BattleState%5B%5D%2CPaperMarioBattleSystem.BattleEvent)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleEventManager.cs/#L63">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEventManager_QueueBattleEvent_" data-uid="PaperMarioBattleSystem.BattleEventManager.QueueBattleEvent*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEventManager_QueueBattleEvent_System_Int32_PaperMarioBattleSystem_BattleGlobals_BattleState___PaperMarioBattleSystem_BattleEvent_" data-uid="PaperMarioBattleSystem.BattleEventManager.QueueBattleEvent(System.Int32,PaperMarioBattleSystem.BattleGlobals.BattleState[],PaperMarioBattleSystem.BattleEvent)">QueueBattleEvent(Int32, BattleGlobals.BattleState[], BattleEvent)</h4>
+  <div class="markdown level1 summary"><p>Places a Battle Event on the pending list.
+<p>If the current BattleState matches a BattleState the Battle Event takes effect in, it will take effect immediately.
+Otherwise, it will wait and take effect once the current BattleState matches.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void QueueBattleEvent(int priority, BattleGlobals.BattleState[] battleStates, BattleEvent battleEvent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">priority</span></td>
+        <td><p>The priority the Battle Event has. Must be greater than or equal to 0.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.BattleState.html">BattleGlobals.BattleState</a>[]</td>
+        <td><span class="parametername">battleStates</span></td>
+        <td><p>The BattleStates the Battle Event takes effect in. If none are specified, the event isn&apos;t added.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEvent.html">BattleEvent</a></td>
+        <td><span class="parametername">battleEvent</span></td>
+        <td><p>The Battle Event to add.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEventManager_UpdateBattleEvents.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEventManager.UpdateBattleEvents%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleEventManager.cs/#L179">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEventManager_UpdateBattleEvents_" data-uid="PaperMarioBattleSystem.BattleEventManager.UpdateBattleEvents*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEventManager_UpdateBattleEvents" data-uid="PaperMarioBattleSystem.BattleEventManager.UpdateBattleEvents">UpdateBattleEvents()</h4>
+  <div class="markdown level1 summary"><p>Updates the current set of Battle Events.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateBattleEvents()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEventManager.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEventManager%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleEventManager.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

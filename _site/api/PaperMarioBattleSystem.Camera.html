@@ -1,0 +1,680 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Camera
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Camera
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.Camera">
+  
+  
+  <h1 id="PaperMarioBattleSystem_Camera" data-uid="PaperMarioBattleSystem.Camera" class="text-break">Class Camera
+  </h1>
+  <div class="markdown level0 summary"><p>The game camera. It pans, rotates, and zooms at specified moments.
+<p>This is a Singleton for now</p></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Camera</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_Camera_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Camera</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_Instance.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L18">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_Instance_" data-uid="PaperMarioBattleSystem.Camera.Instance*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_Instance" data-uid="PaperMarioBattleSystem.Camera.Instance">Instance</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Camera Instance { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Camera.html">Camera</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_Position.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.Position%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L43">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_Position_" data-uid="PaperMarioBattleSystem.Camera.Position*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_Position" data-uid="PaperMarioBattleSystem.Camera.Position">Position</h4>
+  <div class="markdown level1 summary"><p>The position of the camera. (0,0) is the center of the screen</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 Position { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_Rotation.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.Rotation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L53">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_Rotation_" data-uid="PaperMarioBattleSystem.Camera.Rotation*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_Rotation" data-uid="PaperMarioBattleSystem.Camera.Rotation">Rotation</h4>
+  <div class="markdown level1 summary"><p>The rotation of the camera</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Rotation { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_Scale.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.Scale%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L48">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_Scale_" data-uid="PaperMarioBattleSystem.Camera.Scale*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_Scale" data-uid="PaperMarioBattleSystem.Camera.Scale">Scale</h4>
+  <div class="markdown level1 summary"><p>The scale of the Camera. Negative values will flip everything on-screen</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Scale { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_Transform.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.Transform%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L55">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_Transform_" data-uid="PaperMarioBattleSystem.Camera.Transform*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_Transform" data-uid="PaperMarioBattleSystem.Camera.Transform">Transform</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix Transform { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Matrix</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_CalculateTransformation.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.CalculateTransformation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L138">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_CalculateTransformation_" data-uid="PaperMarioBattleSystem.Camera.CalculateTransformation*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_CalculateTransformation" data-uid="PaperMarioBattleSystem.Camera.CalculateTransformation">CalculateTransformation()</h4>
+  <div class="markdown level1 summary"><p>Calculates the Camera&apos;s Transform using Matrix multiplication
+<p>Obtained from: <a href="http://www.david-amador.com/2009/10/xna-camera-2d-with-zoom-and-rotation/">http://www.david-amador.com/2009/10/xna-camera-2d-with-zoom-and-rotation/</a></p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix CalculateTransformation()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Matrix</span></td>
+        <td><p>The Matrix representing the Camera&apos;s Transform</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_Initialize_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.Initialize(Microsoft.Xna.Framework.Vector2%2CSystem.Single%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L62">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_Initialize_" data-uid="PaperMarioBattleSystem.Camera.Initialize*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_Initialize_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_" data-uid="PaperMarioBattleSystem.Camera.Initialize(Microsoft.Xna.Framework.Vector2,System.Single,System.Single)">Initialize(Vector2, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Initialize(Vector2 position, float rotation, float scale)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_Rotate_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.Rotate(System.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L86">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_Rotate_" data-uid="PaperMarioBattleSystem.Camera.Rotate*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_Rotate_System_Single_" data-uid="PaperMarioBattleSystem.Camera.Rotate(System.Single)">Rotate(Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Rotate(float amount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">amount</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_SetRotation_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.SetRotation(System.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L81">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_SetRotation_" data-uid="PaperMarioBattleSystem.Camera.SetRotation*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_SetRotation_System_Single_" data-uid="PaperMarioBattleSystem.Camera.SetRotation(System.Single)">SetRotation(Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetRotation(float rotation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_SetTranslation_Microsoft_Xna_Framework_Vector2_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.SetTranslation(Microsoft.Xna.Framework.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L71">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_SetTranslation_" data-uid="PaperMarioBattleSystem.Camera.SetTranslation*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_SetTranslation_Microsoft_Xna_Framework_Vector2_" data-uid="PaperMarioBattleSystem.Camera.SetTranslation(Microsoft.Xna.Framework.Vector2)">SetTranslation(Vector2)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetTranslation(Vector2 translation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">translation</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_SetZoom_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.SetZoom(System.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L91">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_SetZoom_" data-uid="PaperMarioBattleSystem.Camera.SetZoom*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_SetZoom_System_Single_" data-uid="PaperMarioBattleSystem.Camera.SetZoom(System.Single)">SetZoom(Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetZoom(float scale)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_SpriteToUIPos_Microsoft_Xna_Framework_Vector2_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.SpriteToUIPos(Microsoft.Xna.Framework.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L110">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_SpriteToUIPos_" data-uid="PaperMarioBattleSystem.Camera.SpriteToUIPos*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_SpriteToUIPos_Microsoft_Xna_Framework_Vector2_" data-uid="PaperMarioBattleSystem.Camera.SpriteToUIPos(Microsoft.Xna.Framework.Vector2)">SpriteToUIPos(Vector2)</h4>
+  <div class="markdown level1 summary"><p>Converts a position on the Sprite layer to its respective position on the UI layer</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 SpriteToUIPos(Vector2 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The position on the Sprite layer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><p>The position on the UI layer corresponding to the position on the Sprite layer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_Translate_Microsoft_Xna_Framework_Vector2_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.Translate(Microsoft.Xna.Framework.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L76">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_Translate_" data-uid="PaperMarioBattleSystem.Camera.Translate*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_Translate_Microsoft_Xna_Framework_Vector2_" data-uid="PaperMarioBattleSystem.Camera.Translate(Microsoft.Xna.Framework.Vector2)">Translate(Vector2)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Translate(Vector2 amount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">amount</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_UIToSpritePos_Microsoft_Xna_Framework_Vector2_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.UIToSpritePos(Microsoft.Xna.Framework.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L123">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_UIToSpritePos_" data-uid="PaperMarioBattleSystem.Camera.UIToSpritePos*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_UIToSpritePos_Microsoft_Xna_Framework_Vector2_" data-uid="PaperMarioBattleSystem.Camera.UIToSpritePos(Microsoft.Xna.Framework.Vector2)">UIToSpritePos(Vector2)</h4>
+  <div class="markdown level1 summary"><p>Converts a position on the UI layer to its respective position on the Sprite layer</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 UIToSpritePos(Vector2 position)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td><p>The position on the UI layer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><p>The position on the Sprite layer corresponding to the position on the UI layer</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera_Zoom_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera.Zoom(System.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L96">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Camera_Zoom_" data-uid="PaperMarioBattleSystem.Camera.Zoom*"></a>
+  <h4 id="PaperMarioBattleSystem_Camera_Zoom_System_Single_" data-uid="PaperMarioBattleSystem.Camera.Zoom(System.Single)">Zoom(Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Zoom(float amount)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">amount</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Camera.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Camera%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Camera.cs/#L14" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

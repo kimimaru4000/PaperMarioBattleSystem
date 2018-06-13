@@ -1,0 +1,305 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DetonateBobberyBombBattleEvent
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DetonateBobberyBombBattleEvent
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.DetonateBobberyBombBattleEvent">
+  
+  
+  <h1 id="PaperMarioBattleSystem_DetonateBobberyBombBattleEvent" data-uid="PaperMarioBattleSystem.DetonateBobberyBombBattleEvent" class="text-break">Class DetonateBobberyBombBattleEvent
+  </h1>
+  <div class="markdown level0 summary"><p>A Battle Event when Bobbery Bombs are detonated.
+They damage all BattleEntities around them, including other Bobbery Bombs.
+<p>This is a Battle Event because this occurs after some other events (Ex. Status Effects)
+and after another bomb takes explosive damage, causing it to detonate earlier than usual.</p></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PaperMarioBattleSystem.BattleEvent.html">BattleEvent</a></div>
+    <div class="level2"><span class="xref">DetonateBobberyBombBattleEvent</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_Started">BattleEvent.Started</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_IsUnique">BattleEvent.IsUnique</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_IsCombineable">BattleEvent.IsCombineable</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_Done">BattleEvent.Done</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_HasStarted">BattleEvent.HasStarted</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_IsDone">BattleEvent.IsDone</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_Entities">BattleEvent.Entities</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_Start">BattleEvent.Start()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_End">BattleEvent.End()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_Update">BattleEvent.Update()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_AreContentsEqual_PaperMarioBattleSystem_BattleEvent_">BattleEvent.AreContentsEqual(BattleEvent)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_Combine_PaperMarioBattleSystem_BattleEvent_">BattleEvent.Combine(BattleEvent)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_DetonateBobberyBombBattleEvent_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DetonateBobberyBombBattleEvent : BattleEvent, IUpdateable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DetonateBobberyBombBattleEvent__ctor_PaperMarioBattleSystem_BobberyBomb_PaperMarioBattleSystem_DamageData_Microsoft_Xna_Framework_Rectangle_PaperMarioBattleSystem_Enumerations_HeightStates___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.%23ctor(PaperMarioBattleSystem.BobberyBomb%2CPaperMarioBattleSystem.DamageData%2CMicrosoft.Xna.Framework.Rectangle%2CPaperMarioBattleSystem.Enumerations.HeightStates%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEvents/DetonateBobberyBombBattleEvent.cs/#L29">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DetonateBobberyBombBattleEvent__ctor_" data-uid="PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_DetonateBobberyBombBattleEvent__ctor_PaperMarioBattleSystem_BobberyBomb_PaperMarioBattleSystem_DamageData_Microsoft_Xna_Framework_Rectangle_PaperMarioBattleSystem_Enumerations_HeightStates___" data-uid="PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.#ctor(PaperMarioBattleSystem.BobberyBomb,PaperMarioBattleSystem.DamageData,Microsoft.Xna.Framework.Rectangle,PaperMarioBattleSystem.Enumerations.HeightStates[])">DetonateBobberyBombBattleEvent(BobberyBomb, DamageData, Rectangle, Enumerations.HeightStates[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DetonateBobberyBombBattleEvent(BobberyBomb bobberyBomb, DamageData damageInfo, Rectangle explosionArea, params Enumerations.HeightStates[] heightStates)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BobberyBomb.html">BobberyBomb</a></td>
+        <td><span class="parametername">bobberyBomb</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.DamageData.html">DamageData</a></td>
+        <td><span class="parametername">damageInfo</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Rectangle</span></td>
+        <td><span class="parametername">explosionArea</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a>[]</td>
+        <td><span class="parametername">heightStates</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DetonateBobberyBombBattleEvent_OnEnd.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.OnEnd%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEvents/DetonateBobberyBombBattleEvent.cs/#L67">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DetonateBobberyBombBattleEvent_OnEnd_" data-uid="PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.OnEnd*"></a>
+  <h4 id="PaperMarioBattleSystem_DetonateBobberyBombBattleEvent_OnEnd" data-uid="PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.OnEnd">OnEnd()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnEnd()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_OnEnd">BattleEvent.OnEnd()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DetonateBobberyBombBattleEvent_OnStart.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.OnStart%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEvents/DetonateBobberyBombBattleEvent.cs/#L38">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DetonateBobberyBombBattleEvent_OnStart_" data-uid="PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.OnStart*"></a>
+  <h4 id="PaperMarioBattleSystem_DetonateBobberyBombBattleEvent_OnStart" data-uid="PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.OnStart">OnStart()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnStart()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_OnStart">BattleEvent.OnStart()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DetonateBobberyBombBattleEvent_OnUpdate.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.OnUpdate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEvents/DetonateBobberyBombBattleEvent.cs/#L80">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DetonateBobberyBombBattleEvent_OnUpdate_" data-uid="PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.OnUpdate*"></a>
+  <h4 id="PaperMarioBattleSystem_DetonateBobberyBombBattleEvent_OnUpdate" data-uid="PaperMarioBattleSystem.DetonateBobberyBombBattleEvent.OnUpdate">OnUpdate()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnUpdate()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.BattleEvent.html#PaperMarioBattleSystem_BattleEvent_OnUpdate">BattleEvent.OnUpdate()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DetonateBobberyBombBattleEvent.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DetonateBobberyBombBattleEvent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEvents/DetonateBobberyBombBattleEvent.cs/#L18" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

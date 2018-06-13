@@ -1,0 +1,982 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DialogueBubble
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DialogueBubble
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.DialogueBubble">
+  
+  
+  <h1 id="PaperMarioBattleSystem_DialogueBubble" data-uid="PaperMarioBattleSystem.DialogueBubble" class="text-break">Class DialogueBubble
+  </h1>
+  <div class="markdown level0 summary"><p>A dialogue bubble. It shows what characters are saying over time.
+<p>Text for these bubbles involve control codes that have a variety of modifiers that apply a wide range of effects.
+See <a class="xref" href="PaperMarioBattleSystem.DialogueGlobals.html">DialogueGlobals</a> and/or documentation for the modifiers and their tags and attributes.</p></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">DialogueBubble</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.IPosition.html">IPosition</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IScalable.html">IScalable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_DialogueBubble_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class DialogueBubble : IPosition, IScalable, IUpdateable, IDrawable, ICleanup</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble__ctor.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L163">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble__ctor_" data-uid="PaperMarioBattleSystem.DialogueBubble.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble__ctor" data-uid="PaperMarioBattleSystem.DialogueBubble.#ctor">DialogueBubble()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DialogueBubble()</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_CurParagraphIndex.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.CurParagraphIndex%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L75">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_CurParagraphIndex" data-uid="PaperMarioBattleSystem.DialogueBubble.CurParagraphIndex">CurParagraphIndex</h4>
+  <div class="markdown level1 summary"><p>The current paragraph index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CurParagraphIndex</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_DefaultTimeBetweenChars.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.DefaultTimeBetweenChars%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L25">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_DefaultTimeBetweenChars" data-uid="PaperMarioBattleSystem.DialogueBubble.DefaultTimeBetweenChars">DefaultTimeBetweenChars</h4>
+  <div class="markdown level1 summary"><p>The default time between printing characters.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const double DefaultTimeBetweenChars = 25</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_FastTextScrollSpeed.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.FastTextScrollSpeed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L35">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_FastTextScrollSpeed" data-uid="PaperMarioBattleSystem.DialogueBubble.FastTextScrollSpeed">FastTextScrollSpeed</h4>
+  <div class="markdown level1 summary"><p>The faster text scrolling speed when going up or down a new paragraph.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float FastTextScrollSpeed = -12F</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_PreviousParagraphButton.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.PreviousParagraphButton%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L40">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_PreviousParagraphButton" data-uid="PaperMarioBattleSystem.DialogueBubble.PreviousParagraphButton">PreviousParagraphButton</h4>
+  <div class="markdown level1 summary"><p>The button to press to go to the previous paragraph.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const Keys PreviousParagraphButton = Keys.I</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Input.Keys</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_ProgressionButton.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.ProgressionButton%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L45">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_ProgressionButton" data-uid="PaperMarioBattleSystem.DialogueBubble.ProgressionButton">ProgressionButton</h4>
+  <div class="markdown level1 summary"><p>The button to press to progress past an input prompt.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const Keys ProgressionButton = Keys.O</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Input.Keys</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_ProgressTextStar.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.ProgressTextStar%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L85">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_ProgressTextStar" data-uid="PaperMarioBattleSystem.DialogueBubble.ProgressTextStar">ProgressTextStar</h4>
+  <div class="markdown level1 summary"><p>The star to indicate the end of text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly ProgressDialogueStar ProgressTextStar</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.ProgressDialogueStar.html">ProgressDialogueStar</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_stringBuilder.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.stringBuilder%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L65">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_stringBuilder" data-uid="PaperMarioBattleSystem.DialogueBubble.stringBuilder">stringBuilder</h4>
+  <div class="markdown level1 summary"><p>The StringBuilder adding the characters in the dialogue that will be rendered.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly StringBuilder stringBuilder</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Text.StringBuilder</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_TextScrollSpeed.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.TextScrollSpeed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L30">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_TextScrollSpeed" data-uid="PaperMarioBattleSystem.DialogueBubble.TextScrollSpeed">TextScrollSpeed</h4>
+  <div class="markdown level1 summary"><p>The base text scrolling speed when going up or down a new paragraph.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public const float TextScrollSpeed = -4F</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_TextYOffset.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.TextYOffset%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L93">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_TextYOffset" data-uid="PaperMarioBattleSystem.DialogueBubble.TextYOffset">TextYOffset</h4>
+  <div class="markdown level1 summary"><p>The Y offset for the text. This is set when scrolling up or down a new paragraph.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float TextYOffset</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_TimeBetweenCharacters.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.TimeBetweenCharacters%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L60">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_TimeBetweenCharacters" data-uid="PaperMarioBattleSystem.DialogueBubble.TimeBetweenCharacters">TimeBetweenCharacters</h4>
+  <div class="markdown level1 summary"><p>How long to wait in between each displayed character.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double TimeBetweenCharacters</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_BubbleRasterizerState.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.BubbleRasterizerState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L114">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_BubbleRasterizerState_" data-uid="PaperMarioBattleSystem.DialogueBubble.BubbleRasterizerState*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_BubbleRasterizerState" data-uid="PaperMarioBattleSystem.DialogueBubble.BubbleRasterizerState">BubbleRasterizerState</h4>
+  <div class="markdown level1 summary"><p>The RasterizerState for the Dialogue Bubble.
+This enables the ScissorRectangle to clip text outside of the bubble.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RasterizerState BubbleRasterizerState { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.RasterizerState</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_DBubbleData.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.DBubbleData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L139">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_DBubbleData_" data-uid="PaperMarioBattleSystem.DialogueBubble.DBubbleData*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_DBubbleData" data-uid="PaperMarioBattleSystem.DialogueBubble.DBubbleData">DBubbleData</h4>
+  <div class="markdown level1 summary"><p>The data that the Dialogue Bubble uses to render text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DialogueGlobals.BubbleData DBubbleData { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.DialogueGlobals.BubbleData.html">DialogueGlobals.BubbleData</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_IsDone.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.IsDone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L103">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_IsDone_" data-uid="PaperMarioBattleSystem.DialogueBubble.IsDone*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_IsDone" data-uid="PaperMarioBattleSystem.DialogueBubble.IsDone">IsDone</h4>
+  <div class="markdown level1 summary"><p>Tells whether the dialogue bubble completed all of its text or not.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsDone { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_Position.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.Position%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L87">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_Position_" data-uid="PaperMarioBattleSystem.DialogueBubble.Position*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_Position" data-uid="PaperMarioBattleSystem.DialogueBubble.Position">Position</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 Position { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_Scale.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.Scale%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L88">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_Scale_" data-uid="PaperMarioBattleSystem.DialogueBubble.Scale*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_Scale" data-uid="PaperMarioBattleSystem.DialogueBubble.Scale">Scale</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 Scale { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_Speaker.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.Speaker%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L108">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_Speaker_" data-uid="PaperMarioBattleSystem.DialogueBubble.Speaker*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_Speaker" data-uid="PaperMarioBattleSystem.DialogueBubble.Speaker">Speaker</h4>
+  <div class="markdown level1 summary"><p>The BattlEntity speaking the dialogue. This can be null.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BattleEntity Speaker { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_YMoveAmount.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.YMoveAmount%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L50">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_YMoveAmount_" data-uid="PaperMarioBattleSystem.DialogueBubble.YMoveAmount*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_YMoveAmount" data-uid="PaperMarioBattleSystem.DialogueBubble.YMoveAmount">YMoveAmount</h4>
+  <div class="markdown level1 summary"><p>The amount to move the text when going up or down a paragraph.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float YMoveAmount { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_AddMessageRoutine_PaperMarioBattleSystem_MessageRoutine_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.AddMessageRoutine(PaperMarioBattleSystem.MessageRoutine)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L502">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_AddMessageRoutine_" data-uid="PaperMarioBattleSystem.DialogueBubble.AddMessageRoutine*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_AddMessageRoutine_PaperMarioBattleSystem_MessageRoutine_" data-uid="PaperMarioBattleSystem.DialogueBubble.AddMessageRoutine(PaperMarioBattleSystem.MessageRoutine)">AddMessageRoutine(MessageRoutine)</h4>
+  <div class="markdown level1 summary"><p>Adds a Message Routine to the Message Routine stack.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddMessageRoutine(MessageRoutine routine)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.MessageRoutine.html">MessageRoutine</a></td>
+        <td><span class="parametername">routine</span></td>
+        <td><p>The Message Routine to add.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_AttachSpeaker_PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.AttachSpeaker(PaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L232">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_AttachSpeaker_" data-uid="PaperMarioBattleSystem.DialogueBubble.AttachSpeaker*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_AttachSpeaker_PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.DialogueBubble.AttachSpeaker(PaperMarioBattleSystem.BattleEntity)">AttachSpeaker(BattleEntity)</h4>
+  <div class="markdown level1 summary"><p>Attaches a speaker to the Dialogue Bubble. When text scrolls, the speaker will appear to speak.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AttachSpeaker(BattleEntity speaker)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
+        <td><span class="parametername">speaker</span></td>
+        <td><p>The BattleEntity to speak.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_CleanUp.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.CleanUp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L180">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_CleanUp_" data-uid="PaperMarioBattleSystem.DialogueBubble.CleanUp*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_CleanUp" data-uid="PaperMarioBattleSystem.DialogueBubble.CleanUp">CleanUp()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CleanUp()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_Close.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.Close%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L285">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_Close_" data-uid="PaperMarioBattleSystem.DialogueBubble.Close*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_Close" data-uid="PaperMarioBattleSystem.DialogueBubble.Close">Close()</h4>
+  <div class="markdown level1 summary"><p>Marks the Dialogue Bubble as finished so it can be closed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Close()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_Draw.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.Draw%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L512">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_Draw_" data-uid="PaperMarioBattleSystem.DialogueBubble.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_Draw" data-uid="PaperMarioBattleSystem.DialogueBubble.Draw">Draw()</h4>
+  <div class="markdown level1 summary"><p>Draws the Dialogue Bubble&apos;s image and end-of-text star.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_DrawText.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.DrawText%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L532">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_DrawText_" data-uid="PaperMarioBattleSystem.DialogueBubble.DrawText*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_DrawText" data-uid="PaperMarioBattleSystem.DialogueBubble.DrawText">DrawText()</h4>
+  <div class="markdown level1 summary"><p>Draws the Dialogue Bubble&apos;s text.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawText()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_Reset.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.Reset%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L258">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_Reset_" data-uid="PaperMarioBattleSystem.DialogueBubble.Reset*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_Reset" data-uid="PaperMarioBattleSystem.DialogueBubble.Reset">Reset()</h4>
+  <div class="markdown level1 summary"><p>Resets the Dialogue Bubble.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Reset()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_SetFont_Microsoft_Xna_Framework_Graphics_SpriteFont_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.SetFont(Microsoft.Xna.Framework.Graphics.SpriteFont)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L222">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_SetFont_" data-uid="PaperMarioBattleSystem.DialogueBubble.SetFont*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_SetFont_Microsoft_Xna_Framework_Graphics_SpriteFont_" data-uid="PaperMarioBattleSystem.DialogueBubble.SetFont(Microsoft.Xna.Framework.Graphics.SpriteFont)">SetFont(SpriteFont)</h4>
+  <div class="markdown level1 summary"><p>Sets the font to use for the Dialogue Bubble.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetFont(SpriteFont spriteFont)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">spriteFont</span></td>
+        <td><p>The SpriteFont to use.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_SetText_System_String_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.SetText(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L206">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_SetText_" data-uid="PaperMarioBattleSystem.DialogueBubble.SetText*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_SetText_System_String_" data-uid="PaperMarioBattleSystem.DialogueBubble.SetText(System.String)">SetText(String)</h4>
+  <div class="markdown level1 summary"><p>Resets the Dialogue Bubble and sets new text for it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetText(string text)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td><p>A string containing the text for the Dialogue Bubble to parse and print.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_SpeakerEndTalk.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.SpeakerEndTalk%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L249">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_SpeakerEndTalk_" data-uid="PaperMarioBattleSystem.DialogueBubble.SpeakerEndTalk*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_SpeakerEndTalk" data-uid="PaperMarioBattleSystem.DialogueBubble.SpeakerEndTalk">SpeakerEndTalk()</h4>
+  <div class="markdown level1 summary"><p>Makes the speaker end its talking animation by going into its idle animation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SpeakerEndTalk()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_SpeakerStartTalk.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.SpeakerStartTalk%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L240">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_SpeakerStartTalk_" data-uid="PaperMarioBattleSystem.DialogueBubble.SpeakerStartTalk*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_SpeakerStartTalk" data-uid="PaperMarioBattleSystem.DialogueBubble.SpeakerStartTalk">SpeakerStartTalk()</h4>
+  <div class="markdown level1 summary"><p>Makes the speaker play its talking animation if it&apos;s not doing so already.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SpeakerStartTalk()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble_Update.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L290">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DialogueBubble_Update_" data-uid="PaperMarioBattleSystem.DialogueBubble.Update*"></a>
+  <h4 id="PaperMarioBattleSystem_DialogueBubble_Update" data-uid="PaperMarioBattleSystem.DialogueBubble.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Update()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IPosition.html">IPosition</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IScalable.html">IScalable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DialogueBubble.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DialogueBubble%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Dialogue/DialogueBubble.cs/#L20" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

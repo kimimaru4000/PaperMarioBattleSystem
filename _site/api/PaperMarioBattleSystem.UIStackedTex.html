@@ -1,0 +1,636 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class UIStackedTex
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class UIStackedTex
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.UIStackedTex">
+  
+  
+  <h1 id="PaperMarioBattleSystem_UIStackedTex" data-uid="PaperMarioBattleSystem.UIStackedTex" class="text-break">Class UIStackedTex
+  </h1>
+  <div class="markdown level0 summary"><p>A UIElement containing <a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a>s overlaid on top of one another.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PaperMarioBattleSystem.UIElement.html">UIElement</a></div>
+    <div class="level2"><a class="xref" href="PaperMarioBattleSystem.PosUIElement.html">PosUIElement</a></div>
+    <div class="level3"><span class="xref">UIStackedTex</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IPosition.html">IPosition</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.ITintable.html">ITintable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.PosUIElement.html#PaperMarioBattleSystem_PosUIElement_Position">PosUIElement.Position</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.UIElement.html#PaperMarioBattleSystem_UIElement_CleanUp">UIElement.CleanUp()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_UIStackedTex_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class UIStackedTex : PosUIElement, IUpdateable, IDrawable, ICleanup, IPosition, ITintable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex__ctor.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L33">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIStackedTex__ctor_" data-uid="PaperMarioBattleSystem.UIStackedTex.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex__ctor" data-uid="PaperMarioBattleSystem.UIStackedTex.#ctor">UIStackedTex()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UIStackedTex()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex__ctor_System_Single_PaperMarioBattleSystem_CroppedTexture2D___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.%23ctor(System.Single%2CPaperMarioBattleSystem.CroppedTexture2D%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L38">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIStackedTex__ctor_" data-uid="PaperMarioBattleSystem.UIStackedTex.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex__ctor_System_Single_PaperMarioBattleSystem_CroppedTexture2D___" data-uid="PaperMarioBattleSystem.UIStackedTex.#ctor(System.Single,PaperMarioBattleSystem.CroppedTexture2D[])">UIStackedTex(Single, CroppedTexture2D[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UIStackedTex(float depthDiff, params CroppedTexture2D[] croppedTextures)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">depthDiff</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a>[]</td>
+        <td><span class="parametername">croppedTextures</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_BaseDepth.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.BaseDepth%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L29">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_BaseDepth" data-uid="PaperMarioBattleSystem.UIStackedTex.BaseDepth">BaseDepth</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float BaseDepth</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_DepthDiff.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.DepthDiff%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L24">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_DepthDiff" data-uid="PaperMarioBattleSystem.UIStackedTex.DepthDiff">DepthDiff</h4>
+  <div class="markdown level1 summary"><p>The amount to offset the depth of each element by.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float DepthDiff</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_FlipX.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.FlipX%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L26">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_FlipX" data-uid="PaperMarioBattleSystem.UIStackedTex.FlipX">FlipX</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool FlipX</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_FlipY.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.FlipY%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L27">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_FlipY" data-uid="PaperMarioBattleSystem.UIStackedTex.FlipY">FlipY</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool FlipY</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_Rotation.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.Rotation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L28">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_Rotation" data-uid="PaperMarioBattleSystem.UIStackedTex.Rotation">Rotation</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Rotation</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_Scale.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.Scale%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L30">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_Scale" data-uid="PaperMarioBattleSystem.UIStackedTex.Scale">Scale</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Scale</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_TintColor.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.TintColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L31">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIStackedTex_TintColor_" data-uid="PaperMarioBattleSystem.UIStackedTex.TintColor*"></a>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_TintColor" data-uid="PaperMarioBattleSystem.UIStackedTex.TintColor">TintColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color TintColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_AddElement_PaperMarioBattleSystem_CroppedTexture2D_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.AddElement(PaperMarioBattleSystem.CroppedTexture2D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L49">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIStackedTex_AddElement_" data-uid="PaperMarioBattleSystem.UIStackedTex.AddElement*"></a>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_AddElement_PaperMarioBattleSystem_CroppedTexture2D_" data-uid="PaperMarioBattleSystem.UIStackedTex.AddElement(PaperMarioBattleSystem.CroppedTexture2D)">AddElement(CroppedTexture2D)</h4>
+  <div class="markdown level1 summary"><p>Adds a <a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a> to the <a class="xref" href="PaperMarioBattleSystem.UIStackedTex.html">UIStackedTex</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddElement(CroppedTexture2D croppedTex2D)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a></td>
+        <td><span class="parametername">croppedTex2D</span></td>
+        <td><p>The <a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a> to add.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_Draw.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.Draw%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L113">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIStackedTex_Draw_" data-uid="PaperMarioBattleSystem.UIStackedTex.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_Draw" data-uid="PaperMarioBattleSystem.UIStackedTex.Draw">Draw()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Draw()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.UIElement.html#PaperMarioBattleSystem_UIElement_Draw">UIElement.Draw()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_RemoveAllElements.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.RemoveAllElements%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L103">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIStackedTex_RemoveAllElements_" data-uid="PaperMarioBattleSystem.UIStackedTex.RemoveAllElements*"></a>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_RemoveAllElements" data-uid="PaperMarioBattleSystem.UIStackedTex.RemoveAllElements">RemoveAllElements()</h4>
+  <div class="markdown level1 summary"><p>Removes all <a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a>s from the <a class="xref" href="PaperMarioBattleSystem.UIStackedTex.html">UIStackedTex</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveAllElements()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_RemoveElement_PaperMarioBattleSystem_CroppedTexture2D_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.RemoveElement(PaperMarioBattleSystem.CroppedTexture2D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L64">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIStackedTex_RemoveElement_" data-uid="PaperMarioBattleSystem.UIStackedTex.RemoveElement*"></a>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_RemoveElement_PaperMarioBattleSystem_CroppedTexture2D_" data-uid="PaperMarioBattleSystem.UIStackedTex.RemoveElement(PaperMarioBattleSystem.CroppedTexture2D)">RemoveElement(CroppedTexture2D)</h4>
+  <div class="markdown level1 summary"><p>Removes a <a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a> from the <a class="xref" href="PaperMarioBattleSystem.UIStackedTex.html">UIStackedTex</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveElement(CroppedTexture2D croppedTex2D)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a></td>
+        <td><span class="parametername">croppedTex2D</span></td>
+        <td><p>The <a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a> to remove.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_RemoveElementAt_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.RemoveElementAt(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L73">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIStackedTex_RemoveElementAt_" data-uid="PaperMarioBattleSystem.UIStackedTex.RemoveElementAt*"></a>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_RemoveElementAt_System_Int32_" data-uid="PaperMarioBattleSystem.UIStackedTex.RemoveElementAt(System.Int32)">RemoveElementAt(Int32)</h4>
+  <div class="markdown level1 summary"><p>Removes an element at a particular index from the <a class="xref" href="PaperMarioBattleSystem.UIStackedTex.html">UIStackedTex</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveElementAt(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The zero-based index to remove the element at.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_RemoveFirst.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.RemoveFirst%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L87">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIStackedTex_RemoveFirst_" data-uid="PaperMarioBattleSystem.UIStackedTex.RemoveFirst*"></a>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_RemoveFirst" data-uid="PaperMarioBattleSystem.UIStackedTex.RemoveFirst">RemoveFirst()</h4>
+  <div class="markdown level1 summary"><p>Removes the first <a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a> added to the <a class="xref" href="PaperMarioBattleSystem.UIStackedTex.html">UIStackedTex</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveFirst()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_RemoveLast.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.RemoveLast%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L95">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIStackedTex_RemoveLast_" data-uid="PaperMarioBattleSystem.UIStackedTex.RemoveLast*"></a>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_RemoveLast" data-uid="PaperMarioBattleSystem.UIStackedTex.RemoveLast">RemoveLast()</h4>
+  <div class="markdown level1 summary"><p>Removes the last <a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a> added to the <a class="xref" href="PaperMarioBattleSystem.UIStackedTex.html">UIStackedTex</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveLast()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex_Update.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L108">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIStackedTex_Update_" data-uid="PaperMarioBattleSystem.UIStackedTex.Update*"></a>
+  <h4 id="PaperMarioBattleSystem_UIStackedTex_Update" data-uid="PaperMarioBattleSystem.UIStackedTex.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Update()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.UIElement.html#PaperMarioBattleSystem_UIElement_Update">UIElement.Update()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IPosition.html">IPosition</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.ITintable.html">ITintable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIStackedTex.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIStackedTex%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIStackedTex.cs/#L14" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

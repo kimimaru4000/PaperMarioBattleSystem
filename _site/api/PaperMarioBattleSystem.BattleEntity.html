@@ -1,0 +1,3166 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class BattleEntity
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class BattleEntity
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.BattleEntity">
+  
+  
+  <h1 id="PaperMarioBattleSystem_BattleEntity" data-uid="PaperMarioBattleSystem.BattleEntity" class="text-break">Class BattleEntity
+  </h1>
+  <div class="markdown level0 summary"><p>Any fighter that takes part in battle.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">BattleEntity</span></div>
+      <div class="level2"><a class="xref" href="PaperMarioBattleSystem.BattleEnemy.html">BattleEnemy</a></div>
+      <div class="level2"><a class="xref" href="PaperMarioBattleSystem.BattlePlayer.html">BattlePlayer</a></div>
+      <div class="level2"><a class="xref" href="PaperMarioBattleSystem.BobberyBomb.html">BobberyBomb</a></div>
+      <div class="level2"><a class="xref" href="PaperMarioBattleSystem.GulpitsRock.html">GulpitsRock</a></div>
+      <div class="level2"><a class="xref" href="PaperMarioBattleSystem.Shell.html">Shell</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.INameable.html">INameable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IPosition.html">IPosition</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IRotatable.html">IRotatable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IScalable.html">IScalable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.ITintable.html">ITintable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_BattleEntity_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class BattleEntity : INameable, IUpdateable, IDrawable, IPosition, IRotatable, IScalable, ITintable, ICleanup</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity__ctor_PaperMarioBattleSystem_Stats_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.%23ctor(PaperMarioBattleSystem.Stats)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L199">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity__ctor_" data-uid="PaperMarioBattleSystem.BattleEntity.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity__ctor_PaperMarioBattleSystem_Stats_" data-uid="PaperMarioBattleSystem.BattleEntity.#ctor(PaperMarioBattleSystem.Stats)">BattleEntity(Stats)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected BattleEntity(Stats stats)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Stats.html">Stats</a></td>
+        <td><span class="parametername">stats</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_ConfusionHandler.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.ConfusionHandler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L80">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_ConfusionHandler" data-uid="PaperMarioBattleSystem.BattleEntity.ConfusionHandler">ConfusionHandler</h4>
+  <div class="markdown level1 summary"><p>The handler to use when determining Confusion&apos;s effects.
+This allows BattleEntities to handle Confusion however they want.
+It defaults to <a class="xref" href="PaperMarioBattleSystem.BattleEntity.html#PaperMarioBattleSystem_BattleEntity_BaseConfusionHandler_PaperMarioBattleSystem_MoveAction_PaperMarioBattleSystem_BattleEntity___">BaseConfusionHandler(MoveAction, BattleEntity[])</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected BattleEntity.ConfusionDelegate ConfusionHandler</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.ConfusionDelegate.html">BattleEntity.ConfusionDelegate</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_DefensiveActions.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.DefensiveActions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L190">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_DefensiveActions" data-uid="PaperMarioBattleSystem.BattleEntity.DefensiveActions">DefensiveActions</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly List&lt;DefensiveAction&gt; DefensiveActions</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PaperMarioBattleSystem.DefensiveAction.html">DefensiveAction</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_Origin.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.Origin%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L157">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_Origin" data-uid="PaperMarioBattleSystem.BattleEntity.Origin">Origin</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public readonly Vector2 Origin</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_AnimManager.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.AnimManager%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L97">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_AnimManager_" data-uid="PaperMarioBattleSystem.BattleEntity.AnimManager*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_AnimManager" data-uid="PaperMarioBattleSystem.BattleEntity.AnimManager">AnimManager</h4>
+  <div class="markdown level1 summary"><p>The BattleEntity&apos;s animation manager.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ObjAnimManager AnimManager { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.ObjAnimManager.html">ObjAnimManager</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_BaseTurns.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.BaseTurns%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L117">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_BaseTurns_" data-uid="PaperMarioBattleSystem.BattleEntity.BaseTurns*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_BaseTurns" data-uid="PaperMarioBattleSystem.BattleEntity.BaseTurns">BaseTurns</h4>
+  <div class="markdown level1 summary"><p>The base number of turns the BattleEntity has in each of its phases.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int BaseTurns { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_BattleIndex.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.BattleIndex%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L141">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_BattleIndex_" data-uid="PaperMarioBattleSystem.BattleEntity.BattleIndex*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_BattleIndex" data-uid="PaperMarioBattleSystem.BattleEntity.BattleIndex">BattleIndex</h4>
+  <div class="markdown level1 summary"><p>The BattleEntity&apos;s battle index, assigned from the BattleManager.
+If it&apos;s less than or equal to <a class="xref" href="PaperMarioBattleSystem.BattleGlobals.html#PaperMarioBattleSystem_BattleGlobals_InvalidBattleIndex">InvalidBattleIndex</a>, the BattleEntity is not considered in battle.
+<p>This indicates its relation to BattleEntities of the same EntityType.
+BattleEntities with higher battle indices are behind ones with lower battle indices.</p>
+<p>In most cases, it also corresponds to its position from the left side of the stage and
+its reference index in its entity list.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int BattleIndex { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_BattlePosition.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.BattlePosition%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L151">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_BattlePosition_" data-uid="PaperMarioBattleSystem.BattleEntity.BattlePosition*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_BattlePosition" data-uid="PaperMarioBattleSystem.BattleEntity.BattlePosition">BattlePosition</h4>
+  <div class="markdown level1 summary"><p>The BattleEntity&apos;s battle position. The BattleEntity goes back to this after each action.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 BattlePosition { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_BattleStats.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.BattleStats%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L110">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_BattleStats_" data-uid="PaperMarioBattleSystem.BattleEntity.BattleStats*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_BattleStats" data-uid="PaperMarioBattleSystem.BattleEntity.BattleStats">BattleStats</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Stats BattleStats { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Stats.html">Stats</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_BManager.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.BManager%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L87">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_BManager_" data-uid="PaperMarioBattleSystem.BattleEntity.BManager*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_BManager" data-uid="PaperMarioBattleSystem.BattleEntity.BManager">BManager</h4>
+  <div class="markdown level1 summary"><p>The BattleManager the BattleEntity belongs to.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BattleManager BManager { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleManager.html">BattleManager</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_CurFP.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.CurFP%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L112">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_CurFP_" data-uid="PaperMarioBattleSystem.BattleEntity.CurFP*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_CurFP" data-uid="PaperMarioBattleSystem.BattleEntity.CurFP">CurFP</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual int CurFP { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_CurHP.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.CurHP%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L111">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_CurHP_" data-uid="PaperMarioBattleSystem.BattleEntity.CurHP*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_CurHP" data-uid="PaperMarioBattleSystem.BattleEntity.CurHP">CurHP</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CurHP { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_EntityProperties.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.EntityProperties%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L92">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_EntityProperties_" data-uid="PaperMarioBattleSystem.BattleEntity.EntityProperties*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_EntityProperties" data-uid="PaperMarioBattleSystem.BattleEntity.EntityProperties">EntityProperties</h4>
+  <div class="markdown level1 summary"><p>Various unique properties belonging to the BattleEntity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BattleEntityProperties EntityProperties { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntityProperties.html">BattleEntityProperties</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_EntityType.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.EntityType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L159">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_EntityType_" data-uid="PaperMarioBattleSystem.BattleEntity.EntityType*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_EntityType" data-uid="PaperMarioBattleSystem.BattleEntity.EntityType">EntityType</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Enumerations.EntityTypes EntityType { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.EntityTypes.html">Enumerations.EntityTypes</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_HealthState.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.HealthState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L108">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_HealthState_" data-uid="PaperMarioBattleSystem.BattleEntity.HealthState*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_HealthState" data-uid="PaperMarioBattleSystem.BattleEntity.HealthState">HealthState</h4>
+  <div class="markdown level1 summary"><p>The HealthState of the BattleEntity.
+This can apply to any BattleEntity, but only Mario and his Partners utilize Danger and Peril.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Enumerations.HealthStates HealthState { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HealthStates.html">Enumerations.HealthStates</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_HeightState.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.HeightState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L102">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_HeightState_" data-uid="PaperMarioBattleSystem.BattleEntity.HeightState*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_HeightState" data-uid="PaperMarioBattleSystem.BattleEntity.HeightState">HeightState</h4>
+  <div class="markdown level1 summary"><p>The HeightState of the BattleEntity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Enumerations.HeightStates HeightState { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_IsDead.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.IsDead%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L180">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_IsDead_" data-uid="PaperMarioBattleSystem.BattleEntity.IsDead*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_IsDead" data-uid="PaperMarioBattleSystem.BattleEntity.IsDead">IsDead</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsDead { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_IsInBattle.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.IsInBattle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L188">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_IsInBattle_" data-uid="PaperMarioBattleSystem.BattleEntity.IsInBattle*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_IsInBattle" data-uid="PaperMarioBattleSystem.BattleEntity.IsInBattle">IsInBattle</h4>
+  <div class="markdown level1 summary"><p>Tells if the BattleEntity is currently in battle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsInBattle { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_IsInDanger.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.IsInDanger%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L179">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_IsInDanger_" data-uid="PaperMarioBattleSystem.BattleEntity.IsInDanger*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_IsInDanger" data-uid="PaperMarioBattleSystem.BattleEntity.IsInDanger">IsInDanger</h4>
+  <div class="markdown level1 summary"><p>Tells whether the BattleEntity is in Danger or Peril</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsInDanger { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_IsTargeted.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.IsTargeted%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L174">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_IsTargeted_" data-uid="PaperMarioBattleSystem.BattleEntity.IsTargeted*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_IsTargeted" data-uid="PaperMarioBattleSystem.BattleEntity.IsTargeted">IsTargeted</h4>
+  <div class="markdown level1 summary"><p>Tells whether the BattleEntity is being targeted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsTargeted { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_IsTurn.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.IsTurn%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L181">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_IsTurn_" data-uid="PaperMarioBattleSystem.BattleEntity.IsTurn*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_IsTurn" data-uid="PaperMarioBattleSystem.BattleEntity.IsTurn">IsTurn</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsTurn { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_LastAction.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.LastAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L164">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_LastAction_" data-uid="PaperMarioBattleSystem.BattleEntity.LastAction*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_LastAction" data-uid="PaperMarioBattleSystem.BattleEntity.LastAction">LastAction</h4>
+  <div class="markdown level1 summary"><p>The last MoveAction the BattleEntity performed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MoveAction LastAction { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.MoveAction.html">MoveAction</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_Layer.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.Layer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L156">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_Layer_" data-uid="PaperMarioBattleSystem.BattleEntity.Layer*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_Layer" data-uid="PaperMarioBattleSystem.BattleEntity.Layer">Layer</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Layer { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_MaxTurns.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.MaxTurns%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L127">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_MaxTurns_" data-uid="PaperMarioBattleSystem.BattleEntity.MaxTurns*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_MaxTurns" data-uid="PaperMarioBattleSystem.BattleEntity.MaxTurns">MaxTurns</h4>
+  <div class="markdown level1 summary"><p>The current max number of turns the BattleEntity has in this phase.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxTurns { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_Name.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L129">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_Name_" data-uid="PaperMarioBattleSystem.BattleEntity.Name*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_Name" data-uid="PaperMarioBattleSystem.BattleEntity.Name">Name</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_Position.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.Position%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L146">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_Position_" data-uid="PaperMarioBattleSystem.BattleEntity.Position*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_Position" data-uid="PaperMarioBattleSystem.BattleEntity.Position">Position</h4>
+  <div class="markdown level1 summary"><p>The BattleEntity&apos;s current position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 Position { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_Rotation.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.Rotation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L153">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_Rotation_" data-uid="PaperMarioBattleSystem.BattleEntity.Rotation*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_Rotation" data-uid="PaperMarioBattleSystem.BattleEntity.Rotation">Rotation</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Rotation { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_Scale.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.Scale%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L154">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_Scale_" data-uid="PaperMarioBattleSystem.BattleEntity.Scale*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_Scale" data-uid="PaperMarioBattleSystem.BattleEntity.Scale">Scale</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 Scale { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_SpriteFlip.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.SpriteFlip%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L155">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_SpriteFlip_" data-uid="PaperMarioBattleSystem.BattleEntity.SpriteFlip*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_SpriteFlip" data-uid="PaperMarioBattleSystem.BattleEntity.SpriteFlip">SpriteFlip</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool SpriteFlip { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_Targeter.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.Targeter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L169">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_Targeter_" data-uid="PaperMarioBattleSystem.BattleEntity.Targeter*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_Targeter" data-uid="PaperMarioBattleSystem.BattleEntity.Targeter">Targeter</h4>
+  <div class="markdown level1 summary"><p>The BattleEntity targeting this one.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BattleEntity Targeter { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_TintColor.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.TintColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L131">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_TintColor_" data-uid="PaperMarioBattleSystem.BattleEntity.TintColor*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_TintColor" data-uid="PaperMarioBattleSystem.BattleEntity.TintColor">TintColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color TintColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_TurnsUsed.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.TurnsUsed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L122">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_TurnsUsed_" data-uid="PaperMarioBattleSystem.BattleEntity.TurnsUsed*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_TurnsUsed" data-uid="PaperMarioBattleSystem.BattleEntity.TurnsUsed">TurnsUsed</h4>
+  <div class="markdown level1 summary"><p>The number of turns the BattleEntity used in this phase.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int TurnsUsed { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_UsedTurn.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.UsedTurn%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L183">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_UsedTurn_" data-uid="PaperMarioBattleSystem.BattleEntity.UsedTurn*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_UsedTurn" data-uid="PaperMarioBattleSystem.BattleEntity.UsedTurn">UsedTurn</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool UsedTurn { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_AddAccuracyMod_System_Double_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.AddAccuracyMod(System.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L499">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_AddAccuracyMod_" data-uid="PaperMarioBattleSystem.BattleEntity.AddAccuracyMod*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_AddAccuracyMod_System_Double_" data-uid="PaperMarioBattleSystem.BattleEntity.AddAccuracyMod(System.Double)">AddAccuracyMod(Double)</h4>
+  <div class="markdown level1 summary"><p>Adds an Accuracy modifier. </p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddAccuracyMod(double accuracyMod)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">accuracyMod</span></td>
+        <td><p>The percentage change in decimal form. For example, .6 would indicate a 60% decrease in Accuracy.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_AddEvasionMod_System_Double_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.AddEvasionMod(System.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L523">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_AddEvasionMod_" data-uid="PaperMarioBattleSystem.BattleEntity.AddEvasionMod*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_AddEvasionMod_System_Double_" data-uid="PaperMarioBattleSystem.BattleEntity.AddEvasionMod(System.Double)">AddEvasionMod(Double)</h4>
+  <div class="markdown level1 summary"><p>Adds an Evasion modifier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddEvasionMod(double evasionMod)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">evasionMod</span></td>
+        <td><p>The percentage change in decimal form. For example, .6 would indicate a 60% decrease in Evasion.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_AttemptHitEntity_PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.AttemptHitEntity(PaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L651">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_AttemptHitEntity_" data-uid="PaperMarioBattleSystem.BattleEntity.AttemptHitEntity*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_AttemptHitEntity_PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.BattleEntity.AttemptHitEntity(PaperMarioBattleSystem.BattleEntity)">AttemptHitEntity(BattleEntity)</h4>
+  <div class="markdown level1 summary"><p>Checks if the BattleEntity&apos;s attempt to hit another BattleEntity is successful based on the BattleEntity&apos;s Accuracy and the victim&apos;s Evasion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AttemptHitEntity(BattleEntity victim)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
+        <td><span class="parametername">victim</span></td>
+        <td><p>The entity trying to evade.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true if the entity hits and the victim doesn&apos;t evade, otherwise false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_BaseConfusionHandler_PaperMarioBattleSystem_MoveAction_PaperMarioBattleSystem_BattleEntity___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.BaseConfusionHandler(PaperMarioBattleSystem.MoveAction%2CPaperMarioBattleSystem.BattleEntity%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L869">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_BaseConfusionHandler_" data-uid="PaperMarioBattleSystem.BattleEntity.BaseConfusionHandler*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_BaseConfusionHandler_PaperMarioBattleSystem_MoveAction_PaperMarioBattleSystem_BattleEntity___" data-uid="PaperMarioBattleSystem.BattleEntity.BaseConfusionHandler(PaperMarioBattleSystem.MoveAction,PaperMarioBattleSystem.BattleEntity[])">BaseConfusionHandler(MoveAction, BattleEntity[])</h4>
+  <div class="markdown level1 summary"><p>The base confusion handler.
+It covers a broad set of actions, targeting allies if the action deals damage and targeting enemies if the action heals.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected BattleGlobals.ActionHolder BaseConfusionHandler(MoveAction action, BattleEntity[] targets)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.MoveAction.html">MoveAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The BattleAction originally used.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a>[]</td>
+        <td><span class="parametername">targets</span></td>
+        <td><p>The original set of BattleEntities to target</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.ActionHolder.html">BattleGlobals.ActionHolder</a></td>
+        <td><p>An ActionHolder with a new BattleAction to perform or a different target list if the BattleEntity was affected by Confused.
+If not affected, the originals of each will be returned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_ChangeHeightState_PaperMarioBattleSystem_Enumerations_HeightStates_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.ChangeHeightState(PaperMarioBattleSystem.Enumerations.HeightStates)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L624">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_ChangeHeightState_" data-uid="PaperMarioBattleSystem.BattleEntity.ChangeHeightState*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_ChangeHeightState_PaperMarioBattleSystem_Enumerations_HeightStates_" data-uid="PaperMarioBattleSystem.BattleEntity.ChangeHeightState(PaperMarioBattleSystem.Enumerations.HeightStates)">ChangeHeightState(Enumerations.HeightStates)</h4>
+  <div class="markdown level1 summary"><p>Changes the HeightState of the BattleEntity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ChangeHeightState(Enumerations.HeightStates newHeightState)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a></td>
+        <td><span class="parametername">newHeightState</span></td>
+        <td><p>The new HeightState.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_CleanUp.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.CleanUp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L205">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_CleanUp_" data-uid="PaperMarioBattleSystem.BattleEntity.CleanUp*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_CleanUp" data-uid="PaperMarioBattleSystem.BattleEntity.CleanUp">CleanUp()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void CleanUp()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_DamageEntity_PaperMarioBattleSystem_InteractionHolder__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.DamageEntity(PaperMarioBattleSystem.InteractionHolder%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L262">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_DamageEntity_" data-uid="PaperMarioBattleSystem.BattleEntity.DamageEntity*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_DamageEntity_PaperMarioBattleSystem_InteractionHolder__" data-uid="PaperMarioBattleSystem.BattleEntity.DamageEntity(PaperMarioBattleSystem.InteractionHolder@)">DamageEntity(InteractionHolder)</h4>
+  <div class="markdown level1 summary"><p>Tells this BattleEntity to damage another one.
+This method is a wrapper that calls the <a class="xref" href="PaperMarioBattleSystem.BattleEntity.html#PaperMarioBattleSystem_BattleEntity_DealtDamageEvent">DealtDamageEvent</a> for this BattleEntity.
+This should only be called if damage actually hits.
+<p>This also is called when dealing Payback damage.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DamageEntity(in InteractionHolder damageInfo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.InteractionHolder.html">InteractionHolder</a></td>
+        <td><span class="parametername">damageInfo</span></td>
+        <td><p>The InteractionHolder containing the BattleEntity to damage and all other interaction data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_Die.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.Die%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L546">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_Die_" data-uid="PaperMarioBattleSystem.BattleEntity.Die*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_Die" data-uid="PaperMarioBattleSystem.BattleEntity.Die">Die()</h4>
+  <div class="markdown level1 summary"><p>Kills the BattleEntity instantly.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Die()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_Draw.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.Draw%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L1096">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_Draw_" data-uid="PaperMarioBattleSystem.BattleEntity.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_Draw" data-uid="PaperMarioBattleSystem.BattleEntity.Draw">Draw()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_DrawEntity.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.DrawEntity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L1108">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_DrawEntity_" data-uid="PaperMarioBattleSystem.BattleEntity.DrawEntity*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_DrawEntity" data-uid="PaperMarioBattleSystem.BattleEntity.DrawEntity">DrawEntity()</h4>
+  <div class="markdown level1 summary"><p>Draws the BattleEntity itself.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void DrawEntity()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_DrawOther.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.DrawOther%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L1116">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_DrawOther_" data-uid="PaperMarioBattleSystem.BattleEntity.DrawOther*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_DrawOther" data-uid="PaperMarioBattleSystem.BattleEntity.DrawOther">DrawOther()</h4>
+  <div class="markdown level1 summary"><p>Draws anything else related to the BattleEntity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void DrawOther()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_EndTurn.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.EndTurn%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L778">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_EndTurn_" data-uid="PaperMarioBattleSystem.BattleEntity.EndTurn*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_EndTurn" data-uid="PaperMarioBattleSystem.BattleEntity.EndTurn">EndTurn()</h4>
+  <div class="markdown level1 summary"><p>Officially ends the BattleEntity&apos;s turn.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void EndTurn()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_GetDefensiveActionResult_System_Int32_PaperMarioBattleSystem_StatusChanceHolder___PaperMarioBattleSystem_Enumerations_DamageEffects_PaperMarioBattleSystem_Enumerations_DefensiveActionTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.GetDefensiveActionResult(System.Int32%2CPaperMarioBattleSystem.StatusChanceHolder%5B%5D%2CPaperMarioBattleSystem.Enumerations.DamageEffects%2CPaperMarioBattleSystem.Enumerations.DefensiveActionTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L664">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_GetDefensiveActionResult_" data-uid="PaperMarioBattleSystem.BattleEntity.GetDefensiveActionResult*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_GetDefensiveActionResult_System_Int32_PaperMarioBattleSystem_StatusChanceHolder___PaperMarioBattleSystem_Enumerations_DamageEffects_PaperMarioBattleSystem_Enumerations_DefensiveActionTypes_" data-uid="PaperMarioBattleSystem.BattleEntity.GetDefensiveActionResult(System.Int32,PaperMarioBattleSystem.StatusChanceHolder[],PaperMarioBattleSystem.Enumerations.DamageEffects,PaperMarioBattleSystem.Enumerations.DefensiveActionTypes)">GetDefensiveActionResult(Int32, StatusChanceHolder[], Enumerations.DamageEffects, Enumerations.DefensiveActionTypes)</h4>
+  <div class="markdown level1 summary"><p>Gets the result of the first successful Defensive Action performed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BattleGlobals.DefensiveActionHolder? GetDefensiveActionResult(int damage, StatusChanceHolder[] statusesInflicted, Enumerations.DamageEffects damageEffects, Enumerations.DefensiveActionTypes defensiveOverrides)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">damage</span></td>
+        <td><p>The original damage of the attack.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.StatusChanceHolder.html">StatusChanceHolder</a>[]</td>
+        <td><span class="parametername">statusesInflicted</span></td>
+        <td><p>The original set of StatusEffects inflicted.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.DamageEffects.html">Enumerations.DamageEffects</a></td>
+        <td><span class="parametername">damageEffects</span></td>
+        <td><p>The original DamageEffects that would affect the BattleEntity.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.DefensiveActionTypes.html">Enumerations.DefensiveActionTypes</a></td>
+        <td><span class="parametername">defensiveOverrides</span></td>
+        <td><p>The types of Defensive Actions to override.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<a class="xref" href="PaperMarioBattleSystem.BattleGlobals.DefensiveActionHolder.html">BattleGlobals.DefensiveActionHolder</a>&gt;</td>
+        <td><p>A nullable DefensiveActionHolder? with a DefensiveAction&apos;s result if successful, otherwise null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_GetIdleAnim.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.GetIdleAnim%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L1026">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_GetIdleAnim_" data-uid="PaperMarioBattleSystem.BattleEntity.GetIdleAnim*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_GetIdleAnim" data-uid="PaperMarioBattleSystem.BattleEntity.GetIdleAnim">GetIdleAnim()</h4>
+  <div class="markdown level1 summary"><p>Gets the idle animation of the BattleEntity based on its HealthState and the Status Effects it&apos;s inflicted with.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual string GetIdleAnim()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><p>A string with the idle animation name the BattleEntity has.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_GetItemOfType_PaperMarioBattleSystem_Item_ItemTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.GetItemOfType(PaperMarioBattleSystem.Item.ItemTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L1060">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_GetItemOfType_" data-uid="PaperMarioBattleSystem.BattleEntity.GetItemOfType*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_GetItemOfType_PaperMarioBattleSystem_Item_ItemTypes_" data-uid="PaperMarioBattleSystem.BattleEntity.GetItemOfType(PaperMarioBattleSystem.Item.ItemTypes)">GetItemOfType(Item.ItemTypes)</h4>
+  <div class="markdown level1 summary"><p>Gets the first item of a particular ItemType that the BattleEntity has.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract Item GetItemOfType(Item.ItemTypes itemTypes)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Item.ItemTypes.html">Item.ItemTypes</a></td>
+        <td><span class="parametername">itemTypes</span></td>
+        <td><p>The ItemType enum value. If an item has any of these values, it will be returned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Item.html">Item</a></td>
+        <td><p>An Item that the BattleEntity has matching the ItemType enum value, otherwise null.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_HandleDamageEffects_PaperMarioBattleSystem_Enumerations_DamageEffects_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.HandleDamageEffects(PaperMarioBattleSystem.Enumerations.DamageEffects)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L354">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_HandleDamageEffects_" data-uid="PaperMarioBattleSystem.BattleEntity.HandleDamageEffects*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_HandleDamageEffects_PaperMarioBattleSystem_Enumerations_DamageEffects_" data-uid="PaperMarioBattleSystem.BattleEntity.HandleDamageEffects(PaperMarioBattleSystem.Enumerations.DamageEffects)">HandleDamageEffects(Enumerations.DamageEffects)</h4>
+  <div class="markdown level1 summary"><p>BattleEntity-specific logic for handling DamageEffects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void HandleDamageEffects(Enumerations.DamageEffects damageEffects)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.DamageEffects.html">Enumerations.DamageEffects</a></td>
+        <td><span class="parametername">damageEffects</span></td>
+        <td><p>The bit field of DamageEffects.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_HandleDamageResult_PaperMarioBattleSystem_InteractionHolder__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.HandleDamageResult(PaperMarioBattleSystem.InteractionHolder%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L277">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_HandleDamageResult_" data-uid="PaperMarioBattleSystem.BattleEntity.HandleDamageResult*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_HandleDamageResult_PaperMarioBattleSystem_InteractionHolder__" data-uid="PaperMarioBattleSystem.BattleEntity.HandleDamageResult(PaperMarioBattleSystem.InteractionHolder@)">HandleDamageResult(InteractionHolder)</h4>
+  <div class="markdown level1 summary"><p>Handles the <a class="xref" href="PaperMarioBattleSystem.ElementInteractionResult.html">ElementInteractionResult</a> received from being damaged.
+<p>The base behavior deals damage for <a class="xref" href="PaperMarioBattleSystem.ElementInteractionResult.html#PaperMarioBattleSystem_ElementInteractionResult_Damage">Damage</a>,
+KOs for <a class="xref" href="PaperMarioBattleSystem.ElementInteractionResult.html#PaperMarioBattleSystem_ElementInteractionResult_KO">KO</a>,
+and heals for <a class="xref" href="PaperMarioBattleSystem.ElementInteractionResult.html#PaperMarioBattleSystem_ElementInteractionResult_Heal">Heal</a>.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void HandleDamageResult(in InteractionHolder damageResult)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.InteractionHolder.html">InteractionHolder</a></td>
+        <td><span class="parametername">damageResult</span></td>
+        <td><p>The InteractionHolder containing the result of a damage interaction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_HandleStatusAffliction_PaperMarioBattleSystem_InteractionHolder__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.HandleStatusAffliction(PaperMarioBattleSystem.InteractionHolder%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L336">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_HandleStatusAffliction_" data-uid="PaperMarioBattleSystem.BattleEntity.HandleStatusAffliction*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_HandleStatusAffliction_PaperMarioBattleSystem_InteractionHolder__" data-uid="PaperMarioBattleSystem.BattleEntity.HandleStatusAffliction(PaperMarioBattleSystem.InteractionHolder@)">HandleStatusAffliction(InteractionHolder)</h4>
+  <div class="markdown level1 summary"><p>Handles inflicting Status Effects on the BattleEntity after receiving damage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void HandleStatusAffliction(in InteractionHolder damageResult)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.InteractionHolder.html">InteractionHolder</a></td>
+        <td><span class="parametername">damageResult</span></td>
+        <td><p>The InteractionHolder containing the result of a damage interaction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_HealFP_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.HealFP(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L426">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_HealFP_" data-uid="PaperMarioBattleSystem.BattleEntity.HealFP*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_HealFP_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.HealFP(System.Int32)">HealFP(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void HealFP(int fp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">fp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_HealHP_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.HealHP(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L418">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_HealHP_" data-uid="PaperMarioBattleSystem.BattleEntity.HealHP*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_HealHP_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.HealHP(System.Int32)">HealHP(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void HealHP(int hp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">hp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_LoadAnimations.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.LoadAnimations%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L228">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_LoadAnimations_" data-uid="PaperMarioBattleSystem.BattleEntity.LoadAnimations*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_LoadAnimations" data-uid="PaperMarioBattleSystem.BattleEntity.LoadAnimations">LoadAnimations()</h4>
+  <div class="markdown level1 summary"><p>Loads a BattleEntity&apos;s animations.
+<p>This is public to allow for easier debugging through reloading animations.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void LoadAnimations()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_LoseFP_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.LoseFP(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L445">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_LoseFP_" data-uid="PaperMarioBattleSystem.BattleEntity.LoseFP*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_LoseFP_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.LoseFP(System.Int32)">LoseFP(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void LoseFP(int fp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">fp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_LoseHP_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.LoseHP(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L432">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_LoseHP_" data-uid="PaperMarioBattleSystem.BattleEntity.LoseHP*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_LoseHP_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.LoseHP(System.Int32)">LoseHP(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LoseHP(int hp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">hp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_LowerAttack_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.LowerAttack(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L485">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_LowerAttack_" data-uid="PaperMarioBattleSystem.BattleEntity.LowerAttack*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_LowerAttack_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.LowerAttack(System.Int32)">LowerAttack(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LowerAttack(int attack)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">attack</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_LowerDefense_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.LowerDefense(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L490">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_LowerDefense_" data-uid="PaperMarioBattleSystem.BattleEntity.LowerDefense*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_LowerDefense_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.LowerDefense(System.Int32)">LowerDefense(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LowerDefense(int defense)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">defense</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_LowerMaxFP_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.LowerMaxFP(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L469">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_LowerMaxFP_" data-uid="PaperMarioBattleSystem.BattleEntity.LowerMaxFP*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_LowerMaxFP_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.LowerMaxFP(System.Int32)">LowerMaxFP(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void LowerMaxFP(int fp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">fp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_LowerMaxHP_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.LowerMaxHP(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L457">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_LowerMaxHP_" data-uid="PaperMarioBattleSystem.BattleEntity.LowerMaxHP*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_LowerMaxHP_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.LowerMaxHP(System.Int32)">LowerMaxHP(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LowerMaxHP(int hp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">hp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_OnDeath.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.OnDeath%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L572">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_OnDeath_" data-uid="PaperMarioBattleSystem.BattleEntity.OnDeath*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_OnDeath" data-uid="PaperMarioBattleSystem.BattleEntity.OnDeath">OnDeath()</h4>
+  <div class="markdown level1 summary"><p>Performs BattleEntity-specific logic on death.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnDeath()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_OnEnteredBattle.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.OnEnteredBattle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L635">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_OnEnteredBattle_" data-uid="PaperMarioBattleSystem.BattleEntity.OnEnteredBattle*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_OnEnteredBattle" data-uid="PaperMarioBattleSystem.BattleEntity.OnEnteredBattle">OnEnteredBattle()</h4>
+  <div class="markdown level1 summary"><p>What occurs when the BattleEntity enters a battle.
+<p>This is called when the BattleEntity is added to a battle.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnEnteredBattle()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_OnHealthStateChange_PaperMarioBattleSystem_Enumerations_HealthStates_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.OnHealthStateChange(PaperMarioBattleSystem.Enumerations.HealthStates)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L615">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_OnHealthStateChange_" data-uid="PaperMarioBattleSystem.BattleEntity.OnHealthStateChange*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_OnHealthStateChange_PaperMarioBattleSystem_Enumerations_HealthStates_" data-uid="PaperMarioBattleSystem.BattleEntity.OnHealthStateChange(PaperMarioBattleSystem.Enumerations.HealthStates)">OnHealthStateChange(Enumerations.HealthStates)</h4>
+  <div class="markdown level1 summary"><p>What occurs when an BattleEntity changes HealthStates</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnHealthStateChange(Enumerations.HealthStates newHealthState)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HealthStates.html">Enumerations.HealthStates</a></td>
+        <td><span class="parametername">newHealthState</span></td>
+        <td><p>The new HealthState of the BattleEntity.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_OnPhaseCycleStart.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.OnPhaseCycleStart%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L695">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_OnPhaseCycleStart_" data-uid="PaperMarioBattleSystem.BattleEntity.OnPhaseCycleStart*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_OnPhaseCycleStart" data-uid="PaperMarioBattleSystem.BattleEntity.OnPhaseCycleStart">OnPhaseCycleStart()</h4>
+  <div class="markdown level1 summary"><p>What happens at the start of the phase cycle.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnPhaseCycleStart()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_OnPhaseEnd.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.OnPhaseEnd%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L727">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_OnPhaseEnd_" data-uid="PaperMarioBattleSystem.BattleEntity.OnPhaseEnd*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_OnPhaseEnd" data-uid="PaperMarioBattleSystem.BattleEntity.OnPhaseEnd">OnPhaseEnd()</h4>
+  <div class="markdown level1 summary"><p>What happens at the end of the BattleEntity&apos;s phase.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnPhaseEnd()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_OnPhaseStart.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.OnPhaseStart%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L719">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_OnPhaseStart_" data-uid="PaperMarioBattleSystem.BattleEntity.OnPhaseStart*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_OnPhaseStart" data-uid="PaperMarioBattleSystem.BattleEntity.OnPhaseStart">OnPhaseStart()</h4>
+  <div class="markdown level1 summary"><p>What happens at the start of the BattleEntity&apos;s phase.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnPhaseStart()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_OnTakeDamage_PaperMarioBattleSystem_InteractionHolder__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.OnTakeDamage(PaperMarioBattleSystem.InteractionHolder%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L409">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_OnTakeDamage_" data-uid="PaperMarioBattleSystem.BattleEntity.OnTakeDamage*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_OnTakeDamage_PaperMarioBattleSystem_InteractionHolder__" data-uid="PaperMarioBattleSystem.BattleEntity.OnTakeDamage(PaperMarioBattleSystem.InteractionHolder@)">OnTakeDamage(InteractionHolder)</h4>
+  <div class="markdown level1 summary"><p>Performs BattleEntity-specific logic when taking damage.
+This is called after damage has been dealt but before the damage taken event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnTakeDamage(in InteractionHolder damageInfo)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.InteractionHolder.html">InteractionHolder</a></td>
+        <td><span class="parametername">damageInfo</span></td>
+        <td><p>The InteractionHolder containing the BattleEntity to damage and all other interaction data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_OnTurnEnd.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.OnTurnEnd%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L766">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_OnTurnEnd_" data-uid="PaperMarioBattleSystem.BattleEntity.OnTurnEnd*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_OnTurnEnd" data-uid="PaperMarioBattleSystem.BattleEntity.OnTurnEnd">OnTurnEnd()</h4>
+  <div class="markdown level1 summary"><p>What happens when the entity&apos;s turn ends</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnTurnEnd()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_OnTurnStart.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.OnTurnStart%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L752">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_OnTurnStart_" data-uid="PaperMarioBattleSystem.BattleEntity.OnTurnStart*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_OnTurnStart" data-uid="PaperMarioBattleSystem.BattleEntity.OnTurnStart">OnTurnStart()</h4>
+  <div class="markdown level1 summary"><p>What happens when the entity&apos;s turn starts</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnTurnStart()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_RaiseAttack_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.RaiseAttack(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L475">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_RaiseAttack_" data-uid="PaperMarioBattleSystem.BattleEntity.RaiseAttack*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_RaiseAttack_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.RaiseAttack(System.Int32)">RaiseAttack(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RaiseAttack(int attack)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">attack</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_RaiseDefense_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.RaiseDefense(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L480">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_RaiseDefense_" data-uid="PaperMarioBattleSystem.BattleEntity.RaiseDefense*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_RaiseDefense_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.RaiseDefense(System.Int32)">RaiseDefense(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RaiseDefense(int defense)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">defense</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_RaiseMaxFP_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.RaiseMaxFP(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L463">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_RaiseMaxFP_" data-uid="PaperMarioBattleSystem.BattleEntity.RaiseMaxFP*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_RaiseMaxFP_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.RaiseMaxFP(System.Int32)">RaiseMaxFP(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void RaiseMaxFP(int fp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">fp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_RaiseMaxHP_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.RaiseMaxHP(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L451">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_RaiseMaxHP_" data-uid="PaperMarioBattleSystem.BattleEntity.RaiseMaxHP*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_RaiseMaxHP_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.RaiseMaxHP(System.Int32)">RaiseMaxHP(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RaiseMaxHP(int hp)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">hp</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_RemoveAccuracyMod_System_Double_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.RemoveAccuracyMod(System.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L511">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_RemoveAccuracyMod_" data-uid="PaperMarioBattleSystem.BattleEntity.RemoveAccuracyMod*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_RemoveAccuracyMod_System_Double_" data-uid="PaperMarioBattleSystem.BattleEntity.RemoveAccuracyMod(System.Double)">RemoveAccuracyMod(Double)</h4>
+  <div class="markdown level1 summary"><p>Removes an Accuracy modifier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveAccuracyMod(double accuracyMod)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">accuracyMod</span></td>
+        <td><p>The percentage change in decimal form. For example, .6 would indicate a 60% decrease in Accuracy.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_RemoveEvasionMod_System_Double_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.RemoveEvasionMod(System.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L535">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_RemoveEvasionMod_" data-uid="PaperMarioBattleSystem.BattleEntity.RemoveEvasionMod*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_RemoveEvasionMod_System_Double_" data-uid="PaperMarioBattleSystem.BattleEntity.RemoveEvasionMod(System.Double)">RemoveEvasionMod(Double)</h4>
+  <div class="markdown level1 summary"><p>Removes an Evasion modifier.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveEvasionMod(double evasionMod)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">evasionMod</span></td>
+        <td><p>The percentage change in decimal form. For example, .6 would indicate a 60% decrease in Evasion.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_SetBattleIndex_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.SetBattleIndex(System.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L845">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_SetBattleIndex_" data-uid="PaperMarioBattleSystem.BattleEntity.SetBattleIndex*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_SetBattleIndex_System_Int32_System_Boolean_" data-uid="PaperMarioBattleSystem.BattleEntity.SetBattleIndex(System.Int32,System.Boolean)">SetBattleIndex(Int32, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Sets the BattleIndex for the BattleEntity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetBattleIndex(int battleIndex, bool autoSort = true)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">battleIndex</span></td>
+        <td><p>The new BattleIndex of the BattleEntity.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">autoSort</span></td>
+        <td><p>If true, will tell the BattleManager to sort all BattleEntities of this type by BattleIndex.
+If false, make sure to sort manually to prevent mismatched data.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_SetBattleManager_PaperMarioBattleSystem_BattleManager_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.SetBattleManager(PaperMarioBattleSystem.BattleManager)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L834">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_SetBattleManager_" data-uid="PaperMarioBattleSystem.BattleEntity.SetBattleManager*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_SetBattleManager_PaperMarioBattleSystem_BattleManager_" data-uid="PaperMarioBattleSystem.BattleEntity.SetBattleManager(PaperMarioBattleSystem.BattleManager)">SetBattleManager(BattleManager)</h4>
+  <div class="markdown level1 summary"><p>Sets the BattleManager the BattleEntity belongs to.
+This is typically only called by BattleManagers themselves when adding and removing BattleEntities.
+<p>When transferring BattleEntities between battles, make sure to remove them from one battle before adding them to the other.
+If a BattleEntity technically stays in battle but is inactive (Ex. Partners), it&apos;s recommended to keep the BattleManager reference.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetBattleManager(BattleManager bManager)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleManager.html">BattleManager</a></td>
+        <td><span class="parametername">bManager</span></td>
+        <td><p>The BattleManager the BattleEntity is apart of.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_SetBattlePosition_Microsoft_Xna_Framework_Vector2_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.SetBattlePosition(Microsoft.Xna.Framework.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L856">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_SetBattlePosition_" data-uid="PaperMarioBattleSystem.BattleEntity.SetBattlePosition*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_SetBattlePosition_Microsoft_Xna_Framework_Vector2_" data-uid="PaperMarioBattleSystem.BattleEntity.SetBattlePosition(Microsoft.Xna.Framework.Vector2)">SetBattlePosition(Vector2)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetBattlePosition(Vector2 battlePos)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">battlePos</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_SetEntityProperties_PaperMarioBattleSystem_BattleEntityProperties_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.SetEntityProperties(PaperMarioBattleSystem.BattleEntityProperties)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L241">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_SetEntityProperties_" data-uid="PaperMarioBattleSystem.BattleEntity.SetEntityProperties*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_SetEntityProperties_PaperMarioBattleSystem_BattleEntityProperties_" data-uid="PaperMarioBattleSystem.BattleEntity.SetEntityProperties(PaperMarioBattleSystem.BattleEntityProperties)">SetEntityProperties(BattleEntityProperties)</h4>
+  <div class="markdown level1 summary"><p>Sets the properties of this BattleEntity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void SetEntityProperties(BattleEntityProperties entityProperties)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntityProperties.html">BattleEntityProperties</a></td>
+        <td><span class="parametername">entityProperties</span></td>
+        <td><p>The BattleEntityProperties to set.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="PaperMarioBattleSystem_BattleEntity_SetEntityProperties_PaperMarioBattleSystem_BattleEntityProperties__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>By default, all BattleEntities have a new set of properties, which suffices for the vast majority of cases.
+However, there may be some situations that require referencing another set of properties.
+For example, target points sharing properties with the main entity, or swapping among sets of properties without losing information.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_SetMaxTurns_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.SetMaxTurns(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L810">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_SetMaxTurns_" data-uid="PaperMarioBattleSystem.BattleEntity.SetMaxTurns*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_SetMaxTurns_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.SetMaxTurns(System.Int32)">SetMaxTurns(Int32)</h4>
+  <div class="markdown level1 summary"><p>Sets the max number of turns the entity has during this phase</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetMaxTurns(int maxTurns)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">maxTurns</span></td>
+        <td><p>The new number of turns the entity has for this phase</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_SetTurnsUsed_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.SetTurnsUsed(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L820">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_SetTurnsUsed_" data-uid="PaperMarioBattleSystem.BattleEntity.SetTurnsUsed*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_SetTurnsUsed_System_Int32_" data-uid="PaperMarioBattleSystem.BattleEntity.SetTurnsUsed(System.Int32)">SetTurnsUsed(Int32)</h4>
+  <div class="markdown level1 summary"><p>Sets the number of turns used by the entity during this phase.
+This is primarily used by StatusEffects</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetTurnsUsed(int turnsUsed)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">turnsUsed</span></td>
+        <td><p>The new number of turns the entity used in this phase</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_StartAction_PaperMarioBattleSystem_MoveAction_System_Boolean_PaperMarioBattleSystem_BattleEntity___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.StartAction(PaperMarioBattleSystem.MoveAction%2CSystem.Boolean%2CPaperMarioBattleSystem.BattleEntity%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L993">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_StartAction_" data-uid="PaperMarioBattleSystem.BattleEntity.StartAction*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_StartAction_PaperMarioBattleSystem_MoveAction_System_Boolean_PaperMarioBattleSystem_BattleEntity___" data-uid="PaperMarioBattleSystem.BattleEntity.StartAction(PaperMarioBattleSystem.MoveAction,System.Boolean,PaperMarioBattleSystem.BattleEntity[])">StartAction(MoveAction, Boolean, BattleEntity[])</h4>
+  <div class="markdown level1 summary"><p>Makes the BattleEntity perform a MoveAction.
+The actual action performed may not be the one passed in if the BattleEntity is affected by Confusion.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StartAction(MoveAction action, bool ignoreConfusion, params BattleEntity[] targets)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.MoveAction.html">MoveAction</a></td>
+        <td><span class="parametername">action</span></td>
+        <td><p>The MoveAction to perform.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">ignoreConfusion</span></td>
+        <td><p>Whether to ignore the effects of Confusion for this action or not.
+This is often true when a certain action must be performed at a certain time (Ex. Koopas doing nothing when flipped, 
+Veil&apos;s second part).</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a>[]</td>
+        <td><span class="parametername">targets</span></td>
+        <td><p>The BattleEntities the MoveAction targets.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_StartTurn.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.StartTurn%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L741">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_StartTurn_" data-uid="PaperMarioBattleSystem.BattleEntity.StartTurn*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_StartTurn" data-uid="PaperMarioBattleSystem.BattleEntity.StartTurn">StartTurn()</h4>
+  <div class="markdown level1 summary"><p>Officially starts the BattleEntity&apos;s turn.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StartTurn()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_StopTarget.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.StopTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L1077">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_StopTarget_" data-uid="PaperMarioBattleSystem.BattleEntity.StopTarget*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_StopTarget" data-uid="PaperMarioBattleSystem.BattleEntity.StopTarget">StopTarget()</h4>
+  <div class="markdown level1 summary"><p>Tells the BattleEntity that it is no longer being targeted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StopTarget()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_TakeDamage_PaperMarioBattleSystem_Enumerations_Elements_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.TakeDamage(PaperMarioBattleSystem.Enumerations.Elements%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L399">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_TakeDamage_" data-uid="PaperMarioBattleSystem.BattleEntity.TakeDamage*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_TakeDamage_PaperMarioBattleSystem_Enumerations_Elements_System_Int32_System_Boolean_" data-uid="PaperMarioBattleSystem.BattleEntity.TakeDamage(PaperMarioBattleSystem.Enumerations.Elements,System.Int32,System.Boolean)">TakeDamage(Enumerations.Elements, Int32, Boolean)</h4>
+  <div class="markdown level1 summary"><p>Makes the BattleEntity take damage from an attack.
+<p>This method is a shorthand for inflicting simple damage such as Poison damage every turn from a StatusEffect.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TakeDamage(Enumerations.Elements element, int damage, bool piercing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.Elements.html">Enumerations.Elements</a></td>
+        <td><span class="parametername">element</span></td>
+        <td><p>The element to damage the entity with</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">damage</span></td>
+        <td><p>The damage to deal to the entity</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">piercing</span></td>
+        <td><p>Whether the attack penetrates Defense or not</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_TakeDamage_PaperMarioBattleSystem_InteractionHolder__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.TakeDamage(PaperMarioBattleSystem.InteractionHolder%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L363">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_TakeDamage_" data-uid="PaperMarioBattleSystem.BattleEntity.TakeDamage*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_TakeDamage_PaperMarioBattleSystem_InteractionHolder__" data-uid="PaperMarioBattleSystem.BattleEntity.TakeDamage(PaperMarioBattleSystem.InteractionHolder@)">TakeDamage(InteractionHolder)</h4>
+  <div class="markdown level1 summary"><p>Makes the BattleEntity take damage from an attack.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TakeDamage(in InteractionHolder damageResult)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.InteractionHolder.html">InteractionHolder</a></td>
+        <td><span class="parametername">damageResult</span></td>
+        <td><p>The InteractionHolder containing the result of a damage interaction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_TargetForMove_PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.TargetForMove(PaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L1069">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_TargetForMove_" data-uid="PaperMarioBattleSystem.BattleEntity.TargetForMove*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_TargetForMove_PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.BattleEntity.TargetForMove(PaperMarioBattleSystem.BattleEntity)">TargetForMove(BattleEntity)</h4>
+  <div class="markdown level1 summary"><p>Targets this BattleEntity for a move.
+This prevents it from doing certain things, like playing the death animation, until it is no longer targeted.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TargetForMove(BattleEntity attacker)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
+        <td><span class="parametername">attacker</span></td>
+        <td><p>The BattleEntity targeting this one for an attack.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_TurnUpdate.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.TurnUpdate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L801">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_TurnUpdate_" data-uid="PaperMarioBattleSystem.BattleEntity.TurnUpdate*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_TurnUpdate" data-uid="PaperMarioBattleSystem.BattleEntity.TurnUpdate">TurnUpdate()</h4>
+  <div class="markdown level1 summary"><p>What happens during the entity&apos;s turn (choosing action commands, etc.)</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void TurnUpdate()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_Update.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L1085">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_Update_" data-uid="PaperMarioBattleSystem.BattleEntity.Update*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_Update" data-uid="PaperMarioBattleSystem.BattleEntity.Update">Update()</h4>
+  <div class="markdown level1 summary"><p>Used for update logic that applies to the BattleEntity regardless of whether it is its turn or not.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void Update()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_UpdateHealthState.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.UpdateHealthState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L580">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_BattleEntity_UpdateHealthState_" data-uid="PaperMarioBattleSystem.BattleEntity.UpdateHealthState*"></a>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_UpdateHealthState" data-uid="PaperMarioBattleSystem.BattleEntity.UpdateHealthState">UpdateHealthState()</h4>
+  <div class="markdown level1 summary"><p>Updates the BattleEntity&apos;s health state based on its current HP.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void UpdateHealthState()</code></pre>
+  </div>
+  <h3 id="events">Events
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_DamageTakenEvent.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.DamageTakenEvent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L53">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_DamageTakenEvent" data-uid="PaperMarioBattleSystem.BattleEntity.DamageTakenEvent">DamageTakenEvent</h4>
+  <div class="markdown level1 summary"><p>The event invoked when the BattleEntity takes damage. This is invoked after all other logic when taking damage.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event BattleEntity.DamageTaken DamageTakenEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.DamageTaken.html">BattleEntity.DamageTaken</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_DealtDamageEvent.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.DealtDamageEvent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L60">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_DealtDamageEvent" data-uid="PaperMarioBattleSystem.BattleEntity.DealtDamageEvent">DealtDamageEvent</h4>
+  <div class="markdown level1 summary"><p>The event invoked when the BattleEntity damages another BattleEntity.
+This is invoked after all other logic when damaging the BattleEntity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event BattleEntity.DealtDamage DealtDamageEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.DealtDamage.html">BattleEntity.DealtDamage</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_HealthStateChangedEvent.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.HealthStateChangedEvent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L27">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_HealthStateChangedEvent" data-uid="PaperMarioBattleSystem.BattleEntity.HealthStateChangedEvent">HealthStateChangedEvent</h4>
+  <div class="markdown level1 summary"><p>The event invoked when the BattleEntity&apos;s HealthState is changed. This occurs immediately before actually changing the HealthState.
+<p>This event won&apos;t be invoked if the BattleEntity&apos;s HealthState is set to the same one it currently has.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event BattleEntity.HealthStateChanged HealthStateChangedEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.HealthStateChanged.html">BattleEntity.HealthStateChanged</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_PhaseCycleStartEvent.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.PhaseCycleStartEvent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L35">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_PhaseCycleStartEvent" data-uid="PaperMarioBattleSystem.BattleEntity.PhaseCycleStartEvent">PhaseCycleStartEvent</h4>
+  <div class="markdown level1 summary"><p>The event invoked at the start of each phase cycle. This is invoked after all Statuses take effect.
+<p>Use this for anything that doesn&apos;t need to occur before or after anything else.
+Status Effects don&apos;t use this event since they need to take effect in a specific order.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event BattleEntity.PhaseCycleStarted PhaseCycleStartEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.PhaseCycleStarted.html">BattleEntity.PhaseCycleStarted</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_TurnEndEvent.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.TurnEndEvent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L47">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_TurnEndEvent" data-uid="PaperMarioBattleSystem.BattleEntity.TurnEndEvent">TurnEndEvent</h4>
+  <div class="markdown level1 summary"><p>The event invoked at the end of the BattleEntity&apos;s turn.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event BattleEntity.TurnEnded TurnEndEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.TurnEnded.html">BattleEntity.TurnEnded</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_TurnStartEvent.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.TurnStartEvent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L41">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_BattleEntity_TurnStartEvent" data-uid="PaperMarioBattleSystem.BattleEntity.TurnStartEvent">TurnStartEvent</h4>
+  <div class="markdown level1 summary"><p>The event invoked at the start of the BattleEntity&apos;s turn. This is invoked after all other logic when the turn starts.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event BattleEntity.TurnStarted TurnStartEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.TurnStarted.html">BattleEntity.TurnStarted</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.INameable.html">INameable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IPosition.html">IPosition</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IRotatable.html">IRotatable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IScalable.html">IScalable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.ITintable.html">ITintable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_AddIntAdditionalProperty_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_Enumerations_AdditionalProperty_System_Int32_">Extensions.AddIntAdditionalProperty(BattleEntity, Enumerations.AdditionalProperty, Int32)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_SubtractIntAdditionalProperty_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_Enumerations_AdditionalProperty_System_Int32_System_Boolean_">Extensions.SubtractIntAdditionalProperty(BattleEntity, Enumerations.AdditionalProperty, Int32, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_AddShowHPProperty_PaperMarioBattleSystem_BattleEntity_">Extensions.AddShowHPProperty(BattleEntity)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_SubtractShowHPProperty_PaperMarioBattleSystem_BattleEntity_">Extensions.SubtractShowHPProperty(BattleEntity)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_HasCharge_PaperMarioBattleSystem_BattleEntity_">Extensions.HasCharge(BattleEntity)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_IsInvincible_PaperMarioBattleSystem_BattleEntity_">Extensions.IsInvincible(BattleEntity)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_IsImmobile_PaperMarioBattleSystem_BattleEntity_">Extensions.IsImmobile(BattleEntity)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_AddRemoveStatusImmunity_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_Enumerations_StatusTypes_System_Boolean_">Extensions.AddRemoveStatusImmunity(BattleEntity, Enumerations.StatusTypes, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_GetOpposingEntityType_PaperMarioBattleSystem_BattleEntity_">Extensions.GetOpposingEntityType(BattleEntity)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_GetTrueTarget_PaperMarioBattleSystem_BattleEntity_">Extensions.GetTrueTarget(BattleEntity)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_GetEquippedBadgeCount_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_">Extensions.GetEquippedBadgeCount(BattleEntity, BadgeGlobals.BadgeTypes)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_GetEquippedNPBadgeCount_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_">Extensions.GetEquippedNPBadgeCount(BattleEntity, BadgeGlobals.BadgeTypes)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_GetPartyEquippedBadgeCount_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_">Extensions.GetPartyEquippedBadgeCount(BattleEntity, BadgeGlobals.BadgeTypes)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_GetPartyEquippedNPBadgeCount_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_">Extensions.GetPartyEquippedNPBadgeCount(BattleEntity, BadgeGlobals.BadgeTypes)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_PartyHasAdditionalProperty_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_Enumerations_AdditionalProperty_">Extensions.PartyHasAdditionalProperty(BattleEntity, Enumerations.AdditionalProperty)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_GetDrawnPosAbove_PaperMarioBattleSystem_BattleEntity_Microsoft_Xna_Framework_Vector2__">Extensions.GetDrawnPosAbove(BattleEntity, Vector2)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_GetDrawnPosBelow_PaperMarioBattleSystem_BattleEntity_Microsoft_Xna_Framework_Vector2__">Extensions.GetDrawnPosBelow(BattleEntity, Vector2)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L18" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

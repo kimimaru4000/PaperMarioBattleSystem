@@ -1,0 +1,849 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class ActionSubMenu
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class ActionSubMenu
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.ActionSubMenu">
+  
+  
+  <h1 id="PaperMarioBattleSystem_ActionSubMenu" data-uid="PaperMarioBattleSystem.ActionSubMenu" class="text-break">Class ActionSubMenu
+  </h1>
+  <div class="markdown level0 summary"><p>A menu for the MoveActions relating to an ActionMenu. For example, any Jump actions would be in the ActionSubMenu for Jump.
+ActionSubMenus can lead to more ActionSubMenus, as is the case with &quot;Change Partner&quot;
+This is only used by the player
+<p>All ActionSubMenus have the &quot;SubMenu&quot; suffix</p></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PaperMarioBattleSystem.BattleMenu.html">BattleMenu</a></div>
+    <div class="level2"><a class="xref" href="PaperMarioBattleSystem.InputMenu.html">InputMenu</a></div>
+    <div class="level3"><span class="xref">ActionSubMenu</span></div>
+      <div class="level4"><a class="xref" href="PaperMarioBattleSystem.BowSubMenu.html">BowSubMenu</a></div>
+      <div class="level4"><a class="xref" href="PaperMarioBattleSystem.ChangePartnerSubMenu.html">ChangePartnerSubMenu</a></div>
+      <div class="level4"><a class="xref" href="PaperMarioBattleSystem.GoombarioSubMenu.html">GoombarioSubMenu</a></div>
+      <div class="level4"><a class="xref" href="PaperMarioBattleSystem.HammerSubMenu.html">HammerSubMenu</a></div>
+      <div class="level4"><a class="xref" href="PaperMarioBattleSystem.ItemDipSubMenu.html">ItemDipSubMenu</a></div>
+      <div class="level4"><a class="xref" href="PaperMarioBattleSystem.ItemSubMenu.html">ItemSubMenu</a></div>
+      <div class="level4"><a class="xref" href="PaperMarioBattleSystem.JumpSubMenu.html">JumpSubMenu</a></div>
+      <div class="level4"><a class="xref" href="PaperMarioBattleSystem.KooperSubMenu.html">KooperSubMenu</a></div>
+      <div class="level4"><a class="xref" href="PaperMarioBattleSystem.SpecialSubMenu.html">SpecialSubMenu</a></div>
+      <div class="level4"><a class="xref" href="PaperMarioBattleSystem.TacticsSubMenu.html">TacticsSubMenu</a></div>
+      <div class="level4"><a class="xref" href="PaperMarioBattleSystem.WattSubMenu.html">WattSubMenu</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.INameable.html">INameable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.InputMenu.html#PaperMarioBattleSystem_InputMenu_CurSelection">InputMenu.CurSelection</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.InputMenu.html#PaperMarioBattleSystem_InputMenu_WrapCursor">InputMenu.WrapCursor</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.InputMenu.html#PaperMarioBattleSystem_InputMenu_ChangeSelection_System_Int32_">InputMenu.ChangeSelection(Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.InputMenu.html#PaperMarioBattleSystem_InputMenu_HandleCursorInput">InputMenu.HandleCursorInput()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.InputMenu.html#PaperMarioBattleSystem_InputMenu_HandleSelectionInput">InputMenu.HandleSelectionInput()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleMenu.html#PaperMarioBattleSystem_BattleMenu_MenuType">BattleMenu.MenuType</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_ActionSubMenu_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class ActionSubMenu : InputMenu, IUpdateable, INameable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu__ctor_PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.%23ctor(PaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L70">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu__ctor_" data-uid="PaperMarioBattleSystem.ActionSubMenu.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu__ctor_PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.ActionSubMenu.#ctor(PaperMarioBattleSystem.BattleEntity)">ActionSubMenu(BattleEntity)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected ActionSubMenu(BattleEntity user)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
+        <td><span class="parametername">user</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu__ctor_PaperMarioBattleSystem_BattleEntity_System_String_PaperMarioBattleSystem_MoveAction___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.%23ctor(PaperMarioBattleSystem.BattleEntity%2CSystem.String%2CPaperMarioBattleSystem.MoveAction%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L90">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu__ctor_" data-uid="PaperMarioBattleSystem.ActionSubMenu.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu__ctor_PaperMarioBattleSystem_BattleEntity_System_String_PaperMarioBattleSystem_MoveAction___" data-uid="PaperMarioBattleSystem.ActionSubMenu.#ctor(PaperMarioBattleSystem.BattleEntity,System.String,PaperMarioBattleSystem.MoveAction[])">ActionSubMenu(BattleEntity, String, MoveAction[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ActionSubMenu(BattleEntity user, string name, params MoveAction[] battleActions)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
+        <td><span class="parametername">user</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">name</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.MoveAction.html">MoveAction</a>[]</td>
+        <td><span class="parametername">battleActions</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_AutoSelectSingle.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.AutoSelectSingle%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L45">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_AutoSelectSingle" data-uid="PaperMarioBattleSystem.ActionSubMenu.AutoSelectSingle">AutoSelectSingle</h4>
+  <div class="markdown level1 summary"><p>Tells if the ActionSubMenu should auto-select the first action if it&apos;s the only one available.
+This is used for Mario&apos;s Jump and Hammer moves.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AutoSelectSingle</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_BoxMenu.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.BoxMenu%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L65">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_BoxMenu" data-uid="PaperMarioBattleSystem.ActionSubMenu.BoxMenu">BoxMenu</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TextBox BoxMenu</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.TextBox.html">TextBox</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_HeaderImage.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.HeaderImage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L62">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_HeaderImage" data-uid="PaperMarioBattleSystem.ActionSubMenu.HeaderImage">HeaderImage</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected NineSlicedTexture2D HeaderImage</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.NineSlicedTexture2D.html">NineSlicedTexture2D</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_HeaderSize.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.HeaderSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L60">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_HeaderSize" data-uid="PaperMarioBattleSystem.ActionSubMenu.HeaderSize">HeaderSize</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Vector2 HeaderSize</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_IconXOffset.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.IconXOffset%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L57">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_IconXOffset" data-uid="PaperMarioBattleSystem.ActionSubMenu.IconXOffset">IconXOffset</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected float IconXOffset</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_MenuBG.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.MenuBG%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L63">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_MenuBG" data-uid="PaperMarioBattleSystem.ActionSubMenu.MenuBG">MenuBG</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected NineSlicedTexture2D MenuBG</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.NineSlicedTexture2D.html">NineSlicedTexture2D</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_MoveCategory.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.MoveCategory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L39">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_MoveCategory" data-uid="PaperMarioBattleSystem.ActionSubMenu.MoveCategory">MoveCategory</h4>
+  <div class="markdown level1 summary"><p>The category of the menu.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Enumerations.MoveCategories MoveCategory</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.MoveCategories.html">Enumerations.MoveCategories</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_Position.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.Position%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L50">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_Position" data-uid="PaperMarioBattleSystem.ActionSubMenu.Position">Position</h4>
+  <div class="markdown level1 summary"><p>The position of the submenu</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Vector2 Position</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_ResourceCostXOffset.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.ResourceCostXOffset%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L58">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_ResourceCostXOffset" data-uid="PaperMarioBattleSystem.ActionSubMenu.ResourceCostXOffset">ResourceCostXOffset</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected float ResourceCostXOffset</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_SelectionCursor.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.SelectionCursor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L66">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_SelectionCursor" data-uid="PaperMarioBattleSystem.ActionSubMenu.SelectionCursor">SelectionCursor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected LoopAnimation SelectionCursor</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.LoopAnimation.html">LoopAnimation</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_YSpacing.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.YSpacing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L55">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_YSpacing" data-uid="PaperMarioBattleSystem.ActionSubMenu.YSpacing">YSpacing</h4>
+  <div class="markdown level1 summary"><p>The Y spacing of the action list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected float YSpacing</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_BattleActions.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.BattleActions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L34">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu_BattleActions_" data-uid="PaperMarioBattleSystem.ActionSubMenu.BattleActions*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_BattleActions" data-uid="PaperMarioBattleSystem.ActionSubMenu.BattleActions">BattleActions</h4>
+  <div class="markdown level1 summary"><p>The list of move actions in the submenu</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public List&lt;MoveAction&gt; BattleActions { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PaperMarioBattleSystem.MoveAction.html">MoveAction</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_LastSelection.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.LastSelection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L68">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu_LastSelection_" data-uid="PaperMarioBattleSystem.ActionSubMenu.LastSelection*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_LastSelection" data-uid="PaperMarioBattleSystem.ActionSubMenu.LastSelection">LastSelection</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override int LastSelection { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.InputMenu.html#PaperMarioBattleSystem_InputMenu_LastSelection">InputMenu.LastSelection</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_Name.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L29">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu_Name_" data-uid="PaperMarioBattleSystem.ActionSubMenu.Name*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_Name" data-uid="PaperMarioBattleSystem.ActionSubMenu.Name">Name</h4>
+  <div class="markdown level1 summary"><p>The name of the SubMenu.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Name { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_User.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.User%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L24">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu_User_" data-uid="PaperMarioBattleSystem.ActionSubMenu.User*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_User" data-uid="PaperMarioBattleSystem.ActionSubMenu.User">User</h4>
+  <div class="markdown level1 summary"><p>The user of this ActionSubMenu.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public BattleEntity User { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_Draw.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.Draw%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L161">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu_Draw_" data-uid="PaperMarioBattleSystem.ActionSubMenu.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_Draw" data-uid="PaperMarioBattleSystem.ActionSubMenu.Draw">Draw()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Draw()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.InputMenu.html#PaperMarioBattleSystem_InputMenu_Draw">InputMenu.Draw()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_Initialize.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L96">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu_Initialize_" data-uid="PaperMarioBattleSystem.ActionSubMenu.Initialize*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_Initialize" data-uid="PaperMarioBattleSystem.ActionSubMenu.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Initialize()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_OnBackOut.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.OnBackOut%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L123">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu_OnBackOut_" data-uid="PaperMarioBattleSystem.ActionSubMenu.OnBackOut*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_OnBackOut" data-uid="PaperMarioBattleSystem.ActionSubMenu.OnBackOut">OnBackOut()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnBackOut()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.InputMenu.html#PaperMarioBattleSystem_InputMenu_OnBackOut">InputMenu.OnBackOut()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_OnConfirm.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.OnConfirm%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L131">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu_OnConfirm_" data-uid="PaperMarioBattleSystem.ActionSubMenu.OnConfirm*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_OnConfirm" data-uid="PaperMarioBattleSystem.ActionSubMenu.OnConfirm">OnConfirm()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnConfirm()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.InputMenu.html#PaperMarioBattleSystem_InputMenu_OnConfirm">InputMenu.OnConfirm()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_OnSelectionChanged_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.OnSelectionChanged(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L117">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu_OnSelectionChanged_" data-uid="PaperMarioBattleSystem.ActionSubMenu.OnSelectionChanged*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_OnSelectionChanged_System_Int32_" data-uid="PaperMarioBattleSystem.ActionSubMenu.OnSelectionChanged(System.Int32)">OnSelectionChanged(Int32)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnSelectionChanged(int newSelection)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">newSelection</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.InputMenu.html#PaperMarioBattleSystem_InputMenu_OnSelectionChanged_System_Int32_">InputMenu.OnSelectionChanged(Int32)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu_Update.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L154">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_ActionSubMenu_Update_" data-uid="PaperMarioBattleSystem.ActionSubMenu.Update*"></a>
+  <h4 id="PaperMarioBattleSystem_ActionSubMenu_Update" data-uid="PaperMarioBattleSystem.ActionSubMenu.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Update()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.InputMenu.html#PaperMarioBattleSystem_InputMenu_Update">InputMenu.Update()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.INameable.html">INameable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_ActionSubMenu.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.ActionSubMenu%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Menus/ActionSubMenus/ActionSubMenu.cs/#L19" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

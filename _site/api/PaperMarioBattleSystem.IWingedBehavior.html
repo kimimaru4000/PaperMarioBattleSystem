@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Interface IWingedBehavior
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Interface IWingedBehavior
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.IWingedBehavior">
+  
+  
+  <h1 id="PaperMarioBattleSystem_IWingedBehavior" data-uid="PaperMarioBattleSystem.IWingedBehavior" class="text-break">Interface IWingedBehavior
+  </h1>
+  <div class="markdown level0 summary"><p>An interface for any Winged object that can be knocked to the ground.
+<p>Examples include Paragoombas and Stilt Guys.
+Parakarry is excluded, as he cannot be knocked to the ground.</p></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ICleanup.html#PaperMarioBattleSystem_ICleanup_CleanUp">ICleanup.CleanUp()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_IWingedBehavior_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public interface IWingedBehavior : ICleanup</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_IWingedBehavior_ElapsedGroundedTurns.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.IWingedBehavior.ElapsedGroundedTurns%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Interfaces/IWingedBehavior.cs/#L32">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_IWingedBehavior_ElapsedGroundedTurns_" data-uid="PaperMarioBattleSystem.IWingedBehavior.ElapsedGroundedTurns*"></a>
+  <h4 id="PaperMarioBattleSystem_IWingedBehavior_ElapsedGroundedTurns" data-uid="PaperMarioBattleSystem.IWingedBehavior.ElapsedGroundedTurns">ElapsedGroundedTurns</h4>
+  <div class="markdown level1 summary"><p>How many turns the object has been Grounded.
+<p>This is only used by Kammy Koopa in the PM games.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int ElapsedGroundedTurns { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_IWingedBehavior_Grounded.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.IWingedBehavior.Grounded%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Interfaces/IWingedBehavior.cs/#L20">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_IWingedBehavior_Grounded_" data-uid="PaperMarioBattleSystem.IWingedBehavior.Grounded*"></a>
+  <h4 id="PaperMarioBattleSystem_IWingedBehavior_Grounded" data-uid="PaperMarioBattleSystem.IWingedBehavior.Grounded">Grounded</h4>
+  <div class="markdown level1 summary"><p>Whether the object is Grounded or not.
+This is set to true when the object is knocked to the ground and loses its wings.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Grounded { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_IWingedBehavior_GroundedEntity.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.IWingedBehavior.GroundedEntity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Interfaces/IWingedBehavior.cs/#L38">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_IWingedBehavior_GroundedEntity_" data-uid="PaperMarioBattleSystem.IWingedBehavior.GroundedEntity*"></a>
+  <h4 id="PaperMarioBattleSystem_IWingedBehavior_GroundedEntity" data-uid="PaperMarioBattleSystem.IWingedBehavior.GroundedEntity">GroundedEntity</h4>
+  <div class="markdown level1 summary"><p>The BattleEntity to become when grounded. It should not have a vulnerability to losing wings.
+Winged BattleEntities should use only the information from this and clear it after falling, unless they go airborne again.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">BattleEntity GroundedEntity { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_IWingedBehavior_GroundedOnEffects.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.IWingedBehavior.GroundedOnEffects%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Interfaces/IWingedBehavior.cs/#L43">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_IWingedBehavior_GroundedOnEffects_" data-uid="PaperMarioBattleSystem.IWingedBehavior.GroundedOnEffects*"></a>
+  <h4 id="PaperMarioBattleSystem_IWingedBehavior_GroundedOnEffects" data-uid="PaperMarioBattleSystem.IWingedBehavior.GroundedOnEffects">GroundedOnEffects</h4>
+  <div class="markdown level1 summary"><p>The DamageEffects the object is grounded from.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Enumerations.DamageEffects GroundedOnEffects { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.DamageEffects.html">Enumerations.DamageEffects</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_IWingedBehavior_GroundedTurns.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.IWingedBehavior.GroundedTurns%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Interfaces/IWingedBehavior.cs/#L26">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_IWingedBehavior_GroundedTurns_" data-uid="PaperMarioBattleSystem.IWingedBehavior.GroundedTurns*"></a>
+  <h4 id="PaperMarioBattleSystem_IWingedBehavior_GroundedTurns" data-uid="PaperMarioBattleSystem.IWingedBehavior.GroundedTurns">GroundedTurns</h4>
+  <div class="markdown level1 summary"><p>How many turns the object stays Grounded.
+<p>This is only used by Kammy Koopa in the PM games.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">int GroundedTurns { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_IWingedBehavior_HandleGrounded.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.IWingedBehavior.HandleGrounded%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Interfaces/IWingedBehavior.cs/#L53">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_IWingedBehavior_HandleGrounded_" data-uid="PaperMarioBattleSystem.IWingedBehavior.HandleGrounded*"></a>
+  <h4 id="PaperMarioBattleSystem_IWingedBehavior_HandleGrounded" data-uid="PaperMarioBattleSystem.IWingedBehavior.HandleGrounded">HandleGrounded()</h4>
+  <div class="markdown level1 summary"><p>What happens when the object is hit by a move that grounds it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void HandleGrounded()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_IWingedBehavior_RemoveWings.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.IWingedBehavior.RemoveWings%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Interfaces/IWingedBehavior.cs/#L48">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_IWingedBehavior_RemoveWings_" data-uid="PaperMarioBattleSystem.IWingedBehavior.RemoveWings*"></a>
+  <h4 id="PaperMarioBattleSystem_IWingedBehavior_RemoveWings" data-uid="PaperMarioBattleSystem.IWingedBehavior.RemoveWings">RemoveWings()</h4>
+  <div class="markdown level1 summary"><p>Removes the Winged object&apos;s wings, performing any other logic required to transition it to the GroundedEntity.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RemoveWings()</code></pre>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_IWingedBehavior.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.IWingedBehavior%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Interfaces/IWingedBehavior.cs/#L14" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

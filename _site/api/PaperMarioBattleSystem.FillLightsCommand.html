@@ -1,0 +1,507 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class FillLightsCommand
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class FillLightsCommand
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.FillLightsCommand">
+  
+  
+  <h1 id="PaperMarioBattleSystem_FillLightsCommand" data-uid="PaperMarioBattleSystem.FillLightsCommand" class="text-break">Class FillLightsCommand
+  </h1>
+  <div class="markdown level0 summary"><p>A base class for Action Commands that involve lighting lights.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PaperMarioBattleSystem.ActionCommand.html">ActionCommand</a></div>
+    <div class="level2"><span class="xref">FillLightsCommand</span></div>
+      <div class="level3"><a class="xref" href="PaperMarioBattleSystem.HammerCommand.html">HammerCommand</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_AcceptingInput">ActionCommand.AcceptingInput</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_Handler">ActionCommand.Handler</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_AutoComplete">ActionCommand.AutoComplete</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_SetHandler_PaperMarioBattleSystem_IActionCommandHandler_">ActionCommand.SetHandler(IActionCommandHandler)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_OnComplete_PaperMarioBattleSystem_ActionCommand_CommandResults_">ActionCommand.OnComplete(ActionCommand.CommandResults)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_SendCommandRank_PaperMarioBattleSystem_ActionCommand_CommandRank_">ActionCommand.SendCommandRank(ActionCommand.CommandRank)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_SendResponse_System_Object_">ActionCommand.SendResponse(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_ReadInput">ActionCommand.ReadInput()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_Update">ActionCommand.Update()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_FillLightsCommand_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class FillLightsCommand : ActionCommand</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand__ctor_PaperMarioBattleSystem_IActionCommandHandler_System_Int32_System_Double_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand.%23ctor(PaperMarioBattleSystem.IActionCommandHandler%2CSystem.Int32%2CSystem.Double)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L38">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_FillLightsCommand__ctor_" data-uid="PaperMarioBattleSystem.FillLightsCommand.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_FillLightsCommand__ctor_PaperMarioBattleSystem_IActionCommandHandler_System_Int32_System_Double_" data-uid="PaperMarioBattleSystem.FillLightsCommand.#ctor(PaperMarioBattleSystem.IActionCommandHandler,System.Int32,System.Double)">FillLightsCommand(IActionCommandHandler, Int32, Double)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FillLightsCommand(IActionCommandHandler commandAction, int maxLights, double timeBetweenLights)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.IActionCommandHandler.html">IActionCommandHandler</a></td>
+        <td><span class="parametername">commandAction</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">maxLights</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">timeBetweenLights</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand_LightsFilled.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand.LightsFilled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L30">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_FillLightsCommand_LightsFilled" data-uid="PaperMarioBattleSystem.FillLightsCommand.LightsFilled">LightsFilled</h4>
+  <div class="markdown level1 summary"><p>The number of lights filled</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int LightsFilled</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand_LitLight.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand.LitLight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L34">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_FillLightsCommand_LitLight" data-uid="PaperMarioBattleSystem.FillLightsCommand.LitLight">LitLight</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CroppedTexture2D LitLight</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand_MaxLights.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand.MaxLights%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L20">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_FillLightsCommand_MaxLights" data-uid="PaperMarioBattleSystem.FillLightsCommand.MaxLights">MaxLights</h4>
+  <div class="markdown level1 summary"><p>The max number of lights to fill</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxLights</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand_PrevLightTime.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand.PrevLightTime%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L31">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_FillLightsCommand_PrevLightTime" data-uid="PaperMarioBattleSystem.FillLightsCommand.PrevLightTime">PrevLightTime</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected double PrevLightTime</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand_TimeBetweenLights.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand.TimeBetweenLights%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L25">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_FillLightsCommand_TimeBetweenLights" data-uid="PaperMarioBattleSystem.FillLightsCommand.TimeBetweenLights">TimeBetweenLights</h4>
+  <div class="markdown level1 summary"><p>The time between each light being lit</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected double TimeBetweenLights</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand_UnlitLight.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand.UnlitLight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L33">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_FillLightsCommand_UnlitLight" data-uid="PaperMarioBattleSystem.FillLightsCommand.UnlitLight">UnlitLight</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected CroppedTexture2D UnlitLight</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.CroppedTexture2D.html">CroppedTexture2D</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand_AllLightsFilled.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand.AllLightsFilled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L36">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_FillLightsCommand_AllLightsFilled_" data-uid="PaperMarioBattleSystem.FillLightsCommand.AllLightsFilled*"></a>
+  <h4 id="PaperMarioBattleSystem_FillLightsCommand_AllLightsFilled" data-uid="PaperMarioBattleSystem.FillLightsCommand.AllLightsFilled">AllLightsFilled</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AllLightsFilled { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand_EndInput.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand.EndInput%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L54">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_FillLightsCommand_EndInput_" data-uid="PaperMarioBattleSystem.FillLightsCommand.EndInput*"></a>
+  <h4 id="PaperMarioBattleSystem_FillLightsCommand_EndInput" data-uid="PaperMarioBattleSystem.FillLightsCommand.EndInput">EndInput()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void EndInput()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_EndInput">ActionCommand.EndInput()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand_FillNextLight.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand.FillNextLight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L62">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_FillLightsCommand_FillNextLight_" data-uid="PaperMarioBattleSystem.FillLightsCommand.FillNextLight*"></a>
+  <h4 id="PaperMarioBattleSystem_FillLightsCommand_FillNextLight" data-uid="PaperMarioBattleSystem.FillLightsCommand.FillNextLight">FillNextLight()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void FillNextLight()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand_StartInput_System_Object___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand.StartInput(System.Object%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L44">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_FillLightsCommand_StartInput_" data-uid="PaperMarioBattleSystem.FillLightsCommand.StartInput*"></a>
+  <h4 id="PaperMarioBattleSystem_FillLightsCommand_StartInput_System_Object___" data-uid="PaperMarioBattleSystem.FillLightsCommand.StartInput(System.Object[])">StartInput(Object[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void StartInput(params object[] values)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span>[]</td>
+        <td><span class="parametername">values</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_StartInput_System_Object___">ActionCommand.StartInput(Object[])</a></div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_FillLightsCommand.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.FillLightsCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/FillLightsCommand.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

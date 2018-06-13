@@ -1,0 +1,1756 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class UIGrid
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class UIGrid
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.UIGrid">
+  
+  
+  <h1 id="PaperMarioBattleSystem_UIGrid" data-uid="PaperMarioBattleSystem.UIGrid" class="text-break">Class UIGrid
+  </h1>
+  <div class="markdown level0 summary"><p>A grid holding <a class="xref" href="PaperMarioBattleSystem.PosUIElement.html">PosUIElement</a>s.
+<p>By default the grid repositions the elements when it is modified in some way (Ex. Rows, Columns, CellSize).
+To change this behavior, set <a class="xref" href="PaperMarioBattleSystem.UIGrid.html#PaperMarioBattleSystem_UIGrid_AutomaticReposition">AutomaticReposition</a> to false.
+In this case, the grid will need to be manually repositioned with <a class="xref" href="PaperMarioBattleSystem.UIGrid.html#PaperMarioBattleSystem_UIGrid_RepositionGridElements">RepositionGridElements()</a> after changes have been made.</p></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PaperMarioBattleSystem.UIElement.html">UIElement</a></div>
+    <div class="level2"><a class="xref" href="PaperMarioBattleSystem.PosUIElement.html">PosUIElement</a></div>
+    <div class="level3"><span class="xref">UIGrid</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IPosition.html">IPosition</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.UIElement.html#PaperMarioBattleSystem_UIElement_CleanUp">UIElement.CleanUp()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_UIGrid_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class UIGrid : PosUIElement, IUpdateable, IDrawable, ICleanup, IPosition</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid__ctor_System_Int32_System_Int32_Microsoft_Xna_Framework_Vector2_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.%23ctor(System.Int32%2CSystem.Int32%2CMicrosoft.Xna.Framework.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L205">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid__ctor_" data-uid="PaperMarioBattleSystem.UIGrid.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid__ctor_System_Int32_System_Int32_Microsoft_Xna_Framework_Vector2_" data-uid="PaperMarioBattleSystem.UIGrid.#ctor(System.Int32,System.Int32,Microsoft.Xna.Framework.Vector2)">UIGrid(Int32, Int32, Vector2)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UIGrid(int columns, int rows, Vector2 cellSize)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">columns</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">rows</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">cellSize</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_AutomaticReposition.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.AutomaticReposition%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L44">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIGrid_AutomaticReposition" data-uid="PaperMarioBattleSystem.UIGrid.AutomaticReposition">AutomaticReposition</h4>
+  <div class="markdown level1 summary"><p>Whether to automatically reposition the elements after any changes or not</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool AutomaticReposition</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GridCellSize.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GridCellSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L167">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GridCellSize" data-uid="PaperMarioBattleSystem.UIGrid.GridCellSize">GridCellSize</h4>
+  <div class="markdown level1 summary"><p>The size of each cell in the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Vector2 GridCellSize</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GridColumns.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GridColumns%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L172">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GridColumns" data-uid="PaperMarioBattleSystem.UIGrid.GridColumns">GridColumns</h4>
+  <div class="markdown level1 summary"><p>The number of columns in the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int GridColumns</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GridElements.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GridElements%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L203">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GridElements" data-uid="PaperMarioBattleSystem.UIGrid.GridElements">GridElements</h4>
+  <div class="markdown level1 summary"><p>The PosUIElements in the grid.
+This is a list for performance/usability reasons, as we can easily position a list in a grid-like manner.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected List&lt;PosUIElement&gt; GridElements</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PaperMarioBattleSystem.PosUIElement.html">PosUIElement</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GridElementSpacing.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GridElementSpacing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L192">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GridElementSpacing" data-uid="PaperMarioBattleSystem.UIGrid.GridElementSpacing">GridElementSpacing</h4>
+  <div class="markdown level1 summary"><p>The amount to space the grid elements away from each other.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Vector2 GridElementSpacing</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GridPadding.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GridPadding%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L197">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GridPadding" data-uid="PaperMarioBattleSystem.UIGrid.GridPadding">GridPadding</h4>
+  <div class="markdown level1 summary"><p>The padding of the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected UIGrid.Padding GridPadding</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.UIGrid.Padding.html">UIGrid.Padding</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GridRows.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GridRows%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L177">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GridRows" data-uid="PaperMarioBattleSystem.UIGrid.GridRows">GridRows</h4>
+  <div class="markdown level1 summary"><p>The number of rows in the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int GridRows</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_CellSize.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.CellSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L63">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_CellSize_" data-uid="PaperMarioBattleSystem.UIGrid.CellSize*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_CellSize" data-uid="PaperMarioBattleSystem.UIGrid.CellSize">CellSize</h4>
+  <div class="markdown level1 summary"><p>A property for the size of each cell in the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 CellSize { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_Columns.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.Columns%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L82">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_Columns_" data-uid="PaperMarioBattleSystem.UIGrid.Columns*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_Columns" data-uid="PaperMarioBattleSystem.UIGrid.Columns">Columns</h4>
+  <div class="markdown level1 summary"><p>A property for the number of columns in the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Columns { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_ElementPivot.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.ElementPivot%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L187">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_ElementPivot_" data-uid="PaperMarioBattleSystem.UIGrid.ElementPivot*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_ElementPivot" data-uid="PaperMarioBattleSystem.UIGrid.ElementPivot">ElementPivot</h4>
+  <div class="markdown level1 summary"><p>The pivot for the grid elements.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UIGrid.GridPivots ElementPivot { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.UIGrid.GridPivots.html">UIGrid.GridPivots</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GridBounds.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GridBounds%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L154">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GridBounds_" data-uid="PaperMarioBattleSystem.UIGrid.GridBounds*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GridBounds" data-uid="PaperMarioBattleSystem.UIGrid.GridBounds">GridBounds</h4>
+  <div class="markdown level1 summary"><p>The bounds of the grid. This does not take into account the pivot.
+<p>This is primarily for debugging.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Rectangle GridBounds { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Rectangle</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GridPivot.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GridPivot%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L182">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GridPivot_" data-uid="PaperMarioBattleSystem.UIGrid.GridPivot*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GridPivot" data-uid="PaperMarioBattleSystem.UIGrid.GridPivot">GridPivot</h4>
+  <div class="markdown level1 summary"><p>The grid pivot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UIGrid.GridPivots GridPivot { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.UIGrid.GridPivots.html">UIGrid.GridPivots</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GridSize.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GridSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L148">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GridSize_" data-uid="PaperMarioBattleSystem.UIGrid.GridSize*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GridSize" data-uid="PaperMarioBattleSystem.UIGrid.GridSize">GridSize</h4>
+  <div class="markdown level1 summary"><p>The total size of the grid. This does not take into account the pivot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 GridSize { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_MaxElementsInGrid.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.MaxElementsInGrid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L138">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_MaxElementsInGrid_" data-uid="PaperMarioBattleSystem.UIGrid.MaxElementsInGrid*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_MaxElementsInGrid" data-uid="PaperMarioBattleSystem.UIGrid.MaxElementsInGrid">MaxElementsInGrid</h4>
+  <div class="markdown level1 summary"><p>The max number of elements that can be in the grid based on its size.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxElementsInGrid { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_NumElementsInGrid.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.NumElementsInGrid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L143">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_NumElementsInGrid_" data-uid="PaperMarioBattleSystem.UIGrid.NumElementsInGrid*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_NumElementsInGrid" data-uid="PaperMarioBattleSystem.UIGrid.NumElementsInGrid">NumElementsInGrid</h4>
+  <div class="markdown level1 summary"><p>The number of elements in the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int NumElementsInGrid { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_Position.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.Position%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L46">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_Position_" data-uid="PaperMarioBattleSystem.UIGrid.Position*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_Position" data-uid="PaperMarioBattleSystem.UIGrid.Position">Position</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override Vector2 Position { set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.PosUIElement.html#PaperMarioBattleSystem_PosUIElement_Position">PosUIElement.Position</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_Rows.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.Rows%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L101">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_Rows_" data-uid="PaperMarioBattleSystem.UIGrid.Rows*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_Rows" data-uid="PaperMarioBattleSystem.UIGrid.Rows">Rows</h4>
+  <div class="markdown level1 summary"><p>A property for the number of rows in the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int Rows { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_Spacing.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.Spacing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L120">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_Spacing_" data-uid="PaperMarioBattleSystem.UIGrid.Spacing*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_Spacing" data-uid="PaperMarioBattleSystem.UIGrid.Spacing">Spacing</h4>
+  <div class="markdown level1 summary"><p>The spacing of the grid elements.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 Spacing { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_AddGridElement_PaperMarioBattleSystem_PosUIElement_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.AddGridElement(PaperMarioBattleSystem.PosUIElement)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L220">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_AddGridElement_" data-uid="PaperMarioBattleSystem.UIGrid.AddGridElement*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_AddGridElement_PaperMarioBattleSystem_PosUIElement_" data-uid="PaperMarioBattleSystem.UIGrid.AddGridElement(PaperMarioBattleSystem.PosUIElement)">AddGridElement(PosUIElement)</h4>
+  <div class="markdown level1 summary"><p>Adds an element to the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddGridElement(PosUIElement posUIElement)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.PosUIElement.html">PosUIElement</a></td>
+        <td><span class="parametername">posUIElement</span></td>
+        <td><p>The PosUIElement to add to the grid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_ChangeElementPivot_PaperMarioBattleSystem_UIGrid_GridPivots_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.ChangeElementPivot(PaperMarioBattleSystem.UIGrid.GridPivots)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L446">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_ChangeElementPivot_" data-uid="PaperMarioBattleSystem.UIGrid.ChangeElementPivot*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_ChangeElementPivot_PaperMarioBattleSystem_UIGrid_GridPivots_" data-uid="PaperMarioBattleSystem.UIGrid.ChangeElementPivot(PaperMarioBattleSystem.UIGrid.GridPivots)">ChangeElementPivot(UIGrid.GridPivots)</h4>
+  <div class="markdown level1 summary"><p>Changes the ElementPivot of the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ChangeElementPivot(UIGrid.GridPivots pivot)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.UIGrid.GridPivots.html">UIGrid.GridPivots</a></td>
+        <td><span class="parametername">pivot</span></td>
+        <td><p>The GridPivot to change to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_ChangeGridPadding_System_Int32_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.ChangeGridPadding(System.Int32%2CSystem.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L464">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_ChangeGridPadding_" data-uid="PaperMarioBattleSystem.UIGrid.ChangeGridPadding*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_ChangeGridPadding_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="PaperMarioBattleSystem.UIGrid.ChangeGridPadding(System.Int32,System.Int32,System.Int32,System.Int32)">ChangeGridPadding(Int32, Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Changes the padding of the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ChangeGridPadding(int left, int right, int top, int bottom)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">left</span></td>
+        <td><p>The left padding.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">right</span></td>
+        <td><p>The right padding.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">top</span></td>
+        <td><p>The top padding.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">bottom</span></td>
+        <td><p>The bottom padding.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_ChangeGridPaddingRelative_System_Int32_System_Int32_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.ChangeGridPaddingRelative(System.Int32%2CSystem.Int32%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L484">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_ChangeGridPaddingRelative_" data-uid="PaperMarioBattleSystem.UIGrid.ChangeGridPaddingRelative*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_ChangeGridPaddingRelative_System_Int32_System_Int32_System_Int32_System_Int32_" data-uid="PaperMarioBattleSystem.UIGrid.ChangeGridPaddingRelative(System.Int32,System.Int32,System.Int32,System.Int32)">ChangeGridPaddingRelative(Int32, Int32, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Changes the padding of the grid relative to its original padding.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ChangeGridPaddingRelative(int left, int right, int top, int bottom)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">left</span></td>
+        <td><p>The left padding.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">right</span></td>
+        <td><p>The right padding.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">top</span></td>
+        <td><p>The top padding.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">bottom</span></td>
+        <td><p>The bottom padding.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_ChangeGridPivot_PaperMarioBattleSystem_UIGrid_GridPivots_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.ChangeGridPivot(PaperMarioBattleSystem.UIGrid.GridPivots)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L431">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_ChangeGridPivot_" data-uid="PaperMarioBattleSystem.UIGrid.ChangeGridPivot*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_ChangeGridPivot_PaperMarioBattleSystem_UIGrid_GridPivots_" data-uid="PaperMarioBattleSystem.UIGrid.ChangeGridPivot(PaperMarioBattleSystem.UIGrid.GridPivots)">ChangeGridPivot(UIGrid.GridPivots)</h4>
+  <div class="markdown level1 summary"><p>Changes the GridPivot of the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ChangeGridPivot(UIGrid.GridPivots pivot)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.UIGrid.GridPivots.html">UIGrid.GridPivots</a></td>
+        <td><span class="parametername">pivot</span></td>
+        <td><p>The GridPivot to change to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_ClearGrid.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.ClearGrid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L278">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_ClearGrid_" data-uid="PaperMarioBattleSystem.UIGrid.ClearGrid*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_ClearGrid" data-uid="PaperMarioBattleSystem.UIGrid.ClearGrid">ClearGrid()</h4>
+  <div class="markdown level1 summary"><p>Clears the grid by removing all elements from it.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearGrid()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_Draw.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.Draw%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L670">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_Draw_" data-uid="PaperMarioBattleSystem.UIGrid.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_Draw" data-uid="PaperMarioBattleSystem.UIGrid.Draw">Draw()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Draw()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.UIElement.html#PaperMarioBattleSystem_UIElement_Draw">UIElement.Draw()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GetColumnRowFromIndex_System_Int32_System_Int32__System_Int32__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GetColumnRowFromIndex(System.Int32%2CSystem.Int32%40%2CSystem.Int32%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L323">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GetColumnRowFromIndex_" data-uid="PaperMarioBattleSystem.UIGrid.GetColumnRowFromIndex*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GetColumnRowFromIndex_System_Int32_System_Int32__System_Int32__" data-uid="PaperMarioBattleSystem.UIGrid.GetColumnRowFromIndex(System.Int32,System.Int32@,System.Int32@)">GetColumnRowFromIndex(Int32, out Int32, out Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns zero-based column and row numbers from an index in the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetColumnRowFromIndex(int index, out int column, out int row)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index to retrieve the zero-based column and row numbers for.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">column</span></td>
+        <td><p>An out integer that will be the zero-based column number. -1 if the grid has 0 or fewer Columns.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">row</span></td>
+        <td><p>An out integer that will be the zero-based row number. -1 if the grid has 0 or fewer Columns.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GetElementOffsetForPivot_PaperMarioBattleSystem_UIGrid_GridPivots_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GetElementOffsetForPivot(PaperMarioBattleSystem.UIGrid.GridPivots)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L523">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GetElementOffsetForPivot_" data-uid="PaperMarioBattleSystem.UIGrid.GetElementOffsetForPivot*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GetElementOffsetForPivot_PaperMarioBattleSystem_UIGrid_GridPivots_" data-uid="PaperMarioBattleSystem.UIGrid.GetElementOffsetForPivot(PaperMarioBattleSystem.UIGrid.GridPivots)">GetElementOffsetForPivot(UIGrid.GridPivots)</h4>
+  <div class="markdown level1 summary"><p>Gets the offset for the grid elements at a particular pivot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Vector2 GetElementOffsetForPivot(UIGrid.GridPivots pivot)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.UIGrid.GridPivots.html">UIGrid.GridPivots</a></td>
+        <td><span class="parametername">pivot</span></td>
+        <td><p>The pivot to get the grid elements offset for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><p>A Vector2 of the grid elements offset for the pivot.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GetGridElement_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GetGridElement(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L344">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GetGridElement_" data-uid="PaperMarioBattleSystem.UIGrid.GetGridElement*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GetGridElement_System_Int32_" data-uid="PaperMarioBattleSystem.UIGrid.GetGridElement(System.Int32)">GetGridElement(Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns the grid element at an index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PosUIElement GetGridElement(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index to retrieve the element for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.PosUIElement.html">PosUIElement</a></td>
+        <td><p>null if the index is out of the grid&apos;s range, otherwise the element at the index.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GetGridElement_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GetGridElement(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L361">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GetGridElement_" data-uid="PaperMarioBattleSystem.UIGrid.GetGridElement*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GetGridElement_System_Int32_System_Int32_" data-uid="PaperMarioBattleSystem.UIGrid.GetGridElement(System.Int32,System.Int32)">GetGridElement(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns the grid element at a particular column and row number.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public PosUIElement GetGridElement(int column, int row)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">column</span></td>
+        <td><p>The zero-based column number.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">row</span></td>
+        <td><p>The zero-based row number.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.PosUIElement.html">PosUIElement</a></td>
+        <td><p>null if the column or index are out of the grid&apos;s range, otherwise the element at the index.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GetIndex_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GetIndex(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L304">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GetIndex_" data-uid="PaperMarioBattleSystem.UIGrid.GetIndex*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GetIndex_System_Int32_System_Int32_" data-uid="PaperMarioBattleSystem.UIGrid.GetIndex(System.Int32,System.Int32)">GetIndex(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns an index in the grid from column and row numbers.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetIndex(int column, int row)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">column</span></td>
+        <td><p>The zero-based column of the grid.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">row</span></td>
+        <td><p>The zero-based row of the grid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>-1 if the column or row is out of the grid&apos;s range, otherwise an index</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GetOffsetFromPivot_PaperMarioBattleSystem_UIGrid_GridPivots_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GetOffsetFromPivot(PaperMarioBattleSystem.UIGrid.GridPivots)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L494">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GetOffsetFromPivot_" data-uid="PaperMarioBattleSystem.UIGrid.GetOffsetFromPivot*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GetOffsetFromPivot_PaperMarioBattleSystem_UIGrid_GridPivots_" data-uid="PaperMarioBattleSystem.UIGrid.GetOffsetFromPivot(PaperMarioBattleSystem.UIGrid.GridPivots)">GetOffsetFromPivot(UIGrid.GridPivots)</h4>
+  <div class="markdown level1 summary"><p>Gets the offset of the grid at a particular pivot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Vector2 GetOffsetFromPivot(UIGrid.GridPivots pivot)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.UIGrid.GridPivots.html">UIGrid.GridPivots</a></td>
+        <td><span class="parametername">pivot</span></td>
+        <td><p>The pivot to get the grid offset for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><p>A Vector2 of the grid offset for the pivot.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GetPositionAtIndex_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GetPositionAtIndex(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L404">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GetPositionAtIndex_" data-uid="PaperMarioBattleSystem.UIGrid.GetPositionAtIndex*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GetPositionAtIndex_System_Int32_" data-uid="PaperMarioBattleSystem.UIGrid.GetPositionAtIndex(System.Int32)">GetPositionAtIndex(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets the position a grid element would be at a particular index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 GetPositionAtIndex(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index of the grid element. This can be outside of the grid&apos;s range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><p>The position of the grid element.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GetPositionAtIndex_System_Int32_PaperMarioBattleSystem_UIGrid_GridPivots_PaperMarioBattleSystem_UIGrid_GridPivots_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GetPositionAtIndex(System.Int32%2CPaperMarioBattleSystem.UIGrid.GridPivots%2CPaperMarioBattleSystem.UIGrid.GridPivots)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L416">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GetPositionAtIndex_" data-uid="PaperMarioBattleSystem.UIGrid.GetPositionAtIndex*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GetPositionAtIndex_System_Int32_PaperMarioBattleSystem_UIGrid_GridPivots_PaperMarioBattleSystem_UIGrid_GridPivots_" data-uid="PaperMarioBattleSystem.UIGrid.GetPositionAtIndex(System.Int32,PaperMarioBattleSystem.UIGrid.GridPivots,PaperMarioBattleSystem.UIGrid.GridPivots)">GetPositionAtIndex(Int32, UIGrid.GridPivots, UIGrid.GridPivots)</h4>
+  <div class="markdown level1 summary"><p>Gets the position a grid element would be at a particular index with a particular element and grid pivot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 GetPositionAtIndex(int index, UIGrid.GridPivots gridPivot, UIGrid.GridPivots elementPivot)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index of the grid element. This can be outside of the grid&apos;s range.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.UIGrid.GridPivots.html">UIGrid.GridPivots</a></td>
+        <td><span class="parametername">gridPivot</span></td>
+        <td><p>The pivot used to offset the grid.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.UIGrid.GridPivots.html">UIGrid.GridPivots</a></td>
+        <td><span class="parametername">elementPivot</span></td>
+        <td><p>The pivot used to offset the elements in the grid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><p>The position of the grid element with the designated element and grid pivots.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GetRelativePositionAtIndex_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GetRelativePositionAtIndex(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L372">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GetRelativePositionAtIndex_" data-uid="PaperMarioBattleSystem.UIGrid.GetRelativePositionAtIndex*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GetRelativePositionAtIndex_System_Int32_" data-uid="PaperMarioBattleSystem.UIGrid.GetRelativePositionAtIndex(System.Int32)">GetRelativePositionAtIndex(Int32)</h4>
+  <div class="markdown level1 summary"><p>Gets the position of a grid element at a particular index relative to the grid&apos;s position.
+This overload is used for convenience.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Vector2 GetRelativePositionAtIndex(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index of the grid element. This can be outside of the grid&apos;s range.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><p>The relative position of the grid element.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GetRelativePositionAtIndex_System_Int32_PaperMarioBattleSystem_UIGrid_GridPivots_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GetRelativePositionAtIndex(System.Int32%2CPaperMarioBattleSystem.UIGrid.GridPivots)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L383">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GetRelativePositionAtIndex_" data-uid="PaperMarioBattleSystem.UIGrid.GetRelativePositionAtIndex*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GetRelativePositionAtIndex_System_Int32_PaperMarioBattleSystem_UIGrid_GridPivots_" data-uid="PaperMarioBattleSystem.UIGrid.GetRelativePositionAtIndex(System.Int32,PaperMarioBattleSystem.UIGrid.GridPivots)">GetRelativePositionAtIndex(Int32, UIGrid.GridPivots)</h4>
+  <div class="markdown level1 summary"><p>Gets the position of a grid element at a particular index relative to the grid&apos;s position.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Vector2 GetRelativePositionAtIndex(int index, UIGrid.GridPivots pivot)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index of the grid element. This can be outside of the grid&apos;s range.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.UIGrid.GridPivots.html">UIGrid.GridPivots</a></td>
+        <td><span class="parametername">pivot</span></td>
+        <td><p>The pivot used to offset the elements in the grid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><p>The relative position of the grid element.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_GetSpacingAtColumnRow_System_Int32_System_Int32_PaperMarioBattleSystem_UIGrid_GridPivots_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.GetSpacingAtColumnRow(System.Int32%2CSystem.Int32%2CPaperMarioBattleSystem.UIGrid.GridPivots)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L553">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_GetSpacingAtColumnRow_" data-uid="PaperMarioBattleSystem.UIGrid.GetSpacingAtColumnRow*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_GetSpacingAtColumnRow_System_Int32_System_Int32_PaperMarioBattleSystem_UIGrid_GridPivots_" data-uid="PaperMarioBattleSystem.UIGrid.GetSpacingAtColumnRow(System.Int32,System.Int32,PaperMarioBattleSystem.UIGrid.GridPivots)">GetSpacingAtColumnRow(Int32, Int32, UIGrid.GridPivots)</h4>
+  <div class="markdown level1 summary"><p>Gets the spacing of a grid element at a column and row number for a pivot.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Vector2 GetSpacingAtColumnRow(int column, int row, UIGrid.GridPivots pivot)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">column</span></td>
+        <td><p>The zero-based column number.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">row</span></td>
+        <td><p>The zero-based row number.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.UIGrid.GridPivots.html">UIGrid.GridPivots</a></td>
+        <td><span class="parametername">pivot</span></td>
+        <td><p>The pivot to get the spacing for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><p>A Vector2 of the spacing of the grid element for the pivot.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_RemoveGridElement_PaperMarioBattleSystem_PosUIElement_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.RemoveGridElement(PaperMarioBattleSystem.PosUIElement)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L247">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_RemoveGridElement_" data-uid="PaperMarioBattleSystem.UIGrid.RemoveGridElement*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_RemoveGridElement_PaperMarioBattleSystem_PosUIElement_" data-uid="PaperMarioBattleSystem.UIGrid.RemoveGridElement(PaperMarioBattleSystem.PosUIElement)">RemoveGridElement(PosUIElement)</h4>
+  <div class="markdown level1 summary"><p>Removes an element from the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveGridElement(PosUIElement posUIElement)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.PosUIElement.html">PosUIElement</a></td>
+        <td><span class="parametername">posUIElement</span></td>
+        <td><p>The PosUIElement to remove from the grid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_RemoveGridElement_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.RemoveGridElement(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L260">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_RemoveGridElement_" data-uid="PaperMarioBattleSystem.UIGrid.RemoveGridElement*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_RemoveGridElement_System_Int32_" data-uid="PaperMarioBattleSystem.UIGrid.RemoveGridElement(System.Int32)">RemoveGridElement(Int32)</h4>
+  <div class="markdown level1 summary"><p>Removes an element from the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveGridElement(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index of the element to remove from the grid.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_RemoveGridElement_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.RemoveGridElement(System.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L270">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_RemoveGridElement_" data-uid="PaperMarioBattleSystem.UIGrid.RemoveGridElement*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_RemoveGridElement_System_Int32_System_Int32_" data-uid="PaperMarioBattleSystem.UIGrid.RemoveGridElement(System.Int32,System.Int32)">RemoveGridElement(Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Removes an element from the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveGridElement(int column, int row)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">column</span></td>
+        <td><p>The zero-based column number of the element.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">row</span></td>
+        <td><p>The zero-based row number of the element.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_RepositionGridElements.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.RepositionGridElements%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L286">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_RepositionGridElements_" data-uid="PaperMarioBattleSystem.UIGrid.RepositionGridElements*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_RepositionGridElements" data-uid="PaperMarioBattleSystem.UIGrid.RepositionGridElements">RepositionGridElements()</h4>
+  <div class="markdown level1 summary"><p>Repositions the elements in the grid.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RepositionGridElements()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid_Update.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L621">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_UIGrid_Update_" data-uid="PaperMarioBattleSystem.UIGrid.Update*"></a>
+  <h4 id="PaperMarioBattleSystem_UIGrid_Update" data-uid="PaperMarioBattleSystem.UIGrid.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Update()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.UIElement.html#PaperMarioBattleSystem_UIElement_Update">UIElement.Update()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IPosition.html">IPosition</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_UIGrid.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.UIGrid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/UIElements/UIGrid.cs/#L23" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,2597 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class SpriteRenderer
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class SpriteRenderer
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.SpriteRenderer">
+  
+  
+  <h1 id="PaperMarioBattleSystem_SpriteRenderer" data-uid="PaperMarioBattleSystem.SpriteRenderer" class="text-break">Class SpriteRenderer
+  </h1>
+  <div class="markdown level0 summary"><p>Handles all rendering
+<p>This is a Singleton</p></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">SpriteRenderer</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_SpriteRenderer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class SpriteRenderer : ICleanup</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_FinalRenderTarget.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.FinalRenderTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L90">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_FinalRenderTarget_" data-uid="PaperMarioBattleSystem.SpriteRenderer.FinalRenderTarget*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_FinalRenderTarget" data-uid="PaperMarioBattleSystem.SpriteRenderer.FinalRenderTarget">FinalRenderTarget</h4>
+  <div class="markdown level1 summary"><p>The RenderTarget containing the final output.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public RenderTarget2D FinalRenderTarget { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.RenderTarget2D</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_graphicsDeviceManager.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.graphicsDeviceManager%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L67">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_graphicsDeviceManager_" data-uid="PaperMarioBattleSystem.SpriteRenderer.graphicsDeviceManager*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_graphicsDeviceManager" data-uid="PaperMarioBattleSystem.SpriteRenderer.graphicsDeviceManager">graphicsDeviceManager</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphicsDeviceManager graphicsDeviceManager { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.GraphicsDeviceManager</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_Instance.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.Instance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L21">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_Instance_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Instance*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_Instance" data-uid="PaperMarioBattleSystem.SpriteRenderer.Instance">Instance</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static SpriteRenderer Instance { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.SpriteRenderer.html">SpriteRenderer</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_IsFullscreen.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.IsFullscreen%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L73">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_IsFullscreen_" data-uid="PaperMarioBattleSystem.SpriteRenderer.IsFullscreen*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_IsFullscreen" data-uid="PaperMarioBattleSystem.SpriteRenderer.IsFullscreen">IsFullscreen</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsFullscreen { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_PostProcessingCount.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.PostProcessingCount%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L80">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_PostProcessingCount_" data-uid="PaperMarioBattleSystem.SpriteRenderer.PostProcessingCount*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_PostProcessingCount" data-uid="PaperMarioBattleSystem.SpriteRenderer.PostProcessingCount">PostProcessingCount</h4>
+  <div class="markdown level1 summary"><p>The number of post-processing shaders in effect.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int PostProcessingCount { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_ResolutionScale.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.ResolutionScale%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L71">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_ResolutionScale_" data-uid="PaperMarioBattleSystem.SpriteRenderer.ResolutionScale*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_ResolutionScale" data-uid="PaperMarioBattleSystem.SpriteRenderer.ResolutionScale">ResolutionScale</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 ResolutionScale { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_spriteBatch.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.spriteBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L61">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_spriteBatch_" data-uid="PaperMarioBattleSystem.SpriteRenderer.spriteBatch*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_spriteBatch" data-uid="PaperMarioBattleSystem.SpriteRenderer.spriteBatch">spriteBatch</h4>
+  <div class="markdown level1 summary"><p>The SpriteBatch used for drawing non-UI elements</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpriteBatch spriteBatch { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteBatch</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_StartedDrawing.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.StartedDrawing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L105">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_StartedDrawing_" data-uid="PaperMarioBattleSystem.SpriteRenderer.StartedDrawing*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_StartedDrawing" data-uid="PaperMarioBattleSystem.SpriteRenderer.StartedDrawing">StartedDrawing</h4>
+  <div class="markdown level1 summary"><p>Whether drawing for the frame started or not.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool StartedDrawing { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_uiBatch.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.uiBatch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L66">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_uiBatch_" data-uid="PaperMarioBattleSystem.SpriteRenderer.uiBatch*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_uiBatch" data-uid="PaperMarioBattleSystem.SpriteRenderer.uiBatch">uiBatch</h4>
+  <div class="markdown level1 summary"><p>The SpriteBatch used for drawing UI elements. UI is always drawn on top of non-UI elements</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpriteBatch uiBatch { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteBatch</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_WindowCenter.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.WindowCenter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L70">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_WindowCenter_" data-uid="PaperMarioBattleSystem.SpriteRenderer.WindowCenter*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_WindowCenter" data-uid="PaperMarioBattleSystem.SpriteRenderer.WindowCenter">WindowCenter</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 WindowCenter { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_WindowSize.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.WindowSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L69">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_WindowSize_" data-uid="PaperMarioBattleSystem.SpriteRenderer.WindowSize*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_WindowSize" data-uid="PaperMarioBattleSystem.SpriteRenderer.WindowSize">WindowSize</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 WindowSize { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_AddPostProcessingEffect_Microsoft_Xna_Framework_Graphics_Effect_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.AddPostProcessingEffect(Microsoft.Xna.Framework.Graphics.Effect%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L261">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_AddPostProcessingEffect_" data-uid="PaperMarioBattleSystem.SpriteRenderer.AddPostProcessingEffect*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_AddPostProcessingEffect_Microsoft_Xna_Framework_Graphics_Effect_System_Int32_" data-uid="PaperMarioBattleSystem.SpriteRenderer.AddPostProcessingEffect(Microsoft.Xna.Framework.Graphics.Effect,System.Int32)">AddPostProcessingEffect(Effect, Int32)</h4>
+  <div class="markdown level1 summary"><p>Adds a post-processing effect.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddPostProcessingEffect(Effect effect, int index = -1)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Effect</span></td>
+        <td><span class="parametername">effect</span></td>
+        <td><p>The post-processing effect to add.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index to insert the effect at. If less than 0, it will add it to the end of the list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_AdjustWindowSize_Microsoft_Xna_Framework_Vector2_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.AdjustWindowSize(Microsoft.Xna.Framework.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L158">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_AdjustWindowSize_" data-uid="PaperMarioBattleSystem.SpriteRenderer.AdjustWindowSize*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_AdjustWindowSize_Microsoft_Xna_Framework_Vector2_" data-uid="PaperMarioBattleSystem.SpriteRenderer.AdjustWindowSize(Microsoft.Xna.Framework.Vector2)">AdjustWindowSize(Vector2)</h4>
+  <div class="markdown level1 summary"><p>Adjusts the size of the game window</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AdjustWindowSize(Vector2 newWindowSize)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">newWindowSize</span></td>
+        <td><p>The new size of the window</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_BeginBatch_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_BlendState_Microsoft_Xna_Framework_Graphics_SamplerState_Microsoft_Xna_Framework_Graphics_Effect_System_Nullable_Microsoft_Xna_Framework_Matrix__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.BeginBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch%2CMicrosoft.Xna.Framework.Graphics.BlendState%2CMicrosoft.Xna.Framework.Graphics.SamplerState%2CMicrosoft.Xna.Framework.Graphics.Effect%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Matrix%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L305">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_BeginBatch_" data-uid="PaperMarioBattleSystem.SpriteRenderer.BeginBatch*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_BeginBatch_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_BlendState_Microsoft_Xna_Framework_Graphics_SamplerState_Microsoft_Xna_Framework_Graphics_Effect_System_Nullable_Microsoft_Xna_Framework_Matrix__" data-uid="PaperMarioBattleSystem.SpriteRenderer.BeginBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.Effect,System.Nullable{Microsoft.Xna.Framework.Matrix})">BeginBatch(SpriteBatch, BlendState, SamplerState, Effect, Nullable&lt;Matrix&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BeginBatch(SpriteBatch batch, BlendState blendState, SamplerState samplerState, Effect effect, Matrix? transformMatrix)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteBatch</span></td>
+        <td><span class="parametername">batch</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.BlendState</span></td>
+        <td><span class="parametername">blendState</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SamplerState</span></td>
+        <td><span class="parametername">samplerState</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Effect</span></td>
+        <td><span class="parametername">effect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Matrix</span>&gt;</td>
+        <td><span class="parametername">transformMatrix</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_BeginBatch_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_SpriteSortMode_Microsoft_Xna_Framework_Graphics_BlendState_Microsoft_Xna_Framework_Graphics_SamplerState_Microsoft_Xna_Framework_Graphics_DepthStencilState_Microsoft_Xna_Framework_Graphics_RasterizerState_Microsoft_Xna_Framework_Graphics_Effect_System_Nullable_Microsoft_Xna_Framework_Matrix__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.BeginBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch%2CMicrosoft.Xna.Framework.Graphics.SpriteSortMode%2CMicrosoft.Xna.Framework.Graphics.BlendState%2CMicrosoft.Xna.Framework.Graphics.SamplerState%2CMicrosoft.Xna.Framework.Graphics.DepthStencilState%2CMicrosoft.Xna.Framework.Graphics.RasterizerState%2CMicrosoft.Xna.Framework.Graphics.Effect%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Matrix%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L299">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_BeginBatch_" data-uid="PaperMarioBattleSystem.SpriteRenderer.BeginBatch*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_BeginBatch_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_SpriteSortMode_Microsoft_Xna_Framework_Graphics_BlendState_Microsoft_Xna_Framework_Graphics_SamplerState_Microsoft_Xna_Framework_Graphics_DepthStencilState_Microsoft_Xna_Framework_Graphics_RasterizerState_Microsoft_Xna_Framework_Graphics_Effect_System_Nullable_Microsoft_Xna_Framework_Matrix__" data-uid="PaperMarioBattleSystem.SpriteRenderer.BeginBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.SpriteSortMode,Microsoft.Xna.Framework.Graphics.BlendState,Microsoft.Xna.Framework.Graphics.SamplerState,Microsoft.Xna.Framework.Graphics.DepthStencilState,Microsoft.Xna.Framework.Graphics.RasterizerState,Microsoft.Xna.Framework.Graphics.Effect,System.Nullable{Microsoft.Xna.Framework.Matrix})">BeginBatch(SpriteBatch, SpriteSortMode, BlendState, SamplerState, DepthStencilState, RasterizerState, Effect, Nullable&lt;Matrix&gt;)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void BeginBatch(SpriteBatch batch, SpriteSortMode spriteSortMode, BlendState blendState, SamplerState samplerState, DepthStencilState depthStencilState, RasterizerState rasterizerState, Effect effect, Matrix? transformMatrix)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteBatch</span></td>
+        <td><span class="parametername">batch</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteSortMode</span></td>
+        <td><span class="parametername">spriteSortMode</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.BlendState</span></td>
+        <td><span class="parametername">blendState</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SamplerState</span></td>
+        <td><span class="parametername">samplerState</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.DepthStencilState</span></td>
+        <td><span class="parametername">depthStencilState</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.RasterizerState</span></td>
+        <td><span class="parametername">rasterizerState</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Effect</span></td>
+        <td><span class="parametername">effect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Matrix</span>&gt;</td>
+        <td><span class="parametername">transformMatrix</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_CleanUp.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.CleanUp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L112">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_CleanUp_" data-uid="PaperMarioBattleSystem.SpriteRenderer.CleanUp*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_CleanUp" data-uid="PaperMarioBattleSystem.SpriteRenderer.CleanUp">CleanUp()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CleanUp()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_ConcludeDrawing.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.ConcludeDrawing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L205">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_ConcludeDrawing_" data-uid="PaperMarioBattleSystem.SpriteRenderer.ConcludeDrawing*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_ConcludeDrawing" data-uid="PaperMarioBattleSystem.SpriteRenderer.ConcludeDrawing">ConcludeDrawing()</h4>
+  <div class="markdown level1 summary"><p>Ends drawing for the frame, rendering the contents of the main RenderTarget to the screen.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ConcludeDrawing()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Rectangle_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Rectangle%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L382">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_Draw_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Rectangle_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Rectangle,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Boolean,System.Boolean,System.Single,System.Boolean)">Draw(Texture2D, Rectangle, Nullable&lt;Rectangle&gt;, Color, Single, Vector2, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(Texture2D texture, Rectangle destinationRect, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Rectangle</span></td>
+        <td><span class="parametername">destinationRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Color%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L357">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_Draw_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Boolean,System.Boolean,System.Single,System.Boolean)">Draw(Texture2D, Vector2, Color, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(Texture2D texture, Vector2 position, Color color, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L367">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_Draw_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Vector2,System.Boolean,System.Boolean,System.Single,System.Boolean)">Draw(Texture2D, Vector2, Nullable&lt;Rectangle&gt;, Color, Vector2, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, Vector2 origin, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L362">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_Draw_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Boolean,System.Boolean,System.Single,System.Boolean)">Draw(Texture2D, Vector2, Nullable&lt;Rectangle&gt;, Color, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L377">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_Draw_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Boolean,System.Boolean,System.Single,System.Boolean)">Draw(Texture2D, Vector2, Nullable&lt;Rectangle&gt;, Color, Single, Vector2, Vector2, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Single%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L372">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_Draw_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_Draw_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Draw(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,System.Boolean,System.Boolean,System.Single,System.Boolean)">Draw(Texture2D, Vector2, Nullable&lt;Rectangle&gt;, Color, Single, Vector2, Single, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, float scale, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawBatch_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Rectangle_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch%2CMicrosoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Rectangle%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L331">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawBatch_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawBatch*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawBatch_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Rectangle_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Rectangle,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Boolean,System.Boolean,System.Single,System.Boolean)">DrawBatch(SpriteBatch, Texture2D, Rectangle, Nullable&lt;Rectangle&gt;, Color, Single, Vector2, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawBatch(SpriteBatch batch, Texture2D texture, Rectangle destinationRect, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteBatch</span></td>
+        <td><span class="parametername">batch</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Rectangle</span></td>
+        <td><span class="parametername">destinationRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawBatch_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch%2CMicrosoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L317">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawBatch_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawBatch*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawBatch_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Boolean,System.Boolean,System.Single,System.Boolean)">DrawBatch(SpriteBatch, Texture2D, Vector2, Nullable&lt;Rectangle&gt;, Color, Single, Vector2, Vector2, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawBatch(SpriteBatch batch, Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteBatch</span></td>
+        <td><span class="parametername">batch</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawBatchText_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawBatchText(Microsoft.Xna.Framework.Graphics.SpriteBatch%2CMicrosoft.Xna.Framework.Graphics.SpriteFont%2CSystem.String%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Single%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L342">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawBatchText_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawBatchText*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawBatchText_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawBatchText(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,System.Single)">DrawBatchText(SpriteBatch, SpriteFont, String, Vector2, Color, Single, Vector2, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawBatchText(SpriteBatch batch, SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteBatch</span></td>
+        <td><span class="parametername">batch</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">spriteFont</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawBatchText_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_SpriteFont_System_Text_StringBuilder_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawBatchText(Microsoft.Xna.Framework.Graphics.SpriteBatch%2CMicrosoft.Xna.Framework.Graphics.SpriteFont%2CSystem.Text.StringBuilder%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Single%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L348">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawBatchText_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawBatchText*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawBatchText_Microsoft_Xna_Framework_Graphics_SpriteBatch_Microsoft_Xna_Framework_Graphics_SpriteFont_System_Text_StringBuilder_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawBatchText(Microsoft.Xna.Framework.Graphics.SpriteBatch,Microsoft.Xna.Framework.Graphics.SpriteFont,System.Text.StringBuilder,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,System.Single)">DrawBatchText(SpriteBatch, SpriteFont, StringBuilder, Vector2, Color, Single, Vector2, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawBatchText(SpriteBatch batch, SpriteFont spriteFont, StringBuilder stringBuilder, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteBatch</span></td>
+        <td><span class="parametername">batch</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">spriteFont</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Text.StringBuilder</span></td>
+        <td><span class="parametername">stringBuilder</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawText(Microsoft.Xna.Framework.Graphics.SpriteFont%2CSystem.String%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Color%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L425">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawText_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawText*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawText(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single)">DrawText(SpriteFont, String, Vector2, Color, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">spriteFont</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawText(Microsoft.Xna.Framework.Graphics.SpriteFont%2CSystem.String%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Single%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L430">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawText_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawText*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawText(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,System.Single)">DrawText(SpriteFont, String, Vector2, Color, Single, Vector2, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawText(SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">spriteFont</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_Text_StringBuilder_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawText(Microsoft.Xna.Framework.Graphics.SpriteFont%2CSystem.Text.StringBuilder%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Single%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L435">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawText_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawText*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_Text_StringBuilder_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawText(Microsoft.Xna.Framework.Graphics.SpriteFont,System.Text.StringBuilder,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,System.Single)">DrawText(SpriteFont, StringBuilder, Vector2, Color, Single, Vector2, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawText(SpriteFont spriteFont, StringBuilder stringBuilder, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">spriteFont</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Text.StringBuilder</span></td>
+        <td><span class="parametername">stringBuilder</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Rectangle_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Rectangle%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L416">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Rectangle_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Rectangle,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Boolean,System.Boolean,System.Single,System.Boolean)">DrawUI(Texture2D, Rectangle, Nullable&lt;Rectangle&gt;, Color, Single, Vector2, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawUI(Texture2D texture, Rectangle destinationRect, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Rectangle</span></td>
+        <td><span class="parametername">destinationRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Color%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L391">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Boolean,System.Boolean,System.Single,System.Boolean)">DrawUI(Texture2D, Vector2, Color, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawUI(Texture2D texture, Vector2 position, Color color, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L401">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,Microsoft.Xna.Framework.Vector2,System.Boolean,System.Boolean,System.Single,System.Boolean)">DrawUI(Texture2D, Vector2, Nullable&lt;Rectangle&gt;, Color, Vector2, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawUI(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, Vector2 origin, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L396">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Boolean,System.Boolean,System.Single,System.Boolean)">DrawUI(Texture2D, Vector2, Nullable&lt;Rectangle&gt;, Color, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawUI(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L411">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Boolean,System.Boolean,System.Single,System.Boolean)">DrawUI(Texture2D, Vector2, Nullable&lt;Rectangle&gt;, Color, Single, Vector2, Vector2, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawUI(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Boolean_System_Boolean_System_Single_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Nullable%7BMicrosoft.Xna.Framework.Rectangle%7D%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Single%2CSystem.Boolean%2CSystem.Boolean%2CSystem.Single%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L406">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawUI_Microsoft_Xna_Framework_Graphics_Texture2D_Microsoft_Xna_Framework_Vector2_System_Nullable_Microsoft_Xna_Framework_Rectangle__Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Boolean_System_Boolean_System_Single_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUI(Microsoft.Xna.Framework.Graphics.Texture2D,Microsoft.Xna.Framework.Vector2,System.Nullable{Microsoft.Xna.Framework.Rectangle},Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,System.Boolean,System.Boolean,System.Single,System.Boolean)">DrawUI(Texture2D, Vector2, Nullable&lt;Rectangle&gt;, Color, Single, Vector2, Single, Boolean, Boolean, Single, Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawUI(Texture2D texture, Vector2 position, Rectangle? sourceRect, Color color, float rotation, Vector2 origin, float scale, bool flipX, bool flipY, float layer, bool absOrigin = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">texture</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Nullable</span>&lt;<span class="xref">Microsoft.Xna.Framework.Rectangle</span>&gt;</td>
+        <td><span class="parametername">sourceRect</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipX</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipY</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">absOrigin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawUIText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawUIText(Microsoft.Xna.Framework.Graphics.SpriteFont%2CSystem.String%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Color%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L440">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawUIText_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUIText*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawUIText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUIText(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single)">DrawUIText(SpriteFont, String, Vector2, Color, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawUIText(SpriteFont spriteFont, string text, Vector2 position, Color color, float layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">spriteFont</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawUIText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawUIText(Microsoft.Xna.Framework.Graphics.SpriteFont%2CSystem.String%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Single%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L445">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawUIText_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUIText*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawUIText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_String_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUIText(Microsoft.Xna.Framework.Graphics.SpriteFont,System.String,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,System.Single)">DrawUIText(SpriteFont, String, Vector2, Color, Single, Vector2, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawUIText(SpriteFont spriteFont, string text, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">spriteFont</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">text</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_DrawUIText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_Text_StringBuilder_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.DrawUIText(Microsoft.Xna.Framework.Graphics.SpriteFont%2CSystem.Text.StringBuilder%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Single%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L450">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_DrawUIText_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUIText*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_DrawUIText_Microsoft_Xna_Framework_Graphics_SpriteFont_System_Text_StringBuilder_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_System_Single_System_Single_" data-uid="PaperMarioBattleSystem.SpriteRenderer.DrawUIText(Microsoft.Xna.Framework.Graphics.SpriteFont,System.Text.StringBuilder,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,System.Single,System.Single)">DrawUIText(SpriteFont, StringBuilder, Vector2, Color, Single, Vector2, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void DrawUIText(SpriteFont spriteFont, StringBuilder stringBuilder, Vector2 position, Color color, float rotation, Vector2 origin, float scale, float layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteFont</span></td>
+        <td><span class="parametername">spriteFont</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Text.StringBuilder</span></td>
+        <td><span class="parametername">stringBuilder</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_EndBatch_Microsoft_Xna_Framework_Graphics_SpriteBatch_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.EndBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L310">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_EndBatch_" data-uid="PaperMarioBattleSystem.SpriteRenderer.EndBatch*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_EndBatch_Microsoft_Xna_Framework_Graphics_SpriteBatch_" data-uid="PaperMarioBattleSystem.SpriteRenderer.EndBatch(Microsoft.Xna.Framework.Graphics.SpriteBatch)">EndBatch(SpriteBatch)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void EndBatch(SpriteBatch batch)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.SpriteBatch</span></td>
+        <td><span class="parametername">batch</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_Initialize_Microsoft_Xna_Framework_GraphicsDeviceManager_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.Initialize(Microsoft.Xna.Framework.GraphicsDeviceManager)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L133">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_Initialize_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Initialize*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_Initialize_Microsoft_Xna_Framework_GraphicsDeviceManager_" data-uid="PaperMarioBattleSystem.SpriteRenderer.Initialize(Microsoft.Xna.Framework.GraphicsDeviceManager)">Initialize(GraphicsDeviceManager)</h4>
+  <div class="markdown level1 summary"><p>Initializes the SpriteRenderer</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Initialize(GraphicsDeviceManager graphics)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.GraphicsDeviceManager</span></td>
+        <td><span class="parametername">graphics</span></td>
+        <td><p>The GraphicsDeviceManager used for rendering</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_RemoveAllPostProcessingEffects.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.RemoveAllPostProcessingEffects%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L294">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_RemoveAllPostProcessingEffects_" data-uid="PaperMarioBattleSystem.SpriteRenderer.RemoveAllPostProcessingEffects*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_RemoveAllPostProcessingEffects" data-uid="PaperMarioBattleSystem.SpriteRenderer.RemoveAllPostProcessingEffects">RemoveAllPostProcessingEffects()</h4>
+  <div class="markdown level1 summary"><p>Removes all post-processing effects.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveAllPostProcessingEffects()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_RemovePostProcessingEffect_Microsoft_Xna_Framework_Graphics_Effect_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.RemovePostProcessingEffect(Microsoft.Xna.Framework.Graphics.Effect)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L277">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_RemovePostProcessingEffect_" data-uid="PaperMarioBattleSystem.SpriteRenderer.RemovePostProcessingEffect*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_RemovePostProcessingEffect_Microsoft_Xna_Framework_Graphics_Effect_" data-uid="PaperMarioBattleSystem.SpriteRenderer.RemovePostProcessingEffect(Microsoft.Xna.Framework.Graphics.Effect)">RemovePostProcessingEffect(Effect)</h4>
+  <div class="markdown level1 summary"><p>Removes a post-processing effect.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemovePostProcessingEffect(Effect effectToRemove)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Effect</span></td>
+        <td><span class="parametername">effectToRemove</span></td>
+        <td><p>The post-processing effect to remove.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_RemovePostProcessingEffect_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.RemovePostProcessingEffect(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L286">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_RemovePostProcessingEffect_" data-uid="PaperMarioBattleSystem.SpriteRenderer.RemovePostProcessingEffect*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_RemovePostProcessingEffect_System_Int32_" data-uid="PaperMarioBattleSystem.SpriteRenderer.RemovePostProcessingEffect(System.Int32)">RemovePostProcessingEffect(Int32)</h4>
+  <div class="markdown level1 summary"><p>Removes a post-processing effect at a particular index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemovePostProcessingEffect(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index to remove the post-processing effect at.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_SetFullscreen_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.SetFullscreen(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L173">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_SetFullscreen_" data-uid="PaperMarioBattleSystem.SpriteRenderer.SetFullscreen*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_SetFullscreen_System_Boolean_" data-uid="PaperMarioBattleSystem.SpriteRenderer.SetFullscreen(System.Boolean)">SetFullscreen(Boolean)</h4>
+  <div class="markdown level1 summary"><p>Sets the game to be windowed or full screen.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetFullscreen(bool fullScreen)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">fullScreen</span></td>
+        <td><p>Whether to set full screen or not.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_SetupDrawing.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.SetupDrawing%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L182">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_SpriteRenderer_SetupDrawing_" data-uid="PaperMarioBattleSystem.SpriteRenderer.SetupDrawing*"></a>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_SetupDrawing" data-uid="PaperMarioBattleSystem.SpriteRenderer.SetupDrawing">SetupDrawing()</h4>
+  <div class="markdown level1 summary"><p>Sets up initial drawing to the main RenderTarget.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetupDrawing()</code></pre>
+  </div>
+  <h3 id="events">Events
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_ConcludedDrawingEvent.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.ConcludedDrawingEvent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L49">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_ConcludedDrawingEvent" data-uid="PaperMarioBattleSystem.SpriteRenderer.ConcludedDrawingEvent">ConcludedDrawingEvent</h4>
+  <div class="markdown level1 summary"><p>An event invoked when drawing has concluded for the frame and the final RenderTarget is ready.
+<p>This is invoked right after obtaining the final RenderTarget but right before it is drawn to the backbuffer.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SpriteRenderer.ConcludedDrawing ConcludedDrawingEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.SpriteRenderer.ConcludedDrawing.html">SpriteRenderer.ConcludedDrawing</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_FullyConcludedDrawingEvent.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.FullyConcludedDrawingEvent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L56">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_FullyConcludedDrawingEvent" data-uid="PaperMarioBattleSystem.SpriteRenderer.FullyConcludedDrawingEvent">FullyConcludedDrawingEvent</h4>
+  <div class="markdown level1 summary"><p>An event invoked when drawing has fully concluded for the frame and the final RenderTarget has been drawn to the backbuffer.
+<p>Anything that needs to draw at this point must draw to the backbuffer.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SpriteRenderer.FullyConcludedDrawing FullyConcludedDrawingEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.SpriteRenderer.FullyConcludedDrawing.html">SpriteRenderer.FullyConcludedDrawing</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer_WindowSizeChangedEvent.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer.WindowSizeChangedEvent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L42">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_SpriteRenderer_WindowSizeChangedEvent" data-uid="PaperMarioBattleSystem.SpriteRenderer.WindowSizeChangedEvent">WindowSizeChangedEvent</h4>
+  <div class="markdown level1 summary"><p>An event invoked when the window size has changed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event SpriteRenderer.OnWindowSizeChanged WindowSizeChangedEvent</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.SpriteRenderer.OnWindowSizeChanged.html">SpriteRenderer.OnWindowSizeChanged</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_DrawSliced_PaperMarioBattleSystem_SpriteRenderer_PaperMarioBattleSystem_SlicedTexture2D_Microsoft_Xna_Framework_Rectangle_Microsoft_Xna_Framework_Color_System_Single_">Extensions.DrawSliced(SpriteRenderer, SlicedTexture2D, Rectangle, Color, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.Extensions.Extensions.html#PaperMarioBattleSystem_Extensions_Extensions_DrawUISliced_PaperMarioBattleSystem_SpriteRenderer_PaperMarioBattleSystem_SlicedTexture2D_Microsoft_Xna_Framework_Rectangle_Microsoft_Xna_Framework_Color_System_Single_">Extensions.DrawUISliced(SpriteRenderer, SlicedTexture2D, Rectangle, Color, Single)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_SpriteRenderer.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.SpriteRenderer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/SpriteRenderer.cs/#L17" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

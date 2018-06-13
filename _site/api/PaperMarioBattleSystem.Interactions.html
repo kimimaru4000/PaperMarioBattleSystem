@@ -1,0 +1,677 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Interactions
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Interactions
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.Interactions">
+  
+  
+  <h1 id="PaperMarioBattleSystem_Interactions" data-uid="PaperMarioBattleSystem.Interactions" class="text-break">Class Interactions
+  </h1>
+  <div class="markdown level0 summary"><p>Defines all types of interactions that exist among BattleEntities and provides methods for handling them.
+This includes the damage formula.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Interactions</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_Interactions_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static class Interactions</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_DamageCalculationStepCount.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.DamageCalculationStepCount%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L55">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_DamageCalculationStepCount_" data-uid="PaperMarioBattleSystem.Interactions.DamageCalculationStepCount*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_DamageCalculationStepCount" data-uid="PaperMarioBattleSystem.Interactions.DamageCalculationStepCount">DamageCalculationStepCount</h4>
+  <div class="markdown level1 summary"><p>The number of steps in the Damage Calculation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int DamageCalculationStepCount { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_AddDamageStep_PaperMarioBattleSystem_Interactions_DamageCalcStep_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.AddDamageStep(PaperMarioBattleSystem.Interactions.DamageCalcStep%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L162">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_AddDamageStep_" data-uid="PaperMarioBattleSystem.Interactions.AddDamageStep*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_AddDamageStep_PaperMarioBattleSystem_Interactions_DamageCalcStep_System_Int32_" data-uid="PaperMarioBattleSystem.Interactions.AddDamageStep(PaperMarioBattleSystem.Interactions.DamageCalcStep,System.Int32)">AddDamageStep(Interactions.DamageCalcStep, Int32)</h4>
+  <div class="markdown level1 summary"><p>Adds a damage step to the damage formula.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void AddDamageStep(Interactions.DamageCalcStep damageStep, int index = -1)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Interactions.DamageCalcStep.html">Interactions.DamageCalcStep</a></td>
+        <td><span class="parametername">damageStep</span></td>
+        <td><p>The DamageCalcStep to add.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index to insert the damage step at. If less than 0, it will be added to the end of the list.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_AttemptDamageEntities_PaperMarioBattleSystem_BattleEntity_System_Collections_Generic_IList_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_DamageData_PaperMarioBattleSystem_Interactions_VictimMissInteraction_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.AttemptDamageEntities(PaperMarioBattleSystem.BattleEntity%2CSystem.Collections.Generic.IList%7BPaperMarioBattleSystem.BattleEntity%7D%2CPaperMarioBattleSystem.DamageData%2CPaperMarioBattleSystem.Interactions.VictimMissInteraction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L296">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_AttemptDamageEntities_" data-uid="PaperMarioBattleSystem.Interactions.AttemptDamageEntities*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_AttemptDamageEntities_PaperMarioBattleSystem_BattleEntity_System_Collections_Generic_IList_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_DamageData_PaperMarioBattleSystem_Interactions_VictimMissInteraction_" data-uid="PaperMarioBattleSystem.Interactions.AttemptDamageEntities(PaperMarioBattleSystem.BattleEntity,System.Collections.Generic.IList{PaperMarioBattleSystem.BattleEntity},PaperMarioBattleSystem.DamageData,PaperMarioBattleSystem.Interactions.VictimMissInteraction)">AttemptDamageEntities(BattleEntity, IList&lt;BattleEntity&gt;, DamageData, Interactions.VictimMissInteraction)</h4>
+  <div class="markdown level1 summary"><p>Have an attacker attempt to deal damage to a set of victims.
+<p>Based on the ContactType of this BattleAction, this can fail, resulting in an interruption.
+In the event of an interruption, no further entities are tested.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static InteractionResult[] AttemptDamageEntities(BattleEntity attacker, IList&lt;BattleEntity&gt; victims, DamageData damageInfo, Interactions.VictimMissInteraction onVictimMiss)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
+        <td><span class="parametername">attacker</span></td>
+        <td><p>The BattleEntity dealing the damage.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a>&gt;</td>
+        <td><span class="parametername">victims</span></td>
+        <td><p>The BattleEntities to attempt to inflict damage on.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.DamageData.html">DamageData</a></td>
+        <td><span class="parametername">damageInfo</span></td>
+        <td><p>The damage information to use.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Interactions.VictimMissInteraction.html">Interactions.VictimMissInteraction</a></td>
+        <td><span class="parametername">onVictimMiss</span></td>
+        <td><p>A delegate invoked when the attacker misses a victim.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.InteractionResult.html">InteractionResult</a>[]</td>
+        <td><p>An array of InteractionResults containing all the interactions.
+Some entries of the array will have null values if the attacker misses or is interrupted.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_GetContactResult_System_Collections_Generic_IList_PaperMarioBattleSystem_Enumerations_PhysicalAttributes__PaperMarioBattleSystem_Enumerations_ContactTypes_PaperMarioBattleSystem_Enumerations_ContactProperties_System_Collections_Generic_IList_PaperMarioBattleSystem_StatusGlobals_PaybackHolder__PaperMarioBattleSystem_Enumerations_PhysicalAttributes___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.GetContactResult(System.Collections.Generic.IList%7BPaperMarioBattleSystem.Enumerations.PhysicalAttributes%7D%2CPaperMarioBattleSystem.Enumerations.ContactTypes%2CPaperMarioBattleSystem.Enumerations.ContactProperties%2CSystem.Collections.Generic.IList%7BPaperMarioBattleSystem.StatusGlobals.PaybackHolder%7D%2CPaperMarioBattleSystem.Enumerations.PhysicalAttributes%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L75">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_GetContactResult_" data-uid="PaperMarioBattleSystem.Interactions.GetContactResult*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_GetContactResult_System_Collections_Generic_IList_PaperMarioBattleSystem_Enumerations_PhysicalAttributes__PaperMarioBattleSystem_Enumerations_ContactTypes_PaperMarioBattleSystem_Enumerations_ContactProperties_System_Collections_Generic_IList_PaperMarioBattleSystem_StatusGlobals_PaybackHolder__PaperMarioBattleSystem_Enumerations_PhysicalAttributes___" data-uid="PaperMarioBattleSystem.Interactions.GetContactResult(System.Collections.Generic.IList{PaperMarioBattleSystem.Enumerations.PhysicalAttributes},PaperMarioBattleSystem.Enumerations.ContactTypes,PaperMarioBattleSystem.Enumerations.ContactProperties,System.Collections.Generic.IList{PaperMarioBattleSystem.StatusGlobals.PaybackHolder},PaperMarioBattleSystem.Enumerations.PhysicalAttributes[])">GetContactResult(IList&lt;Enumerations.PhysicalAttributes&gt;, Enumerations.ContactTypes, Enumerations.ContactProperties, IList&lt;StatusGlobals.PaybackHolder&gt;, Enumerations.PhysicalAttributes[])</h4>
+  <div class="markdown level1 summary"><p>Gets the result of a ContactType on a set of PhysicalAttributes</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static ContactResultInfo GetContactResult(IList&lt;Enumerations.PhysicalAttributes&gt; attackerPhysAttributes, Enumerations.ContactTypes contactType, Enumerations.ContactProperties contactProperty, IList&lt;StatusGlobals.PaybackHolder&gt; victimPaybacks, params Enumerations.PhysicalAttributes[] attackerContactExceptions)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="PaperMarioBattleSystem.Enumerations.PhysicalAttributes.html">Enumerations.PhysicalAttributes</a>&gt;</td>
+        <td><span class="parametername">attackerPhysAttributes</span></td>
+        <td><p>The attacker&apos;s set of PhysicalAttributes.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.ContactTypes.html">Enumerations.ContactTypes</a></td>
+        <td><span class="parametername">contactType</span></td>
+        <td><p>The ContactType performed.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.ContactProperties.html">Enumerations.ContactProperties</a></td>
+        <td><span class="parametername">contactProperty</span></td>
+        <td><p>The ContactProperty of the contact.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.IList</span>&lt;<a class="xref" href="PaperMarioBattleSystem.StatusGlobals.PaybackHolder.html">StatusGlobals.PaybackHolder</a>&gt;</td>
+        <td><span class="parametername">victimPaybacks</span></td>
+        <td><p>The victim&apos;s set of Paybacks to test against.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.PhysicalAttributes.html">Enumerations.PhysicalAttributes</a>[]</td>
+        <td><span class="parametername">attackerContactExceptions</span></td>
+        <td><p>The attacker&apos;s contact exceptions; the set PhysicalAttributes to ignore.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.ContactResultInfo.html">ContactResultInfo</a></td>
+        <td><p>A ContactResultInfo of the interaction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_GetDamageFormula.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.GetDamageFormula%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L206">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_GetDamageFormula_" data-uid="PaperMarioBattleSystem.Interactions.GetDamageFormula*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_GetDamageFormula" data-uid="PaperMarioBattleSystem.Interactions.GetDamageFormula">GetDamageFormula()</h4>
+  <div class="markdown level1 summary"><p>Returns a new list containing the current damage formula.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;Interactions.DamageCalcStep&gt; GetDamageFormula()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PaperMarioBattleSystem.Interactions.DamageCalcStep.html">Interactions.DamageCalcStep</a>&gt;</td>
+        <td><p>A new <span class="xref">System.Collections.Generic.List&lt;T&gt;</span> containing the current damage formula.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_GetDamageFormula_System_Collections_Generic_List_PaperMarioBattleSystem_Interactions_DamageCalcStep__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.GetDamageFormula(System.Collections.Generic.List%7BPaperMarioBattleSystem.Interactions.DamageCalcStep%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L197">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_GetDamageFormula_" data-uid="PaperMarioBattleSystem.Interactions.GetDamageFormula*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_GetDamageFormula_System_Collections_Generic_List_PaperMarioBattleSystem_Interactions_DamageCalcStep__" data-uid="PaperMarioBattleSystem.Interactions.GetDamageFormula(System.Collections.Generic.List{PaperMarioBattleSystem.Interactions.DamageCalcStep})">GetDamageFormula(List&lt;Interactions.DamageCalcStep&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds the current damage formula to a supplied list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void GetDamageFormula(List&lt;Interactions.DamageCalcStep&gt; damageCalcSteps)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PaperMarioBattleSystem.Interactions.DamageCalcStep.html">Interactions.DamageCalcStep</a>&gt;</td>
+        <td><span class="parametername">damageCalcSteps</span></td>
+        <td><p>The list to add the current damage formula to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_GetDamageInteraction_PaperMarioBattleSystem_InteractionParamHolder__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.GetDamageInteraction(PaperMarioBattleSystem.InteractionParamHolder%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L440">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_GetDamageInteraction_" data-uid="PaperMarioBattleSystem.Interactions.GetDamageInteraction*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_GetDamageInteraction_PaperMarioBattleSystem_InteractionParamHolder__" data-uid="PaperMarioBattleSystem.Interactions.GetDamageInteraction(PaperMarioBattleSystem.InteractionParamHolder@)">GetDamageInteraction(InteractionParamHolder)</h4>
+  <div class="markdown level1 summary"><p>Calculates and returns the entire damage interaction between two BattleEntities.
+<p>This returns all the necessary information for both BattleEntities, including the total amount of damage dealt,
+the type of Elemental damage to deal, the Status Effects to inflict, and whether the attack successfully hit or not.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static InteractionResult GetDamageInteraction(in InteractionParamHolder interactionParam)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.InteractionParamHolder.html">InteractionParamHolder</a></td>
+        <td><span class="parametername">interactionParam</span></td>
+        <td><p>An InteractionParamHolder containing the BattleEntities interacting and data about their interaction.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.InteractionResult.html">InteractionResult</a></td>
+        <td><p>An InteractionResult containing InteractionHolders for both the victim and the attacker.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_GetDefaultDamageFormula.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.GetDefaultDamageFormula%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L272">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_GetDefaultDamageFormula_" data-uid="PaperMarioBattleSystem.Interactions.GetDefaultDamageFormula*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_GetDefaultDamageFormula" data-uid="PaperMarioBattleSystem.Interactions.GetDefaultDamageFormula">GetDefaultDamageFormula()</h4>
+  <div class="markdown level1 summary"><p>Returns a new list containing the default damage formula.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static List&lt;Interactions.DamageCalcStep&gt; GetDefaultDamageFormula()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PaperMarioBattleSystem.Interactions.DamageCalcStep.html">Interactions.DamageCalcStep</a>&gt;</td>
+        <td><p>A new <span class="xref">System.Collections.Generic.List&lt;T&gt;</span> containing the default damage formula.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_GetDefaultDamageFormula_System_Collections_Generic_List_PaperMarioBattleSystem_Interactions_DamageCalcStep__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.GetDefaultDamageFormula(System.Collections.Generic.List%7BPaperMarioBattleSystem.Interactions.DamageCalcStep%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L242">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_GetDefaultDamageFormula_" data-uid="PaperMarioBattleSystem.Interactions.GetDefaultDamageFormula*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_GetDefaultDamageFormula_System_Collections_Generic_List_PaperMarioBattleSystem_Interactions_DamageCalcStep__" data-uid="PaperMarioBattleSystem.Interactions.GetDefaultDamageFormula(System.Collections.Generic.List{PaperMarioBattleSystem.Interactions.DamageCalcStep})">GetDefaultDamageFormula(List&lt;Interactions.DamageCalcStep&gt;)</h4>
+  <div class="markdown level1 summary"><p>Adds the default damage formula to a supplied list.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void GetDefaultDamageFormula(List&lt;Interactions.DamageCalcStep&gt; damageCalcSteps)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PaperMarioBattleSystem.Interactions.DamageCalcStep.html">Interactions.DamageCalcStep</a>&gt;</td>
+        <td><span class="parametername">damageCalcSteps</span></td>
+        <td><p>The list to add the default damage formula to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_RemoveDamageStep_PaperMarioBattleSystem_Interactions_DamageCalcStep_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.RemoveDamageStep(PaperMarioBattleSystem.Interactions.DamageCalcStep)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L179">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_RemoveDamageStep_" data-uid="PaperMarioBattleSystem.Interactions.RemoveDamageStep*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_RemoveDamageStep_PaperMarioBattleSystem_Interactions_DamageCalcStep_" data-uid="PaperMarioBattleSystem.Interactions.RemoveDamageStep(PaperMarioBattleSystem.Interactions.DamageCalcStep)">RemoveDamageStep(Interactions.DamageCalcStep)</h4>
+  <div class="markdown level1 summary"><p>Removes a damage step from the damage formula.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool RemoveDamageStep(Interactions.DamageCalcStep damageStep)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Interactions.DamageCalcStep.html">Interactions.DamageCalcStep</a></td>
+        <td><span class="parametername">damageStep</span></td>
+        <td><p>The DamageCalcStep to remove.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true if the damage step was removed, otherwise false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_RemoveDamageStep_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.RemoveDamageStep(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L188">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_RemoveDamageStep_" data-uid="PaperMarioBattleSystem.Interactions.RemoveDamageStep*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_RemoveDamageStep_System_Int32_" data-uid="PaperMarioBattleSystem.Interactions.RemoveDamageStep(System.Int32)">RemoveDamageStep(Int32)</h4>
+  <div class="markdown level1 summary"><p>Removes a damage step from the damage formula at the specified index.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void RemoveDamageStep(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_SetDamageFormula_System_Collections_Generic_List_PaperMarioBattleSystem_Interactions_DamageCalcStep__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.SetDamageFormula(System.Collections.Generic.List%7BPaperMarioBattleSystem.Interactions.DamageCalcStep%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L151">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Interactions_SetDamageFormula_" data-uid="PaperMarioBattleSystem.Interactions.SetDamageFormula*"></a>
+  <h4 id="PaperMarioBattleSystem_Interactions_SetDamageFormula_System_Collections_Generic_List_PaperMarioBattleSystem_Interactions_DamageCalcStep__" data-uid="PaperMarioBattleSystem.Interactions.SetDamageFormula(System.Collections.Generic.List{PaperMarioBattleSystem.Interactions.DamageCalcStep})">SetDamageFormula(List&lt;Interactions.DamageCalcStep&gt;)</h4>
+  <div class="markdown level1 summary"><p>Sets the damage formula.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetDamageFormula(List&lt;Interactions.DamageCalcStep&gt; damageCalcSteps)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.Generic.List</span>&lt;<a class="xref" href="PaperMarioBattleSystem.Interactions.DamageCalcStep.html">Interactions.DamageCalcStep</a>&gt;</td>
+        <td><span class="parametername">damageCalcSteps</span></td>
+        <td><p>The DamageCalcSteps involved in the damage formula.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L18" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

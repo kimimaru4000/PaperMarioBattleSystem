@@ -1,0 +1,1339 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Animation
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Animation
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.Animation">
+  
+  
+  <h1 id="PaperMarioBattleSystem_Animation" data-uid="PaperMarioBattleSystem.Animation" class="text-break">Class Animation
+  </h1>
+  <div class="markdown level0 summary"><p>The base class for sprite animation.
+It plays an animation forwards once, stopping on the last frame.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><span class="xref">Animation</span></div>
+      <div class="level2"><a class="xref" href="PaperMarioBattleSystem.LoopAnimation.html">LoopAnimation</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.IAnimation.html">IAnimation</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_Animation_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Animation : IAnimation, IUpdateable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation__ctor_Microsoft_Xna_Framework_Graphics_Texture2D_PaperMarioBattleSystem_Animation_Frame___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.%23ctor(Microsoft.Xna.Framework.Graphics.Texture2D%2CPaperMarioBattleSystem.Animation.Frame%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L110">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation__ctor_" data-uid="PaperMarioBattleSystem.Animation.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation__ctor_Microsoft_Xna_Framework_Graphics_Texture2D_PaperMarioBattleSystem_Animation_Frame___" data-uid="PaperMarioBattleSystem.Animation.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,PaperMarioBattleSystem.Animation.Frame[])">Animation(Texture2D, Animation.Frame[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Animation(Texture2D spriteSheet, params Animation.Frame[] frames)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">spriteSheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Animation.Frame.html">Animation.Frame</a>[]</td>
+        <td><span class="parametername">frames</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation__ctor_Microsoft_Xna_Framework_Graphics_Texture2D_System_Boolean_PaperMarioBattleSystem_Animation_Frame___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.%23ctor(Microsoft.Xna.Framework.Graphics.Texture2D%2CSystem.Boolean%2CPaperMarioBattleSystem.Animation.Frame%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L118">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation__ctor_" data-uid="PaperMarioBattleSystem.Animation.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation__ctor_Microsoft_Xna_Framework_Graphics_Texture2D_System_Boolean_PaperMarioBattleSystem_Animation_Frame___" data-uid="PaperMarioBattleSystem.Animation.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Boolean,PaperMarioBattleSystem.Animation.Frame[])">Animation(Texture2D, Boolean, Animation.Frame[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Animation(Texture2D spriteSheet, bool isUIAnim, params Animation.Frame[] frames)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">spriteSheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isUIAnim</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Animation.Frame.html">Animation.Frame</a>[]</td>
+        <td><span class="parametername">frames</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation__ctor_Microsoft_Xna_Framework_Graphics_Texture2D_System_Single_System_Boolean_PaperMarioBattleSystem_Animation_Frame___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.%23ctor(Microsoft.Xna.Framework.Graphics.Texture2D%2CSystem.Single%2CSystem.Boolean%2CPaperMarioBattleSystem.Animation.Frame%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L123">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation__ctor_" data-uid="PaperMarioBattleSystem.Animation.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation__ctor_Microsoft_Xna_Framework_Graphics_Texture2D_System_Single_System_Boolean_PaperMarioBattleSystem_Animation_Frame___" data-uid="PaperMarioBattleSystem.Animation.#ctor(Microsoft.Xna.Framework.Graphics.Texture2D,System.Single,System.Boolean,PaperMarioBattleSystem.Animation.Frame[])">Animation(Texture2D, Single, Boolean, Animation.Frame[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Animation(Texture2D spriteSheet, float speed, bool isUIAnim, params Animation.Frame[] frames)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td><span class="parametername">spriteSheet</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">speed</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">isUIAnim</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Animation.Frame.html">Animation.Frame</a>[]</td>
+        <td><span class="parametername">frames</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_AnimDone.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.AnimDone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L50">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_Animation_AnimDone" data-uid="PaperMarioBattleSystem.Animation.AnimDone">AnimDone</h4>
+  <div class="markdown level1 summary"><p>Whether the animation is complete or not. This is a separate value to maximize flexibility</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool AnimDone</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_ChildFrames.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.ChildFrames%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L35">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_Animation_ChildFrames" data-uid="PaperMarioBattleSystem.Animation.ChildFrames">ChildFrames</h4>
+  <div class="markdown level1 summary"><p>Additional frames to be rendered at the same time as the normal frames. This cannot exceed the number of 
+frames in the normal frames array.
+<p>This is commonly used for wings.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Animation.Frame[] ChildFrames</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Animation.Frame.html">Animation.Frame</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Frames.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Frames%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L28">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_Animation_Frames" data-uid="PaperMarioBattleSystem.Animation.Frames">Frames</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Animation.Frame[] Frames</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Animation.Frame.html">Animation.Frame</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_IsUIAnim.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.IsUIAnim%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L56">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_Animation_IsUIAnim" data-uid="PaperMarioBattleSystem.Animation.IsUIAnim">IsUIAnim</h4>
+  <div class="markdown level1 summary"><p>Specifies whether the animation should be rendered on the UI layer or not</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsUIAnim</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_MaxFrames.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.MaxFrames%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L40">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_Animation_MaxFrames" data-uid="PaperMarioBattleSystem.Animation.MaxFrames">MaxFrames</h4>
+  <div class="markdown level1 summary"><p>The max number of frames in the animation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int MaxFrames</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_CurChildFrame.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.CurChildFrame%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L105">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_CurChildFrame_" data-uid="PaperMarioBattleSystem.Animation.CurChildFrame*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_CurChildFrame" data-uid="PaperMarioBattleSystem.Animation.CurChildFrame">CurChildFrame</h4>
+  <div class="markdown level1 summary"><p>Returns the current child animation frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Animation.Frame CurChildFrame { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Animation.Frame.html">Animation.Frame</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_CurFrame.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.CurFrame%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L92">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_CurFrame_" data-uid="PaperMarioBattleSystem.Animation.CurFrame*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_CurFrame" data-uid="PaperMarioBattleSystem.Animation.CurFrame">CurFrame</h4>
+  <div class="markdown level1 summary"><p>Returns the current animation frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Animation.Frame CurFrame { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Animation.Frame.html">Animation.Frame</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_CurFrameNum.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.CurFrameNum%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L45">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_CurFrameNum_" data-uid="PaperMarioBattleSystem.Animation.CurFrameNum*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_CurFrameNum" data-uid="PaperMarioBattleSystem.Animation.CurFrameNum">CurFrameNum</h4>
+  <div class="markdown level1 summary"><p>The current frame in the animation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CurFrameNum { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_ElapsedFrameTime.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.ElapsedFrameTime%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L107">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_ElapsedFrameTime_" data-uid="PaperMarioBattleSystem.Animation.ElapsedFrameTime*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_ElapsedFrameTime" data-uid="PaperMarioBattleSystem.Animation.ElapsedFrameTime">ElapsedFrameTime</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected double ElapsedFrameTime { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Finished.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Finished%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L69">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_Finished_" data-uid="PaperMarioBattleSystem.Animation.Finished*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_Finished" data-uid="PaperMarioBattleSystem.Animation.Finished">Finished</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Finished { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_IsPlaying.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.IsPlaying%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L74">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_IsPlaying_" data-uid="PaperMarioBattleSystem.Animation.IsPlaying*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_IsPlaying" data-uid="PaperMarioBattleSystem.Animation.IsPlaying">IsPlaying</h4>
+  <div class="markdown level1 summary"><p>Tells if the Animation is playing.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsPlaying { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Key.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Key%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L21">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_Key_" data-uid="PaperMarioBattleSystem.Animation.Key*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_Key" data-uid="PaperMarioBattleSystem.Animation.Key">Key</h4>
+  <div class="markdown level1 summary"><p>The key for the animation. This is set when it is added to a BattleEntity&apos;s animation dictionary</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string Key { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_MaxFrameIndex.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.MaxFrameIndex%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L79">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_MaxFrameIndex_" data-uid="PaperMarioBattleSystem.Animation.MaxFrameIndex*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_MaxFrameIndex" data-uid="PaperMarioBattleSystem.Animation.MaxFrameIndex">MaxFrameIndex</h4>
+  <div class="markdown level1 summary"><p>The last valid frame index in the animation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int MaxFrameIndex { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Paused.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Paused%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L66">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_Paused_" data-uid="PaperMarioBattleSystem.Animation.Paused*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_Paused" data-uid="PaperMarioBattleSystem.Animation.Paused">Paused</h4>
+  <div class="markdown level1 summary"><p>Whether the animation is paused or not</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Paused { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_PrevFrameTimer.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.PrevFrameTimer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L51">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_PrevFrameTimer_" data-uid="PaperMarioBattleSystem.Animation.PrevFrameTimer*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_PrevFrameTimer" data-uid="PaperMarioBattleSystem.Animation.PrevFrameTimer">PrevFrameTimer</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected double PrevFrameTimer { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Speed.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Speed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L61">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_Speed_" data-uid="PaperMarioBattleSystem.Animation.Speed*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_Speed" data-uid="PaperMarioBattleSystem.Animation.Speed">Speed</h4>
+  <div class="markdown level1 summary"><p>The speed the animation plays back at</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Speed { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_SpriteSheet.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.SpriteSheet%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L26">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_SpriteSheet_" data-uid="PaperMarioBattleSystem.Animation.SpriteSheet*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_SpriteSheet" data-uid="PaperMarioBattleSystem.Animation.SpriteSheet">SpriteSheet</h4>
+  <div class="markdown level1 summary"><p>The sprite sheet containing the sprites to be used in the animation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Texture2D SpriteSheet { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Graphics.Texture2D</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_TrueCurFrameDuration.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.TrueCurFrameDuration%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L108">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_TrueCurFrameDuration_" data-uid="PaperMarioBattleSystem.Animation.TrueCurFrameDuration*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_TrueCurFrameDuration" data-uid="PaperMarioBattleSystem.Animation.TrueCurFrameDuration">TrueCurFrameDuration</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected double TrueCurFrameDuration { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_DerivedReset.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.DerivedReset%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L208">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_DerivedReset_" data-uid="PaperMarioBattleSystem.Animation.DerivedReset*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_DerivedReset" data-uid="PaperMarioBattleSystem.Animation.DerivedReset">DerivedReset()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void DerivedReset()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Draw_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Draw(Microsoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Color%2CSystem.Single%2CMicrosoft.Xna.Framework.Vector2%2CMicrosoft.Xna.Framework.Vector2%2CSystem.Boolean%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L260">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_Draw_" data-uid="PaperMarioBattleSystem.Animation.Draw*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_Draw_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Color_System_Single_Microsoft_Xna_Framework_Vector2_Microsoft_Xna_Framework_Vector2_System_Boolean_System_Single_" data-uid="PaperMarioBattleSystem.Animation.Draw(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Color,System.Single,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Boolean,System.Single)">Draw(Vector2, Color, Single, Vector2, Vector2, Boolean, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Draw(Vector2 position, Color color, float rotation, Vector2 origin, Vector2 scale, bool flipped, float layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">position</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Color</span></td>
+        <td><span class="parametername">color</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">rotation</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Vector2</span></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><span class="parametername">flipped</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">layer</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_End.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.End%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L216">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_End_" data-uid="PaperMarioBattleSystem.Animation.End*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_End" data-uid="PaperMarioBattleSystem.Animation.End">End()</h4>
+  <div class="markdown level1 summary"><p>Ends the animation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void End()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_FrameComplete.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.FrameComplete%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L141">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_FrameComplete_" data-uid="PaperMarioBattleSystem.Animation.FrameComplete*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_FrameComplete" data-uid="PaperMarioBattleSystem.Animation.FrameComplete">FrameComplete()</h4>
+  <div class="markdown level1 summary"><p>Tells if the current frame is complete</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool FrameComplete()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p>true if the time passed is greater than the current frame&apos;s duration, otherwise false</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_GetChildFrame_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.GetChildFrame(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L100">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_GetChildFrame_" data-uid="PaperMarioBattleSystem.Animation.GetChildFrame*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_GetChildFrame_System_Int32_" data-uid="PaperMarioBattleSystem.Animation.GetChildFrame(System.Int32)">GetChildFrame(Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns the child animation frame at a particular index.
+If the child frame doesn&apos;t exist at the index, an exception is thrown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Animation.Frame GetChildFrame(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index to retrive the child animation frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Animation.Frame.html">Animation.Frame</a></td>
+        <td><p>The child animation frame at the specified index.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_GetFrame_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.GetFrame(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L87">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_GetFrame_" data-uid="PaperMarioBattleSystem.Animation.GetFrame*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_GetFrame_System_Int32_" data-uid="PaperMarioBattleSystem.Animation.GetFrame(System.Int32)">GetFrame(Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns the animation frame at a particular index.
+If the frame doesn&apos;t exist at the index, an exception is thrown.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Animation.Frame GetFrame(int index)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">index</span></td>
+        <td><p>The index to retrive the animation frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Animation.Frame.html">Animation.Frame</a></td>
+        <td><p>The animation frame at the specified index.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_GetTotalFrameLength.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.GetTotalFrameLength%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L280">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_GetTotalFrameLength_" data-uid="PaperMarioBattleSystem.Animation.GetTotalFrameLength*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_GetTotalFrameLength" data-uid="PaperMarioBattleSystem.Animation.GetTotalFrameLength">GetTotalFrameLength()</h4>
+  <div class="markdown level1 summary"><p>Gets the total length of all frames in the Animation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double GetTotalFrameLength()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Pause.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Pause%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L174">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_Pause_" data-uid="PaperMarioBattleSystem.Animation.Pause*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_Pause" data-uid="PaperMarioBattleSystem.Animation.Pause">Pause()</h4>
+  <div class="markdown level1 summary"><p>Pauses the animation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Pause()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Play.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Play%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L165">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_Play_" data-uid="PaperMarioBattleSystem.Animation.Play*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_Play" data-uid="PaperMarioBattleSystem.Animation.Play">Play()</h4>
+  <div class="markdown level1 summary"><p>Plays the animation from the start</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Play()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Progress.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Progress%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L149">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_Progress_" data-uid="PaperMarioBattleSystem.Animation.Progress*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_Progress" data-uid="PaperMarioBattleSystem.Animation.Progress">Progress()</h4>
+  <div class="markdown level1 summary"><p>Progresses through the animation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Progress()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Reset.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Reset%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L197">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_Reset_" data-uid="PaperMarioBattleSystem.Animation.Reset*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_Reset" data-uid="PaperMarioBattleSystem.Animation.Reset">Reset()</h4>
+  <div class="markdown level1 summary"><p>Resets the animation to the start</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Reset()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_ResetFrameDur.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.ResetFrameDur%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L243">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_ResetFrameDur_" data-uid="PaperMarioBattleSystem.Animation.ResetFrameDur*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_ResetFrameDur" data-uid="PaperMarioBattleSystem.Animation.ResetFrameDur">ResetFrameDur()</h4>
+  <div class="markdown level1 summary"><p>Resets the frame timer to the start of the current frame</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void ResetFrameDur()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_ResetSpeed.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.ResetSpeed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L235">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_ResetSpeed_" data-uid="PaperMarioBattleSystem.Animation.ResetSpeed*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_ResetSpeed" data-uid="PaperMarioBattleSystem.Animation.ResetSpeed">ResetSpeed()</h4>
+  <div class="markdown level1 summary"><p>Resets the animation&apos;s Speed to the default value</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ResetSpeed()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Resume.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Resume%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L185">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_Resume_" data-uid="PaperMarioBattleSystem.Animation.Resume*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_Resume" data-uid="PaperMarioBattleSystem.Animation.Resume">Resume()</h4>
+  <div class="markdown level1 summary"><p>Resumes the animation</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Resume()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_SetChildFrames_PaperMarioBattleSystem_Animation_Frame___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.SetChildFrames(PaperMarioBattleSystem.Animation.Frame%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L271">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_SetChildFrames_" data-uid="PaperMarioBattleSystem.Animation.SetChildFrames*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_SetChildFrames_PaperMarioBattleSystem_Animation_Frame___" data-uid="PaperMarioBattleSystem.Animation.SetChildFrames(PaperMarioBattleSystem.Animation.Frame[])">SetChildFrames(Animation.Frame[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetChildFrames(params Animation.Frame[] childFrames)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Animation.Frame.html">Animation.Frame</a>[]</td>
+        <td><span class="parametername">childFrames</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_SetKey_System_String_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.SetKey(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L132">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_SetKey_" data-uid="PaperMarioBattleSystem.Animation.SetKey*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_SetKey_System_String_" data-uid="PaperMarioBattleSystem.Animation.SetKey(System.String)">SetKey(String)</h4>
+  <div class="markdown level1 summary"><p>Sets the animation&apos;s key</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetKey(string key)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.String</span></td>
+        <td><span class="parametername">key</span></td>
+        <td><p>The key to reference the animation by</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_SetSpeed_System_Single_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.SetSpeed(System.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L227">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_SetSpeed_" data-uid="PaperMarioBattleSystem.Animation.SetSpeed*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_SetSpeed_System_Single_" data-uid="PaperMarioBattleSystem.Animation.SetSpeed(System.Single)">SetSpeed(Single)</h4>
+  <div class="markdown level1 summary"><p>Sets the Speed the animation plays at</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetSpeed(float newSpeed)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Single</span></td>
+        <td><span class="parametername">newSpeed</span></td>
+        <td><p>The new speed of the animation. This value cannot be lower than 0 as reversed playback is
+not supported through the speed</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation_Update.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L248">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Animation_Update_" data-uid="PaperMarioBattleSystem.Animation.Update*"></a>
+  <h4 id="PaperMarioBattleSystem_Animation_Update" data-uid="PaperMarioBattleSystem.Animation.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Update()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IAnimation.html">IAnimation</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Animation.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Animation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Animations/Animation.cs/#L16" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

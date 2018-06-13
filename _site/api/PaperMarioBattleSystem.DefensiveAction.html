@@ -1,0 +1,758 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DefensiveAction
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DefensiveAction
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.DefensiveAction">
+  
+  
+  <h1 id="PaperMarioBattleSystem_DefensiveAction" data-uid="PaperMarioBattleSystem.DefensiveAction" class="text-break">Class DefensiveAction
+  </h1>
+  <div class="markdown level0 summary"><p>The base class for Defensive Actions BattleEntities can perform in battle.
+<p>A Defensive Action is defined as one that can be done when it&apos;s not the BattleEntity&apos;s turn.
+In the first two Paper Mario games, the only Defensive Actions are Guard and Superguard.</p></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PaperMarioBattleSystem.BattleAction.html">BattleAction</a></div>
+    <div class="level2"><span class="xref">DefensiveAction</span></div>
+      <div class="level3"><a class="xref" href="PaperMarioBattleSystem.Guard.html">Guard</a></div>
+      <div class="level3"><a class="xref" href="PaperMarioBattleSystem.Superguard.html">Superguard</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.IActionCommand.html">IActionCommand</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IActionCommandHandler.html">IActionCommandHandler</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.INameable.html">INameable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleAction.html#PaperMarioBattleSystem_BattleAction_Name">BattleAction.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleAction.html#PaperMarioBattleSystem_BattleAction_User">BattleAction.User</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleAction.html#PaperMarioBattleSystem_BattleAction_SetUser_PaperMarioBattleSystem_BattleEntity_">BattleAction.SetUser(BattleEntity)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.BattleAction.html#PaperMarioBattleSystem_BattleAction_Draw">BattleAction.Draw()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_DefensiveAction_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract class DefensiveAction : BattleAction, IActionCommand, IActionCommandHandler, INameable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction__ctor_PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.%23ctor(PaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L54">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction__ctor_" data-uid="PaperMarioBattleSystem.DefensiveAction.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction__ctor_PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.DefensiveAction.#ctor(PaperMarioBattleSystem.BattleEntity)">DefensiveAction(BattleEntity)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected DefensiveAction(BattleEntity user)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
+        <td><span class="parametername">user</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_AllowedStatuses.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.AllowedStatuses%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L52">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_AllowedStatuses" data-uid="PaperMarioBattleSystem.DefensiveAction.AllowedStatuses">AllowedStatuses</h4>
+  <div class="markdown level1 summary"><p>StatusEffects that the DefensiveAction doesn&apos;t defend against.
+If this is null, it defends against all of them.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Enumerations.StatusTypes[] AllowedStatuses</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.StatusTypes.html">Enumerations.StatusTypes</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_CommandSuccessTimer.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.CommandSuccessTimer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L41">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_CommandSuccessTimer" data-uid="PaperMarioBattleSystem.DefensiveAction.CommandSuccessTimer">CommandSuccessTimer</h4>
+  <div class="markdown level1 summary"><p>The amount of time a successful ActionCommand is valid for</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected double CommandSuccessTimer</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_PrevCommandTimer.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.PrevCommandTimer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L46">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_PrevCommandTimer" data-uid="PaperMarioBattleSystem.DefensiveAction.PrevCommandTimer">PrevCommandTimer</h4>
+  <div class="markdown level1 summary"><p>The time since the last successful ActionCommand</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected double PrevCommandTimer</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_actionCommand.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.actionCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L18">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_actionCommand_" data-uid="PaperMarioBattleSystem.DefensiveAction.actionCommand*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_actionCommand" data-uid="PaperMarioBattleSystem.DefensiveAction.actionCommand">actionCommand</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ActionCommand actionCommand { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.ActionCommand.html">ActionCommand</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_CommandEnabled.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.CommandEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L21">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_CommandEnabled_" data-uid="PaperMarioBattleSystem.DefensiveAction.CommandEnabled*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_CommandEnabled" data-uid="PaperMarioBattleSystem.DefensiveAction.CommandEnabled">CommandEnabled</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool CommandEnabled { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_CommandResult.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.CommandResult%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L25">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_CommandResult_" data-uid="PaperMarioBattleSystem.DefensiveAction.CommandResult*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_CommandResult" data-uid="PaperMarioBattleSystem.DefensiveAction.CommandResult">CommandResult</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ActionCommand.CommandResults CommandResult { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.ActionCommand.CommandResults.html">ActionCommand.CommandResults</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_DefensiveActionType.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.DefensiveActionType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L31">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_DefensiveActionType_" data-uid="PaperMarioBattleSystem.DefensiveAction.DefensiveActionType*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_DefensiveActionType" data-uid="PaperMarioBattleSystem.DefensiveAction.DefensiveActionType">DefensiveActionType</h4>
+  <div class="markdown level1 summary"><p>The type of DefensiveAction this is.
+This is used to help moves determine whether they can override this or not.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Enumerations.DefensiveActionTypes DefensiveActionType { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.DefensiveActionTypes.html">Enumerations.DefensiveActionTypes</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_EnableActionCommand.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.EnableActionCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L19">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_EnableActionCommand_" data-uid="PaperMarioBattleSystem.DefensiveAction.EnableActionCommand*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_EnableActionCommand" data-uid="PaperMarioBattleSystem.DefensiveAction.EnableActionCommand">EnableActionCommand</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool EnableActionCommand { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_IsSuccessful.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.IsSuccessful%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L22">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_IsSuccessful_" data-uid="PaperMarioBattleSystem.DefensiveAction.IsSuccessful*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_IsSuccessful" data-uid="PaperMarioBattleSystem.DefensiveAction.IsSuccessful">IsSuccessful</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsSuccessful { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_UserImmobile.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.UserImmobile%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L36">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_UserImmobile_" data-uid="PaperMarioBattleSystem.DefensiveAction.UserImmobile*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_UserImmobile" data-uid="PaperMarioBattleSystem.DefensiveAction.UserImmobile">UserImmobile</h4>
+  <div class="markdown level1 summary"><p>Tells if the user of the DefensiveAction is Immobile.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool UserImmobile { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_FilterStatuses_PaperMarioBattleSystem_StatusChanceHolder___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.FilterStatuses(PaperMarioBattleSystem.StatusChanceHolder%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L98">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_FilterStatuses_" data-uid="PaperMarioBattleSystem.DefensiveAction.FilterStatuses*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_FilterStatuses_PaperMarioBattleSystem_StatusChanceHolder___" data-uid="PaperMarioBattleSystem.DefensiveAction.FilterStatuses(PaperMarioBattleSystem.StatusChanceHolder[])">FilterStatuses(StatusChanceHolder[])</h4>
+  <div class="markdown level1 summary"><p>Filters out StatusEffects that the DefensiveAction defends against</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual StatusChanceHolder[] FilterStatuses(StatusChanceHolder[] statusesInflicted)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.StatusChanceHolder.html">StatusChanceHolder</a>[]</td>
+        <td><span class="parametername">statusesInflicted</span></td>
+        <td><p>The original set of StatusEffects inflicted</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.StatusChanceHolder.html">StatusChanceHolder</a>[]</td>
+        <td><p>A set of StatusEffects that the DefensiveAction doesn&apos;t defend against.
+null if the DefensiveAction defends against all StatusEffects</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_HandleSuccess_System_Int32_PaperMarioBattleSystem_StatusChanceHolder___PaperMarioBattleSystem_Enumerations_DamageEffects_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.HandleSuccess(System.Int32%2CPaperMarioBattleSystem.StatusChanceHolder%5B%5D%2CPaperMarioBattleSystem.Enumerations.DamageEffects)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L90">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_HandleSuccess_" data-uid="PaperMarioBattleSystem.DefensiveAction.HandleSuccess*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_HandleSuccess_System_Int32_PaperMarioBattleSystem_StatusChanceHolder___PaperMarioBattleSystem_Enumerations_DamageEffects_" data-uid="PaperMarioBattleSystem.DefensiveAction.HandleSuccess(System.Int32,PaperMarioBattleSystem.StatusChanceHolder[],PaperMarioBattleSystem.Enumerations.DamageEffects)">HandleSuccess(Int32, StatusChanceHolder[], Enumerations.DamageEffects)</h4>
+  <div class="markdown level1 summary"><p>What happens when the Defensive Action is successfully performed.
+<p>This can be called for only one Defensive Action at a time (Ex. You can&apos;t both Guard and Superguard).
+Whichever is successful first in the BattleEntity&apos;s DefensiveAction list is the one that gets called.</p></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public abstract BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusChanceHolder[] statusEffects, Enumerations.DamageEffects damageEffects)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">damage</span></td>
+        <td><p>The original damage that would be dealt to the BattleEntity</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.StatusChanceHolder.html">StatusChanceHolder</a>[]</td>
+        <td><span class="parametername">statusEffects</span></td>
+        <td><p>The original StatusEffects that would be inflicted on the BattleEntity</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.DamageEffects.html">Enumerations.DamageEffects</a></td>
+        <td><span class="parametername">damageEffects</span></td>
+        <td><p>The original DamageEffects that would affect the BattleEntity.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.DefensiveActionHolder.html">BattleGlobals.DefensiveActionHolder</a></td>
+        <td><p>A DefensiveActionHolder containing the modified damage dealt and a filtered set of StatusEffects inflicted</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_OnCommandFailed.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.OnCommandFailed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L66">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_OnCommandFailed_" data-uid="PaperMarioBattleSystem.DefensiveAction.OnCommandFailed*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_OnCommandFailed" data-uid="PaperMarioBattleSystem.DefensiveAction.OnCommandFailed">OnCommandFailed()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnCommandFailed()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_OnCommandRankResult_PaperMarioBattleSystem_ActionCommand_CommandRank__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.OnCommandRankResult(PaperMarioBattleSystem.ActionCommand.CommandRank%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L71">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_OnCommandRankResult_" data-uid="PaperMarioBattleSystem.DefensiveAction.OnCommandRankResult*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_OnCommandRankResult_PaperMarioBattleSystem_ActionCommand_CommandRank__" data-uid="PaperMarioBattleSystem.DefensiveAction.OnCommandRankResult(PaperMarioBattleSystem.ActionCommand.CommandRank@)">OnCommandRankResult(ActionCommand.CommandRank)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnCommandRankResult(in ActionCommand.CommandRank commandRank)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.ActionCommand.CommandRank.html">ActionCommand.CommandRank</a></td>
+        <td><span class="parametername">commandRank</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_OnCommandResponse_System_Object__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.OnCommandResponse(System.Object%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L76">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_OnCommandResponse_" data-uid="PaperMarioBattleSystem.DefensiveAction.OnCommandResponse*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_OnCommandResponse_System_Object__" data-uid="PaperMarioBattleSystem.DefensiveAction.OnCommandResponse(System.Object@)">OnCommandResponse(Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnCommandResponse(in object response)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span></td>
+        <td><span class="parametername">response</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_OnCommandSuccess.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.OnCommandSuccess%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L59">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_OnCommandSuccess_" data-uid="PaperMarioBattleSystem.DefensiveAction.OnCommandSuccess*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_OnCommandSuccess" data-uid="PaperMarioBattleSystem.DefensiveAction.OnCommandSuccess">OnCommandSuccess()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual void OnCommandSuccess()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction_Update.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L108">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DefensiveAction_Update_" data-uid="PaperMarioBattleSystem.DefensiveAction.Update*"></a>
+  <h4 id="PaperMarioBattleSystem_DefensiveAction_Update" data-uid="PaperMarioBattleSystem.DefensiveAction.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Update()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.BattleAction.html#PaperMarioBattleSystem_BattleAction_Update">BattleAction.Update()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IActionCommand.html">IActionCommand</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IActionCommandHandler.html">IActionCommandHandler</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.INameable.html">INameable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DefensiveAction.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DefensiveAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L16" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

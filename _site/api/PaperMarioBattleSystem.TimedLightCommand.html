@@ -1,0 +1,588 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class TimedLightCommand
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class TimedLightCommand
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.TimedLightCommand">
+  
+  
+  <h1 id="PaperMarioBattleSystem_TimedLightCommand" data-uid="PaperMarioBattleSystem.TimedLightCommand" class="text-break">Class TimedLightCommand
+  </h1>
+  <div class="markdown level0 summary"><p>An Action Command for timed lights. As the bar fills up, press a button when the lights are lit.
+One move that uses this is Yoshi&apos;s Mini-Egg.
+<p>The bar fills over time. As such, the values passed in should be time-based. Lights are spaced out across the bar according to the LightDistribution used.</p></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PaperMarioBattleSystem.ActionCommand.html">ActionCommand</a></div>
+    <div class="level2"><a class="xref" href="PaperMarioBattleSystem.FillBarCommand.html">FillBarCommand</a></div>
+    <div class="level3"><span class="xref">TimedLightCommand</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.FillBarCommand.html#PaperMarioBattleSystem_FillBarCommand_CurBarValue">FillBarCommand.CurBarValue</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.FillBarCommand.html#PaperMarioBattleSystem_FillBarCommand_MaxBarValue">FillBarCommand.MaxBarValue</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.FillBarCommand.html#PaperMarioBattleSystem_FillBarCommand_IsBarFull">FillBarCommand.IsBarFull</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.FillBarCommand.html#PaperMarioBattleSystem_FillBarCommand_StartInput_System_Object___">FillBarCommand.StartInput(Object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.FillBarCommand.html#PaperMarioBattleSystem_FillBarCommand_FillBar_System_Double_">FillBarCommand.FillBar(Double)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.FillBarCommand.html#PaperMarioBattleSystem_FillBarCommand_FillBar_System_Double_System_Boolean_">FillBarCommand.FillBar(Double, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_AcceptingInput">ActionCommand.AcceptingInput</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_Handler">ActionCommand.Handler</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_AutoComplete">ActionCommand.AutoComplete</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_SetHandler_PaperMarioBattleSystem_IActionCommandHandler_">ActionCommand.SetHandler(IActionCommandHandler)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_EndInput">ActionCommand.EndInput()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_OnComplete_PaperMarioBattleSystem_ActionCommand_CommandResults_">ActionCommand.OnComplete(ActionCommand.CommandResults)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_SendCommandRank_PaperMarioBattleSystem_ActionCommand_CommandRank_">ActionCommand.SendCommandRank(ActionCommand.CommandRank)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_SendResponse_System_Object_">ActionCommand.SendResponse(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_Update">ActionCommand.Update()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_TimedLightCommand_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class TimedLightCommand : FillBarCommand</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand__ctor_PaperMarioBattleSystem_IActionCommandHandler_System_Double_System_Int32_System_Double_System_Double_PaperMarioBattleSystem_TimedLightCommand_LightDistributions_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.%23ctor(PaperMarioBattleSystem.IActionCommandHandler%2CSystem.Double%2CSystem.Int32%2CSystem.Double%2CSystem.Double%2CPaperMarioBattleSystem.TimedLightCommand.LightDistributions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L76">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TimedLightCommand__ctor_" data-uid="PaperMarioBattleSystem.TimedLightCommand.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand__ctor_PaperMarioBattleSystem_IActionCommandHandler_System_Double_System_Int32_System_Double_System_Double_PaperMarioBattleSystem_TimedLightCommand_LightDistributions_" data-uid="PaperMarioBattleSystem.TimedLightCommand.#ctor(PaperMarioBattleSystem.IActionCommandHandler,System.Double,System.Int32,System.Double,System.Double,PaperMarioBattleSystem.TimedLightCommand.LightDistributions)">TimedLightCommand(IActionCommandHandler, Double, Int32, Double, Double, TimedLightCommand.LightDistributions)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimedLightCommand(IActionCommandHandler commandAction, double maxBarValue, int numLights, double lightRange, double speedScale, TimedLightCommand.LightDistributions lightDistribution)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.IActionCommandHandler.html">IActionCommandHandler</a></td>
+        <td><span class="parametername">commandAction</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">maxBarValue</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">numLights</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">lightRange</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">speedScale</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.TimedLightCommand.LightDistributions.html">TimedLightCommand.LightDistributions</a></td>
+        <td><span class="parametername">lightDistribution</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_KeyToPress.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.KeyToPress%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L26">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_KeyToPress" data-uid="PaperMarioBattleSystem.TimedLightCommand.KeyToPress">KeyToPress</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Keys KeyToPress</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Input.Keys</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_LightDistribution.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.LightDistribution%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L57">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_LightDistribution" data-uid="PaperMarioBattleSystem.TimedLightCommand.LightDistribution">LightDistribution</h4>
+  <div class="markdown level1 summary"><p>How to distribute the lights.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected TimedLightCommand.LightDistributions LightDistribution</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.TimedLightCommand.LightDistributions.html">TimedLightCommand.LightDistributions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_LightRange.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.LightRange%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L47">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_LightRange" data-uid="PaperMarioBattleSystem.TimedLightCommand.LightRange">LightRange</h4>
+  <div class="markdown level1 summary"><p>The success range of pressing the button to fill the light.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected double LightRange</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_LightsFilled.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.LightsFilled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L42">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_LightsFilled" data-uid="PaperMarioBattleSystem.TimedLightCommand.LightsFilled">LightsFilled</h4>
+  <div class="markdown level1 summary"><p>The number of lights successfully filled.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int LightsFilled</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_SpeedScale.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.SpeedScale%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L52">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_SpeedScale" data-uid="PaperMarioBattleSystem.TimedLightCommand.SpeedScale">SpeedScale</h4>
+  <div class="markdown level1 summary"><p>How much faster or slower to progress the bar.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected double SpeedScale</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_CurLight.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.CurLight%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L37">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TimedLightCommand_CurLight_" data-uid="PaperMarioBattleSystem.TimedLightCommand.CurLight*"></a>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_CurLight" data-uid="PaperMarioBattleSystem.TimedLightCommand.CurLight">CurLight</h4>
+  <div class="markdown level1 summary"><p>The current light you&apos;re on.
+If you press the button at the wrong time, this light is the one that&apos;ll fail.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CurLight { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_LightRanges.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.LightRanges%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L59">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TimedLightCommand_LightRanges_" data-uid="PaperMarioBattleSystem.TimedLightCommand.LightRanges*"></a>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_LightRanges" data-uid="PaperMarioBattleSystem.TimedLightCommand.LightRanges">LightRanges</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TimedLightCommand.LightData[] LightRanges { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.TimedLightCommand.LightData.html">TimedLightCommand.LightData</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_NumLights.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.NumLights%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L31">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TimedLightCommand_NumLights_" data-uid="PaperMarioBattleSystem.TimedLightCommand.NumLights*"></a>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_NumLights" data-uid="PaperMarioBattleSystem.TimedLightCommand.NumLights">NumLights</h4>
+  <div class="markdown level1 summary"><p>The number of lights to fill.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int NumLights { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_WithinRange.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.WithinRange%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L67">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TimedLightCommand_WithinRange_" data-uid="PaperMarioBattleSystem.TimedLightCommand.WithinRange*"></a>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_WithinRange" data-uid="PaperMarioBattleSystem.TimedLightCommand.WithinRange">WithinRange</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool WithinRange { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_ReadInput.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.ReadInput%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L131">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TimedLightCommand_ReadInput_" data-uid="PaperMarioBattleSystem.TimedLightCommand.ReadInput*"></a>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_ReadInput" data-uid="PaperMarioBattleSystem.TimedLightCommand.ReadInput">ReadInput()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void ReadInput()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_ReadInput">ActionCommand.ReadInput()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_SpaceLastLightAtEnd.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.SpaceLastLightAtEnd%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L118">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TimedLightCommand_SpaceLastLightAtEnd_" data-uid="PaperMarioBattleSystem.TimedLightCommand.SpaceLastLightAtEnd*"></a>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_SpaceLastLightAtEnd" data-uid="PaperMarioBattleSystem.TimedLightCommand.SpaceLastLightAtEnd">SpaceLastLightAtEnd()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void SpaceLastLightAtEnd()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand_SpaceOutLightsEvenly.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand.SpaceOutLightsEvenly%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L94">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_TimedLightCommand_SpaceOutLightsEvenly_" data-uid="PaperMarioBattleSystem.TimedLightCommand.SpaceOutLightsEvenly*"></a>
+  <h4 id="PaperMarioBattleSystem_TimedLightCommand_SpaceOutLightsEvenly" data-uid="PaperMarioBattleSystem.TimedLightCommand.SpaceOutLightsEvenly">SpaceOutLightsEvenly()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected void SpaceOutLightsEvenly()</code></pre>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_TimedLightCommand.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.TimedLightCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/TimedLightCommand.cs/#L16" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

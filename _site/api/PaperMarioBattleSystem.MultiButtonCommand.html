@@ -1,0 +1,524 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class MultiButtonCommand
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class MultiButtonCommand
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.MultiButtonCommand">
+  
+  
+  <h1 id="PaperMarioBattleSystem_MultiButtonCommand" data-uid="PaperMarioBattleSystem.MultiButtonCommand" class="text-break">Class MultiButtonCommand
+  </h1>
+  <div class="markdown level0 summary"><p>Press a random sequence of buttons in the correct order within the time limit.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PaperMarioBattleSystem.ActionCommand.html">ActionCommand</a></div>
+    <div class="level2"><span class="xref">MultiButtonCommand</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_AcceptingInput">ActionCommand.AcceptingInput</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_Handler">ActionCommand.Handler</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_AutoComplete">ActionCommand.AutoComplete</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_SetHandler_PaperMarioBattleSystem_IActionCommandHandler_">ActionCommand.SetHandler(IActionCommandHandler)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_EndInput">ActionCommand.EndInput()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_OnComplete_PaperMarioBattleSystem_ActionCommand_CommandResults_">ActionCommand.OnComplete(ActionCommand.CommandResults)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_SendCommandRank_PaperMarioBattleSystem_ActionCommand_CommandRank_">ActionCommand.SendCommandRank(ActionCommand.CommandRank)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_SendResponse_System_Object_">ActionCommand.SendResponse(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_Update">ActionCommand.Update()</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_MultiButtonCommand_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MultiButtonCommand : ActionCommand</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand__ctor_PaperMarioBattleSystem_IActionCommandHandler_System_Int32_System_Int32_System_Double_Microsoft_Xna_Framework_Input_Keys___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand.%23ctor(PaperMarioBattleSystem.IActionCommandHandler%2CSystem.Int32%2CSystem.Int32%2CSystem.Double%2CMicrosoft.Xna.Framework.Input.Keys%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L58">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_MultiButtonCommand__ctor_" data-uid="PaperMarioBattleSystem.MultiButtonCommand.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_MultiButtonCommand__ctor_PaperMarioBattleSystem_IActionCommandHandler_System_Int32_System_Int32_System_Double_Microsoft_Xna_Framework_Input_Keys___" data-uid="PaperMarioBattleSystem.MultiButtonCommand.#ctor(PaperMarioBattleSystem.IActionCommandHandler,System.Int32,System.Int32,System.Double,Microsoft.Xna.Framework.Input.Keys[])">MultiButtonCommand(IActionCommandHandler, Int32, Int32, Double, Keys[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MultiButtonCommand(IActionCommandHandler commandHandler, int minButtons, int maxButtons, double inputDuration, params Keys[] validSequenceButtons)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.IActionCommandHandler.html">IActionCommandHandler</a></td>
+        <td><span class="parametername">commandHandler</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">minButtons</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><span class="parametername">maxButtons</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td><span class="parametername">inputDuration</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Input.Keys</span>[]</td>
+        <td><span class="parametername">validSequenceButtons</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand_MaxButtons.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand.MaxButtons%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L26">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_MultiButtonCommand_MaxButtons" data-uid="PaperMarioBattleSystem.MultiButtonCommand.MaxButtons">MaxButtons</h4>
+  <div class="markdown level1 summary"><p>The maximum number of buttons that can appear in the button sequence.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int MaxButtons</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand_MinButtons.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand.MinButtons%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L21">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_MultiButtonCommand_MinButtons" data-uid="PaperMarioBattleSystem.MultiButtonCommand.MinButtons">MinButtons</h4>
+  <div class="markdown level1 summary"><p>The minimum number of buttons that can appear in the button sequence.
+This should be greater than 0.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int MinButtons</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand_ValidSequenceButtons.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand.ValidSequenceButtons%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L36">View Source</a>
+  </span>
+  <h4 id="PaperMarioBattleSystem_MultiButtonCommand_ValidSequenceButtons" data-uid="PaperMarioBattleSystem.MultiButtonCommand.ValidSequenceButtons">ValidSequenceButtons</h4>
+  <div class="markdown level1 summary"><p>The valid buttons that can be featured in the sequence.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Keys[] ValidSequenceButtons</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Input.Keys</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand_ButtonSequence.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand.ButtonSequence%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L41">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_MultiButtonCommand_ButtonSequence_" data-uid="PaperMarioBattleSystem.MultiButtonCommand.ButtonSequence*"></a>
+  <h4 id="PaperMarioBattleSystem_MultiButtonCommand_ButtonSequence" data-uid="PaperMarioBattleSystem.MultiButtonCommand.ButtonSequence">ButtonSequence</h4>
+  <div class="markdown level1 summary"><p>The final generated button sequence.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Keys[] ButtonSequence { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Input.Keys</span>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand_CurButtonIndex.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand.CurButtonIndex%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L46">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_MultiButtonCommand_CurButtonIndex_" data-uid="PaperMarioBattleSystem.MultiButtonCommand.CurButtonIndex*"></a>
+  <h4 id="PaperMarioBattleSystem_MultiButtonCommand_CurButtonIndex" data-uid="PaperMarioBattleSystem.MultiButtonCommand.CurButtonIndex">CurButtonIndex</h4>
+  <div class="markdown level1 summary"><p>The current index of the button to press.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CurButtonIndex { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand_InputDuration.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand.InputDuration%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L31">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_MultiButtonCommand_InputDuration_" data-uid="PaperMarioBattleSystem.MultiButtonCommand.InputDuration*"></a>
+  <h4 id="PaperMarioBattleSystem_MultiButtonCommand_InputDuration" data-uid="PaperMarioBattleSystem.MultiButtonCommand.InputDuration">InputDuration</h4>
+  <div class="markdown level1 summary"><p>How long the player has to input all the buttons.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double InputDuration { get; protected set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Double</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand_NextButtonToPress.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand.NextButtonToPress%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L51">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_MultiButtonCommand_NextButtonToPress_" data-uid="PaperMarioBattleSystem.MultiButtonCommand.NextButtonToPress*"></a>
+  <h4 id="PaperMarioBattleSystem_MultiButtonCommand_NextButtonToPress" data-uid="PaperMarioBattleSystem.MultiButtonCommand.NextButtonToPress">NextButtonToPress</h4>
+  <div class="markdown level1 summary"><p>The next button to press in the button sequence.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Keys NextButtonToPress { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">Microsoft.Xna.Framework.Input.Keys</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand_GenerateButtonSequence.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand.GenerateButtonSequence%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L133">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_MultiButtonCommand_GenerateButtonSequence_" data-uid="PaperMarioBattleSystem.MultiButtonCommand.GenerateButtonSequence*"></a>
+  <h4 id="PaperMarioBattleSystem_MultiButtonCommand_GenerateButtonSequence" data-uid="PaperMarioBattleSystem.MultiButtonCommand.GenerateButtonSequence">GenerateButtonSequence()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void GenerateButtonSequence()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand_ReadInput.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand.ReadInput%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L77">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_MultiButtonCommand_ReadInput_" data-uid="PaperMarioBattleSystem.MultiButtonCommand.ReadInput*"></a>
+  <h4 id="PaperMarioBattleSystem_MultiButtonCommand_ReadInput" data-uid="PaperMarioBattleSystem.MultiButtonCommand.ReadInput">ReadInput()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void ReadInput()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_ReadInput">ActionCommand.ReadInput()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand_StartInput_System_Object___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand.StartInput(System.Object%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L67">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_MultiButtonCommand_StartInput_" data-uid="PaperMarioBattleSystem.MultiButtonCommand.StartInput*"></a>
+  <h4 id="PaperMarioBattleSystem_MultiButtonCommand_StartInput_System_Object___" data-uid="PaperMarioBattleSystem.MultiButtonCommand.StartInput(System.Object[])">StartInput(Object[])</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void StartInput(params object[] values)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Object</span>[]</td>
+        <td><span class="parametername">values</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.ActionCommand.html#PaperMarioBattleSystem_ActionCommand_StartInput_System_Object___">ActionCommand.StartInput(Object[])</a></div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_MultiButtonCommand.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.MultiButtonCommand%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/ActionCommands/MultiButtonCommand.cs/#L15" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

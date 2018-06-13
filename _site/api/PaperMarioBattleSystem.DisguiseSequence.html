@@ -1,0 +1,481 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class DisguiseSequence
+   </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class DisguiseSequence
+   ">
+    <meta name="generator" content="docfx 2.36.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.DisguiseSequence">
+  
+  
+  <h1 id="PaperMarioBattleSystem_DisguiseSequence" data-uid="PaperMarioBattleSystem.DisguiseSequence" class="text-break">Class DisguiseSequence
+  </h1>
+  <div class="markdown level0 summary"><p>The Sequence for a Duplighost&apos;s Disguise move.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><span class="xref">System.Object</span></div>
+    <div class="level1"><a class="xref" href="PaperMarioBattleSystem.Sequence.html">Sequence</a></div>
+    <div class="level2"><span class="xref">DisguiseSequence</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.IActionCommandHandler.html">IActionCommandHandler</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.INameable.html">INameable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a></div>
+    <div><a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_Action">Sequence.Action</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_Name">Sequence.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_User">Sequence.User</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_actionCommand">Sequence.actionCommand</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_CommandEnabled">Sequence.CommandEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_BaseDamage">Sequence.BaseDamage</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_EntitiesAffected">Sequence.EntitiesAffected</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_InSequence">Sequence.InSequence</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SequenceStep">Sequence.SequenceStep</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_CurBranch">Sequence.CurBranch</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_CurSequenceAction">Sequence.CurSequenceAction</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_JumpToBranch">Sequence.JumpToBranch</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_InterruptionHandler">Sequence.InterruptionHandler</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_StylishHandler">Sequence.StylishHandler</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_CommandResult">Sequence.CommandResult</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_HighestCommandRank">Sequence.HighestCommandRank</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_CurStylishData">Sequence.CurStylishData</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_AutoCompleteStylish">Sequence.AutoCompleteStylish</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SideSeqActionCount">Sequence.SideSeqActionCount</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SetAction_PaperMarioBattleSystem_MoveAction_">Sequence.SetAction(MoveAction)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_StartSequence_PaperMarioBattleSystem_BattleEntity___">Sequence.StartSequence(BattleEntity[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_EndSequence">Sequence.EndSequence()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_OnEnd">Sequence.OnEnd()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_PrintInvalidSequence">Sequence.PrintInvalidSequence()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_ChangeSequenceBranch_PaperMarioBattleSystem_Sequence_SequenceBranch_">Sequence.ChangeSequenceBranch(Sequence.SequenceBranch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_ChangeJumpBranch_PaperMarioBattleSystem_Sequence_SequenceBranch_">Sequence.ChangeJumpBranch(Sequence.SequenceBranch)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SetStylishData_System_Double_System_Double_System_Int32_">Sequence.SetStylishData(Double, Double, Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_AddSideSeqAction_PaperMarioBattleSystem_SequenceAction_System_Int32_">Sequence.AddSideSeqAction(SequenceAction, Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SequenceInterruptionBranch">Sequence.SequenceInterruptionBranch()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SequenceStylishBranch">Sequence.SequenceStylishBranch()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_BaseInterruptionHandler">Sequence.BaseInterruptionHandler()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_StartInterruption_PaperMarioBattleSystem_Enumerations_Elements_">Sequence.StartInterruption(Enumerations.Elements)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_OnMiss">Sequence.OnMiss()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_OnInterruption_PaperMarioBattleSystem_Enumerations_Elements_">Sequence.OnInterruption(Enumerations.Elements)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_HandleStylishMove_System_Int32_">Sequence.HandleStylishMove(Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_OnCommandSuccess">Sequence.OnCommandSuccess()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_OnCommandFailed">Sequence.OnCommandFailed()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_OnCommandRankResult_PaperMarioBattleSystem_ActionCommand_CommandRank__">Sequence.OnCommandRankResult(ActionCommand.CommandRank)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_OnCommandResponse_System_Object__">Sequence.OnCommandResponse(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_CommandSuccess">Sequence.CommandSuccess()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_CommandFailed">Sequence.CommandFailed()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_StartActionCommandInput_System_Object___">Sequence.StartActionCommandInput(Object[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_ShowCommandRankVFX_PaperMarioBattleSystem_ActionCommand_CommandRank_Microsoft_Xna_Framework_Vector2_">Sequence.ShowCommandRankVFX(ActionCommand.CommandRank, Vector2)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_Update">Sequence.Update()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_Draw">Sequence.Draw()</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_AttemptDamage_System_Int32_PaperMarioBattleSystem_BattleEntity___PaperMarioBattleSystem_DamageData_System_Boolean_">Sequence.AttemptDamage(Int32, BattleEntity[], DamageData, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_AttemptDamage_System_Int32_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_DamageData_System_Boolean_">Sequence.AttemptDamage(Int32, BattleEntity, DamageData, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_GetTotalDamage_System_Int32_">Sequence.GetTotalDamage(Int32)</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_PerformHeal_PaperMarioBattleSystem_HealingData_PaperMarioBattleSystem_BattleEntity___">Sequence.PerformHeal(HealingData, BattleEntity[])</a>
+    </div>
+    <div>
+      <a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_PerformHeal_PaperMarioBattleSystem_HealingData_PaperMarioBattleSystem_BattleEntity_">Sequence.PerformHeal(HealingData, BattleEntity)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
+  <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
+  <h5 id="PaperMarioBattleSystem_DisguiseSequence_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public sealed class DisguiseSequence : Sequence, IActionCommandHandler, INameable, IUpdateable, IDrawable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DisguiseSequence__ctor_PaperMarioBattleSystem_MoveAction_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DisguiseSequence.%23ctor(PaperMarioBattleSystem.MoveAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Duplighost/DisguiseSequence.cs/#L19">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DisguiseSequence__ctor_" data-uid="PaperMarioBattleSystem.DisguiseSequence.#ctor*"></a>
+  <h4 id="PaperMarioBattleSystem_DisguiseSequence__ctor_PaperMarioBattleSystem_MoveAction_" data-uid="PaperMarioBattleSystem.DisguiseSequence.#ctor(PaperMarioBattleSystem.MoveAction)">DisguiseSequence(MoveAction)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DisguiseSequence(MoveAction moveAction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="PaperMarioBattleSystem.MoveAction.html">MoveAction</a></td>
+        <td><span class="parametername">moveAction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DisguiseSequence_OnStart.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DisguiseSequence.OnStart%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Duplighost/DisguiseSequence.cs/#L24">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DisguiseSequence_OnStart_" data-uid="PaperMarioBattleSystem.DisguiseSequence.OnStart*"></a>
+  <h4 id="PaperMarioBattleSystem_DisguiseSequence_OnStart" data-uid="PaperMarioBattleSystem.DisguiseSequence.OnStart">OnStart()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void OnStart()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_OnStart">Sequence.OnStart()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DisguiseSequence_SequenceEndBranch.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DisguiseSequence.SequenceEndBranch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Duplighost/DisguiseSequence.cs/#L51">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DisguiseSequence_SequenceEndBranch_" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceEndBranch*"></a>
+  <h4 id="PaperMarioBattleSystem_DisguiseSequence_SequenceEndBranch" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceEndBranch">SequenceEndBranch()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void SequenceEndBranch()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SequenceEndBranch">Sequence.SequenceEndBranch()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DisguiseSequence_SequenceFailedBranch.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DisguiseSequence.SequenceFailedBranch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Duplighost/DisguiseSequence.cs/#L155">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DisguiseSequence_SequenceFailedBranch_" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceFailedBranch*"></a>
+  <h4 id="PaperMarioBattleSystem_DisguiseSequence_SequenceFailedBranch" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceFailedBranch">SequenceFailedBranch()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void SequenceFailedBranch()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SequenceFailedBranch">Sequence.SequenceFailedBranch()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DisguiseSequence_SequenceMainBranch.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DisguiseSequence.SequenceMainBranch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Duplighost/DisguiseSequence.cs/#L66">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DisguiseSequence_SequenceMainBranch_" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceMainBranch*"></a>
+  <h4 id="PaperMarioBattleSystem_DisguiseSequence_SequenceMainBranch" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceMainBranch">SequenceMainBranch()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void SequenceMainBranch()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SequenceMainBranch">Sequence.SequenceMainBranch()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DisguiseSequence_SequenceMissBranch.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DisguiseSequence.SequenceMissBranch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Duplighost/DisguiseSequence.cs/#L165">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DisguiseSequence_SequenceMissBranch_" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceMissBranch*"></a>
+  <h4 id="PaperMarioBattleSystem_DisguiseSequence_SequenceMissBranch" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceMissBranch">SequenceMissBranch()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void SequenceMissBranch()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SequenceMissBranch">Sequence.SequenceMissBranch()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DisguiseSequence_SequenceStartBranch.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DisguiseSequence.SequenceStartBranch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Duplighost/DisguiseSequence.cs/#L31">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DisguiseSequence_SequenceStartBranch_" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceStartBranch*"></a>
+  <h4 id="PaperMarioBattleSystem_DisguiseSequence_SequenceStartBranch" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceStartBranch">SequenceStartBranch()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void SequenceStartBranch()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SequenceStartBranch">Sequence.SequenceStartBranch()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DisguiseSequence_SequenceSuccessBranch.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DisguiseSequence.SequenceSuccessBranch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Duplighost/DisguiseSequence.cs/#L145">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_DisguiseSequence_SequenceSuccessBranch_" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceSuccessBranch*"></a>
+  <h4 id="PaperMarioBattleSystem_DisguiseSequence_SequenceSuccessBranch" data-uid="PaperMarioBattleSystem.DisguiseSequence.SequenceSuccessBranch">SequenceSuccessBranch()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected override void SequenceSuccessBranch()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="PaperMarioBattleSystem.Sequence.html#PaperMarioBattleSystem_Sequence_SequenceSuccessBranch">Sequence.SequenceSuccessBranch()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IActionCommandHandler.html">IActionCommandHandler</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.INameable.html">INameable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IUpdateable.html">IUpdateable</a>
+  </div>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.IDrawable.html">IDrawable</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_DisguiseSequence.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.DisguiseSequence%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Duplighost/DisguiseSequence.cs/#L14" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

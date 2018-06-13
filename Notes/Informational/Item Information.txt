@@ -1,6 +1,0 @@
-Item Information (1/11/18)
---------------------------
-
-Mystery
--------
-If used in a dark battle, all items that target enemies are excluded from the item set.

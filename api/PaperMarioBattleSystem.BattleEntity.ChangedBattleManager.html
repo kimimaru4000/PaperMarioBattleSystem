@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Delegate BattleEntity.ConfusionDelegate
+    <title>Delegate BattleEntity.ChangedBattleManager
    </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Delegate BattleEntity.ConfusionDelegate
+    <meta name="title" content="Delegate BattleEntity.ChangedBattleManager
    ">
     <meta name="generator" content="docfx 2.36.1.0">
     
@@ -68,20 +68,18 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.BattleEntity.ConfusionDelegate">
+            <article class="content wrap" id="_content" data-uid="PaperMarioBattleSystem.BattleEntity.ChangedBattleManager">
   
   
-  <h1 id="PaperMarioBattleSystem_BattleEntity_ConfusionDelegate" data-uid="PaperMarioBattleSystem.BattleEntity.ConfusionDelegate" class="text-break">Delegate BattleEntity.ConfusionDelegate
+  <h1 id="PaperMarioBattleSystem_BattleEntity_ChangedBattleManager" data-uid="PaperMarioBattleSystem.BattleEntity.ChangedBattleManager" class="text-break">Delegate BattleEntity.ChangedBattleManager
   </h1>
-  <div class="markdown level0 summary"><p>A delegate handling how the BattleEntity gets affected by the Confused status.
-The BattleEntity may perform a different action and/or target different entities.</p>
-</div>
+  <div class="markdown level0 summary"></div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="PaperMarioBattleSystem.html">PaperMarioBattleSystem</a></h6>
   <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
-  <h5 id="PaperMarioBattleSystem_BattleEntity_ConfusionDelegate_syntax">Syntax</h5>
+  <h5 id="PaperMarioBattleSystem_BattleEntity_ChangedBattleManager_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected delegate BattleGlobals.ActionHolder ConfusionDelegate(MoveAction action, BattleEntity[] targets);</code></pre>
+    <pre><code class="lang-csharp hljs">public delegate void ChangedBattleManager(in BattleManager prevBattleManager, in BattleManager newBattleManager);</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -94,32 +92,14 @@ The BattleEntity may perform a different action and/or target different entities
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="PaperMarioBattleSystem.MoveAction.html">MoveAction</a></td>
-        <td><span class="parametername">action</span></td>
-        <td><p>The MoveAction originally used.</p>
-</td>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleManager.html">BattleManager</a></td>
+        <td><span class="parametername">prevBattleManager</span></td>
+        <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a>[]</td>
-        <td><span class="parametername">targets</span></td>
-        <td><p>The original set of BattleEntities to target.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.ActionHolder.html">BattleGlobals.ActionHolder</a></td>
-        <td><p>An ActionHolder with a new BattleAction to perform and/or a different target list.</p>
-</td>
+        <td><a class="xref" href="PaperMarioBattleSystem.BattleManager.html">BattleManager</a></td>
+        <td><span class="parametername">newBattleManager</span></td>
+        <td></td>
       </tr>
     </tbody>
   </table>
@@ -131,10 +111,10 @@ The BattleEntity may perform a different action and/or target different entities
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_ConfusionDelegate.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.ConfusionDelegate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleEntity_ChangedBattleManager.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleEntity.ChangedBattleManager%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L80" class="contribution-link">View Source</a>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/BattleEntities/BattleEntity.cs/#L62" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

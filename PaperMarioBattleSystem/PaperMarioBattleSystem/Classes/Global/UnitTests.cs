@@ -37,6 +37,13 @@ namespace PaperMarioBattleSystem
             BadgeUnitTests.TestPartyNPEquipCount();
         }
 
+        public static void RunBattleUnitTests()
+        {
+            BattleUnitTests.TestSwitchMarioPeekaboo();
+            BattleUnitTests.TestSwitchMarioLuckyStart();
+            BattleUnitTests.TestSwitchMarioSleep();
+        }
+
         public static class InteractionUnitTests
         {
             public static void ElementOverrideInteractionUT1()
@@ -346,6 +353,132 @@ namespace PaperMarioBattleSystem
                 ccp.UnEquip();
 
                 Debug.Log("\n");
+            }
+        }
+
+        public static class BattleUnitTests
+        {
+            public static void TestSwitchMarioPeekaboo()
+            {
+                BattleMario mario = new BattleMario(new MarioStats(1, 1, 1, 1, 1, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
+                KoopaTroopa koopa = new KoopaTroopa();
+
+                BattleManager manager1 = new BattleManager();
+
+                PeekabooBadge peekaboo = new PeekabooBadge();
+                peekaboo.Equip(mario);
+
+                manager1.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true), mario, null, 
+                    new List<BattleEntity>() { koopa });
+
+                Debug.Assert(manager1.TotalEntityCount == 2);
+
+                
+
+                Debug.Assert(peekaboo.EntityEquipped == mario);
+                Debug.Assert(peekaboo.EntityEquipped.BManager == manager1);
+                Debug.Assert(koopa.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) == 1);
+
+                BattleManager manager2 = new BattleManager();
+                Goomba goomba = new Goomba();
+                manager2.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true), null, null,
+                    new List<BattleEntity>() { goomba });
+
+                Debug.Assert(manager2.TotalEntityCount == 1);
+                Debug.Assert(goomba.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) == 0);
+
+                manager1.RemoveEntity(mario, false);
+
+                Debug.Assert(manager1.TotalEntityCount == 1);
+                Debug.Assert(peekaboo.EntityEquipped == mario);
+
+                Debug.Assert(koopa.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) == 0);
+
+                manager2.AddEntity(mario, null, true);
+
+                Debug.Assert(manager2.TotalEntityCount == 2);
+                Debug.Assert(peekaboo.EntityEquipped == mario);
+                Debug.Assert(peekaboo.EntityEquipped.BManager == manager2);
+
+                Debug.Assert(koopa.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) == 0);
+                Debug.Assert(goomba.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) == 1);
+
+                peekaboo.UnEquip();
+
+                manager1.CleanUp();
+                manager2.CleanUp();
+            }
+
+            public static void TestSwitchMarioLuckyStart()
+            {
+                BattleMario mario = new BattleMario(new MarioStats(1, 1, 1, 1, 1, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
+
+                BattleManager manager1 = new BattleManager();
+
+                manager1.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true), mario, null, null);
+
+                LuckyStartBadge luckyStart = new LuckyStartBadge();
+                luckyStart.Equip(mario);
+
+                Debug.Assert(manager1.TotalEntityCount == 1);
+
+                Debug.Assert(luckyStart.EntityEquipped == mario);
+                Debug.Assert(luckyStart.EntityEquipped.BManager == manager1);
+
+                BattleManager manager2 = new BattleManager();
+                manager2.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true), null, null, null);
+
+                Debug.Assert(manager2.TotalEntityCount == 0);
+
+                manager1.RemoveEntity(mario, false);
+
+                Debug.Assert(manager1.TotalEntityCount == 0);
+                Debug.Assert(luckyStart.EntityEquipped == mario);
+
+                manager2.AddEntity(mario, null, true);
+
+                Debug.Assert(manager2.TotalEntityCount == 1);
+                Debug.Assert(luckyStart.EntityEquipped == mario);
+                Debug.Assert(luckyStart.EntityEquipped.BManager == manager2);
+
+                luckyStart.UnEquip();
+
+                manager1.CleanUp();
+                manager2.CleanUp();
+            }
+
+            public static void TestSwitchMarioSleep()
+            {
+                BattleMario mario = new BattleMario(new MarioStats(1, 1, 1, 1, 1, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
+                mario.EntityProperties.AfflictStatus(new SleepStatus(3));
+
+                BattleManager manager1 = new BattleManager();
+
+                manager1.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true), mario, null, null);
+                Debug.Assert(manager1.TotalEntityCount == 1);
+
+                Debug.Assert(mario.EntityProperties.HasStatus(Enumerations.StatusTypes.Sleep) == true);
+
+                BattleManager manager2 = new BattleManager();
+                manager2.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true), null, null, null);
+
+                manager1.RemoveEntity(mario, false);
+
+                Debug.Assert(manager1.TotalEntityCount == 0);
+                Debug.Assert(mario.EntityProperties.HasStatus(Enumerations.StatusTypes.Sleep) == true);
+
+                manager2.AddEntity(mario, null, true);
+
+                Debug.Assert(manager1.TotalEntityCount == 0);
+                Debug.Assert(manager2.TotalEntityCount == 1);
+                Debug.Assert(mario.EntityProperties.HasStatus(Enumerations.StatusTypes.Sleep) == true);
+
+                mario.EntityProperties.RemoveStatus(Enumerations.StatusTypes.Sleep);
+
+                Debug.Assert(mario.EntityProperties.HasStatus(Enumerations.StatusTypes.Sleep) == false);
+
+                manager1.CleanUp();
+                manager2.CleanUp();
             }
         }
     }

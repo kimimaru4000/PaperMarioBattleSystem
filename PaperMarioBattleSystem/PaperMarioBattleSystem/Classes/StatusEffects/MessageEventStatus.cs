@@ -44,14 +44,14 @@ namespace PaperMarioBattleSystem
             //Examples include healing via Tasty Tonic and Bowser's Shockwave Drain move
             if (IsTurnFinished == false) return;
 
-            if (string.IsNullOrEmpty(RemovedMessage) == false)
+            if (string.IsNullOrEmpty(RemovedMessage) == false && EntityAfflicted.BManager != null)
             {
                 EntityAfflicted.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + Priority,
                     new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new MessageBattleEvent(EntityAfflicted.BManager.battleUIManager, RemovedMessage, 2000d));
             }
 
             //Queue a battle event for the status removal
-            if (ShouldQueueEndEvent == true)
+            if (ShouldQueueEndEvent == true && EntityAfflicted.BManager != null)
             {
                 EntityAfflicted.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Status + Priority,
                     new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new StatusEndedBattleEvent(EntityAfflicted));
@@ -60,7 +60,7 @@ namespace PaperMarioBattleSystem
 
         protected void ShowAfflictedMessage()
         {
-            if (string.IsNullOrEmpty(AfflictedMessage) == false)
+            if (string.IsNullOrEmpty(AfflictedMessage) == false && EntityAfflicted.BManager != null)
             {
                 EntityAfflicted.BManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message + Priority,
                     new BattleGlobals.BattleState[] { BattleGlobals.BattleState.TurnEnd }, new MessageBattleEvent(EntityAfflicted.BManager.battleUIManager, AfflictedMessage, 2000d));

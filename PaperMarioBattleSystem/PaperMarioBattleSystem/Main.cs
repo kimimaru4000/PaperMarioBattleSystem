@@ -322,7 +322,7 @@ namespace PaperMarioBattleSystem
             //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlus, BadgeGlobals.BadgeFilterType.UnEquipped));
             //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPPlus, BadgeGlobals.BadgeFilterType.UnEquipped));
 
-            //this.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Peekaboo, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Peekaboo, BadgeGlobals.BadgeFilterType.UnEquipped));
 
             //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LEmblem, BadgeGlobals.BadgeFilterType.UnEquipped));
             //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.WEmblem, BadgeGlobals.BadgeFilterType.UnEquipped));
@@ -350,7 +350,7 @@ namespace PaperMarioBattleSystem
 
             //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LuckyStart, BadgeGlobals.BadgeFilterType.UnEquipped));
             mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TimingTutor, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped));
 
             //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXB, BadgeGlobals.BadgeFilterType.UnEquipped));
             //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXC, BadgeGlobals.BadgeFilterType.UnEquipped));
@@ -368,7 +368,7 @@ namespace PaperMarioBattleSystem
             partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.GroupFocus, BadgeGlobals.BadgeFilterType.UnEquipped));
             //partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFineP, BadgeGlobals.BadgeFilterType.UnEquipped));
             //partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlusP, BadgeGlobals.BadgeFilterType.UnEquipped));
-            partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped));
+            //partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped));
             //partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Peekaboo, BadgeGlobals.BadgeFilterType.UnEquipped));
         }
 
@@ -380,7 +380,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         protected override void LoadContent()
         {
-            // TODO: use this.Content to load your game content here
+            
         }
 
         /// <summary>
@@ -390,7 +390,7 @@ namespace PaperMarioBattleSystem
         protected override void UnloadContent()
         {
             graphics.PreparingDeviceSettings -= OnPreparingDeviceSettings;
-
+            
             lightingManager?.CleanUp();
             lightingManager = null;
 
@@ -442,8 +442,6 @@ namespace PaperMarioBattleSystem
         private void MainUpdate(GameTime gameTime)
         {
             battleManager.Update();
-            battleManager.battleUIManager.Update();
-            battleManager.battleObjManager.Update();
 
             DialogueManager.Instance.Update();
 

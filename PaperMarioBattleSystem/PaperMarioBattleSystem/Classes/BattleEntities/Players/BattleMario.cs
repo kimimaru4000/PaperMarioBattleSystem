@@ -33,7 +33,10 @@ namespace PaperMarioBattleSystem
 
         public override void CleanUp()
         {
-            BManager.EntityRemovedEvent -= OnEntityRemoved;
+            if (BManager != null)
+            {
+                BManager.EntityRemovedEvent -= OnEntityRemoved;
+            }
         }
 
         public override void LoadAnimations()
@@ -196,6 +199,13 @@ namespace PaperMarioBattleSystem
 
         private void OnEntityRemoved(BattleEntity entity)
         {
+            //If Mario was removed, unsubscribe from the event
+            if (entity == this)
+            {
+                BManager.EntityRemovedEvent -= OnEntityRemoved;
+                return;
+            }
+
             //If the Partner was removed, set Mario's BattleIndex to 0
             if (BattleIndex > 0 && BManager.Partner == null)
             {

@@ -274,6 +274,10 @@ namespace PaperMarioBattleSystem
 
             //Update all BattleEntities
             UpdateEntities();
+
+            //Update other parts
+            battleUIManager.Update();
+            battleObjManager.Update();
         }
 
         private void UpdateEntities()
@@ -636,8 +640,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="battleEntity">The BattleEntity to remove.</param>
         /// <param name="cleanUp">Whether to clean up the BattleEntity or not when removed from battle.
-        /// This should be true if the BattleEntity is permanently removed from battle.
-        /// In temporary cases, such as switching Partners, it would be preferable to set this to false.</param>
+        /// This should be true if the BattleEntity is permanently removed from battle and will not be used in any battle again.
+        /// In temporary cases, such as switching Partners, this should be set to false.</param>
         public void RemoveEntity(BattleEntity battleEntity, bool cleanUp)
         {
             //Check for a null BattleEntity
@@ -671,16 +675,16 @@ namespace PaperMarioBattleSystem
             if (cleanUp == true)
             {
                 battleEntity.CleanUp();
+            }
 
-                //Clear these references if the BattleEntity removed is Mario or his Partner
-                if (battleEntity == Mario)
-                {
-                    SetMario(null);
-                }
-                if (battleEntity == Partner)
-                {
-                    SetPartner(null);
-                }
+            //Clear these references if the BattleEntity removed is Mario or his Partner
+            if (battleEntity == Mario)
+            {
+                SetMario(null);
+            }
+            if (battleEntity == Partner)
+            {
+                SetPartner(null);
             }
 
             //Decrement BattleEntity count when removed
@@ -696,7 +700,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="battleEntities">An <see cref="IList{T}"/> of BattleEntities to remove.</param>
         /// <param name="cleanUp">Whether to clean up the BattleEntities or not when removed from battle.
-        /// This should be true if the BattleEntities are permanently removed from battle.
+        /// This should be true if the BattleEntities are permanently removed from battle and will not be used in any battle again.
         /// In temporary cases, such as switching Partners, it would be preferable to set this to false.</param>
         public void RemoveEntities(IList<BattleEntity> battleEntities, bool cleanUp)
         {

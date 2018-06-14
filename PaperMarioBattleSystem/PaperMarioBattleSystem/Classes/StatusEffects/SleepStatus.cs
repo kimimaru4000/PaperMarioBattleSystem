@@ -42,14 +42,20 @@ namespace PaperMarioBattleSystem
             EntityAfflicted.DamageTakenEvent -= OnEntityDamaged;
             EntityAfflicted.DamageTakenEvent += OnEntityDamaged;
 
-            EntityAfflicted.BManager.EntityAddedEvent -= OnEntityAdded;
-            EntityAfflicted.BManager.EntityAddedEvent += OnEntityAdded;
+            EntityAfflicted.ChangedBattleManagerEvent -= OnEntityChangedBattle;
+            EntityAfflicted.ChangedBattleManagerEvent += OnEntityChangedBattle;
 
-            EntityAfflicted.BManager.EntityRemovedEvent -= OnEntityRemoved;
-            EntityAfflicted.BManager.EntityRemovedEvent += OnEntityRemoved;
+            if (EntityAfflicted.BManager != null)
+            {
+                EntityAfflicted.BManager.EntityAddedEvent -= OnEntityAdded;
+                EntityAfflicted.BManager.EntityAddedEvent += OnEntityAdded;
+
+                EntityAfflicted.BManager.EntityRemovedEvent -= OnEntityRemoved;
+                EntityAfflicted.BManager.EntityRemovedEvent += OnEntityRemoved;
+            }
 
             //Add the sleep VFX
-            AddSleepVFX();
+            AddSleepVFX(EntityAfflicted.BManager);
         }
 
         protected override void OnEnd()
@@ -57,11 +63,16 @@ namespace PaperMarioBattleSystem
             base.OnEnd();
 
             EntityAfflicted.DamageTakenEvent -= OnEntityDamaged;
-            EntityAfflicted.BManager.EntityAddedEvent -= OnEntityAdded;
-            EntityAfflicted.BManager.EntityRemovedEvent -= OnEntityRemoved;
+            EntityAfflicted.ChangedBattleManagerEvent -= OnEntityChangedBattle;
+
+            if (EntityAfflicted.BManager != null)
+            {
+                EntityAfflicted.BManager.EntityAddedEvent -= OnEntityAdded;
+                EntityAfflicted.BManager.EntityRemovedEvent -= OnEntityRemoved;
+            }
 
             //Remove the sleep VFX
-            RemoveSleepVFX();
+            RemoveSleepVFX(EntityAfflicted.BManager);
         }
 
         private void OnEntityDamaged(in InteractionHolder damageInfo)
@@ -89,7 +100,7 @@ namespace PaperMarioBattleSystem
             if (battleEntity != EntityAfflicted) return;
             
             //If added to battle but not cleaned up beforehand (Ex. Partners), add the sleep VFX back
-            AddSleepVFX();
+            AddSleepVFX(EntityAfflicted.BManager);
         }
 
         private void OnEntityRemoved(BattleEntity battleEntity)
@@ -97,23 +108,43 @@ namespace PaperMarioBattleSystem
             if (battleEntity != EntityAfflicted) return;
 
             //If removed from battle but not cleaned up (Ex. Partners), remove the sleep VFX
-            RemoveSleepVFX();
+            RemoveSleepVFX(EntityAfflicted.BManager);
         }
 
-        private void AddSleepVFX()
+        private void OnEntityChangedBattle(in BattleManager prevBattleManager, in BattleManager newBattleManager)
         {
-            if (SleepVFX == null)
+            //Unsubscribe from the events of the previous battle the BattleEntity was in
+            if (prevBattleManager != null)
             {
-                SleepVFX = new SleepZVFX(EntityAfflicted);
-                EntityAfflicted.BManager.battleObjManager.AddBattleObject(SleepVFX);
+                prevBattleManager.EntityAddedEvent -= OnEntityAdded;
+                prevBattleManager.EntityRemovedEvent -= OnEntityRemoved;
+            }
+
+            //Subscribe to the events of the new battle the BattleEntity is in
+            if (newBattleManager != null)
+            {
+                newBattleManager.EntityAddedEvent -= OnEntityAdded;
+                newBattleManager.EntityAddedEvent += OnEntityAdded;
+
+                newBattleManager.EntityRemovedEvent -= OnEntityRemoved;
+                newBattleManager.EntityRemovedEvent += OnEntityRemoved;
             }
         }
 
-        private void RemoveSleepVFX()
+        private void AddSleepVFX(in BattleManager bManager)
         {
-            if (SleepVFX != null)
+            if (SleepVFX == null && bManager != null)
             {
-                EntityAfflicted.BManager.battleObjManager.RemoveBattleObject(SleepVFX);
+                SleepVFX = new SleepZVFX(EntityAfflicted);
+                bManager.battleObjManager.AddBattleObject(SleepVFX);
+            }
+        }
+
+        private void RemoveSleepVFX(in BattleManager bManager)
+        {
+            if (SleepVFX != null && bManager != null)
+            {
+                bManager.battleObjManager.RemoveBattleObject(SleepVFX);
                 SleepVFX = null;
             }
         }

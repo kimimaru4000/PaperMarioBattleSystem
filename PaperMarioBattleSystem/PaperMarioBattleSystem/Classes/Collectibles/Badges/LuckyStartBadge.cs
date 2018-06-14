@@ -14,6 +14,8 @@ namespace PaperMarioBattleSystem
     {
         public const int StatusDuration = 3;
 
+        private bool AddedWithEvents = false;
+
         public LuckyStartBadge()
         {
             Name = "Lucky Start";
@@ -28,13 +30,19 @@ namespace PaperMarioBattleSystem
 
         protected override void OnEquip()
         {
-            EntityEquipped.BManager.EntityAddedEvent -= OnEntityEnteredBattle;
-            EntityEquipped.BManager.EntityAddedEvent += OnEntityEnteredBattle;
+            HandleSubscribe(EntityEquipped.BManager);
+
+            EntityEquipped.ChangedBattleManagerEvent -= OnEntityChangedBattle;
+            EntityEquipped.ChangedBattleManagerEvent += OnEntityChangedBattle;
         }
 
         protected override void OnUnequip()
         {
-            EntityEquipped.BManager.EntityAddedEvent -= OnEntityEnteredBattle;
+            HandleUnsubscribe(EntityEquipped.BManager);
+
+            EntityEquipped.ChangedBattleManagerEvent -= OnEntityChangedBattle;
+
+            AddedWithEvents = false;
         }
 
         private StatusEffect[] GetPossibleGrantedStatuses()
@@ -54,7 +62,7 @@ namespace PaperMarioBattleSystem
             //If so, grant it one of the Status Effects
             if (EntityEquipped == entity)
             {
-                EntityEquipped.BManager.EntityAddedEvent -= OnEntityEnteredBattle;
+                HandleUnsubscribe(EntityEquipped.BManager);
 
                 //Get the statuses and choose a random one
                 StatusEffect[] statuses = GetPossibleGrantedStatuses();
@@ -62,12 +70,49 @@ namespace PaperMarioBattleSystem
 
                 //Despite the badge's effects, the Status Effect isn't guaranteed to be inflicted
                 //If you have Feeling Fine equipped in TTYD and get Electrified with Lucky Start,
-                //it's not inflicted yet the "LUCKY" text is displayed and the sound plays
+                //it's not inflicted but the "LUCKY" text is still displayed and the sound still plays
                 if (EntityEquipped.EntityProperties.TryAfflictStatus(100d, statuses[randStatus].StatusType) == true)
                 {
                     EntityEquipped.EntityProperties.AfflictStatus(statuses[randStatus]);
                 }
             }
+        }
+
+        //Check if this BattleEntity changed battles
+        private void OnEntityChangedBattle(in BattleManager prevBManager, in BattleManager newBManager)
+        {
+            HandleUnsubscribe(prevBManager);
+
+            HandleSubscribe(newBManager);
+        }
+
+        /// <summary>
+        /// Handles subscribing to a BattleManager's events.
+        /// If this Lucky Start badge has already done this, it won't do it again until removed.
+        /// </summary>
+        /// <param name="bManager">The BattleManager.</param>
+        private void HandleSubscribe(in BattleManager bManager)
+        {
+            if (AddedWithEvents == true || bManager == null) return;
+
+            bManager.EntityAddedEvent -= OnEntityEnteredBattle;
+            bManager.EntityAddedEvent += OnEntityEnteredBattle;
+
+            AddedWithEvents = true;
+        }
+
+        /// <summary>
+        /// Handles unsubscribing from a BattleManager's events.
+        /// If this Lucky Start badge has already done this, it won't do it again until added.
+        /// </summary>
+        /// <param name="bManager">The BattleManager.</param>
+        private void HandleUnsubscribe(in BattleManager bManager)
+        {
+            if (AddedWithEvents == false || bManager == null) return;
+
+            bManager.EntityAddedEvent -= OnEntityEnteredBattle;
+
+            AddedWithEvents = false;
         }
     }
 }

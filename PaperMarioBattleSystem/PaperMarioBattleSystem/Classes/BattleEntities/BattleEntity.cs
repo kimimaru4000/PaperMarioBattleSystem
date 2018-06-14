@@ -13,7 +13,7 @@ using PaperMarioBattleSystem.Extensions;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Any fighter that takes part in battle
+    /// Any fighter that takes part in battle.
     /// </summary>
     public abstract class BattleEntity : INameable, IUpdateable, IDrawable, IPosition, IRotatable, IScalable, ITintable, ICleanup
     {
@@ -58,6 +58,13 @@ namespace PaperMarioBattleSystem
         /// This is invoked after all other logic when damaging the BattleEntity.
         /// </summary>
         public event DealtDamage DealtDamageEvent = null;
+
+        public delegate void ChangedBattleManager(in BattleManager prevBattleManager, in BattleManager newBattleManager);
+        /// <summary>
+        /// The event invoked when the BattleEntity changes its BattleManager.
+        /// This is invoked after the new BattleManager is set.
+        /// </summary>
+        public event ChangedBattleManager ChangedBattleManagerEvent = null;
 
         #endregion
 
@@ -219,6 +226,7 @@ namespace PaperMarioBattleSystem
             TurnEndEvent = null;
             DamageTakenEvent = null;
             DealtDamageEvent = null;
+            ChangedBattleManagerEvent = null;
         }
 
         /// <summary>
@@ -833,7 +841,10 @@ namespace PaperMarioBattleSystem
         /// <param name="bManager">The BattleManager the BattleEntity is apart of.</param>
         public void SetBattleManager(BattleManager bManager)
         {
+            BattleManager prevBManager = BManager;
             BManager = bManager;
+
+            ChangedBattleManagerEvent?.Invoke(prevBManager, BManager);
         }
 
         /// <summary>

@@ -548,6 +548,11 @@ namespace PaperMarioBattleSystem
             {
                 UnitTests.RunBadgeUnitTests();
             }
+            //Battle unit tests
+            else if (Input.GetKeyDown(Keys.D6, DebugKeyboard))
+            {
+                UnitTests.RunBattleUnitTests();
+            }
         }
 
         #endregion

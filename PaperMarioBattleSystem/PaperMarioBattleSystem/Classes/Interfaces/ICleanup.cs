@@ -14,6 +14,7 @@ namespace PaperMarioBattleSystem
     {
         /// <summary>
         /// Performs clean up on the object, clearing events and other data.
+        /// This should be called when the object in question will no longer be used.
         /// </summary>
         void CleanUp();
     }

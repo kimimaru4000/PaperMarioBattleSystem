@@ -19,7 +19,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The BattleEntity the Shell is defending.
         /// </summary>
-        private BattleEntity EntityDefending = null;
+        public BattleEntity EntityDefending { get; private set; } = null;
 
         private bool SentDeathBattleEvent = false;
 
@@ -55,7 +55,10 @@ namespace PaperMarioBattleSystem
 
         public override void CleanUp()
         {
-            BManager.EntityRemovedEvent -= EntityRemoved;
+            if (BManager != null)
+            {
+                BManager.EntityRemovedEvent -= EntityRemoved;
+            }
 
             RemoveEntityDefending();
 
@@ -128,7 +131,7 @@ namespace PaperMarioBattleSystem
             BManager.EntityRemovedEvent += EntityRemoved;
 
             //Show the Shell's HP, which can only be viewed with the Peekaboo Badge since it can't be tattled (in the actual games, at least)
-            if (BManager.Mario.GetPartyEquippedBadgeCount(BadgeGlobals.BadgeTypes.Peekaboo) > 0)
+            if (BManager.Mario != null && BManager.Mario.GetPartyEquippedBadgeCount(BadgeGlobals.BadgeTypes.Peekaboo) > 0)
             {
                 this.AddShowHPProperty();
             }
@@ -174,13 +177,15 @@ namespace PaperMarioBattleSystem
         
         private void EntityRemoved(BattleEntity entityRemoved)
         {
-            //Remove the BattleEntity the Shell is defending and kill the Shell
-            if (EntityDefending != null && entityRemoved == EntityDefending)
+            //Remove the BattleEntity the Shell is defending if that BattleEntity or the Shell is removed from battle
+            //Kill off the Shell since it won't be defending anyone
+            if (entityRemoved == this || (EntityDefending != null && entityRemoved == EntityDefending))
             {
                 RemoveEntityDefending();
 
                 //Unsubscribe from this event
-                BManager.EntityRemovedEvent -= EntityRemoved;
+                if (BManager != null)
+                    BManager.EntityRemovedEvent -= EntityRemoved;
 
                 //Kill the Shell if it's not already dead
                 if (IsDead == false)

@@ -19,6 +19,9 @@ namespace PaperMarioBattleSystem
 
         public override void PerformAction()
         {
+            //Try to use an item; if so, return
+            if (TryUseItem() == true) return;
+
             int randNum = RandomGlobals.Randomizer.Next(0, 2);
 
             //Jump if there are no segments left or we chose not to

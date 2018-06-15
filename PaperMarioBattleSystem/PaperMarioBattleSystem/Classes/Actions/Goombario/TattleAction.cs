@@ -44,22 +44,20 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        protected override BattleEntity[] GetCustomAffectedEntities()
+        protected override void GetCustomAffectedEntities(List<BattleEntity> entityList)
         {
-            return GetTattleableEntities();
+            GetTattleableEntities(entityList);
         }
         
         /// <summary>
         /// Gets all BattleEntities that can be tattled.
         /// They all implement the <see cref="ITattleableEntity"/> interface and are available to be tattled.
         /// </summary>
-        /// <returns>An array of BattleEntities of the opposing EntityType that can be tattled.</returns>
-        private BattleEntity[] GetTattleableEntities()
+        /// <param name="entityList">The list to add the BattleEntities that can be tattled into.</param>
+        private void GetTattleableEntities(List<BattleEntity> entityList)
         {
-            List<BattleEntity> tattleableEntities = new List<BattleEntity>();
-
             //Get all BattleEntities of the types specified in the move information
-            if (MoveProperties.OtherEntTypes != null)
+            if (MoveProperties.OtherEntTypes != null && MoveProperties.OtherEntTypes.Length > 0)
             {
                 List<BattleEntity> entities = new List<BattleEntity>();
 
@@ -75,15 +73,13 @@ namespace PaperMarioBattleSystem
                         //Add it if the entity is tattleable and can currently be tattled
                         if (tattleableEntity != null && tattleableEntity.CanBeTattled == true)
                         {
-                            tattleableEntities.Add(entities[j]);
+                            entityList.Add(entities[j]);
                         }
                     }
 
                     entities.Clear();
                 }
             }
-
-            return tattleableEntities.ToArray();
         }
     }
 }

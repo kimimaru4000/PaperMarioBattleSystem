@@ -524,7 +524,7 @@ namespace PaperMarioBattleSystem
         private void FindNextEntityTurn()
         {
             //Get the list of entities going on the current phase
-            List<BattleEntity> entities = GetEntitiesList(CurEntityPhase);
+            List<BattleEntity> entities = GetInternalEntitiesList(CurEntityPhase);
             if (entities != null)
             {
                 for (int i = 0; i < entities.Count; i++)
@@ -562,7 +562,7 @@ namespace PaperMarioBattleSystem
             EntityTypes entityType = battleEntity.EntityType;
 
             //Get the existing list to add this BattleEntity to
-            List<BattleEntity> entityList = GetEntitiesList(entityType);
+            List<BattleEntity> entityList = GetInternalEntitiesList(entityType);
 
             //If no list exists for this EntityType, add one
             if (entityList == null)
@@ -654,7 +654,7 @@ namespace PaperMarioBattleSystem
             EntityTypes entityType = battleEntity.EntityType;
 
             //Get the existing list to remove this BattleEntity from
-            List<BattleEntity> entityList = GetEntitiesList(entityType);
+            List<BattleEntity> entityList = GetInternalEntitiesList(entityType);
 
             //If no BattleEntities of this type are present, there's nothing to remove
             if (entityList == null)
@@ -724,7 +724,7 @@ namespace PaperMarioBattleSystem
         /// <param name="entityType">The type of BattleEntities to sort.</param>
         public void SortEntityList(EntityTypes entityType)
         {
-            List<BattleEntity> entityList = GetEntitiesList(entityType);
+            List<BattleEntity> entityList = GetInternalEntitiesList(entityType);
             if (entityList != null && entityList.Count > 0)
             {
                 entityList.Sort(BattleGlobals.EntityBattleIndexSort);
@@ -761,7 +761,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="entityType">The EntityType of entities to return.</param>
         /// <returns>Entities matching the EntityType specified. If none exist, null is returned.</returns>
-        private List<BattleEntity> GetEntitiesList(EntityTypes entityType)
+        private List<BattleEntity> GetInternalEntitiesList(EntityTypes entityType)
         {
             List<BattleEntity> entities = null;
 
@@ -784,7 +784,7 @@ namespace PaperMarioBattleSystem
         {
             //Get the internal list
             List<BattleEntity> entities = new List<BattleEntity>();
-            List<BattleEntity> entitiesOfType = GetEntitiesList(entityType);
+            List<BattleEntity> entitiesOfType = GetInternalEntitiesList(entityType);
 
             //Add the BattleEntities in the internal list into the new list
             entities.CopyFromList(entitiesOfType);
@@ -855,7 +855,7 @@ namespace PaperMarioBattleSystem
         public int GetEntitiesCount(EntityTypes entityType)
         {
             //Get the same list reference and return its count
-            List<BattleEntity> entities = GetEntitiesList(entityType);
+            List<BattleEntity> entities = GetInternalEntitiesList(entityType);
 
             if (entities == null) return 0;
             else return entities.Count;
@@ -883,7 +883,7 @@ namespace PaperMarioBattleSystem
         /// If null, will include entities of all height states</param>
         public void GetEntities(List<BattleEntity> entityList, EntityTypes entityType, params HeightStates[] heightStates)
         {
-            List<BattleEntity> entList = GetEntitiesList(entityType);
+            List<BattleEntity> entList = GetInternalEntitiesList(entityType);
             entityList.CopyFromList(entList);
 
             BattleManagerUtils.FilterEntitiesByHeights(entityList, heightStates);
@@ -915,7 +915,7 @@ namespace PaperMarioBattleSystem
         /// <returns>Entities matching the EntityType and height states specified, in reverse.</returns>
         public void GetEntitiesReversed(List<BattleEntity> entityList, EntityTypes entityType, params HeightStates[] heightStates)
         {
-            List<BattleEntity> entList = GetEntitiesList(entityType);
+            List<BattleEntity> entList = GetInternalEntitiesList(entityType);
             entityList.CopyFromListReverse(entList);
 
             BattleManagerUtils.FilterEntitiesByHeights(entityList, heightStates);
@@ -946,7 +946,7 @@ namespace PaperMarioBattleSystem
         /// If null or empty, will return the entities passed in</param>
         public void GetEntityAllies(List<BattleEntity> entityList, BattleEntity entity, params HeightStates[] heightStates)
         {
-            List<BattleEntity> entList = GetEntitiesList(entity.EntityType);
+            List<BattleEntity> entList = GetInternalEntitiesList(entity.EntityType);
 
             entityList.CopyFromList(entList);
             entityList.Remove(entity);
@@ -1031,7 +1031,7 @@ namespace PaperMarioBattleSystem
         /// <param name="entity">The BattleEntity to find entities behind</param>
         public void GetEntitiesBehind(List<BattleEntity> entityList, BattleEntity entity)
         {
-            List<BattleEntity> entList = GetEntitiesList(entity.EntityType);
+            List<BattleEntity> entList = GetInternalEntitiesList(entity.EntityType);
 
             //Copy the BattleEntities into this list
             entityList.CopyFromList(entList);
@@ -1057,7 +1057,7 @@ namespace PaperMarioBattleSystem
         /// <returns>An int array containing the Battle Indices that have been skipped over. If none are found, an empty array.</returns>
         public int[] FindBattleIndexGaps(EntityTypes entityType)
         {
-            return BattleManagerUtils.FindBattleIndexGaps(GetEntitiesList(entityType));
+            return BattleManagerUtils.FindBattleIndexGaps(GetInternalEntitiesList(entityType));
         }
 
         /// <summary>
@@ -1068,7 +1068,7 @@ namespace PaperMarioBattleSystem
         /// If no BattleEntities of the specified type are in battle, -1 will be returned.</returns>
         public int FindLowestAvailableBattleIndex(EntityTypes entityType)
         {
-            List<BattleEntity> entities = GetEntitiesList(entityType);
+            List<BattleEntity> entities = GetInternalEntitiesList(entityType);
 
             //No BattleEntities are in this list, so nothing can be returned
             if (entities == null || entities.Count == 0)
@@ -1115,7 +1115,7 @@ namespace PaperMarioBattleSystem
         /// <returns>The BattleEntity found from the starting BattleIndex, otherwise null.</returns>
         public BattleEntity FindEntityFromBattleIndex(EntityTypes entityType, int startIndex, bool backwards = false)
         {
-            List<BattleEntity> entities = GetEntitiesList(entityType);
+            List<BattleEntity> entities = GetInternalEntitiesList(entityType);
 
             //No BattleEntities are in this list, so nothing can be returned
             if (entities == null) return null;
@@ -1170,7 +1170,7 @@ namespace PaperMarioBattleSystem
         /// If none exist that match the height states specified, then null.</returns>
         public BattleEntity GetFrontmostBattleEntity(EntityTypes entityType, params HeightStates[] heightStates)
         {
-            List<BattleEntity> entities = GetEntitiesList(entityType);
+            List<BattleEntity> entities = GetInternalEntitiesList(entityType);
 
             //Return immediately if either input is null
             if (entities == null || entities.Count == 0) return null;

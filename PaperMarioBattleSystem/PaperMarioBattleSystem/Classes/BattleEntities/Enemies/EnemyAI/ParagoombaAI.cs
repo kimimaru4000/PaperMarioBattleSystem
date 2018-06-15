@@ -23,6 +23,9 @@ namespace PaperMarioBattleSystem
         {
             if (paragoomba.WingedBehavior.Grounded == false)
             {
+                //Try to use an item; if so, return
+                if (TryUseItem() == true) return;
+
                 Enemy.StartAction(new DiveKickAction(Enemy), false, Enemy.BManager.FrontPlayer.GetTrueTarget());
             }
             else

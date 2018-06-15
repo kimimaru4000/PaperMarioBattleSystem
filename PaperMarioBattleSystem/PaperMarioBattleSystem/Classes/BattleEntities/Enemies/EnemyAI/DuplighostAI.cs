@@ -30,6 +30,9 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
+            //Try to use an item; if so, return
+            if (TryUseItem() == true) return;
+
             if (duplighost.PartnerTypeDisguise == PartnerTypes.None)
             {
                 //For testing, say that it's a 50% chance of disguising and headbutting

@@ -164,6 +164,7 @@
     <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\ParagoombaAI.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\PokeyAI.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\ShyGuyAI.cs" />
+    <Compile Include="Classes\BattleEntities\Enemies\EnemyAI\SkyGuyAI.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Goomba.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Gulpit.cs" />
     <Compile Include="Classes\BattleEntities\Enemies\Koopatrol.cs" />

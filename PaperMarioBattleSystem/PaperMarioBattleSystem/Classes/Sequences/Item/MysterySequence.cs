@@ -113,7 +113,8 @@ namespace PaperMarioBattleSystem
             //1. Find out if this item targets enemies or allies
             //2. If it targets allies, only use it on the entity using it
             //3. If it targets enemies, use it on the first enemy if it targets only one, otherwise use it on all enemies
-            List<BattleEntity> entitiesAffected = new List<BattleEntity>(itemChosenAction.GetEntitiesMoveAffects());
+            List<BattleEntity> entitiesAffected = new List<BattleEntity>();
+            itemChosenAction.GetEntitiesMoveAffects(entitiesAffected);
             if (itemChosenAction.MoveProperties.SelectionType == Enumerations.EntitySelectionType.Single
                 || itemChosenAction.MoveProperties.SelectionType == Enumerations.EntitySelectionType.First)
             {

@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PaperMarioBattleSystem
 {
-    public sealed class ShyGuyAI : EnemyAIBehavior
+    public sealed class SkyGuyAI : EnemyAIBehavior
     {
-        public ShyGuyAI(BattleEnemy enemy) : base(enemy)
+        public SkyGuyAI(BattleEnemy enemy) : base(enemy)
         {
 
         }
@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
             //Try to use an item; if so, return
             if (TryUseItem() == true) return;
 
-            Enemy.StartAction(new SwapMarioPartnerAction(Enemy), true, Enemy.BManager.FrontPlayer);
+            Enemy.StartAction(new WindBreathAction(Enemy, 1, 4), true, Enemy.BManager.FrontPlayer);
         }
     }
 }

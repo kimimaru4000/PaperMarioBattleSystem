@@ -61,8 +61,9 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.PlayAnimation(AnimationGlobals.RunningName, true);
-
-                    Vector2 pos = BattleManagerUtils.GetPositionInFront(User.BManager.FrontPlayer, User.EntityType != Enumerations.EntityTypes.Player);
+                    
+                    //Get the position in front of the frontmost BattleEntity for this EntityType
+                    Vector2 pos = BattleManagerUtils.GetPositionInFront(User.BManager.GetFrontmostBattleEntity(User.EntityType, null), User.EntityType != Enumerations.EntityTypes.Player);
                     pos.Y = User.BattlePosition.Y;
 
                     CurSequenceAction = new MoveToSeqAction(User, pos, WalkDuration);
@@ -103,9 +104,18 @@ namespace PaperMarioBattleSystem
                 case 1:
                     User.AnimManager.PlayAnimation(User.GetIdleAnim());
 
-                    //Remove the item from the Inventory when it's finished
-                    //NOTE: I'm not sure if this is the best place to do this yet
-                    Inventory.Instance.RemoveItem(itemAction.ItemUsed);
+                    //Remove the item when finished
+                    //For Players, remove the item from the inventory
+                    if (User.EntityType == Enumerations.EntityTypes.Player)
+                    {
+                        Inventory.Instance.RemoveItem(itemAction.ItemUsed);
+                    }
+                    //It has to be an Enemy, so remove its held item
+                    else
+                    {
+                        BattleEnemy enemy = (BattleEnemy)User;
+                        enemy.SetHeldCollectible(null);
+                    }
 
                     EndSequence();
                     break;

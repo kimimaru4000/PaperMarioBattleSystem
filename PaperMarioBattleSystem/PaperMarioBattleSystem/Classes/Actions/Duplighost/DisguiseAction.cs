@@ -23,12 +23,10 @@ namespace PaperMarioBattleSystem
             actionCommand = null;
         }
 
-        protected override BattleEntity[] GetCustomAffectedEntities()
+        protected override void GetCustomAffectedEntities(List<BattleEntity> entityList)
         {
             BattlePartner partner = User.BManager.Partner;
-            if (partner == null) return null;
-
-            return new BattleEntity[] { partner };
+            if (partner != null) entityList.Add(partner);
         }
     }
 }

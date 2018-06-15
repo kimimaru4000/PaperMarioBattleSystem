@@ -19,6 +19,9 @@ namespace PaperMarioBattleSystem
 
         public override void PerformAction()
         {
+            //Try to use an item; if so, return
+            if (TryUseItem() == true) return;
+
             Enemy.StartAction(new JumpAction(Enemy), false, Enemy.BManager.FrontPlayer.GetTrueTarget());
         }
     }

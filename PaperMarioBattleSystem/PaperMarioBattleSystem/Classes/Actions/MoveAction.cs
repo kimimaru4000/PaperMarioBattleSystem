@@ -281,10 +281,11 @@ namespace PaperMarioBattleSystem
             //If the move targets entities, check if any entities can be targeted
             if (MoveProperties.MoveAffectionType != MoveAffectionTypes.None)
             {
-                BattleEntity[] entities = GetEntitiesMoveAffects();
+                List<BattleEntity> entities = new List<BattleEntity>();
+                GetEntitiesMoveAffects(entities);
 
                 //There are no entities this move can target
-                if (entities.Length == 0)
+                if (entities.Count == 0)
                 {
                     Disabled = true;
                     DisabledString = "There's no one this move can target!";
@@ -423,65 +424,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Draws the information about this action in the menu.
-        /// This can include the name and FP cost.
-        /// </summary>
-        /// <param name="position">The position to draw the information at.</param>
-        /// <param name="color">The color to draw the information.</param>
-        /// <param name="textColor">The color to draw the text for the information.</param>
-        /// <param name="alphaMod">The alpha value of the color. This is less than 1 if this MoveAction isn't currently selected on the menu.</param>
-        /// <param name="iconXOffset">The X offset to display the move's icon.</param>
-        /// <param name="resourceCostXOffset">The X offset to display the move's resource cost.</param>
-        //public virtual void DrawMenuInfo(Vector2 position, Color color, Color textColor, float alphaMod, float iconXOffset, float resourceCostXOffset)
-        //{
-        //    //Draw icon
-        //    if (MoveInfo.Icon != null && MoveInfo.Icon.Tex != null)
-        //    {
-        //        SpriteRenderer.Instance.DrawUI(MoveInfo.Icon.Tex, position - new Vector2(iconXOffset, 0), MoveInfo.Icon.SourceRect, color * alphaMod, false, false, .39f);
-        //    }
-        //
-        //    //Draw name
-        //    SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, Name, position, textColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
-        //
-        //    //Show cost if the move costs anything
-        //    if ((CostsFP == true || CostsSP == true) && MoveProperties.CostDisplayType != CostDisplayTypes.Hidden)
-        //    {
-        //        Color fpColor = textColor;
-        //
-        //        //If the resource cost was lowered, show it a bluish-gray color (This feature is from PM)
-        //        //Keep it gray if the move is disabled for any reason
-        //        if (Disabled == false && MoveProperties.CostDisplayType == CostDisplayTypes.Special)
-        //        {
-        //            Color blueGray = SpecialCaseColor;
-        //            fpColor = blueGray;
-        //        }
-        //
-        //        SpriteRenderer.Instance.DrawUIText(AssetManager.Instance.TTYDFont, GetCostString(), position + new Vector2(resourceCostXOffset, 0), fpColor * alphaMod, 0f, Vector2.Zero, 1f, .4f);
-        //    }
-        //}
-
-        /// <summary>
-        /// Gets the cost of the MoveAction. This is the FP cost for most moves and SP cost for Special Moves.
-        /// </summary>
-        /// <returns>A string of the cost to use the action.</returns>
-        //public string GetCostString()
-        //{
-        //    if (MoveProperties.ResourceType == MoveResourceTypes.FP)
-        //    {
-        //        return $"{MoveProperties.ResourceCost} FP";
-        //    }
-        //    else
-        //    {
-        //        return $"{MoveProperties.ResourceCost / StarPowerGlobals.SPUPerStarPower} SP";
-        //    }
-        //}
-
-        /// <summary>
         /// Gets the set of BattleEntities that this move affects.
-        /// <para>The default behavior is to get the entities based on the MoveAction's <see cref="MoveAffectionTypes"/>.</para>
+        /// <para>This gets the BattleEntities based on the MoveAction's <see cref="MoveAffectionTypes"/>.</para>
         /// </summary>
-        /// <returns>The BattleEntities the move affects based on its MoveAffectionType and the HeightStates it can target.
-        /// If None, an empty array is returned.</returns>
+        /// <returns>A new array containing the BattleEntities the move affects based on its MoveAffectionType and the HeightStates it can target.</returns>
         /* NOTE: We eventually may want this to be static and make the instance version call the static one.
          * This would allow filtering just from data without requiring an instance.
          */
@@ -489,22 +435,41 @@ namespace PaperMarioBattleSystem
         {
             List<BattleEntity> entities = new List<BattleEntity>();
 
+            GetEntitiesMoveAffects(entities);
+
+            if (entities.Count == 0)
+            {
+                return Array.Empty<BattleEntity>();
+            }
+            else
+            {
+                return entities.ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Adds the set of BattleEntities that this move affects into a supplied list.
+        /// <para>This gets the entities based on the MoveAction's <see cref="MoveAffectionTypes"/>.</para>
+        /// </summary>
+        /// <param name="entityList">The list to add the BattleEntities this move affects into.</param>
+        public void GetEntitiesMoveAffects(List<BattleEntity> entityList)
+        {
             bool addedAllies = false;
 
             //Check for adding allies
             if (UtilityGlobals.MoveAffectionTypesHasFlag(MoveProperties.MoveAffectionType, MoveAffectionTypes.Ally) == true)
             {
-                entities.AddRange(User.BManager.GetEntities(User.EntityType, MoveProperties.HeightsAffected));
+                entityList.AddRange(User.BManager.GetEntities(User.EntityType, MoveProperties.HeightsAffected));
                 addedAllies = true;
             }
-            
+
             //Check if the user of the move should be added
             if (UtilityGlobals.MoveAffectionTypesHasFlag(MoveProperties.MoveAffectionType, MoveAffectionTypes.Self) == true)
             {
                 //If we didn't add allies, add the user of the move
                 if (addedAllies == false)
                 {
-                    entities.Add(User);
+                    entityList.Add(User);
                 }
             }
             else
@@ -512,7 +477,7 @@ namespace PaperMarioBattleSystem
                 //Otherwise if we're not adding the user of the move and we did add allies, remove the user so we end up with only allies
                 if (addedAllies == true)
                 {
-                    entities.Remove(User);
+                    entityList.Remove(User);
                 }
             }
 
@@ -524,7 +489,7 @@ namespace PaperMarioBattleSystem
                     for (int i = 0; i < MoveProperties.OtherEntTypes.Length; i++)
                     {
                         EntityTypes otherType = MoveProperties.OtherEntTypes[i];
-                        entities.AddRange(User.BManager.GetEntities(otherType, MoveProperties.HeightsAffected));
+                        entityList.AddRange(User.BManager.GetEntities(otherType, MoveProperties.HeightsAffected));
                     }
                 }
                 else
@@ -536,42 +501,40 @@ namespace PaperMarioBattleSystem
             //If this move has custom entity targeting logic, add the entities to the list
             if (UtilityGlobals.MoveAffectionTypesHasFlag(MoveProperties.MoveAffectionType, MoveAffectionTypes.Custom) == true)
             {
-                BattleEntity[] customAffected = GetCustomAffectedEntities();
-
-                if (customAffected != null && customAffected.Length > 0)
-                {
-                    entities.AddRange(customAffected);
-                }
+                GetCustomAffectedEntities(entityList);
             }
 
             //Filter out untargetable BattleEntities
-            BattleManagerUtils.FilterEntitiesByTargetable(entities);
+            BattleManagerUtils.FilterEntitiesByTargetable(entityList);
 
             //If the BattleEntity has a custom targeting method and shouldn't be targeted, remove it
             //Otherwise, set to the true target in the event something is defending it
-            for (int i = entities.Count - 1; i >= 0; i--)
+            for (int i = entityList.Count - 1; i >= 0; i--)
             {
                 //Check for a custom targeting method
-                bool? targetVal = entities[i].EntityProperties.CustomTargeting?.Invoke(this);
+                bool? targetVal = entityList[i].EntityProperties.CustomTargeting?.Invoke(this);
 
                 //If it returns false, remove the BattleEntity from the list
                 if (targetVal == false)
                 {
-                    entities.RemoveAt(i);
+                    entityList.RemoveAt(i);
                     continue;
                 }
                 else
                 {
-                    entities[i] = entities[i].GetTrueTarget();
+                    entityList[i] = entityList[i].GetTrueTarget();
                 }
             }
-
-            return entities.ToArray();
         }
 
-        protected virtual BattleEntity[] GetCustomAffectedEntities()
+        /// <summary>
+        /// Retrieves a custom set of BattleEntities that the MoveAction targets.
+        /// This is called if the MoveAction's <see cref="MoveAffectionTypes"/> contains <see cref="MoveAffectionTypes.Custom"/>.
+        /// </summary>
+        /// <param name="entityList">The list to add the custom set of BattleEntities this move affects into.</param>
+        protected virtual void GetCustomAffectedEntities(List<BattleEntity> entityList)
         {
-            return null;
+            
         }
     }
 }

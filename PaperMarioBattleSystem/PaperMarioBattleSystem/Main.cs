@@ -113,9 +113,7 @@ namespace PaperMarioBattleSystem
 
             battleManager.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
                 mario, partner,
-                new List<BattleEntity>() { new Goomba(), new Paratroopa() });
-
-            battleManager.AddEntity(new Pokey(), 3, true);
+                new List<BattleEntity>() { new Goomba(), new Paratroopa(), new Pokey() });
 
             //Initialize helper objects
             //Check for the battle setting and add darkness if so

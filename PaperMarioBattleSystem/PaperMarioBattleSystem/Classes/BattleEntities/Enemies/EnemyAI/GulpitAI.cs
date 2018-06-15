@@ -19,6 +19,9 @@ namespace PaperMarioBattleSystem
 
         public override void PerformAction()
         {
+            //Try to use an item; if so, return
+            if (TryUseItem() == true) return;
+
             //If any IUsableEntities are found in the Neutral BattleEntity list, perform Rock Spit with it
             //Otherwise, perform Lick
             List<BattleEntity> usableEntities = new List<BattleEntity>();

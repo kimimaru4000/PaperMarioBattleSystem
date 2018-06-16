@@ -347,6 +347,7 @@
     <Compile Include="Classes\Dialogue\MessageRoutines\SpeedRoutine.cs" />
     <Compile Include="Classes\Dialogue\MessageRoutines\WaitRoutine.cs" />
     <Compile Include="Classes\Dialogue\ProgressDialogueStar.cs" />
+    <Compile Include="Classes\General\ConfigLoader.cs" />
     <Compile Include="Classes\Graphics\NineSlicedTexture2D.cs" />
     <Compile Include="Classes\Graphics\CroppedTexture2D.cs" />
     <Compile Include="Classes\Graphics\SlicedTexture2D.cs" />
@@ -595,6 +596,10 @@
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\PMBSConfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Content\Shaders\Charge.fx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -854,7 +859,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Classes\General\" />
     <Folder Include="Content\Audio\Music\" />
   </ItemGroup>
   <ItemGroup>

@@ -164,6 +164,7 @@ namespace PaperMarioBattleSystem
             //Unequip all Badges from the BattleEntity
             for (int i = EquippedBadges.Count - 1; i >= 0; i--)
             {
+                //UnEquip() will remove the Badge from the list, so we don't need to manually remove it here
                 EquippedBadges[i].UnEquip();
             }
 
@@ -1365,7 +1366,7 @@ namespace PaperMarioBattleSystem
         #region Badge Methods
 
         /// <summary>
-        /// Adds a Badge to a BattleEntity. This is called from the Badge's Equip methods.
+        /// Adds a Badge to a BattleEntity. This is called from the Badge's <see cref="Badge.Equip(BattleEntity)"/> method.
         /// </summary>
         /// <param name="badge">The Badge to equip.</param>
         public void AddEquippedBadge(Badge badge)
@@ -1390,7 +1391,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Removes a Badge from a BattleEntity. This is called from the Badge's UnEquip methods.
+        /// Removes a Badge from a BattleEntity. This is called from the Badge's <see cref="Badge.UnEquip"/> method.
         /// </summary>
         /// <param name="badge">The Badge to unequip.</param>
         public void RemoveEquippedBadge(Badge badge)

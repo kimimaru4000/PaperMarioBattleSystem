@@ -570,17 +570,24 @@ namespace PaperMarioBattleSystem
 
     /// <summary>
     /// A class containing the main stats in the game.
-    /// Enemies have internal levels, likely related to Star Point gain.
     /// </summary>
     public class Stats
     {
+        /// <summary>
+        /// Level.
+        /// </summary>
         public int Level;
 
         //Max stats
+        /// <summary>
+        /// The max HP.
+        /// </summary>
         public int MaxHP;
-        public int MaxFP;
 
-        //Base stats going into battle
+        /// <summary>
+        /// The max FP.
+        /// </summary>
+        public int MaxFP;
 
         /// <summary>
         /// Base Attack without any modifications.
@@ -592,7 +599,14 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public int BaseDefense;
 
+        /// <summary>
+        /// The current HP.
+        /// </summary>
         public int HP;
+
+        /// <summary>
+        /// The current FP.
+        /// </summary>
         public int FP;
 
         /// <summary>
@@ -607,7 +621,7 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Different from Defense - this modifies the total damage the attack itself does, making it possible to reduce damage dealt
-        /// to you from Piercing attacks. This value can be negative.
+        /// from Piercing attacks. This value can be negative.
         /// <para>The P-Up, D-Down and P-Down, D-Up Badges modify this value.</para>
         /// </summary>
         public int DamageReduction;
@@ -649,7 +663,7 @@ namespace PaperMarioBattleSystem
         public readonly List<double> EvasionModifiers = new List<double>();
 
         /// <summary>
-        /// Default stats
+        /// Default stats.
         /// </summary>
         public static Stats Default => new Stats(1, 10, 5, 0, 0);
 

@@ -169,7 +169,7 @@ namespace PaperMarioBattleSystem
                 MiniYuxes.Add(miniYux);
 
                 //Add the Mini-Yux to battle with the same BattleIndex as the Yux
-                BManager.AddEntity(miniYux, BattleIndex, true);
+                BManager.AddEntity(miniYux, BattleIndex);
 
                 createdAny = true;
             }

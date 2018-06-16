@@ -37,6 +37,8 @@ namespace PaperMarioBattleSystem
             {
                 BManager.EntityRemovedEvent -= OnEntityRemoved;
             }
+
+            base.CleanUp();
         }
 
         public override void LoadAnimations()

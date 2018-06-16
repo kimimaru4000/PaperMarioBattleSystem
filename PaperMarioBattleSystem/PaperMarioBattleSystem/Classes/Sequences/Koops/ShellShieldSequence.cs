@@ -147,7 +147,7 @@ namespace PaperMarioBattleSystem
 
                     //Tell the Shell to defend the target and add the Shell to battle
                     ShellCreated.SetEntityToDefend(EntitiesAffected[0]);
-                    User.BManager.AddEntities(new BattleEntity[] { ShellCreated }, null, true);
+                    User.BManager.AddEntity(ShellCreated, null);
 
                     CurSequenceAction = new WaitSeqAction(WaitDur / 2d);
                     break;

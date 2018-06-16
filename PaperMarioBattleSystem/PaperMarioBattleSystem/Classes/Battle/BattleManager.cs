@@ -224,8 +224,8 @@ namespace PaperMarioBattleSystem
                 addedEntities.AddRange(otherEntities);
             }
 
-            //Add and initialize all entities
-            AddEntities(addedEntities, null, true);
+            //Add all entities
+            AddEntities(addedEntities, null);
 
             Phase = StartingPhase;
 
@@ -547,10 +547,7 @@ namespace PaperMarioBattleSystem
         /// <param name="battleEntity">The BattleEntity to add.</param>
         /// <param name="battleIndex">An int containing the BattleIndex to add the BattleEntity at.
         /// <para>If the value is null, the BattleManager will assign the lowest available BattleIndex.</para></param>
-        /// <param name="initialize">Whether to initialize the BattleEntity or not. Regardless of the value, it assigns a BattleIndex.
-        /// If the BattleEntity has first joined battle, this should be true.
-        /// This should be false in cases where the BattleEntities have been removed and re-added to battle, such as switching Partners.</param>
-        public void AddEntity(BattleEntity battleEntity, int? battleIndex, bool initialize)
+        public void AddEntity(BattleEntity battleEntity, int? battleIndex)
         {
             //Check for a null BattleEntity
             if (battleEntity == null)
@@ -586,13 +583,9 @@ namespace PaperMarioBattleSystem
             //Set the Battle Manager associated with the BattleEntity to this one
             battleEntity.SetBattleManager(this);
 
-            //Set the battle index and start battle for the BattleEntity if it should
+            //Set the battle index and tell the BattleEntity it entered the battle
             battleEntity.SetBattleIndex(finalBattleIndex, false);
-
-            if (initialize == true)
-            {
-                battleEntity.OnEnteredBattle();
-            }
+            battleEntity.OnEnteredBattle();
 
             //Increment BattleEntity count when added
             TotalEntityCount++;
@@ -611,10 +604,7 @@ namespace PaperMarioBattleSystem
         /// <param name="battleIndices">An <see cref="IList{T}"/> of ints containing the BattleIndex to add each BattleEntity at.
         /// <para>If the IList is null, the value at the IList index is less than 0, or the IList index is out of the <paramref name="battleEntities"/>
         /// IList range, the BattleManager will assign the lowest available BattleIndex.</para></param>
-        /// <param name="initialize">Whether to initialize the entities or not. Regardless of the value, it assigns a BattleIndex.
-        /// If the BattleEntities have first joined battle, this should be true.
-        /// This should be false in cases where BattleEntities have been removed and re-added to battle, such as switching Partners.</param>
-        public void AddEntities(IList<BattleEntity> battleEntities, IList<int> battleIndices, bool initialize)
+        public void AddEntities(IList<BattleEntity> battleEntities, IList<int> battleIndices)
         {
             //Don't add a null or empty list
             if (battleEntities == null || battleEntities.Count == 0)
@@ -631,7 +621,7 @@ namespace PaperMarioBattleSystem
                 if (battleIndices != null && i < battleIndices.Count)
                     index = battleIndices[i];
 
-                AddEntity(battleEntities[i], index, initialize);
+                AddEntity(battleEntities[i], index);
             }
         }
 

@@ -36,10 +36,26 @@ namespace PaperMarioBattleSystem
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Blown, new StatusPropertyHolder(90d, 0));
 
             LoadAnimations();
+
+            //Create the Balloon
+            Balloon = new SkyGuyBalloon(Layer - .0001f);
+
+            //Mark that the Balloon is a helper for the Sky Guy
+            Balloon.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.HelperEntity, this);
+
+            //Subscribe to see when the Balloon's dies
+            Balloon.HealthStateChangedEvent -= OnBalloonHealthStateChanged;
+            Balloon.HealthStateChangedEvent += OnBalloonHealthStateChanged;
+
+            //See when it changes battle; we need this to remove the Balloon from the previous battle
+            ChangedBattleManagerEvent -= OnBattleChanged;
+            ChangedBattleManagerEvent += OnBattleChanged;
         }
 
         public override void CleanUp()
         {
+            ChangedBattleManagerEvent -= OnBattleChanged;
+
             base.CleanUp();
 
             WingedBehavior?.CleanUp();
@@ -48,9 +64,9 @@ namespace PaperMarioBattleSystem
             {
                 Balloon.HealthStateChangedEvent -= OnBalloonHealthStateChanged;
 
-                //Kill off the balloon if it's not dead
+                //Clean up the balloon if it's not dead
                 if (Balloon.IsDead == false)
-                    Balloon.Die();
+                    Balloon.CleanUp();
 
                 Balloon = null;
             }
@@ -71,19 +87,11 @@ namespace PaperMarioBattleSystem
         {
             base.OnEnteredBattle();
 
-            //Add the Balloon to battle
-            Balloon = new SkyGuyBalloon(Layer - .0001f);
-            BManager.AddEntity(Balloon, null, true);
+            //Add the Balloon to the current battle
+            BManager.AddEntity(Balloon, null);
 
             Balloon.Position = Position + new Vector2(2, -40);
             Balloon.SetBattlePosition(Balloon.Position);
-
-            //Mark that the Balloon is a helper for the Sky Guy
-            Balloon.EntityProperties.AddAdditionalProperty(Enumerations.AdditionalProperty.HelperEntity, this);
-
-            //Subscribe to see when the Balloon's dies
-            Balloon.HealthStateChangedEvent -= OnBalloonHealthStateChanged;
-            Balloon.HealthStateChangedEvent += OnBalloonHealthStateChanged;
         }
 
         #region Tattle Data
@@ -113,6 +121,7 @@ namespace PaperMarioBattleSystem
             if (newHealthState == Enumerations.HealthStates.Dead)
             {
                 Balloon.HealthStateChangedEvent -= OnBalloonHealthStateChanged;
+                ChangedBattleManagerEvent -= OnBattleChanged;
 
                 //If the Sky Guy is already dead, don't handle grounding it
                 if (IsDead == false)
@@ -122,6 +131,16 @@ namespace PaperMarioBattleSystem
 
                 //Set to null since we don't need the Balloon anymore
                 Balloon = null;
+            }
+        }
+
+        //When changing battles, the SkyGuy should bring the Balloon with him
+        private void OnBattleChanged(in BattleManager prevBattleManager, in BattleManager newBattleManager)
+        {
+            //Remove from the previous BattleManager
+            if (prevBattleManager != null && Balloon != null)
+            {
+                prevBattleManager.RemoveEntity(Balloon, false);
             }
         }
     }

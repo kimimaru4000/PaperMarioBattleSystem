@@ -394,7 +394,7 @@ namespace PaperMarioBattleSystem
 
                 Debug.Assert(koopa.EntityProperties.GetAdditionalProperty<int>(Enumerations.AdditionalProperty.ShowHP) == 0);
 
-                manager2.AddEntity(mario, null, true);
+                manager2.AddEntity(mario, null);
 
                 Debug.Assert(manager2.TotalEntityCount == 2);
                 Debug.Assert(peekaboo.EntityEquipped == mario);
@@ -435,7 +435,7 @@ namespace PaperMarioBattleSystem
                 Debug.Assert(manager1.TotalEntityCount == 0);
                 Debug.Assert(luckyStart.EntityEquipped == mario);
 
-                manager2.AddEntity(mario, null, true);
+                manager2.AddEntity(mario, null);
 
                 Debug.Assert(manager2.TotalEntityCount == 1);
                 Debug.Assert(luckyStart.EntityEquipped == mario);
@@ -467,7 +467,7 @@ namespace PaperMarioBattleSystem
                 Debug.Assert(manager1.TotalEntityCount == 0);
                 Debug.Assert(mario.EntityProperties.HasStatus(Enumerations.StatusTypes.Sleep) == true);
 
-                manager2.AddEntity(mario, null, true);
+                manager2.AddEntity(mario, null);
 
                 Debug.Assert(manager1.TotalEntityCount == 0);
                 Debug.Assert(manager2.TotalEntityCount == 1);

@@ -58,7 +58,7 @@ namespace PaperMarioBattleSystem
             BobberyBomb bobberyBomb = new BobberyBomb(Action.DamageProperties.Damage);
             bobberyBomb.Position = User.Position;
 
-            User.BManager.AddEntity(bobberyBomb, null, true);
+            User.BManager.AddEntity(bobberyBomb, null);
 
             //Add a battle event to shoot the bomb out
             //NOTE: Some values are temporary (Ex. ground position)

@@ -21,6 +21,8 @@ namespace PaperMarioBattleSystem
         public const string ShaderRoot = "Shaders/";
         public const string ShaderTextureRoot = ShaderRoot + "ShaderTextures/";
 
+        public const string ConfigName = "PMBSConfig.xml";
+
         public const string LuigiPaletteExtension = "LEmblem";
         public const string WarioPaletteExtension = "WEmblem";
         public const string WaluigiPaletteExtension = "WLEmblem";

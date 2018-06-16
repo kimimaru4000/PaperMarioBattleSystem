@@ -235,5 +235,5 @@ _Pvt_Extensions
 # FAKE - F# Make
 .fake/
 
-#Ruge Deploy Tool settings
-/DeployToolSettings.dt
+#Config
+/PaperMarioBattleSystem/PaperMarioBattleSystem/Content/PMBSConfig.xml

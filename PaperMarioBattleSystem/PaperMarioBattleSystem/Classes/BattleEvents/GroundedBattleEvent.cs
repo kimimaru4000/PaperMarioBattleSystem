@@ -69,9 +69,14 @@ namespace PaperMarioBattleSystem
                 return;
             }
 
-            if (HurtAnim != null && HurtAnim.Finished == true)
+            if (HurtAnim != null)
             {
-                HurtAnim.Play();
+                //If we're not playing the animation for some reason (Ex. another event ending sooner that changes it), play it
+                //Also play it if the animation is finished
+                if (Entity.AnimManager.CurrentAnim.Key != HurtAnim.Key || HurtAnim.Finished == true)
+                {
+                    Entity.AnimManager.PlayAnimation(HurtAnim.Key);
+                }
             }
 
             //Return if the entity is targeted

@@ -82,7 +82,7 @@ namespace PaperMarioBattleSystem
             //Prepare any graphics device settings here
             //Note that OpenGL does not provide a way to set the adapter; the driver is responsible for that
             graphics.PreparingDeviceSettings -= OnPreparingDeviceSettings;
-        }
+        }        
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -94,26 +94,34 @@ namespace PaperMarioBattleSystem
         {
             IsFixedTimeStep = Time.FixedTimeStep;
 
+            //Initialize singletons
             SpriteRenderer.Instance.Initialize(graphics);
             SpriteRenderer.Instance.AdjustWindowSize(new Vector2(RenderingGlobals.BaseResolutionWidth, RenderingGlobals.BaseResolutionHeight));
-
             AssetManager.Instance.Initialize(Content);
 
-            //FOR TESTING
-            InitializeInventory();
+            //Initialize core battle properties
+            BattleGlobals.BattleProperties battleProperties = new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true);
+
+            BattleMario mario = new BattleMario(new MarioStats(1, 10, 5, 0, 0,
+                EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
+
+            List<BattleEntity> enemyList = new List<BattleEntity>();
+
+            //Read from the config
+            if (ConfigLoader.LoadConfig($"{ContentGlobals.ContentRoot}/{ContentGlobals.ConfigName}", ref battleProperties, mario, enemyList) == false)
+            {
+                //If we failed to read from the config, initialize a default battle
+                InitDefaultBattle(mario, enemyList);
+            }
 
             //Initialize the BattleManager
             battleManager = new BattleManager();
 
-            BattleMario mario = new BattleMario(new MarioStats(1, 50, 10, 0, 0, EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
-            InitMarioBadges(mario);
+            //Send out the first Partner to battle, provided it exists
+            int partnerCount = Inventory.Instance.partnerInventory.GetPartnerCount();
+            BattlePartner partner = (partnerCount == 0) ? null : Inventory.Instance.partnerInventory.GetAllPartners()[0];
 
-            BattlePartner partner = Inventory.Instance.partnerInventory.GetPartner(Enumerations.PartnerTypes.Goombario);
-            InitPartnerBadges(partner);
-
-            battleManager.Initialize(new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true),
-                mario, partner,
-                new List<BattleEntity>() { new Goomba(), new Paratroopa(), new Pokey() });
+            battleManager.Initialize(battleProperties, mario, partner, enemyList);
 
             //Initialize helper objects
             //Check for the battle setting and add darkness if so
@@ -152,225 +160,37 @@ namespace PaperMarioBattleSystem
             WasFocused = IsActive;
         }
 
-        /// <summary>
-        /// FOR TESTING
-        /// </summary>
-        private void InitializeInventory()
+        private void InitDefaultBattle(BattleMario mario, List<BattleEntity> entities)
         {
+            Inventory.Instance.AddItem(new LuckyStar());
+            Inventory.Instance.AddItem(new Mushroom());
+            Inventory.Instance.AddItem(new HoneySyrup());
+            Inventory.Instance.AddItem(new LifeShroom());
+            Inventory.Instance.AddItem(new Mystery());
+            Inventory.Instance.AddItem(new ThunderRage());
+            Inventory.Instance.AddItem(new StoneCap());
+
+            Inventory.Instance.AddBadge(new PowerBounceBadge());
+            Inventory.Instance.AddBadge(new MultibounceBadge());
+            Inventory.Instance.AddBadge(new PowerSmashBadge());
+            Inventory.Instance.AddBadge(new DeepFocusBadge());
+            Inventory.Instance.AddBadge(new DeepFocusBadge());
+
             Inventory.Instance.partnerInventory.AddPartner(new Goompa());
             Inventory.Instance.partnerInventory.AddPartner(new Goombario());
             Inventory.Instance.partnerInventory.AddPartner(new Kooper());
             Inventory.Instance.partnerInventory.AddPartner(new Bow());
             Inventory.Instance.partnerInventory.AddPartner(new Watt());
 
-            Inventory.Instance.AddItem(new LuckyStar());
-
-            Inventory.Instance.AddBadge(new DefendPlusBadge());
-            Inventory.Instance.AddBadge(new PowerPlusBadge());
-            Inventory.Instance.AddBadge(new SpikeShieldBadge());
-            Inventory.Instance.AddBadge(new FireShieldBadge());
-            Inventory.Instance.AddBadge(new IcePowerBadge());
-            Inventory.Instance.AddBadge(new AllOrNothingBadge());
-            Inventory.Instance.AddBadge(new DoublePainBadge());
-            Inventory.Instance.AddBadge(new LastStandBadge());
-
-            Inventory.Instance.AddBadge(new DamageDodgeBadge());
-            Inventory.Instance.AddBadge(new DamageDodgeBadge());
-            Inventory.Instance.AddBadge(new DamageDodgeBadge());
-            Inventory.Instance.AddBadge(new DamageDodgeBadge());
-
-            Inventory.Instance.AddBadge(new PowerBounceBadge());
-            Inventory.Instance.AddBadge(new MultibounceBadge());
-            Inventory.Instance.AddBadge(new IceSmashBadge());
-            Inventory.Instance.AddBadge(new HeadRattleBadge());
-            Inventory.Instance.AddBadge(new TornadoJumpBadge());
-
-            Inventory.Instance.AddBadge(new FeelingFineBadge());
-            Inventory.Instance.AddBadge(new FeelingFinePBadge());
-
-            Inventory.Instance.AddBadge(new ChargeBadge());
-            Inventory.Instance.AddBadge(new ChargePBadge());
-
-            Inventory.Instance.AddBadge(new QuickChangeBadge());
-
-            Inventory.Instance.AddBadge(new FlowerSaverBadge());
-            Inventory.Instance.AddBadge(new FlowerSaverPBadge());
-
-            Inventory.Instance.AddBadge(new DoubleDipBadge());
-            Inventory.Instance.AddBadge(new DoubleDipBadge());
-            Inventory.Instance.AddBadge(new DoubleDipPBadge());
-            Inventory.Instance.AddBadge(new DoubleDipPBadge());
-            Inventory.Instance.AddBadge(new TripleDipBadge());
-
-            Inventory.Instance.AddBadge(new DeepFocusBadge());
-            Inventory.Instance.AddBadge(new DeepFocusBadge());
-            Inventory.Instance.AddBadge(new DeepFocusBadge());
-            Inventory.Instance.AddBadge(new GroupFocusBadge());
-
-            Inventory.Instance.AddBadge(new CloseCallBadge());
-            Inventory.Instance.AddBadge(new PrettyLuckyBadge());
-            Inventory.Instance.AddBadge(new PrettyLuckyBadge());
-            Inventory.Instance.AddBadge(new PrettyLuckyBadge());
-            Inventory.Instance.AddBadge(new LuckyDayBadge());
-
-            Inventory.Instance.AddBadge(new ZapTapBadge());
-            Inventory.Instance.AddBadge(new ReturnPostageBadge());
-
-            Inventory.Instance.AddBadge(new HPPlusBadge());
-            Inventory.Instance.AddBadge(new HPPlusPBadge());
-            Inventory.Instance.AddBadge(new FPPlusBadge());
-
-            Inventory.Instance.AddBadge(new PeekabooBadge());
-
-            Inventory.Instance.AddBadge(new LEmblemBadge());
-            Inventory.Instance.AddBadge(new WEmblemBadge());
-
-            Inventory.Instance.AddBadge(new PityFlowerBadge());
-            Inventory.Instance.AddBadge(new HPDrainBadge());
-            Inventory.Instance.AddBadge(new HPDrainBadge());
-            Inventory.Instance.AddBadge(new HPDrainBadge());
-            Inventory.Instance.AddBadge(new FPDrainBadge());
-            Inventory.Instance.AddBadge(new FPDrainBadge());
-
-            Inventory.Instance.AddBadge(new SimplifierBadge());
-            Inventory.Instance.AddBadge(new SimplifierBadge());
-            Inventory.Instance.AddBadge(new UnsimplifierBadge());
-            Inventory.Instance.AddBadge(new UnsimplifierBadge());
-
-            Inventory.Instance.AddBadge(new DDownPoundBadge());
-            Inventory.Instance.AddBadge(new PiercingBlowBadge());
-            Inventory.Instance.AddBadge(new DDownJumpBadge());
-
-            Inventory.Instance.AddBadge(new JumpmanBadge());
-            Inventory.Instance.AddBadge(new JumpmanBadge());
-            Inventory.Instance.AddBadge(new HammermanBadge());
-            Inventory.Instance.AddBadge(new HammermanBadge());
-
-            Inventory.Instance.AddBadge(new LuckyStartBadge());
-
-            Inventory.Instance.AddBadge(new PowerSmashBadge());
-            Inventory.Instance.AddBadge(new PowerSmashBadge());
-            Inventory.Instance.AddBadge(new MegaSmashBadge());
-            Inventory.Instance.AddBadge(new QuakeHammerBadge());
-            Inventory.Instance.AddBadge(new TimingTutorBadge());
-
-            Inventory.Instance.AddBadge(new AttackFXBBadge(true));
-            Inventory.Instance.AddBadge(new AttackFXCBadge());
-            Inventory.Instance.AddBadge(new AttackFXDBadge());
-            Inventory.Instance.AddBadge(new AttackFXEBadge());
-            Inventory.Instance.AddBadge(new AttackFXFBadge());
-            Inventory.Instance.AddBadge(new AttackFXBBadge(true));
-            Inventory.Instance.AddBadge(new AttackFXCBadge());
-            Inventory.Instance.AddBadge(new AttackFXDBadge());
-            Inventory.Instance.AddBadge(new AttackFXEBadge());
-            Inventory.Instance.AddBadge(new AttackFXFBadge());
-
-            //Debug Badge - Right On!
-            Inventory.Instance.AddBadge(new RightOnBadge());
-            Inventory.Instance.AddBadge(new RightOnBadge());
-
-            //Items
-            Inventory.Instance.AddItem(new Mushroom());
-            Inventory.Instance.AddItem(new Mystery());
-            Inventory.Instance.AddItem(new SuperShroom());
-            Inventory.Instance.AddItem(new ThunderRage());
-            Inventory.Instance.AddItem(new ThunderBolt());
-            Inventory.Instance.AddItem(new TastyTonic());
-            Inventory.Instance.AddItem(new FireFlower());
-            Inventory.Instance.AddItem(new VoltShroom());
-            Inventory.Instance.AddItem(new DizzyDial());
-            Inventory.Instance.AddItem(new StoneCap());
-        }
-
-        #region Init Mario and Partner Badges + More
-
-        private void InitMarioBadges(BattleMario mario)
-        {
-            //Have full star power for convenience
-            mario.MStats.SSStarPower.GainStarPower(mario.MStats.SSStarPower.MaxSPU);
-
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.SpikeShield, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.IcePower, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ZapTap, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerPlus, BadgeGlobals.BadgeFilterType.UnEquipped));
             mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerBounce, BadgeGlobals.BadgeFilterType.UnEquipped));
             mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Multibounce, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.IceSmash, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HeadRattle, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TornadoJump, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.QuickChange, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFine, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaver, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Charge, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AllOrNothing, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoublePain, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LastStand, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDip, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDip, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TripleDip, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DeepFocus, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DeepFocus, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DeepFocus, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ReturnPostage, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PrettyLucky, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PrettyLucky, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PrettyLucky, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LuckyDay, BadgeGlobals.BadgeFilterType.UnEquipped));
-
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlus, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPPlus, BadgeGlobals.BadgeFilterType.UnEquipped));
-
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Peekaboo, BadgeGlobals.BadgeFilterType.UnEquipped));
-
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LEmblem, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.WEmblem, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.DeactivateAndUnequipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.WEmblem, BadgeGlobals.BadgeFilterType.Equipped));
-
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PityFlower, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPDrain, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FPDrain, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Unsimplifier, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Unsimplifier, BadgeGlobals.BadgeFilterType.UnEquipped));
-
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DDownPound, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PiercingBlow, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DDownJump, BadgeGlobals.BadgeFilterType.UnEquipped));
-
             mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.PowerSmash, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.MegaSmash, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.QuakeHammer, BadgeGlobals.BadgeFilterType.UnEquipped));
+            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DeepFocus, BadgeGlobals.BadgeFilterType.UnEquipped));
+            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DeepFocus, BadgeGlobals.BadgeFilterType.UnEquipped));
 
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Jumpman, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Hammerman, BadgeGlobals.BadgeFilterType.UnEquipped));
-
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.LuckyStart, BadgeGlobals.BadgeFilterType.UnEquipped));
-            mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.TimingTutor, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped));
-
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXB, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXC, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXD, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXE, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //mario.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.AttackFXF, BadgeGlobals.BadgeFilterType.UnEquipped));
+            entities.Add(new Goomba());
+            entities.Add(new Paratroopa());
         }
-
-        private void InitPartnerBadges(BattlePartner partner)
-        {
-            partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.ChargeP, BadgeGlobals.BadgeFilterType.UnEquipped));
-            partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FlowerSaverP, BadgeGlobals.BadgeFilterType.UnEquipped));
-            partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDipP, BadgeGlobals.BadgeFilterType.UnEquipped));
-            partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.DoubleDipP, BadgeGlobals.BadgeFilterType.UnEquipped));
-            partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.GroupFocus, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.FeelingFineP, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.HPPlusP, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.RightOn, BadgeGlobals.BadgeFilterType.UnEquipped));
-            //partner.ActivateAndEquipBadge(Inventory.Instance.GetBadge(BadgeGlobals.BadgeTypes.Peekaboo, BadgeGlobals.BadgeFilterType.UnEquipped));
-        }
-
-        #endregion
 
         /// <summary>
         /// LoadContent will be called once per game and is the place to load

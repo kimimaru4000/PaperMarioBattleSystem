@@ -99,18 +99,17 @@ namespace PaperMarioBattleSystem
         /// </summary>
         private void SwapPartner()
         {
-            //Remove the old partner from battle, set the new Partner reference, then add the new Partner to battle
-            //This order ensures that the Partner reference is correct for the EntityRemovedEvent and the EntityAddedEvent
-            OldPartner.BManager.RemoveEntity(OldPartner, false);
-
+            //Set the new Partner reference
             OldPartner.BManager.SetPartner(NewPartner);
+
+            //Remove the old Partner from battle, then add the new Partner to battle
+            OldPartner.BManager.RemoveEntity(OldPartner, false);
 
             //Swap Partner badges with the new Partner
             BattlePartner.SwapPartnerBadges(OldPartner, NewPartner);
 
-            //Important: Set to initialize the new Partner
-            //This way, certain Badge properties, such as autocompleting Defensive Actions, can carry over
-            OldPartner.BManager.AddEntity(NewPartner, null, true);
+            //Add the new Partner to battle
+            OldPartner.BManager.AddEntity(NewPartner, null);
 
             //Position offset
             Vector2 offset = Vector2.Zero;

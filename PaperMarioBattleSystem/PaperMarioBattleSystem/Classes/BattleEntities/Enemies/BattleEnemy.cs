@@ -36,10 +36,10 @@ namespace PaperMarioBattleSystem
 
         public override void CleanUp()
         {
-            base.CleanUp();
-
             //Clear the held collectible to unequip any Badges on Enemies, as they're always completely removed from battle
             SetHeldCollectible(null);
+
+            base.CleanUp();
         }
 
         public override void OnEnteredBattle()

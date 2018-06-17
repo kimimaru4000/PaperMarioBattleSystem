@@ -62,7 +62,7 @@ namespace PaperMarioBattleSystem
                 Debug.Assert(goomba.EntityProperties.HasPhysAttributes(true, Enumerations.PhysicalAttributes.Fiery));
                 Debug.Assert(goomba.EntityProperties.HasWeakness(Enumerations.Elements.Ice));
 
-                ElementOverrideHolder overrideHolder = mario.EntityProperties.GetTotalElementOverride(goomba);
+                ElementOverrideHolder overrideHolder = mario.EntityProperties.GetTotalElementOverride(goomba.EntityProperties.GetAllPhysAttributes());
 
                 Debug.Assert(overrideHolder.Element == Enumerations.Elements.Ice);
                 Debug.Assert(overrideHolder.OverrideCount == 2);
@@ -78,7 +78,7 @@ namespace PaperMarioBattleSystem
                 icePower.UnEquip();
                 icePower2.UnEquip();
 
-                ElementOverrideHolder overrideHolder2 = mario.EntityProperties.GetTotalElementOverride(goomba);
+                ElementOverrideHolder overrideHolder2 = mario.EntityProperties.GetTotalElementOverride(goomba.EntityProperties.GetAllPhysAttributes());
                 Debug.Assert(overrideHolder2.Element == Enumerations.Elements.Invalid);
             }
 

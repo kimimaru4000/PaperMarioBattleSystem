@@ -320,6 +320,15 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Tells whether the StatusEffect is suppressed in any way.
+        /// </summary>
+        /// <returns>true if the StatusEffect is suppressed in any way, otherwise false.</returns>
+        public bool IsSuppressed()
+        {
+            return (SuppressionStates.Count != 0);
+        }
+
+        /// <summary>
         /// Fully unsuppresses the StatusEffect.
         /// <para>This is called when the StatusEffect is ended to ensure it ends properly.</para>
         /// </summary>

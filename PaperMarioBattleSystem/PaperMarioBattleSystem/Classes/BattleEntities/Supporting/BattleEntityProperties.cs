@@ -11,7 +11,7 @@ using PaperMarioBattleSystem.Extensions;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Handles numerous BattleEntity properties like weaknesses/resistances to certain Elements, and more.
+    /// Handles numerous BattleEntity properties such as weaknesses and resistances to certain Elements, and more.
     /// </summary>
     public class BattleEntityProperties : ICleanup
     {
@@ -19,15 +19,15 @@ namespace PaperMarioBattleSystem
 
         public delegate void StatusInflicted(StatusEffect statusEffect);
         /// <summary>
-        /// The event invoked when inflicting a BattleEntity with a Status Effect.
-        /// This is invoked after the Status Effect is actually inflicted.
+        /// The event invoked when inflicting a BattleEntity with a StatusEffect.
+        /// This is invoked after the StatusEffect is actually inflicted.
         /// </summary>
         public event StatusInflicted StatusInflictedEvent = null;
 
         public delegate void StatusRemoved(StatusEffect statusEffect);
         /// <summary>
-        /// The event invoked when a Status Effect is removed from a BattleEntity.
-        /// This is invoked after the Status Effect is actually removed.
+        /// The event invoked when a StatusEffect is removed from a BattleEntity.
+        /// This is invoked after the StatusEffect is actually removed.
         /// </summary>
         public event StatusRemoved StatusRemovedEvent = null;
 
@@ -39,49 +39,47 @@ namespace PaperMarioBattleSystem
         protected readonly BattleEntity Entity = null;
 
         /// <summary>
-        /// The physical attributes the entity possesses. When added, they are sorted in decreasing order.
+        /// The physical attributes the BattleEntity possesses. When added, they are sorted in decreasing order.
         /// </summary>
         protected readonly SortedDictionary<PhysicalAttributes, int> PhysAttributes = new SortedDictionary<PhysicalAttributes, int>(new PhysAttributeGlobals.PhysAttributeComparer());
 
         /// <summary>
-        /// The exceptions this entity has for certain types of contact against certain PhysicalAttributes.
+        /// The exceptions this BattleEntity has for certain types of contact against certain PhysicalAttributes.
         /// <para>This is used for Badges such as Spike Shield and Ice Power.</para>
         /// </summary>
         protected readonly Dictionary<ContactTypes, List<PhysicalAttributes>> ContactExceptions = new Dictionary<ContactTypes, List<PhysicalAttributes>>();
 
         /// <summary>
-        /// The Weaknesses the entity has.
+        /// The Weaknesses the BattleEntity has.
         /// <para>A List is used for the value so additional Weaknesses can be added via moves or equipment.</para>
         /// </summary>
         protected readonly Dictionary<Elements, List<WeaknessHolder>> Weaknesses = new Dictionary<Elements, List<WeaknessHolder>>();
 
         /// <summary>
-        /// The Resistances the entity has.
+        /// The Resistances the BattleEntity has.
         /// <para>A List is used for the value so additional Resistances can be added via moves or equipment.</para>
         /// </summary>
         protected readonly Dictionary<Elements, List<ResistanceHolder>> Resistances = new Dictionary<Elements, List<ResistanceHolder>>();
 
         /// <summary>
-        /// The Strengths the entity has against entities with PhysicalAttributes.
+        /// The Strengths the BattleEntity has against BattleEntities with PhysicalAttributes.
         /// </summary>
         protected readonly Dictionary<PhysicalAttributes, List<StrengthHolder>> Strengths = new Dictionary<PhysicalAttributes, List<StrengthHolder>>();
 
         /// <summary>
-        /// The types of Elemental damage to use when dealing damage to BattleEntities with particular PhysicalAttributes
+        /// The types of Elemental damage to use when dealing damage to BattleEntities with particular PhysicalAttributes.
         /// </summary>
         protected readonly Dictionary<PhysicalAttributes, SortedDictionary<Elements, int>> ElementOverrides = new Dictionary<PhysicalAttributes, SortedDictionary<Elements, int>>();
-        
+
         /// <summary>
-        /// The StatusEffects the entity is afflicted with. When added, they are sorted by their priorities in the StatusOrder table.
-        /// <para></para>
-        /// <see cref="StatusGlobals.StatusOrder"/>
+        /// The StatusEffects the BattleEntity is afflicted with. When added, they are sorted by their priorities in the <see cref="StatusGlobals.StatusOrder"/> table.
         /// </summary>
         protected readonly SortedDictionary<StatusTypes, StatusEffect> Statuses = new SortedDictionary<StatusTypes, StatusEffect>(new StatusGlobals.StatusTypeComparer());
 
         /// <summary>
-        /// Properties relating to how the entity is affected by each StatusEffect.
+        /// Properties relating to how the BattleEntity is affected by each StatusEffect.
         /// Examples include the likelihood of being inflicted by a StatusEffect-inducing attack and
-        /// how many additional turns the entity is affected by the StatusEffect
+        /// how many additional turns the BattleEntity is affected by the StatusEffect.
         /// </summary>
         protected readonly Dictionary<StatusTypes, StatusPropertyHolder> StatusProperties = new Dictionary<StatusTypes, StatusPropertyHolder>();
 
@@ -91,17 +89,17 @@ namespace PaperMarioBattleSystem
         protected DamageEffects VulnerableDamageEffects = DamageEffects.None;
 
         /// <summary>
-        /// Additional properties of the entity
+        /// Additional properties of the BattleEntity.
         /// </summary>
         protected readonly Dictionary<AdditionalProperty, object> AdditionalProperties = new Dictionary<AdditionalProperty, object>();
 
         /// <summary>
-        /// The Payback data of the entity
+        /// The Payback data of the BattleEntity.
         /// </summary>
         protected readonly List<PaybackHolder> Paybacks = new List<PaybackHolder>();
 
         /// <summary>
-        /// The move categories the entity cannot perform because they are disabled
+        /// The MoveCategories the BattleEntity cannot currently perform.
         /// </summary>
         protected readonly Dictionary<MoveCategories, int> DisabledMoveCategories = new Dictionary<MoveCategories, int>();
 
@@ -179,9 +177,9 @@ namespace PaperMarioBattleSystem
         #region Physical Attribute Methods
 
         /// <summary>
-        /// Adds a physical attribute to the entity
+        /// Adds a PhysicalAttribute to the BattleEntity.
         /// </summary>
-        /// <param name="physicalAttribute">The physical attribute to add</param>
+        /// <param name="physicalAttribute">The PhysicalAttribute to add.</param>
         public void AddPhysAttribute(PhysicalAttributes physicalAttribute)
         {
             if (PhysAttributes.ContainsKey(physicalAttribute) == true)
@@ -198,9 +196,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Removes a physical attribute from the entity
+        /// Removes a PhysicalAttribute from the BattleEntity.
         /// </summary>
-        /// <param name="physicalAttribute">The physical attribute to remove</param>
+        /// <param name="physicalAttribute">The PhysicalAttribute to remove.</param>
         public void RemovePhysAttribute(PhysicalAttributes physicalAttribute)
         {
             int attributeNum = -1;
@@ -225,11 +223,11 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells whether the entity has a set of physical attributes or not
+        /// Tells whether the BattleEntity has a set of PhysicalAttributes or not.
         /// </summary>
-        /// <param name="checkAny">If true, checks the entity has any of the physical attributes rather than all</param>
-        /// <param name="attributes">The set of physical attributes to check the entity has</param>
-        /// <returns>true if the entity has any or all, based on the value of checkAny, of the physical attributes in the set, otherwise false</returns>
+        /// <param name="checkAny">If true, checks the BattleEntity has any of the PhysicalAttributes rather than all.</param>
+        /// <param name="attributes">The set of PhysicalAttributes to check the BattleEntity has.</param>
+        /// <returns>true if the BattleEntity has any or all, based on the value of <paramref name="checkAny"/>, of the PhysicalAttributes in the set, otherwise false.</returns>
         public bool HasPhysAttributes(bool checkAny, params PhysicalAttributes[] attributes)
         {
             if (attributes == null) return false;
@@ -243,23 +241,6 @@ namespace PaperMarioBattleSystem
             }
 
             return !checkAny;
-        }
-
-        /// <summary>
-        /// Determines the result of contact, based on the type of contact made, when it's made with this entity.
-        /// <para>Contacts that aren't a Success are prioritized over any Payback.
-        /// If a ContactResult of Success is found, then the Payback for this entity is added if it exists
-        /// and the ContactResult becomes a PartialSuccess.</para>
-        /// </summary>
-        /// <param name="attacker">The entity attacking this one</param>
-        /// <param name="contactType">The type of contact made with this entity</param>
-        /// <param name="contactProperty">The ContactProperty of the contact.</param>
-        /// <returns>A ContactResultInfo containing the result of the interaction</returns>
-        public ContactResultInfo GetContactResult(BattleEntity attacker, ContactTypes contactType, ContactProperties contactProperty)
-        {
-            ContactResultInfo contactResultInfo = Interactions.GetContactResult(attacker.EntityProperties.GetAllPhysAttributes(), contactType, contactProperty, GetAllPaybacks(), attacker.EntityProperties.GetContactExceptions(contactType));
-
-            return contactResultInfo;
         }
 
         /// <summary>
@@ -290,10 +271,10 @@ namespace PaperMarioBattleSystem
         #region Element Override Methods
 
         /// <summary>
-        /// Adds an Element Override of an Element to this BattleEntity for a PhysicalAttribute
+        /// Adds an Element Override of an Element to this BattleEntity for a PhysicalAttribute.
         /// </summary>
-        /// <param name="attribute">The PhysicalAttribute associated with the Element Override</param>
-        /// <param name="element">The Element to add for this PhysicalAttribute</param>
+        /// <param name="attribute">The PhysicalAttribute associated with the Element Override.</param>
+        /// <param name="element">The Element to add for this PhysicalAttribute.</param>
         public void AddElementOverride(PhysicalAttributes attribute, Elements element)
         {
             SortedDictionary<Elements, int> elementOverride = GetElementOverride(attribute);
@@ -320,10 +301,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Removes an Element Override of an Element this BattleEntity has for a PhysicalAttribute
+        /// Removes an Element Override of an Element this BattleEntity has for a PhysicalAttribute.
         /// </summary>
-        /// <param name="attribute">The PhysicalAttribute associated with the Element Override</param>
-        /// <param name="element">The Element to remove for the Element Override</param>
+        /// <param name="attribute">The PhysicalAttribute associated with the Element Override.</param>
+        /// <param name="element">The Element to remove for the Element Override.</param>
         public void RemoveElementOverride(PhysicalAttributes attribute, Elements element)
         {
             SortedDictionary<Elements, int> elementOverride = GetElementOverride(attribute);
@@ -358,10 +339,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells if the BattleEntity has an Element Override for a particular PhysicalAttribute
+        /// Tells if the BattleEntity has an Element Override for a particular PhysicalAttribute.
         /// </summary>
-        /// <param name="attribute">The PhysicalAttribute associated with the Element Override</param>
-        /// <returns>true if the Element Override exists for the PhysicalAttribute, otherwise false</returns>
+        /// <param name="attribute">The PhysicalAttribute associated with the Element Override.</param>
+        /// <returns>true if the Element Override exists for the PhysicalAttribute, otherwise false.</returns>
         public bool HasElementOverride(PhysicalAttributes attribute)
         {
             return ElementOverrides.ContainsKey(attribute);
@@ -380,15 +361,13 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Retrieves the Element Override this BattleEntity has for the first PhysicalAttribute found on a victim
+        /// Retrieves the Element Override this BattleEntity has for the first PhysicalAttribute found in a set of PhysicalAttributes.
         /// </summary>
-        /// <param name="attacker">The BattleEntity this one is attacking</param>
+        /// <param name="victimAttributes">The set of PhysicalAttributes to test against.</param>
         /// <returns>An ElementOverrideHolder with the type of Element damage this BattleEntity will do and how many overrides of that Element exist.</returns>
-        public ElementOverrideHolder GetTotalElementOverride(BattleEntity victim)
+        public ElementOverrideHolder GetTotalElementOverride(IList<PhysicalAttributes> victimAttributes)
         {
-            PhysicalAttributes[] victimAttributes = victim.EntityProperties.GetAllPhysAttributes();
-
-            for (int i = 0; i < victimAttributes.Length; i++)
+            for (int i = 0; i < victimAttributes.Count; i++)
             {
                 PhysicalAttributes physAttribute = victimAttributes[i];
 
@@ -453,10 +432,10 @@ namespace PaperMarioBattleSystem
         #region Contact Exception Methods
 
         /// <summary>
-        /// Adds a contact exception to the entity
+        /// Adds a contact exception to the BattleEntity.
         /// </summary>
-        /// <param name="contactType"></param>
-        /// <param name="physAttribute"></param>
+        /// <param name="contactType">The ContactType to add an exception for.</param>
+        /// <param name="physAttribute">The PhysicalAttribute to add an exception for.</param>
         public void AddContactException(ContactTypes contactType, PhysicalAttributes physAttribute)
         {
             List<PhysicalAttributes> physAttrList = null;
@@ -474,6 +453,11 @@ namespace PaperMarioBattleSystem
             Debug.Log($"Added contact exception on {Entity.Name} for the {physAttribute} PhysicalAttribute during {contactType} contact!");
         }
 
+        /// <summary>
+        /// Removes a contact exception from the BattleEntity.
+        /// </summary>
+        /// <param name="contactType">The ContactType to remove an exception for.</param>
+        /// <param name="physAttribute">The PhysicalAttribute to remove an exception for.</param>
         public void RemoveContactException(ContactTypes contactType, PhysicalAttributes physAttribute)
         {
             List<PhysicalAttributes> physAttrList = null;
@@ -534,10 +518,10 @@ namespace PaperMarioBattleSystem
         #region Weakness Methods
 
         /// <summary>
-        /// Adds a Weakness on the BattleEntity
+        /// Adds a Weakness to the BattleEntity.
         /// </summary>
-        /// <param name="element">The Element the BattleEntity is weak to</param>
-        /// <param name="weaknessHolder">The data for the Weakness</param>
+        /// <param name="element">The Element the BattleEntity is weak to.</param>
+        /// <param name="weaknessHolder">The data for the Weakness.</param>
         public void AddWeakness(Elements element, in WeaknessHolder weaknessHolder)
         {
             List<WeaknessHolder> weaknessList = null;
@@ -552,9 +536,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Removes a Weakness on the BattleEntity
+        /// Removes a Weakness from the BattleEntity.
         /// </summary>
-        /// <param name="element">The Element the BattleEntity is weak to</param>
+        /// <param name="element">The Element the BattleEntity is weak to.</param>
         public void RemoveWeakness(Elements element, in WeaknessHolder weakness)
         {
             List<WeaknessHolder> weaknessList = null;
@@ -575,10 +559,28 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets this entity's total weakness to a particular Element
+        /// Removes all Weaknesses to a particular Element from the BattleEntity.
         /// </summary>
-        /// <param name="element">The Element to test a weakness for</param>
-        /// <returns>A copy of the WeaknessHolder associated with the element if found, otherwise default weakness data</returns>
+        /// <param name="element">The Element the BattleEntity is weak to.</param>
+        public void RemoveWeaknesses(Elements element)
+        {
+            bool removed = Weaknesses.Remove(element);
+            if (removed == false)
+            {
+                Debug.LogWarning($"{Entity.Name} does not have a weakness to {element}");
+                
+            }
+            else
+            {
+                Debug.Log($"Removed all Weaknesses to the {element} on {Entity.Name}!");
+            }
+        }
+
+        /// <summary>
+        /// Gets this BattleEntity's total Weakness to a particular Element.
+        /// </summary>
+        /// <param name="element">The Element to test a Weakness for.</param>
+        /// <returns>A copy of the WeaknessHolder associated with the element if found, otherwise default WeaknessHolder data.</returns>
         public WeaknessHolder GetWeakness(Elements element)
         {
             List<WeaknessHolder> weaknesses = null;
@@ -603,10 +605,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells if the BattleEntity has a Weakness to a particular Element
+        /// Tells if the BattleEntity has a Weakness to a particular Element.
         /// </summary>
-        /// <param name="element">The Element</param>
-        /// <returns>true if the BattleEntity has a Weakness to the Element, false otherwise</returns>
+        /// <param name="element">The Element to test a Weakness to.</param>
+        /// <returns>true if the BattleEntity has a Weakness to the Element, false otherwise.</returns>
         public bool HasWeakness(Elements element)
         {
             return Weaknesses.ContainsKey(element);
@@ -617,10 +619,10 @@ namespace PaperMarioBattleSystem
         #region Resistance Methods
 
         ///<summary>
-        ///Adds a Resistance on the BattleEntity
+        ///Adds a Resistance to the BattleEntity.
         ///</summary>
-        ///<param name="element">The element the BattleEntity is resistant to</param>
-        ///<param name="resistanceHolder">The data for the Resistance</param>
+        ///<param name="element">The Element the BattleEntity is resistant to.</param>
+        ///<param name="resistanceHolder">The data for the Resistance.</param>
         public void AddResistance(Elements element, in ResistanceHolder resistanceHolder)
         {
             List<ResistanceHolder> resistanceList = null;
@@ -635,9 +637,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Removes a Resistance on the BattleEntity
+        /// Removes a Resistance from the BattleEntity.
         /// </summary>
-        /// <param name="element">The Element the BattleEntity is resistant to</param>
+        /// <param name="element">The Element the BattleEntity is resistant to.</param>
         public void RemoveResistance(Elements element, in ResistanceHolder resistanceHolder)
         {
             List<ResistanceHolder> resistanceList = null;
@@ -658,10 +660,27 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets this entity's total resistance to a particular Element
+        /// Removes all Resistances to a particular Element from the BattleEntity.
         /// </summary>
-        /// <param name="element">The element to test a resistance towards</param>
-        /// <returns>A copy of the ResistanceHolder associated with the element if found, otherwise default resistance data</returns>
+        /// <param name="element">The Element the BattleEntity is resistant to.</param>
+        public void RemoveResistances(Elements element)
+        {
+            bool removed = Resistances.Remove(element);
+            if (removed == false)
+            {
+                Debug.LogWarning($"{Entity.Name} does not have a resistance to {element}");
+            }
+            else
+            {
+                Debug.Log($"Removed all Resistances to the {element} on {Entity.Name}!");
+            }
+        }
+
+        /// <summary>
+        /// Gets this BattleEntity's total Resistance to a particular Element.
+        /// </summary>
+        /// <param name="element">The Element to test a resistance towards.</param>
+        /// <returns>A copy of the ResistanceHolder associated with the element if found, otherwise default ResistanceHolder data.</returns>
         public ResistanceHolder GetResistance(Elements element)
         {
             List<ResistanceHolder> resistances = null;
@@ -687,10 +706,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells if the BattleEntity has a Resistance to a particular Element
+        /// Tells if the BattleEntity has a Resistance to a particular Element.
         /// </summary>
-        /// <param name="element">The Element</param>
-        /// <returns>true if the BattleEntity has a Resistance to the Element, false otherwise</returns>
+        /// <param name="element">The Element to test a Resistance towards.</param>
+        /// <returns>true if the BattleEntity has a Resistance to the Element, false otherwise.</returns>
         public bool HasResistance(Elements element)
         {
             return Resistances.ContainsKey(element);
@@ -742,10 +761,27 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets this entity's total strength to a particular PhysicalAttribute.
+        /// Removes all Strengths to a particular PhysicalAttribute from the BattleEntity.
         /// </summary>
-        /// <param name="physAttribute">The PhysicalAttribute to test a strength towards.</param>
-        /// <returns>A copy of the StrengthHolder associated with the element if found, otherwise default strength data.</returns>
+        /// <param name="physAttribute">The PhysicalAttribute the BattleEntity is strong against.</param>
+        public void RemoveStrengths(PhysicalAttributes physAttribute)
+        {
+            bool removed = Strengths.Remove(physAttribute);
+            if (removed == false)
+            {
+                Debug.LogWarning($"{Entity.Name} does not have a strength for {physAttribute}");
+            }
+            else
+            {
+                Debug.Log($"Removed all Strengths to {physAttribute} on {Entity.Name}!");
+            }
+        }
+
+        /// <summary>
+        /// Gets this BattleEntity's total Strength towards a particular PhysicalAttribute.
+        /// </summary>
+        /// <param name="physAttribute">The PhysicalAttribute to test a Strength towards.</param>
+        /// <returns>A copy of the StrengthHolder associated with the element if found, otherwise default StrengthHolder data.</returns>
         private StrengthHolder GetStrength(PhysicalAttributes physAttribute)
         {
             List<StrengthHolder> strengths = null;
@@ -768,26 +804,25 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells if the BattleEntity has a Strength to a particular PhysicalAttribute.
+        /// Tells if the BattleEntity has a Strength towards a particular PhysicalAttribute.
         /// </summary>
-        /// <param name="physAttribute">The PhysicalAttribute.</param>
-        /// <returns>true if the BattleEntity has a Strength to the PhysicalAttribute, false otherwise.</returns>
+        /// <param name="physAttribute">The PhysicalAttribute to test a Strength towards.</param>
+        /// <returns>true if the BattleEntity has a Strength towards the PhysicalAttribute, false otherwise.</returns>
         public bool HasStrength(PhysicalAttributes physAttribute)
         {
             return Strengths.ContainsKey(physAttribute);
         }
 
         /// <summary>
-        /// Retrieves the total Strength this BattleEntity has against all PhysicalAttributes found on a victim.
+        /// Retrieves the total Strength this BattleEntity has against a set of PhysicalAttributes.
         /// </summary>
-        /// <param name="attacker">The BattleEntity this one is attacking.</param>
-        /// <returns>A StrengthHolder with information about how much additional damage this BattleEntity will do to the victim.</returns>
-        public StrengthHolder GetTotalStrength(BattleEntity victim)
+        /// <param name="victimAttributes">The set of PhysicalAttributes to get the Strength towards.</param>
+        /// <returns>A StrengthHolder with information about how much additional damage this BattleEntity will do to a victim with the given set of PhysicalAttributes.</returns>
+        public StrengthHolder GetTotalStrength(IList<PhysicalAttributes> victimAttributes)
         {
             StrengthHolder totalStrength = StrengthHolder.Default;
-            PhysicalAttributes[] victimAttributes = victim.EntityProperties.GetAllPhysAttributes();
 
-            for (int i = 0; i < victimAttributes.Length; i++)
+            for (int i = 0; i < victimAttributes.Count; i++)
             {
                 StrengthHolder attributeStrength = GetStrength(victimAttributes[i]);
                 totalStrength.Value += attributeStrength.Value;
@@ -822,9 +857,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Directly afflicts the entity with a StatusEffect
+        /// Directly afflicts the BattleEntity with a StatusEffect.
         /// </summary>
-        /// <param name="status">The StatusEffect to afflict the entity with</param>
+        /// <param name="status">The StatusEffect to afflict the BattleEntity with.</param>
         public void AfflictStatus(StatusEffect status)
         {
             StatusEffect refreshedStatus = GetStatus(status.StatusType);
@@ -863,10 +898,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Ends and removes a StatusEffect on the entity
+        /// Ends and removes a StatusEffect on the BattleEntity.
         /// </summary>
-        /// <param name="statusType">The StatusTypes of the StatusEffect to remove</param>
-        /// <param name="showMessage">Whether to show the StatusEffect's RemovedMessage as a Battle Message when it is removed.</param>
+        /// <param name="statusType">The StatusTypes of the StatusEffect to remove.</param>
         /// <returns>The StatusEffect removed from the BattleEntity.</returns>
         public StatusEffect RemoveStatus(StatusTypes statusType)
         {
@@ -907,10 +941,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells if the entity is currently afflicted with a particular StatusEffect
+        /// Tells if the BattleEntity is currently afflicted with a particular StatusEffect.
         /// </summary>
-        /// <param name="statusType">The StatusTypes of the StatusEffect to check</param>
-        /// <returns>true if the entity is afflicted with the StatusEffect, otherwise false</returns>
+        /// <param name="statusType">The StatusTypes of the StatusEffect to check.</param>
+        /// <returns>true if the BattleEntity is afflicted with the StatusEffect, otherwise false.</returns>
         public bool HasStatus(StatusTypes statusType)
         {
             return Statuses.ContainsKey(statusType);
@@ -920,7 +954,7 @@ namespace PaperMarioBattleSystem
         /// Retrieves a specific StatusEffect. This method is internal.
         /// </summary>
         /// <param name="statusType">The StatusTypes of the StatusEffect to get.</param>
-        /// <returns>null if the entity isn't afflicted with the StatusEffect, otherwise the StatusEffect it's afflicted with.</returns>
+        /// <returns>null if the BattleEntity isn't afflicted with the StatusEffect, otherwise the StatusEffect it's afflicted with.</returns>
         private StatusEffect GetStatus(StatusTypes statusType)
         {
             StatusEffect status = null;
@@ -930,9 +964,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Returns all StatusEffects the entity is afflicted with, in order of Priority.
+        /// Returns all StatusEffects the BattleEntity is afflicted with, in order of Priority.
         /// </summary>
-        /// <returns>An array of StatusEffects in order of Priority. If no StatusEffects are on the entity, it'll return an empty array.</returns>
+        /// <returns>An array of StatusEffects in order of Priority. If no StatusEffects are on the BattleEntity, it'll return an empty array.</returns>
         public StatusEffect[] GetStatuses()
         {
             if (Statuses.Values.Count == 0) return Array.Empty<StatusEffect>();
@@ -941,7 +975,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Adds all StatusEffects the entity is afflicted with, in order of Priority, into a supplied list.
+        /// Adds all StatusEffects the BattleEntity is afflicted with, in order of Priority, into a supplied list.
         /// </summary>
         /// <param name="statusList">The List to add the StatusEffects to.</param>
         public void GetStatuses(List<StatusEffect> statusList)
@@ -953,10 +987,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Suppresses a set of Status Effects in a particular way.
+        /// Suppresses a set of StatusEffects on the BattleEntity in a particular way.
         /// </summary>
-        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the Status Effects should be suppressed.</param>
-        /// <param name="statusTypes">The StatusTypes of the Status Effects to suppress.</param>
+        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the StatusEffects should be suppressed.</param>
+        /// <param name="statusTypes">The StatusTypes of the StatusEffects to suppress.</param>
         public void SuppressStatuses(StatusSuppressionTypes statusSuppressionType, params StatusTypes[] statusTypes)
         {
             //Return if there are no statuses to suppress
@@ -982,10 +1016,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Unsuppresses a set of Status Effects in a particular way.
+        /// Unsuppresses a set of StatusEffects on the BattleEntity in a particular way.
         /// </summary>
-        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the Status Effects should be unsuppressed.</param>
-        /// <param name="statusTypes">The StatusTypes of the Status Effects to unsuppress.</param>
+        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the StatusEffects should be unsuppressed.</param>
+        /// <param name="statusTypes">The StatusTypes of the StatusEffects to unsuppress.</param>
         public void UnsuppressStatuses(StatusSuppressionTypes statusSuppressionType, params StatusTypes[] statusTypes)
         {
             //Return if there are no statuses to unsuppress
@@ -1008,6 +1042,21 @@ namespace PaperMarioBattleSystem
                     Debug.LogWarning($"Could not find Status {statusTypes[i]} on {Entity.Name} to unsuppress!");
                 }
             }
+        }
+
+        /// <summary>
+        /// Tells if a StatusEffect the BattleEntity is afflicted with is suppressed in a particular way.
+        /// </summary>
+        /// <param name="statusType">The StatusTypes of the StatusEffect to check for suppression.</param>
+        /// <param name="statusSuppressionType">The StatusSuppressionTypes of how the StatusEffect is suppressed.</param>
+        /// <returns>true if the BattleEntity is afflicted with the StatusEffect and the StatusEffect is suppressed in this way, otherwise false.</returns>
+        public bool IsStatusSuppressed(StatusTypes statusType, StatusSuppressionTypes statusSuppressionType)
+        {
+            StatusEffect statusEffect = GetStatus(statusType);
+
+            if (statusEffect == null) return false;
+
+            return statusEffect.IsSuppressed(statusSuppressionType);
         }
 
         #endregion
@@ -1047,20 +1096,20 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells if the BattleEntity has a StatusPropertyHolder associated with a particular StatusEffect or not
+        /// Tells if the BattleEntity has a StatusPropertyHolder associated with a particular StatusEffect or not.
         /// </summary>
-        /// <param name="statusType">The StatusType of the StatusEffect</param>
-        /// <returns>true if a StatusPropertyHolder can be found for the specified StatusType, false otherwise</returns>
+        /// <param name="statusType">The StatusType of the StatusEffect.</param>
+        /// <returns>true if a StatusPropertyHolder can be found for the specified StatusType, false otherwise.</returns>
         public bool HasStatusProperty(StatusTypes statusType)
         {
             return StatusProperties.ContainsKey(statusType);
         }
 
         /// <summary>
-        /// Retrieves the StatusPropertyHolder associated with a particular StatusEffect
+        /// Retrieves the StatusPropertyHolder associated with a particular StatusEffect.
         /// </summary>
-        /// <param name="statusType">The StatusType of the StatusEffect</param>
-        /// <returns>The StatusPropertyHolder corresponding to the specified StatusType. If there is no entry, returns a default one</returns>
+        /// <param name="statusType">The StatusType of the StatusEffect.</param>
+        /// <returns>The StatusPropertyHolder corresponding to the specified StatusType. If there is no entry, a default one is returned.</returns>
         public StatusPropertyHolder GetStatusProperty(StatusTypes statusType)
         {
             StatusPropertyHolder statusProperty;
@@ -1144,7 +1193,7 @@ namespace PaperMarioBattleSystem
         #region Payback Data Methods
 
         /// <summary>
-        /// Adds Payback to the BattleEntity, causing it to deal damage to direct attackers.
+        /// Adds Payback to the BattleEntity, causing it to deal damage to attackers.
         /// </summary>
         /// <param name="paybackHolder">The PaybackHolder to add.</param>
         public void AddPayback(in PaybackHolder paybackHolder)
@@ -1192,7 +1241,7 @@ namespace PaperMarioBattleSystem
         /// Gets the total Payback a BattleEntity has by combining all of the current Paybacks affecting the BattleEntity.
         /// </summary>
         /// <param name="additionalPaybacks">Any additional PaybackHolders to factor in.</param>
-        /// <returns>A PaybackHolder with the combined properties of all the Paybacks the BattleEntity has</returns>
+        /// <returns>A PaybackHolder with the combined properties of all the Paybacks the BattleEntity has.</returns>
         public PaybackHolder GetPayback(params PaybackHolder[] additionalPaybacks)
         {
             //Gather all the entity's Paybacks in the list
@@ -1209,9 +1258,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells if the BattleEntity has any Payback at all
+        /// Tells if the BattleEntity has any Payback at all.
         /// </summary>
-        /// <returns>true if the Payback list has at least one entry, otherwise false</returns>
+        /// <returns>true if the Payback list has at least one entry, otherwise false.</returns>
         public bool HasPayback()
         {
             return (Paybacks.Count > 0);
@@ -1222,7 +1271,7 @@ namespace PaperMarioBattleSystem
         #region Additional Property Methods
 
         /// <summary>
-        /// Adds an AdditionalProperty to the entity.
+        /// Adds an AdditionalProperty to the BattleEntity.
         /// If it already has the property, it replaces its value with the new value.
         /// </summary>
         /// <param name="property">The AdditionalProperty to add.</param>
@@ -1240,7 +1289,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Removes an AdditionalProperty from the entity
+        /// Removes an AdditionalProperty from the BattleEntity.
         /// </summary>
         /// <param name="property">The AdditionalProperty to remove.</param>
         public void RemoveAdditionalProperty(AdditionalProperty property)
@@ -1254,21 +1303,21 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Checks if the entity has an AdditionalProperty.
+        /// Checks if the BattleEntity has a particular AdditionalProperty.
         /// </summary>
         /// <param name="property">The AdditionalProperty to check.</param>
-        /// <returns>true if the entity has the AdditionalProperty, otherwise false</returns>
+        /// <returns>true if the BattleEntity has the AdditionalProperty, otherwise false.</returns>
         public bool HasAdditionalProperty(AdditionalProperty property)
         {
             return AdditionalProperties.ContainsKey(property);
         }
 
         /// <summary>
-        /// Gets the value of an AdditionalProperty the entity has.
+        /// Gets the value of an AdditionalProperty the BattleEntity has.
         /// </summary>
-        /// <typeparam name="T">The type of property to get.</typeparam>
+        /// <typeparam name="T">The type of the AdditionalProperty to get.</typeparam>
         /// <param name="property">The AdditionalProperty to get the value for.</param>
-        /// <returns>The value corresponding to the property passed in. If no value was found, returns the default value of type T.</returns>
+        /// <returns>The value corresponding to the AdditionalProperty passed in. If no value was found, returns the default value of type <typeparamref name="T"/>.</returns>
         public T GetAdditionalProperty<T>(AdditionalProperty property)
         {
             if (AdditionalProperties.TryGetValue(property, out object val) == true)
@@ -1284,7 +1333,7 @@ namespace PaperMarioBattleSystem
         #region Move Category Methods
 
         /// <summary>
-        /// Disables a particular MoveCategory from being used by the entity.
+        /// Disables a particular MoveCategory from being used by the BattleEntity.
         /// </summary>
         /// <param name="category">The type of moves to disable.</param>
         public void DisableMoveCategory(MoveCategories category)
@@ -1329,7 +1378,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Tells whether a particular MoveCategory is disabled for this entity.
+        /// Tells whether a particular MoveCategory is disabled for this BattleEntity.
         /// </summary>
         /// <param name="category">The type of moves to check.</param>
         /// <returns>true if the category is in the disabled dictionary, otherwise false.</returns>
@@ -1339,7 +1388,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets all of the entity's currently disabled MoveCategories.
+        /// Gets all of the BattleEntity's currently disabled MoveCategories.
         /// </summary>
         /// <returns>An array of MoveCategories that are disabled. If none are disabled, an empty array is returned.</returns>
         public MoveCategories[] GetDisabledMoveCategories()
@@ -1350,8 +1399,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets all of the entity's currently disabled MoveCategories.
+        /// Adds all of the BattleEntity's currently disabled MoveCategories into a supplied list.
         /// </summary>
+        /// <param name="moveCategoryList">The list to add the disabled MoveCategories to.</param>
         /// <returns>An array of MoveCategories that are disabled. If none are disabled, an empty array is returned.</returns>
         public void GetDisabledMoveCategories(List<MoveCategories> moveCategoryList)
         {

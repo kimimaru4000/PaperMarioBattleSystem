@@ -251,12 +251,12 @@ namespace PaperMarioBattleSystem.Extensions
         /// Tells if the BattleEntity has a usable charge. This will return false if the Charged Status is suppressed.
         /// </summary>
         /// <param name="entity">The BattleEntity to check for a charge.</param>
-        /// <returns>true if the BattleEntity has the Charged status and the ChargedDamage AdditionalProperty.</returns>
+        /// <returns>true if the BattleEntity has the Charged status and the Charged status isn't suppressed.</returns>
         public static bool HasCharge(this BattleEntity entity)
         {
-            //We check for both the Charged Status and the ChargedDamage property because the Status could be suppressed
+            //We check for both the Charged Status and if Charged is Effects suppressed
             return (entity.EntityProperties.HasStatus(StatusTypes.Charged) == true 
-                && entity.EntityProperties.HasAdditionalProperty(AdditionalProperty.ChargedDamage) == true);
+                && entity.EntityProperties.IsStatusSuppressed(StatusTypes.Charged, StatusSuppressionTypes.Effects) == false);
         }
 
         /// <summary>

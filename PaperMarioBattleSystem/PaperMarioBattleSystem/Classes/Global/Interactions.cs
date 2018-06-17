@@ -141,7 +141,6 @@ namespace PaperMarioBattleSystem
             //Combine all the Paybacks in the list
             PaybackHolder finalPayback = PaybackHolder.CombinePaybacks(combinedPaybacks);
 
-            //Return the normal PaybackContactResult since it's a PartialSuccess anyway
             return new ContactResultInfo(finalPayback, finalPayback.PaybackContactResult);
         }
 
@@ -544,7 +543,6 @@ namespace PaperMarioBattleSystem
                 //Get contact results
                 StepContactResultInfo = GetContactResult(attacker.EntityProperties.GetAllPhysAttributes(), contactType,
                     StepResult.VictimResult.ContactProperty, victimPaybacks, attacker.EntityProperties.GetContactExceptions(contactType));
-                //victim.EntityProperties.GetContactResult(attacker, StepResult.VictimResult.ContactType, StepResult.VictimResult.ContactProperty);
             }
         }
 
@@ -560,7 +558,7 @@ namespace PaperMarioBattleSystem
 
                 //Retrieve an overridden type of Elemental damage to inflict based on the Victim's PhysicalAttributes
                 //(Ex. The Ice Power Badge only deals Ice damage to Fiery entities)
-                ElementOverrideHolder newElement = StepResult.AttackerResult.Entity.EntityProperties.GetTotalElementOverride(victim);
+                ElementOverrideHolder newElement = StepResult.AttackerResult.Entity.EntityProperties.GetTotalElementOverride(victim.EntityProperties.GetAllPhysAttributes());
                 if (newElement.Element != Elements.Invalid)
                 {
                     //Add the number of element overrides to the damage if the element used already exists as an override and the victim has a Weakness
@@ -587,7 +585,7 @@ namespace PaperMarioBattleSystem
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
             {
-                StrengthHolder totalStrength = StepResult.AttackerResult.Entity.EntityProperties.GetTotalStrength(StepResult.VictimResult.Entity);
+                StrengthHolder totalStrength = StepResult.AttackerResult.Entity.EntityProperties.GetTotalStrength(StepResult.VictimResult.Entity.EntityProperties.GetAllPhysAttributes());
                 StepResult.VictimResult.TotalDamage += totalStrength.Value;
             }
         }

@@ -274,7 +274,7 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Defines the priority of StatusEffects. Higher priorities affect BattleEntities sooner.
-        /// <para>Related StatusEffects are sometimes grouped together in lines for readability</para>
+        /// <para>Related StatusEffects are sometimes grouped together in lines for readability.</para>
         /// </summary>
         private readonly static Dictionary<StatusTypes, int> StatusOrder = new Dictionary<StatusTypes, int>()
         {

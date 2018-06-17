@@ -12,21 +12,34 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public abstract class BattlePartner : BattlePlayer
     {
+        /// <summary>
+        /// The type of Partner this is.
+        /// </summary>
         public Enumerations.PartnerTypes PartnerType { get; protected set; } = Enumerations.PartnerTypes.None;
 
+        /// <summary>
+        /// The description of the Partner.
+        /// </summary>
         public string PartnerDescription { get; protected set; } = string.Empty;
+
+        /// <summary>
+        /// The Partner's stats.
+        /// </summary>
+        public PartnerStats PStats { get; private set; } = null;
 
         /// <summary>
         /// The number of max turns all Partners have this phase cycle. All Partners share turns.
         /// </summary>
         public static int PartnerMaxTurns { get; private set; } = 0;
 
-        public BattlePartner(PartnerStats stats) : base(stats)
+        public BattlePartner(PartnerStats partnerStats) : base(partnerStats)
         {
             Name = "Partner";
 
             EntityType = Enumerations.EntityTypes.Player;
             PlayerType = Enumerations.PlayerTypes.Partner;
+
+            PStats = partnerStats;
         }
 
         /// <summary>

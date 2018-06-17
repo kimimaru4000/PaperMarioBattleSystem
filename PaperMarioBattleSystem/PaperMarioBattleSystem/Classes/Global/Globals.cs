@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     #region Enums
 
     /// <summary>
-    /// The result of elemental damage dealt on an entity based on its weaknesses and/or resistances
+    /// The result of elemental damage dealt on an BattleEntity based on its weaknesses and/or resistances.
     /// </summary>
     public enum ElementInteractionResult
     {
@@ -20,7 +20,7 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
-    /// The ways to handle weaknesses
+    /// The ways to handle weaknesses.
     /// </summary>
     public enum WeaknessTypes
     {
@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
-    /// The ways to handle resistances
+    /// The ways to handle resistances.
     /// </summary>
     public enum ResistanceTypes
     {
@@ -71,6 +71,9 @@ namespace PaperMarioBattleSystem
         }
     }
 
+    /// <summary>
+    /// Holds data about weaknesses.
+    /// </summary>
     public struct WeaknessHolder : IEquatable<WeaknessHolder>
     {
         public WeaknessTypes WeaknessType;
@@ -140,6 +143,9 @@ namespace PaperMarioBattleSystem
         #endregion
     }
 
+    /// <summary>
+    /// Holds data about resistances.
+    /// </summary>
     public struct ResistanceHolder : IEquatable<ResistanceHolder>
     {
         public ResistanceTypes ResistanceType;
@@ -209,6 +215,9 @@ namespace PaperMarioBattleSystem
         #endregion
     }
 
+    /// <summary>
+    /// Holds data about strengths.
+    /// </summary>
     public struct StrengthHolder
     {
         public int Value;
@@ -221,6 +230,9 @@ namespace PaperMarioBattleSystem
         }
     }
 
+    /// <summary>
+    /// Holds the a ContactResult and any Payback associated with it.
+    /// </summary>
     public struct ContactResultInfo
     {
         public StatusGlobals.PaybackHolder Paybackholder;
@@ -303,17 +315,17 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
-    /// Holds immutable data for elemental damage
+    /// Holds immutable data for elemental damage.
     /// </summary>
     public struct ElementDamageHolder
     {
         /// <summary>
-        /// The damage dealt
+        /// The amount of damage dealt.
         /// </summary>
         public int Damage { get; private set; }
 
         /// <summary>
-        /// The type of Elemental damage dealt
+        /// The type of Elemental damage dealt.
         /// </summary>
         public Enumerations.Elements Element { get; private set; }
 
@@ -408,8 +420,6 @@ namespace PaperMarioBattleSystem
         public Enumerations.ContactTypes ContactType;
         public Enumerations.ContactProperties ContactProperty;
         public bool Piercing;
-        //NOTE: This had to be changed to a StatusChanceHolder since you can now specify the chance of inflicting one
-        //I wanted to keep it a StatusEffect array, but I'll keep this since knowing the chance of it being inflicted is useful
         public StatusChanceHolder[] StatusesInflicted;
         public bool Hit;
         public Enumerations.DamageEffects DamageEffect;
@@ -688,7 +698,16 @@ namespace PaperMarioBattleSystem
             Defense = 0;
         }
 
+        /// <summary>
+        /// Gets the total Accuracy stat.
+        /// </summary>
+        /// <returns>A double containing the total Accuracy.</returns>
         public double GetTotalAccuracy() => (Accuracy * AccuracyMod);
+
+        /// <summary>
+        /// Gets the total Evasion stat.
+        /// </summary>
+        /// <returns>A double containing the total Evasion.</returns>
         public double GetTotalEvasion() => (Evasion * EvasionMod);
 
         /// <summary>
@@ -727,6 +746,9 @@ namespace PaperMarioBattleSystem
     /// </summary>
     public sealed class PartnerStats : Stats
     {
+        /// <summary>
+        /// The rank of the Partner.
+        /// </summary>
         public PartnerGlobals.PartnerRanks PartnerRank = PartnerGlobals.PartnerRanks.Normal;
 
         public PartnerStats(PartnerGlobals.PartnerRanks partnerRank, int maxHP, int attack, int defense)
@@ -742,12 +764,12 @@ namespace PaperMarioBattleSystem
     public sealed class MarioStats : Stats
     {
         /// <summary>
-        /// The level of Mario's Boots
+        /// The level of Mario's Boots.
         /// </summary>
         public EquipmentGlobals.BootLevels BootLevel = EquipmentGlobals.BootLevels.Normal;
 
         /// <summary>
-        /// The level of Mario's Hammer
+        /// The level of Mario's Hammer.
         /// </summary>
         public EquipmentGlobals.HammerLevels HammerLevel = EquipmentGlobals.HammerLevels.Normal;
 
@@ -795,7 +817,7 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
-    /// The final result of an interaction, containing InteractionHolders for both the attacker and victim
+    /// The final result of an interaction, containing InteractionHolders for both the attacker and victim.
     /// </summary>
     public sealed class InteractionResult
     {
@@ -1030,6 +1052,9 @@ namespace PaperMarioBattleSystem
 
         #region RestorationTable
 
+        /// <summary>
+        /// The restoration table for Sweet Treat and Sweet Feast.
+        /// </summary>
         public static readonly Dictionary<RestoreTypes, RestoreBehaviorData> RestorationTable = new Dictionary<RestoreTypes, RestoreBehaviorData>()
         {
             { RestoreTypes.MarioHP, new RestoreBehaviorData(RestoreBehavior.HealMarioHP, 1) },
@@ -1094,11 +1119,11 @@ namespace PaperMarioBattleSystem
         #region Methods
 
         /// <summary>
-        /// A Comparison sort method for PhysicalAttributes, putting higher valued attributes first for consistency with contact results
+        /// A Comparison sort method for PhysicalAttributes, putting higher valued attributes first for consistency with contact results.
         /// </summary>
-        /// <param name="physAttr1"></param>
-        /// <param name="physAttr2"></param>
-        /// <returns></returns>
+        /// <param name="physAttr1">The first PhysicalAttribute to compare.</param>
+        /// <param name="physAttr2">The second PhysicalAttribute to compare.</param>
+        /// <returns>-1 if status1 has a higher value, 1 if physAttribute2 has a higher value, 0 if they have the same values.</returns>
         public static int SortPhysicalAttributes(Enumerations.PhysicalAttributes physAttr1, Enumerations.PhysicalAttributes physAttr2)
         {
             if (physAttr1 > physAttr2)
@@ -1129,7 +1154,7 @@ namespace PaperMarioBattleSystem
             /// </summary>
             /// <param name="element1">The first Element to compare.</param>
             /// <param name="element2">The second Element to compare.</param>
-            /// <returns>-1 if status1 has a higher value, 1 if physAttribute2 has a higher value, 0 if they have the same value.</returns>
+            /// <returns>-1 if element1 has a higher value, 1 if element2 has a higher value, 0 if they have the same value.</returns>
             public int Compare(Enumerations.Elements element1, Enumerations.Elements element2)
             {
                 return SortElements(element1, element2);
@@ -1143,9 +1168,9 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// A Comparison sort method for Elements, putting higher valued elements first.
         /// </summary>
-        /// <param name="element1"></param>
-        /// <param name="element2"></param>
-        /// <returns></returns>
+        /// <param name="element1">The first Element to compare.</param>
+        /// <param name="element2">The second Element to compare.</param>
+        /// <returns>-1 if element1 has a higher value, 1 if element2 has a higher value, 0 if they have the same value.</returns>
         public static int SortElements(Enumerations.Elements element1, Enumerations.Elements element2)
         {
             if (element1 > element2)
@@ -1186,7 +1211,7 @@ namespace PaperMarioBattleSystem
     }
 
     /// <summary>
-    /// Class for global values dealing with general equipment
+    /// Class for global values dealing with equipment.
     /// </summary>
     public static class EquipmentGlobals
     {

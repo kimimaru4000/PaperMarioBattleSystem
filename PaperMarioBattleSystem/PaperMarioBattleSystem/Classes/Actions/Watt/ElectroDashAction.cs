@@ -22,7 +22,11 @@ namespace PaperMarioBattleSystem
                 "Pierce enemy defense, dealing 5 damage.", MoveResourceTypes.FP, 0, CostDisplayTypes.Shown, MoveAffectionTypes.Other, 
                 Enumerations.EntitySelectionType.Single, true, null, new EntityTypes[] { User.GetOpposingEntityType() });
 
-            DamageInfo = new DamageData(5, Elements.Electric, true, ContactTypes.SideDirect, ContactProperties.None, null, DamageEffects.None);
+            DamageInfo = new DamageData(3, Elements.Electric, true, ContactTypes.SideDirect, ContactProperties.None, null, DamageEffects.None);
+
+            //If a Partner (Watt) is using this move, the base damage is increased by 1 per Partner rank above Normal
+            PartnerStats partnerStats = User.BattleStats as PartnerStats;
+            if (partnerStats != null) DamageInfo.Damage += ((int)partnerStats.PartnerRank - 1);
 
             ElectroDashSequence electroDashSequence = new ElectroDashSequence(this);
             SetMoveSequence(electroDashSequence);

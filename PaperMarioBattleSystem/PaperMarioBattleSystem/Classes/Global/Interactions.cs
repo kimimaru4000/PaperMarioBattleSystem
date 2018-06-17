@@ -19,6 +19,11 @@ namespace PaperMarioBattleSystem
     {
         #region Delegates
         
+        /// <summary>
+        /// A delegate invoked when an attacker misses a victim.
+        /// The return value indicates whether to continue attacking after a miss or not.
+        /// </summary>
+        /// <returns>true to continue attacking, otherwise false.</returns>
         public delegate bool VictimMissInteraction();
         
         #endregion
@@ -26,7 +31,7 @@ namespace PaperMarioBattleSystem
         #region Structs
 
         /// <summary>
-        /// Holds the result and damage value of an damage interaction involving an Element
+        /// Holds the result and damage value of an damage interaction involving an Element.
         /// </summary>
         private struct ElementDamageResultHolder
         {
@@ -64,7 +69,7 @@ namespace PaperMarioBattleSystem
         #region Contact Methods
 
         /// <summary>
-        /// Gets the result of a ContactType on a set of PhysicalAttributes
+        /// Gets the result of a ContactType on a set of PhysicalAttributes.
         /// </summary>
         /// <param name="attackerPhysAttributes">The attacker's set of PhysicalAttributes.</param>
         /// <param name="contactType">The ContactType performed.</param>
@@ -284,8 +289,8 @@ namespace PaperMarioBattleSystem
 
         ///<summary>
         ///Have an attacker attempt to deal damage to a set of victims.
-        ///<para>Based on the ContactType of this BattleAction, this can fail, resulting in an interruption.
-        ///In the event of an interruption, no further entities are tested.</para>
+        ///<para>Based on the ContactType of the move, this can fail, resulting in an interruption.
+        ///In the event of an interruption, no further BattleEntities are tested.</para>
         ///</summary>
         ///<param name="attacker">The BattleEntity dealing the damage.</param>
         ///<param name="victims">The BattleEntities to attempt to inflict damage on.</param>
@@ -356,9 +361,9 @@ namespace PaperMarioBattleSystem
         /// Calculates the result of elemental damage on a BattleEntity, based on its weaknesses and resistances to that Element.
         /// </summary>
         /// <param name="victim">The BattleEntity being damaged.</param>
-        /// <param name="element">The element the entity is attacked with.</param>
+        /// <param name="element">The element the BattleEntity is attacked with.</param>
         /// <param name="damage">The initial damage of the attack.</param>
-        /// <returns>An ElementDamageHolder stating the result and final damage dealt to this entity.</returns>
+        /// <returns>An ElementDamageHolder stating the result and final damage dealt to this BattleEntity.</returns>
         private static ElementDamageResultHolder GetElementalDamage(BattleEntity victim, Elements element, int damage)
         {
             ElementDamageResultHolder elementDamageResult = new ElementDamageResultHolder(ElementInteractionResult.Damage, damage);
@@ -402,11 +407,11 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Filters an array of StatusEffects depending on whether they will be inflicted on a BattleEntity
-        /// depending on the entity's status percentages and the chance of inflicting the StatusEffect.
+        /// depending on the BattleEntity's status percentages and the chance of inflicting the StatusEffect.
         /// </summary>
-        /// <param name="entity">The BattleEntity to attempt to afflict the StatusEffects with</param>
+        /// <param name="entity">The BattleEntity to attempt to afflict the StatusEffects with.</param>
         /// <param name="statusesToInflict">The original array of StatusChanceHolders.</param>
-        /// <returns>An array of StatusEffects that has succeeded in being inflicted on the entity</returns>
+        /// <returns>An array of StatusEffects that has succeeded in being inflicted on the BattleEntity.</returns>
         private static StatusChanceHolder[] GetFilteredInflictedStatuses(BattleEntity entity, StatusChanceHolder[] statusesToInflict)
         {
             //Handle null
@@ -456,19 +461,29 @@ namespace PaperMarioBattleSystem
         #region Damage Formula Step Classes
 
         /// <summary>
-        /// The base class for steps in the total damage calculation.
+        /// The base class for steps in the damage calculation.
         /// </summary>
         public abstract class DamageCalcStep
         {
             /// <summary>
-            /// The current InteractionResult at each step.
+            /// The current InteractionResult at the step.
             /// This is copied and modified each step, so all the values after each calculation are preserved.
             /// <para>This also allows us to preserve the last interaction performed.</para>
             /// </summary>
             protected InteractionResult StepResult = null;
 
+            /// <summary>
+            /// The current ContactResultInfo at the step.
+            /// </summary>
             public ContactResultInfo StepContactResultInfo = new ContactResultInfo();
 
+            /// <summary>
+            /// Calculates the result of an interaction.
+            /// </summary>
+            /// <param name="damageInfo">An InteractionParamHolder containing the damage information.</param>
+            /// <param name="curResult">The current InteractionResult, calculated from the previous step.</param>
+            /// <param name="curContactResult">The current ContactResultInfo, calculated from the previous step.</param>
+            /// <returns>An InteractionResult containing the result of the interaction at this step.</returns>
             public InteractionResult Calculate(in InteractionParamHolder damageInfo, in InteractionResult curResult, in ContactResultInfo curContactResult)
             {
                 StepResult = new InteractionResult(curResult);
@@ -476,10 +491,17 @@ namespace PaperMarioBattleSystem
                 OnCalculate(damageInfo);
                 return StepResult;
             }
-        
+
+            /// <summary>
+            /// Calculates the interaction for this step.
+            /// </summary>
+            /// <param name="damageInfo">An InteractionParamHolder containing the damage information.</param>
             protected abstract void OnCalculate(in InteractionParamHolder damageInfo);
         }
 
+        /// <summary>
+        /// Initializes the interaction information.
+        /// </summary>
         public sealed class InitStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -496,6 +518,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Determines the ContactResult interaction between the attacker and victim.
+        /// </summary>
         public sealed class ContactResultStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -523,6 +548,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Calculates the Element Override the attacker has on the victim and whether to change the damage Element in the interaction.
+        /// </summary>
         public sealed class ElementOverrideStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -564,6 +592,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Factors in the elemental damage dealt to the victim.
+        /// </summary>
         public sealed class VictimElementDamageStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -576,6 +607,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Factors in the victim's DamageReduction stat.
+        /// </summary>
         public sealed class VictimDamageReductionStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -584,6 +618,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Checks if the victim is hit or not.
+        /// </summary>
         public sealed class VictimCheckHitStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -595,6 +632,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Factors in the Victim's DefensiveActions performed.
         /// The Victim's final UNSCALED damage is calculated in this step.
         /// </summary>
         public sealed class VictimDefensiveStep : DamageCalcStep
@@ -645,55 +683,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        /*NOTE: This has been commented out because it is redundant. Entities currently handle DamageEffects their own way,
-         and if a move misses, HandleDamageEffects() won't even be called to begin with. If this needs to be reintroduced,
-         chances are it will need to be rewritten*/
-        // <summary>
-        // Filters out DamageEffects caused by the move depending on whether the BattleEntity is vulnerable to them or not.
-        // </summary>
-        /*public sealed class VictimDamageEffectStep : DamageCalcStep
-        {
-            protected override void OnCalculate(InteractionParamHolder damageInfo, InteractionResult curResult, ContactResultInfo curContactResult)
-            {
-                //If the attack didn't hit, don't factor in DamageEffects
-                if (StepResult.VictimResult.Hit == false)
-                {
-                    StepResult.VictimResult.DamageEffect = DamageEffects.None;
-                }
-        
-                //If the current result has no DamageEffects (whether the move didn't have any or a Defensive Action removed them)
-                //or if the BattleEntity isn't vulnerable to any DamageEffects, then don't bother doing anything else
-                if (StepResult.VictimResult.DamageEffect == DamageEffects.None
-                    || StepResult.VictimResult.Entity.EntityProperties.HasDamageEffectVulnerabilities() == false)
-                {
-                    return;
-                }
-                
-                //The DamageEffects stored in the result
-                DamageEffects resultEffects = DamageEffects.None;
-
-                //Get all the DamageEffects
-                DamageEffects[] damageEffects = UtilityGlobals.GetEnumValues<DamageEffects>();
-
-                //Start at index 1, as 0 is the value of None indicating no DamageEffects
-                for (int i = 1; i < damageEffects.Length; i++)
-                {
-                    DamageEffects curEffect = damageEffects[i];
-
-                    //If the move has the DamageEffect and the entity is affected by it, add it to the result
-                    //This approach is easier and more readable than removing effects
-                    if (UtilityGlobals.DamageEffectHasFlag(StepResult.VictimResult.DamageEffect, curEffect) == true
-                        && StepResult.VictimResult.Entity.EntityProperties.IsVulnerableToDamageEffect(curEffect) == true)
-                    {
-                        resultEffects |= curEffect;
-                    }
-                }
-
-                //Set the result
-                StepResult.VictimResult.DamageEffect = resultEffects;
-            }
-        }*/
-
+        /// <summary>
+        /// Factors in the number of Double Pain Badges the victim has equipped.
+        /// </summary>
         public sealed class VictimDoublePainStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -705,6 +697,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Factors in the number of Last Stand Badges the victim has equipped if the victim is in Danger or Peril.
+        /// </summary>
         public sealed class VictimLastStandStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -722,6 +717,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Clamps the final victim damage.
+        /// </summary>
         public sealed class ClampVictimDamageStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -732,6 +730,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Determines the StatusEffects the victim should be inflicted with.
+        /// </summary>
         public sealed class VictimFilteredStatusStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -741,6 +742,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Factors in the victim's invincibility.
+        /// </summary>
         public sealed class VictimCheckInvincibleStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -756,6 +760,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Determines whether the victim is hit based on the ContactResult calculated prior.
         /// Final Victim step - ALL Victim damage information is known after this.
         /// </summary>
         public sealed class VictimCheckContactResultStep : DamageCalcStep
@@ -771,6 +776,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Calculates the amount of Payback damage dealt to the attacker based on the victim's Paybacks.
+        /// </summary>
         public sealed class AttackerPaybackDamageStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -810,6 +818,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Clamps the final attacker damage.
+        /// </summary>
         public class ClampAttackerDamageStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -819,6 +830,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Determines the StatusEffects the attacker should be inflicted with.
+        /// </summary>
         public class AttackerFilteredStatusStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -828,6 +842,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Factors in the attacker's invincibility.
+        /// </summary>
         public class AttackerCheckInvincibleStep : DamageCalcStep
         {
             protected override void OnCalculate(in InteractionParamHolder damageInfo)
@@ -843,6 +860,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
+        /// Determines whether the attacker is hit based on the ContactResult calculated prior.
         /// Final Attacker step - ALL Attacker damage information is known after this.
         /// </summary>
         public sealed class AttackerCheckContactResultStep : DamageCalcStep

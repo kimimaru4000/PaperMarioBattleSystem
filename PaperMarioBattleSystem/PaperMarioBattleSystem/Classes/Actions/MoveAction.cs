@@ -14,49 +14,54 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// A type of BattleAction selectable from a BattleMenu.
-    /// They have sequences that the BattleEntity performs.
+    /// They have a <see cref="Sequence"/> that the BattleEntity performs.
     /// </summary>
     public class MoveAction : BattleAction, IActionCommand, IDisableable
     {
         #region Fields/Properties
 
+        /// <summary>
+        /// The properties of the MoveAction. It includes FP cost and more.
+        /// </summary>
         public MoveActionData MoveProperties => MoveInfo;
 
         /// <summary>
-        /// The properties of the MoveAction. Includes FP cost and more.
+        /// The properties of the MoveAction. It includes FP cost and more.
         /// </summary>
         protected MoveActionData MoveInfo;
 
         /// <summary>
-        /// The Sequence this MoveAction has the BattleEntity perform.
+        /// The Sequence the BattleEntity using this move performs.
         /// </summary>
         public Sequence MoveSequence { get; private set; } = null;
 
         /// <summary>
-        /// The damage information of this MoveAction.
+        /// The damage information of the MoveAction.
         /// </summary>
         protected DamageData DamageInfo;
 
+        /// <summary>
+        /// The damage information of the MoveAction.
+        /// </summary>
         public DamageData DamageProperties => DamageInfo;
 
         /// <summary>
-        /// The healing information of this MoveAction.
+        /// The healing information of the MoveAction.
         /// </summary>
         public HealingData? HealingInfo { get; protected set; } = null;
 
         /// <summary>
-        /// The category of this action. It is automatically set by the menus.
+        /// The category of the MoveAction. It is automatically set by the menus.
         /// </summary>
         public MoveCategories MoveCategory { get; private set; } = MoveCategories.Enemy;
 
         /// <summary>
-        /// The ActionCommand associated with the BattleAction
+        /// The ActionCommand associated with the MoveAction.
         /// </summary>
         public ActionCommand actionCommand { get; set; }
 
         /// <summary>
         /// Tells whether the action command is enabled or not.
-        /// Action commands are by default disabled for enemies
         /// </summary>
         public bool CommandEnabled => (HasActionCommand == true && EnableActionCommand == true);
 
@@ -294,6 +299,10 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Classifies the move under a certain category. 
+        /// </summary>
+        /// <param name="moveCategory">The MoveCategories value to classify this move as.</param>
         public virtual void SetMoveCategory(MoveCategories moveCategory)
         {
             MoveCategory = moveCategory;
@@ -301,7 +310,7 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// What happens when the MoveAction is selected on the menu.
-        /// The default behavior is to start target selection with the ActionStart method
+        /// The default behavior is to start target selection with the ActionStart method.
         /// </summary>
         public virtual void OnMenuSelected()
         {
@@ -318,9 +327,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Clears the menu stack and makes the entity whose turn it is start performing this action
+        /// Clears the menu stack and makes the BattleEntity whose turn it is start performing this action.
         /// </summary>
-        /// <param name="targets"></param>
+        /// <param name="targets">An array of BattleEntities as the targets of the move.</param>
         protected void ActionStart(BattleEntity[] targets)
         {
             User.BManager.battleUIManager.ClearMenuStack();

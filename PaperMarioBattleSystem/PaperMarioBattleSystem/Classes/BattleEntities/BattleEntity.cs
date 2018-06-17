@@ -114,7 +114,11 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public HealthStates HealthState { get; private set; } = HealthStates.Normal;
 
+        /// <summary>
+        /// The stats of the BattleEntity. This includes Level, HP, and FP.
+        /// </summary>
         public Stats BattleStats { get; protected set; } = Stats.Default;
+
         public int CurHP => BattleStats.HP;
         public virtual int CurFP => BattleStats.FP;
 
@@ -163,6 +167,9 @@ namespace PaperMarioBattleSystem
         public float Layer { get; set; } = .1f;
         public readonly Vector2 Origin = new Vector2(.5f, .5f);
 
+        /// <summary>
+        /// The type of BattleEntity this is. Common types include Player and Enemy.
+        /// </summary>
         public EntityTypes EntityType { get; protected set; } = EntityTypes.Enemy;
 
         /// <summary>
@@ -184,13 +191,24 @@ namespace PaperMarioBattleSystem
         /// Tells whether the BattleEntity is in Danger or Peril
         /// </summary>
         public bool IsInDanger => (HealthState == HealthStates.Danger || HealthState == HealthStates.Peril);
+
+        /// <summary>
+        /// Tells whether the BattleEntity is out of HP and cannot battle.
+        /// </summary>
         public bool IsDead => HealthState == HealthStates.Dead;
+
+        /// <summary>
+        /// Tells whether this BattleEntity is currently going or not.
+        /// </summary>
         public bool IsTurn => (BManager?.EntityTurn == this);
 
+        /// <summary>
+        /// Tells if the BattleEntity used up all of its turns.
+        /// </summary>
         public bool UsedTurn => (TurnsUsed >= MaxTurns || IsDead == true);
 
         /// <summary>
-        /// Tells if the BattleEntity is currently in battle.
+        /// Tells if the BattleEntity is currently in a battle.
         /// </summary>
         public bool IsInBattle => (BManager != null && BattleGlobals.IsValidBattleIndex(BattleIndex));
 
@@ -401,9 +419,9 @@ namespace PaperMarioBattleSystem
         /// Makes the BattleEntity take damage from an attack.
         /// <para>This method is a shorthand for inflicting simple damage such as Poison damage every turn from a StatusEffect.</para>
         /// </summary>
-        /// <param name="element">The element to damage the entity with</param>
-        /// <param name="damage">The damage to deal to the entity</param>
-        /// <param name="piercing">Whether the attack penetrates Defense or not</param>
+        /// <param name="element">The element to damage the BattleEntity with.</param>
+        /// <param name="damage">The damage to deal to the BattleEntity.</param>
+        /// <param name="piercing">Whether the attack penetrates Defense or not.</param>
         public void TakeDamage(Elements element, int damage, bool piercing)
         {
             TakeDamage(new InteractionHolder(this, damage, element, ElementInteractionResult.Damage, ContactTypes.None, ContactProperties.Ranged, piercing, null, true, DamageEffects.None));
@@ -423,6 +441,10 @@ namespace PaperMarioBattleSystem
 
         #region Stat Manipulations
 
+        /// <summary>
+        /// Heals the BattleEntity's HP by a specified amount.
+        /// </summary>
+        /// <param name="hp">The amount of HP to heal.</param>
         public void HealHP(int hp)
         {
             BattleStats.HP = UtilityGlobals.Clamp(BattleStats.HP + hp, 0, BattleStats.MaxHP);
@@ -431,12 +453,20 @@ namespace PaperMarioBattleSystem
             Debug.Log($"{Name} healed {hp} HP!");
         }
 
+        /// <summary>
+        /// Heals the BattleEntity's FP by a specified amount.
+        /// </summary>
+        /// <param name="fp">The amount of FP to heal.</param>
         public virtual void HealFP(int fp)
         {
             BattleStats.FP = UtilityGlobals.Clamp(BattleStats.FP + fp, 0, BattleStats.MaxFP);
             Debug.Log($"{Name} healed {fp} FP!");
         }
 
+        /// <summary>
+        /// Subtracts the BattleEntity's HP by a specified amount.
+        /// </summary>
+        /// <param name="hp">The amount of HP to subtract.</param>
         public void LoseHP(int hp)
         {
             BattleStats.HP = UtilityGlobals.Clamp(BattleStats.HP - hp, 0, BattleStats.MaxHP);
@@ -450,51 +480,87 @@ namespace PaperMarioBattleSystem
             Debug.Log($"{Name} took {hp} points of damage!");
         }
 
+        /// <summary>
+        /// Subtracts the BattleEntity's FP by a specified amount.
+        /// </summary>
+        /// <param name="fp">The amount of FP to subtract.</param>
         public virtual void LoseFP(int fp)
         {
             BattleStats.FP = UtilityGlobals.Clamp(BattleStats.FP - fp, 0, BattleStats.MaxFP);
             Debug.Log($"{Name} lost {fp} FP!");
         }
 
+        /// <summary>
+        /// Raises the BattleEntity's Max HP by a specified amount.
+        /// </summary>
+        /// <param name="hp">The amount to raise the BattleEntity's Max HP by.</param>
         public void RaiseMaxHP(int hp)
         {
             BattleStats.MaxHP += hp;
             HealHP(0);
         }
 
+        /// <summary>
+        /// Lowers the BattleEntity's Max HP by a specified amount.
+        /// </summary>
+        /// <param name="hp">The amount to lower the BattleEntity's Max HP by.</param>
         public void LowerMaxHP(int hp)
         {
             BattleStats.MaxHP -= hp;
             HealHP(0);
         }
 
+        /// <summary>
+        /// Raises the BattleEntity's Max FP by a specified amount.
+        /// </summary>
+        /// <param name="fp">The amount to raise the BattleEntity's Max FP by.</param>
         public virtual void RaiseMaxFP(int fp)
         {
             BattleStats.MaxFP += fp;
             HealFP(0);
         }
 
+        /// <summary>
+        /// Lowers the BattleEntity's Max FP by a specified amount.
+        /// </summary>
+        /// <param name="fp">The amount to lower the BattleEntity's Max HP by.</param>
         public virtual void LowerMaxFP(int fp)
         {
             BattleStats.MaxFP -= fp;
             HealFP(0);
         }
 
+        /// <summary>
+        /// Raises the BattleEntity's Attack by a specified amount.
+        /// </summary>
+        /// <param name="attack">The amount to raise the BattleEntity's Attack by.</param>
         public void RaiseAttack(int attack)
         {
             BattleStats.Attack += attack;
         }
 
+        /// <summary>
+        /// Raises the BattleEntity's Defense by a specified amount.
+        /// </summary>
+        /// <param name="defense">The amount to raise the BattleEntity's Defense by.</param>
         public void RaiseDefense(int defense)
         {
             BattleStats.Defense += defense;
         }
 
+        /// <summary>
+        /// Lowers the BattleEntity's Attack by a specified amount.
+        /// </summary>
+        /// <param name="attack">The amount to lower the BattleEntity's Attack by.</param>
         public void LowerAttack(int attack)
         {
             BattleStats.Attack -= attack;
         }
 
+        /// <summary>
+        /// Lowers the BattleEntity's Defense by a specified amount.
+        /// </summary>
+        /// <param name="defense">The amount to lower the BattleEntity's Defense by.</param>
         public void LowerDefense(int defense)
         {
             BattleStats.Defense -= defense;
@@ -580,7 +646,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Updates the BattleEntity's health state based on its current HP.
+        /// Updates the BattleEntity's HealthState based on its current HP.
         /// </summary>
         protected void UpdateHealthState()
         {
@@ -614,7 +680,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What occurs when an BattleEntity changes HealthStates
+        /// What occurs when an BattleEntity changes HealthStates.
         /// </summary>
         /// <param name="newHealthState">The new HealthState of the BattleEntity.</param>
         protected virtual void OnHealthStateChange(HealthStates newHealthState)
@@ -648,8 +714,8 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Checks if the BattleEntity's attempt to hit another BattleEntity is successful based on the BattleEntity's Accuracy and the victim's Evasion.
         /// </summary>
-        /// <param name="victim">The entity trying to evade.</param>
-        /// <returns>true if the entity hits and the victim doesn't evade, otherwise false.</returns>
+        /// <param name="victim">The BattleEntity trying to evade.</param>
+        /// <returns>true if the BattleEntity hits and the victim doesn't evade, otherwise false.</returns>
         //NOTE: When dealing with Badges such as Close Call, we should compare the entity's Evasion first, then perform
         //the test again with the Badges' Evasion added in. If the Badges' Evasion bonus allows the entity to evade the attack,
         //that's when we'd play the "LUCKY" animation
@@ -665,7 +731,7 @@ namespace PaperMarioBattleSystem
         /// <param name="statusesInflicted">The original set of StatusEffects inflicted.</param>
         /// <param name="damageEffects">The original DamageEffects that would affect the BattleEntity.</param>
         /// <param name="defensiveOverrides">The types of Defensive Actions to override.</param>
-        /// <returns>A nullable DefensiveActionHolder? with a DefensiveAction's result if successful, otherwise null.</returns>
+        /// <returns>A nullable DefensiveActionHolder with a DefensiveAction's result if successful, otherwise null.</returns>
         public BattleGlobals.DefensiveActionHolder? GetDefensiveActionResult(int damage, StatusChanceHolder[] statusesInflicted, DamageEffects damageEffects,
             DefensiveActionTypes defensiveOverrides)
         {
@@ -752,7 +818,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What happens when the entity's turn starts
+        /// What happens when the BattleEntity's turn starts.
         /// </summary>
         public virtual void OnTurnStart()
         {
@@ -766,7 +832,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What happens when the entity's turn ends
+        /// What happens when the BattleEntity's turn ends.
         /// </summary>
         public virtual void OnTurnEnd()
         {
@@ -801,7 +867,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What happens during the entity's turn (choosing action commands, etc.)
+        /// What happens during the BattleEntity's turn (choosing action commands, etc).
         /// </summary>
         public virtual void TurnUpdate()
         {
@@ -809,19 +875,19 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Sets the max number of turns the entity has during this phase
+        /// Sets the max number of turns the BattleEntity has during this phase.
         /// </summary>
-        /// <param name="maxTurns">The new number of turns the entity has for this phase</param>
+        /// <param name="maxTurns">The new number of turns the BattleEntity has for this phase.</param>
         public void SetMaxTurns(int maxTurns)
         {
             MaxTurns = maxTurns;
         }
 
         /// <summary>
-        /// Sets the number of turns used by the entity during this phase.
-        /// This is primarily used by StatusEffects
+        /// Sets the number of turns used by the BattleEntity during this phase.
+        /// <para>This is primarily used by StatusEffects.</para>
         /// </summary>
-        /// <param name="turnsUsed">The new number of turns the entity used in this phase</param>
+        /// <param name="turnsUsed">The new number of turns the BattleEntity used in this phase.</param>
         public void SetTurnsUsed(int turnsUsed)
         {
             TurnsUsed = turnsUsed;
@@ -861,6 +927,10 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Sets the BattlePosition of the BattleEntity.
+        /// </summary>
+        /// <param name="battlePos">A Vector2 representing the new BattlePosition.</param>
         public void SetBattlePosition(Vector2 battlePos)
         {
             BattlePosition = battlePos;

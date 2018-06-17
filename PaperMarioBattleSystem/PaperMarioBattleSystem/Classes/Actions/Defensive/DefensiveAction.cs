@@ -10,8 +10,8 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The base class for Defensive Actions BattleEntities can perform in battle.
-    /// <para>A Defensive Action is defined as one that can be done when it's not the BattleEntity's turn.
-    /// In the first two Paper Mario games, the only Defensive Actions are Guard and Superguard.</para>
+    /// <para>A Defensive Action is defined as one that can be done when it's not the BattleEntity's turn and helps them
+    /// reduce the damage dealt. In the first two Paper Mario games, the only Defensive Actions are Guard and Superguard.</para>
     /// </summary>
     public abstract class DefensiveAction : BattleAction, IActionCommand, IActionCommandHandler
     {
@@ -36,12 +36,12 @@ namespace PaperMarioBattleSystem
         protected bool UserImmobile => (User != null && User.IsImmobile() == true);
 
         /// <summary>
-        /// The amount of time a successful ActionCommand is valid for
+        /// The amount of time a successful ActionCommand is valid for.
         /// </summary>
         protected double CommandSuccessTimer = 0f;
 
         /// <summary>
-        /// The time since the last successful ActionCommand
+        /// The time since the last successful ActionCommand.
         /// </summary>
         protected double PrevCommandTimer = 0f;
 
@@ -83,18 +83,18 @@ namespace PaperMarioBattleSystem
         /// <para>This can be called for only one Defensive Action at a time (Ex. You can't both Guard and Superguard).
         /// Whichever is successful first in the BattleEntity's DefensiveAction list is the one that gets called.</para>
         /// </summary>
-        /// <param name="damage">The original damage that would be dealt to the BattleEntity</param>
-        /// <param name="statusEffects">The original StatusEffects that would be inflicted on the BattleEntity</param>
+        /// <param name="damage">The original damage that would be dealt to the BattleEntity.</param>
+        /// <param name="statusEffects">The original StatusEffects that would be inflicted on the BattleEntity.</param>
         /// <param name="damageEffects">The original DamageEffects that would affect the BattleEntity.</param>
-        /// <returns>A DefensiveActionHolder containing the modified damage dealt and a filtered set of StatusEffects inflicted</returns>
+        /// <returns>A DefensiveActionHolder containing the modified damage dealt and a filtered set of StatusEffects inflicted.</returns>
         public abstract BattleGlobals.DefensiveActionHolder HandleSuccess(int damage, StatusChanceHolder[] statusEffects, DamageEffects damageEffects);
 
         /// <summary>
-        /// Filters out StatusEffects that the DefensiveAction defends against
+        /// Filters out StatusEffects that the DefensiveAction defends against.
         /// </summary>
-        /// <param name="statusesInflicted">The original set of StatusEffects inflicted</param>
+        /// <param name="statusesInflicted">The original set of StatusEffects inflicted.</param>
         /// <returns>A set of StatusEffects that the DefensiveAction doesn't defend against.
-        /// null if the DefensiveAction defends against all StatusEffects</returns>
+        /// null if the DefensiveAction defends against all StatusEffects.</returns>
         protected virtual StatusChanceHolder[] FilterStatuses(StatusChanceHolder[] statusesInflicted)
         {
             if (AllowedStatuses == null || AllowedStatuses.Length == 0 || statusesInflicted == null || statusesInflicted.Length == 0)

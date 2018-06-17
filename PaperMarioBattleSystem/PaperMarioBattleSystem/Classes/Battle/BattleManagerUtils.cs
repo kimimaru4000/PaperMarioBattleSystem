@@ -15,12 +15,12 @@ namespace PaperMarioBattleSystem
     public static class BattleManagerUtils
     {
         /// <summary>
-        /// Filters a set of entities by specified height states. This method is called internally by the BattleManager.
+        /// Filters a set of entities by specified HeightStates.
         /// </summary>
         /// <typeparam name="T">A BattleEntity or derived type.</typeparam>
-        /// <param name="entities">The list of entities to filter. This list is modified directly.</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null or empty, will return the entities passed in</param>
+        /// <param name="entities">The list of BattleEntities to filter. This list is modified directly.</param>
+        /// <param name="heightStates">The HeightStates to filter entities by. BattleEntities with any of the state will be included.
+        /// If null or empty, will return the BattleEntities passed in</param>
         public static void FilterEntitiesByHeights<T>(List<T> entities, params HeightStates[] heightStates) where T : BattleEntity
         {
             //Return immediately if either input is null
@@ -40,13 +40,13 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Filters a set of entities by specified height states
+        /// Filters a set of entities by specified HeightStates.
         /// </summary>
         /// <typeparam name="T">A BattleEntity or derived type.</typeparam>
-        /// <param name="entities">The array of entities to filter</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null or empty, will return the entities passed in</param>
-        /// <returns>An array of BattleEntities filtered by HeightStates</returns>
+        /// <param name="entities">The array of BattleEntities to filter.</param>
+        /// <param name="heightStates">The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+        /// If null or empty, will return the BattleEntities passed in.</param>
+        /// <returns>An array of BattleEntities filtered by HeightStates.</returns>
         public static T[] FilterEntitiesByHeights<T>(T[] entities, params HeightStates[] heightStates) where T : BattleEntity
         {
             if (entities == null || entities.Length == 0 || heightStates == null || heightStates.Length == 0) return entities;
@@ -59,7 +59,6 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Filters out BattleEntities marked as Untargetable from a set of BattleEntities.
-        /// This method is called internally by the BattleManager.
         /// </summary>
         /// <typeparam name="T">A BattleEntity or derived type.</typeparam>
         /// <param name="entities">The list of BattleEntities to filter. The list is modified directly.</param>
@@ -136,11 +135,11 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Gets the position in front of an entity's battle position
+        /// Gets the position in front of a BattleEntity's battle position.
         /// </summary>
-        /// <param name="entity">The entity to get the position in front of</param>
+        /// <param name="entity">The BattleEntity to get the position in front of.</param>
         /// <param name="fromLeftSide">Whether the front refers to the left side of the BattleEntity.</param>
-        /// <returns>A Vector2 with the position in front of the entity</returns>
+        /// <returns>A Vector2 with the position in front of the BattleEntity.</returns>
         public static Vector2 GetPositionInFront(BattleEntity entity, bool fromLeftSide)
         {
             Vector2 xdiff = new Vector2(PositionXDiff, 0f);

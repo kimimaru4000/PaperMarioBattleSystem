@@ -12,7 +12,7 @@ using PaperMarioBattleSystem.Extensions;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Handles all aspects regarding turn-based battles. It manages the BattleEntities taking part in battle.
+    /// Handles all aspects regarding turn-based battles and manages the BattleEntities taking part in battle.
     /// </summary>
     public class BattleManager : IUpdateable, ICleanup
     {
@@ -214,7 +214,7 @@ namespace PaperMarioBattleSystem
             //Add all entities at once
             List<BattleEntity> addedEntities = new List<BattleEntity>();
 
-            //Add Mario before the Partner so his Battle Index is set to 0
+            //Add Mario before the Partner so his BattleIndex is set to 0
             addedEntities.Add(mario);
             addedEntities.Add(partner);
 
@@ -293,7 +293,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Starts the Battle
+        /// Starts the battle.
         /// </summary>
         public void StartBattle()
         {
@@ -306,8 +306,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Ends the Battle
+        /// Ends the battle.
         /// </summary>
+        /// <param name="battleResult">The result of the battle.</param>
         public void EndBattle(BattleResults battleResult)
         {
             ChangeBattleState(BattleState.Done);
@@ -326,6 +327,10 @@ namespace PaperMarioBattleSystem
             battleEventManager.AddPendingEvents();
         }
 
+        /// <summary>
+        /// Switches the Phase of the battle.
+        /// </summary>
+        /// <param name="phase">The new phase to switch to.</param>
         private void SwitchPhase(int phase)
         {
             SwitchingPhase = false;
@@ -412,6 +417,9 @@ namespace PaperMarioBattleSystem
             Partner = partner;
         }
 
+        /// <summary>
+        /// Starts the next BattleEntity's turn in battle.
+        /// </summary>
         public void TurnStart()
         {
             if (State == BattleState.Done)
@@ -428,6 +436,9 @@ namespace PaperMarioBattleSystem
             EntityTurn.StartTurn();
         }
 
+        /// <summary>
+        /// Ends the current BattleEntity's turn in battle and decides who should go next.
+        /// </summary>
         public void TurnEnd()
         {
             if (State == BattleState.Done)
@@ -464,8 +475,8 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Updates the battle state, checking if the battle should be over.
-        /// It's game over if Mario has 0 HP, otherwise it's victory if no enemies are alive
+        /// Updates the BattleState, checking if the battle should be over.
+        /// It's game over if Mario has 0 HP, otherwise it's victory if no enemies are alive.
         /// </summary>
         private void UpdateBattleState()
         {
@@ -519,7 +530,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Finds the next BattleEntity that should go.
+        /// Finds the BattleEntity that should go next.
         /// </summary>
         private void FindNextEntityTurn()
         {
@@ -749,8 +760,8 @@ namespace PaperMarioBattleSystem
         /// This method is used internally in the BattleManager.
         /// <para>NOTE: Be very careful with this list; modifying it outside of the appropriate methods may result in mismatched data.</para>
         /// </summary>
-        /// <param name="entityType">The EntityType of entities to return.</param>
-        /// <returns>Entities matching the EntityType specified. If none exist, null is returned.</returns>
+        /// <param name="entityType">The EntityType of BattleEntities to return.</param>
+        /// <returns>BattleEntities matching the EntityType specified. If none exist, null is returned.</returns>
         private List<BattleEntity> GetInternalEntitiesList(EntityTypes entityType)
         {
             List<BattleEntity> entities = null;
@@ -766,10 +777,10 @@ namespace PaperMarioBattleSystem
         /// Returns all BattleEntities of a specified EntityType in a new list.
         /// This method is used internally in the BattleManager to allow for easy manipulation of the returned list.
         /// </summary>
-        /// <param name="entityType">The EntityType of entities to return.</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null, will include entities of all height states.</param>
-        /// <returns>Entities matching the EntityType and height states specified. If none are found, an empty list.</returns>
+        /// <param name="entityType">The EntityType of BattleEntities to return.</param>
+        /// <param name="heightStates">The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+        /// If null, will include BattleEntities of all HeightStates.</param>
+        /// <returns>BattleEntities matching the EntityType and HeightStates specified. If none are found, an empty list.</returns>
         private List<BattleEntity> GetEntitiesList(EntityTypes entityType, params HeightStates[] heightStates)
         {
             //Get the internal list
@@ -807,9 +818,9 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Returns all BattleEntities taking part in battle in an array.
         /// </summary>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null, will include entities of all height states.</param>
-        /// <returns>All BattleEntities in battle matching the height states specified.</returns>
+        /// <param name="heightStates">The HeightStates to filter entities by. Entities with any of the state will be included.
+        /// If null, will include entities of all HeightStates.</param>
+        /// <returns>All BattleEntities in battle matching the HeightStates specified.</returns>
         public BattleEntity[] GetAllBattleEntities(params HeightStates[] heightStates)
         {
             List<BattleEntity> allentities = GetAllEntitiesList();
@@ -824,8 +835,8 @@ namespace PaperMarioBattleSystem
         /// Gets all BattleEntities taking part in battle into a supplied list. This method generates no garbage.
         /// </summary>
         /// <param name="entityList">The list to put the BattleEntities into.</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null, will include entities of all height states.</param>
+        /// <param name="heightStates">The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+        /// If null, will include BattleEntities of all HeightStates.</param>
         public void GetAllBattleEntities(List<BattleEntity> entityList, params HeightStates[] heightStates)
         {
             //Add all the BattleEntities to the existing list
@@ -852,12 +863,12 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Returns all entities of a specified EntityType in a new array.
+        /// Returns all BattleEntities of a specified EntityType in a new array.
         /// </summary>
         /// <param name="entityType">The EntityType of BattleEntities to return.</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null, will include entities of all height states</param>
-        /// <returns>Entities matching the EntityType and height states specified.</returns>
+        /// <param name="heightStates">The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+        /// If null, will include BattleEntities of all HeightStates.</param>
+        /// <returns>BattleEntities matching the EntityType and HeightStates specified.</returns>
         public BattleEntity[] GetEntities(EntityTypes entityType, params HeightStates[] heightStates)
         {
             List<BattleEntity> entities = GetEntitiesList(entityType, heightStates);
@@ -865,12 +876,12 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Adds all entities of a specified EntityType in a supplied List. This method generates no garbage.
+        /// Adds all BattleEntities of a specified EntityType in a supplied List. This method generates no garbage.
         /// </summary>
         /// <param name="entityList">The List to add the BattleEntities to.</param>
         /// <param name="entityType">The EntityType of BattleEntities to return.</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null, will include entities of all height states</param>
+        /// <param name="heightStates">The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+        /// If null, will include BattleEntities of all HeightStates.</param>
         public void GetEntities(List<BattleEntity> entityList, EntityTypes entityType, params HeightStates[] heightStates)
         {
             List<BattleEntity> entList = GetInternalEntitiesList(entityType);
@@ -880,13 +891,13 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Returns all entities of a specified EntityType in an array.
-        /// The entities are returned in reverse order. Entities in the back are the first elements in the List.
+        /// Returns all BattleEntities of a specified EntityType in an array.
+        /// The BattleEntities are returned in reverse order. BattleEntities in the back are the first elements in the List.
         /// </summary>
         /// <param name="entityType">The EntityType of BattleEntities to return.</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null, will include entities of all height states.</param>
-        /// <returns>Entities matching the EntityType and height states specified, in reverse.</returns>
+        /// <param name="heightStates">The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+        /// If null, will include BattleEntities of all HeightStates.</param>
+        /// <returns>BattleEntities matching the EntityType and HeightStates specified, in reverse.</returns>
         public BattleEntity[] GetEntitiesReversed(EntityTypes entityType, params HeightStates[] heightStates)
         {
             List<BattleEntity> entities = GetEntitiesList(entityType, heightStates);
@@ -895,14 +906,14 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Adds all entities of a specified EntityType in a supplied List in reverse order.
-        /// Entities in the back are the first elements in the List. This method generates no garbage.
+        /// Adds all BattleEntities of a specified EntityType in a supplied List in reverse order.
+        /// BattleEntities in the back are the first elements in the List. This method generates no garbage.
         /// </summary>
         /// <param name="entityList">The List to add the BattleEntities to.</param>
         /// <param name="entityType">The EntityType of BattleEntities to return.</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null, will include entities of all height states.</param>
-        /// <returns>Entities matching the EntityType and height states specified, in reverse.</returns>
+        /// <param name="heightStates">The HeightStates to filter BattleEntities by. Entities with any of the state will be included.
+        /// If null, will include BattleEntities of all HeightStates.</param>
+        /// <returns>BattleEntities matching the EntityType and HeightStates specified, in reverse.</returns>
         public void GetEntitiesReversed(List<BattleEntity> entityList, EntityTypes entityType, params HeightStates[] heightStates)
         {
             List<BattleEntity> entList = GetInternalEntitiesList(entityType);
@@ -915,8 +926,8 @@ namespace PaperMarioBattleSystem
         /// Gets all allies of a particular BattleEntity.
         /// </summary>
         /// <param name="entity">The BattleEntity whose allies to get</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null or empty, will return the entities passed in</param>
+        /// <param name="heightStates">The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+        /// If null or empty, will return the BattleEntities passed in.</param>
         /// <returns>An array of allies the BattleEntity has.</returns>
         public BattleEntity[] GetEntityAllies(BattleEntity entity, params HeightStates[] heightStates)
         {
@@ -932,8 +943,8 @@ namespace PaperMarioBattleSystem
         /// </summary>
         /// <param name="entityList">The list to put the allies into.</param>
         /// <param name="entity">The BattleEntity whose allies to get.</param>
-        /// <param name="heightStates">The height states to filter entities by. Entities with any of the state will be included.
-        /// If null or empty, will return the entities passed in</param>
+        /// <param name="heightStates">The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+        /// If null or empty, will return the BattleEntities passed in.</param>
         public void GetEntityAllies(List<BattleEntity> entityList, BattleEntity entity, params HeightStates[] heightStates)
         {
             List<BattleEntity> entList = GetInternalEntitiesList(entity.EntityType);
@@ -944,26 +955,30 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Gets the BattleEntities adjacent to a particular BattleEntity.
-        /// <para>This considers all foreground entities (Ex. Adjacent to Mario would be his Partner and the first Enemy)</para>
+        /// <para>This considers all foreground BattleEntities
+        /// (Ex. Adjacent to Mario would be his Partner and the first Enemy if Mario is in front).</para>
         /// </summary>
-        /// <param name="entity">The BattleEntity to find entities adjacent to</param>
-        /// <param name="getDead">Gets any adjacent entities even if they're dead</param>
+        /// <param name="entity">The BattleEntity to find BattleEntities adjacent to.</param>
         /// <returns>An array of adjacent BattleEntities. If none are adjacent, an empty array.</returns>
         public BattleEntity[] GetAdjacentEntities(BattleEntity entity)
         {
             List<BattleEntity> adjacentEntities = new List<BattleEntity>();
             GetAdjacentEntities(adjacentEntities, entity);
 
-            return adjacentEntities.ToArray();
+            //Return a cached empty array if there are no adjacent BattleEntities
+            if (adjacentEntities.Count == 0)
+                return Array.Empty<BattleEntity>();
+            else
+                return adjacentEntities.ToArray();
         }
 
         /// <summary>
         /// Gets the BattleEntities adjacent to a particular BattleEntity. This method generates no garbage.
-        /// <para>This considers all foreground entities (Ex. Adjacent to Mario would be his Partner and the first Enemy).</para>
+        /// <para>This considers all foreground BattleEntities
+        /// (Ex. Adjacent to Mario would be his Partner and the first Enemy if Mario is in front).</para>
         /// </summary>
         /// <param name="adjacentEntities">The list to populate with the adjacent BattleEntities.</param>
-        /// <param name="entity">The BattleEntity to find entities adjacent to.</param>
-        /// <param name="getDead">Gets any adjacent entities, even if they're dead.</param>
+        /// <param name="entity">The BattleEntity to find BattleEntities adjacent to.</param>
         public void GetAdjacentEntities(List<BattleEntity> adjacentEntities, BattleEntity entity)
         {
             //If the entity is an enemy, it can either be two Enemies or the front Player and another Enemy
@@ -1005,20 +1020,24 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets the BattleEntities behind a particular BattleEntity.
         /// </summary>
-        /// <param name="entity">The BattleEntity to find entities behind</param>
+        /// <param name="entity">The BattleEntity to find BattleEntities behind.</param>
         /// <returns>An array of BattleEntities behind the given one. If none are behind, an empty array.</returns>
         public BattleEntity[] GetEntitiesBehind(BattleEntity entity)
         {
             List<BattleEntity> behindEntities = new List<BattleEntity>();
             GetEntitiesBehind(behindEntities, entity);
 
-            return behindEntities.ToArray();
+            //Return a cached empty array if there are no BattleEntities behind
+            if (behindEntities.Count == 0)
+                return Array.Empty<BattleEntity>();
+            else
+                return behindEntities.ToArray();
         }
 
         /// <summary>
         /// Gets the BattleEntities behind a particular BattleEntity. This method generates no garbage.
         /// </summary>
-        /// <param name="entity">The BattleEntity to find entities behind</param>
+        /// <param name="entity">The BattleEntity to find BattleEntities behind.</param>
         public void GetEntitiesBehind(List<BattleEntity> entityList, BattleEntity entity)
         {
             List<BattleEntity> entList = GetInternalEntitiesList(entity.EntityType);
@@ -1027,7 +1046,7 @@ namespace PaperMarioBattleSystem
             entityList.CopyFromList(entList);
             entityList.Remove(entity);
 
-            //Compare Battle Index
+            //Compare BattleIndex
             //BattleEntities behind have higher Battle Indices
             int battleIndex = entity.BattleIndex;
             for (int i = 0; i < entityList.Count; i++)
@@ -1051,10 +1070,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Finds the lowest available Battle Index for a given EntityType.
+        /// Finds the lowest available BattleIndex for a given EntityType.
         /// </summary>
-        /// <param name="entityType">The type of BattleEntities to find a Battle Index for.</param>
-        /// <returns>An integer representing the next available Battle Index.
+        /// <param name="entityType">The type of BattleEntities to find a BattleIndex for.</param>
+        /// <returns>An integer representing the next available BattleIndex.
         /// If no BattleEntities of the specified type are in battle, -1 will be returned.</returns>
         public int FindLowestAvailableBattleIndex(EntityTypes entityType)
         {
@@ -1141,7 +1160,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Returns the closest BattleEntity in front of a specified one.
         /// </summary>
-        /// <param name="battleEntity">The BattleEntity to find the entity in front of.</param>
+        /// <param name="battleEntity">The BattleEntity used to find the closest BattleEntity in front of it.</param>
         /// <returns>The closest BattleEntity in front of the specified one. null if no BattleEntity is in front of the specified one.</returns>
         public BattleEntity GetEntityInFrontOf(BattleEntity battleEntity)
         {
@@ -1153,11 +1172,11 @@ namespace PaperMarioBattleSystem
         /// Gets the frontmost BattleEntity for a specified EntityType.
         /// </summary>
         /// <param name="entityType">The EntityType.</param>
-        /// <param name="heightStates">The height states to filter the BattleEntities by.
+        /// <param name="heightStates">The HeightStates to filter the BattleEntities by.
         /// The frontmost BattleEntity with any of the state will be included.
-        /// If null or empty, will consider all height states.</param>
+        /// If null or empty, will consider all HeightStates.</param>
         /// <returns>The frontmost BattleEntity for the EntityType.
-        /// If none exist that match the height states specified, then null.</returns>
+        /// If none exist that match the HeightStates specified, then null.</returns>
         public BattleEntity GetFrontmostBattleEntity(EntityTypes entityType, params HeightStates[] heightStates)
         {
             List<BattleEntity> entities = GetInternalEntitiesList(entityType);

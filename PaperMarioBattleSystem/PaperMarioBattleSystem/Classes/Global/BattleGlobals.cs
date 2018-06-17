@@ -61,7 +61,7 @@ namespace PaperMarioBattleSystem
         #region Constants
 
         /// <summary>
-        /// Anything below or equal to this value is an invalid Battle Index.
+        /// Anything below or equal to this value is an invalid BattleIndex.
         /// </summary>
         public const int InvalidBattleIndex = -1;
         public const int DefaultTurnCount = 1;

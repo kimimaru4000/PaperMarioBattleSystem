@@ -61,6 +61,9 @@ namespace PaperMarioBattleSystem
 
             BattleItem bItem = (BattleItem)Enemy.HeldCollectible;
             ItemAction itemMove = new ItemAction(Enemy, bItem);
+            
+            //Categorize the move as an Item
+            itemMove.SetMoveCategory(Enumerations.MoveCategories.Item);
 
             //Get the affected list; target all at the start
             List<BattleEntity> affectedEntities = new List<BattleEntity>();

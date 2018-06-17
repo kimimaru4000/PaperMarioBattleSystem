@@ -37,6 +37,7 @@ namespace PaperMarioBattleSystem
         private const string BootsAttribute = "boots";
         private const string HammerAttribute = "hammer";
         private const string SPAttribute = "sp";
+        private const string RankAttribute = "rank";
 
         /// <summary>
         /// Loads the Config.xml file from the designated path. The values are used to set up the battle.
@@ -209,7 +210,10 @@ namespace PaperMarioBattleSystem
                     //Add the Partner if it hasn't already been added
                     if (Inventory.Instance.partnerInventory.HasPartner(partner.PartnerType) == false)
                     {
-                        Inventory.Instance.partnerInventory.AddPartner(player as BattlePartner);
+                        Inventory.Instance.partnerInventory.AddPartner(partner);
+
+                        //Read in the stats for this Partner
+                        ReadPartnerStats(partner, node);
                     }
                     //Otherwise clean it up and return since it won't be added to battle
                     else
@@ -222,10 +226,10 @@ namespace PaperMarioBattleSystem
             else
             {
                 enemies.Add(entity);
-            }
 
-            //Read stats for this BattleEntity
-            ReadBattleEntityStats(entity, node);
+                //Read stats for this BattleEntity
+                ReadBattleEntityStats(entity, node);
+            }
 
             //Read the equipment for this BattleEntity
             ReadBattleEntityEquipment(entity, node);
@@ -279,6 +283,35 @@ namespace PaperMarioBattleSystem
                         //Handle general BattleEntity stats if it wasn't a Mario-specific stat
                         default:
                             ReadStat(mario, nameToLower, val);
+                            break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Reads in a Partner's stats from an XmlNode.
+        /// </summary>
+        /// <param name="partner">The Partner.</param>
+        /// <param name="node">An XmlNode containing attributes with the BattleEntity's stats.</param>
+        private static void ReadPartnerStats(in BattlePartner partner, in XmlNode node)
+        {
+            //Parse stats by name
+            foreach (XmlAttribute attribute in node.Attributes)
+            {
+                string nameToLower = attribute.Name.ToLower();
+
+                if (int.TryParse(attribute.Value, out int val) == true)
+                {
+                    //Handle Partner-specific stats
+                    switch (nameToLower)
+                    {
+                        case RankAttribute:
+                            partner.PStats.PartnerRank = (PartnerGlobals.PartnerRanks)val;
+                            break;
+                        //Handle general BattleEntity stats if it wasn't a Partner-specific stat
+                        default:
+                            ReadStat(partner, nameToLower, val);
                             break;
                     }
                 }
@@ -489,6 +522,12 @@ namespace PaperMarioBattleSystem
             if (constructorParams == null || constructorParams.Length == 0)
                 return;
 
+            //Fill out the list with the number of parameters in the constructor
+            for (int i = 0; i < constructorParams.Length; i++)
+            {
+                parameters.Add(null);
+            }
+
             //Look through the attributes and find matching parameter names
             foreach (XmlAttribute attribute in node.Attributes)
             {
@@ -502,16 +541,8 @@ namespace PaperMarioBattleSystem
                         object obj = null;
                         if (TryParseType(attribute.Value, constructorParams[i].ParameterType, out obj) == true)
                         {
-                            //Insert it in the correct spot on the parameter list
-                            //Add it to the end if we can't insert at this position
-                            if (i > parameters.Count)
-                            {
-                                parameters.Add(obj);
-                            }
-                            else
-                            {
-                                parameters.Insert(i, obj);
-                            }
+                            //Set the value in the correct spot on the parameter list
+                            parameters[i] = obj;
                         }
                     }
                 }

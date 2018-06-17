@@ -29,7 +29,7 @@ namespace PaperMarioBattleSystem
 
             GulpSequence gulpSequence = new GulpSequence(this);
             SetMoveSequence(gulpSequence);
-            actionCommand = new GulpCommand(MoveSequence, gulpSequence.WalkDuration / 2f, 500f, 1f, Microsoft.Xna.Framework.Input.Keys.R);
+            actionCommand = new GulpCommand(MoveSequence, gulpSequence.WalkDuration / 2f, 500f, 1f, Microsoft.Xna.Framework.Input.Keys.Z);
         }
     }
 }

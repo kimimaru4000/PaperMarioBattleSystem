@@ -16,23 +16,23 @@ namespace PaperMarioBattleSystem
     public sealed class GulpCommand : FillBarCommand
     {
         /// <summary>
-        /// The value the success range starts
+        /// The value the success range starts.
         /// </summary>
         public double SuccessStartValue { get; private set; } = 0d;
 
         /// <summary>
-        /// The amount of time the light is lit up for the success to be valid
+        /// The amount of time the light is lit up for the success to be valid.
         /// </summary>
         public double SuccessRange { get; private set; } = 0d;
 
         /// <summary>
-        /// How much faster or slower to progress the bar
+        /// How much faster or slower to progress the bar.
         /// </summary>
         private double SpeedScale = 1f;
 
         private double EndTime = 0d;
 
-        private Keys KeyToHold = Keys.R;
+        private Keys KeyToHold = Keys.Z;
 
         private bool StartedHolding = false;
 

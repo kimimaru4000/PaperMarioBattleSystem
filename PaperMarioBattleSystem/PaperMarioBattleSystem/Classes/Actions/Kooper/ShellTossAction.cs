@@ -25,6 +25,10 @@ namespace PaperMarioBattleSystem
 
             DamageInfo = new DamageData(1, Elements.Normal, false, ContactTypes.SideDirect, ContactProperties.Protected, null, DamageEffects.RemovesSegment);
 
+            //If a partner (Kooper or Koops) is using this move, the base damage is the Partner rank
+            PartnerStats partnerStats = User.BattleStats as PartnerStats;
+            if (partnerStats != null) DamageInfo.Damage = (int)partnerStats.PartnerRank;
+
             SetMoveSequence(new ShellTossSequence(this));
             actionCommand = new HammerCommand(MoveSequence, 4, 500d);
         }

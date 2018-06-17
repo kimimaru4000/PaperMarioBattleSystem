@@ -56,20 +56,29 @@ namespace PaperMarioBattleSystem
         {
             ChangedBattleManagerEvent -= OnBattleChanged;
 
-            base.CleanUp();
-
-            WingedBehavior?.CleanUp();
-
             if (Balloon != null)
             {
                 Balloon.HealthStateChangedEvent -= OnBalloonHealthStateChanged;
 
-                //Clean up the balloon if it's not dead
+                //Remove the balloon from battle if it's not dead
                 if (Balloon.IsDead == false)
-                    Balloon.CleanUp();
+                {
+                    //Remove the balloon from the SkyGuy's current battle
+                    if (IsInBattle == true)
+                    {
+                        BManager.RemoveEntity(Balloon, true);
+                    }
+
+                    //Kill off the balloon
+                    Balloon.Die();
+                }
 
                 Balloon = null;
             }
+
+            base.CleanUp();
+
+            WingedBehavior?.CleanUp();
         }
 
         public override void LoadAnimations()

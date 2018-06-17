@@ -27,7 +27,7 @@ PMBS contains most of the core features from the battle system of Paper Mario an
 5. Run `nuget restore -PackagesDirectory PaperMarioBattleSystem` in a terminal or the Package Manager Console to restore all NuGet packages in the project. [HtmlAgilityPack](https://github.com/zzzprojects/html-agility-pack) 1.8.4.0 is currently used to help parse Control Codes for the dialogue system.
 
 ## Builds
-Cross-platform builds can be made using Mono's [mkbundle](http://www.mono-project.com/docs/tools+libraries/tools/mkbundle/). You can find a great tutorial for setting up and using the tool on Windows [here](https://dotnetcoretutorials.com/2018/03/22/bundling-mono-with-a-net-executable-using-mkbundle-on-windows/). Something overlooked in the tutorial is that you will need to extract the runtime you want to build for. To do so, rename the runtime file's extension to ".zip" or something similar and then extract it.
+Cross-platform builds can be made using Mono's [mkbundle](http://www.mono-project.com/docs/tools+libraries/tools/mkbundle/). You can find a great tutorial for setting up and using the tool on Windows [here](https://dotnetcoretutorials.com/2018/03/22/bundling-mono-with-a-net-executable-using-mkbundle-on-windows/). Something overlooked in the tutorial is that you will need to extract the runtime you want to build for. To do so, rename the runtime file's extension to ".zip" then extract it.
 
 For native non-Windows builds to run, you may need to comment out code involving the System.Windows.Forms namespace. The only code in the project using System.Windows.Forms is the debug functions that take screenshots and dump logs, so it doesn't affect the battle system itself.
 

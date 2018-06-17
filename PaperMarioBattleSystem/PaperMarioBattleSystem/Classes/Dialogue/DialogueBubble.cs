@@ -37,12 +37,12 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The button to press to go to the previous paragraph.
         /// </summary>
-        public const Keys PreviousParagraphButton = Keys.I;
+        public const Keys PreviousParagraphButton = Keys.X;
 
         /// <summary>
         /// The button to press to progress past an input prompt.
         /// </summary>
-        public const Keys ProgressionButton = Keys.O;
+        public const Keys ProgressionButton = Keys.Z;
 
         /// <summary>
         /// The amount to move the text when going up or down a paragraph.

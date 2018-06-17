@@ -212,11 +212,12 @@ namespace PaperMarioBattleSystem
             lightingManager?.CleanUp();
             lightingManager = null;
 
+            battleManager.CleanUp();
+            battleManager = null;
+
             AssetManager.Instance.CleanUp();
             SoundManager.Instance.CleanUp();
             SpriteRenderer.Instance.CleanUp();
-            battleManager.CleanUp();
-            battleManager = null;
 
             crashHandler.CleanUp();
 

@@ -339,7 +339,7 @@ namespace PaperMarioBattleSystem.Extensions
         public static BattleEntity GetTrueTarget(this BattleEntity battleEntity)
         {
             //The BattleEntity defending is active only on phases other than the entity's phase
-            if (battleEntity.BManager.CurEntityPhase != battleEntity.EntityType)
+            if (battleEntity.IsInBattle == true && battleEntity.BManager.CurEntityPhase != battleEntity.EntityType)
             {
                 //Check if we have a defender and return it if so
                 BattleEntity defendedByEntity = battleEntity.EntityProperties.GetAdditionalProperty<BattleEntity>(AdditionalProperty.DefendedByEntity);
@@ -391,7 +391,7 @@ namespace PaperMarioBattleSystem.Extensions
         /// <returns>The total number of Badges of the BadgeType that the BattleEntity and its allies have equipped.</returns>
         public static int GetPartyEquippedBadgeCount(this BattleEntity battleEntity, BadgeGlobals.BadgeTypes badgeType)
         {
-            if (battleEntity == null) return 0;
+            if (battleEntity == null || battleEntity.IsInBattle == false) return 0;
 
             return EntityGlobals.GetCombinedEquippedBadgeCount(battleEntity.BManager.GetEntities(battleEntity.EntityType, null), badgeType);
         }
@@ -404,7 +404,7 @@ namespace PaperMarioBattleSystem.Extensions
         /// <returns>The total number of Badges of the Partner and Non-Partner versions of the BadgeType that the BattleEntity and its allies have equipped.</returns>
         public static int GetPartyEquippedNPBadgeCount(this BattleEntity battleEntity, BadgeGlobals.BadgeTypes badgeType)
         {
-            if (battleEntity == null) return 0;
+            if (battleEntity == null || battleEntity.IsInBattle == false) return 0;
 
             return EntityGlobals.GetCombinedEquippedNPBadgeCount(battleEntity.BManager.GetEntities(battleEntity.EntityType, null), badgeType);
         }
@@ -416,7 +416,7 @@ namespace PaperMarioBattleSystem.Extensions
         /// <returns>true if the BattleEntity or its allies have the AdditionalProperty, otherwise false</returns>
         public static bool PartyHasAdditionalProperty(this BattleEntity battleEntity, AdditionalProperty property)
         {
-            if (battleEntity == null) return false;
+            if (battleEntity == null || battleEntity.IsInBattle == false) return false;
 
             return EntityGlobals.CombinedHaveAdditionalProperty(battleEntity.BManager.GetEntities(battleEntity.EntityType, null), property);
         }

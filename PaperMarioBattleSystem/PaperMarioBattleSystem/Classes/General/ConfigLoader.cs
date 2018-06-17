@@ -150,7 +150,7 @@ namespace PaperMarioBattleSystem
             bool isMario = false;
             List<object> parameters = null;
 
-            //Go through the attributes
+            //Go through the attributes and find the type name
             foreach (XmlAttribute attribute in node.Attributes)
             {
                 string nameToLower = attribute.Name.ToLower();
@@ -162,7 +162,7 @@ namespace PaperMarioBattleSystem
 
                     typeName = $"{nameof(PaperMarioBattleSystem)}.{toLower}";
 
-                    //For Mario, read in other information; everyone else exits
+                    //Mark if it's Mario
                     if (toLower == MarioType)
                     {
                         isMario = true;
@@ -171,36 +171,23 @@ namespace PaperMarioBattleSystem
                     {
                         parameters = new List<object>();
                     }
-                }
-                //Parse stats for Mario
-                else if (isMario == true)
-                {
-                    int val = 0;
 
-                    if (int.TryParse(attribute.Value, out val) == true)
-                    {
-                        if (nameToLower == HPAttribute) mario.MStats.MaxHP = mario.MStats.HP = val;
-                        else if (nameToLower == FPAttribute) mario.MStats.MaxFP = mario.MStats.FP = val;
-                        else if (nameToLower == AttackAttribute) mario.MStats.BaseAttack = val;
-                        else if (nameToLower == DefenseAttribute) mario.MStats.BaseDefense = val;
-                        else if (nameToLower == BootsAttribute) mario.MStats.BootLevel = (EquipmentGlobals.BootLevels)val;
-                        else if (nameToLower == HammerAttribute) mario.MStats.HammerLevel = (EquipmentGlobals.HammerLevels)val;
-                        else if (nameToLower == SPAttribute) mario.MStats.SSStarPower.GainStarPower(val);
-                    }
-                }
-                //Parse constructor information for other BattleEntities
-                else
-                {
-                    object primitive = ReadPrimitiveType(attribute);
-                    parameters.Add(primitive);
+                    break;
                 }
             }
 
             //Return since Mario is created beforehand, as he's required for battle
             if (isMario == true)
             {
+                ReadMarioStats(mario, node);
                 ReadBattleEntityEquipment(mario, node);
                 return;
+            }
+            //Parse constructor information for other BattleEntities
+            else
+            {
+                //Read constructor parameters and try to parse the attributes to get an object list in the correct order
+                ReadConstructorParameters(Assembly.GetExecutingAssembly().GetType(typeName, false, true), node, parameters);
             }
 
             //Try to instantiate the BattleEntity
@@ -217,7 +204,19 @@ namespace PaperMarioBattleSystem
                 BattlePlayer player = (BattlePlayer)entity;
                 if (player.PlayerType == Enumerations.PlayerTypes.Partner)
                 {
-                    Inventory.Instance.partnerInventory.AddPartner(player as BattlePartner);
+                    BattlePartner partner = (BattlePartner)player;
+
+                    //Add the Partner if it hasn't already been added
+                    if (Inventory.Instance.partnerInventory.HasPartner(partner.PartnerType) == false)
+                    {
+                        Inventory.Instance.partnerInventory.AddPartner(player as BattlePartner);
+                    }
+                    //Otherwise clean it up and return since it won't be added to battle
+                    else
+                    {
+                        entity.CleanUp();
+                        return;
+                    }
                 }
             }
             else
@@ -225,8 +224,91 @@ namespace PaperMarioBattleSystem
                 enemies.Add(entity);
             }
 
+            //Read stats for this BattleEntity
+            ReadBattleEntityStats(entity, node);
+
             //Read the equipment for this BattleEntity
             ReadBattleEntityEquipment(entity, node);
+        }
+
+        /// <summary>
+        /// Reads in a BattleEntity's stats from an XmlNode.
+        /// </summary>
+        /// <param name="entity">The BattleEntity to read the stats for.</param>
+        /// <param name="node">An XmlNode containing attributes with the BattleEntity's stats.</param>
+        private static void ReadBattleEntityStats(in BattleEntity entity, in XmlNode node)
+        {
+            //Parse stats by name
+            foreach (XmlAttribute attribute in node.Attributes)
+            {
+                string nameToLower = attribute.Name.ToLower();
+
+                if (int.TryParse(attribute.Value, out int val) == true)
+                {
+                    ReadStat(entity, nameToLower, val);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Reads in Mario's stats from an XmlNode.
+        /// </summary>
+        /// <param name="mario">Mario.</param>
+        /// <param name="node">An XmlNode containing attributes with the BattleEntity's stats.</param>
+        private static void ReadMarioStats(in BattleMario mario, in XmlNode node)
+        {
+            //Parse stats by name
+            foreach (XmlAttribute attribute in node.Attributes)
+            {
+                string nameToLower = attribute.Name.ToLower();
+
+                if (int.TryParse(attribute.Value, out int val) == true)
+                {
+                    //Handle Mario-specific stats
+                    switch (nameToLower)
+                    {
+                        case BootsAttribute:
+                            mario.MStats.BootLevel = (EquipmentGlobals.BootLevels)val;
+                            break;
+                        case HammerAttribute:
+                            mario.MStats.HammerLevel = (EquipmentGlobals.HammerLevels)val;
+                            break;
+                        case SPAttribute:
+                            mario.MStats.SSStarPower.GainStarPower(val);
+                            break;
+                        //Handle general BattleEntity stats if it wasn't a Mario-specific stat
+                        default:
+                            ReadStat(mario, nameToLower, val);
+                            break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets a BattleEntity's stat based on the stat name.
+        /// </summary>
+        /// <param name="entity">The BattleEntity to set the stat for.</param>
+        /// <param name="attributeName">The name of the stat.</param>
+        /// <param name="val">The value of the stat to set.</param>
+        private static void ReadStat(in BattleEntity entity, in string attributeName, in int val)
+        {
+            //Set the stats based on the name
+            switch (attributeName)
+            {
+                case HPAttribute:
+                    entity.BattleStats.MaxHP = entity.BattleStats.HP = val;
+                    break;
+                case FPAttribute:
+                    entity.BattleStats.MaxFP = entity.BattleStats.FP = val;
+                    break;
+                case AttackAttribute:
+                    entity.BattleStats.BaseAttack = val;
+                    break;
+                case DefenseAttribute:
+                    entity.BattleStats.BaseDefense = val;
+                    break;
+            }
         }
 
         /// <summary>
@@ -340,14 +422,12 @@ namespace PaperMarioBattleSystem
                 {
                     //Get the Type name with the current assembly
                     typeName = $"{nameof(PaperMarioBattleSystem)}.{attr.Value.ToLower()}";
-                }
-                //Parse constructor parameters
-                else
-                {
-                    object primitive = ReadPrimitiveType(attr);
-                    parameters.Add(primitive);
+                    break;
                 }
             }
+
+            //Parse constructor parameters
+            ReadConstructorParameters(Assembly.GetExecutingAssembly().GetType(typeName, false, true), childNode, parameters);
 
             //Instantiate the Collectible
             return InstantiateObject<Collectible>(typeName, (parameters.Count == 0) ? Array.Empty<object>() : parameters.ToArray());
@@ -382,88 +462,84 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Reads and returns a primitive type from an XmlAttribute.
+        /// Reads the constructor parameters of a Type and fills out a parameter list in the correct order from an XmlNode's data.
         /// </summary>
-        /// <param name="attribute">The XmlAttribute.</param>
-        /// <returns>An object containing a primitive type, otherwise null.</returns>
-        private static object ReadPrimitiveType(XmlAttribute attribute)
+        /// <param name="type">The Type to get the constructor information from.</param>
+        /// <param name="node">The XmlNode to get the information from.</param>
+        /// <param name="parameters">A list of objects that will be filled in to allow invoking the object's constructor.</param>
+        private static void ReadConstructorParameters(in Type type, in XmlNode node, List<object> parameters)
         {
-            string nameToLower = attribute.Name.ToLower();
+            //Return if any of these are null
+            if (type == null || node == null || parameters == null) return;
 
-            //Try to convert standard types
-            //Converting others will be trickier with the way we're parsing the config, so this will need to change if we require it
-            //Most objects take in only primitives, so it will work for now
-            if (nameToLower == "string")
+            //Get all public constructors
+            ConstructorInfo[] constructors = type.GetConstructors();
+
+            ParameterInfo[] constructorParams = null;
+
+            //Find the one with the most parameters and use that
+            for (int i = 0; i < constructors.Length; i++)
             {
-                return attribute.Value;
+                ParameterInfo[] param = constructors[i].GetParameters();
+                if (constructorParams == null || param.Length > constructorParams.Length)
+                    constructorParams = param;
             }
-            else if (nameToLower == "bool")
+
+            //Return if this constructor takes no parameters
+            if (constructorParams == null || constructorParams.Length == 0)
+                return;
+
+            //Look through the attributes and find matching parameter names
+            foreach (XmlAttribute attribute in node.Attributes)
             {
-                bool.TryParse(attribute.Value, out bool success);
-                return success;
+                string nameToLower = attribute.Name.ToLower();
+
+                for (int i = 0; i < constructorParams.Length; i++)
+                {
+                    if (nameToLower == constructorParams[i].Name.ToLower())
+                    {
+                        //Try to parse the parameter
+                        object obj = null;
+                        if (TryParseType(attribute.Value, constructorParams[i].ParameterType, out obj) == true)
+                        {
+                            //Insert it in the correct spot on the parameter list
+                            //Add it to the end if we can't insert at this position
+                            if (i > parameters.Count)
+                            {
+                                parameters.Add(obj);
+                            }
+                            else
+                            {
+                                parameters.Insert(i, obj);
+                            }
+                        }
+                    }
+                }
             }
-            else if (nameToLower == "byte")
+        }
+
+        /// <summary>
+        /// Attempt to parse a Type from a string.
+        /// </summary>
+        /// <param name="value">The string value to parse.</param>
+        /// <param name="type">The Type to convert to.</param>
+        /// <param name="result">The object to return.</param>
+        /// <returns>true if the type was successfully parsed, otherwise false.</returns>
+        private static bool TryParseType(in string value, Type type, out object result)
+        {
+            //Get the converter for the specified type
+            var converter = TypeDescriptor.GetConverter(type);
+
+            //Make sure the converter exists and is valid
+            if (converter != null && converter.IsValid(value) == true)
             {
-                byte.TryParse(attribute.Value, out byte success);
-                return success;
+                result = converter.ConvertFromString(value);
+                return true;
             }
-            else if (nameToLower == "sbyte")
-            {
-                sbyte.TryParse(attribute.Value, out sbyte success);
-                return success;
-            }
-            else if (nameToLower == "char")
-            {
-                char.TryParse(attribute.Value, out char success);
-                return success;
-            }
-            else if (nameToLower == "short")
-            {
-                short.TryParse(attribute.Value, out short success);
-                return success;
-            }
-            else if (nameToLower == "ushort")
-            {
-                ushort.TryParse(attribute.Value, out ushort success);
-                return success;
-            }
-            else if (nameToLower == "int")
-            {
-                int.TryParse(attribute.Value, out int success);
-                return success;
-            }
-            else if (nameToLower == "uint")
-            {
-                uint.TryParse(attribute.Value, out uint success);
-                return success;
-            }
-            else if (nameToLower == "long")
-            {
-                long.TryParse(attribute.Value, out long success);
-                return success;
-            }
-            else if (nameToLower == "ulong")
-            {
-                ulong.TryParse(attribute.Value, out ulong success);
-                return success;
-            }
-            else if (nameToLower == "float")
-            {
-                float.TryParse(attribute.Value, out float success);
-                return success;
-            }
-            else if (nameToLower == "decimal")
-            {
-                decimal.TryParse(attribute.Value, out decimal success);
-                return success;
-            }
-            else if (nameToLower == "double")
-            {
-                double.TryParse(attribute.Value, out double success);
-                return success;
-            }
-            
-            return null;
+
+            //We can't convert, so the result is null
+            result = null;
+            return false;
         }
     }
 }

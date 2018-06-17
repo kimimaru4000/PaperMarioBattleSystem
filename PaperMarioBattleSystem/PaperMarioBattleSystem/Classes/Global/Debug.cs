@@ -62,6 +62,7 @@ namespace PaperMarioBattleSystem
                 LogsEnabled = true;
             #else
                 DebugEnabled = false;
+                LogsEnabled = true;
             #endif
         }
 

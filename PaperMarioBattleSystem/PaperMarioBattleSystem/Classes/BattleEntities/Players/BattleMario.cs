@@ -10,16 +10,19 @@ using PaperMarioBattleSystem.Extensions;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Mario in battle
+    /// Mario in battle.
     /// </summary>
     public sealed class BattleMario : BattlePlayer, ITattleableEntity
     {
+        /// <summary>
+        /// Mario's stats.
+        /// </summary>
         public MarioStats MStats { get; private set; } = null;
 
         /// <summary>
-        /// Constructor
+        /// Constructor.
         /// </summary>
-        /// <param name="marioStats">Mario's stats</param>
+        /// <param name="marioStats">Mario's stats.</param>
         public BattleMario(MarioStats marioStats) : base(marioStats)
         {
             Name = "Mario";

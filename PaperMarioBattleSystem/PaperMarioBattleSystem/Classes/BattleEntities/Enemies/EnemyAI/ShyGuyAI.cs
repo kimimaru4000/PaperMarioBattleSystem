@@ -18,7 +18,7 @@ namespace PaperMarioBattleSystem
             //Try to use an item; if so, return
             if (TryUseItem() == true) return;
 
-            Enemy.StartAction(new SwapMarioPartnerAction(Enemy), true, Enemy.BManager.FrontPlayer);
+            Enemy.StartAction(new KissyKissyAction(Enemy, true, 5, 2, Enumerations.Elements.Normal, true, true, null), true, Enemy.BManager.FrontPlayer);
         }
     }
 }

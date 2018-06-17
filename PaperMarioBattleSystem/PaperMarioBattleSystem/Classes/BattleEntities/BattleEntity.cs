@@ -185,7 +185,7 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public bool IsInDanger => (HealthState == HealthStates.Danger || HealthState == HealthStates.Peril);
         public bool IsDead => HealthState == HealthStates.Dead;
-        public bool IsTurn => (BManager.EntityTurn == this);
+        public bool IsTurn => (BManager?.EntityTurn == this);
 
         public bool UsedTurn => (TurnsUsed >= MaxTurns || IsDead == true);
 
@@ -560,9 +560,6 @@ namespace PaperMarioBattleSystem
             EntityProperties.RemoveAllStatuses();
 
             OnDeath();
-
-            //NOTE: The death event occurs for standard enemies like Goombas during their sequence if it was interrupted
-            //I'm not sure about bosses yet, so that'll need to be tested
 
             //Start the event only if the BattleEntity is in battle
             //If the BattleEntity isn't in battle, there's no way to start the event, so ignore it

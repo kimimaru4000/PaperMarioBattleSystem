@@ -42,7 +42,7 @@ namespace PaperMarioBattleSystem
                 //If Kissy-Kissy has an Action Command, it can't be Guarded or Superguarded
                 DamageInfo.DefensiveOverride = DefensiveActionTypes.Guard | DefensiveActionTypes.Superguard;
 
-                actionCommand = new MashButtonCommand(MoveSequence, 100d, 10d, MashButtonCommand.InfiniteTime, Microsoft.Xna.Framework.Input.Keys.A);
+                actionCommand = new MashButtonCommand(MoveSequence, 100d, 10d, MashButtonCommand.InfiniteTime, Microsoft.Xna.Framework.Input.Keys.Z);
             }
         }
     }

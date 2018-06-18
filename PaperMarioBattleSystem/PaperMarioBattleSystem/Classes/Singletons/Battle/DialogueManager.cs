@@ -46,6 +46,9 @@ namespace PaperMarioBattleSystem
         public void CleanUp()
         {
             DialogBubble?.CleanUp();
+            DialogBubble = null;
+
+            instance = null;
         }
 
         ///// <summary>

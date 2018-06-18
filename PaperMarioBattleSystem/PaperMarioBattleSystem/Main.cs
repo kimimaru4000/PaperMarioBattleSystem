@@ -164,6 +164,11 @@ namespace PaperMarioBattleSystem
                 Inventory.Instance.CleanUp();
             }
 
+            if (DialogueManager.HasInstance == true)
+            {
+                DialogueManager.Instance.CleanUp();
+            }
+
             //Read from the config
             //First check if the config is in the same folder as the executable
             if (ConfigLoader.LoadConfig($"{ContentGlobals.ConfigName}", ref battleProperties, mario, enemyList) == false)
@@ -240,6 +245,11 @@ namespace PaperMarioBattleSystem
             if (Inventory.HasInstance == true)
             {
                 Inventory.Instance.CleanUp();
+            }
+
+            if (DialogueManager.HasInstance == true)
+            {
+                DialogueManager.Instance.CleanUp();
             }
 
             AssetManager.Instance.CleanUp();

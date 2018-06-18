@@ -165,10 +165,15 @@ namespace PaperMarioBattleSystem
             }
 
             //Read from the config
-            if (ConfigLoader.LoadConfig($"{ContentGlobals.ContentRoot}/{ContentGlobals.ConfigName}", ref battleProperties, mario, enemyList) == false)
+            //First check if the config is in the same folder as the executable
+            if (ConfigLoader.LoadConfig($"{ContentGlobals.ConfigName}", ref battleProperties, mario, enemyList) == false)
             {
-                //If we failed to read from the config, initialize a default battle
-                InitDefaultBattle(mario, enemyList);
+                //If it's not here, check in the root of the Content folder
+                if (ConfigLoader.LoadConfig($"{ContentGlobals.ContentRoot}/{ContentGlobals.ConfigName}", ref battleProperties, mario, enemyList) == false)
+                {
+                    //If we failed to read from the config, initialize a default battle
+                    InitDefaultBattle(mario, enemyList);
+                }
             }
 
             //Initialize the BattleManager

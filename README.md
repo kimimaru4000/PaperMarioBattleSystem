@@ -1,5 +1,5 @@
 # PaperMarioBattleSystem
-<img src="https://tdeeb.github.io/PaperMarioBattleSystem/images/PMBS%20GIF.gif" alt="Mario successfully performing a Hammer Action Command against a Goomba" width="400" height="300"/>
+<img src="https://tdeeb.github.io/PaperMarioBattleSystem/images/PMBS%20Multibounce.gif" alt="Mario performing Multibounce." width="400" height="300"/>
 
 Paper Mario Battle System (PMBS for short) is an open source recreation of the turn-based battle system from the first two Paper Mario games. The goal is to create a modular, flexible battle system that is customizable and can be used in game projects. The inspiration for this project came from the lack of open source battle systems that closely resemble Paper Mario.
 

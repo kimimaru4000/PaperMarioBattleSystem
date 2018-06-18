@@ -237,3 +237,6 @@ _Pvt_Extensions
 
 #Ruge Deploy Tool settings
 /DeployToolSettings.dt
+
+#Config
+PMBSConfig.xml

@@ -82,6 +82,10 @@ This tells which Partners Mario currently has available.</p>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">Inventory.PartnerInventory</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
@@ -110,7 +114,7 @@ This tells which Partners Mario currently has available.</p>
   <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
   <h5 id="PaperMarioBattleSystem_Inventory_PartnerInventory_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class PartnerInventory</code></pre>
+    <pre><code class="lang-csharp hljs">public class PartnerInventory : ICleanup</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -119,7 +123,7 @@ This tells which Partners Mario currently has available.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_PartnerInventory__ctor.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.PartnerInventory.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L546">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L582">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_PartnerInventory__ctor_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.#ctor*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_PartnerInventory__ctor" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.#ctor">PartnerInventory()</h4>
@@ -136,7 +140,7 @@ This tells which Partners Mario currently has available.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_PartnerInventory_AddPartner_PaperMarioBattleSystem_BattlePartner_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.PartnerInventory.AddPartner(PaperMarioBattleSystem.BattlePartner)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L555">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L596">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_PartnerInventory_AddPartner_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.AddPartner*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_PartnerInventory_AddPartner_PaperMarioBattleSystem_BattlePartner_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.AddPartner(PaperMarioBattleSystem.BattlePartner)">AddPartner(BattlePartner)</h4>
@@ -167,10 +171,25 @@ This tells which Partners Mario currently has available.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_PartnerInventory_CleanUp.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.PartnerInventory.CleanUp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L587">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Inventory_PartnerInventory_CleanUp_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.CleanUp*"></a>
+  <h4 id="PaperMarioBattleSystem_Inventory_PartnerInventory_CleanUp" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.CleanUp">CleanUp()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CleanUp()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_PartnerInventory_GetAllPartners.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.PartnerInventory.GetAllPartners%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L636">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L677">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_PartnerInventory_GetAllPartners_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.GetAllPartners*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_PartnerInventory_GetAllPartners" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.GetAllPartners">GetAllPartners()</h4>
@@ -203,7 +222,7 @@ If none are in the party, an empty array is returned.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_PartnerInventory_GetAllPartners_System_Collections_Generic_List_PaperMarioBattleSystem_BattlePartner__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.PartnerInventory.GetAllPartners(System.Collections.Generic.List%7BPaperMarioBattleSystem.BattlePartner%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L616">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L657">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_PartnerInventory_GetAllPartners_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.GetAllPartners*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_PartnerInventory_GetAllPartners_System_Collections_Generic_List_PaperMarioBattleSystem_BattlePartner__" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.GetAllPartners(System.Collections.Generic.List{PaperMarioBattleSystem.BattlePartner})">GetAllPartners(List&lt;BattlePartner&gt;)</h4>
@@ -237,7 +256,7 @@ If none are in the party, an empty array is returned.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_PartnerInventory_GetPartner_PaperMarioBattleSystem_Enumerations_PartnerTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.PartnerInventory.GetPartner(PaperMarioBattleSystem.Enumerations.PartnerTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L594">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L635">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_PartnerInventory_GetPartner_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.GetPartner*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_PartnerInventory_GetPartner_PaperMarioBattleSystem_Enumerations_PartnerTypes_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.GetPartner(PaperMarioBattleSystem.Enumerations.PartnerTypes)">GetPartner(Enumerations.PartnerTypes)</h4>
@@ -287,7 +306,7 @@ If none are in the party, an empty array is returned.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_PartnerInventory_GetPartnerCount.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.PartnerInventory.GetPartnerCount%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L651">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L692">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_PartnerInventory_GetPartnerCount_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.GetPartnerCount*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_PartnerInventory_GetPartnerCount" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.GetPartnerCount">GetPartnerCount()</h4>
@@ -319,7 +338,7 @@ If none are in the party, an empty array is returned.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_PartnerInventory_HasPartner_PaperMarioBattleSystem_Enumerations_PartnerTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.PartnerInventory.HasPartner(PaperMarioBattleSystem.Enumerations.PartnerTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L607">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L648">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_PartnerInventory_HasPartner_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.HasPartner*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_PartnerInventory_HasPartner_PaperMarioBattleSystem_Enumerations_PartnerTypes_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.HasPartner(PaperMarioBattleSystem.Enumerations.PartnerTypes)">HasPartner(Enumerations.PartnerTypes)</h4>
@@ -369,7 +388,7 @@ If none are in the party, an empty array is returned.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_PartnerInventory_RemovePartner_PaperMarioBattleSystem_Enumerations_PartnerTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.PartnerInventory.RemovePartner(PaperMarioBattleSystem.Enumerations.PartnerTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L576">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L617">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_PartnerInventory_RemovePartner_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.RemovePartner*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_PartnerInventory_RemovePartner_PaperMarioBattleSystem_Enumerations_PartnerTypes_" data-uid="PaperMarioBattleSystem.Inventory.PartnerInventory.RemovePartner(PaperMarioBattleSystem.Enumerations.PartnerTypes)">RemovePartner(Enumerations.PartnerTypes)</h4>
@@ -398,6 +417,10 @@ If none are in the party, an empty array is returned.</p>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a>
+  </div>
 </article>
           </div>
           
@@ -409,7 +432,7 @@ If none are in the party, an empty array is returned.</p>
                     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_PartnerInventory.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.PartnerInventory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L542" class="contribution-link">View Source</a>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L578" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

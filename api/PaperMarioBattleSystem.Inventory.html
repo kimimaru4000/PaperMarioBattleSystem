@@ -73,13 +73,17 @@
   
   <h1 id="PaperMarioBattleSystem_Inventory" data-uid="PaperMarioBattleSystem.Inventory" class="text-break">Class Inventory
   </h1>
-  <div class="markdown level0 summary"><p>The Player&apos;s inventory</p>
+  <div class="markdown level0 summary"><p>The Player&apos;s inventory.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">Inventory</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -109,7 +113,7 @@
   <h6><strong>Assembly</strong>: PaperMarioBattleSystem.dll</h6>
   <h5 id="PaperMarioBattleSystem_Inventory_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class Inventory</code></pre>
+    <pre><code class="lang-csharp hljs">public class Inventory : ICleanup</code></pre>
   </div>
   <h3 id="fields">Fields
   </h3>
@@ -118,7 +122,7 @@
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_MaxCoins.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.MaxCoins%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L47">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L52">View Source</a>
   </span>
   <h4 id="PaperMarioBattleSystem_Inventory_MaxCoins" data-uid="PaperMarioBattleSystem.Inventory.MaxCoins">MaxCoins</h4>
   <div class="markdown level1 summary"><p>The max number of Coins that can be held at a time.</p>
@@ -148,7 +152,7 @@
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_MaxStarPieces.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.MaxStarPieces%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L52">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L57">View Source</a>
   </span>
   <h4 id="PaperMarioBattleSystem_Inventory_MaxStarPieces" data-uid="PaperMarioBattleSystem.Inventory.MaxStarPieces">MaxStarPieces</h4>
   <div class="markdown level1 summary"><p>The max number of Star Pieces that can be held at a time.</p>
@@ -178,10 +182,11 @@
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_partnerInventory.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.partnerInventory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L38">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L43">View Source</a>
   </span>
   <h4 id="PaperMarioBattleSystem_Inventory_partnerInventory" data-uid="PaperMarioBattleSystem.Inventory.partnerInventory">partnerInventory</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The Partner inventory holding all Partners in Mario&apos;s party.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -209,11 +214,11 @@
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_BP.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.BP%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L71">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L76">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_BP_" data-uid="PaperMarioBattleSystem.Inventory.BP*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_BP" data-uid="PaperMarioBattleSystem.Inventory.BP">BP</h4>
-  <div class="markdown level1 summary"><p>The number of Badge Points (BP) Mario currently has available</p>
+  <div class="markdown level1 summary"><p>The number of Badge Points (BP) Mario currently has available.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -240,7 +245,7 @@
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_Coins.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.Coins%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L57">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L62">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_Coins_" data-uid="PaperMarioBattleSystem.Inventory.Coins*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_Coins" data-uid="PaperMarioBattleSystem.Inventory.Coins">Coins</h4>
@@ -262,6 +267,36 @@
     <tbody>
       <tr>
         <td><span class="xref">System.UInt32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_HasInstance.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.HasInstance%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L32">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Inventory_HasInstance_" data-uid="PaperMarioBattleSystem.Inventory.HasInstance*"></a>
+  <h4 id="PaperMarioBattleSystem_Inventory_HasInstance" data-uid="PaperMarioBattleSystem.Inventory.HasInstance">HasInstance</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool HasInstance { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -301,11 +336,11 @@
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_MaxBP.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.MaxBP%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L76">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L81">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_MaxBP_" data-uid="PaperMarioBattleSystem.Inventory.MaxBP*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_MaxBP" data-uid="PaperMarioBattleSystem.Inventory.MaxBP">MaxBP</h4>
-  <div class="markdown level1 summary"><p>The max number of Badge Points (BP) Mario has</p>
+  <div class="markdown level1 summary"><p>The max number of Badge Points (BP) Mario has.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -332,7 +367,7 @@
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_StarPieces.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.StarPieces%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L62">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L67">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_StarPieces_" data-uid="PaperMarioBattleSystem.Inventory.StarPieces*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_StarPieces" data-uid="PaperMarioBattleSystem.Inventory.StarPieces">StarPieces</h4>
@@ -365,7 +400,7 @@
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_ActivateBadge_PaperMarioBattleSystem_Badge_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.ActivateBadge(PaperMarioBattleSystem.Badge)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L414">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L450">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_ActivateBadge_" data-uid="PaperMarioBattleSystem.Inventory.ActivateBadge*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_ActivateBadge_PaperMarioBattleSystem_Badge_" data-uid="PaperMarioBattleSystem.Inventory.ActivateBadge(PaperMarioBattleSystem.Badge)">ActivateBadge(Badge)</h4>
@@ -400,7 +435,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_AddBadge_PaperMarioBattleSystem_Badge_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.AddBadge(PaperMarioBattleSystem.Badge)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L258">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L294">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_AddBadge_" data-uid="PaperMarioBattleSystem.Inventory.AddBadge*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_AddBadge_PaperMarioBattleSystem_Badge_" data-uid="PaperMarioBattleSystem.Inventory.AddBadge(PaperMarioBattleSystem.Badge)">AddBadge(Badge)</h4>
@@ -434,11 +469,12 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_AddCoins_System_UInt32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.AddCoins(System.UInt32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L121">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L145">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_AddCoins_" data-uid="PaperMarioBattleSystem.Inventory.AddCoins*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_AddCoins_System_UInt32_" data-uid="PaperMarioBattleSystem.Inventory.AddCoins(System.UInt32)">AddCoins(UInt32)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gives the player a number of coins.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -457,7 +493,8 @@ Do not add new Badges instances here. Add only Badges that are already in the In
       <tr>
         <td><span class="xref">System.UInt32</span></td>
         <td><span class="parametername">coinsAdded</span></td>
-        <td></td>
+        <td><p>The number of coins to give.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -466,11 +503,11 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_AddItem_PaperMarioBattleSystem_Item_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.AddItem(PaperMarioBattleSystem.Item)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L149">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L185">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_AddItem_" data-uid="PaperMarioBattleSystem.Inventory.AddItem*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_AddItem_PaperMarioBattleSystem_Item_" data-uid="PaperMarioBattleSystem.Inventory.AddItem(PaperMarioBattleSystem.Item)">AddItem(Item)</h4>
-  <div class="markdown level1 summary"><p>Adds an Item to the Player&apos;s Inventory</p>
+  <div class="markdown level1 summary"><p>Adds an Item to the Player&apos;s Inventory.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -490,7 +527,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Item.html">Item</a></td>
         <td><span class="parametername">item</span></td>
-        <td><p>The Item to add</p>
+        <td><p>The Item to add.</p>
 </td>
       </tr>
     </tbody>
@@ -500,11 +537,12 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_AddStarPieces_System_UInt32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.AddStarPieces(System.UInt32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L131">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L163">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_AddStarPieces_" data-uid="PaperMarioBattleSystem.Inventory.AddStarPieces*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_AddStarPieces_System_UInt32_" data-uid="PaperMarioBattleSystem.Inventory.AddStarPieces(System.UInt32)">AddStarPieces(UInt32)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Gives the player a number of Star Pieces.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -523,7 +561,8 @@ Do not add new Badges instances here. Add only Badges that are already in the In
       <tr>
         <td><span class="xref">System.UInt32</span></td>
         <td><span class="parametername">starPiecesAdded</span></td>
-        <td></td>
+        <td><p>The number of Star Pieces to give.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -532,7 +571,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_CanEquip_PaperMarioBattleSystem_Badge_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.CanEquip(PaperMarioBattleSystem.Badge)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L249">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L285">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_CanEquip_" data-uid="PaperMarioBattleSystem.Inventory.CanEquip*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_CanEquip_PaperMarioBattleSystem_Badge_" data-uid="PaperMarioBattleSystem.Inventory.CanEquip(PaperMarioBattleSystem.Badge)">CanEquip(Badge)</h4>
@@ -577,10 +616,25 @@ Do not add new Badges instances here. Add only Badges that are already in the In
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_CleanUp.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.CleanUp%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L124">View Source</a>
+  </span>
+  <a id="PaperMarioBattleSystem_Inventory_CleanUp_" data-uid="PaperMarioBattleSystem.Inventory.CleanUp*"></a>
+  <h4 id="PaperMarioBattleSystem_Inventory_CleanUp" data-uid="PaperMarioBattleSystem.Inventory.CleanUp">CleanUp()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void CleanUp()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_DeactivateBadge_PaperMarioBattleSystem_Badge_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.DeactivateBadge(PaperMarioBattleSystem.Badge)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L450">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L486">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_DeactivateBadge_" data-uid="PaperMarioBattleSystem.Inventory.DeactivateBadge*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_DeactivateBadge_PaperMarioBattleSystem_Badge_" data-uid="PaperMarioBattleSystem.Inventory.DeactivateBadge(PaperMarioBattleSystem.Badge)">DeactivateBadge(Badge)</h4>
@@ -614,7 +668,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_FindItem_PaperMarioBattleSystem_Item_ItemCategories_PaperMarioBattleSystem_Item_ItemTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.FindItem(PaperMarioBattleSystem.Item.ItemCategories%2CPaperMarioBattleSystem.Item.ItemTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L214">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L250">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_FindItem_" data-uid="PaperMarioBattleSystem.Inventory.FindItem*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_FindItem_PaperMarioBattleSystem_Item_ItemCategories_PaperMarioBattleSystem_Item_ItemTypes_" data-uid="PaperMarioBattleSystem.Inventory.FindItem(PaperMarioBattleSystem.Item.ItemCategories,PaperMarioBattleSystem.Item.ItemTypes)">FindItem(Item.ItemCategories, Item.ItemTypes)</h4>
@@ -669,11 +723,11 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_FindItem_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.FindItem(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L197">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L233">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_FindItem_" data-uid="PaperMarioBattleSystem.Inventory.FindItem*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_FindItem_System_String_System_Boolean_" data-uid="PaperMarioBattleSystem.Inventory.FindItem(System.String,System.Boolean)">FindItem(String, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Finds the first instance of an Item by name</p>
+  <div class="markdown level1 summary"><p>Finds the first instance of an Item by name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -693,13 +747,13 @@ Do not add new Badges instances here. Add only Badges that are already in the In
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">name</span></td>
-        <td><p>The name of the Item to find</p>
+        <td><p>The name of the Item to find.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">keyItem</span></td>
-        <td><p>Whether the Item is a key item or not</p>
+        <td><p>Whether the Item is a key item or not.</p>
 </td>
       </tr>
     </tbody>
@@ -715,7 +769,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <tbody>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Item.html">Item</a></td>
-        <td><p>The Item if found, otherwise null</p>
+        <td><p>The Item if found, otherwise null.</p>
 </td>
       </tr>
     </tbody>
@@ -725,7 +779,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_FindItems_PaperMarioBattleSystem_Item_ItemCategories_PaperMarioBattleSystem_Item_ItemTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.FindItems(PaperMarioBattleSystem.Item.ItemCategories%2CPaperMarioBattleSystem.Item.ItemTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L224">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L260">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_FindItems_" data-uid="PaperMarioBattleSystem.Inventory.FindItems*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_FindItems_PaperMarioBattleSystem_Item_ItemCategories_PaperMarioBattleSystem_Item_ItemTypes_" data-uid="PaperMarioBattleSystem.Inventory.FindItems(PaperMarioBattleSystem.Item.ItemCategories,PaperMarioBattleSystem.Item.ItemTypes)">FindItems(Item.ItemCategories, Item.ItemTypes)</h4>
@@ -780,7 +834,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_GetActiveBadgeCount_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.GetActiveBadgeCount(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L505">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L541">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_GetActiveBadgeCount_" data-uid="PaperMarioBattleSystem.Inventory.GetActiveBadgeCount*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_GetActiveBadgeCount_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_" data-uid="PaperMarioBattleSystem.Inventory.GetActiveBadgeCount(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes)">GetActiveBadgeCount(BadgeGlobals.BadgeTypes)</h4>
@@ -830,7 +884,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_GetActiveBadgesOnEntity_PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.GetActiveBadgesOnEntity(PaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L528">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L564">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_GetActiveBadgesOnEntity_" data-uid="PaperMarioBattleSystem.Inventory.GetActiveBadgesOnEntity*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_GetActiveBadgesOnEntity_PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.Inventory.GetActiveBadgesOnEntity(PaperMarioBattleSystem.BattleEntity)">GetActiveBadgesOnEntity(BattleEntity)</h4>
@@ -880,7 +934,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_GetBadge_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_PaperMarioBattleSystem_BadgeGlobals_BadgeFilterType_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.GetBadge(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes%2CPaperMarioBattleSystem.BadgeGlobals.BadgeFilterType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L333">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L369">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_GetBadge_" data-uid="PaperMarioBattleSystem.Inventory.GetBadge*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_GetBadge_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_PaperMarioBattleSystem_BadgeGlobals_BadgeFilterType_" data-uid="PaperMarioBattleSystem.Inventory.GetBadge(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes,PaperMarioBattleSystem.BadgeGlobals.BadgeFilterType)">GetBadge(BadgeGlobals.BadgeTypes, BadgeGlobals.BadgeFilterType)</h4>
@@ -936,7 +990,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_GetBadgeCount_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.GetBadgeCount(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L389">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L425">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_GetBadgeCount_" data-uid="PaperMarioBattleSystem.Inventory.GetBadgeCount*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_GetBadgeCount_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_" data-uid="PaperMarioBattleSystem.Inventory.GetBadgeCount(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes)">GetBadgeCount(BadgeGlobals.BadgeTypes)</h4>
@@ -986,7 +1040,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_GetBadges_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_PaperMarioBattleSystem_BadgeGlobals_BadgeFilterType_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.GetBadges(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes%2CPaperMarioBattleSystem.BadgeGlobals.BadgeFilterType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L363">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L399">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_GetBadges_" data-uid="PaperMarioBattleSystem.Inventory.GetBadges*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_GetBadges_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_PaperMarioBattleSystem_BadgeGlobals_BadgeFilterType_" data-uid="PaperMarioBattleSystem.Inventory.GetBadges(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes,PaperMarioBattleSystem.BadgeGlobals.BadgeFilterType)">GetBadges(BadgeGlobals.BadgeTypes, BadgeGlobals.BadgeFilterType)</h4>
@@ -1042,7 +1096,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_HasBadgeType_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.HasBadgeType(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L402">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L438">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_HasBadgeType_" data-uid="PaperMarioBattleSystem.Inventory.HasBadgeType*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_HasBadgeType_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_" data-uid="PaperMarioBattleSystem.Inventory.HasBadgeType(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes)">HasBadgeType(BadgeGlobals.BadgeTypes)</h4>
@@ -1092,7 +1146,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_IsBadgeTypeActive_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.IsBadgeTypeActive(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L518">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L554">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_IsBadgeTypeActive_" data-uid="PaperMarioBattleSystem.Inventory.IsBadgeTypeActive*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_IsBadgeTypeActive_PaperMarioBattleSystem_BadgeGlobals_BadgeTypes_" data-uid="PaperMarioBattleSystem.Inventory.IsBadgeTypeActive(PaperMarioBattleSystem.BadgeGlobals.BadgeTypes)">IsBadgeTypeActive(BadgeGlobals.BadgeTypes)</h4>
@@ -1142,7 +1196,7 @@ Do not add new Badges instances here. Add only Badges that are already in the In
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_RemoveBadge_PaperMarioBattleSystem_Badge_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.RemoveBadge(PaperMarioBattleSystem.Badge)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L288">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L324">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_RemoveBadge_" data-uid="PaperMarioBattleSystem.Inventory.RemoveBadge*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_RemoveBadge_PaperMarioBattleSystem_Badge_" data-uid="PaperMarioBattleSystem.Inventory.RemoveBadge(PaperMarioBattleSystem.Badge)">RemoveBadge(Badge)</h4>
@@ -1177,11 +1231,11 @@ If the Badge is active, it also unequips the Badge and removes it from the activ
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_RemoveItem_PaperMarioBattleSystem_Item_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.RemoveItem(PaperMarioBattleSystem.Item)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L179">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L215">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_RemoveItem_" data-uid="PaperMarioBattleSystem.Inventory.RemoveItem*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_RemoveItem_PaperMarioBattleSystem_Item_" data-uid="PaperMarioBattleSystem.Inventory.RemoveItem(PaperMarioBattleSystem.Item)">RemoveItem(Item)</h4>
-  <div class="markdown level1 summary"><p>Removes an Item from the Player&apos;s Inventory</p>
+  <div class="markdown level1 summary"><p>Removes an Item from the Player&apos;s Inventory.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1201,7 +1255,7 @@ If the Badge is active, it also unequips the Badge and removes it from the activ
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Item.html">Item</a></td>
         <td><span class="parametername">item</span></td>
-        <td><p>The Item to remove</p>
+        <td><p>The Item to remove.</p>
 </td>
       </tr>
     </tbody>
@@ -1211,11 +1265,12 @@ If the Badge is active, it also unequips the Badge and removes it from the activ
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_SubtractCoins_System_UInt32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.SubtractCoins(System.UInt32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L126">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L154">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_SubtractCoins_" data-uid="PaperMarioBattleSystem.Inventory.SubtractCoins*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_SubtractCoins_System_UInt32_" data-uid="PaperMarioBattleSystem.Inventory.SubtractCoins(System.UInt32)">SubtractCoins(UInt32)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Subtracts a number of coins from the player.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -1234,7 +1289,8 @@ If the Badge is active, it also unequips the Badge and removes it from the activ
       <tr>
         <td><span class="xref">System.UInt32</span></td>
         <td><span class="parametername">coinsSubtracted</span></td>
-        <td></td>
+        <td><p>The number of coins to subtract.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1243,11 +1299,12 @@ If the Badge is active, it also unequips the Badge and removes it from the activ
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Inventory_SubtractStarPieces_System_UInt32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Inventory.SubtractStarPieces(System.UInt32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L136">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Singletons/General/Inventory.cs/#L172">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Inventory_SubtractStarPieces_" data-uid="PaperMarioBattleSystem.Inventory.SubtractStarPieces*"></a>
   <h4 id="PaperMarioBattleSystem_Inventory_SubtractStarPieces_System_UInt32_" data-uid="PaperMarioBattleSystem.Inventory.SubtractStarPieces(System.UInt32)">SubtractStarPieces(UInt32)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Subtracts a number of Star Pieces from the player.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -1266,10 +1323,15 @@ If the Badge is active, it also unequips the Badge and removes it from the activ
       <tr>
         <td><span class="xref">System.UInt32</span></td>
         <td><span class="parametername">starPiecesSubtracted</span></td>
-        <td></td>
+        <td><p>The number of Star Pieces to subtract.</p>
+</td>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="PaperMarioBattleSystem.ICleanup.html">ICleanup</a>
+  </div>
 </article>
           </div>
           

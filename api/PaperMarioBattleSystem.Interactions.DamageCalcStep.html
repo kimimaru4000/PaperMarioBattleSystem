@@ -73,7 +73,7 @@
   
   <h1 id="PaperMarioBattleSystem_Interactions_DamageCalcStep" data-uid="PaperMarioBattleSystem.Interactions.DamageCalcStep" class="text-break">Class Interactions.DamageCalcStep
   </h1>
-  <div class="markdown level0 summary"><p>The base class for steps in the total damage calculation.</p>
+  <div class="markdown level0 summary"><p>The base class for steps in the damage calculation.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -137,10 +137,11 @@
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_DamageCalcStep_StepContactResultInfo.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.DamageCalcStep.StepContactResultInfo%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L470">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L477">View Source</a>
   </span>
   <h4 id="PaperMarioBattleSystem_Interactions_DamageCalcStep_StepContactResultInfo" data-uid="PaperMarioBattleSystem.Interactions.DamageCalcStep.StepContactResultInfo">StepContactResultInfo</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The current ContactResultInfo at the step.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -166,10 +167,10 @@
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_DamageCalcStep_StepResult.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.DamageCalcStep.StepResult%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L468">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L472">View Source</a>
   </span>
   <h4 id="PaperMarioBattleSystem_Interactions_DamageCalcStep_StepResult" data-uid="PaperMarioBattleSystem.Interactions.DamageCalcStep.StepResult">StepResult</h4>
-  <div class="markdown level1 summary"><p>The current InteractionResult at each step.
+  <div class="markdown level1 summary"><p>The current InteractionResult at the step.
 This is copied and modified each step, so all the values after each calculation are preserved.
 <p>This also allows us to preserve the last interaction performed.</p></p>
 </div>
@@ -200,11 +201,12 @@ This is copied and modified each step, so all the values after each calculation 
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_DamageCalcStep_Calculate_PaperMarioBattleSystem_InteractionParamHolder__PaperMarioBattleSystem_InteractionResult__PaperMarioBattleSystem_ContactResultInfo__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.DamageCalcStep.Calculate(PaperMarioBattleSystem.InteractionParamHolder%40%2CPaperMarioBattleSystem.InteractionResult%40%2CPaperMarioBattleSystem.ContactResultInfo%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L472">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L486">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Interactions_DamageCalcStep_Calculate_" data-uid="PaperMarioBattleSystem.Interactions.DamageCalcStep.Calculate*"></a>
   <h4 id="PaperMarioBattleSystem_Interactions_DamageCalcStep_Calculate_PaperMarioBattleSystem_InteractionParamHolder__PaperMarioBattleSystem_InteractionResult__PaperMarioBattleSystem_ContactResultInfo__" data-uid="PaperMarioBattleSystem.Interactions.DamageCalcStep.Calculate(PaperMarioBattleSystem.InteractionParamHolder@,PaperMarioBattleSystem.InteractionResult@,PaperMarioBattleSystem.ContactResultInfo@)">Calculate(InteractionParamHolder, InteractionResult, ContactResultInfo)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Calculates the result of an interaction.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -223,17 +225,20 @@ This is copied and modified each step, so all the values after each calculation 
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.InteractionParamHolder.html">InteractionParamHolder</a></td>
         <td><span class="parametername">damageInfo</span></td>
-        <td></td>
+        <td><p>An InteractionParamHolder containing the damage information.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.InteractionResult.html">InteractionResult</a></td>
         <td><span class="parametername">curResult</span></td>
-        <td></td>
+        <td><p>The current InteractionResult, calculated from the previous step.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.ContactResultInfo.html">ContactResultInfo</a></td>
         <td><span class="parametername">curContactResult</span></td>
-        <td></td>
+        <td><p>The current ContactResultInfo, calculated from the previous step.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -248,7 +253,8 @@ This is copied and modified each step, so all the values after each calculation 
     <tbody>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.InteractionResult.html">InteractionResult</a></td>
-        <td></td>
+        <td><p>An InteractionResult containing the result of the interaction at this step.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -257,11 +263,12 @@ This is copied and modified each step, so all the values after each calculation 
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_DamageCalcStep_OnCalculate_PaperMarioBattleSystem_InteractionParamHolder__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.DamageCalcStep.OnCalculate(PaperMarioBattleSystem.InteractionParamHolder%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L480">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L498">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Interactions_DamageCalcStep_OnCalculate_" data-uid="PaperMarioBattleSystem.Interactions.DamageCalcStep.OnCalculate*"></a>
   <h4 id="PaperMarioBattleSystem_Interactions_DamageCalcStep_OnCalculate_PaperMarioBattleSystem_InteractionParamHolder__" data-uid="PaperMarioBattleSystem.Interactions.DamageCalcStep.OnCalculate(PaperMarioBattleSystem.InteractionParamHolder@)">OnCalculate(InteractionParamHolder)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Calculates the interaction for this step.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -280,7 +287,8 @@ This is copied and modified each step, so all the values after each calculation 
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.InteractionParamHolder.html">InteractionParamHolder</a></td>
         <td><span class="parametername">damageInfo</span></td>
-        <td></td>
+        <td><p>An InteractionParamHolder containing the damage information.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -295,7 +303,7 @@ This is copied and modified each step, so all the values after each calculation 
                     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Interactions_DamageCalcStep.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Interactions.DamageCalcStep%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L461" class="contribution-link">View Source</a>
+                    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Global/Interactions.cs/#L465" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

@@ -73,7 +73,7 @@
   
   <h1 id="PaperMarioBattleSystem_BattleManager" data-uid="PaperMarioBattleSystem.BattleManager" class="text-break">Class BattleManager
   </h1>
-  <div class="markdown level0 summary"><p>Handles all aspects regarding turn-based battles. It manages the BattleEntities taking part in battle.</p>
+  <div class="markdown level0 summary"><p>Handles all aspects regarding turn-based battles and manages the BattleEntities taking part in battle.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -575,19 +575,19 @@ This is a property that references the <span class="xref">PaperMarioBattleSystem
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_AddEntities_System_Collections_Generic_IList_PaperMarioBattleSystem_BattleEntity__System_Collections_Generic_IList_System_Int32__System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList%7BPaperMarioBattleSystem.BattleEntity%7D%2CSystem.Collections.Generic.IList%7BSystem.Int32%7D%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_AddEntities_System_Collections_Generic_IList_PaperMarioBattleSystem_BattleEntity__System_Collections_Generic_IList_System_Int32__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList%7BPaperMarioBattleSystem.BattleEntity%7D%2CSystem.Collections.Generic.IList%7BSystem.Int32%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L617">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L618">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_AddEntities_" data-uid="PaperMarioBattleSystem.BattleManager.AddEntities*"></a>
-  <h4 id="PaperMarioBattleSystem_BattleManager_AddEntities_System_Collections_Generic_IList_PaperMarioBattleSystem_BattleEntity__System_Collections_Generic_IList_System_Int32__System_Boolean_" data-uid="PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList{PaperMarioBattleSystem.BattleEntity},System.Collections.Generic.IList{System.Int32},System.Boolean)">AddEntities(IList&lt;BattleEntity&gt;, IList&lt;Int32&gt;, Boolean)</h4>
+  <h4 id="PaperMarioBattleSystem_BattleManager_AddEntities_System_Collections_Generic_IList_PaperMarioBattleSystem_BattleEntity__System_Collections_Generic_IList_System_Int32__" data-uid="PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList{PaperMarioBattleSystem.BattleEntity},System.Collections.Generic.IList{System.Int32})">AddEntities(IList&lt;BattleEntity&gt;, IList&lt;Int32&gt;)</h4>
   <div class="markdown level1 summary"><p>Adds a set of BattleEntities to battle.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddEntities(IList&lt;BattleEntity&gt; battleEntities, IList&lt;int&gt; battleIndices, bool initialize)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddEntities(IList&lt;BattleEntity&gt; battleEntities, IList&lt;int&gt; battleIndices)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -613,31 +613,23 @@ This is a property that references the <span class="xref">PaperMarioBattleSystem
 IList range, the BattleManager will assign the lowest available BattleIndex.</p></p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">initialize</span></td>
-        <td><p>Whether to initialize the entities or not. Regardless of the value, it assigns a BattleIndex.
-If the BattleEntities have first joined battle, this should be true.
-This should be false in cases where BattleEntities have been removed and re-added to battle, such as switching Partners.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_AddEntity_PaperMarioBattleSystem_BattleEntity_System_Nullable_System_Int32__System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity%2CSystem.Nullable%7BSystem.Int32%7D%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_AddEntity_PaperMarioBattleSystem_BattleEntity_System_Nullable_System_Int32__.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity%2CSystem.Nullable%7BSystem.Int32%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L553">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L561">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_AddEntity_" data-uid="PaperMarioBattleSystem.BattleManager.AddEntity*"></a>
-  <h4 id="PaperMarioBattleSystem_BattleManager_AddEntity_PaperMarioBattleSystem_BattleEntity_System_Nullable_System_Int32__System_Boolean_" data-uid="PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity,System.Nullable{System.Int32},System.Boolean)">AddEntity(BattleEntity, Nullable&lt;Int32&gt;, Boolean)</h4>
+  <h4 id="PaperMarioBattleSystem_BattleManager_AddEntity_PaperMarioBattleSystem_BattleEntity_System_Nullable_System_Int32__" data-uid="PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity,System.Nullable{System.Int32})">AddEntity(BattleEntity, Nullable&lt;Int32&gt;)</h4>
   <div class="markdown level1 summary"><p>Adds a BattleEntity to battle.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddEntity(BattleEntity battleEntity, int? battleIndex, bool initialize)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddEntity(BattleEntity battleEntity, int? battleIndex)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -662,14 +654,6 @@ This should be false in cases where BattleEntities have been removed and re-adde
 <p>If the value is null, the BattleManager will assign the lowest available BattleIndex.</p></p>
 </td>
       </tr>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><span class="parametername">initialize</span></td>
-        <td><p>Whether to initialize the BattleEntity or not. Regardless of the value, it assigns a BattleIndex.
-If the BattleEntity has first joined battle, this should be true.
-This should be false in cases where the BattleEntities have been removed and re-added to battle, such as switching Partners.</p>
-</td>
-      </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
@@ -692,11 +676,11 @@ This should be false in cases where the BattleEntities have been removed and re-
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_EndBattle_PaperMarioBattleSystem_BattleGlobals_BattleResults_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.EndBattle(PaperMarioBattleSystem.BattleGlobals.BattleResults)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L311">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L312">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_EndBattle_" data-uid="PaperMarioBattleSystem.BattleManager.EndBattle*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_EndBattle_PaperMarioBattleSystem_BattleGlobals_BattleResults_" data-uid="PaperMarioBattleSystem.BattleManager.EndBattle(PaperMarioBattleSystem.BattleGlobals.BattleResults)">EndBattle(BattleGlobals.BattleResults)</h4>
-  <div class="markdown level1 summary"><p>Ends the Battle</p>
+  <div class="markdown level1 summary"><p>Ends the battle.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -716,7 +700,8 @@ This should be false in cases where the BattleEntities have been removed and re-
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.BattleResults.html">BattleGlobals.BattleResults</a></td>
         <td><span class="parametername">battleResult</span></td>
-        <td></td>
+        <td><p>The result of the battle.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -725,7 +710,7 @@ This should be false in cases where the BattleEntities have been removed and re-
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_FindBattleIndexGaps_PaperMarioBattleSystem_Enumerations_EntityTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.FindBattleIndexGaps(PaperMarioBattleSystem.Enumerations.EntityTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1058">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1067">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_FindBattleIndexGaps_" data-uid="PaperMarioBattleSystem.BattleManager.FindBattleIndexGaps*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_FindBattleIndexGaps_PaperMarioBattleSystem_Enumerations_EntityTypes_" data-uid="PaperMarioBattleSystem.BattleManager.FindBattleIndexGaps(PaperMarioBattleSystem.Enumerations.EntityTypes)">FindBattleIndexGaps(Enumerations.EntityTypes)</h4>
@@ -775,7 +760,7 @@ This should be false in cases where the BattleEntities have been removed and re-
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_FindEntityFromBattleIndex_PaperMarioBattleSystem_Enumerations_EntityTypes_System_Int32_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.FindEntityFromBattleIndex(PaperMarioBattleSystem.Enumerations.EntityTypes%2CSystem.Int32%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1116">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1125">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_FindEntityFromBattleIndex_" data-uid="PaperMarioBattleSystem.BattleManager.FindEntityFromBattleIndex*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_FindEntityFromBattleIndex_PaperMarioBattleSystem_Enumerations_EntityTypes_System_Int32_System_Boolean_" data-uid="PaperMarioBattleSystem.BattleManager.FindEntityFromBattleIndex(PaperMarioBattleSystem.Enumerations.EntityTypes,System.Int32,System.Boolean)">FindEntityFromBattleIndex(Enumerations.EntityTypes, Int32, Boolean)</h4>
@@ -839,11 +824,11 @@ If true, will find a BattleEntity with a BattleIndex less than or equal to <code
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_FindLowestAvailableBattleIndex_PaperMarioBattleSystem_Enumerations_EntityTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.FindLowestAvailableBattleIndex(PaperMarioBattleSystem.Enumerations.EntityTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1069">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1078">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_FindLowestAvailableBattleIndex_" data-uid="PaperMarioBattleSystem.BattleManager.FindLowestAvailableBattleIndex*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_FindLowestAvailableBattleIndex_PaperMarioBattleSystem_Enumerations_EntityTypes_" data-uid="PaperMarioBattleSystem.BattleManager.FindLowestAvailableBattleIndex(PaperMarioBattleSystem.Enumerations.EntityTypes)">FindLowestAvailableBattleIndex(Enumerations.EntityTypes)</h4>
-  <div class="markdown level1 summary"><p>Finds the lowest available Battle Index for a given EntityType.</p>
+  <div class="markdown level1 summary"><p>Finds the lowest available BattleIndex for a given EntityType.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -863,7 +848,7 @@ If true, will find a BattleEntity with a BattleIndex less than or equal to <code
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.EntityTypes.html">Enumerations.EntityTypes</a></td>
         <td><span class="parametername">entityType</span></td>
-        <td><p>The type of BattleEntities to find a Battle Index for.</p>
+        <td><p>The type of BattleEntities to find a BattleIndex for.</p>
 </td>
       </tr>
     </tbody>
@@ -879,7 +864,7 @@ If true, will find a BattleEntity with a BattleIndex less than or equal to <code
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>An integer representing the next available Battle Index.
+        <td><p>An integer representing the next available BattleIndex.
 If no BattleEntities of the specified type are in battle, -1 will be returned.</p>
 </td>
       </tr>
@@ -890,12 +875,13 @@ If no BattleEntities of the specified type are in battle, -1 will be returned.</
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetAdjacentEntities_PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetAdjacentEntities(PaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L962">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L963">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetAdjacentEntities_" data-uid="PaperMarioBattleSystem.BattleManager.GetAdjacentEntities*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetAdjacentEntities_PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.BattleManager.GetAdjacentEntities(PaperMarioBattleSystem.BattleEntity)">GetAdjacentEntities(BattleEntity)</h4>
   <div class="markdown level1 summary"><p>Gets the BattleEntities adjacent to a particular BattleEntity.
-<p>This considers all foreground entities (Ex. Adjacent to Mario would be his Partner and the first Enemy)</p></p>
+<p>This considers all foreground BattleEntities
+(Ex. Adjacent to Mario would be his Partner and the first Enemy if Mario is in front).</p></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -915,7 +901,7 @@ If no BattleEntities of the specified type are in battle, -1 will be returned.</
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
         <td><span class="parametername">entity</span></td>
-        <td><p>The BattleEntity to find entities adjacent to</p>
+        <td><p>The BattleEntity to find BattleEntities adjacent to.</p>
 </td>
       </tr>
     </tbody>
@@ -941,12 +927,13 @@ If no BattleEntities of the specified type are in battle, -1 will be returned.</
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetAdjacentEntities_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetAdjacentEntities(System.Collections.Generic.List%7BPaperMarioBattleSystem.BattleEntity%7D%2CPaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L977">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L982">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetAdjacentEntities_" data-uid="PaperMarioBattleSystem.BattleManager.GetAdjacentEntities*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetAdjacentEntities_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.BattleManager.GetAdjacentEntities(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity},PaperMarioBattleSystem.BattleEntity)">GetAdjacentEntities(List&lt;BattleEntity&gt;, BattleEntity)</h4>
   <div class="markdown level1 summary"><p>Gets the BattleEntities adjacent to a particular BattleEntity. This method generates no garbage.
-<p>This considers all foreground entities (Ex. Adjacent to Mario would be his Partner and the first Enemy).</p></p>
+<p>This considers all foreground BattleEntities
+(Ex. Adjacent to Mario would be his Partner and the first Enemy if Mario is in front).</p></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -972,7 +959,7 @@ If no BattleEntities of the specified type are in battle, -1 will be returned.</
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
         <td><span class="parametername">entity</span></td>
-        <td><p>The BattleEntity to find entities adjacent to.</p>
+        <td><p>The BattleEntity to find BattleEntities adjacent to.</p>
 </td>
       </tr>
     </tbody>
@@ -982,7 +969,7 @@ If no BattleEntities of the specified type are in battle, -1 will be returned.</
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetAllBattleEntities_PaperMarioBattleSystem_Enumerations_HeightStates___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetAllBattleEntities(PaperMarioBattleSystem.Enumerations.HeightStates%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L823">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L824">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetAllBattleEntities_" data-uid="PaperMarioBattleSystem.BattleManager.GetAllBattleEntities*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetAllBattleEntities_PaperMarioBattleSystem_Enumerations_HeightStates___" data-uid="PaperMarioBattleSystem.BattleManager.GetAllBattleEntities(PaperMarioBattleSystem.Enumerations.HeightStates[])">GetAllBattleEntities(Enumerations.HeightStates[])</h4>
@@ -1006,8 +993,8 @@ If no BattleEntities of the specified type are in battle, -1 will be returned.</
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a>[]</td>
         <td><span class="parametername">heightStates</span></td>
-        <td><p>The height states to filter entities by. Entities with any of the state will be included.
-If null, will include entities of all height states.</p>
+        <td><p>The HeightStates to filter entities by. Entities with any of the state will be included.
+If null, will include entities of all HeightStates.</p>
 </td>
       </tr>
     </tbody>
@@ -1023,7 +1010,7 @@ If null, will include entities of all height states.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a>[]</td>
-        <td><p>All BattleEntities in battle matching the height states specified.</p>
+        <td><p>All BattleEntities in battle matching the HeightStates specified.</p>
 </td>
       </tr>
     </tbody>
@@ -1033,7 +1020,7 @@ If null, will include entities of all height states.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetAllBattleEntities_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_Enumerations_HeightStates___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetAllBattleEntities(System.Collections.Generic.List%7BPaperMarioBattleSystem.BattleEntity%7D%2CPaperMarioBattleSystem.Enumerations.HeightStates%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L839">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L840">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetAllBattleEntities_" data-uid="PaperMarioBattleSystem.BattleManager.GetAllBattleEntities*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetAllBattleEntities_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_Enumerations_HeightStates___" data-uid="PaperMarioBattleSystem.BattleManager.GetAllBattleEntities(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity},PaperMarioBattleSystem.Enumerations.HeightStates[])">GetAllBattleEntities(List&lt;BattleEntity&gt;, Enumerations.HeightStates[])</h4>
@@ -1063,8 +1050,8 @@ If null, will include entities of all height states.</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a>[]</td>
         <td><span class="parametername">heightStates</span></td>
-        <td><p>The height states to filter entities by. Entities with any of the state will be included.
-If null, will include entities of all height states.</p>
+        <td><p>The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+If null, will include BattleEntities of all HeightStates.</p>
 </td>
       </tr>
     </tbody>
@@ -1074,11 +1061,11 @@ If null, will include entities of all height states.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetEntities_PaperMarioBattleSystem_Enumerations_EntityTypes_PaperMarioBattleSystem_Enumerations_HeightStates___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetEntities(PaperMarioBattleSystem.Enumerations.EntityTypes%2CPaperMarioBattleSystem.Enumerations.HeightStates%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L871">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L872">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetEntities_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntities*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetEntities_PaperMarioBattleSystem_Enumerations_EntityTypes_PaperMarioBattleSystem_Enumerations_HeightStates___" data-uid="PaperMarioBattleSystem.BattleManager.GetEntities(PaperMarioBattleSystem.Enumerations.EntityTypes,PaperMarioBattleSystem.Enumerations.HeightStates[])">GetEntities(Enumerations.EntityTypes, Enumerations.HeightStates[])</h4>
-  <div class="markdown level1 summary"><p>Returns all entities of a specified EntityType in a new array.</p>
+  <div class="markdown level1 summary"><p>Returns all BattleEntities of a specified EntityType in a new array.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1104,8 +1091,8 @@ If null, will include entities of all height states.</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a>[]</td>
         <td><span class="parametername">heightStates</span></td>
-        <td><p>The height states to filter entities by. Entities with any of the state will be included.
-If null, will include entities of all height states</p>
+        <td><p>The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+If null, will include BattleEntities of all HeightStates.</p>
 </td>
       </tr>
     </tbody>
@@ -1121,7 +1108,7 @@ If null, will include entities of all height states</p>
     <tbody>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a>[]</td>
-        <td><p>Entities matching the EntityType and height states specified.</p>
+        <td><p>BattleEntities matching the EntityType and HeightStates specified.</p>
 </td>
       </tr>
     </tbody>
@@ -1131,11 +1118,11 @@ If null, will include entities of all height states</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetEntities_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_Enumerations_EntityTypes_PaperMarioBattleSystem_Enumerations_HeightStates___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetEntities(System.Collections.Generic.List%7BPaperMarioBattleSystem.BattleEntity%7D%2CPaperMarioBattleSystem.Enumerations.EntityTypes%2CPaperMarioBattleSystem.Enumerations.HeightStates%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L884">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L885">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetEntities_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntities*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetEntities_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_Enumerations_EntityTypes_PaperMarioBattleSystem_Enumerations_HeightStates___" data-uid="PaperMarioBattleSystem.BattleManager.GetEntities(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity},PaperMarioBattleSystem.Enumerations.EntityTypes,PaperMarioBattleSystem.Enumerations.HeightStates[])">GetEntities(List&lt;BattleEntity&gt;, Enumerations.EntityTypes, Enumerations.HeightStates[])</h4>
-  <div class="markdown level1 summary"><p>Adds all entities of a specified EntityType in a supplied List. This method generates no garbage.</p>
+  <div class="markdown level1 summary"><p>Adds all BattleEntities of a specified EntityType in a supplied List. This method generates no garbage.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1167,8 +1154,8 @@ If null, will include entities of all height states</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a>[]</td>
         <td><span class="parametername">heightStates</span></td>
-        <td><p>The height states to filter entities by. Entities with any of the state will be included.
-If null, will include entities of all height states</p>
+        <td><p>The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+If null, will include BattleEntities of all HeightStates.</p>
 </td>
       </tr>
     </tbody>
@@ -1178,7 +1165,7 @@ If null, will include entities of all height states</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetEntitiesBehind_PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetEntitiesBehind(PaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1020">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1025">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetEntitiesBehind_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntitiesBehind*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetEntitiesBehind_PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntitiesBehind(PaperMarioBattleSystem.BattleEntity)">GetEntitiesBehind(BattleEntity)</h4>
@@ -1202,7 +1189,7 @@ If null, will include entities of all height states</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
         <td><span class="parametername">entity</span></td>
-        <td><p>The BattleEntity to find entities behind</p>
+        <td><p>The BattleEntity to find BattleEntities behind.</p>
 </td>
       </tr>
     </tbody>
@@ -1228,7 +1215,7 @@ If null, will include entities of all height states</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetEntitiesBehind_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetEntitiesBehind(System.Collections.Generic.List%7BPaperMarioBattleSystem.BattleEntity%7D%2CPaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1032">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1041">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetEntitiesBehind_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntitiesBehind*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetEntitiesBehind_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntitiesBehind(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity},PaperMarioBattleSystem.BattleEntity)">GetEntitiesBehind(List&lt;BattleEntity&gt;, BattleEntity)</h4>
@@ -1257,7 +1244,7 @@ If null, will include entities of all height states</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
         <td><span class="parametername">entity</span></td>
-        <td><p>The BattleEntity to find entities behind</p>
+        <td><p>The BattleEntity to find BattleEntities behind.</p>
 </td>
       </tr>
     </tbody>
@@ -1267,7 +1254,7 @@ If null, will include entities of all height states</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetEntitiesCount_PaperMarioBattleSystem_Enumerations_EntityTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetEntitiesCount(PaperMarioBattleSystem.Enumerations.EntityTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L855">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L856">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetEntitiesCount_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntitiesCount*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetEntitiesCount_PaperMarioBattleSystem_Enumerations_EntityTypes_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntitiesCount(PaperMarioBattleSystem.Enumerations.EntityTypes)">GetEntitiesCount(Enumerations.EntityTypes)</h4>
@@ -1317,12 +1304,12 @@ If null, will include entities of all height states</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetEntitiesReversed_PaperMarioBattleSystem_Enumerations_EntityTypes_PaperMarioBattleSystem_Enumerations_HeightStates___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetEntitiesReversed(PaperMarioBattleSystem.Enumerations.EntityTypes%2CPaperMarioBattleSystem.Enumerations.HeightStates%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L900">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L901">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetEntitiesReversed_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntitiesReversed*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetEntitiesReversed_PaperMarioBattleSystem_Enumerations_EntityTypes_PaperMarioBattleSystem_Enumerations_HeightStates___" data-uid="PaperMarioBattleSystem.BattleManager.GetEntitiesReversed(PaperMarioBattleSystem.Enumerations.EntityTypes,PaperMarioBattleSystem.Enumerations.HeightStates[])">GetEntitiesReversed(Enumerations.EntityTypes, Enumerations.HeightStates[])</h4>
-  <div class="markdown level1 summary"><p>Returns all entities of a specified EntityType in an array.
-The entities are returned in reverse order. Entities in the back are the first elements in the List.</p>
+  <div class="markdown level1 summary"><p>Returns all BattleEntities of a specified EntityType in an array.
+The BattleEntities are returned in reverse order. BattleEntities in the back are the first elements in the List.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1348,8 +1335,8 @@ The entities are returned in reverse order. Entities in the back are the first e
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a>[]</td>
         <td><span class="parametername">heightStates</span></td>
-        <td><p>The height states to filter entities by. Entities with any of the state will be included.
-If null, will include entities of all height states.</p>
+        <td><p>The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+If null, will include BattleEntities of all HeightStates.</p>
 </td>
       </tr>
     </tbody>
@@ -1365,7 +1352,7 @@ If null, will include entities of all height states.</p>
     <tbody>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a>[]</td>
-        <td><p>Entities matching the EntityType and height states specified, in reverse.</p>
+        <td><p>BattleEntities matching the EntityType and HeightStates specified, in reverse.</p>
 </td>
       </tr>
     </tbody>
@@ -1375,12 +1362,12 @@ If null, will include entities of all height states.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetEntitiesReversed_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_Enumerations_EntityTypes_PaperMarioBattleSystem_Enumerations_HeightStates___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetEntitiesReversed(System.Collections.Generic.List%7BPaperMarioBattleSystem.BattleEntity%7D%2CPaperMarioBattleSystem.Enumerations.EntityTypes%2CPaperMarioBattleSystem.Enumerations.HeightStates%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L916">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L917">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetEntitiesReversed_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntitiesReversed*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetEntitiesReversed_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_Enumerations_EntityTypes_PaperMarioBattleSystem_Enumerations_HeightStates___" data-uid="PaperMarioBattleSystem.BattleManager.GetEntitiesReversed(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity},PaperMarioBattleSystem.Enumerations.EntityTypes,PaperMarioBattleSystem.Enumerations.HeightStates[])">GetEntitiesReversed(List&lt;BattleEntity&gt;, Enumerations.EntityTypes, Enumerations.HeightStates[])</h4>
-  <div class="markdown level1 summary"><p>Adds all entities of a specified EntityType in a supplied List in reverse order.
-Entities in the back are the first elements in the List. This method generates no garbage.</p>
+  <div class="markdown level1 summary"><p>Adds all BattleEntities of a specified EntityType in a supplied List in reverse order.
+BattleEntities in the back are the first elements in the List. This method generates no garbage.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1412,8 +1399,8 @@ Entities in the back are the first elements in the List. This method generates n
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a>[]</td>
         <td><span class="parametername">heightStates</span></td>
-        <td><p>The height states to filter entities by. Entities with any of the state will be included.
-If null, will include entities of all height states.</p>
+        <td><p>The HeightStates to filter BattleEntities by. Entities with any of the state will be included.
+If null, will include BattleEntities of all HeightStates.</p>
 </td>
       </tr>
     </tbody>
@@ -1423,7 +1410,7 @@ If null, will include entities of all height states.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetEntityAllies_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_Enumerations_HeightStates___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetEntityAllies(PaperMarioBattleSystem.BattleEntity%2CPaperMarioBattleSystem.Enumerations.HeightStates%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L931">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L932">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetEntityAllies_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntityAllies*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetEntityAllies_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_Enumerations_HeightStates___" data-uid="PaperMarioBattleSystem.BattleManager.GetEntityAllies(PaperMarioBattleSystem.BattleEntity,PaperMarioBattleSystem.Enumerations.HeightStates[])">GetEntityAllies(BattleEntity, Enumerations.HeightStates[])</h4>
@@ -1453,8 +1440,8 @@ If null, will include entities of all height states.</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a>[]</td>
         <td><span class="parametername">heightStates</span></td>
-        <td><p>The height states to filter entities by. Entities with any of the state will be included.
-If null or empty, will return the entities passed in</p>
+        <td><p>The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+If null or empty, will return the BattleEntities passed in.</p>
 </td>
       </tr>
     </tbody>
@@ -1480,7 +1467,7 @@ If null or empty, will return the entities passed in</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetEntityAllies_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_Enumerations_HeightStates___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetEntityAllies(System.Collections.Generic.List%7BPaperMarioBattleSystem.BattleEntity%7D%2CPaperMarioBattleSystem.BattleEntity%2CPaperMarioBattleSystem.Enumerations.HeightStates%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L947">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L948">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetEntityAllies_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntityAllies*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetEntityAllies_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_Enumerations_HeightStates___" data-uid="PaperMarioBattleSystem.BattleManager.GetEntityAllies(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity},PaperMarioBattleSystem.BattleEntity,PaperMarioBattleSystem.Enumerations.HeightStates[])">GetEntityAllies(List&lt;BattleEntity&gt;, BattleEntity, Enumerations.HeightStates[])</h4>
@@ -1516,8 +1503,8 @@ If null or empty, will return the entities passed in</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a>[]</td>
         <td><span class="parametername">heightStates</span></td>
-        <td><p>The height states to filter entities by. Entities with any of the state will be included.
-If null or empty, will return the entities passed in</p>
+        <td><p>The HeightStates to filter BattleEntities by. BattleEntities with any of the state will be included.
+If null or empty, will return the BattleEntities passed in.</p>
 </td>
       </tr>
     </tbody>
@@ -1527,7 +1514,7 @@ If null or empty, will return the entities passed in</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetEntityInFrontOf_PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetEntityInFrontOf(PaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1156">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1165">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetEntityInFrontOf_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntityInFrontOf*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetEntityInFrontOf_PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.BattleManager.GetEntityInFrontOf(PaperMarioBattleSystem.BattleEntity)">GetEntityInFrontOf(BattleEntity)</h4>
@@ -1551,7 +1538,7 @@ If null or empty, will return the entities passed in</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
         <td><span class="parametername">battleEntity</span></td>
-        <td><p>The BattleEntity to find the entity in front of.</p>
+        <td><p>The BattleEntity used to find the closest BattleEntity in front of it.</p>
 </td>
       </tr>
     </tbody>
@@ -1577,7 +1564,7 @@ If null or empty, will return the entities passed in</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_GetFrontmostBattleEntity_PaperMarioBattleSystem_Enumerations_EntityTypes_PaperMarioBattleSystem_Enumerations_HeightStates___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.GetFrontmostBattleEntity(PaperMarioBattleSystem.Enumerations.EntityTypes%2CPaperMarioBattleSystem.Enumerations.HeightStates%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1171">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L1180">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_GetFrontmostBattleEntity_" data-uid="PaperMarioBattleSystem.BattleManager.GetFrontmostBattleEntity*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_GetFrontmostBattleEntity_PaperMarioBattleSystem_Enumerations_EntityTypes_PaperMarioBattleSystem_Enumerations_HeightStates___" data-uid="PaperMarioBattleSystem.BattleManager.GetFrontmostBattleEntity(PaperMarioBattleSystem.Enumerations.EntityTypes,PaperMarioBattleSystem.Enumerations.HeightStates[])">GetFrontmostBattleEntity(Enumerations.EntityTypes, Enumerations.HeightStates[])</h4>
@@ -1607,9 +1594,9 @@ If null or empty, will return the entities passed in</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.HeightStates.html">Enumerations.HeightStates</a>[]</td>
         <td><span class="parametername">heightStates</span></td>
-        <td><p>The height states to filter the BattleEntities by.
+        <td><p>The HeightStates to filter the BattleEntities by.
 The frontmost BattleEntity with any of the state will be included.
-If null or empty, will consider all height states.</p>
+If null or empty, will consider all HeightStates.</p>
 </td>
       </tr>
     </tbody>
@@ -1626,7 +1613,7 @@ If null or empty, will consider all height states.</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
         <td><p>The frontmost BattleEntity for the EntityType.
-If none exist that match the height states specified, then null.</p>
+If none exist that match the HeightStates specified, then null.</p>
 </td>
       </tr>
     </tbody>
@@ -1636,7 +1623,7 @@ If none exist that match the height states specified, then null.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_HaltTurn.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.HaltTurn%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L384">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L389">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_HaltTurn_" data-uid="PaperMarioBattleSystem.BattleManager.HaltTurn*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_HaltTurn" data-uid="PaperMarioBattleSystem.BattleManager.HaltTurn">HaltTurn()</h4>
@@ -1652,7 +1639,7 @@ If none exist that match the height states specified, then null.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_HandleEntityDeath_PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.HandleEntityDeath(PaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L460">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L471">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_HandleEntityDeath_" data-uid="PaperMarioBattleSystem.BattleManager.HandleEntityDeath*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_HandleEntityDeath_PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.BattleManager.HandleEntityDeath(PaperMarioBattleSystem.BattleEntity)">HandleEntityDeath(BattleEntity)</h4>
@@ -1738,7 +1725,7 @@ Called in <a class="xref" href="PaperMarioBattleSystem.DeathBattleEvent.html">De
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_RemoveEntities_System_Collections_Generic_IList_PaperMarioBattleSystem_BattleEntity__System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.RemoveEntities(System.Collections.Generic.IList%7BPaperMarioBattleSystem.BattleEntity%7D%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L705">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L706">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_RemoveEntities_" data-uid="PaperMarioBattleSystem.BattleManager.RemoveEntities*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_RemoveEntities_System_Collections_Generic_IList_PaperMarioBattleSystem_BattleEntity__System_Boolean_" data-uid="PaperMarioBattleSystem.BattleManager.RemoveEntities(System.Collections.Generic.IList{PaperMarioBattleSystem.BattleEntity},System.Boolean)">RemoveEntities(IList&lt;BattleEntity&gt;, Boolean)</h4>
@@ -1780,7 +1767,7 @@ In temporary cases, such as switching Partners, it would be preferable to set th
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_RemoveEntity_PaperMarioBattleSystem_BattleEntity_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.RemoveEntity(PaperMarioBattleSystem.BattleEntity%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L645">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L646">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_RemoveEntity_" data-uid="PaperMarioBattleSystem.BattleManager.RemoveEntity*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_RemoveEntity_PaperMarioBattleSystem_BattleEntity_System_Boolean_" data-uid="PaperMarioBattleSystem.BattleManager.RemoveEntity(PaperMarioBattleSystem.BattleEntity,System.Boolean)">RemoveEntity(BattleEntity, Boolean)</h4>
@@ -1822,7 +1809,7 @@ In temporary cases, such as switching Partners, this should be set to false.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_ResumeTurn.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.ResumeTurn%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L392">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L397">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_ResumeTurn_" data-uid="PaperMarioBattleSystem.BattleManager.ResumeTurn*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_ResumeTurn" data-uid="PaperMarioBattleSystem.BattleManager.ResumeTurn">ResumeTurn()</h4>
@@ -1838,7 +1825,7 @@ In temporary cases, such as switching Partners, this should be set to false.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_SetMario_PaperMarioBattleSystem_BattleMario_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.SetMario(PaperMarioBattleSystem.BattleMario)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L401">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L406">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_SetMario_" data-uid="PaperMarioBattleSystem.BattleManager.SetMario*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_SetMario_PaperMarioBattleSystem_BattleMario_" data-uid="PaperMarioBattleSystem.BattleManager.SetMario(PaperMarioBattleSystem.BattleMario)">SetMario(BattleMario)</h4>
@@ -1872,7 +1859,7 @@ In temporary cases, such as switching Partners, this should be set to false.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_SetPartner_PaperMarioBattleSystem_BattlePartner_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.SetPartner(PaperMarioBattleSystem.BattlePartner)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L410">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L415">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_SetPartner_" data-uid="PaperMarioBattleSystem.BattleManager.SetPartner*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_SetPartner_PaperMarioBattleSystem_BattlePartner_" data-uid="PaperMarioBattleSystem.BattleManager.SetPartner(PaperMarioBattleSystem.BattlePartner)">SetPartner(BattlePartner)</h4>
@@ -1906,7 +1893,7 @@ In temporary cases, such as switching Partners, this should be set to false.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_SortEntityList_PaperMarioBattleSystem_Enumerations_EntityTypes_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.SortEntityList(PaperMarioBattleSystem.Enumerations.EntityTypes)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L725">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L726">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_SortEntityList_" data-uid="PaperMarioBattleSystem.BattleManager.SortEntityList*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_SortEntityList_PaperMarioBattleSystem_Enumerations_EntityTypes_" data-uid="PaperMarioBattleSystem.BattleManager.SortEntityList(PaperMarioBattleSystem.Enumerations.EntityTypes)">SortEntityList(Enumerations.EntityTypes)</h4>
@@ -1944,7 +1931,7 @@ In temporary cases, such as switching Partners, this should be set to false.</p>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_StartBattle_" data-uid="PaperMarioBattleSystem.BattleManager.StartBattle*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_StartBattle" data-uid="PaperMarioBattleSystem.BattleManager.StartBattle">StartBattle()</h4>
-  <div class="markdown level1 summary"><p>Starts the Battle</p>
+  <div class="markdown level1 summary"><p>Starts the battle.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1956,11 +1943,12 @@ In temporary cases, such as switching Partners, this should be set to false.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_TurnEnd.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.TurnEnd%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L431">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L442">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_TurnEnd_" data-uid="PaperMarioBattleSystem.BattleManager.TurnEnd*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_TurnEnd" data-uid="PaperMarioBattleSystem.BattleManager.TurnEnd">TurnEnd()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Ends the current BattleEntity&apos;s turn in battle and decides who should go next.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -1971,11 +1959,12 @@ In temporary cases, such as switching Partners, this should be set to false.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_BattleManager_TurnStart.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.BattleManager.TurnStart%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L415">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Battle/BattleManager.cs/#L423">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_BattleManager_TurnStart_" data-uid="PaperMarioBattleSystem.BattleManager.TurnStart*"></a>
   <h4 id="PaperMarioBattleSystem_BattleManager_TurnStart" data-uid="PaperMarioBattleSystem.BattleManager.TurnStart">TurnStart()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Starts the next BattleEntity&apos;s turn in battle.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">

@@ -74,8 +74,8 @@
   <h1 id="PaperMarioBattleSystem_Sequence" data-uid="PaperMarioBattleSystem.Sequence" class="text-break">Class Sequence
   </h1>
   <div class="markdown level0 summary"><p>A Sequence used in a MoveAction.
-<p>Sequences define a series of step-by-step actions that are performed for a particular move.
-For example, for Mario&apos;s Hammer, the Sequence would play Mario&apos;s run animation, move Mario up to the enemy, start the Action Command, then damage the enemy based on the result.</p></p>
+<p>Sequences define a series of step-by-step actions that are performed for a particular move.</p>
+<p>For example, for Mario&apos;s Hammer, the Sequence would play Mario&apos;s run animation, move Mario up to the enemy, start the Action Command, then damage the enemy based on the result.</p></p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -824,11 +824,11 @@ This allows the sequences to remain flexible and not cause any sequence or branc
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Sequence_AttemptDamage_System_Int32_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_DamageData_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Sequence.AttemptDamage(System.Int32%2CPaperMarioBattleSystem.BattleEntity%2CPaperMarioBattleSystem.DamageData%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L791">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L794">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Sequence_AttemptDamage_" data-uid="PaperMarioBattleSystem.Sequence.AttemptDamage*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_AttemptDamage_System_Int32_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_DamageData_System_Boolean_" data-uid="PaperMarioBattleSystem.Sequence.AttemptDamage(System.Int32,PaperMarioBattleSystem.BattleEntity,PaperMarioBattleSystem.DamageData,System.Boolean)">AttemptDamage(Int32, BattleEntity, DamageData, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Convenience function for attempting damage with only one entity.</p>
+  <div class="markdown level1 summary"><p>Convenience function for attempting damage with only one BattleEntity.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -848,13 +848,13 @@ This allows the sequences to remain flexible and not cause any sequence or branc
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">damage</span></td>
-        <td><p>The damage the BattleAction deals to the entity if the attempt was successful</p>
+        <td><p>The damage the BattleAction deals to the BattleEntity if the attempt was successful.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a></td>
         <td><span class="parametername">entity</span></td>
-        <td><p>The BattleEntity to attempt to inflict damage on</p>
+        <td><p>The BattleEntity to attempt to inflict damage on.</p>
 </td>
       </tr>
       <tr>
@@ -867,7 +867,7 @@ This allows the sequences to remain flexible and not cause any sequence or branc
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">isTotalDamage</span></td>
         <td><p>Whether the damage passed in is the total damage or not.
-If false, the total damage will be calculated using surface-level stats (such as adding the user&apos;s Attack)</p>
+If false, the total damage will be calculated using surface-level stats (such as adding the user&apos;s Attack).</p>
 </td>
       </tr>
     </tbody>
@@ -892,14 +892,14 @@ If false, the total damage will be calculated using surface-level stats (such as
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Sequence_AttemptDamage_System_Int32_PaperMarioBattleSystem_BattleEntity___PaperMarioBattleSystem_DamageData_System_Boolean_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Sequence.AttemptDamage(System.Int32%2CPaperMarioBattleSystem.BattleEntity%5B%5D%2CPaperMarioBattleSystem.DamageData%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L739">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L742">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Sequence_AttemptDamage_" data-uid="PaperMarioBattleSystem.Sequence.AttemptDamage*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_AttemptDamage_System_Int32_PaperMarioBattleSystem_BattleEntity___PaperMarioBattleSystem_DamageData_System_Boolean_" data-uid="PaperMarioBattleSystem.Sequence.AttemptDamage(System.Int32,PaperMarioBattleSystem.BattleEntity[],PaperMarioBattleSystem.DamageData,System.Boolean)">AttemptDamage(Int32, BattleEntity[], DamageData, Boolean)</h4>
-  <div class="markdown level1 summary"><p>Attempt to deal damage to a set of entities with this BattleAction.
+  <div class="markdown level1 summary"><p>Attempt to deal damage to a set of BattleEntities with this BattleAction.
 <p>Based on the ContactType of this BattleAction, this can fail, resulting in an interruption.
-In the event of an interruption, no further entities are tested, the ActionCommand is ended, and 
-we go into the Interruption branch</p></p>
+In the event of an interruption, no further BattleEntities are tested, the ActionCommand is ended, and 
+we go into the Interruption branch.</p></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -919,13 +919,13 @@ we go into the Interruption branch</p></p>
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">damage</span></td>
-        <td><p>The damage the BattleAction deals to the entity if the attempt was successful</p>
+        <td><p>The damage the BattleAction deals to the BattleEntity if the attempt was successful.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleEntity.html">BattleEntity</a>[]</td>
         <td><span class="parametername">entities</span></td>
-        <td><p>The BattleEntities to attempt to inflict damage on</p>
+        <td><p>The BattleEntities to attempt to inflict damage on.</p>
 </td>
       </tr>
       <tr>
@@ -938,7 +938,7 @@ we go into the Interruption branch</p></p>
         <td><span class="xref">System.Boolean</span></td>
         <td><span class="parametername">isTotalDamage</span></td>
         <td><p>Whether the damage passed in is the total damage or not.
-If false, the total damage will be calculated using surface-level stats (such as adding the user&apos;s Attack)</p>
+If false, the total damage will be calculated using surface-level stats (such as adding the user&apos;s Attack).</p>
 </td>
       </tr>
     </tbody>
@@ -954,7 +954,7 @@ If false, the total damage will be calculated using surface-level stats (such as
     <tbody>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.InteractionResult.html">InteractionResult</a>[]</td>
-        <td><p>An InteractionResult array containing the InteractionResult with each BattleEntity targeted, in order</p>
+        <td><p>An InteractionResult array containing the InteractionResult with each BattleEntity targeted, in order.</p>
 </td>
       </tr>
     </tbody>
@@ -968,7 +968,7 @@ If false, the total damage will be calculated using surface-level stats (such as
   </span>
   <a id="PaperMarioBattleSystem_Sequence_BaseInterruptionHandler_" data-uid="PaperMarioBattleSystem.Sequence.BaseInterruptionHandler*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_BaseInterruptionHandler" data-uid="PaperMarioBattleSystem.Sequence.BaseInterruptionHandler">BaseInterruptionHandler()</h4>
-  <div class="markdown level1 summary"><p>The base interruption handler</p>
+  <div class="markdown level1 summary"><p>The base interruption handler.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -984,7 +984,7 @@ If false, the total damage will be calculated using surface-level stats (such as
   </span>
   <a id="PaperMarioBattleSystem_Sequence_ChangeJumpBranch_" data-uid="PaperMarioBattleSystem.Sequence.ChangeJumpBranch*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_ChangeJumpBranch_PaperMarioBattleSystem_Sequence_SequenceBranch_" data-uid="PaperMarioBattleSystem.Sequence.ChangeJumpBranch(PaperMarioBattleSystem.Sequence.SequenceBranch)">ChangeJumpBranch(Sequence.SequenceBranch)</h4>
-  <div class="markdown level1 summary"><p>Sets the branch to jump to after the current sequence updates</p>
+  <div class="markdown level1 summary"><p>Sets the branch to jump to after the current sequence updates.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1004,7 +1004,7 @@ If false, the total damage will be calculated using surface-level stats (such as
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Sequence.SequenceBranch.html">Sequence.SequenceBranch</a></td>
         <td><span class="parametername">newJumpBranch</span></td>
-        <td><p>The new branch to jump to</p>
+        <td><p>The new branch to jump to.</p>
 </td>
       </tr>
     </tbody>
@@ -1018,7 +1018,7 @@ If false, the total damage will be calculated using surface-level stats (such as
   </span>
   <a id="PaperMarioBattleSystem_Sequence_ChangeSequenceBranch_" data-uid="PaperMarioBattleSystem.Sequence.ChangeSequenceBranch*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_ChangeSequenceBranch_PaperMarioBattleSystem_Sequence_SequenceBranch_" data-uid="PaperMarioBattleSystem.Sequence.ChangeSequenceBranch(PaperMarioBattleSystem.Sequence.SequenceBranch)">ChangeSequenceBranch(Sequence.SequenceBranch)</h4>
-  <div class="markdown level1 summary"><p>Switches to a new sequence branch. This also resets the current step</p>
+  <div class="markdown level1 summary"><p>Switches to a new sequence branch. This also resets the current step.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1038,7 +1038,7 @@ If false, the total damage will be calculated using surface-level stats (such as
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Sequence.SequenceBranch.html">Sequence.SequenceBranch</a></td>
         <td><span class="parametername">newBranch</span></td>
-        <td><p>The new branch to switch to</p>
+        <td><p>The new branch to switch to.</p>
 </td>
       </tr>
     </tbody>
@@ -1078,7 +1078,7 @@ If false, the total damage will be calculated using surface-level stats (such as
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Sequence_Draw.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Sequence.Draw%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L714">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L717">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Sequence_Draw_" data-uid="PaperMarioBattleSystem.Sequence.Draw*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_Draw" data-uid="PaperMarioBattleSystem.Sequence.Draw">Draw()</h4>
@@ -1097,7 +1097,7 @@ If false, the total damage will be calculated using surface-level stats (such as
   </span>
   <a id="PaperMarioBattleSystem_Sequence_EndSequence_" data-uid="PaperMarioBattleSystem.Sequence.EndSequence*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_EndSequence" data-uid="PaperMarioBattleSystem.Sequence.EndSequence">EndSequence()</h4>
-  <div class="markdown level1 summary"><p>Ends the action sequence</p>
+  <div class="markdown level1 summary"><p>Ends the action sequence.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1109,7 +1109,7 @@ If false, the total damage will be calculated using surface-level stats (such as
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Sequence_GetTotalDamage_System_Int32_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Sequence.GetTotalDamage(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L802">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L805">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Sequence_GetTotalDamage_" data-uid="PaperMarioBattleSystem.Sequence.GetTotalDamage*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_GetTotalDamage_System_Int32_" data-uid="PaperMarioBattleSystem.Sequence.GetTotalDamage(System.Int32)">GetTotalDamage(Int32)</h4>
@@ -1134,7 +1134,7 @@ This factors in a BattleEntity&apos;s Attack stat, Charge, and anything else on 
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">actionDamage</span></td>
-        <td><p>The damage the BattleAction deals</p>
+        <td><p>The damage the BattleAction deals.</p>
 </td>
       </tr>
     </tbody>
@@ -1150,7 +1150,7 @@ This factors in a BattleEntity&apos;s Attack stat, Charge, and anything else on 
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>An int with the total raw damage the BattleEntity can deal when using this BattleAction</p>
+        <td><p>An int with the total raw damage the BattleEntity can deal when using this BattleAction.</p>
 </td>
       </tr>
     </tbody>
@@ -1328,7 +1328,7 @@ This factors in a BattleEntity&apos;s Attack stat, Charge, and anything else on 
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.Elements.html">Enumerations.Elements</a></td>
         <td><span class="parametername">element</span></td>
-        <td><p>The elemental damage being dealt</p>
+        <td><p>The elemental damage being dealt.</p>
 </td>
       </tr>
     </tbody>
@@ -1343,7 +1343,7 @@ This factors in a BattleEntity&apos;s Attack stat, Charge, and anything else on 
   <a id="PaperMarioBattleSystem_Sequence_OnMiss_" data-uid="PaperMarioBattleSystem.Sequence.OnMiss*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_OnMiss" data-uid="PaperMarioBattleSystem.Sequence.OnMiss">OnMiss()</h4>
   <div class="markdown level1 summary"><p>How the action handles a miss.
-The base implementation is to do nothing, but actions such as Jump may go to the Miss branch
+The base implementation is to do nothing, but actions such as Jump may go to the Miss branch.
 <p>The return value indicates whether missing continues testing for hitting the remaining BattleEntities or not.
 true means to continue, and false means to stop. The base implementation returns true.</p></p>
 </div>
@@ -1389,11 +1389,11 @@ true means to continue, and false means to stop. The base implementation returns
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Sequence_PerformHeal_PaperMarioBattleSystem_HealingData_PaperMarioBattleSystem_BattleEntity_.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Sequence.PerformHeal(PaperMarioBattleSystem.HealingData%2CPaperMarioBattleSystem.BattleEntity)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L858">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L861">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Sequence_PerformHeal_" data-uid="PaperMarioBattleSystem.Sequence.PerformHeal*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_PerformHeal_PaperMarioBattleSystem_HealingData_PaperMarioBattleSystem_BattleEntity_" data-uid="PaperMarioBattleSystem.Sequence.PerformHeal(PaperMarioBattleSystem.HealingData,PaperMarioBattleSystem.BattleEntity)">PerformHeal(HealingData, BattleEntity)</h4>
-  <div class="markdown level1 summary"><p>Convenience function for healing with only one entity.</p>
+  <div class="markdown level1 summary"><p>Convenience function for healing with only one BattleEntity.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1429,7 +1429,7 @@ true means to continue, and false means to stop. The base implementation returns
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Sequence_PerformHeal_PaperMarioBattleSystem_HealingData_PaperMarioBattleSystem_BattleEntity___.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Sequence.PerformHeal(PaperMarioBattleSystem.HealingData%2CPaperMarioBattleSystem.BattleEntity%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L829">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L832">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Sequence_PerformHeal_" data-uid="PaperMarioBattleSystem.Sequence.PerformHeal*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_PerformHeal_PaperMarioBattleSystem_HealingData_PaperMarioBattleSystem_BattleEntity___" data-uid="PaperMarioBattleSystem.Sequence.PerformHeal(PaperMarioBattleSystem.HealingData,PaperMarioBattleSystem.BattleEntity[])">PerformHeal(HealingData, BattleEntity[])</h4>
@@ -1475,7 +1475,7 @@ true means to continue, and false means to stop. The base implementation returns
   <a id="PaperMarioBattleSystem_Sequence_PrintInvalidSequence_" data-uid="PaperMarioBattleSystem.Sequence.PrintInvalidSequence*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_PrintInvalidSequence" data-uid="PaperMarioBattleSystem.Sequence.PrintInvalidSequence">PrintInvalidSequence()</h4>
   <div class="markdown level1 summary"><p>Prints an error message when an invalid sequence has occurred.
-It includes information such as the action and the entity performing it, the sequence branch, and the sequence step</p>
+It includes information such as the action and the entity performing it, the sequence branch, and the sequence step.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1491,7 +1491,7 @@ It includes information such as the action and the entity performing it, the seq
   </span>
   <a id="PaperMarioBattleSystem_Sequence_SequenceEndBranch_" data-uid="PaperMarioBattleSystem.Sequence.SequenceEndBranch*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_SequenceEndBranch" data-uid="PaperMarioBattleSystem.Sequence.SequenceEndBranch">SequenceEndBranch()</h4>
-  <div class="markdown level1 summary"><p>The end of the action sequence</p>
+  <div class="markdown level1 summary"><p>The end of the action sequence.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1507,7 +1507,7 @@ It includes information such as the action and the entity performing it, the seq
   </span>
   <a id="PaperMarioBattleSystem_Sequence_SequenceFailedBranch_" data-uid="PaperMarioBattleSystem.Sequence.SequenceFailedBranch*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_SequenceFailedBranch" data-uid="PaperMarioBattleSystem.Sequence.SequenceFailedBranch">SequenceFailedBranch()</h4>
-  <div class="markdown level1 summary"><p>What occurs when the action command for this action is failed</p>
+  <div class="markdown level1 summary"><p>What occurs when the action command for this action is failed.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1524,8 +1524,8 @@ It includes information such as the action and the entity performing it, the seq
   <a id="PaperMarioBattleSystem_Sequence_SequenceInterruptionBranch_" data-uid="PaperMarioBattleSystem.Sequence.SequenceInterruptionBranch*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_SequenceInterruptionBranch" data-uid="PaperMarioBattleSystem.Sequence.SequenceInterruptionBranch">SequenceInterruptionBranch()</h4>
   <div class="markdown level1 summary"><p>What occurs when the action is interrupted.
-The most notable example of this is when Mario takes damage from jumping on a spiked enemy
-<p>This is overrideable through the InterruptionHandler, as actions can handle this in more than one way</p></p>
+The most notable example of this is when Mario takes damage from jumping on a spiked enemy.
+<p>This is overrideable through the InterruptionHandler, as actions can handle this in more than one way.</p></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1541,7 +1541,7 @@ The most notable example of this is when Mario takes damage from jumping on a sp
   </span>
   <a id="PaperMarioBattleSystem_Sequence_SequenceMainBranch_" data-uid="PaperMarioBattleSystem.Sequence.SequenceMainBranch*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_SequenceMainBranch" data-uid="PaperMarioBattleSystem.Sequence.SequenceMainBranch">SequenceMainBranch()</h4>
-  <div class="markdown level1 summary"><p>The main part of the action sequence. If the action has an Action Command, this branch will likely incorporate it</p>
+  <div class="markdown level1 summary"><p>The main part of the action sequence. If the action has an Action Command, this branch will likely incorporate it.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1557,7 +1557,7 @@ The most notable example of this is when Mario takes damage from jumping on a sp
   </span>
   <a id="PaperMarioBattleSystem_Sequence_SequenceMissBranch_" data-uid="PaperMarioBattleSystem.Sequence.SequenceMissBranch*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_SequenceMissBranch" data-uid="PaperMarioBattleSystem.Sequence.SequenceMissBranch">SequenceMissBranch()</h4>
-  <div class="markdown level1 summary"><p>What occurs when the action misses</p>
+  <div class="markdown level1 summary"><p>What occurs when the action misses.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1573,7 +1573,7 @@ The most notable example of this is when Mario takes damage from jumping on a sp
   </span>
   <a id="PaperMarioBattleSystem_Sequence_SequenceStartBranch_" data-uid="PaperMarioBattleSystem.Sequence.SequenceStartBranch*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_SequenceStartBranch" data-uid="PaperMarioBattleSystem.Sequence.SequenceStartBranch">SequenceStartBranch()</h4>
-  <div class="markdown level1 summary"><p>The start of the action sequence</p>
+  <div class="markdown level1 summary"><p>The start of the action sequence.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1607,7 +1607,7 @@ There can be any number of Stylish Moves, so Sequences must provide what they wa
   </span>
   <a id="PaperMarioBattleSystem_Sequence_SequenceSuccessBranch_" data-uid="PaperMarioBattleSystem.Sequence.SequenceSuccessBranch*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_SequenceSuccessBranch" data-uid="PaperMarioBattleSystem.Sequence.SequenceSuccessBranch">SequenceSuccessBranch()</h4>
-  <div class="markdown level1 summary"><p>What occurs when the action command for this action is performed successfully</p>
+  <div class="markdown level1 summary"><p>What occurs when the action command for this action is performed successfully.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1779,7 +1779,7 @@ If the Action Command is not enabled, it will call OnCommandFailed().</p>
   </span>
   <a id="PaperMarioBattleSystem_Sequence_StartInterruption_" data-uid="PaperMarioBattleSystem.Sequence.StartInterruption*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_StartInterruption_PaperMarioBattleSystem_Enumerations_Elements_" data-uid="PaperMarioBattleSystem.Sequence.StartInterruption(PaperMarioBattleSystem.Enumerations.Elements)">StartInterruption(Enumerations.Elements)</h4>
-  <div class="markdown level1 summary"><p>Starts the interruption, which occurs when a BattleEntity takes damage mid-sequence</p>
+  <div class="markdown level1 summary"><p>Starts the interruption, which occurs when a BattleEntity takes damage mid-sequence.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1799,7 +1799,7 @@ If the Action Command is not enabled, it will call OnCommandFailed().</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.Enumerations.Elements.html">Enumerations.Elements</a></td>
         <td><span class="parametername">element</span></td>
-        <td><p>The elemental damage being dealt</p>
+        <td><p>The elemental damage being dealt.</p>
 </td>
       </tr>
     </tbody>
@@ -1843,11 +1843,12 @@ If the Action Command is not enabled, it will call OnCommandFailed().</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/new/master/apiSpec/new?filename=PaperMarioBattleSystem_Sequence_Update.md&amp;value=---%0Auid%3A%20PaperMarioBattleSystem.Sequence.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L624">View Source</a>
+    <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Sequences/Sequence.cs/#L627">View Source</a>
   </span>
   <a id="PaperMarioBattleSystem_Sequence_Update_" data-uid="PaperMarioBattleSystem.Sequence.Update*"></a>
   <h4 id="PaperMarioBattleSystem_Sequence_Update" data-uid="PaperMarioBattleSystem.Sequence.Update">Update()</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Updates the Sequence.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">

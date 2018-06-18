@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/Users/Thomas/Desktop/Documentation/PMBS Documentation/PMBS Documentation",
+  "source_base_path": "D:/Documents/Game Development/PMBS Documentation/PMBS Documentation/PMBS Documentation",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -105,7 +105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ActionCommandGlobals.ArtAttackResponse.html",
-          "hash": "2NTL6cEk3w8tCTN+5oFDbg=="
+          "hash": "mXM57HfzOaoXk3/9MhKcCw=="
         }
       },
       "is_incremental": false,
@@ -117,7 +117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ActionCommandGlobals.BarRangeData.html",
-          "hash": "xwJjLFT0MZ8oeDmhLGKa8Q=="
+          "hash": "txt/TiRq22N1RpWPo/W6SQ=="
         }
       },
       "is_incremental": false,
@@ -129,7 +129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ActionCommandGlobals.BombSquadResponse.html",
-          "hash": "/kAnzSgI8uXvJIhuWqrmNw=="
+          "hash": "wsXaLsnYt+q/nUuejLYQ+A=="
         }
       },
       "is_incremental": false,
@@ -141,7 +141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ActionCommandGlobals.PowerLiftResponse.html",
-          "hash": "OdULmKauB0OrfU5y7RaNpw=="
+          "hash": "AFo/ZqrvXoG60BaCecIRng=="
         }
       },
       "is_incremental": false,
@@ -153,7 +153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ActionCommandGlobals.ShellShieldResponse.html",
-          "hash": "Ct7O/hdW2KL4qERohz7K6w=="
+          "hash": "xfpo5xRc0xpFfTwwoSS1xQ=="
         }
       },
       "is_incremental": false,
@@ -165,7 +165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ActionCommandGlobals.SweetTreatResponse.html",
-          "hash": "paQONffmB/IKPcx0CwMYqQ=="
+          "hash": "kkWM7PN8fo5QK4lajku0sg=="
         }
       },
       "is_incremental": false,
@@ -177,7 +177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ActionCommandGlobals.html",
-          "hash": "te62kPCSRbqGyutEcyNuvQ=="
+          "hash": "INjaWdIgTi9Qg+DPtf09mA=="
         }
       },
       "is_incremental": false,
@@ -213,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ActionSubMenu.html",
-          "hash": "frgz2hgBdT8iTjyS7RkSJg=="
+          "hash": "j+jRshtZ7jBWlcMRVEj9qg=="
         }
       },
       "is_incremental": false,
@@ -261,7 +261,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AirLiftAction.html",
-          "hash": "rAP9qYc4Jb/t5ZpFQgsVog=="
+          "hash": "VbUct3B1uKlpfHRgMeYSnA=="
         }
       },
       "is_incremental": false,
@@ -309,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AllergicStatus.html",
-          "hash": "RLslw4fMSd5oY4+gRdf8rQ=="
+          "hash": "VVF+tlZXR+TOoWtqUxB1cw=="
         }
       },
       "is_incremental": false,
@@ -345,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.DuplighostBattleAnimations.html",
-          "hash": "Hf8ir+Ea7MdIuldIPBh/yg=="
+          "hash": "NfLKjetz6d+qD3bZuFPTZw=="
         }
       },
       "is_incremental": false,
@@ -381,7 +381,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.GulpitBattleAnimations.html",
-          "hash": "y0WNWX0CAjLDsk1eEYytxA=="
+          "hash": "Kr/d7lJLHlBDEgDP+JMHBw=="
         }
       },
       "is_incremental": false,
@@ -393,7 +393,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.HuffNPuffBattleAnimations.html",
-          "hash": "08VCt3yOtQlwPEUh0zHeyQ=="
+          "hash": "G2y88KofAZGuhfsyfBTPaA=="
         }
       },
       "is_incremental": false,
@@ -405,7 +405,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.KoopatrolBattleAnimations.html",
-          "hash": "RgFfnf5img3nOn5p2OIq8g=="
+          "hash": "KNB7rZ59hrsPzyGT0vFEUg=="
         }
       },
       "is_incremental": false,
@@ -429,7 +429,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.MarioBattleAnimations.html",
-          "hash": "RjTQaY7VUk5JYY8CqZEbUg=="
+          "hash": "K4QLL8XupBx67cwIDcWu8g=="
         }
       },
       "is_incremental": false,
@@ -441,7 +441,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.ParagoombaBattleAnimations.html",
-          "hash": "eT5uif42MqcNDbMKmHY5tQ=="
+          "hash": "FLP8QU500r72A5XlR9Xrlw=="
         }
       },
       "is_incremental": false,
@@ -465,7 +465,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.ParatroopaBattleAnimations.html",
-          "hash": "yftEsom6u0Iefx0MEsjHKw=="
+          "hash": "iG4n2pOjBaEnnCZlZySzJQ=="
         }
       },
       "is_incremental": false,
@@ -477,7 +477,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.PlayerBattleAnimations.html",
-          "hash": "+6NIOhYcNMeZszr4hQsoaQ=="
+          "hash": "NZN/g590uSb8toFuFl797g=="
         }
       },
       "is_incremental": false,
@@ -489,7 +489,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.ShellBattleAnimations.html",
-          "hash": "13VIao3GZumsp71oFLxnTA=="
+          "hash": "LsktCp2No6fMWJTHWzA/sg=="
         }
       },
       "is_incremental": false,
@@ -501,7 +501,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.ShelledBattleAnimations.html",
-          "hash": "JmU5qAyV+o41YXZHMvQFhw=="
+          "hash": "4AzANoBLJe/z3A9nVhyt4A=="
         }
       },
       "is_incremental": false,
@@ -513,7 +513,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.StatusBattleAnimations.html",
-          "hash": "iJplhgpBAd7Qm4s51djl4w=="
+          "hash": "wDu4UXhhmVDY122SduNlwQ=="
         }
       },
       "is_incremental": false,
@@ -537,7 +537,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.WingedBattleAnimations.html",
-          "hash": "/YyZj3PdT7pWtsBi1RdO8Q=="
+          "hash": "i3BI8V5oqqL8qFfaAVILaA=="
         }
       },
       "is_incremental": false,
@@ -561,7 +561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.AnimationGlobals.html",
-          "hash": "XTKCiQWM3w7Qflt6n8F0+w=="
+          "hash": "M2wDLUzJTaMwGOE2l8dBmw=="
         }
       },
       "is_incremental": false,
@@ -573,7 +573,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ArtAttackAction.html",
-          "hash": "u6zBiItRBJxBMZsKxJrEdQ=="
+          "hash": "hjCaWMA+6EzEIoLAsw6+Jw=="
         }
       },
       "is_incremental": false,
@@ -813,7 +813,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BadgeGlobals.BadgeTypes.html",
-          "hash": "OCI5esjaG3A6kgM3SbRtjw=="
+          "hash": "gL6tLIUxQcU+ThRB/LdqPA=="
         }
       },
       "is_incremental": false,
@@ -825,7 +825,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BadgeGlobals.html",
-          "hash": "CO7yVEUqNnEdMRTAS4YhLA=="
+          "hash": "7EHtXbtPjHF8h+OA2YQCOw=="
         }
       },
       "is_incremental": false,
@@ -873,7 +873,19 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleEnemy.html",
-          "hash": "YIOhZD95V/MII3dig9Osdw=="
+          "hash": "FBbLhU6Hs8Oyn16n0Irohw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/PaperMarioBattleSystem.BattleEntity.ChangedBattleManager.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PaperMarioBattleSystem.BattleEntity.ChangedBattleManager.html",
+          "hash": "9F2gS0uf4uDysHy1EUkKeg=="
         }
       },
       "is_incremental": false,
@@ -885,7 +897,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleEntity.ConfusionDelegate.html",
-          "hash": "VWA6MGh4sFTlXDc+p7Xm3Q=="
+          "hash": "jiqjXAHjc0SJ/9mKNbSzmA=="
         }
       },
       "is_incremental": false,
@@ -969,7 +981,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleEntity.html",
-          "hash": "Es6s4EXWsu06j8wqyCje1A=="
+          "hash": "jdk/n9/MNGfAplgJJ2SMow=="
         }
       },
       "is_incremental": false,
@@ -981,7 +993,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleEntityProperties.CustomTarget.html",
-          "hash": "IE/q7d0kYsWYJBoVaQ4ZeQ=="
+          "hash": "OnzmXstO7UQ/9eQS9zrnNQ=="
         }
       },
       "is_incremental": false,
@@ -1017,7 +1029,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleEntityProperties.html",
-          "hash": "qWFZIk0GmAoEdHbQ3dE+4g=="
+          "hash": "ZeTzISc94DmH/ZnrHhAbyA=="
         }
       },
       "is_incremental": false,
@@ -1053,7 +1065,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleGlobals.ActionHolder.html",
-          "hash": "xAbKxkA84BeHho7Fj1ZSwA=="
+          "hash": "s3O6Aax/CWCgskiMcqziPg=="
         }
       },
       "is_incremental": false,
@@ -1125,7 +1137,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleGlobals.DefensiveActionHolder.html",
-          "hash": "UB92h80oKg0yiMZCF59WNA=="
+          "hash": "G/SkRZdkOipF8d1QNg3hMw=="
         }
       },
       "is_incremental": false,
@@ -1137,7 +1149,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleGlobals.PendingBattleEventHolder.html",
-          "hash": "+XpYQeS1Exy+9ghsQ5vvdg=="
+          "hash": "aPRO1kfSvJvHQY7UxcyFSw=="
         }
       },
       "is_incremental": false,
@@ -1149,7 +1161,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleGlobals.html",
-          "hash": "MR4esvG/oRBnlCx10haDSA=="
+          "hash": "OVr//BzVPGo6BGdmvZ7Rdg=="
         }
       },
       "is_incremental": false,
@@ -1257,7 +1269,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleManager.html",
-          "hash": "AxkT5BexsQrquQxF4n4Ntg=="
+          "hash": "P2dW+Vo5TNLxdGUL7qsJNQ=="
         }
       },
       "is_incremental": false,
@@ -1269,7 +1281,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleManagerUtils.html",
-          "hash": "3WtP+wcGAHGzXxMxiMAFdA=="
+          "hash": "Vx0Kxt6H3/C82uOkzAwhEQ=="
         }
       },
       "is_incremental": false,
@@ -1281,7 +1293,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattleMario.html",
-          "hash": "UMMZNaNSxt3me20mCibpag=="
+          "hash": "ht3mBUz0LJ+NqBvQXGCcHg=="
         }
       },
       "is_incremental": false,
@@ -1365,7 +1377,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattlePartner.html",
-          "hash": "84oMbsjTlqxaXV86dEoMPQ=="
+          "hash": "m4CPnjiBNWQA4tXrDQ5mKg=="
         }
       },
       "is_incremental": false,
@@ -1377,7 +1389,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BattlePlayer.html",
-          "hash": "NRsNR7fArGxj7IbiJlUphw=="
+          "hash": "/d0TOaoBG3xTPrF6dMtBDQ=="
         }
       },
       "is_incremental": false,
@@ -1401,7 +1413,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BlinkFasterAction.html",
-          "hash": "HgseAYiMLRaY+eU5YitldA=="
+          "hash": "QOnwi5Ffi5hehzcRwWsotg=="
         }
       },
       "is_incremental": false,
@@ -1449,7 +1461,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BlownStatus.html",
-          "hash": "075sfuGa0GlXkZ4ivxAT5w=="
+          "hash": "b5/KLFQNyjm5//3p1YUXyA=="
         }
       },
       "is_incremental": false,
@@ -1461,7 +1473,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BobberyBomb.html",
-          "hash": "zqP739dv9QmMCggPJ7ekZg=="
+          "hash": "/B2X0hZiyfR6ybT4nEgLWQ=="
         }
       },
       "is_incremental": false,
@@ -1473,7 +1485,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BodyThrowAction.html",
-          "hash": "Y+gKk0+A2I/apioQtxgiDQ=="
+          "hash": "19q0Uko4Su+pQ/jKgbpkPw=="
         }
       },
       "is_incremental": false,
@@ -1497,7 +1509,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BombSquadAction.html",
-          "hash": "VHfZq9S9E9J1BBsx3D8hWQ=="
+          "hash": "ckIIHaKCWXwxLIep07Y6+w=="
         }
       },
       "is_incremental": false,
@@ -1545,7 +1557,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BonkAction.html",
-          "hash": "EQTE/OK6lOSZaiFIwrIVog=="
+          "hash": "8ASCHwo3Yvo67okH7+zhrw=="
         }
       },
       "is_incremental": false,
@@ -1569,7 +1581,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Bow.html",
-          "hash": "99LggE1hGAL7I6GRxmS0SA=="
+          "hash": "KINS0O5NJ3sazOGlJwFlUQ=="
         }
       },
       "is_incremental": false,
@@ -1581,7 +1593,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BowSubMenu.html",
-          "hash": "BxWU1eEYZXNYIYdI2ZNhKQ=="
+          "hash": "EJN7mpEAxjP2YiAr0eaYdw=="
         }
       },
       "is_incremental": false,
@@ -1605,7 +1617,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.BurnStatus.html",
-          "hash": "wr69nuDeF2d9u7aNgGQlWg=="
+          "hash": "lODbkId2oCgu4gR5QzDb1w=="
         }
       },
       "is_incremental": false,
@@ -1629,7 +1641,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.CancelDipMenu.html",
-          "hash": "cOj9pXfYiKyiykOIH6zKRg=="
+          "hash": "v/+4juOetvtZpLuNbb/xSw=="
         }
       },
       "is_incremental": false,
@@ -1641,7 +1653,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ChangePartnerAction.html",
-          "hash": "WAAHMn3J+JFEN9Tc6zhgeg=="
+          "hash": "evCLzd9rpbYKx/tf5BfjPQ=="
         }
       },
       "is_incremental": false,
@@ -1665,7 +1677,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ChangePartnerSubMenu.html",
-          "hash": "o6t+OKftJZcegkvkqKFlkw=="
+          "hash": "SQYJpnlyKqnQjZ4k36ZVnw=="
         }
       },
       "is_incremental": false,
@@ -1713,7 +1725,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ChargedStatus.html",
-          "hash": "VcAf9hWV7RHLk9LG1fguqQ=="
+          "hash": "PF2aS1OMxMWvLWFQtplqfQ=="
         }
       },
       "is_incremental": false,
@@ -1773,7 +1785,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.CloudNineStatus.html",
-          "hash": "KkmX/1nNyIVoaKnVRB5F5g=="
+          "hash": "j8mcRxYmvVsdYsr60u1k5g=="
         }
       },
       "is_incremental": false,
@@ -1853,11 +1865,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "obj/api/PaperMarioBattleSystem.ConfigLoader.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PaperMarioBattleSystem.ConfigLoader.html",
+          "hash": "SAjDpgKo9TuyIyetK2QfZg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "obj/api/PaperMarioBattleSystem.ConfusedStatus.yml",
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ConfusedStatus.html",
-          "hash": "CslZaohSjsZi7rNmkFQLVg=="
+          "hash": "hBqGZVsJJE0TxK3gDGnN7Q=="
         }
       },
       "is_incremental": false,
@@ -1869,7 +1893,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ContactResultInfo.html",
-          "hash": "z+hDLld5mQrVTJthfQUA0A=="
+          "hash": "L3TPOkyDWd7zQehhytYwcw=="
         }
       },
       "is_incremental": false,
@@ -1881,7 +1905,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ContentGlobals.html",
-          "hash": "2xNzeCPkbSJEXsHaF7Vm3A=="
+          "hash": "uPYZFOEgibUyu9jg1lYLIw=="
         }
       },
       "is_incremental": false,
@@ -1893,7 +1917,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.CrashHandler.html",
-          "hash": "Qaq7FbjWvFa10Q/k+Z8FAA=="
+          "hash": "L1xMXtFmil3SdHo3WuI1Vg=="
         }
       },
       "is_incremental": false,
@@ -1941,7 +1965,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DDownJumpAction.html",
-          "hash": "/c2SZtXIvQGqTzwMQrcRlg=="
+          "hash": "ECwWtO3CScU/+ksXwNWVZw=="
         }
       },
       "is_incremental": false,
@@ -1965,7 +1989,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DDownPoundAction.html",
-          "hash": "peNEsgwTDoRyWdTmZZvDeg=="
+          "hash": "BdYwqkEc/O50xTCnhza7iA=="
         }
       },
       "is_incremental": false,
@@ -1989,7 +2013,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DEFDownStatus.html",
-          "hash": "ChT3hlG+jKn7C4pBQfGPQw=="
+          "hash": "QuCIhyaOO68mzRGWxxpfkg=="
         }
       },
       "is_incremental": false,
@@ -2001,7 +2025,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DEFUpStatus.html",
-          "hash": "ySpMp7Zo5tDIDk6tAgIHHw=="
+          "hash": "/kgQ5+4FvrxorGo0TYc95w=="
         }
       },
       "is_incremental": false,
@@ -2013,7 +2037,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DamageData.html",
-          "hash": "RL+7g4miX5XHcDsf1l1pIw=="
+          "hash": "TNQHTLAs4zJVorM20xLNkw=="
         }
       },
       "is_incremental": false,
@@ -2097,7 +2121,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Debug.DebugGlobals.html",
-          "hash": "gtujdn285H26De2VIxPJ1w=="
+          "hash": "AQwCK1dfbA5JKsMNbeCDJA=="
         }
       },
       "is_incremental": false,
@@ -2121,7 +2145,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Debug.html",
-          "hash": "uS4ONkPiEwJwdlFIJXZy+g=="
+          "hash": "A8aBno/BN1K7Bs5eINxgVw=="
         }
       },
       "is_incremental": false,
@@ -2145,7 +2169,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DefaultEnemyAI.html",
-          "hash": "8EW7JYimImrxk4Vguv+7OA=="
+          "hash": "yZ/qFBWnfb4ymD0SFaEGKw=="
         }
       },
       "is_incremental": false,
@@ -2157,7 +2181,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DefendAction.html",
-          "hash": "s5ovNPhePOzG7YpFSK/sjA=="
+          "hash": "1tI6o60tGXDAPWgBnpLIfQ=="
         }
       },
       "is_incremental": false,
@@ -2193,7 +2217,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DefensiveAction.html",
-          "hash": "v4Qegys8FdHEwSfrpCqkNg=="
+          "hash": "NnfJLNpwjlPryh0KdrPCbw=="
         }
       },
       "is_incremental": false,
@@ -2217,7 +2241,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DialogueBubble.html",
-          "hash": "jOaNvDH5NTX6T++jodRWDw=="
+          "hash": "d/LNOcWfZS0VAjCDXguRww=="
         }
       },
       "is_incremental": false,
@@ -2277,7 +2301,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DisguiseAction.html",
-          "hash": "jWITSpjm0/DrUBP+xzWa7w=="
+          "hash": "7RuScF2C3dacWcUV5fEGnQ=="
         }
       },
       "is_incremental": false,
@@ -2301,7 +2325,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DiveKickAction.html",
-          "hash": "z+1s5qWzHsbFhdjcobsEVQ=="
+          "hash": "9xT/9Muunq25S2WnXFLeXg=="
         }
       },
       "is_incremental": false,
@@ -2349,7 +2373,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DizzyStatus.html",
-          "hash": "097JEFmO/TRtOSAx7Sf40g=="
+          "hash": "jf2W8lx/UI1SOqgAkz/y8Q=="
         }
       },
       "is_incremental": false,
@@ -2361,7 +2385,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DodgyStatus.html",
-          "hash": "SirqqXemG8GJctVJybhh6A=="
+          "hash": "YCeD5HRE7fq1BlfCzpYERA=="
         }
       },
       "is_incremental": false,
@@ -2409,7 +2433,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Duplighost.html",
-          "hash": "AzsqioYgKJfbwkJeKdZ1AA=="
+          "hash": "+OyweyI6XuXv/tPbclGddw=="
         }
       },
       "is_incremental": false,
@@ -2421,7 +2445,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.DuplighostAI.html",
-          "hash": "iE1WBhSOSO2QpQXLBU+acQ=="
+          "hash": "bZGGoRIUcg//zn8INx5Rvg=="
         }
       },
       "is_incremental": false,
@@ -2433,7 +2457,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ElectrifiedStatus.html",
-          "hash": "Hik+o5O22XpqqXLP9sYU9Q=="
+          "hash": "9+/mfo54EAEYqnuxtvowkQ=="
         }
       },
       "is_incremental": false,
@@ -2445,7 +2469,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ElectroDashAction.html",
-          "hash": "5e3MB85n3/Oo2xvdHQ9Mew=="
+          "hash": "Ema9Fx9BjGiVMXWl+2rbIw=="
         }
       },
       "is_incremental": false,
@@ -2469,7 +2493,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ElementDamageHolder.html",
-          "hash": "MVxtnNU985fB0AQ4V9rUfQ=="
+          "hash": "CfsW+xrcfioQCj/BXiTiuA=="
         }
       },
       "is_incremental": false,
@@ -2481,7 +2505,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ElementGlobals.ElementComparer.html",
-          "hash": "DNG9O/+J7adxEgh8SuOBhQ=="
+          "hash": "sHLpZ3EKMFr2OiV/rcl+xQ=="
         }
       },
       "is_incremental": false,
@@ -2493,7 +2517,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ElementGlobals.html",
-          "hash": "hFAelQW+0Ut0SItzkjNJBw=="
+          "hash": "v740Za3mJBvNDIMx3BGHRA=="
         }
       },
       "is_incremental": false,
@@ -2505,7 +2529,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ElementInteractionResult.html",
-          "hash": "UIcov7fbqvjz6Almcx49Aw=="
+          "hash": "J+s8+9/1jmr+dAA7gxup4Q=="
         }
       },
       "is_incremental": false,
@@ -2517,7 +2541,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ElementOverrideHolder.html",
-          "hash": "N1KIFgnCsXy872QmtFVurQ=="
+          "hash": "vfg3TLOzcoxByGVLhWI0lQ=="
         }
       },
       "is_incremental": false,
@@ -2529,7 +2553,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.EnemyAIBehavior.html",
-          "hash": "EWdkk6I0baJMxIk/TKtRGg=="
+          "hash": "hJDW7giU1FwaaJds/WFOcg=="
         }
       },
       "is_incremental": false,
@@ -2541,7 +2565,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.EntityGlobals.html",
-          "hash": "l87q4QbVHgtX3PK10IxTlg=="
+          "hash": "hNZwM3AGsyzd269xwGshNw=="
         }
       },
       "is_incremental": false,
@@ -2565,7 +2589,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Enumerations.AdditionalProperty.html",
-          "hash": "VDe0NIgBZwMgNIMDNJSGJg=="
+          "hash": "sw9Od314Gj1q8kvtnajhtQ=="
         }
       },
       "is_incremental": false,
@@ -2589,7 +2613,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Enumerations.ContactProperties.html",
-          "hash": "deJxGB+9QQDBx9/HrJNFBA=="
+          "hash": "PMYFvSexdZ2yACssxSWBkg=="
         }
       },
       "is_incremental": false,
@@ -2601,7 +2625,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Enumerations.ContactResult.html",
-          "hash": "4wvNYEBsAUO/lUNUWzS9sA=="
+          "hash": "KC7jB+usXPnzkJBEg+Yd4w=="
         }
       },
       "is_incremental": false,
@@ -2613,7 +2637,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Enumerations.ContactTypes.html",
-          "hash": "qrjXzc8d+LGLRhXN5Pl/CQ=="
+          "hash": "rh1F1GI6eOI3ng+AFAsQtg=="
         }
       },
       "is_incremental": false,
@@ -2661,7 +2685,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Enumerations.Elements.html",
-          "hash": "RjjxsAaj6Lbkd13s73dOOw=="
+          "hash": "vzNKfWsG1m3XhtyWbCxzrg=="
         }
       },
       "is_incremental": false,
@@ -2697,7 +2721,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Enumerations.HealthStates.html",
-          "hash": "bHSjrwnlyIzOyjchPW41Ig=="
+          "hash": "CXYdffOkD9i3JElt8gq2Iw=="
         }
       },
       "is_incremental": false,
@@ -2709,7 +2733,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Enumerations.HeightStates.html",
-          "hash": "KvxmNFxd8z+Ee3j41DuVHw=="
+          "hash": "3tMI0hwG6dx/31SHQBYH4A=="
         }
       },
       "is_incremental": false,
@@ -2721,7 +2745,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Enumerations.MoveAffectionTypes.html",
-          "hash": "JSPRDBKbPsPZcU+lX4mJdA=="
+          "hash": "BLIQ3EiEkm5E5rVa/Siunw=="
         }
       },
       "is_incremental": false,
@@ -2769,7 +2793,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Enumerations.PhysicalAttributes.html",
-          "hash": "kGmNx6oP4Cj6skWRw24HBQ=="
+          "hash": "iT0n0AuYcU7y5esxxs1uIQ=="
         }
       },
       "is_incremental": false,
@@ -2793,7 +2817,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Enumerations.StatusSuppressionTypes.html",
-          "hash": "Ws+avGiQr/lsawxexeI32Q=="
+          "hash": "w5y2Dur1eWPCl2kSfNjRDg=="
         }
       },
       "is_incremental": false,
@@ -2805,7 +2829,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Enumerations.StatusTypes.html",
-          "hash": "u5d1OhqOXZNNjMEuybZwPA=="
+          "hash": "IB9DvDQPmXZuN96m71cNkw=="
         }
       },
       "is_incremental": false,
@@ -2829,7 +2853,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.EquipmentGlobals.BootLevels.html",
-          "hash": "O/dfWaohw8Gake4oymJZJQ=="
+          "hash": "FVL3Tghmgy5Lp2ecROm15Q=="
         }
       },
       "is_incremental": false,
@@ -2841,7 +2865,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.EquipmentGlobals.HammerLevels.html",
-          "hash": "5O5QvDGhXYHqCV7TsRaZ5g=="
+          "hash": "VC4PbfKOEg+q07q15WdbBw=="
         }
       },
       "is_incremental": false,
@@ -2853,7 +2877,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.EquipmentGlobals.html",
-          "hash": "0u0L4ErZqjLHX570L4oETw=="
+          "hash": "bx7hM5ZO8fjbrkbF5lolbg=="
         }
       },
       "is_incremental": false,
@@ -2865,7 +2889,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Extensions.Extensions.html",
-          "hash": "duH7rSPOdscKPcQUK1tErg=="
+          "hash": "KXnm11j66+LBqQmVOok29Q=="
         }
       },
       "is_incremental": false,
@@ -2913,7 +2937,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.FPRegenStatus.html",
-          "hash": "MNp33o/O3F5XbYAxwCeQXA=="
+          "hash": "yoLxH5KIONI+8NJMybIiBw=="
         }
       },
       "is_incremental": false,
@@ -2925,7 +2949,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.FPSCounter.html",
-          "hash": "W4gDWt+vljYKmtfrMijYXQ=="
+          "hash": "xBL21WYi6rO+1byVYJv7zg=="
         }
       },
       "is_incremental": false,
@@ -2937,7 +2961,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.FastStatus.html",
-          "hash": "ecMCinym0dNb4W8YRIFBgA=="
+          "hash": "5qijNMa3S6v0r9v9uG/1lQ=="
         }
       },
       "is_incremental": false,
@@ -3093,7 +3117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.FocusAction.html",
-          "hash": "vyH2WeL97zqIdvNjhsFwfw=="
+          "hash": "UTbJvWz/pq/dspWygcM6Lg=="
         }
       },
       "is_incremental": false,
@@ -3141,7 +3165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.FrightStatus.html",
-          "hash": "98r4U6rxB8isfouwCaZvSA=="
+          "hash": "YXbp/joZ6Xb5P9opRY/W1Q=="
         }
       },
       "is_incremental": false,
@@ -3153,7 +3177,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.FrozenStatus.html",
-          "hash": "FEpyqDD0KiA9garanE/WUg=="
+          "hash": "fxSCR0N2ijlxu+9GckWJBQ=="
         }
       },
       "is_incremental": false,
@@ -3177,7 +3201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Goomba.html",
-          "hash": "Zz/hycCsHtXwqHEcQHuHOQ=="
+          "hash": "fLcBiiER+u08irVKJ4DMGw=="
         }
       },
       "is_incremental": false,
@@ -3189,7 +3213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.GoombaAI.html",
-          "hash": "MtFxxcnOIb1LBbMNxBqZOw=="
+          "hash": "lz6GfSJEZAq1U0LpZHSn/w=="
         }
       },
       "is_incremental": false,
@@ -3201,7 +3225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Goombario.html",
-          "hash": "JgBbh0xGqfRjnHWas/MlVg=="
+          "hash": "xLdmbcLSy4P1HMuiX6bxuw=="
         }
       },
       "is_incremental": false,
@@ -3213,7 +3237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.GoombarioSubMenu.html",
-          "hash": "PldfKur8cH1RuRfEqK4kWw=="
+          "hash": "d3s7QokTnOAHMVgP49Sw4g=="
         }
       },
       "is_incremental": false,
@@ -3225,7 +3249,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Goompa.html",
-          "hash": "ib3Glju/4URSsXgqtf69XA=="
+          "hash": "D2TFb7rPFVO2YLyG1wpwsg=="
         }
       },
       "is_incremental": false,
@@ -3285,7 +3309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.GulpAction.html",
-          "hash": "27n0FB+AU2fNDHi2MsLbcA=="
+          "hash": "bFjABuLh3kax4XXN1juXWg=="
         }
       },
       "is_incremental": false,
@@ -3309,7 +3333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.GulpCommand.html",
-          "hash": "iWGY78BxCNxH9LyFh5jOWA=="
+          "hash": "MOWMOOztlveUKoZLJVqb8A=="
         }
       },
       "is_incremental": false,
@@ -3333,7 +3357,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Gulpit.html",
-          "hash": "aOPFfbGT8J11N8GC47UR2w=="
+          "hash": "w4ilJOIMOdRtHS7O4vUFgA=="
         }
       },
       "is_incremental": false,
@@ -3345,7 +3369,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.GulpitAI.html",
-          "hash": "1Rw5cip4JJN0/+mMzI5zcQ=="
+          "hash": "URif4Nip9Rp2UuQez3VSkg=="
         }
       },
       "is_incremental": false,
@@ -3357,7 +3381,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.GulpitsRock.html",
-          "hash": "vpHkxHi0ro6tKTf7Pvycxw=="
+          "hash": "JL17dogusIkk96JaGzUT5Q=="
         }
       },
       "is_incremental": false,
@@ -3429,7 +3453,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.HPRegenStatus.html",
-          "hash": "Eo74X7LaiUgb0/3Rx3grtg=="
+          "hash": "6F3kTeC5RZcuZa6fv/KLqQ=="
         }
       },
       "is_incremental": false,
@@ -3441,7 +3465,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.HammerAction.html",
-          "hash": "CXM2nNmx4wwI/MHmvxSjiQ=="
+          "hash": "aMF9LfVmxS2zyRQK1f19rg=="
         }
       },
       "is_incremental": false,
@@ -3489,7 +3513,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.HammerSubMenu.html",
-          "hash": "Rtmz1E96KxM9/rTsO/zr1g=="
+          "hash": "uzfBNoGdsQ6ERNorR0UpwA=="
         }
       },
       "is_incremental": false,
@@ -3513,7 +3537,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.HeadRattleAction.html",
-          "hash": "8otj1zhlhoR4LKwU/LdWCw=="
+          "hash": "I5dSBwjU6YyRrwCAiu4d3w=="
         }
       },
       "is_incremental": false,
@@ -3537,7 +3561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.HeadbuttAction.html",
-          "hash": "a5aWOB4sx0qk6lsniYEwqg=="
+          "hash": "jP9VZhlxyZ2RYV6lR3ta2w=="
         }
       },
       "is_incremental": false,
@@ -3585,7 +3609,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.HealingData.html",
-          "hash": "jdgTtjYuHittq2wlPfjqrQ=="
+          "hash": "bdJDkmsoSlGkLnC8jE5f7Q=="
         }
       },
       "is_incremental": false,
@@ -3609,7 +3633,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.HoldFastStatus.html",
-          "hash": "Bc705oqLzrpwqDMA+h3I3A=="
+          "hash": "qrzGfGYOE+1oKP/pCLBXRA=="
         }
       },
       "is_incremental": false,
@@ -3633,7 +3657,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.HugeStatus.html",
-          "hash": "GBl3F6+B6Uq6QfliAAUwwQ=="
+          "hash": "0s/8HnHWC5SQyTOyrYuxIw=="
         }
       },
       "is_incremental": false,
@@ -3693,7 +3717,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ICleanup.html",
-          "hash": "fEGomR1mU1CCisFmvh/iAw=="
+          "hash": "PjayjLDcJNtoAzL+f/DkGg=="
         }
       },
       "is_incremental": false,
@@ -4053,7 +4077,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.IceSmashAction.html",
-          "hash": "FRjb2r6Mf9Ue72nRh3nWVQ=="
+          "hash": "Y3l98byL3MqLo3Ws+LW3pA=="
         }
       },
       "is_incremental": false,
@@ -4077,7 +4101,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.InjuredStatus.html",
-          "hash": "obT87wzHUZuhFrmfAleqMQ=="
+          "hash": "QSczVYRSEift0YvXfonO0w=="
         }
       },
       "is_incremental": false,
@@ -4101,7 +4125,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.InputMenu.html",
-          "hash": "BggTh5Tpfv0ffW2uDER/jg=="
+          "hash": "REVw+R1omAiACsQAGxUTZQ=="
         }
       },
       "is_incremental": false,
@@ -4125,7 +4149,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.InteractionHolder.html",
-          "hash": "FbkLjDuj9B4OEtsT8UhxqA=="
+          "hash": "AUMe/2M/uOrdiYzj/hHI8g=="
         }
       },
       "is_incremental": false,
@@ -4137,7 +4161,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.InteractionParamHolder.html",
-          "hash": "y2rcSIHJXhvPffxZ+jAAOQ=="
+          "hash": "qZjZEme+u+K8DkxhxAlGYA=="
         }
       },
       "is_incremental": false,
@@ -4149,7 +4173,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.InteractionResult.html",
-          "hash": "7PtuK4hWKQZP7sWOb/WYHQ=="
+          "hash": "FGvWTVUufwx/khwPAjrSYA=="
         }
       },
       "is_incremental": false,
@@ -4161,7 +4185,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.AttackerCheckContactResultStep.html",
-          "hash": "Y6vrwPmhKw2VUDlknqstEg=="
+          "hash": "NdZFy1cEfnLreIMLIPeMvA=="
         }
       },
       "is_incremental": false,
@@ -4173,7 +4197,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.AttackerCheckInvincibleStep.html",
-          "hash": "y6qz1dypbL526WAriU1yBw=="
+          "hash": "597aHw8l7ee0THOV6dKipQ=="
         }
       },
       "is_incremental": false,
@@ -4185,7 +4209,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.AttackerFilteredStatusStep.html",
-          "hash": "ft+rF/SW4Blt13kmwdBGCg=="
+          "hash": "Qlpq19Bv5sD+JrjJVHAErw=="
         }
       },
       "is_incremental": false,
@@ -4197,7 +4221,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.AttackerPaybackDamageStep.html",
-          "hash": "Slr3DTs7D2+KmYSzBEEEGw=="
+          "hash": "ZikQ/35EDurBmwWFutG8zg=="
         }
       },
       "is_incremental": false,
@@ -4209,7 +4233,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.ClampAttackerDamageStep.html",
-          "hash": "qM3I3KykKom/TwRb8FCrIw=="
+          "hash": "JEyHh+aYniqCyj4mzICeeQ=="
         }
       },
       "is_incremental": false,
@@ -4221,7 +4245,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.ClampVictimDamageStep.html",
-          "hash": "ddy4B1uH0feGVtkmby1ZPg=="
+          "hash": "D15A77VP0EQEJycrdro+lw=="
         }
       },
       "is_incremental": false,
@@ -4233,7 +4257,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.ContactResultStep.html",
-          "hash": "X5w8PvirPoX2o/3BuoSuVA=="
+          "hash": "jJVrlYBuSP07dZFnXVYvQA=="
         }
       },
       "is_incremental": false,
@@ -4245,7 +4269,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.DamageCalcStep.html",
-          "hash": "tLAQ4uKm6qItGZWVChdZ5w=="
+          "hash": "qUSHMW4qOxaNvAEpkfjcWQ=="
         }
       },
       "is_incremental": false,
@@ -4257,7 +4281,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.ElementOverrideStep.html",
-          "hash": "Q3bvvU46XRt+Tbbnwfpvyw=="
+          "hash": "BQ9uIA4mdcqECv68VwUNFQ=="
         }
       },
       "is_incremental": false,
@@ -4269,7 +4293,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.InitStep.html",
-          "hash": "lyOb99ZAHmysxli/3PbejA=="
+          "hash": "u+8OZGD+TvWmc/ZS1H2Ufw=="
         }
       },
       "is_incremental": false,
@@ -4281,7 +4305,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.VictimAttackerStrengthStep.html",
-          "hash": "QFlbCaESEXwgZlHQsOVdsw=="
+          "hash": "Cdv93Nm8EMXokyWzqL8qYg=="
         }
       },
       "is_incremental": false,
@@ -4293,7 +4317,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.VictimCheckContactResultStep.html",
-          "hash": "uYqx54J9MD78/26eTZqhMA=="
+          "hash": "2kD/md3zgg28R3YyKxUUAQ=="
         }
       },
       "is_incremental": false,
@@ -4305,7 +4329,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.VictimCheckHitStep.html",
-          "hash": "7vhidBGnPIVgfvW/0jxvsA=="
+          "hash": "0u4US5MyCNB5uyeGCnsJeg=="
         }
       },
       "is_incremental": false,
@@ -4317,7 +4341,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.VictimCheckInvincibleStep.html",
-          "hash": "1hjQ29qpMuid16IPiSvaBQ=="
+          "hash": "aESQQIVxXEGyZ0EA4LVC9g=="
         }
       },
       "is_incremental": false,
@@ -4329,7 +4353,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.VictimDamageReductionStep.html",
-          "hash": "U9L55HSifMnU/1DoKoP0SA=="
+          "hash": "zP33VoMzYnQxsumk9sGhmQ=="
         }
       },
       "is_incremental": false,
@@ -4341,7 +4365,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.VictimDefensiveStep.html",
-          "hash": "+xkGN+NS47P3KtOYYE07Kw=="
+          "hash": "aVsVl+Q/bR55uXm4Zm2pjQ=="
         }
       },
       "is_incremental": false,
@@ -4353,7 +4377,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.VictimDoublePainStep.html",
-          "hash": "gTAsBMSBCCfAxm7XJ1p3Og=="
+          "hash": "ZjZf6Wmoa2I459AI+lIynA=="
         }
       },
       "is_incremental": false,
@@ -4365,7 +4389,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.VictimElementDamageStep.html",
-          "hash": "E18AkRMUDVTI+LGl0UC4Yg=="
+          "hash": "qGbQr7VLtO7IrJ+owyMhbQ=="
         }
       },
       "is_incremental": false,
@@ -4377,7 +4401,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.VictimFilteredStatusStep.html",
-          "hash": "Cb17qKLpezvdNMRZA9i9Xw=="
+          "hash": "DXkJPu1Vx1X6W+1seTvlSA=="
         }
       },
       "is_incremental": false,
@@ -4389,7 +4413,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.VictimLastStandStep.html",
-          "hash": "oRoxwg+8WwAOlIx+5H/q8w=="
+          "hash": "abbBQSBHG4fMCMyNhPb2vA=="
         }
       },
       "is_incremental": false,
@@ -4401,7 +4425,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.VictimMissInteraction.html",
-          "hash": "Z9dEZEowLKtqitRoo8URVA=="
+          "hash": "5vXUX3Rj/cDd1CIKeN5fYg=="
         }
       },
       "is_incremental": false,
@@ -4413,7 +4437,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Interactions.html",
-          "hash": "bmAt7eRfFfImpjcuHU62hA=="
+          "hash": "UOEOosCJrgckR7VA14+gZA=="
         }
       },
       "is_incremental": false,
@@ -4425,7 +4449,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Inventory.PartnerInventory.html",
-          "hash": "bkvjYH1O+CEacj4tPsk/rw=="
+          "hash": "ndEGWc44sdZKj1sJFHZDIw=="
         }
       },
       "is_incremental": false,
@@ -4437,7 +4461,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Inventory.html",
-          "hash": "ckrHUIivVd0OYS4oUbYu1A=="
+          "hash": "XRkEOeskC+PieT9lFZTPuw=="
         }
       },
       "is_incremental": false,
@@ -4449,7 +4473,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.InvisibleStatus.html",
-          "hash": "shgGLANK0YGxX8NGMVXmpA=="
+          "hash": "aYMxER2w2RZdr2qoMdD1TA=="
         }
       },
       "is_incremental": false,
@@ -4509,7 +4533,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ItemAction.html",
-          "hash": "O4FE4R9S4Eod2CRhwF2yvQ=="
+          "hash": "ZNCyn7yIa7ZO5v/RBqAN/g=="
         }
       },
       "is_incremental": false,
@@ -4533,7 +4557,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ItemSequence.html",
-          "hash": "drI4NmbGNUpnWiv/inDwpw=="
+          "hash": "2xzSE3su0MQ1FO0XiCuntA=="
         }
       },
       "is_incremental": false,
@@ -4557,7 +4581,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.JumpAction.html",
-          "hash": "t7OuQ48yPNpwZyVW+idYqw=="
+          "hash": "oT0SRm1Rju2NtK/f6DQ2fg=="
         }
       },
       "is_incremental": false,
@@ -4605,7 +4629,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.JumpSubMenu.html",
-          "hash": "TRlRLTNqN79X3MJG9jnzNA=="
+          "hash": "1PpFsfF1fo4SqOaL2xl1/Q=="
         }
       },
       "is_incremental": false,
@@ -4629,7 +4653,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.KOStatus.html",
-          "hash": "xPSB35t+PJusXd6u61jXFQ=="
+          "hash": "hRQd5fE6htORfEoWfFp2GQ=="
         }
       },
       "is_incremental": false,
@@ -4641,7 +4665,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.KissyKissyAction.html",
-          "hash": "Dud8feWNvQsWo7lbBqeO4g=="
+          "hash": "stZfVoB5PWiJX6cfU64mEQ=="
         }
       },
       "is_incremental": false,
@@ -4653,7 +4677,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.KissyKissySequence.html",
-          "hash": "LVK13Oel7OqQL96yud30QQ=="
+          "hash": "Aj61RjQDdpbjuGnIAAHt0A=="
         }
       },
       "is_incremental": false,
@@ -4677,7 +4701,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.KoopaTroopa.html",
-          "hash": "mJlu8KDwQ3by7UHvRc+ArQ=="
+          "hash": "7yXkWAQHm1AH7X+Eyq0/xA=="
         }
       },
       "is_incremental": false,
@@ -4689,7 +4713,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.KoopaTroopaAI.html",
-          "hash": "dFX7qKKLTFQ5ufoJ13sZPg=="
+          "hash": "yKi7+z/xdQgnOYdFEaO/jw=="
         }
       },
       "is_incremental": false,
@@ -4701,7 +4725,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Koopatrol.html",
-          "hash": "rY/0SZMetDIby4213RjOCQ=="
+          "hash": "XQWv9CyosKPbmsF7dML8ag=="
         }
       },
       "is_incremental": false,
@@ -4713,7 +4737,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.KoopatrolAI.html",
-          "hash": "C7nN4qmv4pNQZ51Lyi9Hdg=="
+          "hash": "Fxs2K0giqzX7S3jsbM54Pg=="
         }
       },
       "is_incremental": false,
@@ -4737,7 +4761,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Kooper.html",
-          "hash": "Xufvf9CO5qPa3MnshJtH4w=="
+          "hash": "ByYRWC0OBCn+7AUUC5j3uw=="
         }
       },
       "is_incremental": false,
@@ -4749,7 +4773,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.KooperSubMenu.html",
-          "hash": "bEgFMcrwKgOyzPJMljofhA=="
+          "hash": "MOLMEG1uymUm0bwuuOzKwg=="
         }
       },
       "is_incremental": false,
@@ -4785,7 +4809,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.LickAction.html",
-          "hash": "thn6yhJTN/SsrbyUfNL2FA=="
+          "hash": "ZNzcs/FfSCqxw5lPIxAhAw=="
         }
       },
       "is_incremental": false,
@@ -4821,7 +4845,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.LiftedStatus.html",
-          "hash": "u0P636Vrd1AYzKuS+LC3pA=="
+          "hash": "7HQzM0vwWH+O5ANCV4cSgg=="
         }
       },
       "is_incremental": false,
@@ -4845,7 +4869,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Line.html",
-          "hash": "vMfGrc5I74y9Sag+lvxtNA=="
+          "hash": "PeZjUCszH/ZsFoCHXKVXvA=="
         }
       },
       "is_incremental": false,
@@ -4893,7 +4917,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.LuckyStartBadge.html",
-          "hash": "akLY4pwkzCWCkD8VYpy7Uw=="
+          "hash": "VOATjWDfwzSelqd7KPpKmA=="
         }
       },
       "is_incremental": false,
@@ -4905,7 +4929,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.LullabyAction.html",
-          "hash": "BRlW265yFnuBe8wMKbmYbA=="
+          "hash": "JatQnghOHzBih9BNo4g2nQ=="
         }
       },
       "is_incremental": false,
@@ -4953,7 +4977,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Main.html",
-          "hash": "hj+cJdAYGPEBLY1tUQmy7w=="
+          "hash": "zOTxHFUM9FzjXCgA1xP6uw=="
         }
       },
       "is_incremental": false,
@@ -4965,7 +4989,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MarioBattleMenu.html",
-          "hash": "f55WlKr+KDUqsV/3sgTqRg=="
+          "hash": "f4UM3TPUqnMrHCdKTsK/fw=="
         }
       },
       "is_incremental": false,
@@ -4977,7 +5001,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MarioStats.html",
-          "hash": "S3W1NkXjsd08LmEeqgKg5A=="
+          "hash": "q33GJA53arpDg15CrPIW7g=="
         }
       },
       "is_incremental": false,
@@ -5049,7 +5073,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MegaSmashAction.html",
-          "hash": "+1YEC1JeH+vUIxcq6lo1xA=="
+          "hash": "/CrDGOHmzw4eHvmul66ajw=="
         }
       },
       "is_incremental": false,
@@ -5085,7 +5109,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MenuAction.html",
-          "hash": "PoeglJztbSGdnsFKp/bUUQ=="
+          "hash": "8XMD9v+LIXkshbu6cEJdCw=="
         }
       },
       "is_incremental": false,
@@ -5097,7 +5121,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MessageAction.html",
-          "hash": "mREbuPT3JHtZuJ+nTUXChQ=="
+          "hash": "YHZPjvgS8sbsowZK5biKRg=="
         }
       },
       "is_incremental": false,
@@ -5121,7 +5145,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MessageEventStatus.html",
-          "hash": "doqjDZ2rasnUpO6bzP9gIw=="
+          "hash": "eYelmUd2byKjFVqJ6sX2Ow=="
         }
       },
       "is_incremental": false,
@@ -5145,7 +5169,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MiniEggAction.html",
-          "hash": "44PefsBPmlUWu+qiFEkxnA=="
+          "hash": "yfAfEctgPMlIIft4222FBw=="
         }
       },
       "is_incremental": false,
@@ -5169,7 +5193,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MiniYux.html",
-          "hash": "XuXgEU+YzJPVRLNEC0aLhA=="
+          "hash": "hakBLvWuXJxtZFsTjp1gNQ=="
         }
       },
       "is_incremental": false,
@@ -5181,7 +5205,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MoveAction.html",
-          "hash": "wpfzMWGiSDMttiAy9ZVWIA=="
+          "hash": "cLrVaI01AUfWXEuyO2OeLA=="
         }
       },
       "is_incremental": false,
@@ -5193,7 +5217,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MoveActionData.html",
-          "hash": "iCYHXggDIEfPlYDGI3RCOg=="
+          "hash": "CM9apnqBTclhZUuSyUbWEA=="
         }
       },
       "is_incremental": false,
@@ -5289,7 +5313,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MultibounceAction.html",
-          "hash": "u87K6bEuGWghzZefnGTHoA=="
+          "hash": "B6/ujXuq4Fd/aNXkRYIQ4Q=="
         }
       },
       "is_incremental": false,
@@ -5349,7 +5373,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.MysteryAction.html",
-          "hash": "UWC0YN1qQckdWngmpGZQxg=="
+          "hash": "P1zp+/il8vuiOOsJMrogNQ=="
         }
       },
       "is_incremental": false,
@@ -5385,7 +5409,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.NoAction.html",
-          "hash": "A0kQbPwhxKO4WNkyQr0inw=="
+          "hash": "O6DUOy/sThfFB9A7gQ6Dyw=="
         }
       },
       "is_incremental": false,
@@ -5409,7 +5433,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.NoSkillsStatus.html",
-          "hash": "HsXglpuIoIxepwZkhkN6AQ=="
+          "hash": "Avnun0SBAFTxrdqB3/wLSw=="
         }
       },
       "is_incremental": false,
@@ -5445,7 +5469,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.OuttaSightAction.html",
-          "hash": "KhygQgtNiyABzk5FtaigDg=="
+          "hash": "FwZNjVyCeYeeip7HclFWpg=="
         }
       },
       "is_incremental": false,
@@ -5481,7 +5505,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.POWDownStatus.html",
-          "hash": "opqT38PZCJTQFj2/F/hNAQ=="
+          "hash": "gsAHmhw5FLwQcOuS19MMCQ=="
         }
       },
       "is_incremental": false,
@@ -5493,7 +5517,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.POWUpStatus.html",
-          "hash": "QZG/0OPT4sx05LiDJ3Nv6Q=="
+          "hash": "g+A7fImb0pp69C6CD8YoKw=="
         }
       },
       "is_incremental": false,
@@ -5505,7 +5529,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Paragoomba.html",
-          "hash": "VD9f+1sPBXEV3NwaoCZZKw=="
+          "hash": "DsWImp4RoVpvPpcOb52eDQ=="
         }
       },
       "is_incremental": false,
@@ -5517,7 +5541,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ParagoombaAI.html",
-          "hash": "wtb0hoc7m1Jta4f0cueXsw=="
+          "hash": "4tIYTVqKwPc9+Uy+h6J6lg=="
         }
       },
       "is_incremental": false,
@@ -5541,7 +5565,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ParalyzedStatus.html",
-          "hash": "890ztR/iSVFtZLbs2GVPYA=="
+          "hash": "cJ9RsdURrPo7W7xcwIRltA=="
         }
       },
       "is_incremental": false,
@@ -5553,7 +5577,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Paratroopa.html",
-          "hash": "eiGA2aq1hVE4AohyRIvFfw=="
+          "hash": "Lbwp/8txjuXQxMf0JQ3fOg=="
         }
       },
       "is_incremental": false,
@@ -5589,7 +5613,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PartnerBattleMenu.html",
-          "hash": "2rXQtuPTHd/d8WqQTBvpTg=="
+          "hash": "FFaLcoqa/xjc9T6aa/gwJg=="
         }
       },
       "is_incremental": false,
@@ -5601,7 +5625,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PartnerGlobals.PartnerRanks.html",
-          "hash": "3EbqKnrxHjr2arQlta3OFA=="
+          "hash": "H4dpjN0cpBbZ/ep+YxbrUg=="
         }
       },
       "is_incremental": false,
@@ -5613,7 +5637,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PartnerGlobals.YoshiColors.html",
-          "hash": "8Y0ORZb1h/0EfALaJIDM7w=="
+          "hash": "F5jCk0lApxScOdirttqr/Q=="
         }
       },
       "is_incremental": false,
@@ -5625,7 +5649,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PartnerGlobals.html",
-          "hash": "kbT13qxflNEmSEEAGVyMRw=="
+          "hash": "FIjzJOM+1aAnVRnr8tZciw=="
         }
       },
       "is_incremental": false,
@@ -5637,7 +5661,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PartnerStats.html",
-          "hash": "vn0qPbcsLACxqU01EzM7JA=="
+          "hash": "GbOuuHKiQOXydL0uH5r/RA=="
         }
       },
       "is_incremental": false,
@@ -5649,7 +5673,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PaybackStatus.html",
-          "hash": "7WcjySlrWFLl7v+woxb5uA=="
+          "hash": "MQ8Lx4ZDEj9WPmIiLDo8Jg=="
         }
       },
       "is_incremental": false,
@@ -5661,7 +5685,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PeekabooBadge.html",
-          "hash": "35ge7BsZcB0kYdAI4u585g=="
+          "hash": "bOjOH+Cgh9ykUceQqQ5lnQ=="
         }
       },
       "is_incremental": false,
@@ -5673,7 +5697,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PhysAttributeGlobals.PhysAttributeComparer.html",
-          "hash": "M1hLrSeaLTq8I2uSjsPeLw=="
+          "hash": "k7jdfJbw6Q8gCFrYOzPnSQ=="
         }
       },
       "is_incremental": false,
@@ -5685,7 +5709,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PhysAttributeGlobals.html",
-          "hash": "7stPeBNz9sS7EzppO3nZOw=="
+          "hash": "nGboFNkw2NJTynEACjGYSg=="
         }
       },
       "is_incremental": false,
@@ -5697,7 +5721,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PiercingBlowAction.html",
-          "hash": "wB6WwvvwFaDXLKDi2M27vQ=="
+          "hash": "ksdXcBHUGf145l3dirA9RA=="
         }
       },
       "is_incremental": false,
@@ -5757,7 +5781,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PoisonStatus.html",
-          "hash": "YW++jvOVfh4v8k7oyVQJ7g=="
+          "hash": "i+acrGLdRuu3kkBdON92lA=="
         }
       },
       "is_incremental": false,
@@ -5769,7 +5793,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Pokey.html",
-          "hash": "wTSiOXM2f0OaKcVnZDDE/A=="
+          "hash": "63bxzOHuW1B98w3WvSdKmg=="
         }
       },
       "is_incremental": false,
@@ -5781,7 +5805,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PokeyAI.html",
-          "hash": "buprP2wtbfo6LxAyjEdnvQ=="
+          "hash": "MsBd7zL33hPVMZ5m6hC0vA=="
         }
       },
       "is_incremental": false,
@@ -5817,7 +5841,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PowerBounceAction.html",
-          "hash": "emsejt7i2YTng4yR5Ws5zg=="
+          "hash": "ZaUSearRutGLUVRVW0WUcA=="
         }
       },
       "is_incremental": false,
@@ -5853,7 +5877,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PowerLiftAction.html",
-          "hash": "9MdVTsdc9VBnYXw7owz3RQ=="
+          "hash": "gtkG7IIw/qkpFRPT0xTVVw=="
         }
       },
       "is_incremental": false,
@@ -5925,7 +5949,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PowerPlusBadge.html",
-          "hash": "yMA1l04nLBNclu3NClzLwQ=="
+          "hash": "Z1btAanNFqs9llVCvyzYnA=="
         }
       },
       "is_incremental": false,
@@ -5961,7 +5985,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PowerShockAction.html",
-          "hash": "WTrfgAXGHsGQi8PFDNGjUw=="
+          "hash": "ardaq9T/aGxeWa4kclXpkw=="
         }
       },
       "is_incremental": false,
@@ -5985,7 +6009,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.PowerSmashAction.html",
-          "hash": "foyUrvnHV0kh0WU3EPVc+A=="
+          "hash": "z6fiXGpzWGS3dYHt7w/DOA=="
         }
       },
       "is_incremental": false,
@@ -6069,7 +6093,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.QuakeHammerAction.html",
-          "hash": "uHI8GeS/FL8r1u+73f1e5A=="
+          "hash": "NLDgDM8ZkY+6iukMLBrxsw=="
         }
       },
       "is_incremental": false,
@@ -6117,7 +6141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.RallyWinkAction.html",
-          "hash": "//Yt7ukvZOnefkH6go+bMA=="
+          "hash": "NsHLzycvC0xnV1knsDbyDA=="
         }
       },
       "is_incremental": false,
@@ -6189,7 +6213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.RandomGlobals.html",
-          "hash": "xo9FpRaToeDkQ/fENXl7GA=="
+          "hash": "Tn8GJ+reSX0emCSXUcOKvw=="
         }
       },
       "is_incremental": false,
@@ -6201,7 +6225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.RefreshAction.html",
-          "hash": "xmzkSevW5df6sVPfHy3PDg=="
+          "hash": "PwilT6H1AAsmGWXxyYRkQA=="
         }
       },
       "is_incremental": false,
@@ -6249,7 +6273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.RenderingGlobals.html",
-          "hash": "kEBEjMa4kqWP6QAeGQ/sig=="
+          "hash": "B4SSxftg5pwbFvU9Qx66fw=="
         }
       },
       "is_incremental": false,
@@ -6261,7 +6285,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ResistanceHolder.html",
-          "hash": "tW92RsD9OC/SYeeC9ceOSA=="
+          "hash": "e2dZ6DkmyCJrRRfq3aeM7Q=="
         }
       },
       "is_incremental": false,
@@ -6273,7 +6297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ResistanceTypes.html",
-          "hash": "PyRUrDDsgLxSkf99w3pGaw=="
+          "hash": "dJ3VVELYlwSW54y/0GNaGA=="
         }
       },
       "is_incremental": false,
@@ -6333,7 +6357,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.RockSpitAction.html",
-          "hash": "2z/GaGP/WysFonURSUb9RA=="
+          "hash": "DL2dUfGKaY/FnhMlX6rS4A=="
         }
       },
       "is_incremental": false,
@@ -6357,7 +6381,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.RunAwayAction.html",
-          "hash": "PLf9htqFPFdDkTMzvfNi0g=="
+          "hash": "Xeh0Bvz4Q5zNvKwaJLjOFQ=="
         }
       },
       "is_incremental": false,
@@ -6441,7 +6465,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Sequence.SequenceBranch.html",
-          "hash": "5bixSpNLszPNBZrFqyZkxw=="
+          "hash": "MM40KKxPomwEzgGaTtu+fQ=="
         }
       },
       "is_incremental": false,
@@ -6453,7 +6477,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Sequence.StylishData.html",
-          "hash": "iAlXN04ubf2TVs6FFjEV8A=="
+          "hash": "OAM/skS2ZNNezQy74kDozA=="
         }
       },
       "is_incremental": false,
@@ -6477,7 +6501,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Sequence.html",
-          "hash": "lnPS5wVG6ausbLujECOVdg=="
+          "hash": "gchbpluSwgwYv7Gykfc1tA=="
         }
       },
       "is_incremental": false,
@@ -6501,7 +6525,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Shell.html",
-          "hash": "xHanjkTAkin3jo9JREeQgA=="
+          "hash": "o2zkhKHvaIrcQ2eHe/vt3A=="
         }
       },
       "is_incremental": false,
@@ -6537,7 +6561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ShellShieldAction.html",
-          "hash": "307/unxJXMResf4Txm7FFQ=="
+          "hash": "eRrIeZJlV4eNUgOCL0Yf3g=="
         }
       },
       "is_incremental": false,
@@ -6585,7 +6609,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ShellTossAction.html",
-          "hash": "x2Vl69L1p8rxjfmdWpzZ/A=="
+          "hash": "+4s5kBSj1H2xycyXumsl3w=="
         }
       },
       "is_incremental": false,
@@ -6633,7 +6657,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ShyGuy.html",
-          "hash": "WvP8SD0tPW3L8SHFz/RnHQ=="
+          "hash": "Nx7Fmbkzdbkre6cvFO0/vQ=="
         }
       },
       "is_incremental": false,
@@ -6645,7 +6669,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.ShyGuyAI.html",
-          "hash": "vB2bHRUtD4JbLxxxbnSweQ=="
+          "hash": "UyKep3q2VDmAan13QJcXxA=="
         }
       },
       "is_incremental": false,
@@ -6669,7 +6693,19 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SkyGuy.html",
-          "hash": "SIUpayiPNbmCYtve0c/6lg=="
+          "hash": "fVx57XFCxF3irQ6t2JXUmw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/PaperMarioBattleSystem.SkyGuyAI.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PaperMarioBattleSystem.SkyGuyAI.html",
+          "hash": "1dmzk4OOJ/iAZ3JJbdxKjA=="
         }
       },
       "is_incremental": false,
@@ -6681,7 +6717,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SkyGuyBalloon.html",
-          "hash": "Vn5fEFeKvHmcRhreh3aZLg=="
+          "hash": "3ryppt5YbDKhMHcTvDTf0g=="
         }
       },
       "is_incremental": false,
@@ -6705,7 +6741,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SleepStatus.html",
-          "hash": "q2QCHkDHKKz2RchYgBWNNg=="
+          "hash": "EmZE7gVJ+BEj51BbycyJ+g=="
         }
       },
       "is_incremental": false,
@@ -6765,7 +6801,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SlowStatus.html",
-          "hash": "3AbFZ+H8dSwHlVD/KwFLkA=="
+          "hash": "UNnDcowrIhWhD5OqggaEhA=="
         }
       },
       "is_incremental": false,
@@ -6813,7 +6849,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SpecialMoveAction.html",
-          "hash": "mLjNDz6d8S/nKX7YNDvFQg=="
+          "hash": "babRv0HgJgZIH445AZKVTQ=="
         }
       },
       "is_incremental": false,
@@ -6837,7 +6873,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SpecialSubMenu.html",
-          "hash": "jKsuysKNXs67zTWvUPfG6g=="
+          "hash": "VtB7B+icUYYp7+nfgpzEeg=="
         }
       },
       "is_incremental": false,
@@ -6885,7 +6921,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SpikedGoomba.html",
-          "hash": "87gS4IJJSCSsNPyDa7R3uQ=="
+          "hash": "hEkTKEeSZ8dmdn0jXPvCVw=="
         }
       },
       "is_incremental": false,
@@ -7017,7 +7053,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Stats.html",
-          "hash": "HRC/LnqiNB/OgulWbFRT1g=="
+          "hash": "+QIdUIFn0C/ub/LcfAjdSA=="
         }
       },
       "is_incremental": false,
@@ -7029,7 +7065,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.StatusChanceHolder.html",
-          "hash": "jAtAFOZ/UQ87tZ3xZArmyA=="
+          "hash": "nkOvfrVGaBiTH15S1Bqm7w=="
         }
       },
       "is_incremental": false,
@@ -7053,7 +7089,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.StatusEffect.html",
-          "hash": "jHl/bWLHuv4QaRBS4rlSSA=="
+          "hash": "IJkUGq0TK0J1XNzu9L8V6Q=="
         }
       },
       "is_incremental": false,
@@ -7073,23 +7109,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "obj/api/PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.html",
-          "hash": "OoyWPmVFAOO9l++Xs+Gs4g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "obj/api/PaperMarioBattleSystem.StatusGlobals.PaybackHolder.yml",
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.StatusGlobals.PaybackHolder.html",
-          "hash": "LtaX3IjRqGHSjgPX3VwSNw=="
+          "hash": "N03k2XnLTjmPuJBgLpDMHA=="
         }
       },
       "is_incremental": false,
@@ -7101,7 +7125,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.StatusGlobals.PaybackTypes.html",
-          "hash": "O0wIVJgFdvYHGWEQKLrg+w=="
+          "hash": "XNOY5deiBDIAK8Fyt0Wl2w=="
         }
       },
       "is_incremental": false,
@@ -7113,7 +7137,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.StatusGlobals.StatusComparer.html",
-          "hash": "CZmJMsYqluoQpEhncQvosA=="
+          "hash": "jKSGpq5m3d16cGjO1dm4fw=="
         }
       },
       "is_incremental": false,
@@ -7125,7 +7149,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.StatusGlobals.StatusTypeComparer.html",
-          "hash": "Y4xNwk2gSzPmZ8HMDNOzoQ=="
+          "hash": "NiGl4FJInIzMCdNAIbL0FA=="
         }
       },
       "is_incremental": false,
@@ -7137,7 +7161,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.StatusGlobals.html",
-          "hash": "GyLr8EXW4186Q4M4kt068g=="
+          "hash": "LEZHh7RPT6eAhF9Ep8uUFw=="
         }
       },
       "is_incremental": false,
@@ -7149,7 +7173,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.StatusPropertyHolder.html",
-          "hash": "yA3dyFC5dN4/hRHRI0XeXw=="
+          "hash": "peLvN7OWJiKzmHFQqLxhbQ=="
         }
       },
       "is_incremental": false,
@@ -7185,7 +7209,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.StoneStatus.html",
-          "hash": "Pu1ctZptmpy5U1QSLMv1/w=="
+          "hash": "WvRNGJgT8lk7HpWAXXk8Ig=="
         }
       },
       "is_incremental": false,
@@ -7197,7 +7221,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.StopStatus.html",
-          "hash": "g6cu66DhBDeXUB2Uvwn2ng=="
+          "hash": "gbPgiIgCwxyajmRs81++1Q=="
         }
       },
       "is_incremental": false,
@@ -7209,7 +7233,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.StrengthHolder.html",
-          "hash": "kDsfyzyBoU8LqUJ+bg7WIQ=="
+          "hash": "EjwDDlkSoLyuDCJglRY6uA=="
         }
       },
       "is_incremental": false,
@@ -7245,7 +7269,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SummonKoopatrolAction.html",
-          "hash": "Gc/7IEzPeBULSt4Ktl8Ylg=="
+          "hash": "Mx6L0ptlBItlf7+xmAG6RA=="
         }
       },
       "is_incremental": false,
@@ -7305,7 +7329,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SwapMarioPartnerAction.html",
-          "hash": "erXsGKAjKffOxT7B2vSALg=="
+          "hash": "KHkvyAGAJBp9qqBYHrR1GA=="
         }
       },
       "is_incremental": false,
@@ -7353,7 +7377,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SweetTreatAction.html",
-          "hash": "akknMVqf2ky8FS9qN1YonA=="
+          "hash": "fvaN4+hRJeZDFB+FMt1Z0g=="
         }
       },
       "is_incremental": false,
@@ -7413,7 +7437,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SweetTreatGlobals.RestoreBehavior.html",
-          "hash": "/M3iUE+g6GpPWF9BIBVC8Q=="
+          "hash": "Is6A/HPO4rM9UR3/yYCvKQ=="
         }
       },
       "is_incremental": false,
@@ -7425,7 +7449,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SweetTreatGlobals.RestoreBehaviorData.html",
-          "hash": "Nu4i0LZGmVcSTOLUMyZyhA=="
+          "hash": "hdpJrwcNJzpZ7ecDfkbnkw=="
         }
       },
       "is_incremental": false,
@@ -7437,7 +7461,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SweetTreatGlobals.RestoreTypes.html",
-          "hash": "p95PtZCXAEpyXckyPz1ixg=="
+          "hash": "hMffkewzkqkntdczyt96ZA=="
         }
       },
       "is_incremental": false,
@@ -7449,7 +7473,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.SweetTreatGlobals.html",
-          "hash": "xgkEMoNo57WqXDCpUDQOMA=="
+          "hash": "oTDE+5GAtDFT0RklHcEQMg=="
         }
       },
       "is_incremental": false,
@@ -7521,7 +7545,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.TargetSelectionMenu.html",
-          "hash": "8uDJ4tux/V1WcbeDVJ3fQA=="
+          "hash": "Ju+5fdRfRS+4m6iOfjd7HA=="
         }
       },
       "is_incremental": false,
@@ -7545,7 +7569,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.TattleAction.html",
-          "hash": "EC9bMcOmkMyJa+z7UHjZ6A=="
+          "hash": "0fedmarmxaZhKrrEAsxAzQ=="
         }
       },
       "is_incremental": false,
@@ -7581,7 +7605,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.TattleDatabase.html",
-          "hash": "K8/vQ4KGdmkjBmX02AwWqg=="
+          "hash": "Psanvoi1jp8aR+kv4E2a6A=="
         }
       },
       "is_incremental": false,
@@ -7665,7 +7689,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.TidalWaveAction.html",
-          "hash": "X8ABd5dODSt1ODNNCA0SEA=="
+          "hash": "IqSUNYi5yDzltl3eMmm3zQ=="
         }
       },
       "is_incremental": false,
@@ -7713,7 +7737,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Time.html",
-          "hash": "L7XpOtThIMgV+8vNsr8cfA=="
+          "hash": "9kLheNB5n6+vG7b0ii5z8Q=="
         }
       },
       "is_incremental": false,
@@ -7785,7 +7809,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.TinyStatus.html",
-          "hash": "uPr0j/0M7QJvkmbBtGIkew=="
+          "hash": "M5WGwNzL6TuZ/flHw03R+Q=="
         }
       },
       "is_incremental": false,
@@ -7797,7 +7821,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.TornadoJumpAction.html",
-          "hash": "rNfJv9lsPAqiDOeWWqbOFg=="
+          "hash": "H3xPbwJJynldBlfqwNqyNg=="
         }
       },
       "is_incremental": false,
@@ -7881,7 +7905,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.TurboChargeStatus.html",
-          "hash": "+n/9m/y0ac5NT8S5U37SGw=="
+          "hash": "ca1PbX3fa/F7/miIaONtkg=="
         }
       },
       "is_incremental": false,
@@ -7989,7 +8013,19 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.UnitTests.BadgeUnitTests.html",
-          "hash": "PH1uFNpTabLFlzvFHZzxIQ=="
+          "hash": "a5vxSuPMvHNWWb/zBWZZPQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "obj/api/PaperMarioBattleSystem.UnitTests.BattleUnitTests.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/PaperMarioBattleSystem.UnitTests.BattleUnitTests.html",
+          "hash": "ZZ9xXv1T4ynVZepdD0Hd0w=="
         }
       },
       "is_incremental": false,
@@ -8001,7 +8037,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.UnitTests.InteractionUnitTests.html",
-          "hash": "v/ZE+FOQTqbR+m3Dmm1mXA=="
+          "hash": "rueSqFA10lhcxjpFK0++RQ=="
         }
       },
       "is_incremental": false,
@@ -8013,7 +8049,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.UnitTests.StatusUnitTests.html",
-          "hash": "Cg0cp74MvfIbWikiBy8U7g=="
+          "hash": "PSNukQ1cex9S7q83347LjA=="
         }
       },
       "is_incremental": false,
@@ -8025,7 +8061,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.UnitTests.html",
-          "hash": "hxq2/Fy/TAjv4v4g/3tQVA=="
+          "hash": "DX2ep7/ebhS1+70Oj8cU1g=="
         }
       },
       "is_incremental": false,
@@ -8157,7 +8193,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.VeilAction.html",
-          "hash": "envZ6DkcOswCSG7lcFzxyQ=="
+          "hash": "xupmulEuder+h7PAIC7ceg=="
         }
       },
       "is_incremental": false,
@@ -8325,7 +8361,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.WaterBlockStatus.html",
-          "hash": "LD2cqEDc7xzohb0cvJtrhw=="
+          "hash": "dkdo7D+ppVBL0UX4RHFtiA=="
         }
       },
       "is_incremental": false,
@@ -8337,7 +8373,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Watt.html",
-          "hash": "ZLe0DDLFyc0gM0jcOAr8XA=="
+          "hash": "vMUuX0Cg69Y642L6rzUy2Q=="
         }
       },
       "is_incremental": false,
@@ -8349,7 +8385,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.WattSubMenu.html",
-          "hash": "SClDqPZ1c3tgykTZGfqpGw=="
+          "hash": "ei3iVGD9m0A2zRFUEldfig=="
         }
       },
       "is_incremental": false,
@@ -8361,7 +8397,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.WeaknessHolder.html",
-          "hash": "Q4kIyfJ78nbBIIHtwSnVeQ=="
+          "hash": "gnUpTQjmrSa3kwiCl/JAmg=="
         }
       },
       "is_incremental": false,
@@ -8373,7 +8409,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.WeaknessTypes.html",
-          "hash": "NPk9pZ5RTAPa70BEQ08JZA=="
+          "hash": "R2QZS4NjBEOfe2YdNRAMig=="
         }
       },
       "is_incremental": false,
@@ -8385,7 +8421,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.WindBreathAction.html",
-          "hash": "3RvJq1UO1xXb/0pA7jsecA=="
+          "hash": "JEiBbFLIF2SBvBf6c7G4Iw=="
         }
       },
       "is_incremental": false,
@@ -8421,7 +8457,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.Yux.html",
-          "hash": "q4LoKTp6BVYMfgZGHKrVMA=="
+          "hash": "mDFFgKzKOpC7kceloFDGAw=="
         }
       },
       "is_incremental": false,
@@ -8445,7 +8481,7 @@
       "output": {
         ".html": {
           "relative_path": "api/PaperMarioBattleSystem.html",
-          "hash": "VrmNv3ktoRly9BriwQY/4w=="
+          "hash": "FjrjVuk5PpvDDtnhbD0dYw=="
         }
       },
       "is_incremental": false,
@@ -8457,7 +8493,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "EjtFZe7iabxSbztk4WVUEw=="
+          "hash": "M9/t8yfXIKkJ2RrekKsOSg=="
         }
       },
       "is_incremental": false,
@@ -8484,17 +8520,17 @@
         "incrementalPhase": "build"
       },
       "processors": {
-        "TocDocumentProcessor": {
+        "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build"
         },
-        "ManagedReferenceDocumentProcessor": {
+        "TocDocumentProcessor": {
           "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build"
         }
       }

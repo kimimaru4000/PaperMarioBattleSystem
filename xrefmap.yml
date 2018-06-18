@@ -4700,6 +4700,18 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.BattleEntity.BManager
   nameWithType: BattleEntity.BManager
+- uid: PaperMarioBattleSystem.BattleEntity.ChangedBattleManager
+  name: BattleEntity.ChangedBattleManager
+  href: api/PaperMarioBattleSystem.BattleEntity.ChangedBattleManager.html
+  commentId: T:PaperMarioBattleSystem.BattleEntity.ChangedBattleManager
+  fullName: PaperMarioBattleSystem.BattleEntity.ChangedBattleManager
+  nameWithType: BattleEntity.ChangedBattleManager
+- uid: PaperMarioBattleSystem.BattleEntity.ChangedBattleManagerEvent
+  name: ChangedBattleManagerEvent
+  href: api/PaperMarioBattleSystem.BattleEntity.html#PaperMarioBattleSystem_BattleEntity_ChangedBattleManagerEvent
+  commentId: E:PaperMarioBattleSystem.BattleEntity.ChangedBattleManagerEvent
+  fullName: PaperMarioBattleSystem.BattleEntity.ChangedBattleManagerEvent
+  nameWithType: BattleEntity.ChangedBattleManagerEvent
 - uid: PaperMarioBattleSystem.BattleEntity.ChangeHeightState(PaperMarioBattleSystem.Enumerations.HeightStates)
   name: ChangeHeightState(Enumerations.HeightStates)
   href: api/PaperMarioBattleSystem.BattleEntity.html#PaperMarioBattleSystem_BattleEntity_ChangeHeightState_PaperMarioBattleSystem_Enumerations_HeightStates_
@@ -6176,19 +6188,6 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.BattleEntityProperties.GetContactExceptions
   nameWithType: BattleEntityProperties.GetContactExceptions
-- uid: PaperMarioBattleSystem.BattleEntityProperties.GetContactResult(PaperMarioBattleSystem.BattleEntity,PaperMarioBattleSystem.Enumerations.ContactTypes,PaperMarioBattleSystem.Enumerations.ContactProperties)
-  name: GetContactResult(BattleEntity, Enumerations.ContactTypes, Enumerations.ContactProperties)
-  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_GetContactResult_PaperMarioBattleSystem_BattleEntity_PaperMarioBattleSystem_Enumerations_ContactTypes_PaperMarioBattleSystem_Enumerations_ContactProperties_
-  commentId: M:PaperMarioBattleSystem.BattleEntityProperties.GetContactResult(PaperMarioBattleSystem.BattleEntity,PaperMarioBattleSystem.Enumerations.ContactTypes,PaperMarioBattleSystem.Enumerations.ContactProperties)
-  fullName: PaperMarioBattleSystem.BattleEntityProperties.GetContactResult(PaperMarioBattleSystem.BattleEntity, PaperMarioBattleSystem.Enumerations.ContactTypes, PaperMarioBattleSystem.Enumerations.ContactProperties)
-  nameWithType: BattleEntityProperties.GetContactResult(BattleEntity, Enumerations.ContactTypes, Enumerations.ContactProperties)
-- uid: PaperMarioBattleSystem.BattleEntityProperties.GetContactResult*
-  name: GetContactResult
-  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_GetContactResult_
-  commentId: Overload:PaperMarioBattleSystem.BattleEntityProperties.GetContactResult
-  isSpec: "True"
-  fullName: PaperMarioBattleSystem.BattleEntityProperties.GetContactResult
-  nameWithType: BattleEntityProperties.GetContactResult
 - uid: PaperMarioBattleSystem.BattleEntityProperties.GetDisabledMoveCategories
   name: GetDisabledMoveCategories()
   href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_GetDisabledMoveCategories
@@ -6332,12 +6331,15 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.BattleEntityProperties.GetStatusProperty
   nameWithType: BattleEntityProperties.GetStatusProperty
-- uid: PaperMarioBattleSystem.BattleEntityProperties.GetTotalElementOverride(PaperMarioBattleSystem.BattleEntity)
-  name: GetTotalElementOverride(BattleEntity)
-  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_GetTotalElementOverride_PaperMarioBattleSystem_BattleEntity_
-  commentId: M:PaperMarioBattleSystem.BattleEntityProperties.GetTotalElementOverride(PaperMarioBattleSystem.BattleEntity)
-  fullName: PaperMarioBattleSystem.BattleEntityProperties.GetTotalElementOverride(PaperMarioBattleSystem.BattleEntity)
-  nameWithType: BattleEntityProperties.GetTotalElementOverride(BattleEntity)
+- uid: PaperMarioBattleSystem.BattleEntityProperties.GetTotalElementOverride(System.Collections.Generic.IList{PaperMarioBattleSystem.Enumerations.PhysicalAttributes})
+  name: GetTotalElementOverride(IList<Enumerations.PhysicalAttributes>)
+  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_GetTotalElementOverride_System_Collections_Generic_IList_PaperMarioBattleSystem_Enumerations_PhysicalAttributes__
+  commentId: M:PaperMarioBattleSystem.BattleEntityProperties.GetTotalElementOverride(System.Collections.Generic.IList{PaperMarioBattleSystem.Enumerations.PhysicalAttributes})
+  name.vb: GetTotalElementOverride(IList(Of Enumerations.PhysicalAttributes))
+  fullName: PaperMarioBattleSystem.BattleEntityProperties.GetTotalElementOverride(System.Collections.Generic.IList<PaperMarioBattleSystem.Enumerations.PhysicalAttributes>)
+  fullName.vb: PaperMarioBattleSystem.BattleEntityProperties.GetTotalElementOverride(System.Collections.Generic.IList(Of PaperMarioBattleSystem.Enumerations.PhysicalAttributes))
+  nameWithType: BattleEntityProperties.GetTotalElementOverride(IList<Enumerations.PhysicalAttributes>)
+  nameWithType.vb: BattleEntityProperties.GetTotalElementOverride(IList(Of Enumerations.PhysicalAttributes))
 - uid: PaperMarioBattleSystem.BattleEntityProperties.GetTotalElementOverride*
   name: GetTotalElementOverride
   href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_GetTotalElementOverride_
@@ -6345,12 +6347,15 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.BattleEntityProperties.GetTotalElementOverride
   nameWithType: BattleEntityProperties.GetTotalElementOverride
-- uid: PaperMarioBattleSystem.BattleEntityProperties.GetTotalStrength(PaperMarioBattleSystem.BattleEntity)
-  name: GetTotalStrength(BattleEntity)
-  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_GetTotalStrength_PaperMarioBattleSystem_BattleEntity_
-  commentId: M:PaperMarioBattleSystem.BattleEntityProperties.GetTotalStrength(PaperMarioBattleSystem.BattleEntity)
-  fullName: PaperMarioBattleSystem.BattleEntityProperties.GetTotalStrength(PaperMarioBattleSystem.BattleEntity)
-  nameWithType: BattleEntityProperties.GetTotalStrength(BattleEntity)
+- uid: PaperMarioBattleSystem.BattleEntityProperties.GetTotalStrength(System.Collections.Generic.IList{PaperMarioBattleSystem.Enumerations.PhysicalAttributes})
+  name: GetTotalStrength(IList<Enumerations.PhysicalAttributes>)
+  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_GetTotalStrength_System_Collections_Generic_IList_PaperMarioBattleSystem_Enumerations_PhysicalAttributes__
+  commentId: M:PaperMarioBattleSystem.BattleEntityProperties.GetTotalStrength(System.Collections.Generic.IList{PaperMarioBattleSystem.Enumerations.PhysicalAttributes})
+  name.vb: GetTotalStrength(IList(Of Enumerations.PhysicalAttributes))
+  fullName: PaperMarioBattleSystem.BattleEntityProperties.GetTotalStrength(System.Collections.Generic.IList<PaperMarioBattleSystem.Enumerations.PhysicalAttributes>)
+  fullName.vb: PaperMarioBattleSystem.BattleEntityProperties.GetTotalStrength(System.Collections.Generic.IList(Of PaperMarioBattleSystem.Enumerations.PhysicalAttributes))
+  nameWithType: BattleEntityProperties.GetTotalStrength(IList<Enumerations.PhysicalAttributes>)
+  nameWithType.vb: BattleEntityProperties.GetTotalStrength(IList(Of Enumerations.PhysicalAttributes))
 - uid: PaperMarioBattleSystem.BattleEntityProperties.GetTotalStrength*
   name: GetTotalStrength
   href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_GetTotalStrength_
@@ -6536,6 +6541,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.BattleEntityProperties.IsMoveCategoryDisabled
   nameWithType: BattleEntityProperties.IsMoveCategoryDisabled
+- uid: PaperMarioBattleSystem.BattleEntityProperties.IsStatusSuppressed(PaperMarioBattleSystem.Enumerations.StatusTypes,PaperMarioBattleSystem.Enumerations.StatusSuppressionTypes)
+  name: IsStatusSuppressed(Enumerations.StatusTypes, Enumerations.StatusSuppressionTypes)
+  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_IsStatusSuppressed_PaperMarioBattleSystem_Enumerations_StatusTypes_PaperMarioBattleSystem_Enumerations_StatusSuppressionTypes_
+  commentId: M:PaperMarioBattleSystem.BattleEntityProperties.IsStatusSuppressed(PaperMarioBattleSystem.Enumerations.StatusTypes,PaperMarioBattleSystem.Enumerations.StatusSuppressionTypes)
+  fullName: PaperMarioBattleSystem.BattleEntityProperties.IsStatusSuppressed(PaperMarioBattleSystem.Enumerations.StatusTypes, PaperMarioBattleSystem.Enumerations.StatusSuppressionTypes)
+  nameWithType: BattleEntityProperties.IsStatusSuppressed(Enumerations.StatusTypes, Enumerations.StatusSuppressionTypes)
+- uid: PaperMarioBattleSystem.BattleEntityProperties.IsStatusSuppressed*
+  name: IsStatusSuppressed
+  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_IsStatusSuppressed_
+  commentId: Overload:PaperMarioBattleSystem.BattleEntityProperties.IsStatusSuppressed
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.BattleEntityProperties.IsStatusSuppressed
+  nameWithType: BattleEntityProperties.IsStatusSuppressed
 - uid: PaperMarioBattleSystem.BattleEntityProperties.IsVulnerableToDamageEffect(PaperMarioBattleSystem.Enumerations.DamageEffects)
   name: IsVulnerableToDamageEffect(Enumerations.DamageEffects)
   href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_IsVulnerableToDamageEffect_PaperMarioBattleSystem_Enumerations_DamageEffects_
@@ -6671,6 +6689,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.BattleEntityProperties.RemoveResistance
   nameWithType: BattleEntityProperties.RemoveResistance
+- uid: PaperMarioBattleSystem.BattleEntityProperties.RemoveResistances(PaperMarioBattleSystem.Enumerations.Elements)
+  name: RemoveResistances(Enumerations.Elements)
+  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_RemoveResistances_PaperMarioBattleSystem_Enumerations_Elements_
+  commentId: M:PaperMarioBattleSystem.BattleEntityProperties.RemoveResistances(PaperMarioBattleSystem.Enumerations.Elements)
+  fullName: PaperMarioBattleSystem.BattleEntityProperties.RemoveResistances(PaperMarioBattleSystem.Enumerations.Elements)
+  nameWithType: BattleEntityProperties.RemoveResistances(Enumerations.Elements)
+- uid: PaperMarioBattleSystem.BattleEntityProperties.RemoveResistances*
+  name: RemoveResistances
+  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_RemoveResistances_
+  commentId: Overload:PaperMarioBattleSystem.BattleEntityProperties.RemoveResistances
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.BattleEntityProperties.RemoveResistances
+  nameWithType: BattleEntityProperties.RemoveResistances
 - uid: PaperMarioBattleSystem.BattleEntityProperties.RemoveStatus(PaperMarioBattleSystem.Enumerations.StatusTypes)
   name: RemoveStatus(Enumerations.StatusTypes)
   href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_RemoveStatus_PaperMarioBattleSystem_Enumerations_StatusTypes_
@@ -6713,6 +6744,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.BattleEntityProperties.RemoveStrength
   nameWithType: BattleEntityProperties.RemoveStrength
+- uid: PaperMarioBattleSystem.BattleEntityProperties.RemoveStrengths(PaperMarioBattleSystem.Enumerations.PhysicalAttributes)
+  name: RemoveStrengths(Enumerations.PhysicalAttributes)
+  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_RemoveStrengths_PaperMarioBattleSystem_Enumerations_PhysicalAttributes_
+  commentId: M:PaperMarioBattleSystem.BattleEntityProperties.RemoveStrengths(PaperMarioBattleSystem.Enumerations.PhysicalAttributes)
+  fullName: PaperMarioBattleSystem.BattleEntityProperties.RemoveStrengths(PaperMarioBattleSystem.Enumerations.PhysicalAttributes)
+  nameWithType: BattleEntityProperties.RemoveStrengths(Enumerations.PhysicalAttributes)
+- uid: PaperMarioBattleSystem.BattleEntityProperties.RemoveStrengths*
+  name: RemoveStrengths
+  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_RemoveStrengths_
+  commentId: Overload:PaperMarioBattleSystem.BattleEntityProperties.RemoveStrengths
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.BattleEntityProperties.RemoveStrengths
+  nameWithType: BattleEntityProperties.RemoveStrengths
 - uid: PaperMarioBattleSystem.BattleEntityProperties.RemoveWeakness(PaperMarioBattleSystem.Enumerations.Elements,PaperMarioBattleSystem.WeaknessHolder@)
   name: RemoveWeakness(Enumerations.Elements, WeaknessHolder)
   href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_RemoveWeakness_PaperMarioBattleSystem_Enumerations_Elements_PaperMarioBattleSystem_WeaknessHolder__
@@ -6729,6 +6773,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.BattleEntityProperties.RemoveWeakness
   nameWithType: BattleEntityProperties.RemoveWeakness
+- uid: PaperMarioBattleSystem.BattleEntityProperties.RemoveWeaknesses(PaperMarioBattleSystem.Enumerations.Elements)
+  name: RemoveWeaknesses(Enumerations.Elements)
+  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_RemoveWeaknesses_PaperMarioBattleSystem_Enumerations_Elements_
+  commentId: M:PaperMarioBattleSystem.BattleEntityProperties.RemoveWeaknesses(PaperMarioBattleSystem.Enumerations.Elements)
+  fullName: PaperMarioBattleSystem.BattleEntityProperties.RemoveWeaknesses(PaperMarioBattleSystem.Enumerations.Elements)
+  nameWithType: BattleEntityProperties.RemoveWeaknesses(Enumerations.Elements)
+- uid: PaperMarioBattleSystem.BattleEntityProperties.RemoveWeaknesses*
+  name: RemoveWeaknesses
+  href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_RemoveWeaknesses_
+  commentId: Overload:PaperMarioBattleSystem.BattleEntityProperties.RemoveWeaknesses
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.BattleEntityProperties.RemoveWeaknesses
+  nameWithType: BattleEntityProperties.RemoveWeaknesses
 - uid: PaperMarioBattleSystem.BattleEntityProperties.Resistances
   name: Resistances
   href: api/PaperMarioBattleSystem.BattleEntityProperties.html#PaperMarioBattleSystem_BattleEntityProperties_Resistances
@@ -7899,15 +7956,15 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.BattleManager.BattleManager
   nameWithType: BattleManager.BattleManager
-- uid: PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList{PaperMarioBattleSystem.BattleEntity},System.Collections.Generic.IList{System.Int32},System.Boolean)
-  name: AddEntities(IList<BattleEntity>, IList<Int32>, Boolean)
-  href: api/PaperMarioBattleSystem.BattleManager.html#PaperMarioBattleSystem_BattleManager_AddEntities_System_Collections_Generic_IList_PaperMarioBattleSystem_BattleEntity__System_Collections_Generic_IList_System_Int32__System_Boolean_
-  commentId: M:PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList{PaperMarioBattleSystem.BattleEntity},System.Collections.Generic.IList{System.Int32},System.Boolean)
-  name.vb: AddEntities(IList(Of BattleEntity), IList(Of Int32), Boolean)
-  fullName: PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList<PaperMarioBattleSystem.BattleEntity>, System.Collections.Generic.IList<System.Int32>, System.Boolean)
-  fullName.vb: PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList(Of PaperMarioBattleSystem.BattleEntity), System.Collections.Generic.IList(Of System.Int32), System.Boolean)
-  nameWithType: BattleManager.AddEntities(IList<BattleEntity>, IList<Int32>, Boolean)
-  nameWithType.vb: BattleManager.AddEntities(IList(Of BattleEntity), IList(Of Int32), Boolean)
+- uid: PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList{PaperMarioBattleSystem.BattleEntity},System.Collections.Generic.IList{System.Int32})
+  name: AddEntities(IList<BattleEntity>, IList<Int32>)
+  href: api/PaperMarioBattleSystem.BattleManager.html#PaperMarioBattleSystem_BattleManager_AddEntities_System_Collections_Generic_IList_PaperMarioBattleSystem_BattleEntity__System_Collections_Generic_IList_System_Int32__
+  commentId: M:PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList{PaperMarioBattleSystem.BattleEntity},System.Collections.Generic.IList{System.Int32})
+  name.vb: AddEntities(IList(Of BattleEntity), IList(Of Int32))
+  fullName: PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList<PaperMarioBattleSystem.BattleEntity>, System.Collections.Generic.IList<System.Int32>)
+  fullName.vb: PaperMarioBattleSystem.BattleManager.AddEntities(System.Collections.Generic.IList(Of PaperMarioBattleSystem.BattleEntity), System.Collections.Generic.IList(Of System.Int32))
+  nameWithType: BattleManager.AddEntities(IList<BattleEntity>, IList<Int32>)
+  nameWithType.vb: BattleManager.AddEntities(IList(Of BattleEntity), IList(Of Int32))
 - uid: PaperMarioBattleSystem.BattleManager.AddEntities*
   name: AddEntities
   href: api/PaperMarioBattleSystem.BattleManager.html#PaperMarioBattleSystem_BattleManager_AddEntities_
@@ -7915,15 +7972,15 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.BattleManager.AddEntities
   nameWithType: BattleManager.AddEntities
-- uid: PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity,System.Nullable{System.Int32},System.Boolean)
-  name: AddEntity(BattleEntity, Nullable<Int32>, Boolean)
-  href: api/PaperMarioBattleSystem.BattleManager.html#PaperMarioBattleSystem_BattleManager_AddEntity_PaperMarioBattleSystem_BattleEntity_System_Nullable_System_Int32__System_Boolean_
-  commentId: M:PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity,System.Nullable{System.Int32},System.Boolean)
-  name.vb: AddEntity(BattleEntity, Nullable(Of Int32), Boolean)
-  fullName: PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity, System.Nullable<System.Int32>, System.Boolean)
-  fullName.vb: PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity, System.Nullable(Of System.Int32), System.Boolean)
-  nameWithType: BattleManager.AddEntity(BattleEntity, Nullable<Int32>, Boolean)
-  nameWithType.vb: BattleManager.AddEntity(BattleEntity, Nullable(Of Int32), Boolean)
+- uid: PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity,System.Nullable{System.Int32})
+  name: AddEntity(BattleEntity, Nullable<Int32>)
+  href: api/PaperMarioBattleSystem.BattleManager.html#PaperMarioBattleSystem_BattleManager_AddEntity_PaperMarioBattleSystem_BattleEntity_System_Nullable_System_Int32__
+  commentId: M:PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity,System.Nullable{System.Int32})
+  name.vb: AddEntity(BattleEntity, Nullable(Of Int32))
+  fullName: PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity, System.Nullable<System.Int32>)
+  fullName.vb: PaperMarioBattleSystem.BattleManager.AddEntity(PaperMarioBattleSystem.BattleEntity, System.Nullable(Of System.Int32))
+  nameWithType: BattleManager.AddEntity(BattleEntity, Nullable<Int32>)
+  nameWithType.vb: BattleManager.AddEntity(BattleEntity, Nullable(Of Int32))
 - uid: PaperMarioBattleSystem.BattleManager.AddEntity*
   name: AddEntity
   href: api/PaperMarioBattleSystem.BattleManager.html#PaperMarioBattleSystem_BattleManager_AddEntity_
@@ -9365,6 +9422,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.BattlePartner.PartnerType
   nameWithType: BattlePartner.PartnerType
+- uid: PaperMarioBattleSystem.BattlePartner.PStats
+  name: PStats
+  href: api/PaperMarioBattleSystem.BattlePartner.html#PaperMarioBattleSystem_BattlePartner_PStats
+  commentId: P:PaperMarioBattleSystem.BattlePartner.PStats
+  fullName: PaperMarioBattleSystem.BattlePartner.PStats
+  nameWithType: BattlePartner.PStats
+- uid: PaperMarioBattleSystem.BattlePartner.PStats*
+  name: PStats
+  href: api/PaperMarioBattleSystem.BattlePartner.html#PaperMarioBattleSystem_BattlePartner_PStats_
+  commentId: Overload:PaperMarioBattleSystem.BattlePartner.PStats
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.BattlePartner.PStats
+  nameWithType: BattlePartner.PStats
 - uid: PaperMarioBattleSystem.BattlePartner.RaiseMaxFP(System.Int32)
   name: RaiseMaxFP(Int32)
   href: api/PaperMarioBattleSystem.BattlePartner.html#PaperMarioBattleSystem_BattlePartner_RaiseMaxFP_System_Int32_
@@ -12320,6 +12390,28 @@ references:
   fullName.vb: PaperMarioBattleSystem.CollisionTracker(Of T, U).SetCollisionData
   nameWithType: CollisionTracker<T, U>.SetCollisionData
   nameWithType.vb: CollisionTracker(Of T, U).SetCollisionData
+- uid: PaperMarioBattleSystem.ConfigLoader
+  name: ConfigLoader
+  href: api/PaperMarioBattleSystem.ConfigLoader.html
+  commentId: T:PaperMarioBattleSystem.ConfigLoader
+  fullName: PaperMarioBattleSystem.ConfigLoader
+  nameWithType: ConfigLoader
+- uid: PaperMarioBattleSystem.ConfigLoader.LoadConfig(System.String@,PaperMarioBattleSystem.BattleGlobals.BattleProperties@,PaperMarioBattleSystem.BattleMario,System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity})
+  name: LoadConfig(String, ref BattleGlobals.BattleProperties, BattleMario, List<BattleEntity>)
+  href: api/PaperMarioBattleSystem.ConfigLoader.html#PaperMarioBattleSystem_ConfigLoader_LoadConfig_System_String__PaperMarioBattleSystem_BattleGlobals_BattleProperties__PaperMarioBattleSystem_BattleMario_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__
+  commentId: M:PaperMarioBattleSystem.ConfigLoader.LoadConfig(System.String@,PaperMarioBattleSystem.BattleGlobals.BattleProperties@,PaperMarioBattleSystem.BattleMario,System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity})
+  name.vb: LoadConfig(ByRef String, ByRef BattleGlobals.BattleProperties, BattleMario, List(Of BattleEntity))
+  fullName: PaperMarioBattleSystem.ConfigLoader.LoadConfig(System.String, ref PaperMarioBattleSystem.BattleGlobals.BattleProperties, PaperMarioBattleSystem.BattleMario, System.Collections.Generic.List<PaperMarioBattleSystem.BattleEntity>)
+  fullName.vb: PaperMarioBattleSystem.ConfigLoader.LoadConfig(ByRef System.String, ByRef PaperMarioBattleSystem.BattleGlobals.BattleProperties, PaperMarioBattleSystem.BattleMario, System.Collections.Generic.List(Of PaperMarioBattleSystem.BattleEntity))
+  nameWithType: ConfigLoader.LoadConfig(String, ref BattleGlobals.BattleProperties, BattleMario, List<BattleEntity>)
+  nameWithType.vb: ConfigLoader.LoadConfig(ByRef String, ByRef BattleGlobals.BattleProperties, BattleMario, List(Of BattleEntity))
+- uid: PaperMarioBattleSystem.ConfigLoader.LoadConfig*
+  name: LoadConfig
+  href: api/PaperMarioBattleSystem.ConfigLoader.html#PaperMarioBattleSystem_ConfigLoader_LoadConfig_
+  commentId: Overload:PaperMarioBattleSystem.ConfigLoader.LoadConfig
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.ConfigLoader.LoadConfig
+  nameWithType: ConfigLoader.LoadConfig
 - uid: PaperMarioBattleSystem.ConfusedStatus
   name: ConfusedStatus
   href: api/PaperMarioBattleSystem.ConfusedStatus.html
@@ -12479,6 +12571,12 @@ references:
   commentId: F:PaperMarioBattleSystem.ContentGlobals.BattleGFX
   fullName: PaperMarioBattleSystem.ContentGlobals.BattleGFX
   nameWithType: ContentGlobals.BattleGFX
+- uid: PaperMarioBattleSystem.ContentGlobals.ConfigName
+  name: ConfigName
+  href: api/PaperMarioBattleSystem.ContentGlobals.html#PaperMarioBattleSystem_ContentGlobals_ConfigName
+  commentId: F:PaperMarioBattleSystem.ContentGlobals.ConfigName
+  fullName: PaperMarioBattleSystem.ContentGlobals.ConfigName
+  nameWithType: ContentGlobals.ConfigName
 - uid: PaperMarioBattleSystem.ContentGlobals.ContentRoot
   name: ContentRoot
   href: api/PaperMarioBattleSystem.ContentGlobals.html#PaperMarioBattleSystem_ContentGlobals_ContentRoot
@@ -15381,12 +15479,15 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.DisguiseAction.DisguiseAction
   nameWithType: DisguiseAction.DisguiseAction
-- uid: PaperMarioBattleSystem.DisguiseAction.GetCustomAffectedEntities
-  name: GetCustomAffectedEntities()
-  href: api/PaperMarioBattleSystem.DisguiseAction.html#PaperMarioBattleSystem_DisguiseAction_GetCustomAffectedEntities
-  commentId: M:PaperMarioBattleSystem.DisguiseAction.GetCustomAffectedEntities
-  fullName: PaperMarioBattleSystem.DisguiseAction.GetCustomAffectedEntities()
-  nameWithType: DisguiseAction.GetCustomAffectedEntities()
+- uid: PaperMarioBattleSystem.DisguiseAction.GetCustomAffectedEntities(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity})
+  name: GetCustomAffectedEntities(List<BattleEntity>)
+  href: api/PaperMarioBattleSystem.DisguiseAction.html#PaperMarioBattleSystem_DisguiseAction_GetCustomAffectedEntities_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__
+  commentId: M:PaperMarioBattleSystem.DisguiseAction.GetCustomAffectedEntities(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity})
+  name.vb: GetCustomAffectedEntities(List(Of BattleEntity))
+  fullName: PaperMarioBattleSystem.DisguiseAction.GetCustomAffectedEntities(System.Collections.Generic.List<PaperMarioBattleSystem.BattleEntity>)
+  fullName.vb: PaperMarioBattleSystem.DisguiseAction.GetCustomAffectedEntities(System.Collections.Generic.List(Of PaperMarioBattleSystem.BattleEntity))
+  nameWithType: DisguiseAction.GetCustomAffectedEntities(List<BattleEntity>)
+  nameWithType.vb: DisguiseAction.GetCustomAffectedEntities(List(Of BattleEntity))
 - uid: PaperMarioBattleSystem.DisguiseAction.GetCustomAffectedEntities*
   name: GetCustomAffectedEntities
   href: api/PaperMarioBattleSystem.DisguiseAction.html#PaperMarioBattleSystem_DisguiseAction_GetCustomAffectedEntities_
@@ -16720,6 +16821,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.EnemyAIBehavior.Enemy
   nameWithType: EnemyAIBehavior.Enemy
+- uid: PaperMarioBattleSystem.EnemyAIBehavior.HasItem
+  name: HasItem()
+  href: api/PaperMarioBattleSystem.EnemyAIBehavior.html#PaperMarioBattleSystem_EnemyAIBehavior_HasItem
+  commentId: M:PaperMarioBattleSystem.EnemyAIBehavior.HasItem
+  fullName: PaperMarioBattleSystem.EnemyAIBehavior.HasItem()
+  nameWithType: EnemyAIBehavior.HasItem()
+- uid: PaperMarioBattleSystem.EnemyAIBehavior.HasItem*
+  name: HasItem
+  href: api/PaperMarioBattleSystem.EnemyAIBehavior.html#PaperMarioBattleSystem_EnemyAIBehavior_HasItem_
+  commentId: Overload:PaperMarioBattleSystem.EnemyAIBehavior.HasItem
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.EnemyAIBehavior.HasItem
+  nameWithType: EnemyAIBehavior.HasItem
 - uid: PaperMarioBattleSystem.EnemyAIBehavior.PerformAction
   name: PerformAction()
   href: api/PaperMarioBattleSystem.EnemyAIBehavior.html#PaperMarioBattleSystem_EnemyAIBehavior_PerformAction
@@ -16733,6 +16847,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.EnemyAIBehavior.PerformAction
   nameWithType: EnemyAIBehavior.PerformAction
+- uid: PaperMarioBattleSystem.EnemyAIBehavior.TryUseItem
+  name: TryUseItem()
+  href: api/PaperMarioBattleSystem.EnemyAIBehavior.html#PaperMarioBattleSystem_EnemyAIBehavior_TryUseItem
+  commentId: M:PaperMarioBattleSystem.EnemyAIBehavior.TryUseItem
+  fullName: PaperMarioBattleSystem.EnemyAIBehavior.TryUseItem()
+  nameWithType: EnemyAIBehavior.TryUseItem()
+- uid: PaperMarioBattleSystem.EnemyAIBehavior.TryUseItem*
+  name: TryUseItem
+  href: api/PaperMarioBattleSystem.EnemyAIBehavior.html#PaperMarioBattleSystem_EnemyAIBehavior_TryUseItem_
+  commentId: Overload:PaperMarioBattleSystem.EnemyAIBehavior.TryUseItem
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.EnemyAIBehavior.TryUseItem
+  nameWithType: EnemyAIBehavior.TryUseItem
 - uid: PaperMarioBattleSystem.EntityGlobals
   name: EntityGlobals
   href: api/PaperMarioBattleSystem.EntityGlobals.html
@@ -24581,6 +24708,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.Inventory.CanEquip
   nameWithType: Inventory.CanEquip
+- uid: PaperMarioBattleSystem.Inventory.CleanUp
+  name: CleanUp()
+  href: api/PaperMarioBattleSystem.Inventory.html#PaperMarioBattleSystem_Inventory_CleanUp
+  commentId: M:PaperMarioBattleSystem.Inventory.CleanUp
+  fullName: PaperMarioBattleSystem.Inventory.CleanUp()
+  nameWithType: Inventory.CleanUp()
+- uid: PaperMarioBattleSystem.Inventory.CleanUp*
+  name: CleanUp
+  href: api/PaperMarioBattleSystem.Inventory.html#PaperMarioBattleSystem_Inventory_CleanUp_
+  commentId: Overload:PaperMarioBattleSystem.Inventory.CleanUp
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.Inventory.CleanUp
+  nameWithType: Inventory.CleanUp
 - uid: PaperMarioBattleSystem.Inventory.Coins
   name: Coins
   href: api/PaperMarioBattleSystem.Inventory.html#PaperMarioBattleSystem_Inventory_Coins
@@ -24717,6 +24857,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.Inventory.HasBadgeType
   nameWithType: Inventory.HasBadgeType
+- uid: PaperMarioBattleSystem.Inventory.HasInstance
+  name: HasInstance
+  href: api/PaperMarioBattleSystem.Inventory.html#PaperMarioBattleSystem_Inventory_HasInstance
+  commentId: P:PaperMarioBattleSystem.Inventory.HasInstance
+  fullName: PaperMarioBattleSystem.Inventory.HasInstance
+  nameWithType: Inventory.HasInstance
+- uid: PaperMarioBattleSystem.Inventory.HasInstance*
+  name: HasInstance
+  href: api/PaperMarioBattleSystem.Inventory.html#PaperMarioBattleSystem_Inventory_HasInstance_
+  commentId: Overload:PaperMarioBattleSystem.Inventory.HasInstance
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.Inventory.HasInstance
+  nameWithType: Inventory.HasInstance
 - uid: PaperMarioBattleSystem.Inventory.Instance
   name: Instance
   href: api/PaperMarioBattleSystem.Inventory.html#PaperMarioBattleSystem_Inventory_Instance
@@ -24806,6 +24959,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.Inventory.PartnerInventory.AddPartner
   nameWithType: Inventory.PartnerInventory.AddPartner
+- uid: PaperMarioBattleSystem.Inventory.PartnerInventory.CleanUp
+  name: CleanUp()
+  href: api/PaperMarioBattleSystem.Inventory.PartnerInventory.html#PaperMarioBattleSystem_Inventory_PartnerInventory_CleanUp
+  commentId: M:PaperMarioBattleSystem.Inventory.PartnerInventory.CleanUp
+  fullName: PaperMarioBattleSystem.Inventory.PartnerInventory.CleanUp()
+  nameWithType: Inventory.PartnerInventory.CleanUp()
+- uid: PaperMarioBattleSystem.Inventory.PartnerInventory.CleanUp*
+  name: CleanUp
+  href: api/PaperMarioBattleSystem.Inventory.PartnerInventory.html#PaperMarioBattleSystem_Inventory_PartnerInventory_CleanUp_
+  commentId: Overload:PaperMarioBattleSystem.Inventory.PartnerInventory.CleanUp
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.Inventory.PartnerInventory.CleanUp
+  nameWithType: Inventory.PartnerInventory.CleanUp
 - uid: PaperMarioBattleSystem.Inventory.PartnerInventory.GetAllPartners
   name: GetAllPartners()
   href: api/PaperMarioBattleSystem.Inventory.PartnerInventory.html#PaperMarioBattleSystem_Inventory_PartnerInventory_GetAllPartners
@@ -28019,19 +28185,6 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.Line.ToString
   nameWithType: Line.ToString
-- uid: PaperMarioBattleSystem.Line.UnitTestCoincident
-  name: UnitTestCoincident()
-  href: api/PaperMarioBattleSystem.Line.html#PaperMarioBattleSystem_Line_UnitTestCoincident
-  commentId: M:PaperMarioBattleSystem.Line.UnitTestCoincident
-  fullName: PaperMarioBattleSystem.Line.UnitTestCoincident()
-  nameWithType: Line.UnitTestCoincident()
-- uid: PaperMarioBattleSystem.Line.UnitTestCoincident*
-  name: UnitTestCoincident
-  href: api/PaperMarioBattleSystem.Line.html#PaperMarioBattleSystem_Line_UnitTestCoincident_
-  commentId: Overload:PaperMarioBattleSystem.Line.UnitTestCoincident
-  isSpec: "True"
-  fullName: PaperMarioBattleSystem.Line.UnitTestCoincident
-  nameWithType: Line.UnitTestCoincident
 - uid: PaperMarioBattleSystem.LoopAnimation
   name: LoopAnimation
   href: api/PaperMarioBattleSystem.LoopAnimation.html
@@ -29758,12 +29911,15 @@ references:
   commentId: F:PaperMarioBattleSystem.MoveAction.EnabledColor
   fullName: PaperMarioBattleSystem.MoveAction.EnabledColor
   nameWithType: MoveAction.EnabledColor
-- uid: PaperMarioBattleSystem.MoveAction.GetCustomAffectedEntities
-  name: GetCustomAffectedEntities()
-  href: api/PaperMarioBattleSystem.MoveAction.html#PaperMarioBattleSystem_MoveAction_GetCustomAffectedEntities
-  commentId: M:PaperMarioBattleSystem.MoveAction.GetCustomAffectedEntities
-  fullName: PaperMarioBattleSystem.MoveAction.GetCustomAffectedEntities()
-  nameWithType: MoveAction.GetCustomAffectedEntities()
+- uid: PaperMarioBattleSystem.MoveAction.GetCustomAffectedEntities(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity})
+  name: GetCustomAffectedEntities(List<BattleEntity>)
+  href: api/PaperMarioBattleSystem.MoveAction.html#PaperMarioBattleSystem_MoveAction_GetCustomAffectedEntities_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__
+  commentId: M:PaperMarioBattleSystem.MoveAction.GetCustomAffectedEntities(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity})
+  name.vb: GetCustomAffectedEntities(List(Of BattleEntity))
+  fullName: PaperMarioBattleSystem.MoveAction.GetCustomAffectedEntities(System.Collections.Generic.List<PaperMarioBattleSystem.BattleEntity>)
+  fullName.vb: PaperMarioBattleSystem.MoveAction.GetCustomAffectedEntities(System.Collections.Generic.List(Of PaperMarioBattleSystem.BattleEntity))
+  nameWithType: MoveAction.GetCustomAffectedEntities(List<BattleEntity>)
+  nameWithType.vb: MoveAction.GetCustomAffectedEntities(List(Of BattleEntity))
 - uid: PaperMarioBattleSystem.MoveAction.GetCustomAffectedEntities*
   name: GetCustomAffectedEntities
   href: api/PaperMarioBattleSystem.MoveAction.html#PaperMarioBattleSystem_MoveAction_GetCustomAffectedEntities_
@@ -29777,6 +29933,15 @@ references:
   commentId: M:PaperMarioBattleSystem.MoveAction.GetEntitiesMoveAffects
   fullName: PaperMarioBattleSystem.MoveAction.GetEntitiesMoveAffects()
   nameWithType: MoveAction.GetEntitiesMoveAffects()
+- uid: PaperMarioBattleSystem.MoveAction.GetEntitiesMoveAffects(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity})
+  name: GetEntitiesMoveAffects(List<BattleEntity>)
+  href: api/PaperMarioBattleSystem.MoveAction.html#PaperMarioBattleSystem_MoveAction_GetEntitiesMoveAffects_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__
+  commentId: M:PaperMarioBattleSystem.MoveAction.GetEntitiesMoveAffects(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity})
+  name.vb: GetEntitiesMoveAffects(List(Of BattleEntity))
+  fullName: PaperMarioBattleSystem.MoveAction.GetEntitiesMoveAffects(System.Collections.Generic.List<PaperMarioBattleSystem.BattleEntity>)
+  fullName.vb: PaperMarioBattleSystem.MoveAction.GetEntitiesMoveAffects(System.Collections.Generic.List(Of PaperMarioBattleSystem.BattleEntity))
+  nameWithType: MoveAction.GetEntitiesMoveAffects(List<BattleEntity>)
+  nameWithType.vb: MoveAction.GetEntitiesMoveAffects(List(Of BattleEntity))
 - uid: PaperMarioBattleSystem.MoveAction.GetEntitiesMoveAffects*
   name: GetEntitiesMoveAffects
   href: api/PaperMarioBattleSystem.MoveAction.html#PaperMarioBattleSystem_MoveAction_GetEntitiesMoveAffects_
@@ -37761,6 +37926,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.Shell.CleanUp
   nameWithType: Shell.CleanUp
+- uid: PaperMarioBattleSystem.Shell.EntityDefending
+  name: EntityDefending
+  href: api/PaperMarioBattleSystem.Shell.html#PaperMarioBattleSystem_Shell_EntityDefending
+  commentId: P:PaperMarioBattleSystem.Shell.EntityDefending
+  fullName: PaperMarioBattleSystem.Shell.EntityDefending
+  nameWithType: Shell.EntityDefending
+- uid: PaperMarioBattleSystem.Shell.EntityDefending*
+  name: EntityDefending
+  href: api/PaperMarioBattleSystem.Shell.html#PaperMarioBattleSystem_Shell_EntityDefending_
+  commentId: Overload:PaperMarioBattleSystem.Shell.EntityDefending
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.Shell.EntityDefending
+  nameWithType: Shell.EntityDefending
 - uid: PaperMarioBattleSystem.Shell.GetIdleAnim
   name: GetIdleAnim()
   href: api/PaperMarioBattleSystem.Shell.html#PaperMarioBattleSystem_Shell_GetIdleAnim
@@ -38958,6 +39136,38 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.SkyGuy.WingedBehavior
   nameWithType: SkyGuy.WingedBehavior
+- uid: PaperMarioBattleSystem.SkyGuyAI
+  name: SkyGuyAI
+  href: api/PaperMarioBattleSystem.SkyGuyAI.html
+  commentId: T:PaperMarioBattleSystem.SkyGuyAI
+  fullName: PaperMarioBattleSystem.SkyGuyAI
+  nameWithType: SkyGuyAI
+- uid: PaperMarioBattleSystem.SkyGuyAI.#ctor(PaperMarioBattleSystem.BattleEnemy)
+  name: SkyGuyAI(BattleEnemy)
+  href: api/PaperMarioBattleSystem.SkyGuyAI.html#PaperMarioBattleSystem_SkyGuyAI__ctor_PaperMarioBattleSystem_BattleEnemy_
+  commentId: M:PaperMarioBattleSystem.SkyGuyAI.#ctor(PaperMarioBattleSystem.BattleEnemy)
+  fullName: PaperMarioBattleSystem.SkyGuyAI.SkyGuyAI(PaperMarioBattleSystem.BattleEnemy)
+  nameWithType: SkyGuyAI.SkyGuyAI(BattleEnemy)
+- uid: PaperMarioBattleSystem.SkyGuyAI.#ctor*
+  name: SkyGuyAI
+  href: api/PaperMarioBattleSystem.SkyGuyAI.html#PaperMarioBattleSystem_SkyGuyAI__ctor_
+  commentId: Overload:PaperMarioBattleSystem.SkyGuyAI.#ctor
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.SkyGuyAI.SkyGuyAI
+  nameWithType: SkyGuyAI.SkyGuyAI
+- uid: PaperMarioBattleSystem.SkyGuyAI.PerformAction
+  name: PerformAction()
+  href: api/PaperMarioBattleSystem.SkyGuyAI.html#PaperMarioBattleSystem_SkyGuyAI_PerformAction
+  commentId: M:PaperMarioBattleSystem.SkyGuyAI.PerformAction
+  fullName: PaperMarioBattleSystem.SkyGuyAI.PerformAction()
+  nameWithType: SkyGuyAI.PerformAction()
+- uid: PaperMarioBattleSystem.SkyGuyAI.PerformAction*
+  name: PerformAction
+  href: api/PaperMarioBattleSystem.SkyGuyAI.html#PaperMarioBattleSystem_SkyGuyAI_PerformAction_
+  commentId: Overload:PaperMarioBattleSystem.SkyGuyAI.PerformAction
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.SkyGuyAI.PerformAction
+  nameWithType: SkyGuyAI.PerformAction
 - uid: PaperMarioBattleSystem.SkyGuyBalloon
   name: SkyGuyBalloon
   href: api/PaperMarioBattleSystem.SkyGuyBalloon.html
@@ -41479,6 +41689,12 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.StatusEffect.IsInfinite
   nameWithType: StatusEffect.IsInfinite
+- uid: PaperMarioBattleSystem.StatusEffect.IsSuppressed
+  name: IsSuppressed()
+  href: api/PaperMarioBattleSystem.StatusEffect.html#PaperMarioBattleSystem_StatusEffect_IsSuppressed
+  commentId: M:PaperMarioBattleSystem.StatusEffect.IsSuppressed
+  fullName: PaperMarioBattleSystem.StatusEffect.IsSuppressed()
+  nameWithType: StatusEffect.IsSuppressed()
 - uid: PaperMarioBattleSystem.StatusEffect.IsSuppressed(PaperMarioBattleSystem.Enumerations.StatusSuppressionTypes)
   name: IsSuppressed(Enumerations.StatusSuppressionTypes)
   href: api/PaperMarioBattleSystem.StatusEffect.html#PaperMarioBattleSystem_StatusEffect_IsSuppressed_PaperMarioBattleSystem_Enumerations_StatusSuppressionTypes_
@@ -41801,38 +42017,6 @@ references:
   commentId: T:PaperMarioBattleSystem.StatusGlobals
   fullName: PaperMarioBattleSystem.StatusGlobals
   nameWithType: StatusGlobals
-- uid: PaperMarioBattleSystem.StatusGlobals.ConfusionHolder
-  name: StatusGlobals.ConfusionHolder
-  href: api/PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.html
-  commentId: T:PaperMarioBattleSystem.StatusGlobals.ConfusionHolder
-  fullName: PaperMarioBattleSystem.StatusGlobals.ConfusionHolder
-  nameWithType: StatusGlobals.ConfusionHolder
-- uid: PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.#ctor(System.Int32)
-  name: ConfusionHolder(Int32)
-  href: api/PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.html#PaperMarioBattleSystem_StatusGlobals_ConfusionHolder__ctor_System_Int32_
-  commentId: M:PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.#ctor(System.Int32)
-  fullName: PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.ConfusionHolder(System.Int32)
-  nameWithType: StatusGlobals.ConfusionHolder.ConfusionHolder(Int32)
-- uid: PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.#ctor*
-  name: ConfusionHolder
-  href: api/PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.html#PaperMarioBattleSystem_StatusGlobals_ConfusionHolder__ctor_
-  commentId: Overload:PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.#ctor
-  isSpec: "True"
-  fullName: PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.ConfusionHolder
-  nameWithType: StatusGlobals.ConfusionHolder.ConfusionHolder
-- uid: PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.ConfusionPercent
-  name: ConfusionPercent
-  href: api/PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.html#PaperMarioBattleSystem_StatusGlobals_ConfusionHolder_ConfusionPercent
-  commentId: P:PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.ConfusionPercent
-  fullName: PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.ConfusionPercent
-  nameWithType: StatusGlobals.ConfusionHolder.ConfusionPercent
-- uid: PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.ConfusionPercent*
-  name: ConfusionPercent
-  href: api/PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.html#PaperMarioBattleSystem_StatusGlobals_ConfusionHolder_ConfusionPercent_
-  commentId: Overload:PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.ConfusionPercent
-  isSpec: "True"
-  fullName: PaperMarioBattleSystem.StatusGlobals.ConfusionHolder.ConfusionPercent
-  nameWithType: StatusGlobals.ConfusionHolder.ConfusionPercent
 - uid: PaperMarioBattleSystem.StatusGlobals.GetStatusPriority(PaperMarioBattleSystem.Enumerations.StatusTypes)
   name: GetStatusPriority(Enumerations.StatusTypes)
   href: api/PaperMarioBattleSystem.StatusGlobals.html#PaperMarioBattleSystem_StatusGlobals_GetStatusPriority_PaperMarioBattleSystem_Enumerations_StatusTypes_
@@ -44479,12 +44663,15 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.TattleAction.TattleAction
   nameWithType: TattleAction.TattleAction
-- uid: PaperMarioBattleSystem.TattleAction.GetCustomAffectedEntities
-  name: GetCustomAffectedEntities()
-  href: api/PaperMarioBattleSystem.TattleAction.html#PaperMarioBattleSystem_TattleAction_GetCustomAffectedEntities
-  commentId: M:PaperMarioBattleSystem.TattleAction.GetCustomAffectedEntities
-  fullName: PaperMarioBattleSystem.TattleAction.GetCustomAffectedEntities()
-  nameWithType: TattleAction.GetCustomAffectedEntities()
+- uid: PaperMarioBattleSystem.TattleAction.GetCustomAffectedEntities(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity})
+  name: GetCustomAffectedEntities(List<BattleEntity>)
+  href: api/PaperMarioBattleSystem.TattleAction.html#PaperMarioBattleSystem_TattleAction_GetCustomAffectedEntities_System_Collections_Generic_List_PaperMarioBattleSystem_BattleEntity__
+  commentId: M:PaperMarioBattleSystem.TattleAction.GetCustomAffectedEntities(System.Collections.Generic.List{PaperMarioBattleSystem.BattleEntity})
+  name.vb: GetCustomAffectedEntities(List(Of BattleEntity))
+  fullName: PaperMarioBattleSystem.TattleAction.GetCustomAffectedEntities(System.Collections.Generic.List<PaperMarioBattleSystem.BattleEntity>)
+  fullName.vb: PaperMarioBattleSystem.TattleAction.GetCustomAffectedEntities(System.Collections.Generic.List(Of PaperMarioBattleSystem.BattleEntity))
+  nameWithType: TattleAction.GetCustomAffectedEntities(List<BattleEntity>)
+  nameWithType.vb: TattleAction.GetCustomAffectedEntities(List(Of BattleEntity))
 - uid: PaperMarioBattleSystem.TattleAction.GetCustomAffectedEntities*
   name: GetCustomAffectedEntities
   href: api/PaperMarioBattleSystem.TattleAction.html#PaperMarioBattleSystem_TattleAction_GetCustomAffectedEntities_
@@ -47790,6 +47977,51 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.UnitTests.BadgeUnitTests.TestPartyNPEquipCount
   nameWithType: UnitTests.BadgeUnitTests.TestPartyNPEquipCount
+- uid: PaperMarioBattleSystem.UnitTests.BattleUnitTests
+  name: UnitTests.BattleUnitTests
+  href: api/PaperMarioBattleSystem.UnitTests.BattleUnitTests.html
+  commentId: T:PaperMarioBattleSystem.UnitTests.BattleUnitTests
+  fullName: PaperMarioBattleSystem.UnitTests.BattleUnitTests
+  nameWithType: UnitTests.BattleUnitTests
+- uid: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioLuckyStart
+  name: TestSwitchMarioLuckyStart()
+  href: api/PaperMarioBattleSystem.UnitTests.BattleUnitTests.html#PaperMarioBattleSystem_UnitTests_BattleUnitTests_TestSwitchMarioLuckyStart
+  commentId: M:PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioLuckyStart
+  fullName: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioLuckyStart()
+  nameWithType: UnitTests.BattleUnitTests.TestSwitchMarioLuckyStart()
+- uid: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioLuckyStart*
+  name: TestSwitchMarioLuckyStart
+  href: api/PaperMarioBattleSystem.UnitTests.BattleUnitTests.html#PaperMarioBattleSystem_UnitTests_BattleUnitTests_TestSwitchMarioLuckyStart_
+  commentId: Overload:PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioLuckyStart
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioLuckyStart
+  nameWithType: UnitTests.BattleUnitTests.TestSwitchMarioLuckyStart
+- uid: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioPeekaboo
+  name: TestSwitchMarioPeekaboo()
+  href: api/PaperMarioBattleSystem.UnitTests.BattleUnitTests.html#PaperMarioBattleSystem_UnitTests_BattleUnitTests_TestSwitchMarioPeekaboo
+  commentId: M:PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioPeekaboo
+  fullName: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioPeekaboo()
+  nameWithType: UnitTests.BattleUnitTests.TestSwitchMarioPeekaboo()
+- uid: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioPeekaboo*
+  name: TestSwitchMarioPeekaboo
+  href: api/PaperMarioBattleSystem.UnitTests.BattleUnitTests.html#PaperMarioBattleSystem_UnitTests_BattleUnitTests_TestSwitchMarioPeekaboo_
+  commentId: Overload:PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioPeekaboo
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioPeekaboo
+  nameWithType: UnitTests.BattleUnitTests.TestSwitchMarioPeekaboo
+- uid: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioSleep
+  name: TestSwitchMarioSleep()
+  href: api/PaperMarioBattleSystem.UnitTests.BattleUnitTests.html#PaperMarioBattleSystem_UnitTests_BattleUnitTests_TestSwitchMarioSleep
+  commentId: M:PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioSleep
+  fullName: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioSleep()
+  nameWithType: UnitTests.BattleUnitTests.TestSwitchMarioSleep()
+- uid: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioSleep*
+  name: TestSwitchMarioSleep
+  href: api/PaperMarioBattleSystem.UnitTests.BattleUnitTests.html#PaperMarioBattleSystem_UnitTests_BattleUnitTests_TestSwitchMarioSleep_
+  commentId: Overload:PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioSleep
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.UnitTests.BattleUnitTests.TestSwitchMarioSleep
+  nameWithType: UnitTests.BattleUnitTests.TestSwitchMarioSleep
 - uid: PaperMarioBattleSystem.UnitTests.InteractionUnitTests
   name: UnitTests.InteractionUnitTests
   href: api/PaperMarioBattleSystem.UnitTests.InteractionUnitTests.html
@@ -47861,6 +48093,19 @@ references:
   isSpec: "True"
   fullName: PaperMarioBattleSystem.UnitTests.RunBadgeUnitTests
   nameWithType: UnitTests.RunBadgeUnitTests
+- uid: PaperMarioBattleSystem.UnitTests.RunBattleUnitTests
+  name: RunBattleUnitTests()
+  href: api/PaperMarioBattleSystem.UnitTests.html#PaperMarioBattleSystem_UnitTests_RunBattleUnitTests
+  commentId: M:PaperMarioBattleSystem.UnitTests.RunBattleUnitTests
+  fullName: PaperMarioBattleSystem.UnitTests.RunBattleUnitTests()
+  nameWithType: UnitTests.RunBattleUnitTests()
+- uid: PaperMarioBattleSystem.UnitTests.RunBattleUnitTests*
+  name: RunBattleUnitTests
+  href: api/PaperMarioBattleSystem.UnitTests.html#PaperMarioBattleSystem_UnitTests_RunBattleUnitTests_
+  commentId: Overload:PaperMarioBattleSystem.UnitTests.RunBattleUnitTests
+  isSpec: "True"
+  fullName: PaperMarioBattleSystem.UnitTests.RunBattleUnitTests
+  nameWithType: UnitTests.RunBattleUnitTests
 - uid: PaperMarioBattleSystem.UnitTests.RunInteractionUnitTests
   name: RunInteractionUnitTests()
   href: api/PaperMarioBattleSystem.UnitTests.html#PaperMarioBattleSystem_UnitTests_RunInteractionUnitTests

@@ -74,8 +74,8 @@
   <h1 id="PaperMarioBattleSystem_DefensiveAction" data-uid="PaperMarioBattleSystem.DefensiveAction" class="text-break">Class DefensiveAction
   </h1>
   <div class="markdown level0 summary"><p>The base class for Defensive Actions BattleEntities can perform in battle.
-<p>A Defensive Action is defined as one that can be done when it&apos;s not the BattleEntity&apos;s turn.
-In the first two Paper Mario games, the only Defensive Actions are Guard and Superguard.</p></p>
+<p>A Defensive Action is defined as one that can be done when it&apos;s not the BattleEntity&apos;s turn and helps them
+reduce the damage dealt. In the first two Paper Mario games, the only Defensive Actions are Guard and Superguard.</p></p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -209,7 +209,7 @@ If this is null, it defends against all of them.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L41">View Source</a>
   </span>
   <h4 id="PaperMarioBattleSystem_DefensiveAction_CommandSuccessTimer" data-uid="PaperMarioBattleSystem.DefensiveAction.CommandSuccessTimer">CommandSuccessTimer</h4>
-  <div class="markdown level1 summary"><p>The amount of time a successful ActionCommand is valid for</p>
+  <div class="markdown level1 summary"><p>The amount of time a successful ActionCommand is valid for.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -239,7 +239,7 @@ If this is null, it defends against all of them.</p>
     <a href="https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/PaperMarioBattleSystem/PaperMarioBattleSystem/Classes/Actions/Defensive/DefensiveAction.cs/#L46">View Source</a>
   </span>
   <h4 id="PaperMarioBattleSystem_DefensiveAction_PrevCommandTimer" data-uid="PaperMarioBattleSystem.DefensiveAction.PrevCommandTimer">PrevCommandTimer</h4>
-  <div class="markdown level1 summary"><p>The time since the last successful ActionCommand</p>
+  <div class="markdown level1 summary"><p>The time since the last successful ActionCommand.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -487,7 +487,7 @@ This is used to help moves determine whether they can override this or not.</p>
   </span>
   <a id="PaperMarioBattleSystem_DefensiveAction_FilterStatuses_" data-uid="PaperMarioBattleSystem.DefensiveAction.FilterStatuses*"></a>
   <h4 id="PaperMarioBattleSystem_DefensiveAction_FilterStatuses_PaperMarioBattleSystem_StatusChanceHolder___" data-uid="PaperMarioBattleSystem.DefensiveAction.FilterStatuses(PaperMarioBattleSystem.StatusChanceHolder[])">FilterStatuses(StatusChanceHolder[])</h4>
-  <div class="markdown level1 summary"><p>Filters out StatusEffects that the DefensiveAction defends against</p>
+  <div class="markdown level1 summary"><p>Filters out StatusEffects that the DefensiveAction defends against.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -507,7 +507,7 @@ This is used to help moves determine whether they can override this or not.</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.StatusChanceHolder.html">StatusChanceHolder</a>[]</td>
         <td><span class="parametername">statusesInflicted</span></td>
-        <td><p>The original set of StatusEffects inflicted</p>
+        <td><p>The original set of StatusEffects inflicted.</p>
 </td>
       </tr>
     </tbody>
@@ -524,7 +524,7 @@ This is used to help moves determine whether they can override this or not.</p>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.StatusChanceHolder.html">StatusChanceHolder</a>[]</td>
         <td><p>A set of StatusEffects that the DefensiveAction doesn&apos;t defend against.
-null if the DefensiveAction defends against all StatusEffects</p>
+null if the DefensiveAction defends against all StatusEffects.</p>
 </td>
       </tr>
     </tbody>
@@ -560,13 +560,13 @@ Whichever is successful first in the BattleEntity&apos;s DefensiveAction list is
       <tr>
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">damage</span></td>
-        <td><p>The original damage that would be dealt to the BattleEntity</p>
+        <td><p>The original damage that would be dealt to the BattleEntity.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.StatusChanceHolder.html">StatusChanceHolder</a>[]</td>
         <td><span class="parametername">statusEffects</span></td>
-        <td><p>The original StatusEffects that would be inflicted on the BattleEntity</p>
+        <td><p>The original StatusEffects that would be inflicted on the BattleEntity.</p>
 </td>
       </tr>
       <tr>
@@ -588,7 +588,7 @@ Whichever is successful first in the BattleEntity&apos;s DefensiveAction list is
     <tbody>
       <tr>
         <td><a class="xref" href="PaperMarioBattleSystem.BattleGlobals.DefensiveActionHolder.html">BattleGlobals.DefensiveActionHolder</a></td>
-        <td><p>A DefensiveActionHolder containing the modified damage dealt and a filtered set of StatusEffects inflicted</p>
+        <td><p>A DefensiveActionHolder containing the modified damage dealt and a filtered set of StatusEffects inflicted.</p>
 </td>
       </tr>
     </tbody>

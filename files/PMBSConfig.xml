@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Battle>
+  <BattleProperties BattleSetting="Normal" Runnable="true"></BattleProperties>
+  <BattleEntity Type="Mario" HP="50" FP="30" Attack="0" Defense="0" Boots="1" Hammer="2" SP="700">
+    <Item Type="LuckyStar"></Item>
+    <Item Type="Mushroom"></Item>
+    <Item Type="HoneySyrup"></Item>
+    <Item Type="ThunderRage"></Item>
+    <Item Type="TastyTonic"></Item>
+    <Item Type="FireFlower"></Item>
+    <Item Type="LifeShroom"></Item>
+    <Item Type="Mystery"></Item>
+    <Item Type="VoltShroom"></Item>
+    <Item Type="DizzyDial"></Item>
+    <Item Type="StoneCap"></Item>
+    <Badge Type="QuickChangeBadge"></Badge>
+    <Badge Type="PowerBounceBadge"></Badge>
+    <Badge Type="MultiBounceBadge"></Badge>
+    <Badge Type="IceSmashBadge"></Badge>
+    <Badge Type="HeadRattleBadge"></Badge>
+    <Badge Type="TornadoJumpBadge"></Badge>
+    <Badge Type="QuickChangeBadge"></Badge>
+    <Badge Type="ChargeBadge"></Badge>
+    <Badge Type="DoubleDipBadge"></Badge>
+    <Badge Type="DoubleDipBadge"></Badge>
+    <Badge Type="TripleDipBadge"></Badge>
+    <Badge Type="DeepFocusBadge"></Badge>
+    <Badge Type="DeepFocusBadge"></Badge>
+    <Badge Type="DeepFocusBadge"></Badge>
+    <Badge Type="DDownPoundBadge"></Badge>
+    <Badge Type="PiercingBlowBadge"></Badge>
+    <Badge Type="DDownJumpBadge"></Badge>
+    <Badge Type="PowerSmashBadge"></Badge>
+    <Badge Type="MegaSmashBadge"></Badge>
+    <Badge Type="QuakeHammerBadge"></Badge>
+    <Badge Type="TimingTutorBadge"></Badge>
+  </BattleEntity>
+  <BattleEntity Type="Goompa"></BattleEntity>
+  <BattleEntity Type="Goombario" Rank="1">
+    <Badge Type="ChargePBadge"></Badge>
+    <Badge Type="FlowerSaverPBadge"></Badge>
+    <Badge Type="DoubleDipPBadge"></Badge>
+    <Badge Type="DoubleDipPBadge"></Badge>
+    <Badge Type="GroupFocusBadge"></Badge>
+  </BattleEntity>
+  <BattleEntity Type="Kooper" Rank="3"></BattleEntity>
+  <BattleEntity Type="Bow"></BattleEntity>
+  <BattleEntity Type="Watt" Rank="2"></BattleEntity>
+  
+  <BattleEntity Type="Goomba">
+    <Item Type="Mushroom"></Item>
+  </BattleEntity>
+  <BattleEntity Type="Paratroopa"></BattleEntity>
+  <BattleEntity Type="Pokey"></BattleEntity>
+</Battle>

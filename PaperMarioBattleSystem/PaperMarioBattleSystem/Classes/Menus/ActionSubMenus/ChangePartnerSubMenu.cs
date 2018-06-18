@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The menu that shows Mario's list of partners.
+    /// The menu that shows Mario's list of Partners.
     /// You can select one to change to.
     /// </summary>
     public sealed class ChangePartnerSubMenu : ActionSubMenu

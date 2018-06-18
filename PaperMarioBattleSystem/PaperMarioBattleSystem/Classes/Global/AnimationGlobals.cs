@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Class for global values dealing with Animations
+    /// Class for global values dealing with Animations.
     /// </summary>
     public static class AnimationGlobals
     {
         /// <summary>
-        /// A value corresponding to an animation that loops infinitely
+        /// A value corresponding to an animation that loops infinitely.
         /// </summary>
         public const int InfiniteLoop = -1;
         public const float DefaultAnimSpeed = 1f;
@@ -36,7 +36,7 @@ namespace PaperMarioBattleSystem
         public const string TalkName = "Talk";
 
         /// <summary>
-        /// Battle animations specific to playable characters
+        /// Battle animations specific to playable characters.
         /// </summary>
         public static class PlayerBattleAnimations
         {
@@ -51,7 +51,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Mario-specific battle animations
+        /// Mario-specific battle animations.
         /// </summary>
         public static class MarioBattleAnimations
         {
@@ -123,33 +123,51 @@ namespace PaperMarioBattleSystem
             public const string WattElectricChargeName = "WattElectricCharge";
         }
 
+        /// <summary>
+        /// Paragoomba-specific battle animations.
+        /// </summary>
         public static class ParagoombaBattleAnimations
         {
             public const string DiveKickName = "DiveKick";
         }
 
+        /// <summary>
+        /// Paratroopa-specific battle animations.
+        /// </summary>
         public static class ParatroopaBattleAnimations
         {
             public const string ShellShotName = "ShellShot";
         }
 
+        /// <summary>
+        /// Huff N. Puff-specific battle animations.
+        /// </summary>
         public static class HuffNPuffBattleAnimations
         {
             public const string InhaleName = "Inhale";
             public const string ExhaleName = "Exhale";
         }
 
+        /// <summary>
+        /// Gulpit-specific battle animations.
+        /// </summary>
         public static class GulpitBattleAnimations
         {
             public const string LickName = "Lick";
             public const string SpitRockName = "SpitRock";
         }
 
+        /// <summary>
+        /// Koopatrol-specific battle animations.
+        /// </summary>
         public static class KoopatrolBattleAnimations
         {
             public const string SummonKoopatrolName = "SummonKoopatrol";
         }
 
+        /// <summary>
+        /// Duplighost-specific battle animations.
+        /// </summary>
         public static class DuplighostBattleAnimations
         {
             public const string HeadbuttStartName = "HeadbuttStart";
@@ -190,7 +208,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Status Effect-related animations in battle
+        /// Status Effect-related animations in battle.
         /// </summary>
         public static class StatusBattleAnimations
         {

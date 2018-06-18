@@ -12,7 +12,7 @@ namespace PaperMarioBattleSystem
     #region Enums
 
     /// <summary>
-    /// The result of elemental damage dealt on an BattleEntity based on its weaknesses and/or resistances.
+    /// The result of elemental damage dealt on a BattleEntity based on its weaknesses and/or resistances.
     /// </summary>
     public enum ElementInteractionResult
     {

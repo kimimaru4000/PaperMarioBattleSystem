@@ -252,6 +252,14 @@ Star Beam
 -Removes charge for Hyper Goombas, Hyper Paragoombas, Hyper Clefts, Koopatrols
 -Removes Electrified granted by Yellow Magikoopas
 
+Succession Moves (PM)
+---------------------
+Succession moves with Action Commands in PM, such as a Jungle Fuzzy's Kissy-Kissy move, don't bring up the Action Command and end earlier if the target is immobile in some way.
+
+This can be observed with Jungle Fuzzies after using the Stone Cap on Mario. Instead of attacking 5 times, they attack 2, and the Action Command never comes up. It's possible that the number of attacks is divided by two then floored, making it: NumAttacks = floor(NumAttacks / 2)
+
+Unfortunately, no enemies with these moves are found alongside enemies that inflict Status Effects that immobilize Mario, so there's no way to test this behavior aside from Stone.
+
 General
 -------
 For the Cloud Nine, Water Block, and Turbo Charge Status Effects, it shows the order

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Class for global values dealing with loading and unloading content
+    /// Class for global values dealing with loading and unloading content.
     /// </summary>
     public static class ContentGlobals
     {
@@ -21,6 +21,9 @@ namespace PaperMarioBattleSystem
         public const string ShaderRoot = "Shaders/";
         public const string ShaderTextureRoot = ShaderRoot + "ShaderTextures/";
 
+        /// <summary>
+        /// The name of the config file.
+        /// </summary>
         public const string ConfigName = "PMBSConfig.xml";
 
         public const string LuigiPaletteExtension = "LEmblem";

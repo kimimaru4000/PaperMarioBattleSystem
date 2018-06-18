@@ -94,9 +94,9 @@ namespace PaperMarioBattleSystem
         public static readonly Vector2 EnemyStartPos = new Vector2(150, 100);
         public static readonly int PositionXDiff = 50;
 
-        //These are general values used by most entities in the air or on the ceiling
-        //The entity can still configure how high it goes on its own if needed
-        //In that case, make sure to update the entity's BattlePosition as well
+        //These are general values used by most BattleEntities in the air or on the ceiling.
+        //The BattleEntity can still configure how high it goes on its own if needed.
+        //In that case, make sure to update the BattleEntity's BattlePosition as well.
         public static readonly int AirborneY = 40;
         public static readonly int CeilingY = 100;
 
@@ -120,7 +120,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Holds information about a MoveAction being used and the BattleEntities it targets
+        /// Holds information about a MoveAction being used and the BattleEntities it targets.
         /// </summary>
         public struct ActionHolder
         {
@@ -141,15 +141,18 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Holds immutable data regarding the result of a <see cref="DefensiveAction"/>.
+        /// </summary>
         public struct DefensiveActionHolder
         {
             /// <summary>
-            /// The final damage, influenced by the Defensive Action
+            /// The final damage, influenced by the Defensive Action.
             /// </summary>
             public int Damage { get; private set; }
 
             /// <summary>
-            /// A filtered set of StatusEffects, influenced by the Defensive Action
+            /// A filtered set of StatusEffects, influenced by the Defensive Action.
             /// </summary>
             public StatusChanceHolder[] Statuses { get; private set; }
 
@@ -188,7 +191,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Holds a pending Battle Event with its priority and the Battle States it should be added in.
+        /// Holds a pending Battle Event with its priority and the <see cref="BattleState"/>s it should be added in.
         /// The fields in this struct are immutable.
         /// </summary>
         public struct PendingBattleEventHolder
@@ -235,8 +238,8 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Handles resolving the sorting of BattleEntities if their BattleIndices are the same.
         /// </summary>
-        /// <param name="entity1"></param>
-        /// <param name="entity2"></param>
+        /// <param name="entity1">The first BattleEntity to compare.</param>
+        /// <param name="entity2">The second BattleEntity to compare.</param>
         /// <returns>-1 if entity1 has a lower X position, 1 if entity2 has a lower X position. If players, higher X positions are favored instead.
         /// If X positions are equal, -1 if entity1 has a lower Y position and 1 if entity2 has a lower Y position.
         /// If X and Y positions are equal, 0.</returns>

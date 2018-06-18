@@ -42,7 +42,7 @@ namespace PaperMarioBattleSystem
         /// Gets the Tattle image corresponding to an enemy.
         /// </summary>
         /// <param name="enemyName">The name of the enemy.</param>
-        /// <returns>A Texture2D of the enemy's Tattle image if it exists in the table, otherwise null</returns>
+        /// <returns>A Texture2D of the enemy's Tattle image if it exists in the table, otherwise null.</returns>
         public static Texture2D GetTattleImage(string enemyName)
         {
             Texture2D tex = null;
@@ -65,7 +65,7 @@ namespace PaperMarioBattleSystem
         /// Gets the Tattle Log corresponding to an enemy.
         /// </summary>
         /// <param name="enemyName">The name of the enemy.</param>
-        /// <returns>A string[] array of the enemy's Tattle Log entry if it exists in the table, otherwise null</returns>
+        /// <returns>A string[] array of the enemy's Tattle Log entry if it exists in the table, otherwise null.</returns>
         public static string[] GetTattleLog(string enemyName)
         {
             string[] log = null;
@@ -88,7 +88,7 @@ namespace PaperMarioBattleSystem
         /// Gets the Tattle Description corresponding to an enemy.
         /// </summary>
         /// <param name="enemyName">The name of the enemy.</param>
-        /// <returns>A string of the enemy's in-battle Tattle Description entry if it exists in the table, otherwise null</returns>
+        /// <returns>A string of the enemy's in-battle Tattle Description entry if it exists in the table, otherwise null.</returns>
         public static string GetTattleDescription(string enemyName)
         {
             string description = null;

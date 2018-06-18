@@ -11,6 +11,10 @@ using static PaperMarioBattleSystem.Enumerations;
 
 namespace PaperMarioBattleSystem
 {
+    /// <summary>
+    /// A Partner battle menu. It contains Tactics, Items, and Abilities. The contents of Abilities varies depending on the Partner.
+    /// <para>With Group Focus equipped, Partners can use Focus.</para>
+    /// </summary>
     public class PartnerBattleMenu : PlayerBattleMenu
     {
         protected ActionSubMenu PartnerSubMenu { get; private set; } = null;

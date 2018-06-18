@@ -19,7 +19,8 @@ namespace PaperMarioBattleSystem
             Name = "Tactics";
             Position = new Vector2(230, 150);
 
-            //int quickChangeCount = entity.GetEquippedBadgeCount(BadgeGlobals.BadgeTypes.QuickChange);
+            /* Uncomment if you want the Change Partner menu option to be a different color with Quick Change equipped */
+            //int quickChangeCount = user.GetPartyEquippedNPBadgeCount(BadgeGlobals.BadgeTypes.QuickChange);
             //Enumerations.CostDisplayTypes costDisplayType = Enumerations.CostDisplayTypes.Shown;
             //if (quickChangeCount > 0) costDisplayType = Enumerations.CostDisplayTypes.Special;
 

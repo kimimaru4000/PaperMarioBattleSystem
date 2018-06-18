@@ -7,6 +7,9 @@ using Microsoft.Xna.Framework;
 
 namespace PaperMarioBattleSystem
 {
+    /// <summary>
+    /// A SubMenu for Goombario's Abilities.
+    /// </summary>
     public class GoombarioSubMenu : ActionSubMenu
     {
         public GoombarioSubMenu(BattleEntity user) : base(user)

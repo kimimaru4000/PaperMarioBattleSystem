@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// A Submenu for Watt's Abilities.
+    /// A SubMenu for Watt's Abilities.
     /// </summary>
     public sealed class WattSubMenu : ActionSubMenu
     {

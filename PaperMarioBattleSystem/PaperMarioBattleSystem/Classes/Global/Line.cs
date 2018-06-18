@@ -87,7 +87,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets the center of the Line.
         /// </summary>
-        /// <returns>Gets the center point of the line</returns>
+        /// <returns>Gets the center point of the Line.</returns>
         public Vector2 GetCenter()
         {
             Vector2 diff = ((P2.ToVector2() - P1.ToVector2()) / 2f);
@@ -106,15 +106,6 @@ namespace PaperMarioBattleSystem
             diff.Y = Math.Abs(diff.Y);
 
             return (diff / 2);
-        }
-
-        public static void UnitTestCoincident()
-        {
-            Line line1 = new Line(400, 80, 450, 80);
-            Line line2 = new Line(200, 80, 399, 80);
-
-            Debug.Log($"line 1: {line1} and line 2: {line2}");
-            Debug.Log($"Do they intersect? {line1.Intersects(line2)}");
         }
 
         #region Comparison and Operator Overloading

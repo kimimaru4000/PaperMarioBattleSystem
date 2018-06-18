@@ -9,7 +9,7 @@ using PaperMarioBattleSystem.Utilities;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Class for global values dealing with rendering
+    /// Class for global values dealing with rendering.
     /// </summary>
     public static class RenderingGlobals
     {

@@ -12,9 +12,9 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// A menu for the MoveActions relating to an ActionMenu. For example, any Jump actions would be in the ActionSubMenu for Jump.
-    /// ActionSubMenus can lead to more ActionSubMenus, as is the case with "Change Partner"
-    /// This is only used by the player
-    /// <para>All ActionSubMenus have the "SubMenu" suffix</para>
+    /// ActionSubMenus can lead to more ActionSubMenus, as is the case with "Change Partner".
+    /// This is only used by Players.
+    /// <para>All ActionSubMenus have the "SubMenu" suffix.</para>
     /// </summary>
     public class ActionSubMenu : InputMenu, INameable
     {
@@ -29,7 +29,7 @@ namespace PaperMarioBattleSystem
         public string Name { get; set; } = string.Empty;
 
         /// <summary>
-        /// The list of move actions in the submenu
+        /// The list of move actions in the SubMenu.
         /// </summary>
         public List<MoveAction> BattleActions { get; protected set; } = new List<MoveAction>();
 
@@ -45,7 +45,7 @@ namespace PaperMarioBattleSystem
         public bool AutoSelectSingle = false;
 
         /// <summary>
-        /// The position of the submenu
+        /// The position of the SubMenu.
         /// </summary>
         protected Vector2 Position = Vector2.Zero;
 

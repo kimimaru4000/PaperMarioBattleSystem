@@ -99,57 +99,7 @@ namespace PaperMarioBattleSystem
             SpriteRenderer.Instance.AdjustWindowSize(new Vector2(RenderingGlobals.BaseResolutionWidth, RenderingGlobals.BaseResolutionHeight));
             AssetManager.Instance.Initialize(Content);
 
-            //Initialize core battle properties
-            BattleGlobals.BattleProperties battleProperties = new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true);
-
-            BattleMario mario = new BattleMario(new MarioStats(1, 10, 5, 0, 0,
-                EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
-
-            List<BattleEntity> enemyList = new List<BattleEntity>();
-
-            //Read from the config
-            if (ConfigLoader.LoadConfig($"{ContentGlobals.ContentRoot}/{ContentGlobals.ConfigName}", ref battleProperties, mario, enemyList) == false)
-            {
-                //If we failed to read from the config, initialize a default battle
-                InitDefaultBattle(mario, enemyList);
-            }
-
-            //Initialize the BattleManager
-            battleManager = new BattleManager();
-
-            //Send out the first Partner to battle, provided it exists
-            int partnerCount = Inventory.Instance.partnerInventory.GetPartnerCount();
-            BattlePartner partner = (partnerCount == 0) ? null : Inventory.Instance.partnerInventory.GetAllPartners()[0];
-
-            battleManager.Initialize(battleProperties, mario, partner, enemyList);
-
-            //Initialize helper objects
-            //Check for the battle setting and add darkness if so
-            if (battleManager.Properties.BattleSetting == BattleGlobals.BattleSettings.Dark)
-            {
-                BattleDarknessObj battleDarkness = new BattleDarknessObj(battleManager);
-
-                //Initialize the lighting manager for dark battles
-                lightingManager = new LightingManager(battleDarkness, 
-                    AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Lighting"),
-                    AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}LightMask.png"));
-
-                battleManager.battleObjManager.AddBattleObject(battleDarkness);
-            }
-
-            //Add the HP bar manager
-            battleManager.battleObjManager.AddBattleObject(new HPBarManagerObj(battleManager));
-
-            //If you can't run from battle, show a message at the start saying so
-            if (battleManager.Properties.Runnable == false)
-            {
-                battleManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
-                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn },
-                    new MessageBattleEvent(battleManager.battleUIManager, BattleGlobals.NoRunMessage, MessageBattleEvent.DefaultWaitDuration));
-            }
-
-            //Start the battle
-            battleManager.StartBattle();
+            LoadBattle();
 
             //Initialize the lists with a capacity equal to the current number of BattleEntities in battle
             BattleEntities = new List<BattleEntity>(battleManager.TotalEntityCount);
@@ -192,6 +142,73 @@ namespace PaperMarioBattleSystem
             entities.Add(new Paratroopa());
         }
 
+        private void LoadBattle()
+        {
+            //Initialize core battle properties
+            BattleGlobals.BattleProperties battleProperties = new BattleGlobals.BattleProperties(BattleGlobals.BattleSettings.Normal, true);
+
+            BattleMario mario = new BattleMario(new MarioStats(1, 10, 5, 0, 0,
+                EquipmentGlobals.BootLevels.Normal, EquipmentGlobals.HammerLevels.Normal));
+
+            List<BattleEntity> enemyList = new List<BattleEntity>();
+
+            //Clean up any previous references we may have
+            lightingManager?.CleanUp();
+            lightingManager = null;
+
+            battleManager?.CleanUp();
+            battleManager = null;
+
+            if (Inventory.HasInstance == true)
+            {
+                Inventory.Instance.CleanUp();
+            }
+
+            //Read from the config
+            if (ConfigLoader.LoadConfig($"{ContentGlobals.ContentRoot}/{ContentGlobals.ConfigName}", ref battleProperties, mario, enemyList) == false)
+            {
+                //If we failed to read from the config, initialize a default battle
+                InitDefaultBattle(mario, enemyList);
+            }
+
+            //Initialize the BattleManager
+            battleManager = new BattleManager();
+
+            //Send out the first Partner to battle, provided it exists
+            int partnerCount = Inventory.Instance.partnerInventory.GetPartnerCount();
+            BattlePartner partner = (partnerCount == 0) ? null : Inventory.Instance.partnerInventory.GetAllPartners()[0];
+
+            battleManager.Initialize(battleProperties, mario, partner, enemyList);
+
+            //Initialize helper objects
+            //Check for the battle setting and add darkness if so
+            if (battleManager.Properties.BattleSetting == BattleGlobals.BattleSettings.Dark)
+            {
+                BattleDarknessObj battleDarkness = new BattleDarknessObj(battleManager);
+
+                //Initialize the lighting manager for dark battles
+                lightingManager = new LightingManager(battleDarkness,
+                    AssetManager.Instance.LoadAsset<Effect>($"{ContentGlobals.ShaderRoot}Lighting"),
+                    AssetManager.Instance.LoadRawTexture2D($"{ContentGlobals.ShaderTextureRoot}LightMask.png"));
+
+                battleManager.battleObjManager.AddBattleObject(battleDarkness);
+            }
+
+            //Add the HP bar manager
+            battleManager.battleObjManager.AddBattleObject(new HPBarManagerObj(battleManager));
+
+            //If you can't run from battle, show a message at the start saying so
+            if (battleManager.Properties.Runnable == false)
+            {
+                battleManager.battleEventManager.QueueBattleEvent((int)BattleGlobals.BattleEventPriorities.Message,
+                    new BattleGlobals.BattleState[] { BattleGlobals.BattleState.Turn },
+                    new MessageBattleEvent(battleManager.battleUIManager, BattleGlobals.NoRunMessage, MessageBattleEvent.DefaultWaitDuration));
+            }
+
+            //Start the battle
+            battleManager.StartBattle();
+        }
+
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -214,6 +231,11 @@ namespace PaperMarioBattleSystem
 
             battleManager.CleanUp();
             battleManager = null;
+
+            if (Inventory.HasInstance == true)
+            {
+                Inventory.Instance.CleanUp();
+            }
 
             AssetManager.Instance.CleanUp();
             SoundManager.Instance.CleanUp();
@@ -263,6 +285,19 @@ namespace PaperMarioBattleSystem
             battleManager.Update();
 
             DialogueManager.Instance.Update();
+
+            //Allow reloading the battle if Left Ctrl + R is pressed if Debug is enabled
+            if (Debug.DebugEnabled == true)
+            {
+                //Reload the battle if CTRL + R is pressed
+                if (Input.GetKey(Keys.LeftControl) == true)
+                {
+                    if (Input.GetKeyDown(Keys.R) == true)
+                    {
+                        LoadBattle();
+                    }
+                }
+            }
 
             /*if (Input.GetKeyDown(Keys.Y))
             {
@@ -351,7 +386,7 @@ namespace PaperMarioBattleSystem
         private void MainDraw(GameTime gameTime)
         {
             //Don't render if the battle didn't start yet
-            if (battleManager.State == BattleGlobals.BattleState.Init) return;
+            if (battleManager?.State == BattleGlobals.BattleState.Init) return;
 
             battleManager.GetAllBattleEntities(BattleEntities, null);
 

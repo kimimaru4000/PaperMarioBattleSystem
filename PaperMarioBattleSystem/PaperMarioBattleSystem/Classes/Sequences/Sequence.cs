@@ -14,8 +14,8 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// A Sequence used in a MoveAction.
-    /// <para>Sequences define a series of step-by-step actions that are performed for a particular move.
-    /// For example, for Mario's Hammer, the Sequence would play Mario's run animation, move Mario up to the enemy, start the Action Command, then damage the enemy based on the result.</para>
+    /// <para>Sequences define a series of step-by-step actions that are performed for a particular move.</para>
+    /// <para>For example, for Mario's Hammer, the Sequence would play Mario's run animation, move Mario up to the enemy, start the Action Command, then damage the enemy based on the result.</para>
     /// </summary>
     public abstract class Sequence : IActionCommandHandler, IUpdateable, IDrawable
     {
@@ -23,7 +23,7 @@ namespace PaperMarioBattleSystem
         /// Values for each branch of a sequence.
         /// Sequences switch branches based on what happens.
         /// <para>The None branch is only used to indicate whether to jump to a certain branch after the sequence updates.
-        /// The most common use-case is switching to the Interruption branch</para>
+        /// The most common use-case is switching to the Interruption branch.</para>
         /// </summary>
         public enum SequenceBranch
         {
@@ -192,7 +192,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Ends the action sequence
+        /// Ends the action sequence.
         /// </summary>
         public void EndSequence()
         {
@@ -245,7 +245,7 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// Prints an error message when an invalid sequence has occurred.
-        /// It includes information such as the action and the entity performing it, the sequence branch, and the sequence step
+        /// It includes information such as the action and the entity performing it, the sequence branch, and the sequence step.
         /// </summary>
         protected void PrintInvalidSequence()
         {
@@ -253,9 +253,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Progresses the BattleAction further into its sequence
+        /// Progresses the BattleAction further into its sequence.
         /// </summary>
-        /// <param name="progressAmount">The amount to progress the sequence</param>
+        /// <param name="progressAmount">The amount to progress the sequence.</param>
         private void ProgressSequence(uint progressAmount)
         {
             SequenceStep += (int)progressAmount;
@@ -270,9 +270,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Switches to a new sequence branch. This also resets the current step
+        /// Switches to a new sequence branch. This also resets the current step.
         /// </summary>
-        /// <param name="newBranch">The new branch to switch to</param>
+        /// <param name="newBranch">The new branch to switch to.</param>
         protected void ChangeSequenceBranch(SequenceBranch newBranch)
         {
             //Debug.LogWarning($"Changing from {CurBranch} to {newBranch}");
@@ -284,9 +284,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Sets the branch to jump to after the current sequence updates
+        /// Sets the branch to jump to after the current sequence updates.
         /// </summary>
-        /// <param name="newJumpBranch">The new branch to jump to</param>
+        /// <param name="newJumpBranch">The new branch to jump to.</param>
         protected void ChangeJumpBranch(SequenceBranch newJumpBranch)
         {
             JumpToBranch = newJumpBranch;
@@ -378,34 +378,34 @@ namespace PaperMarioBattleSystem
         #region Sequence Branch Methods
 
         /// <summary>
-        /// The start of the action sequence
+        /// The start of the action sequence.
         /// </summary>
         protected abstract void SequenceStartBranch();
 
         /// <summary>
-        /// The end of the action sequence
+        /// The end of the action sequence.
         /// </summary>
         protected abstract void SequenceEndBranch();
 
         /// <summary>
-        /// The main part of the action sequence. If the action has an Action Command, this branch will likely incorporate it
+        /// The main part of the action sequence. If the action has an Action Command, this branch will likely incorporate it.
         /// </summary>
         protected abstract void SequenceMainBranch();
 
         /// <summary>
-        /// What occurs when the action command for this action is performed successfully
+        /// What occurs when the action command for this action is performed successfully.
         /// </summary>
         protected abstract void SequenceSuccessBranch();
 
         /// <summary>
-        /// What occurs when the action command for this action is failed
+        /// What occurs when the action command for this action is failed.
         /// </summary>
         protected abstract void SequenceFailedBranch();
 
         /// <summary>
         /// What occurs when the action is interrupted.
-        /// The most notable example of this is when Mario takes damage from jumping on a spiked enemy
-        /// <para>This is overrideable through the InterruptionHandler, as actions can handle this in more than one way</para>
+        /// The most notable example of this is when Mario takes damage from jumping on a spiked enemy.
+        /// <para>This is overrideable through the InterruptionHandler, as actions can handle this in more than one way.</para>
         /// </summary>
         protected void SequenceInterruptionBranch()
         {
@@ -419,7 +419,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// What occurs when the action misses
+        /// What occurs when the action misses.
         /// </summary>
         protected abstract void SequenceMissBranch();
 
@@ -441,7 +441,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// The base interruption handler
+        /// The base interruption handler.
         /// </summary>
         protected void BaseInterruptionHandler()
         {
@@ -478,9 +478,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Starts the interruption, which occurs when a BattleEntity takes damage mid-sequence
+        /// Starts the interruption, which occurs when a BattleEntity takes damage mid-sequence.
         /// </summary>
-        /// <param name="element">The elemental damage being dealt</param>
+        /// <param name="element">The elemental damage being dealt.</param>
         public virtual void StartInterruption(Elements element)
         {
             ChangeJumpBranch(SequenceBranch.Interruption);
@@ -491,7 +491,7 @@ namespace PaperMarioBattleSystem
 
         /// <summary>
         /// How the action handles a miss.
-        /// The base implementation is to do nothing, but actions such as Jump may go to the Miss branch
+        /// The base implementation is to do nothing, but actions such as Jump may go to the Miss branch.
         /// <para>The return value indicates whether missing continues testing for hitting the remaining BattleEntities or not.
         /// true means to continue, and false means to stop. The base implementation returns true.</para>
         /// </summary>
@@ -506,7 +506,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Sets the InterruptionHandler based on the type of damage dealt.
         /// </summary>
-        /// <param name="element">The elemental damage being dealt</param>
+        /// <param name="element">The elemental damage being dealt.</param>
         protected virtual void OnInterruption(Elements element)
         {
             InterruptionHandler = BaseInterruptionHandler;
@@ -621,6 +621,9 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        /// <summary>
+        /// Updates the Sequence.
+        /// </summary>
         public void Update()
         {
             //Perform sequence
@@ -722,20 +725,20 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        #region Damage Methods
+        #region Damage Helper Methods
 
         /// <summary>
-        /// Attempt to deal damage to a set of entities with this BattleAction.
+        /// Attempt to deal damage to a set of BattleEntities with this BattleAction.
         /// <para>Based on the ContactType of this BattleAction, this can fail, resulting in an interruption.
-        /// In the event of an interruption, no further entities are tested, the ActionCommand is ended, and 
-        /// we go into the Interruption branch</para>
+        /// In the event of an interruption, no further BattleEntities are tested, the ActionCommand is ended, and 
+        /// we go into the Interruption branch.</para>
         /// </summary>
-        /// <param name="damage">The damage the BattleAction deals to the entity if the attempt was successful</param>
-        /// <param name="entities">The BattleEntities to attempt to inflict damage on</param>
+        /// <param name="damage">The damage the BattleAction deals to the BattleEntity if the attempt was successful.</param>
+        /// <param name="entities">The BattleEntities to attempt to inflict damage on.</param>
         /// <param name="damageInfo">The damage information to use.</param>
         /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
-        /// If false, the total damage will be calculated using surface-level stats (such as adding the user's Attack)</param>
-        /// <returns>An InteractionResult array containing the InteractionResult with each BattleEntity targeted, in order</returns>
+        /// If false, the total damage will be calculated using surface-level stats (such as adding the user's Attack).</param>
+        /// <returns>An InteractionResult array containing the InteractionResult with each BattleEntity targeted, in order.</returns>
         protected InteractionResult[] AttemptDamage(int damage, BattleEntity[] entities, DamageData damageInfo, bool isTotalDamage)
         {
             if (entities == null || entities.Length == 0)
@@ -781,13 +784,13 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Convenience function for attempting damage with only one entity.
+        /// Convenience function for attempting damage with only one BattleEntity.
         /// </summary>
-        /// <param name="damage">The damage the BattleAction deals to the entity if the attempt was successful</param>
-        /// <param name="entity">The BattleEntity to attempt to inflict damage on</param>
+        /// <param name="damage">The damage the BattleAction deals to the BattleEntity if the attempt was successful.</param>
+        /// <param name="entity">The BattleEntity to attempt to inflict damage on.</param>
         /// <param name="damageInfo">The damage information to use.</param>
         /// <param name="isTotalDamage">Whether the damage passed in is the total damage or not.
-        /// If false, the total damage will be calculated using surface-level stats (such as adding the user's Attack)</param>
+        /// If false, the total damage will be calculated using surface-level stats (such as adding the user's Attack).</param>
         protected InteractionResult[] AttemptDamage(int damage, BattleEntity entity, DamageData damageInfo, bool isTotalDamage)
         {
             return AttemptDamage(damage, new BattleEntity[] { entity }, damageInfo, isTotalDamage);
@@ -797,8 +800,8 @@ namespace PaperMarioBattleSystem
         /// Gets the total raw damage a BattleEntity can deal using this BattleAction.
         /// This factors in a BattleEntity's Attack stat, Charge, and anything else on the surface level that may influence the damage dealt.
         /// </summary>
-        /// <param name="actionDamage">The damage the BattleAction deals</param>
-        /// <returns>An int with the total raw damage the BattleEntity can deal when using this BattleAction</returns>
+        /// <param name="actionDamage">The damage the BattleAction deals.</param>
+        /// <returns>An int with the total raw damage the BattleEntity can deal when using this BattleAction.</returns>
         protected int GetTotalDamage(int actionDamage)
         {
             int totalDamage = actionDamage + User.BattleStats.TotalAttack + GetChargeDamage();
@@ -818,7 +821,7 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
-        #region Healing Methods
+        #region Healing Helper Methods
 
         /// <summary>
         /// Heals a set of BattleEntities with this MoveAction.
@@ -851,7 +854,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Convenience function for healing with only one entity.
+        /// Convenience function for healing with only one BattleEntity.
         /// </summary>
         /// <param name="healingData">The HealingData containing HP, FP, and more.</param>
         /// <param name="entity">The BattleEntity to heal.</param>

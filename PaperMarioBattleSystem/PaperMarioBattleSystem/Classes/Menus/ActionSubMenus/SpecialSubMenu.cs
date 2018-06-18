@@ -9,9 +9,9 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// The menu that shows Special Moves, if they are available.
-    /// <para>We can put both Star Spirit and Crystal Star Special Moves in this menu.
-    /// Selecting one would bring up another menu with the respective set of Special Moves available.</para>
     /// </summary>
+    //NOTE: We can put both Star Spirit and Crystal Star Special Moves in this menu.
+    //Selecting one would bring up another menu with the respective set of Special Moves available.</para>
     public class SpecialSubMenu : ActionSubMenu
     {
         public SpecialSubMenu(BattleEntity user) : base(user)

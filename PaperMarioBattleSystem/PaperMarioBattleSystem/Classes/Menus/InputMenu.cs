@@ -10,6 +10,9 @@ using PaperMarioBattleSystem.Utilities;
 
 namespace PaperMarioBattleSystem
 {
+    /// <summary>
+    /// A BattleMenu that handles input.
+    /// </summary>
     public abstract class InputMenu : BattleMenu
     {
         /// <summary>
@@ -34,6 +37,10 @@ namespace PaperMarioBattleSystem
 
         #region Input-Related Methods
 
+        /// <summary>
+        /// Changes the current selection.
+        /// </summary>
+        /// <param name="amount">The amount to change the selection.</param>
         protected void ChangeSelection(int amount)
         {
             if (WrapCursor == false)
@@ -48,6 +55,10 @@ namespace PaperMarioBattleSystem
             OnSelectionChanged(CurSelection);
         }
 
+        /// <summary>
+        /// What happens when the selection is changed.
+        /// </summary>
+        /// <param name="newSelection">The new selection.</param>
         protected virtual void OnSelectionChanged(int newSelection)
         {
 

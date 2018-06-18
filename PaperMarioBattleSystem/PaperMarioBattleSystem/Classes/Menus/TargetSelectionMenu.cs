@@ -12,7 +12,7 @@ using static PaperMarioBattleSystem.Enumerations;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The target selection menu when performing an action
+    /// The target selection menu shown when selecting which BattleEntities a move targets.
     /// </summary>
     public class TargetSelectionMenu : InputMenu
     {

@@ -28,7 +28,7 @@ namespace PaperMarioBattleSystem
         #region Enums
 
         /// <summary>
-        /// The various types of Badges (what the actual Badges are).
+        /// The various types of Badges.
         /// <para>The values are defined by each Badge type's Type Number.
         /// If Badges exist in the same spot and aren't in both games, Badges with lower alphabetical values will be placed first.
         /// In cases where one Badge is before another Badge in one game and after that Badge in the other game, the Badge is grouped
@@ -154,11 +154,11 @@ namespace PaperMarioBattleSystem
         #region Badge Sort Methods
 
         /// <summary>
-        /// A Comparison method used to sort Badges by their Type Numbers
+        /// A Comparison method used to sort Badges by their Type Numbers.
         /// </summary>
-        /// <param name="badge1">The first Badge to compare</param>
-        /// <param name="badge2">The second Badge to compare</param>
-        /// <returns>-1 if badge1 has a lower TypeNumber, 1 if badge2 has a lower TypeNumber, 0 if they have the same TypeNumber</returns>
+        /// <param name="badge1">The first Badge to compare.</param>
+        /// <param name="badge2">The second Badge to compare.</param>
+        /// <returns>-1 if badge1 has a lower TypeNumber, 1 if badge2 has a lower TypeNumber, 0 if they have the same TypeNumber.</returns>
         public static int BadgeTypeNumberSort(Badge badge1, Badge badge2)
         {
             if (badge1 == null && badge2 == null) return 0;
@@ -174,11 +174,11 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// A Comparison method used to sort Badges alphabetically (ABC)
+        /// A Comparison method used to sort Badges alphabetically (ABC).
         /// </summary>
-        /// <param name="badge1">The first Badge to compare</param>
-        /// <param name="badge2">The second Badge to compare</param>
-        /// <returns>-1 if badge1 has a lower alphabetical value, 1 if badge2 has a lower alphabetical value, 0 if they have the same alphabetical value</returns>
+        /// <param name="badge1">The first Badge to compare.</param>
+        /// <param name="badge2">The second Badge to compare.</param>
+        /// <returns>-1 if badge1 has a lower alphabetical value, 1 if badge2 has a lower alphabetical value, 0 if they have the same alphabetical value.</returns>
         public static int BadgeAlphabeticalSort(Badge badge1, Badge badge2)
         {
             if (badge1 == null && badge2 == null) return 0;
@@ -189,11 +189,11 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// A Comparison method used to sort Badges by BP cost (BP Needed)
+        /// A Comparison method used to sort Badges by BP cost (BP Needed).
         /// </summary>
-        /// <param name="badge1">The first Badge to compare</param>
-        /// <param name="badge2">The second Badge to compare</param>
-        /// <returns>-1 if badge1 has a lower BP cost, 1 if badge2 has a lower BP cost, 0 if they have the same BP cost and TypeNumber</returns>
+        /// <param name="badge1">The first Badge to compare.</param>
+        /// <param name="badge2">The second Badge to compare.</param>
+        /// <returns>-1 if badge1 has a lower BP cost, 1 if badge2 has a lower BP cost, 0 if they have the same BP cost and TypeNumber.</returns>
         public static int BadgeBPSort(Badge badge1, Badge badge2)
         {
             if (badge1 == null && badge2 == null) return 0;

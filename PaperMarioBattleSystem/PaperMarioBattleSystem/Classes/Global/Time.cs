@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Handles all time
+    /// Handles all time.
     /// </summary>
     public static class Time
     {
@@ -22,17 +22,17 @@ namespace PaperMarioBattleSystem
         private static double ActiveElapsedTime = 0d;
 
         /// <summary>
-        /// The frames per second the game runs at
+        /// The frames per second the game runs at.
         /// </summary>
         public static double FPS = 60d;
 
         /// <summary>
-        /// Whether the game's frame rate is updated at the end of each frame or not
+        /// Whether the game's frame rate is updated at the end of each frame or not.
         /// </summary>
         public static bool UpdateFPS { get; private set; } = false;
 
         /// <summary>
-        /// Whether in-game time is enabled or not. If set to false, ActiveMilliseconds won't be updated
+        /// Whether in-game time is enabled or not. If set to false, ActiveMilliseconds won't be updated.
         /// </summary>
         public static bool InGameTimeEnabled { get; private set; } = true;
 
@@ -47,22 +47,22 @@ namespace PaperMarioBattleSystem
         public static long TotalFrames { get; private set; } = 0L;
 
         /// <summary>
-        /// The total amount of time, in milliseconds, since the game booted up
+        /// The total amount of time, in milliseconds, since the game booted up.
         /// </summary>
         public static double TotalMilliseconds => TotalTime.TotalMilliseconds;
 
         /// <summary>
-        /// The total amount of unpaused or unfrozen time, in milliseconds, since the game booted up
+        /// The total amount of unpaused or unfrozen time, in milliseconds, since the game booted up.
         /// </summary>
         public static double ActiveMilliseconds => ActiveElapsedTime;
 
         /// <summary>
-        /// The amount of time since the previous frame
+        /// The amount of time since the previous frame.
         /// </summary>
         public static double ElapsedMilliseconds => ElapsedTime.TotalMilliseconds;
 
         /// <summary>
-        /// Determines if the game is running slowly or not
+        /// Determines if the game is running slowly or not.
         /// </summary>
         public static bool RunningSlowly { get; private set; } = false;
 
@@ -79,25 +79,25 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Enables or disables in-game time. If false, <see cref="ActiveMilliseconds"/> will not be updated.
         /// </summary>
-        /// <param name="ingameTimeEnabled"></param>
+        /// <param name="ingameTimeEnabled">A bool indicating whether to enable in-game time or not.</param>
         public static void ToggleInGameTime(bool ingameTimeEnabled)
         {
             InGameTimeEnabled = ingameTimeEnabled;
         }
 
         /// <summary>
-        /// Enables or disables updating the game's framerate at the end of each frame
+        /// Enables or disables updating the game's framerate at the end of each frame.
         /// </summary>
-        /// <param name="enableUpdateFPS">true to enable updating the FPS, false to disable it</param>
+        /// <param name="enableUpdateFPS">true to enable updating the FPS, false to disable it.</param>
         public static void ToggleFPSUpdate(bool enableUpdateFPS)
         {
             UpdateFPS = enableUpdateFPS;
         }
 
         /// <summary>
-        /// Updates the game time
+        /// Updates the game time.
         /// </summary>
-        /// <param name="gameTime">Provides a snapshop of timing values</param>
+        /// <param name="gameTime">Provides a snapshop of timing values.</param>
         public static void UpdateTime(GameTime gameTime)
         {
             TotalTime = gameTime.TotalGameTime;

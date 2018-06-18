@@ -11,7 +11,7 @@ namespace PaperMarioBattleSystem
     /// <summary>
     /// The menu shown when attempting to cancel Double or Triple Dip.
     /// <para>Two options are presented: Yes and No.
-    /// Choosing Yes ends the entity's turn and clears the menu stack.
+    /// Choosing Yes ends the BattleEntity's turn and clears the menu stack.
     /// Choosing No goes back to the Item menu.</para>
     /// </summary>
     public sealed class CancelDipMenu : InputMenu

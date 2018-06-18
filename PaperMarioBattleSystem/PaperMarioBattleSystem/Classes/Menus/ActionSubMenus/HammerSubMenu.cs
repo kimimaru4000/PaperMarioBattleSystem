@@ -10,7 +10,7 @@ using PaperMarioBattleSystem.Extensions;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The SubMenu for all Hammer attacks
+    /// The SubMenu for all Hammer attacks.
     /// </summary>
     public class HammerSubMenu : ActionSubMenu
     {

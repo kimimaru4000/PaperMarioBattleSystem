@@ -60,9 +60,9 @@ namespace PaperMarioBattleSystem
         /// The types of BattleEntities a MoveAction affects.
         /// <para>None causes the MoveAction to occur immediately.
         /// Self targets the user of the MoveAction.
-        /// Ally targets all entities that are allies of the user.
-        /// Other targets other types of entities in battle.
-        /// Custom targets a set of entities based on the move's conditions.</para>
+        /// Ally targets all BattleEntities that are allies of the user.
+        /// Other targets other types of BattleEntities in battle.
+        /// Custom targets a set of BattleEntities based on the move's conditions.</para>
         /// <para>This is a bit field.</para>
         /// </summary>
         [Flags]
@@ -137,19 +137,6 @@ namespace PaperMarioBattleSystem
             SpinsOut = 1 << 4
         }
 
-        // <summary>
-        // The types of Items that can be stolen via moves.
-        // This enum is a bit field, so handle it with bitwise operations.
-        // </summary>
-        //[Flags]
-        //public enum ItemStealingTypes
-        //{
-        //    None,
-        //    Coin = 1 << 0,
-        //    Item = 1 << 1,
-        //    Badge = 1 << 2
-        //}
-
         /// <summary>
         /// The types of damage elements.
         /// </summary>
@@ -161,8 +148,8 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// The main height states an entity can be in.
         /// Some moves may or may not be able to hit entities in certain height states.
-        /// <para>Hovering means that the entity is right above the ground and can be hit by most, but not all, ground moves.
-        /// Quake Hammer cannot hit Hovering entities. Tornado Jump's secondary attack will hit Hovering entities.</para>
+        /// <para>Hovering means that the BattleEntity is right above the ground and can be hit by most, but not all, ground moves.
+        /// For example, Quake Hammer cannot hit Hovering BattleEntities, but Tornado Jump's secondary attack will hit Hovering BattleEntities.</para>
         /// </summary>
         public enum HeightStates
         {
@@ -170,28 +157,23 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// The physical attributes assigned to entities.
-        /// These determine if an attack can target a particular entity, or whether there is an advantage
-        /// or disadvantage to using a particular attack on an entity with a particular physical attribute.
+        /// The physical attributes assigned to BattleEntities.
+        /// These determine if an attack can target a particular BattleEntity, or whether there is an advantage
+        /// or disadvantage to using a particular attack on a BattleEntity with a particular PhysicalAttribute.
         /// 
-        /// <para>Winged does not mean that the entity is Airborne. Flying entities, such as Ruff Puffs,
+        /// <para>Flying does not mean that the BattleEntity is Airborne. Flying BattleEntities, such as Ruff Puffs,
         /// can still be damaged by ground moves if they hover at ground level.</para>
         /// </summary>
-        /*NOTE: The case of Explosive on contact in the actual games are with enraged Bob-Ombs and when Bobbery uses Hold Fast.
-          If you make contact with these enemies, they deal explosive damage and die instantly, with Hold Fast being an exception
-          to the latter*/
-        /*NOTE: Test if Spiked enemies get hurt by jumping on other Spiked enemies
-          Confirmed - Spiked enemies get hurt when jumping on other Spiked enemies*/
         public enum PhysicalAttributes
         {
             None = 0, Flying = 1, Electrified = 2, Poisonous = 3, Spiked = 4, Icy = 5, Fiery = 6, Explosive = 7, Starry = 8
         }
 
         /// <summary>
-        /// The state of health an entity can be in.
-        /// <para>Danger occurs when the entity has 2-5 HP remaining.
-        /// Peril occurs when the entity has exactly 1 HP remaining.
-        /// Dead occurs when the entity has 0 HP remaining.</para>
+        /// The state of health a BattleEntity can be in.
+        /// <para>Danger occurs when the BattleEntity has 2-5 HP remaining.
+        /// Peril occurs when the BattleEntity has exactly 1 HP remaining.
+        /// Dead occurs when the BattleEntity has 0 HP remaining.</para>
         /// </summary>
         public enum HealthStates
         {
@@ -199,7 +181,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// The type of contact actions will make on entities.
+        /// The type of contact actions will make on BattleEntities.
         /// <para>None is no contact at all (Ex. Hammer Throw, Star Storm).
         /// Latch is direct contact used to start an attack (Ex. Fuzzy's Kissy-Kissy, first part of Kiss Thief).
         /// TopDirect is direct contact from the top (Ex. Jump).
@@ -224,9 +206,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// The result of a ContactType and the PhysicalAttributes of an entity.
-        /// A Failure indicates that the action backfired.
-        /// PartialSuccess indicates that damage is dealt and the attacker suffers a backfire.
+        /// The result of a ContactType and the PhysicalAttributes of a BattleEntity.
+        /// A Failure indicates that the action backfired and only the attacker takes damage.
+        /// PartialSuccess indicates that damage is dealt to both the attacker and the victim.
         /// </summary>
         public enum ContactResult
         {
@@ -234,7 +216,7 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// The types of StatusEffects BattleEntities can be afflicted with
+        /// The types of StatusEffects BattleEntities can be afflicted with.
         /// </summary>
         public enum StatusTypes
         {
@@ -256,6 +238,10 @@ namespace PaperMarioBattleSystem
             TurnCount, Effects, VFX, Icon
         }
 
+        /// <summary>
+        /// Miscellaneous properties that BattleEntities can have.
+        /// <para>This includes information such as how much Charge damage a BattleEntity has stored.</para>
+        /// </summary>
         public enum AdditionalProperty
         {
             Invincible,

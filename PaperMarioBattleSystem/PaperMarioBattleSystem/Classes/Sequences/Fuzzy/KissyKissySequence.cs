@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using PaperMarioBattleSystem.Extensions;
+using PaperMarioBattleSystem.Utilities;
 
 namespace PaperMarioBattleSystem
 {
@@ -34,6 +36,25 @@ namespace PaperMarioBattleSystem
         protected override void OnStart()
         {
             base.OnStart();
+
+            //In PM, if you're inflicted with Stone, then the Action Command doesn't come up
+            //and the number of attacks is halved, rounding down
+
+            //Check if the target is immobile
+            if (EntitiesAffected[0].IsImmobile() == true)
+            {
+                //Disable the action command
+                Action.EnableActionCommand = false;
+
+                //Divide the number of attacks by two, clamping at one
+                //We clamp because if the Action Command is disabled, an infinite attack would softlock
+                //In addition, as the target is immobile, it's not able to Superguard to damage the attacker and end the move
+                MaxAttacks = UtilityGlobals.Clamp(MaxAttacks / 2, 1, MaxAttacks);
+                NumAttacks = MaxAttacks;
+
+                //Log a message here to indicate it's intentional
+                Debug.Log($"{EntitiesAffected[0].Name} is Immobile; ActionCommand disabled and MaxAttacks halved to {MaxAttacks}. This is PM behavior");
+            }
 
             if (Action.CommandEnabled == true && Action.DrawActionCommandInfo == true)
             {

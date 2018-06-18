@@ -10,9 +10,9 @@ using PaperMarioBattleSystem.Utilities;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The Player's inventory
+    /// The Player's inventory.
     /// </summary>
-    public class Inventory
+    public class Inventory : ICleanup
     {
         #region Singleton Fields
 
@@ -29,12 +29,17 @@ namespace PaperMarioBattleSystem
             }
         }
 
+        public static bool HasInstance => (instance != null);
+
         private static Inventory instance = null;
 
         #endregion
 
         #region Partner Inventory
 
+        /// <summary>
+        /// The Partner inventory holding all Partners in Mario's party.
+        /// </summary>
         public readonly PartnerInventory partnerInventory = new PartnerInventory();
 
         #endregion
@@ -66,32 +71,32 @@ namespace PaperMarioBattleSystem
         #region Badge Related Fields
 
         /// <summary>
-        /// The number of Badge Points (BP) Mario currently has available
+        /// The number of Badge Points (BP) Mario currently has available.
         /// </summary>
         public int BP { get; private set; } = 3;
 
         /// <summary>
-        /// The max number of Badge Points (BP) Mario has
+        /// The max number of Badge Points (BP) Mario has.
         /// </summary>
         public int MaxBP { get; private set; } = 3;
 
         /// <summary>
-        /// All Badges the Player owns
+        /// All Badges the Player owns.
         /// </summary>
         private readonly List<Badge> AllBadges = new List<Badge>();
 
         /// <summary>
-        /// Counts for all Badges the Player owns
+        /// Counts for all Badges the Player owns.
         /// </summary>
         private readonly Dictionary<BadgeTypes, int> AllBadgeCounts = new Dictionary<BadgeTypes, int>();
 
         /// <summary>
-        /// The Badges the Player owns that are active
+        /// The Badges the Player owns that are active.
         /// </summary>
         private readonly List<Badge> ActiveBadges = new List<Badge>();
         
         /// <summary>
-        /// Counts for the active Badges the Player owns
+        /// Counts for the active Badges the Player owns.
         /// </summary>
         private readonly Dictionary<BadgeTypes, int> ActiveBadgeCounts = new Dictionary<BadgeTypes, int>();
 
@@ -100,12 +105,12 @@ namespace PaperMarioBattleSystem
         #region Item Related Fields
 
         /// <summary>
-        /// The Player's Item inventory
+        /// The Player's Item inventory.
         /// </summary>
         private readonly List<Item> Items = new List<Item>(10);
 
         /// <summary>
-        /// The key items the Player possesses
+        /// The key items the Player possesses.
         /// </summary>
         private readonly List<Item> KeyItems = new List<Item>(20);
 
@@ -116,23 +121,54 @@ namespace PaperMarioBattleSystem
             
         }
 
+        public void CleanUp()
+        {
+            partnerInventory.CleanUp();
+
+            ActiveBadges.Clear();
+            ActiveBadgeCounts.Clear();
+            AllBadges.Clear();
+            AllBadgeCounts.Clear();
+
+            Items.Clear();
+            KeyItems.Clear();
+
+            instance = null;
+        }
+
         #region Currency Methods
 
+        /// <summary>
+        /// Gives the player a number of coins.
+        /// </summary>
+        /// <param name="coinsAdded">The number of coins to give.</param>
         public void AddCoins(uint coinsAdded)
         {
             Coins = UtilityGlobals.Clamp(Coins + coinsAdded, 0u, MaxCoins);
         }
 
+        /// <summary>
+        /// Subtracts a number of coins from the player.
+        /// </summary>
+        /// <param name="coinsSubtracted">The number of coins to subtract.</param>
         public void SubtractCoins(uint coinsSubtracted)
         {
             Coins = UtilityGlobals.Clamp(Coins - coinsSubtracted, 0u, MaxCoins);
         }
 
+        /// <summary>
+        /// Gives the player a number of Star Pieces.
+        /// </summary>
+        /// <param name="starPiecesAdded">The number of Star Pieces to give.</param>
         public void AddStarPieces(uint starPiecesAdded)
         {
             StarPieces = UtilityGlobals.Clamp(StarPieces + starPiecesAdded, 0u, MaxStarPieces);
         }
 
+        /// <summary>
+        /// Subtracts a number of Star Pieces from the player.
+        /// </summary>
+        /// <param name="starPiecesSubtracted">The number of Star Pieces to subtract.</param>
         public void SubtractStarPieces(uint starPiecesSubtracted)
         {
             StarPieces = UtilityGlobals.Clamp(StarPieces - starPiecesSubtracted, 0u, MaxStarPieces);
@@ -143,9 +179,9 @@ namespace PaperMarioBattleSystem
         #region Item Methods
 
         /// <summary>
-        /// Adds an Item to the Player's Inventory
+        /// Adds an Item to the Player's Inventory.
         /// </summary>
-        /// <param name="item">The Item to add</param>
+        /// <param name="item">The Item to add.</param>
         public void AddItem(Item item)
         {
             if (item.ItemCategory == Item.ItemCategories.KeyItem)
@@ -173,9 +209,9 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Removes an Item from the Player's Inventory
+        /// Removes an Item from the Player's Inventory.
         /// </summary>
-        /// <param name="item">The Item to remove</param>
+        /// <param name="item">The Item to remove.</param>
         public void RemoveItem(Item item)
         {
             if (item.ItemCategory == Item.ItemCategories.KeyItem)
@@ -189,11 +225,11 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// Finds the first instance of an Item by name
+        /// Finds the first instance of an Item by name.
         /// </summary>
-        /// <param name="name">The name of the Item to find</param>
-        /// <param name="keyItem">Whether the Item is a key item or not</param>
-        /// <returns>The Item if found, otherwise null</returns>
+        /// <param name="name">The name of the Item to find.</param>
+        /// <param name="keyItem">Whether the Item is a key item or not.</param>
+        /// <returns>The Item if found, otherwise null.</returns>
         public Item FindItem(string name, bool keyItem)
         {
             if (keyItem == true)
@@ -539,13 +575,18 @@ namespace PaperMarioBattleSystem
         /// The inventory for Mario's Partners.
         /// This tells which Partners Mario currently has available.
         /// </summary>
-        public class PartnerInventory
+        public class PartnerInventory : ICleanup
         {
             private readonly Dictionary<PartnerTypes, BattlePartner> Partners = new Dictionary<PartnerTypes, BattlePartner>();
 
             public PartnerInventory()
             {
                 
+            }
+
+            public void CleanUp()
+            {
+                Partners.Clear();
             }
 
             /// <summary>

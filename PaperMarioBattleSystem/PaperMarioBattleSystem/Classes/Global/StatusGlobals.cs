@@ -8,12 +8,18 @@ using static PaperMarioBattleSystem.Enumerations;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Class for global values dealing with StatusEffects
+    /// Class for global values dealing with StatusEffects.
     /// </summary>
     public static class StatusGlobals
     {
         #region Enums
 
+        /// <summary>
+        /// The types of Payback.
+        /// <para>Constant means a set amount of damage will be dealt to the attacker.
+        /// Half means half the damage dealt to the victim will be dealt to the attacker.
+        /// Full means all the damage dealt to the victim will be dealt to the attacker.</para>
+        /// </summary>
         public enum PaybackTypes
         {
             Constant, Half, Full
@@ -24,12 +30,12 @@ namespace PaperMarioBattleSystem
         #region Structs
 
         /// <summary>
-        /// Holds information about Payback damage
+        /// Holds information about Payback damage.
         /// </summary>
         public struct PaybackHolder
         {
             /// <summary>
-            /// The type of Payback damage
+            /// The type of Payback damage.
             /// </summary>
             public PaybackTypes PaybackType { get; private set; }
 
@@ -39,7 +45,7 @@ namespace PaperMarioBattleSystem
             public Enumerations.PhysicalAttributes PhysAttribute { get; private set; }
 
             /// <summary>
-            /// The Elemental damage dealt
+            /// The Elemental damage dealt.
             /// </summary>
             public Enumerations.Elements Element { get; private set; }
 
@@ -217,19 +223,6 @@ namespace PaperMarioBattleSystem
             }
         }
 
-        /// <summary>
-        /// Holds information about Confusion
-        /// </summary>
-        public struct ConfusionHolder
-        {
-            public int ConfusionPercent { get; private set; }
-
-            public ConfusionHolder(int confusionPercent)
-            {
-                ConfusionPercent = confusionPercent;
-            }
-        }
-
         #endregion
 
         #region Classes
@@ -302,7 +295,7 @@ namespace PaperMarioBattleSystem
         #region Constants
 
         /// <summary>
-        /// Denotes a duration value for a StatusEffect that does not go away
+        /// Denotes a duration value for a StatusEffect that does not wear off with turn count.
         /// </summary>
         public const int InfiniteDuration = 0;
 
@@ -321,10 +314,10 @@ namespace PaperMarioBattleSystem
         #region Methods
 
         /// <summary>
-        /// Gets the Priority value of a particular type of StatusEffect
+        /// Gets the Priority value of a particular type of StatusEffect.
         /// </summary>
-        /// <param name="statusType">The StatusType to get priority for</param>
-        /// <returns>The Priority value corresponding to the StatusType if it has an entry, otherwise 0</returns>
+        /// <param name="statusType">The StatusType to get the priority for.</param>
+        /// <returns>The Priority value corresponding to the StatusType if it has an entry, otherwise 0.</returns>
         public static int GetStatusPriority(Enumerations.StatusTypes statusType)
         {
             int order = 0;
@@ -334,10 +327,10 @@ namespace PaperMarioBattleSystem
         }
 
         /// <summary>
-        /// A Comparison method used to sort StatusEffects by their Priorities
+        /// A Comparison method used to sort StatusEffects by their Priorities.
         /// </summary>
-        /// <param name="status1">The first StatusEffect to compare</param>
-        /// <param name="status2">The second StatusEffect to compare</param>
+        /// <param name="status1">The first StatusEffect to compare.</param>
+        /// <param name="status2">The second StatusEffect to compare.</param>
         /// <returns>-1 if status1 has a higher priority, 1 if status2 has a higher priority, and 0 if they have the same priorities.</returns>
         public static int StatusPrioritySort(StatusEffect status1, StatusEffect status2)
         {

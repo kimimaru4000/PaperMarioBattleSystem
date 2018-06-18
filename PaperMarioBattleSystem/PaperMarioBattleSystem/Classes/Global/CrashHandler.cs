@@ -9,7 +9,7 @@ namespace PaperMarioBattleSystem
 {
     /// <summary>
     /// Handles crashes through unhandled exceptions.
-    /// <para>This currently works only for debug builds if a debugger is not attached.</para>
+    /// <para>This currently works only if a debugger is not attached.</para>
     /// </summary>
     public class CrashHandler : ICleanup
     {

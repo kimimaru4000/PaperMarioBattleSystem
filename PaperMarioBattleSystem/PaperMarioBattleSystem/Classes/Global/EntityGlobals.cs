@@ -16,16 +16,16 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets the number of Badges of a particular BadgeType that a set of BattleEntities have equipped.
         /// </summary>
-        /// <param name="battleEntity"></param>
+        /// <param name="party">The set of BattleEntities to check.</param>
         /// <param name="badgeType">The BadgeType to check for.</param>
         /// <returns>The total number of Badges of the BadgeType that a set of BattleEntities have equipped.</returns>
         public static int GetCombinedEquippedBadgeCount(IList<BattleEntity> party, BadgeGlobals.BadgeTypes badgeType)
         {
-            if (party == null || party.Count == 0) return 0;
+            if (party == null) return 0;
 
             int count = 0;
 
-            //Check the Badge count for each party
+            //Check the Badge count for each party member
             for (int i = 0; i < party.Count; i++)
             {
                 count += party[i].GetEquippedBadgeCount(badgeType);
@@ -37,7 +37,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Gets the number of Badges of a particular BadgeType, for both its Partner and Non-Partner versions, that a set of BattleEntities have equipped.
         /// </summary>
-        /// <param name="battleEntity"></param>
+        /// <param name="party">The set of BattleEntities to check.</param>
         /// <param name="badgeType">The BadgeType to check for.</param>
         /// <returns>The total number of Badges of the Partner and Non-Partner versions of the BadgeType that a set of BattleEntities have equipped.</returns>
         public static int GetCombinedEquippedNPBadgeCount(IList<BattleEntity> party, BadgeGlobals.BadgeTypes badgeType)
@@ -57,6 +57,7 @@ namespace PaperMarioBattleSystem
         /// <summary>
         /// Checks if a set of BattleEntities have an AdditionalProperty.
         /// </summary>
+        /// <param name="party">The set of BattleEntities to check.</param>
         /// <param name="property">The AdditionalProperty to check.</param>
         /// <returns>true if any of the BattleEntities in the set have the AdditionalProperty, otherwise false</returns>
         public static bool CombinedHaveAdditionalProperty(IList<BattleEntity> party, Enumerations.AdditionalProperty property)

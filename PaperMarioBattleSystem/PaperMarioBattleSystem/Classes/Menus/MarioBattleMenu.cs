@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// Mario's battle menu. It contains Strategies, Items, Jump, Hammer, and Star Spirits
+    /// Mario's battle menu. It contains Tactics, Items, Jump, Hammer, and Special.
     /// </summary>
     public sealed class MarioBattleMenu : PlayerBattleMenu
     {

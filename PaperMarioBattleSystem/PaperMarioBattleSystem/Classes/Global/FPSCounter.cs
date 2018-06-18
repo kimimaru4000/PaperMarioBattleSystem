@@ -8,12 +8,12 @@ using Microsoft.Xna.Framework;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// FPS Counter that displays the FPS
+    /// FPS Counter that displays the FPS.
     /// </summary>
     public static class FPSCounter
     {
         /// <summary>
-        /// The amount of time, in milliseconds, to wait before updating the FPS display
+        /// The amount of time, in milliseconds, to wait before updating the FPS display.
         /// </summary>
         private static double UpdateInterval = 1000d;
 

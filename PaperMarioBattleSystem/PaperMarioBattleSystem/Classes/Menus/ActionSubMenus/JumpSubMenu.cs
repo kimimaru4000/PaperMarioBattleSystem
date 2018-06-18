@@ -9,7 +9,7 @@ using PaperMarioBattleSystem.Extensions;
 namespace PaperMarioBattleSystem
 {
     /// <summary>
-    /// The Jump submenu for all Jump attacks
+    /// The Jump submenu for all Jump attacks.
     /// </summary>
     public class JumpSubMenu : ActionSubMenu
     {

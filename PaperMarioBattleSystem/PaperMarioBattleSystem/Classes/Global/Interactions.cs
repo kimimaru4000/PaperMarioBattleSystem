@@ -152,7 +152,7 @@ namespace PaperMarioBattleSystem
         /// Sets the damage formula.
         /// </summary>
         /// <param name="damageCalcSteps">The DamageCalcSteps involved in the damage formula.</param>
-        public static void SetDamageFormula(List<DamageCalcStep> damageCalcSteps)
+        public static void SetDamageFormula(IList<DamageCalcStep> damageCalcSteps)
         {
             DamageCalculationSteps.Clear();
             DamageCalculationSteps.CopyFromList(damageCalcSteps);
@@ -210,6 +210,47 @@ namespace PaperMarioBattleSystem
         public static List<DamageCalcStep> GetDamageFormula()
         {
             return new List<DamageCalcStep>(DamageCalculationSteps);
+        }
+
+        /// <summary>
+        /// Gets the index of the first <see cref="DamageCalcStep"/> in the damage formula of type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The DamageCalcStep type.</typeparam>
+        /// <returns>The index in the damage formula where the DamageCalcStep of type <typeparamref name="T"/> is. -1 if not found.</returns>
+        public static int GetDamageStepIndex<T>() where T : DamageCalcStep
+        {
+            //Get the Type we want to look for
+            Type tType = typeof(T);
+
+            for (int i = 0; i < DamageCalculationStepCount; i++)
+            {
+                //Compare Type
+                if (DamageCalculationSteps[i].GetType() == tType)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
+
+        /// <summary>
+        /// Gets the index of the first <see cref="DamageCalcStep"/> in the damage formula with a particular Type name.
+        /// </summary>
+        /// <param name="stepTypeName">The Type name of the DamageCalcStep to find.</param>
+        /// <returns>The index in the damage formula where the DamageCalcStep with a Type name of <paramref name="stepTypeName"/> is. -1 if not found.</returns>
+        public static int GetDamageStepIndex(in string stepTypeName)
+        {
+            for (int i = 0; i < DamageCalculationStepCount; i++)
+            {
+                //Compare name
+                if (DamageCalculationSteps[i].GetType().Name == stepTypeName)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
         }
 
         /* Damage Calculation Order:

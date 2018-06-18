@@ -29,10 +29,14 @@ PMBS contains most of the core features from the battle system of Paper Mario an
 ## Builds
 Cross-platform builds can be made using Mono's [mkbundle](http://www.mono-project.com/docs/tools+libraries/tools/mkbundle/). You can find a great tutorial for setting up and using the tool on Windows [here](https://dotnetcoretutorials.com/2018/03/22/bundling-mono-with-a-net-executable-using-mkbundle-on-windows/). Something overlooked in the tutorial is that you will need to extract the runtime you want to build for. To do so, rename the runtime file's extension to ".zip" then extract it.
 
-For native non-Windows builds to run, you may need to comment out code involving the System.Windows.Forms namespace. The only code in the project using System.Windows.Forms is the debug functions that take screenshots and dump logs, so it doesn't affect the battle system itself.
+For native non-Windows builds to run, you may need to comment out code involving the `System.Windows.Forms` namespace. The only code in the project using `System.Windows.Forms` are the debug functions that take screenshots and dump logs, so it doesn't affect the battle system itself.
 
 ## Contributing
 Contributions are encouraged and appreciated! Feel free to file an [issue](https://github.com/tdeeb/PaperMarioBattleSystem/issues) for any bugs, missing features, or suggestions for improving the battle system. [Pull requests](https://github.com/tdeeb/PaperMarioBattleSystem/pulls) are highly encouraged.
+
+For any significant changes, please open an issue first to discuss your ideas. As of the 1.0 release, PMBS follows standard [GitHub Flow](https://guides.github.com/introduction/flow/index.html).
+
+For ideas on what needs work, take a look at the issues as well as the [improvements](https://github.com/tdeeb/PaperMarioBattleSystem/wiki/Improvements) listed on the wiki.
 
 ## Author(s)
 * **Thomas Deeb (aka Kimimaru)**

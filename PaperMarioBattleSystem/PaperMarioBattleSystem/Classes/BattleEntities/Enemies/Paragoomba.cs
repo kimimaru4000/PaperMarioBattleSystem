@@ -24,6 +24,8 @@ namespace PaperMarioBattleSystem
             AIBehavior = new ParagoombaAI(this);
 
             ChangeHeightState(Enumerations.HeightStates.Airborne);
+
+            WingedBehavior = new ParagoombaWingedBehavior(this, -1, EntityProperties.GetVulnerableDamageEffects(), new Goomba());
         }
 
         public override void CleanUp()
@@ -79,8 +81,6 @@ namespace PaperMarioBattleSystem
         public override void OnEnteredBattle()
         {
             base.OnEnteredBattle();
-
-            WingedBehavior = new ParagoombaWingedBehavior(this, -1, EntityProperties.GetVulnerableDamageEffects(), new Goomba());
 
             AnimManager.PlayAnimation(GetIdleAnim());
         }

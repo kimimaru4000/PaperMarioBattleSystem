@@ -59,6 +59,14 @@ namespace PaperMarioBattleSystem
             LoadAnimations();
 
             SegmentTex = new CroppedTexture2D(AnimManager.SpriteSheet, new Rectangle(99, 38, 28, 23));
+
+            SegmentBehavior = new PokeySegmentBehavior(this, 3, Enumerations.DamageEffects.RemovesSegment);
+
+            //Add the visual segments
+            for (int i = 0; i < SegmentBehavior.CurSegmentCount; i++)
+            {
+                VisualSegments.Add(SegmentTex);
+            }
         }
 
         public override void CleanUp()
@@ -87,24 +95,15 @@ namespace PaperMarioBattleSystem
                 new Animation.Frame(new Rectangle(65, 66, 30, 29), 200d, new Vector2(0, -1))));
         }
 
-        protected virtual void SetSegmentBehavior()
-        {
-            SegmentBehavior?.CleanUp();
-            SegmentBehavior = new PokeySegmentBehavior(this, 3, Enumerations.DamageEffects.RemovesSegment);
-        }
-
         public override void OnEnteredBattle()
         {
             base.OnEnteredBattle();
 
-            SetSegmentBehavior();
-
             Vector2 pos = BattlePosition;
 
-            //Add the visual segments
+            //Adjust the Pokey's battle position based on how many segments it has
             for (int i = 0; i < SegmentBehavior.CurSegmentCount; i++)
             {
-                VisualSegments.Add(SegmentTex);
                 pos.Y -= SegmentHeight;
             }
 

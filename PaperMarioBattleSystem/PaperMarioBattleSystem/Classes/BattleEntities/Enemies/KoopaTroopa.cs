@@ -89,7 +89,9 @@ namespace PaperMarioBattleSystem
         {
             base.OnEnteredBattle();
 
-            SetFlippedBehavior();
+            //Only set if already null
+            if (FlippedBehavior == null)
+                SetFlippedBehavior();
         }
 
         public override string GetIdleAnim()

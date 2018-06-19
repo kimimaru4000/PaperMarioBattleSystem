@@ -101,7 +101,10 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.GetAnimation<Animation>(AnimationGlobals.ShelledBattleAnimations.ShellSpinName)?.SetSpeed(3f);
-                    CurSequenceAction = new MoveToSeqAction(User, BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), SpinMoveDuration);
+
+                    Vector2 pos = BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy);
+
+                    CurSequenceAction = new MoveToSeqAction(User, new Vector2(pos.X, User.Position.Y), SpinMoveDuration);
                     break;
                 case 1:
                     InteractionResult[] interactions = AttemptDamage(BaseDamage * DamageMod, EntitiesAffected[0], Action.DamageProperties, false);
@@ -123,7 +126,10 @@ namespace PaperMarioBattleSystem
             {
                 case 0:
                     User.AnimManager.GetAnimation<Animation>(AnimationGlobals.ShelledBattleAnimations.ShellSpinName)?.SetSpeed(2f);
-                    CurSequenceAction = new MoveToSeqAction(User, BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy), SpinMoveDuration);
+
+                    Vector2 pos = BattleManagerUtils.GetPositionInFront(EntitiesAffected[0], User.EntityType != Enumerations.EntityTypes.Enemy);
+
+                    CurSequenceAction = new MoveToSeqAction(User, new Vector2(pos.X, User.Position.Y), SpinMoveDuration);
                     break;
                 case 1:
                     AttemptDamage(BaseDamage * DamageMod, EntitiesAffected[0], Action.DamageProperties, false);

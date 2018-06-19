@@ -27,6 +27,8 @@ namespace PaperMarioBattleSystem
 
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Dizzy, new StatusPropertyHolder(120d, 0));
             EntityProperties.AddStatusProperty(Enumerations.StatusTypes.Blown, new StatusPropertyHolder(110d, 0));
+
+            WingedBehavior = new ParatroopaWingedBehavior(this, -1, Enumerations.DamageEffects.RemovesWings, new KoopaTroopa());
         }
 
         public override void LoadAnimations()
@@ -95,8 +97,6 @@ namespace PaperMarioBattleSystem
         public override void OnEnteredBattle()
         {
             base.OnEnteredBattle();
-
-            WingedBehavior = new ParatroopaWingedBehavior(this, -1, Enumerations.DamageEffects.RemovesWings, new KoopaTroopa());
 
             AnimManager.PlayAnimation(GetIdleAnim());
         }

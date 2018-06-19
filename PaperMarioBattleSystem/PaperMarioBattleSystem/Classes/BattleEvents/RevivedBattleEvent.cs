@@ -74,7 +74,7 @@ namespace PaperMarioBattleSystem
                     //If the revival item heals 0 or fewer HP, log a warning
                     if (revivalData.RevivalHPRestored <= 0)
                     {
-                        Debug.LogWarning($"{RevivalItem.Name} heals 0 or fewer HP, so the BattleEntity won't actually be revived!");
+                        Debug.LogWarning($"{RevivalItem.Name} heals 0 or fewer HP, so {RevivedEntity.Name} won't actually be revived!");
                     }
 
                     //Heal HP
@@ -98,8 +98,16 @@ namespace PaperMarioBattleSystem
                 }
                 else
                 {
-                    Debug.LogError($"{RevivalItem.Name} does not implement {nameof(IRevivalItem)}, so the BattleEntity can't be revived!");
+                    Debug.LogError($"{RevivalItem.Name} does not implement {nameof(IRevivalItem)}, so {RevivedEntity.Name} can't be revived!");
                 }
+
+                //Failsafe; handle a dead BattleEntity in the event the RevivalItem doesn't actually revive or heal
+                if (RevivedEntity.IsDead == true)
+                    RevivedEntity.BManager.HandleEntityDeath(RevivedEntity);
+            }
+            else
+            {
+                Debug.LogWarning($"{RevivedEntity.Name} isn't in battle and thus won't be revived!");
             }
 
             //Clear references

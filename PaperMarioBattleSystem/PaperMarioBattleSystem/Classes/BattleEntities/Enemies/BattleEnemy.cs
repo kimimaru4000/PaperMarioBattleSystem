@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using PaperMarioBattleSystem.Extensions;
+using PaperMarioBattleSystem.Utilities;
 
 namespace PaperMarioBattleSystem
 {
@@ -82,7 +83,19 @@ namespace PaperMarioBattleSystem
 
         public override Item GetItemOfType(Item.ItemTypes itemTypes)
         {
-            return (HeldCollectible as Item);
+            //If the enemy isn't holding anything, simply return null;
+            if (HeldCollectible == null) return null;
+
+            //See if the enemy is holding an item
+            Item item = HeldCollectible as Item;
+
+            //If the enemy is holding an item and the item has the ItemTypes specified, return it
+            if (item != null && UtilityGlobals.ItemTypesHasFlag(item.ItemType, itemTypes) == true)
+            {
+                return item;
+            }
+
+            return null;
         }
 
         /// <summary>

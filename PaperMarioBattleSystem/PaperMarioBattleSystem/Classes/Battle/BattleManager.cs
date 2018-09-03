@@ -162,6 +162,11 @@ namespace PaperMarioBattleSystem
         public BattlePartner Partner { get; private set; } = null;
 
         /// <summary>
+        /// The First Strike to be performed when the battle starts.
+        /// </summary>
+        private FirstStrike FirstStrikeData = null;
+
+        /// <summary>
         /// The number of enemies alive.
         /// </summary>
         private int EnemiesAlive => GetEntitiesCount(EntityTypes.Enemy);
@@ -187,6 +192,8 @@ namespace PaperMarioBattleSystem
 
             //Remove all entities
             RemoveEntities(removedEntities, true);
+
+            FirstStrikeData = null;
 
             EntityAddedEvent = null;
             EntityRemovedEvent = null;
@@ -227,10 +234,22 @@ namespace PaperMarioBattleSystem
             //Add all entities
             AddEntities(addedEntities, null);
 
-            Phase = StartingPhase;
-
             //Calculate the total number of BattleEntities
             TotalEntityCount = CalculateEntityCount();
+        }
+
+        /// <summary>
+        /// Initializes the battle with a First Strike.
+        /// </summary>
+        /// <param name="properties">The battle's properties.</param>
+        /// <param name="mario">Mario.</param>
+        /// <param name="partner">Mario's partner.</param>
+        /// <param name="otherEntities">The BattleEntities to add, in order. This includes enemies.</param>
+        public void Initialize(BattleProperties properties, BattleMario mario, BattlePartner partner, List<BattleEntity> otherEntities,
+            FirstStrike firstStrikeData)
+        {
+            Initialize(properties, mario, partner, otherEntities);
+            SetFirstStrikeData(firstStrikeData);
         }
 
         public void Update()
@@ -301,8 +320,69 @@ namespace PaperMarioBattleSystem
 
             BattleStartedEvent?.Invoke();
 
-            SwitchingPhase = true;
-            SwitchPhase(Phase);
+            Phase = StartingPhase;
+
+            //If we have First Strike data, start the turn with that BattleEntity
+            if (FirstStrikeData != null)
+            {
+                //Set the BattleEntity to go to this one
+                EntityTurn = FirstStrikeData.Entity;
+
+                MoveAction moveUsed = FirstStrikeData.MoveUsed;
+                EntitySelectionType selectionType = moveUsed.MoveProperties.SelectionType;
+
+                //Get the BattleEntities the move affects
+                BattleEntity[] affectedEntities = FirstStrikeData.MoveUsed.GetEntitiesMoveAffects();
+
+                //If the move affects more than one and only one can be targeted, choose the first BattleEntity as the target
+                if (affectedEntities.Length > 1 &&
+                    selectionType == EntitySelectionType.First || selectionType == EntitySelectionType.Single)
+                {
+                    affectedEntities = new BattleEntity[] { affectedEntities[0] };
+                }
+
+                BattleEnemy enemy = null;
+
+                //If it's an enemy, suppress its AI until after it starts its turn
+                if (EntityTurn.EntityType == EntityTypes.Enemy)
+                {
+                    enemy = (BattleEnemy)EntityTurn;
+                    enemy.SuppressAI = true;
+                }
+
+                //Call the normal turn start flow
+                TurnStart();
+
+                //Clear the menu stack for Players so it doesn't get in the way of their move
+                if (EntityTurn.EntityType == EntityTypes.Player)
+                {
+                    battleUIManager.ClearMenuStack();
+
+                    //Also enable the action command for the move if the Lucky Star is in the inventory
+                    if (Inventory.Instance.FindItem(LuckyStar.LuckyStarName, true) != null)
+                    {
+                        FirstStrikeData.MoveUsed.EnableActionCommand = true;
+                    }
+                }
+
+                //Unsuppress the enemy's AI
+                if (enemy != null)
+                {
+                    enemy.SuppressAI = false;
+                }
+
+                //Subtract a turn used so the BattleEntity can go if this is during its phase
+                //This will work regardless if it's the BattleEntity's phase
+                EntityTurn.SetTurnsUsed(EntityTurn.TurnsUsed - 1);
+
+                //Start the next move
+                EntityTurn.StartAction(FirstStrikeData.MoveUsed, true, affectedEntities);
+            }
+            else
+            {
+                SwitchingPhase = true;
+                SwitchPhase(Phase);
+            }
         }
 
         /// <summary>
@@ -314,6 +394,22 @@ namespace PaperMarioBattleSystem
             ChangeBattleState(BattleState.Done);
 
             BattleEndedEvent?.Invoke(battleResult);
+        }
+
+        /// <summary>
+        /// Sets the First Strike data to be carried out at the start of this battle.
+        /// This can be set only when the battle isn't in progress.
+        /// </summary>
+        /// <param name="firstStrikeData"></param>
+        public void SetFirstStrikeData(in FirstStrike firstStrikeData)
+        {
+            if (State != BattleState.Init && State != BattleState.Done)
+            {
+                Debug.LogError("First Strike data cannot be set while the battle is already in progress!");
+                return;
+            }
+
+            FirstStrikeData = firstStrikeData;
         }
 
         /// <summary>

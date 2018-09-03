@@ -25,6 +25,12 @@ namespace PaperMarioBattleSystem
         /// </summary>
         public EnemyAIBehavior AIBehavior { get; protected set; } = null;
 
+        /// <summary>
+        /// Tells whether to suppress the Enemy's AI behavior from making a decision at the start of its turn.
+        /// <para>Use this to manually make the Enemy perform a move after starting its turn.</para>
+        /// </summary>
+        public bool SuppressAI = false;
+
         protected BattleEnemy(Stats stats) : base(stats)
         {
             Name = "Partner";
@@ -77,8 +83,9 @@ namespace PaperMarioBattleSystem
         {
             base.OnTurnStart();
 
-            //Make the enemy perform an action on its turn
-            AIBehavior.PerformAction();
+            //Make the enemy perform an action on its turn if its AI isn't suppressed
+            if (SuppressAI == false)
+                AIBehavior.PerformAction();
         }
 
         public override Item GetItemOfType(Item.ItemTypes itemTypes)

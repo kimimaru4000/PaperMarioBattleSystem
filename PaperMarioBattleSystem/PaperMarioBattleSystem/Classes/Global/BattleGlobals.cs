@@ -210,6 +210,26 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Classes
+
+        /// <summary>
+        /// Contains immutable data on First Strikes.
+        /// This includes which <see cref="MoveAction"/> was used and which <see cref="BattleEntity"/> performed the move.
+        /// </summary>
+        public class FirstStrike
+        {
+            public BattleEntity Entity { get; private set; } = null;
+            public MoveAction MoveUsed { get; private set; } = null;
+
+            public FirstStrike(in BattleEntity battleEntity, in MoveAction moveUsed)
+            {
+                Entity = battleEntity;
+                MoveUsed = moveUsed;
+            }
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>

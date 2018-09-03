@@ -312,8 +312,8 @@ namespace PaperMarioBattleSystem
                 //Otherwise keep printing
                 else
                 {
-                    //If the user inputs the progress button, skip ahead
-                    if (Input.GetKeyDown(ProgressionButton) == true)
+                    //If the user inputs the progress button or the time between characters is 0 or less, skip ahead
+                    if (TimeBetweenCharacters <= 0f || Input.GetKeyDown(ProgressionButton) == true)
                     {
                         PrintRemaining();
                         ElapsedCharPrintTime = 0d;

@@ -226,6 +226,7 @@
     <Compile Include="Classes\BattleObjects\BattleDarknessObj.cs" />
     <Compile Include="Classes\BattleObjects\BattleObject.cs" />
     <Compile Include="Classes\BattleObjects\EntityListenerObj.cs" />
+    <Compile Include="Classes\BattleObjects\FirstStrikeDisplayObj.cs" />
     <Compile Include="Classes\BattleObjects\HPBarManagerObj.cs" />
     <Compile Include="Classes\BattleObjects\ShellBreakAnimObj.cs" />
     <Compile Include="Classes\BattleObjects\TattleRenderObj.cs" />

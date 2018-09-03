@@ -322,6 +322,9 @@ namespace PaperMarioBattleSystem
 
             Phase = StartingPhase;
 
+            //Start the phase
+            SwitchPhase(Phase);
+
             //If we have First Strike data, start the turn with that BattleEntity
             if (FirstStrikeData != null)
             {
@@ -372,16 +375,11 @@ namespace PaperMarioBattleSystem
                 }
 
                 //Subtract a turn used so the BattleEntity can go if this is during its phase
-                //This will work regardless if it's the BattleEntity's phase
+                //This will work regardless if it's the BattleEntity's phase or not
                 EntityTurn.SetTurnsUsed(EntityTurn.TurnsUsed - 1);
 
-                //Start the next move
+                //Start the move
                 EntityTurn.StartAction(FirstStrikeData.MoveUsed, true, affectedEntities);
-            }
-            else
-            {
-                SwitchingPhase = true;
-                SwitchPhase(Phase);
             }
         }
 

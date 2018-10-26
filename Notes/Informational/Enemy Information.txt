@@ -85,7 +85,8 @@ Lakitu
 
 Lava Piranha
 ------------
-When it misses with its main fireball move, the fireball doesn't show up and little fire particles show up instead.
+-When it misses with its main fireball move, the fireball doesn't show up and little fire particles show up instead.
+-Can be hit by Quake Hammer
 
 Huff N' Puff
 ------------
@@ -221,3 +222,7 @@ Big Lantern Ghost
 -Has the Lantern light attack that shines to deal 2 damage to Mario and his Partner
   -This attack does not put out the Lantern
 -Is considered the back enemy. Attempting to Hammer will let you target only its Lantern
+
+Fuzzipede
+---------
+-Is elevated when on top of the crate, and thus can't be hit by Hammer, but can be hit by Quake Hammer

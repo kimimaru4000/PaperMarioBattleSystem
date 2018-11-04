@@ -17,7 +17,7 @@ namespace PaperMarioBattleSystem
 
         private float OffsetToScroll = 0f;
 
-        public ScrollRoutine(DialogueBubble bubble, float offsetToScroll) : base(bubble)
+        public ScrollRoutine(DialogueBubble bubble, in float offsetToScroll) : base(bubble)
         {
             OffsetToScroll = offsetToScroll;
         }

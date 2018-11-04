@@ -15,7 +15,7 @@ namespace PaperMarioBattleSystem
         private Keys PreviousButton;
         private Keys ProgressButton;
 
-        public InputRoutine(DialogueBubble bubble, Keys previousButton, Keys progressButton) : base(bubble)
+        public InputRoutine(DialogueBubble bubble, in Keys previousButton, in Keys progressButton) : base(bubble)
         {
             PreviousButton = previousButton;
             ProgressButton = progressButton;

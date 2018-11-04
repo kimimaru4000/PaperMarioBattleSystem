@@ -13,7 +13,7 @@ namespace PaperMarioBattleSystem
     {
         private double Speed = 0d;
 
-        public SpeedRoutine(DialogueBubble bubble, double speed) : base(bubble)
+        public SpeedRoutine(DialogueBubble bubble, in double speed) : base(bubble)
         {
             Speed = speed;
         }

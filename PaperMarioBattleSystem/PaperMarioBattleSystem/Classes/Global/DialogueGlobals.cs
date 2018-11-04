@@ -228,6 +228,14 @@ namespace PaperMarioBattleSystem
         #region Message Routines
 
         /// <summary>
+        /// The values for the types of sounds that can be loaded from a sound routine.
+        /// </summary>
+        public enum SoundLoadTypes
+        {
+            Raw, Xnb
+        }
+
+        /// <summary>
         /// The string representing the key tag.
         /// </summary>
         public const string KeyTag = "key";
@@ -246,6 +254,11 @@ namespace PaperMarioBattleSystem
         /// The string representing the speed tag.
         /// </summary>
         public const string SpeedTag = "speed";
+
+        /// <summary>
+        /// The string representing the sound tag.
+        /// </summary>
+        public const string SoundTag = "sound";
 
         /// <summary>
         /// Tells if the string is a key tag.
@@ -277,6 +290,11 @@ namespace PaperMarioBattleSystem
             return (text == SpeedTag);
         }
 
+        public static bool IsSoundTag(in string text)
+        {
+            return (text == SoundTag);
+        }
+
         /// <summary>
         /// Tells if the string is a valid message routine.
         /// <para>Note that Paragraph tags are message modifiers in addition to message routines.</para>
@@ -285,7 +303,8 @@ namespace PaperMarioBattleSystem
         /// <returns>true if so, otherwise false.</returns>
         public static bool IsMessageRoutine(in string text)
         {
-            return (IsParagraphTag(text) == true || IsKeyTag(text) == true || IsWaitTag(text) == true || IsSpeedTag(text) == true);
+            return (IsParagraphTag(text) == true || IsKeyTag(text) == true || IsWaitTag(text) == true || IsSpeedTag(text) == true
+                || IsSoundTag(text) == true);
         }
 
         #endregion

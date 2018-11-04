@@ -14,7 +14,7 @@ namespace PaperMarioBattleSystem
         public double WaitTime = 0d;
         private double ElapsedTime = 0d;
 
-        public WaitRoutine(DialogueBubble bubble, double waitTime) : base(bubble)
+        public WaitRoutine(DialogueBubble bubble, in double waitTime) : base(bubble)
         {
             WaitTime = waitTime;
         }

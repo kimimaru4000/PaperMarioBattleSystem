@@ -493,6 +493,24 @@ namespace PaperMarioBattleSystem
                 SpeedRoutine speedRoutine = new SpeedRoutine(this, timeBetween);
                 AddMessageRoutine(speedRoutine);
             }
+
+            if (DialogueGlobals.IsSoundTag(tag) == true)
+            {
+                string soundPath = routine.Attributes[0].Value;
+                SoundLoadTypes soundType = SoundLoadTypes.Raw;
+
+                if (routine.Attributes.Count > 1)
+                {
+                    if (Enum.TryParse(routine.Attributes[1].Value, true, out soundType) == false)
+                    {
+                        //Default to Raw if this cannot be parsed
+                        soundType = SoundLoadTypes.Raw;
+                    }
+                }
+
+                SoundRoutine soundRoutine = new SoundRoutine(this, soundPath, soundType);
+                AddMessageRoutine(soundRoutine);
+            }
         }
         
         /// <summary>

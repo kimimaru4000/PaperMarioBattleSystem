@@ -345,6 +345,7 @@
     <Compile Include="Classes\Dialogue\MessageRoutines\InputRoutine.cs" />
     <Compile Include="Classes\Dialogue\MessageRoutines\MessageRoutine.cs" />
     <Compile Include="Classes\Dialogue\MessageRoutines\ScrollRoutine.cs" />
+    <Compile Include="Classes\Dialogue\MessageRoutines\SoundRoutine.cs" />
     <Compile Include="Classes\Dialogue\MessageRoutines\SpeedRoutine.cs" />
     <Compile Include="Classes\Dialogue\MessageRoutines\WaitRoutine.cs" />
     <Compile Include="Classes\Dialogue\ProgressDialogueStar.cs" />
@@ -597,6 +598,7 @@
     <EmbeddedResource Include="Icon.bmp" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Audio\SFX\Danger.xnb" />
     <Content Include="PMBSConfig.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
@@ -782,9 +784,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Audio\SFX\Damaged.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Audio\SFX\Danger.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Audio\SFX\Fright Mask.xnb">

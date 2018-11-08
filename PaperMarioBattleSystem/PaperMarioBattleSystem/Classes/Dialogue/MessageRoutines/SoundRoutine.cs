@@ -15,11 +15,14 @@ namespace PaperMarioBattleSystem
     {
         private string SoundPath = string.Empty;
         private DialogueGlobals.SoundLoadTypes SoundType = DialogueGlobals.SoundLoadTypes.Raw;
+        private float SoundVolume = 1f;
 
-        public SoundRoutine(DialogueBubble bubble, in string soundPath, in DialogueGlobals.SoundLoadTypes soundType) : base(bubble)
+        public SoundRoutine(DialogueBubble bubble, in string soundPath, in DialogueGlobals.SoundLoadTypes soundType, in float soundVolume)
+            : base(bubble)
         {
             SoundPath = soundPath;
             SoundType = soundType;
+            SoundVolume = soundVolume;
         }
 
         public override void OnStart()
@@ -27,11 +30,11 @@ namespace PaperMarioBattleSystem
             //Play the appropriate type of sound
             if (SoundType == DialogueGlobals.SoundLoadTypes.Raw)
             {
-                SoundManager.Instance.PlayRawSound(SoundPath, 1f);
+                SoundManager.Instance.PlayRawSound(SoundPath, SoundVolume);
             }
             else
             {
-                SoundManager.Instance.PlaySound(SoundPath, 1f);
+                SoundManager.Instance.PlaySound(SoundPath, SoundVolume);
             }
 
             Complete = true;

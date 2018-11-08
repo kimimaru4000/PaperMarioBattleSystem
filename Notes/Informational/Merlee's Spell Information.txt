@@ -1,0 +1,3 @@
+Merlee's Spell Information (11/7/18)
+------------------------------------
+-The Defensive spell affects only Mario, even if the enemy attacks his partner the turn it activated

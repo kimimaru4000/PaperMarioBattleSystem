@@ -225,6 +225,15 @@ namespace PaperMarioBattleSystem
 
         #endregion
 
+        #region Global Attributes
+
+        /// <summary>
+        /// A string representing the value attribute for numerous tags.
+        /// </summary>
+        public const string ValueAttributeTag = "value";
+
+        #endregion
+
         #region Message Routines
 
         /// <summary>
@@ -259,6 +268,20 @@ namespace PaperMarioBattleSystem
         /// The string representing the sound tag.
         /// </summary>
         public const string SoundTag = "sound";
+
+        #region Message Routine Attributes
+
+        /// <summary>
+        /// The string representing the type attribute for the sound tag.
+        /// </summary>
+        public const string SoundTypeAttributeTag = "type";
+
+        /// <summary>
+        /// The string representing the volume attribute for the sound tag.
+        /// </summary>
+        public const string SoundVolumeAttributeTag = "volume";
+
+        #endregion
 
         /// <summary>
         /// Tells if the string is a key tag.

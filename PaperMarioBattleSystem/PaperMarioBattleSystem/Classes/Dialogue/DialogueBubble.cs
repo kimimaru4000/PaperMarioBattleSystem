@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Globalization;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -498,17 +499,33 @@ namespace PaperMarioBattleSystem
             {
                 string soundPath = routine.Attributes[0].Value;
                 SoundLoadTypes soundType = SoundLoadTypes.Raw;
+                float soundVolume = 1f;
 
-                if (routine.Attributes.Count > 1)
+                if (routine.Attributes.Contains(DialogueGlobals.ValueAttributeTag) == true)
                 {
-                    if (Enum.TryParse(routine.Attributes[1].Value, true, out soundType) == false)
+                    soundPath = routine.Attributes[DialogueGlobals.ValueAttributeTag].Value;
+                }
+
+                if (routine.Attributes.Contains(DialogueGlobals.SoundTypeAttributeTag) == true)
+                {
+                    if (Enum.TryParse(routine.Attributes[DialogueGlobals.SoundTypeAttributeTag].Value, true, out soundType) == false)
                     {
                         //Default to Raw if this cannot be parsed
                         soundType = SoundLoadTypes.Raw;
                     }
                 }
 
-                SoundRoutine soundRoutine = new SoundRoutine(this, soundPath, soundType);
+                if (routine.Attributes.Contains(DialogueGlobals.SoundVolumeAttributeTag) == true)
+                {
+                    if (float.TryParse(routine.Attributes[DialogueGlobals.SoundVolumeAttributeTag].Value, NumberStyles.Any,
+                        CultureInfo.InvariantCulture, out soundVolume) == false)
+                    {
+                        //Default to max volume if this cannot be parsed
+                        soundVolume = 1f;
+                    }
+                }
+
+                SoundRoutine soundRoutine = new SoundRoutine(this, soundPath, soundType, soundVolume);
                 AddMessageRoutine(soundRoutine);
             }
         }

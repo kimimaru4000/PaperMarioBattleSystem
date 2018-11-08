@@ -41,3 +41,7 @@ Example: "<wait value="500">"
 <speed> - Changes the speed the Dialogue Bubble prints characters
 Attributes: value="(double value)"
 Example: "<speed value="16.6667">"
+
+<sound> - Plays a sound when reached in the Dialogue Bubble
+Attributes: value="(string value)" type="(string value)" volume="(float value)"
+Example: "<sound value="Audio/SFX/Danger" type="xnb" volume="0.5">"

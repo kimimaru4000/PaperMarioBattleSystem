@@ -750,22 +750,20 @@ namespace PaperMarioBattleSystem.Extensions
             }
 
             //If this character can't be rendered, exit
-            if (glyphs.ContainsKey(c) == false)
+            if (glyphs.TryGetValue(c, out SpriteFont.Glyph glyph) == false)
                 return offset;
-
-            SpriteFont.Glyph glyph = glyphs[c];
 
             //The first character on a line might have a negative left side bearing
             //In this scenario, offset the text to the right so that the text does not hang off the left side of its rectangle
             if (firstGlyphOfLine)
             {
-                offset.X = Math.Max(glyph.LeftSideBearing, 0);
+                offset.X = Math.Max(glyph.LeftSideBearing * finalScale.X, 0);
                 firstGlyphOfLine = false;
             }
             //Add the left side bearing and the spacing
             else
             {
-                offset.X += (font.Spacing * finalScale.X) + glyph.LeftSideBearing;
+                offset.X += ((font.Spacing + glyph.LeftSideBearing) * finalScale.X);
             }
 
             //Add the cropping
@@ -780,7 +778,7 @@ namespace PaperMarioBattleSystem.Extensions
             spriteBatch.Draw(font.Texture, p, glyph.BoundsInTexture, color, rotation, origin, curScale, effects, layerDepth);
 
             //Add the character's width with its right side bearing for the next character
-            offset.X += (glyph.Width * finalScale.X) + glyph.RightSideBearing;
+            offset.X += ((glyph.Width + glyph.RightSideBearing) * finalScale.X);
 
             return offset;
         }

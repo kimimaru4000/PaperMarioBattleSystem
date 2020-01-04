@@ -41,9 +41,6 @@ For ideas on what needs work, take a look at the issues as well as the [improvem
 ## Author(s)
 * **Thomas Deeb (aka Kimimaru)**
 
-## License
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/tdeeb/PaperMarioBattleSystem/blob/master/LICENSE) file for details.
-
 ## Acknowledgements
 * Jdaster64 (evasion Badge stacking, many other in-depth mechanics on the Paper Mario games) - https://supermariofiles.wordpress.com/
 * Super Mario Wiki (PM and TTYD bestiaries, other miscellaneous information) - https://www.mariowiki.com/Main_Page

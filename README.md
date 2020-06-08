@@ -38,10 +38,9 @@ For any significant changes, please open an issue first to discuss your ideas. A
 
 For ideas on what needs work, take a look at the issues as well as the [improvements](https://github.com/tdeeb/PaperMarioBattleSystem/wiki/Improvements) listed on the wiki.
 
-## Author(s)
-* **Thomas Deeb (aka Kimimaru)**
-
 ## Acknowledgements
 * Jdaster64 (evasion Badge stacking, many other in-depth mechanics on the Paper Mario games) - https://supermariofiles.wordpress.com/
 * Super Mario Wiki (PM and TTYD bestiaries, other miscellaneous information) - https://www.mariowiki.com/Main_Page
 * The Spriter's Resource (Paper Mario sprites) - https://www.spriters-resource.com/
+
+All Paper Mario game assets are Copyright © Nintendo.
